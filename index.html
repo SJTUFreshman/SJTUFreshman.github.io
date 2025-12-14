@@ -3,7 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Name - Personal Homepage</title>
+    
+    <meta name="description" content="Runde Yang (楊潤德) - Student at School of Artificial Intelligence, Shanghai Jiao Tong University. Research interests: AI, Machine Learning.">
+    <meta name="keywords" content="Runde Yang, 楊潤德, SJTU, AI, Artificial Intelligence, Shanghai Jiao Tong University, Machine Learning">
+    <meta name="author" content="Runde Yang">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://你的GitHubPage鏈接.io/">
+    <meta property="og:title" content="Runde Yang - Personal Homepage">
+    <meta property="og:description" content="Academic homepage of Runde Yang, SJTU.">
+    <meta property="og:image" content="https://你的GitHubPage鏈接.io/images/avatar.jpg">
+    
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:title" content="Runde Yang - Personal Homepage">
+    <meta property="twitter:description" content="Student at School of Artificial Intelligence, SJTU.">
+
+    <title>Runde Yang - Personal Homepage/杨润德个人主页</title>
     <style>
         /* --- 基礎設定 --- */
         :root {
@@ -163,7 +178,7 @@
         <div class="profile">
             <img src="https://via.placeholder.com/150" alt="Profile Photo" class="avatar">
             <div class="bio-text content-area" data-key="intro">
-                </div>
+            </div>
         </div>
     </section>
 
@@ -185,18 +200,24 @@
              </ul>
     </section>
     
-    <footer style="text-align: center; font-size: 0.8rem; color: #999; margin-top: 50px;">
-        &copy; 2024 Zhang San. Hosted on GitHub Pages.
+    <div style="margin: 40px auto; text-align: center; max-width: 200px;">
+        <h4 style="color: #999; font-size: 0.8rem; margin-bottom: 10px; font-family: sans-serif;">Visitor Map</h4>
+        <script type="text/javascript" id="clstr_globe" src="//cdn.clustrmaps.com/globe.js?d=YourIDHere&w=200"></script>
+    </div>
+    
+    <footer style="text-align: center; font-size: 0.8rem; color: #999; margin-top: 20px;">
+        &copy; 2025 Runde Yang. Hosted on GitHub Pages.
     </footer>
 </div>
 
 <script>
-    // --- 數據內容配置 (在這裡修改你的文字) ---
+    // --- 數據內容配置 ---
+    // 注意：郵箱位置使用 <span id="email-protection"></span> 佔位，不直接寫郵箱
     const content = {
             en: {
                 intro: `<p>Hello! I am a student at the <strong>School of Artificial Intelligence, Shanghai Jiao Tong University</strong> (enrolled 2024).</p>
                         <p>My research interests include Artificial Intelligence and related fields.</p>
-                        <p>Email: <a href="mailto:yangrundemdj@gmail.com">yangrundemdj@gmail.com</a> / <a href="#">GitHub</a></p>`,
+                        <p>Email: <span id="email-protection"></span> / <a href="#">GitHub</a></p>`,
                 news_title: "News",
                 news_list: `<li><span class="date">[2025]</span> Page updated.</li>`,
                 pubs_title: "Publications",
@@ -207,7 +228,7 @@
             'zh-CN': {
                 intro: `<p>你好！我是<strong>上海交通大学人工智能学院</strong>的在读学生（24级）。</p>
                         <p>我的研究兴趣主要集中在人工智能及相关领域。</p>
-                        <p>邮箱: <a href="mailto:yangrundemdj@gmail.com">yangrundemdj@gmail.com</a> / <a href="#">GitHub</a></p>`,
+                        <p>邮箱: <span id="email-protection"></span> / <a href="#">GitHub</a></p>`,
                 news_title: "最新动态",
                 news_list: `<li><span class="date">[2025]</span> 主页更新。</li>`,
                 pubs_title: "发表论文",
@@ -218,7 +239,7 @@
             'zh-TW': {
                 intro: `<p>你好！我是<strong>上海交通大學人工智能學院</strong>的在讀學生（24級）。</p>
                         <p>我的研究興趣主要集中在人工智能及相關領域。</p>
-                        <p>郵箱: <a href="mailto:yangrundemdj@gmail.com">yangrundemdj@gmail.com</a> / <a href="#">GitHub</a></p>`,
+                        <p>郵箱: <span id="email-protection"></span> / <a href="#">GitHub</a></p>`,
                 news_title: "最新動態",
                 news_list: `<li><span class="date">[2025]</span> 主頁更新。</li>`,
                 pubs_title: "發表論文",
@@ -247,7 +268,18 @@
             }
         });
 
-        // 3. 切換字體 (英文用襯線，中文用標楷體)
+        // 3. --- 自動注入郵箱 (防爬蟲核心邏輯) ---
+        // 當 intro 內容被更新後，頁面上會出現 id="email-protection" 的空標籤
+        // 我們立刻用 JS 把它填充成真實的鏈接
+        const emailBox = document.getElementById('email-protection');
+        if (emailBox) {
+            const u = "yangrundemdj"; // 用戶名
+            const d = "gmail.com";    // 域名
+            // 這是用戶看到的樣子，也是點擊後的效果
+            emailBox.innerHTML = `<a href="mailto:${u}@${d}">${u}@${d}</a>`; 
+        }
+
+        // 4. 切換字體 (英文用襯線，中文用標楷體)
         const body = document.body;
         body.classList.remove('zh-font', 'en-font');
         if (lang === 'en') {
