@@ -1,11 +1,280 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>我的主页</title>
-  </head>
-  <body>
-    <h1>你好，我是Andrew</h1>
-    <p>这是我用 GitHub Pages 搭的个人主页。</p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name - Personal Homepage</title>
+    <style>
+        /* --- 基礎設定 --- */
+        :root {
+            --bg-color: #fcfbf9; /* 極淡的米色，類似紙張 */
+            --text-color: #333333; /* 深灰，不像純黑那麽硬 */
+            --accent-color: #2c5282; /* 學術藍，用於鏈接和強調 */
+            --font-en: 'Georgia', 'Times New Roman', Times, serif;
+            --font-zh: "KaiTi", "BiaoKaiTi", "STKaiti", "DFKai-SB", serif; /* 標楷體優先 */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* --- 佈局容器 --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- 導航與語言切換 --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        .name-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: var(--font-en); /* 名字默認用英文襯線體，更有學術感 */
+        }
+
+        .lang-switch {
+            font-family: sans-serif; /* 按鈕保持無襯線，清晰 */
+            font-size: 0.9rem;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #888;
+            padding: 0 5px;
+            transition: color 0.2s;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* --- 內容區域 --- */
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        /* --- 動態字體類 --- */
+        /* 當語言為中文時，應用標楷體 */
+        .zh-font {
+            font-family: var(--font-zh);
+        }
+        /* 當語言為英文時，應用襯線體 */
+        .en-font {
+            font-family: var(--font-en);
+        }
+
+        /* --- 個人信息區 --- */
+        .profile {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background-color: #ddd; /* 替換為你的照片 */
+            border-radius: 50%; /* 圓形頭像 */
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .bio-text {
+            flex-grow: 1;
+        }
+
+        /* --- 列表樣式 (論文/項目) --- */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        .date {
+            font-size: 0.9em;
+            color: #666;
+            margin-right: 10px;
+            font-family: sans-serif;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- 響應式 --- */
+        @media (max-width: 600px) {
+            .profile {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .name-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="name-title" id="site-name">Zhang San (張三)</div>
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLang('en')">EN</button> |
+            <button class="lang-btn" onclick="setLang('zh-CN')">简</button> |
+            <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
+        </div>
+    </header>
+
+    <section id="about-section">
+        <div class="profile">
+            <img src="https://via.placeholder.com/150" alt="Profile Photo" class="avatar">
+            <div class="bio-text content-area" data-key="intro">
+                </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title" data-key="news_title">News</h2>
+        <ul class="content-area" data-key="news_list">
+             </ul>
+    </section>
+
+    <section>
+        <h2 class="section-title" data-key="pubs_title">Publications</h2>
+        <ul class="content-area" data-key="pubs_list">
+             </ul>
+    </section>
+
+    <section>
+        <h2 class="section-title" data-key="projects_title">Projects</h2>
+        <ul class="content-area" data-key="projects_list">
+             </ul>
+    </section>
+    
+    <footer style="text-align: center; font-size: 0.8rem; color: #999; margin-top: 50px;">
+        &copy; 2024 Zhang San. Hosted on GitHub Pages.
+    </footer>
+</div>
+
+<script>
+    // --- 數據內容配置 (在這裡修改你的文字) ---
+    const content = {
+        en: {
+            intro: `<p>Hello! I am a Ph.D. student at <strong>[University Name]</strong>, majoring in Computer Science.</p>
+                    <p>My research interests include Machine Learning, Computer Vision, and AI Agents. I am passionate about using code to solve real-world problems.</p>
+                    <p>Email: <a href="mailto:email@example.com">email@example.com</a> / <a href="#">GitHub</a> / <a href="#">Google Scholar</a></p>`,
+            news_title: "News",
+            news_list: `<li><span class="date">[2024-12]</span> One paper accepted by CVPR 2025!</li>
+                        <li><span class="date">[2024-09]</span> Started my internship at Tech Company.</li>`,
+            pubs_title: "Selected Publications",
+            pubs_list: `<li><strong>Paper Title Example</strong><br>
+                        <em>Zhang San</em>, Li Si, Wang Wu.<br>
+                        Conference on Computer Vision and Pattern Recognition (CVPR), 2025.<br>
+                        [<a href="#">PDF</a>] [<a href="#">Code</a>]</li>`,
+            projects_title: "Projects",
+            projects_list: `<li><strong>My Awesome Project</strong>: A framework for testing AI agents.<br>
+                            [<a href="#">GitHub</a>] [<a href="#">Demo</a>]</li>`
+        },
+        'zh-CN': {
+            intro: `<p>你好！我是<strong>[大学名称]</strong>计算机科学专业的博士生。</p>
+                    <p>我的研究兴趣主要集中在机器学习、计算机视觉以及智能体（AI Agents）。我热衷于通过代码解决现实世界的问题。</p>
+                    <p>邮箱: <a href="mailto:email@example.com">email@example.com</a> / <a href="#">GitHub</a> / <a href="#">谷歌学术</a></p>`,
+            news_title: "最新动态",
+            news_list: `<li><span class="date">[2024-12]</span> 一篇论文被 CVPR 2025 接收！</li>
+                        <li><span class="date">[2024-09]</span> 开始在某科技公司的实习。</li>`,
+            pubs_title: "代表性论文",
+            pubs_list: `<li><strong>Paper Title Example</strong><br>
+                        <em>张三</em>, 李四, 王五.<br>
+                        计算机视觉与模式识别会议 (CVPR), 2025.<br>
+                        [<a href="#">PDF</a>] [<a href="#">代码</a>]</li>`,
+            projects_title: "项目经历",
+            projects_list: `<li><strong>My Awesome Project</strong>: 一个用于测试 AI 智能体的框架。<br>
+                            [<a href="#">GitHub</a>] [<a href="#">演示</a>]</li>`
+        },
+        'zh-TW': {
+            intro: `<p>你好！我是<strong>[大學名稱]</strong>計算機科學專業的博士生。</p>
+                    <p>我的研究興趣主要集中在機器學習、計算機視覺以及智能體（AI Agents）。我熱衷於通過代碼解決現實世界的問題。</p>
+                    <p>郵箱: <a href="mailto:email@example.com">email@example.com</a> / <a href="#">GitHub</a> / <a href="#">谷歌學術</a></p>`,
+            news_title: "最新動態",
+            news_list: `<li><span class="date">[2024-12]</span> 一篇論文被 CVPR 2025 接收！</li>
+                        <li><span class="date">[2024-09]</span> 開始在某科技公司的實習。</li>`,
+            pubs_title: "代表性論文",
+            pubs_list: `<li><strong>Paper Title Example</strong><br>
+                        <em>張三</em>, 李四, 王五.<br>
+                        計算機視覺與模式識別會議 (CVPR), 2025.<br>
+                        [<a href="#">PDF</a>] [<a href="#">代碼</a>]</li>`,
+            projects_title: "項目經歷",
+            projects_list: `<li><strong>My Awesome Project</strong>: 一個用於測試 AI 智能體的框架。<br>
+                            [<a href="#">GitHub</a>] [<a href="#">演示</a>]</li>`
+        }
+    };
+
+    // --- 邏輯控制 ---
+    function setLang(lang) {
+        // 1. 更新按鈕狀態
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.innerText.toLowerCase().includes(lang === 'en' ? 'en' : (lang === 'zh-CN' ? '简' : '繁'))) {
+                btn.classList.add('active');
+            }
+        });
+
+        // 2. 更新文字內容
+        const data = content[lang];
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (data[key]) {
+                el.innerHTML = data[key];
+            }
+        });
+
+        // 3. 切換字體 (英文用襯線，中文用標楷體)
+        const body = document.body;
+        body.classList.remove('zh-font', 'en-font');
+        if (lang === 'en') {
+            body.classList.add('en-font');
+        } else {
+            body.classList.add('zh-font');
+        }
+    }
+
+    // 初始化：默認英文
+    setLang('en');
+</script>
+
+</body>
 </html>
