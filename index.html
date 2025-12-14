@@ -193,55 +193,40 @@
 <script>
     // --- 數據內容配置 (在這裡修改你的文字) ---
     const content = {
-        en: {
-            intro: `<p>Hello! I am a undergraduate student at <strong>[Shanghai Jiaotong University]</strong>, majoring in Artificial Intelligence.</p>
-                    <p>My research interests include ---. I am passionate about ---.</p>
-                    <p>Email: <a href="mailto:yangrundemdj@gmail.com">email@example.com</a> / <a href="#">GitHub</a> / <a href="#">Google Scholar</a></p>`,
-            news_title: "News",
-            news_list: `<li><span class="date">[2024-12]</span> One paper accepted by CVPR 2025!</li>
-                        <li><span class="date">[2024-09]</span> Started my internship at Tech Company.</li>`,
-            pubs_title: "Selected Publications",
-            pubs_list: `<li><strong>Paper Title Example</strong><br>
-                        <em>Zhang San</em>, Li Si, Wang Wu.<br>
-                        Conference on Computer Vision and Pattern Recognition (CVPR), 2025.<br>
-                        [<a href="#">PDF</a>] [<a href="#">Code</a>]</li>`,
-            projects_title: "Projects",
-            projects_list: `<li><strong>My Awesome Project</strong>: A framework for testing AI agents.<br>
-                            [<a href="#">GitHub</a>] [<a href="#">Demo</a>]</li>`
-        },
-        'zh-CN': {
-            intro: `<p>你好！我是<strong>[大学名称]</strong>计算机科学专业的博士生。</p>
-                    <p>我的研究兴趣主要集中在机器学习、计算机视觉以及智能体（AI Agents）。我热衷于通过代码解决现实世界的问题。</p>
-                    <p>邮箱: <a href="mailto:email@example.com">email@example.com</a> / <a href="#">GitHub</a> / <a href="#">谷歌学术</a></p>`,
-            news_title: "最新动态",
-            news_list: `<li><span class="date">[2024-12]</span> 一篇论文被 CVPR 2025 接收！</li>
-                        <li><span class="date">[2024-09]</span> 开始在某科技公司的实习。</li>`,
-            pubs_title: "代表性论文",
-            pubs_list: `<li><strong>Paper Title Example</strong><br>
-                        <em>张三</em>, 李四, 王五.<br>
-                        计算机视觉与模式识别会议 (CVPR), 2025.<br>
-                        [<a href="#">PDF</a>] [<a href="#">代码</a>]</li>`,
-            projects_title: "项目经历",
-            projects_list: `<li><strong>My Awesome Project</strong>: 一个用于测试 AI 智能体的框架。<br>
-                            [<a href="#">GitHub</a>] [<a href="#">演示</a>]</li>`
-        },
-        'zh-TW': {
-            intro: `<p>你好！我是<strong>[大學名稱]</strong>計算機科學專業的博士生。</p>
-                    <p>我的研究興趣主要集中在機器學習、計算機視覺以及智能體（AI Agents）。我熱衷於通過代碼解決現實世界的問題。</p>
-                    <p>郵箱: <a href="mailto:email@example.com">email@example.com</a> / <a href="#">GitHub</a> / <a href="#">谷歌學術</a></p>`,
-            news_title: "最新動態",
-            news_list: `<li><span class="date">[2024-12]</span> 一篇論文被 CVPR 2025 接收！</li>
-                        <li><span class="date">[2024-09]</span> 開始在某科技公司的實習。</li>`,
-            pubs_title: "代表性論文",
-            pubs_list: `<li><strong>Paper Title Example</strong><br>
-                        <em>張三</em>, 李四, 王五.<br>
-                        計算機視覺與模式識別會議 (CVPR), 2025.<br>
-                        [<a href="#">PDF</a>] [<a href="#">代碼</a>]</li>`,
-            projects_title: "項目經歷",
-            projects_list: `<li><strong>My Awesome Project</strong>: 一個用於測試 AI 智能體的框架。<br>
-                            [<a href="#">GitHub</a>] [<a href="#">演示</a>]</li>`
-        }
-    };
+            en: {
+                intro: `<p>Hello! I am a student at the <strong>School of Artificial Intelligence, Shanghai Jiao Tong University</strong> (enrolled 2024).</p>
+                        <p>My research interests include Artificial Intelligence and related fields.</p>
+                        <p>Email: <a href="mailto:yangrundemdj@gmail.com">yangrundemdj@gmail.com</a> / <a href="#">GitHub</a></p>`,
+                news_title: "News",
+                news_list: `<li><span class="date">[2025]</span> Page updated.</li>`,
+                pubs_title: "Publications",
+                pubs_list: `<li style="color: #888; font-style: italic;">(Publication list is being updated...)</li>`,
+                projects_title: "Projects",
+                projects_list: `<li style="color: #888; font-style: italic;">(Project list is being updated...)</li>`
+            },
+            'zh-CN': {
+                intro: `<p>你好！我是<strong>上海交通大学人工智能学院</strong>的在读学生（24级）。</p>
+                        <p>我的研究兴趣主要集中在人工智能及相关领域。</p>
+                        <p>邮箱: <a href="mailto:yangrundemdj@gmail.com">yangrundemdj@gmail.com</a> / <a href="#">GitHub</a></p>`,
+                news_title: "最新动态",
+                news_list: `<li><span class="date">[2025]</span> 主页更新。</li>`,
+                pubs_title: "发表论文",
+                pubs_list: `<li style="color: #888; font-style: italic;">（论文列表更新中...）</li>`,
+                projects_title: "项目经历",
+                projects_list: `<li style="color: #888; font-style: italic;">（项目列表更新中...）</li>`
+            },
+            'zh-TW': {
+                intro: `<p>你好！我是<strong>上海交通大學人工智能學院</strong>的在讀學生（24級）。</p>
+                        <p>我的研究興趣主要集中在人工智能及相關領域。</p>
+                        <p>郵箱: <a href="mailto:yangrundemdj@gmail.com">yangrundemdj@gmail.com</a> / <a href="#">GitHub</a></p>`,
+                news_title: "最新動態",
+                news_list: `<li><span class="date">[2025]</span> 主頁更新。</li>`,
+                pubs_title: "發表論文",
+                pubs_list: `<li style="color: #888; font-style: italic;">（論文列表更新中...）</li>`,
+                projects_title: "項目經歷",
+                projects_list: `<li style="color: #888; font-style: italic;">（項目列表更新中...）</li>`
+            }
+        };
 
     // --- 邏輯控制 ---
     function setLang(lang) {
