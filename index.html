@@ -13,19 +13,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- 1. 字體變量配置 (保持不變) --- */
+        /* --- 1. 字體變量配置 --- */
         :root {
             --bg-color: #fcfbf9;
             --text-color: #333333;
             --accent-color: #2c5282;
+            --accent-hover-bg: rgba(44, 82, 130, 0.08); /* 導航欄懸浮背景色 */
             
-            /* Sidebar 寬度改小，讓它更緊湊 */
             --sidebar-width: 240px; 
-            --header-height: 60px; /* 定義頂部欄高度 */
+            --header-height: 64px; /* 稍微增高一點，讓按鈕呼吸感更好 */
 
-            /* 字體設置 */
-            --font-default: "Calibri", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
-            --font-zh-cn: "Calibri", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
+            /* 字體設置：
+               1. 英文數字強制 Calibri 優先。
+               2. 簡體模式 (zh-cn)：現在優先嘗試 "BiaoKaiTi" (標楷體)，
+                  如果系統沒有（非Windows環境），則回退到標準楷體。
+               3. 繁體模式 (zh-tw)：維持標楷體優先。
+            */
+            --font-default: "Calibri", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", serif;
+            --font-zh-cn: "Calibri", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
             --font-zh-tw: "Calibri", "BiaoKaiTi", "DFKai-SB", serif;
         }
 
@@ -36,28 +41,27 @@
             padding: 0;
             line-height: 1.6;
             font-family: var(--font-default); 
-            /* 為了不被頂部固定欄擋住內容，給 body 加一個上內邊距 */
             padding-top: var(--header-height);
         }
 
-        /* --- 新增：半透明固定頂部導航欄 --- */
+        /* --- 2. 頂部導航欄 (樣式升級) --- */
         .fixed-header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: var(--header-height);
-            background-color: rgba(252, 251, 249, 0.85); /* 半透明背景 */
-            backdrop-filter: blur(8px); /* 毛玻璃模糊效果 */
+            background-color: rgba(252, 251, 249, 0.9); /* 透明度稍微調高 */
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(0,0,0,0.05);
             z-index: 1000;
             display: flex;
-            justify-content: center; /* 內容居中 */
+            justify-content: center;
         }
 
         .header-inner {
             width: 100%;
-            max-width: 1150px; /* 與下方內容寬度對齊 */
+            max-width: 1150px;
             padding: 0 20px;
             display: flex;
             align-items: center;
@@ -67,75 +71,82 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 10px; /* 按鈕之間的間距 */
         }
 
         .header-name-link {
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #000;
             text-decoration: none;
-            margin-right: 10px;
+            margin-right: 20px;
+            font-family: "Calibri", sans-serif;
         }
 
+        /* 導航按鈕樣式升級：塊狀懸浮 */
         .nav-link {
-            color: #666;
+            color: #555;
             text-decoration: none;
             font-size: 0.95rem;
-            position: relative;
-            transition: color 0.2s;
+            padding: 8px 16px; /* 增加內邊距形成方塊 */
+            border-radius: 6px; /* 圓角 */
+            transition: all 0.2s ease; /* 平滑過渡 */
+            font-weight: 500;
         }
-        .nav-link:hover { color: var(--accent-color); }
+
+        .nav-link:hover {
+            background-color: var(--accent-hover-bg); /* 淺藍色背景 */
+            color: var(--accent-color); /* 深藍色文字 */
+        }
 
         .header-right {
             display: flex;
             align-items: center;
         }
 
-        /* 語言按鈕樣式 */
+        /* 語言按鈕 */
         .lang-btn {
             background: none;
             border: none;
             cursor: pointer;
             color: #999;
-            padding: 0 6px;
+            padding: 4px 8px;
+            border-radius: 4px;
             font-family: "Calibri", sans-serif;
             font-size: 0.9rem;
-            transition: color 0.2s;
+            transition: all 0.2s;
         }
-        .lang-btn:hover, .lang-btn.active {
+        .lang-btn:hover { background-color: #eee; color: #333; }
+        .lang-btn.active {
             color: var(--accent-color);
             font-weight: bold;
         }
 
-        /* --- 2. 雙欄佈局結構 --- */
+        /* --- 3. 頁面佈局 --- */
         .page-wrapper {
             max-width: 1150px;
-            margin: 0 auto; /* 居中 */
+            margin: 0 auto;
             padding: 40px 20px;
             display: flex;
-            gap: 60px; /* 欄間距 */
+            gap: 60px;
             align-items: flex-start;
         }
 
-        /* --- 左側固定欄 (Sidebar) --- */
+        /* Sidebar */
         .sidebar {
             width: var(--sidebar-width);
             flex-shrink: 0;
             text-align: center;
-            /* Sticky 效果 */
             position: -webkit-sticky;
             position: sticky;
-            /* top 值要考慮 header 的高度，多加一點緩衝 */
             top: calc(var(--header-height) + 30px); 
         }
 
         .avatar {
-            width: 180px; /* 稍微縮小 */
+            width: 180px;
             height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            /* 去掉了白框 border */
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             margin-bottom: 20px;
         }
@@ -154,12 +165,10 @@
             font-weight: normal;
         }
 
-        /* 左側聯繫方式列表 */
         .contact-list {
             list-style: none;
             padding: 0;
             text-align: left;
-            /* 讓列表在 sidebar 裡看起來居中一點，但文字靠左 */
             display: inline-block; 
             margin-top: 20px;
             font-size: 0.9rem;
@@ -186,39 +195,164 @@
         }
         .contact-list a:hover { color: var(--accent-color); }
 
-        /* --- 右側內容區 (Main Content) --- */
+        /* Main Content */
         .main-content {
             flex-grow: 1;
             min-width: 0; 
         }
 
-        /* 章節樣式 */
         section { 
-            margin-bottom: 60px; 
-            /* 為了點擊導航時不被 Header 遮擋，做一個偏移修復 */
-            scroll-margin-top: calc(var(--header-height) + 20px);
+            margin-bottom: 70px; 
+            scroll-margin-top: calc(var(--header-height) + 30px);
         }
         
         h2 {
             font-size: 1.4rem;
             border-bottom: 1px solid #eee;
             padding-bottom: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--accent-color);
             margin-top: 0;
         }
 
         p { margin-bottom: 1rem; text-align: justify; }
-
         a { color: var(--accent-color); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
-        /* 列表微調 */
-        ul.content-area { padding-left: 18px; }
-        li { margin-bottom: 10px; }
-        .date { font-weight: bold; color: #666; margin-right: 5px; font-family: "Calibri"; }
+        /* --- Publications Style (列表+圖標按鈕) --- */
+        .pub-list {
+            list-style: none;
+            padding: 0;
+        }
+        .pub-item {
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .pub-title {
+            font-weight: bold;
+            font-size: 1.05rem;
+            color: #333;
+        }
+        .pub-authors { color: #555; }
+        .pub-venue { font-style: italic; color: #666; }
+        
+        .pub-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        .pub-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            cursor: pointer;
+            padding: 2px 0;
+            border: none;
+            background: none;
+            font-family: var(--font-default); /* 保持字體一致 */
+        }
+        .pub-btn:hover { text-decoration: underline; color: #1a365d; }
+        .pub-btn i { font-size: 1rem; }
 
-        /* Life Preview Card */
+        /* --- Projects Style (Grid 卡片佈局) --- */
+        .project-grid {
+            display: grid;
+            /* 自適應列寬，最小寬度 280px */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .project-card {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px); /* 上浮特效 */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: #ddd;
+        }
+
+        .project-img-wrapper {
+            width: 100%;
+            height: 160px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* 如果沒有圖片，placeholder 的樣式 */
+            color: #ccc;
+            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-content {
+            padding: 15px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            color: #333;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            flex-grow: 1; /* 讓按鈕總是在底部對齊 */
+        }
+
+        .project-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Project Card 內的小按鈕 */
+        .btn-card {
+            padding: 5px 12px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            background-color: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-card:hover { background-color: #1a365d; text-decoration: none; }
+        .btn-card.secondary {
+            background-color: #edf2f7;
+            color: var(--accent-color);
+        }
+        .btn-card.secondary:hover { background-color: #e2e8f0; }
+
+        /* Life Preview (保持原樣) */
         .life-preview {
             background: #fff;
             border: 1px solid #eee;
@@ -236,29 +370,25 @@
         }
         .life-icon { font-size: 1.8rem; color: var(--accent-color); }
 
-        /* 底部訪客地圖區域 */
+        /* Footer Map */
         .visitor-map-container {
             margin-top: 80px;
             border-top: 1px dashed #eee;
             padding-top: 20px;
-            text-align: center; /* 讓地圖居中 */
-        }
-        .map-placeholder {
-            /* 這裡模擬地圖樣式，實際代碼放入後可刪除此 class */
-            display: inline-block;
-            opacity: 0.8;
-            max-width: 300px;
-            width: 100%;
+            text-align: center; 
         }
 
-        /* --- 響應式 --- */
+        /* 響應式 */
         @media (max-width: 850px) {
             .page-wrapper { flex-direction: column; align-items: center; padding-top: 20px; }
             .sidebar { width: 100%; position: static; margin-bottom: 40px; }
-            .header-left { display: none; } /* 手機端暫時隱藏頂部導航鏈接，保留名字或另作處理 */
-            .header-content { justify-content: center; }
+            .header-left { display: none; } /* 手機端隱藏菜單，避免擠壓 */
+            .header-inner { justify-content: center; position: relative; }
+            .header-right { position: absolute; right: 20px; }
+            .header-name-link { margin-right: 0; }
             .contact-list { display: block; text-align: center; }
             .contact-list li { justify-content: center; }
+            .project-grid { grid-template-columns: 1fr; } /* 手機端單欄 */
         }
     </style>
 </head>
@@ -324,20 +454,84 @@
 
         <section id="news">
             <h2 data-key="news_title">News</h2>
-            <ul class="content-area" data-key="news_list">
+            <ul class="content-area" style="padding-left: 20px;">
+                <li data-key="news_list"></li>
             </ul>
         </section>
 
         <section id="pubs">
             <h2 data-key="pubs_title">Publications</h2>
-            <ul class="content-area" data-key="pubs_list">
-             </ul>
+            <div class="pub-list" id="pubs-container">
+                <div class="pub-item">
+                    <div class="pub-title">ChatDev: Communicative Agents for Software Development</div>
+                    <div class="pub-authors">Chen Qian, Wei Liu, Hongzhang Liu, Nuo Chen, Yufan Dang, <b>Runde Yang</b>, et al.</div>
+                    <div class="pub-venue">In Annual Meeting of the Association for Computational Linguistics (ACL), 2024.</div>
+                    <div class="pub-actions">
+                        <a href="#" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
+                        <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
+                        <button class="pub-btn" onclick="copyCitation('ChatDev_2024')"><i class="fas fa-quote-right"></i> Citation</button>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-title">Experiential Co-Learning of Software-Developing Agents</div>
+                    <div class="pub-authors">Chen Qian, Yufan Dang, <b>Runde Yang</b>, et al.</div>
+                    <div class="pub-venue">In Annual Meeting of the Association for Computational Linguistics (ACL), 2024.</div>
+                    <div class="pub-actions">
+                        <a href="#" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
+                        <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
+                        <button class="pub-btn" onclick="copyCitation('CoLearning_2024')"><i class="fas fa-quote-right"></i> Citation</button>
+                    </div>
+                </div>
+            </div>
         </section>
         
         <section id="projects">
             <h2 data-key="projects_title">Projects</h2>
-            <ul class="content-area" data-key="projects_list">
-             </ul>
+            <div class="project-grid">
+                
+                <div class="project-card">
+                    <div class="project-img-wrapper">
+                        <div class="project-img"><i class="fas fa-robot"></i></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-title">ChatDev</div>
+                        <div class="project-desc">Communicative Agents for Software Development. A virtual software company operated by intelligent agents.</div>
+                        <div class="project-links">
+                            <a href="#" class="btn-card"><i class="far fa-file-alt"></i> Paper</a>
+                            <a href="#" class="btn-card secondary"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img-wrapper">
+                        <div class="project-img"><i class="fas fa-network-wired"></i></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-title">MacNet</div>
+                        <div class="project-desc">Scaling Large Language Model-based Multi-Agent Collaboration. (ICLR-2025)</div>
+                        <div class="project-links">
+                            <a href="#" class="btn-card"><i class="far fa-file-alt"></i> Paper</a>
+                            <a href="#" class="btn-card secondary"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img-wrapper">
+                        <div class="project-img"><i class="fas fa-code"></i></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-title">My Awesome Project</div>
+                        <div class="project-desc">Another interesting project description goes here. Describing what it does briefly.</div>
+                        <div class="project-links">
+                            <a href="#" class="btn-card secondary"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
         <section id="life">
@@ -355,9 +549,9 @@
         </section>
 
         <div class="visitor-map-container">
-            <div class="map-placeholder">
-                <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=300&t=tt&d=YOUR_ID_HERE&co=2d78ad&ct=ffffff&cmo=3acc3a&cmn=ff5353'></script>
-            </div>
+            <div style="display:inline-block; width: 300px; height: 180px; background: #fafafa; line-height: 180px; color:#ccc;">
+                Map Placeholder
+                </div>
         </div>
 
     </main>
@@ -373,11 +567,9 @@
             intro: `<p>Hello! I am a student at the <strong>School of Artificial Intelligence, Shanghai Jiao Tong University</strong> (enrolled 2024).</p>
                     <p>My research interests include Artificial Intelligence and related fields.</p>`,
             news_title: "News",
-            news_list: `<li><span class="date">[2025]</span> Page updated.</li>`,
+            news_list: `<span class="date">[2025]</span> Page updated.`,
             pubs_title: "Publications",
-            pubs_list: `<li style="color: #888; font-style: italic;">(Publication list is being updated...)</li>`,
             projects_title: "Projects",
-            projects_list: `<li style="color: #888; font-style: italic;">(Project list is being updated...)</li>`,
             life_title: "Life & Gallery",
             life_desc_title: "Beyond Research",
             life_desc_text: "Photography, Traveling, and random thoughts. Check out my footprints map and gallery."
@@ -390,11 +582,9 @@
             intro: `<p>你好！我是<strong>上海交通大学人工智能学院</strong>的在读学生（24级）。</p>
                     <p>我的研究兴趣主要集中在人工智能及相关领域。</p>`,
             news_title: "最新动态",
-            news_list: `<li><span class="date">[2025]</span> 主页更新。</li>`,
+            news_list: `<span class="date">[2025]</span> 主页更新。`,
             pubs_title: "发表论文",
-            pubs_list: `<li style="color: #888; font-style: italic;">（论文列表更新中...）</li>`,
             projects_title: "项目经历",
-            projects_list: `<li style="color: #888; font-style: italic;">（项目列表更新中...）</li>`,
             life_title: "生活与光影",
             life_desc_title: "科研之外",
             life_desc_text: "摄影、旅行以及随笔。点击查看我的足迹地图和相册。"
@@ -407,11 +597,9 @@
             intro: `<p>你好！我是<strong>上海交通大學人工智能學院</strong>的在讀學生（24級）。</p>
                     <p>我的研究興趣主要集中在人工智能及相關領域。</p>`,
             news_title: "最新動態",
-            news_list: `<li><span class="date">[2025]</span> 主頁更新。</li>`,
+            news_list: `<span class="date">[2025]</span> 主頁更新。`,
             pubs_title: "發表論文",
-            pubs_list: `<li style="color: #888; font-style: italic;">（論文列表更新中...）</li>`,
             projects_title: "項目經歷",
-            projects_list: `<li style="color: #888; font-style: italic;">（項目列表更新中...）</li>`,
             life_title: "生活與光影",
             life_desc_title: "科研之外",
             life_desc_text: "攝影、旅行以及隨筆。點擊查看我的足跡地圖和相冊。"
@@ -427,29 +615,23 @@
             }
         });
 
-        // 2. 更新所有文字內容
+        // 2. 更新文字
         const data = content[lang];
-        
-        // 更新左側邊欄名字
         document.getElementById('sidebar-name').innerText = data.sidebar_name;
         
-        // 更新其他帶有 data-key 的元素
         document.querySelectorAll('[data-key]').forEach(el => {
             const key = el.getAttribute('data-key');
             if (data[key]) {
-                el.innerHTML = data[key];
+                // 特殊處理列表，避免覆蓋掉 span 樣式
+                if(key.includes('_list')) {
+                    el.innerHTML = `<li>${data[key]}</li>`;
+                } else {
+                    el.innerHTML = data[key];
+                }
             }
         });
 
-        // 3. 郵箱注入
-        const emailBox = document.getElementById('sidebar-email-box');
-        if (emailBox) {
-            const u = "yangrundemdj"; 
-            const d = "gmail.com";     
-            emailBox.innerHTML = `<a href="mailto:${u}@${d}">${u}@${d}</a>`; 
-        }
-
-        // 4. 字體切換邏輯
+        // 3. 字體切換 (關鍵修改)
         const body = document.body;
         body.style.fontFamily = ''; 
         
@@ -460,6 +642,26 @@
         } else {
             body.style.fontFamily = 'var(--font-default)';
         }
+    }
+
+    // 模擬複製 Citation 的功能
+    function copyCitation(paperId) {
+        // 實際使用時，這裡可以是真實的 BibTex 字符串
+        const dummyBib = `@article{${paperId},\n  title={Title of the paper},\n  author={Yang, Runde and others},\n  journal={Conference},\n  year={2024}\n}`;
+        
+        navigator.clipboard.writeText(dummyBib).then(() => {
+            alert("BibTeX copied to clipboard!");
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+
+    // 郵箱防爬
+    const emailBox = document.getElementById('sidebar-email-box');
+    if (emailBox) {
+        const u = "yangrundemdj"; 
+        const d = "gmail.com";     
+        emailBox.innerHTML = `<a href="mailto:${u}@${d}">${u}@${d}</a>`; 
     }
 
     // 初始化
