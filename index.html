@@ -4,34 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta name="description" content="Runde Yang (楊潤德) - Student at School of Artificial Intelligence, Shanghai Jiao Tong University. Research interests: AI, Machine Learning.">
-    <meta name="keywords" content="Runde Yang, 楊潤德, SJTU, AI, Artificial Intelligence, Shanghai Jiao Tong University, Machine Learning">
+    <meta name="description" content="Runde Yang (楊潤德) - Student at School of Artificial Intelligence, Shanghai Jiao Tong University.">
+    <meta name="keywords" content="Runde Yang, 楊潤德, SJTU, AI">
     <meta name="author" content="Runde Yang">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://你的GitHubPage鏈接.io/">
-    <meta property="og:title" content="Runde Yang - Personal Homepage">
-    <meta property="og:description" content="Academic homepage of Runde Yang, SJTU.">
-    <meta property="og:image" content="https://你的GitHubPage鏈接.io/images/avatar.jpg">
     
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:title" content="Runde Yang - Personal Homepage">
-    <meta property="twitter:description" content="Student at School of Artificial Intelligence, SJTU.">
+    <title>Runde Yang - Personal Homepage</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <title>Runde Yang - Personal Homepage/杨润德个人主页</title>
     <style>
-        /* --- 1. 基礎設定與字體變量 --- */
+        /* --- 1. 字體變量配置 (核心修改) --- */
         :root {
             --bg-color: #fcfbf9;
             --text-color: #333333;
             --accent-color: #2c5282;
-            --font-en: 'Georgia', 'Times New Roman', Times, serif;
+            --sidebar-width: 280px;
+
+            /* 技巧：將 Calibri 放在最前面。
+               瀏覽器會優先用 Calibri 渲染英文/數字。
+               遇到漢字時，Calibri 裡沒有，就會自動降級用後面的中文字體。
+            */
             
-            /* 嚴格區分簡繁字體棧 */
-            /* 簡體：優先 AR PL UKai CN，其次常見楷體 */
-            --font-zh-cn: "AR PL UKai CN", "KaiTi", "STKaiti", "楷ti", serif;
-            /* 繁體：優先 Windows 標楷體，其次 Mac 標楷體 */
-            --font-zh-tw: "BiaoKaiTi", "DFKai-SB", "BiaoKaiTi", serif; 
+            /* 默認/英文模式：英文用 Calibri，中文名字用簡體楷體 */
+            --font-default: "Calibri", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
+            
+            /* 簡體模式：英文用 Calibri，中文用簡體楷體 */
+            --font-zh-cn: "Calibri", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
+            
+            /* 繁體模式：英文用 Calibri，中文用台灣標楷體 */
+            --font-zh-tw: "Calibri", "BiaoKaiTi", "DFKai-SB", serif;
         }
 
         body {
@@ -40,75 +41,109 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            transition: all 0.3s ease;
-            /* 字體將通過 JS 動態指定 */
+            /* 默認字體，後續 JS 會改 */
+            font-family: var(--font-default); 
         }
 
-        /* --- 2. 佈局容器 --- */
-        .container {
-            max-width: 800px;
+        /* --- 2. 雙欄佈局結構 --- */
+        .page-wrapper {
+            max-width: 1100px;
             margin: 0 auto;
             padding: 40px 20px;
-        }
-
-        /* --- 3. 新版導航欄佈局 --- */
-        header {
             display: flex;
-            justify-content: space-between;
-            align-items: baseline; /* 讓文字底部對齊 */
-            margin-bottom: 60px;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 15px;
-            padding-top: 10px;
+            gap: 50px; /* 左右欄間距 */
+            align-items: flex-start; /* 頂部對齊 */
         }
 
-        /* 左側容器：包含名字和導航鏈接 */
-        .header-left {
-            display: flex;
-            align-items: baseline;
-            gap: 25px; /* 名字和導航之間的間距 */
-            flex-wrap: wrap;
+        /* --- 左側固定欄 (Sidebar) --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            flex-shrink: 0;
+            text-align: center;
+            /* 實現滾動時固定效果 */
+            position: -webkit-sticky;
+            position: sticky;
+            top: 40px; 
         }
 
-        .name-title {
-            font-size: 1.5rem;
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .my-name {
+            font-size: 1.8rem;
             font-weight: bold;
-            cursor: pointer; /* 表明可點擊 */
-        }
-        
-        .name-title:hover {
-            opacity: 0.8;
+            margin-bottom: 5px;
+            color: #000;
         }
 
-        /* 導航鏈接樣式 */
-        .nav-menu a {
-            text-decoration: none;
+        .my-title {
+            font-size: 0.95rem;
             color: #666;
-            font-size: 1rem;
-            margin-right: 15px;
-            font-family: var(--font-en); /* 導航菜單保持英文襯線體比較整齊 */
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        /* 左側聯繫方式列表 */
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-top: 30px;
+            font-size: 0.95rem;
+        }
+
+        .contact-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #555;
+        }
+
+        .contact-list i {
+            width: 20px;
+            text-align: center;
+            color: var(--accent-color);
+        }
+
+        .contact-list a {
+            color: #555;
+            text-decoration: none;
             transition: color 0.2s;
         }
+        .contact-list a:hover { color: var(--accent-color); }
 
-        .nav-menu a:hover {
-            color: var(--accent-color);
-            border-bottom: 1px solid var(--accent-color);
+        /* --- 右側內容區 (Main Content) --- */
+        .main-content {
+            flex-grow: 1;
+            /* 防止內容溢出 */
+            min-width: 0; 
         }
 
-        /* 語言切換按鈕 */
-        .lang-switch {
-            font-family: sans-serif;
-            font-size: 0.9rem;
-            white-space: nowrap; /* 防止按鈕換行 */
+        /* 頂部導航 (語言切換) - 現在放在右側內容區的頂部 */
+        .top-nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
         }
 
         .lang-btn {
             background: none;
             border: none;
             cursor: pointer;
-            color: #888;
+            color: #999;
             padding: 0 5px;
-            transition: color 0.2s;
+            font-family: "Calibri", sans-serif;
+            font-size: 0.9rem;
         }
 
         .lang-btn:hover, .lang-btn.active {
@@ -116,183 +151,190 @@
             font-weight: bold;
         }
 
-        /* --- 4. 內容區域 --- */
-        section {
-            margin-bottom: 50px;
-            scroll-margin-top: 80px; /* 防止點擊導航時標題被擋住 */
-        }
-
+        /* 章節樣式 */
+        section { margin-bottom: 50px; }
+        
         h2 {
             font-size: 1.4rem;
             border-bottom: 2px solid #eee;
             padding-bottom: 8px;
             margin-bottom: 20px;
             color: var(--accent-color);
+            margin-top: 0;
         }
 
-        /* --- 個人信息區 --- */
-        .profile {
+        p { margin-bottom: 1rem; text-align: justify; }
+
+        a { color: var(--accent-color); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* 列表微調 */
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        .date { font-weight: bold; color: #666; margin-right: 5px; }
+
+        /* Life Preview Card */
+        .life-preview {
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
             display: flex;
-            gap: 30px;
-            align-items: flex-start;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.2s;
+            cursor: pointer;
         }
-
-        .avatar {
-            width: 150px;
-            height: 150px;
-            background-color: #ddd; /* 替換為你的照片 */
-            border-radius: 50%; /* 圓形頭像 */
-            object-fit: cover;
-            flex-shrink: 0;
+        .life-preview:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
+        .life-icon { font-size: 2rem; color: var(--accent-color); }
 
-        .bio-text {
-            flex-grow: 1;
-        }
-
-        /* --- 列表樣式 --- */
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 15px;
-        }
-
-        .date {
-            font-size: 0.9em;
-            color: #666;
-            margin-right: 10px;
-            font-family: sans-serif;
-        }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* --- 響應式 --- */
-        @media (max-width: 600px) {
-            .profile {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .name-title {
-                font-size: 1.2rem;
-            }
-            .header-left {
-                gap: 10px;
-                flex-direction: column;
-            }
+        /* --- 響應式：手機端變成單欄 --- */
+        @media (max-width: 768px) {
+            .page-wrapper { flex-direction: column; align-items: center; }
+            .sidebar { width: 100%; position: static; margin-bottom: 40px; }
+            .contact-list { text-align: center; display: inline-block; }
+            .contact-list li { justify-content: center; }
+            .top-nav { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div class="header-left">
-            <div class="name-title" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-                Runde Yang (杨润德)
-            </div>
-            
-            <nav class="nav-menu">
-                <a href="#about-section">About</a>
-                <a href="#news-section">News</a>
-                <a href="#pubs-section">Pubs</a>
-                <a href="#projects-section">Projects</a>
-                <a href="life.html" style="font-weight: bold;">Life</a>
-            </nav>
-        </div>
+<div class="page-wrapper">
+    
+    <aside class="sidebar">
+        <img src="me_at_dorm.jpg" alt="Runde Yang" class="avatar">
+        
+        <div class="my-name" id="sidebar-name">Runde Yang (杨润德)</div>
+        <div class="my-title" data-key="sidebar_title">Master Student at SJTU</div>
 
-        <div class="lang-switch">
+        <ul class="contact-list">
+            <li>
+                <i class="fas fa-map-marker-alt"></i> 
+                <span data-key="location">Shanghai, China</span>
+            </li>
+            <li>
+                <i class="fas fa-envelope"></i> 
+                <span id="sidebar-email-box"></span>
+            </li>
+            <li>
+                <i class="fab fa-github"></i> 
+                <a href="https://github.com/yourusername" target="_blank">Github</a>
+            </li>
+            <li>
+                <i class="fas fa-graduation-cap"></i> 
+                <a href="#" target="_blank">Google Scholar</a>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        
+        <div class="top-nav">
             <button class="lang-btn active" onclick="setLang('en')">EN</button> |
             <button class="lang-btn" onclick="setLang('zh-CN')">简</button> |
             <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
         </div>
-    </header>
 
-    <section id="about-section">
-        <div class="profile">
-            <img src="me_at_dorm.jpg" alt="Profile Photo" class="avatar">
-            <div class="bio-text content-area" data-key="intro">
+        <section id="about">
+            <h2 data-key="about_title">Biography</h2>
+            <div class="content-area" data-key="intro">
+                </div>
+        </section>
+
+        <section id="news">
+            <h2 data-key="news_title">News</h2>
+            <ul class="content-area" data-key="news_list">
+                </ul>
+        </section>
+
+        <section id="pubs">
+            <h2 data-key="pubs_title">Publications</h2>
+            <ul class="content-area" data-key="pubs_list">
+                 </ul>
+        </section>
+        
+        <section id="projects">
+            <h2 data-key="projects_title">Projects</h2>
+            <ul class="content-area" data-key="projects_list">
+                 </ul>
+        </section>
+
+        <section id="life">
+            <h2 data-key="life_title">Life & Gallery</h2>
+            <div class="life-preview" onclick="window.location.href='life.html'">
+                <div class="life-icon"><i class="fas fa-camera-retro"></i></div>
+                <div style="flex:1;">
+                    <p style="margin:0; font-weight:bold; color:#333;" data-key="life_desc_title">Beyond Research</p>
+                    <p style="margin:5px 0 0 0; color:#666; font-size:0.95rem;" data-key="life_desc_text">
+                        Photography, Traveling, and random thoughts. Check out my footprints map and gallery.
+                    </p>
+                </div>
+                <div style="color:#ccc;">&rarr;</div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="news-section">
-        <h2 class="section-title" data-key="news_title">News</h2>
-        <ul class="content-area" data-key="news_list">
-             </ul>
-    </section>
-
-    <section id="pubs-section">
-        <h2 class="section-title" data-key="pubs_title">Publications</h2>
-        <ul class="content-area" data-key="pubs_list">
-             </ul>
-    </section>
-
-    <section id="projects-section">
-        <h2 class="section-title" data-key="projects_title">Projects</h2>
-        <ul class="content-area" data-key="projects_list">
-             </ul>
-    </section>
-    
-    <div style="margin: 40px auto; text-align: center; max-width: 200px;">
-        <h4 style="color: #999; font-size: 0.8rem; margin-bottom: 10px; font-family: sans-serif;">Visitor Map</h4>
-        <script type="text/javascript" id="clstr_globe" src="//cdn.clustrmaps.com/globe.js?d=YourIDHere&w=200"></script>
-    </div>
-    
-    <footer style="text-align: center; font-size: 0.8rem; color: #999; margin-top: 20px;">
-        &copy; 2025 Runde Yang. Hosted on GitHub Pages.
-    </footer>
+    </main>
 </div>
 
 <script>
-    // --- 數據內容配置 ---
     const content = {
-            en: {
-                intro: `<p>Hello! I am a student at the <strong>School of Artificial Intelligence, Shanghai Jiao Tong University</strong> (enrolled 2024).</p>
-                        <p>My research interests include Artificial Intelligence and related fields.</p>
-                        <p>Email: <span id="email-protection"></span> / <a href="#">GitHub</a></p>`,
-                news_title: "News",
-                news_list: `<li><span class="date">[2025]</span> Page updated.</li>`,
-                pubs_title: "Publications",
-                pubs_list: `<li style="color: #888; font-style: italic;">(Publication list is being updated...)</li>`,
-                projects_title: "Projects",
-                projects_list: `<li style="color: #888; font-style: italic;">(Project list is being updated...)</li>`
-            },
-            'zh-CN': {
-                intro: `<p>你好！我是<strong>上海交通大学人工智能学院</strong>的在读学生（24级）。</p>
-                        <p>我的研究兴趣主要集中在人工智能及相关领域。</p>
-                        <p>邮箱: <span id="email-protection"></span> / <a href="#">GitHub</a></p>`,
-                news_title: "最新动态",
-                news_list: `<li><span class="date">[2025]</span> 主页更新。</li>`,
-                pubs_title: "发表论文",
-                pubs_list: `<li style="color: #888; font-style: italic;">（论文列表更新中...）</li>`,
-                projects_title: "项目经历",
-                projects_list: `<li style="color: #888; font-style: italic;">（项目列表更新中...）</li>`
-            },
-            'zh-TW': {
-                intro: `<p>你好！我是<strong>上海交通大學人工智能學院</strong>的在讀學生（24級）。</p>
-                        <p>我的研究興趣主要集中在人工智能及相關領域。</p>
-                        <p>郵箱: <span id="email-protection"></span> / <a href="#">GitHub</a></p>`,
-                news_title: "最新動態",
-                news_list: `<li><span class="date">[2025]</span> 主頁更新。</li>`,
-                pubs_title: "發表論文",
-                pubs_list: `<li style="color: #888; font-style: italic;">（論文列表更新中...）</li>`,
-                projects_title: "項目經歷",
-                projects_list: `<li style="color: #888; font-style: italic;">（項目列表更新中...）</li>`
-            }
-        };
+        en: {
+            sidebar_name: "Runde Yang (杨润德)", // 這裡楊潤德會顯示為簡體（因為默認fallback是簡體）
+            sidebar_title: "Master Student at SJTU",
+            location: "Shanghai, China",
+            about_title: "Biography",
+            intro: `<p>Hello! I am a student at the <strong>School of Artificial Intelligence, Shanghai Jiao Tong University</strong> (enrolled 2024).</p>
+                    <p>My research interests include Artificial Intelligence and related fields.</p>`,
+            news_title: "News",
+            news_list: `<li><span class="date">[2025]</span> Page updated.</li>`,
+            pubs_title: "Publications",
+            pubs_list: `<li style="color: #888; font-style: italic;">(Publication list is being updated...)</li>`,
+            projects_title: "Projects",
+            projects_list: `<li style="color: #888; font-style: italic;">(Project list is being updated...)</li>`,
+            life_title: "Life & Gallery",
+            life_desc_title: "Beyond Research",
+            life_desc_text: "Photography, Traveling, and random thoughts. Check out my footprints map and gallery."
+        },
+        'zh-CN': {
+            sidebar_name: "杨润德",
+            sidebar_title: "上海交大 硕士生",
+            location: "中国 上海",
+            about_title: "个人简介",
+            intro: `<p>你好！我是<strong>上海交通大学人工智能学院</strong>的在读学生（24级）。</p>
+                    <p>我的研究兴趣主要集中在人工智能及相关领域。</p>`,
+            news_title: "最新动态",
+            news_list: `<li><span class="date">[2025]</span> 主页更新。</li>`,
+            pubs_title: "发表论文",
+            pubs_list: `<li style="color: #888; font-style: italic;">（论文列表更新中...）</li>`,
+            projects_title: "项目经历",
+            projects_list: `<li style="color: #888; font-style: italic;">（项目列表更新中...）</li>`,
+            life_title: "生活与光影",
+            life_desc_title: "科研之外",
+            life_desc_text: "摄影、旅行以及随笔。点击查看我的足迹地图和相册。"
+        },
+        'zh-TW': {
+            sidebar_name: "楊潤德",
+            sidebar_title: "上海交大 碩士生",
+            location: "中國 上海",
+            about_title: "個人簡介",
+            intro: `<p>你好！我是<strong>上海交通大學人工智能學院</strong>的在讀學生（24級）。</p>
+                    <p>我的研究興趣主要集中在人工智能及相關領域。</p>`,
+            news_title: "最新動態",
+            news_list: `<li><span class="date">[2025]</span> 主頁更新。</li>`,
+            pubs_title: "發表論文",
+            pubs_list: `<li style="color: #888; font-style: italic;">（論文列表更新中...）</li>`,
+            projects_title: "項目經歷",
+            projects_list: `<li style="color: #888; font-style: italic;">（項目列表更新中...）</li>`,
+            life_title: "生活與光影",
+            life_desc_title: "科研之外",
+            life_desc_text: "攝影、旅行以及隨筆。點擊查看我的足跡地圖和相冊。"
+        }
+    };
 
-    // --- 邏輯控制 ---
     function setLang(lang) {
         // 1. 更新按鈕狀態
         document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -302,8 +344,13 @@
             }
         });
 
-        // 2. 更新文字內容
+        // 2. 更新所有文字內容
         const data = content[lang];
+        
+        // 更新左側邊欄名字
+        document.getElementById('sidebar-name').innerText = data.sidebar_name;
+        
+        // 更新其他帶有 data-key 的元素
         document.querySelectorAll('[data-key]').forEach(el => {
             const key = el.getAttribute('data-key');
             if (data[key]) {
@@ -311,32 +358,29 @@
             }
         });
 
-        // 3. 自動注入郵箱 (防爬蟲)
-        const emailBox = document.getElementById('email-protection');
+        // 3. 郵箱注入 (保持你的防爬蟲邏輯)
+        const emailBox = document.getElementById('sidebar-email-box');
         if (emailBox) {
             const u = "yangrundemdj"; 
             const d = "gmail.com";    
             emailBox.innerHTML = `<a href="mailto:${u}@${d}">${u}@${d}</a>`; 
         }
 
-        // 4. --- 字體切換核心邏輯 ---
+        // 4. --- 關鍵：字體切換邏輯 ---
         const body = document.body;
-        // 先移除所有特定字體樣式
-        body.style.fontFamily = ''; 
+        body.style.fontFamily = ''; // 重置
         
         if (lang === 'zh-CN') {
-            // 簡體模式：強制使用 AR PL UKai CN
             body.style.fontFamily = 'var(--font-zh-cn)';
         } else if (lang === 'zh-TW') {
-            // 繁體模式：強制使用 標楷體
             body.style.fontFamily = 'var(--font-zh-tw)';
         } else {
-            // 英文模式：使用襯線體
-            body.style.fontFamily = 'var(--font-en)';
+            // 英文模式：使用默認設置 (Calibri -> 簡體楷體)
+            body.style.fontFamily = 'var(--font-default)';
         }
     }
 
-    // 初始化：默認英文
+    // 初始化
     setLang('en');
 </script>
 
