@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life & Gallery - Runde Yang</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        /* --- 繼承首頁的基礎風格 --- */
+        :root {
+            --bg-color: #fcfbf9;
+            --text-color: #333333;
+            --accent-color: #2c5282; /* 學術藍 */
+            --caption-color: #555555;
+            --font-en: 'Georgia', 'Times New Roman', Times, serif;
+            --font-zh: "KaiTi", "BiaoKaiTi", "STKaiti", "DFKai-SB", serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-family: var(--font-en);
+        }
+
+        .container {
+            max-width: 900px; /* 比首頁寬一點，為了放地圖和照片 */
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- 導航欄 (簡化版) --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .nav-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* --- 通用標題 --- */
+        h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 60px;
+            margin-bottom: 30px;
+            font-family: var(--font-en);
+        }
+
+        /* --- 1. 攝影長廊 (Gallery) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .photo-card {
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .photo-card:hover { transform: translateY(-3px); }
+
+        .photo-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-caption {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .caption-en { font-size: 0.85rem; color: #888; margin-bottom: 4px; }
+        .caption-zh { 
+            font-family: var(--font-zh); 
+            font-size: 1rem; 
+            color: var(--caption-color); 
+        }
+
+        /* Lightbox (點擊放大) */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255,255,255,0.95);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .lightbox img { max-width: 90%; max-height: 80vh; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+        .lightbox-caption { margin-top: 20px; text-align: center; }
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 30px;
+            font-size: 3rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* --- 2. 足跡地圖 (Maps) --- */
+        .map-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .map-box {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: #fff;
+            border: 1px solid #eee;
+        }
+
+        /* --- 3. 書影音清單 (List) --- */
+        .item-list { display: flex; flex-direction: column; gap: 20px; }
+        .item-card {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .item-cover {
+            width: 60px;
+            height: 85px;
+            background: #ddd; /* 封面佔位 */
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+        .item-info h3 { margin: 0 0 5px 0; font-size: 1rem; }
+        .item-comment {
+            font-family: var(--font-zh);
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* --- 4. 隨筆 (Micro-blog) --- */
+        .snippet-list { border-left: 2px solid #eee; padding-left: 20px; margin-left: 10px; }
+        .snippet-item { margin-bottom: 30px; position: relative; }
+        .snippet-item::before {
+            content: '';
+            position: absolute;
+            left: -26px; top: 6px;
+            width: 10px; height: 10px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+        .snippet-date { font-size: 0.8rem; color: #999; margin-bottom: 5px; font-family: sans-serif; }
+        .snippet-content { font-family: var(--font-zh); font-size: 1.05rem; }
+
+        /* --- 5. 友情鏈接 --- */
+        .friend-list { display: flex; flex-wrap: wrap; gap: 15px; }
+        .friend-link {
+            padding: 5px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .friend-link:hover { border-color: var(--accent-color); color: var(--accent-color); }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav>
+        <a href="index.html" class="nav-title">← Back to Home</a>
+        <div class="nav-links">
+            <a href="#gallery">Gallery</a>
+            <a href="#map">Footprints</a>
+            <a href="#thoughts">Thoughts</a>
+        </div>
+    </nav>
+
+    <section id="gallery">
+        <h2>Gallery / 光影</h2>
+        <div class="gallery-grid">
+            
+            <div class="photo-card" onclick="openLightbox(this)">
+                <img src="images/meteor.jpg" alt="Qiandao Lake Meteor"> 
+                <div class="photo-caption">
+                    <div class="caption-en">Qiandao Lake, 2024</div>
+                    <div class="caption-zh">醉後不知天在水，滿船清夢壓星河。</div>
+                </div>
+            </div>
+
+            <div class="photo-card" onclick="openLightbox(this)">
+                <img src="https://via.placeholder.com/400x300" alt="Sample Photo">
+                <div class="photo-caption">
+                    <div class="caption-en">Shanghai, SJTU</div>
+                    <div class="caption-zh">校園的秋天，梧桐葉落。</div>
+                </div>
+            </div>
+
+            </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="">
+        <div class="lightbox-caption">
+            <div id="lightbox-en" class="caption-en"></div>
+            <div id="lightbox-zh" class="caption-zh" style="font-size: 1.5rem; color: #333;"></div>
+        </div>
+    </div>
+
+    <section id="map">
+        <h2>Footprints / 足跡</h2>
+        <div class="map-container">
+            <div id="china-map" class="map-box"></div>
+            <div id="world-map" class="map-box"></div>
+        </div>
+    </section>
+
+    <section id="shelf">
+        <h2>Shelf / 書影</h2>
+        <div class="item-list">
+            
+            <div class="item-card">
+                <img src="https://via.placeholder.com/60x85" class="item-cover">
+                <div class="item-info">
+                    <h3>Deep Learning (Ian Goodfellow)</h3>
+                    <div class="item-comment">常讀常新。數學基礎部分寫得極好，不僅是工具書，更是思維導圖。</div>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <img src="https://via.placeholder.com/60x85" class="item-cover">
+                <div class="item-info">
+                    <h3>Interstellar</h3>
+                    <div class="item-comment">愛是唯一可以穿越時間與空間的事物。</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="thoughts">
+        <h2>Snippets / 隨筆</h2>
+        <div class="snippet-list">
+            
+            <div class="snippet-item">
+                <div class="snippet-date">Dec 15, 2024</div>
+                <div class="snippet-content">
+                    整理這份主頁的時候，突然意識到「減法」比「加法」難得多。代碼如此，生活亦然。
+                </div>
+            </div>
+
+            <div class="snippet-item">
+                <div class="snippet-date">Nov 10, 2024</div>
+                <div class="snippet-content">
+                    千島湖的流星雨。肉眼看到的比相機拍到的震撼一萬倍。人類的鏡頭終究還是太侷限了。
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <h2>Friends / 友鏈</h2>
+        <div class="friend-list">
+            <a href="#" class="friend-link">Laboratory Partner A</a>
+            <a href="#" class="friend-link">SJTU AI Club</a>
+            <a href="#" class="friend-link">Another Friend</a>
+        </div>
+    </section>
+
+    <footer style="text-align: center; color: #999; font-size: 0.8rem; margin-top: 60px;">
+        &copy; 2025 Runde Yang.
+    </footer>
+
+</div>
+
+<script>
+    // --- 1. Lightbox 邏輯 ---
+    function openLightbox(element) {
+        const imgSrc = element.querySelector('img').src;
+        const enText = element.querySelector('.caption-en').innerText;
+        const zhText = element.querySelector('.caption-zh').innerText;
+
+        document.getElementById('lightbox-img').src = imgSrc;
+        document.getElementById('lightbox-en').innerText = enText;
+        document.getElementById('lightbox-zh').innerText = zhText;
+        
+        document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+    }
+
+    // --- 2. 地圖配置 (ECharts) ---
+    // 這裡我們異步加載地圖數據，確保頁面不卡頓
+    
+    // 初始化圖表實例
+    const myChartChina = echarts.init(document.getElementById('china-map'));
+    const myChartWorld = echarts.init(document.getElementById('world-map'));
+
+    // 加載中國地圖數據 (使用阿里雲 DataV 的 GeoJSON)
+    fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+        .then(response => response.json())
+        .then(geoJson => {
+            echarts.registerMap('china', geoJson);
+            
+            myChartChina.setOption({
+                title: { text: 'China Footprints', left: 'center', top: 20 },
+                tooltip: { trigger: 'item' },
+                geo: {
+                    map: 'china',
+                    roam: true, // 允許縮放
+                    label: { show: false },
+                    itemStyle: {
+                        areaColor: '#f3f3f3', // 默認顏色
+                        borderColor: '#999'
+                    },
+                    emphasis: {
+                        itemStyle: { areaColor: '#ddd' }
+                    }
+                },
+                series: [{
+                    name: 'Visited',
+                    type: 'map',
+                    geoIndex: 0,
+                    data: [
+                        // 在這裡添加你去過的省份/直轄市，顏色會變深
+                        {name: '上海市', itemStyle: {areaColor: '#2c5282'}}, 
+                        {name: '浙江省', itemStyle: {areaColor: '#2c5282'}}, // 千島湖在浙江
+                        {name: '北京市', itemStyle: {areaColor: '#2c5282'}}
+                    ]
+                }]
+            });
+        });
+
+    // 加載世界地圖 (簡化版)
+    // 這裡使用一個常用的在線 GeoJSON 源
+    fetch('https://raw.githubusercontent.com/apache/echarts-examples/gh-pages/public/data/asset/geo/world.json')
+        .then(response => response.json())
+        .then(geoJson => {
+            echarts.registerMap('world', geoJson);
+            
+            myChartWorld.setOption({
+                title: { text: 'World Footprints', left: 'center', top: 20 },
+                tooltip: { trigger: 'item' },
+                geo: {
+                    map: 'world',
+                    roam: true,
+                    label: { show: false },
+                    itemStyle: {
+                        areaColor: '#f3f3f3',
+                        borderColor: '#999'
+                    },
+                    emphasis: {
+                        itemStyle: { areaColor: '#ddd' }
+                    }
+                },
+                series: [{
+                    type: 'effectScatter', // 點狀標記
+                    coordinateSystem: 'geo',
+                    rippleEffect: { brushType: 'stroke' },
+                    label: { show: true, position: 'right', formatter: '{b}' },
+                    symbolSize: 5,
+                    itemStyle: { color: '#2c5282' },
+                    data: [
+                        // 世界地圖用經緯度標記點比較準確
+                        {name: 'Shanghai', value: [121.4737, 31.2304]}, 
+                        {name: 'New York', value: [-74.006, 40.7128]}
+                    ]
+                }]
+            });
+        });
+
+    // 窗口大小改變時重繪地圖
+    window.addEventListener('resize', () => {
+        myChartChina.resize();
+        myChartWorld.resize();
+    });
+
+</script>
+
+</body>
+</html>
