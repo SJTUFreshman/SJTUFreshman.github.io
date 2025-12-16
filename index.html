@@ -13,25 +13,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- 1. 字體變量配置 (核心修改) --- */
+        /* --- 1. 字體變量配置 (保持不變) --- */
         :root {
             --bg-color: #fcfbf9;
             --text-color: #333333;
             --accent-color: #2c5282;
-            --sidebar-width: 280px;
+            
+            /* Sidebar 寬度改小，讓它更緊湊 */
+            --sidebar-width: 240px; 
+            --header-height: 60px; /* 定義頂部欄高度 */
 
-            /* 技巧：將 Calibri 放在最前面。
-               瀏覽器會優先用 Calibri 渲染英文/數字。
-               遇到漢字時，Calibri 裡沒有，就會自動降級用後面的中文字體。
-            */
-            
-            /* 默認/英文模式：英文用 Calibri，中文名字用簡體楷體 */
+            /* 字體設置 */
             --font-default: "Calibri", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
-            
-            /* 簡體模式：英文用 Calibri，中文用簡體楷體 */
             --font-zh-cn: "Calibri", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
-            
-            /* 繁體模式：英文用 Calibri，中文用台灣標楷體 */
             --font-zh-tw: "Calibri", "BiaoKaiTi", "DFKai-SB", serif;
         }
 
@@ -41,18 +35,87 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            /* 默認字體，後續 JS 會改 */
             font-family: var(--font-default); 
+            /* 為了不被頂部固定欄擋住內容，給 body 加一個上內邊距 */
+            padding-top: var(--header-height);
+        }
+
+        /* --- 新增：半透明固定頂部導航欄 --- */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background-color: rgba(252, 251, 249, 0.85); /* 半透明背景 */
+            backdrop-filter: blur(8px); /* 毛玻璃模糊效果 */
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: center; /* 內容居中 */
+        }
+
+        .header-inner {
+            width: 100%;
+            max-width: 1150px; /* 與下方內容寬度對齊 */
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .header-name-link {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #000;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: var(--accent-color); }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        /* 語言按鈕樣式 */
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #999;
+            padding: 0 6px;
+            font-family: "Calibri", sans-serif;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            color: var(--accent-color);
+            font-weight: bold;
         }
 
         /* --- 2. 雙欄佈局結構 --- */
         .page-wrapper {
-            max-width: 1100px;
-            margin: 0 auto;
+            max-width: 1150px;
+            margin: 0 auto; /* 居中 */
             padding: 40px 20px;
             display: flex;
-            gap: 50px; /* 左右欄間距 */
-            align-items: flex-start; /* 頂部對齊 */
+            gap: 60px; /* 欄間距 */
+            align-items: flex-start;
         }
 
         /* --- 左側固定欄 (Sidebar) --- */
@@ -60,24 +123,25 @@
             width: var(--sidebar-width);
             flex-shrink: 0;
             text-align: center;
-            /* 實現滾動時固定效果 */
+            /* Sticky 效果 */
             position: -webkit-sticky;
             position: sticky;
-            top: 40px; 
+            /* top 值要考慮 header 的高度，多加一點緩衝 */
+            top: calc(var(--header-height) + 30px); 
         }
 
         .avatar {
-            width: 200px;
-            height: 200px;
+            width: 180px; /* 稍微縮小 */
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            /* 去掉了白框 border */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             margin-bottom: 20px;
         }
 
         .my-name {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: bold;
             margin-bottom: 5px;
             color: #000;
@@ -95,15 +159,17 @@
             list-style: none;
             padding: 0;
             text-align: left;
-            margin-top: 30px;
-            font-size: 0.95rem;
+            /* 讓列表在 sidebar 裡看起來居中一點，但文字靠左 */
+            display: inline-block; 
+            margin-top: 20px;
+            font-size: 0.9rem;
         }
 
         .contact-list li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             color: #555;
         }
 
@@ -123,40 +189,19 @@
         /* --- 右側內容區 (Main Content) --- */
         .main-content {
             flex-grow: 1;
-            /* 防止內容溢出 */
             min-width: 0; 
         }
 
-        /* 頂部導航 (語言切換) - 現在放在右側內容區的頂部 */
-        .top-nav {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .lang-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #999;
-            padding: 0 5px;
-            font-family: "Calibri", sans-serif;
-            font-size: 0.9rem;
-        }
-
-        .lang-btn:hover, .lang-btn.active {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-
         /* 章節樣式 */
-        section { margin-bottom: 50px; }
+        section { 
+            margin-bottom: 60px; 
+            /* 為了點擊導航時不被 Header 遮擋，做一個偏移修復 */
+            scroll-margin-top: calc(var(--header-height) + 20px);
+        }
         
         h2 {
             font-size: 1.4rem;
-            border-bottom: 2px solid #eee;
+            border-bottom: 1px solid #eee;
             padding-bottom: 8px;
             margin-bottom: 20px;
             color: var(--accent-color);
@@ -169,9 +214,9 @@
         a:hover { text-decoration: underline; }
 
         /* 列表微調 */
-        ul { padding-left: 20px; }
+        ul.content-area { padding-left: 18px; }
         li { margin-bottom: 10px; }
-        .date { font-weight: bold; color: #666; margin-right: 5px; }
+        .date { font-weight: bold; color: #666; margin-right: 5px; font-family: "Calibri"; }
 
         /* Life Preview Card */
         .life-preview {
@@ -186,22 +231,60 @@
             cursor: pointer;
         }
         .life-preview:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        .life-icon { font-size: 2rem; color: var(--accent-color); }
+        .life-icon { font-size: 1.8rem; color: var(--accent-color); }
 
-        /* --- 響應式：手機端變成單欄 --- */
-        @media (max-width: 768px) {
-            .page-wrapper { flex-direction: column; align-items: center; }
+        /* 底部訪客地圖區域 */
+        .visitor-map-container {
+            margin-top: 80px;
+            border-top: 1px dashed #eee;
+            padding-top: 20px;
+            text-align: center; /* 讓地圖居中 */
+        }
+        .map-placeholder {
+            /* 這裡模擬地圖樣式，實際代碼放入後可刪除此 class */
+            display: inline-block;
+            opacity: 0.8;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        /* --- 響應式 --- */
+        @media (max-width: 850px) {
+            .page-wrapper { flex-direction: column; align-items: center; padding-top: 20px; }
             .sidebar { width: 100%; position: static; margin-bottom: 40px; }
-            .contact-list { text-align: center; display: inline-block; }
+            .header-left { display: none; } /* 手機端暫時隱藏頂部導航鏈接，保留名字或另作處理 */
+            .header-content { justify-content: center; }
+            .contact-list { display: block; text-align: center; }
             .contact-list li { justify-content: center; }
-            .top-nav { justify-content: center; }
         }
     </style>
 </head>
 <body>
+
+<nav class="fixed-header">
+    <div class="header-inner">
+        <div class="header-left">
+            <a href="#" class="header-name-link">Runde Yang</a>
+            
+            <a href="#about" class="nav-link" data-key="about_title">Biography</a>
+            <a href="#news" class="nav-link" data-key="news_title">News</a>
+            <a href="#pubs" class="nav-link" data-key="pubs_title">Publications</a>
+            <a href="#projects" class="nav-link" data-key="projects_title">Projects</a>
+            <a href="#life" class="nav-link" data-key="life_title">Life</a>
+        </div>
+
+        <div class="header-right">
+            <button class="lang-btn active" onclick="setLang('en')">EN</button>
+            <span style="color:#ddd; margin:0 3px;">|</span>
+            <button class="lang-btn" onclick="setLang('zh-CN')">简</button>
+            <span style="color:#ddd; margin:0 3px;">|</span>
+            <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
+        </div>
+    </div>
+</nav>
 
 <div class="page-wrapper">
     
@@ -233,34 +316,28 @@
 
     <main class="main-content">
         
-        <div class="top-nav">
-            <button class="lang-btn active" onclick="setLang('en')">EN</button> |
-            <button class="lang-btn" onclick="setLang('zh-CN')">简</button> |
-            <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
-        </div>
-
         <section id="about">
             <h2 data-key="about_title">Biography</h2>
             <div class="content-area" data-key="intro">
-                </div>
+            </div>
         </section>
 
         <section id="news">
             <h2 data-key="news_title">News</h2>
             <ul class="content-area" data-key="news_list">
-                </ul>
+            </ul>
         </section>
 
         <section id="pubs">
             <h2 data-key="pubs_title">Publications</h2>
             <ul class="content-area" data-key="pubs_list">
-                 </ul>
+             </ul>
         </section>
         
         <section id="projects">
             <h2 data-key="projects_title">Projects</h2>
             <ul class="content-area" data-key="projects_list">
-                 </ul>
+             </ul>
         </section>
 
         <section id="life">
@@ -277,13 +354,19 @@
             </div>
         </section>
 
+        <div class="visitor-map-container">
+            <div class="map-placeholder">
+                <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=300&t=tt&d=YOUR_ID_HERE&co=2d78ad&ct=ffffff&cmo=3acc3a&cmn=ff5353'></script>
+            </div>
+        </div>
+
     </main>
 </div>
 
 <script>
     const content = {
         en: {
-            sidebar_name: "Runde Yang (杨润德)", // 這裡楊潤德會顯示為簡體（因為默認fallback是簡體）
+            sidebar_name: "Runde Yang (杨润德)",
             sidebar_title: "Master Student at SJTU",
             location: "Shanghai, China",
             about_title: "Biography",
@@ -358,24 +441,23 @@
             }
         });
 
-        // 3. 郵箱注入 (保持你的防爬蟲邏輯)
+        // 3. 郵箱注入
         const emailBox = document.getElementById('sidebar-email-box');
         if (emailBox) {
             const u = "yangrundemdj"; 
-            const d = "gmail.com";    
+            const d = "gmail.com";     
             emailBox.innerHTML = `<a href="mailto:${u}@${d}">${u}@${d}</a>`; 
         }
 
-        // 4. --- 關鍵：字體切換邏輯 ---
+        // 4. 字體切換邏輯
         const body = document.body;
-        body.style.fontFamily = ''; // 重置
+        body.style.fontFamily = ''; 
         
         if (lang === 'zh-CN') {
             body.style.fontFamily = 'var(--font-zh-cn)';
         } else if (lang === 'zh-TW') {
             body.style.fontFamily = 'var(--font-zh-tw)';
         } else {
-            // 英文模式：使用默認設置 (Calibri -> 簡體楷體)
             body.style.fontFamily = 'var(--font-default)';
         }
     }
