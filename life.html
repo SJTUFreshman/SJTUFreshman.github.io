@@ -83,37 +83,53 @@
 
         /* Gallery */
 /* --- Gallery: 疊放照片堆 (Polaroid Stack) --- */
-/* --- Gallery: 平行四邊形堆疊 (Parallelogram Stack) --- */
-        .gallery-stack {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 400px;
-            padding: 20px 0;
-            overflow: visible; /* 允許圖片懸浮時超出容器 */
+/* --- Gallery: 可拖拽的正方形堆疊相冊 --- */
+        
+        /* 1. 最外層容器：負責遮罩 (虛化邊緣) 和隱藏滾動條 */
+        .gallery-scroll-view {
+            position: relative;
+            width: 100%;
+            overflow: hidden; /* 隱藏默認滾動條，改用 JS 拖拽 */
+            padding: 40px 0; /* 上下留白給懸浮動畫 */
+            cursor: grab;    /* 鼠標手勢：抓取 */
+            
+            /* 核心：左右邊緣漸變虛化 (CSS Mask) */
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
+        
+        .gallery-scroll-view:active {
+            cursor: grabbing; /* 抓取時的手勢 */
         }
 
+        /* 2. 內部軌道：負責橫向排列 */
+        .gallery-track {
+            display: flex;
+            align-items: center;
+            width: max-content; /* 寬度根據內容自動延伸 */
+            padding: 0 50px;    /* 兩側留白，保證第一張和最後一張能被看到 */
+            padding-left: 100px; /* 初始位置稍微靠右一點 */
+        }
+
+        /* 3. 卡片本體 */
         .photo-card {
             position: relative;
-            width: 260px;       /* 卡片寬度 */
-            height: 360px;      /* 卡片高度 */
+            width: 240px;
+            height: 240px; /* 正方形 */
             background: #fff;
-            
-            /* 核心：傾斜變成平行四邊形 */
-            transform: skewX(-10deg); 
-            
-            /* 核心：負邊距實現重疊效果 */
-            margin-left: -60px; 
-            
             border: 4px solid #fff;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1); /* 陰影在左側，增強堆疊感 */
-            overflow: hidden;   /* 隱藏溢出的圖片 */
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* 絲滑回彈 */
-            cursor: pointer;
-            z-index: 1; /* 默認層級 */
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* 陰影在左側 */
+            border-radius: 4px; /* 輕微圓角 */
+            overflow: hidden;
+            
+            /* 核心：負邊距實現重疊 (後一張壓住前一張的一半) */
+            margin-left: -120px; 
+            
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            user-select: none; /* 防止拖拽時選中圖片 */
         }
 
-        /* 讓第一張卡片不要有左邊距 */
+        /* 第一張不要負邊距 */
         .photo-card:first-child {
             margin-left: 0;
         }
@@ -121,42 +137,33 @@
         .photo-card img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            
-            /* 核心：圖片反向傾斜 + 放大，抵消外框的變形，保證人像不歪 */
-            transform: skewX(10deg) scale(1.2); 
+            object-fit: cover; /* 填滿正方形 */
+            pointer-events: none; /* 防止圖片本身的拖拽干擾 JS 邏輯 */
+        }
+
+        /* 4. 註釋文字 (默認隱藏) */
+        .photo-caption {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            background: rgba(255,255,255,0.95);
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #333;
+            transform: translateY(100%); /* 默認沉在下面 */
             transition: transform 0.3s;
         }
 
-        /* 註釋文字樣式 */
-        .photo-caption {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 1rem;
-            color: #333;
-            background: rgba(255,255,255,0.9); /* 半透明白底 */
-            padding: 8px 0;
-            
-            /* 文字也要反向傾斜回來，方便閱讀 */
-            transform: skewX(10deg);
-            opacity: 0; /* 默認隱藏，懸浮顯示 */
-            transition: opacity 0.3s;
-        }
-
-        /* --- 鼠標懸停特效：抽出來 --- */
+        /* 5. 懸浮互動 (抽出來) */
         .photo-card:hover {
-            /* 向上彈起 + 稍微放大 */
-            transform: skewX(-10deg) translateY(-30px) scale(1.05);
-            z-index: 100; /* 層級最高，防止被遮擋 */
-            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-            margin-right: 20px; /* 稍微推開右邊的圖片，增加空間感（可選） */
+            transform: translateY(-40px) scale(1.1); /* 向上浮起 + 放大 */
+            z-index: 100; /* 層級最高 */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            margin-right: 60px; /* 稍微推開右邊的圖片，讓自己完全露出來 */
         }
 
         .photo-card:hover .photo-caption {
-            opacity: 1; /* 顯示文字 */
+            transform: translateY(0); /* 文字浮現 */
         }
 
         /* Map */
@@ -232,23 +239,35 @@
     <section id="gallery">
         <h2 data-key="title_gallery">Gallery</h2>
         
-        <div class="gallery-stack">
-            
-            <div class="photo-card" onclick="openLightbox(this)">
-                <img src="images/meteor.jpg" alt="Qiandao Lake"> 
-                <div class="photo-caption" data-key="cap_meteor">Qiandao Lake, 2024.</div>
-            </div>
+        <div class="gallery-scroll-view" id="galleryContainer">
+            <div class="gallery-track">
+                
+                <div class="photo-card" onclick="openLightbox(this)">
+                    <img src="images/meteor.jpg" alt="Qiandao Lake"> 
+                    <div class="photo-caption" data-key="cap_meteor">Qiandao Lake, 2024.</div>
+                </div>
 
-            <div class="photo-card" onclick="openLightbox(this)">
-                <img src="images/campus.jpg" alt="SJTU Campus">
-                <div class="photo-caption" data-key="cap_campus">Shanghai, SJTU.</div>
-            </div>
+                <div class="photo-card" onclick="openLightbox(this)">
+                    <img src="https://via.placeholder.com/300" alt="Campus">
+                    <div class="photo-caption" data-key="cap_campus">SJTU Campus.</div>
+                </div>
 
-            <div class="photo-card" onclick="openLightbox(this)">
-                <img src="https://via.placeholder.com/400x300/2c5282/ffffff?text=Travel" alt="Travel">
-                <div class="photo-caption" data-key="life_desc_title">Random Travel</div>
-            </div>
+                <div class="photo-card" onclick="openLightbox(this)">
+                    <img src="https://via.placeholder.com/300" alt="Travel">
+                    <div class="photo-caption" data-key="life_desc_title">Random Travel</div>
+                </div>
+                
+                <div class="photo-card" onclick="openLightbox(this)">
+                    <img src="https://via.placeholder.com/300" alt="Life">
+                    <div class="photo-caption">City Walk</div>
+                </div>
 
+                 <div class="photo-card" onclick="openLightbox(this)">
+                    <img src="https://via.placeholder.com/300" alt="Coffee">
+                    <div class="photo-caption">Coffee Time</div>
+                </div>
+
+            </div>
         </div>
     </section>
 
