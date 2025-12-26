@@ -395,6 +395,22 @@
             padding-top: 20px;
             text-align: center; 
         }
+        /* ClustrMaps globe size control */
+        .clustrmaps-box{
+            width: 320px;          /* 你想要的寬度 */
+            height: 200px;         /* 你想要的高度 */
+            margin: 0 auto;        /* 居中 */
+            overflow: hidden;      /* 防止地球溢出 */
+        }
+        
+        /* 手機端再縮小一點（可選） */
+        @media (max-width: 850px){
+            .clustrmaps-box{
+                width: 260px;
+                height: 170px;
+            }
+        }
+
 
         /* 響應式 */
         @media (max-width: 850px) {
@@ -528,9 +544,13 @@
             </div>
         </section>
 
-        <div class="visitor-map-container">
-            <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=fX5iFnBQqkI4YOaCh2hYxnYfi2pj9aK8Fq4We1ChmH4"></script>
-        </div>
+      <div class="clustrmaps-box">
+        <script
+          type="text/javascript"
+          id="clstr_globe"
+          src="//clustrmaps.com/globe.js?d=fX5iFnBQqkI4YOaCh2hYxnYfi2pj9aK8Fq4We1ChmH4">
+        </script>
+      </div>
 
     </main>
 </div>
@@ -626,7 +646,15 @@
     // 模擬複製 Citation 的功能
     function copyCitation(paperId) {
         // 實際使用時，這裡可以是真實的 BibTex 字符串
-        const dummyBib = `@article{${paperId},\n  title={Title of the paper},\n  author={Yang, Runde and others},\n  journal={Conference},\n  year={2024}\n}`;
+        const dummyBib = `@misc{fan2025appcopilotgeneralaccuratelonghorizon,
+      title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent}, 
+      author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},
+      year={2025},
+      eprint={2509.02444},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2509.02444}, 
+}`;
         
         navigator.clipboard.writeText(dummyBib).then(() => {
             alert("BibTeX copied to clipboard!");
