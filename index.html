@@ -395,21 +395,36 @@
             padding-top: 20px;
             text-align: center; 
         }
-        /* ClustrMaps globe size control */
+        /* ===== ClustrMaps globe FIX ===== */
         .clustrmaps-box{
-            width: 320px;          /* 你想要的寬度 */
-            height: 200px;         /* 你想要的高度 */
-            margin: 0 auto;        /* 居中 */
-            overflow: hidden;      /* 防止地球溢出 */
+            width: 300px;
+            aspect-ratio: 1 / 1;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
         }
         
-        /* 手機端再縮小一點（可選） */
+        .clustrmaps-box canvas,
+        .clustrmaps-box iframe,
+        .clustrmaps-box object,
+        .clustrmaps-box embed{
+            width: 100% !important;
+            height: 100% !important;
+            display: block !important;
+        }
+        
+        /* 防止第三方腳本把頁面撐開 */
+        html, body{
+            overflow-x: hidden;
+        }
+        
+        /* 手機端 */
         @media (max-width: 850px){
             .clustrmaps-box{
-                width: 260px;
-                height: 170px;
+                width: 240px;
             }
         }
+
 
 
         /* 響應式 */
