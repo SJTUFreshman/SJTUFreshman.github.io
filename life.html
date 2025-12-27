@@ -252,21 +252,6 @@
                     <div class="photo-caption" data-key="cap_campus">SJTU Campus.</div>
                 </div>
 
-                <div class="photo-card" onclick="openLightbox(this)">
-                    <img src="https://via.placeholder.com/300" alt="Travel">
-                    <div class="photo-caption" data-key="life_desc_title">Random Travel</div>
-                </div>
-                
-                <div class="photo-card" onclick="openLightbox(this)">
-                    <img src="https://via.placeholder.com/300" alt="Life">
-                    <div class="photo-caption">City Walk</div>
-                </div>
-
-                 <div class="photo-card" onclick="openLightbox(this)">
-                    <img src="https://via.placeholder.com/300" alt="Coffee">
-                    <div class="photo-caption">Coffee Time</div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -455,96 +440,111 @@
         if(myChartChina) myChartChina.setOption({ title: { text: chinaTitle } });
         if(myChartWorld) myChartWorld.setOption({ title: { text: worldTitle } });
     }
-
-    // 加載數據 - 中國地圖
+    // 加載數據 - 中國地圖（本地）
     fetch('assets/maps/china_100000_full.json')
-      .then(response => {
-        if (!response.ok) throw new Error(`China geojson HTTP ${response.status}`);
-        return response.json();
+      .then(r => {
+        if (!r.ok) throw new Error(`China geojson HTTP ${r.status}`);
+        return r.json();
       })
       .then(geoJson => {
         echarts.registerMap('china', geoJson);
-            myChartChina.setOption({
-                title: { text: 'China Footprints', left: 'center', top: 20, textStyle: { color: '#2c5282', fontFamily: getComputedStyle(document.body).fontFamily},
-                tooltip: { trigger: 'item' },
-                geo: {
-                    map: 'china', roam: true, label: { show: false },
-                    itemStyle: { areaColor: '#f3f3f3', borderColor: '#999' },
-                    emphasis: { itemStyle: { areaColor: '#ddd' } }
-                },
-                series: [{
-                    name: 'Visited', type: 'map', geoIndex: 0,
-                    data: [
-                        {name: '上海市', itemStyle: {areaColor: '#2c5282'}}, 
-                        {name: '西安市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '南京市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '苏州市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '武汉市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '锦州市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '秦皇岛市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '葫芦岛市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '赤峰市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '承德市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '银川市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '开封市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '西宁市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '绍兴市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '榆林市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '延安市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '海西藏族自治州', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '海南藏族自治州', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '海北藏族自治州', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '七台河市', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '牡丹江市', itemStyle: {areaColor: '#2c5282'}}
-                    ]
-                }]
-            });
+    
+        myChartChina.setOption({
+          title: {
+            text: 'China Footprints',
+            left: 'center',
+            top: 20,
+            textStyle: {
+              color: '#2c5282',
+              fontFamily: getComputedStyle(document.body).fontFamily
+            }
+          },
+          tooltip: { trigger: 'item' },
+          geo: {
+            map: 'china',
+            roam: true,
+            label: { show: false },
+            itemStyle: { areaColor: '#f3f3f3', borderColor: '#999' },
+            emphasis: { itemStyle: { areaColor: '#ddd' } }
+          },
+          series: [{
+            name: 'Visited',
+            type: 'map',
+            geoIndex: 0,
+            data: [
+                    {name: '上海市', itemStyle: {areaColor: '#2c5282'}}, 
+                    {name: '西安市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '南京市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '苏州市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '武汉市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '锦州市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '秦皇岛市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '葫芦岛市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '赤峰市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '承德市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '银川市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '开封市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '西宁市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '绍兴市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '榆林市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '延安市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '海西藏族自治州', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '海南藏族自治州', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '海北藏族自治州', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '七台河市', itemStyle: {areaColor: '#2c5282'}},
+                    {name: '牡丹江市', itemStyle: {areaColor: '#2c5282'}}
+            ]
+          }]
+        });
+    
+        // 地圖真初始化完後，再做一次語言/字體同步（可選，但建議）
+        setLang('en');
       })
       .catch(err => {
         console.error('China map load failed:', err);
-        // 你也可以在容器里显示提示文字（可选）
         document.getElementById('china-map').innerHTML =
           '<div style="padding:16px;color:#999;">China map failed to load.</div>';
       });
-            // 加載完成後更新一次語言，確保標題正確
-            // const currentLang = document.querySelector('.lang-btn.active').innerText.includes('EN') ? 'en' : 'zh-TW'; 
-            setLang('en');
-        });
 
-    // 加載數據 - 世界地圖
     fetch('https://raw.githubusercontent.com/apache/echarts-examples/gh-pages/public/data/asset/geo/world.json')
-        .then(response => response.json())
-        .then(geoJson => {
-            echarts.registerMap('world', geoJson);
-            myChartWorld.setOption({
-                title: { text: 'World Footprints', left: 'center', top: 20, textStyle: { color: '#2c5282', fontFamily: getComputedStyle(document.body).fontFamily},
-                tooltip: { trigger: 'item' },
-                geo: {
-                    map: 'world', roam: true, label: { show: false },
-                    itemStyle: { areaColor: '#f3f3f3', borderColor: '#999' },
-                    emphasis: { itemStyle: { areaColor: '#ddd' } }
-                },
-                series: [{
-                    type: 'effectScatter', coordinateSystem: 'geo',
-                    rippleEffect: { brushType: 'stroke' },
-                    label: { show: true, position: 'right', formatter: '{b}' },
-                    symbolSize: 5, itemStyle: { color: '#2c5282' },
-                    data: [
-                        {name: 'Shanghai', value: [121.4737, 31.2304]}, 
-                        {name: 'New York', value: [-74.006, 40.7128]}
-                    ]
-                }]
-            });
-            setLang('en');
+      .then(r => r.json())
+      .then(geoJson => {
+        echarts.registerMap('world', geoJson);
+    
+        myChartWorld.setOption({
+          title: {
+            text: 'World Footprints',
+            left: 'center',
+            top: 20,
+            textStyle: {
+              color: '#2c5282',
+              fontFamily: getComputedStyle(document.body).fontFamily
+            }
+          },
+          tooltip: { trigger: 'item' },
+          geo: {
+            map: 'world',
+            roam: true,
+            label: { show: false },
+            itemStyle: { areaColor: '#f3f3f3', borderColor: '#999' },
+            emphasis: { itemStyle: { areaColor: '#ddd' } }
+          },
+          series: [{
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            rippleEffect: { brushType: 'stroke' },
+            label: { show: true, position: 'right', formatter: '{b}' },
+            symbolSize: 5,
+            itemStyle: { color: '#2c5282' },
+            data: [
+              { name: 'Shanghai', value: [121.4737, 31.2304] },
+              { name: 'New York', value: [-74.006, 40.7128] }
+            ]
+          }]
         });
-
-    window.addEventListener('resize', () => {
-        myChartChina.resize();
-        myChartWorld.resize();
-    });
-
-    // 初始化
-    setLang('en');
+    
+        setLang('en');
+      });
 </script>
 
 </body>
