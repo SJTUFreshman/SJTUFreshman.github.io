@@ -417,6 +417,7 @@
 
         // 更新圖表標題
         updateChartTitles(data.chart_china, data.chart_world);
+        syncEchartsFont();
     }
 
     // --- 3. Lightbox 邏輯 ---
@@ -438,6 +439,17 @@
     // 在全域聲明變量，以便 setLang 可以訪問
     const myChartChina = echarts.init(document.getElementById('china-map'));
     const myChartWorld = echarts.init(document.getElementById('world-map'));
+    function syncEchartsFont() {
+        const currentFont = getComputedStyle(document.body).fontFamily;
+    
+        const common = {
+            textStyle: { fontFamily: currentFont },          // 全局字體
+            title: { textStyle: { fontFamily: currentFont } } // title 再保險一次
+        };
+    
+        if (myChartChina) myChartChina.setOption(common);
+        if (myChartWorld) myChartWorld.setOption(common);
+    }
 
     function updateChartTitles(chinaTitle, worldTitle) {
         if(myChartChina) myChartChina.setOption({ title: { text: chinaTitle } });
@@ -445,12 +457,15 @@
     }
 
     // 加載數據 - 中國地圖
-    fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
-        .then(response => response.json())
-        .then(geoJson => {
-            echarts.registerMap('china', geoJson);
+    fetch('assets/maps/china_100000_full.json')
+      .then(response => {
+        if (!response.ok) throw new Error(`China geojson HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(geoJson => {
+        echarts.registerMap('china', geoJson);
             myChartChina.setOption({
-                title: { text: 'China Footprints', left: 'center', top: 20, textStyle: { color: '#2c5282' } },
+                title: { text: 'China Footprints', left: 'center', top: 20, textStyle: { color: '#2c5282', fontFamily: getComputedStyle(document.body).fontFamily},
                 tooltip: { trigger: 'item' },
                 geo: {
                     map: 'china', roam: true, label: { show: false },
@@ -461,11 +476,36 @@
                     name: 'Visited', type: 'map', geoIndex: 0,
                     data: [
                         {name: '上海市', itemStyle: {areaColor: '#2c5282'}}, 
-                        {name: '浙江省', itemStyle: {areaColor: '#2c5282'}},
-                        {name: '北京市', itemStyle: {areaColor: '#2c5282'}}
+                        {name: '西安市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '南京市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '苏州市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '武汉市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '锦州市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '秦皇岛市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '葫芦岛市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '赤峰市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '承德市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '银川市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '开封市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '西宁市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '绍兴市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '榆林市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '延安市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '海西藏族自治州', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '海南藏族自治州', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '海北藏族自治州', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '七台河市', itemStyle: {areaColor: '#2c5282'}},
+                        {name: '牡丹江市', itemStyle: {areaColor: '#2c5282'}}
                     ]
                 }]
             });
+      })
+      .catch(err => {
+        console.error('China map load failed:', err);
+        // 你也可以在容器里显示提示文字（可选）
+        document.getElementById('china-map').innerHTML =
+          '<div style="padding:16px;color:#999;">China map failed to load.</div>';
+      });
             // 加載完成後更新一次語言，確保標題正確
             // const currentLang = document.querySelector('.lang-btn.active').innerText.includes('EN') ? 'en' : 'zh-TW'; 
             setLang('en');
@@ -477,7 +517,7 @@
         .then(geoJson => {
             echarts.registerMap('world', geoJson);
             myChartWorld.setOption({
-                title: { text: 'World Footprints', left: 'center', top: 20, textStyle: { color: '#2c5282' } },
+                title: { text: 'World Footprints', left: 'center', top: 20, textStyle: { color: '#2c5282', fontFamily: getComputedStyle(document.body).fontFamily},
                 tooltip: { trigger: 'item' },
                 geo: {
                     map: 'world', roam: true, label: { show: false },
