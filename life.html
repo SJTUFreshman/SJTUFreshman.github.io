@@ -440,63 +440,123 @@
         if(myChartChina) myChartChina.setOption({ title: { text: chinaTitle } });
         if(myChartWorld) myChartWorld.setOption({ title: { text: worldTitle } });
     }
-    // 加載數據 - 中國地圖（本地）
-    fetch('assets/maps/china_city_full.json')
-      .then(r => {
-        if (!r.ok) throw new Error(`China geojson HTTP ${r.status}`);
-        return r.json();
-      })
-      .then(geoJson => {
-        echarts.registerMap('china', geoJson);
-    
-        myChartChina.setOption({
-          title: {
-            text: 'China Footprints',
-            left: 'center',
-            top: 20,
-            textStyle: {
-              color: '#2c5282',
-              fontFamily: getComputedStyle(document.body).fontFamily
-            }
-          },
-          tooltip: { trigger: 'item' },
-          geo: {
-            map: 'china',
-            roam: true,
-            label: { show: false },
-            itemStyle: { areaColor: '#f3f3f3', borderColor: '#999' },
-            emphasis: { itemStyle: { areaColor: '#ddd' } }
-          },
-          series: [{
-            name: 'Visited',
-            type: 'map',
-            geoIndex: 0,
-            data: [
-                    {name: '上海市', itemStyle: {areaColor: '#2c5282'}}, 
-                    {name: '西安市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '南京市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '苏州市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '武汉市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '锦州市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '秦皇岛市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '葫芦岛市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '赤峰市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '承德市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '银川市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '开封市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '西宁市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '绍兴市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '榆林市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '延安市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '海西藏族自治州', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '海南藏族自治州', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '海北藏族自治州', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '七台河市', itemStyle: {areaColor: '#2c5282'}},
-                    {name: '牡丹江市', itemStyle: {areaColor: '#2c5282'}}
-            ]
-          }]
-        });
-    
+// 你原来的 visited 列表（保持不变即可）
+const visited = [
+  '上海市','西安市','南京市','苏州市','武汉市','锦州市','秦皇岛市','葫芦岛市',
+  '赤峰市','承德市','银川市','开封市','西宁市','绍兴市','榆林市','延安市',
+  '海西蒙古族藏族自治州','海南藏族自治州','海北藏族自治州','七台河市','牡丹江市',
+  '北京市' // 你如果想整市高亮，就写这个
+];
+
+const MUNICIPALITIES = new Set(['北京市', '上海市', '天津市', '重庆市']);
+
+fetch('assets/maps/china_city_full.json')
+  .then(r => {
+    if (!r.ok) throw new Error(`China geojson HTTP ${r.status}`);
+    return r.json();
+  })
+  .then(geoJson => {
+    // 1) 预处理：分离 city / district
+    const cityFeatures = [];
+    const districtByParent = new Map(); // parentAdcode -> [districtFeatures]
+
+    for (const f of geoJson.features) {
+      const p = f.properties || {};
+      const lvl = p.level;
+      if (lvl === 'city') {
+        cityFeatures.push(f);
+      } else if (lvl === 'district' && p.parent && p.parent.adcode) {
+        const key = String(p.parent.adcode);
+        if (!districtByParent.has(key)) districtByParent.set(key, []);
+        districtByParent.get(key).push(f);
+      }
+    }
+
+    // 2) 根据 visited 生成“最终要上色的 name 集合”
+    const featureNamesCity = new Set(cityFeatures.map(f => f.properties?.name).filter(Boolean));
+
+    // 若 visited 里出现“北京市/上海市...”，但 geojson 没有对应 city polygon
+    // 则把它扩展成该直辖市所有 district 的 name，实现“整市高亮”
+    const visitedExpanded = new Set();
+
+    for (const name of visited) {
+      if (!MUNICIPALITIES.has(name)) {
+        visitedExpanded.add(name);
+        continue;
+      }
+
+      if (featureNamesCity.has(name)) {
+        // 数据里有 “北京市” 这个 city feature，直接用
+        visitedExpanded.add(name);
+        continue;
+      }
+
+      // 否则：用 parent adcode 扩展
+      const parentAdcode =
+        name === '北京市' ? '110000' :
+        name === '上海市' ? '310000' :
+        name === '天津市' ? '120000' :
+        name === '重庆市' ? '500000' : null;
+
+      if (parentAdcode && districtByParent.has(parentAdcode)) {
+        for (const df of districtByParent.get(parentAdcode)) {
+          visitedExpanded.add(df.properties.name);
+        }
+      } else {
+        // 找不到就先把名字留着（便于你调试）
+        visitedExpanded.add(name);
+      }
+    }
+
+    // 3) 只用一个图层：把 cityFeatures + 直辖市 districtFeatures 合并进一个 FeatureCollection
+    //    这样地图上既有地级市，也能把直辖市按区显示。
+    const mergedFeatures = [...cityFeatures];
+    // 把四个直辖市的 district 加进来（否则北京可能只剩一个 city 外轮廓或没有）
+    for (const parent of ['110000','310000','120000','500000']) {
+      if (districtByParent.has(parent)) {
+        mergedFeatures.push(...districtByParent.get(parent));
+      }
+    }
+
+    const mergedGeo = { type: 'FeatureCollection', features: mergedFeatures };
+
+    echarts.registerMap('china_mixed', mergedGeo);
+
+    // 4) 用纯 series.map（不要 geoIndex）
+    myChartChina.setOption({
+      title: {
+        text: 'China Footprints',
+        left: 'center',
+        top: 20,
+        textStyle: {
+          color: '#2c5282',
+          fontFamily: getComputedStyle(document.body).fontFamily
+        }
+      },
+      tooltip: { trigger: 'item' },
+      series: [{
+        type: 'map',
+        map: 'china_mixed',
+        roam: true,
+        label: { show: false },
+        itemStyle: { areaColor: '#f3f3f3', borderColor: '#999' },
+        emphasis: { itemStyle: { areaColor: '#ddd' } },
+
+        // 关键：按 visitedExpanded 生成 data，确保 name 精确匹配
+        data: Array.from(visitedExpanded).map(n => ({
+          name: n,
+          itemStyle: { areaColor: '#2c5282' }
+        }))
+      }]
+    });
+
+    setLang('en');
+  })
+  .catch(err => {
+    console.error('China map load failed:', err);
+    document.getElementById('china-map').innerHTML =
+      '<div style="padding:16px;color:#999;">China map failed to load.</div>';
+  });
         // 地圖真初始化完後，再做一次語言/字體同步（可選，但建議）
         setLang('en');
       })
