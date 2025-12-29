@@ -441,7 +441,7 @@
         if(myChartWorld) myChartWorld.setOption({ title: { text: worldTitle } });
     }
     // 加載數據 - 中國地圖（本地）
-    fetch('assets/maps/china_100000_full.json')
+    fetch('assets/maps/china_city_full.json')
       .then(r => {
         if (!r.ok) throw new Error(`China geojson HTTP ${r.status}`);
         return r.json();
