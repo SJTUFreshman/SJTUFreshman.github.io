@@ -529,7 +529,13 @@ fetch('assets/maps/china_city_full.json')
       series: [{
         type: 'map',
         map: 'china_mixed',
-        roam: 'scale',
+        roam: True ,
+      // 初始视角（你可以微调）
+        center: [104.0, 35.0],
+        zoom: 1.05,
+    
+      // 限制缩放
+        scaleLimit: { min: 1.0, max: 2.2 },
         label: { show: false },
         itemStyle: { areaColor: '#f3f3f3', borderColor: '#999' },
         emphasis: { itemStyle: { areaColor: '#ddd' } },
@@ -586,6 +592,35 @@ fetch('assets/maps/china_city_full.json')
             ]
           }]
         });
+    // 限制拖动：把 center 限制在一个经纬度范围内（按需要调小范围）
+    const CHINA_CENTER_CLAMP = {
+      lonMin: 73, lonMax: 135,
+      latMin: 18, latMax: 54
+    };
+    
+    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+    
+    myChartChina.off('georoam'); // 防重复绑定
+    myChartChina.on('georoam', () => {
+      const opt = myChartChina.getOption();
+      const s0 = opt.series && opt.series[0];
+      if (!s0) return;
+    
+      const c = (s0.center && s0.center.length === 2) ? s0.center : [104, 35];
+    
+      const clamped = [
+        clamp(c[0], CHINA_CENTER_CLAMP.lonMin, CHINA_CENTER_CLAMP.lonMax),
+        clamp(c[1], CHINA_CENTER_CLAMP.latMin, CHINA_CENTER_CLAMP.latMax),
+      ];
+    
+      // 只有超界才回弹，避免抖动
+      if (clamped[0] !== c[0] || clamped[1] !== c[1]) {
+        myChartChina.setOption({
+          series: [{ center: clamped }]
+        }, { notMerge: false, lazyUpdate: true });
+      }
+    });
+
     
         setLang('en');
       });
