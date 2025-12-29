@@ -450,15 +450,24 @@ const visited = [
 
 const MUNICIPALITIES = new Set(['北京市', '上海市', '天津市', '重庆市']);
 
+// 你原来的 visited 列表（保持不变即可）
+const visited = [
+  '上海市','西安市','南京市','苏州市','武汉市','锦州市','秦皇岛市','葫芦岛市',
+  '赤峰市','承德市','银川市','开封市','西宁市','绍兴市','榆林市','延安市',
+  '海西蒙古族藏族自治州','海南藏族自治州','海北藏族自治州','七台河市','牡丹江市',
+  '北京市'
+];
+
+const MUNICIPALITIES = new Set(['北京市', '上海市', '天津市', '重庆市']);
+
 fetch('assets/maps/china_city_full.json')
   .then(r => {
     if (!r.ok) throw new Error(`China geojson HTTP ${r.status}`);
     return r.json();
   })
   .then(geoJson => {
-    // 1) 预处理：分离 city / district
     const cityFeatures = [];
-    const districtByParent = new Map(); // parentAdcode -> [districtFeatures]
+    const districtByParent = new Map();
 
     for (const f of geoJson.features) {
       const p = f.properties || {};
@@ -472,11 +481,10 @@ fetch('assets/maps/china_city_full.json')
       }
     }
 
-    // 2) 根据 visited 生成“最终要上色的 name 集合”
-    const featureNamesCity = new Set(cityFeatures.map(f => f.properties?.name).filter(Boolean));
+    const featureNamesCity = new Set(
+      cityFeatures.map(f => f.properties?.name).filter(Boolean)
+    );
 
-    // 若 visited 里出现“北京市/上海市...”，但 geojson 没有对应 city polygon
-    // 则把它扩展成该直辖市所有 district 的 name，实现“整市高亮”
     const visitedExpanded = new Set();
 
     for (const name of visited) {
@@ -486,12 +494,10 @@ fetch('assets/maps/china_city_full.json')
       }
 
       if (featureNamesCity.has(name)) {
-        // 数据里有 “北京市” 这个 city feature，直接用
         visitedExpanded.add(name);
         continue;
       }
 
-      // 否则：用 parent adcode 扩展
       const parentAdcode =
         name === '北京市' ? '110000' :
         name === '上海市' ? '310000' :
@@ -503,26 +509,22 @@ fetch('assets/maps/china_city_full.json')
           visitedExpanded.add(df.properties.name);
         }
       } else {
-        // 找不到就先把名字留着（便于你调试）
         visitedExpanded.add(name);
       }
     }
 
-    // 3) 只用一个图层：把 cityFeatures + 直辖市 districtFeatures 合并进一个 FeatureCollection
-    //    这样地图上既有地级市，也能把直辖市按区显示。
     const mergedFeatures = [...cityFeatures];
-    // 把四个直辖市的 district 加进来（否则北京可能只剩一个 city 外轮廓或没有）
     for (const parent of ['110000','310000','120000','500000']) {
       if (districtByParent.has(parent)) {
         mergedFeatures.push(...districtByParent.get(parent));
       }
     }
 
-    const mergedGeo = { type: 'FeatureCollection', features: mergedFeatures };
+    echarts.registerMap('china_mixed', {
+      type: 'FeatureCollection',
+      features: mergedFeatures
+    });
 
-    echarts.registerMap('china_mixed', mergedGeo);
-
-    // 4) 用纯 series.map（不要 geoIndex）
     myChartChina.setOption({
       title: {
         text: 'China Footprints',
@@ -541,8 +543,6 @@ fetch('assets/maps/china_city_full.json')
         label: { show: false },
         itemStyle: { areaColor: '#f3f3f3', borderColor: '#999' },
         emphasis: { itemStyle: { areaColor: '#ddd' } },
-
-        // 关键：按 visitedExpanded 生成 data，确保 name 精确匹配
         data: Array.from(visitedExpanded).map(n => ({
           name: n,
           itemStyle: { areaColor: '#2c5282' }
@@ -550,6 +550,7 @@ fetch('assets/maps/china_city_full.json')
       }]
     });
 
+    // 这里调用一次就够了
     setLang('en');
   })
   .catch(err => {
@@ -557,14 +558,7 @@ fetch('assets/maps/china_city_full.json')
     document.getElementById('china-map').innerHTML =
       '<div style="padding:16px;color:#999;">China map failed to load.</div>';
   });
-        // 地圖真初始化完後，再做一次語言/字體同步（可選，但建議）
-        setLang('en');
-      })
-      .catch(err => {
-        console.error('China map load failed:', err);
-        document.getElementById('china-map').innerHTML =
-          '<div style="padding:16px;color:#999;">China map failed to load.</div>';
-      });
+
 
     fetch('https://raw.githubusercontent.com/apache/echarts-examples/gh-pages/public/data/asset/geo/world.json')
       .then(r => r.json())
