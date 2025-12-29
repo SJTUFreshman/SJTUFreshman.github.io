@@ -462,9 +462,11 @@ fetch('assets/maps/china_city_full.json')
     for (const f of geoJson.features) {
       const p = f.properties || {};
       const lvl = p.level;
-      if (lvl === 'city') {
-        cityFeatures.push(f);
-      } else if (lvl === 'district' && p.parent && p.parent.adcode) {
+    if (lvl === 'city') {
+      cityFeatures.push(f);
+    } else if (lvl === 'province' && (p.name === '台湾省' || p.name === '臺灣省')) {
+      cityFeatures.push(f); // 直接塞進同一个 mergedFeatures 即可
+    } else if (lvl === 'district' && p.parent && p.parent.adcode) {
         const key = String(p.parent.adcode);
         if (!districtByParent.has(key)) districtByParent.set(key, []);
         districtByParent.get(key).push(f);
