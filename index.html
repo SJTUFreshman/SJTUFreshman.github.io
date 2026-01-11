@@ -518,7 +518,18 @@
                     <div class="pub-actions">
                         <a href="#" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
                         <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
-                        <button class="pub-btn" onclick="copyCitation('ChatDev_2024')"><i class="fas fa-quote-right"></i> Citation</button>
+                        <button class="pub-btn" onclick="copyCitation('AppCopilot_2025')"><i class="fas fa-quote-right"></i> Citation</button>
+                    </div>
+                </div>
+
+                <div class="pub-item">
+                    <div class="pub-title">Generative Teaching via Code (TeachMaster)</div>
+                    <div class="pub-authors">Yuheng Wang, </b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian</div>
+                    <div class="pub-venue">arXiv preprint arXiv:2601.04204</div>
+                    <div class="pub-actions">
+                        <a href="https://arxiv.org/abs/2601.04204v1" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
+                        <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
+                        <button class="pub-btn" onclick="copyCitation('Generative_2025')"><i class="fas fa-quote-right"></i> Citation</button>
                     </div>
                 </div>
             </div>
@@ -542,6 +553,19 @@
                     </div>
                 </div>
 
+                <div class="project-card">
+                    <div class="project-img-wrapper">
+                        <img src="images/TeachMaster.png" alt="TeachMaster Logo" class="project-img">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-title">Generative Teaching via Code (TeachMaster)</div>
+                        <div class="project-desc">A multi-agent framework that uses code as an intermediate semantic representation to automatically generate pedagogically structured, editable, and curriculum-ready educational videos.</div>
+                        <div class="project-links">
+                            <a href="https://arxiv.org/abs/2601.04204v1" class="btn-card"><i class="far fa-file-alt"></i> Paper</a>
+                            <a href="#" class="btn-card secondary"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -657,27 +681,39 @@
         }
         body.className = 'lang-' + lang;
     }
-
+    const citations = {
+      AppCopilot_2025: `@misc{fan2025appcopilotgeneralaccuratelonghorizon,
+        title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},
+        author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},
+        year={2025},
+        eprint={2509.02444},
+        archivePrefix={arXiv},
+        primaryClass={cs.AI},
+        url={https://arxiv.org/abs/2509.02444}
+      }`,
+    
+      Generative_2025: `@misc{wang2025generativeteachingcode,
+      title={Generative Teaching via Code}, 
+      author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},
+      year={2025},
+      eprint={2601.04204},
+      archivePrefix={arXiv},
+      primaryClass={cs.CY},
+      url={https://arxiv.org/abs/2601.04204}, 
+    }`
+    };
     // 模擬複製 Citation 的功能
     function copyCitation(paperId) {
-        // 實際使用時，這裡可以是真實的 BibTex 字符串
-        const dummyBib = `@misc{fan2025appcopilotgeneralaccuratelonghorizon,
-      title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent}, 
-      author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},
-      year={2025},
-      eprint={2509.02444},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2509.02444}, 
-}`;
-        
-        navigator.clipboard.writeText(dummyBib).then(() => {
-            alert("BibTeX copied to clipboard!");
-        }).catch(err => {
-            console.error('Failed to copy: ', err);
+        const bibtex = citations[paperId];
+        if (!bibtex) {
+            alert("Citation not found.");
+            return;
+        }
+    
+        navigator.clipboard.writeText(bibtex).then(() => {
+            alert("Citation copied to clipboard!");
         });
     }
-
     // 郵箱防爬
     const emailBox = document.getElementById('sidebar-email-box');
     if (emailBox) {
