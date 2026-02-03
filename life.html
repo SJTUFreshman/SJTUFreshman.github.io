@@ -7,6 +7,13 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     
     <style>
+        @font-face {
+          font-family: "EduKai";
+          src: url("fonts/edukai-5.0.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
         /* --- 1. 核心變量 (與 index.html 完全一致) --- */
         :root {
             --bg-color: #fcfbf9;
@@ -17,9 +24,9 @@
             --caption-color: #555555;
 
             /* 字體系統 */
-            --font-default: "Calibri", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", serif;
-            --font-zh-cn: "Calibri", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
-            --font-zh-tw: "Calibri", "BiaoKaiTi", "DFKai-SB", serif;
+            --font-default: "Calibri", "EduKai", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", serif;
+            --font-zh-cn: "Calibri", "EduKai", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
+            --font-zh-tw: "Calibri", "EduKai", "BiaoKaiTi", "DFKai-SB", serif;
         }
 
         body {
