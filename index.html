@@ -13,6 +13,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        @font-face {
+          font-family: "EduKai";
+          src: url("fonts/edukai-5.0.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
         /* --- 1. 字體變量配置 --- */
         :root {
             --bg-color: #fbfaf7;
@@ -36,9 +43,9 @@
                   如果系統沒有（非Windows環境），則回退到標準楷體。
                3. 繁體模式 (zh-tw)：維持標楷體優先。
             */
-            --font-default: "Calibri", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", serif;
-            --font-zh-cn: "Calibri", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
-            --font-zh-tw: "Calibri", "BiaoKaiTi", "DFKai-SB", serif;
+            --font-default: "Calibri", "EduKai", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", serif;
+            --font-zh-cn: "Calibri", "EduKai", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
+            --font-zh-tw: "Calibri", "EduKai", "BiaoKaiTi", "DFKai-SB", serif;
         }
         /* --- 字號分開調整區域 --- */
 
