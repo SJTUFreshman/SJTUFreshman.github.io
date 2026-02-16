@@ -3,354 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Runde Yang (楊潤德) - Student at School of Artificial Intelligence, Shanghai Jiao Tong University.">
-    <meta name="keywords" content="Runde Yang, 楊潤德, SJTU, AI">
+    <meta name="description" content="Runde Yang (楊潤德) – Student at School of Artificial Intelligence, Shanghai Jiao Tong University.">
+    <meta name="keywords" content="Runde Yang, 楊潤德, SJTU, AI, Multi-Agent Systems">
     <meta name="author" content="Runde Yang">
-    
-    <title>Runde Yang - Personal Homepage</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Runde Yang</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* --- 1. 字體變量配置 --- */
-        :root {
-            --bg-color: #fbfaf7;
-            --text-color: #2f2f2f;
-            --muted-text: #666666;
-            --accent-color: #2f5c8f;
-            --accent-strong: #1e3f66;
-            --border-color: #e7e3dd;
-            --card-bg: #ffffff;
-            --header-bg: rgba(251, 250, 247, 0.92);
-            --shadow-soft: 0 10px 24px rgba(28, 33, 38, 0.08);
-            --shadow-lite: 0 4px 12px rgba(28, 33, 38, 0.08);
-            --accent-hover-bg: rgba(44, 82, 130, 0.08); /* 導航欄懸浮背景色 */
-            
-            --sidebar-width: 240px; 
-            --header-height: 64px; /* 稍微增高一點，讓按鈕呼吸感更好 */
-
-            /* 字體設置：
-               1. 英文數字強制 Calibri 優先。
-               2. 簡體模式 (zh-cn)：現在優先嘗試 "BiaoKaiTi" (標楷體)，
-                  如果系統沒有（非Windows環境），則回退到標準楷體。
-               3. 繁體模式 (zh-tw)：維持標楷體優先。
-            */
-            --font-default: "Calibri", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", serif;
-            --font-zh-cn: "Calibri", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
-            --font-zh-tw: "Calibri", "BiaoKaiTi", "DFKai-SB", serif;
+        /* ========== Custom Font ========== */
+        @font-face {
+            font-family: 'EduKai';
+            src: url('fonts/edukai.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
         }
-        /* --- 字號分開調整區域 --- */
 
-        /* 1. 英文模式 (預設或 lang-en) */
-        .lang-en h2 { font-size: 1.5rem; }        /* 標題字號 */
-        .lang-en .content-area p { font-size: 1.1rem; } /* 正文字號 */
-        .lang-en .nav-link { font-size: 1.1rem; }
-        
-        /* 2. 簡體中文模式 */
-        .lang-zh-CN h2 { font-size: 1.5rem; }     /* 簡體標題通常可以大一點點 */
-        .lang-zh-CN .content-area p { font-size: 1.2rem; } /* 簡體正文 */
-        .lang-zh-CN .nav-link { font-size: 1.2rem; } /* 導航欄字號也可以單獨改 */
-        .lang-zh-CN .sidebar .my-name { font-size: 1.7rem; }
-        
-        /* 3. 繁體中文模式 */
-        .lang-zh-TW h2 { font-size: 1.5rem; }     /* 繁體標題 */
-        .lang-zh-TW .content-area p { font-size: 1.2rem; } /* 繁體正文 */
-        .lang-zh-TW .nav-link { font-size: 1.2rem; } /* 導航欄字號也可以單獨改 */
-        .lang-zh-TW .sidebar .my-name { font-size: 1.7rem; } /* 甚至可以改側邊欄名字字號 */
+        /* ========== CSS Variables ========== */
+        :root {
+            --bg: #fafaf8;
+            --bg-alt: #ffffff;
+            --text: #1a1a1a;
+            --text-secondary: #6b6b6b;
+            --text-muted: #999;
+            --accent: #2d3436;
+            --accent-light: #636e72;
+            --border: #e8e8e8;
+            --border-light: #f0f0f0;
+            --radius: 8px;
+            --radius-lg: 16px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.08);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-cn: 'EduKai', 'DFKai-SB', 'KaiTi', serif;
+            --font-en: 'Cormorant Garamond', 'Georgia', serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --max-width: 720px;
+            --nav-height: 56px;
+        }
+
+        /* ========== Reset & Base ========== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--nav-height) + 24px);
+        }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            line-height: 1.7;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-en);
+            line-height: 1.75;
             letter-spacing: 0.01em;
-            font-family: var(--font-default); 
-            padding-top: var(--header-height);
+            -webkit-font-smoothing: antialiased;
+            padding-top: var(--nav-height);
         }
 
-        /* --- 2. 頂部導航欄 (樣式升級) --- */
-        .fixed-header {
+        /* Chinese font class */
+        body.lang-zh-CN, body.lang-zh-TW {
+            font-family: var(--font-cn);
+        }
+        body.lang-zh-CN .en-only, body.lang-zh-TW .en-only {
+            font-family: var(--font-en);
+        }
+
+        ::selection {
+            background: rgba(45,52,54,0.12);
+        }
+
+        a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        a:hover { color: var(--accent-light); }
+
+        img { display: block; max-width: 100%; }
+
+        /* ========== Google Font Import ========== */
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+        /* ========== Navigation ========== */
+        .nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--header-height);
-            background-color: var(--header-bg); /* 透明度稍微調高 */
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+            top: 0; left: 0; right: 0;
+            height: var(--nav-height);
+            background: rgba(250,250,248,0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
             z-index: 1000;
             display: flex;
             justify-content: center;
         }
 
-        .header-inner {
+        .nav-inner {
             width: 100%;
-            max-width: 1150px;
-            padding: 0 20px;
+            max-width: 960px;
+            padding: 0 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .header-left {
+        .nav-brand {
+            font-family: var(--font-en);
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--text);
+            letter-spacing: 0.04em;
+        }
+
+        .nav-links {
             display: flex;
             align-items: center;
-            gap: 10px; /* 按鈕之間的間距 */
+            gap: 4px;
         }
 
-        .header-name-link {
-            font-weight: bold;
-            font-size: 1.15rem;
-            color: #111;
-            text-decoration: none;
-            margin-right: 20px;
-            font-family: "Calibri", sans-serif;
-        }
-
-        /* 導航按鈕樣式升級：塊狀懸浮 */
         .nav-link {
-            color: #4a4a4a;
-            text-decoration: none;
-            font-size: 0.98rem;
-            padding: 8px 16px; /* 增加內邊距形成方塊 */
-            border-radius: 6px; /* 圓角 */
-            transition: all 0.2s ease; /* 平滑過渡 */
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all var(--transition);
             font-weight: 500;
         }
-
         .nav-link:hover {
-            background-color: var(--accent-hover-bg); /* 淺藍色背景 */
-            color: var(--accent-color); /* 深藍色文字 */
+            color: var(--text);
+            background: rgba(0,0,0,0.03);
         }
 
-        .header-right {
+        .nav-lang {
             display: flex;
             align-items: center;
+            gap: 2px;
+            margin-left: 16px;
+            border-left: 1px solid var(--border);
+            padding-left: 16px;
         }
 
-        /* 語言按鈕 */
         .lang-btn {
             background: none;
             border: none;
             cursor: pointer;
-            color: #8a8a8a;
-            padding: 6px 10px;
+            font-family: var(--font-en);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            padding: 4px 8px;
             border-radius: 4px;
-            font-family: "Calibri", sans-serif;
-            font-size: 0.9rem;
-            transition: all 0.2s;
+            transition: all var(--transition);
         }
-        .lang-btn:hover { background-color: #f0ede7; color: #333; }
-        .lang-btn.active {
-            color: var(--accent-color);
-            font-weight: bold;
+        .lang-btn:hover { color: var(--text); background: rgba(0,0,0,0.03); }
+        .lang-btn.active { color: var(--text); font-weight: 600; }
+
+        /* Mobile nav toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text);
+            padding: 4px;
         }
 
-        /* --- 3. 頁面佈局 --- */
-        .page-wrapper {
-            max-width: 1150px;
+        /* ========== Main Layout ========== */
+        .container {
+            max-width: var(--max-width);
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        section:last-of-type { border-bottom: none; }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-family: var(--font-en);
+        }
+
+        /* ========== Hero Section ========== */
+        .hero {
+            padding: 80px 0 60px;
             display: flex;
-            gap: 60px;
             align-items: flex-start;
+            gap: 40px;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: var(--sidebar-width);
-            flex-shrink: 0;
-            text-align: center;
-            position: -webkit-sticky;
-            position: sticky;
-            top: calc(var(--header-height) + 30px); 
-        }
-
-        .avatar {
-            width: 180px;
-            height: 180px;
+        .hero-avatar {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: var(--shadow-lite);
-            margin-bottom: 20px;
+            flex-shrink: 0;
+            filter: grayscale(10%);
+            transition: filter var(--transition);
         }
-
-        .my-name {
-            font-size: 1.6rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #111;
-        }
-
-        .my-title {
-            font-size: 0.95rem;
-            color: var(--muted-text);
-            margin-bottom: 20px;
-            font-weight: normal;
-        }
-
-        .contact-list {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            display: inline-block; 
-            margin-top: 20px;
-            font-size: 0.9rem;
-        }
-
-        .contact-list li {
-            margin-bottom: 8px;
+        .hero-avatar:hover { filter: grayscale(0%); }
+        .hero-avatar-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%);
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: #555;
+            justify-content: center;
+            font-size: 2.4rem;
+            color: var(--text-muted);
+            font-family: var(--font-en);
+            font-weight: 600;
         }
 
-        .contact-list i {
-            width: 20px;
-            text-align: center;
-            color: var(--accent-color);
+        .hero-info {
+            flex: 1;
         }
 
-        .contact-list a {
-            color: #555;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .contact-list a:hover { color: var(--accent-color); }
-
-        /* Main Content */
-        .main-content {
-            flex-grow: 1;
-            min-width: 0; 
+        .hero-name {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+            line-height: 1.3;
         }
 
-        section { 
-            margin-bottom: 70px; 
-            scroll-margin-top: calc(var(--header-height) + 30px);
-        }
-        
-        h2 {
-            font-size: 1.4rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-            margin-bottom: 25px;
-            color: var(--accent-color);
-            margin-top: 0;
+        .hero-title {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 400;
         }
 
-        p { margin-bottom: 1rem; text-align: justify; }
-        a { color: var(--accent-color); text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        .hero-bio {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
 
-        /* --- Publications Style (列表+圖標按鈕) --- */
-        .pub-list {
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.88rem;
+        }
+
+        .hero-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            transition: color var(--transition);
+        }
+        .hero-link:hover { color: var(--text); }
+        .hero-link i { font-size: 0.95rem; width: 16px; text-align: center; }
+
+        /* Weather widget */
+        .weather-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 5px 14px 5px 10px;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            margin-top: 16px;
+            transition: all var(--transition);
+        }
+        .weather-pill:hover {
+            border-color: #ccc;
+            box-shadow: var(--shadow);
+        }
+        .weather-icon { font-size: 1.1rem; }
+        .weather-temp { font-weight: 600; color: var(--text); font-family: var(--font-en); }
+        .weather-desc { color: var(--text-muted); }
+        .weather-loc { color: var(--text-muted); font-size: 0.78rem; }
+
+        /* ========== News Section ========== */
+        .news-list {
             list-style: none;
+        }
+        .news-item {
+            display: flex;
+            gap: 16px;
+            padding: 10px 0;
+            font-size: 0.92rem;
+            align-items: baseline;
+        }
+        .news-date {
+            font-family: var(--font-en);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            flex-shrink: 0;
+            min-width: 80px;
+        }
+        .news-text {
+            color: var(--text-secondary);
+        }
+
+        /* ========== Publications ========== */
+        .pub-list { display: flex; flex-direction: column; gap: 32px; }
+
+        .pub-item {
             padding: 0;
         }
-        .pub-item {
-            margin-bottom: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
+
+        .pub-title-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.5;
+            margin-bottom: 4px;
         }
-        .pub-title {
-            font-weight: bold;
-            font-size: 1.08rem;
-            color: #2f2f2f;
+
+        .pub-authors {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 2px;
         }
-        .pub-authors { color: #555; }
-        .pub-venue { font-style: italic; color: var(--muted-text); }
-        
+        .pub-authors b { font-weight: 600; color: var(--text); }
+
+        .pub-venue {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
         .pub-actions {
             display: flex;
-            gap: 15px;
-            margin-top: 5px;
+            gap: 16px;
         }
+
         .pub-btn {
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            font-size: 0.9rem;
-            color: var(--accent-color);
-            cursor: pointer;
-            padding: 2px 0;
-            border: none;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
             background: none;
-            font-family: var(--font-default); /* 保持字體一致 */
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-en);
+            padding: 0;
+            transition: color var(--transition);
         }
-        .pub-btn:hover { text-decoration: underline; color: var(--accent-strong); }
-        .pub-btn i { font-size: 1rem; }
+        .pub-btn:hover { color: var(--text); }
+        .pub-btn i { font-size: 0.85rem; }
 
-        /* --- Projects Style (Grid 卡片佈局) --- */
+        /* ========== Projects ========== */
         .project-grid {
             display: grid;
-            /* 自適應列寬，最小寬度 280px */
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
-        
+
         .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
+            transition: all var(--transition);
         }
-
         .project-card:hover {
-            transform: translateY(-5px); /* 上浮特效 */
-            box-shadow: var(--shadow-soft);
-            border-color: #d9d4cc;
+            border-color: #ccc;
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
         }
 
-        .project-img-wrapper {
+        .project-img-wrap {
             width: 100%;
-            height: 160px;
-            background-color: #f2efe9;
+            height: 140px;
+            background: var(--border-light);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            border-bottom: 1px solid #f5f1ea;
         }
-        
-        .project-img {
+        .project-img-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* 如果沒有圖片，placeholder 的樣式 */
-            color: #ccc;
-            font-size: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .project-content {
-            padding: 15px 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        .project-body {
+            padding: 16px;
         }
 
-        .project-title {
-            font-size: 1.12rem;
-            font-weight: bold;
-            margin: 0 0 8px 0;
-            color: #333;
+        .project-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
+            line-height: 1.4;
         }
 
         .project-desc {
-            font-size: 0.9rem;
-            color: var(--muted-text);
-            margin-bottom: 15px;
-            line-height: 1.5;
-            flex-grow: 1; /* 讓按鈕總是在底部對齊 */
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 12px;
         }
 
         .project-links {
@@ -358,380 +422,864 @@
             gap: 10px;
         }
 
-        /* Project Card 內的小按鈕 */
-        .btn-card {
-            padding: 5px 12px;
-            font-size: 0.85rem;
+        .project-link {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border: 1px solid var(--border);
             border-radius: 4px;
-            background-color: var(--accent-color);
-            color: #fff;
-            text-decoration: none;
-            transition: background 0.2s;
+            color: var(--text-secondary);
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
+            transition: all var(--transition);
         }
-        .btn-card:hover { background-color: var(--accent-strong); text-decoration: none; }
-        .btn-card.secondary {
-            background-color: #efece6;
-            color: var(--accent-color);
+        .project-link:hover {
+            border-color: var(--text);
+            color: var(--text);
         }
-        .btn-card.secondary:hover { background-color: #e6e1d9; }
 
-        /* Life Preview (保持原樣) */
-        .life-preview {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 8px;
+        /* ========== Gallery Section ========== */
+        .gallery-scroll {
+            position: relative;
+            width: calc(100% + 48px);
+            margin-left: -24px;
+            overflow: hidden;
+            padding: 20px 0;
+            cursor: grab;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+        .gallery-scroll:active { cursor: grabbing; }
+
+        .gallery-track {
             display: flex;
+            gap: 16px;
+            padding: 0 40px;
+            width: max-content;
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+            z-index: 10;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            color: #fff;
+            padding: 24px 12px 10px;
+            font-size: 0.8rem;
+            transform: translateY(100%);
+            transition: transform var(--transition);
+        }
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(250,250,248,0.96);
+            backdrop-filter: blur(20px);
+            justify-content: center;
             align-items: center;
-            gap: 20px;
-            transition: transform 0.2s;
+            flex-direction: column;
             cursor: pointer;
         }
-        .life-preview:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lite);
+        .lightbox.active { display: flex; }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 75vh;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-hover);
         }
-        .life-icon { font-size: 1.8rem; color: var(--accent-color); }
+        .lightbox-caption {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 28px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            transition: color var(--transition);
+        }
+        .lightbox-close:hover { color: var(--text); }
 
-        /* Footer Map */
-        .visitor-map-container {
-            margin-top: 80px;
-            border-top: 1px dashed var(--border-color);
-            padding-top: 20px;
-            text-align: center; 
-        }
-        /* ===== ClustrMaps globe FIX ===== */
-        .clustrmaps-box{
-            width: 300px;
-            aspect-ratio: 1 / 1;
-            margin: 0 auto;
+        /* ========== Life Preview ========== */
+        .life-card {
             position: relative;
+            display: block;
+            margin-top: 40px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+            height: 220px;
+            text-decoration: none;
+        }
+        .life-card-bg {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3px;
+            opacity: 0.55;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .life-card:hover .life-card-bg {
+            opacity: 0.35;
+            transform: scale(1.03);
+        }
+        .life-card-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .life-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26,26,26,0.65) 0%, rgba(26,26,26,0.25) 100%);
+            transition: background 0.5s ease;
+        }
+        .life-card:hover .life-card-overlay {
+            background: linear-gradient(135deg, rgba(26,26,26,0.75) 0%, rgba(26,26,26,0.35) 100%);
+        }
+        .life-card-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 32px;
+        }
+        .life-card-icon {
+            font-size: 1.6rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 16px;
+            transition: transform 0.5s ease;
+        }
+        .life-card:hover .life-card-icon {
+            transform: rotate(45deg);
+        }
+        .life-card-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+        body.lang-en .life-card-title {
+            text-transform: uppercase;
+            font-family: var(--font-en);
+        }
+        .life-card-rule {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.5);
+            margin-bottom: 12px;
+            transition: width 0.4s ease;
+        }
+        .life-card:hover .life-card-rule {
+            width: 80px;
+        }
+        .life-card-desc {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.6;
+            max-width: 360px;
+        }
+        .life-card-arrow {
+            position: absolute;
+            bottom: 20px;
+            right: 24px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            transition: all 0.4s ease;
+            z-index: 2;
+        }
+        .life-card:hover .life-card-arrow {
+            color: rgba(255,255,255,0.9);
+            transform: translateX(6px);
+        }
+
+        /* ========== Notes Section ========== */
+        .notes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        .note-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+        .note-item:hover {
+            border-color: #ccc;
+            box-shadow: var(--shadow);
+        }
+        .note-icon {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            width: 20px;
+            text-align: center;
+        }
+        .note-info { flex: 1; }
+        .note-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        .note-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-family: var(--font-en);
+        }
+        .note-arrow {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+        .notes-empty {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 20px 0;
+        }
+
+        /* ========== Visitor Map ========== */
+        .visitor-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .clustrmaps-wrap {
+            width: 240px;
+            aspect-ratio: 1;
+            margin: 0 auto;
             overflow: hidden;
         }
-        
-        .clustrmaps-box canvas,
-        .clustrmaps-box iframe,
-        .clustrmaps-box object,
-        .clustrmaps-box embed{
+        .clustrmaps-wrap canvas,
+        .clustrmaps-wrap iframe,
+        .clustrmaps-wrap object,
+        .clustrmaps-wrap embed {
             width: 100% !important;
             height: 100% !important;
             display: block !important;
         }
-        
-        /* 防止第三方腳本把頁面撐開 */
-        html, body{
-            overflow-x: hidden;
+
+        /* ========== Footer ========== */
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-family: var(--font-en);
         }
-        
-        /* 手機端 */
-        @media (max-width: 850px){
-            .clustrmaps-box{
-                width: 240px;
+
+        /* ========== Responsive ========== */
+        @media (max-width: 768px) {
+            :root { --max-width: 100%; }
+
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: var(--nav-height);
+                left: 0; right: 0;
+                background: rgba(250,250,248,0.98);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid var(--border);
+                padding: 12px 24px;
+                gap: 4px;
             }
+            .nav-links.open .nav-lang {
+                border-left: none;
+                padding-left: 0;
+                margin-left: 0;
+                border-top: 1px solid var(--border-light);
+                padding-top: 8px;
+                margin-top: 4px;
+            }
+            .nav-toggle { display: block; }
+
+            .hero {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 48px 0 40px;
+            }
+            .hero-avatar { width: 100px; height: 100px; }
+            .hero-avatar-placeholder { width: 100px; height: 100px; font-size: 2rem; }
+            .hero-links { justify-content: center; }
+            .weather-pill { justify-content: center; }
+
+            .project-grid { grid-template-columns: 1fr; }
+
+            section { padding: 40px 0; }
         }
 
-
-
-        /* 響應式 */
-        @media (max-width: 850px) {
-            .page-wrapper { flex-direction: column; align-items: center; padding-top: 20px; }
-            .sidebar { width: 100%; position: static; margin-bottom: 40px; }
-            .header-left { display: none; } /* 手機端隱藏菜單，避免擠壓 */
-            .header-inner { justify-content: center; position: relative; }
-            .header-right { position: absolute; right: 20px; }
-            .header-name-link { margin-right: 0; }
-            .contact-list { display: block; text-align: center; }
-            .contact-list li { justify-content: center; }
-            .project-grid { grid-template-columns: 1fr; } /* 手機端單欄 */
+        /* ========== Animations ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scrollbar */
+        html { overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #bbb; }
     </style>
 </head>
-<body>
+<body class="lang-en">
 
-<nav class="fixed-header">
-    <div class="header-inner">
-        <div class="header-left">
-            <a href="#" class="header-name-link">Runde Yang</a>
-            
-            <a href="#about" class="nav-link" data-key="about_title">Biography</a>
-            <a href="#news" class="nav-link" data-key="news_title">News</a>
-            <a href="#pubs" class="nav-link" data-key="pubs_title">Publications</a>
-            <a href="#projects" class="nav-link" data-key="projects_title">Projects</a>
-            <a href="#life" class="nav-link" data-key="life_title">Life</a>
-        </div>
-
-        <div class="header-right">
-            <button class="lang-btn active" onclick="setLang('en')">EN</button>
-            <span style="color:#ddd; margin:0 3px;">|</span>
-            <button class="lang-btn" onclick="setLang('zh-CN')">简</button>
-            <span style="color:#ddd; margin:0 3px;">|</span>
-            <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
+<!-- ===== Navigation ===== -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-brand en-only">Runde Yang</a>
+        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <a href="#about" class="nav-link" data-key="nav_about">About</a>
+            <a href="#news" class="nav-link" data-key="nav_news">News</a>
+            <a href="#publications" class="nav-link" data-key="nav_pubs">Publications</a>
+            <a href="#projects" class="nav-link" data-key="nav_projects">Projects</a>
+            <a href="#gallery" class="nav-link" data-key="nav_gallery">Gallery</a>
+            <a href="#notes" class="nav-link" data-key="nav_notes">Notes</a>
+            <a href="life.html" class="nav-link" data-key="nav_life">Life</a>
+            <div class="nav-lang">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('zh-CN')">简</button>
+                <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
+            </div>
         </div>
     </div>
 </nav>
 
-<div class="page-wrapper">
-    
-    <aside class="sidebar">
-        <img src="me_at_dorm.jpg" alt="Runde Yang" class="avatar">
-        
-        <div class="my-name" id="sidebar-name">Runde Yang (杨润德)</div>
-        <div class="my-title" data-key="sidebar_title">Undergraduate Student at SJTU</div>
+<!-- ===== Hero / About ===== -->
+<div class="container">
+    <section class="hero" id="about">
+        <img src="me_at_dorm.jpg" alt="Runde Yang" class="hero-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
+        <div class="hero-info">
+            <h1 class="hero-name" id="heroName">Runde Yang <span style="font-weight:400; font-size:0.65em; color:var(--text-secondary);">楊潤德</span></h1>
+            <p class="hero-title" data-key="hero_title">Undergraduate · School of AI, Shanghai Jiao Tong University</p>
+            <p class="hero-bio" data-key="hero_bio">Class of 2028. Currently focusing on Multi-Agent Systems. Always learning, always curious.</p>
+            <div class="hero-links">
+                <a class="hero-link" id="emailLink"><i class="fas fa-envelope"></i> <span id="emailText"></span></a>
+                <a href="https://github.com/SJTUFreshman" target="_blank" class="hero-link"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://scholar.google.com/citations?user=uGjwKq0AAAAJ&hl=zh-TW" target="_blank" class="hero-link"><i class="fas fa-graduation-cap"></i> Scholar</a>
+                <span class="hero-link"><i class="fas fa-map-marker-alt"></i> <span data-key="hero_location">Shanghai, China</span></span>
+            </div>
+            <div class="weather-pill" id="weatherWidget" style="display:none;">
+                <span class="weather-icon" id="weatherIcon"></span>
+                <span class="weather-temp" id="weatherTemp"></span>
+                <span class="weather-desc" id="weatherDesc"></span>
+                <span class="weather-loc" id="weatherLoc">Shanghai</span>
+            </div>
+        </div>
+    </section>
 
-        <ul class="contact-list">
-            <li>
-                <i class="fas fa-map-marker-alt"></i> 
-                <span data-key="location">Shanghai, China</span>
-            </li>
-            <li>
-                <i class="fas fa-envelope"></i> 
-                <span id="sidebar-email-box"></span>
-            </li>
-            <li>
-                <i class="fab fa-github"></i> 
-                <a href="https://github.com/SJTUFreshman" target="_blank">Github</a>
-            </li>
-            <li>
-                <i class="fas fa-graduation-cap"></i> 
-                <a href="https://scholar.google.com/citations?user=uGjwKq0AAAAJ&hl=zh-TW" target="_blank">Google Scholar</a>
+    <!-- ===== News ===== -->
+    <section id="news" class="fade-in">
+        <div class="section-title" data-key="title_news">News</div>
+        <ul class="news-list" id="newsList">
+            <li class="news-item">
+                <span class="news-date">2025</span>
+                <span class="news-text" data-key="news_1">Personal homepage launched.</span>
             </li>
         </ul>
-    </aside>
+    </section>
 
-    <main class="main-content">
-        
-        <section id="about">
-            <h2 data-key="about_title">Biography</h2>
-            <div class="content-area" data-key="intro">
-            </div>
-        </section>
-
-        <section id="news">
-            <h2 data-key="news_title">News</h2>
-            <ul class="content-area" style="padding-left: 20px;">
-                <li data-key="news_list"></li>
-            </ul>
-        </section>
-
-        <section id="pubs">
-            <h2 data-key="pubs_title">Publications</h2>
-            <div class="pub-list" id="pubs-container">
-                <div class="pub-item">
-                    <div class="pub-title">AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent</div>
-                    <div class="pub-authors">Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian</div>
-                    <div class="pub-venue">arXiv preprint arXiv:2509.02444</div>
-                    <div class="pub-actions">
-                        <a href="#" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
-                        <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
-                        <button class="pub-btn" onclick="copyCitation('AppCopilot_2025')"><i class="fas fa-quote-right"></i> Citation</button>
-                    </div>
-                </div>
-
-                <div class="pub-item">
-                    <div class="pub-title">Generative Teaching via Code (TeachMaster)</div>
-                    <div class="pub-authors">Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian</div>
-                    <div class="pub-venue">arXiv preprint arXiv:2601.04204</div>
-                    <div class="pub-actions">
-                        <a href="https://arxiv.org/abs/2601.04204v1" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
-                        <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
-                        <button class="pub-btn" onclick="copyCitation('Generative_2025')"><i class="fas fa-quote-right"></i> Citation</button>
-                    </div>
+    <!-- ===== Publications ===== -->
+    <section id="publications" class="fade-in">
+        <div class="section-title" data-key="title_pubs">Publications</div>
+        <div class="pub-list">
+            <div class="pub-item">
+                <div class="pub-title-text en-only">AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent</div>
+                <div class="pub-authors en-only">Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian</div>
+                <div class="pub-venue en-only">arXiv preprint arXiv:2509.02444</div>
+                <div class="pub-actions">
+                    <a href="#" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
+                    <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
+                    <button class="pub-btn" onclick="copyCitation('AppCopilot_2025')"><i class="fas fa-quote-right"></i> Cite</button>
                 </div>
             </div>
-        </section>
-        
-        <section id="projects">
-            <h2 data-key="projects_title">Projects</h2>
-            <div class="project-grid">
-                
-                <div class="project-card">
-                    <div class="project-img-wrapper">
-                        <img src="images/AppCopilot.png" alt="AppCopilot Logo" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-title">AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent</div>
-                        <div class="project-desc">A multimodal multi-agent on-device assistant; explores tool-use, planning, and robust UI grounding.</div>
-                        <div class="project-links">
-                            <a href="#" class="btn-card"><i class="far fa-file-alt"></i> Paper</a>
-                            <a href="#" class="btn-card secondary"><i class="fab fa-github"></i> Code</a>
-                        </div>
-                    </div>
+            <div class="pub-item">
+                <div class="pub-title-text en-only">Generative Teaching via Code (TeachMaster)</div>
+                <div class="pub-authors en-only">Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian</div>
+                <div class="pub-venue en-only">arXiv preprint arXiv:2601.04204</div>
+                <div class="pub-actions">
+                    <a href="https://arxiv.org/abs/2601.04204v1" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
+                    <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
+                    <button class="pub-btn" onclick="copyCitation('Generative_2025')"><i class="fas fa-quote-right"></i> Cite</button>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="project-card">
-                    <div class="project-img-wrapper">
-                        <img src="images/TeachMaster.png" alt="TeachMaster Logo" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-title">Generative Teaching via Code (TeachMaster)</div>
-                        <div class="project-desc">A multi-agent framework that uses code as an intermediate semantic representation to automatically generate pedagogically structured, editable, and curriculum-ready educational videos.</div>
-                        <div class="project-links">
-                            <a href="https://arxiv.org/abs/2601.04204v1" class="btn-card"><i class="far fa-file-alt"></i> Paper</a>
-                            <a href="#" class="btn-card secondary"><i class="fab fa-github"></i> Code</a>
-                        </div>
+    <!-- ===== Projects ===== -->
+    <section id="projects" class="fade-in">
+        <div class="section-title" data-key="title_projects">Projects</div>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-img-wrap">
+                    <img src="images/AppCopilot.png" alt="AppCopilot">
+                </div>
+                <div class="project-body">
+                    <div class="project-name en-only">AppCopilot</div>
+                    <div class="project-desc" data-key="proj_appcopilot">A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.</div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="far fa-file-alt"></i> Paper</a>
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section id="life">
-            <h2 data-key="life_title">Life & Gallery</h2>
-            <div class="life-preview" onclick="window.location.href='life.html'">
-                <div class="life-icon"><i class="fas fa-camera-retro"></i></div>
-                <div style="flex:1;">
-                    <p style="margin:0; font-weight:bold; color:#333;" data-key="life_desc_title">Beyond Research</p>
-                    <p style="margin:5px 0 0 0; color:#666; font-size:0.95rem;" data-key="life_desc_text">
-                        Photography, Traveling, and random thoughts. Check out my footprints map and gallery.
-                    </p>
+            <div class="project-card">
+                <div class="project-img-wrap">
+                    <img src="images/TeachMaster.png" alt="TeachMaster">
                 </div>
-                <div style="color:#ccc;">&rarr;</div>
+                <div class="project-body">
+                    <div class="project-name en-only">TeachMaster</div>
+                    <div class="project-desc" data-key="proj_teachmaster">A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.</div>
+                    <div class="project-links">
+                        <a href="https://arxiv.org/abs/2601.04204v1" class="project-link"><i class="far fa-file-alt"></i> Paper</a>
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-      <div class="clustrmaps-box">
-        <script
-          type="text/javascript"
-          id="clstr_globe"
-          src="//clustrmaps.com/globe.js?d=fX5iFnBQqkI4YOaCh2hYxnYfi2pj9aK8Fq4We1ChmH4">
-        </script>
-      </div>
+    <!-- ===== Gallery ===== -->
+    <section id="gallery" class="fade-in">
+        <div class="section-title" data-key="title_gallery">Gallery</div>
+        <div class="gallery-scroll" id="galleryScroll">
+            <div class="gallery-track" id="galleryTrack">
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="images/meteor.jpg" alt="Orion Nebula">
+                    <div class="gallery-caption" data-key="cap_meteor">Orion Nebula, 2025</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="images/nari.jpg" alt="Stargazing Camp">
+                    <div class="gallery-caption" data-key="cap_nari">Stargazing camp</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="images/qiandaohu.jpg" alt="Qiandao Lake Sunset">
+                    <div class="gallery-caption" data-key="cap_qiandaohu">Qiandao Lake sunset</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="images/qiandaohu-road.jpg" alt="On the Road">
+                    <div class="gallery-caption" data-key="cap_road">On the road to Qiandao Lake</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="images/campus.jpg" alt="SJTU Campus">
+                    <div class="gallery-caption" data-key="cap_campus">SJTU Campus in spring</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="images/zijinshan.jpg" alt="Zijin Mountain">
+                    <div class="gallery-caption" data-key="cap_zijinshan">Zijin Mountain, Nanjing</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="images/cake.jpg" alt="Baking Club">
+                    <div class="gallery-caption" data-key="cap_cake">Baking club strawberry cake</div>
+                </div>
+            </div>
+        </div>
 
-    </main>
+        <!-- Life link card -->
+        <div class="life-card" onclick="window.location.href='life.html'">
+            <div class="life-card-bg">
+                <img src="images/qiandaohu.jpg" alt="">
+                <img src="images/campus.jpg" alt="">
+                <img src="images/meteor.jpg" alt="">
+                <img src="images/zijinshan.jpg" alt="">
+            </div>
+            <div class="life-card-overlay"></div>
+            <div class="life-card-content">
+                <div class="life-card-icon"><i class="fas fa-compass"></i></div>
+                <div class="life-card-title" data-key="life_card_title">Beyond Research</div>
+                <div class="life-card-rule"></div>
+                <div class="life-card-desc" data-key="life_card_desc">Footprints map, bookshelf, thoughts, and more.</div>
+            </div>
+            <div class="life-card-arrow"><i class="fas fa-long-arrow-alt-right"></i> <span class="en-only" style="font-size:0.8rem;letter-spacing:0.05em;">EXPLORE</span></div>
+        </div>
+    </section>
+
+    <!-- ===== Notes ===== -->
+    <section id="notes" class="fade-in">
+        <div class="section-title" data-key="title_notes">Notes</div>
+        <div class="notes-grid" id="notesGrid">
+            <!-- Notes will be dynamically loaded or manually added here -->
+            <div class="notes-empty" data-key="notes_empty">Notes coming soon...</div>
+            <!--
+            Example note item:
+            <a href="notes/example.pdf" class="note-item" target="_blank">
+                <span class="note-icon"><i class="far fa-file-pdf"></i></span>
+                <div class="note-info">
+                    <div class="note-title">Machine Learning Lecture Notes</div>
+                    <div class="note-meta">PDF · 2025-01-15</div>
+                </div>
+                <span class="note-arrow"><i class="fas fa-chevron-right"></i></span>
+            </a>
+            -->
+        </div>
+    </section>
+
+    <!-- ===== Visitor Map ===== -->
+    <div class="visitor-section">
+        <div class="clustrmaps-wrap">
+            <script type="text/javascript" id="clstr_globe"
+                src="//clustrmaps.com/globe.js?d=fX5iFnBQqkI4YOaCh2hYxnYfi2pj9aK8Fq4We1ChmH4">
+            </script>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    &copy; 2025–2026 Runde Yang. Built with care.
+</footer>
+
+<!-- ===== Lightbox ===== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
 
 <script>
-    const content = {
-        en: {
-            sidebar_name: "Runde Yang (杨润德)",
-            sidebar_title: "Undergraduate Student at SJTU",
-            location: "Shanghai, China",
-            about_title: "Biography",
-            intro: `<p>Class of 2028, School of Artificial Intelligence, Shanghai Jiao Tong University (SJTU).</p>
-                    <p>Currently focusing on Multi-Agent Systems (MAS). Always learning.</p>`,
-            news_title: "News",
-            news_list: `<span class="date">[2025]</span> Page updated.`,
-            pubs_title: "Publications",
-            projects_title: "Projects",
-            life_title: "Life & Gallery",
-            life_desc_title: "Beyond Research",
-            life_desc_text: "Photography, Traveling, and random thoughts. Check out my footprints map and gallery."
-        },
-        'zh-CN': {
-            sidebar_name: "杨润德",
-            sidebar_title: "上海交大 本科生",
-            location: "中国 上海",
-            about_title: "个人简介",
-            intro: `<p>上海交通大学人工智能学院24级本科生。</p>
-                    <p>目前从事多智能体系统相关工作，持续学习中~</p>`,
-            news_title: "最新动态",
-            news_list: `<span class="date">[12/17/2025]</span> 主页上线。`,
-            pubs_title: "发表论文",
-            projects_title: "项目经历",
-            life_title: "生活与光影",
-            life_desc_title: "科研之外",
-            life_desc_text: "摄影、旅行以及随笔。点击查看我的足迹地图和相册。"
-        },
-        'zh-TW': {
-            sidebar_name: "楊潤德",
-            sidebar_title: "上海交大 本科生",
-            location: "中國 上海",
-            about_title: "個人簡介",
-            intro: `<p>上海交通大學人工智能學院24級本科生。</p>
-                    <p>目前從事多智能體系統相關工作，持續學習中~</p>`,
-            news_title: "最新動態",
-            news_list: `<span class="date">[2025]</span> 主頁上線。`,
-            pubs_title: "發表論文",
-            projects_title: "項目經歷",
-            life_title: "生活與光影",
-            life_desc_title: "科研之外",
-            life_desc_text: "攝影、旅行以及隨筆。點擊查看我的足跡地圖和相冊。"
-        }
-    };
-
-    function setLang(lang) {
-        // 1. 更新按鈕狀態
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.innerText.toLowerCase().includes(lang === 'en' ? 'en' : (lang === 'zh-CN' ? '简' : '繁'))) {
-                btn.classList.add('active');
-            }
-        });
-
-        // 2. 更新文字
-        const data = content[lang];
-        document.getElementById('sidebar-name').innerText = data.sidebar_name;
-        
-        document.querySelectorAll('[data-key]').forEach(el => {
-            const key = el.getAttribute('data-key');
-            if (data[key]) {
-                // 特殊處理列表，避免覆蓋掉 span 樣式
-                if(key.includes('_list')) {
-                    el.innerHTML = `<li>${data[key]}</li>`;
-                } else {
-                    el.innerHTML = data[key];
-                }
-            }
-        });
-
-        // 3. 字體切換 (關鍵修改)
-        const body = document.body;
-        body.style.fontFamily = ''; 
-        
-        if (lang === 'zh-CN') {
-            body.style.fontFamily = 'var(--font-zh-cn)';
-        } else if (lang === 'zh-TW') {
-            body.style.fontFamily = 'var(--font-zh-tw)';
-        } else {
-            body.style.fontFamily = 'var(--font-default)';
-        }
-        body.className = 'lang-' + lang;
+/* ===== i18n Content ===== */
+const i18n = {
+    en: {
+        nav_about: "About", nav_news: "News", nav_pubs: "Publications",
+        nav_projects: "Projects", nav_gallery: "Gallery", nav_notes: "Notes", nav_life: "Life",
+        hero_name: 'Runde Yang <span style="font-weight:400;font-size:0.65em;color:var(--text-secondary);">楊潤德</span>',
+        hero_title: "Undergraduate · School of AI, Shanghai Jiao Tong University",
+        hero_bio: "Class of 2028. Currently focusing on Multi-Agent Systems. Always learning, always curious.",
+        hero_location: "Shanghai, China",
+        title_news: "News", title_pubs: "Publications", title_projects: "Projects",
+        title_gallery: "Gallery", title_notes: "Notes",
+        news_1: "Personal homepage launched.",
+        proj_appcopilot: "A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.",
+        proj_teachmaster: "A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.",
+        cap_meteor: "Orion Nebula, 2025",
+        cap_nari: "Stargazing camp",
+        cap_qiandaohu: "Qiandao Lake sunset",
+        cap_road: "On the road to Qiandao Lake",
+        cap_campus: "SJTU Campus in spring",
+        cap_zijinshan: "Zijin Mountain, Nanjing",
+        cap_cake: "Baking club strawberry cake",
+        life_card_title: "Beyond Research",
+        life_card_desc: "Footprints map, bookshelf, thoughts, and more.",
+        notes_empty: "Notes coming soon...",
+        weather_loc: "Shanghai"
+    },
+    'zh-CN': {
+        nav_about: "关于", nav_news: "动态", nav_pubs: "论文",
+        nav_projects: "项目", nav_gallery: "光影", nav_notes: "笔记", nav_life: "生活",
+        hero_name: '杨润德',
+        hero_title: "上海交通大学 · 人工智能学院 本科生",
+        hero_bio: "24 级本科生，目前从事多智能体系统相关工作。持续学习中。",
+        hero_location: "中国 上海",
+        title_news: "动态", title_pubs: "发表论文", title_projects: "项目经历",
+        title_gallery: "光影", title_notes: "笔记",
+        news_1: "个人主页上线。",
+        proj_appcopilot: "一个多模态多智能体设备端助手，探索工具使用、规划和鲁棒的 UI 定位。",
+        proj_teachmaster: "一个多智能体框架，使用代码作为中间语义表示，自动生成结构化的教育视频。",
+        cap_meteor: "猎户座大星云，2025",
+        cap_nari: "观星营地",
+        cap_qiandaohu: "千岛湖日落",
+        cap_road: "千岛湖路上",
+        cap_campus: "美哉吾校",
+        cap_zijinshan: "紫金山，南京",
+        cap_cake: "烘焙社草莓蛋糕",
+        life_card_title: "科研之外",
+        life_card_desc: "足迹地图、书影、随笔，以及更多。",
+        notes_empty: "笔记即将上线……",
+        weather_loc: "上海"
+    },
+    'zh-TW': {
+        nav_about: "關於", nav_news: "動態", nav_pubs: "論文",
+        nav_projects: "項目", nav_gallery: "光影", nav_notes: "筆記", nav_life: "生活",
+        hero_name: '楊潤德',
+        hero_title: "上海交通大學 · 人工智能學院 本科生",
+        hero_bio: "24 級本科生，目前從事多智能體系統相關工作。持續學習中。",
+        hero_location: "中國 上海",
+        title_news: "動態", title_pubs: "發表論文", title_projects: "項目經歷",
+        title_gallery: "光影", title_notes: "筆記",
+        news_1: "個人主頁上線。",
+        proj_appcopilot: "一個多模態多智能體設備端助手，探索工具使用、規劃和魯棒的 UI 定位。",
+        proj_teachmaster: "一個多智能體框架，使用代碼作為中間語義表示，自動生成結構化的教育視頻。",
+        cap_meteor: "獵戶座大星雲，2025",
+        cap_nari: "觀星營地",
+        cap_qiandaohu: "千島湖日落",
+        cap_road: "千島湖路上",
+        cap_campus: "美哉吾校",
+        cap_zijinshan: "紫金山，南京",
+        cap_cake: "烘焙社草莓蛋糕",
+        life_card_title: "科研之外",
+        life_card_desc: "足跡地圖、書影、隨筆，以及更多。",
+        notes_empty: "筆記即將上線……",
+        weather_loc: "上海"
     }
-    const citations = {
-      AppCopilot_2025: `@misc{fan2025appcopilotgeneralaccuratelonghorizon,
-        title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},
-        author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},
-        year={2025},
-        eprint={2509.02444},
-        archivePrefix={arXiv},
-        primaryClass={cs.AI},
-        url={https://arxiv.org/abs/2509.02444}
-      }`,
-    
-      Generative_2025: `@misc{wang2025generativeteachingcode,
-      title={Generative Teaching via Code}, 
-      author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},
-      year={2025},
-      eprint={2601.04204},
-      archivePrefix={arXiv},
-      primaryClass={cs.CY},
-      url={https://arxiv.org/abs/2601.04204}, 
-    }`
-    };
-    // 模擬複製 Citation 的功能
-    function copyCitation(paperId) {
-        const bibtex = citations[paperId];
-        if (!bibtex) {
-            alert("Citation not found.");
-            return;
-        }
-    
-        navigator.clipboard.writeText(bibtex).then(() => {
-            alert("Citation copied to clipboard!");
-        });
-    }
-    // 郵箱防爬
-    const emailBox = document.getElementById('sidebar-email-box');
-    if (emailBox) {
-        const u = "yangrundemdj"; 
-        const d = "gmail.com";     
-        emailBox.innerHTML = `<a href="mailto:${u}@${d}">${u}@${d}</a>`; 
-    }
+};
 
-    // 初始化
-    setLang('en');
+let currentLang = localStorage.getItem('preferredLang') || 'en';
+
+function setLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('preferredLang', lang);
+    const data = i18n[lang];
+
+    // Update body class for font switching
+    document.body.className = 'lang-' + lang;
+
+    // Update lang buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    const labels = { 'en': 'EN', 'zh-CN': '简', 'zh-TW': '繁' };
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.textContent.trim() === labels[lang]) btn.classList.add('active');
+    });
+
+    // Update hero name
+    document.getElementById('heroName').innerHTML = data.hero_name;
+
+    // Update all data-key elements
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (data[key] !== undefined) {
+            el.innerHTML = data[key];
+        }
+    });
+
+    // Update weather location
+    const wLoc = document.getElementById('weatherLoc');
+    if (wLoc) wLoc.textContent = data.weather_loc || 'Shanghai';
+}
+
+/* ===== Init Language ===== */
+setLang(currentLang);
+
+/* ===== Email Obfuscation ===== */
+(function() {
+    const u = 'yangrundemdj', d = 'gmail.com';
+    const link = document.getElementById('emailLink');
+    const text = document.getElementById('emailText');
+    if (link && text) {
+        link.href = 'mailto:' + u + '@' + d;
+        text.textContent = u + '@' + d;
+    }
+})();
+
+/* ===== Weather (Open-Meteo, no API key) ===== */
+const WMO_CODES = {
+    0: ['☀️', 'Clear sky', '晴', '晴'],
+    1: ['🌤️', 'Mainly clear', '大部晴朗', '大部晴朗'],
+    2: ['⛅', 'Partly cloudy', '局部多云', '局部多雲'],
+    3: ['☁️', 'Overcast', '阴天', '陰天'],
+    45: ['🌫️', 'Fog', '雾', '霧'],
+    48: ['🌫️', 'Rime fog', '雾凇', '霧凇'],
+    51: ['🌦️', 'Light drizzle', '小毛毛雨', '小毛毛雨'],
+    53: ['🌦️', 'Drizzle', '毛毛雨', '毛毛雨'],
+    55: ['🌧️', 'Dense drizzle', '大毛毛雨', '大毛毛雨'],
+    61: ['🌧️', 'Slight rain', '小雨', '小雨'],
+    63: ['🌧️', 'Moderate rain', '中雨', '中雨'],
+    65: ['🌧️', 'Heavy rain', '大雨', '大雨'],
+    71: ['🌨️', 'Slight snow', '小雪', '小雪'],
+    73: ['🌨️', 'Moderate snow', '中雪', '中雪'],
+    75: ['❄️', 'Heavy snow', '大雪', '大雪'],
+    77: ['🌨️', 'Snow grains', '雪粒', '雪粒'],
+    80: ['🌦️', 'Slight showers', '小阵雨', '小陣雨'],
+    81: ['🌧️', 'Moderate showers', '中阵雨', '中陣雨'],
+    82: ['⛈️', 'Violent showers', '暴雨', '暴雨'],
+    85: ['🌨️', 'Slight snow showers', '小阵雪', '小陣雪'],
+    86: ['🌨️', 'Heavy snow showers', '大阵雪', '大陣雪'],
+    95: ['⛈️', 'Thunderstorm', '雷暴', '雷暴'],
+    96: ['⛈️', 'Thunderstorm w/ hail', '雷暴冰雹', '雷暴冰雹'],
+    99: ['⛈️', 'Thunderstorm w/ heavy hail', '雷暴大冰雹', '雷暴大冰雹']
+};
+
+async function fetchWeather() {
+    try {
+        const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=31.23&longitude=121.47&current=temperature_2m,weather_code&timezone=Asia/Shanghai');
+        const data = await res.json();
+        const temp = Math.round(data.current.temperature_2m);
+        const code = data.current.weather_code;
+        const info = WMO_CODES[code] || ['🌡️', 'N/A', 'N/A', 'N/A'];
+
+        document.getElementById('weatherIcon').textContent = info[0];
+        document.getElementById('weatherTemp').textContent = temp + '°C';
+
+        const langIdx = { 'en': 1, 'zh-CN': 2, 'zh-TW': 3 };
+        document.getElementById('weatherDesc').textContent = info[langIdx[currentLang] || 1];
+        document.getElementById('weatherWidget').style.display = 'inline-flex';
+
+        // Store for language switching
+        window._weatherInfo = info;
+        window._weatherTemp = temp;
+    } catch (e) {
+        console.warn('Weather fetch failed:', e);
+    }
+}
+
+// Update weather description on lang change
+const origSetLang = setLang;
+setLang = function(lang) {
+    origSetLang(lang);
+    if (window._weatherInfo) {
+        const langIdx = { 'en': 1, 'zh-CN': 2, 'zh-TW': 3 };
+        document.getElementById('weatherDesc').textContent = window._weatherInfo[langIdx[lang] || 1];
+    }
+};
+
+fetchWeather();
+
+/* ===== Citations ===== */
+const citations = {
+    AppCopilot_2025: `@misc{fan2025appcopilotgeneralaccuratelonghorizon,
+  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},
+  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},
+  year={2025},
+  eprint={2509.02444},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI},
+  url={https://arxiv.org/abs/2509.02444}
+}`,
+    Generative_2025: `@misc{wang2025generativeteachingcode,
+  title={Generative Teaching via Code},
+  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},
+  year={2025},
+  eprint={2601.04204},
+  archivePrefix={arXiv},
+  primaryClass={cs.CY},
+  url={https://arxiv.org/abs/2601.04204}
+}`
+};
+
+function copyCitation(id) {
+    const bib = citations[id];
+    if (!bib) return;
+    navigator.clipboard.writeText(bib).then(() => {
+        const btn = event.target.closest('.pub-btn');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+        setTimeout(() => { btn.innerHTML = orig; }, 1500);
+    });
+}
+
+/* ===== Gallery Drag Scroll ===== */
+(function() {
+    const el = document.getElementById('galleryScroll');
+    let isDown = false, startX, scrollLeft;
+
+    el.addEventListener('mousedown', e => {
+        isDown = true;
+        startX = e.pageX - el.offsetLeft;
+        scrollLeft = el.scrollLeft;
+    });
+    el.addEventListener('mouseleave', () => isDown = false);
+    el.addEventListener('mouseup', () => isDown = false);
+    el.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - el.offsetLeft;
+        el.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    });
+
+    // Touch support
+    let touchStartX, touchScrollLeft;
+    el.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].pageX;
+        touchScrollLeft = el.scrollLeft;
+    }, { passive: true });
+    el.addEventListener('touchmove', e => {
+        const x = e.touches[0].pageX;
+        el.scrollLeft = touchScrollLeft - (x - touchStartX);
+    }, { passive: true });
+})();
+
+/* ===== Lightbox ===== */
+function openLightbox(el) {
+    const src = el.querySelector('img').src;
+    const cap = el.querySelector('.gallery-caption').textContent;
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightboxCaption').textContent = cap;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+});
+
+/* ===== Mobile Nav Toggle ===== */
+function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+}
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+    });
+});
+
+/* ===== Scroll Fade-in Animation ===== */
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+/* ===== Init ===== */
+setLang('en');
 </script>
 
 </body>

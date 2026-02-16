@@ -3,629 +3,609 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life & Gallery - Runde Yang</title>
+    <title>Life – Runde Yang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-    
-    <style>
-        /* --- 1. 核心變量 (與 index.html 完全一致) --- */
-        :root {
-            --bg-color: #fcfbf9;
-            --text-color: #333333;
-            --accent-color: #2c5282;
-            --accent-hover-bg: rgba(44, 82, 130, 0.08);
-            --header-height: 64px;
-            --caption-color: #555555;
 
-            /* 字體系統 */
-            --font-default: "Calibri", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", serif;
-            --font-zh-cn: "Calibri", "BiaoKaiTi", "DFKai-SB", "AR PL UKai CN", "KaiTi", "STKaiti", serif;
-            --font-zh-tw: "Calibri", "BiaoKaiTi", "DFKai-SB", serif;
+    <style>
+        @font-face {
+            font-family: 'EduKai';
+            src: url('fonts/edukai.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
         }
+
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+        :root {
+            --bg: #fafaf8;
+            --bg-alt: #ffffff;
+            --text: #1a1a1a;
+            --text-secondary: #6b6b6b;
+            --text-muted: #999;
+            --accent: #2d3436;
+            --border: #e8e8e8;
+            --border-light: #f0f0f0;
+            --radius: 8px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.08);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-cn: 'EduKai', 'DFKai-SB', 'KaiTi', serif;
+            --font-en: 'Cormorant Garamond', 'Georgia', serif;
+            --max-width: 780px;
+            --nav-height: 56px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 24px); overflow-x: hidden; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            line-height: 1.8;
-            font-family: var(--font-default);
-            padding-top: var(--header-height); /* 為固定導航欄留出空間 */
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-en);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            padding-top: var(--nav-height);
         }
+        body.lang-zh-CN, body.lang-zh-TW { font-family: var(--font-cn); }
+        body.lang-zh-CN .en-only, body.lang-zh-TW .en-only { font-family: var(--font-en); }
 
-        /* --- 2. 頂部導航欄 (從 index.html 移植) --- */
-        .fixed-header {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: var(--header-height);
-            background-color: rgba(252, 251, 249, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+        ::selection { background: rgba(45,52,54,0.12); }
+        a { color: var(--text); text-decoration: none; transition: color var(--transition); }
+        a:hover { color: var(--text-secondary); }
+        img { display: block; max-width: 100%; }
+
+        /* Nav */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: var(--nav-height);
+            background: rgba(250,250,248,0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
             z-index: 1000;
             display: flex; justify-content: center;
         }
-        .header-inner {
-            width: 100%; max-width: 1150px; padding: 0 20px;
+        .nav-inner {
+            width: 100%; max-width: 960px; padding: 0 24px;
             display: flex; align-items: center; justify-content: space-between;
         }
-        .header-left { display: flex; align-items: center; gap: 10px; }
-        .header-name-link {
-            font-weight: bold; font-size: 1.2rem; color: #000;
-            text-decoration: none; margin-right: 20px; font-family: "Calibri", sans-serif;
+        .nav-brand {
+            font-family: var(--font-en); font-size: 1.05rem; font-weight: 400;
+            color: var(--text); letter-spacing: 0.04em;
         }
+        .nav-links { display: flex; align-items: center; gap: 4px; }
         .nav-link {
-            color: #555; text-decoration: none; font-size: 0.95rem;
-            padding: 8px 16px; border-radius: 6px; transition: all 0.2s ease; font-weight: 500;
+            font-size: 0.88rem; color: var(--text-secondary);
+            padding: 6px 12px; border-radius: 6px;
+            transition: all var(--transition); font-weight: 500;
         }
-        .nav-link:hover { background-color: var(--accent-hover-bg); color: var(--accent-color); }
-        .header-right { display: flex; align-items: center; }
-        
-        /* 語言按鈕 */
+        .nav-link:hover { color: var(--text); background: rgba(0,0,0,0.03); }
+        .nav-lang {
+            display: flex; align-items: center; gap: 2px;
+            margin-left: 16px; border-left: 1px solid var(--border); padding-left: 16px;
+        }
         .lang-btn {
-            background: none; border: none; cursor: pointer; color: #999;
-            padding: 4px 8px; border-radius: 4px; font-family: "Calibri", sans-serif;
-            font-size: 0.9rem; transition: all 0.2s;
+            background: none; border: none; cursor: pointer;
+            font-family: var(--font-en); font-size: 0.82rem;
+            color: var(--text-muted); padding: 4px 8px; border-radius: 4px;
+            transition: all var(--transition);
         }
-        .lang-btn:hover { background-color: #eee; color: #333; }
-        .lang-btn.active { color: var(--accent-color); font-weight: bold; }
+        .lang-btn:hover { color: var(--text); background: rgba(0,0,0,0.03); }
+        .lang-btn.active { color: var(--text); font-weight: 600; }
 
-        /* --- 3. 頁面容器 --- */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0px 20px;
+        .nav-toggle {
+            display: none; background: none; border: none;
+            cursor: pointer; font-size: 1.2rem; color: var(--text); padding: 4px;
         }
 
-        /* --- 4. Life 頁面特定樣式 --- */
-        h2 {
-            font-size: 1.5rem; color: var(--accent-color);
-            border-bottom: 2px solid #eee; padding-bottom: 10px;
-            margin-top: 60px; margin-bottom: 20px;
+        /* Container */
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+        section { padding: 60px 0; border-bottom: 1px solid var(--border-light); }
+        section:last-of-type { border-bottom: none; }
+
+        .section-title {
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--text-muted);
+            margin-bottom: 32px; font-family: var(--font-en);
         }
 
         /* Gallery */
-/* --- Gallery: 疊放照片堆 (Polaroid Stack) --- */
-/* --- Gallery: 可拖拽的正方形堆疊相冊 --- */
-        
-        /* 1. 最外層容器：負責遮罩 (虛化邊緣) 和隱藏滾動條 */
-        .gallery-scroll-view {
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .gallery-item {
             position: relative;
-            width: 100%;
-            overflow: hidden; /* 隱藏默認滾動條，改用 JS 拖拽 */
-            padding: 40px 0; /* 上下留白給懸浮動畫 */
-            cursor: grab;    /* 鼠標手勢：抓取 */
-            
-            /* 核心：左右邊緣漸變虛化 (CSS Mask) */
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-        }
-        
-        .gallery-scroll-view:active {
-            cursor: grabbing; /* 抓取時的手勢 */
-        }
-
-        /* 2. 內部軌道：負責橫向排列 */
-        .gallery-track {
-            display: flex;
-            align-items: center;
-            width: max-content; /* 寬度根據內容自動延伸 */
-            padding: 0 50px;    /* 兩側留白，保證第一張和最後一張能被看到 */
-            padding-left: 100px; /* 初始位置稍微靠右一點 */
-        }
-
-        /* 3. 卡片本體 */
-        .photo-card {
-            position: relative;
-            width: 240px;
-            height: 240px; /* 正方形 */
-            background: #fff;
-            border: 4px solid #fff;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* 陰影在左側 */
-            border-radius: 4px; /* 輕微圓角 */
+            aspect-ratio: 1;
+            border-radius: var(--radius);
             overflow: hidden;
-            
-            /* 核心：負邊距實現重疊 (後一張壓住前一張的一半) */
-            margin-left: -120px; 
-            
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            user-select: none; /* 防止拖拽時選中圖片 */
+            cursor: pointer;
+            transition: all var(--transition);
         }
-
-        /* 第一張不要負邊距 */
-        .photo-card:first-child {
-            margin-left: 0;
+        .gallery-item:hover { transform: scale(1.02); box-shadow: var(--shadow-hover); z-index: 10; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            color: #fff; padding: 20px 10px 8px; font-size: 0.78rem;
+            transform: translateY(100%); transition: transform var(--transition);
         }
-
-        .photo-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 填滿正方形 */
-            pointer-events: none; /* 防止圖片本身的拖拽干擾 JS 邏輯 */
-        }
-
-        /* 4. 註釋文字 (默認隱藏) */
-        .photo-caption {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%;
-            background: rgba(255,255,255,0.95);
-            padding: 10px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #333;
-            transform: translateY(100%); /* 默認沉在下面 */
-            transition: transform 0.3s;
-        }
-
-        /* 5. 懸浮互動 (抽出來) */
-        .photo-card:hover {
-            transform: translateY(-40px) scale(1.1); /* 向上浮起 + 放大 */
-            z-index: 100; /* 層級最高 */
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            margin-right: 60px; /* 稍微推開右邊的圖片，讓自己完全露出來 */
-        }
-
-        .photo-card:hover .photo-caption {
-            transform: translateY(0); /* 文字浮現 */
-        }
-
-        /* Map */
-        .map-container { display: flex; flex-wrap: wrap; gap: 20px; }
-        .map-box { flex: 1; min-width: 300px; height: 400px; background: #fff; border: 1px solid #eee; }
-
-        /* Shelf (List) */
-        .item-list { display: flex; flex-direction: column; gap: 20px; }
-        .item-card { display: flex; gap: 20px; align-items: flex-start; }
-        .item-cover { width: 60px; height: 85px; background: #ddd; flex-shrink: 0; object-fit: cover; }
-        .item-info h3 { margin: 0 0 5px 0; font-size: 1rem; }
-        .item-comment { color: #555; font-size: 0.95rem; }
-
-        /* Thoughts */
-        .snippet-list { border-left: 2px solid #eee; padding-left: 20px; margin-left: 10px; }
-        .snippet-item { margin-bottom: 30px; position: relative; }
-        .snippet-item::before {
-            content: ''; position: absolute; left: -26px; top: 6px;
-            width: 10px; height: 10px; background: var(--accent-color); border-radius: 50%;
-        }
-        .snippet-date { font-size: 0.8rem; color: #999; margin-bottom: 5px; font-family: "Calibri", sans-serif; }
-        .snippet-content { font-size: 1.05rem; }
-
-        /* Friend Links */
-        .friend-list { display: flex; flex-wrap: wrap; gap: 15px; }
-        .friend-link {
-            padding: 5px 15px; border: 1px solid #ddd; border-radius: 20px;
-            color: #555; text-decoration: none; font-size: 0.9rem; transition: all 0.2s;
-        }
-        .friend-link:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .gallery-item:hover .gallery-caption { transform: translateY(0); }
 
         /* Lightbox */
         .lightbox {
-            display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.95); justify-content: center; align-items: center; flex-direction: column;
+            display: none; position: fixed; z-index: 2000;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(250,250,248,0.96); backdrop-filter: blur(20px);
+            justify-content: center; align-items: center; flex-direction: column;
+            cursor: pointer;
         }
-        .lightbox img { max-width: 90%; max-height: 80vh; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
-        .lightbox-caption { margin-top: 20px; text-align: center; font-size: 1.1rem; color: #333; }
-        .lightbox-close { position: absolute; top: 20px; right: 30px; font-size: 3rem; cursor: pointer; color: #333; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 75vh; border-radius: var(--radius); box-shadow: var(--shadow-hover); }
+        .lightbox-caption { margin-top: 16px; font-size: 0.9rem; color: var(--text-secondary); }
+        .lightbox-close {
+            position: absolute; top: 20px; right: 28px; font-size: 1.5rem;
+            cursor: pointer; color: var(--text-muted); background: none; border: none;
+        }
+        .lightbox-close:hover { color: var(--text); }
 
-        /* 響應式 */
-        @media (max-width: 850px) {
-            .header-left .nav-link { display: none; } /* 手機端隱藏中間鏈接 */
-            .header-inner { justify-content: space-between; }
+        /* Maps */
+        .map-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
+        .map-box {
+            height: 380px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        /* Shelf */
+        .shelf-list { display: flex; flex-direction: column; gap: 20px; }
+        .shelf-item {
+            display: flex; gap: 16px; align-items: flex-start;
+            padding: 16px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: all var(--transition);
+        }
+        .shelf-item:hover { border-color: #ccc; box-shadow: var(--shadow); }
+        .shelf-icon {
+            font-size: 1.4rem; color: var(--text-muted);
+            width: 32px; text-align: center; flex-shrink: 0; padding-top: 2px;
+        }
+        .shelf-info { flex: 1; }
+        .shelf-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+        .shelf-comment { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* Thoughts */
+        .thoughts-list {
+            border-left: 2px solid var(--border);
+            padding-left: 24px;
+            margin-left: 8px;
+        }
+        .thought-item {
+            margin-bottom: 28px;
+            position: relative;
+        }
+        .thought-item::before {
+            content: '';
+            position: absolute;
+            left: -30px; top: 8px;
+            width: 8px; height: 8px;
+            background: var(--text-muted);
+            border-radius: 50%;
+        }
+        .thought-date {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-family: var(--font-en);
+            margin-bottom: 4px;
+        }
+        .thought-text {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Friends */
+        .friends-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .friend-link {
+            padding: 6px 16px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: all var(--transition);
+        }
+        .friend-link:hover { border-color: var(--text); color: var(--text); }
+
+        /* Footer */
+        .footer {
+            text-align: center; padding: 32px 0;
+            font-size: 0.78rem; color: var(--text-muted);
+            font-family: var(--font-en);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex; flex-direction: column;
+                position: absolute; top: var(--nav-height);
+                left: 0; right: 0;
+                background: rgba(250,250,248,0.98);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid var(--border);
+                padding: 12px 24px; gap: 4px;
+            }
+            .nav-links.open .nav-lang {
+                border-left: none; padding-left: 0; margin-left: 0;
+                border-top: 1px solid var(--border-light);
+                padding-top: 8px; margin-top: 4px;
+            }
+            .nav-toggle { display: block; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .map-grid { grid-template-columns: 1fr; }
+            .map-box { height: 300px; }
+            section { padding: 40px 0; }
+        }
+
+        .fade-in {
+            opacity: 0; transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
     </style>
 </head>
-<body>
+<body class="lang-en">
 
-<nav class="fixed-header">
-    <div class="header-inner">
-        <div class="header-left">
-            <a href="index.html" class="header-name-link">Runde Yang</a>
-            
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand en-only">Runde Yang</a>
+        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
             <a href="#gallery" class="nav-link" data-key="nav_gallery">Gallery</a>
-            <a href="#map" class="nav-link" data-key="nav_map">Footprints</a>
+            <a href="#footprints" class="nav-link" data-key="nav_map">Footprints</a>
             <a href="#shelf" class="nav-link" data-key="nav_shelf">Shelf</a>
             <a href="#thoughts" class="nav-link" data-key="nav_thoughts">Thoughts</a>
-        </div>
-
-        <div class="header-right">
-            <button class="lang-btn active" onclick="setLang('en')">EN</button>
-            <span style="color:#ddd; margin:0 3px;">|</span>
-            <button class="lang-btn" onclick="setLang('zh-CN')">简</button>
-            <span style="color:#ddd; margin:0 3px;">|</span>
-            <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
+            <a href="#friends" class="nav-link" data-key="nav_friends">Friends</a>
+            <div class="nav-lang">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('zh-CN')">简</button>
+                <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
+            </div>
         </div>
     </div>
 </nav>
 
 <div class="container">
 
-    <section id="gallery">
-        <h2 data-key="title_gallery">Gallery</h2>
-        
-        <div class="gallery-scroll-view" id="galleryContainer">
-            <div class="gallery-track">
-                
-                <div class="photo-card" onclick="openLightbox(this)">
-                    <img src="images/meteor.jpg" alt="Qiandao Lake"> 
-                    <div class="photo-caption" data-key="cap_meteor">Qiandao Lake, 2024.</div>
-                </div>
-
-                <div class="photo-card" onclick="openLightbox(this)">
-                    <img src="images/美哉吾校.jpg" alt="Campus">
-                    <div class="photo-caption" data-key="cap_campus">SJTU Campus.</div>
-                </div>
-
+    <!-- Gallery -->
+    <section id="gallery" class="fade-in">
+        <div class="section-title" data-key="title_gallery">Gallery</div>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="images/meteor.jpg" alt="Orion Nebula">
+                <div class="gallery-caption" data-key="cap_meteor">Orion Nebula, 2025</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="images/nari.jpg" alt="Stargazing">
+                <div class="gallery-caption" data-key="cap_nari">Stargazing camp</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="images/qiandaohu.jpg" alt="Qiandao Lake">
+                <div class="gallery-caption" data-key="cap_qiandaohu">Qiandao Lake sunset</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="images/qiandaohu-road.jpg" alt="Road">
+                <div class="gallery-caption" data-key="cap_road">On the road</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="images/campus.jpg" alt="Campus">
+                <div class="gallery-caption" data-key="cap_campus">SJTU Campus</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="images/zijinshan.jpg" alt="Zijin Mountain">
+                <div class="gallery-caption" data-key="cap_zijinshan">Zijin Mountain</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="images/cake.jpg" alt="Cake">
+                <div class="gallery-caption" data-key="cap_cake">Baking club</div>
             </div>
         </div>
     </section>
 
+    <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="">
-        <div class="lightbox-caption" id="lightbox-caption"></div>
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <img id="lightboxImg" src="">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
 
-    <section id="map">
-        <h2 data-key="title_map">Footprints</h2>
-        <div class="map-container">
-            <div id="china-map" class="map-box"></div>
-            <div id="world-map" class="map-box"></div>
+    <!-- Footprints -->
+    <section id="footprints" class="fade-in">
+        <div class="section-title" data-key="title_map">Footprints</div>
+        <div class="map-grid">
+            <div id="chinaMap" class="map-box"></div>
+            <div id="worldMap" class="map-box"></div>
         </div>
     </section>
 
-    <section id="shelf">
-        <h2 data-key="title_shelf">Shelf</h2>
-        <div class="item-list">
-            
-            <div class="item-card">
-                <img src="https://via.placeholder.com/60x85" class="item-cover">
-                <div class="item-info">
-                    <h3>Deep Learning (Ian Goodfellow)</h3>
-                    <div class="item-comment" data-key="book_dl">Mathematical foundation is excellent. Not just a tool book, but a mind map.</div>
+    <!-- Shelf -->
+    <section id="shelf" class="fade-in">
+        <div class="section-title" data-key="title_shelf">Shelf</div>
+        <div class="shelf-list">
+            <div class="shelf-item">
+                <div class="shelf-icon"><i class="fas fa-book"></i></div>
+                <div class="shelf-info">
+                    <div class="shelf-title">Deep Learning — Ian Goodfellow</div>
+                    <div class="shelf-comment" data-key="book_dl">Mathematical foundation is excellent. Not just a tool book, but a mind map.</div>
                 </div>
             </div>
-
-            <div class="item-card">
-                <img src="https://via.placeholder.com/60x85" class="item-cover">
-                <div class="item-info">
-                    <h3>Interstellar</h3>
-                    <div class="item-comment" data-key="movie_interstellar">Love is the one thing that transcends time and space.</div>
+            <div class="shelf-item">
+                <div class="shelf-icon"><i class="fas fa-film"></i></div>
+                <div class="shelf-info">
+                    <div class="shelf-title">Interstellar</div>
+                    <div class="shelf-comment" data-key="movie_interstellar">Love is the one thing that transcends time and space.</div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <section id="thoughts">
-        <h2 data-key="title_thoughts">Thoughts</h2>
-        <div class="snippet-list">
-            
-            <div class="snippet-item">
-                <div class="snippet-date">Dec 15, 2024</div>
-                <div class="snippet-content" data-key="thought_1">
-                    Realized that "subtraction" is harder than "addition". Code is like this, life is like this.
-                </div>
+    <!-- Thoughts -->
+    <section id="thoughts" class="fade-in">
+        <div class="section-title" data-key="title_thoughts">Thoughts</div>
+        <div class="thoughts-list">
+            <div class="thought-item">
+                <div class="thought-date">Dec 15, 2024</div>
+                <div class="thought-text" data-key="thought_1">Realized that "subtraction" is harder than "addition". Code is like this, life is like this.</div>
             </div>
-
-            <div class="snippet-item">
-                <div class="snippet-date">Nov 10, 2024</div>
-                <div class="snippet-content" data-key="thought_2">
-                    Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera.
-                </div>
+            <div class="thought-item">
+                <div class="thought-date">Nov 10, 2024</div>
+                <div class="thought-text" data-key="thought_2">Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera.</div>
             </div>
-
         </div>
     </section>
 
-    <section>
-        <h2 data-key="title_friends">Friends</h2>
-        <div class="friend-list">
+    <!-- Friends -->
+    <section id="friends" class="fade-in">
+        <div class="section-title" data-key="title_friends">Friends</div>
+        <div class="friends-list">
             <a href="#" class="friend-link">Laboratory Partner A</a>
             <a href="#" class="friend-link">SJTU AI Club</a>
         </div>
     </section>
 
-    <footer style="text-align: center; color: #999; font-size: 0.8rem; margin-top: 60px;">
-        &copy; 2025 Runde Yang.
-    </footer>
-
 </div>
 
+<footer class="footer">&copy; 2025–2026 Runde Yang.</footer>
+
 <script>
-    // --- 1. 內容數據字典 (包含所有翻譯) ---
-    const content = {
-        en: {
-            nav_gallery: "Gallery", nav_map: "Footprints", nav_shelf: "Shelf", nav_thoughts: "Thoughts",
-            title_gallery: "Gallery", title_map: "Footprints", title_shelf: "Shelf", title_thoughts: "Thoughts", title_friends: "Friends",
-            
-            // 具體內容
-            cap_meteor: "Qiandao Lake, 2025. Meteor shower.",
-            cap_campus: "Shanghai, SJTU. Spring on campus.",
-            book_dl: "Mathematical foundation is excellent. Not just a tool book, but a mind map.",
-            movie_interstellar: "Love is the one thing that transcends time and space.",
-            thought_1: "Realized that 'subtraction' is harder than 'addition'. Code is like this, life is like this.",
-            thought_2: "Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera.",
-            
-            // 圖表標題
-            chart_china: "China Footprints", chart_world: "World Footprints"
-        },
-        'zh-CN': {
-            nav_gallery: "光影", nav_map: "足迹", nav_shelf: "书影", nav_thoughts: "随笔",
-            title_gallery: "光影 / Gallery", title_map: "足迹 / Footprints", title_shelf: "书影 / Shelf", title_thoughts: "随笔 / Snippets", title_friends: "友链 / Friends",
-            
-            cap_meteor: "2025 猎户座流星雨",
-            cap_campus: "美哉吾校，真理之花<br>青年之楷模，邦国之荣华",
-            book_dl: "常读常新。数学基础部分写得极好，不仅是工具书，更是思维导图。",
-            movie_interstellar: "爱是唯一可以穿越时间与空间的事物。",
-            thought_1: "整理这份主页的时候，突然意识到“减法”比“加法”难得多。代码如此，生活亦然。",
-            thought_2: "千岛湖的流星雨。肉眼看到的比相机拍到的震撼一万倍。人类的镜头终究还是太局限了。",
-
-            chart_china: "中国足迹", chart_world: "世界足迹"
-        },
-        'zh-TW': {
-            nav_gallery: "光影", nav_map: "足跡", nav_shelf: "書影", nav_thoughts: "隨筆",
-            title_gallery: "光影 / Gallery", title_map: "足跡 / Footprints", title_shelf: "書影 / Shelf", title_thoughts: "隨筆 / Snippets", title_friends: "友鏈 / Friends",
-            
-            cap_meteor: "2025 獵戶座流星雨",
-            cap_campus: "美哉吾校，真理之花<br>青年之楷模，邦國之榮華",
-            book_dl: "常讀常新。數學基礎部分寫得極好，不僅是工具書，更是思維導圖。",
-            movie_interstellar: "愛是唯一可以穿越時間與空間的事物。",
-            thought_1: "整理這份主頁的時候，突然意識到「減法」比「加法」難得多。代碼如此，生活亦然。",
-            thought_2: "千島湖的流星雨。肉眼看到的比相機拍到的震撼一萬倍。人類的鏡頭終究還是太侷限了。",
-
-            chart_china: "中國足跡", chart_world: "世界足跡"
-        }
-    };
-
-    // --- 2. 語言切換邏輯 ---
-    function setLang(lang) {
-        // 更新按鈕
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.innerText.toLowerCase().includes(lang === 'en' ? 'en' : (lang === 'zh-CN' ? '简' : '繁'))) {
-                btn.classList.add('active');
-            }
-        });
-
-        // 更新文本內容
-        const data = content[lang];
-        document.querySelectorAll('[data-key]').forEach(el => {
-            const key = el.getAttribute('data-key');
-            if (data[key]) {
-                el.innerHTML = data[key];
-            }
-        });
-
-        // 更新字體變量 (與 Index 保持一致)
-        const body = document.body;
-        body.style.fontFamily = ''; 
-        if (lang === 'zh-CN') body.style.fontFamily = 'var(--font-zh-cn)';
-        else if (lang === 'zh-TW') body.style.fontFamily = 'var(--font-zh-tw)';
-        else body.style.fontFamily = 'var(--font-default)';
-
-        // 更新圖表標題
-        updateChartTitles(data.chart_china, data.chart_world);
-        syncEchartsFont();
+/* ===== i18n ===== */
+const i18n = {
+    en: {
+        nav_gallery: "Gallery", nav_map: "Footprints", nav_shelf: "Shelf",
+        nav_thoughts: "Thoughts", nav_friends: "Friends",
+        title_gallery: "Gallery", title_map: "Footprints", title_shelf: "Shelf",
+        title_thoughts: "Thoughts", title_friends: "Friends",
+        cap_meteor: "Orion Nebula, 2025",
+        cap_nari: "Stargazing camp",
+        cap_qiandaohu: "Qiandao Lake sunset",
+        cap_road: "On the road to Qiandao Lake",
+        cap_campus: "SJTU Campus in spring",
+        cap_zijinshan: "Zijin Mountain, Nanjing",
+        cap_cake: "Baking club strawberry cake",
+        book_dl: "Mathematical foundation is excellent. Not just a tool book, but a mind map.",
+        movie_interstellar: "Love is the one thing that transcends time and space.",
+        thought_1: 'Realized that "subtraction" is harder than "addition". Code is like this, life is like this.',
+        thought_2: "Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera.",
+        chart_china: "China", chart_world: "World"
+    },
+    'zh-CN': {
+        nav_gallery: "光影", nav_map: "足迹", nav_shelf: "书影",
+        nav_thoughts: "随笔", nav_friends: "友链",
+        title_gallery: "光影", title_map: "足迹", title_shelf: "书影",
+        title_thoughts: "随笔", title_friends: "友链",
+        cap_meteor: "猎户座大星云，2025",
+        cap_nari: "观星营地",
+        cap_qiandaohu: "千岛湖日落",
+        cap_road: "千岛湖路上",
+        cap_campus: "美哉吾校，真理之花",
+        cap_zijinshan: "紫金山，南京",
+        cap_cake: "烘焙社草莓蛋糕",
+        book_dl: "常读常新。数学基础部分写得极好，不仅是工具书，更是思维导图。",
+        movie_interstellar: "爱是唯一可以穿越时间与空间的事物。",
+        thought_1: "整理这份主页的时候，突然意识到「减法」比「加法」难得多。代码如此，生活亦然。",
+        thought_2: "千岛湖的流星雨。肉眼看到的比相机拍到的震撼一万倍。",
+        chart_china: "中国", chart_world: "世界"
+    },
+    'zh-TW': {
+        nav_gallery: "光影", nav_map: "足跡", nav_shelf: "書影",
+        nav_thoughts: "隨筆", nav_friends: "友鏈",
+        title_gallery: "光影", title_map: "足跡", title_shelf: "書影",
+        title_thoughts: "隨筆", title_friends: "友鏈",
+        cap_meteor: "獵戶座大星雲，2025",
+        cap_nari: "觀星營地",
+        cap_qiandaohu: "千島湖日落",
+        cap_road: "千島湖路上",
+        cap_campus: "美哉吾校，真理之花",
+        cap_zijinshan: "紫金山，南京",
+        cap_cake: "烘焙社草莓蛋糕",
+        book_dl: "常讀常新。數學基礎部分寫得極好，不僅是工具書，更是思維導圖。",
+        movie_interstellar: "愛是唯一可以穿越時間與空間的事物。",
+        thought_1: "整理這份主頁的時候，突然意識到「減法」比「加法」難得多。代碼如此，生活亦然。",
+        thought_2: "千島湖的流星雨。肉眼看到的比相機拍到的震撼一萬倍。",
+        chart_china: "中國", chart_world: "世界"
     }
+};
 
-    // --- 3. Lightbox 邏輯 ---
-    function openLightbox(element) {
-        const imgSrc = element.querySelector('img').src;
-        // 直接讀取當前顯示的文字 (因為 setLang 已經更新了 DOM)
-        const captionText = element.querySelector('.photo-caption').innerText;
+function setLang(lang) {
+    localStorage.setItem('preferredLang', lang);
+    document.body.className = 'lang-' + lang;
+    const data = i18n[lang];
 
-        document.getElementById('lightbox-img').src = imgSrc;
-        document.getElementById('lightbox-caption').innerText = captionText;
-        document.getElementById('lightbox').style.display = 'flex';
-    }
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    const labels = { 'en': 'EN', 'zh-CN': '简', 'zh-TW': '繁' };
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.textContent.trim() === labels[lang]) btn.classList.add('active');
+    });
 
-    function closeLightbox() {
-        document.getElementById('lightbox').style.display = 'none';
-    }
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (data[key] !== undefined) el.innerHTML = data[key];
+    });
 
-    // --- 4. 地圖配置 (ECharts) ---
-    // 在全域聲明變量，以便 setLang 可以訪問
-    const myChartChina = echarts.init(document.getElementById('china-map'));
-    const myChartWorld = echarts.init(document.getElementById('world-map'));
-    function syncEchartsFont() {
-        const currentFont = getComputedStyle(document.body).fontFamily;
-    
-        const common = {
-            textStyle: { fontFamily: currentFont },          // 全局字體
-            title: { textStyle: { fontFamily: currentFont } } // title 再保險一次
-        };
-    
-        if (myChartChina) myChartChina.setOption(common);
-        if (myChartWorld) myChartWorld.setOption(common);
-    }
+    // Update chart titles
+    if (window.myChartChina) myChartChina.setOption({ title: { text: data.chart_china } });
+    if (window.myChartWorld) myChartWorld.setOption({ title: { text: data.chart_world } });
+}
 
-    function updateChartTitles(chinaTitle, worldTitle) {
-        if(myChartChina) myChartChina.setOption({ title: { text: chinaTitle } });
-        if(myChartWorld) myChartWorld.setOption({ title: { text: worldTitle } });
-    }
-// 你原来的 visited 列表（保持不变即可）
+/* ===== Lightbox ===== */
+function openLightbox(el) {
+    document.getElementById('lightboxImg').src = el.querySelector('img').src;
+    document.getElementById('lightboxCaption').textContent = el.querySelector('.gallery-caption').textContent;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+/* ===== Nav Toggle ===== */
+function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+/* ===== Scroll Animation ===== */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+/* ===== ECharts Maps ===== */
+const myChartChina = echarts.init(document.getElementById('chinaMap'));
+const myChartWorld = echarts.init(document.getElementById('worldMap'));
+
+// Resize
+window.addEventListener('resize', () => {
+    myChartChina.resize();
+    myChartWorld.resize();
+});
+
 const visited = [
-  '上海市','西安市','南京市','苏州市','武汉市','锦州市','秦皇岛市','葫芦岛市',
-  '赤峰市','承德市','银川市','开封市','西宁市','绍兴市','榆林市','延安市',
-  '海西蒙古族藏族自治州','海南藏族自治州','海北藏族自治州','七台河市','牡丹江市','哈尔滨市',
-  '无锡市','杭州市','扬州市','景德镇市','九江市','洛阳市','海东市','咸阳市','临汾市','太原市'
+    '上海市','西安市','南京市','苏州市','武汉市','锦州市','秦皇岛市','葫芦岛市',
+    '赤峰市','承德市','银川市','开封市','西宁市','绍兴市','榆林市','延安市',
+    '海西蒙古族藏族自治州','海南藏族自治州','海北藏族自治州','七台河市','牡丹江市','哈尔滨市',
+    '无锡市','杭州市','扬州市','景德镇市','九江市','洛阳市','海东市','咸阳市','临汾市','太原市'
 ];
 
 const MUNICIPALITIES = new Set(['北京市', '上海市', '天津市', '重庆市']);
 
+// China map
 fetch('assets/maps/china_city_full.json')
-  .then(r => {
-    if (!r.ok) throw new Error(`China geojson HTTP ${r.status}`);
-    return r.json();
-  })
-  .then(geoJson => {
-    const cityFeatures = [];
-    const districtByParent = new Map();
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(geoJson => {
+        const cityFeatures = [];
+        const districtByParent = new Map();
 
-    for (const f of geoJson.features) {
-      const p = f.properties || {};
-      const lvl = p.level;
-    if (lvl === 'city') {
-      cityFeatures.push(f);
-    } else if (lvl === 'province' && (p.name === '台湾省' || p.name === '臺灣省')) {
-      cityFeatures.push(f); // 直接塞進同一个 mergedFeatures 即可
-    } else if (lvl === 'district' && p.parent && p.parent.adcode) {
-        const key = String(p.parent.adcode);
-        if (!districtByParent.has(key)) districtByParent.set(key, []);
-        districtByParent.get(key).push(f);
-      }
-    }
-
-    const featureNamesCity = new Set(
-      cityFeatures.map(f => f.properties?.name).filter(Boolean)
-    );
-
-    const visitedExpanded = new Set();
-
-    for (const name of visited) {
-      if (!MUNICIPALITIES.has(name)) {
-        visitedExpanded.add(name);
-        continue;
-      }
-
-      if (featureNamesCity.has(name)) {
-        visitedExpanded.add(name);
-        continue;
-      }
-
-      const parentAdcode =
-        name === '北京市' ? '110000' :
-        name === '上海市' ? '310000' :
-        name === '天津市' ? '120000' :
-        name === '重庆市' ? '500000' : null;
-
-      if (parentAdcode && districtByParent.has(parentAdcode)) {
-        for (const df of districtByParent.get(parentAdcode)) {
-          visitedExpanded.add(df.properties.name);
-        }
-      } else {
-        visitedExpanded.add(name);
-      }
-    }
-
-    const mergedFeatures = [...cityFeatures];
-    for (const parent of ['110000','310000','120000','500000']) {
-      if (districtByParent.has(parent)) {
-        mergedFeatures.push(...districtByParent.get(parent));
-      }
-    }
-
-    echarts.registerMap('china_mixed', {
-      type: 'FeatureCollection',
-      features: mergedFeatures
-    });
-
-    myChartChina.setOption({
-      title: {
-        text: 'China Footprints',
-        left: 'center',
-        top: 20,
-        textStyle: {
-          color: '#2c5282',
-          fontFamily: getComputedStyle(document.body).fontFamily
-        }
-      },
-      tooltip: { trigger: 'item' },
-      series: [{
-        type: 'map',
-        map: 'china_mixed',
-        roam: true ,
-      // 初始视角（你可以微调）
-        center: [104.0, 35.0],
-        zoom: 1.05,
-    
-      // 限制缩放
-        scaleLimit: { min: 1.0, max: 2.2 },
-        label: { show: false },
-        itemStyle: { areaColor: '#f3f3f3', borderColor: '#999' },
-        emphasis: { itemStyle: { areaColor: '#ddd' } },
-        data: Array.from(visitedExpanded).map(n => ({
-          name: n,
-          itemStyle: { areaColor: '#2c5282' }
-        }))
-      }]
-    });
-
-    // 这里调用一次就够了
-    setLang('en');
-  })
-  .catch(err => {
-    console.error('China map load failed:', err);
-    document.getElementById('china-map').innerHTML =
-      '<div style="padding:16px;color:#999;">China map failed to load.</div>';
-  });
-
-
-    fetch('https://raw.githubusercontent.com/apache/echarts-examples/gh-pages/public/data/asset/geo/world.json')
-      .then(r => r.json())
-      .then(geoJson => {
-        echarts.registerMap('world', geoJson);
-    
-        myChartWorld.setOption({
-          title: {
-            text: 'World Footprints',
-            left: 'center',
-            top: 20,
-            textStyle: {
-              color: '#2c5282',
-              fontFamily: getComputedStyle(document.body).fontFamily
+        for (const f of geoJson.features) {
+            const p = f.properties || {};
+            const lvl = p.level;
+            if (lvl === 'city') {
+                cityFeatures.push(f);
+            } else if (lvl === 'province' && (p.name === '台湾省' || p.name === '臺灣省')) {
+                cityFeatures.push(f);
+            } else if (lvl === 'district' && p.parent && p.parent.adcode) {
+                const key = String(p.parent.adcode);
+                if (!districtByParent.has(key)) districtByParent.set(key, []);
+                districtByParent.get(key).push(f);
             }
-          },
-          tooltip: { trigger: 'item' },
-          geo: {
-            map: 'world',
-            roam: true,
-            label: { show: false },
-            itemStyle: { areaColor: '#f3f3f3', borderColor: '#999' },
-            emphasis: { itemStyle: { areaColor: '#ddd' } }
-          },
-          series: [{
-            type: 'effectScatter',
-            coordinateSystem: 'geo',
-            rippleEffect: { brushType: 'stroke' },
-            label: { show: true, position: 'right', formatter: '{b}' },
-            symbolSize: 5,
-            itemStyle: { color: '#2c5282' },
-            data: [
-              { name: 'Shanghai', value: [121.4737, 31.2304] },
-              { name: 'New York', value: [-74.006, 40.7128] }
-            ]
-          }]
-        });
-    // 限制拖动：把 center 限制在一个经纬度范围内（按需要调小范围）
-    const CHINA_CENTER_CLAMP = {
-      lonMin: 73, lonMax: 135,
-      latMin: 18, latMax: 54
-    };
-    
-    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-    
-    myChartChina.off('georoam'); // 防重复绑定
-    myChartChina.on('georoam', () => {
-      const opt = myChartChina.getOption();
-      const s0 = opt.series && opt.series[0];
-      if (!s0) return;
-    
-      const c = (s0.center && s0.center.length === 2) ? s0.center : [104, 35];
-    
-      const clamped = [
-        clamp(c[0], CHINA_CENTER_CLAMP.lonMin, CHINA_CENTER_CLAMP.lonMax),
-        clamp(c[1], CHINA_CENTER_CLAMP.latMin, CHINA_CENTER_CLAMP.latMax),
-      ];
-    
-      // 只有超界才回弹，避免抖动
-      if (clamped[0] !== c[0] || clamped[1] !== c[1]) {
+        }
+
+        const featureNamesCity = new Set(cityFeatures.map(f => f.properties?.name).filter(Boolean));
+        const visitedExpanded = new Set();
+
+        for (const name of visited) {
+            if (!MUNICIPALITIES.has(name)) { visitedExpanded.add(name); continue; }
+            if (featureNamesCity.has(name)) { visitedExpanded.add(name); continue; }
+            const parentAdcode = name === '北京市' ? '110000' : name === '上海市' ? '310000' :
+                name === '天津市' ? '120000' : name === '重庆市' ? '500000' : null;
+            if (parentAdcode && districtByParent.has(parentAdcode)) {
+                for (const df of districtByParent.get(parentAdcode)) visitedExpanded.add(df.properties.name);
+            } else { visitedExpanded.add(name); }
+        }
+
+        const mergedFeatures = [...cityFeatures];
+        for (const parent of ['110000','310000','120000','500000']) {
+            if (districtByParent.has(parent)) mergedFeatures.push(...districtByParent.get(parent));
+        }
+
+        echarts.registerMap('china_mixed', { type: 'FeatureCollection', features: mergedFeatures });
+
         myChartChina.setOption({
-          series: [{ center: clamped }]
-        }, { notMerge: false, lazyUpdate: true });
-      }
+            title: { text: 'China', left: 'center', top: 16, textStyle: { color: '#999', fontSize: 13, fontWeight: 500 } },
+            tooltip: { trigger: 'item' },
+            series: [{
+                type: 'map', map: 'china_mixed', roam: true,
+                center: [104.0, 35.0], zoom: 1.05, scaleLimit: { min: 1.0, max: 2.2 },
+                label: { show: false },
+                itemStyle: { areaColor: '#f5f5f5', borderColor: '#ddd' },
+                emphasis: { itemStyle: { areaColor: '#e0e0e0' }, label: { show: false } },
+                data: Array.from(visitedExpanded).map(n => ({ name: n, itemStyle: { areaColor: '#2d3436' } }))
+            }]
+        });
+    })
+    .catch(err => {
+        console.error('China map failed:', err);
+        document.getElementById('chinaMap').innerHTML = '<div style="padding:20px;color:#999;text-align:center;">Map failed to load</div>';
     });
 
-    
-        setLang('en');
-      });
+// World map
+fetch('https://raw.githubusercontent.com/apache/echarts-examples/gh-pages/public/data/asset/geo/world.json')
+    .then(r => r.json())
+    .then(geoJson => {
+        echarts.registerMap('world', geoJson);
+        myChartWorld.setOption({
+            title: { text: 'World', left: 'center', top: 16, textStyle: { color: '#999', fontSize: 13, fontWeight: 500 } },
+            tooltip: { trigger: 'item' },
+            geo: {
+                map: 'world', roam: true,
+                label: { show: false },
+                itemStyle: { areaColor: '#f5f5f5', borderColor: '#ddd' },
+                emphasis: { itemStyle: { areaColor: '#e0e0e0' }, label: { show: false } }
+            },
+            series: [{
+                type: 'effectScatter', coordinateSystem: 'geo',
+                rippleEffect: { brushType: 'stroke' },
+                label: { show: true, position: 'right', formatter: '{b}', fontSize: 11, color: '#666' },
+                symbolSize: 5,
+                itemStyle: { color: '#2d3436' },
+                data: [
+                    { name: 'Shanghai', value: [121.4737, 31.2304] },
+                    { name: 'New York', value: [-74.006, 40.7128] }
+                ]
+            }]
+        });
+    });
+
+/* Init */
+const savedLang = localStorage.getItem('preferredLang') || 'en';
+setLang(savedLang);
 </script>
 
 </body>
