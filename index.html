@@ -62,11 +62,18 @@
             padding-top: var(--nav-height);
         }
 
-        /* Chinese font class */
+        /* 修改後的版本：增加了對常用英文標籤的覆蓋 */
         body.lang-zh-CN, body.lang-zh-TW {
             font-family: var(--font-cn);
         }
-        body.lang-zh-CN .en-only, body.lang-zh-TW .en-only {
+
+        /* 強制以下類名在中文模式下依然使用英文設計字體 */
+        body.lang-zh-CN .en-only, body.lang-zh-TW .en-only,
+        body.lang-zh-CN .nav-link, body.lang-zh-TW .nav-link,
+        body.lang-zh-CN .pub-btn, body.lang-zh-TW .pub-btn,
+        body.lang-zh-CN .news-date, body.lang-zh-TW .news-date,
+        body.lang-zh-CN .note-meta, body.lang-zh-TW .note-meta,
+        body.lang-zh-CN .weather-temp, body.lang-zh-TW .weather-temp {
             font-family: var(--font-en);
         }
 
