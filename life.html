@@ -49,7 +49,14 @@
             padding-top: var(--nav-height);
         }
         body.lang-zh-CN, body.lang-zh-TW { font-family: var(--font-cn); }
-        body.lang-zh-CN .en-only, body.lang-zh-TW .en-only { font-family: var(--font-en); }
+        
+        /* 強制友鏈、英文標籤、導航和日期使用英文設計字體 */
+        body.lang-zh-CN .en-only, body.lang-zh-TW .en-only,
+        body.lang-zh-CN .friend-link, body.lang-zh-TW .friend-link,
+        body.lang-zh-CN .nav-link, body.lang-zh-TW .nav-link,
+        body.lang-zh-CN .thought-date, body.lang-zh-TW .thought-date {
+            font-family: var(--font-en);
+        }
 
         ::selection { background: rgba(45,52,54,0.12); }
         a { color: var(--text); text-decoration: none; transition: color var(--transition); }

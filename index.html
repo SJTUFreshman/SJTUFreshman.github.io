@@ -62,21 +62,24 @@
             padding-top: var(--nav-height);
         }
 
-        /* 修改後的版本：增加了對常用英文標籤的覆蓋 */
+        /* Chinese font class */
         body.lang-zh-CN, body.lang-zh-TW {
             font-family: var(--font-cn);
         }
-
-        /* 強制以下類名在中文模式下依然使用英文設計字體 */
+        
+        /* 強制以下純英文或主要為英文的區塊使用英文設計字體 */
         body.lang-zh-CN .en-only, body.lang-zh-TW .en-only,
-        body.lang-zh-CN .nav-link, body.lang-zh-TW .nav-link,
-        body.lang-zh-CN .pub-btn, body.lang-zh-TW .pub-btn,
-        body.lang-zh-CN .news-date, body.lang-zh-TW .news-date,
-        body.lang-zh-CN .note-meta, body.lang-zh-TW .note-meta,
-        body.lang-zh-CN .weather-temp, body.lang-zh-TW .weather-temp {
+        body.lang-zh-CN .hero-link, body.lang-zh-TW .hero-link,
+        body.lang-zh-CN .pub-authors, body.lang-zh-TW .pub-authors,
+        body.lang-zh-CN .nav-link, body.lang-zh-TW .nav-link {
             font-family: var(--font-en);
         }
 
+        /* 排除 hero-link 中的地理位置，確保它在翻譯後仍使用中文字體 */
+        body.lang-zh-CN [data-key="hero_location"], 
+        body.lang-zh-TW [data-key="hero_location"] {
+            font-family: var(--font-cn);
+        }
         ::selection {
             background: rgba(45,52,54,0.12);
         }
