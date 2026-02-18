@@ -228,35 +228,52 @@
         .summon-option:hover { background: #636e72; color: #f1c40f; }
         .summon-option:last-child { border-bottom: none; }
 
-        /* 2. 寵物容器 (全螢幕自由定位) */
+        /* 2. 寵物容器 */
         .pet-wrapper {
             position: fixed;
             top: 0; left: 0;
             width: 80px; height: 80px;
             z-index: 9999;
-            /* 移除 pointer-events: none，交給子元素控制 */
-            display: none;
+            display: none; /* 預設隱藏 */
+            pointer-events: none; /* 讓容器不攔截鼠標，由子元素 canvas 攔截 */
         }
+        
+        /* 新增：當有 active 類別時才顯示 */
+        .pet-wrapper.active {
+            display: block !important;
+        }
+
         .pixel-pet-canvas {
             width: 100%; height: 100%;
             image-rendering: pixelated;
             cursor: pointer;
-            pointer-events: auto; /* 確保畫布可點擊 */
+            pointer-events: auto; /* 畫布開啟點擊 */
             position: relative;
             z-index: 2;
         }
+
+        /* 統一右鍵選單樣式 */
         .pet-menu {
             display: none; 
-            position: fixed; /* 必須是 fixed 才能正確出現在鼠標位置 */
+            position: fixed; /* 脫離 pet-wrapper 的 transform 影響 */
             background: #fff; 
             border: 3px solid #2d3436; 
             color: #2d3436;
             min-width: 120px; 
-            z-index: 100001; /* 確保在最上層 */
+            z-index: 100001; 
             font-family: 'Courier New', monospace; 
             box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
             pointer-events: auto;
         }
+        .pet-menu.show { display: block; }
+        .pet-menu-item { 
+            padding: 8px 12px; 
+            cursor: pointer; 
+            border-bottom: 2px solid #eee;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .pet-menu-item:hover { background: #eee; }
 
         /* 3. 氣泡與右鍵選單 */
         .pet-bubble {
@@ -1123,10 +1140,9 @@
 <div class="pet-wrapper" id="pixelPet">
     <div class="pet-bubble" id="petBubble"></div>
     <canvas id="petCanvas" width="64" height="64" class="pixel-pet-canvas"></canvas>
-    
-    <div class="pet-menu" id="petMenu">
-        </div>
 </div>
+
+<div class="pet-menu" id="petMenu"></div>
 
 <script>
 /* ===== i18n Content ===== */
