@@ -180,65 +180,70 @@
             padding: 4px;
         }
 
-        /* ========== Pixel Pet (電子寵物) ========== */
-        .nav-pet-wrapper {
-            position: absolute;
-            bottom: -6px; /* 貼齊導航欄底部 */
-            /* left/right 將由 JS 控制 */
-            width: 48px;
-            height: 48px;
-            z-index: 1002;
-            pointer-events: auto;
-            /* 禁止選取，避免拖曳影響體驗 */
-            user-select: none; 
-            -webkit-user-select: none;
+        /* ========== Desktop Pet (桌寵模式) ========== */
+        .desktop-pet-wrapper {
+            position: fixed; /* 關鍵：固定在視窗，不隨捲動跑掉 */
+            bottom: 0;       /* 吸附在底部地板 */
+            left: 0;         /* 初始位置 (JS 會控制這個) */
+            width: 80px;     /* 再大一點！更可愛 */
+            height: 80px;
+            z-index: 9999;   /* 永遠在最上層 */
+            pointer-events: none; /* 容器不擋滑鼠，只有畫布擋 */
         }
 
         .pixel-pet-canvas {
             width: 100%;
             height: 100%;
             image-rendering: pixelated;
-            cursor: grab; /* 鼠標變成小手 */
+            cursor: grab;
+            pointer-events: auto; /* 讓兔子可以被點擊 */
             transition: transform 0.1s;
         }
         .pixel-pet-canvas:active { cursor: grabbing; transform: scale(0.95); }
 
-        /* 寵物氣泡 */
+        /* 氣泡 (調整位置適配大頭兔) */
         .pet-bubble {
             position: absolute;
-            top: -30px; left: 50%;
+            bottom: 70px;   /* 在頭頂上方 */
+            left: 50%;      /* 置中 */
             transform: translateX(-50%) scale(0);
-            background: #fff; border: 2px solid #2d3436;
-            padding: 4px 8px; border-radius: 8px;
-            font-size: 0.75rem; font-weight: bold;
-            white-space: nowrap; pointer-events: none; opacity: 0;
+            transform-origin: bottom center;
+            
+            background: #fff;
+            border: 2px solid #2d3436;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #2d3436;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1003;
+            z-index: 10000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .pet-bubble.show { transform: translateX(-50%) scale(1); opacity: 1; }
+        .pet-bubble::after { /* 加個小三角形指向兔子 */
+            content: ''; position: absolute; bottom: -6px; left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px 6px 0; border-style: solid;
+            border-color: #2d3436 transparent transparent transparent;
+        }
+        .pet-bubble.show { opacity: 1; transform: translateX(-50%) scale(1); }
 
-        /* 右鍵選單 (Mode Selection) */
+        /* 選單樣式 (保持不變) */
         .pet-menu {
-            display: none;
-            position: absolute;
-            bottom: 50px; left: 0;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid #e8e8e8;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 4px;
-            z-index: 1004;
-            min-width: 100px;
-            backdrop-filter: blur(4px);
+            display: none; position: absolute; bottom: 60px; left: 10px;
+            background: rgba(255,255,255,0.95); border: 1px solid #ddd;
+            border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            padding: 6px; z-index: 10001; min-width: 120px; pointer-events: auto;
         }
         .pet-menu.show { display: block; animation: fadeIn 0.2s; }
         .pet-menu-item {
-            padding: 6px 12px;
-            font-size: 0.8rem; color: #2d3436;
-            cursor: pointer; border-radius: 4px;
-            font-family: var(--font-en);
+            padding: 8px 12px; font-size: 0.85rem; color: #333;
+            cursor: pointer; border-radius: 4px; font-family: sans-serif;
         }
-        .pet-menu-item:hover { background: #f0f0f0; }
+        .pet-menu-item:hover { background: #f5f5f5; }
         .pet-menu-item.active { background: #2d3436; color: #fff; }
 
         /* RWD: 手機版調整位置 */
@@ -874,16 +879,6 @@
                 <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
             </div>
         </div>
-
-        <div class="nav-pet-wrapper" id="navPet">
-            <div class="pet-bubble" id="petBubble">❤️</div>
-            <canvas id="petCanvas" width="32" height="32" class="pixel-pet-canvas"></canvas>
-            
-            <div class="pet-menu" id="petMenu">
-                <div class="pet-menu-item" data-mode="ROAM">Pixel Mode: Roam</div>
-                <div class="pet-menu-item" data-mode="STAY">Pixel Mode: Stay</div>
-            </div>
-        </div>
     </div>
 </nav>
 
@@ -1076,6 +1071,16 @@
     <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
     <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
     <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<div class="desktop-pet-wrapper" id="desktopPet">
+    <div class="pet-bubble" id="petBubble">❤️</div>
+    <canvas id="petCanvas" width="64" height="64" class="pixel-pet-canvas"></canvas>
+    
+    <div class="pet-menu" id="petMenu">
+        <div class="pet-menu-item" data-mode="ROAM">Mode: Roam</div>
+        <div class="pet-menu-item" data-mode="STAY">Mode: Stay</div>
+    </div>
 </div>
 
 <script>
@@ -1374,168 +1379,179 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 /* ===== Init ===== */
 setLang('en');
 
-/* ========== Pixel Pet Logic (Roaming & Prone Update) ========== */
+/* ========== Desktop Pet (Chubby Bunny Version) ========== */
 class PixelPet {
     constructor() {
-        this.wrapper = document.getElementById('navPet');
+        this.wrapper = document.getElementById('desktopPet'); // 注意 ID 變了
         this.canvas = document.getElementById('petCanvas');
         this.bubble = document.getElementById('petBubble');
         this.menu = document.getElementById('petMenu');
         
         if (!this.canvas) return;
-
         this.ctx = this.canvas.getContext('2d');
         
-        // 狀態變數
+        // 狀態
         this.frame = 0;
-        this.mode = localStorage.getItem('petMode') || 'ROAM'; // ROAM (自由) 或 STAY (強制趴)
-        this.state = 'IDLE'; // IDLE, WALK, SLEEP, JUMP, PRONE
+        this.mode = localStorage.getItem('petMode') || 'ROAM';
+        this.state = 'IDLE'; 
         
-        // 位置系統 (相對於 nav-inner)
-        // 初始位置設在右側 (例如 80% 處)
-        this.x = this.wrapper.parentElement.offsetWidth * 0.8;
+        // 位置 (全螢幕)
+        this.x = window.innerWidth - 150; // 初始在右下角
         this.targetX = this.x;
-        this.speed = 1.5;
-        this.direction = 1; // 1 = 右, -1 = 左
+        this.speed = 2; // 走快一點點
+        this.direction = 1;
 
-        // 時間控制
         this.lastActionTime = Date.now();
-        this.nextRoamTime = Date.now() + 3000;
+        this.nextRoamTime = Date.now() + 1000;
 
         this.initEvents();
-        this.updatePosition(); // 初始化位置
+        this.updatePosition();
         this.startLoop();
         this.updateMenuUI();
     }
 
-    // 更新 CSS 位置
     updatePosition() {
-        this.wrapper.style.left = `${this.x}px`;
-        // 修正翻轉：往左走時翻轉畫布
-        this.canvas.style.transform = `scaleX(${this.direction})`;
+        // 使用 transform 來移動，效能更好，且不影響排版
+        this.wrapper.style.left = '0px'; 
+        this.wrapper.style.transform = `translateX(${this.x}px)`;
+        
+        // 轉向 (翻轉 Canvas)
+        if (this.direction === -1) {
+            this.canvas.style.transform = 'scaleX(1)'; // 面向左 (原本畫法就是朝左)
+        } else {
+            this.canvas.style.transform = 'scaleX(-1)'; // 面向右
+        }
     }
 
-    /* --- 繪圖核心 --- */
-    drawPixel(x, y, color) {
-        this.ctx.fillStyle = color;
-        this.ctx.fillRect(Math.round(x), Math.round(y), 1, 1);
-    }
-
+    /* --- 繪圖核心：軟萌胖兔 (Chubby Style) --- */
     drawBunny(yOffset, frame) {
         const ctx = this.ctx;
-        ctx.clearRect(0, 0, 32, 32);
+        ctx.clearRect(0, 0, 64, 64); // 清空畫布
 
-        // 如果是「強制趴下」模式，使用專屬畫法
-        if (this.state === 'PRONE') {
-            this.drawProne(frame);
+        // 趴下模式 (變成一灘麻糬)
+        if (this.state === 'PRONE' || this.mode === 'STAY') {
+            this.drawMoChi(frame);
             return;
         }
 
-        // 一般站立/走路畫法
-        let bx = 10;
-        let by = 16 + yOffset;
-        
-        // 走路時腳步動畫
-        let legOffset = 0;
+        // 基準點
+        const cx = 32;
+        let by = 58 + yOffset; // 腳底貼近 Canvas 底部
+
+        // 走路的 Q 彈感
         if (this.state === 'WALK') {
-            legOffset = (Math.floor(frame / 5) % 2 === 0) ? 1 : 0;
-            by -= Math.abs(Math.sin(frame / 2)) * 1.5; // 走路跳動
+            by -= Math.abs(Math.sin(frame / 3)) * 3;
         }
 
-        // 耳朵動態
-        const earL = (Math.floor(frame / 20) % 2 === 0) ? 0 : 1;
-        const earR = (Math.floor(frame / 20) % 2 !== 0) ? 0 : 1;
-
-        // 畫耳朵
+        // 1. 耳朵 (寬寬長長)
         ctx.fillStyle = '#fff';
-        ctx.fillRect(bx + 1, by - 6 + earL, 3, 5);
-        ctx.fillRect(bx + 8, by - 6 + earR, 3, 5);
-        ctx.fillStyle = '#ffb8b8';
-        ctx.fillRect(bx + 2, by - 5 + earL, 1, 3);
-        ctx.fillRect(bx + 9, by - 5 + earR, 1, 3);
-
-        // 畫身體
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(bx, by, 12, 10);
-        ctx.fillRect(bx - 1, by + 4, 1, 4); // 臉頰
-        ctx.fillRect(bx + 12, by + 4, 1, 4);
-        ctx.fillRect(bx + 1, by - 1, 10, 1); // 頭頂
-
-        // 表情
-        if (this.state === 'SLEEP') {
-            ctx.fillStyle = '#2d3436'; // 睡覺眼
-            ctx.fillRect(bx + 2, by + 4, 3, 1);
-            ctx.fillRect(bx + 7, by + 4, 3, 1);
-        } else {
-            ctx.fillStyle = '#1a1a1a'; // 正常眼
-            ctx.fillRect(bx + 2, by + 3, 2, 3);
-            ctx.fillRect(bx + 8, by + 3, 2, 3);
-            ctx.fillStyle = '#fff'; // 眼神光
-            ctx.fillRect(bx + 3, by + 3, 1, 1); 
-            ctx.fillRect(bx + 9, by + 3, 1, 1);
-        }
-
-        // 腮紅 & 嘴巴
-        ctx.fillStyle = 'rgba(255, 118, 117, 0.4)';
-        ctx.fillRect(bx, by + 6, 2, 1);
-        ctx.fillRect(bx + 10, by + 6, 2, 1);
+        // 左耳 (稍微向外撇)
+        this.drawRect(cx - 14, by - 48, 8, 20); 
+        // 右耳
+        this.drawRect(cx + 6, by - 48, 8, 20);
         
+        // 粉紅內耳
+        ctx.fillStyle = '#ffb8b8';
+        this.drawRect(cx - 12, by - 45, 4, 12);
+        this.drawRect(cx + 8, by - 45, 4, 12);
+
+        // 2. 身體 (大圓球)
+        ctx.fillStyle = '#fff';
+        // 身體主體 (寬度 28，高度 24) -> 胖乎乎
+        this.drawRect(cx - 14, by - 26, 28, 24); 
+        // 臉頰加寬 (更圓潤)
+        this.drawRect(cx - 16, by - 22, 32, 16); 
+
+        // 3. 手手 (小圓手)
+        ctx.fillStyle = '#fff';
+        if (this.state === 'WALK') {
+            // 走路擺手
+            const swing = Math.floor(frame / 5) % 2 === 0 ? 0 : 1;
+            this.drawRect(cx - 8, by - 14 + swing, 6, 6);
+            this.drawRect(cx + 4, by - 14 - swing, 6, 6);
+        } else {
+            this.drawRect(cx - 10, by - 14, 6, 6);
+            this.drawRect(cx + 4, by - 14, 6, 6);
+        }
+
+        // 4. 腳 (短短的)
+        ctx.fillStyle = '#f0f0f0'; // 稍微深一點
+        if (this.state === 'WALK') {
+            const step = Math.floor(frame / 5) % 2 === 0 ? 0 : 2;
+            this.drawRect(cx - 12, by - 4, 8, 4);
+            this.drawRect(cx + 4, by - 4, 8, 4);
+        } else {
+            this.drawRect(cx - 12, by - 2, 8, 4);
+            this.drawRect(cx + 4, by - 2, 8, 4);
+        }
+
+        // 5. 五官 (集中在臉中央，顯得可愛)
+        const faceY = by - 20;
+        
+        if (this.state === 'SLEEP') {
+            ctx.fillStyle = '#2d3436';
+            this.drawRect(cx - 10, faceY, 6, 2); // - 
+            this.drawRect(cx + 4, faceY, 6, 2);  // -
+        } else {
+            // 眼睛 (大一點)
+            ctx.fillStyle = '#2d3436';
+            this.drawRect(cx - 10, faceY - 2, 4, 6); 
+            this.drawRect(cx + 6, faceY - 2, 4, 6);
+            
+            // 眼神光
+            ctx.fillStyle = '#fff';
+            this.drawRect(cx - 9, faceY - 1, 2, 2);
+            this.drawRect(cx + 7, faceY - 1, 2, 2);
+        }
+
+        // 鼻子
         if (this.state !== 'SLEEP') {
             ctx.fillStyle = '#ff7675';
-            ctx.fillRect(bx + 5, by + 6, 2, 1);
+            this.drawRect(cx - 2, faceY + 2, 4, 2);
         }
 
-        // 腳 (走路時動態)
-        ctx.fillStyle = '#eee';
-        if (this.state === 'WALK') {
-            ctx.fillRect(bx + 2, by + 10, 3, 1 + legOffset);
-            ctx.fillRect(bx + 7, by + 10, 3, 1 - legOffset);
-        } else {
-            ctx.fillRect(bx + 1, by + 10, 10, 1); // 站立陰影
-        }
+        // 腮紅 (粉粉的)
+        ctx.fillStyle = 'rgba(255, 118, 117, 0.3)';
+        this.drawRect(cx - 16, faceY + 2, 4, 4);
+        this.drawRect(cx + 12, faceY + 2, 4, 4);
     }
 
-    // 專屬：趴在導航欄上的畫法
-    drawProne(frame) {
+    /* --- 趴下變麻糬 (Mochi Mode) --- */
+    drawMoChi(frame) {
         const ctx = this.ctx;
-        const bx = 10;
-        const by = 20; // 趴得比較低
-        
-        // 身體 (壓扁一點)
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(bx, by, 12, 8); 
-        ctx.fillRect(bx - 1, by + 2, 14, 4); // 寬臉
-        
-        // 耳朵 (垂下來一點)
-        ctx.fillRect(bx - 1, by - 4, 3, 5);
-        ctx.fillRect(bx + 10, by - 4, 3, 5);
-        ctx.fillStyle = '#ffb8b8';
-        ctx.fillRect(bx, by - 3, 1, 3);
-        ctx.fillRect(bx + 11, by - 3, 1, 3);
+        const cx = 32;
+        const by = 60;
 
-        // 手手 (搭在邊緣最重要！)
-        // 我們畫兩個小圓手搭在最下面 (y=28左右)
+        // 身體 (壓扁)
         ctx.fillStyle = '#fff';
-        ctx.fillRect(bx - 2, by + 6, 4, 3); // 左手
-        ctx.fillRect(bx + 10, by + 6, 4, 3); // 右手
-        
-        // 手的陰影 (讓它看起來是掛著的)
-        ctx.fillStyle = '#ddd';
-        ctx.fillRect(bx - 2, by + 9, 4, 1);
-        ctx.fillRect(bx + 10, by + 9, 4, 1);
+        this.drawRect(cx - 18, by - 16, 36, 16); // 扁扁的
+        this.drawRect(cx - 14, by - 20, 28, 4);  // 頂部弧度
 
-        // 睡著的臉
+        // 耳朵 (垂在兩邊)
+        ctx.fillStyle = '#fff';
+        this.drawRect(cx - 22, by - 14, 6, 12);
+        this.drawRect(cx + 16, by - 14, 6, 12);
+
+        // 表情 (慵懶)
         ctx.fillStyle = '#2d3436';
-        ctx.fillRect(bx + 2, by + 4, 3, 1); // 左眼 -
-        ctx.fillRect(bx + 7, by + 4, 3, 1); // 右眼 -
-        
-        // 呼吸動畫
-        const breathe = Math.floor(frame / 30) % 2 === 0 ? 0 : 1;
-        if (breathe) {
-            ctx.fillStyle = 'rgba(255,255,255,0.5)'; // 呼氣泡泡? 
-            // 簡單點，讓頭微動就好
-            ctx.clearRect(0, 0, 32, 5); // 清除頂部防止殘影
+        if (Math.floor(frame / 60) % 4 === 0) {
+             // 偶爾眨眼
+             this.drawRect(cx - 10, by - 10, 6, 2);
+             this.drawRect(cx + 4, by - 10, 6, 2);
+        } else {
+             this.drawRect(cx - 10, by - 10, 6, 2);
+             this.drawRect(cx + 4, by - 10, 6, 2);
         }
+        
+        // 腮紅
+        ctx.fillStyle = '#ffb8b8';
+        this.drawRect(cx - 16, by - 8, 4, 2);
+        this.drawRect(cx + 12, by - 8, 4, 2);
+    }
+
+    // 輔助畫矩形 (因為用了很多 rect)
+    drawRect(x, y, w, h) {
+        this.ctx.fillRect(Math.round(x), Math.round(y), w, h);
     }
 
     /* --- 行為邏輯 --- */
@@ -1544,98 +1560,85 @@ class PixelPet {
             this.frame++;
             const now = Date.now();
 
-            // 1. 模式判斷
             if (this.mode === 'STAY') {
-                this.state = 'PRONE'; // 強制趴下
-                // 趴下時不走動，位置固定在最後的位置或特定位置
+                this.state = 'PRONE';
             } else {
-                // ROAM 模式邏輯
-                if (this.state === 'PRONE') this.state = 'IDLE'; // 從趴下恢復
+                if (this.state === 'PRONE') this.state = 'IDLE';
 
-                // 閒置一段時間後，開始亂走
+                // 自由走動邏輯
                 if (this.state === 'IDLE' && now > this.nextRoamTime) {
                     this.pickNewLocation();
                 }
-                
-                // 閒置太久睡覺
-                if (this.state === 'IDLE' && now - this.lastActionTime > 8000) {
+                if (this.state === 'IDLE' && now - this.lastActionTime > 6000) {
                     this.state = 'SLEEP';
                 }
             }
 
-            // 2. 移動邏輯 (僅在 WALK 狀態)
+            // 移動處理
             if (this.state === 'WALK') {
                 const dist = this.targetX - this.x;
-                if (Math.abs(dist) < 2) {
+                if (Math.abs(dist) < 4) { // 接近目標
                     this.x = this.targetX;
                     this.state = 'IDLE';
                     this.lastActionTime = now;
-                    this.nextRoamTime = now + 2000 + Math.random() * 5000;
+                    this.nextRoamTime = now + 2000 + Math.random() * 8000;
                 } else {
                     const step = dist > 0 ? this.speed : -this.speed;
                     this.x += step;
-                    this.direction = dist > 0 ? 1 : -1;
+                    this.direction = dist > 0 ? -1 : 1; // 修正方向判定
                 }
                 this.updatePosition();
             }
 
-            // 3. 繪圖
-            if (this.state !== 'JUMP') { // JUMP 由動畫函數自己畫
+            if (this.state !== 'JUMP') {
                 this.drawBunny(0, this.frame);
             }
-
         }, 50);
     }
 
     pickNewLocation() {
         this.state = 'WALK';
-        // 獲取導航欄寬度
-        const maxW = this.wrapper.parentElement.offsetWidth - 60; // 減去邊距
-        // 隨機選一個新位置 (限制在 20% ~ 90% 區域，避開左邊 Logo)
-        this.targetX = Math.max(200, Math.random() * maxW);
+        // 可以在整個視窗寬度走動 (留一點邊距)
+        const maxW = window.innerWidth - 80;
+        this.targetX = Math.max(20, Math.random() * maxW);
     }
 
     initEvents() {
-        // 點擊：互動 (跳)
+        // 點擊互動
         this.canvas.addEventListener('click', (e) => {
-            e.stopPropagation(); // 防止觸發選單關閉
+            e.stopPropagation();
             if (this.state === 'PRONE') {
-                // 如果趴著被點，嚇一跳醒來
                 this.state = 'IDLE';
-                this.mode = 'ROAM'; // 暫時喚醒? 或者僅僅是動畫
-                this.showBubble('💤 -> ❗');
+                this.mode = 'ROAM';
+                this.showBubble('Huh?');
                 this.jump();
             } else {
                 this.jump();
-                this.showBubble(['❤️', 'Hey!', '🥕'][Math.floor(Math.random()*3)]);
+                const texts = ['❤️', 'Piu!', '(>w<)', 'Boing!'];
+                this.showBubble(texts[Math.floor(Math.random()*texts.length)]);
             }
         });
 
-        // 右鍵：打開選單
+        // 右鍵選單
         this.canvas.addEventListener('contextmenu', (e) => {
-            e.preventDefault(); // 阻止瀏覽器默認選單
+            e.preventDefault();
             this.menu.classList.add('show');
         });
-
-        // 點擊其他地方關閉選單
         document.addEventListener('click', () => {
             this.menu.classList.remove('show');
         });
-
-        // 選單選項點擊
         this.menu.querySelectorAll('.pet-menu-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const newMode = item.dataset.mode;
-                this.setMode(newMode);
+                this.setMode(item.dataset.mode);
                 this.menu.classList.remove('show');
             });
         });
 
-        // 視窗改變大小時重置位置防止溢出
+        // 視窗調整時修正位置
         window.addEventListener('resize', () => {
-            if (this.x > this.wrapper.parentElement.offsetWidth) {
-                this.x = this.wrapper.parentElement.offsetWidth - 50;
+            if (this.x > window.innerWidth) {
+                this.x = window.innerWidth - 100;
                 this.updatePosition();
             }
         });
@@ -1643,35 +1646,28 @@ class PixelPet {
 
     setMode(newMode) {
         this.mode = newMode;
-        localStorage.setItem('petMode', newMode); // 記住用戶選擇
+        localStorage.setItem('petMode', newMode);
         this.updateMenuUI();
-        
         if (newMode === 'STAY') {
             this.state = 'PRONE';
-            this.showBubble('Gooood night...');
+            this.showBubble('Zzz...');
         } else {
             this.state = 'IDLE';
-            this.showBubble('Let\'s go!');
+            this.showBubble('Let\'s Play!');
             this.lastActionTime = Date.now();
         }
     }
 
     updateMenuUI() {
         this.menu.querySelectorAll('.pet-menu-item').forEach(item => {
-            if (item.dataset.mode === this.mode) {
-                item.classList.add('active');
-                item.innerHTML = `✓ ${item.dataset.mode === 'ROAM' ? 'Roam (Free)' : 'Stay (Prone)'}`;
-            } else {
-                item.classList.remove('active');
-                item.innerHTML = item.dataset.mode === 'ROAM' ? 'Roam (Free)' : 'Stay (Prone)';
-            }
+            item.classList.toggle('active', item.dataset.mode === this.mode);
         });
     }
 
     showBubble(text) {
         this.bubble.textContent = text;
         this.bubble.classList.add('show');
-        setTimeout(() => this.bubble.classList.remove('show'), 1500);
+        setTimeout(() => this.bubble.classList.remove('show'), 2000);
     }
 
     jump() {
@@ -1679,12 +1675,13 @@ class PixelPet {
         const oldState = this.state;
         this.state = 'JUMP';
         let h = 0; let dir = 1;
+        // Q 彈跳躍
         const loop = setInterval(() => {
-            h += 0.5 * dir;
-            if (h > 4) dir = -1;
+            h += 1 * dir;
+            if (h > 12) dir = -1; // 跳高一點
             if (h <= 0) {
                 h = 0; clearInterval(loop);
-                this.state = oldState === 'PRONE' ? 'IDLE' : 'IDLE'; // 跳完恢復站立
+                this.state = 'IDLE';
             }
             this.drawBunny(-h, this.frame);
         }, 20);
