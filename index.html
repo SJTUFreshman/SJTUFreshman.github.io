@@ -1451,28 +1451,28 @@ class PixelPet {
 
         // 配色表
         this.palettes = {
-            // Mochi: 灰綠色調 (參考實物圖) + 像素圖結構
+            // Mochi: 參考圖片中的棕白相間配色
             mochi: { 
-                outline: '#2f3542', 
-                fur: '#a4b0be', // 淺灰
-                furDark: '#747d8c', 
+                outline: '#21181b', 
+                fur: '#b07d57',    // 棕色
+                furDark: '#8d6041', 
                 white: '#ffffff', 
-                pink: '#ff7f50' 
+                pink: '#f190a7'    // 粉色鼻子與耳內
             },
-            // AppCopilot: 藍色 + 拳擊手套
             copilot: { 
                 outline: '#1e3799', 
                 body: '#4a69bd', 
                 screen: '#dff9fb', 
-                glove: '#0c2461', // 深藍手套
+                glove: '#0c2461',
                 gloveLight: '#38ada9' 
             },
-            // Timo: 綠書 + 博士帽 + 黃頁
+            // Timo: 參考 TeachMaster 圖標
             timo: { 
-                outline: '#006266', 
-                cover: '#27ae60', // 綠皮
-                page: '#f1c40f',  // 黃頁
-                cap: '#2d3436'    // 黑帽
+                outline: '#00332a', // 深綠輪廓
+                cover: '#27ae60',   // 綠色書脊
+                page: '#fef5c5',    // 淡黃色封面 (重要特徵)
+                cap: '#004d40',     // 博士帽深綠色
+                tassel: '#00221a'   // 帽穗
             }
         };
 
@@ -1572,74 +1572,62 @@ class PixelPet {
         this.ctx.restore();
     }
 
-    /* === Mochi: 灰兔 (還原提供的像素圖) === */
     drawMochi(frame, pose) {
         const c = this.palettes.mochi;
         const cx = 32; let cy = 54;
 
-        if (pose === 'SPLOOT') { // 趴在導航欄 (Sploot)
-            // 身體壓扁
-            this.rect(cx-14, cy-12, 28, 12, c.fur);
-            this.rect(cx-14, cy-12, 28, 12, null, c.outline);
-            // 耳朵垂下 (關鍵特徵)
-            this.rect(cx-18, cy-10, 6, 10, c.fur);
-            this.rect(cx-18, cy-10, 6, 10, null, c.outline);
-            this.rect(cx+12, cy-10, 6, 10, c.fur);
-            this.rect(cx+12, cy-10, 6, 10, null, c.outline);
-            // 臉
-            this.rect(cx-8, cy-10, 16, 10, c.white);
+        if (pose === 'SPLOOT') { // 趴下 (對應參考圖右下)
+            // 耳朵向兩側攤開
+            this.rect(cx-24, cy-12, 14, 6, c.fur); 
+            this.rect(cx-24, cy-12, 14, 6, null, c.outline);
+            this.rect(cx+10, cy-12, 14, 6, c.fur);
+            this.rect(cx+10, cy-12, 14, 6, null, c.outline);
+            // 身體
+            this.rect(cx-14, cy-14, 28, 14, c.fur);
+            this.rect(cx-14, cy-14, 28, 14, null, c.outline);
+            // 臉部白色
+            this.rect(cx-6, cy-14, 12, 14, c.white);
             // 睡眼
-            this.rect(cx-6, cy-6, 4, 1, c.outline);
-            this.rect(cx+2, cy-6, 4, 1, c.outline);
-            // 小手手搭在邊緣
-            this.rect(cx-8, cy, 4, 4, c.white);
-            this.rect(cx+4, cy, 4, 4, c.white);
+            this.rect(cx-8, cy-8, 4, 1, c.outline);
+            this.rect(cx+4, cy-8, 4, 1, c.outline);
             return;
         }
 
-        if (pose === 'RUN') {
-            cy -= Math.abs(Math.sin(frame/3)) * 4; // 跳躍
-            // 奔跑時耳朵向後
-            this.rect(cx-12, cy-28, 8, 16, c.fur); // 耳
-            this.rect(cx-12, cy-28, 8, 16, null, c.outline);
-            // 身體前傾
-            this.rect(cx-10, cy-16, 20, 14, c.fur);
-            this.rect(cx-10, cy-16, 20, 14, null, c.outline);
-            // 白肚
-            this.rect(cx-4, cy-14, 10, 10, c.white);
+        if (pose === 'RUN') { // 奔跑 (對應參考圖右上)
+            cy -= Math.abs(Math.sin(frame/3)) * 6;
+            // 耳朵向後飄
+            this.rect(cx-18, cy-24, 12, 6, c.fur);
+            this.rect(cx-18, cy-24, 12, 6, null, c.outline);
+            // 傾斜身體
+            this.rect(cx-12, cy-18, 22, 16, c.fur);
+            this.rect(cx-12, cy-18, 22, 16, null, c.outline);
+            this.rect(cx+4, cy-18, 8, 16, c.white); // 臉部白色
         } else {
-            // STAND (還原像素圖左側)
-            // 兩隻長耳朵豎起來
-            this.rect(cx-8, cy-38, 6, 18, c.fur); // 左耳
-            this.rect(cx-8, cy-38, 6, 18, null, c.outline);
-            this.rect(cx-6, cy-36, 2, 12, c.pink); // 內耳
+            // STAND (對應參考圖左側)
+            // 長耳朵
+            this.rect(cx-8, cy-44, 6, 22, c.fur); 
+            this.rect(cx-8, cy-44, 6, 22, null, c.outline);
+            this.rect(cx-6, cy-40, 2, 14, c.pink); // 耳內粉色
+            this.rect(cx+2, cy-44, 6, 22, c.fur);
+            this.rect(cx+2, cy-44, 6, 22, null, c.outline);
+            this.rect(cx+4, cy-40, 2, 14, c.pink);
 
-            this.rect(cx+2, cy-38, 6, 18, c.fur); // 右耳
-            this.rect(cx+2, cy-38, 6, 18, null, c.outline);
-            this.rect(cx+4, cy-36, 2, 12, c.pink);
-
-            // 身體
-            this.rect(cx-10, cy-20, 20, 18, c.fur);
-            this.rect(cx-10, cy-20, 20, 18, null, c.outline);
+            // 身體與腿
+            this.rect(cx-12, cy-22, 24, 20, c.fur);
+            this.rect(cx-12, cy-22, 24, 20, null, c.outline);
             
-            // 白胸口 (Mochi 特徵)
-            this.rect(cx-6, cy-18, 12, 14, c.white);
+            // 臉部與胸口白色 (垂直條紋)
+            this.rect(cx-5, cy-28, 10, 26, c.white);
 
-            // 頭 (比身體大一點)
-            this.rect(cx-11, cy-28, 22, 14, c.fur);
-            this.rect(cx-11, cy-28, 22, 14, null, c.outline);
-            
-            // 面部白斑
-            this.rect(cx-4, cy-28, 8, 14, c.white); 
+            // 頭部
+            this.rect(cx-11, cy-30, 22, 16, c.fur);
+            this.rect(cx-11, cy-30, 22, 16, null, c.outline);
+            this.rect(cx-5, cy-30, 10, 16, c.white); // 臉部白條
             
             // 五官
-            this.rect(cx-7, cy-24, 2, 4, c.outline); // 眼
-            this.rect(cx+5, cy-24, 2, 4, c.outline);
-            this.rect(cx-1, cy-20, 2, 2, c.pink); // 鼻
-
-            // 手
-            this.rect(cx-6, cy-12, 3, 4, c.white);
-            this.rect(cx+3, cy-12, 3, 4, c.white);
+            this.rect(cx-6, cy-22, 3, 4, c.outline); // 眼
+            this.rect(cx+3, cy-22, 3, 4, c.outline);
+            this.rect(cx-1, cy-18, 2, 2, c.pink); // 鼻
         }
     }
 
@@ -1682,42 +1670,52 @@ class PixelPet {
         this.rect(cx+4, cy-2, 6, 4, c.glove);
     }
 
-    /* === Timo: 綠書 + 博士帽 + 點讚 === */
+    /* === Timo: TeachMaster 書本助手 === */
     drawTimo(frame, pose) {
         const c = this.palettes.timo;
         const cx = 32; let cy = 54;
-        if (pose === 'RUN') cy -= Math.abs(Math.sin(frame/3)) * 3;
+        if (pose === 'RUN') cy -= Math.abs(Math.sin(frame/3)) * 4;
 
-        // 博士帽 (Cap)
-        const capY = cy - 42;
-        this.rect(cx-16, capY, 32, 4, c.cap); // 帽簷
-        this.rect(cx-10, capY-8, 20, 8, c.cap); // 帽頂
-        this.rect(cx+14, capY, 2, 12, '#f1c40f'); // 流蘇
+        // 1. 博士帽 (方形帽頂 + 流蘇)
+        this.rect(cx-18, cy-44, 36, 4, c.cap); // 帽簷
+        this.rect(cx-12, cy-52, 24, 8, c.cap); // 帽身
+        this.rect(cx+16, cy-44, 2, 12, c.outline); // 流蘇
 
-        // 書本體
-        this.rect(cx-14, cy-36, 28, 34, c.cover); // 綠皮
-        this.rect(cx-14, cy-36, 28, 34, null, c.outline);
+        // 2. 書本主體
+        this.rect(cx-14, cy-38, 28, 36, c.page);  // 淡黃色封面
+        this.rect(cx-18, cy-38, 6, 36, c.cover);  // 綠色書脊
+        this.rect(cx-18, cy-38, 32, 36, null, c.outline); // 總輪廓
+
+        // 書脊裝飾橫條 (圖片中的白色線條)
+        this.rect(cx-17, cy-30, 4, 2, '#fff');
+        this.rect(cx-17, cy-10, 4, 2, '#fff');
         
-        // 書頁 (側面)
-        this.rect(cx+8, cy-34, 4, 30, c.page); // 黃頁
-        
-        // 臉 (單眼眨眼 wink)
-        const fy = cy - 20;
-        this.rect(cx-6, fy, 4, 4, c.cap); // 左眼
-        if (frame % 60 < 10) {
-            this.rect(cx+4, fy+2, 4, 1, c.cap); // 眨眼
+        // 3. 臉部 (眨眼 Wink)
+        const fy = cy - 22;
+        this.rect(cx-4, fy, 4, 4, c.outline); // 左眼 (黑)
+        if (frame % 80 < 15) {
+            this.rect(cx+6, fy+2, 5, 1, c.outline); // 右眼眨眼
         } else {
-            this.rect(cx+4, fy, 4, 4, c.cap); // 睜眼
+            this.rect(cx+6, fy, 4, 4, c.outline); // 右眼睜開
         }
-        this.rect(cx-2, fy+6, 4, 2, '#fff'); // 嘴
+        // 微笑嘴巴
+        this.rect(cx-1, fy+8, 6, 2, c.outline);
+        this.rect(cx-3, fy+6, 2, 2, '#ffb6c1'); // 腮紅
+        this.rect(cx+9, fy+6, 2, 2, '#ffb6c1');
 
-        // 大拇指點讚 (關鍵特徵)
-        const handY = cy - 16;
-        // 手掌
-        this.rect(cx-20, handY, 6, 6, c.cover);
-        // 拇指 (黃色)
-        this.rect(cx-20, handY-4, 2, 4, '#f1c40f');
-        this.rect(cx-18, handY, 4, 6, '#f1c40f'); 
+        // 4. 手臂與點讚 (Thumbs Up)
+        const armY = cy - 16;
+        if (pose === 'ACT' || pose === 'STAND') {
+            // 右手點讚 (綠色手臂 + 淡黃色手掌)
+            this.rect(cx+14, armY, 6, 4, c.cover); 
+            this.rect(cx+20, armY-4, 6, 8, c.page); // 手掌
+            this.rect(cx+20, armY-8, 2, 4, c.page); // 大拇指
+            this.rect(cx+20, armY-4, 6, 8, null, c.outline);
+        } else {
+            // 跑步時手縮起來
+            this.rect(cx+14, armY+4, 4, 4, c.cover);
+            this.rect(cx-20, armY+4, 4, 4, c.cover);
+        }
     }
 
     // 通用繪圖輔助
