@@ -230,25 +230,33 @@
 
         /* 2. 寵物容器 (全螢幕自由定位) */
         .pet-wrapper {
-            position: fixed; /* 關鍵：基於視窗定位 */
-            top: 0; left: 0; /* 初始原點，具體位置由 JS 的 transform 控制 */
-            width: 80px; height: 80px; /* 稍微大一點 */
+            position: fixed;
+            top: 0; left: 0;
+            width: 80px; height: 80px;
             z-index: 9999;
-            pointer-events: none; /* 容器本身不擋鼠標 */
+            /* 移除 pointer-events: none，交給子元素控制 */
             display: none;
         }
-        .pet-wrapper.active { display: block; }
-
-        /* 畫布 (核心交互區) */
         .pixel-pet-canvas {
             width: 100%; height: 100%;
             image-rendering: pixelated;
             cursor: pointer;
-            pointer-events: auto; /* 關鍵：確保右鍵能點到！ */
-            transition: transform 0.1s; /* 僅用於點擊縮放，移動由 JS 控制 */
-            filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.2));
+            pointer-events: auto; /* 確保畫布可點擊 */
+            position: relative;
+            z-index: 2;
         }
-        .pixel-pet-canvas:active { transform: scale(0.9); }
+        .pet-menu {
+            display: none; 
+            position: fixed; /* 必須是 fixed 才能正確出現在鼠標位置 */
+            background: #fff; 
+            border: 3px solid #2d3436; 
+            color: #2d3436;
+            min-width: 120px; 
+            z-index: 100001; /* 確保在最上層 */
+            font-family: 'Courier New', monospace; 
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+            pointer-events: auto;
+        }
 
         /* 3. 氣泡與右鍵選單 */
         .pet-bubble {
@@ -917,12 +925,6 @@
                 </div>
                 
                 </div>
-
-            <div class="pet-wrapper" id="pixelPet">
-                <div class="pet-bubble" id="petBubble"></div>
-                <canvas id="petCanvas" width="80" height="80" class="pixel-pet-canvas"></canvas>
-                <div class="pet-menu" id="petInteractMenu"></div>
-            </div>
         </div>
     </div>
 </nav>
@@ -1825,17 +1827,18 @@ class PixelPet {
             });
         });
 
-        // 2. 寵物右鍵選單 (修復)
         this.canvas.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            this.showInteractMenu(e.clientX, e.clientY);
+            // 使用 interactMenu 或 petMenu (取決於你 HTML 的 ID)
+            const menu = document.getElementById('petInteractMenu') || document.getElementById('petMenu');
+            this.showInteractMenu(e.clientX, e.clientY, menu);
         });
 
-        // 點擊空白關閉
-        document.addEventListener('click', () => {
+        // 點擊頁面其他地方關閉選單
+        document.addEventListener('mousedown', (e) => {
+            if (this.interactMenu) this.interactMenu.classList.remove('show');
             this.summonMenu.classList.remove('show');
-            this.interactMenu.classList.remove('show');
         });
 
         // 點擊寵物：跳一下
@@ -1847,39 +1850,34 @@ class PixelPet {
         });
     }
 
-    showInteractMenu(x, y) {
-        const menu = this.interactMenu;
-        menu.innerHTML = ''; // 清空舊的
-        
-        // 選項 A: Roam/Stay 切換
+    showInteractMenu(x, y, menu) {
+        if (!menu) return;
+        this.interactMenu = menu; // 保持引用更新
+        menu.innerHTML = ''; 
+
+        // 1. 休息選項
+        const btnDismiss = document.createElement('div');
+        btnDismiss.className = 'pet-menu-item';
+        btnDismiss.style.color = '#e74c3c';
+        btnDismiss.innerText = '❌ Go Home';
+        btnDismiss.onclick = (e) => {
+            e.stopPropagation();
+            this.despawn();
+            menu.classList.remove('show');
+        };
+        menu.appendChild(btnDismiss);
+
+        // 2. 模式切換
         const btnMode = document.createElement('div');
         btnMode.className = 'pet-menu-item';
         btnMode.innerText = this.mode === 'ROAM' ? '🛌 Stay' : '🏃 Roam';
         btnMode.onclick = (e) => {
             e.stopPropagation();
             if (this.mode === 'ROAM') this.setStayMode();
-            else {
-                this.mode = 'ROAM';
-                this.state = 'WALK';
-                this.targetY = window.innerHeight - 100; // 先落地
-                this.showBubble('Free!');
-            }
+            else this.mode = 'ROAM';
             menu.classList.remove('show');
         };
         menu.appendChild(btnMode);
-
-        // 選項 B: 互動 (Mochi 投喂)
-        if (this.char === 'mochi') {
-            const btnFeed = document.createElement('div');
-            btnFeed.className = 'pet-menu-item';
-            btnFeed.innerText = '🥕 Feed';
-            btnFeed.onclick = (e) => {
-                e.stopPropagation();
-                this.startFeeding();
-                menu.classList.remove('show');
-            };
-            menu.appendChild(btnFeed);
-        }
 
         menu.style.left = x + 'px';
         menu.style.top = y + 'px';
