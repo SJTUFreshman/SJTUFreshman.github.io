@@ -208,6 +208,24 @@
         .pet-summon-btn:active::before { transform: translateY(1px); }
 
         /* 召喚選單 (像素風) */
+Gemini said
+大哥，我看了一下你目前的代碼，發現「召喚不出來」主要有兩個病灶：
+
+CSS 動畫死結：你在 .summon-menu 的 @keyframes openMenu 中使用了 height: auto。CSS 是沒辦法對 auto 進行補間動畫的，這會導致選單高度可能卡在 0，讓你根本點不到裡面的選項。
+
+座標偏移與畫布尺寸不匹配：你的畫布 HTML 定義是 64x64，但 JS 繪圖邏輯裡卻用了 80x80 的清除範圍和翻轉偏移（translate(80, 0)）。這會導致當寵物面向左邊時，它會直接被畫到畫布外面，看起來就像「消失」了。
+
+z-index 競爭：選單被放在了導航欄內部，而寵物容器在外部，這在某些瀏覽器下會因為層級上下文（Stacking Context）導致點擊事件失效。
+
+以下是針對你給出的 index.html 需要修改的具體代碼塊：
+
+1. 修改 CSS 選單與顯示邏輯
+修正動畫並確保「召喚」類別優先級。
+
+需要修改的代碼塊 (約 189-209 行)：
+
+CSS
+        /* 修改前的代碼 */
         .summon-menu {
             display: none; position: absolute;
             top: 45px; right: -10px;
@@ -221,13 +239,6 @@
         .summon-menu.show { display: block; animation: openMenu 0.2s steps(4); }
         @keyframes openMenu { from { height: 0; opacity: 0; } to { height: auto; opacity: 1; } }
 
-        .summon-option {
-            padding: 10px 12px; cursor: pointer; border-bottom: 2px solid #555;
-            font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 8px;
-        }
-        .summon-option:hover { background: #636e72; color: #f1c40f; }
-        .summon-option:last-child { border-bottom: none; }
-
         /* 2. 寵物容器 */
         .pet-wrapper {
             position: fixed;
@@ -237,8 +248,44 @@
             display: none; /* 預設隱藏 */
             pointer-events: none; /* 讓容器不攔截鼠標，由子元素 canvas 攔截 */
         }
+
+        /* 修改後的代碼 */
+        .summon-menu {
+            display: none; position: absolute;
+            top: 45px; right: -10px;
+            background: #2d3436; border: 4px solid #fff; outline: 4px solid #2d3436;
+            color: #fff; padding: 0;
+            min-width: 140px; z-index: 10006;
+            font-family: 'Courier New', monospace;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+            image-rendering: pixelated;
+            overflow: hidden; /* 防止內容溢出 */
+        }
+        .summon-menu.show { display: block; animation: openMenu 0.2s ease-out; }
+ 
+        /* 修正動畫：從 scale 或 opacity 入手，避開無法動畫的 height: auto */
+        @keyframes openMenu { 
+            from { transform: translateY(-10px); opacity: 0; } 
+            to { transform: translateY(0); opacity: 1; } 
+        }
+
+        .summon-option {
+            padding: 10px 12px; cursor: pointer; border-bottom: 2px solid #555;
+            font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 8px;
+        }
+        .summon-option:hover { background: #636e72; color: #f1c40f; }
+        .summon-option:last-child { border-bottom: none; }
+
+        .pet-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 80px; height: 80px;
+            z-index: 99999; /* 提高層級 */
+            display: none;
+            pointer-events: none;
+        }
         
-        /* 新增：當有 active 類別時才顯示 */
+        /* 強制顯示 */
         .pet-wrapper.active {
             display: block !important;
         }
@@ -1523,12 +1570,14 @@ class PixelPet {
         
         // 從按鈕位置出生
         const rect = this.summonBtn.getBoundingClientRect();
-        this.x = rect.left;
+        // 考慮到 wrapper 是 80px，我們稍微調整初始 X 讓它中心對齊寶箱
+        this.x = rect.left - 24; 
         this.y = rect.top;
         
-        // 第一個動作：跳出來
-        this.targetX = rect.left + (Math.random() < 0.5 ? -100 : 100);
-        this.targetY = rect.top + 100;
+        // 第一個動作：跳出來（確保不會跳出螢幕左邊）
+        const offset = Math.random() < 0.5 ? -120 : 120;
+        this.targetX = Math.max(20, Math.min(window.innerWidth - 100, rect.left + offset));
+        this.targetY = rect.top + 80;
         this.state = 'WALK';
         
         this.showBubble('Ready!');
@@ -1578,7 +1627,7 @@ class PixelPet {
         
         // 翻轉處理
         if (this.direction === -1) {
-            this.ctx.translate(80, 0);
+            this.ctx.translate(64, 0);
             this.ctx.scale(-1, 1);
         }
 
