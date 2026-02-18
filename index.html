@@ -180,6 +180,62 @@
             padding: 4px;
         }
 
+        /* ========== Pixel Pet (電子寵物) ========== */
+        .nav-pet-wrapper {
+            position: absolute;
+            bottom: 0; /* 讓它站在導航欄底部 */
+            right: 200px; /* 預設位置，在語言切換按鈕左側 */
+            width: 48px;
+            height: 48px;
+            z-index: 1002;
+            pointer-events: auto;
+        }
+
+        .pixel-pet-canvas {
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated; /* 關鍵：保持像素風銳利，不模糊 */
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .pixel-pet-canvas:active {
+            transform: scale(0.9); /* 點擊時輕微縮放 */
+        }
+
+        /* 寵物說話/冒愛心的氣泡 */
+        .pet-bubble {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            background: #fff;
+            border: 2px solid var(--text);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .pet-bubble.show {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+
+        /* RWD: 手機版調整位置 */
+        @media (max-width: 768px) {
+            .nav-pet-wrapper {
+                right: 60px; /* 手機版放在漢堡選單左側 */
+                bottom: -4px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
         /* ========== Main Layout ========== */
         .container {
             max-width: var(--max-width);
@@ -784,6 +840,13 @@
 <nav class="nav">
     <div class="nav-inner">
         <a href="#" class="nav-brand en-only">Runde Yang</a>
+        <div class="nav-links" id="navLinks">
+            </div>
+
+        <div class="nav-pet-wrapper" id="navPet">
+            <div class="pet-bubble" id="petBubble">❤️</div>
+            <canvas id="petCanvas" width="32" height="32" class="pixel-pet-canvas"></canvas>
+
         <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
             <i class="fas fa-bars"></i>
         </button>
@@ -1290,6 +1353,169 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 /* ===== Init ===== */
 setLang('en');
+
+/* ========== Pixel Pet Logic ========== */
+class PixelPet {
+    constructor() {
+        this.canvas = document.getElementById('petCanvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.bubble = document.getElementById('petBubble');
+        this.frame = 0;
+        this.state = 'IDLE'; // IDLE, SLEEP, JUMP
+        this.lastActionTime = Date.now();
+        
+        // 像素繪圖設定 (1個"像素" = 畫布上的 1x1 單位，但在 CSS 放大顯示)
+        this.colors = {
+            outline: '#2d3436',
+            white: '#ffffff',
+            pink: '#ff7675',
+            eye: '#000000'
+        };
+
+        this.initEvents();
+        this.startLoop();
+    }
+
+    // 繪製像素點 Helper
+    drawPixel(x, y, color) {
+        this.ctx.fillStyle = color;
+        this.ctx.fillRect(x, y, 1, 1);
+    }
+
+    // 繪製兔子 (基於 32x32 網格)
+    drawBunny(yOffset, frameIndex) {
+        const c = this.colors;
+        const ctx = this.ctx;
+        ctx.clearRect(0, 0, 32, 32);
+        
+        // 身體基準點
+        let bx = 10; 
+        let by = 16 + yOffset;
+
+        // 根據幀數微微晃動耳朵
+        let earWiggle = (frameIndex % 2 === 0) ? 0 : 1;
+
+        // --- 繪製身體 (簡單的像素畫法) ---
+        ctx.fillStyle = c.white;
+        // 頭 + 身體
+        ctx.fillRect(bx, by, 12, 10); 
+        ctx.fillRect(bx + 1, by - 2, 10, 2); // 頭頂
+        
+        // 耳朵 (左)
+        ctx.fillStyle = c.white;
+        ctx.fillRect(bx + 1, by - 6 + earWiggle, 3, 4);
+        ctx.fillStyle = c.pink; // 內耳
+        ctx.fillRect(bx + 2, by - 5 + earWiggle, 1, 3);
+        
+        // 耳朵 (右)
+        ctx.fillStyle = c.white;
+        ctx.fillRect(bx + 8, by - 6 - earWiggle, 3, 4);
+        ctx.fillStyle = c.pink;
+        ctx.fillRect(bx + 9, by - 5 - earWiggle, 1, 3);
+
+        // 眼睛
+        ctx.fillStyle = c.eye;
+        if (this.state === 'SLEEP') {
+            // 睡覺眼 (一條線)
+            ctx.fillRect(bx + 2, by + 3, 2, 1);
+            ctx.fillRect(bx + 8, by + 3, 2, 1);
+        } else {
+            // 正常眼
+            ctx.fillRect(bx + 3, by + 3, 2, 2);
+            ctx.fillRect(bx + 8, by + 3, 2, 2);
+            // 眼神光
+            ctx.fillStyle = c.white;
+            ctx.fillRect(bx + 4, by + 3, 1, 1);
+            ctx.fillRect(bx + 9, by + 3, 1, 1);
+        }
+
+        // 腮紅
+        ctx.fillStyle = c.pink;
+        ctx.fillRect(bx + 1, by + 5, 2, 1);
+        ctx.fillRect(bx + 9, by + 5, 2, 1);
+
+        // 鼻子
+        ctx.fillStyle = c.outline;
+        ctx.fillRect(bx + 5, by + 5, 2, 1);
+
+        // 描邊 (選用，讓它更清楚)
+        // 為了極簡風格，這裡只畫底部陰影
+        ctx.fillStyle = 'rgba(0,0,0,0.1)';
+        ctx.fillRect(bx + 1, by + 10, 10, 1);
+    }
+
+    initEvents() {
+        // 點擊互動
+        this.canvas.addEventListener('click', () => {
+            this.jump();
+            this.showBubble(['❤️', 'Hi!', '🥕', '✨'][Math.floor(Math.random() * 4)]);
+        });
+
+        // 滑鼠懸停：醒來
+        this.canvas.addEventListener('mouseenter', () => {
+            this.lastActionTime = Date.now();
+            if (this.state === 'SLEEP') this.state = 'IDLE';
+        });
+    }
+
+    jump() {
+        if (this.state === 'JUMP') return;
+        this.state = 'JUMP';
+        let jumpHeight = 0;
+        let speed = 0.5;
+        let goingUp = true;
+        
+        // 簡單的跳躍動畫邏輯
+        const jumpInterval = setInterval(() => {
+            if (goingUp) {
+                jumpHeight += speed;
+                if (jumpHeight >= 4) goingUp = false;
+            } else {
+                jumpHeight -= speed;
+                if (jumpHeight <= 0) {
+                    jumpHeight = 0;
+                    this.state = 'IDLE';
+                    this.lastActionTime = Date.now();
+                    clearInterval(jumpInterval);
+                }
+            }
+            this.drawBunny(-jumpHeight, this.frame);
+        }, 30);
+    }
+
+    showBubble(text) {
+        this.bubble.textContent = text;
+        this.bubble.classList.add('show');
+        setTimeout(() => {
+            this.bubble.classList.remove('show');
+        }, 1500);
+    }
+
+    startLoop() {
+        setInterval(() => {
+            this.frame++;
+            const now = Date.now();
+
+            // 閒置超過 5 秒就睡覺
+            if (now - this.lastActionTime > 5000 && this.state !== 'JUMP') {
+                this.state = 'SLEEP';
+            }
+
+            // 如果不在跳躍狀態，就執行呼吸/待機動畫
+            if (this.state !== 'JUMP') {
+                // 呼吸效果：每 20 幀身體下降 1 像素
+                let breathe = (this.frame % 20 < 10) ? 0 : 1;
+                this.drawBunny(breathe, Math.floor(this.frame / 10));
+            }
+        }, 100); // 100ms 更新一次畫面
+    }
+}
+
+// 啟動寵物
+document.addEventListener('DOMContentLoaded', () => {
+    new PixelPet();
+});
+
 </script>
 
 </body>
