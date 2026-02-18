@@ -182,7 +182,7 @@
 
         /* ========== RPG Pixel Pet System (Final Fix) ========== */
         
-        /* 1. RPG 召喚入口 (像素寶箱風格) */
+        /* ========== RPG Pixel Pet System (修復版) ========== */
         .pet-summon-btn {
             position: relative;
             width: 32px; height: 32px;
@@ -190,53 +190,51 @@
             cursor: pointer;
             image-rendering: pixelated;
             z-index: 1005;
-            /* 利用 box-shadow 畫一個像素寶箱/方塊 */
             background-color: transparent;
         }
         
-        /* 寶箱閉合狀態 (CSS Pixel Art) */
         .pet-summon-btn::before {
             content: ''; position: absolute; top: 4px; left: 4px; width: 24px; height: 20px;
-            background: #e67e22; /* 箱體 */
-            box-shadow: 
-                inset 0 0 0 2px #d35400, /* 內陰影 */
-                0 -4px 0 -2px #f1c40f,   /* 鎖扣 */
-                0 0 0 2px #2d3436;       /* 外描邊 */
+            background: #e67e22;
+            box-shadow: inset 0 0 0 2px #d35400, 0 -4px 0 -2px #f1c40f, 0 0 0 2px #2d3436;
             transition: transform 0.1s;
         }
         .pet-summon-btn:hover::before { transform: translateY(-2px); }
         .pet-summon-btn:active::before { transform: translateY(1px); }
 
-        /* 召喚選單 (像素風) */
-Gemini said
-大哥，我看了一下你目前的代碼，發現「召喚不出來」主要有兩個病灶：
-
-CSS 動畫死結：你在 .summon-menu 的 @keyframes openMenu 中使用了 height: auto。CSS 是沒辦法對 auto 進行補間動畫的，這會導致選單高度可能卡在 0，讓你根本點不到裡面的選項。
-
-座標偏移與畫布尺寸不匹配：你的畫布 HTML 定義是 64x64，但 JS 繪圖邏輯裡卻用了 80x80 的清除範圍和翻轉偏移（translate(80, 0)）。這會導致當寵物面向左邊時，它會直接被畫到畫布外面，看起來就像「消失」了。
-
-z-index 競爭：選單被放在了導航欄內部，而寵物容器在外部，這在某些瀏覽器下會因為層級上下文（Stacking Context）導致點擊事件失效。
-
-以下是針對你給出的 index.html 需要修改的具體代碼塊：
-
-1. 修改 CSS 選單與顯示邏輯
-修正動畫並確保「召喚」類別優先級。
-
-需要修改的代碼塊 (約 189-209 行)：
-
-CSS
-        /* 修改前的代碼 */
+        /* 修復：移除 height: auto 動畫，改用 scale/opacity */
         .summon-menu {
-            display: none; position: absolute;
-            top: 45px; right: -10px;
-            background: #2d3436; border: 4px solid #fff; outline: 4px solid #2d3436;
+            display: none; 
+            position: absolute;
+            top: 45px; right: 0; /* 右對齊避免超出 */
+            background: #2d3436; 
+            border: 4px solid #fff; 
+            outline: 4px solid #2d3436;
             color: #fff; padding: 0;
-            min-width: 140px; z-index: 10006;
+            min-width: 140px; 
+            z-index: 10006;
             font-family: 'Courier New', monospace;
             box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
             image-rendering: pixelated;
+            /* 關鍵：初始狀態 */
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.2s, transform 0.2s;
         }
-        .summon-menu.show { display: block; animation: openMenu 0.2s steps(4); }
+
+        /* 顯示狀態 */
+        .summon-menu.show { 
+            display: block; 
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .summon-option {
+            padding: 10px 12px; cursor: pointer; border-bottom: 2px solid #555;
+            font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 8px;
+        }
+        .summon-option:hover { background: #636e72; color: #f1c40f; }
+        .summon-option:last-child { border-bottom: none; }
         @keyframes openMenu { from { height: 0; opacity: 0; } to { height: auto; opacity: 1; } }
 
         /* 2. 寵物容器 */
@@ -1612,22 +1610,27 @@ class PixelPet {
         };
     }
 
-    /* --- 2. 繪圖核心 (像素級還原) --- */
+    /* --- 2. 繪圖核心 (修復動作優先級) --- */
     draw(frame) {
-        this.ctx.clearRect(0, 0, 80, 80);
+        this.ctx.clearRect(0, 0, 80, 80); // 清除畫布
         if (this.state === 'HIDDEN') return;
 
-        // 根據模式選擇動作
+        // 邏輯修正：動作判定優先級
         let pose = 'STAND';
-        if (this.mode === 'STAY') pose = 'SPLOOT'; // 趴下
-        else if (this.state === 'WALK' || this.state === 'RUN_HOME') pose = 'RUN';
-        else if (this.state === 'INTERACT') pose = 'ACT';
+
+        if (this.state === 'WALK' || this.state === 'RUN_HOME') {
+            pose = 'RUN'; // 如果在走或跑，強制用 RUN
+        } else if (this.state === 'INTERACT') {
+            pose = 'ACT';
+        } else if (this.mode === 'STAY' && this.state === 'IDLE') {
+            pose = 'SPLOOT'; // 只有在「原地」且「Stay模式」才趴下
+        }
 
         this.ctx.save();
         
         // 翻轉處理
         if (this.direction === -1) {
-            this.ctx.translate(64, 0);
+            this.ctx.translate(64, 0); // 確保翻轉基準點正確
             this.ctx.scale(-1, 1);
         }
 
@@ -1644,20 +1647,29 @@ class PixelPet {
         const c = this.palettes.mochi;
         const cx = 32; let cy = 54;
 
-        if (pose === 'SPLOOT') { // 趴下 (對應參考圖右下)
-            // 耳朵向兩側攤開
-            this.rect(cx-24, cy-12, 14, 6, c.fur); 
-            this.rect(cx-24, cy-12, 14, 6, null, c.outline);
-            this.rect(cx+10, cy-12, 14, 6, c.fur);
-            this.rect(cx+10, cy-12, 14, 6, null, c.outline);
-            // 身體
-            this.rect(cx-14, cy-14, 28, 14, c.fur);
-            this.rect(cx-14, cy-14, 28, 14, null, c.outline);
+        if (pose === 'SPLOOT') { // 趴下 (休息模式)
+            // 身體變扁
+            this.rect(cx-14, cy-10, 28, 14, c.fur);
+            this.rect(cx-14, cy-10, 28, 14, null, c.outline);
+            
+            // 耳朵向兩側垂下 (非常放鬆的樣子)
+            this.rect(cx-26, cy-8, 12, 6, c.fur); // 左耳
+            this.rect(cx-26, cy-8, 12, 6, null, c.outline);
+            this.rect(cx+14, cy-8, 12, 6, c.fur); // 右耳
+            this.rect(cx+14, cy-8, 12, 6, null, c.outline);
+
             // 臉部白色
-            this.rect(cx-6, cy-14, 12, 14, c.white);
-            // 睡眼
-            this.rect(cx-8, cy-8, 4, 1, c.outline);
-            this.rect(cx+4, cy-8, 4, 1, c.outline);
+            this.rect(cx-6, cy-10, 12, 14, c.white);
+            
+            // 閉眼 (休息)
+            this.rect(cx-7, cy-5, 4, 1, c.outline);
+            this.rect(cx+3, cy-5, 4, 1, c.outline);
+            
+            // 呼吸動畫 (ZZZ)
+            if (Math.floor(frame / 60) % 2 === 0) {
+                 this.rect(cx+12, cy-18, 1, 1, '#2d3436');
+                 this.rect(cx+14, cy-20, 1, 1, '#2d3436');
+            }
             return;
         }
 
