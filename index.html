@@ -1453,11 +1453,11 @@ class PixelPet {
         this.palettes = {
             // Mochi: 灰綠色調 (參考實物圖) + 像素圖結構
             mochi: { 
-                outline: '#2f3542', 
-                fur: '#a4b0be', // 淺灰
-                furDark: '#747d8c', 
+                outline: '#21181b', 
+                brown: '#b07d57', 
+                brownDark: '#8d6041', 
                 white: '#ffffff', 
-                pink: '#ff7f50' 
+                pink: '#f190a7' 
             },
             // AppCopilot: 藍色 + 拳擊手套
             copilot: { 
@@ -1469,10 +1469,11 @@ class PixelPet {
             },
             // Timo: 綠書 + 博士帽 + 黃頁
             timo: { 
-                outline: '#006266', 
-                cover: '#27ae60', // 綠皮
-                page: '#f1c40f',  // 黃頁
-                cap: '#2d3436'    // 黑帽
+                outline: '#00332a', 
+                spine: '#27ae60', 
+                pages: '#fef5c5', 
+                cap: '#004d40',
+                black: '#000000'
             }
         };
 
@@ -1577,69 +1578,46 @@ class PixelPet {
         const c = this.palettes.mochi;
         const cx = 32; let cy = 54;
 
-        if (pose === 'SPLOOT') { // 趴在導航欄 (Sploot)
-            // 身體壓扁
-            this.rect(cx-14, cy-12, 28, 12, c.fur);
-            this.rect(cx-14, cy-12, 28, 12, null, c.outline);
-            // 耳朵垂下 (關鍵特徵)
-            this.rect(cx-18, cy-10, 6, 10, c.fur);
-            this.rect(cx-18, cy-10, 6, 10, null, c.outline);
-            this.rect(cx+12, cy-10, 6, 10, c.fur);
-            this.rect(cx+12, cy-10, 6, 10, null, c.outline);
-            // 臉
-            this.rect(cx-8, cy-10, 16, 10, c.white);
-            // 睡眼
-            this.rect(cx-6, cy-6, 4, 1, c.outline);
-            this.rect(cx+2, cy-6, 4, 1, c.outline);
-            // 小手手搭在邊緣
-            this.rect(cx-8, cy, 4, 4, c.white);
-            this.rect(cx+4, cy, 4, 4, c.white);
+        if (pose === 'SPLOOT') { // 趴下 (設計圖左下)
+            this.rect(cx-20, cy-10, 40, 10, c.brown); // 身體
+            this.rect(cx-20, cy-10, 40, 10, null, c.outline);
+            this.rect(cx-14, cy-10, 20, 10, c.white); // 白腹部
+            this.rect(cx-24, cy-8, 12, 8, c.brown); // 左垂耳
+            this.rect(cx-24, cy-8, 12, 8, null, c.outline);
+            this.rect(cx+12, cy-8, 12, 8, c.brown); // 右垂耳
+            this.rect(cx+12, cy-8, 12, 8, null, c.outline);
             return;
         }
 
-        if (pose === 'RUN') {
-            cy -= Math.abs(Math.sin(frame/3)) * 4; // 跳躍
-            // 奔跑時耳朵向後
-            this.rect(cx-12, cy-28, 8, 16, c.fur); // 耳
-            this.rect(cx-12, cy-28, 8, 16, null, c.outline);
-            // 身體前傾
-            this.rect(cx-10, cy-16, 20, 14, c.fur);
-            this.rect(cx-10, cy-16, 20, 14, null, c.outline);
-            // 白肚
-            this.rect(cx-4, cy-14, 10, 10, c.white);
-        } else {
-            // STAND (還原像素圖左側)
-            // 兩隻長耳朵豎起來
-            this.rect(cx-8, cy-38, 6, 18, c.fur); // 左耳
-            this.rect(cx-8, cy-38, 6, 18, null, c.outline);
-            this.rect(cx-6, cy-36, 2, 12, c.pink); // 內耳
-
-            this.rect(cx+2, cy-38, 6, 18, c.fur); // 右耳
-            this.rect(cx+2, cy-38, 6, 18, null, c.outline);
-            this.rect(cx+4, cy-36, 2, 12, c.pink);
-
+        if (pose === 'RUN') { // 奔跑跳躍 (設計圖右上)
+            cy -= Math.abs(Math.sin(frame/3)) * 6;
+            this.rect(cx-14, cy-20, 28, 16, c.brown); // 身體
+            this.rect(cx-14, cy-20, 28, 16, null, c.outline);
+            this.rect(cx-2, cy-20, 16, 12, c.white); // 臉部側白斑
+            this.rect(cx-18, cy-30, 20, 8, c.brown); // 耳朵向後飄
+            this.rect(cx-18, cy-30, 20, 8, null, c.outline);
+        } else { // IDLE / ACT (設計圖左上與右下)
+            // 耳朵 (垂直垂下)
+            this.rect(cx-14, cy-32, 6, 18, c.brown); 
+            this.rect(cx-14, cy-32, 6, 18, null, c.outline);
+            this.rect(cx+8, cy-32, 6, 18, c.brown);
+            this.rect(cx+8, cy-32, 6, 18, null, c.outline);
             // 身體
-            this.rect(cx-10, cy-20, 20, 18, c.fur);
-            this.rect(cx-10, cy-20, 20, 18, null, c.outline);
+            this.rect(cx-10, cy-18, 20, 16, c.brown);
+            this.rect(cx-10, cy-18, 20, 16, null, c.outline);
+            this.rect(cx-6, cy-18, 12, 16, c.white); // 胸腹白
+            // 頭部
+            this.rect(cx-10, cy-34, 20, 16, c.brown);
+            this.rect(cx-10, cy-34, 20, 16, null, c.outline);
+            this.rect(cx-4, cy-34, 8, 16, c.white); // 臉心白
+            this.rect(cx-6, cy-28, 2, 4, c.outline); // 眼
+            this.rect(cx+4, cy-28, 2, 4, c.outline);
+            this.rect(cx-1, cy-24, 2, 2, c.pink); // 鼻
             
-            // 白胸口 (Mochi 特徵)
-            this.rect(cx-6, cy-18, 12, 14, c.white);
-
-            // 頭 (比身體大一點)
-            this.rect(cx-11, cy-28, 22, 14, c.fur);
-            this.rect(cx-11, cy-28, 22, 14, null, c.outline);
-            
-            // 面部白斑
-            this.rect(cx-4, cy-28, 8, 14, c.white); 
-            
-            // 五官
-            this.rect(cx-7, cy-24, 2, 4, c.outline); // 眼
-            this.rect(cx+5, cy-24, 2, 4, c.outline);
-            this.rect(cx-1, cy-20, 2, 2, c.pink); // 鼻
-
-            // 手
-            this.rect(cx-6, cy-12, 3, 4, c.white);
-            this.rect(cx+3, cy-12, 3, 4, c.white);
+            if (pose === 'ACT') { // 餵食胡蘿蔔 (設計圖右下)
+                this.rect(cx-2, cy-18, 4, 10, '#e67e22'); // 胡蘿蔔
+                this.rect(cx-1, cy-20, 2, 3, '#27ae60'); // 纓青
+            }
         }
     }
 
@@ -1686,50 +1664,51 @@ class PixelPet {
     drawTimo(frame, pose) {
         const c = this.palettes.timo;
         const cx = 32; let cy = 54;
-        if (pose === 'RUN') cy -= Math.abs(Math.sin(frame/3)) * 3;
 
-        // 博士帽 (Cap)
-        const capY = cy - 42;
+        if (pose === 'SPLOOT') { // OPEN 展開模式 (設計圖右下)
+            this.rect(cx-20, cy-24, 40, 24, c.spine); // 展開封面
+            this.rect(cx-20, cy-24, 40, 24, null, c.outline);
+            this.rect(cx-18, cy-22, 16, 20, c.pages); // 左頁
+            this.rect(cx+2, cy-22, 16, 20, c.pages); // 右頁
+            // 書上的文字像素點
+            this.rect(cx+4, cy-18, 8, 2, c.outline);
+            this.rect(cx+4, cy-14, 10, 2, c.outline);
+            return;
+        }
+
+        if (pose === 'RUN') cy -= Math.abs(Math.sin(frame/3)) * 4;
+
+        // 學士帽 (Timo 標誌)
+        const capY = cy - 44;
         this.rect(cx-16, capY, 32, 4, c.cap); // 帽簷
-        this.rect(cx-10, capY-8, 20, 8, c.cap); // 帽頂
-        this.rect(cx+14, capY, 2, 12, '#f1c40f'); // 流蘇
+        this.rect(cx-10, capY-6, 20, 6, c.cap); // 帽斗
+        this.rect(cx+14, capY, 2, 10, c.black); //  tassels
 
         // 書本體
-        this.rect(cx-14, cy-36, 28, 34, c.cover); // 綠皮
-        this.rect(cx-14, cy-36, 28, 34, null, c.outline);
-        
-        // 書頁 (側面)
-        this.rect(cx+8, cy-34, 4, 30, c.page); // 黃頁
-        
-        // 臉 (單眼眨眼 wink)
-        const fy = cy - 20;
-        this.rect(cx-6, fy, 4, 4, c.cap); // 左眼
-        if (frame % 60 < 10) {
-            this.rect(cx+4, fy+2, 4, 1, c.cap); // 眨眼
-        } else {
-            this.rect(cx+4, fy, 4, 4, c.cap); // 睜眼
-        }
-        this.rect(cx-2, fy+6, 4, 2, '#fff'); // 嘴
+        this.rect(cx-12, cy-36, 24, 34, c.spine); 
+        this.rect(cx-12, cy-36, 24, 34, null, c.outline);
+        this.rect(cx+8, cy-34, 4, 30, c.pages); // 側邊書頁
 
-        // 大拇指點讚 (關鍵特徵)
-        const handY = cy - 16;
-        // 手掌
-        this.rect(cx-20, handY, 6, 6, c.cover);
-        // 拇指 (黃色)
-        this.rect(cx-20, handY-4, 2, 4, '#f1c40f');
-        this.rect(cx-18, handY, 4, 6, '#f1c40f'); 
-    }
-
-    // 通用繪圖輔助
-    rect(x, y, w, h, fill, stroke) {
-        if (fill) {
-            this.ctx.fillStyle = fill;
-            this.ctx.fillRect(Math.round(x), Math.round(y), w, h);
-        }
-        if (stroke) {
-            this.ctx.strokeStyle = stroke;
-            this.ctx.lineWidth = 2;
-            this.ctx.strokeRect(Math.round(x), Math.round(y), w, h);
+        // 臉部與肢體
+        const fy = cy - 22;
+        if (pose === 'ACT') { // WINK 模式 (設計圖左下)
+            this.rect(cx-5, fy, 2, 4, c.outline); // 左眼
+            this.rect(cx+3, fy+2, 4, 1, c.outline); // 眨眼
+            this.rect(cx-18, cy-18, 6, 2, c.black); // 手臂
+            this.rect(cx-22, cy-22, 4, 4, c.spine); // 大拇指點讚
+        } else { // IDLE / RUN
+            this.rect(cx-5, fy, 2, 4, c.outline); 
+            this.rect(cx+3, fy, 2, 4, c.outline);
+            if (pose === 'RUN') {
+                this.rect(cx-3, fy+6, 6, 3, c.outline); // 開口笑
+                // 奔跑的細長手腳 (設計圖右上)
+                this.rect(cx-18, cy-24, 6, 2, c.black); // 左手
+                this.rect(cx+12, cy-24, 6, 2, c.black); // 右手
+                this.rect(cx-8, cy, 2, 4, c.black); // 腿
+                this.rect(cx+6, cy, 2, 4, c.black);
+            } else {
+                this.rect(cx-3, fy+6, 6, 1, c.outline); // 微笑
+            }
         }
     }
 
