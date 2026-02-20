@@ -881,81 +881,6 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #bbb; }
-        /* ========== SVG 桌寵樣式與骨骼動畫 ========== */
-        .pixel-pet-svg {
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            pointer-events: auto;
-            overflow: visible;
-        }
-
-        /* 變量：控制動畫原點 */
-        .pet-body-group { transform-origin: center bottom; }
-        .pet-ear-left { transform-origin: center bottom; }
-        .pet-ear-right { transform-origin: center bottom; }
-        .pet-shadow { transform-origin: center center; }
-
-        /* 1. 亂逛/走路狀態 (Walk) */
-        .state-walk .pet-body-group {
-            animation: bounceBody 0.4s infinite alternate ease-in-out;
-        }
-        .state-walk .pet-shadow {
-            animation: shadowScale 0.4s infinite alternate ease-in-out;
-        }
-        .state-walk .pet-ear-left { animation: earFlop 0.4s infinite alternate ease-in-out; }
-        .state-walk .pet-ear-right { animation: earFlop 0.4s infinite alternate ease-in-out 0.1s; }
-
-        /* 2. 吃東西狀態 (Eat) */
-        .state-eat .pet-hands {
-            animation: eatMotion 0.2s infinite alternate steps(2);
-        }
-        .state-eat .pet-mouth {
-            transform: scaleY(1.5);
-            fill: #d68d89; /* 張嘴露出粉色 */
-        }
-
-        /* 3. 睡覺/融化狀態 (Sleep) */
-        .state-sleep .pet-body-group {
-            transform: scaleY(0.4) scaleX(1.3) translateY(20px); /* 完美模擬麻糬融化 */
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-        .state-sleep .pet-ear {
-            transform: rotate(-70deg) translateY(10px); /* 耳朵耷拉下來 */
-            transition: transform 0.5s;
-        }
-        .state-sleep .pet-ear-right { transform: rotate(70deg) translateY(10px); }
-
-        /* 動畫關鍵幀 */
-        @keyframes bounceBody {
-            0% { transform: translateY(0) scaleY(1) scaleX(1); }
-            100% { transform: translateY(-10px) scaleY(1.1) scaleX(0.95); }
-        }
-        @keyframes shadowScale {
-            0% { transform: scaleX(1); opacity: 0.15; }
-            100% { transform: scaleX(0.7); opacity: 0.05; }
-        }
-        @keyframes earFlop {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(-15deg); }
-        }
-        @keyframes eatMotion {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-4px); }
-        }
-
-        /* 食物樣式 */
-        .pet-food {
-            position: fixed;
-            font-size: 24px;
-            pointer-events: none;
-            z-index: 9998;
-            animation: dropFood 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        @keyframes dropFood {
-            from { transform: translateY(-50px) scale(0); opacity: 0; }
-            to { transform: translateY(0) scale(1); opacity: 1; }
-        }
     </style>
 </head>
 <body class="lang-en">
@@ -993,41 +918,11 @@
                 
                 </div>
 
-                <div class="pet-wrapper" id="pixelPet">
+            <div class="pet-wrapper" id="pixelPet">
                 <div class="pet-bubble" id="petBubble"></div>
-                
-                <svg id="petSvg" class="pixel-pet-svg" viewBox="0 0 64 64" shape-rendering="crispEdges">
-                    <ellipse cx="32" cy="60" rx="20" ry="4" fill="rgba(0,0,0,0.15)" class="pet-shadow" />
-                    
-                    <g class="pet-body-group">
-                        <path d="M16 30 h32 v26 h-32 z" fill="#8e9e82" stroke="#3b3838" stroke-width="2"/>
-                        <path d="M22 36 h20 v20 h-20 z" fill="#e8e4c9" />
-                        
-                        <g class="pet-ear pet-ear-left">
-                            <path d="M20 10 h8 v20 h-8 z" fill="#8e9e82" stroke="#3b3838" stroke-width="2"/>
-                            <path d="M22 14 h4 v12 h-4 z" fill="#d68d89"/>
-                        </g>
-                        <g class="pet-ear pet-ear-right">
-                            <path d="M36 10 h8 v20 h-8 z" fill="#8e9e82" stroke="#3b3838" stroke-width="2"/>
-                            <path d="M38 14 h4 v12 h-4 z" fill="#d68d89"/>
-                        </g>
-                        
-                        <rect x="24" y="30" width="4" height="6" fill="#3b3838" />
-                        <rect x="36" y="30" width="4" height="6" fill="#3b3838" />
-                        <rect x="18" y="34" width="6" height="4" fill="#d68d89" opacity="0.8"/>
-                        <rect x="40" y="34" width="6" height="4" fill="#d68d89" opacity="0.8"/>
-                        <path d="M30 36 h4 v2 h-4 z" fill="#3b3838" class="pet-mouth"/>
-                        
-                        <g class="pet-hands">
-                            <rect x="22" y="42" width="6" height="4" fill="#8e9e82" stroke="#3b3838" stroke-width="2"/>
-                            <rect x="36" y="42" width="6" height="4" fill="#8e9e82" stroke="#3b3838" stroke-width="2"/>
-                        </g>
-                    </g>
-                </svg>
-
+                <canvas id="petCanvas" width="64" height="64" class="pixel-pet-canvas"></canvas>
                 <div class="pet-menu" id="petInteractMenu"></div>
             </div>
-            <div id="foodContainer"></div>
         </div>
     </div>
 </nav>
@@ -1527,36 +1422,73 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 /* ===== Init ===== */
 setLang('en');
 
+/* ========== RPG Pixel Companion System (Final V3) ========== */
 class PixelPet {
     constructor() {
         this.el = document.getElementById('pixelPet');
-        this.svg = document.getElementById('petSvg'); // 改為獲取 SVG DOM
+        this.canvas = document.getElementById('petCanvas');
         this.bubble = document.getElementById('petBubble');
-        this.foodContainer = document.getElementById('foodContainer');
+        this.ctx = this.canvas.getContext('2d');
         
+        // 選單與按鈕
         this.summonBtn = document.getElementById('summonBtn');
         this.summonMenu = document.getElementById('summonMenu');
         this.interactMenu = document.getElementById('petInteractMenu');
 
+        // 核心狀態
         this.char = 'none'; 
-        this.state = 'HIDDEN'; // HIDDEN, IDLE, WALK, RUN_HOME, INTERACT, EAT, SLEEP
+        this.state = 'HIDDEN'; // HIDDEN, IDLE, WALK, RUN_HOME, INTERACT
         this.mode = 'ROAM'; 
         
+        // 物理位置 (Float)
         this.x = 0; this.y = 0;
         this.targetX = 0; this.targetY = 0;
+        this.velX = 0; this.velY = 0;
         
         this.direction = 1; // 1 = Right, -1 = Left
-        this.foodTarget = null; 
+        this.frame = 0;
+        this.item = null;
+
+        // 配色表
+        this.palettes = {
+            // Mochi: 灰綠色調 (參考實物圖) + 像素圖結構
+            mochi: { 
+                outline: '#2f3542', 
+                fur: '#a4b0be', // 淺灰
+                furDark: '#747d8c', 
+                white: '#ffffff', 
+                pink: '#ff7f50' 
+            },
+            // AppCopilot: 藍色 + 拳擊手套
+            copilot: { 
+                outline: '#1e3799', 
+                body: '#4a69bd', 
+                screen: '#dff9fb', 
+                glove: '#0c2461', // 深藍手套
+                gloveLight: '#38ada9' 
+            },
+            // Timo: 綠書 + 博士帽 + 黃頁
+            timo: { 
+                outline: '#006266', 
+                cover: '#27ae60', // 綠皮
+                page: '#f1c40f',  // 黃頁
+                cap: '#2d3436'    // 黑帽
+            }
+        };
 
         this.initEvents();
         this.startLoop();
     }
 
+    /* --- 1. 召喚與位置控制 --- */
+    
     summon(charName) {
         if (charName === 'hide') {
             this.despawn();
             return;
         }
+        
+        // 如果已經有寵物，先讓它跑回去
         if (this.char !== 'none') {
             this.runHome(() => this.spawnNew(charName));
         } else {
@@ -1568,14 +1500,17 @@ class PixelPet {
         this.char = charName;
         this.el.classList.add('active');
         this.mode = 'ROAM';
+        this.state = 'IDLE';
         
+        // 從按鈕位置出生
         const rect = this.summonBtn.getBoundingClientRect();
         this.x = rect.left;
         this.y = rect.top;
         
+        // 第一個動作：跳出來
         this.targetX = rect.left + (Math.random() < 0.5 ? -100 : 100);
         this.targetY = rect.top + 100;
-        this.changeState('WALK');
+        this.state = 'WALK';
         
         this.showBubble('Ready!');
     }
@@ -1584,52 +1519,228 @@ class PixelPet {
         this.runHome(() => {
             this.char = 'none';
             this.el.classList.remove('active');
-            this.changeState('HIDDEN');
+            this.state = 'HIDDEN';
         });
     }
 
     runHome(callback) {
-        this.changeState('RUN_HOME');
+        this.state = 'RUN_HOME';
         const rect = this.summonBtn.getBoundingClientRect();
         this.targetX = rect.left;
         this.targetY = rect.top;
         this.onArrive = callback;
     }
 
+    // 設置導航欄趴趴模式
     setStayMode() {
         this.mode = 'STAY';
-        this.changeState('RUN_HOME'); 
+        this.state = 'RUN_HOME'; // 借用這個狀態跑過去
         const rect = this.summonBtn.getBoundingClientRect();
-        // 跑回導航欄上方
+        // 趴在按鈕旁邊
         this.targetX = rect.left + 50; 
         this.targetY = rect.top + 5; 
         this.onArrive = () => {
-            // 到達後切換為麻糬融化狀態
-            this.changeState('SLEEP'); 
+            this.state = 'IDLE'; // 到達後變 IDLE (實際繪圖會根據 mode=STAY 畫趴下)
         };
     }
 
-    changeState(newState) {
-        if (this.state === newState) return;
-        this.state = newState;
+    /* --- 2. 繪圖核心 (像素級還原) --- */
+    draw(frame) {
+        this.ctx.clearRect(0, 0, 64, 64);
+        if (this.state === 'HIDDEN') return;
+
+        // 根據模式選擇動作
+        let pose = 'STAND';
+        if (this.mode === 'STAY') pose = 'SPLOOT'; // 趴下
+        else if (this.state === 'WALK' || this.state === 'RUN_HOME') pose = 'RUN';
+        else if (this.state === 'INTERACT') pose = 'ACT';
+
+        this.ctx.save();
         
-        // 重置類名
-        this.svg.className.baseVal = 'pixel-pet-svg';
+        // 翻轉處理
+        if (this.direction === -1) {
+            this.ctx.translate(64, 0);
+            this.ctx.scale(-1, 1);
+        }
+
+        switch(this.char) {
+            case 'mochi': this.drawMochi(frame, pose); break;
+            case 'copilot': this.drawCopilot(frame, pose); break;
+            case 'timo': this.drawTimo(frame, pose); break;
+        }
         
-        // 添加狀態類名觸發 CSS 動畫
-        if (newState === 'WALK' || newState === 'RUN_HOME') {
-            this.svg.classList.add('state-walk');
-        } else if (newState === 'SLEEP') {
-            this.svg.classList.add('state-sleep');
-        } else if (newState === 'EAT') {
-            this.svg.classList.add('state-eat');
+        this.ctx.restore();
+    }
+
+    /* === Mochi: 灰兔 (還原提供的像素圖) === */
+    drawMochi(frame, pose) {
+        const c = this.palettes.mochi;
+        const cx = 32; let cy = 54;
+
+        if (pose === 'SPLOOT') { // 趴在導航欄 (Sploot)
+            // 身體壓扁
+            this.rect(cx-14, cy-12, 28, 12, c.fur);
+            this.rect(cx-14, cy-12, 28, 12, null, c.outline);
+            // 耳朵垂下 (關鍵特徵)
+            this.rect(cx-18, cy-10, 6, 10, c.fur);
+            this.rect(cx-18, cy-10, 6, 10, null, c.outline);
+            this.rect(cx+12, cy-10, 6, 10, c.fur);
+            this.rect(cx+12, cy-10, 6, 10, null, c.outline);
+            // 臉
+            this.rect(cx-8, cy-10, 16, 10, c.white);
+            // 睡眼
+            this.rect(cx-6, cy-6, 4, 1, c.outline);
+            this.rect(cx+2, cy-6, 4, 1, c.outline);
+            // 小手手搭在邊緣
+            this.rect(cx-8, cy, 4, 4, c.white);
+            this.rect(cx+4, cy, 4, 4, c.white);
+            return;
+        }
+
+        if (pose === 'RUN') {
+            cy -= Math.abs(Math.sin(frame/3)) * 4; // 跳躍
+            // 奔跑時耳朵向後
+            this.rect(cx-12, cy-28, 8, 16, c.fur); // 耳
+            this.rect(cx-12, cy-28, 8, 16, null, c.outline);
+            // 身體前傾
+            this.rect(cx-10, cy-16, 20, 14, c.fur);
+            this.rect(cx-10, cy-16, 20, 14, null, c.outline);
+            // 白肚
+            this.rect(cx-4, cy-14, 10, 10, c.white);
+        } else {
+            // STAND (還原像素圖左側)
+            // 兩隻長耳朵豎起來
+            this.rect(cx-8, cy-38, 6, 18, c.fur); // 左耳
+            this.rect(cx-8, cy-38, 6, 18, null, c.outline);
+            this.rect(cx-6, cy-36, 2, 12, c.pink); // 內耳
+
+            this.rect(cx+2, cy-38, 6, 18, c.fur); // 右耳
+            this.rect(cx+2, cy-38, 6, 18, null, c.outline);
+            this.rect(cx+4, cy-36, 2, 12, c.pink);
+
+            // 身體
+            this.rect(cx-10, cy-20, 20, 18, c.fur);
+            this.rect(cx-10, cy-20, 20, 18, null, c.outline);
+            
+            // 白胸口 (Mochi 特徵)
+            this.rect(cx-6, cy-18, 12, 14, c.white);
+
+            // 頭 (比身體大一點)
+            this.rect(cx-11, cy-28, 22, 14, c.fur);
+            this.rect(cx-11, cy-28, 22, 14, null, c.outline);
+            
+            // 面部白斑
+            this.rect(cx-4, cy-28, 8, 14, c.white); 
+            
+            // 五官
+            this.rect(cx-7, cy-24, 2, 4, c.outline); // 眼
+            this.rect(cx+5, cy-24, 2, 4, c.outline);
+            this.rect(cx-1, cy-20, 2, 2, c.pink); // 鼻
+
+            // 手
+            this.rect(cx-6, cy-12, 3, 4, c.white);
+            this.rect(cx+3, cy-12, 3, 4, c.white);
         }
     }
 
+    /* === AppCopilot: 藍手機 + 拳擊手套 === */
+    drawCopilot(frame, pose) {
+        const c = this.palettes.copilot;
+        const cx = 32; let cy = 54;
+        if (pose === 'RUN') cy -= Math.abs(Math.sin(frame/3)) * 3;
+
+        // 頭頂信號 (Wifi)
+        if (Math.floor(frame/10)%2===0) {
+            this.rect(cx-10, cy-48, 2, 4, '#7efff5');
+            this.rect(cx+8, cy-48, 2, 4, '#7efff5');
+        }
+
+        // 手機本體
+        this.rect(cx-12, cy-40, 24, 38, c.body);
+        this.rect(cx-12, cy-40, 24, 38, null, c.outline);
+        
+        // 屏幕
+        this.rect(cx-9, cy-36, 18, 24, c.screen);
+        
+        // 臉 (簡單像素笑臉)
+        const fy = cy - 28;
+        this.rect(cx-5, fy, 2, 4, c.outline); // 眼
+        this.rect(cx+3, fy, 2, 4, c.outline);
+        this.rect(cx-3, fy+6, 6, 1, c.outline); // 嘴
+
+        // 拳擊手套 (關鍵特徵)
+        const handY = cy - 20 + Math.sin(frame/5)*3;
+        // 左手套
+        this.rect(cx-18, handY, 8, 8, c.glove);
+        this.rect(cx-18, handY, 8, 8, null, c.gloveLight); // 亮邊
+        // 右手套
+        this.rect(cx+10, handY, 8, 8, c.glove);
+        this.rect(cx+10, handY, 8, 8, null, c.gloveLight);
+
+        // 腳 (靴子)
+        this.rect(cx-10, cy-2, 6, 4, c.glove);
+        this.rect(cx+4, cy-2, 6, 4, c.glove);
+    }
+
+    /* === Timo: 綠書 + 博士帽 + 點讚 === */
+    drawTimo(frame, pose) {
+        const c = this.palettes.timo;
+        const cx = 32; let cy = 54;
+        if (pose === 'RUN') cy -= Math.abs(Math.sin(frame/3)) * 3;
+
+        // 博士帽 (Cap)
+        const capY = cy - 42;
+        this.rect(cx-16, capY, 32, 4, c.cap); // 帽簷
+        this.rect(cx-10, capY-8, 20, 8, c.cap); // 帽頂
+        this.rect(cx+14, capY, 2, 12, '#f1c40f'); // 流蘇
+
+        // 書本體
+        this.rect(cx-14, cy-36, 28, 34, c.cover); // 綠皮
+        this.rect(cx-14, cy-36, 28, 34, null, c.outline);
+        
+        // 書頁 (側面)
+        this.rect(cx+8, cy-34, 4, 30, c.page); // 黃頁
+        
+        // 臉 (單眼眨眼 wink)
+        const fy = cy - 20;
+        this.rect(cx-6, fy, 4, 4, c.cap); // 左眼
+        if (frame % 60 < 10) {
+            this.rect(cx+4, fy+2, 4, 1, c.cap); // 眨眼
+        } else {
+            this.rect(cx+4, fy, 4, 4, c.cap); // 睜眼
+        }
+        this.rect(cx-2, fy+6, 4, 2, '#fff'); // 嘴
+
+        // 大拇指點讚 (關鍵特徵)
+        const handY = cy - 16;
+        // 手掌
+        this.rect(cx-20, handY, 6, 6, c.cover);
+        // 拇指 (黃色)
+        this.rect(cx-20, handY-4, 2, 4, '#f1c40f');
+        this.rect(cx-18, handY, 4, 6, '#f1c40f'); 
+    }
+
+    // 通用繪圖輔助
+    rect(x, y, w, h, fill, stroke) {
+        if (fill) {
+            this.ctx.fillStyle = fill;
+            this.ctx.fillRect(Math.round(x), Math.round(y), w, h);
+        }
+        if (stroke) {
+            this.ctx.strokeStyle = stroke;
+            this.ctx.lineWidth = 2;
+            this.ctx.strokeRect(Math.round(x), Math.round(y), w, h);
+        }
+    }
+
+    /* --- 3. 邏輯循環 --- */
     startLoop() {
         const loop = () => {
-            if (this.state !== 'HIDDEN' && this.state !== 'SLEEP') {
+            this.frame++;
+            
+            if (this.state !== 'HIDDEN') {
                 this.updatePhysics();
+                this.draw(this.frame);
             }
             requestAnimationFrame(loop);
         };
@@ -1637,57 +1748,51 @@ class PixelPet {
     }
 
     updatePhysics() {
+        // IDLE: 隨機遊蕩
         if (this.state === 'IDLE' && this.mode === 'ROAM') {
-            if (Math.random() < 0.02) { 
+            if (Math.random() < 0.02) { // 2% 機率開始走動
+                // 全螢幕隨機目標 (不再限制在地板！)
                 this.targetX = Math.random() * (window.innerWidth - 80);
                 this.targetY = Math.random() * (window.innerHeight - 80);
-                this.changeState('WALK');
+                this.state = 'WALK';
             }
         }
 
+        // 移動邏輯 (WALK / RUN_HOME)
         if (this.state === 'WALK' || this.state === 'RUN_HOME' || this.state === 'INTERACT') {
             const dx = this.targetX - this.x;
             const dy = this.targetY - this.y;
             const dist = Math.sqrt(dx*dx + dy*dy);
             
             if (dist < 5) {
+                // 到達
                 this.x = this.targetX;
                 this.y = this.targetY;
                 
                 if (this.onArrive) {
-                    this.onArrive(); 
+                    this.onArrive(); // 回調
                     this.onArrive = null;
-                } else if (this.state === 'INTERACT' && this.foodTarget) {
-                    // 到達食物，開始進食動畫
-                    this.changeState('EAT');
-                    this.showBubble('Yummy! 🥕');
-                    
-                    setTimeout(() => {
-                        if (this.foodTarget && this.foodTarget.parentNode) {
-                            this.foodTarget.parentNode.removeChild(this.foodTarget);
-                        }
-                        this.foodTarget = null;
-                        this.changeState('IDLE');
-                    }, 2500);
                 } else {
-                    this.changeState('IDLE');
+                    this.state = 'IDLE';
                 }
             } else {
+                // 移動
                 const speed = (this.state === 'RUN_HOME') ? 10 : 3;
                 this.x += (dx / dist) * speed;
                 this.y += (dy / dist) * speed;
                 
+                // 更新方向
                 if (dx !== 0) this.direction = dx > 0 ? -1 : 1;
             }
         }
         
-        // 應用座標與水平翻轉
-        let transformStr = `translate(${this.x}px, ${this.y}px)`;
-        if (this.direction === -1) transformStr += ' scaleX(-1)';
-        this.el.style.transform = transformStr;
+        // 應用 DOM 位置 (Translate 性能最好)
+        this.el.style.transform = `translate(${this.x}px, ${this.y}px)`;
     }
 
+    /* --- 4. 互動事件 --- */
     initEvents() {
+        // 1. 召喚按鈕
         this.summonBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             this.summonMenu.classList.toggle('show');
@@ -1701,53 +1806,54 @@ class PixelPet {
             });
         });
 
-        this.svg.addEventListener('contextmenu', (e) => {
+        // 2. 寵物右鍵選單 (修復)
+        this.canvas.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             e.stopPropagation();
             this.showInteractMenu(e.clientX, e.clientY);
         });
 
+        // 點擊空白關閉
         document.addEventListener('click', () => {
             this.summonMenu.classList.remove('show');
-            if (this.interactMenu) this.interactMenu.classList.remove('show');
+            this.interactMenu.classList.remove('show');
         });
 
-        this.svg.addEventListener('click', () => {
-            if (this.state !== 'SLEEP' && this.state !== 'EAT') {
-                this.showBubble('Hey!');
-                // 點擊時彈跳一下
-                this.svg.style.transform = 'scale(1.2) translateY(-10px)';
-                setTimeout(() => this.svg.style.transform = 'none', 150);
-            } else if (this.state === 'SLEEP') {
-                this.showBubble('Zzz...');
-            }
+        // 點擊寵物：跳一下
+        this.canvas.addEventListener('click', () => {
+            // 簡單的 CSS 動畫模擬跳躍
+            this.canvas.style.transform = `scale(1.2) translateY(-10px)`;
+            setTimeout(() => this.canvas.style.transform = `scale(1) translateY(0)`, 150);
+            this.showBubble('Hey!');
         });
     }
 
     showInteractMenu(x, y) {
         const menu = this.interactMenu;
-        menu.innerHTML = ''; 
+        menu.innerHTML = ''; // 清空舊的
         
+        // 選項 A: Roam/Stay 切換
         const btnMode = document.createElement('div');
         btnMode.className = 'pet-menu-item';
-        btnMode.innerText = this.mode === 'ROAM' ? '🛌 休眠模式 (Stay)' : '🏃 亂逛模式 (Roam)';
+        btnMode.innerText = this.mode === 'ROAM' ? '🛌 Stay' : '🏃 Roam';
         btnMode.onclick = (e) => {
             e.stopPropagation();
             if (this.mode === 'ROAM') this.setStayMode();
             else {
                 this.mode = 'ROAM';
-                this.changeState('WALK');
-                this.targetY = window.innerHeight - 100; 
+                this.state = 'WALK';
+                this.targetY = window.innerHeight - 100; // 先落地
                 this.showBubble('Free!');
             }
             menu.classList.remove('show');
         };
         menu.appendChild(btnMode);
 
+        // 選項 B: 互動 (Mochi 投喂)
         if (this.char === 'mochi') {
             const btnFeed = document.createElement('div');
             btnFeed.className = 'pet-menu-item';
-            btnFeed.innerText = '🥕 投喂胡蘿蔔';
+            btnFeed.innerText = '🥕 Feed';
             btnFeed.onclick = (e) => {
                 e.stopPropagation();
                 this.startFeeding();
@@ -1762,25 +1868,20 @@ class PixelPet {
     }
 
     startFeeding() {
-        this.showBubble('點擊任意位置投喂！');
+        this.showBubble('Click ground!');
         document.body.style.cursor = 'crosshair';
         
         const feedHandler = (e) => {
             document.body.style.cursor = 'default';
             document.removeEventListener('click', feedHandler);
             
-            const food = document.createElement('div');
-            food.className = 'pet-food';
-            food.innerText = '🥕';
-            food.style.left = (e.clientX - 12) + 'px'; 
-            food.style.top = (e.clientY - 12) + 'px';
-            this.foodContainer.appendChild(food);
-            
-            this.foodTarget = food;
-            this.targetX = e.clientX - 32; 
-            this.targetY = e.clientY - 32; 
-            this.changeState('INTERACT');
+            // 生成食物
+            this.targetX = e.clientX - 32;
+            this.targetY = e.clientY - 32;
+            this.state = 'INTERACT';
+            this.showBubble('Yum yum!');
         };
+        // 延遲綁定以免誤觸
         setTimeout(() => document.addEventListener('click', feedHandler), 50);
     }
 
@@ -1790,7 +1891,12 @@ class PixelPet {
         setTimeout(() => this.bubble.classList.remove('show'), 2000);
     }
 }
-const pixelPetInstance = new PixelPet();
+
+// 啟動
+window.addEventListener('load', () => {
+    new PixelPet();
+});
+
 </script>
 
 </body>
