@@ -1,0 +1,479 @@
+{
+  "site": {
+    "footer": "&copy; 2025–2026 Runde Yang. Built with care.",
+    "email_user": "yangrundemdj",
+    "email_domain": "gmail.com"
+  },
+  "home": {
+    "labels": {
+      "en": {
+        "nav_about": "About",
+        "nav_news": "News",
+        "nav_pubs": "Publications",
+        "nav_projects": "Projects",
+        "nav_gallery": "Gallery",
+        "nav_notes": "Notes",
+        "nav_life": "Life",
+        "title_news": "News",
+        "title_pubs": "Publications",
+        "title_projects": "Projects",
+        "title_gallery": "Gallery",
+        "title_notes": "Notes",
+        "weather_loc": "Shanghai"
+      },
+      "zh-CN": {
+        "nav_about": "关于",
+        "nav_news": "动态",
+        "nav_pubs": "论文",
+        "nav_projects": "项目",
+        "nav_gallery": "光影",
+        "nav_notes": "笔记",
+        "nav_life": "生活",
+        "title_news": "动态",
+        "title_pubs": "发表论文",
+        "title_projects": "项目经历",
+        "title_gallery": "光影",
+        "title_notes": "笔记",
+        "weather_loc": "上海"
+      },
+      "zh-TW": {
+        "nav_about": "關於",
+        "nav_news": "動態",
+        "nav_pubs": "論文",
+        "nav_projects": "項目",
+        "nav_gallery": "光影",
+        "nav_notes": "筆記",
+        "nav_life": "生活",
+        "title_news": "動態",
+        "title_pubs": "發表論文",
+        "title_projects": "項目經歷",
+        "title_gallery": "光影",
+        "title_notes": "筆記",
+        "weather_loc": "上海"
+      }
+    },
+    "hero": {
+      "avatar": "me_at_dorm.jpg",
+      "name_html": {
+        "en": "Runde Yang <span style=\"font-weight:400;font-size:0.65em;color:var(--text-secondary);\">楊潤德</span>",
+        "zh-CN": "杨润德",
+        "zh-TW": "楊潤德"
+      },
+      "title": {
+        "en": "Undergraduate · School of AI, Shanghai Jiao Tong University",
+        "zh-CN": "上海交通大学 · 人工智能学院 本科生",
+        "zh-TW": "上海交通大學 · 人工智能學院 本科生"
+      },
+      "bio": {
+        "en": "Class of 2028. Currently focusing on Multi-Agent Systems. Always learning, always curious.",
+        "zh-CN": "24 级本科生，目前从事多智能体系统相关工作。持续学习中。",
+        "zh-TW": "24 級本科生，目前從事多智能體系統相關工作。持續學習中。"
+      },
+      "location": {
+        "en": "Shanghai, China",
+        "zh-CN": "中国 上海",
+        "zh-TW": "中國 上海"
+      },
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/SJTUFreshman",
+          "icon": "fab fa-github"
+        },
+        {
+          "label": "Scholar",
+          "href": "https://scholar.google.com/citations?user=uGjwKq0AAAAJ&hl=zh-TW",
+          "icon": "fas fa-graduation-cap"
+        }
+      ]
+    },
+    "news": [
+      {
+        "id": "news_1",
+        "date": "2025",
+        "text": {
+          "en": "Personal homepage launched.",
+          "zh-CN": "个人主页上线。",
+          "zh-TW": "個人主頁上線。"
+        }
+      }
+    ],
+    "publications": [
+      {
+        "id": "AppCopilot_2025",
+        "title": "AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent",
+        "authors_html": "Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian",
+        "venue": "arXiv preprint arXiv:2509.02444",
+        "paper_url": "#",
+        "code_url": "#",
+        "citation": "@misc{fan2025appcopilotgeneralaccuratelonghorizon,\n  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},\n  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},\n  year={2025},\n  eprint={2509.02444},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2509.02444}\n}"
+      },
+      {
+        "id": "Generative_2025",
+        "title": "Generative Teaching via Code (TeachMaster)",
+        "authors_html": "Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian",
+        "venue": "arXiv preprint arXiv:2601.04204",
+        "paper_url": "https://arxiv.org/abs/2601.04204v1",
+        "code_url": "#",
+        "citation": "@misc{wang2025generativeteachingcode,\n  title={Generative Teaching via Code},\n  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},\n  year={2025},\n  eprint={2601.04204},\n  archivePrefix={arXiv},\n  primaryClass={cs.CY},\n  url={https://arxiv.org/abs/2601.04204}\n}"
+      }
+    ],
+    "projects": [
+      {
+        "id": "appcopilot",
+        "name": "AppCopilot",
+        "image": "images/AppCopilot.png",
+        "alt": "AppCopilot",
+        "desc": {
+          "en": "A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.",
+          "zh-CN": "一个多模态多智能体设备端助手，探索工具使用、规划和鲁棒的 UI 定位。",
+          "zh-TW": "一個多模態多智能體設備端助手，探索工具使用、規劃和魯棒的 UI 定位。"
+        },
+        "paper_url": "#",
+        "code_url": "#"
+      },
+      {
+        "id": "teachmaster",
+        "name": "TeachMaster",
+        "image": "images/TeachMaster.png",
+        "alt": "TeachMaster",
+        "desc": {
+          "en": "A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.",
+          "zh-CN": "一个多智能体框架，使用代码作为中间语义表示，自动生成结构化的教育视频。",
+          "zh-TW": "一個多智能體框架，使用代碼作為中間語義表示，自動生成結構化的教育視頻。"
+        },
+        "paper_url": "https://arxiv.org/abs/2601.04204v1",
+        "code_url": "#"
+      }
+    ],
+    "gallery": [
+      {
+        "id": "meteor",
+        "image": "images/meteor.jpg",
+        "alt": "Orion Nebula",
+        "caption": {
+          "en": "Orion Nebula, 2025",
+          "zh-CN": "猎户座大星云，2025",
+          "zh-TW": "獵戶座大星雲，2025"
+        }
+      },
+      {
+        "id": "nari",
+        "image": "images/那日.jpg",
+        "alt": "Stargazing Camp",
+        "caption": {
+          "en": "Stargazing camp",
+          "zh-CN": "观星营地",
+          "zh-TW": "觀星營地"
+        }
+      },
+      {
+        "id": "qiandaohu",
+        "image": "images/千島湖.jpg",
+        "alt": "Qiandao Lake Sunset",
+        "caption": {
+          "en": "Qiandao Lake sunset",
+          "zh-CN": "千岛湖日落",
+          "zh-TW": "千島湖日落"
+        }
+      },
+      {
+        "id": "road",
+        "image": "images/千島湖路上.jpg",
+        "alt": "On the Road",
+        "caption": {
+          "en": "On the road to Qiandao Lake",
+          "zh-CN": "千岛湖路上",
+          "zh-TW": "千島湖路上"
+        }
+      },
+      {
+        "id": "campus",
+        "image": "images/美哉吾校.jpg",
+        "alt": "SJTU Campus",
+        "caption": {
+          "en": "SJTU Campus in spring",
+          "zh-CN": "美哉吾校",
+          "zh-TW": "美哉吾校"
+        }
+      },
+      {
+        "id": "zijinshan",
+        "image": "images/紫金山.jpg",
+        "alt": "Zijin Mountain",
+        "caption": {
+          "en": "Zijin Mountain, Nanjing",
+          "zh-CN": "紫金山，南京",
+          "zh-TW": "紫金山，南京"
+        }
+      },
+      {
+        "id": "cake",
+        "image": "images/烘焙社草莓蛋糕.jpg",
+        "alt": "Baking Club",
+        "caption": {
+          "en": "Baking club strawberry cake",
+          "zh-CN": "烘焙社草莓蛋糕",
+          "zh-TW": "烘焙社草莓蛋糕"
+        }
+      }
+    ],
+    "life_card": {
+      "images": [
+        "images/千島湖.jpg",
+        "images/美哉吾校.jpg",
+        "images/meteor.jpg",
+        "images/紫金山.jpg"
+      ],
+      "title": {
+        "en": "Beyond Research",
+        "zh-CN": "科研之外",
+        "zh-TW": "科研之外"
+      },
+      "desc": {
+        "en": "Footprints map, bookshelf, thoughts, and more.",
+        "zh-CN": "足迹地图、书影、随笔，以及更多。",
+        "zh-TW": "足跡地圖、書影、隨筆，以及更多。"
+      }
+    },
+    "notes_empty": {
+      "en": "Notes coming soon...",
+      "zh-CN": "笔记即将上线……",
+      "zh-TW": "筆記即將上線……"
+    },
+    "notes": []
+  },
+  "life": {
+    "labels": {
+      "en": {
+        "nav_gallery": "Gallery",
+        "nav_map": "Footprints",
+        "nav_shelf": "Shelf",
+        "nav_thoughts": "Thoughts",
+        "nav_friends": "Friends",
+        "title_gallery": "Gallery",
+        "title_map": "Footprints",
+        "title_shelf": "Shelf",
+        "title_thoughts": "Thoughts",
+        "title_friends": "Friends",
+        "chart_china": "China",
+        "chart_world": "World"
+      },
+      "zh-CN": {
+        "nav_gallery": "光影",
+        "nav_map": "足迹",
+        "nav_shelf": "书影",
+        "nav_thoughts": "随笔",
+        "nav_friends": "友链",
+        "title_gallery": "光影",
+        "title_map": "足迹",
+        "title_shelf": "书影",
+        "title_thoughts": "随笔",
+        "title_friends": "友链",
+        "chart_china": "中国",
+        "chart_world": "世界"
+      },
+      "zh-TW": {
+        "nav_gallery": "光影",
+        "nav_map": "足跡",
+        "nav_shelf": "書影",
+        "nav_thoughts": "隨筆",
+        "nav_friends": "友鏈",
+        "title_gallery": "光影",
+        "title_map": "足跡",
+        "title_shelf": "書影",
+        "title_thoughts": "隨筆",
+        "title_friends": "友鏈",
+        "chart_china": "中國",
+        "chart_world": "世界"
+      }
+    },
+    "gallery": [
+      {
+        "id": "meteor",
+        "image": "images/meteor.jpg",
+        "alt": "Orion Nebula",
+        "caption": {
+          "en": "Orion Nebula, 2025",
+          "zh-CN": "猎户座大星云，2025",
+          "zh-TW": "獵戶座大星雲，2025"
+        }
+      },
+      {
+        "id": "nari",
+        "image": "images/那日.jpg",
+        "alt": "Stargazing",
+        "caption": {
+          "en": "Stargazing camp",
+          "zh-CN": "观星营地",
+          "zh-TW": "觀星營地"
+        }
+      },
+      {
+        "id": "qiandaohu",
+        "image": "images/千島湖.jpg",
+        "alt": "Qiandao Lake",
+        "caption": {
+          "en": "Qiandao Lake sunset",
+          "zh-CN": "千岛湖日落",
+          "zh-TW": "千島湖日落"
+        }
+      },
+      {
+        "id": "road",
+        "image": "images/千島湖路上.jpg",
+        "alt": "Road",
+        "caption": {
+          "en": "On the road to Qiandao Lake",
+          "zh-CN": "千岛湖路上",
+          "zh-TW": "千島湖路上"
+        }
+      },
+      {
+        "id": "campus",
+        "image": "images/美哉吾校.jpg",
+        "alt": "Campus",
+        "caption": {
+          "en": "SJTU Campus in spring",
+          "zh-CN": "美哉吾校，真理之花",
+          "zh-TW": "美哉吾校，真理之花"
+        }
+      },
+      {
+        "id": "zijinshan",
+        "image": "images/紫金山.jpg",
+        "alt": "Zijin Mountain",
+        "caption": {
+          "en": "Zijin Mountain, Nanjing",
+          "zh-CN": "紫金山，南京",
+          "zh-TW": "紫金山，南京"
+        }
+      },
+      {
+        "id": "cake",
+        "image": "images/烘焙社草莓蛋糕.jpg",
+        "alt": "Cake",
+        "caption": {
+          "en": "Baking club strawberry cake",
+          "zh-CN": "烘焙社草莓蛋糕",
+          "zh-TW": "烘焙社草莓蛋糕"
+        }
+      }
+    ],
+    "shelf": [
+      {
+        "id": "book_dl",
+        "icon": "fas fa-book",
+        "title": "Deep Learning — Ian Goodfellow",
+        "comment": {
+          "en": "Mathematical foundation is excellent. Not just a tool book, but a mind map.",
+          "zh-CN": "常读常新。数学基础部分写得极好，不仅是工具书，更是思维导图。",
+          "zh-TW": "常讀常新。數學基礎部分寫得極好，不僅是工具書，更是思維導圖。"
+        }
+      },
+      {
+        "id": "movie_interstellar",
+        "icon": "fas fa-film",
+        "title": "Interstellar",
+        "comment": {
+          "en": "Love is the one thing that transcends time and space.",
+          "zh-CN": "爱是唯一可以穿越时间与空间的事物。",
+          "zh-TW": "愛是唯一可以穿越時間與空間的事物。"
+        }
+      }
+    ],
+    "thoughts": [
+      {
+        "id": "thought_1",
+        "date": {
+          "en": "Jan 16, 2026",
+          "zh-CN": "2026年1月16日",
+          "zh-TW": "2026年1月16日"
+        },
+        "text": {
+          "en": "Today, the weight of finals and endless tasks has finally lifted.<br><br>My sleep has been a chaotic blur lately—restless and sparse. <br><br>Around 9 PM, a wave of malaise drove me to bed, where I lingered in that hollow space between wakefulness and dreams. By 11:56 PM, I found myself fully awake, yet deeply fatigued.<br><br>I began listening to 'The Shorekeeper’s Theme.' It is remarkably soothing, yet it carries a defiant, positive undertone: I want to play the piano, I want to train, I want to live—truly live—for myself. I crave a life of warmth and intensity; I refuse to be just another exam robot.<br><br>We are meant to live lives of abundance; even when the world bears down on us, we must not allow our spirits to wither.<br><br>In the embrace of the piano, my mind finally exhales. My soul drifts back to a carefree past, where beautiful moments flicker like scenes from a vintage film.<br><br>I am profoundly moved.",
+          "zh-CN": "今天终于把期末所有考试，事情全做完<br><br>这段时间睡眠紊乱不规律不足，今天晚上才九十点钟就感觉很不舒服，遂上床。上了床半天睡不着，闭着眼睛半梦半醒的<br><br>到了十一点五十六现在是，成功给自己整清醒了<br><br>然后又顿觉困乏，躺下听守岸人小曲，才发现原来这么催眠，还有一种积极的暗示，我要弹钢琴，我要锻炼我要积极的生活，我要为自己而活，我要热烈，我不要作做题家<br><br>人应该活得丰盈，即便遇到压力不能丰盈也不该放任自己腐烂<br><br>我发现听钢琴曲的时候思维是放松的，灵魂在曲子的包裹下好像回到无忧无虑的过去，以前那些美好时光像电影片段一样闪现<br><br>真的很感动。",
+          "zh-TW": "今天終於把期末所有考試，事情全做完<br><br>這段時間睡眠紊亂不規律不足，今天晚上才九十點鐘就感覺很不舒服，遂上床。上了床半天睡不著，閉著眼睛半夢半醒的<br><br>到了十一點五十六現在是，成功給自己整清醒了<br><br>然後又頓覺困乏，躺下聽守岸人小曲，才發現原來這麼催眠，還有一種積極的暗示，我要彈鋼琴，我要鍛煉我要積極的生活，我要為自己而活，我要熱烈，我不要作做題家<br><br>人應該活得豐盈，即便遇到壓力不能豐盈也不該放任自己腐爛<br><br>我發現聽鋼琴曲的時候思維是放鬆的，靈魂在曲子的包裹下好像回到無憂無慮的過去，以前的那些美好時光像電影片段一樣閃現<br><br>真的很感動。"
+        }
+      },
+      {
+        "id": "thought_2",
+        "date": {
+          "en": "Nov 10, 2024",
+          "zh-CN": "Nov 10, 2024",
+          "zh-TW": "Nov 10, 2024"
+        },
+        "text": {
+          "en": "Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera.",
+          "zh-CN": "千岛湖的流星雨。肉眼看到的比相机拍到的震撼一万倍。",
+          "zh-TW": "千島湖的流星雨。肉眼看到的比相機拍到的震撼一萬倍。"
+        }
+      }
+    ],
+    "friends": [
+      {
+        "label": "Laboratory Partner A",
+        "href": "#"
+      },
+      {
+        "label": "SJTU AI Club",
+        "href": "#"
+      }
+    ],
+    "footprints": {
+      "visited_china": [
+        "上海市",
+        "西安市",
+        "南京市",
+        "苏州市",
+        "武汉市",
+        "锦州市",
+        "秦皇岛市",
+        "葫芦岛市",
+        "北京市",
+        "青岛市",
+        "赤峰市",
+        "承德市",
+        "银川市",
+        "开封市",
+        "西宁市",
+        "绍兴市",
+        "榆林市",
+        "延安市",
+        "海西蒙古族藏族自治州",
+        "海南藏族自治州",
+        "海北藏族自治州",
+        "七台河市",
+        "牡丹江市",
+        "哈尔滨市",
+        "无锡市",
+        "杭州市",
+        "扬州市",
+        "景德镇市",
+        "九江市",
+        "洛阳市",
+        "海东市",
+        "咸阳市",
+        "临汾市",
+        "嘉兴市",
+        "太原市"
+      ],
+      "world_points": [
+        {
+          "name": "Shanghai",
+          "value": [
+            121.4737,
+            31.2304
+          ]
+        },
+        {
+          "name": "New York",
+          "value": [
+            -74.006,
+            40.7128
+          ]
+        }
+      ]
+    }
+  }
+}
