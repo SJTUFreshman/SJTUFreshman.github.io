@@ -205,10 +205,22 @@
             this.raf = null;
             this.imageCache = new Map();
 
+            this.preloadImages();
             this.ensureSnackUi();
             this.initEvents();
             this.setPose('stand');
             this.startLoop();
+        }
+
+        collectSpriteSets() {
+            const transitionSets = Object.values(this.directionTransitions || {})
+                .flatMap((transitions) => Object.values(transitions));
+            return [
+                ...Object.values(this.poses),
+                ...Object.values(this.clips),
+                ...Object.values(this.walkVariants),
+                ...transitionSets
+            ];
         }
 
         preloadFrame(src) {
@@ -218,14 +230,20 @@
             }
 
             const img = new Image();
-            img.decoding = 'async';
-            img.loading = 'lazy';
+            img.decoding = 'sync';
+            img.loading = 'eager';
             img.src = this.assetBase + src;
             this.imageCache.set(src, img);
             if (typeof img.decode === 'function') {
                 img.decode().catch(() => {});
             }
             return img;
+        }
+
+        preloadImages() {
+            this.collectSpriteSets().forEach((spriteSet) => {
+                spriteSet.frames.forEach((src) => this.preloadFrame(src));
+            });
         }
 
         ensureSnackUi() {
