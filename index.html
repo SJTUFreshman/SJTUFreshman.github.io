@@ -928,9 +928,8 @@
 
 <!-- ===== Hero / About ===== -->
 <div class="container">
-    <!-- SITEGEN:HOME_HERO_START -->
     <section class="hero" id="about">
-        <img src="me_at_dorm.jpg" alt="Runde Yang" class="hero-avatar" loading="eager" decoding="async" fetchpriority="high" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
+        <img src="me_at_dorm.jpg" alt="Runde Yang" class="hero-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
         <div class="hero-info">
             <h1 class="hero-name" id="heroName">Runde Yang <span style="font-weight:400;font-size:0.65em;color:var(--text-secondary);">楊潤德</span></h1>
             <p class="hero-title" data-key="hero_title">Undergraduate · School of AI, Shanghai Jiao Tong University</p>
@@ -949,26 +948,41 @@
             </div>
         </div>
     </section>
-<!-- SITEGEN:HOME_HERO_END -->
 
-    <!-- SITEGEN:HOME_NEWS_START -->
     <!-- ===== News ===== -->
     <section id="news" class="fade-in">
         <div class="section-title" data-key="title_news">News</div>
         <ul class="news-list" id="newsList">
             <li class="news-item">
-                <span class="news-date">2025</span>
-                <span class="news-text" data-key="news_1">Personal homepage launched.</span>
+                <span class="news-date">2026/6/29</span>
+                <span class="news-text" data-key="news_1">25-26 Spring Finals finished.</span>
             </li>
         </ul>
     </section>
-<!-- SITEGEN:HOME_NEWS_END -->
 
-    <!-- SITEGEN:HOME_PUBLICATIONS_START -->
     <!-- ===== Publications ===== -->
     <section id="publications" class="fade-in">
         <div class="section-title" data-key="title_pubs">Publications</div>
         <div class="pub-list">
+            <div class="pub-item">
+                <div class="pub-title-text en-only">Generative Teaching via Code (TeachMaster)</div>
+                <div class="pub-authors en-only">Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian</div>
+                <div class="pub-venue en-only">ACL 2026 Industry Track</div>
+                <div class="pub-actions">
+                    <a href="https://arxiv.org/abs/2601.04204v1" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
+                    <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
+                    <button class="pub-btn" onclick="copyCitation(&quot;Generative_2025&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title-text en-only">AgentXRay: White-Boxing Agentic Systems via Workflow Reconstruction</div>
+                <div class="pub-authors en-only">Ruijie Shi, Houbin Zhang, Yuecheng Han, Yuheng Wang, Jingru Fan, <b>Runde Yang</b>, Yufan Dang, Huatao Li, Dewen Liu, Yuan Cheng, Chen Qian</div>
+                <div class="pub-venue en-only">ICML 2026</div>
+                <div class="pub-actions">
+                    <a href="https://arxiv.org/abs/2602.05353" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
+                    <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
+                </div>
+            </div>
             <div class="pub-item">
                 <div class="pub-title-text en-only">AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent</div>
                 <div class="pub-authors en-only">Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian</div>
@@ -976,31 +990,19 @@
                 <div class="pub-actions">
                     <a href="#" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
                     <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
-                    <button class="pub-btn" onclick="copyCitation('AppCopilot_2025')"><i class="fas fa-quote-right"></i> Cite</button>
-                </div>
-            </div>
-            <div class="pub-item">
-                <div class="pub-title-text en-only">Generative Teaching via Code (TeachMaster)</div>
-                <div class="pub-authors en-only">Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian</div>
-                <div class="pub-venue en-only">arXiv preprint arXiv:2601.04204</div>
-                <div class="pub-actions">
-                    <a href="https://arxiv.org/abs/2601.04204v1" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
-                    <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
-                    <button class="pub-btn" onclick="copyCitation('Generative_2025')"><i class="fas fa-quote-right"></i> Cite</button>
+                    <button class="pub-btn" onclick="copyCitation(&quot;AppCopilot_2025&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
                 </div>
             </div>
         </div>
     </section>
-<!-- SITEGEN:HOME_PUBLICATIONS_END -->
 
-    <!-- SITEGEN:HOME_PROJECTS_START -->
     <!-- ===== Projects ===== -->
     <section id="projects" class="fade-in">
         <div class="section-title" data-key="title_projects">Projects</div>
         <div class="project-grid">
             <div class="project-card">
                 <div class="project-img-wrap">
-                    <img src="images/AppCopilot.png" alt="AppCopilot" loading="lazy" decoding="async">
+                    <img src="images/AppCopilot.png" alt="AppCopilot">
                 </div>
                 <div class="project-body">
                     <div class="project-name en-only">AppCopilot</div>
@@ -1013,7 +1015,7 @@
             </div>
             <div class="project-card">
                 <div class="project-img-wrap">
-                    <img src="images/TeachMaster.png" alt="TeachMaster" loading="lazy" decoding="async">
+                    <img src="images/TeachMaster.png" alt="TeachMaster">
                 </div>
                 <div class="project-body">
                     <div class="project-name en-only">TeachMaster</div>
@@ -1026,40 +1028,38 @@
             </div>
         </div>
     </section>
-<!-- SITEGEN:HOME_PROJECTS_END -->
 
-    <!-- SITEGEN:HOME_GALLERY_START -->
     <!-- ===== Gallery ===== -->
     <section id="gallery" class="fade-in">
         <div class="section-title" data-key="title_gallery">Gallery</div>
         <div class="gallery-scroll" id="galleryScroll">
             <div class="gallery-track" id="galleryTrack">
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/meteor.jpg" alt="Orion Nebula" loading="lazy" decoding="async">
+                    <img src="images/meteor.jpg" alt="Orion Nebula">
                     <div class="gallery-caption" data-key="cap_meteor">Orion Nebula, 2025</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/那日.jpg" alt="Stargazing Camp" loading="lazy" decoding="async">
+                    <img src="images/那日.jpg" alt="Stargazing Camp">
                     <div class="gallery-caption" data-key="cap_nari">Stargazing camp</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/千島湖.jpg" alt="Qiandao Lake Sunset" loading="lazy" decoding="async">
+                    <img src="images/千島湖.jpg" alt="Qiandao Lake Sunset">
                     <div class="gallery-caption" data-key="cap_qiandaohu">Qiandao Lake sunset</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/千島湖路上.jpg" alt="On the Road" loading="lazy" decoding="async">
+                    <img src="images/千島湖路上.jpg" alt="On the Road">
                     <div class="gallery-caption" data-key="cap_road">On the road to Qiandao Lake</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/美哉吾校.jpg" alt="SJTU Campus" loading="lazy" decoding="async">
+                    <img src="images/美哉吾校.jpg" alt="SJTU Campus">
                     <div class="gallery-caption" data-key="cap_campus">SJTU Campus in spring</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/紫金山.jpg" alt="Zijin Mountain" loading="lazy" decoding="async">
+                    <img src="images/紫金山.jpg" alt="Zijin Mountain">
                     <div class="gallery-caption" data-key="cap_zijinshan">Zijin Mountain, Nanjing</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/烘焙社草莓蛋糕.jpg" alt="Baking Club" loading="lazy" decoding="async">
+                    <img src="images/烘焙社草莓蛋糕.jpg" alt="Baking Club">
                     <div class="gallery-caption" data-key="cap_cake">Baking club strawberry cake</div>
                 </div>
             </div>
@@ -1068,10 +1068,10 @@
         <!-- Life link card -->
         <div class="life-card" onclick="window.location.href='life.html'">
             <div class="life-card-bg">
-                <img src="images/千島湖.jpg" alt="" loading="lazy" decoding="async">
-                <img src="images/美哉吾校.jpg" alt="" loading="lazy" decoding="async">
-                <img src="images/meteor.jpg" alt="" loading="lazy" decoding="async">
-                <img src="images/紫金山.jpg" alt="" loading="lazy" decoding="async">
+                <img src="images/千島湖.jpg" alt="">
+                <img src="images/美哉吾校.jpg" alt="">
+                <img src="images/meteor.jpg" alt="">
+                <img src="images/紫金山.jpg" alt="">
             </div>
             <div class="life-card-overlay"></div>
             <div class="life-card-content">
@@ -1083,9 +1083,7 @@
             <div class="life-card-arrow"><i class="fas fa-long-arrow-alt-right"></i> <span class="en-only" style="font-size:0.8rem;letter-spacing:0.05em;">EXPLORE</span></div>
         </div>
     </section>
-<!-- SITEGEN:HOME_GALLERY_END -->
 
-    <!-- SITEGEN:HOME_NOTES_START -->
     <!-- ===== Notes ===== -->
     <section id="notes" class="fade-in">
         <div class="section-title" data-key="title_notes">Notes</div>
@@ -1093,7 +1091,6 @@
             <div class="notes-empty" data-key="notes_empty">Notes coming soon...</div>
         </div>
     </section>
-<!-- SITEGEN:HOME_NOTES_END -->
 
     <!-- ===== Visitor Map ===== -->
     <div class="visitor-section">
@@ -1106,11 +1103,9 @@
 </div>
 
 <!-- ===== Footer ===== -->
-<!-- SITEGEN:HOME_FOOTER_START -->
 <footer class="footer">
     &copy; 2025–2026 Runde Yang. Built with care.
 </footer>
-<!-- SITEGEN:HOME_FOOTER_END -->
 
 <!-- ===== Lightbox ===== -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
@@ -1122,7 +1117,6 @@
 <script src="assets/mochi/mochi-frame-metrics.js"></script>
 <script src="assets/mochi/mochi-pet.js"></script>
 <script>
-/* SITEGEN:HOME_I18N_START */
 /* ===== i18n Content ===== */
 const i18n = {
     "en": {
@@ -1146,7 +1140,7 @@ const i18n = {
         "life_card_title": "Beyond Research",
         "life_card_desc": "Footprints map, bookshelf, thoughts, and more.",
         "notes_empty": "Notes coming soon...",
-        "news_1": "Personal homepage launched.",
+        "news_1": "25-26 Spring Finals finished.",
         "proj_appcopilot": "A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.",
         "proj_teachmaster": "A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.",
         "cap_meteor": "Orion Nebula, 2025",
@@ -1178,7 +1172,7 @@ const i18n = {
         "life_card_title": "科研之外",
         "life_card_desc": "足迹地图、书影、随笔，以及更多。",
         "notes_empty": "笔记即将上线……",
-        "news_1": "个人主页上线。",
+        "news_1": "期末终验考完啦！",
         "proj_appcopilot": "一个多模态多智能体设备端助手，探索工具使用、规划和鲁棒的 UI 定位。",
         "proj_teachmaster": "一个多智能体框架，使用代码作为中间语义表示，自动生成结构化的教育视频。",
         "cap_meteor": "猎户座大星云，2025",
@@ -1210,7 +1204,7 @@ const i18n = {
         "life_card_title": "科研之外",
         "life_card_desc": "足跡地圖、書影、隨筆，以及更多。",
         "notes_empty": "筆記即將上線……",
-        "news_1": "個人主頁上線。",
+        "news_1": "期末终于考完啦！",
         "proj_appcopilot": "一個多模態多智能體設備端助手，探索工具使用、規劃和魯棒的 UI 定位。",
         "proj_teachmaster": "一個多智能體框架，使用代碼作為中間語義表示，自動生成結構化的教育視頻。",
         "cap_meteor": "獵戶座大星雲，2025",
@@ -1222,7 +1216,6 @@ const i18n = {
         "cap_cake": "烘焙社草莓蛋糕"
     }
 };
-/* SITEGEN:HOME_I18N_END */
 
 let currentLang = localStorage.getItem('preferredLang') || 'en';
 
@@ -1334,13 +1327,11 @@ setLang = function(lang) {
 
 fetchWeather();
 
-/* SITEGEN:HOME_CITATIONS_START */
 /* ===== Citations ===== */
 const citations = {
-    "AppCopilot_2025": "@misc{fan2025appcopilotgeneralaccuratelonghorizon,\n  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},\n  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},\n  year={2025},\n  eprint={2509.02444},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2509.02444}\n}",
-    "Generative_2025": "@misc{wang2025generativeteachingcode,\n  title={Generative Teaching via Code},\n  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},\n  year={2025},\n  eprint={2601.04204},\n  archivePrefix={arXiv},\n  primaryClass={cs.CY},\n  url={https://arxiv.org/abs/2601.04204}\n}"
+    "Generative_2025": "@misc{wang2025generativeteachingcode,\n  title={Generative Teaching via Code},\n  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},\n  year={2025},\n  eprint={2601.04204},\n  archivePrefix={arXiv},\n  primaryClass={cs.CY},\n  url={https://arxiv.org/abs/2601.04204}\n}",
+    "AppCopilot_2025": "@misc{fan2025appcopilotgeneralaccuratelonghorizon,\n  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},\n  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},\n  year={2025},\n  eprint={2509.02444},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2509.02444}\n}"
 };
-/* SITEGEN:HOME_CITATIONS_END */
 
 function copyCitation(id) {
     const bib = citations[id];

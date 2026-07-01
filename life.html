@@ -220,6 +220,47 @@
             font-size: 0.92rem;
             color: var(--text-secondary);
             line-height: 1.7;
+            white-space: pre-line;
+        }
+        .thought-text-collapsed {
+            max-height: 12.4em;
+            overflow: hidden;
+            position: relative;
+        }
+        .thought-text-collapsed::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 3.5em;
+            background: linear-gradient(180deg, rgba(250,250,248,0), var(--bg));
+            pointer-events: none;
+        }
+        .thought-text-expanded {
+            max-height: none;
+        }
+        .thought-text-expanded::after {
+            display: none;
+        }
+        .thought-toggle {
+            margin-top: 10px;
+            padding: 0 0 2px;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: var(--font-en);
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: color var(--transition), border-color var(--transition);
+        }
+        .thought-toggle:hover {
+            color: var(--text);
+            border-color: var(--text);
+        }
+        .thought-toggle[hidden] {
+            display: none;
         }
 
         /* Friends */
@@ -301,42 +342,40 @@
 
 <div class="container">
 
-    <!-- SITEGEN:LIFE_GALLERY_START -->
     <!-- Gallery -->
     <section id="gallery" class="fade-in">
         <div class="section-title" data-key="title_gallery">Gallery</div>
         <div class="gallery-grid">
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/meteor.jpg" alt="Orion Nebula" loading="lazy" decoding="async">
+                    <img src="images/meteor.jpg" alt="Orion Nebula">
                     <div class="gallery-caption" data-key="cap_meteor">Orion Nebula, 2025</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/那日.jpg" alt="Stargazing" loading="lazy" decoding="async">
+                    <img src="images/那日.jpg" alt="Stargazing">
                     <div class="gallery-caption" data-key="cap_nari">Stargazing camp</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/千島湖.jpg" alt="Qiandao Lake" loading="lazy" decoding="async">
+                    <img src="images/千島湖.jpg" alt="Qiandao Lake">
                     <div class="gallery-caption" data-key="cap_qiandaohu">Qiandao Lake sunset</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/千島湖路上.jpg" alt="Road" loading="lazy" decoding="async">
+                    <img src="images/千島湖路上.jpg" alt="Road">
                     <div class="gallery-caption" data-key="cap_road">On the road to Qiandao Lake</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/美哉吾校.jpg" alt="Campus" loading="lazy" decoding="async">
+                    <img src="images/美哉吾校.jpg" alt="Campus">
                     <div class="gallery-caption" data-key="cap_campus">SJTU Campus in spring</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/紫金山.jpg" alt="Zijin Mountain" loading="lazy" decoding="async">
+                    <img src="images/紫金山.jpg" alt="Zijin Mountain">
                     <div class="gallery-caption" data-key="cap_zijinshan">Zijin Mountain, Nanjing</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/烘焙社草莓蛋糕.jpg" alt="Cake" loading="lazy" decoding="async">
+                    <img src="images/烘焙社草莓蛋糕.jpg" alt="Cake">
                     <div class="gallery-caption" data-key="cap_cake">Baking club strawberry cake</div>
                 </div>
         </div>
     </section>
-<!-- SITEGEN:LIFE_GALLERY_END -->
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
@@ -354,7 +393,6 @@
         </div>
     </section>
 
-    <!-- SITEGEN:LIFE_SHELF_START -->
     <!-- Shelf -->
     <section id="shelf" class="fade-in">
         <div class="section-title" data-key="title_shelf">Shelf</div>
@@ -375,16 +413,32 @@
             </div>
         </div>
     </section>
-<!-- SITEGEN:LIFE_SHELF_END -->
 
-    <!-- SITEGEN:LIFE_THOUGHTS_START -->
     <!-- Thoughts -->
     <section id="thoughts" class="fade-in">
         <div class="section-title" data-key="title_thoughts">Thoughts</div>
         <div class="thoughts-list">
             <div class="thought-item">
+                <div class="thought-date" data-key="date_thought_0629">Jun 29, 2026</div>
+                <div class="thought-text thought-text-collapsed" data-key="thought_0629">See Chinese version, record of last night's dream.</div>
+                <button class="thought-toggle" type="button" data-thought-toggle aria-expanded="false">Read more</button>
+            </div>
+            <div class="thought-item">
                 <div class="thought-date" data-key="date_thought_1">Jan 16, 2026</div>
-                <div class="thought-text" data-key="thought_1">Today, the weight of finals and endless tasks has finally lifted.<br><br>My sleep has been a chaotic blur lately—restless and sparse. <br><br>Around 9 PM, a wave of malaise drove me to bed, where I lingered in that hollow space between wakefulness and dreams. By 11:56 PM, I found myself fully awake, yet deeply fatigued.<br><br>I began listening to 'The Shorekeeper’s Theme.' It is remarkably soothing, yet it carries a defiant, positive undertone: I want to play the piano, I want to train, I want to live—truly live—for myself. I crave a life of warmth and intensity; I refuse to be just another exam robot.<br><br>We are meant to live lives of abundance; even when the world bears down on us, we must not allow our spirits to wither.<br><br>In the embrace of the piano, my mind finally exhales. My soul drifts back to a carefree past, where beautiful moments flicker like scenes from a vintage film.<br><br>I am profoundly moved.</div>
+                <div class="thought-text thought-text-collapsed" data-key="thought_1">Today, the weight of finals and endless tasks has finally lifted.
+
+My sleep has been a chaotic blur lately—restless and sparse.
+
+Around 9 PM, a wave of malaise drove me to bed, where I lingered in that hollow space between wakefulness and dreams. By 11:56 PM, I found myself fully awake, yet deeply fatigued.
+
+I began listening to 'The Shorekeeper’s Theme.' It is remarkably soothing, yet it carries a defiant, positive undertone: I want to play the piano, I want to train, I want to live—truly live—for myself. I crave a life of warmth and intensity; I refuse to be just another exam robot.
+
+We are meant to live lives of abundance; even when the world bears down on us, we must not allow our spirits to wither.
+
+In the embrace of the piano, my mind finally exhales. My soul drifts back to a carefree past, where beautiful moments flicker like scenes from a vintage film.
+
+I am profoundly moved.</div>
+                <button class="thought-toggle" type="button" data-thought-toggle aria-expanded="false">Read more</button>
             </div>
             <div class="thought-item">
                 <div class="thought-date" data-key="date_thought_2">Nov 10, 2024</div>
@@ -392,9 +446,7 @@
             </div>
         </div>
     </section>
-<!-- SITEGEN:LIFE_THOUGHTS_END -->
 
-    <!-- SITEGEN:LIFE_FRIENDS_START -->
     <!-- Friends -->
     <section id="friends" class="fade-in">
         <div class="section-title" data-key="title_friends">Friends</div>
@@ -403,14 +455,12 @@
             <a href="#" class="friend-link">SJTU AI Club</a>
         </div>
     </section>
-<!-- SITEGEN:LIFE_FRIENDS_END -->
 
 </div>
 
 <footer class="footer">&copy; 2025–2026 Runde Yang.</footer>
 
 <script>
-/* SITEGEN:LIFE_I18N_START */
 /* ===== i18n ===== */
 const i18n = {
     "en": {
@@ -435,8 +485,10 @@ const i18n = {
         "cap_cake": "Baking club strawberry cake",
         "book_dl": "Mathematical foundation is excellent. Not just a tool book, but a mind map.",
         "movie_interstellar": "Love is the one thing that transcends time and space.",
+        "date_thought_0629": "Jun 29, 2026",
+        "thought_0629": "See Chinese version, record of last night's dream.",
         "date_thought_1": "Jan 16, 2026",
-        "thought_1": "Today, the weight of finals and endless tasks has finally lifted.<br><br>My sleep has been a chaotic blur lately—restless and sparse. <br><br>Around 9 PM, a wave of malaise drove me to bed, where I lingered in that hollow space between wakefulness and dreams. By 11:56 PM, I found myself fully awake, yet deeply fatigued.<br><br>I began listening to 'The Shorekeeper’s Theme.' It is remarkably soothing, yet it carries a defiant, positive undertone: I want to play the piano, I want to train, I want to live—truly live—for myself. I crave a life of warmth and intensity; I refuse to be just another exam robot.<br><br>We are meant to live lives of abundance; even when the world bears down on us, we must not allow our spirits to wither.<br><br>In the embrace of the piano, my mind finally exhales. My soul drifts back to a carefree past, where beautiful moments flicker like scenes from a vintage film.<br><br>I am profoundly moved.",
+        "thought_1": "Today, the weight of finals and endless tasks has finally lifted.\n\nMy sleep has been a chaotic blur lately—restless and sparse.\n\nAround 9 PM, a wave of malaise drove me to bed, where I lingered in that hollow space between wakefulness and dreams. By 11:56 PM, I found myself fully awake, yet deeply fatigued.\n\nI began listening to 'The Shorekeeper’s Theme.' It is remarkably soothing, yet it carries a defiant, positive undertone: I want to play the piano, I want to train, I want to live—truly live—for myself. I crave a life of warmth and intensity; I refuse to be just another exam robot.\n\nWe are meant to live lives of abundance; even when the world bears down on us, we must not allow our spirits to wither.\n\nIn the embrace of the piano, my mind finally exhales. My soul drifts back to a carefree past, where beautiful moments flicker like scenes from a vintage film.\n\nI am profoundly moved.",
         "date_thought_2": "Nov 10, 2024",
         "thought_2": "Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera."
     },
@@ -462,8 +514,10 @@ const i18n = {
         "cap_cake": "烘焙社草莓蛋糕",
         "book_dl": "常读常新。数学基础部分写得极好，不仅是工具书，更是思维导图。",
         "movie_interstellar": "爱是唯一可以穿越时间与空间的事物。",
+        "date_thought_0629": "2026年6月29日",
+        "thought_0629": "他已经参加过一次高考，而且考得很好。\n\n关于那一次考试，没有什么可供回想的场景。没有考场，没有发下来的卷子，也没有查到成绩的那一刻。它只是一件早已发生的事，如同姓名和年岁一样，原本就存在于他的记忆里。\n\n他考得很好。\n\n父亲却仍然让他复读。\n\n于是他又要参加一次高考，并在考试以前住进了爷爷家。\n\n爷爷家还是原来的爷爷家。门厅很窄，进门以后要换鞋；客厅的光线总比外面暗一些，茶几上放着遥控器、眼镜布和几只杯子。沙发、窗帘、电视柜，都在它们原来的位置。\n\n爷爷也还是原来的爷爷。\n\n他戴着那副眼镜，坐在客厅里。有时候看电视，有时候低头看手机，有时候只坐着，没有人知道他在想什么。\n\n同时，爷爷是皇帝。\n\n更确切地说，他是乾隆皇帝。\n\n这不是另外一种身份，也没有使他发生什么变化。爷爷并不穿龙袍，家里也没有奏折、侍卫和宫殿。他仍然戴着原来的眼镜，穿着家里的衣服，坐在原来的沙发上。皇帝似乎只是他的职业，如同一个人在单位里担任某个职位。他在家里是爷爷，在外面是皇帝，或者在家里也仍然是皇帝，只是没有必要特别说出来。\n\n所有人都知道这件事。\n\n父亲大概也有一个职位。\n\n他并不知道父亲究竟做什么，只觉得既然爷爷是皇帝，那么父亲理应也是一位官员。至于是什么官，负责什么事情，从来没有人说过。父亲自己似乎也不在意这些。他仍旧像平常一样生活、工作、接电话。\n\n父亲只在爷爷家出现过一次。\n\n那时他忽然知道父亲来了。\n\n父亲站在进门的门厅里，没有换鞋，也没有真正走进客厅。\n\n他大概是来问候爷爷的。\n\n爷爷坐在客厅里。父亲站在门厅处，向里面问了几句好，又回答了爷爷的一两句话。他始终没有往里走，姿态里有一种谨慎的恭敬，仿佛他来到这里，本来就只应当站在那里。\n\n父亲也许顺便看见了他。\n\n但父亲没有同他说话。\n\n他本来以为父亲还会在门口站一阵，等他再看过去的时候，门厅里已经没有人了。\n\n父亲走了以后，房子里又安静下来。\n\n爷爷并没有一直看着他，也不常问他复习得如何，可只要经过客厅，他就会不由自主地放轻脚步。他知道爷爷对第二次高考寄予厚望，也知道自己迟早要把写好的文章拿给爷爷看。\n\n至于爷爷是否满意，则很难事先知道。\n\n爷爷隔着镜片看人的时候，神情总不是十分清楚。他的脸似乎在那里，又似乎被客厅里的暗光遮住了一部分。他不开口，别人便不能肯定他究竟在想什么。\n\n有一天下雨，家里来了一位才子。\n\n他不记得那人是怎样进来的。\n\n最初，客厅里似乎只有爷爷。再后来，爷爷对面便有了一位才子。\n\n他没有朝那边细看。只知道那人已经坐在那里，偶尔说话，偶尔翻动桌上的纸。他颇有才名，性情也有些疏放，平日大约不十分在意规矩；在爷爷面前，却始终很恭敬。\n\n爷爷开口的时候，他会停下来听。\n\n爷爷问他什么，他便认真回答。\n\n这便足以让人知道，他也清楚爷爷是皇帝。\n\n至于他的面容、年纪和衣着，都没有引起过注意。\n\n外面的雨逐渐密了。\n\n水从窗玻璃上流下来，把楼房和树木冲得模糊。远处的树连成深暗的一片，近处的屋顶也像失去了坚硬的边缘。\n\n才子朝窗外看了很久，说，应当画下来。\n\n一张纸不知什么时候铺在桌上。\n\n那是一张横幅，纸色很浅。才子拿起笔，先在一侧落下几笔淡墨。墨在纸上慢慢散开，成了远山。山下有树，有水，有一两间藏在树后的屋舍。\n\n那并不是窗外真实的景物。\n\n画中没有现代的楼房和汽车，是一幅旧时的山水。远山被雨雾遮住，近处的树叶湿重，水面泛着很淡的墨色。一条小路从山脚伸出来，又消失在烟雨深处。几间屋子靠着水边，屋檐下面没有画人。\n\n才子一面看窗外，一面画纸上的古代雨景，仿佛两者原本就是同一处地方。\n\n画的上方留着大片空白。\n\n那些空白比山水本身更显眼。下面的树木、房舍和雨雾都沉在纸的下半部，上面空着，像一整片尚未落下来的天。\n\n他坐在才子旁边。\n\n他似乎也写了什么，也许是诗，也许只写了几个字。那一段并不清楚。纸和桌面有时很近，有时又隔得很远。才子的手在眼前移动，笔尖落下去，远处便多出一座山。\n\n画还没有完成，忽然有事情打断了。\n\n那是什么事情，他不知道。\n\n也许有人说了一句话，也许电话响了，也许屋外发生了什么。那件事本身没有留下形状，只留下了被中断的感觉。\n\n过了一段时间，才子重新坐回桌旁。\n\n雨还在下。\n\n画也还铺在那里。\n\n才子看着那幅画，已经没有了方才的兴致。他说，兴败了。\n\n爷爷没有催促他。\n\n才子坐了一会儿，最终还是重新拿起笔。他在远山后面补了几笔，又把近处一棵没有完成的树画完。后面的笔墨明显比先前更快，像只是为了不让画停在半途。\n\n有一处墨落得很重。\n\n他没有修改。\n\n随后，他把笔移到画上方的空白处，开始题跋。\n\n他站在旁边，看见那些字一个接一个出现。那时他看得非常清楚，甚至能够记住每一个字的位置。\n\n题跋大约是：\n 某年某月，过今上所居，与小主人坐观雨景。时远树含烟，疏林带润，山光水色，颇有清意。因欲为今上并小主人写此一时所见。方经营位置，忽为他事所扰，遂败清兴。笔墨未周，草草为之，聊供清览。\n\n他看见“今上”两个字，知道指的就是爷爷。爷爷仍戴着眼镜坐在客厅里，没有人觉得这两个字出现在画上有什么特别。\n\n才子题完字，将画送给爷爷看。\n\n他把画放到爷爷面前时，动作比作画时谨慎许多。爷爷低下头，隔着镜片看那幅雨景，也看空白处的题跋。\n\n那时爷爷的脸仍不大真切。\n\n只能看见眼镜反射着窗外灰白的光，看见他偶尔抬一下眉，或者将画向自己拉近一些。\n\n才子站在旁边等待。\n\n虽然看不清他的样子，却知道方才那种疏放的意思仍在，只是此刻不再随意说话。\n\n爷爷看了一会儿，说，画得不错。\n\n才子说，后面草率了。\n\n爷爷又看了一阵，没有责怪他。\n\n那幅画便被放在旁边。题跋朝上，墨迹慢慢变干。雨景静止在纸上，雨却像一直没有停。\n\n后来，他也写了一篇文章。\n\n那是一篇八股文。\n\n题目是什么，他在当时应当知道，如今回头去看，却只剩下题目存在过的感觉。他记得纸上有许多字，文章已经写得很完整，段落之间严丝合缝。\n\n他写文章时，爷爷一直在客厅。\n\n爷爷并没有催他。\n\n正因为没有催促，他反而不敢停下来。笔一行一行向下写。有些句子是他想出来的，有些句子则像早已写在纸上，只等他的笔经过。\n\n文章最后自然收住。\n\n他把纸整理好，拿去给爷爷看。\n\n那位才子是否仍在屋里，他已经记不清了。有时觉得才子还在旁边，有时那里只放着一只杯子和那幅雨景图。\n\n他把文章递给爷爷。\n\n爷爷接过去，没有立即说话。\n\n他先摘下眼镜，拿眼镜布擦了擦，又重新戴上。然后从第一行开始，一行一行地看。\n\n他站在旁边。\n\n最初，他很怕爷爷不满意。\n\n爷爷每停一次，他便觉得那里大概写错了。爷爷略微皱眉，他便怀疑整篇文章都已经坏掉。可爷爷只是把纸拿近一点，又继续向下读。\n\n客厅里的光渐渐发生了变化。\n\n窗外的雨声变小了。\n\n画上的题跋仍然很清楚，才子的名字却已经不再能够辨认。最初那些模糊的人和事，也像隔着越来越远的水汽退了下去。\n\n只有爷爷逐渐清楚起来。\n\n他看完了文章。\n\n再抬起头时，脸上的威严已经淡了一些。他仍是皇帝，也仍是那个让人不敢随意靠近的爷爷，但他的目光不再像是在审视一篇等待裁定的文章。\n\n他看着孙子。\n\n看了一阵，脸上有了很明显的满意。\n\n他说，这篇文章写得好。\n\n后来发生的事情比前面清楚得多。\n\n爷爷把文章拿在一只手里，激动地伸出另一只手，紧紧握住了他的手。\n\n爷爷的手温暖而有力。\n\n爷爷笑了。\n\n那不是带着分寸的微笑，也不是长辈为了鼓励孩子而有意露出的神情。他笑得十分开心，眼睛在镜片后面弯起来，脸上的皱纹也跟着舒展开。\n\n那是一种完全属于爷爷的笑。\n\n是爷爷看着自己的孙子时，毫无保留地疼爱他、为他高兴的笑。\n\n他说，写得很好。\n\n一定能中。\n\n画面停在这里。\n\n过了一会儿，它又重新出现。\n\n这一次，他能够看清爷爷眼镜的镜框，看清镜片后面的眼睛，也能看清爷爷脸上的每一道皱纹。先前那些不确定的光影全都消失了，爷爷的脸变得同现实里一样清晰。\n\n爷爷激动地握着他的手。\n\n脸上仍是那种十分开心的笑。\n\n那笑容里没有考量，也没有威严，没有皇帝面对晚辈时应当保留的距离。爷爷只是因为孙子写出了一篇好文章而无比高兴，又因为那是自己的孙子，而显得格外疼爱。\n\n文章还在他的另一只手中，纸边略微弯曲。\n\n那幅画似乎就在旁边，又似乎已经不在了。画上的“今上”、才子的落款、窗外的雨，都逐渐退到看不见的地方。\n\n只剩下爷爷。\n\n他很清楚地看着孙子。\n\n爷爷似乎已经不再是皇帝，或者他仍然是，只是这件事已经没有那么重要。\n\n他笑着。\n\n随后，画面第三次出现。\n\n爷爷的脸比前一次更加清晰。他戴着那副熟悉的眼镜，眼睛里全是欢喜。他紧紧握着孙子的手，仿佛仍觉得只说一句还不够，还要让他从那只手上知道，爷爷究竟有多么满意。\n\n他能够看见爷爷嘴角的笑意。\n\n看见他脸上每一个细小的变化。\n\n爷爷十分开心。\n\n又十分疼爱他。\n\n他握着孙子的手，另一只手拿着那篇文章，笑着看他，像是已经把所有需要说的话都说完了，又像是还想再说许多遍。\n\n画面没有继续。\n\n只是又回到这里。\n\n爷爷激动地握住他的手。\n\n他看得清爷爷的脸。\n\n看见爷爷满脸慈爱而欢喜地笑着。\n\n然后，再一次。",
         "date_thought_1": "2026年1月16日",
-        "thought_1": "今天终于把期末所有考试，事情全做完<br><br>这段时间睡眠紊乱不规律不足，今天晚上才九十点钟就感觉很不舒服，遂上床。上了床半天睡不着，闭着眼睛半梦半醒的<br><br>到了十一点五十六现在是，成功给自己整清醒了<br><br>然后又顿觉困乏，躺下听守岸人小曲，才发现原来这么催眠，还有一种积极的暗示，我要弹钢琴，我要锻炼我要积极的生活，我要为自己而活，我要热烈，我不要作做题家<br><br>人应该活得丰盈，即便遇到压力不能丰盈也不该放任自己腐烂<br><br>我发现听钢琴曲的时候思维是放松的，灵魂在曲子的包裹下好像回到无忧无虑的过去，以前那些美好时光像电影片段一样闪现<br><br>真的很感动。",
+        "thought_1": "今天终于把期末所有考试，事情全做完\n\n这段时间睡眠紊乱不规律不足，今天晚上才九十点钟就感觉很不舒服，遂上床。上了床半天睡不着，闭着眼睛半梦半醒的\n\n到了十一点五十六现在是，成功给自己整清醒了\n\n然后又顿觉困乏，躺下听守岸人小曲，才发现原来这么催眠，还有一种积极的暗示，我要弹钢琴，我要锻炼我要积极的生活，我要为自己而活，我要热烈，我不要作做题家\n\n人应该活得丰盈，即便遇到压力不能丰盈也不该放任自己腐烂\n\n我发现听钢琴曲的时候思维是放松的，灵魂在曲子的包裹下好像回到无忧无虑的过去，以前那些美好时光像电影片段一样闪现\n\n真的很感动。",
         "date_thought_2": "Nov 10, 2024",
         "thought_2": "千岛湖的流星雨。肉眼看到的比相机拍到的震撼一万倍。"
     },
@@ -489,13 +543,14 @@ const i18n = {
         "cap_cake": "烘焙社草莓蛋糕",
         "book_dl": "常讀常新。數學基礎部分寫得極好，不僅是工具書，更是思維導圖。",
         "movie_interstellar": "愛是唯一可以穿越時間與空間的事物。",
+        "date_thought_0629": "2026年6月29日",
+        "thought_0629": "他已經參加過一次高考，而且考得很好。\n\n關於那一次考試，沒有什麼可供回想的場景。沒有考場，沒有發下來的卷子，也沒有查到成績的那一刻。它只是一件早已發生的事，如同姓名和年歲一樣，原本就存在於他的記憶裡。\n\n他考得很好。\n\n父親卻仍然讓他複讀。\n\n於是他又要參加一次高考，並在考試以前住進了爺爺家。\n\n爺爺家還是原來的爺爺家。門廳很窄，進門以後要換鞋；客廳的光線總比外面暗一些，茶几上放著遙控器、眼鏡布和幾隻杯子。沙發、窗簾、電視櫃，都在它們原來的位置。\n\n爺爺也還是原來的爺爺。\n\n他戴著那副眼鏡，坐在客廳裡。有時候看電視，有時候低頭看手機，有時候只坐著，沒有人知道他在想什麼。\n\n同時，爺爺是皇帝。\n\n更確切地說，他是乾隆皇帝。\n\n這不是另外一種身份，也沒有使他發生什麼變化。爺爺並不穿龍袍，家裡也沒有奏摺、侍衛和宮殿。他仍然戴著原來的眼鏡，穿著家裡的衣服，坐在原來的沙發上。皇帝似乎只是他的職業，如同一個人在單位裡擔任某個職位。他在家裡是爺爺，在外面是皇帝，或者在家裡也仍然是皇帝，只是沒有必要特別說出來。\n\n所有人都知道這件事。\n\n父親大概也有一個職位。\n\n他並不知道父親究竟做什麼，只覺得既然爺爺是皇帝，那麼父親理應也是一位官員。至於是什麼官，負責什麼事情，從來沒有人說過。父親自己似乎也不在意這些。他仍舊像平常一樣生活、工作、接電話。\n\n父親只在爺爺家出現過一次。\n\n那時他忽然知道父親來了。\n\n父親站在進門的門廳裡，沒有換鞋，也沒有真正走進客廳。\n\n他大概是來問候爺爺的。\n\n爺爺坐在客廳裡。父親站在門廳處，向裡面問了幾句好，又回答了爺爺的一兩句話。他始終沒有往裡走，姿態裡有一種謹慎的恭敬，仿佛他來到這裡，本來就只應當站在那裡。\n\n父親也許順便看見了他。\n\n但父親沒有同他說話。\n\n他本來以為父親還會在門口站一陣，等他再看過去的時候，門廳裡已經沒有人了。\n\n父親走了以後，房子裡又安靜下來。\n\n爺爺並沒有一直看著他，也不常問他複習得如何，可只要經過客廳，他就會不由自主地放輕腳步。他知道爺爺對第二次高考寄予厚望，也知道自己遲早要把寫好的文章拿給爺爺看。\n\n至於爺爺是否滿意，則很難事先知道。\n\n爺爺隔著鏡片看人的時候，神情總不是十分清楚。他的臉似乎在那裡，又似乎被客廳裡的暗光遮住了一部分。他不開口，別人便不能肯定他究竟在想什麼。\n\n有一天下雨，家裡來了一位才子。\n\n他不記得那人是怎樣進來的。\n\n最初，客廳裡似乎只有爺爺。再後來，爺爺對面便有了一位才子。\n\n他沒有朝那邊細看。只知道那人已經坐在那裡，偶爾說話，偶爾翻動桌上的紙。他頗有才名，性情也有些疏放，平日大約不十分在意規矩；在爺爺面前，卻始終很恭敬。\n\n爺爺開口的時候，他會停下來聽。\n\n爺爺問他什麼，他便認真回答。\n\n這便足以讓人知道，他也清楚爺爺是皇帝。\n\n至於他的面容、年紀和衣著，都沒有引起過注意。\n\n外面的雨逐漸密了。\n\n水從窗玻璃上流下來，把樓房和樹木沖得模糊。遠處的樹連成深暗的一片，近處的屋頂也像失去了堅硬的邊緣。\n\n才子朝窗外看了很久，說，應當畫下來。\n\n一張紙不知什麼時候鋪在桌上。\n\n那是一張橫幅，紙色很淺。才子拿起筆，先在一側落下幾筆淡墨。墨在紙上慢慢散開，成了遠山。山下有樹，有水，有一兩間藏在樹後的屋舍。\n\n那並不是窗外真實的景物。\n\n畫中沒有現代的樓房和汽車，是一幅舊時的山水。遠山被雨霧遮住，近處的樹葉濕重，水面泛著很淡的墨色。一條小路從山腳伸出來，又消失在煙雨深處。幾間屋子靠著水邊，屋簷下面沒有畫人。\n\n才子一面看窗外，一面畫紙上的古代雨景，仿佛兩者原本就是同一處地方。\n\n畫的上方留著大片空白。\n\n那些空白比山水本身更顯眼。下面的樹木、房舍和雨霧都沉在紙的下半部，上面空著，像一整片尚未落下來的天。\n\n他坐在才子旁邊。\n\n他似乎也寫了什麼，也許是詩，也許只寫了幾個字。那一段並不清楚。紙和桌面有時很近，有時又隔得很遠。才子的手在眼前移動，筆尖落下去，遠處便多出一座山。\n\n畫還沒有完成，忽然有事情打斷了。\n\n那是什麼事情，他不知道。\n\n也許有人說了一句話，也許電話響了，也許屋外發生了什麼。那件事本身沒有留下形狀，只留下了被中斷的感覺。\n\n過了一段時間，才子重新坐回桌旁。\n\n雨還在下。\n\n畫也還鋪在那裡。\n\n才子看著那幅畫，已經沒有了方才的興致。他說，興敗了。\n\n爺爺沒有催促他。\n\n才子坐了一會兒，最終還是重新拿起筆。他在遠山後面補了幾筆，又把近處一棵沒有完成的樹畫完。後面的筆墨明顯比先前更快，像只是為了不讓畫停在半途。\n\n有一處墨落得很重。\n\n他沒有修改。\n\n隨後，他把筆移到畫上方的空白處，開始題跋。\n\n他站在旁邊，看見那些字一個接一個出現。那時他看得非常清楚，甚至能夠記住每一個字的位置。\n\n題跋大約是：\n 某年某月，過今上所居，與小主人坐觀雨景。時遠樹含煙，疏林帶潤，山光水色，頗有清意。因欲為今上並小主人寫此一時所見。方經營位置，忽為他事所擾，遂敗清興。筆墨未周，草草為之，聊供清覽。\n\n他看見“今上”兩個字，知道指的就是爺爺。爺爺仍戴著眼鏡坐在客廳裡，沒有人覺得這兩個字出現在畫上有什麼特別。\n\n才子題完字，將畫送給爺爺看。\n\n他把畫放到爺爺面前時，動作比作畫時謹慎許多。爺爺低下頭，隔著鏡片看那幅雨景，也看空白處的題跋。\n\n那時爺爺的臉仍不大真切。\n\n只能看見眼鏡反射著窗外灰白的光，看見他偶爾抬一下眉，或者將畫向自己拉近一些。\n\n才子站在旁邊等待。\n\n雖然看不清他的樣子，卻知道方才那種疏放的意思仍在，只是此刻不再隨意說話。\n\n爺爺看了一會兒，說，畫得不錯。\n\n才子說，後面草率了。\n\n爺爺又看了一陣，沒有責怪他。\n\n那幅畫便被放在旁邊。題跋朝上，墨蹟慢慢變幹。雨景靜止在紙上，雨卻像一直沒有停。\n\n後來，他也寫了一篇文章。\n\n那是一篇八股文。\n\n題目是什麼，他在當時應當知道，如今回頭去看，卻只剩下題目存在過的感覺。他記得紙上有許多字，文章已經寫得很完整，段落之間嚴絲合縫。\n\n他寫文章時，爺爺一直在客廳。\n\n爺爺並沒有催他。\n\n正因為沒有催促，他反而不敢停下來。筆一行一行向下寫。有些句子是他想出來的，有些句子則像早已寫在紙上，只等他的筆經過。\n\n文章最後自然收住。\n\n他把紙整理好，拿去給爺爺看。\n\n那位才子是否仍在屋裡，他已經記不清了。有時覺得才子還在旁邊，有時那裡只放著一隻杯子和那幅雨景圖。\n\n他把文章遞給爺爺。\n\n爺爺接過去，沒有立即說話。\n\n他先摘下眼鏡，拿眼鏡布擦了擦，又重新戴上。然後從第一行開始，一行一行地看。\n\n他站在旁邊。\n\n最初，他很怕爺爺不滿意。\n\n爺爺每停一次，他便覺得那裡大概寫錯了。爺爺略微皺眉，他便懷疑整篇文章都已經壞掉。可爺爺只是把紙拿近一點，又繼續向下讀。\n\n客廳裡的光漸漸發生了變化。\n\n窗外的雨聲變小了。\n\n畫上的題跋仍然很清楚，才子的名字卻已經不再能夠辨認。最初那些模糊的人和事，也像隔著越來越遠的水汽退了下去。\n\n只有爺爺逐漸清楚起來。\n\n他看完了文章。\n\n再抬起頭時，臉上的威嚴已經淡了一些。他仍是皇帝，也仍是那個讓人不敢隨意靠近的爺爺，但他的目光不再像是在審視一篇等待裁定的文章。\n\n他看著孫子。\n\n看了一陣，臉上有了很明顯的滿意。\n\n他說，這篇文章寫得好。\n\n後來發生的事情比前面清楚得多。\n\n爺爺把文章拿在一隻手裡，激動地伸出另一隻手，緊緊握住了他的手。\n\n爺爺的手溫暖而有力。\n\n爺爺笑了。\n\n那不是帶著分寸的微笑，也不是長輩為了鼓勵孩子而有意露出的神情。他笑得十分開心，眼睛在鏡片後面彎起來，臉上的皺紋也跟著舒展開。\n\n那是一種完全屬於爺爺的笑。\n\n是爺爺看著自己的孫子時，毫無保留地疼愛他、為他高興的笑。\n\n他說，寫得很好。\n\n一定能中。\n\n畫面停在這裡。\n\n過了一會兒，它又重新出現。\n\n這一次，他能夠看清爺爺眼鏡的鏡框，看清鏡片後面的眼睛，也能看清爺爺臉上的每一道皺紋。先前那些不確定的光影全都消失了，爺爺的臉變得同現實裡一樣清晰。\n\n爺爺激動地握著他的手。\n\n臉上仍是那種十分開心的笑。\n\n那笑容裡沒有考量，也沒有威嚴，沒有皇帝面對晚輩時應當保留的距離。爺爺只是因為孫子寫出了一篇好文章而無比高興，又因為那是自己的孫子，而顯得格外疼愛。\n\n文章還在他的另一隻手中，紙邊略微彎曲。\n\n那幅畫似乎就在旁邊，又似乎已經不在了。畫上的“今上”、才子的落款、窗外的雨，都逐漸退到看不見的地方。\n\n只剩下爺爺。\n\n他很清楚地看著孫子。\n\n爺爺似乎已經不再是皇帝，或者他仍然是，只是這件事已經沒有那麼重要。\n\n他笑著。\n\n隨後，畫面第三次出現。\n\n爺爺的臉比前一次更加清晰。他戴著那副熟悉的眼鏡，眼睛裡全是歡喜。他緊緊握著孫子的手，仿佛仍覺得只說一句還不夠，還要讓他從那只手上知道，爺爺究竟有多麼滿意。\n\n他能夠看見爺爺嘴角的笑意。\n\n看見他臉上每一個細小的變化。\n\n爺爺十分開心。\n\n又十分疼愛他。\n\n他握著孫子的手，另一隻手拿著那篇文章，笑著看他，像是已經把所有需要說的話都說完了，又像是還想再說許多遍。\n\n畫面沒有繼續。\n\n只是又回到這裡。\n\n爺爺激動地握住他的手。\n\n他看得清爺爺的臉。\n\n看見爺爺滿臉慈愛而歡喜地笑著。\n\n然後，再一次。\n",
         "date_thought_1": "2026年1月16日",
-        "thought_1": "今天終於把期末所有考試，事情全做完<br><br>這段時間睡眠紊亂不規律不足，今天晚上才九十點鐘就感覺很不舒服，遂上床。上了床半天睡不著，閉著眼睛半夢半醒的<br><br>到了十一點五十六現在是，成功給自己整清醒了<br><br>然後又頓覺困乏，躺下聽守岸人小曲，才發現原來這麼催眠，還有一種積極的暗示，我要彈鋼琴，我要鍛煉我要積極的生活，我要為自己而活，我要熱烈，我不要作做題家<br><br>人應該活得豐盈，即便遇到壓力不能豐盈也不該放任自己腐爛<br><br>我發現聽鋼琴曲的時候思維是放鬆的，靈魂在曲子的包裹下好像回到無憂無慮的過去，以前的那些美好時光像電影片段一樣閃現<br><br>真的很感動。",
+        "thought_1": "今天終於把期末所有考試，事情全做完\n\n這段時間睡眠紊亂不規律不足，今天晚上才九十點鐘就感覺很不舒服，遂上床。上了床半天睡不著，閉著眼睛半夢半醒的\n\n到了十一點五十六現在是，成功給自己整清醒了\n\n然後又頓覺困乏，躺下聽守岸人小曲，才發現原來這麼催眠，還有一種積極的暗示，我要彈鋼琴，我要鍛煉我要積極的生活，我要為自己而活，我要熱烈，我不要作做題家\n\n人應該活得豐盈，即便遇到壓力不能豐盈也不該放任自己腐爛\n\n我發現聽鋼琴曲的時候思維是放鬆的，靈魂在曲子的包裹下好像回到無憂無慮的過去，以前的那些美好時光像電影片段一樣閃現\n\n真的很感動。",
         "date_thought_2": "Nov 10, 2024",
         "thought_2": "千島湖的流星雨。肉眼看到的比相機拍到的震撼一萬倍。"
     }
 };
-/* SITEGEN:LIFE_I18N_END */
 
 function setLang(lang) {
     localStorage.setItem('preferredLang', lang);
@@ -512,11 +567,47 @@ function setLang(lang) {
         const key = el.getAttribute('data-key');
         if (data[key] !== undefined) el.innerHTML = data[key];
     });
+    updateThoughtToggles(lang);
 
     // Update chart titles
     if (window.myChartChina) window.myChartChina.setOption({ title: { text: data.chart_china } });
     if (window.myChartWorld) window.myChartWorld.setOption({ title: { text: data.chart_world } });
 }
+
+const thoughtToggleLabels = {
+    en: { more: 'Read more', less: 'Collapse' },
+    'zh-CN': { more: '展开', less: '收起' },
+    'zh-TW': { more: '展開', less: '收起' }
+};
+
+function updateThoughtToggles(lang) {
+    const labels = thoughtToggleLabels[lang] || thoughtToggleLabels.en;
+    document.querySelectorAll('[data-thought-toggle]').forEach(button => {
+        const text = button.previousElementSibling;
+        if (!text) return;
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        text.classList.toggle('thought-text-expanded', expanded);
+        text.classList.toggle('thought-text-collapsed', !expanded);
+        button.textContent = expanded ? labels.less : labels.more;
+        requestAnimationFrame(() => {
+            if (expanded) {
+                button.hidden = false;
+                return;
+            }
+            const needsToggle = text.scrollHeight > text.clientHeight + 4;
+            button.hidden = !needsToggle;
+            if (!needsToggle) text.classList.remove('thought-text-collapsed');
+        });
+    });
+}
+
+document.addEventListener('click', event => {
+    const button = event.target.closest('[data-thought-toggle]');
+    if (!button) return;
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!expanded));
+    updateThoughtToggles(localStorage.getItem('preferredLang') || 'en');
+});
 
 /* ===== Lightbox ===== */
 function openLightbox(el) {
@@ -536,10 +627,17 @@ function toggleNav() { document.getElementById('navLinks').classList.toggle('ope
 document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
 
 /* ===== Scroll Animation ===== */
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+const fadeEls = document.querySelectorAll('.fade-in');
+const showSection = el => el.classList.add('visible');
+if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) showSection(e.target); });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => observer.observe(el));
+    window.addEventListener('load', () => setTimeout(() => fadeEls.forEach(showSection), 900));
+} else {
+    fadeEls.forEach(showSection);
+}
 
 /* ===== ECharts Maps ===== */
 let mapsReady = false;
@@ -556,7 +654,6 @@ function resizeMaps() {
     if (myChartWorld) myChartWorld.resize();
 }
 
-/* SITEGEN:LIFE_VISITED_START */
 const visited = [
     "上海市",
     "西安市",
@@ -594,7 +691,6 @@ const visited = [
     "嘉兴市",
     "太原市"
 ];
-/* SITEGEN:LIFE_VISITED_END */
 
 const MUNICIPALITIES = new Set(['北京市', '上海市', '天津市', '重庆市']);
 
@@ -694,12 +790,10 @@ function initMaps() {
                     label: { show: true, position: 'right', formatter: '{b}', fontSize: 11, color: '#666' },
                     symbolSize: 5,
                     itemStyle: { color: '#2d3436' },
-                    /* SITEGEN:LIFE_WORLD_POINTS_START */
-data: [
+                    data: [
                     { name: "Shanghai", value: [121.4737, 31.2304] },
                     { name: "New York", value: [-74.006, 40.7128] }
                 ]
-/* SITEGEN:LIFE_WORLD_POINTS_END */
                 }]
             });
         });

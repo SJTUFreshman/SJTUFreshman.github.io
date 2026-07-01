@@ -10,6 +10,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent
 CONTENT_FILE = ROOT / "site_content.json"
 LANGS = ("en", "zh-CN", "zh-TW")
+THOUGHT_COLLAPSE_CHARS = 700
 
 
 def esc(value: Any) -> str:
@@ -38,13 +39,13 @@ def load_content(root: Path = ROOT) -> dict[str, Any]:
 def replace_region(text: str, name: str, replacement: str, fallback_pattern: str) -> str:
     start = f"<!-- SITEGEN:{name}_START -->"
     end = f"<!-- SITEGEN:{name}_END -->"
-    wrapped = f"{start}\n{replacement.rstrip()}\n{end}"
+    wrapped = replacement.rstrip()
 
     if start in text and end in text:
-        pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
+        pattern = re.compile(r"^[ \t]*" + re.escape(start) + r"\s*.*?^[ \t]*" + re.escape(end), re.S | re.M)
         text, count = pattern.subn(lambda _match: wrapped, text, count=1)
     else:
-        text, count = re.subn(fallback_pattern, lambda _match: wrapped, text, count=1, flags=re.S)
+        text, count = re.subn(r"^[ \t]*" + fallback_pattern, lambda _match: wrapped, text, count=1, flags=re.S | re.M)
 
     if count != 1:
         raise RuntimeError(f"Could not replace region {name}")
@@ -54,13 +55,13 @@ def replace_region(text: str, name: str, replacement: str, fallback_pattern: str
 def replace_code_region(text: str, name: str, replacement: str, fallback_pattern: str) -> str:
     start = f"/* SITEGEN:{name}_START */"
     end = f"/* SITEGEN:{name}_END */"
-    wrapped = f"{start}\n{replacement.rstrip()}\n{end}"
+    wrapped = replacement.rstrip()
 
     if start in text and end in text:
-        pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
+        pattern = re.compile(r"^[ \t]*" + re.escape(start) + r"\s*.*?^[ \t]*" + re.escape(end), re.S | re.M)
         text, count = pattern.subn(lambda _match: wrapped, text, count=1)
     else:
-        text, count = re.subn(fallback_pattern, lambda _match: wrapped, text, count=1, flags=re.S)
+        text, count = re.subn(r"^[ \t]*" + fallback_pattern, lambda _match: wrapped, text, count=1, flags=re.S | re.M)
 
     if count != 1:
         raise RuntimeError(f"Could not replace code region {name}")
@@ -132,7 +133,7 @@ def render_home_hero(content: dict[str, Any]) -> str:
         )
     link_html = "\n".join(links)
     return f"""    <section class="hero" id="about">
-        <img src="{esc(hero.get("avatar", ""))}" alt="Runde Yang" class="hero-avatar" loading="eager" decoding="async" fetchpriority="high" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
+        <img src="{esc(hero.get("avatar", ""))}" alt="Runde Yang" class="hero-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
         <div class="hero-info">
             <h1 class="hero-name" id="heroName">{lang_value(hero.get("name_html", {}), "en")}</h1>
             <p class="hero-title" data-key="hero_title">{lang_value(hero.get("title", {}), "en")}</p>
@@ -177,7 +178,8 @@ def render_publications(content: dict[str, Any]) -> str:
         cite = item.get("id") or ""
         cite_button = ""
         if item.get("citation"):
-            cite_button = f'\n                    <button class="pub-btn" onclick="copyCitation(\'{esc(cite)}\')"><i class="fas fa-quote-right"></i> Cite</button>'
+            cite_arg = esc(json.dumps(cite, ensure_ascii=False))
+            cite_button = f'\n                    <button class="pub-btn" onclick="copyCitation({cite_arg})"><i class="fas fa-quote-right"></i> Cite</button>'
         rows.append(f"""            <div class="pub-item">
                 <div class="pub-title-text en-only">{item.get("title", "")}</div>
                 <div class="pub-authors en-only">{item.get("authors_html", "")}</div>
@@ -202,7 +204,7 @@ def render_projects(content: dict[str, Any]) -> str:
         key = f"proj_{key_for('project', item, index)}"
         cards.append(f"""            <div class="project-card">
                 <div class="project-img-wrap">
-                    <img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", item.get("name", "")))}" loading="lazy" decoding="async">
+                    <img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", item.get("name", "")))}">
                 </div>
                 <div class="project-body">
                     <div class="project-name en-only">{esc(item.get("name", ""))}</div>
@@ -227,7 +229,7 @@ def render_gallery_items(items: list[dict[str, Any]], grid: bool) -> str:
     for index, item in enumerate(items):
         key = f"cap_{key_for('gallery', item, index)}"
         rows.append(f"""                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", ""))}" loading="lazy" decoding="async">
+                    <img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", ""))}">
                     <div class="gallery-caption" data-key="{esc(key)}">{lang_value(item.get("caption", {}), "en")}</div>
                 </div>""")
     return "\n".join(rows)
@@ -237,7 +239,7 @@ def render_home_gallery(content: dict[str, Any]) -> str:
     home = content["home"]
     life_card = home["life_card"]
     bg_imgs = "\n".join(
-        f'                <img src="{esc(src)}" alt="" loading="lazy" decoding="async">'
+        f'                <img src="{esc(src)}" alt="">'
         for src in life_card.get("images", [])
     )
     return """    <!-- ===== Gallery ===== -->
@@ -325,9 +327,15 @@ def render_thoughts(content: dict[str, Any]) -> str:
     rows = []
     for index, item in enumerate(content["life"]["thoughts"]):
         key = key_for("thought", item, index)
+        text_values = item.get("text", {})
+        should_collapse = any(len(lang_value(text_values, lang)) > THOUGHT_COLLAPSE_CHARS for lang in LANGS)
+        text_class = "thought-text thought-text-collapsed" if should_collapse else "thought-text"
+        toggle = ""
+        if should_collapse:
+            toggle = '\n                <button class="thought-toggle" type="button" data-thought-toggle aria-expanded="false">Read more</button>'
         rows.append(f"""            <div class="thought-item">
                 <div class="thought-date" data-key="{esc('date_' + key)}">{lang_value(item.get("date", {}), "en")}</div>
-                <div class="thought-text" data-key="{esc(key)}">{lang_value(item.get("text", {}), "en")}</div>
+                <div class="{text_class}" data-key="{esc(key)}">{lang_value(text_values, "en")}</div>{toggle}
             </div>""")
     return """    <!-- Thoughts -->
     <section id="thoughts" class="fade-in">
@@ -363,7 +371,7 @@ def render_world_points(content: dict[str, Any]) -> str:
     for item in content["life"]["footprints"].get("world_points", []):
         value = item.get("value", [0, 0])
         rows.append(f"                    {{ name: {json.dumps(item.get('name', ''), ensure_ascii=False)}, value: [{float(value[0])}, {float(value[1])}] }}")
-    return "data: [\n" + ",\n".join(rows) + "\n                ]"
+    return "                    data: [\n" + ",\n".join(rows) + "\n                ]"
 
 
 def render_citations(content: dict[str, Any]) -> str:
@@ -389,15 +397,6 @@ def render_home(root: Path, content: dict[str, Any], write: bool) -> str:
     text = replace_code_region(text, "HOME_CITATIONS", render_citations(content), r'/\* ===== Citations ===== \*/\s*const citations = \{.*?\};')
 
     text = text.replace("const u = 'yangrundemdj', d = 'gmail.com';", f"const u = '{content['site']['email_user']}', d = '{content['site']['email_domain']}';")
-    text = text.replace("setLang('en');\n\n/* ========== RPG Pixel Companion System", "setLang(currentLang);\n\n/* ========== RPG Pixel Companion System")
-    text = text.replace('<script type="text/javascript" id="clstr_globe"', '<script async type="text/javascript" id="clstr_globe"')
-    text = re.sub(
-        r'\n/\* ========== RPG Pixel Companion System \(Final V3\) ========== \*/\s*class PixelPet \{.*?\n\}\s*\n\n// 啟動',
-        '\n// 啟動',
-        text,
-        count=1,
-        flags=re.S,
-    )
 
     if write:
         path.write_text(text, encoding="utf-8", newline="\n")
@@ -417,7 +416,7 @@ def render_life(root: Path, content: dict[str, Any], write: bool) -> str:
         text,
         "LIFE_WORLD_POINTS",
         render_world_points(content),
-        r"data:\s*\[\s*\{ name: 'Shanghai', value: \[[^\]]+\] \},\s*\{ name: 'New York', value: \[[^\]]+\] \}\s*\]",
+        r"[ \t]*data:\s*\[\s*(?:\{[^{}]*\}\s*,?\s*)*\]",
     )
 
     if write:
