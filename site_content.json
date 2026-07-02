@@ -109,6 +109,15 @@
         "citation": "@misc{wang2025generativeteachingcode,\n  title={Generative Teaching via Code},\n  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},\n  year={2025},\n  eprint={2601.04204},\n  archivePrefix={arXiv},\n  primaryClass={cs.CY},\n  url={https://arxiv.org/abs/2601.04204}\n}"
       },
       {
+        "id": "PRISM_2026",
+        "title": "PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning",
+        "authors_html": "Qiran Zhang, Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jingru Fan, Shu Yao, Jie Zhang, Tianle Zhou, Huatao Li, Ruijie Shi, Yihan Li, Chen Qian",
+        "venue": "arXiv preprint arXiv:2605.19382",
+        "paper_url": "https://arxiv.org/abs/2605.19382",
+        "code_url": "#",
+        "citation": "@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,\n      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning}, \n      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},\n      year={2026},\n      eprint={2605.19382},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2605.19382}, \n}"
+      },
+      {
         "id": "AgentXRay_2026",
         "title": "AgentXRay: White-Boxing Agentic Systems via Workflow Reconstruction",
         "authors_html": "Ruijie Shi, Houbin Zhang, Yuecheng Han, Yuheng Wang, Jingru Fan, <b>Runde Yang</b>, Yufan Dang, Huatao Li, Dewen Liu, Yuan Cheng, Chen Qian",

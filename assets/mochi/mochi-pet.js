@@ -16,8 +16,126 @@
                 document.body.appendChild(this.interactMenu);
             }
 
-            this.assetBase = 'assets/mochi/';
-            this.frameMetrics = window.MOCHI_FRAME_METRICS || {};
+            this.petProfiles = {
+                mochi: {
+                    id: 'mochi',
+                    displayName: 'Mochi',
+                    assetBase: 'assets/mochi/',
+                    metrics: window.MOCHI_FRAME_METRICS || {},
+                    phrases: {
+                        summon: 'Mochi!',
+                        click: 'moki!',
+                        sleepClick: 'zzz...',
+                        rest: 'nap',
+                        snack: 'snack?',
+                        feed: 'yum!',
+                        pet: 'hehe',
+                        play: 'boing!',
+                        groom: 'hmm...',
+                        sniff: 'sniff',
+                        happy: 'moki!',
+                        peek: 'peek',
+                        follow: 'follow',
+                        roam: 'roam',
+                        drag: '!'
+                    },
+                    actions: {
+                        rest: 'Rest',
+                        roam: 'Roam',
+                        feed: 'Feed',
+                        pet: 'Pet',
+                        play: 'Play',
+                        groom: 'Groom',
+                        sniff: 'Sniff',
+                        happy: 'Wiggle',
+                        peek: 'Peek',
+                        findSnack: 'Find Snack',
+                        follow: 'Follow',
+                        stopFollow: 'Stop Follow',
+                        dismiss: 'Dismiss'
+                    }
+                },
+                appcopilot: {
+                    id: 'appcopilot',
+                    displayName: 'AppCopilot',
+                    assetBase: 'assets/appcopilot/',
+                    metrics: window.APPCOPILOT_FRAME_METRICS || {},
+                    phrases: {
+                        summon: 'AppCopilot!',
+                        click: 'ready!',
+                        sleepClick: 'charging...',
+                        rest: 'charge',
+                        snack: 'task?',
+                        feed: 'execute!',
+                        pet: 'ping!',
+                        play: 'orchestrate!',
+                        groom: 'review',
+                        sniff: 'ground UI',
+                        happy: 'ship!',
+                        peek: 'peek',
+                        follow: 'follow',
+                        roam: 'roam',
+                        drag: 'hold!'
+                    },
+                    actions: {
+                        rest: 'Charge',
+                        roam: 'Roam',
+                        feed: 'Execute',
+                        pet: 'Ping',
+                        play: 'Orchestrate',
+                        groom: 'Review Plan',
+                        sniff: 'Ground UI',
+                        happy: 'Ship',
+                        peek: 'Peek',
+                        findSnack: 'Find Task',
+                        follow: 'Follow',
+                        stopFollow: 'Stop Follow',
+                        dismiss: 'Dismiss'
+                    }
+                },
+                timo: {
+                    id: 'timo',
+                    displayName: 'Timo',
+                    assetBase: 'assets/timo/',
+                    metrics: window.TIMO_FRAME_METRICS || {},
+                    phrases: {
+                        summon: 'Timo!',
+                        click: 'hi!',
+                        sleepClick: 'zzz...',
+                        rest: 'study nap',
+                        snack: 'snack?',
+                        feed: 'teach!',
+                        pet: 'good job!',
+                        play: 'render!',
+                        groom: 'review',
+                        sniff: 'explain',
+                        happy: 'bravo!',
+                        peek: 'peek',
+                        follow: 'follow',
+                        roam: 'roam',
+                        drag: 'whoa!'
+                    },
+                    actions: {
+                        rest: 'Study Nap',
+                        roam: 'Roam',
+                        feed: 'Teach',
+                        pet: 'Encourage',
+                        play: 'Render Lesson',
+                        groom: 'Review Script',
+                        sniff: 'Explain',
+                        happy: 'Bravo',
+                        peek: 'Peek',
+                        findSnack: 'Find Prompt',
+                        follow: 'Follow',
+                        stopFollow: 'Stop Follow',
+                        dismiss: 'Dismiss'
+                    }
+                }
+            };
+            this.currentPetId = 'mochi';
+            this.currentProfile = this.petProfiles[this.currentPetId];
+            this.assetBase = this.currentProfile.assetBase;
+            this.frameMetrics = this.currentProfile.metrics;
             this.frameOffset = { x: 0, y: 0 };
             this.renderScale = 0.62;
             this.stageWidth = 224;
@@ -36,14 +154,14 @@
                 }
                 return frames;
             };
-            const sprite = (name, width, height, fps, scale = 0.62) => ({
-                frames: sequence(name, 20),
+            const sprite = (name, width, height, fps, scale = 0.62, count = 20) => ({
+                frames: sequence(name, count),
                 width: Math.round(width * scale),
                 height: Math.round(height * scale),
                 fps
             });
-            const clip = (name, width, height, fps, bob = 0, scale = 0.62) => ({
-                ...sprite(name, width, height, fps, scale),
+            const clip = (name, width, height, fps, bob = 0, scale = 0.62, count = 20) => ({
+                ...sprite(name, width, height, fps, scale, count),
                 bob
             });
             const steadySteps = (count) => Array.from({ length: count }, () => 1);
@@ -59,59 +177,63 @@
                 ...range('sit', 0, 5),
                 ...range('sit', 4, 1)
             ];
+            const quietSleepFrames = pick('sleep', [
+                0, 0, 0, 0, 1, 1, 2, 3, 4, 3,
+                2, 1, 0, 0, 0, 0, 0, 0, 1, 0
+            ]);
 
             this.poses = {
                 stand: { frames: quietSitFrames, width: Math.round(220 * 0.62), height: Math.round(248 * 0.62), fps: 6 },
                 sit: { frames: quietSitFrames, width: Math.round(220 * 0.62), height: Math.round(248 * 0.62), fps: 6 },
-                walk: sprite('walk', 251, 222, 20),
+                walk: sprite('walk', 251, 222, 30, 0.62, 40),
                 eat: sprite('eat_cookie', 275, 237, 18),
                 happy: sprite('happy', 260, 256, 18),
-                rest: sprite('sleep', 311, 199, 12),
-                sleep: sprite('sleep', 311, 199, 12),
+                rest: { frames: quietSleepFrames, width: Math.round(311 * 0.62), height: Math.round(199 * 0.62), fps: 4 },
+                sleep: { frames: quietSleepFrames, width: Math.round(311 * 0.62), height: Math.round(199 * 0.62), fps: 3 },
                 groom: sprite('groom', 274, 256, 16),
                 peek: sprite('sniff', 355, 222, 16),
                 dance: sprite('play', 299, 256, 20)
             };
             this.walkVariants = {
                 horizontal: this.poses.walk,
-                down: directionMotion('run_down', 16, 24),
-                up: directionMotion('run_up', 16, 24)
+                down: directionMotion('run_down', 32, 30),
+                up: directionMotion('run_up', 32, 30)
             };
             this.directionTransitions = {
                 horizontal: {
-                    up: directionMotion('turn_side_to_up', 16, 24),
-                    down: directionMotion('turn_side_to_down', 16, 24)
+                    up: directionMotion('turn_side_to_up', 32, 30),
+                    down: directionMotion('turn_side_to_down', 32, 30)
                 },
                 up: {
-                    horizontal: directionMotion('turn_up_to_side', 16, 24),
-                    down: directionMotion('turn_up_to_down', 32, 28)
+                    horizontal: directionMotion('turn_up_to_side', 32, 30),
+                    down: directionMotion('turn_up_to_down', 64, 32)
                 },
                 down: {
-                    horizontal: directionMotion('turn_down_to_side', 16, 24),
-                    up: directionMotion('turn_down_to_up', 32, 28)
+                    horizontal: directionMotion('turn_down_to_side', 32, 30),
+                    up: directionMotion('turn_down_to_up', 64, 32)
                 }
             };
             this.clips = {
                 standToSit: clip('stand_to_sit', 220, 248, 16, 1),
                 sitToStand: clip('sit_to_stand', 220, 248, 16, 1),
-                standToWalk: clip('stand_to_walk', 300, 237, 20, 1.2),
-                walkToStand: clip('walk_to_stand', 299, 235, 20, 1),
-                sitToWalk: clip('sit_to_walk', 300, 237, 20, 1.2),
-                walkToSit: clip('walk_to_sit', 299, 235, 20, 1),
-                walkToEat: clip('walk_to_eat', 299, 235, 20, 1),
+                standToWalk: clip('stand_to_walk', 300, 237, 28, 1.2, 0.62, 40),
+                walkToStand: clip('walk_to_stand', 299, 235, 28, 1, 0.62, 40),
+                sitToWalk: clip('sit_to_walk', 300, 237, 28, 1.2, 0.62, 40),
+                walkToSit: clip('walk_to_sit', 299, 235, 28, 1, 0.62, 40),
+                walkToEat: clip('walk_to_eat', 299, 235, 28, 1, 0.62, 40),
                 sitToEat: clip('sit_to_eat', 299, 235, 18, 1),
                 eatToHappy: clip('eat_to_happy', 260, 256, 18, 2.4),
                 happyToSit: clip('happy_to_sit', 260, 256, 18, 1.4),
                 happyToStand: clip('happy_to_stand', 260, 256, 18, 1.4),
-                happyToWalk: clip('happy_to_walk', 300, 237, 20, 1.8),
-                walkToRest: clip('walk_to_rest', 338, 217, 18, 0.8),
+                happyToWalk: clip('happy_to_walk', 300, 237, 28, 1.8, 0.62, 40),
+                walkToRest: clip('walk_to_rest', 338, 217, 28, 0.8, 0.62, 40),
                 sitToRest: clip('sit_to_rest', 338, 217, 18, 0.8),
                 standToRest: clip('stand_to_rest', 338, 217, 18, 0.8),
-                restToSleep: clip('rest_to_sleep', 311, 199, 12, 0.4),
-                sleepToRest: clip('sleep_to_rest', 311, 199, 12, 0.6),
+                restToSleep: clip('rest_to_sleep', 311, 199, 8, 0.2),
+                sleepToRest: clip('sleep_to_rest', 311, 199, 8, 0.3),
                 restToSit: clip('rest_to_sit', 325, 232, 18, 1),
-                restToWalk: clip('rest_to_walk', 325, 232, 20, 1.2),
-                sleepToWalk: clip('sleep_to_walk', 325, 232, 20, 1.2),
+                restToWalk: clip('rest_to_walk', 325, 232, 28, 1.2, 0.62, 40),
+                sleepToWalk: clip('sleep_to_walk', 325, 232, 28, 1.2, 0.62, 40),
                 sitToPlay: clip('sit_to_play', 299, 256, 20, 3),
                 playToSit: clip('play_to_sit', 299, 256, 20, 1.8),
                 eatGrape: clip('eat_grape', 289, 256, 18, 1),
@@ -191,12 +313,16 @@
             this.directionClip = null;
             this.directionClipTarget = null;
             this.directionClipStartedAt = 0;
-            this.walkStepWeights = [
+            const baseWalkStepWeights = [
                 0.35, 1.20, 1.35, 0.85, 0,
                 1.45, 1.30, 1.15, 0.50, 1.30,
                 0, 1.35, 0, 1.15, 0.55,
                 1.45, 1.25, 0.75, 0.55, 0
             ];
+            this.walkStepWeights = baseWalkStepWeights.flatMap((weight, index) => {
+                const next = baseWalkStepWeights[(index + 1) % baseWalkStepWeights.length];
+                return [weight, (weight + next) / 2];
+            });
             this.walkStepWeightScale = this.walkStepWeights.length / this.walkStepWeights.reduce((sum, weight) => sum + weight, 0);
             this.lastLocomotionFrame = null;
             this.lastLocomotionState = null;
@@ -260,9 +386,9 @@
                 this.snackTray = document.createElement('div');
                 this.snackTray.id = 'snackTray';
                 this.snackTray.className = 'snack-tray';
-                this.snackTray.setAttribute('aria-label', 'Mochi snacks');
                 document.body.appendChild(this.snackTray);
             }
+            this.snackTray.setAttribute('aria-label', `${this.currentProfile.displayName} snacks`);
 
             this.snackTray.innerHTML = '';
             this.snacks.forEach((snack) => {
@@ -293,7 +419,7 @@
                     if (option.dataset.char === 'hide') {
                         this.dismiss();
                     } else {
-                        this.summon();
+                        this.summon(option.dataset.char);
                     }
                 });
             });
@@ -304,7 +430,7 @@
                     this.suppressClick = false;
                     return;
                 }
-                this.showBubble(this.state === 'sleep' ? 'zzz...' : 'moki!');
+                this.showBubble(this.state === 'sleep' ? this.say('sleepClick') : this.say('click'));
             });
 
             this.sprite.addEventListener('dblclick', (event) => {
@@ -318,7 +444,7 @@
                 const now = performance.now();
                 if (now - this.lastHoverAt < 2600) return;
                 this.lastHoverAt = now;
-                this.showBubble('?');
+                this.showBubble(this.say('sniff'));
                 this.playSoftClip('curious');
             });
 
@@ -372,7 +498,39 @@
             return tag === 'input' || tag === 'textarea' || tag === 'select' || target?.isContentEditable;
         }
 
-        summon() {
+        say(key) {
+            const fallback = this.petProfiles.mochi.phrases[key] || '';
+            return this.currentProfile?.phrases?.[key] || fallback;
+        }
+
+        actionLabel(key, fallback) {
+            return this.currentProfile?.actions?.[key] || fallback;
+        }
+
+        switchPet(petId) {
+            const profile = this.petProfiles[petId] || this.petProfiles.mochi;
+            if (profile.id === this.currentPetId) return;
+
+            this.currentPetId = profile.id;
+            this.currentProfile = profile;
+            this.assetBase = profile.assetBase;
+            this.frameMetrics = profile.metrics || {};
+            this.imageCache.clear();
+            this.poseFrame = -1;
+            this.currentFramePath = '';
+            this.frameOffset = { x: 0, y: 0 };
+            this.sprite.alt = profile.displayName;
+            if (this.snackTray) {
+                this.snackTray.setAttribute('aria-label', `${profile.displayName} snacks`);
+            }
+            this.preloadImages();
+            this.setPose(this.stablePose || 'stand');
+        }
+
+        summon(petId) {
+            if (petId) {
+                this.switchPet(petId);
+            }
             const rect = this.summonBtn.getBoundingClientRect();
             this.active = true;
             this.mode = 'roam';
@@ -383,7 +541,7 @@
             this.x = rect.left + rect.width / 2 - this.width / 2;
             this.y = rect.bottom + 6;
             this.setRandomTarget(true);
-            this.showBubble('Mochi!');
+            this.showBubble(this.say('summon'));
         }
 
         dismiss() {
@@ -402,7 +560,7 @@
             if (this.mode === 'rest') {
                 this.mode = 'roam';
                 const startRoam = () => {
-                    this.startTravel(true, 'roam');
+                    this.startTravel(true, this.say('roam'));
                 };
                 startRoam();
             } else {
@@ -419,7 +577,7 @@
             this.state = 'toRest';
             this.targetX = this.clamp(summon.left - 168, 8, window.innerWidth - this.width - 8);
             this.targetY = nav ? nav.top + Math.max(4, nav.height - 48) : 8;
-            this.showBubble('nap');
+            this.showBubble(this.say('rest'));
             this.transitionPose('walk');
         }
 
@@ -764,17 +922,17 @@
         showInteractMenu() {
             if (!this.active) return;
             this.interactMenu.innerHTML = '';
-            this.addMenuItem(this.mode === 'rest' ? 'Roam' : 'Rest', () => this.toggleMode());
-            this.addMenuItem('Feed', () => this.openSnackTray());
-            this.addMenuItem('Pet', () => this.petMochi());
-            this.addMenuItem('Play', () => this.playMochi());
-            this.addMenuItem('Groom', () => this.groomMochi());
-            this.addMenuItem('Sniff', () => this.sniffMochi());
-            this.addMenuItem('Wiggle', () => this.happyMochi());
-            this.addMenuItem('Peek', () => this.peekMochi());
-            this.addMenuItem('Find Snack', () => this.findSnack());
-            this.addMenuItem(this.mode === 'follow' ? 'Stop Follow' : 'Follow', () => this.toggleFollow());
-            this.addMenuItem('Dismiss', () => this.dismiss());
+            this.addMenuItem(this.mode === 'rest' ? this.actionLabel('roam', 'Roam') : this.actionLabel('rest', 'Rest'), () => this.toggleMode());
+            this.addMenuItem(this.actionLabel('feed', 'Feed'), () => this.openSnackTray());
+            this.addMenuItem(this.actionLabel('pet', 'Pet'), () => this.petMochi());
+            this.addMenuItem(this.actionLabel('play', 'Play'), () => this.playMochi());
+            this.addMenuItem(this.actionLabel('groom', 'Groom'), () => this.groomMochi());
+            this.addMenuItem(this.actionLabel('sniff', 'Sniff'), () => this.sniffMochi());
+            this.addMenuItem(this.actionLabel('happy', 'Wiggle'), () => this.happyMochi());
+            this.addMenuItem(this.actionLabel('peek', 'Peek'), () => this.peekMochi());
+            this.addMenuItem(this.actionLabel('findSnack', 'Find Snack'), () => this.findSnack());
+            this.addMenuItem(this.mode === 'follow' ? this.actionLabel('stopFollow', 'Stop Follow') : this.actionLabel('follow', 'Follow'), () => this.toggleFollow());
+            this.addMenuItem(this.actionLabel('dismiss', 'Dismiss'), () => this.dismiss());
 
             const rect = this.el.getBoundingClientRect();
             const gap = 8;
@@ -814,7 +972,7 @@
         openSnackTray() {
             if (!this.active) this.summon();
             this.snackTray.classList.add('show');
-            this.showBubble('snack?');
+            this.showBubble(this.say('snack'));
         }
 
         closeSnackTray() {
@@ -871,7 +1029,7 @@
             this.state = 'toSnack';
             this.targetX = this.clamp(x - this.width * 0.5, 4, window.innerWidth - this.width - 4);
             this.targetY = this.clamp(y - this.height + 16, 4, window.innerHeight - this.height - 4);
-            this.showBubble('yum!');
+            this.showBubble(this.say('feed'));
             this.transitionPose('walk');
         }
 
@@ -922,7 +1080,7 @@
             this.closeSnackTray();
             const resumeRest = this.mode === 'rest';
             const resumeFollow = this.mode === 'follow';
-            this.showBubble('hehe');
+            this.showBubble(this.say('pet'));
 
             const finish = () => {
                 if (resumeRest) {
@@ -946,7 +1104,7 @@
             if (!this.active) this.summon();
             this.closeSnackTray();
             this.mode = 'roam';
-            this.showBubble('boing!');
+            this.showBubble(this.say('play'));
             this.transitionPose('sit', () => {
                 this.playClip('sitToPlay', () => {
                     this.stablePose = 'dance';
@@ -965,7 +1123,7 @@
             if (!this.active) this.summon();
             this.closeSnackTray();
             this.mode = 'roam';
-            this.showBubble('hmm...');
+            this.showBubble(this.say('groom'));
             this.transitionPose('sit', () => {
                 this.stablePose = 'groom';
                 this.playClip('groom', () => {
@@ -980,7 +1138,7 @@
             if (!this.active) this.summon();
             this.closeSnackTray();
             this.mode = 'roam';
-            this.showBubble('sniff');
+            this.showBubble(this.say('sniff'));
             this.transitionPose('sit', () => {
                 this.playClip('sniff', () => {
                     this.state = 'idle';
@@ -995,7 +1153,7 @@
             if (!this.active) this.summon();
             this.closeSnackTray();
             this.mode = 'roam';
-            this.showBubble('moki!');
+            this.showBubble(this.say('happy'));
             this.transitionPose('sit', () => {
                 this.playClip('happy', () => {
                     this.state = 'idle';
@@ -1010,7 +1168,7 @@
             this.closeSnackTray();
             this.mode = 'roam';
             this.state = 'toPeek';
-            this.showBubble('peek');
+            this.showBubble(this.say('peek'));
             const goLeft = Math.random() > 0.5;
             this.facing = goLeft ? -1 : 1;
             this.targetX = goLeft ? 6 : window.innerWidth - this.width - 6;
@@ -1032,7 +1190,7 @@
             this.closeSnackTray();
             if (this.mode === 'follow') {
                 this.mode = 'roam';
-                this.startTravel(true, 'roam');
+                this.startTravel(true, this.say('roam'));
                 return;
             }
 
@@ -1043,7 +1201,7 @@
             const begin = () => {
                 this.mode = 'follow';
                 this.state = 'follow';
-                this.showBubble('follow');
+                this.showBubble(this.say('follow'));
             };
             this.mode = 'follow';
             this.state = 'follow';
@@ -1092,7 +1250,7 @@
 
             if (!didMove) return;
             this.suppressClick = true;
-            this.showBubble('!');
+            this.showBubble(this.say('drag'));
             this.mode = resumeMode === 'rest' ? 'rest' : resumeMode === 'follow' ? 'follow' : 'roam';
             this.playClip('hop', () => {
                 if (this.mode === 'rest') {

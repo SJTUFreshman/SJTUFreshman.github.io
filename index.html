@@ -213,7 +213,7 @@
             top: 45px; right: -10px;
             background: #2d3436; border: 4px solid #fff; outline: 4px solid #2d3436;
             color: #fff; padding: 0;
-            min-width: 140px; z-index: 10006;
+            min-width: 168px; z-index: 10006;
             font-family: 'Courier New', monospace;
             box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
             image-rendering: pixelated;
@@ -911,6 +911,8 @@
             <div class="pet-summon-btn" id="summonBtn" title="Summon Companion">
                     <div class="summon-menu" id="summonMenu">
                         <div class="summon-option" data-char="mochi">&#128007; Mochi</div>
+                        <div class="summon-option" data-char="appcopilot">&#129302; AppCopilot</div>
+                        <div class="summon-option" data-char="timo">&#127891; Timo</div>
                         <div class="summon-option" data-char="hide" style="color:#e74c3c">&#10006; Dismiss</div>
                     </div>
                 </div>
@@ -972,6 +974,16 @@
                     <a href="https://arxiv.org/abs/2601.04204v1" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
                     <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
                     <button class="pub-btn" onclick="copyCitation(&quot;Generative_2025&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title-text en-only">PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning</div>
+                <div class="pub-authors en-only">Qiran Zhang, Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jingru Fan, Shu Yao, Jie Zhang, Tianle Zhou, Huatao Li, Ruijie Shi, Yihan Li, Chen Qian</div>
+                <div class="pub-venue en-only">arXiv preprint arXiv:2605.19382</div>
+                <div class="pub-actions">
+                    <a href="https://arxiv.org/abs/2605.19382" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
+                    <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
+                    <button class="pub-btn" onclick="copyCitation(&quot;PRISM_2026&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
                 </div>
             </div>
             <div class="pub-item">
@@ -1115,6 +1127,8 @@
 </div>
 
 <script src="assets/mochi/mochi-frame-metrics.js"></script>
+<script src="assets/appcopilot/appcopilot-frame-metrics.js"></script>
+<script src="assets/timo/timo-frame-metrics.js"></script>
 <script src="assets/mochi/mochi-pet.js"></script>
 <script>
 /* ===== i18n Content ===== */
@@ -1330,6 +1344,7 @@ fetchWeather();
 /* ===== Citations ===== */
 const citations = {
     "Generative_2025": "@misc{wang2025generativeteachingcode,\n  title={Generative Teaching via Code},\n  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},\n  year={2025},\n  eprint={2601.04204},\n  archivePrefix={arXiv},\n  primaryClass={cs.CY},\n  url={https://arxiv.org/abs/2601.04204}\n}",
+    "PRISM_2026": "@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,\n      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning}, \n      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},\n      year={2026},\n      eprint={2605.19382},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2605.19382}, \n}",
     "AppCopilot_2025": "@misc{fan2025appcopilotgeneralaccuratelonghorizon,\n  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},\n  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},\n  year={2025},\n  eprint={2509.02444},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2509.02444}\n}"
 };
 
