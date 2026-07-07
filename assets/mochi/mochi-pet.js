@@ -22,6 +22,8 @@
                     displayName: 'Mochi',
                     assetBase: 'assets/mochi/',
                     metrics: window.MOCHI_FRAME_METRICS || {},
+                    usesSnackTray: true,
+                    autoActions: ['groom', 'sniff', 'happy', 'play', 'peek'],
                     phrases: {
                         summon: 'Mochi!',
                         click: 'moki!',
@@ -35,6 +37,7 @@
                         sniff: 'sniff',
                         happy: 'moki!',
                         peek: 'peek',
+                        find: 'snack?',
                         follow: 'follow',
                         roam: 'roam',
                         drag: '!'
@@ -60,6 +63,8 @@
                     displayName: 'AppCopilot',
                     assetBase: 'assets/appcopilot/',
                     metrics: window.APPCOPILOT_FRAME_METRICS || {},
+                    usesSnackTray: false,
+                    autoActions: ['sniff', 'groom', 'play', 'feed', 'happy', 'peek'],
                     phrases: {
                         summon: 'AppCopilot!',
                         click: 'ready!',
@@ -73,6 +78,7 @@
                         sniff: 'ground UI',
                         happy: 'ship!',
                         peek: 'peek',
+                        find: 'task found',
                         follow: 'follow',
                         roam: 'roam',
                         drag: 'hold!'
@@ -98,6 +104,8 @@
                     displayName: 'Timo',
                     assetBase: 'assets/timo/',
                     metrics: window.TIMO_FRAME_METRICS || {},
+                    usesSnackTray: false,
+                    autoActions: ['sniff', 'groom', 'play', 'feed', 'happy', 'peek'],
                     phrases: {
                         summon: 'Timo!',
                         click: 'hi!',
@@ -111,6 +119,7 @@
                         sniff: 'explain',
                         happy: 'bravo!',
                         peek: 'peek',
+                        find: 'prompt ready',
                         follow: 'follow',
                         roam: 'roam',
                         drag: 'whoa!'
@@ -137,9 +146,10 @@
             this.assetBase = this.currentProfile.assetBase;
             this.frameMetrics = this.currentProfile.metrics;
             this.frameOffset = { x: 0, y: 0 };
+            this.assetVersion = '20260707-alltempo-v6';
             this.renderScale = 0.62;
             this.stageWidth = 224;
-            this.stageHeight = 170;
+            this.stageHeight = 192;
             const frame = (name, index) => `frames/${name}/${name}-${String(index).padStart(2, '0')}.png`;
             const sequence = (name, count) => Array.from(
                 { length: count },
@@ -181,85 +191,111 @@
                 0, 0, 0, 0, 1, 1, 2, 3, 4, 3,
                 2, 1, 0, 0, 0, 0, 0, 0, 1, 0
             ]);
+            const tempo = {
+                idle: 4,
+                walk: 17,
+                verticalWalk: 16,
+                turn: 15,
+                longTurn: 16,
+                walkTransition: 16,
+                poseTransition: 12,
+                eat: 10,
+                eatTransition: 12,
+                happy: 11,
+                happyTransition: 12,
+                rest: 2.5,
+                sleep: 1.5,
+                restTransition: 9,
+                sleepTransition: 5,
+                workTransition: 12,
+                groom: 8,
+                sniff: 7,
+                peek: 7,
+                play: 11,
+                dance: 12,
+                pet: 11,
+                hop: 13,
+                bye: 10
+            };
 
             this.poses = {
-                stand: { frames: quietSitFrames, width: Math.round(220 * 0.62), height: Math.round(248 * 0.62), fps: 6 },
-                sit: { frames: quietSitFrames, width: Math.round(220 * 0.62), height: Math.round(248 * 0.62), fps: 6 },
-                walk: sprite('walk', 251, 222, 30, 0.62, 40),
-                eat: sprite('eat_cookie', 275, 237, 18),
-                happy: sprite('happy', 260, 256, 18),
-                rest: { frames: quietSleepFrames, width: Math.round(311 * 0.62), height: Math.round(199 * 0.62), fps: 4 },
-                sleep: { frames: quietSleepFrames, width: Math.round(311 * 0.62), height: Math.round(199 * 0.62), fps: 3 },
-                groom: sprite('groom', 274, 256, 16),
-                peek: sprite('sniff', 355, 222, 16),
-                dance: sprite('play', 299, 256, 20)
+                stand: { frames: quietSitFrames, width: Math.round(220 * 0.62), height: Math.round(248 * 0.62), fps: tempo.idle },
+                sit: { frames: quietSitFrames, width: Math.round(220 * 0.62), height: Math.round(248 * 0.62), fps: tempo.idle },
+                walk: sprite('walk', 251, 222, tempo.walk, 0.62, 40),
+                eat: sprite('eat_cookie', 275, 237, tempo.eat),
+                happy: sprite('happy', 260, 256, tempo.happy),
+                rest: { frames: quietSleepFrames, width: Math.round(311 * 0.62), height: Math.round(199 * 0.62), fps: tempo.rest },
+                sleep: { frames: quietSleepFrames, width: Math.round(311 * 0.62), height: Math.round(199 * 0.62), fps: tempo.sleep },
+                groom: sprite('groom', 274, 256, tempo.groom),
+                peek: sprite('sniff', 355, 222, tempo.peek),
+                dance: sprite('play', 299, 256, tempo.dance)
             };
             this.walkVariants = {
                 horizontal: this.poses.walk,
-                down: directionMotion('run_down', 32, 30),
-                up: directionMotion('run_up', 32, 30)
+                down: directionMotion('run_down', 32, tempo.verticalWalk),
+                up: directionMotion('run_up', 32, tempo.verticalWalk)
             };
             this.directionTransitions = {
                 horizontal: {
-                    up: directionMotion('turn_side_to_up', 32, 30),
-                    down: directionMotion('turn_side_to_down', 32, 30)
+                    up: directionMotion('turn_side_to_up', 32, tempo.turn),
+                    down: directionMotion('turn_side_to_down', 32, tempo.turn)
                 },
                 up: {
-                    horizontal: directionMotion('turn_up_to_side', 32, 30),
-                    down: directionMotion('turn_up_to_down', 64, 32)
+                    horizontal: directionMotion('turn_up_to_side', 32, tempo.turn),
+                    down: directionMotion('turn_up_to_down', 64, tempo.longTurn)
                 },
                 down: {
-                    horizontal: directionMotion('turn_down_to_side', 32, 30),
-                    up: directionMotion('turn_down_to_up', 64, 32)
+                    horizontal: directionMotion('turn_down_to_side', 32, tempo.turn),
+                    up: directionMotion('turn_down_to_up', 64, tempo.longTurn)
                 }
             };
             this.clips = {
-                standToSit: clip('stand_to_sit', 220, 248, 16, 1),
-                sitToStand: clip('sit_to_stand', 220, 248, 16, 1),
-                standToWalk: clip('stand_to_walk', 300, 237, 28, 1.2, 0.62, 40),
-                walkToStand: clip('walk_to_stand', 299, 235, 28, 1, 0.62, 40),
-                sitToWalk: clip('sit_to_walk', 300, 237, 28, 1.2, 0.62, 40),
-                walkToSit: clip('walk_to_sit', 299, 235, 28, 1, 0.62, 40),
-                walkToEat: clip('walk_to_eat', 299, 235, 28, 1, 0.62, 40),
-                sitToEat: clip('sit_to_eat', 299, 235, 18, 1),
-                eatToHappy: clip('eat_to_happy', 260, 256, 18, 2.4),
-                happyToSit: clip('happy_to_sit', 260, 256, 18, 1.4),
-                happyToStand: clip('happy_to_stand', 260, 256, 18, 1.4),
-                happyToWalk: clip('happy_to_walk', 300, 237, 28, 1.8, 0.62, 40),
-                walkToRest: clip('walk_to_rest', 338, 217, 28, 0.8, 0.62, 40),
-                sitToRest: clip('sit_to_rest', 338, 217, 18, 0.8),
-                standToRest: clip('stand_to_rest', 338, 217, 18, 0.8),
-                restToSleep: clip('rest_to_sleep', 311, 199, 8, 0.2),
-                sleepToRest: clip('sleep_to_rest', 311, 199, 8, 0.3),
-                restToSit: clip('rest_to_sit', 325, 232, 18, 1),
-                restToWalk: clip('rest_to_walk', 325, 232, 28, 1.2, 0.62, 40),
-                sleepToWalk: clip('sleep_to_walk', 325, 232, 28, 1.2, 0.62, 40),
-                sitToPlay: clip('sit_to_play', 299, 256, 20, 3),
-                playToSit: clip('play_to_sit', 299, 256, 20, 1.8),
-                eatGrape: clip('eat_grape', 289, 256, 18, 1),
-                eatCarrot: clip('eat_carrot', 271, 247, 18, 1.2),
-                eatCookie: clip('eat_cookie', 275, 237, 18, 1),
-                eatMelon: clip('eat_melon', 268, 251, 18, 1),
-                curious: clip('sniff', 355, 222, 16, 1),
-                groom: clip('groom', 274, 256, 16, 0.8),
-                sniff: clip('sniff', 355, 222, 16, 1),
-                peek: clip('sniff', 355, 222, 16, 1),
-                dance: clip('play', 299, 256, 20, 4),
-                happy: clip('happy', 260, 256, 18, 2.4),
+                standToSit: clip('stand_to_sit', 220, 248, tempo.poseTransition, 1),
+                sitToStand: clip('sit_to_stand', 220, 248, tempo.poseTransition, 1),
+                standToWalk: clip('stand_to_walk', 300, 237, tempo.walkTransition, 0.7, 0.62, 40),
+                walkToStand: clip('walk_to_stand', 299, 235, tempo.walkTransition, 0.6, 0.62, 40),
+                sitToWalk: clip('sit_to_walk', 300, 237, tempo.walkTransition, 0.7, 0.62, 40),
+                walkToSit: clip('walk_to_sit', 299, 235, tempo.walkTransition, 0.6, 0.62, 40),
+                walkToEat: clip('walk_to_eat', 299, 235, tempo.walkTransition, 0.6, 0.62, 40),
+                sitToEat: clip('sit_to_eat', 299, 235, tempo.eatTransition, 1),
+                eatToHappy: clip('eat_to_happy', 260, 256, tempo.happyTransition, 2.4),
+                happyToSit: clip('happy_to_sit', 260, 256, tempo.happyTransition, 1.4),
+                happyToStand: clip('happy_to_stand', 260, 256, tempo.happyTransition, 1.4),
+                happyToWalk: clip('happy_to_walk', 300, 237, tempo.walkTransition, 0.8, 0.62, 40),
+                walkToRest: clip('walk_to_rest', 338, 217, tempo.walkTransition, 0.4, 0.62, 40),
+                sitToRest: clip('sit_to_rest', 338, 217, tempo.restTransition, 0.8),
+                standToRest: clip('stand_to_rest', 338, 217, tempo.restTransition, 0.8),
+                restToSleep: clip('rest_to_sleep', 311, 199, tempo.sleepTransition, 0.2),
+                sleepToRest: clip('sleep_to_rest', 311, 199, tempo.sleepTransition, 0.3),
+                restToSit: clip('rest_to_sit', 325, 232, tempo.restTransition, 1),
+                restToWalk: clip('rest_to_walk', 325, 232, tempo.walkTransition, 0.6, 0.62, 40),
+                sleepToWalk: clip('sleep_to_walk', 325, 232, tempo.walkTransition, 0.6, 0.62, 40),
+                sitToPlay: clip('sit_to_play', 299, 256, tempo.workTransition, 3),
+                playToSit: clip('play_to_sit', 299, 256, tempo.workTransition, 1.8),
+                eatGrape: clip('eat_grape', 289, 256, tempo.eat, 1),
+                eatCarrot: clip('eat_carrot', 271, 247, tempo.eat, 1.2),
+                eatCookie: clip('eat_cookie', 275, 237, tempo.eat, 1),
+                eatMelon: clip('eat_melon', 268, 251, tempo.eat, 1),
+                curious: clip('sniff', 355, 222, tempo.sniff, 1),
+                groom: clip('groom', 274, 256, tempo.groom, 0.8),
+                sniff: clip('sniff', 355, 222, tempo.sniff, 1),
+                peek: clip('sniff', 355, 222, tempo.peek, 1),
+                dance: clip('play', 299, 256, tempo.dance, 4),
+                happy: clip('happy', 260, 256, tempo.happy, 2.4),
                 pet: {
                     frames: [...range('sit', 0, 8), ...range('happy', 0, 19), ...range('sit', 8, 19)],
                     width: Math.round(260 * 0.62),
                     height: Math.round(256 * 0.62),
-                    fps: 18,
+                    fps: tempo.pet,
                     bob: 3
                 },
-                play: clip('play', 299, 256, 20, 5),
-                hop: clip('happy', 260, 256, 20, 5),
+                play: clip('play', 299, 256, tempo.play, 5),
+                hop: clip('happy', 260, 256, tempo.hop, 5),
                 bye: {
                     frames: [...range('sit', 0, 10), ...range('happy', 0, 12), ...range('sit', 10, 19)],
                     width: Math.round(260 * 0.62),
                     height: Math.round(256 * 0.62),
-                    fps: 18,
+                    fps: tempo.bye,
                     bob: 2.5
                 }
             };
@@ -276,6 +312,22 @@
                 { id: 'cookie', label: 'Cookie' },
                 { id: 'melon', label: 'Melon' }
             ];
+            this.autoTempo = {
+                initialMin: 8000,
+                initialSpread: 8000,
+                idleMin: 10000,
+                idleSpread: 9000,
+                manualMin: 14000,
+                manualSpread: 9000,
+                workMin: 14000,
+                workSpread: 9000,
+                feedMin: 15000,
+                feedSpread: 9000,
+                autoMin: 15000,
+                autoSpread: 11000,
+                arriveMin: 6500,
+                arriveSpread: 7000
+            };
 
             this.active = false;
             this.mode = 'roam';
@@ -299,6 +351,7 @@
             this.currentSnack = null;
             this.currentSnackType = null;
             this.pendingSnackType = null;
+            this.snackPoint = null;
             this.feedClickHandler = null;
             this.menuOpen = false;
             this.pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
@@ -306,7 +359,7 @@
             this.suppressClick = false;
             this.lastHoverAt = 0;
             this.previousMode = 'roam';
-            this.nextIdleTrickAt = 0;
+            this.nextAutoActionAt = 0;
             this.walkVariant = 'horizontal';
             this.pendingWalkVariant = null;
             this.pendingWalkVariantAt = 0;
@@ -358,12 +411,16 @@
             const img = new Image();
             img.decoding = 'sync';
             img.loading = 'eager';
-            img.src = this.assetBase + src;
+            img.src = this.frameUrl(src);
             this.imageCache.set(src, img);
             if (typeof img.decode === 'function') {
                 img.decode().catch(() => {});
             }
             return img;
+        }
+
+        frameUrl(src) {
+            return `${this.assetBase}${src}?v=${this.assetVersion}`;
         }
 
         preloadImages() {
@@ -476,7 +533,7 @@
                 if (this.isTypingTarget(event.target)) return;
                 if (event.key.toLowerCase() === 'f') {
                     event.preventDefault();
-                    this.openSnackTray();
+                    this.performFeedAction();
                 }
                 if (event.key.toLowerCase() === 'r') {
                     event.preventDefault();
@@ -507,10 +564,36 @@
             return this.currentProfile?.actions?.[key] || fallback;
         }
 
+        supportsSnackTray() {
+            return this.currentProfile?.usesSnackTray === true;
+        }
+
+        clearCurrentSnack() {
+            if (this.currentSnack) {
+                this.currentSnack.remove();
+            }
+            this.currentSnack = null;
+            this.currentSnackType = null;
+            this.snackPoint = null;
+        }
+
+        scheduleNextAutoAction(now = performance.now(), minDelay, spread) {
+            const delay = minDelay ?? this.autoTempo?.idleMin ?? 10000;
+            const jitter = spread ?? this.autoTempo?.idleSpread ?? 9000;
+            this.nextAutoActionAt = now + delay + Math.random() * jitter;
+        }
+
+        setIdlePause(minDelay = 5600, spread = 5600) {
+            this.idleUntil = performance.now() + minDelay + Math.random() * spread;
+        }
+
         switchPet(petId) {
             const profile = this.petProfiles[petId] || this.petProfiles.mochi;
             if (profile.id === this.currentPetId) return;
 
+            this.closeSnackTray();
+            this.clearCurrentSnack();
+            this.returnAfterFeed = false;
             this.currentPetId = profile.id;
             this.currentProfile = profile;
             this.assetBase = profile.assetBase;
@@ -541,12 +624,15 @@
             this.x = rect.left + rect.width / 2 - this.width / 2;
             this.y = rect.bottom + 6;
             this.setRandomTarget(true);
+            this.scheduleNextAutoAction(performance.now(), this.autoTempo.initialMin, this.autoTempo.initialSpread);
             this.showBubble(this.say('summon'));
         }
 
         dismiss() {
             if (!this.active) return;
             this.closeSnackTray();
+            this.clearCurrentSnack();
+            this.returnAfterFeed = false;
             const rect = this.summonBtn.getBoundingClientRect();
             this.mode = 'dismiss';
             this.state = 'dismiss';
@@ -750,12 +836,12 @@
         }
 
         getLocomotionProfile() {
-            if (this.state === 'follow') return { speed: 420, fps: 22, bobScale: 1.05 };
-            if (this.state === 'toSnack') return { speed: 440, fps: 22, bobScale: 1 };
-            if (this.state === 'toRest') return { speed: 430, fps: 21, bobScale: 0.9 };
-            if (this.state === 'dismiss') return { speed: 520, fps: 24, bobScale: 1.1 };
-            if (this.state === 'toPeek') return { speed: 330, fps: 19, bobScale: 0.85 };
-            return { speed: 300, fps: 18, bobScale: 0.9 };
+            if (this.state === 'follow') return { speed: 260, fps: 18, bobScale: 1.05 };
+            if (this.state === 'toSnack') return { speed: 210, fps: 17, bobScale: 1 };
+            if (this.state === 'toRest') return { speed: 185, fps: 16, bobScale: 0.9 };
+            if (this.state === 'dismiss') return { speed: 320, fps: 18, bobScale: 1.1 };
+            if (this.state === 'toPeek') return { speed: 160, fps: 16, bobScale: 0.85 };
+            return { speed: 150, fps: 17, bobScale: 0.9 };
         }
 
         getActiveSpriteSet() {
@@ -876,7 +962,7 @@
                 }
                 this.poseFrame = frame;
                 this.currentFramePath = framePath;
-                this.sprite.src = cached ? cached.src : this.assetBase + framePath;
+                this.sprite.src = cached ? cached.src : this.frameUrl(framePath);
             }
             this.frameOffset = this.getFrameOffset(spriteSet, framePath);
         }
@@ -923,14 +1009,14 @@
             if (!this.active) return;
             this.interactMenu.innerHTML = '';
             this.addMenuItem(this.mode === 'rest' ? this.actionLabel('roam', 'Roam') : this.actionLabel('rest', 'Rest'), () => this.toggleMode());
-            this.addMenuItem(this.actionLabel('feed', 'Feed'), () => this.openSnackTray());
+            this.addMenuItem(this.actionLabel('feed', 'Feed'), () => this.performFeedAction());
             this.addMenuItem(this.actionLabel('pet', 'Pet'), () => this.petMochi());
             this.addMenuItem(this.actionLabel('play', 'Play'), () => this.playMochi());
             this.addMenuItem(this.actionLabel('groom', 'Groom'), () => this.groomMochi());
             this.addMenuItem(this.actionLabel('sniff', 'Sniff'), () => this.sniffMochi());
             this.addMenuItem(this.actionLabel('happy', 'Wiggle'), () => this.happyMochi());
             this.addMenuItem(this.actionLabel('peek', 'Peek'), () => this.peekMochi());
-            this.addMenuItem(this.actionLabel('findSnack', 'Find Snack'), () => this.findSnack());
+            this.addMenuItem(this.actionLabel('findSnack', 'Find Snack'), () => this.performFindAction());
             this.addMenuItem(this.mode === 'follow' ? this.actionLabel('stopFollow', 'Stop Follow') : this.actionLabel('follow', 'Follow'), () => this.toggleFollow());
             this.addMenuItem(this.actionLabel('dismiss', 'Dismiss'), () => this.dismiss());
 
@@ -964,18 +1050,74 @@
             item.addEventListener('click', (event) => {
                 event.stopPropagation();
                 this.closeInteractMenu();
+                this.scheduleNextAutoAction(performance.now(), this.autoTempo.manualMin, this.autoTempo.manualSpread);
                 action();
             });
             this.interactMenu.appendChild(item);
         }
 
+        performFeedAction() {
+            if (this.supportsSnackTray()) {
+                this.openSnackTray();
+                return;
+            }
+            this.runProfileWorkAction('feed');
+        }
+
+        performFindAction() {
+            if (this.supportsSnackTray()) {
+                this.findSnack();
+                return;
+            }
+            this.runProfileWorkAction('find');
+        }
+
+        runProfileWorkAction(bubbleKey = 'play') {
+            if (!this.active) this.summon(this.currentPetId);
+            this.closeSnackTray();
+            this.clearCurrentSnack();
+            const resumeRest = this.mode === 'rest';
+            const resumeFollow = this.mode === 'follow';
+            this.mode = 'roam';
+            this.showBubble(this.say(bubbleKey));
+            this.scheduleNextAutoAction(performance.now(), this.autoTempo.workMin, this.autoTempo.workSpread);
+
+            const finish = () => {
+                if (resumeRest) {
+                    this.goRest();
+                    return;
+                }
+                if (resumeFollow) {
+                    this.startFollow();
+                    return;
+                }
+                this.mode = 'roam';
+                this.state = 'idle';
+                this.setIdlePause();
+                this.setPose('sit');
+            };
+
+            this.transitionPose('sit', () => {
+                this.playClip('sitToPlay', () => {
+                    this.playClip(Math.random() > 0.55 ? 'play' : 'dance', () => {
+                        this.playClip('playToSit', finish);
+                    });
+                });
+            });
+        }
+
         openSnackTray() {
+            if (!this.supportsSnackTray()) {
+                this.runProfileWorkAction('feed');
+                return;
+            }
             if (!this.active) this.summon();
             this.snackTray.classList.add('show');
             this.showBubble(this.say('snack'));
         }
 
         closeSnackTray() {
+            if (!this.snackTray) return;
             this.snackTray.classList.remove('show');
             document.body.classList.remove('mochi-placing');
             this.pendingSnackType = null;
@@ -987,6 +1129,7 @@
         }
 
         pickSnack(type) {
+            if (!this.supportsSnackTray()) return;
             this.pendingSnackType = type;
             document.body.classList.add('mochi-placing');
             this.snackTray.querySelectorAll('.snack-choice').forEach((button) => {
@@ -1013,6 +1156,10 @@
         }
 
         dropSnack(x, y, type) {
+            if (!this.supportsSnackTray()) {
+                this.clearCurrentSnack();
+                return;
+            }
             if (this.currentSnack) this.currentSnack.remove();
 
             const snack = document.createElement('div');
@@ -1034,6 +1181,10 @@
         }
 
         eatCurrentSnack() {
+            if (!this.supportsSnackTray() || !this.currentSnack) {
+                this.finishSnack();
+                return;
+            }
             const clipName = this.foodClipBySnack[this.currentSnackType] || 'eatCookie';
             this.transitionPose('sit', () => {
                 this.playClip(clipName, () => this.finishSnack());
@@ -1041,12 +1192,8 @@
         }
 
         finishSnack() {
-            if (this.currentSnack) {
-                this.currentSnack.remove();
-                this.currentSnack = null;
-            }
-            this.currentSnackType = null;
-            this.snackPoint = null;
+            this.clearCurrentSnack();
+            this.scheduleNextAutoAction(performance.now(), this.autoTempo.feedMin, this.autoTempo.feedSpread);
 
             this.playClip('happy', () => {
                 if (this.returnAfterFeed) {
@@ -1061,7 +1208,7 @@
                 }
                 this.mode = 'roam';
                 this.state = 'idle';
-                this.idleUntil = performance.now() + 1100;
+                this.setIdlePause(6200, 6000);
                 this.transitionPose('sit');
             });
         }
@@ -1093,7 +1240,7 @@
                 }
                 this.mode = 'roam';
                 this.state = 'idle';
-                this.idleUntil = performance.now() + 900;
+                this.setIdlePause(5000, 5600);
                 this.setPose('sit');
             };
 
@@ -1111,7 +1258,7 @@
                     this.playClip(Math.random() > 0.45 ? 'play' : 'dance', () => {
                         this.playClip('playToSit', () => {
                             this.state = 'idle';
-                            this.idleUntil = performance.now() + 900;
+                            this.setIdlePause(5400, 5600);
                             this.setPose('sit');
                         });
                     });
@@ -1128,7 +1275,7 @@
                 this.stablePose = 'groom';
                 this.playClip('groom', () => {
                     this.state = 'idle';
-                    this.idleUntil = performance.now() + 1100;
+                    this.setIdlePause(5200, 5600);
                     this.setPose('sit');
                 });
             });
@@ -1142,7 +1289,7 @@
             this.transitionPose('sit', () => {
                 this.playClip('sniff', () => {
                     this.state = 'idle';
-                    this.idleUntil = performance.now() + 900;
+                    this.setIdlePause(4800, 5200);
                     this.setPose('sit');
                     if (typeof after === 'function') after();
                 });
@@ -1157,7 +1304,7 @@
             this.transitionPose('sit', () => {
                 this.playClip('happy', () => {
                     this.state = 'idle';
-                    this.idleUntil = performance.now() + 900;
+                    this.setIdlePause(5200, 5600);
                     this.setPose('sit');
                 });
             });
@@ -1177,6 +1324,10 @@
         }
 
         findSnack() {
+            if (!this.supportsSnackTray()) {
+                this.runProfileWorkAction('find');
+                return;
+            }
             if (!this.active) this.summon();
             this.closeSnackTray();
             const snack = this.snacks[Math.floor(Math.random() * this.snacks.length)];
@@ -1195,6 +1346,41 @@
             }
 
             this.startFollow();
+        }
+
+        runAutoAction(now = performance.now()) {
+            if (!this.active || this.mode !== 'roam' || this.state !== 'idle' || this.currentClip || this.menuOpen) {
+                return false;
+            }
+            const actions = this.currentProfile?.autoActions || this.petProfiles.mochi.autoActions;
+            const action = actions[Math.floor(Math.random() * actions.length)] || 'happy';
+            this.scheduleNextAutoAction(now, this.autoTempo.autoMin, this.autoTempo.autoSpread);
+            if (action === 'feed') {
+                this.performFeedAction();
+                return true;
+            }
+            if (action === 'find') {
+                this.performFindAction();
+                return true;
+            }
+            if (action === 'play') {
+                this.playMochi();
+                return true;
+            }
+            if (action === 'groom') {
+                this.groomMochi();
+                return true;
+            }
+            if (action === 'sniff') {
+                this.sniffMochi();
+                return true;
+            }
+            if (action === 'peek') {
+                this.peekMochi();
+                return true;
+            }
+            this.happyMochi();
+            return true;
         }
 
         startFollow() {
@@ -1263,7 +1449,7 @@
                     return;
                 }
                 this.state = 'idle';
-                this.idleUntil = performance.now() + 700;
+                this.setIdlePause(3800, 4600);
                 this.transitionPose('stand');
             });
         }
@@ -1287,27 +1473,20 @@
 
             if (this.state === 'idle') {
                 if (!this.nextIdlePoseAt) {
-                    this.nextIdlePoseAt = now + 5200 + Math.random() * 4200;
+                    this.nextIdlePoseAt = now + 6800 + Math.random() * 5200;
                 }
-                if (!this.nextIdleTrickAt) {
-                    this.nextIdleTrickAt = now + 10000 + Math.random() * 9000;
+                if (!this.nextAutoActionAt) {
+                    this.scheduleNextAutoAction(now, this.autoTempo.idleMin, this.autoTempo.idleSpread);
                 }
 
-                if (this.mode === 'roam' && now > this.nextIdleTrickAt && now < this.idleUntil - 1500) {
-                    const tricks = ['groom', 'sniff', 'happy'];
-                    const trick = tricks[Math.floor(Math.random() * tricks.length)];
-                    this.nextIdleTrickAt = now + 12000 + Math.random() * 10000;
-                    this.playClip(trick, () => {
-                        this.state = 'idle';
-                        this.idleUntil = performance.now() + 1100;
-                        this.setPose('sit');
-                    });
+                if (this.mode === 'roam' && now > this.nextAutoActionAt && now < this.idleUntil - 900) {
+                    this.runAutoAction(now);
                     return;
                 }
 
                 if (now > this.nextIdlePoseAt && now < this.idleUntil - 500) {
                     const nextPose = this.stablePose === 'sit' ? 'stand' : 'sit';
-                    this.nextIdlePoseAt = now + 5200 + Math.random() * 4200;
+                        this.nextIdlePoseAt = now + 6800 + Math.random() * 5200;
                     this.transitionPose(nextPose, () => {
                         this.state = 'idle';
                     });
@@ -1458,8 +1637,7 @@
 
             this.setPose('walk');
             const profile = this.getLocomotionProfile();
-            const stepWeight = this.consumeWalkStepWeight(now);
-            const step = Math.min(distance, (profile.speed / this.getWalkFps()) * stepWeight);
+            const step = Math.min(distance, profile.speed * dt);
             if (step > 0) {
                 this.x += (dx / distance) * step;
                 this.y += (dy / distance) * step;
@@ -1496,7 +1674,7 @@
                     this.stablePose = 'peek';
                     this.playClip('peek', () => {
                         this.state = 'idle';
-                        this.idleUntil = performance.now() + 900;
+                        this.setIdlePause(5200, 5600);
                         this.transitionPose('stand');
                     });
                 }, { resumeState: 'toPeek' });
@@ -1504,6 +1682,14 @@
             }
 
             if (this.state === 'toSnack') {
+                if (!this.supportsSnackTray() || !this.currentSnack) {
+                    this.clearCurrentSnack();
+                    this.mode = 'roam';
+                    this.state = 'idle';
+                    this.idleUntil = performance.now() + 3800;
+                    this.setPose('sit');
+                    return;
+                }
                 if (this.snackPoint) {
                     this.facing = this.snackPoint.x >= this.x + this.width / 2 ? 1 : -1;
                 }
@@ -1521,7 +1707,8 @@
 
             this.playClip('walkToSit', () => {
                 this.state = 'idle';
-                this.idleUntil = performance.now() + 520 + Math.random() * 1300;
+                this.setIdlePause(7200, 5800);
+                this.scheduleNextAutoAction(performance.now(), this.autoTempo.arriveMin, this.autoTempo.arriveSpread);
                 this.setPose('sit');
             });
         }

@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: var(--mochi-width, 224px);
-    height: var(--mochi-height, 170px);
+    height: var(--mochi-height, 192px);
     z-index: 9999;
     pointer-events: none;
     display: none;
