@@ -8,8 +8,284 @@
     <meta name="author" content="Runde Yang">
     <title>Runde Yang</title>
 
+    <style id="loader-critical-css">
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+            background: #f7f4ec;
+        }
+
+        .site-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 20000;
+            display: grid;
+            place-items: center;
+            padding: 28px;
+            box-sizing: border-box;
+            background:
+                linear-gradient(90deg, rgba(47,111,143,0.08) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(77,115,88,0.07) 1px, transparent 1px),
+                #f7f4ec;
+            background-size: 42px 42px, 42px 42px, auto;
+            color: #24272a;
+            pointer-events: auto;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.55s ease, visibility 0.55s ease;
+        }
+
+        .site-loader.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .site-loader::before,
+        .site-loader::after {
+            content: '';
+            position: absolute;
+            inset: 18px;
+            border: 1px solid rgba(36,39,42,0.08);
+            pointer-events: none;
+        }
+
+        .site-loader::after {
+            inset: 26px;
+            border-color: rgba(47,111,143,0.14);
+        }
+
+        .loader-content {
+            position: relative;
+            width: min(360px, 86vw);
+            display: grid;
+            justify-items: center;
+            gap: 18px;
+            text-align: center;
+        }
+
+        .loader-mark {
+            position: relative;
+            width: 128px;
+            height: 128px;
+            display: grid;
+            place-items: center;
+        }
+
+        .loader-mark::before,
+        .loader-mark::after {
+            content: '';
+            position: absolute;
+            background: rgba(36,39,42,0.22);
+        }
+
+        .loader-mark::before {
+            width: 1px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+        }
+
+        .loader-mark::after {
+            width: 100%;
+            height: 1px;
+            left: 0;
+            top: 50%;
+        }
+
+        .loader-ring {
+            position: absolute;
+            inset: 10px;
+            border: 1px solid rgba(36,39,42,0.34);
+            border-radius: 50%;
+            animation: loader-spin 3.8s linear infinite;
+        }
+
+        .loader-ring::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            right: 12px;
+            top: 6px;
+            background: #2f6f8f;
+            box-shadow: 0 0 0 4px #f7f4ec;
+        }
+
+        .loader-ring.secondary {
+            inset: 28px;
+            border-color: rgba(184,92,82,0.55);
+            animation-duration: 2.7s;
+            animation-direction: reverse;
+        }
+
+        .loader-ring.secondary::before {
+            width: 9px;
+            height: 9px;
+            left: 5px;
+            right: auto;
+            top: 16px;
+            background: #b88746;
+        }
+
+        .loader-core {
+            width: 34px;
+            height: 34px;
+            background: #24272a;
+            border: 6px solid #f7f4ec;
+            outline: 1px solid rgba(36,39,42,0.55);
+            transform: rotate(45deg);
+            animation: loader-pulse 1.6s ease-in-out infinite;
+        }
+
+        .loader-copy {
+            display: grid;
+            gap: 4px;
+        }
+
+        .loader-kicker,
+        .loader-status {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.72rem;
+            color: #4d7358;
+            letter-spacing: 0;
+        }
+
+        .loader-name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2rem, 10vw, 3.4rem);
+            line-height: 1;
+            font-weight: 500;
+            letter-spacing: 0;
+        }
+
+        .loader-status {
+            color: #6b6b6b;
+        }
+
+        .loader-progress {
+            position: relative;
+            width: min(240px, 70vw);
+            height: 2px;
+            overflow: hidden;
+            background: rgba(36,39,42,0.14);
+        }
+
+        .loader-progress span {
+            position: absolute;
+            inset: 0;
+            width: 42%;
+            background: linear-gradient(90deg, #2f6f8f, #b88746, #b85c52);
+            animation: loader-progress 1.25s ease-in-out infinite;
+        }
+
+        .site-loader.is-ready .loader-progress span {
+            width: 100%;
+            transform: none;
+            animation: none;
+        }
+
+        @keyframes loader-spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes loader-pulse {
+            0%, 100% { transform: rotate(45deg) scale(0.92); }
+            50% { transform: rotate(45deg) scale(1.08); }
+        }
+
+        @keyframes loader-progress {
+            0% { transform: translateX(-120%); }
+            100% { transform: translateX(240%); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .loader-ring,
+            .loader-core,
+            .loader-progress span {
+                animation: none;
+            }
+
+            .loader-progress span {
+                transform: none;
+                width: 100%;
+            }
+        }
+    </style>
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+</head>
+<body class="lang-en">
+
+<div class="site-loader" id="siteLoader" role="status" aria-live="polite" aria-label="Loading homepage">
+    <div class="loader-content">
+        <div class="loader-mark" aria-hidden="true">
+            <span class="loader-ring"></span>
+            <span class="loader-ring secondary"></span>
+            <span class="loader-core"></span>
+        </div>
+        <div class="loader-copy">
+            <div class="loader-kicker">SJTU / AI / Notes</div>
+            <div class="loader-name">Runde Yang</div>
+            <div class="loader-status">Preparing the page</div>
+        </div>
+        <div class="loader-progress" aria-hidden="true"><span></span></div>
+    </div>
+</div>
+<script>
+(function () {
+    const loader = document.getElementById('siteLoader');
+    if (!loader) return;
+
+    const status = loader.querySelector('.loader-status');
+    const startedAt = performance.now();
+    const minVisibleMs = 850;
+    let ready = false;
+    let finished = false;
+
+    function setStatus(message) {
+        if (status && message) status.textContent = message;
+    }
+
+    function hideLoader() {
+        if (finished || !ready) return;
+        finished = true;
+        document.removeEventListener('keydown', handleEnter, true);
+        loader.removeEventListener('pointerdown', handleEnter, true);
+        loader.classList.add('is-hidden');
+        loader.setAttribute('aria-hidden', 'true');
+        window.setTimeout(() => loader.remove(), 700);
+    }
+
+    function handleEnter(event) {
+        if (event && event.type === 'keydown' && event.isComposing) return;
+        hideLoader();
+    }
+
+    function armEntry() {
+        if (finished || ready) return;
+        ready = true;
+        loader.classList.add('is-ready');
+        loader.setAttribute('aria-label', 'Homepage ready. Press any key to enter');
+        setStatus('Ready. Press any key to enter');
+        document.addEventListener('keydown', handleEnter, true);
+        loader.addEventListener('pointerdown', handleEnter, true);
+    }
+
+    function markReady(message) {
+        if (finished || ready) return;
+        if (message) setStatus(message);
+        const elapsed = performance.now() - startedAt;
+        window.setTimeout(armEntry, Math.max(0, minVisibleMs - elapsed));
+    }
+
+    window.__homepageLoader = { setStatus, markReady };
+})();
+</script>
+<noscript><style>.site-loader{display:none!important;}</style></noscript>
 
     <style>
         /* ========== Custom Font ========== */
@@ -882,10 +1158,8 @@
         ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #bbb; }
     </style>
-    <link rel="stylesheet" href="assets/mochi/mochi-pet.css">
-</head>
-<body class="lang-en">
-
+<link rel="preload" as="style" href="assets/mochi/mochi-pet.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="assets/mochi/mochi-pet.css"></noscript>
 <!-- ===== Navigation ===== -->
 <nav class="nav">
     <div class="nav-inner">
@@ -1263,6 +1537,25 @@ function setLang(lang) {
 /* ===== Init Language ===== */
 setLang(currentLang);
 
+function waitForImageReady(img) {
+    if (!img || img.complete) return Promise.resolve();
+    return new Promise(resolve => {
+        const done = () => {
+            img.removeEventListener('load', done);
+            img.removeEventListener('error', done);
+            resolve();
+        };
+        img.addEventListener('load', done, { once: true });
+        img.addEventListener('error', done, { once: true });
+    });
+}
+
+function waitForPetPreload(pet) {
+    const images = pet && pet.imageCache ? Array.from(pet.imageCache.values()) : [];
+    if (!images.length) return Promise.resolve();
+    return Promise.all(images.map(waitForImageReady));
+}
+
 /* ===== Email Obfuscation ===== */
 (function() {
     const u = 'yangrundemdj', d = 'gmail.com';
@@ -1433,8 +1726,16 @@ setLang(currentLang);
 
 // 啟動
 window.addEventListener('load', () => {
+    const loader = window.__homepageLoader;
     if (window.MochiPet) {
-        new MochiPet();
+        if (loader) loader.setStatus('Loading companion frames');
+        const pet = new MochiPet();
+        window.__mochiPet = pet;
+        waitForPetPreload(pet).then(() => {
+            if (loader) loader.markReady('Ready. Press any key to enter');
+        });
+    } else if (loader) {
+        loader.markReady('Ready. Press any key to enter');
     }
 });
 
