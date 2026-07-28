@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import json
 import re
+from datetime import date as calendar_date
 from pathlib import Path
 from typing import Any
 
@@ -11,6 +13,22 @@ ROOT = Path(__file__).resolve().parent
 CONTENT_FILE = ROOT / "site_content.json"
 LANGS = ("en", "zh-CN", "zh-TW")
 THOUGHT_COLLAPSE_CHARS = 700
+MONTH_NAMES = (
+    "",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+)
+GALAXY_STREAMS = ("gallery", "shelf", "thoughts")
 
 
 def esc(value: Any) -> str:
@@ -32,6 +50,216 @@ def json_js(data: Any) -> str:
     return json.dumps(data, ensure_ascii=False, indent=4)
 
 
+def format_moment_date(moment: dict[str, Any], lang: str) -> str:
+    custom = lang_value(moment.get("date_label", {}), lang)
+    if custom:
+        return custom
+
+    value = str(moment.get("date") or "").strip()
+    match = re.fullmatch(r"(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?", value)
+    if not match:
+        return {"en": "Undated", "zh-CN": "未标日期", "zh-TW": "未標日期"}[lang]
+
+    year, month_text, day_text = match.groups()
+    if not month_text:
+        return year
+
+    month = int(month_text)
+    if not 1 <= month <= 12:
+        return value
+    if lang == "en":
+        return f"{MONTH_NAMES[month]} {int(day_text)}, {year}" if day_text else f"{MONTH_NAMES[month]} {year}"
+    suffix = f"{year}年{month}月"
+    return f"{suffix}{int(day_text)}日" if day_text else suffix
+
+
+def moment_sort_key(moment: dict[str, Any]) -> tuple[int, str]:
+    date = str(moment.get("date") or "")
+    # Python's sort is stable, so equal/undated moments retain the editor's
+    # explicit up/down order instead of being silently reordered by ID.
+    return (0 if not date else 1, date)
+
+
+def validate_content(content: dict[str, Any]) -> None:
+    """Reject ambiguous IDs and broken galaxy references before writing HTML."""
+    errors: list[str] = []
+    home = content.get("home", {})
+    life = content.get("life", {})
+
+    collections = (
+        ("home.news", home.get("news", [])),
+        ("home.publications", home.get("publications", [])),
+        ("home.projects", home.get("projects", [])),
+        ("home.gallery", home.get("gallery", [])),
+        ("life.gallery", life.get("gallery", [])),
+        ("life.shelf", life.get("shelf", [])),
+        ("life.thoughts", life.get("thoughts", [])),
+        ("life.moments", life.get("moments", [])),
+    )
+    for label, items in collections:
+        seen: set[str] = set()
+        for index, item in enumerate(items):
+            item_id = str(item.get("id") or "").strip() if isinstance(item, dict) else ""
+            if not item_id:
+                errors.append(f"{label}[{index}] 缺少非空 ID")
+            elif item_id in seen:
+                errors.append(f"{label} 含有重复 ID：{item_id}")
+            else:
+                seen.add(item_id)
+
+    item_ids_by_stream = {
+        stream: {
+            str(item.get("id")).strip()
+            for item in life.get(stream, [])
+            if isinstance(item, dict) and str(item.get("id") or "").strip()
+        }
+        for stream in GALAXY_STREAMS
+    }
+    referenced_by: dict[tuple[str, str], str] = {}
+
+    for index, moment in enumerate(life.get("moments", [])):
+        if not isinstance(moment, dict):
+            errors.append(f"life.moments[{index}] 必须是对象")
+            continue
+
+        moment_id = str(moment.get("id") or f"#{index + 1}").strip()
+        stream = str(moment.get("stream") or "").strip()
+        if stream not in GALAXY_STREAMS:
+            errors.append(
+                f"银河时刻 {moment_id} 的 stream 必须是 gallery、shelf 或 thoughts"
+            )
+            continue
+
+        raw_item_ids = moment.get("item_ids")
+        if not isinstance(raw_item_ids, list) or not raw_item_ids:
+            errors.append(f"银河时刻 {moment_id} 至少要引用一个 {stream} 条目")
+            continue
+
+        local_seen: set[str] = set()
+        for raw_item_id in raw_item_ids:
+            item_id = str(raw_item_id).strip()
+            if not item_id:
+                errors.append(f"银河时刻 {moment_id} 含有空的条目 ID")
+                continue
+            if item_id in local_seen:
+                errors.append(f"银河时刻 {moment_id} 重复引用了 {item_id}")
+                continue
+            local_seen.add(item_id)
+            if item_id not in item_ids_by_stream[stream]:
+                errors.append(f"银河时刻 {moment_id} 引用了不存在的 {stream} 条目：{item_id}")
+                continue
+            reference_key = (stream, item_id)
+            if reference_key in referenced_by:
+                errors.append(
+                    f"{stream} 条目 {item_id} 同时被银河时刻 "
+                    f"{referenced_by[reference_key]} 和 {moment_id} 引用"
+                )
+            else:
+                referenced_by[reference_key] = moment_id
+
+        date_value = str(moment.get("date") or "").strip()
+        if date_value:
+            match = re.fullmatch(r"(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?", date_value)
+            if not match:
+                errors.append(
+                    f"银河时刻 {moment_id} 的日期必须是 YYYY、YYYY-MM 或 YYYY-MM-DD"
+                )
+            else:
+                year_text, month_text, day_text = match.groups()
+                try:
+                    calendar_date(
+                        int(year_text),
+                        int(month_text or 1),
+                        int(day_text or 1),
+                    )
+                except ValueError:
+                    errors.append(f"银河时刻 {moment_id} 的日期无效：{date_value}")
+
+        prominence = moment.get("prominence", 1)
+        try:
+            prominence_number = float(prominence)
+        except (TypeError, ValueError):
+            prominence_number = 0
+        if prominence_number not in (1, 2, 3):
+            errors.append(f"银河时刻 {moment_id} 的 prominence 必须是 1、2 或 3")
+
+    countries_seen: set[str] = set()
+    for index, country in enumerate(life.get("footprints", {}).get("visited_countries", [])):
+        map_name = str(country.get("map_name") or "").strip() if isinstance(country, dict) else ""
+        if not map_name:
+            errors.append(f"life.footprints.visited_countries[{index}] 缺少 GeoJSON map_name")
+        elif map_name in countries_seen:
+            errors.append(f"到访国家和地区含有重复 map_name：{map_name}")
+        else:
+            countries_seen.add(map_name)
+
+    if errors:
+        raise ValueError("内容数据校验失败：\n- " + "\n- ".join(errors))
+
+
+def resolved_moments(content: dict[str, Any], stream: str) -> list[dict[str, Any]]:
+    life = content["life"]
+    items = list(life.get(stream, []))
+    by_id = {str(item.get("id")): item for item in items if item.get("id")}
+    moments: list[dict[str, Any]] = []
+    referenced: set[str] = set()
+
+    for raw in life.get("moments", []):
+        if raw.get("stream") != stream:
+            continue
+        item_ids = [str(item_id) for item_id in raw.get("item_ids", [])]
+        resolved = [by_id[item_id] for item_id in item_ids if item_id in by_id]
+        if not resolved:
+            continue
+        moment = dict(raw)
+        moment["_items"] = resolved
+        moments.append(moment)
+        referenced.update(item_id for item_id in item_ids if item_id in by_id)
+
+    unreferenced = [item for item in items if str(item.get("id")) not in referenced]
+    if unreferenced:
+        fallback_copy = {
+            "gallery": {
+                "en": "More photographs",
+                "zh-CN": "更多光影",
+                "zh-TW": "更多光影",
+            },
+            "shelf": {
+                "en": "More from the shelf",
+                "zh-CN": "更多书影",
+                "zh-TW": "更多書影",
+            },
+            "thoughts": {
+                "en": "More thoughts",
+                "zh-CN": "更多随笔",
+                "zh-TW": "更多隨筆",
+            },
+        }[stream]
+        moments.append(
+            {
+                "id": f"{stream}-unsorted",
+                "stream": stream,
+                "date": "",
+                "date_label": {
+                    "en": "Undated",
+                    "zh-CN": "未标日期",
+                    "zh-TW": "未標日期",
+                },
+                "location": {},
+                "summary": fallback_copy,
+                "item_ids": [str(item.get("id")) for item in unreferenced],
+                "prominence": 1,
+                "_items": unreferenced,
+            }
+        )
+
+    return sorted(moments, key=moment_sort_key)
+
+
+def moment_seed(moment_id: str) -> int:
+    return int(hashlib.sha1(moment_id.encode("utf-8")).hexdigest()[:8], 16)
+
+
 def load_content(root: Path = ROOT) -> dict[str, Any]:
     return json.loads((root / "site_content.json").read_text(encoding="utf-8"))
 
@@ -39,12 +267,14 @@ def load_content(root: Path = ROOT) -> dict[str, Any]:
 def replace_region(text: str, name: str, replacement: str, fallback_pattern: str) -> str:
     start = f"<!-- SITEGEN:{name}_START -->"
     end = f"<!-- SITEGEN:{name}_END -->"
-    wrapped = replacement.rstrip()
+    replacement_text = replacement.rstrip()
 
     if start in text and end in text:
+        wrapped = f"{start}\n{replacement_text}\n{end}"
         pattern = re.compile(r"^[ \t]*" + re.escape(start) + r"\s*.*?^[ \t]*" + re.escape(end), re.S | re.M)
         text, count = pattern.subn(lambda _match: wrapped, text, count=1)
     else:
+        wrapped = replacement_text
         text, count = re.subn(r"^[ \t]*" + fallback_pattern, lambda _match: wrapped, text, count=1, flags=re.S | re.M)
 
     if count != 1:
@@ -55,12 +285,14 @@ def replace_region(text: str, name: str, replacement: str, fallback_pattern: str
 def replace_code_region(text: str, name: str, replacement: str, fallback_pattern: str) -> str:
     start = f"/* SITEGEN:{name}_START */"
     end = f"/* SITEGEN:{name}_END */"
-    wrapped = replacement.rstrip()
+    replacement_text = replacement.rstrip()
 
     if start in text and end in text:
+        wrapped = f"{start}\n{replacement_text}\n{end}"
         pattern = re.compile(r"^[ \t]*" + re.escape(start) + r"\s*.*?^[ \t]*" + re.escape(end), re.S | re.M)
         text, count = pattern.subn(lambda _match: wrapped, text, count=1)
     else:
+        wrapped = replacement_text
         text, count = re.subn(r"^[ \t]*" + fallback_pattern, lambda _match: wrapped, text, count=1, flags=re.S | re.M)
 
     if count != 1:
@@ -119,6 +351,14 @@ def render_life_i18n(content: dict[str, Any]) -> str:
         for lang in LANGS:
             i18n[lang][date_key] = lang_value(item.get("date", {}), lang)
             i18n[lang][key] = lang_value(item.get("text", {}), lang)
+
+    for stream in GALAXY_STREAMS:
+        for moment in resolved_moments(content, stream):
+            moment_id = str(moment.get("id") or "")
+            for lang in LANGS:
+                i18n[lang][f"moment_date_{moment_id}"] = format_moment_date(moment, lang)
+                i18n[lang][f"moment_location_{moment_id}"] = lang_value(moment.get("location", {}), lang)
+                i18n[lang][f"moment_summary_{moment_id}"] = lang_value(moment.get("summary", {}), lang)
 
     return "/* ===== i18n ===== */\nconst i18n = " + json_js(i18n) + ";"
 
@@ -228,8 +468,11 @@ def render_gallery_items(items: list[dict[str, Any]], grid: bool) -> str:
     rows = []
     for index, item in enumerate(items):
         key = f"cap_{key_for('gallery', item, index)}"
-        rows.append(f"""                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", ""))}">
+        rows.append(f"""                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="{esc(lang_value(item.get("caption", {}), "en"))}"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){{event.preventDefault();openLightbox(this)}}">
+                    <img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", ""))}" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="{esc(key)}">{lang_value(item.get("caption", {}), "en")}</div>
                 </div>""")
     return "\n".join(rows)
@@ -252,7 +495,7 @@ def render_home_gallery(content: dict[str, Any]) -> str:
         </div>
 
         <!-- Life link card -->
-        <div class="life-card" onclick="window.location.href='life.html'">
+        <a class="life-card" id="lifePortalLink" href="life.html">
             <div class="life-card-bg">
 {bg_imgs}
             </div>
@@ -264,7 +507,7 @@ def render_home_gallery(content: dict[str, Any]) -> str:
                 <div class="life-card-desc" data-key="life_card_desc">{lang_value(life_card.get("desc", {}), "en")}</div>
             </div>
             <div class="life-card-arrow"><i class="fas fa-long-arrow-alt-right"></i> <span class="en-only" style="font-size:0.8rem;letter-spacing:0.05em;">EXPLORE</span></div>
-        </div>
+        </a>
     </section>"""
 
 
@@ -293,19 +536,9 @@ def render_notes(content: dict[str, Any]) -> str:
     </section>"""
 
 
-def render_life_gallery(content: dict[str, Any]) -> str:
-    return """    <!-- Gallery -->
-    <section id="gallery" class="fade-in">
-        <div class="section-title" data-key="title_gallery">Gallery</div>
-        <div class="gallery-grid">
-""" + render_gallery_items(content["life"]["gallery"], grid=True) + """
-        </div>
-    </section>"""
-
-
-def render_shelf(content: dict[str, Any]) -> str:
+def render_shelf_items(items: list[dict[str, Any]]) -> str:
     rows = []
-    for index, item in enumerate(content["life"]["shelf"]):
+    for index, item in enumerate(items):
         key = key_for("shelf", item, index)
         rows.append(f"""            <div class="shelf-item">
                 <div class="shelf-icon"><i class="{esc(item.get("icon", "fas fa-book"))}"></i></div>
@@ -314,18 +547,12 @@ def render_shelf(content: dict[str, Any]) -> str:
                     <div class="shelf-comment" data-key="{esc(key)}">{lang_value(item.get("comment", {}), "en")}</div>
                 </div>
             </div>""")
-    return """    <!-- Shelf -->
-    <section id="shelf" class="fade-in">
-        <div class="section-title" data-key="title_shelf">Shelf</div>
-        <div class="shelf-list">
-""" + "\n".join(rows) + """
-        </div>
-    </section>"""
+    return "\n".join(rows)
 
 
-def render_thoughts(content: dict[str, Any]) -> str:
+def render_thought_items(items: list[dict[str, Any]]) -> str:
     rows = []
-    for index, item in enumerate(content["life"]["thoughts"]):
+    for index, item in enumerate(items):
         key = key_for("thought", item, index)
         text_values = item.get("text", {})
         should_collapse = any(len(lang_value(text_values, lang)) > THOUGHT_COLLAPSE_CHARS for lang in LANGS)
@@ -337,27 +564,76 @@ def render_thoughts(content: dict[str, Any]) -> str:
                 <div class="thought-date" data-key="{esc('date_' + key)}">{lang_value(item.get("date", {}), "en")}</div>
                 <div class="{text_class}" data-key="{esc(key)}">{lang_value(text_values, "en")}</div>{toggle}
             </div>""")
-    return """    <!-- Thoughts -->
-    <section id="thoughts" class="fade-in">
-        <div class="section-title" data-key="title_thoughts">Thoughts</div>
-        <div class="thoughts-list">
-""" + "\n".join(rows) + """
-        </div>
-    </section>"""
+    return "\n".join(rows)
+
+
+def render_galaxy_detail(stream: str, items: list[dict[str, Any]]) -> str:
+    if stream == "gallery":
+        return """                <div class="gallery-grid" data-gallery-group>
+""" + render_gallery_items(items, grid=True) + """
+                </div>"""
+    if stream == "shelf":
+        return """                <div class="shelf-list">
+""" + render_shelf_items(items) + """
+                </div>"""
+    return """                <div class="thoughts-list">
+""" + render_thought_items(items) + """
+                </div>"""
+
+
+def render_portal_section(content: dict[str, Any], stream: str) -> str:
+    moments = resolved_moments(content, stream)
+    blocks = []
+
+    for index, moment in enumerate(moments):
+        moment_id = str(moment.get("id") or f"{stream}-{index + 1}")
+        date_key = f"moment_date_{moment_id}"
+        location_key = f"moment_location_{moment_id}"
+        summary_key = f"moment_summary_{moment_id}"
+        date_text = format_moment_date(moment, "en")
+        location_text = lang_value(moment.get("location", {}), "en")
+        summary_text = lang_value(moment.get("summary", {}), "en")
+
+        blocks.append(f"""                <article class="portal-moment" data-moment="{esc(moment_id)}">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="{esc(date_key)}">{esc(date_text)}</span>
+                            <span class="portal-moment-location" data-key="{esc(location_key)}">{esc(location_text)}</span>
+                        </div>
+                        <h3 data-key="{esc(summary_key)}">{esc(summary_text)}</h3>
+                    </header>
+{render_galaxy_detail(stream, moment["_items"])}
+                </article>""")
+
+    return f"""        <section id="{stream}" class="portal-content" data-portal-content="{stream}" hidden>
+            <div class="portal-moments">
+{chr(10).join(blocks)}
+            </div>
+        </section>"""
+
+
+def render_life_gallery(content: dict[str, Any]) -> str:
+    return render_portal_section(content, "gallery")
+
+
+def render_shelf(content: dict[str, Any]) -> str:
+    return render_portal_section(content, "shelf")
+
+
+def render_thoughts(content: dict[str, Any]) -> str:
+    return render_portal_section(content, "thoughts")
 
 
 def render_friends(content: dict[str, Any]) -> str:
     rows = "\n".join(
-        f'            <a href="{esc(item.get("href", "#"))}" class="friend-link">{esc(item.get("label", ""))}</a>'
+        f'                    <a href="{esc(item.get("href", "#"))}" class="friend-link">{esc(item.get("label", ""))}</a>'
         for item in content["life"]["friends"]
     )
-    return """    <!-- Friends -->
-    <section id="friends" class="fade-in">
-        <div class="section-title" data-key="title_friends">Friends</div>
-        <div class="friends-list">
+    return """        <section id="friends" class="portal-content" data-portal-content="friends" hidden>
+            <div class="friends-list">
 """ + rows + """
-        </div>
-    </section>"""
+            </div>
+        </section>"""
 
 
 def render_visited(content: dict[str, Any]) -> str:
@@ -366,12 +642,9 @@ def render_visited(content: dict[str, Any]) -> str:
     return "const visited = [\n" + rows + "\n];"
 
 
-def render_world_points(content: dict[str, Any]) -> str:
-    rows = []
-    for item in content["life"]["footprints"].get("world_points", []):
-        value = item.get("value", [0, 0])
-        rows.append(f"                    {{ name: {json.dumps(item.get('name', ''), ensure_ascii=False)}, value: [{float(value[0])}, {float(value[1])}] }}")
-    return "                    data: [\n" + ",\n".join(rows) + "\n                ]"
+def render_visited_countries(content: dict[str, Any]) -> str:
+    values = content["life"]["footprints"].get("visited_countries", [])
+    return "const visitedCountries = " + json_js(values) + ";"
 
 
 def render_citations(content: dict[str, Any]) -> str:
@@ -414,9 +687,9 @@ def render_life(root: Path, content: dict[str, Any], write: bool) -> str:
     text = replace_code_region(text, "LIFE_VISITED", render_visited(content), r'const visited = \[.*?\];')
     text = replace_code_region(
         text,
-        "LIFE_WORLD_POINTS",
-        render_world_points(content),
-        r"[ \t]*data:\s*\[\s*(?:\{[^{}]*\}\s*,?\s*)*\]",
+        "LIFE_VISITED_COUNTRIES",
+        render_visited_countries(content),
+        r"const visitedCountries = \[.*?\];",
     )
 
     if write:
@@ -426,15 +699,31 @@ def render_life(root: Path, content: dict[str, Any], write: bool) -> str:
 
 def render_site(root: Path = ROOT, write: bool = True) -> tuple[str, str]:
     content = load_content(root)
+    validate_content(content)
     return render_home(root, content, write), render_life(root, content, write)
+
+
+def render_life_only(root: Path = ROOT, write: bool = True) -> str:
+    content = load_content(root)
+    validate_content(content)
+    return render_life(root, content, write)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Render static homepage HTML from site_content.json.")
     parser.add_argument("--check", action="store_true", help="Render in memory only; do not write files.")
+    parser.add_argument(
+        "--life-only",
+        action="store_true",
+        help="Render only life.html, leaving index.html byte-for-byte untouched.",
+    )
     args = parser.parse_args()
-    render_site(ROOT, write=not args.check)
-    print("Rendered index.html and life.html" if not args.check else "Render check passed")
+    if args.life_only:
+        render_life_only(ROOT, write=not args.check)
+        print("Rendered life.html" if not args.check else "Life render check passed")
+    else:
+        render_site(ROOT, write=not args.check)
+        print("Rendered index.html and life.html" if not args.check else "Render check passed")
     return 0
 
 

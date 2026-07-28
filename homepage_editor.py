@@ -29,8 +29,24 @@ def load_content() -> dict[str, Any]:
 
 
 def save_content(content: dict[str, Any]) -> None:
+    site_renderer.validate_content(content)
     CONTENT_FILE.write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     site_renderer.render_site(ROOT, write=True)
+
+
+def make_unique_id(items: list[Any], base: str) -> str:
+    existing = {
+        str(item.get("id") or "").strip()
+        for item in items
+        if isinstance(item, dict)
+    }
+    clean_base = base.strip() or "item"
+    if clean_base not in existing:
+        return clean_base
+    suffix = 2
+    while f"{clean_base}_{suffix}" in existing:
+        suffix += 1
+    return f"{clean_base}_{suffix}"
 
 
 def path_parts(path: str) -> list[str | int]:
@@ -183,6 +199,36 @@ SECTION_SPECS: dict[str, dict[str, Any]] = {
             ("Text 繁中", "text.zh-TW", "textarea")
         ]
     },
+    "生活 / Galaxy Moments": {
+        "path": "life.moments",
+        "display": "summary.en",
+        "default": {
+            "id": "moment_new",
+            "stream": "gallery",
+            "date": "2026-01",
+            "date_label": {"en": "", "zh-CN": "", "zh-TW": ""},
+            "location": {"en": "", "zh-CN": "", "zh-TW": ""},
+            "summary": {"en": "New moment", "zh-CN": "新的时刻", "zh-TW": "新的時刻"},
+            "item_ids": [],
+            "prominence": 2
+        },
+        "fields": [
+            ("ID", "id", "entry"),
+            ("Stream (gallery / shelf / thoughts)", "stream", "entry"),
+            ("ISO date (YYYY / YYYY-MM / YYYY-MM-DD)", "date", "entry"),
+            ("Custom date label EN (optional)", "date_label.en", "entry"),
+            ("Custom date label 简中 (optional)", "date_label.zh-CN", "entry"),
+            ("Custom date label 繁中 (optional)", "date_label.zh-TW", "entry"),
+            ("Location EN", "location.en", "entry"),
+            ("Location 简中", "location.zh-CN", "entry"),
+            ("Location 繁中", "location.zh-TW", "entry"),
+            ("Summary EN", "summary.en", "textarea"),
+            ("Summary 简中", "summary.zh-CN", "textarea"),
+            ("Summary 繁中", "summary.zh-TW", "textarea"),
+            ("Referenced item IDs (comma separated)", "item_ids", "csv"),
+            ("Prominence (1–3)", "prominence", "number")
+        ]
+    },
     "生活 / Friends": {
         "path": "life.friends",
         "display": "label",
@@ -199,14 +245,15 @@ SECTION_SPECS: dict[str, dict[str, Any]] = {
         "string_item": True,
         "fields": [("City name", "", "entry")]
     },
-    "生活 / World Points": {
-        "path": "life.footprints.world_points",
-        "display": "name",
-        "default": {"name": "New Place", "value": [0.0, 0.0]},
+    "生活 / Visited Countries": {
+        "path": "life.footprints.visited_countries",
+        "display": "label.en",
+        "default": {"map_name": "China", "label": {"en": "Mainland China", "zh-CN": "中国大陆", "zh-TW": "中國大陸"}},
         "fields": [
-            ("Name", "name", "entry"),
-            ("Longitude", "value.0", "number"),
-            ("Latitude", "value.1", "number")
+            ("GeoJSON map name", "map_name", "entry"),
+            ("Display name EN", "label.en", "entry"),
+            ("Display name 简中", "label.zh-CN", "entry"),
+            ("Display name 繁中", "label.zh-TW", "entry")
         ]
     }
 }
@@ -486,6 +533,8 @@ class HomepageEditor(tk.Tk):
         return widget.get()
 
     def write_widget(self, widget: tk.Widget, value: Any) -> None:
+        if isinstance(value, list):
+            value = ", ".join(str(item) for item in value)
         if isinstance(widget, tk.Text):
             widget.delete("1.0", "end")
             widget.insert("1.0", "" if value is None else str(value))
@@ -598,6 +647,8 @@ class HomepageEditor(tk.Tk):
                 value: Any = self.read_widget(self.form_widgets[path], kind)
                 if kind == "number":
                     value = as_float(value)
+                elif kind == "csv":
+                    value = [part.strip() for part in value.split(",") if part.strip()]
                 set_path(item, path, value)
         selected = self.item_list.curselection()
         self.selection_event_paused = True
@@ -617,8 +668,12 @@ class HomepageEditor(tk.Tk):
     def add_item(self) -> None:
         self.write_current_item(silent=True)
         spec = SECTION_SPECS[self.active_section]
-        self.collection().append(copy.deepcopy(spec["default"]))
-        self.load_section(select_index=len(self.collection()) - 1)
+        items = self.collection()
+        new_item = copy.deepcopy(spec["default"])
+        if isinstance(new_item, dict) and "id" in new_item:
+            new_item["id"] = make_unique_id(items, str(new_item.get("id") or "item"))
+        items.append(new_item)
+        self.load_section(select_index=len(items) - 1)
 
     def duplicate_item(self) -> None:
         if self.current_index is None:
@@ -626,7 +681,13 @@ class HomepageEditor(tk.Tk):
         self.write_current_item(silent=True)
         duplicate_index = self.current_index + 1
         items = self.collection()
-        items.insert(duplicate_index, copy.deepcopy(items[self.current_index]))
+        duplicate = copy.deepcopy(items[self.current_index])
+        if isinstance(duplicate, dict) and "id" in duplicate:
+            duplicate["id"] = make_unique_id(
+                items,
+                f"{str(duplicate.get('id') or 'item').strip()}_copy",
+            )
+        items.insert(duplicate_index, duplicate)
         self.load_section(select_index=duplicate_index)
 
     def delete_item(self) -> None:
@@ -692,8 +753,13 @@ class HomepageEditor(tk.Tk):
         self.write_label(silent=True)
 
     def save_json_only(self) -> None:
-        self.collect_current_edits()
-        CONTENT_FILE.write_text(json.dumps(self.content, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        try:
+            self.collect_current_edits()
+            site_renderer.validate_content(self.content)
+            CONTENT_FILE.write_text(json.dumps(self.content, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        except Exception as exc:  # pragma: no cover - UI guard
+            messagebox.showerror("保存失败", str(exc))
+            return
         self.status.configure(text="已保存数据草稿；网页文件尚未更新。")
 
     def save_all(self) -> None:

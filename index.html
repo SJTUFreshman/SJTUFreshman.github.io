@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-stellar-page="index">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,52 @@
     <meta name="keywords" content="Runde Yang, 楊潤德, SJTU, AI, Multi-Agent Systems">
     <meta name="author" content="Runde Yang">
     <title>Runde Yang</title>
+    <script>
+    (function () {
+        try {
+            const storageKey = 'runde:route-transition:v1';
+            const raw = sessionStorage.getItem(storageKey);
+            if (!raw) return;
+            const payload = JSON.parse(raw);
+            const age = Date.now() - payload?.at;
+            const valid = (
+                payload &&
+                payload.v === 1 &&
+                payload.from === 'life' &&
+                payload.to === 'index' &&
+                ['cool', 'home'].includes(payload.mode) &&
+                Number.isFinite(payload.at) &&
+                age >= 0 &&
+                age <= 15000
+            );
+            if (valid) {
+                document.documentElement.classList.add('stellar-arrival-pending');
+                window.setTimeout(
+                    () => document.documentElement.classList.remove('stellar-arrival-pending'),
+                    4500
+                );
+            } else {
+                sessionStorage.removeItem(storageKey);
+            }
+        } catch (error) {
+            try {
+                sessionStorage.removeItem('runde:route-transition:v1');
+            } catch (storageError) {
+                // Ignore unavailable storage.
+            }
+            // Storage is optional; the homepage remains directly usable.
+        }
+    })();
+    </script>
+    <style>
+        html.stellar-arrival-pending body {
+            background: #050814 !important;
+        }
+        html.stellar-arrival-pending body > :not(.stellar-transit-layer) {
+            visibility: hidden !important;
+        }
+    </style>
+    <script src="assets/stellar-transit.js" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
 
     <style id="loader-critical-css">
         html,
@@ -146,14 +192,14 @@
 
         .loader-kicker,
         .loader-status {
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
             font-size: 0.72rem;
             color: #4d7358;
             letter-spacing: 0;
         }
 
         .loader-name {
-            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-family: 'Newsreader', 'Iowan Old Style', Baskerville, Georgia, serif;
             font-size: clamp(2rem, 10vw, 3.4rem);
             line-height: 1;
             font-weight: 500;
@@ -214,6 +260,7 @@
         }
     </style>
 
+    <link rel="preload" href="fonts/edukai-5.0.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Font Awesome -->
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -242,9 +289,22 @@
 
     const status = loader.querySelector('.loader-status');
     const startedAt = performance.now();
-    const minVisibleMs = 850;
+    const autoReturn = document.documentElement.classList.contains('stellar-arrival-pending');
+    const minVisibleMs = autoReturn ? 0 : 850;
     let ready = false;
     let finished = false;
+
+    function setBackgroundInert(active) {
+        document.querySelectorAll('body > nav, body > .container, body > footer, body > .lightbox').forEach(element => {
+            if (active && !element.inert) {
+                element.inert = true;
+                element.dataset.loaderInert = 'true';
+            } else if (!active && element.dataset.loaderInert === 'true') {
+                element.inert = false;
+                delete element.dataset.loaderInert;
+            }
+        });
+    }
 
     function setStatus(message) {
         if (status && message) status.textContent = message;
@@ -257,11 +317,16 @@
         loader.removeEventListener('pointerdown', handleEnter, true);
         loader.classList.add('is-hidden');
         loader.setAttribute('aria-hidden', 'true');
+        setBackgroundInert(false);
         window.setTimeout(() => loader.remove(), 700);
     }
 
     function handleEnter(event) {
         if (event && event.type === 'keydown' && event.isComposing) return;
+        if (event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
         hideLoader();
     }
 
@@ -269,6 +334,18 @@
         if (finished || ready) return;
         ready = true;
         loader.classList.add('is-ready');
+        if (autoReturn) {
+            setStatus('Home coordinates acquired');
+            hideLoader();
+            if (window.StellarTransit?.markDestinationReady) {
+                window.StellarTransit.markDestinationReady('index');
+            } else {
+                window.dispatchEvent(new CustomEvent('stellar:destination-ready', {
+                    detail: { page: 'index' }
+                }));
+            }
+            return;
+        }
         loader.setAttribute('aria-label', 'Homepage ready. Press any key to enter');
         setStatus('Ready. Press any key to enter');
         document.addEventListener('keydown', handleEnter, true);
@@ -283,9 +360,10 @@
     }
 
     window.__homepageLoader = { setStatus, markReady };
+    document.addEventListener('DOMContentLoaded', () => setBackgroundInert(true), { once: true });
 })();
 </script>
-<noscript><style>.site-loader{display:none!important;}</style></noscript>
+<noscript><style>.site-loader{display:none!important}.fade-in{opacity:1!important;transform:none!important}</style></noscript>
 
     <style>
         /* ========== Custom Font ========== */
@@ -293,6 +371,38 @@
             font-family: 'EduKai';
             src: url('fonts/edukai-5.0.woff2') format('woff2');
             font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Newsreader';
+            src: url('fonts/newsreader-latin.woff2') format('woff2');
+            font-weight: 400 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Newsreader';
+            src: url('fonts/newsreader-italic-latin.woff2') format('woff2');
+            font-weight: 400 600;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'IBM Plex Sans';
+            src: url('fonts/ibm-plex-sans-latin.woff2') format('woff2');
+            font-weight: 100 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'IBM Plex Mono';
+            src: url('fonts/ibm-plex-mono-latin.woff2') format('woff2');
+            font-weight: 400;
             font-style: normal;
             font-display: swap;
         }
@@ -314,8 +424,9 @@
             --shadow-hover: 0 8px 30px rgba(0,0,0,0.08);
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --font-cn: 'EduKai', 'DFKai-SB', 'KaiTi', serif;
-            --font-en: 'Cormorant Garamond', 'Georgia', serif;
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --font-en: 'Newsreader', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
+            --font-ui: 'IBM Plex Sans', 'Aptos', 'Segoe UI', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei UI', 'Microsoft JhengHei UI', sans-serif;
+            --font-mono: 'IBM Plex Mono', 'SFMono-Regular', 'Cascadia Mono', 'Consolas', monospace;
             --max-width: 720px;
             --nav-height: 56px;
         }
@@ -346,8 +457,7 @@
         /* 強制以下純英文或主要為英文的區塊使用英文設計字體 */
         body.lang-zh-CN .en-only, body.lang-zh-TW .en-only,
         body.lang-zh-CN .hero-link, body.lang-zh-TW .hero-link,
-        body.lang-zh-CN .pub-authors, body.lang-zh-TW .pub-authors,
-        body.lang-zh-CN .nav-link, body.lang-zh-TW .nav-link {
+        body.lang-zh-CN .pub-authors, body.lang-zh-TW .pub-authors {
             font-family: var(--font-en);
         }
 
@@ -368,9 +478,6 @@
         a:hover { color: var(--accent-light); }
 
         img { display: block; max-width: 100%; }
-
-        /* ========== Google Font Import ========== */
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
         /* ========== Navigation ========== */
         .nav {
@@ -887,7 +994,7 @@
         .lightbox {
             display: none;
             position: fixed;
-            z-index: 2000;
+            z-index: 12000;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(250,250,248,0.96);
             backdrop-filter: blur(20px);
@@ -895,11 +1002,13 @@
             align-items: center;
             flex-direction: column;
             cursor: pointer;
+            overflow-y: auto;
+            padding: max(28px, env(safe-area-inset-top)) 72px max(28px, env(safe-area-inset-bottom));
         }
         .lightbox.active { display: flex; }
         .lightbox img {
             max-width: 90%;
-            max-height: 75vh;
+            max-height: min(75vh, calc(100dvh - 150px));
             border-radius: var(--radius);
             box-shadow: var(--shadow-hover);
         }
@@ -907,6 +1016,8 @@
             margin-top: 16px;
             font-size: 0.9rem;
             color: var(--text-secondary);
+            padding: 0 72px;
+            text-align: center;
         }
         .lightbox-close {
             position: absolute;
@@ -919,6 +1030,57 @@
             transition: color var(--transition);
         }
         .lightbox-close:hover { color: var(--text); }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: rgba(255,255,255,0.72);
+            color: var(--text-secondary);
+            font-family: var(--font-ui);
+            font-size: 1.35rem;
+            cursor: pointer;
+            transform: translateY(-50%);
+            transition: color var(--transition), border-color var(--transition), background var(--transition), transform var(--transition);
+        }
+        .lightbox-nav:hover,
+        .lightbox-nav:focus-visible {
+            color: var(--text);
+            border-color: #ccc;
+            background: rgba(255,255,255,0.96);
+            transform: translateY(-50%) scale(1.06);
+            outline: none;
+        }
+        .lightbox-prev { left: 24px; }
+        .lightbox-next { right: 24px; }
+
+        @media (max-width: 640px) {
+            .lightbox {
+                padding-left: 16px;
+                padding-right: 16px;
+                padding-bottom: max(96px, env(safe-area-inset-bottom));
+            }
+            .lightbox img {
+                max-width: calc(100% - 32px);
+                max-height: min(68vh, calc(100dvh - 190px));
+            }
+            .lightbox-nav {
+                top: auto;
+                bottom: 24px;
+                transform: none;
+            }
+            .lightbox-nav:hover,
+            .lightbox-nav:focus-visible {
+                transform: scale(1.06);
+            }
+            .lightbox-prev { left: calc(50% - 60px); }
+            .lightbox-next { right: calc(50% - 60px); }
+            .lightbox-caption { margin-bottom: 74px; padding: 0 24px; }
+        }
 
         /* ========== Life Preview ========== */
         .life-card {
@@ -1151,6 +1313,28 @@
             transform: translateY(0);
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .lightbox-nav {
+                transition: none;
+            }
+        }
+
+        /* Functional typography: bilingual UI stays crisp while reading copy remains editorial. */
+        .nav-link,
+        .lang-btn,
+        .section-title,
+        .news-date,
+        .pub-btn,
+        .note-meta,
+        .footer {
+            font-family: var(--font-ui);
+        }
+
         /* Scrollbar */
         html { overflow-x: hidden; }
         ::-webkit-scrollbar { width: 6px; }
@@ -1319,39 +1503,60 @@
         <div class="section-title" data-key="title_gallery">Gallery</div>
         <div class="gallery-scroll" id="galleryScroll">
             <div class="gallery-track" id="galleryTrack">
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/meteor.jpg" alt="Orion Nebula">
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Orion Nebula, 2025"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/meteor.jpg" alt="Orion Nebula" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="cap_meteor">Orion Nebula, 2025</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/那日.jpg" alt="Stargazing Camp">
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Stargazing camp"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/那日.jpg" alt="Stargazing Camp" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="cap_nari">Stargazing camp</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/千島湖.jpg" alt="Qiandao Lake Sunset">
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Qiandao Lake sunset"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/千島湖.jpg" alt="Qiandao Lake Sunset" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="cap_qiandaohu">Qiandao Lake sunset</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/千島湖路上.jpg" alt="On the Road">
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="On the road to Qiandao Lake"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/千島湖路上.jpg" alt="On the Road" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="cap_road">On the road to Qiandao Lake</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/美哉吾校.jpg" alt="SJTU Campus">
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="SJTU Campus in spring"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/美哉吾校.jpg" alt="SJTU Campus" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="cap_campus">SJTU Campus in spring</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/紫金山.jpg" alt="Zijin Mountain">
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Zijin Mountain, Nanjing"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/紫金山.jpg" alt="Zijin Mountain" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="cap_zijinshan">Zijin Mountain, Nanjing</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/烘焙社草莓蛋糕.jpg" alt="Baking Club">
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Baking club strawberry cake"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/烘焙社草莓蛋糕.jpg" alt="Baking Club" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="cap_cake">Baking club strawberry cake</div>
                 </div>
             </div>
         </div>
 
         <!-- Life link card -->
-        <div class="life-card" onclick="window.location.href='life.html'">
+        <a class="life-card" id="lifePortalLink" href="life.html">
             <div class="life-card-bg">
                 <img src="images/千島湖.jpg" alt="">
                 <img src="images/美哉吾校.jpg" alt="">
@@ -1366,7 +1571,7 @@
                 <div class="life-card-desc" data-key="life_card_desc">Footprints map, bookshelf, thoughts, and more.</div>
             </div>
             <div class="life-card-arrow"><i class="fas fa-long-arrow-alt-right"></i> <span class="en-only" style="font-size:0.8rem;letter-spacing:0.05em;">EXPLORE</span></div>
-        </div>
+        </a>
     </section>
 
     <!-- ===== Notes ===== -->
@@ -1393,10 +1598,12 @@
 </footer>
 
 <!-- ===== Lightbox ===== -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-    <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-    <div class="lightbox-caption" id="lightboxCaption"></div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Gallery image viewer">
+    <button class="lightbox-close" type="button" onclick="event.stopPropagation(); closeLightbox()" aria-label="Close image viewer">&times;</button>
+    <button class="lightbox-nav lightbox-prev" type="button" onclick="changeLightbox(-1, event)" aria-label="Previous image">←</button>
+    <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" onclick="event.stopPropagation()">
+    <div class="lightbox-caption" id="lightboxCaption" aria-live="polite" onclick="event.stopPropagation()"></div>
+    <button class="lightbox-nav lightbox-next" type="button" onclick="changeLightbox(1, event)" aria-label="Next image">→</button>
 </div>
 
 <script src="assets/mochi/mochi-frame-metrics.js"></script>
@@ -1503,9 +1710,40 @@ const i18n = {
 
 let currentLang = localStorage.getItem('preferredLang') || 'en';
 
+const interfaceLabels = {
+    en: {
+        lightbox: 'Gallery image viewer',
+        close: 'Close image viewer',
+        previous: 'Previous image',
+        next: 'Next image'
+    },
+    'zh-CN': {
+        lightbox: '照片查看器',
+        close: '关闭照片查看器',
+        previous: '上一张照片',
+        next: '下一张照片'
+    },
+    'zh-TW': {
+        lightbox: '照片檢視器',
+        close: '關閉照片檢視器',
+        previous: '上一張照片',
+        next: '下一張照片'
+    }
+};
+
+function updateInterfaceAccessibility(lang) {
+    const labels = interfaceLabels[lang] || interfaceLabels.en;
+    const lightbox = document.getElementById('lightbox');
+    lightbox.setAttribute('aria-label', labels.lightbox);
+    lightbox.querySelector('.lightbox-close').setAttribute('aria-label', labels.close);
+    lightbox.querySelector('.lightbox-prev').setAttribute('aria-label', labels.previous);
+    lightbox.querySelector('.lightbox-next').setAttribute('aria-label', labels.next);
+}
+
 function setLang(lang) {
     currentLang = lang;
     localStorage.setItem('preferredLang', lang);
+    document.documentElement.lang = lang;
     const data = i18n[lang];
 
     // Update body class for font switching
@@ -1528,6 +1766,11 @@ function setLang(lang) {
             el.innerHTML = data[key];
         }
     });
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        const caption = item.querySelector('.gallery-caption');
+        if (caption) item.setAttribute('aria-label', caption.textContent.trim());
+    });
+    updateInterfaceAccessibility(lang);
 
     // Update weather location
     const wLoc = document.getElementById('weatherLoc');
@@ -1554,6 +1797,18 @@ function waitForPetPreload(pet) {
     const images = pet && pet.imageCache ? Array.from(pet.imageCache.values()) : [];
     if (!images.length) return Promise.resolve();
     return Promise.all(images.map(waitForImageReady));
+}
+
+async function waitForEduKai() {
+    if (!document.fonts || typeof document.fonts.load !== 'function') {
+        throw new Error('Font Loading API unavailable');
+    }
+    const faces = await document.fonts.load('400 1em "EduKai"', '中国大陆標楷字體');
+    await document.fonts.ready;
+    const loaded = faces.length > 0
+        && faces.every(face => face.status === 'loaded')
+        && document.fonts.check('400 1em "EduKai"', '中国大陆標楷字體');
+    if (!loaded) throw new Error('EduKai did not finish loading');
 }
 
 /* ===== Email Obfuscation ===== */
@@ -1652,51 +1907,168 @@ function copyCitation(id) {
 (function() {
     const el = document.getElementById('galleryScroll');
     let isDown = false, startX, scrollLeft;
+    let dragDistance = 0;
+    let suppressClickUntil = 0;
 
     el.addEventListener('mousedown', e => {
         isDown = true;
         startX = e.pageX - el.offsetLeft;
         scrollLeft = el.scrollLeft;
+        dragDistance = 0;
     });
     el.addEventListener('mouseleave', () => isDown = false);
-    el.addEventListener('mouseup', () => isDown = false);
+    el.addEventListener('mouseup', () => {
+        if (dragDistance > 8) suppressClickUntil = performance.now() + 300;
+        isDown = false;
+    });
     el.addEventListener('mousemove', e => {
         if (!isDown) return;
-        e.preventDefault();
         const x = e.pageX - el.offsetLeft;
+        dragDistance = Math.max(dragDistance, Math.abs(x - startX));
+        if (dragDistance > 8) e.preventDefault();
         el.scrollLeft = scrollLeft - (x - startX) * 1.5;
     });
 
     // Touch support
-    let touchStartX, touchScrollLeft;
+    let touchStartX, touchScrollLeft, touchDistance;
     el.addEventListener('touchstart', e => {
         touchStartX = e.touches[0].pageX;
         touchScrollLeft = el.scrollLeft;
+        touchDistance = 0;
     }, { passive: true });
     el.addEventListener('touchmove', e => {
         const x = e.touches[0].pageX;
+        touchDistance = Math.max(touchDistance, Math.abs(x - touchStartX));
         el.scrollLeft = touchScrollLeft - (x - touchStartX);
     }, { passive: true });
+    el.addEventListener('touchend', () => {
+        if (touchDistance > 8) suppressClickUntil = performance.now() + 600;
+    }, { passive: true });
+    el.addEventListener('click', event => {
+        if (performance.now() >= suppressClickUntil) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    }, true);
 })();
 
 /* ===== Lightbox ===== */
+let lightboxItems = [];
+let lightboxIndex = 0;
+let lightboxTrigger = null;
+let lightboxTouchStartX = null;
+
+function setLightboxBackgroundInert(lightbox, active) {
+    if (!active) {
+        document.querySelectorAll('[data-lightbox-inert="true"]').forEach(element => {
+            element.inert = false;
+            delete element.dataset.lightboxInert;
+        });
+        return;
+    }
+
+    let current = lightbox;
+    while (current && current !== document.body) {
+        const parent = current.parentElement;
+        if (!parent) break;
+        Array.from(parent.children).forEach(sibling => {
+            if (sibling === current || sibling.inert) return;
+            sibling.inert = true;
+            sibling.dataset.lightboxInert = 'true';
+        });
+        current = parent;
+    }
+}
+
+function trapLightboxFocus(event, lightbox) {
+    if (event.key !== 'Tab') return;
+    const focusable = Array.from(
+        lightbox.querySelectorAll('button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])')
+    ).filter(element => element.getClientRects().length);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && (document.activeElement === first || !lightbox.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+    } else if (!event.shiftKey && (document.activeElement === last || !lightbox.contains(document.activeElement))) {
+        event.preventDefault();
+        first.focus();
+    }
+}
+
+function renderLightboxItem(index) {
+    if (!lightboxItems.length) return;
+    lightboxIndex = (index + lightboxItems.length) % lightboxItems.length;
+    const item = lightboxItems[lightboxIndex];
+    const image = item.querySelector('img');
+    const caption = item.querySelector('.gallery-caption');
+    const lightboxImage = document.getElementById('lightboxImg');
+    lightboxImage.src = image.src;
+    lightboxImage.alt = image.alt || '';
+    document.getElementById('lightboxCaption').textContent = caption ? caption.textContent : '';
+}
+
 function openLightbox(el) {
-    const src = el.querySelector('img').src;
-    const cap = el.querySelector('.gallery-caption').textContent;
-    document.getElementById('lightboxImg').src = src;
-    document.getElementById('lightboxCaption').textContent = cap;
-    document.getElementById('lightbox').classList.add('active');
+    const scope = el.closest('[data-gallery-group], .gallery-track, .gallery-grid') || document;
+    lightboxItems = Array.from(scope.querySelectorAll('.gallery-item'));
+    lightboxIndex = Math.max(0, lightboxItems.indexOf(el));
+    lightboxTrigger = el;
+    renderLightboxItem(lightboxIndex);
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    setLightboxBackgroundInert(lightbox, true);
     document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => lightbox.querySelector('.lightbox-close').focus());
+}
+
+function changeLightbox(delta, event) {
+    if (event) event.stopPropagation();
+    renderLightboxItem(lightboxIndex + delta);
 }
 
 function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox.classList.contains('active')) return;
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    setLightboxBackgroundInert(lightbox, false);
     document.body.style.overflow = '';
+    if (lightboxTrigger?.isConnected && lightboxTrigger.getClientRects().length) {
+        lightboxTrigger.focus({ preventScroll: true });
+    }
+    lightboxTrigger = null;
 }
 
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeLightbox();
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox.classList.contains('active')) return;
+    trapLightboxFocus(e, lightbox);
+    if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+    }
+    if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        changeLightbox(-1);
+    }
+    if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        changeLightbox(1);
+    }
 });
+
+const lightboxElement = document.getElementById('lightbox');
+lightboxElement.addEventListener('touchstart', event => {
+    lightboxTouchStartX = event.changedTouches[0].clientX;
+}, { passive: true });
+lightboxElement.addEventListener('touchend', event => {
+    if (lightboxTouchStartX === null) return;
+    const distance = event.changedTouches[0].clientX - lightboxTouchStartX;
+    lightboxTouchStartX = null;
+    if (Math.abs(distance) < 48) return;
+    changeLightbox(distance > 0 ? -1 : 1);
+}, { passive: true });
 
 /* ===== Mobile Nav Toggle ===== */
 function toggleNav() {
@@ -1721,22 +2093,53 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+/* ===== Stellar route transition ===== */
+const lifePortalLink = document.getElementById('lifePortalLink');
+lifePortalLink?.addEventListener('click', event => {
+    if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey ||
+        !window.StellarTransit
+    ) return;
+    event.preventDefault();
+    window.StellarTransit.navigate({
+        to: 'life',
+        href: lifePortalLink.href,
+        origin: lifePortalLink,
+        mode: 'cool',
+        duration: 980
+    });
+});
+
 /* ===== Init ===== */
 setLang(currentLang);
 
 // 啟動
 window.addEventListener('load', () => {
     const loader = window.__homepageLoader;
+    if (loader) loader.setStatus('Loading BiauKai typeface');
+    let petReady = Promise.resolve();
     if (window.MochiPet) {
-        if (loader) loader.setStatus('Loading companion frames');
         const pet = new MochiPet();
         window.__mochiPet = pet;
-        waitForPetPreload(pet).then(() => {
-            if (loader) loader.markReady('Ready. Press any key to enter');
-        });
-    } else if (loader) {
-        loader.markReady('Ready. Press any key to enter');
+        petReady = waitForPetPreload(pet);
     }
+    Promise.all([waitForEduKai(), petReady])
+        .then(() => {
+            if (loader) loader.markReady('Ready. Press any key to enter');
+        })
+        .catch(error => {
+            if (loader) loader.setStatus('Typeface unavailable. Refresh to retry');
+            window.StellarTransit?.setDestinationStatus(
+                'BiauKai typeface unavailable. Refresh to retry',
+                'TYPEFACE UNAVAILABLE · REFRESH TO RETRY'
+            );
+            console.error('Homepage preload failed:', error);
+        });
 });
 
 </script>

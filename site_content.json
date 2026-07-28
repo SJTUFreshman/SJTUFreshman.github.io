@@ -271,8 +271,24 @@
         "title_shelf": "Shelf",
         "title_thoughts": "Thoughts",
         "title_friends": "Friends",
+        "title_home": "Home",
         "chart_china": "China",
-        "chart_world": "World"
+        "chart_world": "Countries visited",
+        "enter_galaxy": "Enter the galaxy",
+        "enter_hint": "Click once to take control of the view",
+        "enter_fallback": "Continue with drag controls",
+        "lock_failed_hint": "Pointer lock was blocked. Retry or continue with drag controls.",
+        "resume_view": "Click to return to free look",
+        "control_look": "Mouse · look around",
+        "control_zoom": "Hold right mouse · focus",
+        "control_cursor": "Hold Alt · free cursor",
+        "control_select": "Left click · enter constellation",
+        "gaze_hint": "Bring a bright constellation to the centre",
+        "panel_hint": "Esc · end viewing",
+        "panel_close": "Return to the galaxy",
+        "home_departing": "Returning home",
+        "galaxy_back": "Back to the galaxy",
+        "galaxy_hint": "Follow the brighter stars through time"
       },
       "zh-CN": {
         "nav_gallery": "光影",
@@ -285,8 +301,24 @@
         "title_shelf": "书影",
         "title_thoughts": "随笔",
         "title_friends": "友链",
+        "title_home": "主页",
         "chart_china": "中国",
-        "chart_world": "世界"
+        "chart_world": "到访国家和地区",
+        "enter_galaxy": "进入星河",
+        "enter_hint": "点击一次，接管视角",
+        "enter_fallback": "使用拖拽继续",
+        "lock_failed_hint": "浏览器未允许锁定鼠标；可重试，或使用拖拽浏览。",
+        "resume_view": "点击恢复自由视角",
+        "control_look": "移动鼠标 · 环顾星河",
+        "control_zoom": "按住右键 · 聚焦星河",
+        "control_cursor": "按住 Alt · 解放鼠标",
+        "control_select": "左键 · 进入星座",
+        "gaze_hint": "将高亮星座移至屏幕中央",
+        "panel_hint": "按 Esc · 结束查看",
+        "panel_close": "返回星河",
+        "home_departing": "正在返回主页",
+        "galaxy_back": "返回星河",
+        "galaxy_hint": "循着亮星，沿时间漫游"
       },
       "zh-TW": {
         "nav_gallery": "光影",
@@ -299,8 +331,24 @@
         "title_shelf": "書影",
         "title_thoughts": "隨筆",
         "title_friends": "友鏈",
+        "title_home": "主頁",
         "chart_china": "中國",
-        "chart_world": "世界"
+        "chart_world": "到訪國家和地區",
+        "enter_galaxy": "進入星河",
+        "enter_hint": "點擊一次，接管視角",
+        "enter_fallback": "使用拖曳繼續",
+        "lock_failed_hint": "瀏覽器未允許鎖定滑鼠；可重試，或使用拖曳瀏覽。",
+        "resume_view": "點擊恢復自由視角",
+        "control_look": "移動滑鼠 · 環顧星河",
+        "control_zoom": "按住右鍵 · 聚焦星河",
+        "control_cursor": "按住 Alt · 解放滑鼠",
+        "control_select": "左鍵 · 進入星座",
+        "gaze_hint": "將高亮星座移至螢幕中央",
+        "panel_hint": "按 Esc · 結束查看",
+        "panel_close": "返回星河",
+        "home_departing": "正在返回主頁",
+        "galaxy_back": "返回星河",
+        "galaxy_hint": "循著亮星，沿時間漫遊"
       }
     },
     "gallery": [
@@ -397,6 +445,215 @@
         }
       }
     ],
+    "moments": [
+      {
+        "id": "gallery-qiandao-2024-11",
+        "stream": "gallery",
+        "date": "2024-11",
+        "location": {
+          "en": "Qiandao Lake",
+          "zh-CN": "千岛湖",
+          "zh-TW": "千島湖"
+        },
+        "summary": {
+          "en": "Stargazing camp, sunset, and the road there",
+          "zh-CN": "观星营地、日落与沿途",
+          "zh-TW": "觀星營地、日落與沿途"
+        },
+        "item_ids": [
+          "nari",
+          "qiandaohu",
+          "road"
+        ],
+        "prominence": 3
+      },
+      {
+        "id": "gallery-orion-2025",
+        "stream": "gallery",
+        "date": "2025",
+        "location": {
+          "en": "",
+          "zh-CN": "",
+          "zh-TW": ""
+        },
+        "summary": {
+          "en": "The Orion Nebula",
+          "zh-CN": "猎户座大星云",
+          "zh-TW": "獵戶座大星雲"
+        },
+        "item_ids": [
+          "meteor"
+        ],
+        "prominence": 3
+      },
+      {
+        "id": "gallery-nanjing-2025-03",
+        "stream": "gallery",
+        "date": "2025-03",
+        "location": {
+          "en": "Nanjing",
+          "zh-CN": "南京",
+          "zh-TW": "南京"
+        },
+        "summary": {
+          "en": "Zijin Mountain in early spring",
+          "zh-CN": "初春的紫金山",
+          "zh-TW": "初春的紫金山"
+        },
+        "item_ids": [
+          "zijinshan"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "gallery-baking-2025-12",
+        "stream": "gallery",
+        "date": "2025-12",
+        "location": {
+          "en": "",
+          "zh-CN": "",
+          "zh-TW": ""
+        },
+        "summary": {
+          "en": "A strawberry cake from the baking club",
+          "zh-CN": "烘焙社的草莓蛋糕",
+          "zh-TW": "烘焙社的草莓蛋糕"
+        },
+        "item_ids": [
+          "cake"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "gallery-campus-undated",
+        "stream": "gallery",
+        "date": "",
+        "date_label": {
+          "en": "Spring · Undated",
+          "zh-CN": "春日 · 未标日期",
+          "zh-TW": "春日 · 未標日期"
+        },
+        "location": {
+          "en": "Shanghai",
+          "zh-CN": "上海",
+          "zh-TW": "上海"
+        },
+        "summary": {
+          "en": "Spring on the SJTU campus",
+          "zh-CN": "交大校园的春日",
+          "zh-TW": "交大校園的春日"
+        },
+        "item_ids": [
+          "campus"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "shelf-deep-learning",
+        "stream": "shelf",
+        "date": "",
+        "date_label": {
+          "en": "Recently",
+          "zh-CN": "近期",
+          "zh-TW": "近期"
+        },
+        "location": {
+          "en": "",
+          "zh-CN": "",
+          "zh-TW": ""
+        },
+        "summary": {
+          "en": "Deep Learning — Ian Goodfellow",
+          "zh-CN": "《深度学习》",
+          "zh-TW": "《深度學習》"
+        },
+        "item_ids": [
+          "book_dl"
+        ],
+        "prominence": 3
+      },
+      {
+        "id": "shelf-interstellar",
+        "stream": "shelf",
+        "date": "",
+        "date_label": {
+          "en": "Recently",
+          "zh-CN": "近期",
+          "zh-TW": "近期"
+        },
+        "location": {
+          "en": "",
+          "zh-CN": "",
+          "zh-TW": ""
+        },
+        "summary": {
+          "en": "Interstellar",
+          "zh-CN": "《星际穿越》",
+          "zh-TW": "《星際穿越》"
+        },
+        "item_ids": [
+          "movie_interstellar"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "thought-2024-11-10",
+        "stream": "thoughts",
+        "date": "2024-11-10",
+        "location": {
+          "en": "Qiandao Lake",
+          "zh-CN": "千岛湖",
+          "zh-TW": "千島湖"
+        },
+        "summary": {
+          "en": "The meteor shower the camera could not hold",
+          "zh-CN": "相机装不下的那场流星雨",
+          "zh-TW": "相機裝不下的那場流星雨"
+        },
+        "item_ids": [
+          "thought_2"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "thought-2026-01-16",
+        "stream": "thoughts",
+        "date": "2026-01-16",
+        "location": {
+          "en": "",
+          "zh-CN": "",
+          "zh-TW": ""
+        },
+        "summary": {
+          "en": "After finals, learning to live abundantly again",
+          "zh-CN": "期末之后，重新丰盈地生活",
+          "zh-TW": "期末之後，重新豐盈地生活"
+        },
+        "item_ids": [
+          "thought_1"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "thought-2026-06-29",
+        "stream": "thoughts",
+        "date": "2026-06-29",
+        "location": {
+          "en": "",
+          "zh-CN": "",
+          "zh-TW": ""
+        },
+        "summary": {
+          "en": "A dream from the night before",
+          "zh-CN": "昨夜的一场梦",
+          "zh-TW": "昨夜的一場夢"
+        },
+        "item_ids": [
+          "thought_0629"
+        ],
+        "prominence": 3
+      }
+    ],
     "thoughts": [
       {
         "id": "thought_0629",
@@ -486,20 +743,14 @@
         "嘉兴市",
         "太原市"
       ],
-      "world_points": [
+      "visited_countries": [
         {
-          "name": "Shanghai",
-          "value": [
-            121.4737,
-            31.2304
-          ]
-        },
-        {
-          "name": "New York",
-          "value": [
-            -74.006,
-            40.7128
-          ]
+          "map_name": "China",
+          "label": {
+            "en": "Mainland China",
+            "zh-CN": "中国大陆",
+            "zh-TW": "中國大陸"
+          }
         }
       ]
     }

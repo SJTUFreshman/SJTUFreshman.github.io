@@ -1,402 +1,1433 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-stellar-page="life">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life – Runde Yang</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#070914">
+    <title>Life Beyond Research · Runde Yang</title>
+    <script>
+    (function () {
+        try {
+            const storageKey = 'runde:route-transition:v1';
+            const raw = sessionStorage.getItem(storageKey);
+            if (!raw) return;
+            const payload = JSON.parse(raw);
+            const age = Date.now() - payload?.at;
+            const valid = (
+                payload &&
+                payload.v === 1 &&
+                payload.from === 'index' &&
+                payload.to === 'life' &&
+                ['cool', 'home'].includes(payload.mode) &&
+                Number.isFinite(payload.at) &&
+                age >= 0 &&
+                age <= 15000
+            );
+            if (valid) {
+                document.documentElement.classList.add('stellar-arrival-pending');
+                window.setTimeout(
+                    () => document.documentElement.classList.remove('stellar-arrival-pending'),
+                    4500
+                );
+            } else {
+                sessionStorage.removeItem(storageKey);
+            }
+        } catch (error) {
+            try {
+                sessionStorage.removeItem('runde:route-transition:v1');
+            } catch (storageError) {
+                // Ignore unavailable storage.
+            }
+            // Storage is optional; Life remains directly usable.
+        }
+    })();
+    </script>
+    <style>
+        html.stellar-arrival-pending body {
+            background: #050814 !important;
+        }
+        html.stellar-arrival-pending body > :not(.stellar-transit-layer) {
+            visibility: hidden !important;
+        }
+    </style>
+    <script src="assets/stellar-transit.js" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
+    <link rel="preload" href="fonts/edukai-5.0.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js" defer></script>
     <style>
         @font-face {
             font-family: 'EduKai';
             src: url('fonts/edukai-5.0.woff2') format('woff2');
-            font-weight: normal;
+            font-weight: 400;
             font-style: normal;
             font-display: swap;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+        @font-face {
+            font-family: 'Newsreader';
+            src: url('fonts/newsreader-latin.woff2') format('woff2');
+            font-weight: 400 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Newsreader';
+            src: url('fonts/newsreader-italic-latin.woff2') format('woff2');
+            font-weight: 400 600;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'IBM Plex Sans';
+            src: url('fonts/ibm-plex-sans-latin.woff2') format('woff2');
+            font-weight: 100 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'IBM Plex Mono';
+            src: url('fonts/ibm-plex-mono-latin.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
 
         :root {
-            --bg: #fafaf8;
-            --bg-alt: #ffffff;
-            --text: #1a1a1a;
-            --text-secondary: #6b6b6b;
-            --text-muted: #999;
-            --accent: #2d3436;
-            --border: #e8e8e8;
-            --border-light: #f0f0f0;
-            --radius: 8px;
-            --shadow: 0 1px 3px rgba(0,0,0,0.04);
-            --shadow-hover: 0 8px 30px rgba(0,0,0,0.08);
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --font-cn: 'EduKai', 'DFKai-SB', 'KaiTi', serif;
-            --font-en: 'Cormorant Garamond', 'Georgia', serif;
-            --max-width: 780px;
-            --nav-height: 56px;
+            --space: #070914;
+            --space-soft: #0b0e1d;
+            --starlight: #fff8e7;
+            --starlight-cool: #dce8ff;
+            --paper: #f7f4ec;
+            --paper-soft: rgba(247,244,236,0.965);
+            --ink: #202225;
+            --ink-soft: #67696d;
+            --ink-faint: #96989c;
+            --rule: rgba(38,40,44,0.13);
+            --ui: 'IBM Plex Sans', 'Aptos', 'Segoe UI', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei UI', 'Microsoft JhengHei UI', sans-serif;
+            --editorial: 'Newsreader', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
+            --kai: 'EduKai', 'DFKai-SB', 'KaiTi', serif;
+            --mono: 'IBM Plex Mono', 'SFMono-Regular', 'Cascadia Mono', 'Consolas', monospace;
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 24px); overflow-x: hidden; }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: var(--space);
+        }
 
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: var(--font-en);
-            line-height: 1.75;
+            color: #f6f2e9;
+            font-family: var(--editorial);
+            line-height: 1.65;
             -webkit-font-smoothing: antialiased;
-            padding-top: var(--nav-height);
-        }
-        body.lang-zh-CN, body.lang-zh-TW { font-family: var(--font-cn); }
-        
-        /* 強制友鏈、英文標籤、導航和日期使用英文設計字體 */
-        body.lang-zh-CN .en-only, body.lang-zh-TW .en-only,
-        body.lang-zh-CN .friend-link, body.lang-zh-TW .friend-link,
-        body.lang-zh-CN .nav-link, body.lang-zh-TW .nav-link,
-        body.lang-zh-CN .thought-date, body.lang-zh-TW .thought-date {
-            font-family: var(--font-en);
         }
 
-        ::selection { background: rgba(45,52,54,0.12); }
-        a { color: var(--text); text-decoration: none; transition: color var(--transition); }
-        a:hover { color: var(--text-secondary); }
-        img { display: block; max-width: 100%; }
+        body.lang-zh-CN,
+        body.lang-zh-TW {
+            font-family: var(--kai);
+        }
 
-        /* Nav */
-        .nav {
-            position: fixed; top: 0; left: 0; right: 0;
-            height: var(--nav-height);
-            background: rgba(250,250,248,0.85);
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 1px solid rgba(255,248,231,0.9);
+            outline-offset: 5px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .galaxy-world {
+            position: fixed;
+            inset: 0;
+            isolation: isolate;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 62% 44%, rgba(92,108,160,0.19), transparent 38%),
+                radial-gradient(circle at 26% 62%, rgba(143,103,81,0.12), transparent 34%),
+                var(--space);
+            touch-action: none;
+            user-select: none;
+        }
+
+        #spaceCanvas,
+        #constellationCanvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        #spaceCanvas {
+            z-index: 0;
+        }
+
+        #constellationCanvas {
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .space-vignette,
+        .space-grain {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .space-vignette {
+            background:
+                radial-gradient(ellipse at center, transparent 46%, rgba(1,2,7,0.1) 72%, rgba(1,2,7,0.46) 100%),
+                linear-gradient(180deg, rgba(2,3,8,0.16), transparent 24%, transparent 76%, rgba(2,3,8,0.2));
+        }
+
+        .space-grain {
+            opacity: 0.025;
+            background-image:
+                repeating-radial-gradient(circle at 17% 31%, rgba(255,255,255,0.8) 0 0.4px, transparent 0.7px 3px);
+            background-size: 5px 5px;
+            mix-blend-mode: soft-light;
+        }
+
+        .life-mark {
+            position: fixed;
+            top: max(24px, env(safe-area-inset-top));
+            left: max(28px, env(safe-area-inset-left));
+            z-index: 12;
+            display: grid;
+            gap: 2px;
+            pointer-events: none;
+            text-shadow: 0 1px 18px rgba(0,0,0,0.65);
+        }
+
+        .life-mark strong {
+            font-family: var(--editorial);
+            font-size: 1.05rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+        }
+
+        .life-mark span {
+            color: rgba(239,242,250,0.6);
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .language-switch {
+            position: fixed;
+            top: max(22px, env(safe-area-inset-top));
+            right: max(26px, env(safe-area-inset-right));
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding: 3px;
+            border: 1px solid rgba(231,237,255,0.12);
+            border-radius: 999px;
+            background: rgba(7,9,17,0.32);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-light);
-            z-index: 1000;
-            display: flex; justify-content: center;
+            opacity: 0.5;
+            pointer-events: none;
+            transition: opacity 180ms ease, background 180ms ease;
         }
-        .nav-inner {
-            width: 100%; max-width: 960px; padding: 0 24px;
-            display: flex; align-items: center; justify-content: space-between;
+
+        body.cursor-free .language-switch,
+        body:not(.has-entered) .language-switch,
+        .language-switch:focus-within {
+            opacity: 1;
+            pointer-events: auto;
         }
-        .nav-brand {
-            font-family: var(--font-en); font-size: 1.05rem; font-weight: 400;
-            color: var(--text); letter-spacing: 0.04em;
-        }
-        .nav-links { display: flex; align-items: center; gap: 4px; }
-        .nav-link {
-            font-size: 0.88rem; color: var(--text-secondary);
-            padding: 6px 12px; border-radius: 6px;
-            transition: all var(--transition); font-weight: 500;
-        }
-        .nav-link:hover { color: var(--text); background: rgba(0,0,0,0.03); }
-        .nav-lang {
-            display: flex; align-items: center; gap: 2px;
-            margin-left: 16px; border-left: 1px solid var(--border); padding-left: 16px;
-        }
+
         .lang-btn {
-            background: none; border: none; cursor: pointer;
-            font-family: var(--font-en); font-size: 0.82rem;
-            color: var(--text-muted); padding: 4px 8px; border-radius: 4px;
-            transition: all var(--transition);
-        }
-        .lang-btn:hover { color: var(--text); background: rgba(0,0,0,0.03); }
-        .lang-btn.active { color: var(--text); font-weight: 600; }
-
-        .nav-toggle {
-            display: none; background: none; border: none;
-            cursor: pointer; font-size: 1.2rem; color: var(--text); padding: 4px;
-        }
-
-        /* Container */
-        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
-
-        section { padding: 60px 0; border-bottom: 1px solid var(--border-light); }
-        section:last-of-type { border-bottom: none; }
-
-        .section-title {
-            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 0.12em; color: var(--text-muted);
-            margin-bottom: 32px; font-family: var(--font-en);
-        }
-
-        /* Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-        .gallery-item {
-            position: relative;
-            aspect-ratio: 1;
-            border-radius: var(--radius);
-            overflow: hidden;
+            min-width: 31px;
+            height: 27px;
+            padding: 0 8px;
+            border: 0;
+            border-radius: 999px;
+            background: transparent;
+            color: rgba(239,242,250,0.58);
+            font-family: var(--ui);
+            font-size: 0.68rem;
             cursor: pointer;
-            transition: all var(--transition);
+            transition: color 160ms ease, background 160ms ease;
         }
-        .gallery-item:hover { transform: scale(1.02); box-shadow: var(--shadow-hover); z-index: 10; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        .gallery-caption {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.6));
-            color: #fff; padding: 20px 10px 8px; font-size: 0.78rem;
-            transform: translateY(100%); transition: transform var(--transition);
-        }
-        .gallery-item:hover .gallery-caption { transform: translateY(0); }
 
-        /* Lightbox */
-        .lightbox {
-            display: none; position: fixed; z-index: 2000;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(250,250,248,0.96); backdrop-filter: blur(20px);
-            justify-content: center; align-items: center; flex-direction: column;
-            cursor: pointer;
+        .lang-btn:hover,
+        .lang-btn.active {
+            color: #fffaf0;
+            background: rgba(255,255,255,0.1);
         }
-        .lightbox.active { display: flex; }
-        .lightbox img { max-width: 90%; max-height: 75vh; border-radius: var(--radius); box-shadow: var(--shadow-hover); }
-        .lightbox-caption { margin-top: 16px; font-size: 0.9rem; color: var(--text-secondary); }
-        .lightbox-close {
-            position: absolute; top: 20px; right: 28px; font-size: 1.5rem;
-            cursor: pointer; color: var(--text-muted); background: none; border: none;
-        }
-        .lightbox-close:hover { color: var(--text); }
 
-        /* Maps */
-        .map-grid {
+        .control-legend {
+            position: fixed;
+            left: max(28px, env(safe-area-inset-left));
+            bottom: max(24px, env(safe-area-inset-bottom));
+            z-index: 12;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-        .map-box {
-            height: 380px;
-            background: var(--bg-alt);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
+            gap: 5px;
+            color: rgba(235,239,250,0.62);
+            font-family: var(--ui);
+            font-size: 0.67rem;
+            letter-spacing: 0.02em;
+            pointer-events: none;
+            transition: opacity 500ms ease;
         }
 
-        /* Shelf */
-        .shelf-list { display: flex; flex-direction: column; gap: 20px; }
-        .shelf-item {
-            display: flex; gap: 16px; align-items: flex-start;
-            padding: 16px;
-            background: var(--bg-alt);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            transition: all var(--transition);
+        body.panel-open .control-legend {
+            opacity: 0.2;
         }
-        .shelf-item:hover { border-color: #ccc; box-shadow: var(--shadow); }
-        .shelf-icon {
-            font-size: 1.4rem; color: var(--text-muted);
-            width: 32px; text-align: center; flex-shrink: 0; padding-top: 2px;
-        }
-        .shelf-info { flex: 1; }
-        .shelf-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
-        .shelf-comment { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
 
-        /* Thoughts */
-        .thoughts-list {
-            border-left: 2px solid var(--border);
-            padding-left: 24px;
-            margin-left: 8px;
+        .control-legend span::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 1px;
+            margin: 0 8px 3px 0;
+            background: rgba(255,248,231,0.32);
         }
-        .thought-item {
-            margin-bottom: 28px;
+
+        .scene-status {
+            position: fixed;
+            right: max(28px, env(safe-area-inset-right));
+            bottom: max(24px, env(safe-area-inset-bottom));
+            z-index: 12;
+            color: rgba(235,239,250,0.56);
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+
+        .entry-gate {
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at center, rgba(20,25,45,0.025), rgba(2,3,8,0.1));
+            transition: opacity 420ms ease, visibility 420ms ease;
+        }
+
+        .entry-gate.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .entry-trigger {
             position: relative;
+            display: grid;
+            justify-items: center;
+            gap: 7px;
+            min-width: 260px;
+            padding: 48px;
+            border: 0;
+            background: transparent;
+            color: #fff8e7;
+            cursor: pointer;
+            text-align: center;
+            text-shadow: 0 0 24px rgba(218,230,255,0.28);
         }
-        .thought-item::before {
+
+        .entry-trigger::before,
+        .entry-trigger::after {
             content: '';
             position: absolute;
-            left: -30px; top: 8px;
-            width: 8px; height: 8px;
-            background: var(--text-muted);
+            left: 50%;
+            top: 20px;
             border-radius: 50%;
+            transform: translateX(-50%);
         }
-        .thought-date {
+
+        .entry-trigger::before {
+            width: 5px;
+            height: 5px;
+            background: #fff8e7;
+            box-shadow: 0 0 8px #fff, 0 0 24px rgba(205,220,255,0.85), 0 0 54px rgba(205,220,255,0.38);
+            animation: entry-star 2.4s ease-in-out infinite;
+        }
+
+        .entry-trigger::after {
+            width: 44px;
+            height: 44px;
+            margin-top: -20px;
+            border: 1px solid rgba(229,237,255,0.16);
+            animation: entry-ring 2.4s ease-out infinite;
+        }
+
+        .entry-title {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 400;
+            letter-spacing: 0.035em;
+        }
+
+        .entry-hint {
+            color: rgba(235,239,250,0.48);
+            font-family: var(--ui);
+            font-size: 0.68rem;
+            letter-spacing: 0.04em;
+        }
+
+        .entry-fallback {
+            position: absolute;
+            left: 50%;
+            top: calc(50% + 92px);
+            translate: -50% 0;
+            padding: 7px 0;
+            border: 0;
+            border-bottom: 1px solid rgba(232,239,255,0.22);
+            background: transparent;
+            color: rgba(235,239,250,0.58);
+            font-family: var(--ui);
+            font-size: 0.64rem;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+        }
+
+        .entry-fallback:hover,
+        .entry-fallback:focus-visible {
+            color: rgba(255,250,236,0.94);
+            border-bottom-color: rgba(255,250,236,0.7);
+            outline: none;
+        }
+
+        @keyframes entry-star {
+            0%, 100% { opacity: 0.58; transform: translateX(-50%) scale(0.8); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.22); }
+        }
+
+        @keyframes entry-ring {
+            0% { opacity: 0; transform: translateX(-50%) scale(0.35); }
+            32% { opacity: 0.72; }
+            100% { opacity: 0; transform: translateX(-50%) scale(1.45); }
+        }
+
+        .reticle {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            z-index: 10;
+            width: 42px;
+            height: 42px;
+            transform: translate(-50%, -50%);
+            opacity: 0.18;
+            pointer-events: none;
+            transition: opacity 240ms ease, transform 240ms ease;
+        }
+
+        .reticle::before,
+        .reticle::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background: rgba(255,248,231,0.7);
+            transform: translate(-50%, -50%);
+        }
+
+        .reticle::before {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(221,232,255,0.8);
+        }
+
+        .reticle::after {
+            width: 1px;
+            height: 1px;
+        }
+
+        .reticle span {
+            position: absolute;
+            background: rgba(231,238,255,0.52);
+            transition: transform 240ms ease, opacity 240ms ease;
+        }
+
+        .reticle .r-top,
+        .reticle .r-bottom {
+            left: 20px;
+            width: 1px;
+            height: 7px;
+        }
+
+        .reticle .r-left,
+        .reticle .r-right {
+            top: 20px;
+            width: 7px;
+            height: 1px;
+        }
+
+        .reticle .r-top { top: 2px; }
+        .reticle .r-bottom { bottom: 2px; }
+        .reticle .r-left { left: 2px; }
+        .reticle .r-right { right: 2px; }
+
+        body.has-target .reticle {
+            opacity: 0.82;
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        body.has-target .reticle .r-top { transform: translateY(4px); }
+        body.has-target .reticle .r-bottom { transform: translateY(-4px); }
+        body.has-target .reticle .r-left { transform: translateX(4px); }
+        body.has-target .reticle .r-right { transform: translateX(-4px); }
+
+        .gaze-label {
+            position: fixed;
+            left: 50%;
+            top: calc(50% + 34px);
+            z-index: 11;
+            display: grid;
+            justify-items: center;
+            min-width: 230px;
+            transform: translate(-50%, 9px);
+            opacity: 0;
+            pointer-events: none;
+            text-align: center;
+            text-shadow: 0 2px 22px rgba(0,0,0,0.75);
+            transition: opacity 220ms ease, transform 300ms ease;
+        }
+
+        body.has-target .gaze-label {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .gaze-primary {
+            color: #fffaf0;
+            font-size: clamp(1rem, 2.2vw, 1.35rem);
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .gaze-secondary {
+            margin-top: 2px;
+            color: rgba(232,237,248,0.56);
+            font-family: var(--ui);
+            font-size: 0.63rem;
+            letter-spacing: 0.12em;
+        }
+
+        .gaze-instruction {
+            position: fixed;
+            left: 50%;
+            top: calc(50% + 72px);
+            z-index: 10;
+            color: rgba(232,237,248,0.28);
+            font-family: var(--ui);
+            font-size: 0.62rem;
+            letter-spacing: 0.04em;
+            transform: translateX(-50%);
+            pointer-events: none;
+            transition: opacity 400ms ease;
+        }
+
+        body.has-target .gaze-instruction,
+        body.panel-open .gaze-instruction {
+            opacity: 0;
+        }
+
+        .portal-nav {
+            position: fixed;
+            inset: 0;
+            z-index: 8;
+            pointer-events: none;
+        }
+
+        .portal-hit {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 72px;
+            height: 72px;
+            padding: 0;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            background: transparent;
+            color: transparent;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        body.cursor-free .portal-hit,
+        body.touch-mode .portal-hit {
+            opacity: 1;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        body.cursor-free .portal-hit:hover,
+        body.cursor-free .portal-hit:focus-visible,
+        body.touch-mode .portal-hit:focus-visible {
+            border-color: rgba(255,248,231,0.32);
+            background: radial-gradient(circle, rgba(255,248,231,0.08), transparent 64%);
+            box-shadow: 0 0 32px rgba(205,222,255,0.13);
+            outline: none;
+        }
+
+        body.view-locked,
+        body.view-locked * {
+            cursor: none !important;
+        }
+
+        body.cursor-free {
+            cursor: auto;
+        }
+
+        .portal-panel {
+            position: fixed;
+            z-index: 20;
+            top: max(78px, calc(env(safe-area-inset-top) + 64px));
+            right: max(28px, env(safe-area-inset-right));
+            bottom: max(34px, env(safe-area-inset-bottom));
+            width: clamp(370px, 42vw, 610px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.48);
+            border-radius: 6px;
+            background: var(--paper-soft);
+            color: var(--ink);
+            box-shadow:
+                0 28px 90px rgba(0,0,0,0.43),
+                0 2px 0 rgba(255,255,255,0.55) inset;
+            backdrop-filter: blur(24px) saturate(0.82);
+            opacity: 0;
+            transform: translateX(34px) scale(0.985);
+            transform-origin: right center;
+            visibility: hidden;
+            pointer-events: none;
+            transition:
+                opacity 420ms ease,
+                transform 620ms cubic-bezier(0.16,0.8,0.18,1),
+                visibility 420ms ease;
+        }
+
+        .portal-panel.is-left {
+            right: auto;
+            left: max(28px, env(safe-area-inset-left));
+            transform-origin: left center;
+        }
+
+        body.panel-open .portal-panel {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            visibility: visible;
+        }
+
+        body.cursor-free.panel-open .portal-panel,
+        body.touch-mode.panel-open .portal-panel {
+            pointer-events: auto;
+        }
+
+        .portal-panel-header {
+            position: relative;
+            flex: 0 0 auto;
+            padding: 24px 72px 19px 28px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .portal-panel-kicker {
+            color: var(--ink-faint);
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        .portal-panel-title {
+            margin: 2px 0 0;
+            font-family: var(--editorial);
+            font-size: clamp(1.65rem, 3.2vw, 2.25rem);
+            font-weight: 500;
+            letter-spacing: -0.015em;
+            line-height: 1.08;
+        }
+
+        body.lang-zh-CN .portal-panel-title,
+        body.lang-zh-TW .portal-panel-title {
+            font-family: var(--kai);
+            letter-spacing: 0.04em;
+        }
+
+        .portal-panel-names {
+            margin-top: 5px;
+            color: var(--ink-faint);
+            font-family: var(--ui);
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+        }
+
+        .portal-panel-hint {
+            margin-top: 12px;
+            color: var(--ink-soft);
+            font-family: var(--ui);
+            font-size: 0.68rem;
+        }
+
+        .portal-close {
+            position: absolute;
+            top: 21px;
+            right: 22px;
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            padding: 0;
+            border: 1px solid rgba(32,34,37,0.14);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--ink-soft);
+            cursor: pointer;
+            transition: color 180ms ease, border-color 180ms ease, transform 180ms ease;
+        }
+
+        .portal-close::before {
+            content: '✦';
+            font-family: var(--editorial);
+            font-size: 1rem;
+        }
+
+        .portal-close:hover {
+            color: var(--ink);
+            border-color: rgba(32,34,37,0.35);
+            transform: rotate(22deg);
+        }
+
+        .portal-panel-body {
+            min-height: 0;
+            flex: 1 1 auto;
+            overflow: auto;
+            padding: 25px 28px 36px;
+            overscroll-behavior: contain;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(36,38,42,0.24) transparent;
+        }
+
+        .portal-panel-body::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .portal-panel-body::-webkit-scrollbar-thumb {
+            background: rgba(36,38,42,0.23);
+            border-radius: 99px;
+        }
+
+        .portal-moments {
+            display: grid;
+            gap: 36px;
+        }
+
+        .portal-moment + .portal-moment {
+            padding-top: 32px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .portal-moment-header {
+            margin-bottom: 17px;
+        }
+
+        .portal-moment-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 12px;
+            color: var(--ink-faint);
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.04em;
+        }
+
+        .portal-moment-location:not(:empty)::before {
+            content: '·';
+            margin-right: 12px;
+        }
+
+        .portal-moment h3 {
+            margin: 5px 0 0;
+            font-size: 1.18rem;
+            font-weight: 500;
+            line-height: 1.25;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-item {
+            position: relative;
+            min-height: 0;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            border: 0;
+            border-radius: 3px;
+            background: #ddd9cf;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 360ms ease, filter 360ms ease;
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:focus-visible img {
+            transform: scale(1.035);
+            filter: saturate(1.04);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            inset: auto 0 0;
+            padding: 26px 11px 9px;
+            background: linear-gradient(transparent, rgba(2,3,7,0.72));
+            color: #fff;
             font-size: 0.78rem;
-            color: var(--text-muted);
-            font-family: var(--font-en);
-            margin-bottom: 4px;
+            line-height: 1.35;
+            transform: translateY(100%);
+            transition: transform 220ms ease;
         }
+
+        .gallery-item:hover .gallery-caption,
+        .gallery-item:focus-visible .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .shelf-list,
+        .thoughts-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .shelf-item {
+            display: grid;
+            grid-template-columns: 27px 1fr;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .shelf-item:last-child {
+            border-bottom: 0;
+        }
+
+        .shelf-icon {
+            color: #82785f;
+            text-align: center;
+        }
+
+        .shelf-icon::before {
+            content: '✦';
+        }
+
+        .shelf-icon i {
+            display: none;
+        }
+
+        .shelf-title {
+            font-family: var(--editorial);
+            font-size: 1.02rem;
+            font-weight: 500;
+        }
+
+        .shelf-comment {
+            margin-top: 3px;
+            color: var(--ink-soft);
+            font-size: 0.88rem;
+        }
+
+        .thought-item {
+            padding: 14px 0 20px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .thought-item:last-child {
+            border-bottom: 0;
+        }
+
+        .thought-date {
+            color: var(--ink-faint);
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.04em;
+        }
+
         .thought-text {
+            margin-top: 8px;
+            color: var(--ink);
             font-size: 0.92rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.8;
             white-space: pre-line;
         }
+
         .thought-text-collapsed {
-            max-height: 12.4em;
-            overflow: hidden;
             position: relative;
+            max-height: 13em;
+            overflow: hidden;
         }
+
         .thought-text-collapsed::after {
             content: '';
             position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 3.5em;
-            background: linear-gradient(180deg, rgba(250,250,248,0), var(--bg));
+            inset: auto 0 0;
+            height: 4.8em;
+            background: linear-gradient(transparent, var(--paper));
             pointer-events: none;
         }
+
         .thought-text-expanded {
             max-height: none;
         }
+
         .thought-text-expanded::after {
             display: none;
         }
+
         .thought-toggle {
             margin-top: 10px;
             padding: 0 0 2px;
-            border: none;
-            border-bottom: 1px solid var(--border);
+            border: 0;
+            border-bottom: 1px solid rgba(32,34,37,0.28);
             background: transparent;
-            color: var(--text-secondary);
-            font-family: var(--font-en);
-            font-size: 0.82rem;
+            color: var(--ink-soft);
+            font-family: var(--ui);
+            font-size: 0.72rem;
             cursor: pointer;
-            transition: color var(--transition), border-color var(--transition);
-        }
-        .thought-toggle:hover {
-            color: var(--text);
-            border-color: var(--text);
-        }
-        .thought-toggle[hidden] {
-            display: none;
         }
 
-        /* Friends */
-        .friends-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .friends-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
         .friend-link {
-            padding: 6px 16px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            transition: all var(--transition);
-        }
-        .friend-link:hover { border-color: var(--text); color: var(--text); }
-
-        /* Footer */
-        .footer {
-            text-align: center; padding: 32px 0;
-            font-size: 0.78rem; color: var(--text-muted);
-            font-family: var(--font-en);
+            display: block;
+            padding: 15px 16px;
+            border: 1px solid var(--rule);
+            border-radius: 3px;
+            color: var(--ink);
+            text-decoration: none;
+            transition: border-color 180ms ease, transform 180ms ease;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .nav-links.open {
-                display: flex; flex-direction: column;
-                position: absolute; top: var(--nav-height);
-                left: 0; right: 0;
-                background: rgba(250,250,248,0.98);
-                backdrop-filter: blur(12px);
-                border-bottom: 1px solid var(--border);
-                padding: 12px 24px; gap: 4px;
+        .friend-link:hover {
+            border-color: rgba(32,34,37,0.34);
+            transform: translateY(-1px);
+        }
+
+        .maps-list {
+            display: grid;
+            gap: 18px;
+        }
+
+        .map-card {
+            overflow: hidden;
+            border: 1px solid var(--rule);
+            border-radius: 4px;
+            background: rgba(255,255,255,0.44);
+        }
+
+        .map-card-title {
+            padding: 11px 14px 9px;
+            border-bottom: 1px solid var(--rule);
+            color: var(--ink-soft);
+            font-family: var(--ui);
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .map-box {
+            width: 100%;
+            height: 290px;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: max(30px, env(safe-area-inset-top)) 78px max(30px, env(safe-area-inset-bottom));
+            overflow: auto;
+            background: rgba(3,4,9,0.92);
+            backdrop-filter: blur(22px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 220ms ease, visibility 220ms ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .lightbox-figure {
+            max-width: min(1100px, 88vw);
+            display: grid;
+            justify-items: center;
+            gap: 15px;
+            margin: auto;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: calc(100dvh - 130px);
+            border-radius: 3px;
+            box-shadow: 0 25px 90px rgba(0,0,0,0.52);
+        }
+
+        .lightbox-caption {
+            color: rgba(244,241,234,0.72);
+            font-size: 0.88rem;
+            text-align: center;
+        }
+
+        .lightbox-close,
+        .lightbox-nav {
+            position: fixed;
+            z-index: 2;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 50%;
+            background: rgba(7,9,16,0.35);
+            color: rgba(255,255,255,0.72);
+            cursor: pointer;
+            transition: color 160ms ease, border-color 160ms ease, transform 160ms ease;
+        }
+
+        .lightbox-close:hover,
+        .lightbox-nav:hover {
+            color: #fff;
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .lightbox-close {
+            top: max(20px, env(safe-area-inset-top));
+            right: max(24px, env(safe-area-inset-right));
+            width: 40px;
+            height: 40px;
+            font-size: 1.25rem;
+        }
+
+        .lightbox-nav {
+            top: 50%;
+            width: 46px;
+            height: 46px;
+            font-family: var(--ui);
+            font-size: 1.2rem;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-nav:hover {
+            transform: translateY(-50%) scale(1.04);
+        }
+
+        .lightbox-prev { left: 23px; }
+        .lightbox-next { right: 23px; }
+
+        .transition-veil {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(circle at center, rgba(255,242,211,0.22), rgba(184,205,245,0.08) 18%, rgba(6,9,20,0.12) 43%, transparent 72%);
+            color: rgba(255,248,231,0.82);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 360ms ease, visibility 360ms ease;
+        }
+
+        .transition-veil.is-active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .transition-veil span {
+            position: absolute;
+            bottom: max(34px, env(safe-area-inset-bottom));
+            font-family: var(--mono);
+            font-size: 0.66rem;
+            letter-spacing: 0.12em;
+            text-shadow: 0 0 24px rgba(213,225,255,0.55);
+        }
+
+        @media (max-width: 760px) {
+            .life-mark {
+                top: max(17px, env(safe-area-inset-top));
+                left: max(17px, env(safe-area-inset-left));
             }
-            .nav-links.open .nav-lang {
-                border-left: none; padding-left: 0; margin-left: 0;
-                border-top: 1px solid var(--border-light);
-                padding-top: 8px; margin-top: 4px;
+
+            .language-switch {
+                top: max(15px, env(safe-area-inset-top));
+                right: max(15px, env(safe-area-inset-right));
             }
-            .nav-toggle { display: block; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            .map-grid { grid-template-columns: 1fr; }
-            .map-box { height: 300px; }
-            section { padding: 40px 0; }
+
+            .control-legend {
+                display: none;
+            }
+
+            .scene-status {
+                right: auto;
+                left: max(17px, env(safe-area-inset-left));
+                bottom: max(15px, env(safe-area-inset-bottom));
+            }
+
+            .portal-panel,
+            .portal-panel.is-left {
+                top: auto;
+                left: 10px;
+                right: 10px;
+                bottom: max(10px, env(safe-area-inset-bottom));
+                width: auto;
+                max-height: 58dvh;
+                transform: translateY(28px) scale(0.99);
+                transform-origin: bottom center;
+            }
+
+            body.panel-open .portal-panel {
+                transform: translateY(0) scale(1);
+            }
+
+            .portal-panel-header {
+                padding: 18px 62px 14px 20px;
+            }
+
+            .portal-panel-body {
+                padding: 18px 20px 28px;
+            }
+
+            .portal-close {
+                top: 15px;
+                right: 17px;
+            }
+
+            .gallery-grid,
+            .friends-list {
+                grid-template-columns: 1fr;
+            }
+
+            .map-box {
+                height: 250px;
+            }
+
+            .lightbox {
+                padding: 70px 16px 92px;
+            }
+
+            .lightbox img {
+                max-height: calc(100dvh - 190px);
+            }
+
+            .lightbox-nav {
+                top: auto;
+                bottom: max(23px, env(safe-area-inset-bottom));
+                transform: none;
+            }
+
+            .lightbox-nav:hover {
+                transform: scale(1.04);
+            }
+
+            .lightbox-prev { left: calc(50% - 58px); }
+            .lightbox-next { right: calc(50% - 58px); }
         }
 
-        .fade-in {
-            opacity: 0; transform: translateY(16px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        @media (hover: none), (pointer: coarse) {
+            .portal-hit {
+                width: 88px;
+                height: 88px;
+            }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+            .gaze-instruction {
+                display: none;
+            }
+
+            .gallery-caption {
+                transform: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+        }
     </style>
+    <noscript>
+        <style>
+            html, body { height: auto; overflow: auto; background: #f7f4ec; color: #202225; }
+            .galaxy-world, .life-mark, .language-switch, .control-legend, .scene-status,
+            .entry-gate, .reticle, .gaze-label, .gaze-instruction, .portal-nav,
+            .portal-panel-header, .lightbox, .transition-veil { display: none !important; }
+            .portal-panel { position: static; width: auto; opacity: 1; visibility: visible; transform: none; background: #f7f4ec; color: #202225; box-shadow: none; border: 0; }
+            .portal-panel-body { overflow: visible; padding: 32px max(20px, 5vw); }
+            .portal-content[hidden] { display: block !important; margin-bottom: 64px; }
+        </style>
+    </noscript>
 </head>
 <body class="lang-en">
-
-<nav class="nav">
-    <div class="nav-inner">
-        <a href="index.html" class="nav-brand en-only">Runde Yang</a>
-        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="nav-links" id="navLinks">
-            <a href="#gallery" class="nav-link" data-key="nav_gallery">Gallery</a>
-            <a href="#footprints" class="nav-link" data-key="nav_map">Footprints</a>
-            <a href="#shelf" class="nav-link" data-key="nav_shelf">Shelf</a>
-            <a href="#thoughts" class="nav-link" data-key="nav_thoughts">Thoughts</a>
-            <a href="#friends" class="nav-link" data-key="nav_friends">Friends</a>
-            <div class="nav-lang">
-                <button class="lang-btn active" onclick="setLang('en')">EN</button>
-                <button class="lang-btn" onclick="setLang('zh-CN')">简</button>
-                <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
-            </div>
-        </div>
+    <div class="galaxy-world" id="galaxyWorld" tabindex="-1" aria-label="Interactive galaxy">
+        <canvas id="spaceCanvas" aria-hidden="true"></canvas>
+        <canvas id="constellationCanvas" aria-hidden="true"></canvas>
+        <div class="space-vignette" aria-hidden="true"></div>
+        <div class="space-grain" aria-hidden="true"></div>
     </div>
-</nav>
 
-<div class="container">
+    <div class="life-mark" aria-hidden="true">
+        <strong>Runde Yang</strong>
+        <span>Life beyond research</span>
+    </div>
 
-    <!-- Gallery -->
-    <section id="gallery" class="fade-in">
-        <div class="section-title" data-key="title_gallery">Gallery</div>
-        <div class="gallery-grid">
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/meteor.jpg" alt="Orion Nebula">
-                    <div class="gallery-caption" data-key="cap_meteor">Orion Nebula, 2025</div>
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/那日.jpg" alt="Stargazing">
-                    <div class="gallery-caption" data-key="cap_nari">Stargazing camp</div>
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/千島湖.jpg" alt="Qiandao Lake">
-                    <div class="gallery-caption" data-key="cap_qiandaohu">Qiandao Lake sunset</div>
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/千島湖路上.jpg" alt="Road">
-                    <div class="gallery-caption" data-key="cap_road">On the road to Qiandao Lake</div>
-                </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/美哉吾校.jpg" alt="Campus">
+    <div class="language-switch" aria-label="Language">
+        <button class="lang-btn active" type="button" data-lang="en">EN</button>
+        <button class="lang-btn" type="button" data-lang="zh-CN">简</button>
+        <button class="lang-btn" type="button" data-lang="zh-TW">繁</button>
+    </div>
+
+    <div class="control-legend" aria-hidden="true">
+        <span data-key="control_look">Mouse · look around</span>
+        <span data-key="control_zoom">Hold right mouse · focus</span>
+        <span data-key="control_cursor">Hold Alt · free cursor</span>
+        <span data-key="control_select">Left click · enter constellation</span>
+    </div>
+    <div class="scene-status" id="sceneStatus">FREE LOOK</div>
+
+    <div class="entry-gate" id="entryGate" role="dialog" aria-modal="true" aria-labelledby="entryTitle" aria-describedby="entryHint">
+        <button class="entry-trigger" id="entryTrigger" type="button">
+            <span class="entry-title" id="entryTitle" data-key="enter_galaxy">Enter the galaxy</span>
+            <span class="entry-hint" id="entryHint" data-key="enter_hint">Click once to take control of the view</span>
+        </button>
+        <button class="entry-fallback" id="entryFallback" type="button" data-key="enter_fallback" hidden>Continue with drag controls</button>
+    </div>
+
+    <div class="reticle" id="reticle" aria-hidden="true">
+        <span class="r-top"></span>
+        <span class="r-right"></span>
+        <span class="r-bottom"></span>
+        <span class="r-left"></span>
+    </div>
+    <div class="gaze-label" id="gazeLabel" aria-hidden="true">
+        <span class="gaze-primary" id="gazePrimary"></span>
+        <span class="gaze-secondary" id="gazeSecondary"></span>
+    </div>
+    <div class="gaze-instruction" data-key="gaze_hint">Bring a bright constellation to the centre</div>
+    <div class="sr-only" id="gazeAnnouncement" aria-live="polite"></div>
+
+    <nav class="portal-nav" id="portalNav" aria-label="Life constellations">
+        <button class="portal-hit" type="button" data-portal-button="gallery" aria-label="Gallery / 光影 / 光影"></button>
+        <button class="portal-hit" type="button" data-portal-button="footprints" aria-label="Footprints / 足迹 / 足跡"></button>
+        <button class="portal-hit" type="button" data-portal-button="shelf" aria-label="Shelf / 书影 / 書影"></button>
+        <button class="portal-hit" type="button" data-portal-button="thoughts" aria-label="Thoughts / 随笔 / 隨筆"></button>
+        <button class="portal-hit" type="button" data-portal-button="friends" aria-label="Friends / 友链 / 友鏈"></button>
+        <button class="portal-hit" type="button" data-portal-button="home" aria-label="Home / 主页 / 主頁"></button>
+    </nav>
+
+    <aside class="portal-panel" id="portalPanel" aria-hidden="true" aria-labelledby="portalPanelTitle">
+        <header class="portal-panel-header">
+            <div class="portal-panel-kicker" id="portalPanelKicker">CONSTELLATION</div>
+            <h2 class="portal-panel-title" id="portalPanelTitle" tabindex="-1">Gallery</h2>
+            <div class="portal-panel-names" id="portalPanelNames">Gallery / 光影 / 光影</div>
+            <div class="portal-panel-hint" data-key="panel_hint">Esc · end viewing</div>
+            <button class="portal-close" id="portalClose" type="button" aria-label="Return to the galaxy"></button>
+        </header>
+        <div class="portal-panel-body" id="portalPanelBody">
+<!-- SITEGEN:LIFE_GALLERY_START -->
+        <section id="gallery" class="portal-content" data-portal-content="gallery" hidden>
+            <div class="portal-moments">
+                <article class="portal-moment" data-moment="gallery-campus-undated">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-campus-undated">Spring · Undated</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-campus-undated">Shanghai</span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-campus-undated">Spring on the SJTU campus</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="SJTU Campus in spring"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/美哉吾校.jpg" alt="Campus" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="cap_campus">SJTU Campus in spring</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/紫金山.jpg" alt="Zijin Mountain">
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="gallery-qiandao-2024-11">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-qiandao-2024-11">Nov 2024</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-qiandao-2024-11">Qiandao Lake</span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-qiandao-2024-11">Stargazing camp, sunset, and the road there</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Stargazing camp"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/那日.jpg" alt="Stargazing" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_nari">Stargazing camp</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Qiandao Lake sunset"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/千島湖.jpg" alt="Qiandao Lake" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_qiandaohu">Qiandao Lake sunset</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="On the road to Qiandao Lake"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/千島湖路上.jpg" alt="Road" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_road">On the road to Qiandao Lake</div>
+                </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="gallery-orion-2025">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-orion-2025">2025</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-orion-2025"></span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-orion-2025">The Orion Nebula</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Orion Nebula, 2025"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/meteor.jpg" alt="Orion Nebula" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_meteor">Orion Nebula, 2025</div>
+                </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="gallery-nanjing-2025-03">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-nanjing-2025-03">Mar 2025</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-nanjing-2025-03">Nanjing</span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-nanjing-2025-03">Zijin Mountain in early spring</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Zijin Mountain, Nanjing"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/紫金山.jpg" alt="Zijin Mountain" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="cap_zijinshan">Zijin Mountain, Nanjing</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox(this)">
-                    <img src="images/烘焙社草莓蛋糕.jpg" alt="Cake">
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="gallery-baking-2025-12">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-baking-2025-12">Dec 2025</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-baking-2025-12"></span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-baking-2025-12">A strawberry cake from the baking club</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Baking club strawberry cake"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/烘焙社草莓蛋糕.jpg" alt="Cake" loading="lazy" decoding="async">
                     <div class="gallery-caption" data-key="cap_cake">Baking club strawberry cake</div>
                 </div>
-        </div>
-    </section>
+                </div>
+                </article>
+            </div>
+        </section>
+<!-- SITEGEN:LIFE_GALLERY_END -->
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-        <img id="lightboxImg" src="">
-        <div class="lightbox-caption" id="lightboxCaption"></div>
-    </div>
+            <section id="footprints" class="portal-content" data-portal-content="footprints" hidden>
+                <p class="sr-only" id="visitedCountriesSummary">Countries visited: Mainland China</p>
+                <div class="maps-list">
+                    <article class="map-card">
+                        <div class="map-card-title" data-key="chart_world">Countries visited</div>
+                        <div id="worldMap" class="map-box" role="img" aria-describedby="visitedCountriesSummary"></div>
+                    </article>
+                    <article class="map-card">
+                        <div class="map-card-title" data-key="chart_china">China</div>
+                        <div id="chinaMap" class="map-box" role="img" aria-label="Cities visited in Mainland China"></div>
+                    </article>
+                </div>
+            </section>
 
-    <!-- Footprints -->
-    <section id="footprints" class="fade-in">
-        <div class="section-title" data-key="title_map">Footprints</div>
-        <div class="map-grid">
-            <div id="chinaMap" class="map-box"></div>
-            <div id="worldMap" class="map-box"></div>
-        </div>
-    </section>
-
-    <!-- Shelf -->
-    <section id="shelf" class="fade-in">
-        <div class="section-title" data-key="title_shelf">Shelf</div>
-        <div class="shelf-list">
+<!-- SITEGEN:LIFE_SHELF_START -->
+        <section id="shelf" class="portal-content" data-portal-content="shelf" hidden>
+            <div class="portal-moments">
+                <article class="portal-moment" data-moment="shelf-deep-learning">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_shelf-deep-learning">Recently</span>
+                            <span class="portal-moment-location" data-key="moment_location_shelf-deep-learning"></span>
+                        </div>
+                        <h3 data-key="moment_summary_shelf-deep-learning">Deep Learning — Ian Goodfellow</h3>
+                    </header>
+                <div class="shelf-list">
             <div class="shelf-item">
                 <div class="shelf-icon"><i class="fas fa-book"></i></div>
                 <div class="shelf-info">
@@ -404,6 +1435,17 @@
                     <div class="shelf-comment" data-key="book_dl">Mathematical foundation is excellent. Not just a tool book, but a mind map.</div>
                 </div>
             </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="shelf-interstellar">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_shelf-interstellar">Recently</span>
+                            <span class="portal-moment-location" data-key="moment_location_shelf-interstellar"></span>
+                        </div>
+                        <h3 data-key="moment_summary_shelf-interstellar">Interstellar</h3>
+                    </header>
+                <div class="shelf-list">
             <div class="shelf-item">
                 <div class="shelf-icon"><i class="fas fa-film"></i></div>
                 <div class="shelf-info">
@@ -411,18 +1453,39 @@
                     <div class="shelf-comment" data-key="movie_interstellar">Love is the one thing that transcends time and space.</div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Thoughts -->
-    <section id="thoughts" class="fade-in">
-        <div class="section-title" data-key="title_thoughts">Thoughts</div>
-        <div class="thoughts-list">
-            <div class="thought-item">
-                <div class="thought-date" data-key="date_thought_0629">Jun 29, 2026</div>
-                <div class="thought-text thought-text-collapsed" data-key="thought_0629">See Chinese version, record of last night's dream.</div>
-                <button class="thought-toggle" type="button" data-thought-toggle aria-expanded="false">Read more</button>
+                </div>
+                </article>
             </div>
+        </section>
+<!-- SITEGEN:LIFE_SHELF_END -->
+
+<!-- SITEGEN:LIFE_THOUGHTS_START -->
+        <section id="thoughts" class="portal-content" data-portal-content="thoughts" hidden>
+            <div class="portal-moments">
+                <article class="portal-moment" data-moment="thought-2024-11-10">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_thought-2024-11-10">Nov 10, 2024</span>
+                            <span class="portal-moment-location" data-key="moment_location_thought-2024-11-10">Qiandao Lake</span>
+                        </div>
+                        <h3 data-key="moment_summary_thought-2024-11-10">The meteor shower the camera could not hold</h3>
+                    </header>
+                <div class="thoughts-list">
+            <div class="thought-item">
+                <div class="thought-date" data-key="date_thought_2">Nov 10, 2024</div>
+                <div class="thought-text" data-key="thought_2">Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera.</div>
+            </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="thought-2026-01-16">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_thought-2026-01-16">Jan 16, 2026</span>
+                            <span class="portal-moment-location" data-key="moment_location_thought-2026-01-16"></span>
+                        </div>
+                        <h3 data-key="moment_summary_thought-2026-01-16">After finals, learning to live abundantly again</h3>
+                    </header>
+                <div class="thoughts-list">
             <div class="thought-item">
                 <div class="thought-date" data-key="date_thought_1">Jan 16, 2026</div>
                 <div class="thought-text thought-text-collapsed" data-key="thought_1">Today, the weight of finals and endless tasks has finally lifted.
@@ -440,27 +1503,55 @@ In the embrace of the piano, my mind finally exhales. My soul drifts back to a c
 I am profoundly moved.</div>
                 <button class="thought-toggle" type="button" data-thought-toggle aria-expanded="false">Read more</button>
             </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="thought-2026-06-29">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_thought-2026-06-29">Jun 29, 2026</span>
+                            <span class="portal-moment-location" data-key="moment_location_thought-2026-06-29"></span>
+                        </div>
+                        <h3 data-key="moment_summary_thought-2026-06-29">A dream from the night before</h3>
+                    </header>
+                <div class="thoughts-list">
             <div class="thought-item">
-                <div class="thought-date" data-key="date_thought_2">Nov 10, 2024</div>
-                <div class="thought-text" data-key="thought_2">Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera.</div>
+                <div class="thought-date" data-key="date_thought_0629">Jun 29, 2026</div>
+                <div class="thought-text thought-text-collapsed" data-key="thought_0629">See Chinese version, record of last night's dream.</div>
+                <button class="thought-toggle" type="button" data-thought-toggle aria-expanded="false">Read more</button>
             </div>
+                </div>
+                </article>
+            </div>
+        </section>
+<!-- SITEGEN:LIFE_THOUGHTS_END -->
+
+<!-- SITEGEN:LIFE_FRIENDS_START -->
+        <section id="friends" class="portal-content" data-portal-content="friends" hidden>
+            <div class="friends-list">
+                    <a href="#" class="friend-link">Laboratory Partner A</a>
+                    <a href="#" class="friend-link">SJTU AI Club</a>
+            </div>
+        </section>
+<!-- SITEGEN:LIFE_FRIENDS_END -->
         </div>
-    </section>
+    </aside>
 
-    <!-- Friends -->
-    <section id="friends" class="fade-in">
-        <div class="section-title" data-key="title_friends">Friends</div>
-        <div class="friends-list">
-            <a href="#" class="friend-link">Laboratory Partner A</a>
-            <a href="#" class="friend-link">SJTU AI Club</a>
-        </div>
-    </section>
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Gallery image viewer">
+        <button class="lightbox-close" type="button" aria-label="Close image viewer">&times;</button>
+        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">←</button>
+        <figure class="lightbox-figure">
+            <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+            <figcaption class="lightbox-caption" id="lightboxCaption" aria-live="polite"></figcaption>
+        </figure>
+        <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">→</button>
+    </div>
 
-</div>
+    <div class="transition-veil" id="transitionVeil" aria-hidden="true">
+        <span data-key="home_departing">Returning home</span>
+    </div>
 
-<footer class="footer">&copy; 2025–2026 Runde Yang.</footer>
-
-<script>
+    <script>
+/* SITEGEN:LIFE_I18N_START */
 /* ===== i18n ===== */
 const i18n = {
     "en": {
@@ -474,8 +1565,24 @@ const i18n = {
         "title_shelf": "Shelf",
         "title_thoughts": "Thoughts",
         "title_friends": "Friends",
+        "title_home": "Home",
         "chart_china": "China",
-        "chart_world": "World",
+        "chart_world": "Countries visited",
+        "enter_galaxy": "Enter the galaxy",
+        "enter_hint": "Click once to take control of the view",
+        "enter_fallback": "Continue with drag controls",
+        "lock_failed_hint": "Pointer lock was blocked. Retry or continue with drag controls.",
+        "resume_view": "Click to return to free look",
+        "control_look": "Mouse · look around",
+        "control_zoom": "Hold right mouse · focus",
+        "control_cursor": "Hold Alt · free cursor",
+        "control_select": "Left click · enter constellation",
+        "gaze_hint": "Bring a bright constellation to the centre",
+        "panel_hint": "Esc · end viewing",
+        "panel_close": "Return to the galaxy",
+        "home_departing": "Returning home",
+        "galaxy_back": "Back to the galaxy",
+        "galaxy_hint": "Follow the brighter stars through time",
         "cap_meteor": "Orion Nebula, 2025",
         "cap_nari": "Stargazing camp",
         "cap_qiandaohu": "Qiandao Lake sunset",
@@ -490,7 +1597,37 @@ const i18n = {
         "date_thought_1": "Jan 16, 2026",
         "thought_1": "Today, the weight of finals and endless tasks has finally lifted.\n\nMy sleep has been a chaotic blur lately—restless and sparse.\n\nAround 9 PM, a wave of malaise drove me to bed, where I lingered in that hollow space between wakefulness and dreams. By 11:56 PM, I found myself fully awake, yet deeply fatigued.\n\nI began listening to 'The Shorekeeper’s Theme.' It is remarkably soothing, yet it carries a defiant, positive undertone: I want to play the piano, I want to train, I want to live—truly live—for myself. I crave a life of warmth and intensity; I refuse to be just another exam robot.\n\nWe are meant to live lives of abundance; even when the world bears down on us, we must not allow our spirits to wither.\n\nIn the embrace of the piano, my mind finally exhales. My soul drifts back to a carefree past, where beautiful moments flicker like scenes from a vintage film.\n\nI am profoundly moved.",
         "date_thought_2": "Nov 10, 2024",
-        "thought_2": "Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera."
+        "thought_2": "Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera.",
+        "moment_date_gallery-campus-undated": "Spring · Undated",
+        "moment_location_gallery-campus-undated": "Shanghai",
+        "moment_summary_gallery-campus-undated": "Spring on the SJTU campus",
+        "moment_date_gallery-qiandao-2024-11": "Nov 2024",
+        "moment_location_gallery-qiandao-2024-11": "Qiandao Lake",
+        "moment_summary_gallery-qiandao-2024-11": "Stargazing camp, sunset, and the road there",
+        "moment_date_gallery-orion-2025": "2025",
+        "moment_location_gallery-orion-2025": "",
+        "moment_summary_gallery-orion-2025": "The Orion Nebula",
+        "moment_date_gallery-nanjing-2025-03": "Mar 2025",
+        "moment_location_gallery-nanjing-2025-03": "Nanjing",
+        "moment_summary_gallery-nanjing-2025-03": "Zijin Mountain in early spring",
+        "moment_date_gallery-baking-2025-12": "Dec 2025",
+        "moment_location_gallery-baking-2025-12": "",
+        "moment_summary_gallery-baking-2025-12": "A strawberry cake from the baking club",
+        "moment_date_shelf-deep-learning": "Recently",
+        "moment_location_shelf-deep-learning": "",
+        "moment_summary_shelf-deep-learning": "Deep Learning — Ian Goodfellow",
+        "moment_date_shelf-interstellar": "Recently",
+        "moment_location_shelf-interstellar": "",
+        "moment_summary_shelf-interstellar": "Interstellar",
+        "moment_date_thought-2024-11-10": "Nov 10, 2024",
+        "moment_location_thought-2024-11-10": "Qiandao Lake",
+        "moment_summary_thought-2024-11-10": "The meteor shower the camera could not hold",
+        "moment_date_thought-2026-01-16": "Jan 16, 2026",
+        "moment_location_thought-2026-01-16": "",
+        "moment_summary_thought-2026-01-16": "After finals, learning to live abundantly again",
+        "moment_date_thought-2026-06-29": "Jun 29, 2026",
+        "moment_location_thought-2026-06-29": "",
+        "moment_summary_thought-2026-06-29": "A dream from the night before"
     },
     "zh-CN": {
         "nav_gallery": "光影",
@@ -503,8 +1640,24 @@ const i18n = {
         "title_shelf": "书影",
         "title_thoughts": "随笔",
         "title_friends": "友链",
+        "title_home": "主页",
         "chart_china": "中国",
-        "chart_world": "世界",
+        "chart_world": "到访国家和地区",
+        "enter_galaxy": "进入星河",
+        "enter_hint": "点击一次，接管视角",
+        "enter_fallback": "使用拖拽继续",
+        "lock_failed_hint": "浏览器未允许锁定鼠标；可重试，或使用拖拽浏览。",
+        "resume_view": "点击恢复自由视角",
+        "control_look": "移动鼠标 · 环顾星河",
+        "control_zoom": "按住右键 · 聚焦星河",
+        "control_cursor": "按住 Alt · 解放鼠标",
+        "control_select": "左键 · 进入星座",
+        "gaze_hint": "将高亮星座移至屏幕中央",
+        "panel_hint": "按 Esc · 结束查看",
+        "panel_close": "返回星河",
+        "home_departing": "正在返回主页",
+        "galaxy_back": "返回星河",
+        "galaxy_hint": "循着亮星，沿时间漫游",
         "cap_meteor": "猎户座大星云，2025",
         "cap_nari": "观星营地",
         "cap_qiandaohu": "千岛湖日落",
@@ -519,7 +1672,37 @@ const i18n = {
         "date_thought_1": "2026年1月16日",
         "thought_1": "今天终于把期末所有考试，事情全做完\n\n这段时间睡眠紊乱不规律不足，今天晚上才九十点钟就感觉很不舒服，遂上床。上了床半天睡不着，闭着眼睛半梦半醒的\n\n到了十一点五十六现在是，成功给自己整清醒了\n\n然后又顿觉困乏，躺下听守岸人小曲，才发现原来这么催眠，还有一种积极的暗示，我要弹钢琴，我要锻炼我要积极的生活，我要为自己而活，我要热烈，我不要作做题家\n\n人应该活得丰盈，即便遇到压力不能丰盈也不该放任自己腐烂\n\n我发现听钢琴曲的时候思维是放松的，灵魂在曲子的包裹下好像回到无忧无虑的过去，以前那些美好时光像电影片段一样闪现\n\n真的很感动。",
         "date_thought_2": "Nov 10, 2024",
-        "thought_2": "千岛湖的流星雨。肉眼看到的比相机拍到的震撼一万倍。"
+        "thought_2": "千岛湖的流星雨。肉眼看到的比相机拍到的震撼一万倍。",
+        "moment_date_gallery-campus-undated": "春日 · 未标日期",
+        "moment_location_gallery-campus-undated": "上海",
+        "moment_summary_gallery-campus-undated": "交大校园的春日",
+        "moment_date_gallery-qiandao-2024-11": "2024年11月",
+        "moment_location_gallery-qiandao-2024-11": "千岛湖",
+        "moment_summary_gallery-qiandao-2024-11": "观星营地、日落与沿途",
+        "moment_date_gallery-orion-2025": "2025",
+        "moment_location_gallery-orion-2025": "",
+        "moment_summary_gallery-orion-2025": "猎户座大星云",
+        "moment_date_gallery-nanjing-2025-03": "2025年3月",
+        "moment_location_gallery-nanjing-2025-03": "南京",
+        "moment_summary_gallery-nanjing-2025-03": "初春的紫金山",
+        "moment_date_gallery-baking-2025-12": "2025年12月",
+        "moment_location_gallery-baking-2025-12": "",
+        "moment_summary_gallery-baking-2025-12": "烘焙社的草莓蛋糕",
+        "moment_date_shelf-deep-learning": "近期",
+        "moment_location_shelf-deep-learning": "",
+        "moment_summary_shelf-deep-learning": "《深度学习》",
+        "moment_date_shelf-interstellar": "近期",
+        "moment_location_shelf-interstellar": "",
+        "moment_summary_shelf-interstellar": "《星际穿越》",
+        "moment_date_thought-2024-11-10": "2024年11月10日",
+        "moment_location_thought-2024-11-10": "千岛湖",
+        "moment_summary_thought-2024-11-10": "相机装不下的那场流星雨",
+        "moment_date_thought-2026-01-16": "2026年1月16日",
+        "moment_location_thought-2026-01-16": "",
+        "moment_summary_thought-2026-01-16": "期末之后，重新丰盈地生活",
+        "moment_date_thought-2026-06-29": "2026年6月29日",
+        "moment_location_thought-2026-06-29": "",
+        "moment_summary_thought-2026-06-29": "昨夜的一场梦"
     },
     "zh-TW": {
         "nav_gallery": "光影",
@@ -532,8 +1715,24 @@ const i18n = {
         "title_shelf": "書影",
         "title_thoughts": "隨筆",
         "title_friends": "友鏈",
+        "title_home": "主頁",
         "chart_china": "中國",
-        "chart_world": "世界",
+        "chart_world": "到訪國家和地區",
+        "enter_galaxy": "進入星河",
+        "enter_hint": "點擊一次，接管視角",
+        "enter_fallback": "使用拖曳繼續",
+        "lock_failed_hint": "瀏覽器未允許鎖定滑鼠；可重試，或使用拖曳瀏覽。",
+        "resume_view": "點擊恢復自由視角",
+        "control_look": "移動滑鼠 · 環顧星河",
+        "control_zoom": "按住右鍵 · 聚焦星河",
+        "control_cursor": "按住 Alt · 解放滑鼠",
+        "control_select": "左鍵 · 進入星座",
+        "gaze_hint": "將高亮星座移至螢幕中央",
+        "panel_hint": "按 Esc · 結束查看",
+        "panel_close": "返回星河",
+        "home_departing": "正在返回主頁",
+        "galaxy_back": "返回星河",
+        "galaxy_hint": "循著亮星，沿時間漫遊",
         "cap_meteor": "獵戶座大星雲，2025",
         "cap_nari": "觀星營地",
         "cap_qiandaohu": "千島湖日落",
@@ -548,112 +1747,42 @@ const i18n = {
         "date_thought_1": "2026年1月16日",
         "thought_1": "今天終於把期末所有考試，事情全做完\n\n這段時間睡眠紊亂不規律不足，今天晚上才九十點鐘就感覺很不舒服，遂上床。上了床半天睡不著，閉著眼睛半夢半醒的\n\n到了十一點五十六現在是，成功給自己整清醒了\n\n然後又頓覺困乏，躺下聽守岸人小曲，才發現原來這麼催眠，還有一種積極的暗示，我要彈鋼琴，我要鍛煉我要積極的生活，我要為自己而活，我要熱烈，我不要作做題家\n\n人應該活得豐盈，即便遇到壓力不能豐盈也不該放任自己腐爛\n\n我發現聽鋼琴曲的時候思維是放鬆的，靈魂在曲子的包裹下好像回到無憂無慮的過去，以前的那些美好時光像電影片段一樣閃現\n\n真的很感動。",
         "date_thought_2": "Nov 10, 2024",
-        "thought_2": "千島湖的流星雨。肉眼看到的比相機拍到的震撼一萬倍。"
+        "thought_2": "千島湖的流星雨。肉眼看到的比相機拍到的震撼一萬倍。",
+        "moment_date_gallery-campus-undated": "春日 · 未標日期",
+        "moment_location_gallery-campus-undated": "上海",
+        "moment_summary_gallery-campus-undated": "交大校園的春日",
+        "moment_date_gallery-qiandao-2024-11": "2024年11月",
+        "moment_location_gallery-qiandao-2024-11": "千島湖",
+        "moment_summary_gallery-qiandao-2024-11": "觀星營地、日落與沿途",
+        "moment_date_gallery-orion-2025": "2025",
+        "moment_location_gallery-orion-2025": "",
+        "moment_summary_gallery-orion-2025": "獵戶座大星雲",
+        "moment_date_gallery-nanjing-2025-03": "2025年3月",
+        "moment_location_gallery-nanjing-2025-03": "南京",
+        "moment_summary_gallery-nanjing-2025-03": "初春的紫金山",
+        "moment_date_gallery-baking-2025-12": "2025年12月",
+        "moment_location_gallery-baking-2025-12": "",
+        "moment_summary_gallery-baking-2025-12": "烘焙社的草莓蛋糕",
+        "moment_date_shelf-deep-learning": "近期",
+        "moment_location_shelf-deep-learning": "",
+        "moment_summary_shelf-deep-learning": "《深度學習》",
+        "moment_date_shelf-interstellar": "近期",
+        "moment_location_shelf-interstellar": "",
+        "moment_summary_shelf-interstellar": "《星際穿越》",
+        "moment_date_thought-2024-11-10": "2024年11月10日",
+        "moment_location_thought-2024-11-10": "千島湖",
+        "moment_summary_thought-2024-11-10": "相機裝不下的那場流星雨",
+        "moment_date_thought-2026-01-16": "2026年1月16日",
+        "moment_location_thought-2026-01-16": "",
+        "moment_summary_thought-2026-01-16": "期末之後，重新豐盈地生活",
+        "moment_date_thought-2026-06-29": "2026年6月29日",
+        "moment_location_thought-2026-06-29": "",
+        "moment_summary_thought-2026-06-29": "昨夜的一場夢"
     }
 };
+/* SITEGEN:LIFE_I18N_END */
 
-function setLang(lang) {
-    localStorage.setItem('preferredLang', lang);
-    document.body.className = 'lang-' + lang;
-    const data = i18n[lang];
-
-    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    const labels = { 'en': 'EN', 'zh-CN': '简', 'zh-TW': '繁' };
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        if (btn.textContent.trim() === labels[lang]) btn.classList.add('active');
-    });
-
-    document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.getAttribute('data-key');
-        if (data[key] !== undefined) el.innerHTML = data[key];
-    });
-    updateThoughtToggles(lang);
-
-    // Update chart titles
-    if (window.myChartChina) window.myChartChina.setOption({ title: { text: data.chart_china } });
-    if (window.myChartWorld) window.myChartWorld.setOption({ title: { text: data.chart_world } });
-}
-
-const thoughtToggleLabels = {
-    en: { more: 'Read more', less: 'Collapse' },
-    'zh-CN': { more: '展开', less: '收起' },
-    'zh-TW': { more: '展開', less: '收起' }
-};
-
-function updateThoughtToggles(lang) {
-    const labels = thoughtToggleLabels[lang] || thoughtToggleLabels.en;
-    document.querySelectorAll('[data-thought-toggle]').forEach(button => {
-        const text = button.previousElementSibling;
-        if (!text) return;
-        const expanded = button.getAttribute('aria-expanded') === 'true';
-        text.classList.toggle('thought-text-expanded', expanded);
-        text.classList.toggle('thought-text-collapsed', !expanded);
-        button.textContent = expanded ? labels.less : labels.more;
-        requestAnimationFrame(() => {
-            if (expanded) {
-                button.hidden = false;
-                return;
-            }
-            const needsToggle = text.scrollHeight > text.clientHeight + 4;
-            button.hidden = !needsToggle;
-            if (!needsToggle) text.classList.remove('thought-text-collapsed');
-        });
-    });
-}
-
-document.addEventListener('click', event => {
-    const button = event.target.closest('[data-thought-toggle]');
-    if (!button) return;
-    const expanded = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', String(!expanded));
-    updateThoughtToggles(localStorage.getItem('preferredLang') || 'en');
-});
-
-/* ===== Lightbox ===== */
-function openLightbox(el) {
-    document.getElementById('lightboxImg').src = el.querySelector('img').src;
-    document.getElementById('lightboxCaption').textContent = el.querySelector('.gallery-caption').textContent;
-    document.getElementById('lightbox').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-    document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
-/* ===== Nav Toggle ===== */
-function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
-document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
-
-/* ===== Scroll Animation ===== */
-const fadeEls = document.querySelectorAll('.fade-in');
-const showSection = el => el.classList.add('visible');
-if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) showSection(e.target); });
-    }, { threshold: 0.1 });
-    fadeEls.forEach(el => observer.observe(el));
-    window.addEventListener('load', () => setTimeout(() => fadeEls.forEach(showSection), 900));
-} else {
-    fadeEls.forEach(showSection);
-}
-
-/* ===== ECharts Maps ===== */
-let mapsReady = false;
-let myChartChina = null;
-let myChartWorld = null;
-
-function currentChartLabels() {
-    const lang = localStorage.getItem('preferredLang') || 'en';
-    return i18n[lang] || i18n.en;
-}
-
-function resizeMaps() {
-    if (myChartChina) myChartChina.resize();
-    if (myChartWorld) myChartWorld.resize();
-}
-
+/* SITEGEN:LIFE_VISITED_START */
 const visited = [
     "上海市",
     "西安市",
@@ -691,131 +1820,2364 @@ const visited = [
     "嘉兴市",
     "太原市"
 ];
+/* SITEGEN:LIFE_VISITED_END */
 
-const MUNICIPALITIES = new Set(['北京市', '上海市', '天津市', '重庆市']);
+/* SITEGEN:LIFE_VISITED_COUNTRIES_START */
+const visitedCountries = [
+    {
+        "map_name": "China",
+        "label": {
+            "en": "Mainland China",
+            "zh-CN": "中国大陆",
+            "zh-TW": "中國大陸"
+        }
+    }
+];
+/* SITEGEN:LIFE_VISITED_COUNTRIES_END */
 
-function initMaps() {
-    if (mapsReady) return;
-    mapsReady = true;
+const LANGUAGES = ['en', 'zh-CN', 'zh-TW'];
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const COARSE_POINTER = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+const DEG = Math.PI / 180;
 
-    if (!window.echarts) {
-        document.getElementById('chinaMap').innerHTML = '<div style="padding:20px;color:#999;text-align:center;">Map failed to load</div>';
-        document.getElementById('worldMap').innerHTML = '<div style="padding:20px;color:#999;text-align:center;">Map failed to load</div>';
+const portalDefinitions = [
+    {
+        id: 'gallery',
+        titleKey: 'title_gallery',
+        yaw: -0.64,
+        pitch: 0.17,
+        pattern: 'crown'
+    },
+    {
+        id: 'footprints',
+        titleKey: 'title_map',
+        yaw: 0.04,
+        pitch: 0.1,
+        pattern: 'arc'
+    },
+    {
+        id: 'shelf',
+        titleKey: 'title_shelf',
+        yaw: 0.72,
+        pitch: 0.28,
+        pattern: 'kite'
+    },
+    {
+        id: 'thoughts',
+        titleKey: 'title_thoughts',
+        yaw: 1.46,
+        pitch: -0.08,
+        pattern: 'branch'
+    },
+    {
+        id: 'friends',
+        titleKey: 'title_friends',
+        yaw: -1.36,
+        pitch: -0.24,
+        pattern: 'ring'
+    },
+    {
+        id: 'home',
+        titleKey: 'title_home',
+        yaw: 3.02,
+        pitch: 0.04,
+        pattern: 'home',
+        home: true
+    }
+];
+
+const constellationPatterns = {
+    crown: {
+        points: [[0,0],[-0.055,0.025],[-0.026,0.064],[0.03,0.06],[0.064,0.018],[0.035,-0.046],[-0.036,-0.04]],
+        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,6],[6,1]]
+    },
+    arc: {
+        points: [[-0.068,-0.026],[-0.04,0.025],[-0.005,0.052],[0.034,0.036],[0.067,-0.003],[0.026,-0.052],[-0.025,-0.048]],
+        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,1]]
+    },
+    kite: {
+        points: [[0,0.074],[-0.055,0.01],[0,-0.068],[0.058,0.008],[-0.018,0.016],[0.026,-0.015]],
+        edges: [[0,1],[1,2],[2,3],[3,0],[1,4],[4,3],[4,5],[5,2]]
+    },
+    branch: {
+        points: [[-0.07,0.045],[-0.035,0.02],[0,0],[0.04,-0.026],[0.075,-0.058],[0.018,0.058],[0.056,0.076]],
+        edges: [[0,1],[1,2],[2,3],[3,4],[2,5],[5,6]]
+    },
+    ring: {
+        points: [[0,-0.062],[-0.052,-0.025],[-0.064,0.032],[-0.018,0.066],[0.043,0.052],[0.068,0],[0.038,-0.05],[0,0.006]],
+        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0],[7,1],[7,4]]
+    },
+    home: {
+        points: [[0,0]],
+        edges: []
+    }
+};
+
+const dom = {
+    body: document.body,
+    world: document.getElementById('galaxyWorld'),
+    spaceCanvas: document.getElementById('spaceCanvas'),
+    constellationCanvas: document.getElementById('constellationCanvas'),
+    entryGate: document.getElementById('entryGate'),
+    entryTrigger: document.getElementById('entryTrigger'),
+    entryFallback: document.getElementById('entryFallback'),
+    entryTitle: document.getElementById('entryTitle'),
+    entryHint: document.getElementById('entryHint'),
+    status: document.getElementById('sceneStatus'),
+    gazePrimary: document.getElementById('gazePrimary'),
+    gazeSecondary: document.getElementById('gazeSecondary'),
+    gazeAnnouncement: document.getElementById('gazeAnnouncement'),
+    portalNav: document.getElementById('portalNav'),
+    panel: document.getElementById('portalPanel'),
+    panelTitle: document.getElementById('portalPanelTitle'),
+    panelNames: document.getElementById('portalPanelNames'),
+    panelClose: document.getElementById('portalClose'),
+    panelBody: document.getElementById('portalPanelBody'),
+    lightbox: document.getElementById('lightbox'),
+    lightboxImage: document.getElementById('lightboxImg'),
+    lightboxCaption: document.getElementById('lightboxCaption'),
+    veil: document.getElementById('transitionVeil')
+};
+
+const state = {
+    scene: 'entry',
+    lock: 'entry',
+    hasEntered: false,
+    altHeld: false,
+    altReturnMode: null,
+    relockPending: false,
+    lockIntent: null,
+    lockRequestSource: null,
+    lockErrorHandled: false,
+    lockFailureCount: 0,
+    gateOpen: true,
+    modalOpen: false,
+    rightDown: false,
+    touchMode: COARSE_POINTER,
+    focusedPortal: null,
+    pendingPortal: null,
+    pendingSince: 0,
+    hoverPortal: null,
+    activePortal: null,
+    flight: null,
+    currentLang: localStorage.getItem('preferredLang') || 'en',
+    activationSource: 'gaze',
+    announcementTimer: null,
+    lastFrame: performance.now(),
+    panelHideTimer: null,
+    panelRect: null,
+    panelOnLeft: false,
+    homeWarpProgress: 0
+};
+let dragState = null;
+
+function clearDragState() {
+    if (dragState?.longPressTimer) window.clearTimeout(dragState.longPressTimer);
+    if (dragState?.longPressed) releaseRightZoom();
+    dragState = null;
+}
+
+const camera = {
+    yaw: -0.25,
+    pitch: 0.08,
+    targetYaw: -0.25,
+    targetPitch: 0.08,
+    fov: 62 * DEG,
+    targetFov: 62 * DEG,
+    inspectionYaw: null,
+    inspectionPitch: null
+};
+
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+}
+
+function lerp(start, end, amount) {
+    return start + (end - start) * amount;
+}
+
+function wrapAngle(value) {
+    let angle = value;
+    while (angle > Math.PI) angle -= Math.PI * 2;
+    while (angle < -Math.PI) angle += Math.PI * 2;
+    return angle;
+}
+
+function angleDelta(from, to) {
+    return wrapAngle(to - from);
+}
+
+function lerpAngle(from, to, amount) {
+    return from + angleDelta(from, to) * amount;
+}
+
+function easeInOutCubic(value) {
+    return value < 0.5
+        ? 4 * value * value * value
+        : 1 - Math.pow(-2 * value + 2, 3) / 2;
+}
+
+function vectorLength(vector) {
+    return Math.hypot(vector[0], vector[1], vector[2]);
+}
+
+function normalize(vector) {
+    const length = vectorLength(vector) || 1;
+    return [vector[0] / length, vector[1] / length, vector[2] / length];
+}
+
+function cross(left, right) {
+    return [
+        left[1] * right[2] - left[2] * right[1],
+        left[2] * right[0] - left[0] * right[2],
+        left[0] * right[1] - left[1] * right[0]
+    ];
+}
+
+function dot(left, right) {
+    return left[0] * right[0] + left[1] * right[1] + left[2] * right[2];
+}
+
+function addScaled(base, first, firstScale, second, secondScale) {
+    return normalize([
+        base[0] + first[0] * firstScale + second[0] * secondScale,
+        base[1] + first[1] * firstScale + second[1] * secondScale,
+        base[2] + first[2] * firstScale + second[2] * secondScale
+    ]);
+}
+
+function fromYawPitch(yaw, pitch) {
+    const cp = Math.cos(pitch);
+    return [Math.sin(yaw) * cp, Math.sin(pitch), Math.cos(yaw) * cp];
+}
+
+function cameraBasis() {
+    const cy = Math.cos(camera.yaw);
+    const sy = Math.sin(camera.yaw);
+    const cp = Math.cos(camera.pitch);
+    const sp = Math.sin(camera.pitch);
+    return {
+        right: [cy, 0, -sy],
+        up: [-sy * sp, cp, -cy * sp],
+        forward: [sy * cp, sp, cy * cp]
+    };
+}
+
+function tangentBasis(direction) {
+    const reference = Math.abs(direction[1]) > 0.92 ? [1,0,0] : [0,1,0];
+    const tangent = normalize(cross(reference, direction));
+    const bitangent = normalize(cross(direction, tangent));
+    return { tangent, bitangent };
+}
+
+function seededRandom(seedText) {
+    let seed = 2166136261;
+    for (let index = 0; index < seedText.length; index += 1) {
+        seed ^= seedText.charCodeAt(index);
+        seed = Math.imul(seed, 16777619);
+    }
+    return () => {
+        seed += 0x6D2B79F5;
+        let value = seed;
+        value = Math.imul(value ^ (value >>> 15), value | 1);
+        value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
+        return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+    };
+}
+
+function buildPortalGeometry() {
+    portalDefinitions.forEach(portal => {
+        portal.direction = fromYawPitch(portal.yaw, portal.pitch);
+        const { tangent, bitangent } = tangentBasis(portal.direction);
+        portal.tangent = tangent;
+        portal.bitangent = bitangent;
+        const pattern = constellationPatterns[portal.pattern];
+        portal.patternEdges = pattern.edges;
+        portal.patternPoints = pattern.points.map(([x, y]) =>
+            addScaled(portal.direction, tangent, x, bitangent, y)
+        );
+        portal.button = document.querySelector(`[data-portal-button="${portal.id}"]`);
+        portal.screen = null;
+
+        const content = document.querySelector(`[data-portal-content="${portal.id}"]`);
+        let momentCount = content ? content.querySelectorAll('.portal-moment').length : 0;
+        if (portal.id === 'footprints') momentCount = Math.max(1, visitedCountries.length);
+        if (portal.id === 'friends') momentCount = content?.querySelectorAll('.friend-link').length || 1;
+        portal.momentCount = momentCount;
+
+        const random = seededRandom(`detail-${portal.id}`);
+        portal.detailPoints = [];
+        for (let index = 0; index < momentCount; index += 1) {
+            const angle = index * 2.37 + random() * 0.35;
+            const radius = 0.035 + Math.sqrt(index + 1) * 0.026;
+            portal.detailPoints.push(
+                addScaled(
+                    portal.direction,
+                    tangent,
+                    Math.cos(angle) * radius,
+                    bitangent,
+                    Math.sin(angle) * radius * 0.72
+                )
+            );
+        }
+    });
+}
+
+function projectDirection(direction, basis, width, height, fov = camera.fov) {
+    const x = dot(direction, basis.right);
+    const y = dot(direction, basis.up);
+    const z = dot(direction, basis.forward);
+    if (z <= 0.025) return null;
+    const focal = (height * 0.5) / Math.tan(fov * 0.5);
+    const screenX = width * 0.5 + (x / z) * focal;
+    const screenY = height * 0.5 - (y / z) * focal;
+    return {
+        x: screenX,
+        y: screenY,
+        z,
+        visible: screenX > -150 && screenX < width + 150 && screenY > -150 && screenY < height + 150
+    };
+}
+
+class GalaxyRenderer {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.gl = null;
+        this.ready = false;
+        this.starCount = 0;
+        this.dpr = 1;
+        this.width = 1;
+        this.height = 1;
+        this.qualityScale = 1;
+        this.frameWindowStart = 0;
+        this.frameWindowCount = 0;
+        this.initialize();
+        canvas.addEventListener('webglcontextlost', event => {
+            event.preventDefault();
+            this.ready = false;
+        });
+        canvas.addEventListener('webglcontextrestored', () => this.initialize());
+    }
+
+    initialize() {
+        const options = {
+            alpha: false,
+            antialias: false,
+            depth: false,
+            stencil: false,
+            powerPreference: 'high-performance',
+            preserveDrawingBuffer: false
+        };
+        // GLSL ES 1.00 keeps the same two-draw-call renderer compatible with
+        // both older integrated GPUs and current browsers.
+        this.gl = this.canvas.getContext('webgl', options) ||
+            this.canvas.getContext('experimental-webgl', options);
+        if (!this.gl) {
+            this.ready = false;
+            return;
+        }
+
+        try {
+            this.backgroundProgram = this.createProgram(
+                `
+                attribute vec2 aPosition;
+                varying vec2 vUv;
+                void main() {
+                    vUv = aPosition * 0.5 + 0.5;
+                    gl_Position = vec4(aPosition, 0.0, 1.0);
+                }
+                `,
+                `
+                #ifdef GL_FRAGMENT_PRECISION_HIGH
+                precision highp float;
+                #else
+                precision mediump float;
+                #endif
+                varying vec2 vUv;
+                uniform vec2 uResolution;
+                uniform vec3 uRight;
+                uniform vec3 uUp;
+                uniform vec3 uForward;
+                uniform float uFov;
+                uniform float uTime;
+
+                float hash(vec2 point) {
+                    vec3 mixed = fract(point.xyx * 0.1031);
+                    mixed += vec3(dot(mixed, mixed.yzx + vec3(33.33)));
+                    return fract((mixed.x + mixed.y) * mixed.z);
+                }
+
+                float noise(vec2 point) {
+                    vec2 cell = floor(point);
+                    vec2 local = fract(point);
+                    local = local * local * (3.0 - 2.0 * local);
+                    return mix(
+                        mix(hash(cell), hash(cell + vec2(1.0, 0.0)), local.x),
+                        mix(hash(cell + vec2(0.0, 1.0)), hash(cell + vec2(1.0, 1.0)), local.x),
+                        local.y
+                    );
+                }
+
+                float fbm(vec2 point) {
+                    float value = 0.0;
+                    float amplitude = 0.58;
+                    mat2 rotation = mat2(0.82, -0.57, 0.57, 0.82);
+                    for (int index = 0; index < 3; index++) {
+                        value += noise(point) * amplitude;
+                        point = rotation * point * 2.03 + vec2(7.17);
+                        amplitude *= 0.47;
+                    }
+                    return value;
+                }
+
+                void main() {
+                    vec2 centered = vUv * 2.0 - 1.0;
+                    centered.x *= uResolution.x / max(uResolution.y, 1.0);
+                    float tangent = tan(uFov * 0.5);
+                    vec3 cameraRay = normalize(vec3(centered * tangent, 1.0));
+                    vec3 ray = normalize(
+                        uRight * cameraRay.x +
+                        uUp * cameraRay.y +
+                        uForward * cameraRay.z
+                    );
+
+                    vec3 galacticNormal = normalize(vec3(0.65, 0.68, 0.34));
+                    vec3 galacticX = normalize(cross(galacticNormal, vec3(0.0, 0.0, 1.0)));
+                    vec3 galacticY = cross(galacticNormal, galacticX);
+                    float signedLatitude = dot(ray, galacticNormal);
+                    float latitude = abs(signedLatitude);
+                    vec2 aroundPlane = vec2(dot(ray, galacticX), dot(ray, galacticY));
+                    vec2 texturePoint = aroundPlane * 5.4 + signedLatitude * vec2(1.8, -1.1);
+                    float structure = fbm(texturePoint + vec2(uTime * 0.002, 0.0));
+                    float fineStructure = fbm(texturePoint * 2.35 + vec2(13.7, 18.4));
+                    float grain = noise(texturePoint * 4.7 + vec2(31.2, 9.7));
+                    float broadBand = exp(-pow(latitude * 6.7, 1.32));
+                    float coreBand = exp(-pow(latitude * 15.5, 1.15));
+                    float brokenBand = broadBand * smoothstep(0.2, 0.9, structure * 0.78 + fineStructure * 0.3);
+                    float dust = exp(-latitude * latitude * 285.0) *
+                        smoothstep(0.48, 0.84, grain * 0.72 + fineStructure * 0.28);
+                    float cloudWarmth = noise(texturePoint * 0.92 + vec2(5.1, 21.4));
+
+                    vec3 base = mix(vec3(0.018, 0.023, 0.045), vec3(0.032, 0.039, 0.074), vUv.y);
+                    vec3 cool = vec3(0.30, 0.37, 0.56);
+                    vec3 warm = vec3(0.48, 0.37, 0.30);
+                    vec3 galaxy = mix(cool, warm, smoothstep(0.36, 0.74, cloudWarmth));
+                    vec2 planeDirection = aroundPlane / max(length(aroundPlane), 0.001);
+                    float towardCore = max(
+                        dot(planeDirection, normalize(vec2(-0.27, -0.96))),
+                        0.0
+                    );
+                    float softHalo = exp(-pow(latitude * 3.4, 1.25));
+                    float bulge = pow(towardCore, 7.0) * exp(-pow(latitude * 4.5, 1.3));
+                    galaxy *= brokenBand * (0.23 + structure * 0.50);
+                    galaxy += vec3(0.38, 0.42, 0.55) * coreBand * fineStructure * 0.12;
+                    galaxy += mix(
+                        vec3(0.035, 0.043, 0.070),
+                        vec3(0.078, 0.057, 0.043),
+                        towardCore
+                    ) * softHalo * (0.22 + structure * 0.18);
+                    galaxy += vec3(0.24, 0.16, 0.10) * bulge * (0.12 + structure * 0.18);
+                    galaxy *= 1.0 - dust * 0.62;
+
+                    float distantHaze = noise(aroundPlane * 3.4 + vec2(signedLatitude * 1.7));
+                    base += vec3(0.025, 0.031, 0.062) * distantHaze * 0.28;
+                    vec3 color = base + galaxy;
+                    float vignette = 1.0 - smoothstep(0.28, 1.35, length(centered * vec2(0.72, 0.9)));
+                    color *= 0.86 + vignette * 0.14;
+                    color = 1.0 - exp(-color * 1.42);
+                    color = pow(color, vec3(0.90));
+                    gl_FragColor = vec4(color, 1.0);
+                }
+                `
+            );
+
+            this.starProgram = this.createProgram(
+                `
+                attribute vec3 aDirection;
+                attribute float aSize;
+                attribute float aBrightness;
+                attribute float aTemperature;
+                attribute float aPhase;
+                uniform vec3 uRight;
+                uniform vec3 uUp;
+                uniform vec3 uForward;
+                uniform float uAspect;
+                uniform float uFov;
+                uniform float uDpr;
+                uniform float uTime;
+                varying float vAlpha;
+                varying float vTemperature;
+
+                void main() {
+                    float x = dot(aDirection, uRight);
+                    float y = dot(aDirection, uUp);
+                    float z = dot(aDirection, uForward);
+                    float tangent = tan(uFov * 0.5);
+                    vec2 projected = vec2(
+                        (x / max(z, 0.001)) / (tangent * uAspect),
+                        (y / max(z, 0.001)) / tangent
+                    );
+                    if (z <= 0.015) projected = vec2(4.0, 4.0);
+                    gl_Position = vec4(projected, 0.0, 1.0);
+                    float twinkle = 0.95 + 0.05 * sin(uTime * (0.00035 + fract(aPhase) * 0.00022) + aPhase);
+                    vAlpha = aBrightness * twinkle * smoothstep(0.015, 0.12, z);
+                    vTemperature = aTemperature;
+                    gl_PointSize = min(18.0, aSize * uDpr * (0.9 + 0.16 / max(z, 0.12)));
+                }
+                `,
+                `
+                precision mediump float;
+                varying float vAlpha;
+                varying float vTemperature;
+                void main() {
+                    vec2 local = gl_PointCoord - 0.5;
+                    float radius = length(local) * 2.0;
+                    float halo = exp(-radius * radius * 3.4) * (1.0 - smoothstep(0.78, 1.0, radius));
+                    float core = 1.0 - smoothstep(0.0, 0.20, radius);
+                    vec3 warm = vec3(1.0, 0.88, 0.70);
+                    vec3 cool = vec3(0.72, 0.83, 1.0);
+                    vec3 color = mix(warm, cool, vTemperature);
+                    color = mix(color, vec3(1.0), core * 0.72);
+                    float alpha = min(1.0, (halo * 0.78 + core * 0.48) * vAlpha);
+                    gl_FragColor = vec4(color, alpha);
+                }
+                `
+            );
+
+            this.quadBuffer = this.gl.createBuffer();
+            this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.quadBuffer);
+            this.gl.bufferData(
+                this.gl.ARRAY_BUFFER,
+                new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]),
+                this.gl.STATIC_DRAW
+            );
+
+            const catalog = this.createStarCatalog();
+            this.starCount = catalog.length / 8;
+            this.starBuffer = this.gl.createBuffer();
+            this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.starBuffer);
+            this.gl.bufferData(this.gl.ARRAY_BUFFER, catalog, this.gl.STATIC_DRAW);
+            this.backgroundLocations = {
+                position: this.gl.getAttribLocation(this.backgroundProgram, 'aPosition'),
+                right: this.gl.getUniformLocation(this.backgroundProgram, 'uRight'),
+                up: this.gl.getUniformLocation(this.backgroundProgram, 'uUp'),
+                forward: this.gl.getUniformLocation(this.backgroundProgram, 'uForward'),
+                fov: this.gl.getUniformLocation(this.backgroundProgram, 'uFov'),
+                resolution: this.gl.getUniformLocation(this.backgroundProgram, 'uResolution'),
+                time: this.gl.getUniformLocation(this.backgroundProgram, 'uTime')
+            };
+            this.starLocations = {
+                direction: this.gl.getAttribLocation(this.starProgram, 'aDirection'),
+                size: this.gl.getAttribLocation(this.starProgram, 'aSize'),
+                brightness: this.gl.getAttribLocation(this.starProgram, 'aBrightness'),
+                temperature: this.gl.getAttribLocation(this.starProgram, 'aTemperature'),
+                phase: this.gl.getAttribLocation(this.starProgram, 'aPhase'),
+                right: this.gl.getUniformLocation(this.starProgram, 'uRight'),
+                up: this.gl.getUniformLocation(this.starProgram, 'uUp'),
+                forward: this.gl.getUniformLocation(this.starProgram, 'uForward'),
+                fov: this.gl.getUniformLocation(this.starProgram, 'uFov'),
+                aspect: this.gl.getUniformLocation(this.starProgram, 'uAspect'),
+                dpr: this.gl.getUniformLocation(this.starProgram, 'uDpr'),
+                time: this.gl.getUniformLocation(this.starProgram, 'uTime')
+            };
+            this.ready = true;
+            this.resize();
+        } catch (error) {
+            console.error('WebGL galaxy initialization failed:', error);
+            this.ready = false;
+        }
+    }
+
+    createShader(type, source) {
+        const shader = this.gl.createShader(type);
+        this.gl.shaderSource(shader, source);
+        this.gl.compileShader(shader);
+        if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+            const message = this.gl.getShaderInfoLog(shader);
+            this.gl.deleteShader(shader);
+            throw new Error(message || 'Shader compilation failed');
+        }
+        return shader;
+    }
+
+    createProgram(vertexSource, fragmentSource) {
+        const program = this.gl.createProgram();
+        const vertex = this.createShader(this.gl.VERTEX_SHADER, vertexSource);
+        const fragment = this.createShader(this.gl.FRAGMENT_SHADER, fragmentSource);
+        this.gl.attachShader(program, vertex);
+        this.gl.attachShader(program, fragment);
+        this.gl.linkProgram(program);
+        this.gl.deleteShader(vertex);
+        this.gl.deleteShader(fragment);
+        if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
+            const message = this.gl.getProgramInfoLog(program);
+            this.gl.deleteProgram(program);
+            throw new Error(message || 'Program linking failed');
+        }
+        return program;
+    }
+
+    createStarCatalog() {
+        const weakDevice = COARSE_POINTER || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+        const uniformCount = weakDevice ? 2600 : 6200;
+        const bandCount = weakDevice ? 6200 : 17800;
+        const values = new Float32Array((uniformCount + bandCount) * 8);
+        const random = seededRandom('runde-yang-infinite-galaxy');
+        const gaussian = () => {
+            const first = Math.max(random(), 0.000001);
+            return Math.sqrt(-2 * Math.log(first)) * Math.cos(Math.PI * 2 * random());
+        };
+        const galacticNormal = normalize([0.65, 0.68, 0.34]);
+        const galacticX = normalize(cross(galacticNormal, [0,0,1]));
+        const galacticY = normalize(cross(galacticNormal, galacticX));
+        let cursor = 0;
+
+        const appendStar = (direction, bandStar) => {
+            const rareBright = random() > (bandStar ? 0.982 : 0.991);
+            const size = rareBright
+                ? 3.2 + random() * 3.4
+                : 0.7 + Math.pow(random(), 2.1) * (bandStar ? 2.1 : 1.65);
+            const brightness = rareBright
+                ? 0.82 + random() * 0.18
+                : 0.18 + Math.pow(random(), 1.7) * (bandStar ? 0.58 : 0.48);
+            values[cursor++] = direction[0];
+            values[cursor++] = direction[1];
+            values[cursor++] = direction[2];
+            values[cursor++] = size;
+            values[cursor++] = brightness;
+            values[cursor++] = clamp(0.16 + random() * 0.93 + (bandStar ? 0.05 : 0), 0, 1);
+            values[cursor++] = random() * Math.PI * 2;
+            values[cursor++] = 0;
+        };
+
+        for (let index = 0; index < uniformCount; index += 1) {
+            const y = random() * 2 - 1;
+            const longitude = random() * Math.PI * 2;
+            const radius = Math.sqrt(Math.max(0, 1 - y * y));
+            appendStar([Math.sin(longitude) * radius, y, Math.cos(longitude) * radius], false);
+        }
+
+        for (let index = 0; index < bandCount; index += 1) {
+            const longitude = random() * Math.PI * 2;
+            const latitude = clamp(gaussian() * 0.105, -0.43, 0.43);
+            const onPlane = [
+                galacticX[0] * Math.cos(longitude) + galacticY[0] * Math.sin(longitude),
+                galacticX[1] * Math.cos(longitude) + galacticY[1] * Math.sin(longitude),
+                galacticX[2] * Math.cos(longitude) + galacticY[2] * Math.sin(longitude)
+            ];
+            const direction = normalize([
+                onPlane[0] * Math.cos(latitude) + galacticNormal[0] * Math.sin(latitude),
+                onPlane[1] * Math.cos(latitude) + galacticNormal[1] * Math.sin(latitude),
+                onPlane[2] * Math.cos(latitude) + galacticNormal[2] * Math.sin(latitude)
+            ]);
+            appendStar(direction, true);
+        }
+        return values;
+    }
+
+    resize() {
+        if (!this.gl) return;
+        const maxDpr = (COARSE_POINTER ? 1 : 1.2) * this.qualityScale;
+        this.dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
+        this.width = Math.max(1, window.innerWidth);
+        this.height = Math.max(1, window.innerHeight);
+        const pixelWidth = Math.round(this.width * this.dpr);
+        const pixelHeight = Math.round(this.height * this.dpr);
+        if (this.canvas.width !== pixelWidth || this.canvas.height !== pixelHeight) {
+            this.canvas.width = pixelWidth;
+            this.canvas.height = pixelHeight;
+        }
+    }
+
+    setCameraUniforms(locations, basis) {
+        const gl = this.gl;
+        gl.uniform3fv(locations.right, basis.right);
+        gl.uniform3fv(locations.up, basis.up);
+        gl.uniform3fv(locations.forward, basis.forward);
+        gl.uniform1f(locations.fov, camera.fov);
+    }
+
+    trackFramePacing(time) {
+        if (!this.frameWindowStart) this.frameWindowStart = time;
+        this.frameWindowCount += 1;
+        const elapsed = time - this.frameWindowStart;
+        if (elapsed < 2000) return;
+        const averageFrame = elapsed / Math.max(1, this.frameWindowCount);
+        if (averageFrame > 24 && this.qualityScale > 0.82) {
+            this.qualityScale = 0.82;
+        }
+        this.frameWindowStart = time;
+        this.frameWindowCount = 0;
+    }
+
+    render(time, basis) {
+        if (!this.ready || !this.gl) return false;
+        const gl = this.gl;
+        this.trackFramePacing(time);
+        this.resize();
+        gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+        gl.disable(gl.DEPTH_TEST);
+        gl.disable(gl.CULL_FACE);
+        gl.disable(gl.BLEND);
+
+        gl.useProgram(this.backgroundProgram);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.quadBuffer);
+        gl.enableVertexAttribArray(this.backgroundLocations.position);
+        gl.vertexAttribPointer(this.backgroundLocations.position, 2, gl.FLOAT, false, 0, 0);
+        this.setCameraUniforms(this.backgroundLocations, basis);
+        gl.uniform2f(
+            this.backgroundLocations.resolution,
+            this.canvas.width,
+            this.canvas.height
+        );
+        gl.uniform1f(this.backgroundLocations.time, Math.min(time * 0.001, 60));
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+        gl.useProgram(this.starProgram);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.starBuffer);
+        const stride = 8 * 4;
+        const attributes = [
+            [this.starLocations.direction, 3, 0],
+            [this.starLocations.size, 1, 3 * 4],
+            [this.starLocations.brightness, 1, 4 * 4],
+            [this.starLocations.temperature, 1, 5 * 4],
+            [this.starLocations.phase, 1, 6 * 4]
+        ];
+        attributes.forEach(([location, size, offset]) => {
+            gl.enableVertexAttribArray(location);
+            gl.vertexAttribPointer(location, size, gl.FLOAT, false, stride, offset);
+        });
+        this.setCameraUniforms(this.starLocations, basis);
+        gl.uniform1f(this.starLocations.aspect, this.width / this.height);
+        gl.uniform1f(this.starLocations.dpr, this.dpr);
+        gl.uniform1f(this.starLocations.time, time);
+        gl.drawArrays(gl.POINTS, 0, this.starCount);
+        gl.disable(gl.BLEND);
+        return true;
+    }
+}
+
+const galaxyRenderer = new GalaxyRenderer(dom.spaceCanvas);
+const overlayContext = dom.constellationCanvas.getContext('2d');
+let overlayWidth = 1;
+let overlayHeight = 1;
+let overlayDpr = 1;
+let fallbackStars = [];
+
+function buildFallbackStars() {
+    const random = seededRandom('fallback-sky');
+    fallbackStars = [];
+    const galacticNormal = normalize([0.65, 0.68, 0.34]);
+    const galacticX = normalize(cross(galacticNormal, [0,0,1]));
+    const galacticY = normalize(cross(galacticNormal, galacticX));
+    const gaussian = () => {
+        const first = Math.max(random(), 0.000001);
+        return Math.sqrt(-2 * Math.log(first)) * Math.cos(Math.PI * 2 * random());
+    };
+    const append = (direction, band = false) => {
+        fallbackStars.push({
+            direction,
+            size: band ? 0.35 + random() * 1.25 : 0.4 + random() * 1.45,
+            alpha: band ? 0.12 + random() * 0.52 : 0.16 + random() * 0.65
+        });
+    };
+
+    for (let index = 0; index < 1200; index += 1) {
+        const y = random() * 2 - 1;
+        const longitude = random() * Math.PI * 2;
+        const radius = Math.sqrt(Math.max(0, 1 - y * y));
+        append([Math.sin(longitude) * radius, y, Math.cos(longitude) * radius]);
+    }
+    for (let index = 0; index < 2600; index += 1) {
+        const longitude = random() * Math.PI * 2;
+        const latitude = clamp(gaussian() * 0.105, -0.38, 0.38);
+        const onPlane = [
+            galacticX[0] * Math.cos(longitude) + galacticY[0] * Math.sin(longitude),
+            galacticX[1] * Math.cos(longitude) + galacticY[1] * Math.sin(longitude),
+            galacticX[2] * Math.cos(longitude) + galacticY[2] * Math.sin(longitude)
+        ];
+        append(normalize([
+            onPlane[0] * Math.cos(latitude) + galacticNormal[0] * Math.sin(latitude),
+            onPlane[1] * Math.cos(latitude) + galacticNormal[1] * Math.sin(latitude),
+            onPlane[2] * Math.cos(latitude) + galacticNormal[2] * Math.sin(latitude)
+        ]), true);
+    }
+}
+
+function resizeOverlay() {
+    overlayDpr = Math.min(window.devicePixelRatio || 1, COARSE_POINTER ? 1.25 : 1.6);
+    overlayWidth = Math.max(1, window.innerWidth);
+    overlayHeight = Math.max(1, window.innerHeight);
+    const pixelWidth = Math.round(overlayWidth * overlayDpr);
+    const pixelHeight = Math.round(overlayHeight * overlayDpr);
+    if (dom.constellationCanvas.width !== pixelWidth || dom.constellationCanvas.height !== pixelHeight) {
+        dom.constellationCanvas.width = pixelWidth;
+        dom.constellationCanvas.height = pixelHeight;
+        dom.constellationCanvas.style.width = `${overlayWidth}px`;
+        dom.constellationCanvas.style.height = `${overlayHeight}px`;
+    }
+    overlayContext.setTransform(overlayDpr, 0, 0, overlayDpr, 0, 0);
+}
+
+function drawFallbackSpace(basis, time) {
+    const context = overlayContext;
+    const background = context.createRadialGradient(
+        overlayWidth * 0.56,
+        overlayHeight * 0.46,
+        0,
+        overlayWidth * 0.5,
+        overlayHeight * 0.5,
+        Math.max(overlayWidth, overlayHeight) * 0.76
+    );
+    background.addColorStop(0, '#171b34');
+    background.addColorStop(0.42, '#0b0e1d');
+    background.addColorStop(1, '#040611');
+    context.fillStyle = background;
+    context.fillRect(0, 0, overlayWidth, overlayHeight);
+
+    context.fillStyle = '#dce8ff';
+    fallbackStars.forEach((star, index) => {
+        const point = projectDirection(star.direction, basis, overlayWidth, overlayHeight);
+        if (!point?.visible) return;
+        const twinkle = REDUCED_MOTION ? 1 : 0.95 + 0.05 * Math.sin(time * 0.0005 + index);
+        context.globalAlpha = star.alpha * twinkle;
+        const size = star.size * (0.9 + 0.12 / Math.max(point.z, 0.15));
+        context.fillRect(point.x, point.y, size, size);
+    });
+    context.globalAlpha = 1;
+}
+
+function createStarGlowSprite(warm) {
+    const sprite = document.createElement('canvas');
+    sprite.width = 96;
+    sprite.height = 96;
+    const context = sprite.getContext('2d');
+    const glow = context.createRadialGradient(48, 48, 0, 48, 48, 44);
+    glow.addColorStop(0, warm ? 'rgba(255,230,182,1)' : 'rgba(236,244,255,1)');
+    glow.addColorStop(0.16, warm ? 'rgba(255,215,160,0.5)' : 'rgba(196,216,255,0.5)');
+    glow.addColorStop(1, 'rgba(0,0,0,0)');
+    context.fillStyle = glow;
+    context.fillRect(4, 4, 88, 88);
+    context.fillStyle = warm ? '#fff0c9' : '#fffaf0';
+    context.beginPath();
+    context.arc(48, 48, 8, 0, Math.PI * 2);
+    context.fill();
+    return sprite;
+}
+
+const starGlowSprites = {
+    cool: createStarGlowSprite(false),
+    warm: createStarGlowSprite(true)
+};
+
+function drawStarGlow(context, x, y, radius, alpha, warm = false) {
+    const size = radius * 11;
+    context.globalAlpha = Math.min(1, alpha * 1.18);
+    context.drawImage(
+        warm ? starGlowSprites.warm : starGlowSprites.cool,
+        x - size * 0.5,
+        y - size * 0.5,
+        size,
+        size
+    );
+    context.globalAlpha = 1;
+}
+
+function orderedPortalNames(portal) {
+    const others = LANGUAGES.filter(lang => lang !== state.currentLang);
+    return [state.currentLang, ...others].map(lang => portalName(portal, lang));
+}
+
+function portalName(portal, lang) {
+    return i18n[lang]?.[portal.titleKey] || portal.id;
+}
+
+function updatePortalButton(portal, projected) {
+    const button = portal.button;
+    if (!button) return;
+    const onScreen = projected?.visible &&
+        projected.x > -50 && projected.x < overlayWidth + 50 &&
+        projected.y > -50 && projected.y < overlayHeight + 50;
+    if (portal.buttonVisible !== onScreen) {
+        portal.buttonVisible = onScreen;
+        button.hidden = !onScreen;
+        button.inert = !onScreen;
+    }
+    if (!onScreen) return;
+    if (
+        portal.buttonX === undefined ||
+        Math.abs(portal.buttonX - projected.x) > 0.35 ||
+        Math.abs(portal.buttonY - projected.y) > 0.35
+    ) {
+        portal.buttonX = projected.x;
+        portal.buttonY = projected.y;
+        button.style.transform =
+            `translate3d(${projected.x}px, ${projected.y}px, 0) translate(-50%, -50%)`;
+    }
+}
+
+function updateGazeTarget(time) {
+    if (state.scene === 'flying' || state.scene === 'leaving-home') return;
+    if (state.scene === 'detail' && state.activePortal) {
+        if (state.focusedPortal !== state.activePortal) setFocusedPortal(state.activePortal);
         return;
     }
 
-    const labels = currentChartLabels();
-    myChartChina = echarts.init(document.getElementById('chinaMap'));
-    myChartWorld = echarts.init(document.getElementById('worldMap'));
-    window.myChartChina = myChartChina;
-    window.myChartWorld = myChartWorld;
-    window.addEventListener('resize', resizeMaps);
+    if (state.hoverPortal && state.lock !== 'locked') {
+        if (state.focusedPortal !== state.hoverPortal) setFocusedPortal(state.hoverPortal);
+        return;
+    }
 
-    // China map
-    fetch('assets/maps/china_city_full.json')
-        .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-        .then(geoJson => {
-            const cityFeatures = [];
-            const districtByParent = new Map();
-
-            for (const f of geoJson.features) {
-                const p = f.properties || {};
-                const lvl = p.level;
-                if (lvl === 'city') {
-                    cityFeatures.push(f);
-                } else if (lvl === 'province' && (p.name === '台湾省' || p.name === '臺灣省')) {
-                    cityFeatures.push(f);
-                } else if (lvl === 'district' && p.parent && p.parent.adcode) {
-                    const key = String(p.parent.adcode);
-                    if (!districtByParent.has(key)) districtByParent.set(key, []);
-                    districtByParent.get(key).push(f);
-                }
-            }
-
-            const featureNamesCity = new Set(cityFeatures.map(f => f.properties?.name).filter(Boolean));
-            const visitedExpanded = new Set();
-
-            for (const name of visited) {
-                if (!MUNICIPALITIES.has(name)) { visitedExpanded.add(name); continue; }
-                if (featureNamesCity.has(name)) { visitedExpanded.add(name); continue; }
-                const parentAdcode = name === '北京市' ? '110000' : name === '上海市' ? '310000' :
-                    name === '天津市' ? '120000' : name === '重庆市' ? '500000' : null;
-                if (parentAdcode && districtByParent.has(parentAdcode)) {
-                    for (const df of districtByParent.get(parentAdcode)) visitedExpanded.add(df.properties.name);
-                } else { visitedExpanded.add(name); }
-            }
-
-            const mergedFeatures = [...cityFeatures];
-            for (const parent of ['110000','310000','120000','500000']) {
-                if (districtByParent.has(parent)) mergedFeatures.push(...districtByParent.get(parent));
-            }
-
-            echarts.registerMap('china_mixed', { type: 'FeatureCollection', features: mergedFeatures });
-
-            myChartChina.setOption({
-                title: { text: labels.chart_china, left: 'center', top: 16, textStyle: { color: '#999', fontSize: 13, fontWeight: 500 } },
-                tooltip: { trigger: 'item' },
-                series: [{
-                    type: 'map', map: 'china_mixed', roam: true,
-                    center: [104.0, 35.0], zoom: 1.05, scaleLimit: { min: 1.0, max: 2.2 },
-                    label: { show: false },
-                    itemStyle: { areaColor: '#f5f5f5', borderColor: '#ddd' },
-                    emphasis: { itemStyle: { areaColor: '#e0e0e0' }, label: { show: false } },
-                    data: Array.from(visitedExpanded).map(n => ({ name: n, itemStyle: { areaColor: '#2d3436' } }))
-                }]
-            });
-        })
-        .catch(err => {
-            console.error('China map failed:', err);
-            document.getElementById('chinaMap').innerHTML = '<div style="padding:20px;color:#999;text-align:center;">Map failed to load</div>';
-        });
-
-    // World map
-    fetch('https://raw.githubusercontent.com/apache/echarts-examples/gh-pages/public/data/asset/geo/world.json')
-        .then(r => r.json())
-        .then(geoJson => {
-            echarts.registerMap('world', geoJson);
-            myChartWorld.setOption({
-                title: { text: labels.chart_world, left: 'center', top: 16, textStyle: { color: '#999', fontSize: 13, fontWeight: 500 } },
-                tooltip: { trigger: 'item' },
-                geo: {
-                    map: 'world', roam: true,
-                    label: { show: false },
-                    itemStyle: { areaColor: '#f5f5f5', borderColor: '#ddd' },
-                    emphasis: { itemStyle: { areaColor: '#e0e0e0' }, label: { show: false } }
-                },
-                series: [{
-                    type: 'effectScatter', coordinateSystem: 'geo',
-                    rippleEffect: { brushType: 'stroke' },
-                    label: { show: true, position: 'right', formatter: '{b}', fontSize: 11, color: '#666' },
-                    symbolSize: 5,
-                    itemStyle: { color: '#2d3436' },
-                    data: [
-                    { name: "Shanghai", value: [121.4737, 31.2304] },
-                    { name: "New York", value: [-74.006, 40.7128] }
-                ]
-                }]
-            });
-        });
-}
-
-const footprintsSection = document.getElementById('footprints');
-if (footprintsSection && 'IntersectionObserver' in window) {
-    const mapObserver = new IntersectionObserver((entries, obs) => {
-        if (entries.some(entry => entry.isIntersecting)) {
-            initMaps();
-            obs.disconnect();
+    let best = null;
+    let bestDistance = Infinity;
+    portalDefinitions.forEach(portal => {
+        if (!portal.screen?.visible) return;
+        const distance = Math.hypot(
+            portal.screen.x - overlayWidth * 0.5,
+            portal.screen.y - overlayHeight * 0.5
+        );
+        if (distance < bestDistance) {
+            best = portal;
+            bestDistance = distance;
         }
-    }, { rootMargin: '220px 0px' });
-    mapObserver.observe(footprintsSection);
-} else {
-    initMaps();
+    });
+
+    const enterRadius = clamp(Math.min(overlayWidth, overlayHeight) * 0.085, 48, 74);
+    const exitRadius = enterRadius + 28;
+    if (state.focusedPortal?.screen?.visible) {
+        const currentDistance = Math.hypot(
+            state.focusedPortal.screen.x - overlayWidth * 0.5,
+            state.focusedPortal.screen.y - overlayHeight * 0.5
+        );
+        if (currentDistance <= exitRadius) return;
+    }
+
+    if (!best || bestDistance > enterRadius) {
+        state.pendingPortal = null;
+        if (state.focusedPortal) setFocusedPortal(null);
+        return;
+    }
+
+    if (state.pendingPortal !== best) {
+        state.pendingPortal = best;
+        state.pendingSince = time;
+        return;
+    }
+
+    if (time - state.pendingSince >= (REDUCED_MOTION ? 0 : 145)) {
+        setFocusedPortal(best);
+        state.pendingPortal = null;
+    }
 }
 
-/* Init */
-const savedLang = localStorage.getItem('preferredLang') || 'en';
-setLang(savedLang);
-</script>
+function setFocusedPortal(portal) {
+    state.focusedPortal = portal;
+    dom.body.classList.toggle('has-target', Boolean(portal));
+    if (!portal) {
+        dom.gazePrimary.textContent = '';
+        dom.gazeSecondary.textContent = '';
+        return;
+    }
 
+    const names = orderedPortalNames(portal);
+    dom.gazePrimary.textContent = names[0];
+    dom.gazeSecondary.textContent = names.slice(1).join(' / ');
+    window.clearTimeout(state.announcementTimer);
+    state.announcementTimer = window.setTimeout(() => {
+        if (state.focusedPortal === portal) {
+            dom.gazeAnnouncement.textContent = LANGUAGES.map(lang => portalName(portal, lang)).join(' / ');
+        }
+    }, REDUCED_MOTION ? 0 : 420);
+}
+
+function drawConstellations(basis, time, webglRendered) {
+    resizeOverlay();
+    overlayContext.clearRect(0, 0, overlayWidth, overlayHeight);
+    if (!webglRendered) drawFallbackSpace(basis, time);
+
+    const context = overlayContext;
+    const active = state.activePortal;
+    portalDefinitions.forEach((portal, portalIndex) => {
+        const center = projectDirection(portal.direction, basis, overlayWidth, overlayHeight);
+        portal.screen = center;
+        updatePortalButton(portal, center);
+        if (!center?.visible) return;
+
+        const points = portal.patternPoints.map(point =>
+            projectDirection(point, basis, overlayWidth, overlayHeight)
+        );
+        const focused = state.focusedPortal === portal;
+        const selected = active === portal;
+        const edgeAlpha = selected ? 0.52 : focused ? 0.4 : 0.15;
+        const starAlpha = selected ? 1 : focused ? 0.96 : 0.73;
+        const warm = Boolean(portal.home);
+
+        context.save();
+        context.globalCompositeOperation = 'screen';
+        context.lineWidth = focused || selected ? 0.9 : 0.55;
+        context.strokeStyle = warm
+            ? `rgba(255,218,158,${edgeAlpha})`
+            : `rgba(202,220,255,${edgeAlpha})`;
+        portal.patternEdges.forEach(([startIndex, endIndex]) => {
+            const start = points[startIndex];
+            const end = points[endIndex];
+            if (!start?.visible || !end?.visible) return;
+            context.beginPath();
+            context.moveTo(start.x, start.y);
+            context.lineTo(end.x, end.y);
+            context.stroke();
+        });
+
+        points.forEach((point, index) => {
+            if (!point?.visible) return;
+            const pulse = REDUCED_MOTION
+                ? 1
+                : 0.92 + 0.08 * Math.sin(time * 0.0012 + portalIndex * 2.1 + index * 1.7);
+            const homeExpansion = portal.home && selected
+                ? state.homeWarpProgress * state.homeWarpProgress * 15
+                : 0;
+            const baseRadius = portal.home
+                ? 2.9 + homeExpansion
+                : (index === 0 ? 2.25 : 1.35 + (index % 3) * 0.22);
+            drawStarGlow(
+                context,
+                point.x,
+                point.y,
+                baseRadius * pulse * (focused || selected ? 1.22 : 1),
+                starAlpha * (index === 0 ? 1 : 0.78),
+                warm
+            );
+        });
+
+        if ((selected && (state.scene === 'flying' || state.scene === 'detail')) && portal.detailPoints.length) {
+            const detailPoints = portal.detailPoints.map(point =>
+                projectDirection(point, basis, overlayWidth, overlayHeight)
+            );
+            context.strokeStyle = `rgba(215,226,250,${state.scene === 'detail' ? 0.22 : 0.12})`;
+            context.lineWidth = 0.55;
+            detailPoints.forEach((point, index) => {
+                if (!point?.visible) return;
+                const previous = index === 0 ? center : detailPoints[index - 1];
+                if (previous?.visible) {
+                    context.beginPath();
+                    context.moveTo(previous.x, previous.y);
+                    context.lineTo(point.x, point.y);
+                    context.stroke();
+                }
+                drawStarGlow(context, point.x, point.y, 1.05, 0.72, false);
+            });
+        }
+        context.restore();
+    });
+
+    if (state.scene === 'detail' && active?.screen?.visible) {
+        const rect = state.panelRect;
+        if (rect?.width > 0) {
+            const endX = state.panelOnLeft ? rect.right : rect.left;
+            const endY = clamp(active.screen.y, rect.top + 72, rect.bottom - 54);
+            const gradient = context.createLinearGradient(active.screen.x, active.screen.y, endX, endY);
+            gradient.addColorStop(0, 'rgba(224,234,255,0.34)');
+            gradient.addColorStop(1, 'rgba(224,234,255,0.03)');
+            context.strokeStyle = gradient;
+            context.lineWidth = 0.7;
+            context.beginPath();
+            context.moveTo(active.screen.x, active.screen.y);
+            context.lineTo(endX, endY);
+            context.stroke();
+        }
+    }
+
+    updateGazeTarget(time);
+}
+
+function applyLook(deltaX, deltaY, multiplier = 1) {
+    if (state.scene === 'flying' || state.scene === 'leaving-home' || state.scene === 'detail') return;
+    const sensitivity = (COARSE_POINTER ? 0.0032 : 0.00175) * multiplier;
+    let nextYaw = camera.targetYaw + deltaX * sensitivity;
+    let nextPitch = camera.targetPitch - deltaY * sensitivity;
+    nextPitch = clamp(nextPitch, -1.18, 1.18);
+
+    camera.targetYaw = nextYaw;
+    camera.targetPitch = nextPitch;
+}
+
+function updateCamera(time) {
+    const deltaSeconds = clamp((time - state.lastFrame) / 1000, 0, 0.05);
+    state.lastFrame = time;
+
+    if (state.flight) {
+        const flight = state.flight;
+        const progress = clamp((time - flight.startedAt) / flight.duration, 0, 1);
+        const eased = easeInOutCubic(progress);
+        const homeWarp = flight.portal.home
+            ? clamp((progress - 0.38) / 0.62, 0, 1)
+            : 0;
+        state.homeWarpProgress = homeWarp * homeWarp * (3 - 2 * homeWarp);
+        camera.yaw = lerpAngle(flight.startYaw, flight.endYaw, eased);
+        camera.pitch = lerp(flight.startPitch, flight.endPitch, eased);
+        const focalArc = Math.sin(progress * Math.PI);
+        const focalDepth = flight.portal.home ? 7.5 : 3.5;
+        camera.fov = Math.max(
+            7 * DEG,
+            lerp(flight.startFov, flight.endFov, eased) - focalArc * focalDepth * DEG
+        );
+        camera.targetYaw = camera.yaw;
+        camera.targetPitch = camera.pitch;
+
+        if (flight.portal.home && progress > 0.58) {
+            dom.veil.classList.add('is-active');
+        }
+
+        if (progress >= 1) {
+            state.flight = null;
+            if (flight.portal.home) {
+                state.scene = 'leaving-home';
+                state.lockIntent = 'navigation';
+                releaseRightZoom();
+                const origin = flight.portal.screen?.visible
+                    ? { x: flight.portal.screen.x, y: flight.portal.screen.y }
+                    : { x: window.innerWidth * 0.5, y: window.innerHeight * 0.5 };
+                if (document.pointerLockElement === dom.world) {
+                    document.exitPointerLock();
+                }
+                if (window.StellarTransit) {
+                    window.StellarTransit.navigate({
+                        to: 'index',
+                        href: 'index.html',
+                        origin,
+                        mode: 'home',
+                        duration: 760
+                    });
+                } else {
+                    window.setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, REDUCED_MOTION ? 0 : 360);
+                }
+            } else {
+                openPortalPanel(flight.portal);
+            }
+        }
+        return;
+    }
+
+    const response = REDUCED_MOTION ? 1 : 1 - Math.exp(-deltaSeconds * 8.5);
+    camera.yaw = lerpAngle(camera.yaw, camera.targetYaw, response);
+    camera.pitch = lerp(camera.pitch, camera.targetPitch, response);
+    const restingFov = state.scene === 'detail' ? 43 * DEG : 62 * DEG;
+    const desiredFov = state.rightDown ? restingFov - 14 * DEG : restingFov;
+    const fovResponse = REDUCED_MOTION ? 1 : 1 - Math.exp(-deltaSeconds * 9.5);
+    camera.fov = lerp(camera.fov, desiredFov, fovResponse);
+}
+
+function startPortalFlight(portal, source = 'gaze') {
+    if (!portal || state.scene === 'flying' || state.scene === 'leaving-home' || state.modalOpen) return;
+    if (state.scene === 'detail') closePortalPanel(false);
+    state.activationSource = source;
+    state.scene = 'flying';
+    state.activePortal = portal;
+    state.homeWarpProgress = 0;
+    setFocusedPortal(portal);
+    dom.status.textContent = 'FOCUSING';
+
+    const desktopSideOffset = portal.home || window.innerWidth <= 760 ? 0 : 0.2;
+    const verticalOffset = window.innerWidth <= 760 && !portal.home ? -0.16 : 0;
+    if (portal.home) releaseRightZoom();
+    const duration = REDUCED_MOTION ? 1 : (portal.home ? 1180 : 920);
+    state.flight = {
+        portal,
+        startedAt: performance.now(),
+        duration,
+        startYaw: camera.yaw,
+        startPitch: camera.pitch,
+        startFov: camera.fov,
+        endYaw: portal.yaw + desktopSideOffset,
+        endPitch: clamp(portal.pitch + verticalOffset, -1.1, 1.1),
+        endFov: portal.home ? 9 * DEG : 43 * DEG
+    };
+}
+
+function cancelFlight() {
+    if (!state.flight) return;
+    const flight = state.flight;
+    state.flight = null;
+    state.scene = 'roam';
+    state.activePortal = null;
+    state.homeWarpProgress = 0;
+    camera.yaw = flight.startYaw;
+    camera.pitch = flight.startPitch;
+    camera.fov = flight.startFov;
+    camera.targetYaw = flight.startYaw;
+    camera.targetPitch = flight.startPitch;
+    camera.inspectionYaw = null;
+    camera.inspectionPitch = null;
+    dom.veil.classList.remove('is-active');
+    dom.status.textContent = state.lock === 'locked' ? 'FREE LOOK' : 'VIEW PAUSED';
+    setFocusedPortal(flight.portal);
+}
+
+function releaseViewForDetail() {
+    releaseRightZoom();
+    state.altHeld = false;
+    state.altReturnMode = null;
+    state.relockPending = false;
+    camera.targetYaw = camera.yaw;
+    camera.targetPitch = camera.pitch;
+    camera.targetFov = 43 * DEG;
+    dom.body.classList.remove('view-locked');
+    dom.body.classList.add('cursor-free');
+    hideEntryGate();
+
+    if (document.pointerLockElement === dom.world) {
+        state.lockIntent = 'detail';
+        document.exitPointerLock();
+    } else {
+        state.lockIntent = null;
+        if (!state.touchMode) state.lock = 'detail-free';
+    }
+}
+
+function openPortalPanel(portal) {
+    window.clearTimeout(state.panelHideTimer);
+    document.querySelectorAll('[data-portal-content]').forEach(content => {
+        content.hidden = content.dataset.portalContent !== portal.id;
+    });
+    const names = orderedPortalNames(portal);
+    dom.panelTitle.textContent = names[0];
+    dom.panelNames.textContent = LANGUAGES.map(lang => portalName(portal, lang)).join(' / ');
+    dom.panel.setAttribute('aria-hidden', 'false');
+    dom.panelClose.setAttribute('aria-label', i18n[state.currentLang]?.panel_close || 'Return to the galaxy');
+    dom.body.classList.add('panel-open');
+    state.panelOnLeft = Boolean(portal.screen?.x > overlayWidth * 0.56);
+    dom.panel.classList.toggle('is-left', state.panelOnLeft);
+    state.panelRect = dom.panel.getBoundingClientRect();
+    state.scene = 'detail';
+    state.activePortal = portal;
+    camera.inspectionYaw = camera.yaw;
+    camera.inspectionPitch = camera.pitch;
+    camera.targetFov = 43 * DEG;
+    dom.status.textContent = 'DETAIL';
+    updateThoughtToggles();
+    releaseViewForDetail();
+
+    if (portal.id === 'footprints') {
+        requestAnimationFrame(() => requestAnimationFrame(initMaps));
+    }
+    requestAnimationFrame(() => dom.panelClose.focus({ preventScroll: true }));
+}
+
+function closePortalPanel(restoreFocus = true) {
+    if (state.scene !== 'detail' && !dom.body.classList.contains('panel-open')) return;
+    const closingPortal = state.activePortal;
+    dom.body.classList.remove('panel-open');
+    dom.panel.setAttribute('aria-hidden', 'true');
+    dom.panel.classList.remove('is-left');
+    state.panelRect = null;
+    state.scene = 'roam';
+    state.activePortal = null;
+    camera.inspectionYaw = null;
+    camera.inspectionPitch = null;
+    dom.status.textContent = state.lock === 'locked' ? 'FREE LOOK' : 'CURSOR FREE';
+    state.panelHideTimer = window.setTimeout(() => {
+        document.querySelectorAll('[data-portal-content]').forEach(content => {
+            content.hidden = true;
+        });
+    }, REDUCED_MOTION ? 0 : 420);
+    if (restoreFocus && state.activationSource === 'keyboard' && closingPortal?.button) {
+        closingPortal.button.focus({ preventScroll: true });
+    }
+    setFocusedPortal(null);
+    if (restoreFocus && !state.modalOpen && !state.altHeld) {
+        if (state.touchMode) {
+            dom.status.textContent = 'DRAG TO LOOK';
+        } else if (document.pointerLockElement !== dom.world) {
+            requestViewLock('detail-close');
+        }
+    }
+}
+
+function renderFrame(time) {
+    updateCamera(time);
+    const basis = cameraBasis();
+    const webglRendered = galaxyRenderer.render(REDUCED_MOTION ? 0 : time, basis);
+    drawConstellations(basis, time, webglRendered);
+    frameRequest = requestAnimationFrame(renderFrame);
+}
+
+let frameRequest = 0;
+function startRendering() {
+    cancelAnimationFrame(frameRequest);
+    state.lastFrame = performance.now();
+    frameRequest = requestAnimationFrame(renderFrame);
+}
+
+function stopRendering() {
+    cancelAnimationFrame(frameRequest);
+    frameRequest = 0;
+}
+
+function setGateState(open, focusTrigger = false) {
+    state.gateOpen = open;
+    dom.entryGate.classList.toggle('is-hidden', !open);
+    dom.entryGate.setAttribute('aria-hidden', String(!open));
+    [dom.world, dom.portalNav, dom.panel, dom.lightbox].forEach(element => {
+        if (element) element.inert = open;
+    });
+    if (open && focusTrigger && !document.hidden) {
+        requestAnimationFrame(() => {
+            if (state.gateOpen) dom.entryTrigger.focus({ preventScroll: true });
+        });
+    }
+}
+
+function hideEntryGate() {
+    setGateState(false);
+}
+
+function showResumeGate(focusTrigger = true) {
+    if (state.touchMode || state.modalOpen || state.scene === 'detail') return;
+    state.lock = 'suspended';
+    dom.entryTrigger.disabled = false;
+    dom.body.classList.remove('view-locked', 'cursor-free');
+    dom.entryTitle.textContent = i18n[state.currentLang]?.resume_view || 'Click to return to free look';
+    dom.entryHint.textContent = i18n[state.currentLang]?.enter_hint || 'Click once to take control of the view';
+    setGateState(true, focusTrigger);
+    dom.status.textContent = 'VIEW PAUSED';
+}
+
+function enterFallbackMode() {
+    state.touchMode = true;
+    state.lock = 'unavailable';
+    state.lockIntent = null;
+    state.lockRequestSource = null;
+    state.altHeld = false;
+    state.altReturnMode = null;
+    state.relockPending = false;
+    state.scene = state.scene === 'entry' ? 'roam' : state.scene;
+    dom.entryTrigger.disabled = false;
+    dom.entryFallback.hidden = true;
+    dom.body.classList.remove('view-locked');
+    dom.body.classList.add('touch-mode', 'cursor-free', 'has-entered');
+    hideEntryGate();
+    dom.status.textContent = 'DRAG TO LOOK';
+    dom.world.focus({ preventScroll: true });
+}
+
+function handleLockFailure(error) {
+    if (state.lockErrorHandled) return;
+    state.lockErrorHandled = true;
+    const source = state.lockRequestSource;
+    state.lockRequestSource = null;
+    dom.entryTrigger.disabled = false;
+    const unsupported = error?.name === 'NotSupportedError';
+    if (unsupported) {
+        enterFallbackMode();
+        return;
+    }
+    if (source !== 'alt-release') state.lockFailureCount += 1;
+    if (state.lockFailureCount >= 2) {
+        enterFallbackMode();
+        return;
+    }
+    dom.entryFallback.hidden = false;
+    showResumeGate();
+    dom.entryHint.textContent = i18n[state.currentLang]?.lock_failed_hint ||
+        'Pointer lock was blocked. Retry or continue with drag controls.';
+}
+
+function requestViewLock(source = 'entry') {
+    state.hasEntered = true;
+    dom.body.classList.add('has-entered');
+    if (state.touchMode || typeof dom.world.requestPointerLock !== 'function') {
+        enterFallbackMode();
+        return;
+    }
+    if (
+        state.altHeld ||
+        state.modalOpen ||
+        state.lock === 'requesting' ||
+        document.pointerLockElement === dom.world
+    ) return;
+
+    state.lock = 'requesting';
+    state.lockRequestSource = source;
+    state.lockErrorHandled = false;
+    dom.entryTrigger.disabled = true;
+    dom.status.textContent = 'LOCKING VIEW';
+    try {
+        const result = dom.world.requestPointerLock();
+        if (result && typeof result.catch === 'function') {
+            result.catch(error => {
+                console.warn('Pointer lock request was declined:', error);
+                handleLockFailure(error);
+            });
+        }
+    } catch (error) {
+        console.warn('Pointer lock is unavailable:', error);
+        handleLockFailure(error);
+    }
+}
+
+function releaseRightZoom() {
+    state.rightDown = false;
+}
+
+function handlePointerLockChange() {
+    const locked = document.pointerLockElement === dom.world;
+    releaseRightZoom();
+    if (locked) {
+        state.lock = 'locked';
+        state.lockIntent = null;
+        state.lockRequestSource = null;
+        state.lockErrorHandled = false;
+        state.lockFailureCount = 0;
+        state.relockPending = false;
+        state.altReturnMode = null;
+        state.scene = state.scene === 'entry' ? 'roam' : state.scene;
+        dom.entryTrigger.disabled = false;
+        dom.entryFallback.hidden = true;
+        dom.body.classList.add('view-locked', 'has-entered');
+        dom.body.classList.remove('cursor-free');
+        hideEntryGate();
+        dom.status.textContent = state.scene === 'detail' ? 'DETAIL' : 'FREE LOOK';
+        dom.world.focus({ preventScroll: true });
+        return;
+    }
+
+    dom.body.classList.remove('view-locked');
+    if (state.lockIntent === 'navigation' || state.scene === 'leaving-home') {
+        state.lock = 'navigation';
+        state.lockIntent = null;
+        state.altHeld = false;
+        state.altReturnMode = null;
+        state.relockPending = false;
+        dom.body.classList.add('cursor-free');
+        hideEntryGate();
+        return;
+    }
+    if (state.lockIntent === 'alt') {
+        state.lock = 'alt-free';
+        dom.body.classList.add('cursor-free');
+        hideEntryGate();
+        dom.status.textContent = 'ALT · CURSOR FREE';
+        const shouldRelock = (
+            (state.relockPending || state.altReturnMode === 'locked') &&
+            !state.altHeld &&
+            !state.modalOpen
+        );
+        state.lockIntent = null;
+        state.relockPending = false;
+        if (shouldRelock) {
+            state.altReturnMode = null;
+            queueMicrotask(() => requestViewLock('alt-release'));
+        }
+        return;
+    }
+
+    if (state.lockIntent === 'modal' || state.modalOpen) {
+        state.lock = 'modal-free';
+        state.lockIntent = null;
+        dom.body.classList.add('cursor-free');
+        hideEntryGate();
+        return;
+    }
+
+    if (state.lockIntent === 'keyboard') {
+        state.lock = 'keyboard-free';
+        state.lockIntent = null;
+        dom.body.classList.add('cursor-free');
+        hideEntryGate();
+        dom.status.textContent = 'KEYBOARD · CURSOR FREE';
+        return;
+    }
+
+    if (state.scene === 'flying') cancelFlight();
+    if (state.scene === 'detail') {
+        state.lock = 'detail-free';
+        state.lockIntent = null;
+        state.altHeld = false;
+        state.altReturnMode = null;
+        state.relockPending = false;
+        dom.body.classList.add('cursor-free');
+        hideEntryGate();
+        dom.status.textContent = 'DETAIL · CURSOR FREE';
+        return;
+    }
+    state.altHeld = false;
+    state.altReturnMode = null;
+    state.relockPending = false;
+    state.lockIntent = null;
+    if (state.hasEntered) showResumeGate();
+}
+
+function releaseCursorForAlt() {
+    if (!state.hasEntered || state.altHeld || state.modalOpen || state.touchMode || state.gateOpen) return;
+    state.altHeld = true;
+    state.relockPending = false;
+    state.altReturnMode = document.pointerLockElement === dom.world ? 'locked' : 'free';
+    dom.body.classList.add('cursor-free');
+    if (document.pointerLockElement === dom.world) {
+        state.lockIntent = 'alt';
+        document.exitPointerLock();
+    } else {
+        state.lock = 'alt-free';
+        hideEntryGate();
+    }
+}
+
+function restoreViewAfterAlt() {
+    if (!state.altHeld) return;
+    state.altHeld = false;
+    const shouldRelock = state.altReturnMode === 'locked';
+    if (state.modalOpen || state.touchMode || !shouldRelock) {
+        state.altReturnMode = null;
+        return;
+    }
+    state.relockPending = true;
+    if (document.pointerLockElement === dom.world || state.lockIntent === 'alt') return;
+    state.relockPending = false;
+    state.altReturnMode = null;
+    dom.body.classList.remove('cursor-free');
+    requestViewLock('alt-release');
+}
+
+function suspendForModal() {
+    state.modalOpen = true;
+    state.lockIntent = 'modal';
+    dom.body.classList.add('cursor-free');
+    if (document.pointerLockElement === dom.world) {
+        document.exitPointerLock();
+    }
+}
+
+function resumeAfterModal() {
+    state.modalOpen = false;
+    state.lockIntent = null;
+    if (state.touchMode) return;
+    showResumeGate();
+}
+
+function resetTransientInput(focusGate = false) {
+    releaseRightZoom();
+    clearDragState();
+    state.altHeld = false;
+    state.altReturnMode = null;
+    state.relockPending = false;
+    if (state.scene === 'leaving-home') return;
+    if (state.modalOpen || state.touchMode) return;
+    if (state.scene === 'flying') cancelFlight();
+    state.lockIntent = 'system';
+    if (document.pointerLockElement === dom.world) {
+        document.exitPointerLock();
+        return;
+    }
+    if (state.scene === 'detail') {
+        state.lock = 'detail-free';
+        dom.body.classList.add('cursor-free');
+        hideEntryGate();
+        dom.status.textContent = 'DETAIL · CURSOR FREE';
+        return;
+    }
+    if (state.hasEntered) showResumeGate(focusGate);
+}
+
+dom.entryTrigger.addEventListener('click', () => requestViewLock('entry'));
+dom.entryFallback.addEventListener('click', enterFallbackMode);
+document.addEventListener('pointerlockchange', handlePointerLockChange);
+document.addEventListener('pointerlockerror', () => handleLockFailure());
+
+document.addEventListener('mousemove', event => {
+    if (document.pointerLockElement !== dom.world || state.altHeld || state.modalOpen) return;
+    applyLook(event.movementX, event.movementY);
+});
+
+dom.world.addEventListener('mousedown', event => {
+    if (document.pointerLockElement !== dom.world) return;
+    if (event.button === 2) {
+        event.preventDefault();
+        state.rightDown = true;
+        return;
+    }
+    if (event.button === 0 && state.scene === 'roam' && state.focusedPortal) {
+        startPortalFlight(state.focusedPortal, 'gaze');
+    }
+});
+
+dom.world.addEventListener('contextmenu', event => {
+    if (document.pointerLockElement === dom.world) event.preventDefault();
+});
+
+document.addEventListener('mouseup', event => {
+    if (event.button === 2) releaseRightZoom();
+});
+document.addEventListener('pointercancel', () => {
+    releaseRightZoom();
+    clearDragState();
+});
+window.addEventListener('blur', () => resetTransientInput(false));
+document.addEventListener('visibilitychange', () => {
+    releaseRightZoom();
+    if (document.hidden) {
+        resetTransientInput(false);
+        stopRendering();
+    } else {
+        startRendering();
+    }
+});
+
+dom.world.addEventListener('pointerdown', event => {
+    if (
+        !state.hasEntered ||
+        state.scene !== 'roam' ||
+        document.pointerLockElement === dom.world ||
+        state.modalOpen
+    ) return;
+    if (event.pointerType === 'mouse' && !state.touchMode) return;
+    if (dragState) {
+        if (dragState.longPressTimer) window.clearTimeout(dragState.longPressTimer);
+        dragState.moved = Infinity;
+        return;
+    }
+    dragState = {
+        pointerId: event.pointerId,
+        x: event.clientX,
+        y: event.clientY,
+        moved: 0,
+        longPressed: false,
+        longPressTimer: 0
+    };
+    dragState.longPressTimer = window.setTimeout(() => {
+        if (!dragState || dragState.pointerId !== event.pointerId || dragState.moved >= 9) return;
+        dragState.longPressed = true;
+        state.rightDown = true;
+    }, 360);
+    dom.world.setPointerCapture?.(event.pointerId);
+});
+
+dom.world.addEventListener('pointermove', event => {
+    if (!dragState || dragState.pointerId !== event.pointerId) return;
+    const deltaX = event.clientX - dragState.x;
+    const deltaY = event.clientY - dragState.y;
+    dragState.moved += Math.hypot(deltaX, deltaY);
+    if (dragState.moved >= 9 && dragState.longPressTimer) {
+        window.clearTimeout(dragState.longPressTimer);
+        dragState.longPressTimer = 0;
+    }
+    dragState.x = event.clientX;
+    dragState.y = event.clientY;
+    applyLook(deltaX, deltaY, 1.25);
+});
+
+dom.world.addEventListener('pointerup', event => {
+    if (!dragState || dragState.pointerId !== event.pointerId) return;
+    const wasTap = dragState.moved < 9 && !dragState.longPressed;
+    clearDragState();
+    if (wasTap && state.scene === 'roam' && state.focusedPortal) {
+        startPortalFlight(state.focusedPortal, 'touch');
+    }
+});
+dom.world.addEventListener('lostpointercapture', () => {
+    clearDragState();
+});
+
+buildPortalGeometry();
+portalDefinitions.forEach(portal => {
+    portal.button?.addEventListener('mouseenter', () => {
+        state.hoverPortal = portal;
+        setFocusedPortal(portal);
+    });
+    portal.button?.addEventListener('mouseleave', () => {
+        if (state.hoverPortal === portal) state.hoverPortal = null;
+    });
+    portal.button?.addEventListener('focus', () => {
+        state.hoverPortal = portal;
+        setFocusedPortal(portal);
+    });
+    portal.button?.addEventListener('blur', () => {
+        if (state.hoverPortal === portal) state.hoverPortal = null;
+    });
+    portal.button?.addEventListener('click', event => {
+        event.preventDefault();
+        startPortalFlight(portal, 'pointer');
+    });
+});
+
+function isInteractiveKeyTarget(target) {
+    return target instanceof Element && Boolean(target.closest(
+        'button, a, input, textarea, select, summary, [role="button"], [contenteditable="true"], .portal-panel-body'
+    ));
+}
+
+document.addEventListener('keydown', event => {
+    if (event.key === 'Alt') {
+        if (!state.modalOpen && !state.gateOpen) {
+            event.preventDefault();
+            releaseCursorForAlt();
+        }
+        return;
+    }
+    if (event.key === 'Escape') {
+        releaseRightZoom();
+        if (dom.lightbox.classList.contains('active')) {
+            event.preventDefault();
+            closeLightbox();
+            return;
+        }
+        if (state.scene === 'flying') {
+            event.preventDefault();
+            cancelFlight();
+            return;
+        }
+        if (state.scene === 'detail') {
+            event.preventDefault();
+            closePortalPanel();
+            return;
+        }
+    }
+    if (state.modalOpen || state.gateOpen) return;
+    if (event.key === 'Tab' && document.pointerLockElement === dom.world) {
+        state.lockIntent = 'keyboard';
+        document.exitPointerLock();
+        return;
+    }
+    if (isInteractiveKeyTarget(event.target)) return;
+    if ((event.key === 'Enter' || event.key === ' ') && state.scene === 'roam' && state.focusedPortal) {
+        event.preventDefault();
+        startPortalFlight(state.focusedPortal, 'keyboard');
+        return;
+    }
+    if ((event.key === 'z' || event.key === 'Z') && state.scene === 'roam') {
+        state.rightDown = true;
+        return;
+    }
+    if (state.scene !== 'roam') return;
+    const keyboardStep = 0.055;
+    if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        applyLook(-keyboardStep / 0.00175, 0);
+    } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        applyLook(keyboardStep / 0.00175, 0);
+    } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        applyLook(0, -keyboardStep / 0.00175);
+    } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        applyLook(0, keyboardStep / 0.00175);
+    }
+});
+
+document.addEventListener('keyup', event => {
+    if (event.key === 'Alt') {
+        event.preventDefault();
+        restoreViewAfterAlt();
+    }
+    if (event.key === 'z' || event.key === 'Z') releaseRightZoom();
+});
+
+dom.panelClose.addEventListener('click', () => closePortalPanel());
+window.addEventListener('resize', () => {
+    galaxyRenderer.resize();
+    resizeOverlay();
+    if (state.scene === 'detail') state.panelRect = dom.panel.getBoundingClientRect();
+    resizeMaps();
+});
+
+const thoughtToggleLabels = {
+    en: { more: 'Read more', less: 'Collapse' },
+    'zh-CN': { more: '展开', less: '收起' },
+    'zh-TW': { more: '展開', less: '收起' }
+};
+
+const lightboxLabels = {
+    en: {
+        viewer: 'Gallery image viewer',
+        close: 'Close image viewer',
+        previous: 'Previous image',
+        next: 'Next image'
+    },
+    'zh-CN': {
+        viewer: '照片查看器',
+        close: '关闭照片查看器',
+        previous: '上一张照片',
+        next: '下一张照片'
+    },
+    'zh-TW': {
+        viewer: '照片檢視器',
+        close: '關閉照片檢視器',
+        previous: '上一張照片',
+        next: '下一張照片'
+    }
+};
+
+function updateThoughtToggles() {
+    const labels = thoughtToggleLabels[state.currentLang] || thoughtToggleLabels.en;
+    document.querySelectorAll('[data-thought-toggle]').forEach(button => {
+        const text = button.previousElementSibling;
+        if (!text) return;
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        text.classList.toggle('thought-text-expanded', expanded);
+        text.classList.toggle('thought-text-collapsed', !expanded);
+        button.textContent = expanded ? labels.less : labels.more;
+    });
+}
+
+document.addEventListener('click', event => {
+    const button = event.target.closest('[data-thought-toggle]');
+    if (!button) return;
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!expanded));
+    updateThoughtToggles();
+});
+
+function updateActivePortalCopy() {
+    const portal = state.activePortal || state.focusedPortal;
+    if (!portal) return;
+    if (state.focusedPortal) {
+        const names = orderedPortalNames(state.focusedPortal);
+        dom.gazePrimary.textContent = names[0];
+        dom.gazeSecondary.textContent = names.slice(1).join(' / ');
+    }
+    if (state.activePortal && state.scene === 'detail') {
+        dom.panelTitle.textContent = portalName(state.activePortal, state.currentLang);
+        dom.panelNames.textContent = LANGUAGES.map(lang => portalName(state.activePortal, lang)).join(' / ');
+    }
+}
+
+function updateMapAccessibility() {
+    const data = i18n[state.currentLang] || i18n.en || {};
+    const countries = visitedCountries.map(country =>
+        country.label?.[state.currentLang] || country.label?.en || country.map_name
+    );
+    const summary = document.getElementById('visitedCountriesSummary');
+    if (summary) summary.textContent = `${data.chart_world || 'Countries visited'}: ${countries.join(', ')}`;
+    const chinaMap = document.getElementById('chinaMap');
+    if (chinaMap) {
+        const label = {
+            en: 'Cities visited in Mainland China',
+            'zh-CN': '中国大陆到访城市',
+            'zh-TW': '中國大陸到訪城市'
+        }[state.currentLang];
+        chinaMap.setAttribute('aria-label', label);
+    }
+}
+
+function setLang(lang) {
+    state.currentLang = LANGUAGES.includes(lang) ? lang : 'en';
+    localStorage.setItem('preferredLang', state.currentLang);
+    document.documentElement.lang = state.currentLang;
+    LANGUAGES.forEach(value => dom.body.classList.remove(`lang-${value}`));
+    dom.body.classList.add(`lang-${state.currentLang}`);
+    const data = i18n[state.currentLang] || i18n.en || {};
+
+    document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.dataset.key;
+        if (data[key] !== undefined) element.textContent = data[key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(button => {
+        button.classList.toggle('active', button.dataset.lang === state.currentLang);
+    });
+    portalDefinitions.forEach(portal => {
+        portal.button?.setAttribute(
+            'aria-label',
+            LANGUAGES.map(value => portalName(portal, value)).join(' / ')
+        );
+    });
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        const caption = item.querySelector('.gallery-caption');
+        if (caption) item.setAttribute('aria-label', caption.textContent.trim());
+    });
+
+    const labels = lightboxLabels[state.currentLang] || lightboxLabels.en;
+    dom.lightbox.setAttribute('aria-label', labels.viewer);
+    dom.lightbox.querySelector('.lightbox-close').setAttribute('aria-label', labels.close);
+    dom.lightbox.querySelector('.lightbox-prev').setAttribute('aria-label', labels.previous);
+    dom.lightbox.querySelector('.lightbox-next').setAttribute('aria-label', labels.next);
+    dom.panelClose.setAttribute('aria-label', data.panel_close || 'Return to the galaxy');
+
+    if (!dom.entryGate.classList.contains('is-hidden')) {
+        const resume = state.hasEntered && state.lock === 'suspended';
+        dom.entryTitle.textContent = resume
+            ? (data.resume_view || 'Click to return to free look')
+            : (data.enter_galaxy || 'Enter the galaxy');
+        dom.entryHint.textContent = state.lockFailureCount > 0
+            ? (data.lock_failed_hint || 'Pointer lock was blocked. Retry or continue with drag controls.')
+            : (data.enter_hint || 'Click once to take control of the view');
+    }
+
+    updateThoughtToggles();
+    updateActivePortalCopy();
+    updateMapAccessibility();
+    updateMapLanguage();
+}
+
+document.querySelectorAll('.lang-btn').forEach(button => {
+    button.addEventListener('click', () => setLang(button.dataset.lang));
+});
+
+let mapsInitializing = false;
+let mapsReady = false;
+let chinaMapChart = null;
+let worldMapChart = null;
+
+function waitForECharts(timeout = 7000) {
+    const started = performance.now();
+    return new Promise((resolve, reject) => {
+        const check = () => {
+            if (window.echarts) {
+                resolve(window.echarts);
+                return;
+            }
+            if (performance.now() - started > timeout) {
+                reject(new Error('ECharts did not load'));
+                return;
+            }
+            window.setTimeout(check, 100);
+        };
+        check();
+    });
+}
+
+function coordinateBounds(coordinates) {
+    const bounds = { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity };
+    let found = false;
+    const visit = value => {
+        if (
+            Array.isArray(value) &&
+            value.length >= 2 &&
+            Number.isFinite(value[0]) &&
+            Number.isFinite(value[1])
+        ) {
+            found = true;
+            bounds.minX = Math.min(bounds.minX, value[0]);
+            bounds.maxX = Math.max(bounds.maxX, value[0]);
+            bounds.minY = Math.min(bounds.minY, value[1]);
+            bounds.maxY = Math.max(bounds.maxY, value[1]);
+            return;
+        }
+        if (Array.isArray(value)) value.forEach(visit);
+    };
+    visit(coordinates);
+    return found ? bounds : null;
+}
+
+function separateTaiwanGeometry(geoJson) {
+    const china = geoJson.features?.find(feature => feature.properties?.name === 'China');
+    if (!china || china.geometry?.type !== 'MultiPolygon') return geoJson;
+    const mainlandPolygons = [];
+    const taiwanPolygons = [];
+    china.geometry.coordinates.forEach(polygon => {
+        const bounds = coordinateBounds(polygon);
+        const inTaiwanArea = bounds &&
+            bounds.minX >= 117.8 && bounds.maxX <= 122.5 &&
+            bounds.minY >= 21.4 && bounds.maxY <= 26.0;
+        (inTaiwanArea ? taiwanPolygons : mainlandPolygons).push(polygon);
+    });
+    if (!taiwanPolygons.length) return geoJson;
+    china.geometry.coordinates = mainlandPolygons;
+    china.properties.childNum = mainlandPolygons.length;
+    geoJson.features.push({
+        type: 'Feature',
+        properties: { name: 'Taiwan', childNum: taiwanPolygons.length },
+        geometry: { type: 'MultiPolygon', coordinates: taiwanPolygons }
+    });
+    return geoJson;
+}
+
+function worldSeriesData() {
+    return visitedCountries.map(country => {
+        const displayName = country.label?.[state.currentLang] || country.label?.en || country.map_name;
+        return {
+            name: country.map_name,
+            value: 1,
+            itemStyle: { areaColor: '#30343a' },
+            emphasis: { itemStyle: { areaColor: '#51575f' } },
+            label: {
+                show: true,
+                formatter: displayName,
+                color: '#fff',
+                fontFamily: '"IBM Plex Sans", "PingFang SC", "Microsoft YaHei UI", sans-serif',
+                fontSize: 9
+            }
+        };
+    });
+}
+
+function currentCountrySummary() {
+    return document.getElementById('visitedCountriesSummary')?.textContent || 'Mainland China';
+}
+
+function mapFailure(element, error) {
+    console.error('Map failed:', error);
+    element.innerHTML = '<div style="height:100%;display:grid;place-items:center;color:#999;font:12px IBM Plex Sans,sans-serif;">Map unavailable</div>';
+}
+
+async function initMaps() {
+    if (mapsReady || mapsInitializing) {
+        resizeMaps();
+        return;
+    }
+    mapsInitializing = true;
+    const chinaElement = document.getElementById('chinaMap');
+    const worldElement = document.getElementById('worldMap');
+    try {
+        const echarts = await waitForECharts();
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        chinaMapChart = echarts.init(chinaElement, null, { renderer: 'canvas' });
+        worldMapChart = echarts.init(worldElement, null, { renderer: 'canvas' });
+
+        const [chinaResponse, worldResponse] = await Promise.all([
+            fetch('assets/maps/china_city_full.json'),
+            fetch('assets/maps/world.json')
+        ]);
+        if (!chinaResponse.ok || !worldResponse.ok) {
+            throw new Error(`Map HTTP ${chinaResponse.status}/${worldResponse.status}`);
+        }
+        const [chinaGeoJson, worldGeoJson] = await Promise.all([
+            chinaResponse.json(),
+            worldResponse.json()
+        ]);
+
+        const cityFeatures = [];
+        const districtByParent = new Map();
+        for (const feature of chinaGeoJson.features) {
+            const properties = feature.properties || {};
+            if (properties.level === 'city') {
+                cityFeatures.push(feature);
+            } else if (
+                properties.level === 'province' &&
+                (properties.name === '台湾省' || properties.name === '臺灣省')
+            ) {
+                cityFeatures.push(feature);
+            } else if (
+                properties.level === 'district' &&
+                properties.parent?.adcode
+            ) {
+                const key = String(properties.parent.adcode);
+                if (!districtByParent.has(key)) districtByParent.set(key, []);
+                districtByParent.get(key).push(feature);
+            }
+        }
+
+        const municipalities = new Map([
+            ['北京市', '110000'],
+            ['上海市', '310000'],
+            ['天津市', '120000'],
+            ['重庆市', '500000']
+        ]);
+        const cityNames = new Set(cityFeatures.map(feature => feature.properties?.name).filter(Boolean));
+        const visitedExpanded = new Set();
+        visited.forEach(name => {
+            if (!municipalities.has(name) || cityNames.has(name)) {
+                visitedExpanded.add(name);
+                return;
+            }
+            const districts = districtByParent.get(municipalities.get(name));
+            if (districts?.length) {
+                districts.forEach(feature => visitedExpanded.add(feature.properties.name));
+            } else {
+                visitedExpanded.add(name);
+            }
+        });
+
+        const mergedFeatures = [...cityFeatures];
+        municipalities.forEach(adcode => {
+            if (districtByParent.has(adcode)) mergedFeatures.push(...districtByParent.get(adcode));
+        });
+        echarts.registerMap('china_life_cities', {
+            type: 'FeatureCollection',
+            features: mergedFeatures
+        });
+        echarts.registerMap('world_life_mainland', separateTaiwanGeometry(worldGeoJson));
+
+        chinaMapChart.setOption({
+            animation: !REDUCED_MOTION,
+            backgroundColor: 'transparent',
+            tooltip: { trigger: 'item' },
+            aria: {
+                enabled: true,
+                label: { enabled: true, description: document.getElementById('chinaMap').getAttribute('aria-label') }
+            },
+            series: [{
+                type: 'map',
+                map: 'china_life_cities',
+                roam: true,
+                center: [104, 35],
+                zoom: 0.95,
+                scaleLimit: { min: 0.9, max: 2.5 },
+                label: { show: false },
+                itemStyle: { areaColor: '#f1efe9', borderColor: '#d3d0c8', borderWidth: 0.7 },
+                emphasis: { itemStyle: { areaColor: '#dad7cf' }, label: { show: false } },
+                data: Array.from(visitedExpanded).map(name => ({
+                    name,
+                    itemStyle: { areaColor: '#30343a' }
+                }))
+            }]
+        });
+
+        worldMapChart.setOption({
+            animation: !REDUCED_MOTION,
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'item',
+                formatter: params => {
+                    const country = visitedCountries.find(item => item.map_name === params.name);
+                    return country
+                        ? (country.label?.[state.currentLang] || country.label?.en || params.name)
+                        : params.name;
+                }
+            },
+            aria: {
+                enabled: true,
+                label: { enabled: true, description: currentCountrySummary() }
+            },
+            series: [{
+                type: 'map',
+                map: 'world_life_mainland',
+                roam: true,
+                center: [10, 18],
+                zoom: 0.98,
+                scaleLimit: { min: 0.9, max: 5 },
+                itemStyle: { areaColor: '#f1efe9', borderColor: '#d3d0c8', borderWidth: 0.65 },
+                emphasis: { itemStyle: { areaColor: '#dad7cf' }, label: { show: false } },
+                data: worldSeriesData()
+            }]
+        });
+        mapsReady = true;
+        mapsInitializing = false;
+        resizeMaps();
+    } catch (error) {
+        mapsInitializing = false;
+        mapFailure(chinaElement, error);
+        mapFailure(worldElement, error);
+    }
+}
+
+function updateMapLanguage() {
+    if (!mapsReady) return;
+    worldMapChart?.setOption({
+        aria: {
+            enabled: true,
+            label: { enabled: true, description: currentCountrySummary() }
+        },
+        series: [{ data: worldSeriesData() }]
+    });
+    chinaMapChart?.setOption({
+        aria: {
+            enabled: true,
+            label: {
+                enabled: true,
+                description: document.getElementById('chinaMap').getAttribute('aria-label')
+            }
+        }
+    });
+}
+
+function resizeMaps() {
+    if (!mapsReady) return;
+    chinaMapChart?.resize();
+    worldMapChart?.resize();
+}
+
+let lightboxItems = [];
+let lightboxIndex = 0;
+let lightboxTrigger = null;
+let lightboxTouchStartX = null;
+let lightboxFocusFrame = 0;
+
+function setLightboxBackgroundInert(active) {
+    if (!active) {
+        document.querySelectorAll('[data-lightbox-inert="true"]').forEach(element => {
+            element.inert = false;
+            delete element.dataset.lightboxInert;
+        });
+        return;
+    }
+    Array.from(document.body.children).forEach(element => {
+        if (element === dom.lightbox || element.tagName === 'SCRIPT' || element.inert) return;
+        element.inert = true;
+        element.dataset.lightboxInert = 'true';
+    });
+}
+
+function renderLightboxItem(index) {
+    if (!lightboxItems.length) return;
+    lightboxIndex = (index + lightboxItems.length) % lightboxItems.length;
+    const item = lightboxItems[lightboxIndex];
+    const image = item.querySelector('img');
+    const caption = item.querySelector('.gallery-caption');
+    dom.lightboxImage.src = image.currentSrc || image.src;
+    dom.lightboxImage.alt = image.alt || '';
+    dom.lightboxCaption.textContent = caption?.textContent || '';
+}
+
+function openLightbox(element) {
+    const scope = element.closest('[data-gallery-group], .gallery-grid') || document;
+    lightboxItems = Array.from(scope.querySelectorAll('.gallery-item'));
+    lightboxIndex = Math.max(0, lightboxItems.indexOf(element));
+    lightboxTrigger = element;
+    renderLightboxItem(lightboxIndex);
+    suspendForModal();
+    setLightboxBackgroundInert(true);
+    dom.lightbox.classList.add('active');
+    dom.lightbox.setAttribute('aria-hidden', 'false');
+    cancelAnimationFrame(lightboxFocusFrame);
+    lightboxFocusFrame = requestAnimationFrame(() => {
+        if (dom.lightbox.classList.contains('active')) {
+            dom.lightbox.querySelector('.lightbox-close').focus();
+        }
+    });
+}
+
+function changeLightbox(delta) {
+    renderLightboxItem(lightboxIndex + delta);
+}
+
+function closeLightbox() {
+    if (!dom.lightbox.classList.contains('active')) return;
+    cancelAnimationFrame(lightboxFocusFrame);
+    lightboxFocusFrame = 0;
+    dom.lightbox.classList.remove('active');
+    dom.lightbox.setAttribute('aria-hidden', 'true');
+    setLightboxBackgroundInert(false);
+    if (lightboxTrigger?.isConnected && lightboxTrigger.getClientRects().length) {
+        lightboxTrigger.focus({ preventScroll: true });
+    }
+    lightboxTrigger = null;
+    resumeAfterModal();
+}
+
+function trapLightboxFocus(event) {
+    if (event.key !== 'Tab' || !dom.lightbox.classList.contains('active')) return;
+    const focusable = Array.from(dom.lightbox.querySelectorAll('button:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+        .filter(element => element.getClientRects().length);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && (document.activeElement === first || !dom.lightbox.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+    } else if (!event.shiftKey && (document.activeElement === last || !dom.lightbox.contains(document.activeElement))) {
+        event.preventDefault();
+        first.focus();
+    }
+}
+
+dom.lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+dom.lightbox.querySelector('.lightbox-prev').addEventListener('click', () => changeLightbox(-1));
+dom.lightbox.querySelector('.lightbox-next').addEventListener('click', () => changeLightbox(1));
+dom.lightbox.addEventListener('click', event => {
+    if (event.target === dom.lightbox) closeLightbox();
+});
+dom.lightbox.addEventListener('touchstart', event => {
+    lightboxTouchStartX = event.changedTouches[0].clientX;
+}, { passive: true });
+dom.lightbox.addEventListener('touchend', event => {
+    if (lightboxTouchStartX === null) return;
+    const distance = event.changedTouches[0].clientX - lightboxTouchStartX;
+    lightboxTouchStartX = null;
+    if (Math.abs(distance) >= 48) changeLightbox(distance > 0 ? -1 : 1);
+}, { passive: true });
+
+document.addEventListener('keydown', event => {
+    if (!dom.lightbox.classList.contains('active')) return;
+    trapLightboxFocus(event);
+    if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        changeLightbox(-1);
+    } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        changeLightbox(1);
+    }
+});
+
+buildFallbackStars();
+resizeOverlay();
+setLang(state.currentLang);
+dom.status.textContent = 'AWAITING INPUT';
+setGateState(true, true);
+startRendering();
+
+async function signalStellarDestinationReady() {
+    try {
+        if (!document.fonts || typeof document.fonts.load !== 'function') {
+            throw new Error('Font Loading API unavailable');
+        }
+        const faces = await document.fonts.load('400 1em "EduKai"', '中国大陆標楷字體');
+        await document.fonts.ready;
+        const loaded = faces.length > 0
+            && faces.every(face => face.status === 'loaded')
+            && document.fonts.check('400 1em "EduKai"', '中国大陆標楷字體');
+        if (!loaded) throw new Error('EduKai did not finish loading');
+    } catch (error) {
+        console.warn('Life transition font readiness check failed:', error);
+        window.StellarTransit?.setDestinationStatus(
+            'BiauKai typeface unavailable. Refresh to retry',
+            'TYPEFACE UNAVAILABLE · REFRESH TO RETRY'
+        );
+        return;
+    }
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (window.StellarTransit?.markDestinationReady) {
+            window.StellarTransit.markDestinationReady('life');
+        } else {
+            window.dispatchEvent(new CustomEvent('stellar:destination-ready', {
+                detail: { page: 'life' }
+            }));
+        }
+    }));
+}
+
+if (window.StellarTransit) {
+    signalStellarDestinationReady();
+} else {
+    window.addEventListener('stellar:runtime-ready', signalStellarDestinationReady, { once: true });
+}
+window.addEventListener('stellar:arrival-complete', () => {
+    if (state.gateOpen) dom.entryTrigger.focus({ preventScroll: true });
+});
+
+function restoreLifeAfterNavigation(focusGate = true) {
+    if (state.scene !== 'leaving-home' && !dom.veil.classList.contains('is-active')) return;
+    state.flight = null;
+    state.scene = state.hasEntered ? 'roam' : 'entry';
+    state.activePortal = null;
+    state.homeWarpProgress = 0;
+    state.lockIntent = null;
+    state.altHeld = false;
+    state.altReturnMode = null;
+    state.relockPending = false;
+    releaseRightZoom();
+    clearDragState();
+    camera.yaw = -0.25;
+    camera.pitch = 0.08;
+    camera.targetYaw = -0.25;
+    camera.targetPitch = 0.08;
+    camera.fov = 62 * DEG;
+    dom.veil.classList.remove('is-active');
+    dom.body.classList.remove('panel-open', 'view-locked');
+    setFocusedPortal(null);
+    if (state.hasEntered) {
+        if (state.touchMode) {
+            dom.body.classList.add('cursor-free');
+            hideEntryGate();
+        } else {
+            showResumeGate(focusGate);
+        }
+    } else {
+        setGateState(true, focusGate);
+    }
+    startRendering();
+}
+
+window.addEventListener('stellar:page-restored', event => {
+    restoreLifeAfterNavigation(!event.detail?.arrival);
+});
+window.addEventListener('pageshow', event => {
+    if (!event.persisted || window.StellarTransit) return;
+    requestAnimationFrame(() => restoreLifeAfterNavigation(true));
+});
+    </script>
 </body>
 </html>
