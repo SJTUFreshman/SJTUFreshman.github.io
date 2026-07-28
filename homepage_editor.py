@@ -29,6 +29,8 @@ def load_content() -> dict[str, Any]:
 
 
 def save_content(content: dict[str, Any]) -> None:
+    site_renderer.validate_content(content, require_star_bindings=False)
+    site_renderer.assign_missing_star_bindings(content)
     site_renderer.validate_content(content)
     CONTENT_FILE.write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     site_renderer.render_site(ROOT, write=True)
@@ -151,8 +153,9 @@ SECTION_SPECS: dict[str, dict[str, Any]] = {
     "主页 / Notes": {
         "path": "home.notes",
         "display": "title",
-        "default": {"title": "New note", "href": "documents/example.pdf", "meta": "PDF · 2026-01-01", "icon": "far fa-file-pdf"},
+        "default": {"id": "note_new", "title": "New note", "href": "documents/example.pdf", "meta": "PDF · 2026-01-01", "icon": "far fa-file-pdf"},
         "fields": [
+            ("ID", "id", "entry"),
             ("Title", "title", "entry"),
             ("File / URL", "href", "file"),
             ("Meta", "meta", "entry"),
@@ -232,8 +235,9 @@ SECTION_SPECS: dict[str, dict[str, Any]] = {
     "生活 / Friends": {
         "path": "life.friends",
         "display": "label",
-        "default": {"label": "New friend", "href": "#"},
+        "default": {"id": "friend_new", "label": "New friend", "href": "#"},
         "fields": [
+            ("ID", "id", "entry"),
             ("Label", "label", "entry"),
             ("URL", "href", "entry")
         ]
@@ -248,7 +252,7 @@ SECTION_SPECS: dict[str, dict[str, Any]] = {
     "生活 / Visited Countries": {
         "path": "life.footprints.visited_countries",
         "display": "label.en",
-        "default": {"map_name": "China", "label": {"en": "Mainland China", "zh-CN": "中国大陆", "zh-TW": "中國大陸"}},
+        "default": {"map_name": "China", "label": {"en": "Mainland China and Taiwan", "zh-CN": "中国大陆与台湾", "zh-TW": "中國大陸與臺灣"}},
         "fields": [
             ("GeoJSON map name", "map_name", "entry"),
             ("Display name EN", "label.en", "entry"),
@@ -755,6 +759,8 @@ class HomepageEditor(tk.Tk):
     def save_json_only(self) -> None:
         try:
             self.collect_current_edits()
+            site_renderer.validate_content(self.content, require_star_bindings=False)
+            site_renderer.assign_missing_star_bindings(self.content)
             site_renderer.validate_content(self.content)
             CONTENT_FILE.write_text(json.dumps(self.content, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         except Exception as exc:  # pragma: no cover - UI guard

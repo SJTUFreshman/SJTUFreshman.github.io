@@ -54,7 +54,10 @@
     <link rel="preload" href="fonts/edukai-5.0.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js" defer></script>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <script src="assets/vendor/echarts-5.5.0.min.js" defer></script>
+    <script src="assets/hipparcos-stars.js"></script>
     <style>
         @font-face {
             font-family: 'EduKai';
@@ -606,6 +609,119 @@
             outline: none;
         }
 
+        body.panel-open .portal-hit {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .star-nav {
+            position: fixed;
+            inset: 0;
+            z-index: 19;
+            pointer-events: none;
+        }
+
+        .star-hit {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 64px;
+            height: 64px;
+            padding: 0;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            background: transparent;
+            color: rgba(244,247,255,0.9);
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition:
+                border-color 180ms ease,
+                background 180ms ease,
+                box-shadow 180ms ease;
+        }
+
+        body.cursor-free.panel-open .star-hit,
+        body.touch-mode.panel-open .star-hit {
+            opacity: 1;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .star-hit:hover,
+        .star-hit:focus-visible,
+        .star-hit.is-selected {
+            border-color: rgba(255,248,231,0.4);
+            background: radial-gradient(circle, rgba(255,248,231,0.11), transparent 65%);
+            box-shadow: 0 0 38px rgba(205,222,255,0.18);
+            outline: none;
+        }
+
+        .star-hit.has-content::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 15px;
+            height: 15px;
+            border: 1px solid rgba(220,232,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .star-hit-copy {
+            position: absolute;
+            left: calc(100% + 8px);
+            top: 50%;
+            width: max-content;
+            max-width: min(250px, 34vw);
+            padding: 7px 9px 6px;
+            border: 1px solid rgba(224,234,255,0.14);
+            border-radius: 3px;
+            background: rgba(5,8,17,0.78);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            transform: translate(5px, -50%);
+            transition: opacity 170ms ease, transform 170ms ease;
+            pointer-events: none;
+            text-align: left;
+        }
+
+        body.panel-left .star-hit-copy {
+            left: auto;
+            right: calc(100% + 8px);
+            transform: translate(-5px, -50%);
+            text-align: right;
+        }
+
+        .star-hit:hover .star-hit-copy,
+        .star-hit:focus-visible .star-hit-copy,
+        .star-hit.is-selected .star-hit-copy {
+            opacity: 1;
+            transform: translate(0, -50%);
+        }
+
+        .star-hit-copy strong,
+        .star-hit-copy span {
+            display: block;
+        }
+
+        .star-hit-copy strong {
+            font-family: var(--ui);
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+
+        .star-hit-copy span {
+            margin-top: 2px;
+            color: rgba(226,233,247,0.58);
+            font-family: var(--mono);
+            font-size: 0.54rem;
+            line-height: 1.35;
+        }
+
         body.view-locked,
         body.view-locked * {
             cursor: none !important;
@@ -739,6 +855,7 @@
             min-height: 0;
             flex: 1 1 auto;
             overflow: auto;
+            overflow-anchor: none;
             padding: 25px 28px 36px;
             overscroll-behavior: contain;
             scrollbar-width: thin;
@@ -754,6 +871,103 @@
             border-radius: 99px;
         }
 
+        .star-reader {
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--rule);
+            color: var(--ink-faint);
+        }
+
+        .star-reader-kicker {
+            color: var(--ink-faint);
+            font-family: var(--mono);
+            font-size: 0.52rem;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+        }
+
+        .star-reader-title {
+            margin: 4px 0 0;
+            color: var(--ink-faint);
+            font-family: var(--ui);
+            font-size: 0.72rem;
+            font-weight: 500;
+            line-height: 1.35;
+        }
+
+        body.lang-zh-CN .star-reader-title,
+        body.lang-zh-TW .star-reader-title {
+            font-family: var(--kai);
+            letter-spacing: 0.025em;
+        }
+
+        .star-reader-meta {
+            margin-top: 3px;
+            color: var(--ink-faint);
+            font-family: var(--mono);
+            font-size: 0.54rem;
+            letter-spacing: 0.035em;
+        }
+
+        .star-reader-description {
+            margin: 7px 0 0;
+            color: var(--ink-faint);
+            font-size: 0.68rem;
+            line-height: 1.62;
+        }
+
+        .star-reader-description:empty,
+        .star-reader-status:empty {
+            display: none;
+        }
+
+        .star-reader-status {
+            margin: 7px 0 0;
+            color: var(--ink-faint);
+            font-size: 0.68rem;
+            line-height: 1.55;
+        }
+
+        .star-reader.is-overview .star-reader-kicker {
+            display: none;
+        }
+
+        .star-reader.is-overview,
+        .star-reader.is-empty {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .star-reader.is-overview .star-reader-status,
+        .star-reader.is-empty .star-reader-status {
+            order: -2;
+            margin: 0 0 14px;
+            padding-left: 12px;
+            border-left: 2px solid rgba(91,88,78,0.2);
+            color: var(--ink-soft);
+            font-size: 0.76rem;
+        }
+
+        .star-reader.is-star-footnote .star-reader-kicker {
+            display: none;
+        }
+
+        .star-reader.is-star-footnote:not(.is-empty) .star-reader-status {
+            display: none;
+        }
+
+        .star-reader.is-empty .star-reader-status {
+            color: var(--ink);
+            font-size: 0.8rem;
+        }
+
+        .portal-content:empty {
+            display: none;
+        }
+
         .portal-moments {
             display: grid;
             gap: 36px;
@@ -762,6 +976,11 @@
         .portal-moment + .portal-moment {
             padding-top: 32px;
             border-top: 1px solid var(--rule);
+        }
+
+        .portal-moment.is-first-visible {
+            padding-top: 0;
+            border-top: 0;
         }
 
         .portal-moment-header {
@@ -962,6 +1181,420 @@
             transform: translateY(-1px);
         }
 
+        .home-route-index {
+            order: -1;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 7px;
+            margin-top: 18px;
+        }
+
+        .home-route-button {
+            min-width: 0;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 11px;
+            border: 1px solid var(--rule);
+            border-radius: 3px;
+            background: rgba(255,255,255,0.24);
+            color: var(--ink);
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+            transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+        }
+
+        .home-route-button:hover,
+        .home-route-button:focus-visible {
+            border-color: rgba(32,34,37,0.34);
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-1px);
+        }
+
+        .home-route-button strong,
+        .home-route-button span {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .home-route-button strong {
+            font-size: 0.72rem;
+            font-weight: 500;
+        }
+
+        .home-route-button span {
+            color: var(--ink-faint);
+            font-family: var(--mono);
+            font-size: 0.54rem;
+        }
+
+        .about-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 32px;
+        }
+
+        .about-portrait {
+            width: 120px;
+            height: 120px;
+            flex: 0 0 120px;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
+        }
+
+        .about-portrait img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            filter: grayscale(10%);
+            transition: filter 220ms ease;
+        }
+
+        .about-portrait:hover img {
+            filter: grayscale(0%);
+        }
+
+        .about-portrait-fallback {
+            color: var(--ink-faint);
+            font-family: var(--editorial);
+            font-size: 2rem;
+            letter-spacing: 0.08em;
+        }
+
+        .about-copy {
+            min-width: 0;
+            flex: 1 1 auto;
+        }
+
+        .about-copy h3 {
+            margin: 0;
+            font-family: var(--editorial);
+            font-size: 1.8rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        body.lang-zh-CN .about-copy h3,
+        body.lang-zh-TW .about-copy h3 {
+            font-family: var(--kai);
+        }
+
+        .about-role {
+            margin: 4px 0 0;
+            color: var(--ink-soft);
+            font-size: 1rem;
+        }
+
+        .about-bio {
+            margin: 16px 0 0;
+            color: var(--ink-soft);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .about-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 16px;
+            margin-top: 18px;
+        }
+
+        .about-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0;
+            border: 0;
+            background: none;
+            color: var(--ink-soft);
+            font: inherit;
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: color 180ms ease;
+        }
+
+        .about-link:hover,
+        .about-link:focus-visible {
+            color: var(--ink);
+        }
+
+        .about-link-mark {
+            width: 16px;
+            color: var(--ink-faint);
+            font-family: var(--ui);
+            font-size: 0.78rem;
+            text-align: center;
+        }
+
+        .portal-panel .en-only {
+            font-family: var(--editorial);
+        }
+
+        .portal-content.homepage-parity {
+            --bg-alt: #ffffff;
+            --text: #1a1a1a;
+            --text-secondary: #6b6b6b;
+            --text-muted: #999;
+            --border: #e8e8e8;
+            --border-light: #f0f0f0;
+            --radius: 8px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.08);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-en: var(--editorial);
+            --font-ui: var(--ui);
+            color: var(--text);
+            line-height: 1.75;
+            letter-spacing: 0.01em;
+        }
+
+        .homepage-parity .news-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .homepage-parity .news-item {
+            display: flex;
+            gap: 16px;
+            padding: 10px 0;
+            font-size: 0.92rem;
+            align-items: baseline;
+        }
+
+        .homepage-parity .news-date {
+            font-family: var(--font-en);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            flex-shrink: 0;
+            min-width: 80px;
+        }
+
+        .homepage-parity .news-text {
+            color: var(--text-secondary);
+        }
+
+        .homepage-parity .pub-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .homepage-parity .pub-item {
+            padding: 0;
+        }
+
+        .homepage-parity .pub-title-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.5;
+            margin-bottom: 4px;
+        }
+
+        .homepage-parity .pub-authors {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .homepage-parity .pub-authors b {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .homepage-parity .pub-venue {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .homepage-parity .pub-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .homepage-parity .pub-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-en);
+            padding: 0;
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .homepage-parity .pub-btn:hover,
+        .homepage-parity .pub-btn:focus-visible {
+            color: var(--text);
+        }
+
+        .homepage-parity .pub-btn i {
+            font-size: 0.85rem;
+        }
+
+        .homepage-parity .project-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .homepage-parity .project-card {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+
+        .homepage-parity .project-card:hover {
+            border-color: #ccc;
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .homepage-parity .project-img-wrap {
+            width: 100%;
+            height: 140px;
+            background: var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .homepage-parity .project-img-wrap img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            max-width: 100%;
+            object-fit: cover;
+        }
+
+        .homepage-parity .project-body {
+            padding: 16px;
+        }
+
+        .homepage-parity .project-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .homepage-parity .project-desc {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .homepage-parity .project-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .homepage-parity .project-link {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            transition: all var(--transition);
+        }
+
+        .homepage-parity .project-link:hover,
+        .homepage-parity .project-link:focus-visible {
+            border-color: var(--text);
+            color: var(--text);
+        }
+
+        .homepage-parity .notes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .homepage-parity .note-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            text-decoration: none;
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+
+        .homepage-parity .note-item:hover,
+        .homepage-parity .note-item:focus-visible {
+            border-color: #ccc;
+            box-shadow: var(--shadow);
+        }
+
+        .homepage-parity .note-icon {
+            width: 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .homepage-parity .note-info {
+            flex: 1;
+        }
+
+        .homepage-parity .note-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .homepage-parity .note-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-family: var(--font-en);
+        }
+
+        .homepage-parity .note-arrow {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .homepage-parity .notes-empty {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 20px 0;
+        }
+
+        .homepage-parity .news-date,
+        .homepage-parity .pub-btn,
+        .homepage-parity .note-meta {
+            font-family: var(--font-ui);
+        }
+
         .maps-list {
             display: grid;
             gap: 18px;
@@ -1106,6 +1739,12 @@
             text-shadow: 0 0 24px rgba(213,225,255,0.55);
         }
 
+        @media (max-width: 768px) {
+            .homepage-parity .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 760px) {
             .life-mark {
                 top: max(17px, env(safe-area-inset-top));
@@ -1151,13 +1790,41 @@
                 padding: 18px 20px 28px;
             }
 
+            .star-hit {
+                width: 76px;
+                height: 76px;
+            }
+
+            .star-hit-copy {
+                max-width: 42vw;
+            }
+
             .portal-close {
                 top: 15px;
                 right: 17px;
             }
 
             .gallery-grid,
-            .friends-list {
+            .friends-list,
+            .home-route-index {
+                grid-template-columns: 1fr;
+            }
+
+            .about-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .about-portrait {
+                width: 120px;
+            }
+
+            .about-links {
+                justify-content: center;
+            }
+
+            .project-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1217,7 +1884,7 @@
         <style>
             html, body { height: auto; overflow: auto; background: #f7f4ec; color: #202225; }
             .galaxy-world, .life-mark, .language-switch, .control-legend, .scene-status,
-            .entry-gate, .reticle, .gaze-label, .gaze-instruction, .portal-nav,
+            .entry-gate, .reticle, .gaze-label, .gaze-instruction, .portal-nav, .star-nav,
             .portal-panel-header, .lightbox, .transition-veil { display: none !important; }
             .portal-panel { position: static; width: auto; opacity: 1; visibility: visible; transform: none; background: #f7f4ec; color: #202225; box-shadow: none; border: 0; }
             .portal-panel-body { overflow: visible; padding: 32px max(20px, 5vw); }
@@ -1279,8 +1946,13 @@
         <button class="portal-hit" type="button" data-portal-button="shelf" aria-label="Shelf / 书影 / 書影"></button>
         <button class="portal-hit" type="button" data-portal-button="thoughts" aria-label="Thoughts / 随笔 / 隨筆"></button>
         <button class="portal-hit" type="button" data-portal-button="friends" aria-label="Friends / 友链 / 友鏈"></button>
+        <button class="portal-hit" type="button" data-portal-button="news" aria-label="News / 动态 / 動態"></button>
+        <button class="portal-hit" type="button" data-portal-button="publications" aria-label="Publications / 发表论文 / 發表論文"></button>
+        <button class="portal-hit" type="button" data-portal-button="projects" aria-label="Projects / 项目经历 / 項目經歷"></button>
+        <button class="portal-hit" type="button" data-portal-button="notes" aria-label="Notes / 笔记 / 筆記"></button>
         <button class="portal-hit" type="button" data-portal-button="home" aria-label="Home / 主页 / 主頁"></button>
     </nav>
+    <nav class="star-nav" id="starNav" aria-label="Stars in the selected constellation"></nav>
 
     <aside class="portal-panel" id="portalPanel" aria-hidden="true" aria-labelledby="portalPanelTitle">
         <header class="portal-panel-header">
@@ -1294,25 +1966,7 @@
 <!-- SITEGEN:LIFE_GALLERY_START -->
         <section id="gallery" class="portal-content" data-portal-content="gallery" hidden>
             <div class="portal-moments">
-                <article class="portal-moment" data-moment="gallery-campus-undated">
-                    <header class="portal-moment-header">
-                        <div class="portal-moment-meta">
-                            <span data-key="moment_date_gallery-campus-undated">Spring · Undated</span>
-                            <span class="portal-moment-location" data-key="moment_location_gallery-campus-undated">Shanghai</span>
-                        </div>
-                        <h3 data-key="moment_summary_gallery-campus-undated">Spring on the SJTU campus</h3>
-                    </header>
-                <div class="gallery-grid" data-gallery-group>
-                <div class="gallery-item" role="button" tabindex="0"
-                    aria-label="SJTU Campus in spring"
-                    onclick="openLightbox(this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
-                    <img src="images/美哉吾校.jpg" alt="Campus" loading="lazy" decoding="async">
-                    <div class="gallery-caption" data-key="cap_campus">SJTU Campus in spring</div>
-                </div>
-                </div>
-                </article>
-                <article class="portal-moment" data-moment="gallery-qiandao-2024-11">
+                <article class="portal-moment" data-moment="gallery-qiandao-2024-11" data-portal-entry="gallery-qiandao-2024-11" data-star-hip="746">
                     <header class="portal-moment-header">
                         <div class="portal-moment-meta">
                             <span data-key="moment_date_gallery-qiandao-2024-11">Nov 2024</span>
@@ -1344,7 +1998,7 @@
                 </div>
                 </div>
                 </article>
-                <article class="portal-moment" data-moment="gallery-orion-2025">
+                <article class="portal-moment" data-moment="gallery-orion-2025" data-portal-entry="gallery-orion-2025" data-star-hip="3179">
                     <header class="portal-moment-header">
                         <div class="portal-moment-meta">
                             <span data-key="moment_date_gallery-orion-2025">2025</span>
@@ -1362,7 +2016,7 @@
                 </div>
                 </div>
                 </article>
-                <article class="portal-moment" data-moment="gallery-nanjing-2025-03">
+                <article class="portal-moment" data-moment="gallery-nanjing-2025-03" data-portal-entry="gallery-nanjing-2025-03" data-star-hip="3179">
                     <header class="portal-moment-header">
                         <div class="portal-moment-meta">
                             <span data-key="moment_date_gallery-nanjing-2025-03">Mar 2025</span>
@@ -1380,7 +2034,7 @@
                 </div>
                 </div>
                 </article>
-                <article class="portal-moment" data-moment="gallery-baking-2025-12">
+                <article class="portal-moment" data-moment="gallery-baking-2025-12" data-portal-entry="gallery-baking-2025-12" data-star-hip="4427">
                     <header class="portal-moment-header">
                         <div class="portal-moment-meta">
                             <span data-key="moment_date_gallery-baking-2025-12">Dec 2025</span>
@@ -1398,13 +2052,32 @@
                 </div>
                 </div>
                 </article>
+                <article class="portal-moment" data-moment="gallery-campus-undated" data-portal-entry="gallery-campus-undated" data-star-hip="4427">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-campus-undated">Spring · Undated</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-campus-undated">Shanghai</span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-campus-undated">Spring on the SJTU campus</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="SJTU Campus in spring"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/美哉吾校.jpg" alt="Campus" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_campus">SJTU Campus in spring</div>
+                </div>
+                </div>
+                </article>
             </div>
         </section>
 <!-- SITEGEN:LIFE_GALLERY_END -->
 
+<!-- SITEGEN:LIFE_FOOTPRINTS_START -->
             <section id="footprints" class="portal-content" data-portal-content="footprints" hidden>
-                <p class="sr-only" id="visitedCountriesSummary">Countries visited: Mainland China</p>
-                <div class="maps-list">
+                <p class="sr-only" id="visitedCountriesSummary">Countries visited: Mainland China and Taiwan</p>
+                <div class="maps-list" data-portal-entry="footprints-map" data-star-hip="54061">
                     <article class="map-card">
                         <div class="map-card-title" data-key="chart_world">Countries visited</div>
                         <div id="worldMap" class="map-box" role="img" aria-describedby="visitedCountriesSummary"></div>
@@ -1415,11 +2088,12 @@
                     </article>
                 </div>
             </section>
+<!-- SITEGEN:LIFE_FOOTPRINTS_END -->
 
 <!-- SITEGEN:LIFE_SHELF_START -->
         <section id="shelf" class="portal-content" data-portal-content="shelf" hidden>
             <div class="portal-moments">
-                <article class="portal-moment" data-moment="shelf-deep-learning">
+                <article class="portal-moment" data-moment="shelf-deep-learning" data-portal-entry="shelf-deep-learning" data-star-hip="91262">
                     <header class="portal-moment-header">
                         <div class="portal-moment-meta">
                             <span data-key="moment_date_shelf-deep-learning">Recently</span>
@@ -1437,7 +2111,7 @@
             </div>
                 </div>
                 </article>
-                <article class="portal-moment" data-moment="shelf-interstellar">
+                <article class="portal-moment" data-moment="shelf-interstellar" data-portal-entry="shelf-interstellar" data-star-hip="91262">
                     <header class="portal-moment-header">
                         <div class="portal-moment-meta">
                             <span data-key="moment_date_shelf-interstellar">Recently</span>
@@ -1462,7 +2136,7 @@
 <!-- SITEGEN:LIFE_THOUGHTS_START -->
         <section id="thoughts" class="portal-content" data-portal-content="thoughts" hidden>
             <div class="portal-moments">
-                <article class="portal-moment" data-moment="thought-2024-11-10">
+                <article class="portal-moment" data-moment="thought-2024-11-10" data-portal-entry="thought-2024-11-10" data-star-hip="102098">
                     <header class="portal-moment-header">
                         <div class="portal-moment-meta">
                             <span data-key="moment_date_thought-2024-11-10">Nov 10, 2024</span>
@@ -1477,7 +2151,7 @@
             </div>
                 </div>
                 </article>
-                <article class="portal-moment" data-moment="thought-2026-01-16">
+                <article class="portal-moment" data-moment="thought-2026-01-16" data-portal-entry="thought-2026-01-16" data-star-hip="100453">
                     <header class="portal-moment-header">
                         <div class="portal-moment-meta">
                             <span data-key="moment_date_thought-2026-01-16">Jan 16, 2026</span>
@@ -1505,7 +2179,7 @@ I am profoundly moved.</div>
             </div>
                 </div>
                 </article>
-                <article class="portal-moment" data-moment="thought-2026-06-29">
+                <article class="portal-moment" data-moment="thought-2026-06-29" data-portal-entry="thought-2026-06-29" data-star-hip="95947">
                     <header class="portal-moment-header">
                         <div class="portal-moment-meta">
                             <span data-key="moment_date_thought-2026-06-29">Jun 29, 2026</span>
@@ -1527,12 +2201,195 @@ I am profoundly moved.</div>
 
 <!-- SITEGEN:LIFE_FRIENDS_START -->
         <section id="friends" class="portal-content" data-portal-content="friends" hidden>
-            <div class="friends-list">
-                    <a href="#" class="friend-link">Laboratory Partner A</a>
-                    <a href="#" class="friend-link">SJTU AI Club</a>
-            </div>
-        </section>
+                <div class="friends-list">
+                    <a href="#" class="friend-link" data-portal-entry="friend-laboratory-partner" data-star-hip="36850">Laboratory Partner A</a>
+                    <a href="#" class="friend-link" data-portal-entry="friend-sjtu-ai-club" data-star-hip="36850">SJTU AI Club</a>
+                </div>
+            </section>
 <!-- SITEGEN:LIFE_FRIENDS_END -->
+
+<!-- SITEGEN:LIFE_ABOUT_START -->
+
+<!-- SITEGEN:LIFE_ABOUT_END -->
+
+<!-- SITEGEN:LIFE_NEWS_START -->
+            <section id="news" class="portal-content homepage-parity" data-portal-content="news" hidden>
+                <ul class="news-list">
+                    <li class="news-item news-entry" data-portal-entry="news_1" data-star-hip="97649">
+                        <span class="news-date">2026/6/29</span>
+                        <span class="news-text" data-key="news_1">25-26 Spring Finals finished.</span>
+                    </li>
+                </ul>
+            </section>
+<!-- SITEGEN:LIFE_NEWS_END -->
+
+<!-- SITEGEN:LIFE_PUBLICATIONS_START -->
+            <section id="publications" class="portal-content homepage-parity" data-portal-content="publications" hidden>
+                <div class="pub-list">
+                    <div class="pub-item publication-entry" data-portal-entry="Generative_2025" data-star-hip="113963">
+                         <div class="pub-title-text en-only">Generative Teaching via Code (TeachMaster)</div>
+                         <div class="pub-authors en-only">Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian</div>
+                         <div class="pub-venue en-only">ACL 2026 Industry Track</div>
+                         <div class="pub-actions">
+                            <a class="pub-btn" href="https://arxiv.org/abs/2601.04204v1">
+                                <i class="far fa-file-pdf" aria-hidden="true"></i>
+                                <span data-key="life_action_paper">Paper</span>
+                            </a>
+                            <a class="pub-btn" href="#">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span data-key="life_action_code">Code</span>
+                            </a>
+                            <button class="pub-btn" type="button" data-copy-citation>
+                                <i class="fas fa-quote-right" aria-hidden="true"></i>
+                                <span data-key="life_action_cite">Cite</span>
+                            </button>
+                         </div>
+                        <pre data-citation-source hidden>@misc{wang2025generativeteachingcode,
+  title={Generative Teaching via Code},
+  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},
+  year={2025},
+  eprint={2601.04204},
+  archivePrefix={arXiv},
+  primaryClass={cs.CY},
+  url={https://arxiv.org/abs/2601.04204}
+}</pre>
+                    </div>
+                    <div class="pub-item publication-entry" data-portal-entry="PRISM_2026" data-star-hip="113963">
+                         <div class="pub-title-text en-only">PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning</div>
+                         <div class="pub-authors en-only">Qiran Zhang, Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jingru Fan, Shu Yao, Jie Zhang, Tianle Zhou, Huatao Li, Ruijie Shi, Yihan Li, Chen Qian</div>
+                         <div class="pub-venue en-only">arXiv preprint arXiv:2605.19382</div>
+                         <div class="pub-actions">
+                            <a class="pub-btn" href="https://arxiv.org/abs/2605.19382">
+                                <i class="far fa-file-pdf" aria-hidden="true"></i>
+                                <span data-key="life_action_paper">Paper</span>
+                            </a>
+                            <a class="pub-btn" href="#">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span data-key="life_action_code">Code</span>
+                            </a>
+                            <button class="pub-btn" type="button" data-copy-citation>
+                                <i class="fas fa-quote-right" aria-hidden="true"></i>
+                                <span data-key="life_action_cite">Cite</span>
+                            </button>
+                         </div>
+                        <pre data-citation-source hidden>@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,
+      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning},
+      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},
+      year={2026},
+      eprint={2605.19382},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2605.19382},
+}</pre>
+                    </div>
+                    <div class="pub-item publication-entry" data-portal-entry="AgentXRay_2026" data-star-hip="113963">
+                         <div class="pub-title-text en-only">AgentXRay: White-Boxing Agentic Systems via Workflow Reconstruction</div>
+                         <div class="pub-authors en-only">Ruijie Shi, Houbin Zhang, Yuecheng Han, Yuheng Wang, Jingru Fan, <b>Runde Yang</b>, Yufan Dang, Huatao Li, Dewen Liu, Yuan Cheng, Chen Qian</div>
+                         <div class="pub-venue en-only">ICML 2026</div>
+                         <div class="pub-actions">
+                            <a class="pub-btn" href="https://arxiv.org/abs/2602.05353">
+                                <i class="far fa-file-pdf" aria-hidden="true"></i>
+                                <span data-key="life_action_paper">Paper</span>
+                            </a>
+                            <a class="pub-btn" href="#">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span data-key="life_action_code">Code</span>
+                            </a>
+
+                         </div>
+                    </div>
+                    <div class="pub-item publication-entry" data-portal-entry="AppCopilot_2025" data-star-hip="677">
+                         <div class="pub-title-text en-only">AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent</div>
+                         <div class="pub-authors en-only">Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian</div>
+                         <div class="pub-venue en-only">arXiv preprint arXiv:2509.02444</div>
+                         <div class="pub-actions">
+                            <a class="pub-btn" href="#">
+                                <i class="far fa-file-pdf" aria-hidden="true"></i>
+                                <span data-key="life_action_paper">Paper</span>
+                            </a>
+                            <a class="pub-btn" href="#">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span data-key="life_action_code">Code</span>
+                            </a>
+                            <button class="pub-btn" type="button" data-copy-citation>
+                                <i class="fas fa-quote-right" aria-hidden="true"></i>
+                                <span data-key="life_action_cite">Cite</span>
+                            </button>
+                         </div>
+                        <pre data-citation-source hidden>@misc{fan2025appcopilotgeneralaccuratelonghorizon,
+  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},
+  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},
+  year={2025},
+  eprint={2509.02444},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI},
+  url={https://arxiv.org/abs/2509.02444}
+}</pre>
+                    </div>
+                </div>
+            </section>
+<!-- SITEGEN:LIFE_PUBLICATIONS_END -->
+
+<!-- SITEGEN:LIFE_PROJECTS_START -->
+            <section id="projects" class="portal-content homepage-parity" data-portal-content="projects" hidden>
+                <div class="project-grid">
+                    <div class="project-card project-entry" data-portal-entry="appcopilot" data-star-hip="81693">
+                         <div class="project-img-wrap">
+                            <img src="images/AppCopilot.png" alt="AppCopilot">
+                         </div>
+                         <div class="project-body">
+                             <div class="project-name en-only">AppCopilot</div>
+                             <div class="project-desc" data-key="proj_appcopilot">A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.</div>
+                             <div class="project-links">
+                                <a class="project-link" href="#">
+                                    <i class="far fa-file-alt" aria-hidden="true"></i>
+                                    <span data-key="life_action_paper">Paper</span>
+                                </a>
+                                <a class="project-link" href="#">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                    <span data-key="life_action_code">Code</span>
+                                </a>
+                             </div>
+                         </div>
+                    </div>
+                    <div class="project-card project-entry" data-portal-entry="teachmaster" data-star-hip="81693">
+                         <div class="project-img-wrap">
+                            <img src="images/TeachMaster.png" alt="TeachMaster">
+                         </div>
+                         <div class="project-body">
+                             <div class="project-name en-only">TeachMaster</div>
+                             <div class="project-desc" data-key="proj_teachmaster">A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.</div>
+                             <div class="project-links">
+                                <a class="project-link" href="https://arxiv.org/abs/2601.04204v1">
+                                    <i class="far fa-file-alt" aria-hidden="true"></i>
+                                    <span data-key="life_action_paper">Paper</span>
+                                </a>
+                                <a class="project-link" href="#">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                    <span data-key="life_action_code">Code</span>
+                                </a>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </section>
+<!-- SITEGEN:LIFE_PROJECTS_END -->
+
+<!-- SITEGEN:LIFE_NOTES_START -->
+            <section id="notes" class="portal-content homepage-parity" data-portal-content="notes" hidden>
+                <div class="notes-grid">
+                    <div class="notes-empty" data-key="notes_empty">Notes coming soon...</div>
+                </div>
+            </section>
+<!-- SITEGEN:LIFE_NOTES_END -->
+            <section class="star-reader is-overview" id="starReader" aria-live="polite">
+                <div class="star-reader-kicker" id="starReaderKicker">CONSTELLATION NOTE</div>
+                <h3 class="star-reader-title" id="starReaderTitle">Cassiopeia</h3>
+                <div class="star-reader-meta" id="starReaderMeta">Choose one of its real stars</div>
+                <p class="star-reader-description" id="starReaderDescription"></p>
+                <p class="star-reader-status" id="starReaderStatus"></p>
+                <nav class="home-route-index" id="homeRouteIndex" aria-label="Home star routes" hidden></nav>
+            </section>
         </div>
     </aside>
 
@@ -1583,6 +2440,24 @@ const i18n = {
         "home_departing": "Returning home",
         "galaxy_back": "Back to the galaxy",
         "galaxy_hint": "Follow the brighter stars through time",
+        "title_about": "About",
+        "title_news": "News",
+        "title_publications": "Publications",
+        "title_projects": "Projects",
+        "title_notes": "Notes",
+        "life_about_name": "Runde Yang 楊潤德",
+        "life_about_title": "Undergraduate · School of AI, Shanghai Jiao Tong University",
+        "life_about_bio": "Class of 2028. Currently focusing on Multi-Agent Systems. Always learning, always curious.",
+        "life_about_location": "Shanghai, China",
+        "notes_empty": "Notes coming soon...",
+        "life_action_email": "Email",
+        "life_action_paper": "Paper",
+        "life_action_code": "Code",
+        "life_action_cite": "Cite",
+        "life_action_copied": "Copied",
+        "news_1": "25-26 Spring Finals finished.",
+        "proj_appcopilot": "A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.",
+        "proj_teachmaster": "A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.",
         "cap_meteor": "Orion Nebula, 2025",
         "cap_nari": "Stargazing camp",
         "cap_qiandaohu": "Qiandao Lake sunset",
@@ -1598,9 +2473,6 @@ const i18n = {
         "thought_1": "Today, the weight of finals and endless tasks has finally lifted.\n\nMy sleep has been a chaotic blur lately—restless and sparse.\n\nAround 9 PM, a wave of malaise drove me to bed, where I lingered in that hollow space between wakefulness and dreams. By 11:56 PM, I found myself fully awake, yet deeply fatigued.\n\nI began listening to 'The Shorekeeper’s Theme.' It is remarkably soothing, yet it carries a defiant, positive undertone: I want to play the piano, I want to train, I want to live—truly live—for myself. I crave a life of warmth and intensity; I refuse to be just another exam robot.\n\nWe are meant to live lives of abundance; even when the world bears down on us, we must not allow our spirits to wither.\n\nIn the embrace of the piano, my mind finally exhales. My soul drifts back to a carefree past, where beautiful moments flicker like scenes from a vintage film.\n\nI am profoundly moved.",
         "date_thought_2": "Nov 10, 2024",
         "thought_2": "Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera.",
-        "moment_date_gallery-campus-undated": "Spring · Undated",
-        "moment_location_gallery-campus-undated": "Shanghai",
-        "moment_summary_gallery-campus-undated": "Spring on the SJTU campus",
         "moment_date_gallery-qiandao-2024-11": "Nov 2024",
         "moment_location_gallery-qiandao-2024-11": "Qiandao Lake",
         "moment_summary_gallery-qiandao-2024-11": "Stargazing camp, sunset, and the road there",
@@ -1613,6 +2485,9 @@ const i18n = {
         "moment_date_gallery-baking-2025-12": "Dec 2025",
         "moment_location_gallery-baking-2025-12": "",
         "moment_summary_gallery-baking-2025-12": "A strawberry cake from the baking club",
+        "moment_date_gallery-campus-undated": "Spring · Undated",
+        "moment_location_gallery-campus-undated": "Shanghai",
+        "moment_summary_gallery-campus-undated": "Spring on the SJTU campus",
         "moment_date_shelf-deep-learning": "Recently",
         "moment_location_shelf-deep-learning": "",
         "moment_summary_shelf-deep-learning": "Deep Learning — Ian Goodfellow",
@@ -1658,6 +2533,24 @@ const i18n = {
         "home_departing": "正在返回主页",
         "galaxy_back": "返回星河",
         "galaxy_hint": "循着亮星，沿时间漫游",
+        "title_about": "关于",
+        "title_news": "动态",
+        "title_publications": "发表论文",
+        "title_projects": "项目经历",
+        "title_notes": "笔记",
+        "life_about_name": "杨润德",
+        "life_about_title": "上海交通大学 · 人工智能学院 本科生",
+        "life_about_bio": "24 级本科生，目前从事多智能体系统相关工作。持续学习中。",
+        "life_about_location": "中国 上海",
+        "notes_empty": "笔记即将上线……",
+        "life_action_email": "邮件",
+        "life_action_paper": "论文",
+        "life_action_code": "代码",
+        "life_action_cite": "引用",
+        "life_action_copied": "已复制",
+        "news_1": "期末终验考完啦！",
+        "proj_appcopilot": "一个多模态多智能体设备端助手，探索工具使用、规划和鲁棒的 UI 定位。",
+        "proj_teachmaster": "一个多智能体框架，使用代码作为中间语义表示，自动生成结构化的教育视频。",
         "cap_meteor": "猎户座大星云，2025",
         "cap_nari": "观星营地",
         "cap_qiandaohu": "千岛湖日落",
@@ -1673,9 +2566,6 @@ const i18n = {
         "thought_1": "今天终于把期末所有考试，事情全做完\n\n这段时间睡眠紊乱不规律不足，今天晚上才九十点钟就感觉很不舒服，遂上床。上了床半天睡不着，闭着眼睛半梦半醒的\n\n到了十一点五十六现在是，成功给自己整清醒了\n\n然后又顿觉困乏，躺下听守岸人小曲，才发现原来这么催眠，还有一种积极的暗示，我要弹钢琴，我要锻炼我要积极的生活，我要为自己而活，我要热烈，我不要作做题家\n\n人应该活得丰盈，即便遇到压力不能丰盈也不该放任自己腐烂\n\n我发现听钢琴曲的时候思维是放松的，灵魂在曲子的包裹下好像回到无忧无虑的过去，以前那些美好时光像电影片段一样闪现\n\n真的很感动。",
         "date_thought_2": "Nov 10, 2024",
         "thought_2": "千岛湖的流星雨。肉眼看到的比相机拍到的震撼一万倍。",
-        "moment_date_gallery-campus-undated": "春日 · 未标日期",
-        "moment_location_gallery-campus-undated": "上海",
-        "moment_summary_gallery-campus-undated": "交大校园的春日",
         "moment_date_gallery-qiandao-2024-11": "2024年11月",
         "moment_location_gallery-qiandao-2024-11": "千岛湖",
         "moment_summary_gallery-qiandao-2024-11": "观星营地、日落与沿途",
@@ -1688,6 +2578,9 @@ const i18n = {
         "moment_date_gallery-baking-2025-12": "2025年12月",
         "moment_location_gallery-baking-2025-12": "",
         "moment_summary_gallery-baking-2025-12": "烘焙社的草莓蛋糕",
+        "moment_date_gallery-campus-undated": "春日 · 未标日期",
+        "moment_location_gallery-campus-undated": "上海",
+        "moment_summary_gallery-campus-undated": "交大校园的春日",
         "moment_date_shelf-deep-learning": "近期",
         "moment_location_shelf-deep-learning": "",
         "moment_summary_shelf-deep-learning": "《深度学习》",
@@ -1733,6 +2626,24 @@ const i18n = {
         "home_departing": "正在返回主頁",
         "galaxy_back": "返回星河",
         "galaxy_hint": "循著亮星，沿時間漫遊",
+        "title_about": "關於",
+        "title_news": "動態",
+        "title_publications": "發表論文",
+        "title_projects": "項目經歷",
+        "title_notes": "筆記",
+        "life_about_name": "楊潤德",
+        "life_about_title": "上海交通大學 · 人工智能學院 本科生",
+        "life_about_bio": "24 級本科生，目前從事多智能體系統相關工作。持續學習中。",
+        "life_about_location": "中國 上海",
+        "notes_empty": "筆記即將上線……",
+        "life_action_email": "郵件",
+        "life_action_paper": "論文",
+        "life_action_code": "程式碼",
+        "life_action_cite": "引用",
+        "life_action_copied": "已複製",
+        "news_1": "期末终于考完啦！",
+        "proj_appcopilot": "一個多模態多智能體設備端助手，探索工具使用、規劃和魯棒的 UI 定位。",
+        "proj_teachmaster": "一個多智能體框架，使用代碼作為中間語義表示，自動生成結構化的教育視頻。",
         "cap_meteor": "獵戶座大星雲，2025",
         "cap_nari": "觀星營地",
         "cap_qiandaohu": "千島湖日落",
@@ -1748,9 +2659,6 @@ const i18n = {
         "thought_1": "今天終於把期末所有考試，事情全做完\n\n這段時間睡眠紊亂不規律不足，今天晚上才九十點鐘就感覺很不舒服，遂上床。上了床半天睡不著，閉著眼睛半夢半醒的\n\n到了十一點五十六現在是，成功給自己整清醒了\n\n然後又頓覺困乏，躺下聽守岸人小曲，才發現原來這麼催眠，還有一種積極的暗示，我要彈鋼琴，我要鍛煉我要積極的生活，我要為自己而活，我要熱烈，我不要作做題家\n\n人應該活得豐盈，即便遇到壓力不能豐盈也不該放任自己腐爛\n\n我發現聽鋼琴曲的時候思維是放鬆的，靈魂在曲子的包裹下好像回到無憂無慮的過去，以前的那些美好時光像電影片段一樣閃現\n\n真的很感動。",
         "date_thought_2": "Nov 10, 2024",
         "thought_2": "千島湖的流星雨。肉眼看到的比相機拍到的震撼一萬倍。",
-        "moment_date_gallery-campus-undated": "春日 · 未標日期",
-        "moment_location_gallery-campus-undated": "上海",
-        "moment_summary_gallery-campus-undated": "交大校園的春日",
         "moment_date_gallery-qiandao-2024-11": "2024年11月",
         "moment_location_gallery-qiandao-2024-11": "千島湖",
         "moment_summary_gallery-qiandao-2024-11": "觀星營地、日落與沿途",
@@ -1763,6 +2671,9 @@ const i18n = {
         "moment_date_gallery-baking-2025-12": "2025年12月",
         "moment_location_gallery-baking-2025-12": "",
         "moment_summary_gallery-baking-2025-12": "烘焙社的草莓蛋糕",
+        "moment_date_gallery-campus-undated": "春日 · 未標日期",
+        "moment_location_gallery-campus-undated": "上海",
+        "moment_summary_gallery-campus-undated": "交大校園的春日",
         "moment_date_shelf-deep-learning": "近期",
         "moment_location_shelf-deep-learning": "",
         "moment_summary_shelf-deep-learning": "《深度學習》",
@@ -1827,9 +2738,9 @@ const visitedCountries = [
     {
         "map_name": "China",
         "label": {
-            "en": "Mainland China",
-            "zh-CN": "中国大陆",
-            "zh-TW": "中國大陸"
+            "en": "Mainland China and Taiwan",
+            "zh-CN": "中国大陆与台湾",
+            "zh-TW": "中國大陸與臺灣"
         }
     }
 ];
@@ -1839,77 +2750,450 @@ const LANGUAGES = ['en', 'zh-CN', 'zh-TW'];
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const COARSE_POINTER = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 const DEG = Math.PI / 180;
+const MAX_PITCH = 89.5 * DEG;
+const INITIAL_CAMERA = Object.freeze({
+    yaw: 0.25,
+    pitch: 0.72
+});
 
 const portalDefinitions = [
     {
         id: 'gallery',
         titleKey: 'title_gallery',
-        yaw: -0.64,
-        pitch: 0.17,
-        pattern: 'crown'
+        fallbackYaw: -0.64,
+        fallbackPitch: 0.17,
+        pattern: 'cassiopeia'
     },
     {
         id: 'footprints',
         titleKey: 'title_map',
-        yaw: 0.04,
-        pitch: 0.1,
-        pattern: 'arc'
+        fallbackYaw: 0.04,
+        fallbackPitch: 0.1,
+        pattern: 'ursaMajor'
     },
     {
         id: 'shelf',
         titleKey: 'title_shelf',
-        yaw: 0.72,
-        pitch: 0.28,
-        pattern: 'kite'
+        fallbackYaw: 0.72,
+        fallbackPitch: 0.28,
+        pattern: 'lyra'
     },
     {
         id: 'thoughts',
         titleKey: 'title_thoughts',
-        yaw: 1.46,
-        pitch: -0.08,
-        pattern: 'branch'
+        fallbackYaw: 1.46,
+        fallbackPitch: -0.08,
+        pattern: 'cygnus'
     },
     {
         id: 'friends',
         titleKey: 'title_friends',
-        yaw: -1.36,
-        pitch: -0.24,
-        pattern: 'ring'
+        fallbackYaw: -1.36,
+        fallbackPitch: -0.24,
+        pattern: 'gemini'
+    },
+    {
+        id: 'news',
+        titleKey: 'title_news',
+        fallbackYaw: -2.02,
+        fallbackPitch: 0.24,
+        pattern: 'aquila'
+    },
+    {
+        id: 'publications',
+        titleKey: 'title_publications',
+        fallbackYaw: 2.5,
+        fallbackPitch: 0.18,
+        pattern: 'pegasus'
+    },
+    {
+        id: 'projects',
+        titleKey: 'title_projects',
+        fallbackYaw: 2,
+        fallbackPitch: 0.5,
+        pattern: 'hercules'
+    },
+    {
+        id: 'notes',
+        titleKey: 'title_notes',
+        fallbackYaw: 1.18,
+        fallbackPitch: 0.52,
+        pattern: 'coronaBorealis'
     },
     {
         id: 'home',
         titleKey: 'title_home',
-        yaw: 3.02,
-        pitch: 0.04,
-        pattern: 'home',
+        fallbackYaw: 3.02,
+        fallbackPitch: 0.04,
+        pattern: 'ursaMinor',
         home: true
     }
 ];
 
 const constellationPatterns = {
-    crown: {
-        points: [[0,0],[-0.055,0.025],[-0.026,0.064],[0.03,0.06],[0.064,0.018],[0.035,-0.046],[-0.036,-0.04]],
-        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,6],[6,1]]
+    cassiopeia: {
+        hips: [4427, 746, 3179, 6686, 8886],
+        contentOrder: [746, 3179, 4427, 6686, 8886],
+        focusHip: 4427,
+        fallbackPoints: [[0,0],[-0.07,0.045],[-0.035,0.012],[0.034,0.048],[0.072,0.008]],
+        edges: [[1,2],[2,0],[0,3],[3,4]]
     },
-    arc: {
-        points: [[-0.068,-0.026],[-0.04,0.025],[-0.005,0.052],[0.034,0.036],[0.067,-0.003],[0.026,-0.052],[-0.025,-0.048]],
-        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,1]]
+    ursaMajor: {
+        hips: [59774, 54061, 53910, 58001, 62956, 65378, 67301],
+        contentOrder: [54061, 53910, 58001, 59774, 62956, 65378, 67301],
+        focusHip: 59774,
+        fallbackPoints: [[0,0],[-0.065,0.042],[-0.062,-0.028],[-0.012,-0.047],[0.034,0.012],[0.063,0.027],[0.092,0.006]],
+        edges: [[1,2],[2,3],[3,0],[0,1],[0,4],[4,5],[5,6]]
     },
-    kite: {
-        points: [[0,0.074],[-0.055,0.01],[0,-0.068],[0.058,0.008],[-0.018,0.016],[0.026,-0.015]],
-        edges: [[0,1],[1,2],[2,3],[3,0],[1,4],[4,3],[4,5],[5,2]]
+    lyra: {
+        hips: [91262, 91971, 92420, 93194, 92791],
+        contentOrder: [91262, 91971, 92420, 93194, 92791],
+        focusHip: 91262,
+        fallbackPoints: [[0,0.075],[-0.035,0.018],[-0.025,-0.045],[0.04,-0.052],[0.052,0.012]],
+        edges: [[0,1],[1,2],[2,3],[3,4],[4,1]]
     },
-    branch: {
-        points: [[-0.07,0.045],[-0.035,0.02],[0,0],[0.04,-0.026],[0.075,-0.058],[0.018,0.058],[0.056,0.076]],
-        edges: [[0,1],[1,2],[2,3],[3,4],[2,5],[5,6]]
+    cygnus: {
+        hips: [100453, 102098, 95947, 97165, 102488],
+        contentOrder: [102098, 100453, 95947, 97165, 102488],
+        focusHip: 100453,
+        fallbackPoints: [[0,0],[0,0.08],[0,-0.085],[-0.07,0.005],[0.07,-0.006]],
+        edges: [[1,0],[0,2],[3,0],[0,4]]
     },
-    ring: {
-        points: [[0,-0.062],[-0.052,-0.025],[-0.064,0.032],[-0.018,0.066],[0.043,0.052],[0.068,0],[0.038,-0.05],[0,0.006]],
-        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0],[7,1],[7,4]]
+    gemini: {
+        hips: [35550, 36850, 37826, 32246, 30343, 31681],
+        contentOrder: [36850, 37826, 32246, 35550, 30343, 31681],
+        focusHip: 35550,
+        fallbackPoints: [[0,0],[-0.03,0.075],[0.045,0.07],[-0.045,0.018],[-0.072,-0.055],[0.06,-0.055]],
+        edges: [[1,2],[1,3],[3,4],[2,0],[0,5],[3,0]]
+    },
+    orion: {
+        hips: [26207, 27989, 25336, 26727, 26311, 25930, 27366, 24436],
+        contentOrder: [27989, 24436, 25336, 27366, 26207, 26311, 26727, 25930],
+        focusHip: 26311,
+        fallbackPoints: [[0,0.09],[-0.06,0.045],[0.055,0.05],[-0.035,0],[0,0],[0.035,0],[-0.055,-0.09],[0.06,-0.085]],
+        edges: [[0,1],[0,2],[1,3],[2,5],[3,4],[4,5],[3,6],[5,7]]
+    },
+    aquila: {
+        hips: [97649, 97278, 98036, 95501, 93747, 93244, 97804, 99473, 93805],
+        contentOrder: [97649, 93244, 99473, 93805, 93747, 98036, 97278, 97804, 95501],
+        focusHip: 97649,
+        fallbackPoints: [[0,0],[-0.012,0.047],[0.018,-0.037],[-0.055,0.006],[-0.1,0.045],[-0.13,0.07],[0.052,-0.018],[0.105,-0.055],[-0.09,-0.035]],
+        edges: [[5,4],[4,3],[3,0],[0,6],[6,7],[1,0],[0,2],[3,8]]
+    },
+    pegasus: {
+        hips: [113963, 113881, 677, 1067, 112029, 109427, 107315],
+        contentOrder: [113963, 677, 113881, 1067, 107315, 112029, 109427],
+        focusHip: 113963,
+        fallbackPoints: [[0.04,-0.045],[0.04,0.055],[-0.065,0.06],[-0.065,-0.045],[0.095,-0.06],[0.14,-0.065],[0.195,-0.08]],
+        edges: [[0,1],[1,2],[2,3],[3,0],[0,4],[4,5],[5,6]]
+    },
+    hercules: {
+        hips: [81833, 84380, 83207, 81693, 80816, 80170, 84379, 84345],
+        contentOrder: [81693, 84380, 81833, 83207, 84345, 80170, 80816, 84379],
+        focusHip: 83207,
+        fallbackPoints: [[-0.035,0.04],[0.04,0.05],[0.045,-0.025],[-0.035,-0.035],[-0.09,-0.07],[-0.14,-0.09],[0.095,-0.065],[0.14,-0.1]],
+        edges: [[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[2,6],[6,7]]
+    },
+    coronaBorealis: {
+        hips: [76267, 75695, 76127, 76669, 76952, 77512, 78159, 78493, 79119],
+        contentOrder: [76267, 76669, 79119, 75695, 78493, 76127, 78159, 76952, 77512],
+        focusHip: 76267,
+        fallbackPoints: [[0,-0.055],[-0.04,-0.035],[-0.075,-0.005],[-0.1,0.035],[0.04,-0.035],[0.075,-0.005],[0.095,0.035],[0.085,0.075],[0.055,0.105]],
+        edges: [[0,1],[1,2],[2,3],[0,4],[4,5],[5,6],[6,7],[7,8]]
+    },
+    ursaMinor: {
+        hips: [11767, 85822, 82080, 79822, 77055, 72607, 75097, 70692, 69112, 74605, 73199],
+        contentOrder: [11767, 85822, 82080, 79822, 77055, 72607, 75097, 70692, 69112, 74605, 73199],
+        focusHip: 11767,
+        fallbackPoints: [[0,0],[-0.02,-0.038],[-0.046,-0.06],[-0.067,-0.035],[-0.06,0.012],[-0.018,0.035],[0.012,0.006],[0.01,0.066],[0.038,0.09],[-0.065,0.085],[-0.09,0.12]],
+        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,3],[5,7],[7,8],[6,9],[9,10]]
+    }
+};
+
+const constellationStories = {
+    gallery: {
+        name: { en: 'Cassiopeia', 'zh-CN': '仙后座', 'zh-TW': '仙后座' },
+        epithet: {
+            en: 'The five-frame queen',
+            'zh-CN': '五格天幕中的王后',
+            'zh-TW': '五格天幕中的王后'
+        },
+        reason: {
+            en: 'Cassiopeia’s unmistakable W reads like five frames hung across the northern sky. A constellation defined by being seen becomes the natural home for photographs and remembered light.',
+            'zh-CN': '仙后座醒目的 W 像五只连续悬在北天的取景框。一个因“被看见”而格外鲜明的星座，正适合安放照片与被记住的光。',
+            'zh-TW': '仙后座醒目的 W 像五隻連續懸在北天的取景框。一個因「被看見」而格外鮮明的星座，正適合安放照片與被記住的光。'
+        }
+    },
+    footprints: {
+        name: { en: 'Ursa Major · Big Dipper', 'zh-CN': '大熊座 · 北斗', 'zh-TW': '大熊座 · 北斗' },
+        epithet: {
+            en: 'The old instrument of direction',
+            'zh-CN': '古老的辨向仪',
+            'zh-TW': '古老的辨向儀'
+        },
+        reason: {
+            en: 'Dubhe and Merak point onward to Polaris. For generations the Dipper has turned travel into direction, so every place reached belongs naturally along this celestial route.',
+            'zh-CN': '天枢与天璇把视线引向北极星。北斗长久以来把远行变成方向，因此每一处抵达，都适合留在这条天上的路径上。',
+            'zh-TW': '天樞與天璇把視線引向北極星。北斗長久以來把遠行變成方向，因此每一處抵達，都適合留在這條天上的路徑上。'
+        }
+    },
+    shelf: {
+        name: { en: 'Lyra', 'zh-CN': '天琴座', 'zh-TW': '天琴座' },
+        epithet: {
+            en: 'Works that continue to resonate',
+            'zh-CN': '仍在回响的作品',
+            'zh-TW': '仍在迴響的作品'
+        },
+        reason: {
+            en: 'Lyra turns separate stars into the strings of one instrument. Books, films, music and art gather here not as a list, but as works that keep resonating after they end.',
+            'zh-CN': '天琴座把分散的星连成同一件乐器。书、电影、音乐与艺术在这里不是清单，而是结束之后仍会回响的作品。',
+            'zh-TW': '天琴座把分散的星連成同一件樂器。書、電影、音樂與藝術在這裡不是清單，而是結束之後仍會迴響的作品。'
+        }
+    },
+    thoughts: {
+        name: { en: 'Cygnus · Northern Cross', 'zh-CN': '天鹅座 · 北十字', 'zh-TW': '天鵝座 · 北十字' },
+        epithet: {
+            en: 'A timeline with branching wings',
+            'zh-CN': '带着双翼的时间线',
+            'zh-TW': '帶著雙翼的時間線'
+        },
+        reason: {
+            en: 'Cygnus stretches along the Milky Way: its long axis reads as time, while its wings open like a thought dividing into new directions. Each diary entry becomes one stop in that inward flight.',
+            'zh-CN': '天鹅座沿银河伸展：长轴像时间，双翼则像一段思绪向不同方向分岔。每篇日记，都是这次向内飞行的一站。',
+            'zh-TW': '天鵝座沿銀河伸展：長軸像時間，雙翼則像一段思緒向不同方向分岔。每篇日記，都是這次向內飛行的一站。'
+        }
+    },
+    friends: {
+        name: { en: 'Gemini', 'zh-CN': '双子座', 'zh-TW': '雙子座' },
+        epithet: {
+            en: 'Two lights keeping pace',
+            'zh-CN': '并肩前行的两束光',
+            'zh-TW': '並肩前行的兩束光'
+        },
+        reason: {
+            en: 'Castor and Pollux make companionship visible: distinct lights travelling side by side. Gemini therefore holds the people and communities whose paths meet this one.',
+            'zh-CN': '北河二与北河三让陪伴变得可见：两束不同的光并肩前行。双子座因此收纳那些与这条人生轨迹相遇的人和群体。',
+            'zh-TW': '北河二與北河三讓陪伴變得可見：兩束不同的光並肩前行。雙子座因此收納那些與這條人生軌跡相遇的人和群體。'
+        }
+    },
+    about: {
+        name: { en: 'Orion', 'zh-CN': '猎户座', 'zh-TW': '獵戶座' },
+        epithet: {
+            en: 'A portrait drawn in starlight',
+            'zh-CN': '由星光勾出的肖像',
+            'zh-TW': '由星光勾出的肖像'
+        },
+        reason: {
+            en: 'Orion’s head, shoulders, belt and feet form the sky’s clearest human silhouette. About belongs here because it introduces the person behind every other constellation, not another archive.',
+            'zh-CN': '猎户座以头、双肩、腰带和双足组成夜空最清楚的人形，像一幅由星光勾出的肖像。About 放在这里，因为它介绍的是其余星座背后的那个人，而不是另一份档案。',
+            'zh-TW': '獵戶座以頭、雙肩、腰帶和雙足組成夜空最清楚的人形，像一幅由星光勾出的肖像。About 放在這裡，因為它介紹的是其餘星座背後的那個人，而不是另一份檔案。'
+        }
+    },
+    news: {
+        name: { en: 'Aquila', 'zh-CN': '天鹰座', 'zh-TW': '天鷹座' },
+        epithet: {
+            en: 'Dispatches carried across the Milky Way',
+            'zh-CN': '越过银河的短讯',
+            'zh-TW': '越過銀河的短訊'
+        },
+        reason: {
+            en: 'Aquila crosses the Milky Way in flight. Altair and its flanking stars form the first clear signal, while the wings carry brief dispatches outward; each News item is a flash of arrival on one continuing route.',
+            'zh-CN': '天鹰座展翼越过银河，牛郎星与两侧恒星组成最清楚的信号，双翼再把短讯送向远处。每条 News 都是一瞬抵达，也共同留下连续的时间航迹。',
+            'zh-TW': '天鷹座展翼越過銀河，牛郎星與兩側恆星組成最清楚的信號，雙翼再把短訊送向遠處。每條 News 都是一瞬抵達，也共同留下連續的時間航跡。'
+        }
+    },
+    publications: {
+        name: { en: 'Pegasus · Great Square', 'zh-CN': '飞马座 · 秋季四边形', 'zh-TW': '飛馬座 · 秋季四邊形' },
+        epithet: {
+            en: 'Research given a page and wings',
+            'zh-CN': '让研究拥有页面与翅膀',
+            'zh-TW': '讓研究擁有頁面與翅膀'
+        },
+        reason: {
+            en: 'In myth, Pegasus opened Hippocrene—the Muses’ spring—with a hoofbeat. The Great Square reads like a page, and the horse’s line carries finished research outward: insight made public and given wings.',
+            'zh-CN': '传说飞马一踏涌出缪斯之泉 Hippocrene。秋季四边形像展开的一页，飞马的星线再把完成的研究送向远方：让洞见成为公开作品，也让它获得翅膀。',
+            'zh-TW': '傳說飛馬一踏湧出繆斯之泉 Hippocrene。秋季四邊形像展開的一頁，飛馬的星線再把完成的研究送向遠方：讓洞見成為公開作品，也讓它獲得翅膀。'
+        }
+    },
+    projects: {
+        name: { en: 'Hercules', 'zh-CN': '武仙座', 'zh-TW': '武仙座' },
+        epithet: {
+            en: 'Intent made into work',
+            'zh-CN': '把意图做成作品',
+            'zh-TW': '把意圖做成作品'
+        },
+        reason: {
+            en: 'Hercules is remembered through his labors: each challenge became work carried through. Its Keystone supplies a stable architecture and its limbs extend into different tasks, so Projects is where intent becomes something built.',
+            'zh-CN': '武仙因一项项劳作而被记住：每个挑战都被真正做完。中央的 Keystone 像稳定架构，向外伸展的四肢像不同任务，因此 Projects 正是把意图变成成品的地方。',
+            'zh-TW': '武仙因一項項勞作而被記住：每個挑戰都被真正做完。中央的 Keystone 像穩定架構，向外伸展的四肢像不同任務，因此 Projects 正是把意圖變成成品的地方。'
+        }
+    },
+    notes: {
+        name: { en: 'Corona Borealis', 'zh-CN': '北冕座', 'zh-TW': '北冕座' },
+        epithet: {
+            en: 'Small records completing an open crown',
+            'zh-CN': '沿开放冠弧相连的短记',
+            'zh-TW': '沿開放冠弧相連的短記'
+        },
+        reason: {
+            en: 'Corona Borealis is an open arc assembled from separate jewels. A note may be small and complete on its own, yet notes placed through time form a larger crown; unlike Thoughts’ inward diary, Notes keeps concise research fragments.',
+            'zh-CN': '北冕座是一道由独立宝石连成的开放冠弧。一则笔记可以短小而自足，沿时间排开后又会合成更大的形状；不同于 Thoughts 的内向日记，Notes 收纳简洁的研究片段。',
+            'zh-TW': '北冕座是一道由獨立寶石連成的開放冠弧。一則筆記可以短小而自足，沿時間排開後又會合成更大的形狀；不同於 Thoughts 的內向日記，Notes 收納簡潔的研究片段。'
+        }
     },
     home: {
-        points: [[0,0]],
-        edges: []
+        name: { en: 'Ursa Minor', 'zh-CN': '小熊座', 'zh-TW': '小熊座' },
+        epithet: {
+            en: 'The constellation of return',
+            'zh-CN': '归途的星座',
+            'zh-TW': '歸途的星座'
+        },
+        reason: {
+            en: 'Polaris remains close to the north celestial pole while the sky turns around it. Here it is Home; nine other real stars in Ursa Minor become direct routes into the visible constellations of this life.',
+            'zh-CN': '天空绕北天极旋转，而北极星近乎不动。在这里，它就是 Home；小熊座另外九颗真实恒星成为通往当前生活板块星座的航线。',
+            'zh-TW': '天空繞北天極旋轉，而北極星近乎不動。在這裡，它就是 Home；小熊座另外九顆真實恆星成為通往目前生活板塊星座的航線。'
+        }
+    }
+};
+
+const starProfiles = {
+    746: { names: { en: 'Caph', 'zh-CN': 'Caph · 仙后座 β', 'zh-TW': 'Caph · 仙后座 β' }, designation: 'β Cassiopeiae' },
+    3179: { names: { en: 'Schedar', 'zh-CN': 'Schedar · 仙后座 α', 'zh-TW': 'Schedar · 仙后座 α' }, designation: 'α Cassiopeiae' },
+    4427: { names: { en: 'Gamma Cassiopeiae', 'zh-CN': '仙后座 γ', 'zh-TW': '仙后座 γ' }, designation: 'γ Cassiopeiae' },
+    6686: { names: { en: 'Ruchbah', 'zh-CN': 'Ruchbah · 仙后座 δ', 'zh-TW': 'Ruchbah · 仙后座 δ' }, designation: 'δ Cassiopeiae' },
+    8886: { names: { en: 'Segin', 'zh-CN': 'Segin · 仙后座 ε', 'zh-TW': 'Segin · 仙后座 ε' }, designation: 'ε Cassiopeiae' },
+    54061: { names: { en: 'Dubhe', 'zh-CN': '天枢', 'zh-TW': '天樞' }, designation: 'α Ursae Majoris' },
+    53910: { names: { en: 'Merak', 'zh-CN': '天璇', 'zh-TW': '天璇' }, designation: 'β Ursae Majoris' },
+    58001: { names: { en: 'Phecda', 'zh-CN': '天玑', 'zh-TW': '天璣' }, designation: 'γ Ursae Majoris' },
+    59774: { names: { en: 'Megrez', 'zh-CN': '天权', 'zh-TW': '天權' }, designation: 'δ Ursae Majoris' },
+    62956: { names: { en: 'Alioth', 'zh-CN': '玉衡', 'zh-TW': '玉衡' }, designation: 'ε Ursae Majoris' },
+    65378: { names: { en: 'Mizar', 'zh-CN': '开阳', 'zh-TW': '開陽' }, designation: 'ζ Ursae Majoris' },
+    67301: { names: { en: 'Alkaid', 'zh-CN': '摇光', 'zh-TW': '搖光' }, designation: 'η Ursae Majoris' },
+    91262: { names: { en: 'Vega', 'zh-CN': '织女一', 'zh-TW': '織女一' }, designation: 'α Lyrae' },
+    91971: { names: { en: 'Zeta Lyrae', 'zh-CN': '天琴座 ζ', 'zh-TW': '天琴座 ζ' }, designation: 'ζ Lyrae' },
+    92420: { names: { en: 'Sheliak', 'zh-CN': 'Sheliak · 天琴座 β', 'zh-TW': 'Sheliak · 天琴座 β' }, designation: 'β Lyrae' },
+    93194: { names: { en: 'Sulafat', 'zh-CN': 'Sulafat · 天琴座 γ', 'zh-TW': 'Sulafat · 天琴座 γ' }, designation: 'γ Lyrae' },
+    92791: { names: { en: 'Delta² Lyrae', 'zh-CN': '天琴座 δ²', 'zh-TW': '天琴座 δ²' }, designation: 'δ² Lyrae' },
+    102098: { names: { en: 'Deneb', 'zh-CN': '天津四', 'zh-TW': '天津四' }, designation: 'α Cygni' },
+    100453: { names: { en: 'Sadr', 'zh-CN': 'Sadr · 天鹅座 γ', 'zh-TW': 'Sadr · 天鵝座 γ' }, designation: 'γ Cygni' },
+    95947: { names: { en: 'Albireo', 'zh-CN': 'Albireo · 天鹅座 β', 'zh-TW': 'Albireo · 天鵝座 β' }, designation: 'β Cygni' },
+    97165: { names: { en: 'Delta Cygni', 'zh-CN': '天鹅座 δ', 'zh-TW': '天鵝座 δ' }, designation: 'δ Cygni' },
+    102488: { names: { en: 'Gienah', 'zh-CN': 'Gienah · 天鹅座 ε', 'zh-TW': 'Gienah · 天鵝座 ε' }, designation: 'ε Cygni' },
+    36850: { names: { en: 'Castor', 'zh-CN': '北河二', 'zh-TW': '北河二' }, designation: 'α Geminorum' },
+    37826: { names: { en: 'Pollux', 'zh-CN': '北河三', 'zh-TW': '北河三' }, designation: 'β Geminorum' },
+    32246: { names: { en: 'Mebsuta', 'zh-CN': 'Mebsuta · 双子座 ε', 'zh-TW': 'Mebsuta · 雙子座 ε' }, designation: 'ε Geminorum' },
+    35550: { names: { en: 'Wasat', 'zh-CN': 'Wasat · 双子座 δ', 'zh-TW': 'Wasat · 雙子座 δ' }, designation: 'δ Geminorum' },
+    30343: { names: { en: 'Tejat', 'zh-CN': 'Tejat · 双子座 μ', 'zh-TW': 'Tejat · 雙子座 μ' }, designation: 'μ Geminorum' },
+    31681: { names: { en: 'Alhena', 'zh-CN': 'Alhena · 双子座 γ', 'zh-TW': 'Alhena · 雙子座 γ' }, designation: 'γ Geminorum' },
+    26207: { names: { en: 'Meissa', 'zh-CN': 'Meissa · 猎户座 λ', 'zh-TW': 'Meissa · 獵戶座 λ' }, designation: 'λ Orionis' },
+    27989: { names: { en: 'Betelgeuse', 'zh-CN': '参宿四', 'zh-TW': '參宿四' }, designation: 'α Orionis' },
+    25336: { names: { en: 'Bellatrix', 'zh-CN': '参宿五', 'zh-TW': '參宿五' }, designation: 'γ Orionis' },
+    26727: { names: { en: 'Alnitak', 'zh-CN': '参宿一', 'zh-TW': '參宿一' }, designation: 'ζ Orionis' },
+    26311: { names: { en: 'Alnilam', 'zh-CN': '参宿二', 'zh-TW': '參宿二' }, designation: 'ε Orionis' },
+    25930: { names: { en: 'Mintaka', 'zh-CN': '参宿三', 'zh-TW': '參宿三' }, designation: 'δ Orionis' },
+    27366: { names: { en: 'Saiph', 'zh-CN': '参宿六', 'zh-TW': '參宿六' }, designation: 'κ Orionis' },
+    24436: { names: { en: 'Rigel', 'zh-CN': '参宿七', 'zh-TW': '參宿七' }, designation: 'β Orionis' },
+    97649: { names: { en: 'Altair', 'zh-CN': '河鼓二 · 牛郎星', 'zh-TW': '河鼓二 · 牛郎星' }, designation: 'α Aquilae' },
+    97278: { names: { en: 'Tarazed', 'zh-CN': '河鼓三', 'zh-TW': '河鼓三' }, designation: 'γ Aquilae' },
+    98036: { names: { en: 'Alshain', 'zh-CN': '河鼓一', 'zh-TW': '河鼓一' }, designation: 'β Aquilae' },
+    95501: { names: { en: 'Delta Aquilae', 'zh-CN': '天鹰座 δ', 'zh-TW': '天鷹座 δ' }, designation: 'δ Aquilae' },
+    93747: { names: { en: 'Okab', 'zh-CN': 'Okab · 天鹰座 ζ', 'zh-TW': 'Okab · 天鷹座 ζ' }, designation: 'ζ Aquilae' },
+    93244: { names: { en: 'Epsilon Aquilae', 'zh-CN': '天鹰座 ε', 'zh-TW': '天鷹座 ε' }, designation: 'ε Aquilae' },
+    97804: { names: { en: 'Eta Aquilae', 'zh-CN': '天鹰座 η', 'zh-TW': '天鷹座 η' }, designation: 'η Aquilae' },
+    99473: { names: { en: 'Theta Aquilae', 'zh-CN': '天鹰座 θ', 'zh-TW': '天鷹座 θ' }, designation: 'θ Aquilae' },
+    93805: { names: { en: 'Lambda Aquilae', 'zh-CN': '天鹰座 λ', 'zh-TW': '天鷹座 λ' }, designation: 'λ Aquilae' },
+    113963: { names: { en: 'Markab', 'zh-CN': '室宿一', 'zh-TW': '室宿一' }, designation: 'α Pegasi' },
+    113881: { names: { en: 'Scheat', 'zh-CN': '室宿二', 'zh-TW': '室宿二' }, designation: 'β Pegasi' },
+    677: { names: { en: 'Alpheratz', 'zh-CN': '壁宿二 · 仙女座 α', 'zh-TW': '壁宿二 · 仙女座 α' }, designation: 'α Andromedae · Great Square corner' },
+    1067: { names: { en: 'Algenib', 'zh-CN': '壁宿一', 'zh-TW': '壁宿一' }, designation: 'γ Pegasi' },
+    112029: { names: { en: 'Homam', 'zh-CN': '雷电一', 'zh-TW': '雷電一' }, designation: 'ζ Pegasi' },
+    109427: { names: { en: 'Baham', 'zh-CN': '离宫四', 'zh-TW': '離宮四' }, designation: 'θ Pegasi' },
+    107315: { names: { en: 'Enif', 'zh-CN': '危宿三', 'zh-TW': '危宿三' }, designation: 'ε Pegasi' },
+    81833: { names: { en: 'Eta Herculis', 'zh-CN': '武仙座 η', 'zh-TW': '武仙座 η' }, designation: 'η Herculis' },
+    84380: { names: { en: 'Pi Herculis', 'zh-CN': '武仙座 π', 'zh-TW': '武仙座 π' }, designation: 'π Herculis' },
+    83207: { names: { en: 'Epsilon Herculis', 'zh-CN': '武仙座 ε', 'zh-TW': '武仙座 ε' }, designation: 'ε Herculis' },
+    81693: { names: { en: 'Zeta Herculis', 'zh-CN': '武仙座 ζ', 'zh-TW': '武仙座 ζ' }, designation: 'ζ Herculis' },
+    80816: { names: { en: 'Kornephoros', 'zh-CN': '河间一', 'zh-TW': '河間一' }, designation: 'β Herculis' },
+    80170: { names: { en: 'Gamma Herculis', 'zh-CN': '河间二', 'zh-TW': '河間二' }, designation: 'γ Herculis' },
+    84379: { names: { en: 'Sarin', 'zh-CN': '天纪二', 'zh-TW': '天紀二' }, designation: 'δ Herculis' },
+    84345: { names: { en: 'Rasalgethi', 'zh-CN': '帝座', 'zh-TW': '帝座' }, designation: 'α Herculis' },
+    76267: { names: { en: 'Alphecca', 'zh-CN': '贯索四', 'zh-TW': '貫索四' }, designation: 'α Coronae Borealis' },
+    75695: { names: { en: 'Nusakan', 'zh-CN': '贯索三', 'zh-TW': '貫索三' }, designation: 'β Coronae Borealis' },
+    76127: { names: { en: 'Theta Coronae Borealis', 'zh-CN': '北冕座 θ', 'zh-TW': '北冕座 θ' }, designation: 'θ Coronae Borealis' },
+    76669: { names: { en: 'Zeta Coronae Borealis', 'zh-CN': '北冕座 ζ', 'zh-TW': '北冕座 ζ' }, designation: 'ζ Coronae Borealis' },
+    76952: { names: { en: 'Gamma Coronae Borealis', 'zh-CN': '贯索二', 'zh-TW': '貫索二' }, designation: 'γ Coronae Borealis' },
+    77512: { names: { en: 'Delta Coronae Borealis', 'zh-CN': '贯索一', 'zh-TW': '貫索一' }, designation: 'δ Coronae Borealis' },
+    78159: { names: { en: 'Epsilon Coronae Borealis', 'zh-CN': '北冕座 ε', 'zh-TW': '北冕座 ε' }, designation: 'ε Coronae Borealis' },
+    78493: { names: { en: 'Iota Coronae Borealis', 'zh-CN': '北冕座 ι', 'zh-TW': '北冕座 ι' }, designation: 'ι Coronae Borealis' },
+    79119: { names: { en: 'Tau Coronae Borealis', 'zh-CN': '北冕座 τ', 'zh-TW': '北冕座 τ' }, designation: 'τ Coronae Borealis' },
+    11767: { names: { en: 'Polaris', 'zh-CN': '北极星', 'zh-TW': '北極星' }, designation: 'α Ursae Minoris' },
+    85822: { names: { en: 'Yildun', 'zh-CN': 'Yildun · 小熊座 δ', 'zh-TW': 'Yildun · 小熊座 δ' }, designation: 'δ Ursae Minoris' },
+    82080: { names: { en: 'Epsilon Ursae Minoris', 'zh-CN': '小熊座 ε', 'zh-TW': '小熊座 ε' }, designation: 'ε Ursae Minoris' },
+    79822: { names: { en: 'Eta Ursae Minoris', 'zh-CN': '小熊座 η', 'zh-TW': '小熊座 η' }, designation: 'η Ursae Minoris' },
+    77055: { names: { en: 'Zeta Ursae Minoris', 'zh-CN': '小熊座 ζ', 'zh-TW': '小熊座 ζ' }, designation: 'ζ Ursae Minoris' },
+    72607: { names: { en: 'Kochab', 'zh-CN': 'Kochab · 小熊座 β', 'zh-TW': 'Kochab · 小熊座 β' }, designation: 'β Ursae Minoris' },
+    75097: { names: { en: 'Pherkad', 'zh-CN': 'Pherkad · 小熊座 γ', 'zh-TW': 'Pherkad · 小熊座 γ' }, designation: 'γ Ursae Minoris' },
+    70692: { names: { en: '5 Ursae Minoris', 'zh-CN': '小熊座 5', 'zh-TW': '小熊座 5' }, designation: '5 Ursae Minoris' },
+    69112: { names: { en: '4 Ursae Minoris', 'zh-CN': '小熊座 4', 'zh-TW': '小熊座 4' }, designation: '4 Ursae Minoris' },
+    74605: { names: { en: 'HD 136064', 'zh-CN': 'HD 136064 · 小熊座', 'zh-TW': 'HD 136064 · 小熊座' }, designation: 'HD 136064 · historical ν Ursae Minoris' },
+    73199: { names: { en: 'RR Ursae Minoris', 'zh-CN': '小熊座 RR', 'zh-TW': '小熊座 RR' }, designation: 'RR Ursae Minoris' }
+};
+
+const homeStarTargets = {
+    11767: { type: 'home' },
+    85822: { type: 'portal', portalId: 'gallery' },
+    82080: { type: 'portal', portalId: 'shelf' },
+    79822: { type: 'portal', portalId: 'thoughts' },
+    77055: { type: 'portal', portalId: 'friends' },
+    72607: { type: 'portal', portalId: 'footprints' },
+    70692: { type: 'portal', portalId: 'news' },
+    69112: { type: 'portal', portalId: 'publications' },
+    74605: { type: 'portal', portalId: 'projects' },
+    73199: { type: 'portal', portalId: 'notes' }
+};
+
+const starUiCopy = {
+    en: {
+        sectionKicker: 'LIFE ARCHIVE',
+        constellationNote: 'CONSTELLATION NOTE',
+        starNote: 'STAR NOTE',
+        chooseMeta: count => `${count} real stars · choose one to continue`,
+        choose: 'Move the cursor across the constellation and choose a star. Filled rings carry content; every other star still has its own story.',
+        homeMeta: count => `${count} real stars · Home + nine direct routes`,
+        homeChoose: 'Choose Polaris to return Home. Nine marked stars fly directly to the visible Life constellations; the route index below is also available.',
+        homeRoutes: 'Home star routes',
+        empty: 'This star does not carry any content yet.',
+        filled: count => `${count} ${count === 1 ? 'entry is' : 'entries are'} fixed to this star, following this section’s saved order.`,
+        home: 'Return to the homepage',
+        route: target => `Fly to ${target}`
+    },
+    'zh-CN': {
+        sectionKicker: '生活档案',
+        constellationNote: '星座附注',
+        starNote: '恒星附注',
+        chooseMeta: count => `${count} 颗真实恒星 · 请选择一颗继续`,
+        choose: '把鼠标移到星座中的恒星并选择。带细环的星已有内容；其余恒星也仍有自己的介绍。',
+        homeMeta: count => `${count} 颗真实恒星 · Home 与九条直达航线`,
+        homeChoose: '选择北极星返回主页；九颗带航线的恒星分别直达当前可见的 Life 星座，也可以使用下方的航线索引。',
+        homeRoutes: 'Home 恒星航线',
+        empty: '这颗星上暂时还没有内容。',
+        filled: count => `这颗星固定承载 ${count} 条内容，并遵循该板块保存的顺序。`,
+        home: '返回个人主页',
+        route: target => `飞向${target}`
+    },
+    'zh-TW': {
+        sectionKicker: '生活檔案',
+        constellationNote: '星座附註',
+        starNote: '恆星附註',
+        chooseMeta: count => `${count} 顆真實恆星 · 請選擇一顆繼續`,
+        choose: '把滑鼠移到星座中的恆星並選擇。帶細環的星已有內容；其餘恆星也仍有自己的介紹。',
+        homeMeta: count => `${count} 顆真實恆星 · Home 與九條直達航線`,
+        homeChoose: '選擇北極星返回主頁；九顆帶航線的恆星分別直達目前可見的 Life 星座，也可以使用下方的航線索引。',
+        homeRoutes: 'Home 恆星航線',
+        empty: '這顆星上暫時還沒有內容。',
+        filled: count => `這顆星固定承載 ${count} 條內容，並遵循該板塊儲存的順序。`,
+        home: '返回個人主頁',
+        route: target => `飛向${target}`
     }
 };
 
@@ -1928,11 +3212,20 @@ const dom = {
     gazeSecondary: document.getElementById('gazeSecondary'),
     gazeAnnouncement: document.getElementById('gazeAnnouncement'),
     portalNav: document.getElementById('portalNav'),
+    starNav: document.getElementById('starNav'),
     panel: document.getElementById('portalPanel'),
+    panelKicker: document.getElementById('portalPanelKicker'),
     panelTitle: document.getElementById('portalPanelTitle'),
     panelNames: document.getElementById('portalPanelNames'),
     panelClose: document.getElementById('portalClose'),
     panelBody: document.getElementById('portalPanelBody'),
+    starReader: document.getElementById('starReader'),
+    starReaderKicker: document.getElementById('starReaderKicker'),
+    starReaderTitle: document.getElementById('starReaderTitle'),
+    starReaderMeta: document.getElementById('starReaderMeta'),
+    starReaderDescription: document.getElementById('starReaderDescription'),
+    starReaderStatus: document.getElementById('starReaderStatus'),
+    homeRouteIndex: document.getElementById('homeRouteIndex'),
     lightbox: document.getElementById('lightbox'),
     lightboxImage: document.getElementById('lightboxImg'),
     lightboxCaption: document.getElementById('lightboxCaption'),
@@ -1945,9 +3238,14 @@ const state = {
     hasEntered: false,
     altHeld: false,
     altReturnMode: null,
+    altPreviousLock: null,
     relockPending: false,
+    detailUnlockPending: false,
+    detailRelockPending: false,
     lockIntent: null,
     lockRequestSource: null,
+    lockRequestToken: 0,
+    lockRequestTimer: null,
     lockErrorHandled: false,
     lockFailureCount: 0,
     gateOpen: true,
@@ -1959,6 +3257,8 @@ const state = {
     pendingSince: 0,
     hoverPortal: null,
     activePortal: null,
+    activeStarHip: null,
+    hoverStarHip: null,
     flight: null,
     currentLang: localStorage.getItem('preferredLang') || 'en',
     activationSource: 'gaze',
@@ -1967,6 +3267,7 @@ const state = {
     panelHideTimer: null,
     panelRect: null,
     panelOnLeft: false,
+    detailFov: 43 * DEG,
     homeWarpProgress: 0
 };
 let dragState = null;
@@ -1978,14 +3279,11 @@ function clearDragState() {
 }
 
 const camera = {
-    yaw: -0.25,
-    pitch: 0.08,
-    targetYaw: -0.25,
-    targetPitch: 0.08,
+    orientation: orientationFromYawPitch(INITIAL_CAMERA.yaw, INITIAL_CAMERA.pitch),
+    targetOrientation: orientationFromYawPitch(INITIAL_CAMERA.yaw, INITIAL_CAMERA.pitch),
     fov: 62 * DEG,
     targetFov: 62 * DEG,
-    inspectionYaw: null,
-    inspectionPitch: null
+    inspectionOrientation: null
 };
 
 function clamp(value, min, max) {
@@ -1994,21 +3292,6 @@ function clamp(value, min, max) {
 
 function lerp(start, end, amount) {
     return start + (end - start) * amount;
-}
-
-function wrapAngle(value) {
-    let angle = value;
-    while (angle > Math.PI) angle -= Math.PI * 2;
-    while (angle < -Math.PI) angle += Math.PI * 2;
-    return angle;
-}
-
-function angleDelta(from, to) {
-    return wrapAngle(to - from);
-}
-
-function lerpAngle(from, to, amount) {
-    return from + angleDelta(from, to) * amount;
 }
 
 function easeInOutCubic(value) {
@@ -2038,6 +3321,107 @@ function dot(left, right) {
     return left[0] * right[0] + left[1] * right[1] + left[2] * right[2];
 }
 
+function quatNormalize(quaternion) {
+    const length = Math.hypot(...quaternion) || 1;
+    return quaternion.map(value => value / length);
+}
+
+function quatMultiply(left, right) {
+    const [lx, ly, lz, lw] = left;
+    const [rx, ry, rz, rw] = right;
+    return [
+        lw * rx + lx * rw + ly * rz - lz * ry,
+        lw * ry - lx * rz + ly * rw + lz * rx,
+        lw * rz + lx * ry - ly * rx + lz * rw,
+        lw * rw - lx * rx - ly * ry - lz * rz
+    ];
+}
+
+function quatAxisAngle(x, y, z, angle) {
+    const half = angle * 0.5;
+    const scale = Math.sin(half) / (Math.hypot(x, y, z) || 1);
+    return [x * scale, y * scale, z * scale, Math.cos(half)];
+}
+
+function quatRotate(quaternion, vector) {
+    const [qx, qy, qz, qw] = quaternion;
+    const [vx, vy, vz] = vector;
+    const tx = 2 * (qy * vz - qz * vy);
+    const ty = 2 * (qz * vx - qx * vz);
+    const tz = 2 * (qx * vy - qy * vx);
+    return [
+        vx + qw * tx + qy * tz - qz * ty,
+        vy + qw * ty + qz * tx - qx * tz,
+        vz + qw * tz + qx * ty - qy * tx
+    ];
+}
+
+function quatSlerp(start, end, amount) {
+    let target = end;
+    let cosine = start[0] * end[0] + start[1] * end[1] +
+        start[2] * end[2] + start[3] * end[3];
+    if (cosine < 0) {
+        cosine = -cosine;
+        target = end.map(value => -value);
+    }
+    if (cosine > 0.9995) {
+        return quatNormalize(start.map((value, index) =>
+            value + (target[index] - value) * amount
+        ));
+    }
+    const angle = Math.acos(clamp(cosine, -1, 1));
+    const sine = Math.sin(angle) || 1;
+    const startScale = Math.sin((1 - amount) * angle) / sine;
+    const endScale = Math.sin(amount * angle) / sine;
+    return start.map((value, index) =>
+        value * startScale + target[index] * endScale
+    );
+}
+
+function orientationFromYawPitch(yaw, pitch) {
+    return quatNormalize(quatMultiply(
+        quatAxisAngle(0, 1, 0, yaw),
+        quatAxisAngle(1, 0, 0, -pitch)
+    ));
+}
+
+function orientationFromBasis(right, up, forward) {
+    const m00 = right[0], m01 = up[0], m02 = forward[0];
+    const m10 = right[1], m11 = up[1], m12 = forward[1];
+    const m20 = right[2], m21 = up[2], m22 = forward[2];
+    const trace = m00 + m11 + m22;
+    let x;
+    let y;
+    let z;
+    let w;
+    if (trace > 0) {
+        const scale = Math.sqrt(trace + 1) * 2;
+        w = 0.25 * scale;
+        x = (m21 - m12) / scale;
+        y = (m02 - m20) / scale;
+        z = (m10 - m01) / scale;
+    } else if (m00 > m11 && m00 > m22) {
+        const scale = Math.sqrt(1 + m00 - m11 - m22) * 2;
+        w = (m21 - m12) / scale;
+        x = 0.25 * scale;
+        y = (m01 + m10) / scale;
+        z = (m02 + m20) / scale;
+    } else if (m11 > m22) {
+        const scale = Math.sqrt(1 + m11 - m00 - m22) * 2;
+        w = (m02 - m20) / scale;
+        x = (m01 + m10) / scale;
+        y = 0.25 * scale;
+        z = (m12 + m21) / scale;
+    } else {
+        const scale = Math.sqrt(1 + m22 - m00 - m11) * 2;
+        w = (m10 - m01) / scale;
+        x = (m02 + m20) / scale;
+        y = (m12 + m21) / scale;
+        z = 0.25 * scale;
+    }
+    return quatNormalize([x, y, z, w]);
+}
+
 function addScaled(base, first, firstScale, second, secondScale) {
     return normalize([
         base[0] + first[0] * firstScale + second[0] * secondScale,
@@ -2051,15 +3435,30 @@ function fromYawPitch(yaw, pitch) {
     return [Math.sin(yaw) * cp, Math.sin(pitch), Math.cos(yaw) * cp];
 }
 
-function cameraBasis() {
-    const cy = Math.cos(camera.yaw);
-    const sy = Math.sin(camera.yaw);
-    const cp = Math.cos(camera.pitch);
-    const sp = Math.sin(camera.pitch);
+function toYawPitch(direction) {
     return {
-        right: [cy, 0, -sy],
-        up: [-sy * sp, cp, -cy * sp],
-        forward: [sy * cp, sp, cy * cp]
+        yaw: Math.atan2(direction[0], direction[2]),
+        pitch: Math.asin(clamp(direction[1], -1, 1))
+    };
+}
+
+function hipparcosDirection(hip) {
+    const catalog = window.HipparcosSky;
+    const index = catalog?.indexByHip?.get(hip);
+    if (index === undefined) return null;
+    const offset = index * 3;
+    return normalize([
+        catalog.directions[offset],
+        catalog.directions[offset + 1],
+        catalog.directions[offset + 2]
+    ]);
+}
+
+function cameraBasis() {
+    return {
+        right: quatRotate(camera.orientation, [1, 0, 0]),
+        up: quatRotate(camera.orientation, [0, 1, 0]),
+        forward: quatRotate(camera.orientation, [0, 0, 1])
     };
 }
 
@@ -2070,56 +3469,227 @@ function tangentBasis(direction) {
     return { tangent, bitangent };
 }
 
-function seededRandom(seedText) {
-    let seed = 2166136261;
-    for (let index = 0; index < seedText.length; index += 1) {
-        seed ^= seedText.charCodeAt(index);
-        seed = Math.imul(seed, 16777619);
+function constellationFraming(portal, panelOnLeft = false) {
+    const center = normalize(portal.patternPoints.reduce(
+        (sum, point) => [
+            sum[0] + point[0],
+            sum[1] + point[1],
+            sum[2] + point[2]
+        ],
+        [0, 0, 0]
+    ));
+    const { tangent, bitangent } = tangentBasis(center);
+    let minHorizontalRatio = Infinity;
+    let maxHorizontalRatio = -Infinity;
+    let minVerticalRatio = Infinity;
+    let maxVerticalRatio = -Infinity;
+    portal.patternPoints.forEach(point => {
+        const depth = Math.max(0.05, dot(point, center));
+        const horizontalRatio = dot(point, tangent) / depth;
+        const verticalRatio = dot(point, bitangent) / depth;
+        minHorizontalRatio = Math.min(minHorizontalRatio, horizontalRatio);
+        maxHorizontalRatio = Math.max(maxHorizontalRatio, horizontalRatio);
+        minVerticalRatio = Math.min(minVerticalRatio, verticalRatio);
+        maxVerticalRatio = Math.max(maxVerticalRatio, verticalRatio);
+    });
+
+    const width = Math.max(1, window.innerWidth);
+    const height = Math.max(1, window.innerHeight);
+    const mobile = width <= 760;
+    let safeLeft;
+    let safeRight;
+    let safeTop;
+    let safeBottom;
+    if (mobile) {
+        safeLeft = 42;
+        safeRight = width - 42;
+        safeTop = 72;
+        safeBottom = Math.max(safeTop + 124, height * 0.4);
+    } else {
+        const panelWidth = clamp(width * 0.42, 370, 610);
+        const panelInset = 28;
+        const starMargin = 48;
+        safeTop = 82;
+        safeBottom = height - 58;
+        if (panelOnLeft) {
+            safeLeft = panelInset + panelWidth + starMargin;
+            safeRight = width - starMargin;
+        } else {
+            safeLeft = starMargin;
+            safeRight = width - panelInset - panelWidth - starMargin;
+        }
     }
-    return () => {
-        seed += 0x6D2B79F5;
-        let value = seed;
-        value = Math.imul(value ^ (value >>> 15), value | 1);
-        value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
-        return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+    if (safeRight - safeLeft < 120) {
+        safeLeft = 42;
+        safeRight = width - 42;
+    }
+    if (safeBottom - safeTop < 100) {
+        safeTop = 54;
+        safeBottom = Math.max(safeTop + 100, height - 54);
+    }
+
+    const horizontalSpan = Math.max(0.001, maxHorizontalRatio - minHorizontalRatio);
+    const verticalSpan = Math.max(0.001, maxVerticalRatio - minVerticalRatio);
+    const safeWidth = Math.max(100, safeRight - safeLeft);
+    const safeHeight = Math.max(86, safeBottom - safeTop);
+    const focalLimit = Math.min(
+        safeWidth / horizontalSpan,
+        safeHeight / verticalSpan
+    ) / 1.12;
+    const maxFitFov = (mobile ? 110 : 82) * DEG;
+    let fitFov = clamp(
+        2 * Math.atan((height * 0.5) / Math.max(1, focalLimit)),
+        43 * DEG,
+        maxFitFov
+    );
+    let focal = (height * 0.5) / Math.tan(fitFov * 0.5);
+    const safeCenterX = (safeLeft + safeRight) * 0.5;
+    const safeCenterY = (safeTop + safeBottom) * 0.5;
+    const desiredHorizontalRatio = (safeCenterX - width * 0.5) / focal;
+    const desiredVerticalRatio = (height * 0.5 - safeCenterY) / focal;
+    const horizontalCenter = (minHorizontalRatio + maxHorizontalRatio) * 0.5;
+    const verticalCenter = (minVerticalRatio + maxVerticalRatio) * 0.5;
+    let aim = addScaled(
+        center,
+        tangent,
+        horizontalCenter - desiredHorizontalRatio,
+        bitangent,
+        verticalCenter - desiredVerticalRatio
+    );
+    let right = normalize(cross(bitangent, aim));
+    let up = normalize(cross(aim, right));
+    const targetWidth = safeWidth * 0.88;
+    const targetHeight = safeHeight * 0.88;
+    const projectBounds = () => {
+        let left = Infinity;
+        let rightEdge = -Infinity;
+        let top = Infinity;
+        let bottom = -Infinity;
+        portal.patternPoints.forEach(point => {
+            const depth = Math.max(0.025, dot(point, aim));
+            const x = width * 0.5 + dot(point, right) / depth * focal;
+            const y = height * 0.5 - dot(point, up) / depth * focal;
+            left = Math.min(left, x);
+            rightEdge = Math.max(rightEdge, x);
+            top = Math.min(top, y);
+            bottom = Math.max(bottom, y);
+        });
+        return { left, right: rightEdge, top, bottom };
+    };
+
+    for (let iteration = 0; iteration < 8; iteration += 1) {
+        let bounds = projectBounds();
+        const scale = Math.max(
+            (bounds.right - bounds.left) / Math.max(1, targetWidth),
+            (bounds.bottom - bounds.top) / Math.max(1, targetHeight),
+            1
+        );
+        if (scale > 1.001 && fitFov < maxFitFov) {
+            focal /= scale;
+            fitFov = clamp(
+                2 * Math.atan((height * 0.5) / Math.max(1, focal)),
+                43 * DEG,
+                maxFitFov
+            );
+            focal = (height * 0.5) / Math.tan(fitFov * 0.5);
+            bounds = projectBounds();
+        }
+        const deltaX = (bounds.left + bounds.right) * 0.5 - safeCenterX;
+        const deltaY = (bounds.top + bounds.bottom) * 0.5 - safeCenterY;
+        if (Math.abs(deltaX) < 0.5 && Math.abs(deltaY) < 0.5 && scale <= 1.001) break;
+        aim = normalize([
+            aim[0] + right[0] * (deltaX / focal) - up[0] * (deltaY / focal),
+            aim[1] + right[1] * (deltaX / focal) - up[1] * (deltaY / focal),
+            aim[2] + right[2] * (deltaX / focal) - up[2] * (deltaY / focal)
+        ]);
+        right = normalize(cross(up, aim));
+        up = normalize(cross(aim, right));
+    }
+    return {
+        orientation: orientationFromBasis(right, up, aim),
+        fov: fitFov,
+        panelOnLeft
     };
 }
 
 function buildPortalGeometry() {
+    dom.starNav.replaceChildren();
     portalDefinitions.forEach(portal => {
-        portal.direction = fromYawPitch(portal.yaw, portal.pitch);
+        const pattern = constellationPatterns[portal.pattern];
+        portal.patternHips = pattern.hips.slice();
+        portal.contentOrder = pattern.contentOrder.slice();
+        const catalogPoints = pattern.hips.map(hipparcosDirection);
+        const hasCatalogGeometry = catalogPoints.every(Boolean);
+
+        if (hasCatalogGeometry) {
+            portal.patternPoints = catalogPoints;
+            portal.anchorIndex = Math.max(0, pattern.hips.indexOf(pattern.focusHip));
+            portal.direction = portal.patternPoints[portal.anchorIndex];
+            const orientation = toYawPitch(portal.direction);
+            portal.yaw = orientation.yaw;
+            portal.pitch = orientation.pitch;
+            portal.patternMagnitudes = pattern.hips.map(hip => {
+                const index = window.HipparcosSky.indexByHip.get(hip);
+                return index === undefined
+                    ? Number.NaN
+                    : window.HipparcosSky.magnitudes[index];
+            });
+        } else {
+            portal.yaw = portal.fallbackYaw;
+            portal.pitch = portal.fallbackPitch;
+            portal.direction = fromYawPitch(portal.yaw, portal.pitch);
+            portal.anchorIndex = 0;
+            portal.patternMagnitudes = [];
+        }
+
         const { tangent, bitangent } = tangentBasis(portal.direction);
         portal.tangent = tangent;
         portal.bitangent = bitangent;
-        const pattern = constellationPatterns[portal.pattern];
         portal.patternEdges = pattern.edges;
-        portal.patternPoints = pattern.points.map(([x, y]) =>
-            addScaled(portal.direction, tangent, x, bitangent, y)
-        );
-        portal.button = document.querySelector(`[data-portal-button="${portal.id}"]`);
-        portal.screen = null;
-
-        const content = document.querySelector(`[data-portal-content="${portal.id}"]`);
-        let momentCount = content ? content.querySelectorAll('.portal-moment').length : 0;
-        if (portal.id === 'footprints') momentCount = Math.max(1, visitedCountries.length);
-        if (portal.id === 'friends') momentCount = content?.querySelectorAll('.friend-link').length || 1;
-        portal.momentCount = momentCount;
-
-        const random = seededRandom(`detail-${portal.id}`);
-        portal.detailPoints = [];
-        for (let index = 0; index < momentCount; index += 1) {
-            const angle = index * 2.37 + random() * 0.35;
-            const radius = 0.035 + Math.sqrt(index + 1) * 0.026;
-            portal.detailPoints.push(
-                addScaled(
-                    portal.direction,
-                    tangent,
-                    Math.cos(angle) * radius,
-                    bitangent,
-                    Math.sin(angle) * radius * 0.72
-                )
+        if (!hasCatalogGeometry) {
+            portal.patternPoints = pattern.fallbackPoints.map(([x, y]) =>
+                addScaled(portal.direction, tangent, x, bitangent, y)
             );
         }
+        portal.button = document.querySelector(`[data-portal-button="${portal.id}"]`);
+        portal.screen = null;
+        const content = document.querySelector(`[data-portal-content="${portal.id}"]`);
+        portal.content = content;
+        portal.entriesByHip = new Map(pattern.hips.map(hip => [hip, []]));
+        content?.querySelectorAll('[data-portal-entry]').forEach(entry => {
+            const hip = Number(entry.dataset.starHip);
+            if (portal.entriesByHip.has(hip)) portal.entriesByHip.get(hip).push(entry);
+        });
+
+        portal.starButtons = new Map();
+        pattern.hips.forEach(hip => {
+            const button = document.createElement('button');
+            button.className = 'star-hit';
+            button.type = 'button';
+            button.dataset.starPortal = portal.id;
+            button.dataset.starHip = String(hip);
+            button.hidden = true;
+            button.inert = true;
+            button.innerHTML = '<span class="star-hit-copy"><strong></strong><span></span></span>';
+            button.addEventListener('mouseenter', () => {
+                state.hoverStarHip = hip;
+            });
+            button.addEventListener('mouseleave', () => {
+                if (state.hoverStarHip === hip) state.hoverStarHip = null;
+            });
+            button.addEventListener('focus', () => {
+                state.hoverStarHip = hip;
+            });
+            button.addEventListener('blur', () => {
+                if (state.hoverStarHip === hip) state.hoverStarHip = null;
+            });
+            button.addEventListener('click', event => {
+                event.preventDefault();
+                handlePortalStarAction(portal, hip);
+            });
+            portal.starButtons.set(hip, button);
+            dom.starNav.appendChild(button);
+        });
     });
 }
 
@@ -2148,9 +3718,6 @@ class GalaxyRenderer {
         this.dpr = 1;
         this.width = 1;
         this.height = 1;
-        this.qualityScale = 1;
-        this.frameWindowStart = 0;
-        this.frameWindowCount = 0;
         this.initialize();
         canvas.addEventListener('webglcontextlost', event => {
             event.preventDefault();
@@ -2241,9 +3808,12 @@ class GalaxyRenderer {
                         uForward * cameraRay.z
                     );
 
-                    vec3 galacticNormal = normalize(vec3(0.65, 0.68, 0.34));
-                    vec3 galacticX = normalize(cross(galacticNormal, vec3(0.0, 0.0, 1.0)));
-                    vec3 galacticY = cross(galacticNormal, galacticX);
+                    vec3 galacticNormal = normalize(vec3(-0.198076, 0.455984, -0.867666));
+                    vec3 galacticX = normalize(vec3(-0.873437, -0.483835, -0.054876));
+                    galacticX = normalize(
+                        galacticX - galacticNormal * dot(galacticX, galacticNormal)
+                    );
+                    vec3 galacticY = normalize(cross(galacticNormal, galacticX));
                     float signedLatitude = dot(ray, galacticNormal);
                     float latitude = abs(signedLatitude);
                     vec2 aroundPlane = vec2(dot(ray, galacticX), dot(ray, galacticY));
@@ -2263,10 +3833,7 @@ class GalaxyRenderer {
                     vec3 warm = vec3(0.48, 0.37, 0.30);
                     vec3 galaxy = mix(cool, warm, smoothstep(0.36, 0.74, cloudWarmth));
                     vec2 planeDirection = aroundPlane / max(length(aroundPlane), 0.001);
-                    float towardCore = max(
-                        dot(planeDirection, normalize(vec2(-0.27, -0.96))),
-                        0.0
-                    );
+                    float towardCore = max(dot(planeDirection, vec2(1.0, 0.0)), 0.0);
                     float softHalo = exp(-pow(latitude * 3.4, 1.25));
                     float bulge = pow(towardCore, 7.0) * exp(-pow(latitude * 4.5, 1.3));
                     galaxy *= brokenBand * (0.23 + structure * 0.50);
@@ -2306,9 +3873,13 @@ class GalaxyRenderer {
                 uniform float uFov;
                 uniform float uDpr;
                 uniform float uTime;
+                uniform vec2 uResolution;
                 varying float vAlpha;
                 varying float vTemperature;
                 varying float vMicro;
+                varying float vSubpixel;
+                varying float vEdgeFade;
+                varying float vPointSize;
 
                 void main() {
                     float x = dot(aDirection, uRight);
@@ -2329,14 +3900,34 @@ class GalaxyRenderer {
                     vAlpha = displayBrightness * twinkle * smoothstep(0.015, 0.12, z);
                     vTemperature = aTemperature;
                     vMicro = aMicro;
-                    gl_PointSize = min(18.0, aSize * uDpr * (0.9 + 0.16 / max(z, 0.12)));
+                    float requestedSize = min(
+                        18.0,
+                        aSize * uDpr * (0.9 + 0.16 / max(z, 0.12))
+                    );
+                    vSubpixel = 1.0 - smoothstep(3.0, 6.0, requestedSize);
+                    float stableSize = max(requestedSize, 3.0);
+                    gl_PointSize = stableSize;
+                    vPointSize = stableSize;
+                    vec2 edgePx = (1.0 - abs(projected)) * 0.5 * uResolution;
+                    vEdgeFade = smoothstep(
+                        0.0,
+                        max(2.0, stableSize),
+                        min(edgePx.x, edgePx.y)
+                    );
                 }
                 `,
                 `
+                #ifdef GL_FRAGMENT_PRECISION_HIGH
+                precision highp float;
+                #else
                 precision mediump float;
+                #endif
                 varying float vAlpha;
                 varying float vTemperature;
                 varying float vMicro;
+                varying float vSubpixel;
+                varying float vEdgeFade;
+                varying float vPointSize;
                 void main() {
                     vec2 local = gl_PointCoord - 0.5;
                     float radius = length(local) * 2.0;
@@ -2351,10 +3942,28 @@ class GalaxyRenderer {
                     vec3 warm = vec3(1.0, 0.91, 0.78);
                     vec3 cool = vec3(0.80, 0.88, 1.0);
                     vec3 color = mix(warm, cool, vTemperature);
-                    color = mix(color, vec3(1.0), core * 0.72);
+                    float stableCore = mix(core, 1.0, vSubpixel);
+                    color = mix(color, vec3(1.0), stableCore * 0.72);
                     float haloWeight = mix(0.78, 0.90, vMicro);
                     float coreWeight = mix(0.48, 0.40, vMicro);
-                    float alpha = min(1.0, (halo * haloWeight + core * coreWeight) * vAlpha);
+                    float resolvedAlpha = min(
+                        1.0,
+                        (halo * haloWeight + core * coreWeight) * vAlpha
+                    );
+                    vec2 deltaPx = abs(
+                        (gl_PointCoord - 0.5) * vPointSize
+                    );
+                    float tent =
+                        max(0.0, 1.0 - deltaPx.x) *
+                        max(0.0, 1.0 - deltaPx.y);
+                    float peakWeight = mix(1.26, 1.30, vMicro);
+                    float stableSubpixelAlpha =
+                        min(1.0, peakWeight * vAlpha) * tent;
+                    float alpha = mix(
+                        resolvedAlpha,
+                        stableSubpixelAlpha,
+                        vSubpixel
+                    ) * vEdgeFade;
                     gl_FragColor = vec4(color, alpha);
                 }
                 `
@@ -2395,7 +4004,8 @@ class GalaxyRenderer {
                 fov: this.gl.getUniformLocation(this.starProgram, 'uFov'),
                 aspect: this.gl.getUniformLocation(this.starProgram, 'uAspect'),
                 dpr: this.gl.getUniformLocation(this.starProgram, 'uDpr'),
-                time: this.gl.getUniformLocation(this.starProgram, 'uTime')
+                time: this.gl.getUniformLocation(this.starProgram, 'uTime'),
+                resolution: this.gl.getUniformLocation(this.starProgram, 'uResolution')
             };
             this.ready = true;
             this.resize();
@@ -2435,128 +4045,68 @@ class GalaxyRenderer {
     }
 
     createStarCatalog() {
+        const catalog = window.HipparcosSky;
+        if (!catalog?.count || catalog.directions.length !== catalog.count * 3) {
+            throw new Error('Hipparcos star catalog unavailable');
+        }
+
         const weakDevice = COARSE_POINTER || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
-        const uniformCount = weakDevice ? 3200 : 8500;
-        const bandCount = weakDevice ? 7600 : 23500;
-        const microCount = weakDevice ? 4200 : 16000;
-        const values = new Float32Array((uniformCount + bandCount + microCount) * 8);
-        const random = seededRandom('runde-yang-infinite-galaxy-dense-v2');
-        const gaussian = () => {
-            const first = Math.max(random(), 0.000001);
-            return Math.sqrt(-2 * Math.log(first)) * Math.cos(Math.PI * 2 * random());
-        };
-        const galacticNormal = normalize([0.65, 0.68, 0.34]);
-        const galacticX = normalize(cross(galacticNormal, [0,0,1]));
-        const galacticY = normalize(cross(galacticNormal, galacticX));
-        const cloudCenters = [0.24, 1.36, 2.78, 4.16, 5.48];
+        const visibleCount = Math.min(catalog.count, weakDevice ? 14410 : 45934);
+        const regularCount = Math.min(
+            visibleCount,
+            Math.round(visibleCount * (31145 / 45934))
+        );
+        const rareCount = Math.max(1, Math.round(visibleCount * (213 / 45934)));
+        const values = new Float32Array(visibleCount * 8);
         let cursor = 0;
 
-        const directionOnBand = (longitude, latitude) => {
-            const onPlane = [
-                galacticX[0] * Math.cos(longitude) + galacticY[0] * Math.sin(longitude),
-                galacticX[1] * Math.cos(longitude) + galacticY[1] * Math.sin(longitude),
-                galacticX[2] * Math.cos(longitude) + galacticY[2] * Math.sin(longitude)
-            ];
-            return normalize([
-                onPlane[0] * Math.cos(latitude) + galacticNormal[0] * Math.sin(latitude),
-                onPlane[1] * Math.cos(latitude) + galacticNormal[1] * Math.sin(latitude),
-                onPlane[2] * Math.cos(latitude) + galacticNormal[2] * Math.sin(latitude)
-            ]);
-        };
+        for (let index = 0; index < visibleCount; index += 1) {
+            const directionOffset = index * 3;
+            const rareBright = index < rareCount;
+            const microStar = index >= regularCount;
+            let size;
+            let brightness;
 
-        const appendStar = (direction, profile) => {
-            const bandStar = profile !== 'field';
-            const microStar = profile === 'micro';
-            const rareBright = !microStar && random() > (bandStar ? 0.9925 : 0.995);
-            const size = microStar
-                ? 0.30 + Math.pow(random(), 2.6) * 0.70
-                : rareBright
-                    ? 2.9 + random() * 2.9
-                    : 0.62 + Math.pow(random(), 2.35) * (bandStar ? 1.78 : 1.42);
-            const brightness = microStar
-                ? 0.055 + Math.pow(random(), 2.1) * 0.23
-                : rareBright
-                    ? 0.82 + random() * 0.17
-                    : 0.10 + Math.pow(random(), 1.95) * (bandStar ? 0.45 : 0.38);
-            const temperatureRoll = random();
-            const temperature = microStar
-                ? 0.38 + random() * 0.24
-                : temperatureRoll < 0.15
-                    ? 0.10 + random() * 0.20
-                    : temperatureRoll < 0.83
-                        ? 0.38 + random() * 0.24
-                        : 0.72 + random() * 0.22;
-            values[cursor++] = direction[0];
-            values[cursor++] = direction[1];
-            values[cursor++] = direction[2];
+            if (rareBright) {
+                const strength = rareCount === 1
+                    ? 1
+                    : 1 - index / (rareCount - 1);
+                size = 2.9 + strength * 2.9;
+                brightness = 0.82 + strength * 0.17;
+            } else if (!microStar) {
+                const span = Math.max(1, regularCount - rareCount - 1);
+                const strength = 1 - (index - rareCount) / span;
+                size = 0.62 + Math.pow(strength, 2.35) * 1.78;
+                brightness = 0.10 + Math.pow(strength, 1.95) * 0.45;
+            } else {
+                const span = Math.max(1, visibleCount - regularCount - 1);
+                const strength = 1 - (index - regularCount) / span;
+                size = 0.30 + Math.pow(strength, 2.6) * 0.70;
+                brightness = 0.055 + Math.pow(strength, 2.1) * 0.23;
+            }
+
+            const colorIndex = catalog.colorIndices[index];
+            const temperature = Number.isFinite(colorIndex)
+                ? clamp((1.55 - colorIndex) / 2.0, 0.10, 0.94)
+                : 0.5;
+            const phase = ((catalog.hips[index] * 0.61803398875) % 1) * Math.PI * 2;
+
+            values[cursor++] = catalog.directions[directionOffset];
+            values[cursor++] = catalog.directions[directionOffset + 1];
+            values[cursor++] = catalog.directions[directionOffset + 2];
             values[cursor++] = size;
             values[cursor++] = brightness;
             values[cursor++] = temperature;
-            values[cursor++] = random() * Math.PI * 2;
+            values[cursor++] = phase;
             values[cursor++] = microStar ? 1 : 0;
-        };
-
-        const appendBandStar = (longitude, latitude, profile) => {
-            const laneCenter =
-                0.012 * Math.sin(longitude * 2.1 + 0.4) +
-                0.009 * Math.sin(longitude * 5.2 - 1.1);
-            const laneWidth =
-                0.020 + 0.010 * (0.5 + 0.5 * Math.sin(longitude * 1.7 + 2.3));
-            const proximity = clamp(
-                1 - Math.abs(latitude - laneCenter) / laneWidth,
-                0,
-                1
-            );
-            const irregularity = 0.82 + 0.18 * Math.sin(longitude * 3.7 + 0.9);
-            const dropChance = (profile === 'micro' ? 0.56 : 0.48) *
-                proximity * irregularity;
-            if (random() < dropChance) return;
-            const direction = directionOnBand(longitude, latitude);
-            const beforeBrightness = cursor + 4;
-            appendStar(direction, profile);
-            values[beforeBrightness] *= 1 - proximity * (profile === 'micro' ? 0.34 : 0.24);
-        };
-
-        for (let index = 0; index < uniformCount; index += 1) {
-            const y = random() * 2 - 1;
-            const longitude = random() * Math.PI * 2;
-            const radius = Math.sqrt(Math.max(0, 1 - y * y));
-            appendStar([Math.sin(longitude) * radius, y, Math.cos(longitude) * radius], 'field');
         }
-
-        for (let index = 0; index < bandCount; index += 1) {
-            const longitude = random() * Math.PI * 2;
-            const latitude = clamp(gaussian() * 0.105, -0.43, 0.43);
-            appendBandStar(longitude, latitude, 'band');
-        }
-
-        // A faint, clustered population gives the Milky Way its granular
-        // "uncountable stars" texture without turning the whole band white.
-        for (let index = 0; index < microCount; index += 1) {
-            const clustered = random() < 0.62;
-            const cloudCenter = random() < 0.07
-                ? cloudCenters[3]
-                : cloudCenters[Math.floor(random() * cloudCenters.length)];
-            const longitude = clustered
-                ? cloudCenter + gaussian() * (0.12 + random() * 0.20)
-                : random() * Math.PI * 2;
-            const laneOffset = random() < 0.42
-                ? (random() < 0.5 ? -1 : 1) * (0.012 + random() * 0.026)
-                : 0;
-            const latitude = clamp(
-                gaussian() * (clustered ? 0.046 : 0.074) + laneOffset,
-                -0.29,
-                0.29
-            );
-            appendBandStar(longitude, latitude, 'micro');
-        }
-        return values.subarray(0, cursor);
+        return values;
     }
 
     resize() {
         if (!this.gl) return;
-        const maxDpr = (COARSE_POINTER ? 1 : 1.2) * this.qualityScale;
-        this.dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
+        const maxDpr = COARSE_POINTER ? 1 : 1.2;
+        this.dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, maxDpr));
         this.width = Math.max(1, window.innerWidth);
         this.height = Math.max(1, window.innerHeight);
         const pixelWidth = Math.round(this.width * this.dpr);
@@ -2575,23 +4125,9 @@ class GalaxyRenderer {
         gl.uniform1f(locations.fov, camera.fov);
     }
 
-    trackFramePacing(time) {
-        if (!this.frameWindowStart) this.frameWindowStart = time;
-        this.frameWindowCount += 1;
-        const elapsed = time - this.frameWindowStart;
-        if (elapsed < 2000) return;
-        const averageFrame = elapsed / Math.max(1, this.frameWindowCount);
-        if (averageFrame > 24 && this.qualityScale > 0.82) {
-            this.qualityScale = 0.82;
-        }
-        this.frameWindowStart = time;
-        this.frameWindowCount = 0;
-    }
-
     render(time, basis) {
         if (!this.ready || !this.gl) return false;
         const gl = this.gl;
-        this.trackFramePacing(time);
         this.resize();
         gl.viewport(0, 0, this.canvas.width, this.canvas.height);
         gl.disable(gl.DEPTH_TEST);
@@ -2629,9 +4165,14 @@ class GalaxyRenderer {
             gl.vertexAttribPointer(location, size, gl.FLOAT, false, stride, offset);
         });
         this.setCameraUniforms(this.starLocations, basis);
-        gl.uniform1f(this.starLocations.aspect, this.width / this.height);
+        gl.uniform1f(this.starLocations.aspect, this.canvas.width / this.canvas.height);
         gl.uniform1f(this.starLocations.dpr, this.dpr);
         gl.uniform1f(this.starLocations.time, time);
+        gl.uniform2f(
+            this.starLocations.resolution,
+            this.canvas.width,
+            this.canvas.height
+        );
         gl.drawArrays(gl.POINTS, 0, this.starCount);
         gl.disable(gl.BLEND);
         return true;
@@ -2646,103 +4187,48 @@ let overlayDpr = 1;
 let fallbackStars = [];
 
 function buildFallbackStars() {
-    const random = seededRandom('fallback-sky-dense-v2');
     fallbackStars = [];
-    const galacticNormal = normalize([0.65, 0.68, 0.34]);
-    const galacticX = normalize(cross(galacticNormal, [0,0,1]));
-    const galacticY = normalize(cross(galacticNormal, galacticX));
-    const cloudCenters = [0.24, 1.36, 2.78, 4.16, 5.48];
-    const gaussian = () => {
-        const first = Math.max(random(), 0.000001);
-        return Math.sqrt(-2 * Math.log(first)) * Math.cos(Math.PI * 2 * random());
-    };
-    const directionOnBand = (longitude, latitude) => {
-        const onPlane = [
-            galacticX[0] * Math.cos(longitude) + galacticY[0] * Math.sin(longitude),
-            galacticX[1] * Math.cos(longitude) + galacticY[1] * Math.sin(longitude),
-            galacticX[2] * Math.cos(longitude) + galacticY[2] * Math.sin(longitude)
-        ];
-        return normalize([
-            onPlane[0] * Math.cos(latitude) + galacticNormal[0] * Math.sin(latitude),
-            onPlane[1] * Math.cos(latitude) + galacticNormal[1] * Math.sin(latitude),
-            onPlane[2] * Math.cos(latitude) + galacticNormal[2] * Math.sin(latitude)
-        ]);
-    };
-    const append = (direction, profile = 'field', brightnessMultiplier = 1) => {
-        const band = profile !== 'field';
-        const micro = profile === 'micro';
-        const rareBright = !micro && random() > (band ? 0.988 : 0.994);
-        const size = micro
-            ? 0.40 + Math.pow(random(), 2.2) * 0.65
-            : rareBright
-                ? 1.8 + random() * 1.4
-                : (band ? 0.32 + random() * 1.18 : 0.38 + random() * 1.32);
-        const rawAlpha = (
-            micro
-                ? 0.065 + Math.pow(random(), 2.0) * 0.22
-                : rareBright
-                    ? 0.72 + random() * 0.24
-                    : (band ? 0.10 + random() * 0.45 : 0.12 + random() * 0.52)
-        ) * brightnessMultiplier;
-        fallbackStars.push({
-            direction,
-            size,
-            alpha: Math.pow(
-                Math.max(rawAlpha, 0.0001),
-                micro ? 0.82 : 0.88
-            )
-        });
-    };
-    const appendBand = (longitude, latitude, profile) => {
-        const laneCenter =
-            0.012 * Math.sin(longitude * 2.1 + 0.4) +
-            0.009 * Math.sin(longitude * 5.2 - 1.1);
-        const laneWidth =
-            0.020 + 0.010 * (0.5 + 0.5 * Math.sin(longitude * 1.7 + 2.3));
-        const proximity = clamp(
-            1 - Math.abs(latitude - laneCenter) / laneWidth,
-            0,
-            1
-        );
-        const irregularity = 0.82 + 0.18 * Math.sin(longitude * 3.7 + 0.9);
-        const dropChance = (profile === 'micro' ? 0.56 : 0.48) *
-            proximity * irregularity;
-        if (random() < dropChance) return;
-        append(
-            directionOnBand(longitude, latitude),
-            profile,
-            1 - proximity * (profile === 'micro' ? 0.34 : 0.24)
-        );
-    };
+    const catalog = window.HipparcosSky;
+    if (!catalog?.count) return;
 
-    for (let index = 0; index < 1300; index += 1) {
-        const y = random() * 2 - 1;
-        const longitude = random() * Math.PI * 2;
-        const radius = Math.sqrt(Math.max(0, 1 - y * y));
-        append([Math.sin(longitude) * radius, y, Math.cos(longitude) * radius]);
-    }
-    for (let index = 0; index < 2200; index += 1) {
-        const longitude = random() * Math.PI * 2;
-        const latitude = clamp(gaussian() * 0.105, -0.38, 0.38);
-        appendBand(longitude, latitude, 'band');
-    }
-    for (let index = 0; index < 1300; index += 1) {
-        const clustered = random() < 0.62;
-        const cloudCenter = random() < 0.07
-            ? cloudCenters[3]
-            : cloudCenters[Math.floor(random() * cloudCenters.length)];
-        const longitude = clustered
-            ? cloudCenter + gaussian() * (0.12 + random() * 0.20)
-            : random() * Math.PI * 2;
-        const laneOffset = random() < 0.42
-            ? (random() < 0.5 ? -1 : 1) * (0.012 + random() * 0.026)
-            : 0;
-        const latitude = clamp(
-            gaussian() * (clustered ? 0.046 : 0.074) + laneOffset,
-            -0.29,
-            0.29
-        );
-        appendBand(longitude, latitude, 'micro');
+    const visibleCount = Math.min(catalog.count, COARSE_POINTER ? 2600 : 4800);
+    const regularCount = Math.round(visibleCount * (31145 / 45934));
+    const rareCount = Math.max(1, Math.round(visibleCount * (213 / 45934)));
+
+    for (let index = 0; index < visibleCount; index += 1) {
+        const rareBright = index < rareCount;
+        const micro = index >= regularCount;
+        let size;
+        let rawAlpha;
+
+        if (rareBright) {
+            const strength = rareCount === 1
+                ? 1
+                : 1 - index / (rareCount - 1);
+            size = 1.8 + strength * 1.4;
+            rawAlpha = 0.72 + strength * 0.24;
+        } else if (!micro) {
+            const span = Math.max(1, regularCount - rareCount - 1);
+            const strength = 1 - (index - rareCount) / span;
+            size = 0.38 + strength * 1.32;
+            rawAlpha = 0.12 + strength * 0.52;
+        } else {
+            const span = Math.max(1, visibleCount - regularCount - 1);
+            const strength = 1 - (index - regularCount) / span;
+            size = 0.40 + Math.pow(strength, 2.2) * 0.65;
+            rawAlpha = 0.065 + Math.pow(strength, 2.0) * 0.22;
+        }
+
+        const directionOffset = index * 3;
+        fallbackStars.push({
+            direction: [
+                catalog.directions[directionOffset],
+                catalog.directions[directionOffset + 1],
+                catalog.directions[directionOffset + 2]
+            ],
+            size,
+            alpha: Math.pow(Math.max(rawAlpha, 0.0001), micro ? 0.82 : 0.88)
+        });
     }
 }
 
@@ -2832,6 +4318,242 @@ function orderedPortalNames(portal) {
 
 function portalName(portal, lang) {
     return i18n[lang]?.[portal.titleKey] || portal.id;
+}
+
+function localized(mapping, lang = state.currentLang) {
+    return mapping?.[lang] || mapping?.en || '';
+}
+
+function starName(hip, lang = state.currentLang) {
+    return localized(starProfiles[hip]?.names, lang) || `HIP ${hip}`;
+}
+
+function starCatalogValues(hip) {
+    const index = window.HipparcosSky?.indexByHip?.get(hip);
+    if (index === undefined) return { magnitude: Number.NaN, colorIndex: Number.NaN };
+    return {
+        magnitude: window.HipparcosSky.magnitudes[index],
+        colorIndex: window.HipparcosSky.colorIndices[index]
+    };
+}
+
+function starEntries(portal, hip) {
+    return portal.entriesByHip?.get(hip) || [];
+}
+
+function entryPreview(entry) {
+    if (!entry) return '';
+    if (entry.classList.contains('portal-moment')) {
+        const date = entry.querySelector('.portal-moment-meta span')?.textContent.trim() || '';
+        const location = entry.querySelector('.portal-moment-location')?.textContent.trim() || '';
+        const summary = entry.querySelector('h3')?.textContent.trim() || '';
+        return [[date, location].filter(Boolean).join(' · '), summary].filter(Boolean).join(' — ');
+    }
+    if (entry.classList.contains('friend-link')) return entry.textContent.trim();
+    if (entry.classList.contains('maps-list')) {
+        return document.getElementById('visitedCountriesSummary')?.textContent.trim() || '';
+    }
+    if (entry.classList.contains('about-card')) {
+        const name = entry.querySelector('h3')?.textContent.trim() || '';
+        const role = entry.querySelector('.about-role')?.textContent.trim() || '';
+        return [name, role].filter(Boolean).join(' · ');
+    }
+    if (entry.classList.contains('news-entry')) {
+        const date = entry.querySelector('.news-date, .archive-meta')?.textContent.trim() || '';
+        const title = entry.querySelector('.news-text, h3')?.textContent.trim() || '';
+        return [date, title].filter(Boolean).join(' · ');
+    }
+    if (entry.classList.contains('publication-entry')) {
+        const venue = entry.querySelector('.pub-venue, .archive-meta')?.textContent.trim() || '';
+        const title = entry.querySelector('.pub-title-text, h3')?.textContent.trim() || '';
+        return [venue, title].filter(Boolean).join(' · ');
+    }
+    if (entry.classList.contains('project-entry')) {
+        const title = entry.querySelector('.project-name, h3')?.textContent.trim() || '';
+        const description = entry.querySelector('.project-desc, .project-entry-copy p')?.textContent.trim() || '';
+        return [title, description].filter(Boolean).join(' · ');
+    }
+    if (entry.classList.contains('note-entry')) {
+        const meta = entry.querySelector('.note-meta, .archive-meta')?.textContent.trim() || '';
+        const title = entry.querySelector('.note-title, strong')?.textContent.trim() || '';
+        return [meta, title].filter(Boolean).join(' · ');
+    }
+    return entry.textContent.trim().replace(/\s+/g, ' ').slice(0, 110);
+}
+
+function homeDestinationCopy(hip) {
+    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
+    const action = homeStarTargets[hip];
+    if (!action) return ui.empty;
+    if (action.type === 'home') return ui.home;
+    const target = portalDefinitions.find(portal => portal.id === action.portalId);
+    const route = localized(action.route);
+    return ui.route(route || (target ? portalName(target, state.currentLang) : action.portalId));
+}
+
+function updateStarButtonCopy(portal, hip) {
+    const button = portal.starButtons?.get(hip);
+    if (!button) return;
+    const entries = starEntries(portal, hip);
+    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
+    const name = starName(hip);
+    let preview = portal.home ? homeDestinationCopy(hip) : entryPreview(entries[0]);
+    if (!preview) preview = ui.empty;
+    if (entries.length > 1) preview = `${preview} · +${entries.length - 1}`;
+    const nameNode = button.querySelector('.star-hit-copy > strong');
+    const previewNode = button.querySelector('.star-hit-copy > span');
+    if (nameNode) nameNode.textContent = name;
+    if (previewNode) previewNode.textContent = preview;
+    button.classList.toggle(
+        'has-content',
+        portal.home ? Boolean(homeStarTargets[hip]) : entries.length > 0
+    );
+    button.classList.toggle('is-selected', state.activeStarHip === hip);
+    button.setAttribute('aria-label', `${name} · ${preview}`);
+}
+
+function updateStarButtonPosition(portal, hip, projected) {
+    const button = portal.starButtons?.get(hip);
+    if (!button) return;
+    const active = state.scene === 'detail' && state.activePortal === portal;
+    const onScreen = active && projected?.visible &&
+        projected.x > -56 && projected.x < overlayWidth + 56 &&
+        projected.y > -56 && projected.y < overlayHeight + 56;
+    button.hidden = !onScreen;
+    button.inert = !onScreen;
+    if (!onScreen) return;
+    button.style.transform =
+        `translate3d(${projected.x}px, ${projected.y}px, 0) translate(-50%, -50%)`;
+}
+
+function hideAllStarButtons() {
+    portalDefinitions.forEach(portal => {
+        portal.starButtons?.forEach(button => {
+            button.hidden = true;
+            button.inert = true;
+            button.classList.remove('is-selected');
+        });
+    });
+}
+
+function renderHomeRouteIndex(portal) {
+    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
+    dom.homeRouteIndex.replaceChildren();
+    dom.homeRouteIndex.hidden = !portal?.home;
+    if (!portal?.home) return;
+
+    dom.homeRouteIndex.setAttribute('aria-label', ui.homeRoutes);
+    const fragment = document.createDocumentFragment();
+    portal.contentOrder.forEach(hip => {
+        const action = homeStarTargets[hip];
+        if (!action) return;
+        const button = document.createElement('button');
+        button.className = 'home-route-button';
+        button.type = 'button';
+        button.dataset.homeRouteHip = String(hip);
+        const star = document.createElement('strong');
+        const destination = document.createElement('span');
+        star.textContent = starName(hip);
+        destination.textContent = homeDestinationCopy(hip);
+        button.append(star, destination);
+        button.setAttribute('aria-label', `${star.textContent} · ${destination.textContent}`);
+        button.addEventListener('click', () => handlePortalStarAction(portal, hip));
+        fragment.append(button);
+    });
+    dom.homeRouteIndex.append(fragment);
+}
+
+function showConstellationOverview(portal) {
+    const story = constellationStories[portal.id];
+    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
+    state.activeStarHip = null;
+    state.hoverStarHip = null;
+    dom.starReader.classList.add('is-overview');
+    dom.starReader.classList.remove('is-star-footnote', 'is-empty');
+    dom.starReaderKicker.textContent = ui.constellationNote;
+    dom.starReaderTitle.textContent = localized(story.name);
+    dom.starReaderMeta.textContent = portal.home
+        ? ui.homeMeta(portal.patternHips.length)
+        : ui.chooseMeta(portal.patternHips.length);
+    dom.starReaderDescription.textContent = localized(story.reason);
+    dom.starReaderStatus.textContent = portal.home ? ui.homeChoose : ui.choose;
+    renderHomeRouteIndex(portal);
+    portal.starButtons.forEach((_button, hip) => updateStarButtonCopy(portal, hip));
+    portal.content?.querySelectorAll('[data-portal-entry]').forEach(entry => {
+        entry.hidden = true;
+    });
+}
+
+function starDescription(portal, hip) {
+    const profile = starProfiles[hip] || {};
+    const story = constellationStories[portal.id];
+    const { magnitude, colorIndex } = starCatalogValues(hip);
+    return [
+        profile.designation,
+        `HIP ${hip}`,
+        localized(story.name),
+        Number.isFinite(magnitude) ? `V ${magnitude.toFixed(2)}` : '',
+        Number.isFinite(colorIndex) ? `B−V ${colorIndex.toFixed(2)}` : ''
+    ].filter(Boolean).join(' · ');
+}
+
+function selectPortalStar(portal, hip) {
+    if (state.scene !== 'detail' || state.activePortal !== portal) return;
+    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
+    const entries = starEntries(portal, hip);
+
+    state.activeStarHip = hip;
+    state.hoverStarHip = hip;
+    dom.homeRouteIndex.hidden = true;
+    dom.starReader.classList.remove('is-overview');
+    dom.starReader.classList.add('is-star-footnote');
+    dom.starReader.classList.toggle('is-empty', entries.length === 0);
+    dom.starReaderKicker.textContent = ui.starNote;
+    dom.starReaderTitle.textContent = starName(hip);
+    dom.starReaderMeta.textContent = starDescription(portal, hip);
+    dom.starReaderDescription.textContent = '';
+    dom.starReaderStatus.textContent = entries.length ? ui.filled(entries.length) : ui.empty;
+    portal.starButtons.forEach((_button, starHip) => updateStarButtonCopy(portal, starHip));
+    const contentEntries = portal.content
+        ? Array.from(portal.content.querySelectorAll('[data-portal-entry]'))
+        : [];
+    contentEntries.forEach(entry => {
+        entry.hidden = Number(entry.dataset.starHip) !== hip;
+        entry.classList.remove('is-first-visible');
+    });
+    contentEntries.find(entry =>
+        !entry.hidden && entry.classList.contains('portal-moment')
+    )?.classList.add('is-first-visible');
+    requestAnimationFrame(() => {
+        dom.panelBody.scrollTo({
+            top: 0,
+            behavior: REDUCED_MOTION ? 'auto' : 'smooth'
+        });
+    });
+    if (portal.id === 'footprints' && entries.length) {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            initMaps();
+            resizeMaps();
+        }));
+    }
+}
+
+function handlePortalStarAction(portal, hip) {
+    if (portal.home) {
+        const action = homeStarTargets[hip];
+        if (!action) {
+            selectPortalStar(portal, hip);
+            return;
+        }
+        if (action.type === 'home') {
+            startPortalFlight(portal, 'star-home', 'home-departure');
+            return;
+        }
+        const target = portalDefinitions.find(candidate => candidate.id === action.portalId);
+        if (target) startPortalFlight(target, 'star-route');
+        return;
+    }
+    selectPortalStar(portal, hip);
 }
 
 function updatePortalButton(portal, projected) {
@@ -2943,11 +4665,15 @@ function drawConstellations(basis, time, webglRendered) {
         const center = projectDirection(portal.direction, basis, overlayWidth, overlayHeight);
         portal.screen = center;
         updatePortalButton(portal, center);
-        if (!center?.visible) return;
-
         const points = portal.patternPoints.map(point =>
             projectDirection(point, basis, overlayWidth, overlayHeight)
         );
+        portal.screenPoints = points;
+        portal.patternHips.forEach((hip, index) => {
+            updateStarButtonPosition(portal, hip, points[index]);
+        });
+        if (!center?.visible) return;
+
         const focused = state.focusedPortal === portal;
         const selected = active === portal;
         const edgeAlpha = selected ? 0.52 : focused ? 0.4 : 0.15;
@@ -2972,58 +4698,51 @@ function drawConstellations(basis, time, webglRendered) {
 
         points.forEach((point, index) => {
             if (!point?.visible) return;
+            const hip = portal.patternHips[index];
+            const starSelected = selected && state.activeStarHip === hip;
+            const starHovered = selected && state.hoverStarHip === hip;
             const pulse = REDUCED_MOTION
                 ? 1
                 : 0.92 + 0.08 * Math.sin(time * 0.0012 + portalIndex * 2.1 + index * 1.7);
-            const homeExpansion = portal.home && selected
+            const isAnchor = index === portal.anchorIndex;
+            const homeExpansion = portal.home &&
+                state.flight?.action === 'home-departure' &&
+                selected &&
+                isAnchor
                 ? state.homeWarpProgress * state.homeWarpProgress * 15
                 : 0;
-            const baseRadius = portal.home
+            const baseRadius = portal.home && isAnchor
                 ? 2.9 + homeExpansion
-                : (index === 0 ? 2.25 : 1.35 + (index % 3) * 0.22);
+                : (isAnchor ? 2.25 : 1.35 + (index % 3) * 0.22);
+            const interactionScale = starSelected ? 1.72 : starHovered ? 1.46 : 1;
             drawStarGlow(
                 context,
                 point.x,
                 point.y,
-                baseRadius * pulse * (focused || selected ? 1.22 : 1),
-                starAlpha * (index === 0 ? 1 : 0.78),
+                baseRadius * pulse * (focused || selected ? 1.22 : 1) * interactionScale,
+                Math.min(1, starAlpha * (isAnchor ? 1 : 0.78) * (starSelected || starHovered ? 1.18 : 1)),
                 warm
             );
         });
-
-        if ((selected && (state.scene === 'flying' || state.scene === 'detail')) && portal.detailPoints.length) {
-            const detailPoints = portal.detailPoints.map(point =>
-                projectDirection(point, basis, overlayWidth, overlayHeight)
-            );
-            context.strokeStyle = `rgba(215,226,250,${state.scene === 'detail' ? 0.22 : 0.12})`;
-            context.lineWidth = 0.55;
-            detailPoints.forEach((point, index) => {
-                if (!point?.visible) return;
-                const previous = index === 0 ? center : detailPoints[index - 1];
-                if (previous?.visible) {
-                    context.beginPath();
-                    context.moveTo(previous.x, previous.y);
-                    context.lineTo(point.x, point.y);
-                    context.stroke();
-                }
-                drawStarGlow(context, point.x, point.y, 1.05, 0.72, false);
-            });
-        }
         context.restore();
     });
 
     if (state.scene === 'detail' && active?.screen?.visible) {
         const rect = state.panelRect;
         if (rect?.width > 0) {
+            const activeStarIndex = active.patternHips.indexOf(state.activeStarHip);
+            const source = activeStarIndex >= 0 && active.screenPoints?.[activeStarIndex]?.visible
+                ? active.screenPoints[activeStarIndex]
+                : active.screen;
             const endX = state.panelOnLeft ? rect.right : rect.left;
-            const endY = clamp(active.screen.y, rect.top + 72, rect.bottom - 54);
-            const gradient = context.createLinearGradient(active.screen.x, active.screen.y, endX, endY);
+            const endY = clamp(source.y, rect.top + 72, rect.bottom - 54);
+            const gradient = context.createLinearGradient(source.x, source.y, endX, endY);
             gradient.addColorStop(0, 'rgba(224,234,255,0.34)');
             gradient.addColorStop(1, 'rgba(224,234,255,0.03)');
             context.strokeStyle = gradient;
             context.lineWidth = 0.7;
             context.beginPath();
-            context.moveTo(active.screen.x, active.screen.y);
+            context.moveTo(source.x, source.y);
             context.lineTo(endX, endY);
             context.stroke();
         }
@@ -3035,12 +4754,12 @@ function drawConstellations(basis, time, webglRendered) {
 function applyLook(deltaX, deltaY, multiplier = 1) {
     if (state.scene === 'flying' || state.scene === 'leaving-home' || state.scene === 'detail') return;
     const sensitivity = (COARSE_POINTER ? 0.0032 : 0.00175) * multiplier;
-    let nextYaw = camera.targetYaw + deltaX * sensitivity;
-    let nextPitch = camera.targetPitch - deltaY * sensitivity;
-    nextPitch = clamp(nextPitch, -1.18, 1.18);
-
-    camera.targetYaw = nextYaw;
-    camera.targetPitch = nextPitch;
+    let next = quatMultiply(
+        camera.targetOrientation,
+        quatAxisAngle(0, 1, 0, deltaX * sensitivity)
+    );
+    next = quatMultiply(next, quatAxisAngle(1, 0, 0, deltaY * sensitivity));
+    camera.targetOrientation = quatNormalize(next);
 }
 
 function updateCamera(time) {
@@ -3051,28 +4770,31 @@ function updateCamera(time) {
         const flight = state.flight;
         const progress = clamp((time - flight.startedAt) / flight.duration, 0, 1);
         const eased = easeInOutCubic(progress);
-        const homeWarp = flight.portal.home
+        const isHomeDeparture = flight.action === 'home-departure';
+        const homeWarp = isHomeDeparture
             ? clamp((progress - 0.38) / 0.62, 0, 1)
             : 0;
         state.homeWarpProgress = homeWarp * homeWarp * (3 - 2 * homeWarp);
-        camera.yaw = lerpAngle(flight.startYaw, flight.endYaw, eased);
-        camera.pitch = lerp(flight.startPitch, flight.endPitch, eased);
+        camera.orientation = quatSlerp(
+            flight.startOrientation,
+            flight.endOrientation,
+            eased
+        );
         const focalArc = Math.sin(progress * Math.PI);
-        const focalDepth = flight.portal.home ? 7.5 : 3.5;
+        const focalDepth = isHomeDeparture ? 7.5 : 3.5;
         camera.fov = Math.max(
             7 * DEG,
             lerp(flight.startFov, flight.endFov, eased) - focalArc * focalDepth * DEG
         );
-        camera.targetYaw = camera.yaw;
-        camera.targetPitch = camera.pitch;
+        camera.targetOrientation = camera.orientation.slice();
 
-        if (flight.portal.home && progress > 0.58) {
+        if (isHomeDeparture && progress > 0.58) {
             dom.veil.classList.add('is-active');
         }
 
         if (progress >= 1) {
             state.flight = null;
-            if (flight.portal.home) {
+            if (isHomeDeparture) {
                 state.scene = 'leaving-home';
                 state.lockIntent = 'navigation';
                 releaseRightZoom();
@@ -3096,45 +4818,63 @@ function updateCamera(time) {
                     }, REDUCED_MOTION ? 0 : 360);
                 }
             } else {
-                openPortalPanel(flight.portal);
+                state.detailFov = flight.endFov;
+                openPortalPanel(flight.portal, flight.panelOnLeft);
             }
         }
         return;
     }
 
     const response = REDUCED_MOTION ? 1 : 1 - Math.exp(-deltaSeconds * 8.5);
-    camera.yaw = lerpAngle(camera.yaw, camera.targetYaw, response);
-    camera.pitch = lerp(camera.pitch, camera.targetPitch, response);
-    const restingFov = state.scene === 'detail' ? 43 * DEG : 62 * DEG;
+    camera.orientation = quatSlerp(
+        camera.orientation,
+        camera.targetOrientation,
+        response
+    );
+    const restingFov = state.scene === 'detail' ? state.detailFov : 62 * DEG;
     const desiredFov = state.rightDown ? restingFov - 14 * DEG : restingFov;
     const fovResponse = REDUCED_MOTION ? 1 : 1 - Math.exp(-deltaSeconds * 9.5);
     camera.fov = lerp(camera.fov, desiredFov, fovResponse);
 }
 
-function startPortalFlight(portal, source = 'gaze') {
+function startPortalFlight(portal, source = 'gaze', action = 'open') {
     if (!portal || state.scene === 'flying' || state.scene === 'leaving-home' || state.modalOpen) return;
     if (state.scene === 'detail') closePortalPanel(false);
+    const isHomeDeparture = action === 'home-departure';
     state.activationSource = source;
     state.scene = 'flying';
     state.activePortal = portal;
+    state.activeStarHip = null;
+    state.hoverStarHip = null;
     state.homeWarpProgress = 0;
     setFocusedPortal(portal);
     dom.status.textContent = 'FOCUSING';
 
-    const desktopSideOffset = portal.home || window.innerWidth <= 760 ? 0 : 0.2;
-    const verticalOffset = window.innerWidth <= 760 && !portal.home ? -0.16 : 0;
-    if (portal.home) releaseRightZoom();
-    const duration = REDUCED_MOTION ? 1 : (portal.home ? 1180 : 920);
+    const panelOnLeft = !isHomeDeparture &&
+        window.innerWidth > 760 &&
+        Boolean(portal.screen?.visible && portal.screen.x > overlayWidth * 0.56);
+    let endOrientation = orientationFromYawPitch(
+        portal.yaw,
+        clamp(portal.pitch, -MAX_PITCH, MAX_PITCH)
+    );
+    let endFov = isHomeDeparture ? 9 * DEG : 43 * DEG;
+    if (!isHomeDeparture) {
+        const framing = constellationFraming(portal, panelOnLeft);
+        endOrientation = framing.orientation;
+        endFov = framing.fov;
+    }
+    if (isHomeDeparture) releaseRightZoom();
+    const duration = REDUCED_MOTION ? 1 : (isHomeDeparture ? 1180 : 920);
     state.flight = {
         portal,
+        action,
         startedAt: performance.now(),
         duration,
-        startYaw: camera.yaw,
-        startPitch: camera.pitch,
+        startOrientation: camera.orientation.slice(),
         startFov: camera.fov,
-        endYaw: portal.yaw + desktopSideOffset,
-        endPitch: clamp(portal.pitch + verticalOffset, -1.1, 1.1),
-        endFov: portal.home ? 9 * DEG : 43 * DEG
+        endOrientation,
+        endFov,
+        panelOnLeft
     };
 }
 
@@ -3144,66 +4884,84 @@ function cancelFlight() {
     state.flight = null;
     state.scene = 'roam';
     state.activePortal = null;
+    state.activeStarHip = null;
+    state.hoverStarHip = null;
     state.homeWarpProgress = 0;
-    camera.yaw = flight.startYaw;
-    camera.pitch = flight.startPitch;
+    camera.orientation = flight.startOrientation.slice();
     camera.fov = flight.startFov;
-    camera.targetYaw = flight.startYaw;
-    camera.targetPitch = flight.startPitch;
-    camera.inspectionYaw = null;
-    camera.inspectionPitch = null;
+    camera.targetOrientation = flight.startOrientation.slice();
+    camera.inspectionOrientation = null;
     dom.veil.classList.remove('is-active');
     dom.status.textContent = state.lock === 'locked' ? 'FREE LOOK' : 'VIEW PAUSED';
     setFocusedPortal(flight.portal);
+    if (
+        !state.touchMode &&
+        document.pointerLockElement !== dom.world &&
+        !state.altHeld &&
+        !state.modalOpen
+    ) {
+        settleUnlockedView('flight-cancel');
+    }
 }
 
 function releaseViewForDetail() {
     releaseRightZoom();
+    state.lockRequestToken += 1;
+    window.clearTimeout(state.lockRequestTimer);
+    state.lockRequestTimer = null;
+    state.lockRequestSource = null;
     state.altHeld = false;
     state.altReturnMode = null;
     state.relockPending = false;
-    camera.targetYaw = camera.yaw;
-    camera.targetPitch = camera.pitch;
-    camera.targetFov = 43 * DEG;
+    state.detailUnlockPending = false;
+    state.detailRelockPending = false;
+    camera.targetOrientation = camera.orientation.slice();
+    camera.targetFov = state.detailFov;
     dom.body.classList.remove('view-locked');
     dom.body.classList.add('cursor-free');
     hideEntryGate();
 
     if (document.pointerLockElement === dom.world) {
+        state.detailUnlockPending = true;
+        state.detailRelockPending = false;
         state.lockIntent = 'detail';
         document.exitPointerLock();
     } else {
+        state.detailUnlockPending = false;
         state.lockIntent = null;
         if (!state.touchMode) state.lock = 'detail-free';
     }
 }
 
-function openPortalPanel(portal) {
+function openPortalPanel(portal, panelOnLeft = false) {
     window.clearTimeout(state.panelHideTimer);
     document.querySelectorAll('[data-portal-content]').forEach(content => {
         content.hidden = content.dataset.portalContent !== portal.id;
     });
+    state.activePortal = portal;
+    state.activeStarHip = null;
+    state.hoverStarHip = null;
     const names = orderedPortalNames(portal);
+    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
+    dom.panelKicker.textContent = ui.sectionKicker;
     dom.panelTitle.textContent = names[0];
     dom.panelNames.textContent = LANGUAGES.map(lang => portalName(portal, lang)).join(' / ');
     dom.panel.setAttribute('aria-hidden', 'false');
     dom.panelClose.setAttribute('aria-label', i18n[state.currentLang]?.panel_close || 'Return to the galaxy');
     dom.body.classList.add('panel-open');
-    state.panelOnLeft = Boolean(portal.screen?.x > overlayWidth * 0.56);
+    state.panelOnLeft = window.innerWidth > 760 && panelOnLeft;
     dom.panel.classList.toggle('is-left', state.panelOnLeft);
+    dom.body.classList.toggle('panel-left', state.panelOnLeft);
     state.panelRect = dom.panel.getBoundingClientRect();
     state.scene = 'detail';
-    state.activePortal = portal;
-    camera.inspectionYaw = camera.yaw;
-    camera.inspectionPitch = camera.pitch;
-    camera.targetFov = 43 * DEG;
+    camera.inspectionOrientation = camera.orientation.slice();
+    camera.targetFov = state.detailFov;
     dom.status.textContent = 'DETAIL';
+    dom.portalNav.inert = true;
+    dom.starNav.inert = false;
+    showConstellationOverview(portal);
     updateThoughtToggles();
     releaseViewForDetail();
-
-    if (portal.id === 'footprints') {
-        requestAnimationFrame(() => requestAnimationFrame(initMaps));
-    }
     requestAnimationFrame(() => dom.panelClose.focus({ preventScroll: true }));
 }
 
@@ -3213,11 +4971,18 @@ function closePortalPanel(restoreFocus = true) {
     dom.body.classList.remove('panel-open');
     dom.panel.setAttribute('aria-hidden', 'true');
     dom.panel.classList.remove('is-left');
+    dom.body.classList.remove('panel-left');
+    hideAllStarButtons();
+    dom.homeRouteIndex.hidden = true;
+    dom.starNav.inert = true;
+    dom.portalNav.inert = false;
     state.panelRect = null;
     state.scene = 'roam';
     state.activePortal = null;
-    camera.inspectionYaw = null;
-    camera.inspectionPitch = null;
+    state.activeStarHip = null;
+    state.hoverStarHip = null;
+    state.detailFov = 43 * DEG;
+    camera.inspectionOrientation = null;
     dom.status.textContent = state.lock === 'locked' ? 'FREE LOOK' : 'CURSOR FREE';
     state.panelHideTimer = window.setTimeout(() => {
         document.querySelectorAll('[data-portal-content]').forEach(content => {
@@ -3231,9 +4996,13 @@ function closePortalPanel(restoreFocus = true) {
     if (restoreFocus && !state.modalOpen && !state.altHeld) {
         if (state.touchMode) {
             dom.status.textContent = 'DRAG TO LOOK';
+        } else if (state.detailUnlockPending) {
+            state.detailRelockPending = true;
         } else if (document.pointerLockElement !== dom.world) {
             requestViewLock('detail-close');
         }
+    } else {
+        state.detailRelockPending = false;
     }
 }
 
@@ -3261,9 +5030,11 @@ function setGateState(open, focusTrigger = false) {
     state.gateOpen = open;
     dom.entryGate.classList.toggle('is-hidden', !open);
     dom.entryGate.setAttribute('aria-hidden', String(!open));
-    [dom.world, dom.portalNav, dom.panel, dom.lightbox].forEach(element => {
+    [dom.world, dom.panel, dom.lightbox].forEach(element => {
         if (element) element.inert = open;
     });
+    dom.portalNav.inert = open || state.scene === 'detail';
+    dom.starNav.inert = open || state.scene !== 'detail';
     if (open && focusTrigger && !document.hidden) {
         requestAnimationFrame(() => {
             if (state.gateOpen) dom.entryTrigger.focus({ preventScroll: true });
@@ -3286,7 +5057,54 @@ function showResumeGate(focusTrigger = true) {
     dom.status.textContent = 'VIEW PAUSED';
 }
 
+function settleUnlockedView(reason, { focusGate = false } = {}) {
+    releaseRightZoom();
+    dom.body.classList.remove('view-locked');
+    dom.body.classList.add('cursor-free');
+    if (state.scene === 'leaving-home') {
+        state.lock = 'navigation';
+        hideEntryGate();
+        return;
+    }
+    if (state.modalOpen) {
+        state.lock = 'modal-free';
+        hideEntryGate();
+        return;
+    }
+    if (state.scene === 'detail') {
+        state.lock = 'detail-free';
+        hideEntryGate();
+        dom.status.textContent = 'DETAIL · CURSOR FREE';
+        return;
+    }
+    if (state.touchMode) {
+        state.lock = 'unavailable';
+        hideEntryGate();
+        dom.status.textContent = 'DRAG TO LOOK';
+        return;
+    }
+    if (state.altHeld) {
+        state.lock = 'alt-free';
+        hideEntryGate();
+        dom.status.textContent = 'ALT · CURSOR FREE';
+        return;
+    }
+    if (state.scene === 'flying') {
+        state.lock = 'flight-free';
+        hideEntryGate();
+        return;
+    }
+    if (reason === 'keyboard') {
+        state.lock = 'keyboard-free';
+        hideEntryGate();
+        dom.status.textContent = 'KEYBOARD · CURSOR FREE';
+        return;
+    }
+    if (state.hasEntered) showResumeGate(focusGate);
+}
+
 function enterFallbackMode() {
+    state.lockRequestToken += 1;
     state.touchMode = true;
     state.lock = 'unavailable';
     state.lockIntent = null;
@@ -3294,6 +5112,10 @@ function enterFallbackMode() {
     state.altHeld = false;
     state.altReturnMode = null;
     state.relockPending = false;
+    state.detailUnlockPending = false;
+    state.detailRelockPending = false;
+    window.clearTimeout(state.lockRequestTimer);
+    state.lockRequestTimer = null;
     state.scene = state.scene === 'entry' ? 'roam' : state.scene;
     dom.entryTrigger.disabled = false;
     dom.entryFallback.hidden = true;
@@ -3304,12 +5126,23 @@ function enterFallbackMode() {
     dom.world.focus({ preventScroll: true });
 }
 
-function handleLockFailure(error) {
+function handleLockFailure(error, token = state.lockRequestToken) {
+    if (
+        token !== state.lockRequestToken ||
+        state.lock !== 'requesting' ||
+        document.pointerLockElement === dom.world
+    ) return;
     if (state.lockErrorHandled) return;
+    window.clearTimeout(state.lockRequestTimer);
+    state.lockRequestTimer = null;
     state.lockErrorHandled = true;
     const source = state.lockRequestSource;
     state.lockRequestSource = null;
     dom.entryTrigger.disabled = false;
+    if (state.scene === 'detail' || state.modalOpen || state.scene === 'flying') {
+        settleUnlockedView('lock-failure');
+        return;
+    }
     const unsupported = error?.name === 'NotSupportedError';
     if (unsupported) {
         enterFallbackMode();
@@ -3331,18 +5164,34 @@ function requestViewLock(source = 'entry') {
     dom.body.classList.add('has-entered');
     if (state.touchMode || typeof dom.world.requestPointerLock !== 'function') {
         enterFallbackMode();
-        return;
+        return false;
     }
     if (
+        !['entry', 'roam', 'flying'].includes(state.scene) ||
         state.altHeld ||
         state.modalOpen ||
         state.lock === 'requesting' ||
         document.pointerLockElement === dom.world
-    ) return;
+    ) return false;
 
+    // A fresh user gesture supersedes any system/Alt/detail intent left by an
+    // earlier unlock. This prevents a late pointer-lock result from turning
+    // the first resume click into a no-op.
+    state.lockIntent = null;
     state.lock = 'requesting';
+    const token = state.lockRequestToken + 1;
+    state.lockRequestToken = token;
     state.lockRequestSource = source;
     state.lockErrorHandled = false;
+    window.clearTimeout(state.lockRequestTimer);
+    state.lockRequestTimer = window.setTimeout(() => {
+        if (token !== state.lockRequestToken || state.lock !== 'requesting') return;
+        if (document.pointerLockElement === dom.world) {
+            handlePointerLockChange();
+            return;
+        }
+        handleLockFailure({ name: 'TimeoutError' }, token);
+    }, 1800);
     dom.entryTrigger.disabled = true;
     dom.status.textContent = 'LOCKING VIEW';
     try {
@@ -3350,13 +5199,15 @@ function requestViewLock(source = 'entry') {
         if (result && typeof result.catch === 'function') {
             result.catch(error => {
                 console.warn('Pointer lock request was declined:', error);
-                handleLockFailure(error);
+                handleLockFailure(error, token);
             });
         }
     } catch (error) {
         console.warn('Pointer lock is unavailable:', error);
         handleLockFailure(error);
+        return false;
     }
+    return true;
 }
 
 function releaseRightZoom() {
@@ -3367,13 +5218,67 @@ function handlePointerLockChange() {
     const locked = document.pointerLockElement === dom.world;
     releaseRightZoom();
     if (locked) {
+        window.clearTimeout(state.lockRequestTimer);
+        state.lockRequestTimer = null;
+        state.lockRequestSource = null;
+        if (state.altHeld) {
+            state.lock = 'alt-free';
+            state.lockIntent = 'alt';
+            dom.body.classList.remove('view-locked');
+            dom.body.classList.add('cursor-free');
+            hideEntryGate();
+            queueMicrotask(() => {
+                if (document.pointerLockElement === dom.world) document.exitPointerLock();
+            });
+            return;
+        }
+        const staleRoamLock = (
+            !['requesting', 'locked'].includes(state.lock) &&
+            state.scene !== 'detail' &&
+            state.scene !== 'leaving-home' &&
+            !state.modalOpen
+        );
+        if (document.hidden || state.touchMode || state.lockIntent === 'system' || staleRoamLock) {
+            state.lock = 'suspended';
+            dom.body.classList.remove('view-locked');
+            dom.body.classList.add('cursor-free');
+            queueMicrotask(() => {
+                if (document.pointerLockElement === dom.world) document.exitPointerLock();
+            });
+            return;
+        }
+        if (state.scene === 'detail' || state.modalOpen || state.scene === 'leaving-home') {
+            dom.body.classList.remove('view-locked');
+            dom.body.classList.add('cursor-free');
+            if (state.scene === 'detail') {
+                state.lock = 'detail-free';
+                state.lockIntent = 'detail';
+                state.detailUnlockPending = true;
+            } else if (state.modalOpen) {
+                state.lock = 'modal-free';
+                state.lockIntent = 'modal';
+            } else {
+                state.lock = 'navigation';
+                state.lockIntent = 'navigation';
+            }
+            hideEntryGate();
+            queueMicrotask(() => {
+                if (document.pointerLockElement === dom.world) document.exitPointerLock();
+            });
+            return;
+        }
         state.lock = 'locked';
         state.lockIntent = null;
         state.lockRequestSource = null;
+        window.clearTimeout(state.lockRequestTimer);
+        state.lockRequestTimer = null;
         state.lockErrorHandled = false;
         state.lockFailureCount = 0;
         state.relockPending = false;
         state.altReturnMode = null;
+        state.altPreviousLock = null;
+        state.detailUnlockPending = false;
+        state.detailRelockPending = false;
         state.scene = state.scene === 'entry' ? 'roam' : state.scene;
         dom.entryTrigger.disabled = false;
         dom.entryFallback.hidden = true;
@@ -3392,6 +5297,8 @@ function handlePointerLockChange() {
         state.altHeld = false;
         state.altReturnMode = null;
         state.relockPending = false;
+        state.detailUnlockPending = false;
+        state.detailRelockPending = false;
         dom.body.classList.add('cursor-free');
         hideEntryGate();
         return;
@@ -3410,7 +5317,11 @@ function handlePointerLockChange() {
         state.relockPending = false;
         if (shouldRelock) {
             state.altReturnMode = null;
-            queueMicrotask(() => requestViewLock('alt-release'));
+            state.altPreviousLock = null;
+            queueMicrotask(() => {
+                const requested = requestViewLock('alt-release');
+                if (requested) dom.body.classList.remove('cursor-free');
+            });
         }
         return;
     }
@@ -3423,41 +5334,68 @@ function handlePointerLockChange() {
         return;
     }
 
-    if (state.lockIntent === 'keyboard') {
-        state.lock = 'keyboard-free';
+    if (state.detailUnlockPending || state.lockIntent === 'detail') {
+        const shouldRelock = state.detailRelockPending &&
+            state.scene === 'roam' &&
+            !state.modalOpen &&
+            !state.altHeld;
+        state.detailUnlockPending = false;
+        state.detailRelockPending = false;
         state.lockIntent = null;
-        dom.body.classList.add('cursor-free');
-        hideEntryGate();
-        dom.status.textContent = 'KEYBOARD · CURSOR FREE';
+        if (shouldRelock) {
+            state.lock = 'detail-relock';
+            dom.body.classList.remove('view-locked');
+            dom.body.classList.add('cursor-free');
+            hideEntryGate();
+            queueMicrotask(() => requestViewLock('detail-close'));
+        } else {
+            settleUnlockedView('detail');
+        }
         return;
     }
 
-    if (state.scene === 'flying') cancelFlight();
+    if (state.lockIntent === 'keyboard') {
+        state.lockIntent = null;
+        settleUnlockedView('keyboard');
+        return;
+    }
+
+    if (state.scene === 'flying') {
+        cancelFlight();
+        return;
+    }
     if (state.scene === 'detail') {
-        state.lock = 'detail-free';
         state.lockIntent = null;
         state.altHeld = false;
         state.altReturnMode = null;
         state.relockPending = false;
-        dom.body.classList.add('cursor-free');
-        hideEntryGate();
-        dom.status.textContent = 'DETAIL · CURSOR FREE';
+        settleUnlockedView('detail');
         return;
     }
     state.altHeld = false;
     state.altReturnMode = null;
     state.relockPending = false;
     state.lockIntent = null;
-    if (state.hasEntered) showResumeGate();
+    settleUnlockedView('unexpected', { focusGate: true });
 }
 
 function releaseCursorForAlt() {
     if (!state.hasEntered || state.altHeld || state.modalOpen || state.touchMode || state.gateOpen) return;
+    const pointerLocked = document.pointerLockElement === dom.world;
+    const wasRequesting = state.lock === 'requesting';
+    if (!pointerLocked && !wasRequesting) return;
+    if (wasRequesting && !pointerLocked) {
+        state.lockRequestToken += 1;
+        window.clearTimeout(state.lockRequestTimer);
+        state.lockRequestTimer = null;
+        state.lockRequestSource = null;
+    }
     state.altHeld = true;
     state.relockPending = false;
-    state.altReturnMode = document.pointerLockElement === dom.world ? 'locked' : 'free';
+    state.altPreviousLock = state.lock;
+    state.altReturnMode = pointerLocked || wasRequesting ? 'locked' : 'free';
     dom.body.classList.add('cursor-free');
-    if (document.pointerLockElement === dom.world) {
+    if (pointerLocked) {
         state.lockIntent = 'alt';
         document.exitPointerLock();
     } else {
@@ -3470,16 +5408,49 @@ function restoreViewAfterAlt() {
     if (!state.altHeld) return;
     state.altHeld = false;
     const shouldRelock = state.altReturnMode === 'locked';
-    if (state.modalOpen || state.touchMode || !shouldRelock) {
+    const canRelock = shouldRelock &&
+        ['entry', 'roam', 'flying'].includes(state.scene) &&
+        !state.modalOpen &&
+        !state.touchMode &&
+        !state.gateOpen;
+    if (!canRelock) {
         state.altReturnMode = null;
+        state.altPreviousLock = null;
+        state.relockPending = false;
+        dom.body.classList.add('cursor-free');
+        if (!state.modalOpen && !state.touchMode) {
+            settleUnlockedView(state.scene === 'detail' ? 'detail' : 'keyboard');
+        }
         return;
     }
     state.relockPending = true;
     if (document.pointerLockElement === dom.world || state.lockIntent === 'alt') return;
     state.relockPending = false;
     state.altReturnMode = null;
-    dom.body.classList.remove('cursor-free');
-    requestViewLock('alt-release');
+    state.altPreviousLock = null;
+    const requested = requestViewLock('alt-release');
+    if (requested) {
+        dom.body.classList.remove('cursor-free');
+    } else {
+        dom.body.classList.add('cursor-free');
+    }
+}
+
+function recoverMissingAltKeyup() {
+    if (!state.altHeld) return;
+    state.altHeld = false;
+    state.altReturnMode = null;
+    state.altPreviousLock = null;
+    state.relockPending = false;
+    state.lockIntent = null;
+    dom.body.classList.add('cursor-free');
+    if (state.scene === 'detail') {
+        settleUnlockedView('detail');
+    } else if (state.scene === 'roam' && state.hasEntered) {
+        showResumeGate(false);
+    } else {
+        settleUnlockedView('keyboard');
+    }
 }
 
 function suspendForModal() {
@@ -3501,17 +5472,25 @@ function resumeAfterModal() {
 function resetTransientInput(focusGate = false) {
     releaseRightZoom();
     clearDragState();
+    state.lockRequestToken += 1;
+    window.clearTimeout(state.lockRequestTimer);
+    state.lockRequestTimer = null;
+    state.lockRequestSource = null;
     state.altHeld = false;
     state.altReturnMode = null;
     state.relockPending = false;
+    state.detailUnlockPending = false;
+    state.detailRelockPending = false;
+    state.altPreviousLock = null;
     if (state.scene === 'leaving-home') return;
     if (state.modalOpen || state.touchMode) return;
     if (state.scene === 'flying') cancelFlight();
-    state.lockIntent = 'system';
     if (document.pointerLockElement === dom.world) {
+        state.lockIntent = 'system';
         document.exitPointerLock();
         return;
     }
+    state.lockIntent = null;
     if (state.scene === 'detail') {
         state.lock = 'detail-free';
         dom.body.classList.add('cursor-free');
@@ -3524,15 +5503,48 @@ function resetTransientInput(focusGate = false) {
 
 dom.entryTrigger.addEventListener('click', () => requestViewLock('entry'));
 dom.entryFallback.addEventListener('click', enterFallbackMode);
+dom.entryGate.addEventListener('click', event => {
+    if (!state.gateOpen || state.touchMode) return;
+    if (event.target instanceof Element && event.target.closest('#entryFallback')) return;
+    requestViewLock('entry');
+});
 document.addEventListener('pointerlockchange', handlePointerLockChange);
-document.addEventListener('pointerlockerror', () => handleLockFailure());
+document.addEventListener('pointerlockerror', () => {
+    if (state.lock !== 'requesting' || document.pointerLockElement === dom.world) return;
+    handleLockFailure(undefined, state.lockRequestToken);
+});
 
 document.addEventListener('mousemove', event => {
+    if (
+        state.altHeld &&
+        !event.altKey &&
+        document.pointerLockElement !== dom.world
+    ) {
+        recoverMissingAltKeyup();
+    }
     if (document.pointerLockElement !== dom.world || state.altHeld || state.modalOpen) return;
     applyLook(event.movementX, event.movementY);
 });
 
+document.addEventListener('pointerdown', event => {
+    if (event.button !== 0 || !state.altHeld || event.altKey) return;
+    restoreViewAfterAlt();
+}, true);
+
 dom.world.addEventListener('mousedown', event => {
+    if (
+        event.button === 0 &&
+        document.pointerLockElement !== dom.world &&
+        state.scene === 'roam' &&
+        state.hasEntered &&
+        !state.touchMode &&
+        !state.altHeld &&
+        !state.modalOpen &&
+        !state.gateOpen
+    ) {
+        requestViewLock('world-click');
+        return;
+    }
     if (document.pointerLockElement !== dom.world) return;
     if (event.button === 2) {
         event.preventDefault();
@@ -3676,9 +5688,21 @@ document.addEventListener('keydown', event => {
         }
     }
     if (state.modalOpen || state.gateOpen) return;
-    if (event.key === 'Tab' && document.pointerLockElement === dom.world) {
-        state.lockIntent = 'keyboard';
-        document.exitPointerLock();
+    if (
+        event.key === 'Tab' &&
+        (document.pointerLockElement === dom.world || state.lock === 'requesting')
+    ) {
+        if (document.pointerLockElement === dom.world) {
+            state.lockIntent = 'keyboard';
+            document.exitPointerLock();
+        } else {
+            state.lockRequestToken += 1;
+            window.clearTimeout(state.lockRequestTimer);
+            state.lockRequestTimer = null;
+            state.lockRequestSource = null;
+            state.lockIntent = null;
+            settleUnlockedView('keyboard');
+        }
         return;
     }
     if (isInteractiveKeyTarget(event.target)) return;
@@ -3708,19 +5732,35 @@ document.addEventListener('keydown', event => {
     }
 });
 
-document.addEventListener('keyup', event => {
-    if (event.key === 'Alt') {
+window.addEventListener('keyup', event => {
+    if (
+        event.key === 'Alt' ||
+        event.code === 'AltLeft' ||
+        event.code === 'AltRight'
+    ) {
         event.preventDefault();
         restoreViewAfterAlt();
     }
     if (event.key === 'z' || event.key === 'Z') releaseRightZoom();
-});
+}, true);
 
 dom.panelClose.addEventListener('click', () => closePortalPanel());
 window.addEventListener('resize', () => {
     galaxyRenderer.resize();
     resizeOverlay();
-    if (state.scene === 'detail') state.panelRect = dom.panel.getBoundingClientRect();
+    if (state.scene === 'detail' && state.activePortal) {
+        state.panelOnLeft = window.innerWidth > 760 && state.panelOnLeft;
+        dom.panel.classList.toggle('is-left', state.panelOnLeft);
+        dom.body.classList.toggle('panel-left', state.panelOnLeft);
+        const framing = constellationFraming(state.activePortal, state.panelOnLeft);
+        state.detailFov = framing.fov;
+        camera.orientation = framing.orientation.slice();
+        camera.targetOrientation = framing.orientation.slice();
+        camera.inspectionOrientation = framing.orientation.slice();
+        camera.fov = framing.fov;
+        camera.targetFov = framing.fov;
+        state.panelRect = dom.panel.getBoundingClientRect();
+    }
     resizeMaps();
 });
 
@@ -3763,7 +5803,57 @@ function updateThoughtToggles() {
     });
 }
 
+const citationResetTimers = new WeakMap();
+
+async function writeClipboardText(value) {
+    if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        return;
+    }
+    const textarea = document.createElement('textarea');
+    textarea.value = value;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.append(textarea);
+    textarea.select();
+    const copied = document.execCommand('copy');
+    textarea.remove();
+    if (!copied) throw new Error('Clipboard copy was unavailable');
+}
+
+function updateCitationButtons() {
+    const data = i18n[state.currentLang] || i18n.en || {};
+    document.querySelectorAll('[data-copy-citation]').forEach(button => {
+        const label = button.querySelector('[data-key="life_action_cite"]');
+        if (!label) return;
+        label.textContent = button.dataset.copyState === 'copied'
+            ? (data.life_action_copied || 'Copied')
+            : (data.life_action_cite || 'Cite');
+    });
+}
+
 document.addEventListener('click', event => {
+    const citeButton = event.target.closest('[data-copy-citation]');
+    if (citeButton) {
+        const source = citeButton.closest('[data-portal-entry]')?.querySelector('[data-citation-source]');
+        const citation = source?.textContent.trim() || '';
+        if (!citation) return;
+        event.preventDefault();
+        writeClipboardText(citation).then(() => {
+            window.clearTimeout(citationResetTimers.get(citeButton));
+            citeButton.dataset.copyState = 'copied';
+            updateCitationButtons();
+            const timer = window.setTimeout(() => {
+                delete citeButton.dataset.copyState;
+                updateCitationButtons();
+                citationResetTimers.delete(citeButton);
+            }, 1500);
+            citationResetTimers.set(citeButton, timer);
+        }).catch(() => {});
+        return;
+    }
+
     const button = event.target.closest('[data-thought-toggle]');
     if (!button) return;
     const expanded = button.getAttribute('aria-expanded') === 'true';
@@ -3780,8 +5870,16 @@ function updateActivePortalCopy() {
         dom.gazeSecondary.textContent = names.slice(1).join(' / ');
     }
     if (state.activePortal && state.scene === 'detail') {
-        dom.panelTitle.textContent = portalName(state.activePortal, state.currentLang);
-        dom.panelNames.textContent = LANGUAGES.map(lang => portalName(state.activePortal, lang)).join(' / ');
+        const activePortal = state.activePortal;
+        dom.panelKicker.textContent =
+            (starUiCopy[state.currentLang] || starUiCopy.en).sectionKicker;
+        dom.panelTitle.textContent = portalName(activePortal, state.currentLang);
+        dom.panelNames.textContent = LANGUAGES.map(lang => portalName(activePortal, lang)).join(' / ');
+        if (state.activeStarHip && !activePortal.home) {
+            selectPortalStar(activePortal, state.activeStarHip);
+        } else {
+            showConstellationOverview(activePortal);
+        }
     }
 }
 
@@ -3810,6 +5908,10 @@ function setLang(lang) {
     LANGUAGES.forEach(value => dom.body.classList.remove(`lang-${value}`));
     dom.body.classList.add(`lang-${state.currentLang}`);
     const data = i18n[state.currentLang] || i18n.en || {};
+    dom.starNav.setAttribute(
+        'aria-label',
+        (starUiCopy[state.currentLang] || starUiCopy.en).choose
+    );
 
     document.querySelectorAll('[data-key]').forEach(element => {
         const key = element.dataset.key;
@@ -3846,9 +5948,10 @@ function setLang(lang) {
             : (data.enter_hint || 'Click once to take control of the view');
     }
 
-    updateThoughtToggles();
-    updateActivePortalCopy();
     updateMapAccessibility();
+    updateThoughtToggles();
+    updateCitationButtons();
+    updateActivePortalCopy();
     updateMapLanguage();
 }
 
@@ -3879,52 +5982,6 @@ function waitForECharts(timeout = 7000) {
     });
 }
 
-function coordinateBounds(coordinates) {
-    const bounds = { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity };
-    let found = false;
-    const visit = value => {
-        if (
-            Array.isArray(value) &&
-            value.length >= 2 &&
-            Number.isFinite(value[0]) &&
-            Number.isFinite(value[1])
-        ) {
-            found = true;
-            bounds.minX = Math.min(bounds.minX, value[0]);
-            bounds.maxX = Math.max(bounds.maxX, value[0]);
-            bounds.minY = Math.min(bounds.minY, value[1]);
-            bounds.maxY = Math.max(bounds.maxY, value[1]);
-            return;
-        }
-        if (Array.isArray(value)) value.forEach(visit);
-    };
-    visit(coordinates);
-    return found ? bounds : null;
-}
-
-function separateTaiwanGeometry(geoJson) {
-    const china = geoJson.features?.find(feature => feature.properties?.name === 'China');
-    if (!china || china.geometry?.type !== 'MultiPolygon') return geoJson;
-    const mainlandPolygons = [];
-    const taiwanPolygons = [];
-    china.geometry.coordinates.forEach(polygon => {
-        const bounds = coordinateBounds(polygon);
-        const inTaiwanArea = bounds &&
-            bounds.minX >= 117.8 && bounds.maxX <= 122.5 &&
-            bounds.minY >= 21.4 && bounds.maxY <= 26.0;
-        (inTaiwanArea ? taiwanPolygons : mainlandPolygons).push(polygon);
-    });
-    if (!taiwanPolygons.length) return geoJson;
-    china.geometry.coordinates = mainlandPolygons;
-    china.properties.childNum = mainlandPolygons.length;
-    geoJson.features.push({
-        type: 'Feature',
-        properties: { name: 'Taiwan', childNum: taiwanPolygons.length },
-        geometry: { type: 'MultiPolygon', coordinates: taiwanPolygons }
-    });
-    return geoJson;
-}
-
 function worldSeriesData() {
     return visitedCountries.map(country => {
         const displayName = country.label?.[state.currentLang] || country.label?.en || country.map_name;
@@ -3945,7 +6002,8 @@ function worldSeriesData() {
 }
 
 function currentCountrySummary() {
-    return document.getElementById('visitedCountriesSummary')?.textContent || 'Mainland China';
+    return document.getElementById('visitedCountriesSummary')?.textContent ||
+        'Mainland China and Taiwan';
 }
 
 function mapFailure(element, error) {
@@ -3953,7 +6011,18 @@ function mapFailure(element, error) {
     element.innerHTML = '<div style="height:100%;display:grid;place-items:center;color:#999;font:12px IBM Plex Sans,sans-serif;">Map unavailable</div>';
 }
 
+function footprintsMapIsVisible() {
+    const entry = document.querySelector('[data-portal-entry="footprints-map"]');
+    return Boolean(
+        entry &&
+        !entry.hidden &&
+        state.scene === 'detail' &&
+        state.activePortal?.id === 'footprints'
+    );
+}
+
 async function initMaps() {
+    if (!footprintsMapIsVisible()) return;
     if (mapsReady || mapsInitializing) {
         resizeMaps();
         return;
@@ -3963,10 +6032,6 @@ async function initMaps() {
     const worldElement = document.getElementById('worldMap');
     try {
         const echarts = await waitForECharts();
-        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-        chinaMapChart = echarts.init(chinaElement, null, { renderer: 'canvas' });
-        worldMapChart = echarts.init(worldElement, null, { renderer: 'canvas' });
-
         const [chinaResponse, worldResponse] = await Promise.all([
             fetch('assets/maps/china_city_full.json'),
             fetch('assets/maps/world.json')
@@ -3978,6 +6043,17 @@ async function initMaps() {
             chinaResponse.json(),
             worldResponse.json()
         ]);
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        if (!footprintsMapIsVisible()) {
+            mapsInitializing = false;
+            return;
+        }
+        echarts.getInstanceByDom(chinaElement)?.dispose();
+        echarts.getInstanceByDom(worldElement)?.dispose();
+        chinaElement.replaceChildren();
+        worldElement.replaceChildren();
+        chinaMapChart = echarts.init(chinaElement, null, { renderer: 'canvas' });
+        worldMapChart = echarts.init(worldElement, null, { renderer: 'canvas' });
 
         const cityFeatures = [];
         const districtByParent = new Map();
@@ -4029,7 +6105,7 @@ async function initMaps() {
             type: 'FeatureCollection',
             features: mergedFeatures
         });
-        echarts.registerMap('world_life_mainland', separateTaiwanGeometry(worldGeoJson));
+        echarts.registerMap('world_life_footprints', worldGeoJson);
 
         chinaMapChart.setOption({
             animation: !REDUCED_MOTION,
@@ -4074,7 +6150,7 @@ async function initMaps() {
             },
             series: [{
                 type: 'map',
-                map: 'world_life_mainland',
+                map: 'world_life_footprints',
                 roam: true,
                 center: [10, 18],
                 zoom: 0.98,
@@ -4088,7 +6164,14 @@ async function initMaps() {
         mapsInitializing = false;
         resizeMaps();
     } catch (error) {
+        mapsReady = false;
         mapsInitializing = false;
+        chinaMapChart?.dispose();
+        worldMapChart?.dispose();
+        window.echarts?.getInstanceByDom?.(chinaElement)?.dispose();
+        window.echarts?.getInstanceByDom?.(worldElement)?.dispose();
+        chinaMapChart = null;
+        worldMapChart = null;
         mapFailure(chinaElement, error);
         mapFailure(worldElement, error);
     }
@@ -4283,20 +6366,31 @@ function restoreLifeAfterNavigation(focusGate = true) {
     state.flight = null;
     state.scene = state.hasEntered ? 'roam' : 'entry';
     state.activePortal = null;
+    state.activeStarHip = null;
+    state.hoverStarHip = null;
     state.homeWarpProgress = 0;
     state.lockIntent = null;
     state.altHeld = false;
     state.altReturnMode = null;
+    state.altPreviousLock = null;
     state.relockPending = false;
+    state.detailUnlockPending = false;
+    state.detailRelockPending = false;
+    state.lockRequestToken += 1;
+    window.clearTimeout(state.lockRequestTimer);
+    state.lockRequestTimer = null;
+    state.lockRequestSource = null;
     releaseRightZoom();
     clearDragState();
-    camera.yaw = -0.25;
-    camera.pitch = 0.08;
-    camera.targetYaw = -0.25;
-    camera.targetPitch = 0.08;
+    const initialOrientation = orientationFromYawPitch(INITIAL_CAMERA.yaw, INITIAL_CAMERA.pitch);
+    camera.orientation = initialOrientation.slice();
+    camera.targetOrientation = initialOrientation.slice();
+    camera.inspectionOrientation = null;
+    state.detailFov = 43 * DEG;
     camera.fov = 62 * DEG;
     dom.veil.classList.remove('is-active');
-    dom.body.classList.remove('panel-open', 'view-locked');
+    dom.body.classList.remove('panel-open', 'panel-left', 'view-locked');
+    hideAllStarButtons();
     setFocusedPortal(null);
     if (state.hasEntered) {
         if (state.touchMode) {

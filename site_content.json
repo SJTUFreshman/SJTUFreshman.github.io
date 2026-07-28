@@ -654,6 +654,48 @@
         "prominence": 3
       }
     ],
+    "star_bindings": {
+      "gallery": {
+        "gallery-qiandao-2024-11": 746,
+        "gallery-orion-2025": 3179,
+        "gallery-nanjing-2025-03": 3179,
+        "gallery-baking-2025-12": 4427,
+        "gallery-campus-undated": 4427
+      },
+      "footprints": {
+        "footprints-map": 54061
+      },
+      "shelf": {
+        "shelf-deep-learning": 91262,
+        "shelf-interstellar": 91262
+      },
+      "thoughts": {
+        "thought-2024-11-10": 102098,
+        "thought-2026-01-16": 100453,
+        "thought-2026-06-29": 95947
+      },
+      "friends": {
+        "friend-laboratory-partner": 36850,
+        "friend-sjtu-ai-club": 36850
+      },
+      "about": {
+        "about-profile": 27989
+      },
+      "news": {
+        "news_1": 97649
+      },
+      "publications": {
+        "Generative_2025": 113963,
+        "PRISM_2026": 113963,
+        "AgentXRay_2026": 113963,
+        "AppCopilot_2025": 677
+      },
+      "projects": {
+        "appcopilot": 81693,
+        "teachmaster": 81693
+      },
+      "notes": {}
+    },
     "thoughts": [
       {
         "id": "thought_0629",
@@ -697,10 +739,12 @@
     ],
     "friends": [
       {
+        "id": "friend-laboratory-partner",
         "label": "Laboratory Partner A",
         "href": "#"
       },
       {
+        "id": "friend-sjtu-ai-club",
         "label": "SJTU AI Club",
         "href": "#"
       }
@@ -747,9 +791,9 @@
         {
           "map_name": "China",
           "label": {
-            "en": "Mainland China",
-            "zh-CN": "中国大陆",
-            "zh-TW": "中國大陸"
+            "en": "Mainland China and Taiwan",
+            "zh-CN": "中国大陆与台湾",
+            "zh-TW": "中國大陸與臺灣"
           }
         }
       ]
