@@ -276,6 +276,8 @@
         "chart_world": "Countries visited",
         "enter_galaxy": "Enter the galaxy",
         "enter_hint": "Click once to take control of the view",
+        "enter_location_synced": "Current observing location: {location} · synced from homepage weather",
+        "enter_location_fallback": "Current observing location: {location} · default location",
         "enter_fallback": "Continue with drag controls",
         "lock_failed_hint": "Pointer lock was blocked. Retry or continue with drag controls.",
         "resume_view": "Click to return to free look",
@@ -306,6 +308,8 @@
         "chart_world": "到访国家和地区",
         "enter_galaxy": "进入星河",
         "enter_hint": "点击一次，接管视角",
+        "enter_location_synced": "当前观测位置：{location} · 与主页天气同步",
+        "enter_location_fallback": "当前观测位置：{location} · 默认位置",
         "enter_fallback": "使用拖拽继续",
         "lock_failed_hint": "浏览器未允许锁定鼠标；可重试，或使用拖拽浏览。",
         "resume_view": "点击恢复自由视角",
@@ -336,6 +340,8 @@
         "chart_world": "到訪國家和地區",
         "enter_galaxy": "進入星河",
         "enter_hint": "點擊一次，接管視角",
+        "enter_location_synced": "目前觀測位置：{location} · 與主頁天氣同步",
+        "enter_location_fallback": "目前觀測位置：{location} · 預設位置",
         "enter_fallback": "使用拖曳繼續",
         "lock_failed_hint": "瀏覽器未允許鎖定滑鼠；可重試，或使用拖曳瀏覽。",
         "resume_view": "點擊恢復自由視角",
@@ -597,25 +603,6 @@
         "prominence": 2
       },
       {
-        "id": "thought-2024-11-10",
-        "stream": "thoughts",
-        "date": "2024-11-10",
-        "location": {
-          "en": "Qiandao Lake",
-          "zh-CN": "千岛湖",
-          "zh-TW": "千島湖"
-        },
-        "summary": {
-          "en": "The meteor shower the camera could not hold",
-          "zh-CN": "相机装不下的那场流星雨",
-          "zh-TW": "相機裝不下的那場流星雨"
-        },
-        "item_ids": [
-          "thought_2"
-        ],
-        "prominence": 2
-      },
-      {
         "id": "thought-2026-01-16",
         "stream": "thoughts",
         "date": "2026-01-16",
@@ -625,9 +612,9 @@
           "zh-TW": ""
         },
         "summary": {
-          "en": "After finals, learning to live abundantly again",
-          "zh-CN": "期末之后，重新丰盈地生活",
-          "zh-TW": "期末之後，重新豐盈地生活"
+          "en": "Spes non confundit",
+          "zh-CN": "望德不叫人蒙羞",
+          "zh-TW": "望德不叫人蒙羞"
         },
         "item_ids": [
           "thought_1"
@@ -644,9 +631,9 @@
           "zh-TW": ""
         },
         "summary": {
-          "en": "A dream from the night before",
-          "zh-CN": "昨夜的一场梦",
-          "zh-TW": "昨夜的一場夢"
+          "en": "Misericordiae Vultus",
+          "zh-CN": "慈悲面容",
+          "zh-TW": "慈悲面容"
         },
         "item_ids": [
           "thought_0629"
@@ -670,7 +657,6 @@
         "shelf-interstellar": 91262
       },
       "thoughts": {
-        "thought-2024-11-10": 102098,
         "thought-2026-01-16": 100453,
         "thought-2026-06-29": 95947
       },
@@ -721,19 +707,6 @@
           "en": "Today, the weight of finals and endless tasks has finally lifted.\n\nMy sleep has been a chaotic blur lately—restless and sparse.\n\nAround 9 PM, a wave of malaise drove me to bed, where I lingered in that hollow space between wakefulness and dreams. By 11:56 PM, I found myself fully awake, yet deeply fatigued.\n\nI began listening to 'The Shorekeeper’s Theme.' It is remarkably soothing, yet it carries a defiant, positive undertone: I want to play the piano, I want to train, I want to live—truly live—for myself. I crave a life of warmth and intensity; I refuse to be just another exam robot.\n\nWe are meant to live lives of abundance; even when the world bears down on us, we must not allow our spirits to wither.\n\nIn the embrace of the piano, my mind finally exhales. My soul drifts back to a carefree past, where beautiful moments flicker like scenes from a vintage film.\n\nI am profoundly moved.",
           "zh-CN": "今天终于把期末所有考试，事情全做完\n\n这段时间睡眠紊乱不规律不足，今天晚上才九十点钟就感觉很不舒服，遂上床。上了床半天睡不着，闭着眼睛半梦半醒的\n\n到了十一点五十六现在是，成功给自己整清醒了\n\n然后又顿觉困乏，躺下听守岸人小曲，才发现原来这么催眠，还有一种积极的暗示，我要弹钢琴，我要锻炼我要积极的生活，我要为自己而活，我要热烈，我不要作做题家\n\n人应该活得丰盈，即便遇到压力不能丰盈也不该放任自己腐烂\n\n我发现听钢琴曲的时候思维是放松的，灵魂在曲子的包裹下好像回到无忧无虑的过去，以前那些美好时光像电影片段一样闪现\n\n真的很感动。",
           "zh-TW": "今天終於把期末所有考試，事情全做完\n\n這段時間睡眠紊亂不規律不足，今天晚上才九十點鐘就感覺很不舒服，遂上床。上了床半天睡不著，閉著眼睛半夢半醒的\n\n到了十一點五十六現在是，成功給自己整清醒了\n\n然後又頓覺困乏，躺下聽守岸人小曲，才發現原來這麼催眠，還有一種積極的暗示，我要彈鋼琴，我要鍛煉我要積極的生活，我要為自己而活，我要熱烈，我不要作做題家\n\n人應該活得豐盈，即便遇到壓力不能豐盈也不該放任自己腐爛\n\n我發現聽鋼琴曲的時候思維是放鬆的，靈魂在曲子的包裹下好像回到無憂無慮的過去，以前的那些美好時光像電影片段一樣閃現\n\n真的很感動。"
-        }
-      },
-      {
-        "id": "thought_2",
-        "date": {
-          "en": "Nov 10, 2024",
-          "zh-CN": "Nov 10, 2024",
-          "zh-TW": "Nov 10, 2024"
-        },
-        "text": {
-          "en": "Meteor shower at Qiandao Lake. The naked eye sees 10,000 times more than the camera.",
-          "zh-CN": "千岛湖的流星雨。肉眼看到的比相机拍到的震撼一万倍。",
-          "zh-TW": "千島湖的流星雨。肉眼看到的比相機拍到的震撼一萬倍。"
         }
       }
     ],

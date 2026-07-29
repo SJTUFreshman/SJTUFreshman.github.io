@@ -76,7 +76,8 @@ for (const required of [
     'beginCelestialReturn',
     'completeCelestialReturn',
     'celestialStageLayout',
-    'drawMeteorShower'
+    'drawMeteorShower',
+    'updateEntryLocationCopy'
 ]) {
     assert(
         life.includes(`function ${required}`),
@@ -104,6 +105,22 @@ for (const required of [
 assert(
     /const MIN_CAMERA_ALTITUDE = 0\.25 \* DEG;/.test(life),
     'The camera center must keep a precise 0.25 degree clearance above the horizon'
+);
+assert(htmlIds.has('entryLocation'), 'The entry gate must explain the observing location');
+assert(
+    /aria-describedby="entryHint entryLocation"/.test(life),
+    'The entry-gate location must participate in its accessible description'
+);
+assert(
+    !/GEOMETRIC HORIZON · 0°|几何地平线 · 0°|幾何地平線 · 0°/.test(life),
+    'The geometric-horizon text marker must stay removed'
+);
+assert(
+    life.includes('Spes non confundit') &&
+    life.includes('望德不叫人蒙羞') &&
+    life.includes('Misericordiae Vultus') &&
+    life.includes('慈悲面容'),
+    'Both essays must expose their approved papal-bull titles'
 );
 for (const id of [
     'sectionDrawerToggle',
@@ -1160,6 +1177,13 @@ const horizonCameraState = JSON.parse(vm.runInContext(`(() => {
     const legalConstrained = constrainOrientationAboveHorizon(legalOrientation);
     const legalPoseUnchanged =
         quaternionDot(legalOrientation, legalConstrained) > 1 - 1e-12;
+    const zenithOrientation = orientationFromYawPitchRoll(0.72, 90 * DEG, -1.1);
+    const zenithConstrained = constrainOrientationAboveHorizon(
+        zenithOrientation,
+        0.72
+    );
+    const legalZenithUnchanged =
+        quaternionDot(zenithOrientation, zenithConstrained) > 1 - 1e-12;
 
     state.scene = 'roam';
     state.hasEntered = true;
@@ -1171,6 +1195,76 @@ const horizonCameraState = JSON.parse(vm.runInContext(`(() => {
     applyLook(0, 900);
     const lookForward = quatRotate(camera.targetOrientation, [0, 0, 1]);
     const lookAltitude = Math.asin(clamp(lookForward[1], -1, 1));
+
+    camera.targetOrientation = orientationFromYawPitchRoll(0.35, 90 * DEG, 0.7);
+    const exactZenithForward = quatRotate(
+        camera.targetOrientation,
+        [0, 0, 1]
+    );
+    applyLook(80, 0);
+    const lateralZenithForward = quatRotate(
+        camera.targetOrientation,
+        [0, 0, 1]
+    );
+    const lateralZenithDeflection = Math.acos(clamp(
+        dot(exactZenithForward, lateralZenithForward),
+        -1,
+        1
+    ));
+    const lateralZenithFinite = lateralZenithForward.every(Number.isFinite);
+
+    camera.targetOrientation = orientationFromYawPitchRoll(
+        0.35,
+        89.5 * DEG,
+        0
+    );
+    const beforeCrossing = quatRotate(camera.targetOrientation, [0, 0, 1]);
+    applyLook(0, -20);
+    const afterCrossing = quatRotate(camera.targetOrientation, [0, 0, 1]);
+    const beforeCrossingHorizontal = normalize([
+        beforeCrossing[0],
+        0,
+        beforeCrossing[2]
+    ]);
+    const afterCrossingHorizontal = normalize([
+        afterCrossing[0],
+        0,
+        afterCrossing[2]
+    ]);
+    const crossedZenith =
+        dot(beforeCrossingHorizontal, afterCrossingHorizontal) < -0.99 &&
+        Math.asin(clamp(afterCrossing[1], -1, 1)) < 89 * DEG &&
+        afterCrossing[1] > 0;
+
+    const rolledStart = orientationFromYawPitchRoll(0.4, 50 * DEG, 0.8);
+    const rolledForward = quatRotate(rolledStart, [0, 0, 1]);
+    const rolledRight = quatRotate(rolledStart, [1, 0, 0]);
+    const rolledUp = quatRotate(rolledStart, [0, 1, 0]);
+    camera.targetOrientation = rolledStart.slice();
+    applyLook(18, 0);
+    const rolledHorizontalForward = quatRotate(
+        camera.targetOrientation,
+        [0, 0, 1]
+    );
+    camera.targetOrientation = rolledStart.slice();
+    applyLook(0, 18);
+    const rolledVerticalForward = quatRotate(
+        camera.targetOrientation,
+        [0, 0, 1]
+    );
+    const rolledScreenAxesPreserved =
+        dot(
+            rolledHorizontalForward.map((value, index) =>
+                value - rolledForward[index]
+            ),
+            rolledRight
+        ) > 0.02 &&
+        dot(
+            rolledVerticalForward.map((value, index) =>
+                value - rolledForward[index]
+            ),
+            rolledUp
+        ) < -0.02;
 
     camera.orientation = orientationFromYawPitchRoll(-0.9, -45 * DEG, 1.4);
     camera.targetOrientation = orientationFromYawPitchRoll(1.1, -72 * DEG, -0.8);
@@ -1206,7 +1300,12 @@ const horizonCameraState = JSON.parse(vm.runInContext(`(() => {
         maximumIdempotenceError,
         inverseError,
         legalPoseUnchanged,
+        legalZenithUnchanged,
         lookAltitude,
+        lateralZenithDeflection,
+        lateralZenithFinite,
+        crossedZenith,
+        rolledScreenAxesPreserved,
         enforcedOrientationAltitude,
         enforcedTargetAltitude
     });
@@ -1240,6 +1339,23 @@ assert(
 );
 assert(horizonCameraState.legalPoseUnchanged);
 assert(
+    horizonCameraState.legalZenithUnchanged,
+    'The horizon constraint must not turn the zenith into an artificial upper wall'
+);
+assert(
+    horizonCameraState.lateralZenithFinite &&
+    horizonCameraState.lateralZenithDeflection > 7 * Math.PI / 180,
+    'Horizontal look input at the zenith must move the gaze instead of merely spinning it'
+);
+assert(
+    horizonCameraState.crossedZenith,
+    'Upward look input must pass smoothly across the zenith'
+);
+assert(
+    horizonCameraState.rolledScreenAxesPreserved,
+    'Mouse look must continue to follow screen axes after A/D camera roll'
+);
+assert(
     horizonCameraState.lookAltitude >= horizonCameraState.minimumAltitude - 1e-10,
     'Mouse look must never move the camera center below the real horizon'
 );
@@ -1250,6 +1366,57 @@ assert(
         horizonCameraState.minimumAltitude - 1e-10,
     'Every render path must constrain both the current and target camera pose'
 );
+
+const entryLocationState = JSON.parse(vm.runInContext(`(() => {
+    const savedLocation = skyModel.location;
+    const savedObserver = skyModel.observer;
+    const savedLanguage = state.currentLang;
+    const savedStorage = localStorage.getItem(WEATHER_LOCATION_STORAGE_KEY);
+    const fallbackEnglish = dom.entryLocation.textContent;
+    localStorage.setItem(WEATHER_LOCATION_STORAGE_KEY, JSON.stringify({
+        v: 1,
+        latitude: 30.2741,
+        longitude: 120.1551,
+        height: 0,
+        timezone: 'Asia/Shanghai',
+        label: {
+            en: 'Hangzhou',
+            'zh-CN': '杭州',
+            'zh-TW': '杭州'
+        },
+        source: 'homepage-weather'
+    }));
+    window.dispatchEvent({
+        type: 'storage',
+        key: WEATHER_LOCATION_STORAGE_KEY
+    });
+    const syncedEnglish = dom.entryLocation.textContent;
+    setLang('zh-CN');
+    const syncedSimplified = dom.entryLocation.textContent;
+    setLang('zh-TW');
+    const syncedTraditional = dom.entryLocation.textContent;
+
+    if (savedStorage === null) {
+        localStorage.removeItem(WEATHER_LOCATION_STORAGE_KEY);
+    } else {
+        localStorage.setItem(WEATHER_LOCATION_STORAGE_KEY, savedStorage);
+    }
+    skyModel.location = savedLocation;
+    skyModel.observer = savedObserver;
+    setLang(savedLanguage);
+    return JSON.stringify({
+        fallbackEnglish,
+        syncedEnglish,
+        syncedSimplified,
+        syncedTraditional
+    });
+})()`, runtimeContext));
+assert.deepEqual(entryLocationState, {
+    fallbackEnglish: 'Current observing location: Shanghai · default location',
+    syncedEnglish: 'Current observing location: Hangzhou · synced from homepage weather',
+    syncedSimplified: '当前观测位置：杭州 · 与主页天气同步',
+    syncedTraditional: '目前觀測位置：杭州 · 與主頁天氣同步'
+}, 'The entry gate must distinguish the default observer from the homepage weather location');
 
 const horizonClipState = JSON.parse(vm.runInContext(`(() => {
     const polygonArea = points => {
