@@ -1,6 +1,6 @@
 (function () {
     class MochiPet {
-        constructor() {
+        constructor(options = {}) {
             this.el = document.getElementById('pixelPet');
             this.sprite = document.getElementById('mochiSprite');
             this.bubble = document.getElementById('petBubble');
@@ -141,10 +141,12 @@
                     }
                 }
             };
-            this.currentPetId = 'mochi';
+            const initialPetId = typeof options === 'string' ? options : options.initialPetId;
+            this.currentPetId = this.petProfiles[initialPetId] ? initialPetId : 'mochi';
             this.currentProfile = this.petProfiles[this.currentPetId];
             this.assetBase = this.currentProfile.assetBase;
             this.frameMetrics = this.currentProfile.metrics;
+            this.sprite.alt = this.currentProfile.displayName;
             this.frameOffset = { x: 0, y: 0 };
             this.assetVersion = '20260707-alltempo-v6';
             this.renderScale = 0.62;
@@ -382,7 +384,8 @@
             this.lastLocomotionStartedAt = 0;
             this.lastTime = performance.now();
             this.raf = null;
-            this.imageCache = new Map();
+            this.imageCaches = new Map();
+            this.imageCache = this.getPetImageCache(this.currentPetId);
 
             this.preloadImages();
             this.ensureSnackUi();
@@ -400,6 +403,13 @@
                 ...Object.values(this.walkVariants),
                 ...transitionSets
             ];
+        }
+
+        getPetImageCache(petId = this.currentPetId) {
+            if (!this.imageCaches.has(petId)) {
+                this.imageCaches.set(petId, new Map());
+            }
+            return this.imageCaches.get(petId);
         }
 
         preloadFrame(src) {
@@ -466,13 +476,20 @@
         initEvents() {
             this.summonBtn.addEventListener('click', (event) => {
                 event.stopPropagation();
-                this.summonMenu.classList.toggle('show');
+                const open = this.summonMenu.classList.toggle('show');
+                this.summonBtn.setAttribute('aria-expanded', String(open));
+                this.summonMenu.setAttribute('aria-hidden', String(!open));
+                if (open && event.detail === 0) {
+                    this.summonMenu.querySelector('.summon-option:not([hidden])')?.focus();
+                }
             });
 
             this.summonMenu.querySelectorAll('.summon-option').forEach((option) => {
                 option.addEventListener('click', (event) => {
                     event.stopPropagation();
                     this.summonMenu.classList.remove('show');
+                    this.summonBtn.setAttribute('aria-expanded', 'false');
+                    this.summonMenu.setAttribute('aria-hidden', 'true');
                     if (option.dataset.char === 'hide') {
                         this.dismiss();
                     } else {
@@ -517,6 +534,8 @@
 
             document.addEventListener('click', () => {
                 this.summonMenu.classList.remove('show');
+                this.summonBtn.setAttribute('aria-expanded', 'false');
+                this.summonMenu.setAttribute('aria-hidden', 'true');
                 this.closeInteractMenu();
             });
 
@@ -529,6 +548,14 @@
             });
 
             document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && this.summonMenu.classList.contains('show')) {
+                    event.preventDefault();
+                    this.summonMenu.classList.remove('show');
+                    this.summonBtn.setAttribute('aria-expanded', 'false');
+                    this.summonMenu.setAttribute('aria-hidden', 'true');
+                    this.summonBtn.focus();
+                    return;
+                }
                 if (!this.active || event.repeat) return;
                 if (this.isTypingTarget(event.target)) return;
                 if (event.key.toLowerCase() === 'f') {
@@ -598,7 +625,7 @@
             this.currentProfile = profile;
             this.assetBase = profile.assetBase;
             this.frameMetrics = profile.metrics || {};
-            this.imageCache.clear();
+            this.imageCache = this.getPetImageCache(profile.id);
             this.poseFrame = -1;
             this.currentFramePath = '';
             this.frameOffset = { x: 0, y: 0 };

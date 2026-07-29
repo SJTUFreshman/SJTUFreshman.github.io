@@ -54,316 +54,15 @@
     </style>
     <script src="assets/stellar-transit.js" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
 
-    <style id="loader-critical-css">
-        html,
-        body {
-            margin: 0;
-            min-height: 100%;
-            background: #f7f4ec;
-        }
-
-        .site-loader {
-            position: fixed;
-            inset: 0;
-            z-index: 20000;
-            display: grid;
-            place-items: center;
-            padding: 28px;
-            box-sizing: border-box;
-            background:
-                linear-gradient(90deg, rgba(47,111,143,0.08) 1px, transparent 1px),
-                linear-gradient(0deg, rgba(77,115,88,0.07) 1px, transparent 1px),
-                #f7f4ec;
-            background-size: 42px 42px, 42px 42px, auto;
-            color: #24272a;
-            pointer-events: auto;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.55s ease, visibility 0.55s ease;
-        }
-
-        .site-loader.is-hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .site-loader::before,
-        .site-loader::after {
-            content: '';
-            position: absolute;
-            inset: 18px;
-            border: 1px solid rgba(36,39,42,0.08);
-            pointer-events: none;
-        }
-
-        .site-loader::after {
-            inset: 26px;
-            border-color: rgba(47,111,143,0.14);
-        }
-
-        .loader-content {
-            position: relative;
-            width: min(360px, 86vw);
-            display: grid;
-            justify-items: center;
-            gap: 18px;
-            text-align: center;
-        }
-
-        .loader-mark {
-            position: relative;
-            width: 128px;
-            height: 128px;
-            display: grid;
-            place-items: center;
-        }
-
-        .loader-mark::before,
-        .loader-mark::after {
-            content: '';
-            position: absolute;
-            background: rgba(36,39,42,0.22);
-        }
-
-        .loader-mark::before {
-            width: 1px;
-            height: 100%;
-            left: 50%;
-            top: 0;
-        }
-
-        .loader-mark::after {
-            width: 100%;
-            height: 1px;
-            left: 0;
-            top: 50%;
-        }
-
-        .loader-ring {
-            position: absolute;
-            inset: 10px;
-            border: 1px solid rgba(36,39,42,0.34);
-            border-radius: 50%;
-            animation: loader-spin 3.8s linear infinite;
-        }
-
-        .loader-ring::before {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            right: 12px;
-            top: 6px;
-            background: #2f6f8f;
-            box-shadow: 0 0 0 4px #f7f4ec;
-        }
-
-        .loader-ring.secondary {
-            inset: 28px;
-            border-color: rgba(184,92,82,0.55);
-            animation-duration: 2.7s;
-            animation-direction: reverse;
-        }
-
-        .loader-ring.secondary::before {
-            width: 9px;
-            height: 9px;
-            left: 5px;
-            right: auto;
-            top: 16px;
-            background: #b88746;
-        }
-
-        .loader-core {
-            width: 34px;
-            height: 34px;
-            background: #24272a;
-            border: 6px solid #f7f4ec;
-            outline: 1px solid rgba(36,39,42,0.55);
-            transform: rotate(45deg);
-            animation: loader-pulse 1.6s ease-in-out infinite;
-        }
-
-        .loader-copy {
-            display: grid;
-            gap: 4px;
-        }
-
-        .loader-kicker,
-        .loader-status {
-            font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
-            font-size: 0.72rem;
-            color: #4d7358;
-            letter-spacing: 0;
-        }
-
-        .loader-name {
-            font-family: 'Newsreader', 'Iowan Old Style', Baskerville, Georgia, serif;
-            font-size: clamp(2rem, 10vw, 3.4rem);
-            line-height: 1;
-            font-weight: 500;
-            letter-spacing: 0;
-        }
-
-        .loader-status {
-            color: #6b6b6b;
-        }
-
-        .loader-progress {
-            position: relative;
-            width: min(240px, 70vw);
-            height: 2px;
-            overflow: hidden;
-            background: rgba(36,39,42,0.14);
-        }
-
-        .loader-progress span {
-            position: absolute;
-            inset: 0;
-            width: 42%;
-            background: linear-gradient(90deg, #2f6f8f, #b88746, #b85c52);
-            animation: loader-progress 1.25s ease-in-out infinite;
-        }
-
-        .site-loader.is-ready .loader-progress span {
-            width: 100%;
-            transform: none;
-            animation: none;
-        }
-
-        @keyframes loader-spin {
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes loader-pulse {
-            0%, 100% { transform: rotate(45deg) scale(0.92); }
-            50% { transform: rotate(45deg) scale(1.08); }
-        }
-
-        @keyframes loader-progress {
-            0% { transform: translateX(-120%); }
-            100% { transform: translateX(240%); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .loader-ring,
-            .loader-core,
-            .loader-progress span {
-                animation: none;
-            }
-
-            .loader-progress span {
-                transform: none;
-                width: 100%;
-            }
-        }
-    </style>
-
     <link rel="preload" href="fonts/edukai-5.0.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Font Awesome -->
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="assets/pet-summon.css">
 </head>
 <body class="lang-en">
 
-<div class="site-loader" id="siteLoader" role="status" aria-live="polite" aria-label="Loading homepage">
-    <div class="loader-content">
-        <div class="loader-mark" aria-hidden="true">
-            <span class="loader-ring"></span>
-            <span class="loader-ring secondary"></span>
-            <span class="loader-core"></span>
-        </div>
-        <div class="loader-copy">
-            <div class="loader-kicker">SJTU / AI / Notes</div>
-            <div class="loader-name">Runde Yang</div>
-            <div class="loader-status">Preparing the page</div>
-        </div>
-        <div class="loader-progress" aria-hidden="true"><span></span></div>
-    </div>
-</div>
-<script>
-(function () {
-    const loader = document.getElementById('siteLoader');
-    if (!loader) return;
-
-    const status = loader.querySelector('.loader-status');
-    const startedAt = performance.now();
-    const autoReturn = document.documentElement.classList.contains('stellar-arrival-pending');
-    const minVisibleMs = autoReturn ? 0 : 850;
-    let ready = false;
-    let finished = false;
-
-    function setBackgroundInert(active) {
-        document.querySelectorAll('body > nav, body > .container, body > footer, body > .lightbox').forEach(element => {
-            if (active && !element.inert) {
-                element.inert = true;
-                element.dataset.loaderInert = 'true';
-            } else if (!active && element.dataset.loaderInert === 'true') {
-                element.inert = false;
-                delete element.dataset.loaderInert;
-            }
-        });
-    }
-
-    function setStatus(message) {
-        if (status && message) status.textContent = message;
-    }
-
-    function hideLoader() {
-        if (finished || !ready) return;
-        finished = true;
-        document.removeEventListener('keydown', handleEnter, true);
-        loader.removeEventListener('pointerdown', handleEnter, true);
-        loader.classList.add('is-hidden');
-        loader.setAttribute('aria-hidden', 'true');
-        setBackgroundInert(false);
-        window.setTimeout(() => loader.remove(), 700);
-    }
-
-    function handleEnter(event) {
-        if (event && event.type === 'keydown' && event.isComposing) return;
-        if (event) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
-        hideLoader();
-    }
-
-    function armEntry() {
-        if (finished || ready) return;
-        ready = true;
-        loader.classList.add('is-ready');
-        if (autoReturn) {
-            setStatus('Home coordinates acquired');
-            hideLoader();
-            if (window.StellarTransit?.markDestinationReady) {
-                window.StellarTransit.markDestinationReady('index');
-            } else {
-                window.dispatchEvent(new CustomEvent('stellar:destination-ready', {
-                    detail: { page: 'index' }
-                }));
-            }
-            return;
-        }
-        loader.setAttribute('aria-label', 'Homepage ready. Press any key to enter');
-        setStatus('Ready. Press any key to enter');
-        document.addEventListener('keydown', handleEnter, true);
-        loader.addEventListener('pointerdown', handleEnter, true);
-    }
-
-    function markReady(message) {
-        if (finished || ready) return;
-        if (message) setStatus(message);
-        const elapsed = performance.now() - startedAt;
-        window.setTimeout(armEntry, Math.max(0, minVisibleMs - elapsed));
-    }
-
-    window.__homepageLoader = { setStatus, markReady };
-    document.addEventListener('DOMContentLoaded', () => setBackgroundInert(true), { once: true });
-})();
-</script>
-<noscript><style>.site-loader{display:none!important}.fade-in{opacity:1!important;transform:none!important}</style></noscript>
+<noscript><style>.fade-in{opacity:1!important;transform:none!important}</style></noscript>
 
     <style>
         /* ========== Custom Font ========== */
@@ -561,111 +260,6 @@
             font-size: 1.2rem;
             color: var(--text);
             padding: 4px;
-        }
-
-        /* ========== RPG Pixel Pet System (Final Fix) ========== */
-        
-        /* 1. RPG 召喚入口 (像素寶箱風格) */
-        .pet-summon-btn {
-            position: relative;
-            width: 32px; height: 32px;
-            margin-left: 16px;
-            cursor: pointer;
-            image-rendering: pixelated;
-            z-index: 1005;
-            /* 利用 box-shadow 畫一個像素寶箱/方塊 */
-            background-color: transparent;
-        }
-        
-        /* 寶箱閉合狀態 (CSS Pixel Art) */
-        .pet-summon-btn::before {
-            content: ''; position: absolute; top: 4px; left: 4px; width: 24px; height: 20px;
-            background: #e67e22; /* 箱體 */
-            box-shadow: 
-                inset 0 0 0 2px #d35400, /* 內陰影 */
-                0 -4px 0 -2px #f1c40f,   /* 鎖扣 */
-                0 0 0 2px #2d3436;       /* 外描邊 */
-            transition: transform 0.1s;
-        }
-        .pet-summon-btn:hover::before { transform: translateY(-2px); }
-        .pet-summon-btn:active::before { transform: translateY(1px); }
-
-        /* 召喚選單 (像素風) */
-        .summon-menu {
-            display: none; position: absolute;
-            top: 45px; right: -10px;
-            background: #2d3436; border: 4px solid #fff; outline: 4px solid #2d3436;
-            color: #fff; padding: 0;
-            min-width: 168px; z-index: 10006;
-            font-family: 'Courier New', monospace;
-            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
-            image-rendering: pixelated;
-        }
-        .summon-menu.show { display: block; animation: openMenu 0.2s steps(4); }
-        @keyframes openMenu { from { height: 0; opacity: 0; } to { height: auto; opacity: 1; } }
-
-        .summon-option {
-            padding: 10px 12px; cursor: pointer; border-bottom: 2px solid #555;
-            font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 8px;
-        }
-        .summon-option:hover { background: #636e72; color: #f1c40f; }
-        .summon-option:last-child { border-bottom: none; }
-
-        /* 2. 寵物容器 (全螢幕自由定位) */
-        .pet-wrapper {
-            position: fixed; /* 關鍵：基於視窗定位 */
-            top: 0; left: 0; /* 初始原點，具體位置由 JS 的 transform 控制 */
-            width: 80px; height: 80px; /* 稍微大一點 */
-            z-index: 9999;
-            pointer-events: none; /* 容器本身不擋鼠標 */
-            display: none;
-        }
-        .pet-wrapper.active { display: block; }
-
-        /* 畫布 (核心交互區) */
-        .pixel-pet-canvas {
-            width: 100%; height: 100%;
-            image-rendering: pixelated;
-            cursor: pointer;
-            pointer-events: auto; /* 關鍵：確保右鍵能點到！ */
-            transition: transform 0.1s; /* 僅用於點擊縮放，移動由 JS 控制 */
-            filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.2));
-        }
-        .pixel-pet-canvas:active { transform: scale(0.9); }
-
-        /* 3. 氣泡與右鍵選單 */
-        .pet-bubble {
-            position: absolute; top: -50px; left: 50%; transform: translateX(-50%) scale(0);
-            background: #fff; border: 3px solid #2d3436; padding: 6px 12px;
-            font-family: 'Courier New', monospace; font-weight: bold; font-size: 12px;
-            white-space: nowrap; pointer-events: none; opacity: 0; transition: 0.2s;
-            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
-        }
-        .pet-bubble.show { transform: translateX(-50%) scale(1); opacity: 1; }
-        .pet-bubble::after {
-            content: ''; position: absolute; bottom: -6px; left: 50%; margin-left: -6px;
-            border-width: 6px 6px 0; border-style: solid; border-color: #2d3436 transparent;
-        }
-
-        .pet-menu { /* 右鍵選單復用召喚選單樣式 */
-            display: none; position: fixed; /* Fixed 防止跑偏 */
-            background: #fff; border: 3px solid #2d3436; color: #2d3436;
-            min-width: 100px; z-index: 10007;
-            font-family: 'Courier New', monospace; font-weight: bold;
-            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
-        }
-        .pet-menu.show { display: block; }
-        .pet-menu-item { padding: 8px 12px; cursor: pointer; border-bottom: 2px solid #eee; }
-        .pet-menu-item:hover { background: #eee; }
-
-        /* RWD: 手機版調整位置 */
-        @media (max-width: 768px) {
-            .nav-pet-wrapper {
-                right: 60px; /* 手機版放在漢堡選單左側 */
-                bottom: -4px;
-                width: 40px;
-                height: 40px;
-            }
         }
 
         /* ========== Main Layout ========== */
@@ -1342,16 +936,10 @@
         ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #bbb; }
     </style>
-<link rel="preload" as="style" href="assets/mochi/mochi-pet.css" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="assets/mochi/mochi-pet.css"></noscript>
 <!-- ===== Navigation ===== -->
 <nav class="nav">
     <div class="nav-inner">
         <a href="index.html" class="nav-brand en-only">Runde Yang</a>
-        
-        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
-            <i class="fas fa-bars"></i>
-        </button>
 
         <div class="nav-links" id="navLinks">
             <a href="#about" class="nav-link" data-key="nav_about">About</a>
@@ -1365,22 +953,64 @@
                 <button class="lang-btn" onclick="setLang('zh-CN')">简</button>
                 <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
             </div>
-            <div class="pet-summon-btn" id="summonBtn" title="Summon Companion">
-                    <div class="summon-menu" id="summonMenu">
-                        <div class="summon-option" data-char="mochi">&#128007; Mochi</div>
-                        <div class="summon-option" data-char="appcopilot">&#129302; AppCopilot</div>
-                        <div class="summon-option" data-char="timo">&#127891; Timo</div>
-                        <div class="summon-option" data-char="hide" style="color:#e74c3c">&#10006; Dismiss</div>
-                    </div>
-                </div>
-                
-                </div>
+        </div>
 
-            <div class="pet-wrapper" id="pixelPet">
-                <div class="pet-bubble" id="petBubble"></div>
-                <img id="mochiSprite" class="mochi-sprite" src="assets/mochi/stand.png" alt="Mochi">
-                <div class="pet-menu" id="petInteractMenu"></div>
+        <div class="nav-actions">
+            <div class="pet-summon-control">
+                <button class="pet-summon-btn" id="summonBtn" type="button"
+                        title="Choose a companion" aria-label="Choose a companion"
+                        aria-haspopup="menu" aria-controls="summonMenu" aria-expanded="false">
+                    <span class="pet-launch-portal" aria-hidden="true"></span>
+                    <span class="pet-launch-label">Companion</span>
+                    <span class="pet-launch-spark one" aria-hidden="true"></span>
+                    <span class="pet-launch-spark two" aria-hidden="true"></span>
+                </button>
+                <div class="summon-menu" id="summonMenu" role="menu"
+                     aria-label="Choose your companion" aria-hidden="true">
+                    <div class="summon-menu-heading">
+                        <span class="summon-menu-kicker">Companion drop</span>
+                        <span class="summon-menu-title">Choose your buddy</span>
+                    </div>
+                    <button class="summon-option" type="button" role="menuitem" data-char="mochi">
+                        <span class="summon-option-mark" aria-hidden="true"></span>
+                        <span class="summon-option-copy">
+                            <span class="summon-option-name">Mochi</span>
+                            <span class="summon-option-note">Bouncy explorer</span>
+                        </span>
+                        <span class="summon-option-arrow" aria-hidden="true">→</span>
+                    </button>
+                    <button class="summon-option" type="button" role="menuitem" data-char="appcopilot">
+                        <span class="summon-option-mark" aria-hidden="true"></span>
+                        <span class="summon-option-copy">
+                            <span class="summon-option-name">AppCopilot</span>
+                            <span class="summon-option-note">Tiny task runner</span>
+                        </span>
+                        <span class="summon-option-arrow" aria-hidden="true">→</span>
+                    </button>
+                    <button class="summon-option" type="button" role="menuitem" data-char="timo">
+                        <span class="summon-option-mark" aria-hidden="true"></span>
+                        <span class="summon-option-copy">
+                            <span class="summon-option-name">Timo</span>
+                            <span class="summon-option-note">Pocket study pal</span>
+                        </span>
+                        <span class="summon-option-arrow" aria-hidden="true">→</span>
+                    </button>
+                    <button class="summon-option dismiss" type="button" role="menuitem"
+                            data-char="hide" hidden>Dismiss current companion</button>
+                </div>
             </div>
+
+            <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="pet-wrapper" id="pixelPet">
+            <div class="pet-bubble" id="petBubble"></div>
+            <img id="mochiSprite" class="mochi-sprite"
+                 src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="Companion"
+                 decoding="async" draggable="false">
+            <div class="pet-menu" id="petInteractMenu" role="menu" aria-hidden="true"></div>
         </div>
     </div>
 </nav>
@@ -1606,10 +1236,7 @@
     <button class="lightbox-nav lightbox-next" type="button" onclick="changeLightbox(1, event)" aria-label="Next image">→</button>
 </div>
 
-<script src="assets/mochi/mochi-frame-metrics.js"></script>
-<script src="assets/appcopilot/appcopilot-frame-metrics.js"></script>
-<script src="assets/timo/timo-frame-metrics.js"></script>
-<script src="assets/mochi/mochi-pet.js"></script>
+<script src="assets/pet-summon.js"></script>
 <script>
 /* ===== i18n Content ===== */
 const i18n = {
@@ -1779,25 +1406,6 @@ function setLang(lang) {
 
 /* ===== Init Language ===== */
 setLang(currentLang);
-
-function waitForImageReady(img) {
-    if (!img || img.complete) return Promise.resolve();
-    return new Promise(resolve => {
-        const done = () => {
-            img.removeEventListener('load', done);
-            img.removeEventListener('error', done);
-            resolve();
-        };
-        img.addEventListener('load', done, { once: true });
-        img.addEventListener('error', done, { once: true });
-    });
-}
-
-function waitForPetPreload(pet) {
-    const images = pet && pet.imageCache ? Array.from(pet.imageCache.values()) : [];
-    if (!images.length) return Promise.resolve();
-    return Promise.all(images.map(waitForImageReady));
-}
 
 async function waitForEduKai() {
     if (!document.fonts || typeof document.fonts.load !== 'function') {
@@ -2118,28 +1726,27 @@ lifePortalLink?.addEventListener('click', event => {
 /* ===== Init ===== */
 setLang(currentLang);
 
-// 啟動
-window.addEventListener('load', () => {
-    const loader = window.__homepageLoader;
-    if (loader) loader.setStatus('Loading BiauKai typeface');
-    let petReady = Promise.resolve();
-    if (window.MochiPet) {
-        const pet = new MochiPet();
-        window.__mochiPet = pet;
-        petReady = waitForPetPreload(pet);
+function markHomepageDestinationReady() {
+    if (window.StellarTransit?.markDestinationReady) {
+        window.StellarTransit.markDestinationReady('index');
+    } else {
+        window.dispatchEvent(new CustomEvent('stellar:destination-ready', {
+            detail: { page: 'index' }
+        }));
     }
-    Promise.all([waitForEduKai(), petReady])
-        .then(() => {
-            if (loader) loader.markReady('Ready. Press any key to enter');
-        })
+}
+
+// 啟動：保留字體載入順序，但不再由桌寵或開屏畫面阻塞首頁。
+window.addEventListener('load', () => {
+    waitForEduKai()
         .catch(error => {
-            if (loader) loader.setStatus('Typeface unavailable. Refresh to retry');
             window.StellarTransit?.setDestinationStatus(
-                'BiauKai typeface unavailable. Refresh to retry',
-                'TYPEFACE UNAVAILABLE · REFRESH TO RETRY'
+                'BiauKai typeface unavailable. Using fallback typeface',
+                'TYPEFACE FALLBACK ACTIVE'
             );
-            console.error('Homepage preload failed:', error);
-        });
+            console.error('Homepage typeface preload failed:', error);
+        })
+        .finally(markHomepageDestinationReady);
 });
 
 </script>

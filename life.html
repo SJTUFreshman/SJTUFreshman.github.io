@@ -4762,6 +4762,24 @@ function applyLook(deltaX, deltaY, multiplier = 1) {
     camera.targetOrientation = quatNormalize(next);
 }
 
+function canRestorePetHomepageFromHistory() {
+    if (window.history.length <= 1) return false;
+    try {
+        const petState = JSON.parse(sessionStorage.getItem('runde:pet-runtime:v2'));
+        if (!petState || petState.v !== 2 || petState.ready !== true) return false;
+        const referrer = new URL(document.referrer);
+        const homepage = new URL('index.html', window.location.href);
+        const homepageDirectory = new URL('./', homepage);
+        const cameFromHomepage = (
+            referrer.origin === window.location.origin &&
+            (referrer.pathname === homepage.pathname || referrer.pathname === homepageDirectory.pathname)
+        );
+        return cameFromHomepage;
+    } catch (error) {
+        return false;
+    }
+}
+
 function updateCamera(time) {
     const deltaSeconds = clamp((time - state.lastFrame) / 1000, 0, 0.05);
     state.lastFrame = time;
@@ -4805,16 +4823,22 @@ function updateCamera(time) {
                     document.exitPointerLock();
                 }
                 if (window.StellarTransit) {
+                    const restoreHomepage = canRestorePetHomepageFromHistory();
                     window.StellarTransit.navigate({
                         to: 'index',
                         href: 'index.html',
                         origin,
                         mode: 'home',
-                        duration: 760
+                        duration: 760,
+                        historyDelta: restoreHomepage ? -1 : undefined
                     });
                 } else {
                     window.setTimeout(() => {
-                        window.location.href = 'index.html';
+                        if (canRestorePetHomepageFromHistory()) {
+                            window.history.back();
+                        } else {
+                            window.location.href = 'index.html';
+                        }
                     }, REDUCED_MOTION ? 0 : 360);
                 }
             } else {

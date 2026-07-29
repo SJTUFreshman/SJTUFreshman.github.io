@@ -420,6 +420,16 @@
             ) return false;
             navigation.committed = true;
             writePayload(options.to, options.mode === 'home' ? 'home' : 'cool');
+            if (Number.isInteger(options.historyDelta) && options.historyDelta !== 0) {
+                const hrefBeforeNavigation = window.location.href;
+                window.history.go(options.historyDelta);
+                window.setTimeout(() => {
+                    if (window.location.href === hrefBeforeNavigation) {
+                        window.location.assign(options.href);
+                    }
+                }, 700);
+                return true;
+            }
             window.location.assign(options.href);
             return true;
         };
