@@ -54,7 +54,7 @@
     </style>
     <script src="assets/stellar-transit.js" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
 
-    <link rel="preload" href="fonts/edukai-5.0.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/edukai-site-subset.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Font Awesome -->
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -68,7 +68,7 @@
         /* ========== Custom Font ========== */
         @font-face {
             font-family: 'EduKai';
-            src: url('fonts/edukai-5.0.woff2') format('woff2');
+            src: url('fonts/edukai-site-subset.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -1188,10 +1188,10 @@
         <!-- Life link card -->
         <a class="life-card" id="lifePortalLink" href="life.html">
             <div class="life-card-bg">
-                <img src="images/千島湖.jpg" alt="">
-                <img src="images/美哉吾校.jpg" alt="">
-                <img src="images/meteor.jpg" alt="">
-                <img src="images/紫金山.jpg" alt="">
+                <img src="images/card-thumbs/qiandaohu-card.jpg" alt="">
+                <img src="images/card-thumbs/sjtu-campus-card.jpg" alt="">
+                <img src="images/card-thumbs/meteor-card.jpg" alt="">
+                <img src="images/card-thumbs/zijinshan-card.jpg" alt="">
             </div>
             <div class="life-card-overlay"></div>
             <div class="life-card-content">
@@ -1214,11 +1214,7 @@
 
     <!-- ===== Visitor Map ===== -->
     <div class="visitor-section">
-        <div class="clustrmaps-wrap">
-            <script async type="text/javascript" id="clstr_globe"
-                src="//clustrmaps.com/globe.js?d=fX5iFnBQqkI4YOaCh2hYxnYfi2pj9aK8Fq4We1ChmH4">
-            </script>
-        </div>
+        <div class="clustrmaps-wrap"></div>
     </div>
 </div>
 
@@ -1412,11 +1408,42 @@ async function waitForEduKai() {
         throw new Error('Font Loading API unavailable');
     }
     const faces = await document.fonts.load('400 1em "EduKai"', '中国大陆標楷字體');
-    await document.fonts.ready;
     const loaded = faces.length > 0
         && faces.every(face => face.status === 'loaded')
         && document.fonts.check('400 1em "EduKai"', '中国大陆標楷字體');
     if (!loaded) throw new Error('EduKai did not finish loading');
+}
+
+const CLUSTRMAPS_SRC = 'https://clustrmaps.com/globe.js?d=fX5iFnBQqkI4YOaCh2hYxnYfi2pj9aK8Fq4We1ChmH4';
+
+function loadClustrMaps() {
+    const host = document.querySelector('.clustrmaps-wrap');
+    if (!host || host.dataset.clustrmapsState) return;
+
+    host.dataset.clustrmapsState = 'loading';
+    const script = document.createElement('script');
+    script.id = 'clstr_globe';
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = CLUSTRMAPS_SRC;
+    script.onload = () => {
+        host.dataset.clustrmapsState = 'ready';
+    };
+    script.onerror = () => {
+        host.dataset.clustrmapsState = 'failed';
+        console.warn('ClustrMaps failed to load; homepage remains available.');
+    };
+    host.appendChild(script);
+}
+
+function scheduleClustrMaps() {
+    window.setTimeout(() => {
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadClustrMaps, { timeout: 2000 });
+        } else {
+            window.setTimeout(loadClustrMaps, 0);
+        }
+    }, 1100);
 }
 
 /* ===== Email Obfuscation ===== */
@@ -1736,8 +1763,7 @@ function markHomepageDestinationReady() {
     }
 }
 
-// 啟動：保留字體載入順序，但不再由桌寵或開屏畫面阻塞首頁。
-window.addEventListener('load', () => {
+function signalHomepageReady() {
     waitForEduKai()
         .catch(error => {
             window.StellarTransit?.setDestinationStatus(
@@ -1746,8 +1772,18 @@ window.addEventListener('load', () => {
             );
             console.error('Homepage typeface preload failed:', error);
         })
-        .finally(markHomepageDestinationReady);
-});
+        .finally(() => {
+            markHomepageDestinationReady();
+            scheduleClustrMaps();
+        });
+}
+
+// 首屏 DOM 初始化完成后只等待 EduKai；不再等待 window.load。
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', signalHomepageReady, { once: true });
+} else {
+    signalHomepageReady();
+}
 
 </script>
 

@@ -1,7 +1,7 @@
 "use strict";
 
 const CACHE_PREFIX = "runde-desktop-pet-";
-const CACHE_NAME = `${CACHE_PREFIX}20260729-v3`;
+const CACHE_NAME = `${CACHE_PREFIX}20260729-v4`;
 const PET_DIRECTORIES = [
     "/assets/mochi/",
     "/assets/appcopilot/",

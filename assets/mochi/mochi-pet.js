@@ -384,6 +384,7 @@
             this.lastLocomotionStartedAt = 0;
             this.lastTime = performance.now();
             this.raf = null;
+            this.preloadedPets = new Set();
             this.imageCaches = new Map();
             this.imageCache = this.getPetImageCache(this.currentPetId);
 
@@ -391,7 +392,6 @@
             this.ensureSnackUi();
             this.initEvents();
             this.setPose('stand');
-            this.startLoop();
         }
 
         collectSpriteSets() {
@@ -419,13 +419,10 @@
             }
 
             const img = new Image();
-            img.decoding = 'sync';
+            img.decoding = 'async';
             img.loading = 'eager';
             img.src = this.frameUrl(src);
             this.imageCache.set(src, img);
-            if (typeof img.decode === 'function') {
-                img.decode().catch(() => {});
-            }
             return img;
         }
 
@@ -434,9 +431,11 @@
         }
 
         preloadImages() {
+            if (this.preloadedPets.has(this.currentPetId)) return;
             this.collectSpriteSets().forEach((spriteSet) => {
                 spriteSet.frames.forEach((src) => this.preloadFrame(src));
             });
+            this.preloadedPets.add(this.currentPetId);
         }
 
         ensureSnackUi() {
@@ -643,6 +642,7 @@
             }
             const rect = this.summonBtn.getBoundingClientRect();
             this.active = true;
+            this.startLoop();
             this.mode = 'roam';
             this.state = 'travel';
             this.el.classList.add('active');
@@ -1778,7 +1778,10 @@
         }
 
         startLoop() {
+            if (this.raf !== null) return;
             const loop = (now) => {
+                this.raf = null;
+                if (!this.active) return;
                 const dt = Math.min(0.04, (now - this.lastTime) / 1000 || 0.016);
                 this.lastTime = now;
                 this.update(dt, now);

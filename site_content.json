@@ -235,10 +235,10 @@
     ],
     "life_card": {
       "images": [
-        "images/千島湖.jpg",
-        "images/美哉吾校.jpg",
-        "images/meteor.jpg",
-        "images/紫金山.jpg"
+        "images/card-thumbs/qiandaohu-card.jpg",
+        "images/card-thumbs/sjtu-campus-card.jpg",
+        "images/card-thumbs/meteor-card.jpg",
+        "images/card-thumbs/zijinshan-card.jpg"
       ],
       "title": {
         "en": "Beyond Research",

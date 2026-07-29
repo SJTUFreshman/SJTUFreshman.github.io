@@ -2,7 +2,7 @@
     "use strict";
 
     const SESSION_KEY = "runde:pet-runtime:v2";
-    const RUNTIME_VERSION = "20260729-lazy-v3";
+    const RUNTIME_VERSION = "20260729-lazy-v4";
     const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const PETS = {
         mochi: { name: "Mochi", accent: "#ff78ad" },
@@ -11,11 +11,20 @@
     };
     const ASSETS = {
         style: "assets/mochi/mochi-pet.css",
-        metrics: [
-            "assets/mochi/mochi-frame-metrics.js",
-            "assets/appcopilot/appcopilot-frame-metrics.js",
-            "assets/timo/timo-frame-metrics.js"
-        ],
+        metrics: {
+            mochi: {
+                path: "assets/mochi/mochi-frame-metrics.js",
+                global: "MOCHI_FRAME_METRICS"
+            },
+            appcopilot: {
+                path: "assets/appcopilot/appcopilot-frame-metrics.js",
+                global: "APPCOPILOT_FRAME_METRICS"
+            },
+            timo: {
+                path: "assets/timo/timo-frame-metrics.js",
+                global: "TIMO_FRAME_METRICS"
+            }
+        },
         runtime: "assets/mochi/mochi-pet.js"
     };
 
@@ -25,6 +34,8 @@
     if (!summonButton || !summonMenu) return;
 
     let systemPromise = null;
+    let runtimePromise = null;
+    const metricsPromises = new Map();
     let activeLoadPromise = null;
     let sequence = null;
     let sequenceStatus = null;
@@ -43,6 +54,17 @@
     storedState?.loadedPets?.forEach((petId) => {
         if (PETS[petId]) knownCachedPets.add(petId);
     });
+
+    function markPreferredPet(petId) {
+        if (!PETS[petId]) return;
+        summonMenu.dataset.preferredPet = petId;
+        summonMenu.querySelectorAll(".summon-option[data-char]").forEach((option) => {
+            if (option.dataset.char === petId) option.setAttribute("aria-current", "true");
+            else option.removeAttribute("aria-current");
+        });
+    }
+
+    if (storedState?.currentPetId) markPreferredPet(storedState.currentPetId);
 
     function delay(milliseconds) {
         return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
@@ -84,6 +106,7 @@
         } catch (error) {
             // Session persistence is an enhancement; the current page still works.
         }
+        markPreferredPet(currentPetId);
         return state;
     }
 
@@ -101,7 +124,11 @@
         summonMenu.setAttribute("aria-hidden", String(!nextOpen));
         summonButton.setAttribute("aria-expanded", String(nextOpen));
         if (nextOpen && focusFirst) {
-            summonMenu.querySelector(".summon-option:not([hidden])")?.focus();
+            const preferredPetId = summonMenu.dataset.preferredPet;
+            const preferredOption = preferredPetId
+                ? summonMenu.querySelector(`.summon-option[data-char="${preferredPetId}"]:not([hidden])`)
+                : null;
+            (preferredOption || summonMenu.querySelector(".summon-option:not([hidden])"))?.focus();
         }
     }
 
@@ -344,48 +371,108 @@
         }
     }
 
-    async function ensureSystemAssets(visual) {
+    async function ensurePetMetrics(petId, visual) {
+        const asset = ASSETS.metrics[petId];
+        if (!asset) throw new Error(`No frame metrics were configured for ${petId}`);
+
+        if (!window[asset.global]) {
+            let promise = metricsPromises.get(petId);
+            if (!promise) {
+                promise = loadScript(asset.path).then(() => {
+                    if (!window[asset.global]) {
+                        throw new Error(`Frame metrics did not initialize for ${petId}`);
+                    }
+                    return window[asset.global];
+                }).catch((error) => {
+                    metricsPromises.delete(petId);
+                    throw error;
+                });
+                metricsPromises.set(petId, promise);
+            }
+            if (visual) updateSequence(9, `Briefing ${PETS[petId].name}…`);
+            await promise;
+        }
+
+        const profile = petInstance?.petProfiles?.[petId];
+        if (profile) profile.metrics = window[asset.global];
+    }
+
+    async function ensureSystemAssets(petId, visual) {
+        if (!systemPromise) {
+            systemPromise = (async () => {
+                if (visual) updateSequence(4, "Securing the launch lane…");
+                await activatePetCache();
+                if (visual) updateSequence(7, "Rolling out the game stage…");
+                await loadStyle(ASSETS.style);
+            })().catch((error) => {
+                systemPromise = null;
+                throw error;
+            });
+        }
+        await systemPromise;
+        await ensurePetMetrics(petId, visual);
+
         if (window.MochiPet) return;
-        if (systemPromise) return systemPromise;
-        systemPromise = (async () => {
-            if (visual) updateSequence(4, "Securing the launch lane…");
-            await activatePetCache();
-            if (visual) updateSequence(7, "Rolling out the game stage…");
-            await loadStyle(ASSETS.style);
-            if (visual) updateSequence(9, "Briefing the companion crew…");
-            await Promise.all(ASSETS.metrics.map(loadScript));
-            if (visual) updateSequence(12, "Powering the companion portal…");
-            await loadScript(ASSETS.runtime);
-            if (!window.MochiPet) throw new Error("Companion runtime did not initialize");
-        })().catch((error) => {
-            systemPromise = null;
-            throw error;
-        });
-        return systemPromise;
+        if (!runtimePromise) {
+            runtimePromise = (async () => {
+                if (visual) updateSequence(12, "Powering the companion portal…");
+                await loadScript(ASSETS.runtime);
+                if (!window.MochiPet) throw new Error("Companion runtime did not initialize");
+            })().catch((error) => {
+                runtimePromise = null;
+                throw error;
+            });
+        }
+        await runtimePromise;
     }
 
     function imageReady(image) {
         return new Promise((resolve, reject) => {
-            const decode = () => {
+            const finish = () => {
                 if (!image.naturalWidth) {
                     reject(new Error(`Companion frame failed: ${image.currentSrc || image.src}`));
                     return;
                 }
-                if (typeof image.decode !== "function") {
-                    resolve();
-                    return;
-                }
-                image.decode().then(resolve).catch(() => resolve());
+                resolve();
             };
             if (image.complete) {
-                decode();
+                finish();
                 return;
             }
-            image.addEventListener("load", decode, { once: true });
+            image.addEventListener("load", finish, { once: true });
             image.addEventListener("error", () => {
                 reject(new Error(`Companion frame failed: ${image.currentSrc || image.src}`));
             }, { once: true });
         });
+    }
+
+    async function forEachConcurrent(items, concurrency, callback) {
+        let nextIndex = 0;
+        const worker = async () => {
+            while (nextIndex < items.length) {
+                const index = nextIndex;
+                nextIndex += 1;
+                await callback(items[index], index);
+            }
+        };
+        const workers = Array.from(
+            { length: Math.min(concurrency, items.length) },
+            () => worker()
+        );
+        await Promise.all(workers);
+    }
+
+    function getLaunchFrameImages(petId) {
+        const cache = petInstance?.imageCaches?.get(petId);
+        if (!cache) return [];
+        const launchSources = [
+            ...(petInstance?.poses?.stand?.frames || []),
+            ...(petInstance?.poses?.walk?.frames || [])
+        ];
+        const images = Array.from(new Set(launchSources))
+            .map((source) => cache.get(source))
+            .filter(Boolean);
+        return images.length ? images : Array.from(cache.values()).slice(0, 48);
     }
 
     function retryBrokenFrames(petId) {
@@ -401,12 +488,11 @@
     }
 
     async function waitForPetFrames(petId, visual) {
-        const cache = petInstance?.imageCaches?.get(petId);
-        const images = cache ? Array.from(cache.values()) : [];
+        const images = getLaunchFrameImages(petId);
         if (!images.length) throw new Error(`No frames were prepared for ${petId}`);
         let completed = 0;
         let lastAnnouncedPercent = -1;
-        await Promise.all(images.map(async (image) => {
+        await forEachConcurrent(images, 8, async (image) => {
             await imageReady(image);
             completed += 1;
             if (!visual) return;
@@ -416,10 +502,10 @@
                 lastAnnouncedPercent = rounded;
                 updateSequence(
                     percent,
-                    `Loading ${PETS[petId].name} · ${completed.toLocaleString()} / ${images.length.toLocaleString()} frames`
+                    `Loading ${PETS[petId].name} · ${completed.toLocaleString()} / ${images.length.toLocaleString()} launch frames`
                 );
             }
-        }));
+        });
     }
 
     function instrumentPet(pet) {
@@ -448,7 +534,7 @@
     }
 
     async function preparePet(petId, visual, forceRetry) {
-        await ensureSystemAssets(visual);
+        await ensureSystemAssets(petId, visual);
         if (!petInstance) {
             petInstance = new window.MochiPet({ initialPetId: petId });
             window.__mochiPet = petInstance;
@@ -495,7 +581,7 @@
         if (activeLoadPromise) return activeLoadPromise;
         pendingPetId = petId;
         const requestOptions = {
-            visual: options.visual ?? !knownCachedPets.has(petId),
+            visual: options.visual ?? !residentPets.has(petId),
             summon: options.summon ?? true,
             forceRetry: options.forceRetry ?? false
         };
@@ -554,14 +640,4 @@
         }
     });
 
-    if (storedState?.ready) {
-        dismissOption.hidden = !storedState.active;
-        setButtonBusy(true);
-        queueMicrotask(() => {
-            requestPet(storedState.currentPetId, {
-                visual: false,
-                summon: storedState.active
-            });
-        });
-    }
 })();

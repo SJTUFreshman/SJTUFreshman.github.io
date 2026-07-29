@@ -51,7 +51,7 @@
         }
     </style>
     <script src="assets/stellar-transit.js" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
-    <link rel="preload" href="fonts/edukai-5.0.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/edukai-site-subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
@@ -61,7 +61,7 @@
     <style>
         @font-face {
             font-family: 'EduKai';
-            src: url('fonts/edukai-5.0.woff2') format('woff2');
+            src: url('fonts/edukai-site-subset.woff2') format('woff2');
             font-weight: 400;
             font-style: normal;
             font-display: swap;
@@ -6352,7 +6352,6 @@ async function signalStellarDestinationReady() {
             throw new Error('Font Loading API unavailable');
         }
         const faces = await document.fonts.load('400 1em "EduKai"', '中国大陆標楷字體');
-        await document.fonts.ready;
         const loaded = faces.length > 0
             && faces.every(face => face.status === 'loaded')
             && document.fonts.check('400 1em "EduKai"', '中国大陆標楷字體');
@@ -6363,7 +6362,6 @@ async function signalStellarDestinationReady() {
             'BiauKai typeface unavailable. Refresh to retry',
             'TYPEFACE UNAVAILABLE · REFRESH TO RETRY'
         );
-        return;
     }
     requestAnimationFrame(() => requestAnimationFrame(() => {
         if (window.StellarTransit?.markDestinationReady) {
