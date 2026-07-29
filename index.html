@@ -1485,9 +1485,43 @@ const WMO_CODES = {
     99: ['⛈️', 'Thunderstorm w/ heavy hail', '雷暴大冰雹', '雷暴大冰雹']
 };
 
+const WEATHER_LOCATION_STORAGE_KEY = 'runde:weather-location:v1';
+const WEATHER_OBSERVER = Object.freeze({
+    v: 1,
+    latitude: 31.23,
+    longitude: 121.47,
+    height: 0,
+    timezone: 'Asia/Shanghai',
+    label: {
+        en: 'Shanghai',
+        'zh-CN': '上海',
+        'zh-TW': '上海'
+    },
+    source: 'homepage-weather'
+});
+
+function shareWeatherObserver() {
+    try {
+        localStorage.setItem(WEATHER_LOCATION_STORAGE_KEY, JSON.stringify({
+            ...WEATHER_OBSERVER,
+            updatedAt: Date.now()
+        }));
+    } catch (error) {
+        // Storage is optional; weather and the homepage remain fully usable.
+    }
+}
+
 async function fetchWeather() {
     try {
-        const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=31.23&longitude=121.47&current=temperature_2m,weather_code&timezone=Asia/Shanghai');
+        shareWeatherObserver();
+        const weatherUrl = new URL('https://api.open-meteo.com/v1/forecast');
+        weatherUrl.search = new URLSearchParams({
+            latitude: String(WEATHER_OBSERVER.latitude),
+            longitude: String(WEATHER_OBSERVER.longitude),
+            current: 'temperature_2m,weather_code',
+            timezone: WEATHER_OBSERVER.timezone
+        });
+        const res = await fetch(weatherUrl);
         const data = await res.json();
         const temp = Math.round(data.current.temperature_2m);
         const code = data.current.weather_code;
