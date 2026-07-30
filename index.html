@@ -199,9 +199,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
         }
 
         .nav-brand {
+            flex: 0 0 auto;
             font-family: var(--font-en);
             font-size: 1.05rem;
             font-weight: 400;
@@ -213,6 +215,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
+            margin-left: auto;
         }
 
         .nav-link {
@@ -229,8 +232,11 @@
         }
 
         .nav-lang {
+            position: relative;
+            z-index: 1010;
             display: flex;
             align-items: center;
+            flex: 0 0 auto;
             gap: 2px;
             margin-left: 16px;
             border-left: 1px solid var(--border);
@@ -530,175 +536,93 @@
             color: var(--text);
         }
 
-        /* ========== Gallery Section ========== */
-        .gallery-scroll {
-            position: relative;
-            width: calc(100% + 48px);
-            margin-left: -24px;
-            overflow: hidden;
-            padding: 20px 0;
-            cursor: grab;
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-        }
-        .gallery-scroll:active { cursor: grabbing; }
-
-        .gallery-track {
-            display: flex;
-            gap: 16px;
-            padding: 0 40px;
-            width: max-content;
-        }
-
-        .gallery-item {
-            position: relative;
-            width: 220px;
-            height: 220px;
-            border-radius: var(--radius);
-            overflow: hidden;
-            flex-shrink: 0;
-            cursor: pointer;
-            transition: all var(--transition);
-        }
-        .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-hover);
-            z-index: 10;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .gallery-caption {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.6));
-            color: #fff;
-            padding: 24px 12px 10px;
-            font-size: 0.8rem;
-            transform: translateY(100%);
-            transition: transform var(--transition);
-        }
-        .gallery-item:hover .gallery-caption {
-            transform: translateY(0);
-        }
-
-        /* Lightbox */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 12000;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(250,250,248,0.96);
-            backdrop-filter: blur(20px);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            cursor: pointer;
-            overflow-y: auto;
-            padding: max(28px, env(safe-area-inset-top)) 72px max(28px, env(safe-area-inset-bottom));
-        }
-        .lightbox.active { display: flex; }
-        .lightbox img {
-            max-width: 90%;
-            max-height: min(75vh, calc(100dvh - 150px));
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-hover);
-        }
-        .lightbox-caption {
-            margin-top: 16px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            padding: 0 72px;
-            text-align: center;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 20px; right: 28px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-            background: none;
-            border: none;
-            transition: color var(--transition);
-        }
-        .lightbox-close:hover { color: var(--text); }
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            width: 46px;
-            height: 46px;
-            display: grid;
-            place-items: center;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            background: rgba(255,255,255,0.72);
-            color: var(--text-secondary);
-            font-family: var(--font-ui);
-            font-size: 1.35rem;
-            cursor: pointer;
-            transform: translateY(-50%);
-            transition: color var(--transition), border-color var(--transition), background var(--transition), transform var(--transition);
-        }
-        .lightbox-nav:hover,
-        .lightbox-nav:focus-visible {
-            color: var(--text);
-            border-color: #ccc;
-            background: rgba(255,255,255,0.96);
-            transform: translateY(-50%) scale(1.06);
-            outline: none;
-        }
-        .lightbox-prev { left: 24px; }
-        .lightbox-next { right: 24px; }
-
-        @media (max-width: 640px) {
-            .lightbox {
-                padding-left: 16px;
-                padding-right: 16px;
-                padding-bottom: max(96px, env(safe-area-inset-bottom));
-            }
-            .lightbox img {
-                max-width: calc(100% - 32px);
-                max-height: min(68vh, calc(100dvh - 190px));
-            }
-            .lightbox-nav {
-                top: auto;
-                bottom: 24px;
-                transform: none;
-            }
-            .lightbox-nav:hover,
-            .lightbox-nav:focus-visible {
-                transform: scale(1.06);
-            }
-            .lightbox-prev { left: calc(50% - 60px); }
-            .lightbox-next { right: calc(50% - 60px); }
-            .lightbox-caption { margin-bottom: 74px; padding: 0 24px; }
-        }
-
         /* ========== Life Preview ========== */
         .life-card {
+            --portal-size: 166px;
             position: relative;
             display: block;
-            margin-top: 40px;
+            margin-top: 0;
             border-radius: var(--radius-lg);
             overflow: hidden;
             cursor: pointer;
-            height: 220px;
+            height: 232px;
             text-decoration: none;
+            isolation: isolate;
+            color: #fff;
+            background: #090d18;
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 14px 34px rgba(20, 24, 35, 0.13);
+            transform: translateZ(0);
+            transition:
+                transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.55s ease,
+                border-color 0.55s ease;
+        }
+        .life-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.62;
+            background-image:
+                radial-gradient(circle at 8% 26%, rgba(255,255,255,0.9) 0 0.7px, transparent 1px),
+                radial-gradient(circle at 26% 77%, rgba(255,255,255,0.72) 0 0.6px, transparent 1px),
+                radial-gradient(circle at 48% 18%, rgba(207,221,255,0.88) 0 0.8px, transparent 1.1px),
+                radial-gradient(circle at 63% 72%, rgba(255,255,255,0.82) 0 0.7px, transparent 1px),
+                radial-gradient(circle at 88% 18%, rgba(198,211,255,0.92) 0 0.8px, transparent 1.1px);
+            background-size: 101px 83px, 137px 119px, 173px 151px, 211px 179px, 251px 227px;
+            transition: opacity 0.55s ease, transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .life-card::after {
+            content: "";
+            position: absolute;
+            inset: 7px;
+            z-index: 5;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: calc(var(--radius-lg) - 7px);
+            pointer-events: none;
+            transition: border-color 0.55s ease;
+        }
+        .life-card:hover,
+        .life-card:focus-visible {
+            color: #fff;
+            transform: translateY(-3px);
+            border-color: rgba(192,207,255,0.28);
+            box-shadow: 0 22px 48px rgba(17, 23, 43, 0.22);
+            outline: none;
+        }
+        .life-card:focus-visible {
+            box-shadow:
+                0 0 0 3px var(--bg),
+                0 0 0 5px rgba(73, 92, 138, 0.55),
+                0 22px 48px rgba(17, 23, 43, 0.22);
+        }
+        .life-card:hover::before,
+        .life-card:focus-visible::before {
+            opacity: 0.9;
+            transform: translate3d(-8px, 2px, 0) scale(1.025);
+        }
+        .life-card:hover::after,
+        .life-card:focus-visible::after {
+            border-color: rgba(222,229,255,0.16);
         }
         .life-card-bg {
             position: absolute;
             inset: 0;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3px;
-            opacity: 0.55;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: -2;
+            grid-template-columns: 1.05fr 0.9fr 1fr 1.25fr;
+            gap: 2px;
+            opacity: 0.42;
+            filter: saturate(0.72) contrast(1.08);
+            transition: opacity 0.65s ease, transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), filter 0.65s ease;
         }
-        .life-card:hover .life-card-bg {
-            opacity: 0.35;
-            transform: scale(1.03);
+        .life-card:hover .life-card-bg,
+        .life-card:focus-visible .life-card-bg {
+            opacity: 0.3;
+            filter: saturate(0.5) contrast(1.16);
+            transform: scale(1.035);
         }
         .life-card-bg img {
             width: 100%;
@@ -708,71 +632,293 @@
         .life-card-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(26,26,26,0.65) 0%, rgba(26,26,26,0.25) 100%);
-            transition: background 0.5s ease;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 82% 50%, rgba(103,119,213,0.16) 0%, rgba(32,39,75,0.2) 24%, transparent 46%),
+                linear-gradient(90deg, rgba(7,10,19,0.94) 0%, rgba(7,10,19,0.86) 44%, rgba(7,10,19,0.56) 70%, rgba(7,10,19,0.78) 100%),
+                linear-gradient(180deg, rgba(8,11,21,0.16), rgba(8,11,21,0.56));
+            transition: opacity 0.6s ease;
         }
-        .life-card:hover .life-card-overlay {
-            background: linear-gradient(135deg, rgba(26,26,26,0.75) 0%, rgba(26,26,26,0.35) 100%);
+        .life-card:hover .life-card-overlay,
+        .life-card:focus-visible .life-card-overlay {
+            opacity: 0.94;
         }
         .life-card-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 32px;
-        }
-        .life-card-icon {
-            font-size: 1.6rem;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 16px;
-            transition: transform 0.5s ease;
-        }
-        .life-card:hover .life-card-icon {
-            transform: rotate(45deg);
+            align-items: flex-start;
+            text-align: left;
+            width: 66%;
+            padding: 30px 34px;
         }
         .life-card-title {
-            font-size: 1.5rem;
+            font-size: clamp(1.55rem, 4.5vw, 1.82rem);
             font-weight: 500;
             color: #fff;
-            letter-spacing: 0.08em;
-            margin-bottom: 8px;
+            line-height: 1.12;
+            letter-spacing: 0.045em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 16px rgba(0,0,0,0.35);
         }
         body.lang-en .life-card-title {
             text-transform: uppercase;
             font-family: var(--font-en);
         }
-        .life-card-rule {
-            width: 40px;
-            height: 1px;
-            background: rgba(255,255,255,0.5);
-            margin-bottom: 12px;
-            transition: width 0.4s ease;
-        }
-        .life-card:hover .life-card-rule {
-            width: 80px;
-        }
         .life-card-desc {
             font-size: 0.88rem;
-            color: rgba(255,255,255,0.75);
-            line-height: 1.6;
-            max-width: 360px;
+            color: rgba(234,237,247,0.72);
+            line-height: 1.55;
+            max-width: 320px;
         }
-        .life-card-arrow {
+        .life-card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 17px;
+            color: rgba(232,237,255,0.88);
+            font-family: var(--font-ui);
+            font-size: 0.7rem;
+            font-weight: 500;
+            line-height: 1;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+        }
+        .life-card-cta-line {
+            position: relative;
+            width: 34px;
+            height: 1px;
+            overflow: hidden;
+            background: rgba(221,229,255,0.28);
+            transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .life-card-cta-line::after {
+            content: "";
             position: absolute;
-            bottom: 20px;
-            right: 24px;
-            color: rgba(255,255,255,0.6);
-            font-size: 0.85rem;
-            transition: all 0.4s ease;
-            z-index: 2;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, #edf1ff, transparent);
+            transform: translateX(-110%);
+            transition: transform 0.7s ease;
         }
-        .life-card:hover .life-card-arrow {
-            color: rgba(255,255,255,0.9);
-            transform: translateX(6px);
+        .life-card-cta-arrow {
+            font-size: 0.92rem;
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .life-card:hover .life-card-cta-line,
+        .life-card:focus-visible .life-card-cta-line {
+            width: 48px;
+        }
+        .life-card:hover .life-card-cta-line::after,
+        .life-card:focus-visible .life-card-cta-line::after {
+            transform: translateX(110%);
+        }
+        .life-card:hover .life-card-cta-arrow,
+        .life-card:focus-visible .life-card-cta-arrow {
+            transform: translateX(4px);
+        }
+        .life-card-portal {
+            position: absolute;
+            top: 50%;
+            right: 29px;
+            z-index: 2;
+            width: var(--portal-size);
+            height: var(--portal-size);
+            border-radius: 50%;
+            transform: translateY(-50%);
+            transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .life-card-portal::before {
+            content: "";
+            position: absolute;
+            inset: 13px;
+            border-radius: 50%;
+            background: rgba(95,119,215,0.18);
+            filter: blur(18px);
+            box-shadow: 0 0 34px rgba(151,168,255,0.32);
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        .life-card:hover .life-card-portal,
+        .life-card:focus-visible .life-card-portal {
+            transform: translateY(-50%) scale(1.055);
+        }
+        .life-card:hover .life-card-portal::before,
+        .life-card:focus-visible .life-card-portal::before {
+            opacity: 0.92;
+            transform: scale(1.16);
+        }
+        .life-card-orbit,
+        .life-card-bearing,
+        .life-card-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+        }
+        .life-card-orbit {
+            width: 100%;
+            height: 100%;
+            margin: -50% 0 0 -50%;
+            opacity: 0.64;
+            background:
+                repeating-conic-gradient(
+                    from 8deg,
+                    rgba(224,231,255,0.8) 0deg 0.7deg,
+                    transparent 0.7deg 12deg
+                );
+            -webkit-mask: radial-gradient(circle, transparent 0 78%, #000 79% 81%, transparent 82%);
+            mask: radial-gradient(circle, transparent 0 78%, #000 79% 81%, transparent 82%);
+            animation: life-orbit-turn 28s linear infinite;
+        }
+        .life-card-orbit::before,
+        .life-card-orbit::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: #eef2ff;
+            box-shadow: 0 0 10px rgba(193,207,255,0.9);
+        }
+        .life-card-orbit::before {
+            width: 4px;
+            height: 4px;
+            top: 17px;
+            left: 31px;
+        }
+        .life-card-orbit::after {
+            width: 3px;
+            height: 3px;
+            right: 19px;
+            bottom: 39px;
+        }
+        .life-card-bearing {
+            width: 134px;
+            height: 134px;
+            margin: -67px 0 0 -67px;
+            border: 1px solid rgba(207,217,255,0.22);
+            box-shadow:
+                inset 0 0 0 7px rgba(9,13,24,0.26),
+                0 0 0 7px rgba(168,186,255,0.025);
+            transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.6s ease;
+        }
+        .life-card-bearing::before,
+        .life-card-bearing::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: rgba(209,219,255,0.18);
+            transform: translate(-50%, -50%);
+        }
+        .life-card-bearing::before {
+            width: 152px;
+            height: 1px;
+        }
+        .life-card-bearing::after {
+            width: 1px;
+            height: 152px;
+        }
+        .life-card:hover .life-card-bearing,
+        .life-card:focus-visible .life-card-bearing {
+            border-color: rgba(218,226,255,0.42);
+            transform: rotate(-10deg);
+        }
+        .life-card-core {
+            width: 108px;
+            height: 108px;
+            margin: -54px 0 0 -54px;
+            overflow: hidden;
+            border: 1px solid rgba(229,234,255,0.62);
+            background: #02040a;
+            box-shadow:
+                0 0 0 5px rgba(8,12,24,0.72),
+                0 0 0 6px rgba(195,208,255,0.18),
+                0 0 30px rgba(118,139,239,0.36);
+        }
+        .life-card-core img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 49%;
+            opacity: 0.85;
+            filter: saturate(0.76) contrast(1.14) brightness(0.9);
+            transform: scale(1.32);
+            transition: opacity 0.65s ease, filter 0.65s ease, transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .life-card-core::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background:
+                radial-gradient(circle at 48% 48%, transparent 0 35%, rgba(38,49,94,0.08) 55%, rgba(2,4,10,0.7) 100%);
+            box-shadow: inset 0 0 22px rgba(1,3,9,0.84);
+            pointer-events: none;
+        }
+        .life-card:hover .life-card-core img,
+        .life-card:focus-visible .life-card-core img {
+            opacity: 1;
+            filter: saturate(1.02) contrast(1.12) brightness(1.04);
+            transform: scale(1.18);
+        }
+        .life-card-star {
+            position: absolute;
+            z-index: 3;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 8px rgba(210,221,255,0.95);
+            transition: transform 0.75s ease, opacity 0.75s ease;
+        }
+        .life-card-star.one { top: 27px; right: 186px; opacity: 0.78; }
+        .life-card-star.two { right: 19px; bottom: 30px; opacity: 0.56; }
+        .life-card-star.three { right: 208px; bottom: 38px; opacity: 0.48; }
+        .life-card:hover .life-card-star.one,
+        .life-card:focus-visible .life-card-star.one { transform: translate(5px, -5px) scale(1.45); opacity: 1; }
+        .life-card:hover .life-card-star.two,
+        .life-card:focus-visible .life-card-star.two { transform: translate(-4px, 3px) scale(1.35); opacity: 0.9; }
+        .life-card:hover .life-card-star.three,
+        .life-card:focus-visible .life-card-star.three { transform: translate(4px, 2px) scale(1.4); opacity: 0.82; }
+
+        @keyframes life-orbit-turn {
+            to { transform: rotate(360deg); }
+        }
+        @media (max-width: 560px) {
+            .life-card {
+                --portal-size: 142px;
+                height: 252px;
+            }
+            .life-card-content {
+                width: calc(100% - 70px);
+                padding: 27px 24px;
+            }
+            .life-card-title {
+                max-width: 210px;
+                font-size: 1.48rem;
+            }
+            .life-card-desc {
+                max-width: 230px;
+                font-size: 0.82rem;
+            }
+            .life-card-portal {
+                right: -42px;
+            }
+            .life-card-bearing {
+                width: 116px;
+                height: 116px;
+                margin: -58px 0 0 -58px;
+            }
+            .life-card-bearing::before { width: 132px; }
+            .life-card-bearing::after { height: 132px; }
+            .life-card-core {
+                width: 92px;
+                height: 92px;
+                margin: -46px 0 0 -46px;
+            }
+            .life-card-star.one { right: 108px; }
+            .life-card-star.three { right: 122px; }
         }
 
         /* ========== Notes Section ========== */
@@ -913,8 +1059,21 @@
                 transform: none;
                 transition: none;
             }
-            .lightbox-nav {
+            .life-card,
+            .life-card::before,
+            .life-card-bg,
+            .life-card-portal,
+            .life-card-portal::before,
+            .life-card-bearing,
+            .life-card-core img,
+            .life-card-cta-line,
+            .life-card-cta-line::after,
+            .life-card-cta-arrow,
+            .life-card-star {
                 transition: none;
+            }
+            .life-card-orbit {
+                animation: none;
             }
         }
 
@@ -946,7 +1105,6 @@
             <a href="#news" class="nav-link" data-key="nav_news">News</a>
             <a href="#publications" class="nav-link" data-key="nav_pubs">Publications</a>
             <a href="#projects" class="nav-link" data-key="nav_projects">Projects</a>
-            <a href="#gallery" class="nav-link" data-key="nav_gallery">Gallery</a>
             <a href="#notes" class="nav-link" data-key="nav_notes">Notes</a>
             <div class="nav-lang">
                 <button class="lang-btn active" onclick="setLang('en')">EN</button>
@@ -1128,65 +1286,10 @@
         </div>
     </section>
 
-    <!-- ===== Gallery ===== -->
-    <section id="gallery" class="fade-in">
-        <div class="section-title" data-key="title_gallery">Gallery</div>
-        <div class="gallery-scroll" id="galleryScroll">
-            <div class="gallery-track" id="galleryTrack">
-                <div class="gallery-item" role="button" tabindex="0"
-                    aria-label="Orion Nebula, 2025"
-                    onclick="openLightbox(this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
-                    <img src="images/meteor.jpg" alt="Orion Nebula" loading="lazy" decoding="async">
-                    <div class="gallery-caption" data-key="cap_meteor">Orion Nebula, 2025</div>
-                </div>
-                <div class="gallery-item" role="button" tabindex="0"
-                    aria-label="Stargazing camp"
-                    onclick="openLightbox(this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
-                    <img src="images/那日.jpg" alt="Stargazing Camp" loading="lazy" decoding="async">
-                    <div class="gallery-caption" data-key="cap_nari">Stargazing camp</div>
-                </div>
-                <div class="gallery-item" role="button" tabindex="0"
-                    aria-label="Qiandao Lake sunset"
-                    onclick="openLightbox(this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
-                    <img src="images/千島湖.jpg" alt="Qiandao Lake Sunset" loading="lazy" decoding="async">
-                    <div class="gallery-caption" data-key="cap_qiandaohu">Qiandao Lake sunset</div>
-                </div>
-                <div class="gallery-item" role="button" tabindex="0"
-                    aria-label="On the road to Qiandao Lake"
-                    onclick="openLightbox(this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
-                    <img src="images/千島湖路上.jpg" alt="On the Road" loading="lazy" decoding="async">
-                    <div class="gallery-caption" data-key="cap_road">On the road to Qiandao Lake</div>
-                </div>
-                <div class="gallery-item" role="button" tabindex="0"
-                    aria-label="SJTU Campus in spring"
-                    onclick="openLightbox(this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
-                    <img src="images/美哉吾校.jpg" alt="SJTU Campus" loading="lazy" decoding="async">
-                    <div class="gallery-caption" data-key="cap_campus">SJTU Campus in spring</div>
-                </div>
-                <div class="gallery-item" role="button" tabindex="0"
-                    aria-label="Zijin Mountain, Nanjing"
-                    onclick="openLightbox(this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
-                    <img src="images/紫金山.jpg" alt="Zijin Mountain" loading="lazy" decoding="async">
-                    <div class="gallery-caption" data-key="cap_zijinshan">Zijin Mountain, Nanjing</div>
-                </div>
-                <div class="gallery-item" role="button" tabindex="0"
-                    aria-label="Baking club strawberry cake"
-                    onclick="openLightbox(this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
-                    <img src="images/烘焙社草莓蛋糕.jpg" alt="Baking Club" loading="lazy" decoding="async">
-                    <div class="gallery-caption" data-key="cap_cake">Baking club strawberry cake</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Life link card -->
-        <a class="life-card" id="lifePortalLink" href="life.html">
+    <!-- ===== Life Portal ===== -->
+    <section id="life-portal" class="fade-in">
+        <a class="life-card" id="lifePortalLink" href="life.html"
+           aria-labelledby="lifePortalTitle lifePortalDesc">
             <div class="life-card-bg">
                 <img src="images/card-thumbs/qiandaohu-card.jpg" alt="">
                 <img src="images/card-thumbs/sjtu-campus-card.jpg" alt="">
@@ -1195,12 +1298,24 @@
             </div>
             <div class="life-card-overlay"></div>
             <div class="life-card-content">
-                <div class="life-card-icon"><i class="fas fa-compass"></i></div>
-                <div class="life-card-title" data-key="life_card_title">Beyond Research</div>
-                <div class="life-card-rule"></div>
-                <div class="life-card-desc" data-key="life_card_desc">Footprints map, bookshelf, thoughts, and more.</div>
+                <div class="life-card-title" id="lifePortalTitle" data-key="life_card_title">Beyond Research</div>
+                <div class="life-card-desc" id="lifePortalDesc" data-key="life_card_desc">Footprints map, bookshelf, thoughts, and more.</div>
+                <div class="life-card-cta" aria-hidden="true">
+                    <span data-key="life_card_cta">Enter the night sky</span>
+                    <span class="life-card-cta-line"></span>
+                    <span class="life-card-cta-arrow">→</span>
+                </div>
             </div>
-            <div class="life-card-arrow"><i class="fas fa-long-arrow-alt-right"></i> <span class="en-only" style="font-size:0.8rem;letter-spacing:0.05em;">EXPLORE</span></div>
+            <div class="life-card-portal" aria-hidden="true">
+                <span class="life-card-orbit"></span>
+                <span class="life-card-bearing"></span>
+                <span class="life-card-core">
+                    <img src="images/card-thumbs/meteor-card.jpg" alt="">
+                </span>
+            </div>
+            <span class="life-card-star one" aria-hidden="true"></span>
+            <span class="life-card-star two" aria-hidden="true"></span>
+            <span class="life-card-star three" aria-hidden="true"></span>
         </a>
     </section>
 
@@ -1223,15 +1338,6 @@
     &copy; 2025–2026 Runde Yang. Built with care.
 </footer>
 
-<!-- ===== Lightbox ===== -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Gallery image viewer">
-    <button class="lightbox-close" type="button" onclick="event.stopPropagation(); closeLightbox()" aria-label="Close image viewer">&times;</button>
-    <button class="lightbox-nav lightbox-prev" type="button" onclick="changeLightbox(-1, event)" aria-label="Previous image">←</button>
-    <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" onclick="event.stopPropagation()">
-    <div class="lightbox-caption" id="lightboxCaption" aria-live="polite" onclick="event.stopPropagation()"></div>
-    <button class="lightbox-nav lightbox-next" type="button" onclick="changeLightbox(1, event)" aria-label="Next image">→</button>
-</div>
-
 <script src="assets/pet-summon.js"></script>
 <script>
 /* ===== i18n Content ===== */
@@ -1241,12 +1347,10 @@ const i18n = {
         "nav_news": "News",
         "nav_pubs": "Publications",
         "nav_projects": "Projects",
-        "nav_gallery": "Gallery",
         "nav_notes": "Notes",
         "title_news": "News",
         "title_pubs": "Publications",
         "title_projects": "Projects",
-        "title_gallery": "Gallery",
         "title_notes": "Notes",
         "weather_loc": "Shanghai",
         "hero_name": "Runde Yang <span style=\"font-weight:400;font-size:0.65em;color:var(--text-secondary);\">楊潤德</span>",
@@ -1255,29 +1359,21 @@ const i18n = {
         "hero_location": "Shanghai, China",
         "life_card_title": "Beyond Research",
         "life_card_desc": "Footprints map, bookshelf, thoughts, and more.",
+        "life_card_cta": "Enter the night sky",
         "notes_empty": "Notes coming soon...",
         "news_1": "25-26 Spring Finals finished.",
         "proj_appcopilot": "A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.",
-        "proj_teachmaster": "A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.",
-        "cap_meteor": "Orion Nebula, 2025",
-        "cap_nari": "Stargazing camp",
-        "cap_qiandaohu": "Qiandao Lake sunset",
-        "cap_road": "On the road to Qiandao Lake",
-        "cap_campus": "SJTU Campus in spring",
-        "cap_zijinshan": "Zijin Mountain, Nanjing",
-        "cap_cake": "Baking club strawberry cake"
+        "proj_teachmaster": "A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos."
     },
     "zh-CN": {
         "nav_about": "关于",
         "nav_news": "动态",
         "nav_pubs": "论文",
         "nav_projects": "项目",
-        "nav_gallery": "光影",
         "nav_notes": "笔记",
         "title_news": "动态",
         "title_pubs": "发表论文",
         "title_projects": "项目经历",
-        "title_gallery": "光影",
         "title_notes": "笔记",
         "weather_loc": "上海",
         "hero_name": "杨润德",
@@ -1286,29 +1382,21 @@ const i18n = {
         "hero_location": "中国 上海",
         "life_card_title": "科研之外",
         "life_card_desc": "足迹地图、书影、随笔，以及更多。",
+        "life_card_cta": "进入星空",
         "notes_empty": "笔记即将上线……",
         "news_1": "期末终验考完啦！",
         "proj_appcopilot": "一个多模态多智能体设备端助手，探索工具使用、规划和鲁棒的 UI 定位。",
-        "proj_teachmaster": "一个多智能体框架，使用代码作为中间语义表示，自动生成结构化的教育视频。",
-        "cap_meteor": "猎户座大星云，2025",
-        "cap_nari": "观星营地",
-        "cap_qiandaohu": "千岛湖日落",
-        "cap_road": "千岛湖路上",
-        "cap_campus": "美哉吾校",
-        "cap_zijinshan": "紫金山，南京",
-        "cap_cake": "烘焙社草莓蛋糕"
+        "proj_teachmaster": "一个多智能体框架，使用代码作为中间语义表示，自动生成结构化的教育视频。"
     },
     "zh-TW": {
         "nav_about": "關於",
         "nav_news": "動態",
         "nav_pubs": "論文",
         "nav_projects": "項目",
-        "nav_gallery": "光影",
         "nav_notes": "筆記",
         "title_news": "動態",
         "title_pubs": "發表論文",
         "title_projects": "項目經歷",
-        "title_gallery": "光影",
         "title_notes": "筆記",
         "weather_loc": "上海",
         "hero_name": "楊潤德",
@@ -1317,51 +1405,15 @@ const i18n = {
         "hero_location": "中國 上海",
         "life_card_title": "科研之外",
         "life_card_desc": "足跡地圖、書影、隨筆，以及更多。",
+        "life_card_cta": "進入星空",
         "notes_empty": "筆記即將上線……",
         "news_1": "期末终于考完啦！",
         "proj_appcopilot": "一個多模態多智能體設備端助手，探索工具使用、規劃和魯棒的 UI 定位。",
-        "proj_teachmaster": "一個多智能體框架，使用代碼作為中間語義表示，自動生成結構化的教育視頻。",
-        "cap_meteor": "獵戶座大星雲，2025",
-        "cap_nari": "觀星營地",
-        "cap_qiandaohu": "千島湖日落",
-        "cap_road": "千島湖路上",
-        "cap_campus": "美哉吾校",
-        "cap_zijinshan": "紫金山，南京",
-        "cap_cake": "烘焙社草莓蛋糕"
+        "proj_teachmaster": "一個多智能體框架，使用代碼作為中間語義表示，自動生成結構化的教育視頻。"
     }
 };
 
 let currentLang = localStorage.getItem('preferredLang') || 'en';
-
-const interfaceLabels = {
-    en: {
-        lightbox: 'Gallery image viewer',
-        close: 'Close image viewer',
-        previous: 'Previous image',
-        next: 'Next image'
-    },
-    'zh-CN': {
-        lightbox: '照片查看器',
-        close: '关闭照片查看器',
-        previous: '上一张照片',
-        next: '下一张照片'
-    },
-    'zh-TW': {
-        lightbox: '照片檢視器',
-        close: '關閉照片檢視器',
-        previous: '上一張照片',
-        next: '下一張照片'
-    }
-};
-
-function updateInterfaceAccessibility(lang) {
-    const labels = interfaceLabels[lang] || interfaceLabels.en;
-    const lightbox = document.getElementById('lightbox');
-    lightbox.setAttribute('aria-label', labels.lightbox);
-    lightbox.querySelector('.lightbox-close').setAttribute('aria-label', labels.close);
-    lightbox.querySelector('.lightbox-prev').setAttribute('aria-label', labels.previous);
-    lightbox.querySelector('.lightbox-next').setAttribute('aria-label', labels.next);
-}
 
 function setLang(lang) {
     currentLang = lang;
@@ -1389,12 +1441,6 @@ function setLang(lang) {
             el.innerHTML = data[key];
         }
     });
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        const caption = item.querySelector('.gallery-caption');
-        if (caption) item.setAttribute('aria-label', caption.textContent.trim());
-    });
-    updateInterfaceAccessibility(lang);
-
     // Update weather location
     const wLoc = document.getElementById('weatherLoc');
     if (wLoc) wLoc.textContent = data.weather_loc || 'Shanghai';
@@ -1571,173 +1617,6 @@ function copyCitation(id) {
         setTimeout(() => { btn.innerHTML = orig; }, 1500);
     });
 }
-
-/* ===== Gallery Drag Scroll ===== */
-(function() {
-    const el = document.getElementById('galleryScroll');
-    let isDown = false, startX, scrollLeft;
-    let dragDistance = 0;
-    let suppressClickUntil = 0;
-
-    el.addEventListener('mousedown', e => {
-        isDown = true;
-        startX = e.pageX - el.offsetLeft;
-        scrollLeft = el.scrollLeft;
-        dragDistance = 0;
-    });
-    el.addEventListener('mouseleave', () => isDown = false);
-    el.addEventListener('mouseup', () => {
-        if (dragDistance > 8) suppressClickUntil = performance.now() + 300;
-        isDown = false;
-    });
-    el.addEventListener('mousemove', e => {
-        if (!isDown) return;
-        const x = e.pageX - el.offsetLeft;
-        dragDistance = Math.max(dragDistance, Math.abs(x - startX));
-        if (dragDistance > 8) e.preventDefault();
-        el.scrollLeft = scrollLeft - (x - startX) * 1.5;
-    });
-
-    // Touch support
-    let touchStartX, touchScrollLeft, touchDistance;
-    el.addEventListener('touchstart', e => {
-        touchStartX = e.touches[0].pageX;
-        touchScrollLeft = el.scrollLeft;
-        touchDistance = 0;
-    }, { passive: true });
-    el.addEventListener('touchmove', e => {
-        const x = e.touches[0].pageX;
-        touchDistance = Math.max(touchDistance, Math.abs(x - touchStartX));
-        el.scrollLeft = touchScrollLeft - (x - touchStartX);
-    }, { passive: true });
-    el.addEventListener('touchend', () => {
-        if (touchDistance > 8) suppressClickUntil = performance.now() + 600;
-    }, { passive: true });
-    el.addEventListener('click', event => {
-        if (performance.now() >= suppressClickUntil) return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
-    }, true);
-})();
-
-/* ===== Lightbox ===== */
-let lightboxItems = [];
-let lightboxIndex = 0;
-let lightboxTrigger = null;
-let lightboxTouchStartX = null;
-
-function setLightboxBackgroundInert(lightbox, active) {
-    if (!active) {
-        document.querySelectorAll('[data-lightbox-inert="true"]').forEach(element => {
-            element.inert = false;
-            delete element.dataset.lightboxInert;
-        });
-        return;
-    }
-
-    let current = lightbox;
-    while (current && current !== document.body) {
-        const parent = current.parentElement;
-        if (!parent) break;
-        Array.from(parent.children).forEach(sibling => {
-            if (sibling === current || sibling.inert) return;
-            sibling.inert = true;
-            sibling.dataset.lightboxInert = 'true';
-        });
-        current = parent;
-    }
-}
-
-function trapLightboxFocus(event, lightbox) {
-    if (event.key !== 'Tab') return;
-    const focusable = Array.from(
-        lightbox.querySelectorAll('button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])')
-    ).filter(element => element.getClientRects().length);
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && (document.activeElement === first || !lightbox.contains(document.activeElement))) {
-        event.preventDefault();
-        last.focus();
-    } else if (!event.shiftKey && (document.activeElement === last || !lightbox.contains(document.activeElement))) {
-        event.preventDefault();
-        first.focus();
-    }
-}
-
-function renderLightboxItem(index) {
-    if (!lightboxItems.length) return;
-    lightboxIndex = (index + lightboxItems.length) % lightboxItems.length;
-    const item = lightboxItems[lightboxIndex];
-    const image = item.querySelector('img');
-    const caption = item.querySelector('.gallery-caption');
-    const lightboxImage = document.getElementById('lightboxImg');
-    lightboxImage.src = image.src;
-    lightboxImage.alt = image.alt || '';
-    document.getElementById('lightboxCaption').textContent = caption ? caption.textContent : '';
-}
-
-function openLightbox(el) {
-    const scope = el.closest('[data-gallery-group], .gallery-track, .gallery-grid') || document;
-    lightboxItems = Array.from(scope.querySelectorAll('.gallery-item'));
-    lightboxIndex = Math.max(0, lightboxItems.indexOf(el));
-    lightboxTrigger = el;
-    renderLightboxItem(lightboxIndex);
-    const lightbox = document.getElementById('lightbox');
-    lightbox.classList.add('active');
-    lightbox.setAttribute('aria-hidden', 'false');
-    setLightboxBackgroundInert(lightbox, true);
-    document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => lightbox.querySelector('.lightbox-close').focus());
-}
-
-function changeLightbox(delta, event) {
-    if (event) event.stopPropagation();
-    renderLightboxItem(lightboxIndex + delta);
-}
-
-function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    if (!lightbox.classList.contains('active')) return;
-    lightbox.classList.remove('active');
-    lightbox.setAttribute('aria-hidden', 'true');
-    setLightboxBackgroundInert(lightbox, false);
-    document.body.style.overflow = '';
-    if (lightboxTrigger?.isConnected && lightboxTrigger.getClientRects().length) {
-        lightboxTrigger.focus({ preventScroll: true });
-    }
-    lightboxTrigger = null;
-}
-
-document.addEventListener('keydown', e => {
-    const lightbox = document.getElementById('lightbox');
-    if (!lightbox.classList.contains('active')) return;
-    trapLightboxFocus(e, lightbox);
-    if (e.key === 'Escape') {
-        e.preventDefault();
-        closeLightbox();
-    }
-    if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        changeLightbox(-1);
-    }
-    if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        changeLightbox(1);
-    }
-});
-
-const lightboxElement = document.getElementById('lightbox');
-lightboxElement.addEventListener('touchstart', event => {
-    lightboxTouchStartX = event.changedTouches[0].clientX;
-}, { passive: true });
-lightboxElement.addEventListener('touchend', event => {
-    if (lightboxTouchStartX === null) return;
-    const distance = event.changedTouches[0].clientX - lightboxTouchStartX;
-    lightboxTouchStartX = null;
-    if (Math.abs(distance) < 48) return;
-    changeLightbox(distance > 0 ? -1 : 1);
-}, { passive: true });
 
 /* ===== Mobile Nav Toggle ===== */
 function toggleNav() {
