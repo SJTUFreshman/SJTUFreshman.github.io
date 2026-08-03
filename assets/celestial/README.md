@@ -11,6 +11,7 @@
 
 | 网页资产 | 上游来源与 credit | 网页化修改 |
 | --- | --- | --- |
+| `moon.webp` | Solar System Scope 2K Moon | JPEG 转高质量 WebP；保持 2048×1024 |
 | `mercury.webp` | Solar System Scope 2K Mercury | JPEG 转 WebP；保持 2048×1024 |
 | `venus.webp` | Solar System Scope 2K Venus Atmosphere | JPEG 转 WebP；保持 2048×1024 |
 | `mars.webp` | Solar System Scope 2K Mars | JPEG 转 WebP；保持 2048×1024 |
@@ -27,10 +28,11 @@ WebP、缩放和土星环条带均属于本项目为降低网络传输与解码�
 
 ## Solar System Scope 纹理
 
-水星、金星、火星、木星、土星和太阳取自 Solar System Scope 的免费 2K
+月亮、水星、金星、火星、木星、土星和太阳取自 Solar System Scope 的免费 2K
 纹理包：
 
 - 纹理主页：[Solar Textures](https://www.solarsystemscope.com/textures/)
+- 月亮：[2k_moon.jpg](https://genesis-horizon.solarsystemscope.com/textures/download/2k_moon.jpg)
 - 水星：[2k_mercury.jpg](https://genesis-horizon.solarsystemscope.com/textures/download/2k_mercury.jpg)
 - 金星云层：[2k_venus_atmosphere.jpg](https://genesis-horizon.solarsystemscope.com/textures/download/2k_venus_atmosphere.jpg)
 - 火星：[2k_mars.jpg](https://genesis-horizon.solarsystemscope.com/textures/download/2k_mars.jpg)
@@ -45,9 +47,10 @@ MESSENGER、Viking、Cassini 和 Hubble 的影像调色。它们以
 
 建议随站点保留的署名文本：
 
-> Planet textures by Solar System Scope, based on NASA elevation and imagery
-> data, licensed under CC BY 4.0. Converted to WebP and, where applicable,
-> resized/compressed for this website.
+> Moon and planet textures by Solar System Scope, based on NASA elevation and
+> imagery data, licensed under CC BY 4.0. Files were converted to WebP at
+> their original 2K dimensions and, where applicable, resized/compressed for
+> this website.
 
 ### 真实性边界
 
@@ -57,6 +60,8 @@ Solar System Scope 明确说明：尚未测绘的区域可能用与周边协调�
 
 - 金星使用的是云层而非雷达地表，因为可见光近景看到的是浓密云层；云纹不是
   当前时刻的真实天气。
+- 月球贴图是静态全球表面图；实时计算只负责月相、光照方向、视角大小与朝向，
+  不声称呈现当前地球大气造成的瞬时色偏或视宁度。
 - 木星和土星的大气带、风暴会持续演化，静态贴图只代表典型外观。
 - 太阳贴图只代表典型光球纹理，不包含当前时刻的太阳黑子、耀斑或日珥位置。
 

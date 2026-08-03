@@ -2,8 +2,9 @@
 """Build the EduKai webfont subset used by the static site.
 
 The page sources are scanned as text instead of parsing only visible DOM text.
-That deliberately keeps characters contained in inline JavaScript/i18n strings,
-CSS generated content, and templates that become visible at runtime.
+That deliberately keeps characters contained in JavaScript/i18n strings, CSS
+generated content, and templates that become visible at runtime. The default
+Life page also contributes its referenced first-party CSS and JavaScript files.
 
 Run from anywhere:
 
@@ -20,7 +21,9 @@ import hashlib
 import os
 import sys
 import tempfile
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 try:
     from fontTools import subset
@@ -38,6 +41,12 @@ DEFAULT_FONT = REPO_ROOT / "fonts" / "edukai-5.0.woff2"
 DEFAULT_OUTPUT = REPO_ROOT / "fonts" / "edukai-site-subset.woff2"
 DEFAULT_PAGES = (REPO_ROOT / "index.html", REPO_ROOT / "life.html")
 
+LIFE_PAGE = REPO_ROOT / 'life.html'
+LIFE_SOURCE_ROOTS = (
+    (REPO_ROOT / 'assets' / 'life' / 'styles').resolve(),
+    (REPO_ROOT / 'assets' / 'life' / 'scripts').resolve(),
+)
+
 # Space is needed even if a future page happens to contain no literal spaces.
 ALWAYS_KEEP = {0x20}
 
@@ -47,8 +56,83 @@ def resolve_path(value: str) -> Path:
     return path if path.is_absolute() else REPO_ROOT / path
 
 
+class LifeSourceReferenceParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=False)
+        self.references: list[tuple[str, str]] = []
+
+    def handle_starttag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        self._record_reference(tag, attrs)
+
+    def handle_startendtag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        self._record_reference(tag, attrs)
+
+    def _record_reference(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        values = {name.casefold(): value for name, value in attrs if value}
+        reference = None
+        expected_suffix = None
+        if tag.casefold() == 'link':
+            reference = values.get('href')
+            expected_suffix = '.css'
+        elif tag.casefold() == 'script':
+            reference = values.get('src')
+            expected_suffix = '.js'
+        if reference and expected_suffix:
+            self.references.append((reference, expected_suffix))
+
+
+def referenced_life_sources(page: Path, text: str) -> list[Path]:
+    if page.resolve() != LIFE_PAGE.resolve():
+        return []
+
+    parser = LifeSourceReferenceParser()
+    parser.feed(text)
+    parser.close()
+
+    sources: list[Path] = []
+    seen: set[Path] = set()
+    for reference, expected_suffix in parser.references:
+        try:
+            parsed = urlsplit(reference)
+        except ValueError:
+            continue
+        if parsed.scheme or parsed.netloc or not parsed.path:
+            continue
+
+        reference_path = unquote(parsed.path)
+        try:
+            candidate = (
+                REPO_ROOT / reference_path.lstrip('/\\')
+                if reference_path.startswith(('/', '\\'))
+                else page.parent / reference_path
+            ).resolve()
+        except OSError:
+            continue
+        if candidate.suffix.casefold() != expected_suffix:
+            continue
+        if not any(candidate.is_relative_to(root) for root in LIFE_SOURCE_ROOTS):
+            continue
+        if candidate not in seen:
+            sources.append(candidate)
+            seen.add(candidate)
+    return sources
+
+
 def collect_codepoints(pages: list[Path]) -> set[int]:
     codepoints = set(ALWAYS_KEEP)
+    scanned_life_sources: set[Path] = set()
     for page in pages:
         try:
             text = page.read_text(encoding="utf-8")
@@ -61,6 +145,23 @@ def collect_codepoints(pages: list[Path]) -> set[int]:
         # format and combining characters are retained when the font supports
         # them (for example variation selectors).
         codepoints.update(ord(char) for char in text if char not in "\r\n\t")
+        for source in referenced_life_sources(page, text):
+            if source in scanned_life_sources:
+                continue
+            scanned_life_sources.add(source)
+            try:
+                source_text = source.read_text(encoding='utf-8')
+            except FileNotFoundError as exc:
+                raise SystemExit(
+                    f'Referenced Life source does not exist: {source}'
+                ) from exc
+            except UnicodeDecodeError as exc:
+                raise SystemExit(
+                    f'Referenced Life source is not valid UTF-8: {source}'
+                ) from exc
+            codepoints.update(
+                ord(char) for char in source_text if char not in '\r\n\t'
+            )
     return codepoints
 
 

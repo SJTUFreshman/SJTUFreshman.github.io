@@ -13,7 +13,7 @@ const astronomyPath = path.join(
     'vendor',
     'astronomy-engine-2.1.19.min.js'
 );
-const life = fs.readFileSync(lifePath, 'utf8');
+const lifeHtml = fs.readFileSync(lifePath, 'utf8');
 const index = fs.readFileSync(indexPath, 'utf8');
 
 function inlineScripts(html) {
@@ -22,7 +22,85 @@ function inlineScripts(html) {
         .filter(source => source.trim());
 }
 
-for (const [file, html] of [['index.html', index], ['life.html', life]]) {
+function attributeValue(attributes, name) {
+    const match = attributes.match(new RegExp(
+        '\\b' + name + '\\s*=\\s*(?:\\x22([^\\x22]*)\\x22|\\x27([^\\x27]*)\\x27|([^\\s\\x22\\x27=<>]+))',
+        'i'
+    ));
+    return match ? (match[1] ?? match[2] ?? match[3] ?? '') : null;
+}
+
+function localResource(reference) {
+    if (
+        !reference ||
+        reference.startsWith('//') ||
+        reference.startsWith('#') ||
+        /^[A-Za-z][A-Za-z\d+.-]*:/.test(reference)
+    ) return null;
+    const cleanReference = reference.split(/[?#]/, 1)[0].replace(/^\/+/, '');
+    const absolutePath = path.resolve(root, ...cleanReference.split('/'));
+    const relativePath = path.relative(root, absolutePath);
+    assert(
+        relativePath &&
+        !relativePath.startsWith('..' + path.sep) &&
+        relativePath !== '..' &&
+        !path.isAbsolute(relativePath),
+        'Local resource must remain inside the repository: ' + reference
+    );
+    assert(fs.existsSync(absolutePath), 'Local resource must exist: ' + reference);
+    return {
+        reference,
+        absolutePath,
+        relativePath: relativePath.split(path.sep).join('/'),
+        source: fs.readFileSync(absolutePath, 'utf8')
+    };
+}
+
+function localScriptResources(html) {
+    return [...html.matchAll(/<script\b([^>]*)>[\s\S]*?<\/script>/gi)]
+        .map(match => attributeValue(match[1], 'src'))
+        .map(localResource)
+        .filter(Boolean);
+}
+
+function localStylesheetResources(html) {
+    return [...html.matchAll(/<link\b([^>]*)>/gi)]
+        .filter(match => {
+            const rel = attributeValue(match[1], 'rel') || '';
+            return rel.split(/\s+/).some(value => value.toLowerCase() === 'stylesheet');
+        })
+        .map(match => attributeValue(match[1], 'href'))
+        .map(localResource)
+        .filter(Boolean);
+}
+
+const lifeScripts = localScriptResources(lifeHtml);
+const lifeRuntimeScripts = lifeScripts.filter(resource =>
+    resource.relativePath.startsWith('assets/life/scripts/')
+);
+const lifeStylesheets = localStylesheetResources(lifeHtml).filter(resource =>
+    resource.relativePath.startsWith('assets/life/styles/')
+);
+assert.equal(lifeRuntimeScripts.length, 18, 'life.html must load 18 split runtime scripts');
+assert.equal(lifeStylesheets.length, 7, 'life.html must load 7 split stylesheets');
+assert(
+    lifeHtml.split(/\r?\n/).length < 1000,
+    'life.html must remain below 1000 lines after decomposition'
+);
+for (const resource of lifeRuntimeScripts) {
+    assert(
+        resource.source.split(/\r?\n/).length < 1600,
+        resource.relativePath + ' must remain below 1600 lines'
+    );
+}
+
+const life = [
+    lifeHtml,
+    ...lifeRuntimeScripts.map(resource => resource.source),
+    ...lifeStylesheets.map(resource => resource.source)
+].map(source => source.trimEnd()).join('\n\n');
+
+for (const [file, html] of [['index.html', index], ['life.html', lifeHtml]]) {
     for (const [scriptIndex, source] of inlineScripts(html).entries()) {
         assert.doesNotThrow(
             () => new Function(source),
@@ -30,12 +108,23 @@ for (const [file, html] of [['index.html', index], ['life.html', life]]) {
         );
     }
 }
+for (const resource of lifeScripts) {
+    assert.doesNotThrow(
+        () => new Function(resource.source),
+        resource.relativePath + ' must parse'
+    );
+}
 for (const [styleIndex, style] of [
-    ...life.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/gi)
+    ...lifeHtml.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/gi)
 ].map((match, index) => [index, match[1]])) {
     const openings = (style.match(/\{/g) || []).length;
     const closings = (style.match(/\}/g) || []).length;
     assert.equal(openings, closings, `life.html style block ${styleIndex} braces`);
+}
+for (const resource of lifeStylesheets) {
+    const openings = (resource.source.match(/\{/g) || []).length;
+    const closings = (resource.source.match(/\}/g) || []).length;
+    assert.equal(openings, closings, resource.relativePath + ' braces');
 }
 
 const domBlock = life.match(/const dom = \{([\s\S]*?)\n\};/);
@@ -55,9 +144,9 @@ const registeredIds = [
     ...domBlock[1].matchAll(/getElementById\('([^']+)'\)/g)
 ].map(match => match[1]);
 const htmlIds = new Set(
-    [...life.matchAll(/\bid="([^"]+)"/g)].map(match => match[1])
+    [...lifeHtml.matchAll(/\bid="([^"]+)"/g)].map(match => match[1])
 );
-const allHtmlIds = [...life.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+const allHtmlIds = [...lifeHtml.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 assert.equal(
     htmlIds.size,
     allHtmlIds.length,
@@ -108,11 +197,11 @@ assert(
 );
 assert(htmlIds.has('entryLocation'), 'The entry gate must explain the observing location');
 assert(
-    /aria-describedby="entryHint entryLocation"/.test(life),
+    /aria-describedby="entryHint entryLocation"/.test(lifeHtml),
     'The entry-gate location must participate in its accessible description'
 );
 assert(
-    !/GEOMETRIC HORIZON · 0°|几何地平线 · 0°|幾何地平線 · 0°/.test(life),
+    !/GEOMETRIC HORIZON · 0°|几何地平线 · 0°|幾何地平線 · 0°/.test(lifeHtml),
     'The geometric-horizon text marker must stay removed'
 );
 assert(
@@ -146,12 +235,12 @@ assert(
     'Gaze copy must remain until its visual fade completes'
 );
 assert(
-    !/<section class="home-route-preview"[^>]*aria-live/.test(life),
+    !/<section class="home-route-preview"[^>]*aria-live/.test(lifeHtml),
     'The route card must not nest a second live region'
 );
 assert(
-    /id="portalPanel"[^>]*\sinert/.test(life) &&
-    /id="celestialPanel"[^>]*\sinert/.test(life),
+    /id="portalPanel"[^>]*\sinert/.test(lifeHtml) &&
+    /id="celestialPanel"[^>]*\sinert/.test(lifeHtml),
     'Closed detail panels must start inert'
 );
 assert(
@@ -177,6 +266,7 @@ assert(
 assert(!/\bid:\s*'earth'/.test(life), 'Earth must not be added as a selectable body');
 const expectedCelestialIds = [
     'sun',
+    'moon',
     'mercury',
     'venus',
     'mars',
@@ -195,6 +285,7 @@ for (const bodyId of expectedCelestialIds) {
 
 const celestialAssetPaths = [
     'assets/celestial/sun.webp',
+    'assets/celestial/moon.webp',
     'assets/celestial/mercury.webp',
     'assets/celestial/venus.webp',
     'assets/celestial/mars.webp',
@@ -215,24 +306,24 @@ const surfaceTextureReferences = [
 ].map(match => match[1]);
 assert.equal(
     surfaceTextureReferences.length,
-    9,
+    10,
     'Each selectable celestial body must declare exactly one local surface texture'
 );
 assert.deepEqual(
     new Set(surfaceTextureReferences),
-    new Set(celestialAssetPaths.slice(0, 9)),
-    'The nine celestial profiles must reference the expected local surface textures'
+    new Set(celestialAssetPaths.slice(0, 10)),
+    'The ten celestial profiles must reference the expected local surface textures'
 );
 assert(
     life.includes("ringTexture: 'assets/celestial/saturn-ring.png'"),
     'Saturn must declare its local ring texture'
 );
 assert(
-    !/<(?:img|source)\b[^>]*(?:src|srcset)=["'][^"']*assets\/celestial\//i.test(life),
+    !/<(?:img|source)\b[^>]*(?:src|srcset)=["'][^"']*assets\/celestial\//i.test(lifeHtml),
     'Celestial textures must not be requested by first-screen HTML image elements'
 );
 assert(
-    !/<link\b[^>]*(?:rel=["']preload["'][^>]*href=["'][^"']*assets\/celestial\/|href=["'][^"']*assets\/celestial\/[^>]*rel=["']preload["'])/i.test(life),
+    !/<link\b[^>]*(?:rel=["']preload["'][^>]*href=["'][^"']*assets\/celestial\/|href=["'][^"']*assets\/celestial\/[^>]*rel=["']preload["'])/i.test(lifeHtml),
     'Celestial textures must not be preloaded on first screen'
 );
 
@@ -279,6 +370,12 @@ const closeupRendererSource = life.match(
     /class CelestialCloseupRenderer \{([\s\S]*?)\n\}\n\nconst galaxyRenderer/
 );
 assert(closeupRendererSource, 'Could not extract the celestial close-up renderer');
+assert(
+    !/easeInOutCubic\s*\(\s*clamp\(visit\.visualProgress/.test(
+        closeupRendererSource[1]
+    ),
+    'The close-up renderer must not ease an already-eased visual progress twice'
+);
 assert(
     /uFlattening/.test(closeupRendererSource[1]) &&
     /polarRadius/.test(closeupRendererSource[1]) &&
@@ -547,6 +644,7 @@ assert(
 
 const expectedAltitude = new Map([
     ['Sun', 48.8437],
+    ['Moon', -48.134],
     ['Mercury', 32.271],
     ['Venus', 62.436],
     ['Mars', 10.410],
@@ -565,6 +663,34 @@ for (const [body, expected] of expectedAltitude) {
         `${body} altitude should match the verified Shanghai reference`
     );
 }
+const fixedMoonEquatorial = Astronomy.Equator(
+    'Moon',
+    time,
+    observer,
+    false,
+    true
+);
+const fixedMoonIllumination = Astronomy.Illumination('Moon', time);
+const fixedMoonToSun = normalize([
+    -fixedMoonIllumination.hc.x,
+    -fixedMoonIllumination.hc.y,
+    -fixedMoonIllumination.hc.z
+]);
+const fixedMoonToObserver = normalize([
+    -fixedMoonEquatorial.vec.x,
+    -fixedMoonEquatorial.vec.y,
+    -fixedMoonEquatorial.vec.z
+]);
+const expectedTopocentricMoonCosine = fixedMoonToSun.reduce(
+    (sum, value, index) => sum + value * fixedMoonToObserver[index],
+    0
+);
+const expectedTopocentricMoonPhase = (
+    1 + expectedTopocentricMoonCosine
+) * 0.5;
+const expectedTopocentricMoonPhaseAngle = Math.acos(
+    Math.max(-1, Math.min(1, expectedTopocentricMoonCosine))
+) * 180 / Math.PI;
 
 const validationDates = [
     '2025-01-01T00:00:00Z',
@@ -688,6 +814,7 @@ function mockCanvasContext() {
         beginPath() {},
         clearRect() {},
         clip() {},
+        closePath() {},
         createLinearGradient: mockGradient,
         createRadialGradient: mockGradient,
         drawImage() {},
@@ -698,10 +825,14 @@ function mockCanvasContext() {
         lineTo() {},
         moveTo() {},
         restore() {},
+        rotate() {},
         save() {},
+        scale() {},
         setLineDash() {},
         setTransform() {},
-        stroke() {}
+        stroke() {},
+        transform() {},
+        translate() {}
     };
 }
 
@@ -1066,13 +1197,15 @@ const runtimeContext = {
 };
 runtimeContext.globalThis = runtimeContext;
 vm.createContext(runtimeContext);
-assert.doesNotThrow(
-    () => vm.runInContext(inlineScripts(life)[1], runtimeContext, {
-        filename: 'life.inline.js',
-        timeout: 10000
-    }),
-    'life.html main script must initialize with a minimal DOM'
-);
+for (const resource of lifeRuntimeScripts) {
+    assert.doesNotThrow(
+        () => vm.runInContext(resource.source, runtimeContext, {
+            filename: resource.relativePath,
+            timeout: 10000
+        }),
+        resource.relativePath + ' must initialize with a minimal DOM'
+    );
+}
 
 const horizonCameraState = JSON.parse(vm.runInContext(`(() => {
     const saved = {
@@ -1588,15 +1721,15 @@ assert.deepEqual(
     celestialNavigationState,
     {
         ids: expectedCelestialIds,
-        uniqueIds: 9,
-        buttonCount: 9,
+        uniqueIds: 10,
+        buttonCount: 10,
         buttonIds: expectedCelestialIds,
         imageCount: 0,
         pendingImageCount: 0,
         textureCount: 0,
         activeProfile: null
     },
-    'The live sky must build exactly nine non-Earth hit targets without loading close-up textures'
+    'The live sky must build exactly ten non-Earth hit targets without loading close-up textures'
 );
 assert.ok(
     !life.includes('celestial-catalog') &&
@@ -1605,7 +1738,7 @@ assert.ok(
     'The removed 1–9 observation catalog and its numeric shortcut must not return'
 );
 
-const sectionDrawerMarkup = life.match(
+const sectionDrawerMarkup = lifeHtml.match(
     /<aside\b[^>]*\bid="sectionDrawer"[\s\S]*?<\/aside>/
 );
 assert(sectionDrawerMarkup, 'The left-edge section drawer must exist');
@@ -1620,9 +1753,9 @@ assert(
 );
 assert(
     /id="sectionDrawerToggle"[^>]*aria-expanded="false"[^>]*aria-controls="sectionDrawer"/.test(
-        life
+        lifeHtml
     ) &&
-    /id="sectionDrawer"[^>]*aria-hidden="true"[\s\S]{0,180}\sinert/.test(life),
+    /id="sectionDrawer"[^>]*aria-hidden="true"[\s\S]{0,180}\sinert/.test(lifeHtml),
     'The section drawer must start closed with an accessible disclosure contract'
 );
 
@@ -2636,14 +2769,14 @@ assert.deepEqual(indexedNavigationRuntimeState, {
         cameraStable: true
     },
     daylightResize: {
-        unavailableBeforeOpen: true,
-        openedDirectly: true,
+        unavailableBeforeOpen: false,
+        openedDirectly: false,
         cameraStable: true
     },
     visibleFlightReframed: true,
     drawerFlightEscapeFocus: true,
     drawerPanelEscapeFocus: true
-}, 'Indexed navigation must preserve direct-open views, reframe visible flights, and return Escape focus without revealing hidden sky targets');
+}, 'Indexed navigation must direct-open hidden views, fly to daylight-visible constellations, reframe visible flights, and restore Escape focus');
 
 const runtimeSky = JSON.parse(vm.runInContext(`(() => {
     skyModel.location = {
@@ -2659,6 +2792,10 @@ const runtimeSky = JSON.parse(vm.runInContext(`(() => {
         body: profile.body,
         altitude: profile.current?.altitude,
         apparentAltitude: profile.current?.apparentAltitude,
+        apparentDiscCenterAltitude: profile.current?.apparentDiscCenterAltitude,
+        apparentUpperAltitude: profile.current?.apparentUpperAltitude,
+        apparentLowerAltitude: profile.current?.apparentLowerAltitude,
+        apparentVerticalDiameter: profile.current?.apparentVerticalDiameter,
         azimuth: profile.current?.azimuth,
         direction: profile.current?.direction,
         geometricDirection: profile.current?.geometricDirection,
@@ -2684,9 +2821,31 @@ for (const body of runtimeSky) {
     const directionAzimuth = (
         Math.atan2(body.direction[0], body.direction[2]) * 180 / Math.PI + 360
     ) % 360;
-    const displayAltitude = body.id === 'sun'
-        ? body.apparentAltitude
+    const displayAltitude = Number.isFinite(body.apparentDiscCenterAltitude)
+        ? body.apparentDiscCenterAltitude
         : body.altitude;
+    if (body.id === 'sun' || body.id === 'moon') {
+        assert(Number.isFinite(body.apparentAltitude));
+        assert(Number.isFinite(body.apparentUpperAltitude));
+        assert(Number.isFinite(body.apparentLowerAltitude));
+        assert(Number.isFinite(body.apparentVerticalDiameter));
+        assert(body.apparentUpperAltitude >= body.apparentLowerAltitude);
+        assert(
+            Math.abs(
+                body.apparentDiscCenterAltitude -
+                (body.apparentUpperAltitude + body.apparentLowerAltitude) * 0.5
+            ) < 1e-12,
+            `${body.body} visual center must bisect its refracted limbs`
+        );
+        assert(
+            Math.abs(
+                body.apparentVerticalDiameter -
+                (body.apparentUpperAltitude - body.apparentLowerAltitude) *
+                    Math.PI / 180
+            ) < 1e-12,
+            `${body.body} vertical diameter must preserve differential refraction`
+        );
+    }
     assert(
         Math.abs(directionAltitude - displayAltitude) < 1e-10,
         `${body.body} scene direction must preserve its display altitude`
@@ -2708,19 +2867,24 @@ for (const body of runtimeSky) {
             `${body.body} direction must retain the east-up-north azimuth/altitude convention`
         );
     });
-    if (body.id === 'sun') {
-        const expectedApparentAltitude = body.altitude +
-            Astronomy.Refraction('normal', body.altitude);
+    if (body.id === 'sun' || body.id === 'moon') {
+        const rawRefraction = body.altitude >= -2 && body.altitude <= 90
+            ? Astronomy.Refraction('normal', body.altitude)
+            : 0;
+        const expectedRefraction = Number.isFinite(rawRefraction)
+            ? Math.min(1, Math.max(0, rawRefraction))
+            : 0;
+        const expectedApparentAltitude = body.altitude + expectedRefraction;
         assert(
             Math.abs(body.apparentAltitude - expectedApparentAltitude) < 1e-10,
-            'Sun apparent altitude must equal geometric altitude plus atmospheric refraction'
+            `${body.body} apparent altitude must equal geometric altitude plus atmospheric refraction`
         );
         assert(
             Math.abs(
                 body.direction[1] -
-                Math.sin(body.apparentAltitude * Math.PI / 180)
+                Math.sin(body.apparentDiscCenterAltitude * Math.PI / 180)
             ) < 1e-12,
-            'Sun scene direction must use its refracted apparent altitude'
+            `${body.body} scene direction must use its refracted visual-center altitude`
         );
     } else {
         assert(body.geometricDirection?.every(Number.isFinite));
@@ -2736,6 +2900,18 @@ for (const body of runtimeSky) {
     assert(Number.isFinite(body.spin), `${body.body} must expose a finite rotation phase`);
     assert(body.phase >= 0 && body.phase <= 1, `${body.body} phase must remain normalized`);
     assert(Number.isFinite(body.phaseAngle), `${body.body} phase angle must remain finite`);
+    if (body.id === 'moon') {
+        assert(
+            Math.abs(body.phase - expectedTopocentricMoonPhase) < 1e-12,
+            'Moon phase must use the current observer rather than Earth center'
+        );
+        assert(
+            Math.abs(
+                body.phaseAngle - expectedTopocentricMoonPhaseAngle
+            ) < 1e-10,
+            'Moon phase angle must match the topocentric Sun-Moon-observer geometry'
+        );
+    }
     assert(Number.isFinite(body.ringTilt), `${body.body} ring tilt must remain finite`);
     assert(
         [
@@ -2748,6 +2924,161 @@ for (const body of runtimeSky) {
         `${body.body} must receive a physical observation-mode classification`
     );
 }
+
+const angularDiscProjectionState = JSON.parse(vm.runInContext(`(() => {
+    const width = 1600;
+    const height = 900;
+    const fov = 62 * DEG;
+    const basis = {
+        right: [1, 0, 0],
+        up: [0, 1, 0],
+        forward: [0, 0, 1]
+    };
+    const angularDiameter = 0.5 * DEG;
+    const profileAt = (direction, verticalScale = 1) => ({
+        current: {
+            direction,
+            angularDiameter,
+            apparentVerticalDiameter: angularDiameter * verticalScale
+        }
+    });
+    const centered = projectedAngularDiscGeometry(
+        profileAt([0, 0, 1]),
+        basis,
+        width,
+        height,
+        fov
+    );
+    const offAxisDirection = normalize([
+        Math.sin(45 * DEG),
+        0,
+        Math.cos(45 * DEG)
+    ]);
+    const offAxis = projectedAngularDiscGeometry(
+        profileAt(offAxisDirection),
+        basis,
+        width,
+        height,
+        fov
+    );
+    const flattened = projectedAngularDiscGeometry(
+        profileAt(offAxisDirection, 0.5),
+        basis,
+        width,
+        height,
+        fov
+    );
+    const horizontalLength = geometry => Math.hypot(
+        geometry.horizontal.x,
+        geometry.horizontal.y
+    );
+    const verticalLength = geometry => Math.hypot(
+        geometry.vertical.x,
+        geometry.vertical.y
+    );
+    const localLight = { x: 0.6, y: 0.8 };
+    const screenLight = {
+        x:
+            offAxis.horizontal.x * localLight.x +
+            offAxis.vertical.x * localLight.y,
+        y:
+            offAxis.horizontal.y * localLight.x +
+            offAxis.vertical.y * localLight.y
+    };
+    const recoveredLight = angularDiscLocalDirection(
+        offAxis,
+        Math.atan2(screenLight.y, screenLight.x)
+    );
+    const visitProfile = {
+        angularDisc: true,
+        current: { angularDiameter }
+    };
+    const savedApproachStartRadius = celestialCloseupRenderer.startRadiusForVisit({
+        phase: 'approach',
+        profile: visitProfile,
+        origin: { fov },
+        approachDiscGeometry: { areaRadius: 7.25 },
+        originDiscGeometry: { areaRadius: 3.5 }
+    });
+    const savedReturnStartRadius = celestialCloseupRenderer.startRadiusForVisit({
+        phase: 'returning',
+        profile: visitProfile,
+        origin: { fov },
+        approachDiscGeometry: { areaRadius: 7.25 },
+        originDiscGeometry: { areaRadius: 3.5 }
+    });
+    let crossfadeFloor = 1;
+    for (let index = 0; index <= 1000; index += 1) {
+        const progress = index / 1000;
+        const distant = 1 - smoothstep(0.02, 0.32, progress);
+        const closeup = smoothstep(0.04, 0.26, progress);
+        crossfadeFloor = Math.min(
+            crossfadeFloor,
+            1 - (1 - distant) * (1 - closeup)
+        );
+    }
+    return JSON.stringify({
+        centeredAtOpticalAxis:
+            Math.abs(centered.center.x - width * 0.5) < 1e-12 &&
+            Math.abs(centered.center.y - height * 0.5) < 1e-12,
+        radialScale: horizontalLength(offAxis) / horizontalLength(centered),
+        tangentialScale: verticalLength(offAxis) / verticalLength(centered),
+        differentialRefractionScale:
+            verticalLength(flattened) / verticalLength(offAxis),
+        lightRecoveryError: Math.hypot(
+            recoveredLight.x - localLight.x,
+            recoveredLight.y - localLight.y
+        ),
+        finiteMatrix:
+            Number.isFinite(offAxis.determinant) &&
+            Math.abs(offAxis.determinant) > 1e-8 &&
+            Number.isFinite(offAxis.areaRadius),
+        savedApproachStartRadius,
+        savedReturnStartRadius,
+        crossfadeFloor
+    });
+})()`, runtimeContext));
+assert.equal(
+    angularDiscProjectionState.centeredAtOpticalAxis,
+    true,
+    'Angular-disc projection must preserve the optical-axis center'
+);
+assert(
+    Math.abs(angularDiscProjectionState.radialScale - 2) < 0.001,
+    'A disc 45 degrees off-axis must receive the gnomonic secant-squared radial scale'
+);
+assert(
+    Math.abs(angularDiscProjectionState.tangentialScale - Math.SQRT2) < 0.001,
+    'A disc 45 degrees off-axis must receive the gnomonic secant tangential scale'
+);
+assert(
+    Math.abs(angularDiscProjectionState.differentialRefractionScale - 0.5) <
+        0.001,
+    'Differential atmospheric compression must survive the camera projection'
+);
+assert(
+    angularDiscProjectionState.lightRecoveryError < 1e-12,
+    'Moonlight direction must be inverse-mapped through the full projected disc matrix'
+);
+assert.equal(
+    angularDiscProjectionState.finiteMatrix,
+    true,
+    'Angular-disc projection must expose a finite, invertible local matrix'
+);
+assert.equal(
+    angularDiscProjectionState.savedApproachStartRadius,
+    7.25,
+    'Close-up approach must reuse its live projection radius without a size jump'
+);
+assert.equal(
+    angularDiscProjectionState.savedReturnStartRadius,
+    3.5,
+    'Close-up return must target the original-sky projection radius'
+);
+assert(
+    angularDiscProjectionState.crossfadeFloor > 0.79,
+    'Distant and close-up celestial layers must crossfade without a brightness dropout'
+);
 
 const solarUpperLimbState = JSON.parse(vm.runInContext(`(() => {
     const sun = celestialBodies.find(profile => profile.id === 'sun');
@@ -2787,9 +3118,15 @@ const visibilityState = JSON.parse(vm.runInContext(`(() => {
         magnitude = 0,
         sunAltitude = -20
     }) => {
+        const configuredProfile = celestialBodies.find(candidate => candidate.id === id) || {};
+        const directionAltitude = configuredProfile.refracted
+            ? apparentAltitude
+            : altitude;
         const profile = {
+            ...configuredProfile,
             id,
             current: {
+                direction: horizontalDirection(180, directionAltitude),
                 altitude,
                 apparentAltitude,
                 angularDiameter,
@@ -2900,8 +3237,15 @@ assert.equal(
 assert(skyVisibilityState.nightBright > skyVisibilityState.nightDim);
 assert.equal(skyVisibilityState.below, 0);
 assert(skyVisibilityState.nearHorizon < skyVisibilityState.highAltitude);
-assert.equal(skyVisibilityState.daylightOrdinary, 0);
-assert(skyVisibilityState.daylightExceptional > 0);
+assert(
+    skyVisibilityState.daylightOrdinary > 0 &&
+    skyVisibilityState.daylightOrdinary <= 0.34,
+    'Daylight constellation guides must remain visible but subdued'
+);
+assert(
+    skyVisibilityState.daylightExceptional >= skyVisibilityState.daylightOrdinary,
+    'Exceptional daylight stars must be at least as visible as the guide layer'
+);
 assert.equal(skyVisibilityState.daytimeMagnitudeLimit, -4);
 assert.equal(skyVisibilityState.daytimeAltitude, 12);
 assert(Math.abs(skyVisibilityState.daytimeZenithLength - 1) < 1e-10);
@@ -3066,7 +3410,7 @@ const closeupGeometryState = JSON.parse(vm.runInContext(`(() => {
         };
     }));
 })()`, runtimeContext));
-assert.equal(closeupGeometryState.length, 9);
+assert.equal(closeupGeometryState.length, 10);
 for (const body of closeupGeometryState) {
     assert(body.flattening >= 0 && body.flattening < 0.2);
     assert(body.matricesFinite, `${body.id} close-up matrices must remain finite`);
@@ -4718,10 +5062,10 @@ function catalogDirection(hip) {
 
 function contentHips(portalId) {
     const marker = `data-portal-content="${portalId}"`;
-    const start = life.indexOf(marker);
+    const start = lifeHtml.indexOf(marker);
     assert(start >= 0, `Portal content ${portalId} must exist`);
-    const next = life.indexOf('data-portal-content="', start + marker.length);
-    const segment = life.slice(start, next >= 0 ? next : life.length);
+    const next = lifeHtml.indexOf('data-portal-content="', start + marker.length);
+    const segment = lifeHtml.slice(start, next >= 0 ? next : lifeHtml.length);
     return new Set(
         [...segment.matchAll(/data-star-hip="(\d+)"/g)]
             .map(match => Number(match[1]))

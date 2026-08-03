@@ -1224,31 +1224,43 @@ def render_home(root: Path, content: dict[str, Any], write: bool) -> str:
     return text
 
 
-def render_life(root: Path, content: dict[str, Any], write: bool) -> str:
-    path = root / "life.html"
-    text = path.read_text(encoding="utf-8")
-    text = replace_region(text, "LIFE_GALLERY", render_life_gallery(content), r'<!-- Gallery -->\s*<section id="gallery".*?</section>')
-    text = replace_region(text, "LIFE_FOOTPRINTS", render_footprints(content), r'<section id="footprints".*?</section>')
-    text = replace_region(text, "LIFE_SHELF", render_shelf(content), r'<!-- Shelf -->\s*<section id="shelf".*?</section>')
-    text = replace_region(text, "LIFE_THOUGHTS", render_thoughts(content), r'<!-- Thoughts -->\s*<section id="thoughts".*?</section>')
-    text = replace_region(text, "LIFE_FRIENDS", render_friends(content), r'<!-- Friends -->\s*<section id="friends".*?</section>')
-    text = replace_region(text, "LIFE_ABOUT", render_life_about(content), r'<section id="about".*?</section>')
-    text = replace_region(text, "LIFE_NEWS", render_life_news(content), r'<section id="news".*?</section>')
-    text = replace_region(text, "LIFE_PUBLICATIONS", render_life_publications(content), r'<section id="publications".*?</section>')
-    text = replace_region(text, "LIFE_PROJECTS", render_life_projects(content), r'<section id="projects".*?</section>')
-    text = replace_region(text, "LIFE_NOTES", render_life_notes(content), r'<section id="notes".*?</section>')
-    text = replace_code_region(text, "LIFE_I18N", render_life_i18n(content), r'/\* ===== i18n ===== \*/\s*const i18n = \{.*?\};')
-    text = replace_code_region(text, "LIFE_VISITED", render_visited(content), r'const visited = \[.*?\];')
-    text = replace_code_region(
-        text,
+def render_life_artifacts(
+    root: Path,
+    content: dict[str, Any],
+) -> tuple[str, str]:
+    html_path = root / "life.html"
+    content_data_path = root / "assets" / "life" / "scripts" / "01-content-data.js"
+    html_text = html_path.read_text(encoding="utf-8")
+    content_data_text = content_data_path.read_text(encoding="utf-8")
+    html_text = replace_region(html_text, "LIFE_GALLERY", render_life_gallery(content), r'<!-- Gallery -->\s*<section id="gallery".*?</section>')
+    html_text = replace_region(html_text, "LIFE_FOOTPRINTS", render_footprints(content), r'<section id="footprints".*?</section>')
+    html_text = replace_region(html_text, "LIFE_SHELF", render_shelf(content), r'<!-- Shelf -->\s*<section id="shelf".*?</section>')
+    html_text = replace_region(html_text, "LIFE_THOUGHTS", render_thoughts(content), r'<!-- Thoughts -->\s*<section id="thoughts".*?</section>')
+    html_text = replace_region(html_text, "LIFE_FRIENDS", render_friends(content), r'<!-- Friends -->\s*<section id="friends".*?</section>')
+    html_text = replace_region(html_text, "LIFE_ABOUT", render_life_about(content), r'<section id="about".*?</section>')
+    html_text = replace_region(html_text, "LIFE_NEWS", render_life_news(content), r'<section id="news".*?</section>')
+    html_text = replace_region(html_text, "LIFE_PUBLICATIONS", render_life_publications(content), r'<section id="publications".*?</section>')
+    html_text = replace_region(html_text, "LIFE_PROJECTS", render_life_projects(content), r'<section id="projects".*?</section>')
+    html_text = replace_region(html_text, "LIFE_NOTES", render_life_notes(content), r'<section id="notes".*?</section>')
+    content_data_text = replace_code_region(content_data_text, "LIFE_I18N", render_life_i18n(content), r'/\* ===== i18n ===== \*/\s*const i18n = \{.*?\};')
+    content_data_text = replace_code_region(content_data_text, "LIFE_VISITED", render_visited(content), r'const visited = \[.*?\];')
+    content_data_text = replace_code_region(
+        content_data_text,
         "LIFE_VISITED_COUNTRIES",
         render_visited_countries(content),
         r"const visitedCountries = \[.*?\];",
     )
+    return html_text, content_data_text
 
+
+def render_life(root: Path, content: dict[str, Any], write: bool) -> str:
+    html_path = root / "life.html"
+    content_data_path = root / "assets" / "life" / "scripts" / "01-content-data.js"
+    html_text, content_data_text = render_life_artifacts(root, content)
     if write:
-        path.write_text(text, encoding="utf-8", newline="\n")
-    return text
+        html_path.write_text(html_text, encoding="utf-8", newline="\n")
+        content_data_path.write_text(content_data_text, encoding="utf-8", newline="\n")
+    return html_text
 
 
 def render_site(root: Path = ROOT, write: bool = True) -> tuple[str, str]:
@@ -1283,21 +1295,72 @@ def render_life_only(root: Path = ROOT, write: bool = True) -> str:
     return render_life(root, content, write)
 
 
+def require_current_artifact(path: Path, expected: str, root: Path) -> None:
+    current = path.read_text(encoding="utf-8")
+    if current == expected:
+        return
+    try:
+        label = path.relative_to(root)
+    except ValueError:
+        label = path
+    raise RuntimeError(
+        f"{label} is out of date; run site_renderer.py to regenerate it"
+    )
+
+
+def check_life_render(root: Path = ROOT) -> tuple[str, str]:
+    content = load_content(root)
+    validate_content(content)
+    html_text, content_data_text = render_life_artifacts(root, content)
+    require_current_artifact(root / "life.html", html_text, root)
+    require_current_artifact(
+        root / "assets" / "life" / "scripts" / "01-content-data.js",
+        content_data_text,
+        root,
+    )
+    return html_text, content_data_text
+
+
+def check_site_render(root: Path = ROOT) -> tuple[str, str, str]:
+    content = load_content(root)
+    validate_content(content)
+    home_text = render_home(root, content, write=False)
+    life_text, content_data_text = render_life_artifacts(root, content)
+    require_current_artifact(root / "index.html", home_text, root)
+    require_current_artifact(root / "life.html", life_text, root)
+    require_current_artifact(
+        root / "assets" / "life" / "scripts" / "01-content-data.js",
+        content_data_text,
+        root,
+    )
+    return home_text, life_text, content_data_text
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Render static homepage HTML from site_content.json.")
-    parser.add_argument("--check", action="store_true", help="Render in memory only; do not write files.")
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Render in memory, verify generated artifacts are current, and do not write files.",
+    )
     parser.add_argument(
         "--life-only",
         action="store_true",
         help="Render only life.html, leaving index.html byte-for-byte untouched.",
     )
     args = parser.parse_args()
-    if args.life_only:
+    if args.check and args.life_only:
+        check_life_render(ROOT)
+        print("Life render check passed")
+    elif args.check:
+        check_site_render(ROOT)
+        print("Render check passed")
+    elif args.life_only:
         render_life_only(ROOT, write=not args.check)
-        print("Rendered life.html" if not args.check else "Life render check passed")
+        print("Rendered life.html")
     else:
         render_site(ROOT, write=not args.check)
-        print("Rendered index.html and life.html" if not args.check else "Render check passed")
+        print("Rendered index.html and life.html")
     return 0
 
 
