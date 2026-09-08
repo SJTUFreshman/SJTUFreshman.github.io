@@ -61,6 +61,7 @@ class GalaxyRenderer {
                 uniform float uFov;
                 uniform float uTime;
                 uniform float uSunAltitude;
+                uniform float uSpace;
 
                 float hash(vec2 point) {
                     vec3 mixed = fract(point.xyx * 0.1031);
@@ -209,7 +210,7 @@ class GalaxyRenderer {
                     ground += vec3(0.15, 0.065, 0.03) *
                         warmScatter * smoothstep(-0.14, 0.0, sinAltitude);
                     float geometricHorizon = smoothstep(-0.0035, 0.006, sinAltitude);
-                    vec3 color = mix(ground, skyColor, geometricHorizon);
+                    vec3 color = mix(ground, skyColor, max(geometricHorizon,uSpace));
                     float vignette = 1.0 - smoothstep(0.28, 1.35, length(centered * vec2(0.72, 0.9)));
                     color *= 0.91 + vignette * 0.09;
                     color = 1.0 - exp(-color * 1.68);
@@ -378,7 +379,8 @@ class GalaxyRenderer {
                 fov: this.gl.getUniformLocation(this.backgroundProgram, 'uFov'),
                 resolution: this.gl.getUniformLocation(this.backgroundProgram, 'uResolution'),
                 time: this.gl.getUniformLocation(this.backgroundProgram, 'uTime'),
-                sunAltitude: this.gl.getUniformLocation(this.backgroundProgram, 'uSunAltitude')
+                sunAltitude: this.gl.getUniformLocation(this.backgroundProgram, 'uSunAltitude'),
+                space: this.gl.getUniformLocation(this.backgroundProgram, 'uSpace')
             };
             this.starLocations = {
                 direction: this.gl.getAttribLocation(this.starProgram, 'aDirection'),
@@ -544,6 +546,7 @@ class GalaxyRenderer {
         gl.uniform3fv(this.backgroundLocations.zenith, sky.zenith);
         gl.uniform3fv(this.backgroundLocations.sunDirection, sky.sunDirection);
         gl.uniform1f(this.backgroundLocations.sunAltitude, sky.sunAltitude);
+        gl.uniform1f(this.backgroundLocations.space, window.NightWorld?.inSpace() ? 1 : 0);
         gl.drawArrays(gl.TRIANGLES, 0, 6);
 
         gl.enable(gl.BLEND);

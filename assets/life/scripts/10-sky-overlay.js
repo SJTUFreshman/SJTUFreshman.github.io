@@ -374,6 +374,7 @@ function traceScreenPolygon(context, polygon) {
 }
 
 function drawLocalHorizon(basis) {
+    if (window.NightWorld?.ready && window.NightWorld.mode === 'explore' && (state.scene === 'roam' || state.scene === 'entry')) return;
     const context = overlayContext;
     const width = overlayWidth;
     const height = overlayHeight;

@@ -1,6 +1,6 @@
 # Life 页面分片维护指南
 
-`life.html` 只保留页面骨架、可访问性结构、站点内容区和资源引用。页面视觉与运行时分别拆到本目录的 7 个 CSS 和 18 个 classic JS 中，以便后续 Codex 在较小上下文内维护。
+`life.html` 只保留页面骨架、可访问性结构、站点内容区和资源引用。页面视觉与运行时分别拆到本目录的 8 个 CSS 和 23 个 classic JS 中：原有星空保留，新增的环境层只负责场景与漫游。
 
 ## CSS 分片
 
@@ -15,6 +15,7 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 | 5 | `styles/05-life-content.css` | Gallery、Shelf、Thoughts、Friends、About 等 Life 原生内容样式 |
 | 6 | `styles/06-homepage-parity.css` | News、Publications、Projects、Notes 等与主页保持一致的内容样式 |
 | 7 | `styles/07-overlays-responsive.css` | 地图、lightbox、转场 veil、响应式布局、触屏和 reduced-motion 收尾规则 |
+| 8 | `styles/08-worlds.css` | 透明环境 canvas、场景选择器、漫游 HUD、触屏方向键与环境响应式规则 |
 
 约定：
 
@@ -45,9 +46,15 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 16-input-events.js
 17-content-ui.js
 18-bootstrap.js
+assets/vendor/three-0.160.1.min.js（vendor 依赖，非本目录分片）
+19-world-kit.js
+21-world-outdoors.js
+22-world-interiors.js
+20-world-runtime.js
+23-world-ui.js
 ```
 
-`03` 必须先于 `04`：`04-dom-state.js` 在顶层创建 `camera`，会立即调用 `orientationFromYawPitch`。文件编号与加载顺序保持一致。
+`03` 必须先于 `04`：`04-dom-state.js` 在顶层创建 `camera`，会立即调用 `orientationFromYawPitch`。前 18 个文件按编号加载；环境文件的编号不等于依赖顺序。Three.js 必须先于 `19`，两个 builder 文件 `21` / `22` 必须先于创建场景的 `20`，最后加载 `23`。
 
 `assets/vendor/astronomy-engine-2.1.19.min.js` 必须在以上列表之前加载；头部的 Hipparcos 星表也必须先可用。
 
@@ -71,15 +78,40 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 | `16-input-events.js` | 鼠标、触摸、键盘、resize 等顶层事件绑定 |
 | `17-content-ui.js` | 语言切换、Thoughts、引用复制、ECharts 地图和 lightbox |
 | `18-bootstrap.js` | 最终初始化、开始渲染、StellarTransit ready/restore 与 bfcache 恢复 |
+| `19-world-kit.js` | Three.js 几何、材质、灯光、碰撞体与共享资源管理工具 |
+| `21-world-outdoors.js` | 中转地、湖岸、天文台与回环之路的独立场景 builder |
+| `22-world-interiors.js` | 飞船、列车与有窗房间的独立场景 builder |
+| `20-world-runtime.js` | 环境 renderer、步行和驾驶、碰撞、场景切换、天空遮挡、永夜时间与可选环境声音 |
+| `23-world-ui.js` | 三语场景选择、模式和声音开关、交互提示、触屏移动与焦点管理 |
 
 ## 跨文件状态约定
 
 - 共享核心对象包括 `i18n`、`skyModel`、`portalDefinitions`、`celestialBodies`、`dom`、`state`、`camera`、`galaxyRenderer` 和 `celestialCloseupRenderer`。
 - 顶层 `const`、`let`、class 和 function 由后续 classic script 直接按标识符访问；它们不保证是 `window` 属性。不要创建重名顶层绑定，也不要把单个文件包进 IIFE 而不同时改完全部调用方。
 - `portalDefinitions` 与 `celestialBodies` 是运行时可变模型。代码会写入 `current`、`screen`、`button`、`entriesByHip` 等字段，不要把整个对象深度冻结。
-- 顶层副作用必须保持唯一：renderer 只在 `09` 创建，事件只绑定一次，完整 bootstrap 只在 `18` 执行。
+- 顶层副作用必须保持唯一：原有 renderer 在 `09` 创建、天空 bootstrap 在 `18` 执行；新增透明环境 renderer 只在 `20` 创建。事件各自只绑定一次。
 - 新的纯计算函数应放在依赖它的状态文件之前；新的顶层实例化只能放在其所有 class、DOM 和配置依赖之后。
 - DOM `id`、`data-portal-*`、`data-star-hip`、`inert`、ARIA 和 focus-trap 行为也是运行时契约，修改标记时必须同步检查 `dom` 注册表与验证器。
+
+## 独立环境与星空的边界
+
+七个环境 ID 为 `transit`、`lakeshore`、`observatory`、`spaceship`、`train`、`room`、`loop`。场景道具、地点和动作是纯环境体验，不对应 Home、Projects、Gallery 或任何内容板块。原有星座点击、恒星内容、天体观测和 Life 索引继续使用原有数据与导航机制。
+
+环境工具通过 `window.NightWorldKit` 暴露，builder 注册到 `window.NightWorldBuilders`，运行时和 UI 分别为 `window.NightWorld` 与 `window.NightWorldUI`。环境脚本使用 IIFE 隔离其内部变量，但仍读取原有共享的 `state`、`camera` 与 `skyModel`。场景通过透明 canvas 叠在原有星空之上，不替换星表或星空 renderer；墙体等实际几何会遮挡其背后的天空命中区。
+
+永夜模式保留 Astronomy Engine 的位置计算，优先将观察时间冻结在本次访问日期、当前观察经度对应的当地太阳午夜。如果此时太阳仍高于 −18°（高纬夏季、极昼或极地暮光），改用同年、所在半球冬至日期的当地午夜，确保天文夜晚。正常夜间位置仍保留访问日期的星空；选定时间按观察地点和访问日期缓存，不随真实时钟推进到白天，也不是当前实时天空。改变观察位置时重新选择并验证观察时间；Astronomy Engine 不可用时保留普通午夜退路。不要在个别刷新入口直接用 `new Date()` 绕开这一约定。
+
+环境选择只在本机 `localStorage` 的 `runde:night-world:v1` 中保存；存储不可用时仍可使用默认场景。环境声音由 Web Audio 本地合成，默认关闭，由用户点击开启，不请求外部音频。原有语言和观察地点等偏好仍按原有机制维护。
+
+写实资源采用本地 glTF 模型与 PBR 材质；来源、许可、校验值和松树单变体提取流程见 `ASSETS.md`。近景松树在桌面 52 米、触屏 28 米之外切换为轻量程序化树木。模型异步加载期间保留几何替身，加载失败后再次进入场景可以重试；切换场景不会把迟到的模型挂回已销毁场景。桌面使用月光阴影和每场景最多一个点光源阴影，触屏关闭阴影以控制开销。
+
+操作约定：
+
+- 漫游：鼠标／拖动环顾，`W A S D` 行走，`Shift` 加速，`E` 与附近且在视野内的道具互动。
+- `M` 打开场景选择；其中可切换环境、选择“只看星空”、开关声音或返回抵达位置。`Esc` 关闭选择器，打开时暂停漫游并隔离背景焦点。
+- 飞船驾驶：进入驾驶位后，`W / S` 调节油门，`A / D` 转向，鼠标俯仰／转向，`Q / E` 翻滚，空格制动，`F` 离开驾驶位。驾驶键与普通漫游键的含义不同。
+- 触屏：左下方向键移动（驾驶时控制油门／转向），其余区域拖动环顾；点击交互提示执行动作。离开驾驶位也可点击对应提示。
+- “只看星空”隐藏环境并保留原有星空操作，包括 `A / D` 翻滚、星座点击、内容访问与返回。原有 pointer-lock fallback、Alt 游标释放和 detail/modal 状态仍须一起验证。
 
 ## 生成内容边界
 
@@ -116,6 +148,8 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 python -m py_compile site_renderer.py scripts/build-edukai-subset.py
 python site_renderer.py --check --life-only
 node scripts/validate-life-runtime.cjs
+node scripts/validate-night-worlds.cjs
+git diff --check
 ```
 
 可见文案或字形变化后再运行：
@@ -124,4 +158,4 @@ node scripts/validate-life-runtime.cjs
 python scripts/build-edukai-subset.py
 ```
 
-浏览器回归建议通过本地 HTTP 服务进行，至少检查：昼夜天空、地平线、太阳与月亮、星座点击和拉近、Life 索引、pointer lock/fallback、Alt/Esc、三语切换、地图、lightbox、Home 航线、StellarTransit 返回、窄屏和触屏。不要只验证首屏是否能打开。
+浏览器回归建议通过本地 HTTP 服务进行，至少检查：永夜与地平线、太阳与月亮的原有观测能力、星座点击和拉近、Life 索引、pointer lock/fallback、Alt/Esc、三语切换、地图、lightbox、Home 航线、StellarTransit 返回、窄屏和触屏。环境回归需逐一切换全部七处场景，检查抵达构图、步行与碰撞、道具动作、船内步行／驾驶／离座、天空遮挡和窗口、模式切换、菜单焦点恢复、声音开关与 WebGL 不可用时的星空退路。静态与数值测试不能替代真实浏览器的视觉检查。

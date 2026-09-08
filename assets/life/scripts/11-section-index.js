@@ -32,6 +32,9 @@ function updateEntryLocationCopy() {
     dom.entryLocation.textContent = String(template)
         .split('{location}')
         .join(observerLocationLabel());
+    if (window.NightWorld?.ready) dom.entryLocation.textContent += {
+        en: ' · permanent-night observation', 'zh-CN': ' · 固定夜间观测', 'zh-TW': ' · 固定夜間觀測'
+    }[state.currentLang] || ' · permanent-night observation';
 }
 
 function observerTimeLabel(date = skyModel.date || new Date()) {

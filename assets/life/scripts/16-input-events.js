@@ -343,7 +343,7 @@ window.addEventListener('storage', event => {
     if (event.key !== WEATHER_LOCATION_STORAGE_KEY) return;
     skyModel.location = readWeatherObserverLocation();
     skyModel.observer = null;
-    refreshAstronomicalSky(new Date());
+    refreshAstronomicalSky(window.NightWorld?.ready ? window.NightWorld.skyDate() : new Date());
     updateEntryLocationCopy();
 });
 function handleViewportResize() {

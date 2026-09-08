@@ -1,4 +1,4 @@
-# Vendored browser dependency
+# Vendored browser dependencies
 
 - `echarts-5.5.0.min.js`: Apache ECharts 5.5.0 distribution build.
 - Source: https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js
@@ -15,3 +15,14 @@ CDN at runtime.
 - Upstream: https://github.com/cosinekitty/astronomy
 - License: MIT; the upstream copyright and license notice are retained in the
   minified distribution file.
+
+- `three-0.160.1.min.js`: Three.js 0.160.1 classic browser distribution build.
+- Source: https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js
+- SHA-256: `170C6789F43217C96B3170F4B42FAFE135DE7F7CD48497A4218F9757EE1D49FA`
+- Upstream: https://github.com/mrdoob/three.js
+- License: MIT; see `THREE-LICENSE.txt`, copied from the 0.160.1 package license at
+  https://cdn.jsdelivr.net/npm/three@0.160.1/LICENSE.
+
+Three.js is served locally for the optional, transparent 3D environment layer;
+the existing starfield and astronomy renderers remain separate. The page does
+not contact the dependency CDN at runtime.

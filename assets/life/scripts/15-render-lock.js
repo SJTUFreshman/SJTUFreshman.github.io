@@ -3,10 +3,11 @@ function renderFrame(time) {
     frameRequest = 0;
     try {
         if (skyModel.available && time >= skyModel.nextRefreshAt) {
-            refreshAstronomicalSky(new Date());
+            refreshAstronomicalSky(window.NightWorld?.ready ? window.NightWorld.skyDate() : new Date());
         }
         updateCamera(time);
         enforceCameraSkyDome();
+        window.NightWorld?.tick(time);
         syncSectionDrawerAvailability();
         const basis = cameraBasis();
         const catalogBasis = cameraBasisForCatalog(basis);

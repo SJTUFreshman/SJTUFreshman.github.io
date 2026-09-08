@@ -63,10 +63,12 @@ function updateCelestialButton(profile, projected) {
     button.classList.toggle('is-assisted', assisted);
     button.dataset.observationMode = profile.current?.observationMode || 'unavailable';
     const aboveHorizon = celestialAboveHorizon(profile);
+    const environmentVisible = !projected || !window.NightWorld || window.NightWorld.skyPointVisible(projected.x, projected.y);
     const onScreen = aboveHorizon &&
+        environmentVisible &&
         state.scene === 'roam' &&
         hitAreaIntersectsViewport(projected, COARSE_POINTER ? 47 : 41);
-    if (!aboveHorizon) {
+    if (!aboveHorizon || !environmentVisible) {
         if (state.hoverCelestial === profile) state.hoverCelestial = null;
         if (state.focusedCelestial === profile && state.scene === 'roam') {
             setFocusedCelestial(null);
@@ -542,11 +544,13 @@ function updatePortalButton(portal, projected) {
     if (!button) return;
     const aboveHorizon = isAboveHorizon(portal.direction);
     const observable = (portal.skyVisibility ?? 1) > 0.025;
+    const environmentVisible = !projected || !window.NightWorld || window.NightWorld.skyPointVisible(projected.x, projected.y);
     const onScreen = aboveHorizon &&
         observable &&
+        environmentVisible &&
         state.scene === 'roam' &&
         hitAreaIntersectsViewport(projected, COARSE_POINTER ? 44 : 36);
-    if (!aboveHorizon || !observable) {
+    if (!aboveHorizon || !observable || !environmentVisible) {
         if (state.hoverPortal === portal) state.hoverPortal = null;
         if (state.focusedPortal === portal && state.scene === 'roam') {
             setFocusedPortal(null);

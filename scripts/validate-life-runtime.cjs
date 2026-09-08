@@ -13,8 +13,11 @@ const astronomyPath = path.join(
     'vendor',
     'astronomy-engine-2.1.19.min.js'
 );
-const lifeHtml = fs.readFileSync(lifePath, 'utf8');
-const index = fs.readFileSync(indexPath, 'utf8');
+// Extraction assertions operate on source text, independent of Git's checkout
+// line-ending policy. Keep binary integrity checks on their original bytes.
+const readSource = filename => fs.readFileSync(filename, 'utf8').replace(/\r\n?/g, '\n');
+const lifeHtml = readSource(lifePath);
+const index = readSource(indexPath);
 
 function inlineScripts(html) {
     return [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)]
@@ -52,7 +55,7 @@ function localResource(reference) {
         reference,
         absolutePath,
         relativePath: relativePath.split(path.sep).join('/'),
-        source: fs.readFileSync(absolutePath, 'utf8')
+        source: readSource(absolutePath)
     };
 }
 
@@ -81,8 +84,8 @@ const lifeRuntimeScripts = lifeScripts.filter(resource =>
 const lifeStylesheets = localStylesheetResources(lifeHtml).filter(resource =>
     resource.relativePath.startsWith('assets/life/styles/')
 );
-assert.equal(lifeRuntimeScripts.length, 18, 'life.html must load 18 split runtime scripts');
-assert.equal(lifeStylesheets.length, 7, 'life.html must load 7 split stylesheets');
+assert.equal(lifeRuntimeScripts.length, 23, 'life.html must load the sky and environment runtime scripts');
+assert.equal(lifeStylesheets.length, 8, 'life.html must load the sky and environment stylesheets');
 assert(
     lifeHtml.split(/\r?\n/).length < 1000,
     'life.html must remain below 1000 lines after decomposition'
