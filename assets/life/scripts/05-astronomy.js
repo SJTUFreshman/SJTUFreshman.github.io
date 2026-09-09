@@ -1,5 +1,78 @@
 const ASTRONOMICAL_UNIT_KM = 149597870.7;
 
+window.SceneSky = (() => {
+    const presets = Object.freeze({
+        live: Object.freeze({ cloudCoverage: 0, haze: 1 }),
+        night: Object.freeze({ cloudCoverage: 0, haze: 1 }),
+        clear: Object.freeze({ cloudCoverage: 0.24, haze: 0.82 }),
+        dusk: Object.freeze({ cloudCoverage: 0.31, haze: 1.15 })
+    });
+    const observationCache = new Map();
+    let mode = 'live';
+    return Object.freeze({
+        get mode() { return mode; },
+        setMode(value) {
+            const requested = value === 'day' ? 'clear' : value;
+            if (!Object.prototype.hasOwnProperty.call(presets, requested)) return false;
+            if (mode === requested) return true;
+            mode = requested;
+            skyModel.nextRefreshAt = 0;
+            if (window.document?.body?.dataset) window.document.body.dataset.skyMode = mode;
+            return true;
+        },
+        snapshot() {
+            const sun = celestialBodies.find(profile => profile.id === 'sun')?.current;
+            return {
+                mode,
+                ...presets[mode],
+                observationDate: skyModel.date?.toISOString() || null,
+                sunAltitude: sun?.altitude ?? -90,
+                sunDirection: sun?.direction ? [...sun.direction] : [0, -1, 0]
+            };
+        },
+        observationDate(referenceDate = new Date()) {
+            const reference = new Date(referenceDate);
+            if (!Number.isFinite(+reference)) throw new TypeError('A valid sky observation date is required');
+            if (mode === 'live' || mode === 'night') return reference;
+            const location = skyModel.location;
+            const year = reference.getUTCFullYear();
+            const longitude = Number.isFinite(location?.longitude) ? location.longitude : 0;
+            const latitude = Number.isFinite(location?.latitude) ? location.latitude : 0;
+            const height = Number.isFinite(location?.height) ? location.height : 0;
+            const key = `${mode}:${reference.toISOString().slice(0, 10)}:${latitude}:${longitude}:${height}`;
+            if (observationCache.has(key)) return new Date(observationCache.get(key));
+            const localHour = (date, hour) => Date.UTC(year, date.getUTCMonth(), date.getUTCDate(), hour) - longitude * 240000;
+            let timestamp = localHour(reference, mode === 'clear' ? 12 : 18);
+            const astronomy = window.Astronomy;
+            if (astronomy?.Equator && astronomy?.Horizon && astronomy?.Observer) {
+                const observer = new astronomy.Observer(latitude, longitude, height);
+                const sunAltitude = date => {
+                    const equatorial = astronomy.Equator('Sun', date, observer, true, true);
+                    return astronomy.Horizon(date, observer, equatorial.ra, equatorial.dec, 'normal').altitude;
+                };
+                if (mode === 'clear' && sunAltitude(new Date(timestamp)) < 18 && astronomy.Seasons) {
+                    const seasons = astronomy.Seasons(year);
+                    timestamp = localHour((latitude < 0 ? seasons.dec_solstice : seasons.jun_solstice).date, 12);
+                }
+                if (mode === 'dusk' && astronomy.SearchAltitude) {
+                    const search = date => astronomy.SearchAltitude('Sun', observer, -1, new Date(localHour(date, 0)), 1.1, 1);
+                    let sunset = search(reference);
+                    if (!sunset && astronomy.Seasons) {
+                        const equinox = astronomy.Seasons(year).mar_equinox.date;
+                        for (let offset = -7; offset <= 7 && !sunset; offset += 1) {
+                            sunset = search(new Date(+equinox + offset * 86400000));
+                        }
+                    }
+                    if (sunset?.date) timestamp = +sunset.date;
+                }
+            }
+            if (observationCache.size >= 64) observationCache.delete(observationCache.keys().next().value);
+            observationCache.set(key, timestamp);
+            return new Date(timestamp);
+        }
+    });
+})();
+
 function vectorToArray(vector) {
     return vector
         ? [Number(vector.x) || 0, Number(vector.y) || 0, Number(vector.z) || 0]
@@ -106,7 +179,11 @@ function skyRenderingParameters() {
             localSunDirection[2] / horizontalSunLength
         ]
         : null;
+    const presentation = window.SceneSky?.snapshot();
     return {
+        mode: presentation?.mode || 'live',
+        cloudCoverage: presentation?.cloudCoverage || 0,
+        haze: presentation?.haze || 1,
         zenith: localDirectionToCatalogEquatorial([0, 1, 0]),
         east: localDirectionToCatalogEquatorial([1, 0, 0]),
         north: localDirectionToCatalogEquatorial([0, 0, 1]),

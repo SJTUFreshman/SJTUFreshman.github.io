@@ -8,6 +8,21 @@
     pointer-events: none;
 }
 
+#panoramaCanvas, #panoramaSkyCanvas {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 480ms ease;
+}
+#panoramaSkyCanvas { z-index: 1; }
+body.world-observe-mode #panoramaCanvas, body.world-observe-mode #panoramaSkyCanvas { opacity: 1; }
+body.world-sky-mode #panoramaCanvas, body.world-sky-mode #panoramaSkyCanvas { visibility: hidden; opacity: 0; }
+
 #environmentUI {
     --world-ink: #ece8df;
     --world-muted: #a4abb5;
@@ -23,8 +38,8 @@
 }
 
 #environmentUI.world-ui-suspended { visibility: hidden; }
-body.world-explore-mode:not(.has-target) .gaze-label { opacity: 0; }
-body.world-explore-mode .gaze-instruction { display: none; }
+body.world-explore-mode:not(.has-target) .gaze-label, body.world-observe-mode:not(.has-target) .gaze-label { opacity: 0; }
+body.world-explore-mode .gaze-instruction, body.world-observe-mode .gaze-instruction { display: none; }
 #environmentUI [hidden] { display: none !important; }
 #environmentUI button { color: inherit; cursor: pointer; }
 #environmentUI button:disabled { cursor: default; opacity: .45; }
@@ -189,6 +204,9 @@ body.lang-zh-CN .world-menu h2, body.lang-zh-TW .world-menu h2 { font-family: va
 .world-view-control button { min-height: 33px; padding: 6px 15px; border: 0; border-radius: 4px; color: #aab4c0 !important; background: transparent; font-size: 11px; }
 .world-view-control button[aria-pressed="true"] { color: #eee4d3 !important; background: rgba(189, 180, 160, .14); }
 .world-view-control button:hover { background: rgba(218, 225, 239, .07); }
+.world-quality-control { display: inline-flex; align-items: center; gap: 4px; }
+.world-quality-control button { min-height: 33px; padding: 6px 10px; border: 1px solid transparent; border-radius: 4px; color: #aab4c0 !important; background: transparent; font-size: 11px; }
+.world-quality-control button[aria-pressed="true"] { color: #eee4d3 !important; border-color: var(--world-rule); background: rgba(189, 180, 160, .14); }
 .world-menu-tools { display: flex; align-items: center; gap: 13px; }
 .world-sound-button { display: flex; align-items: center; gap: 8px; min-height: 38px; padding: 7px 2px; border: 0; background: transparent; color: #bac3ce !important; font-size: 11px; }
 .world-sound-button svg { width: 19px; height: 19px; }
@@ -204,8 +222,8 @@ body.lang-zh-CN .world-arrival strong, body.lang-zh-TW .world-arrival strong { f
 body.world-menu-open .world-dock, body.world-menu-open .world-arrival { visibility: hidden; }
 body.world-menu-open .entry-gate { visibility: hidden; pointer-events: none; }
 body.world-menu-open .reticle, body.world-menu-open .gaze-label, body.world-menu-open .gaze-instruction { opacity: 0; }
-body.world-explore-mode .control-legend [data-key="control_roll"] { display: none; }
-body.world-explore-mode .scene-status, body.world-sky-mode .scene-status { bottom: max(100px, calc(env(safe-area-inset-bottom) + 76px)); }
+body.world-explore-mode .control-legend [data-key="control_roll"], body.world-observe-mode .control-legend [data-key="control_roll"] { display: none; }
+body.world-explore-mode .scene-status, body.world-observe-mode .scene-status, body.world-sky-mode .scene-status { bottom: max(100px, calc(env(safe-area-inset-bottom) + 76px)); }
 body:not(.has-entered) .world-hud, body:not(.has-entered) .world-touch-pad { display: none; }
 body.world-sky-mode .world-distance { display: none; }
 
@@ -238,8 +256,8 @@ body.world-sky-mode .world-distance { display: none; }
     .world-walk-hint { font-size: 10px; }
     .world-distance { display: none; }
     .world-interaction { margin-bottom: 5px; }
-    body.world-explore-mode .scene-status, body.world-sky-mode .scene-status { bottom: max(147px, calc(env(safe-area-inset-bottom) + 130px)); right: 17px; }
-    body.world-explore-mode .control-legend { display: none; }
+    body.world-explore-mode .scene-status, body.world-observe-mode .scene-status, body.world-sky-mode .scene-status { bottom: max(147px, calc(env(safe-area-inset-bottom) + 130px)); right: 17px; }
+    body.world-explore-mode .control-legend, body.world-observe-mode .control-legend { display: none; }
 }
 @media (pointer: coarse) {
     .world-touch-pad {
@@ -264,13 +282,15 @@ body.world-sky-mode .world-distance { display: none; }
     .world-touch-pad [data-world-move="right"] svg { transform: rotate(90deg); }
     .world-touch-pad [data-world-move="back"] { grid-column: 2; grid-row: 3; }
     .world-touch-pad [data-world-move="back"] svg { transform: rotate(180deg); }
+    .world-touch-pad [data-world-throttle="1"] { grid-column: 1; grid-row: 1; font-size: 22px; }
+    .world-touch-pad [data-world-throttle="-1"] { grid-column: 3; grid-row: 1; font-size: 22px; }
     .world-place-button kbd, .world-interaction kbd { display: none !important; }
     .world-place-button { min-width: 155px; }
     .world-hud { bottom: max(154px, calc(env(safe-area-inset-bottom) + 139px)); width: calc(100vw - 32px); }
     .world-interaction { min-height: 44px; padding: 10px 19px; }
-    body.world-explore-mode .control-legend { display: none; }
+    body.world-explore-mode .control-legend, body.world-observe-mode .control-legend { display: none; }
     .world-menu-close, .world-menu-tools .world-icon-button { width: 44px; height: 44px; }
-    .world-view-control button, .world-sound-button { min-height: 42px; }
+    .world-view-control button, .world-quality-control button, .world-sound-button { min-height: 42px; }
 }
 @media (max-width: 390px) {
     .world-menu { padding: 20px 15px; }

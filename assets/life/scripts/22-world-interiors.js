@@ -129,6 +129,8 @@
     K = kit || K;
     const w = baseWorld('spaceship', 0x111a20); w.spawn = [1.2, 1.68, -2.8]; w.bounds = { minX: -5.5, maxX: 5.5, minZ: -14, maxZ: 12 };
     const g = w.group;
+    g.children.filter(node=>node.userData.ground).forEach(node=>g.remove(node));
+    w.environment={phase:'night',sunDirection:[-.5,.7,.4],sunColor:0xb7d5ff,sunIntensity:.65,ambientIntensity:.62,groundColor:0x77776f,fogColor:0x000000};
     // hull shell and open central aisle
     surface(box(g, 0, -.2, 0, 10, .4, 28, 0x728089, { metalness: .65, roughness: .35 }),'metal',5,14);
     for(let z=-12;z<=12;z+=1.5){
@@ -147,9 +149,9 @@
       glow(g, side*4.7, .17, 0, .05, .045, 25, 0x5dc0d8, 1.3);
       box(g, side*3.9, 4.6, 2.5, 2, .22, 22, 0x202b32, { metalness: .6 });
     }
-    box(g, 0, 4.6, 7.5, 6, .22, 11, 0x202b32, { metalness: .6 });
+    box(g, 0, 4.38, 7.5, 5.8, .22, 11, 0x202b32, { metalness: .6 });
     for (let z=-11;z<13;z+=3) {
-      const framePoints = [[-4.7,.12,z],[-4.7,3.2,z],[-3.1,4.7,z],[3.1,4.7,z],[4.7,3.2,z],[4.7,.12,z]];
+      const framePoints = [[-4.7,.12,z],[-4.7,3.2,z],[-3.15,4.5,z],[3.15,4.5,z],[4.7,3.2,z],[4.7,.12,z]];
       for (let n=1;n<framePoints.length;n++) rod(g,framePoints[n-1],framePoints[n],.062,0x74818a);
       for(const side of [-1,1]){
         box(g,side*4.64,3.2,z,.12,.36,.3,0x99a3a7,{metalness:.7});
@@ -245,7 +247,142 @@
       }
       seatAction.label=pilot.active ? copy('Leave the helm','离开驾驶位','離開駕駛位') : copy('Take the helm','进入驾驶位','進入駕駛位');
     };
-    w.description = { en: 'A quiet ship on a long night watch.', 'zh-CN': '一艘在漫长永夜中值守的安静飞船。', 'zh-TW': '一艘在漫長永夜中值守的安靜飛船。' }; return w;
+    const palette=new Map([[0x27353d,0xb8b7a9],[0x202b32,0xbfc0b4],[0x35444c,0x9faaa3],[0x354850,0xa4ada3],[0x34464f,0xb9bcad],[0x526970,0x747f79],[0x354850,0xa3aba0],[0x26343a,0x606e6d]]);
+    g.traverse(node=>{
+      if(!node.isMesh||!node.material||Array.isArray(node.material))return;
+      const replacement=palette.get(node.material.color?.getHex());
+      if(replacement!==undefined){const material=localMaterial(node);material.color.setHex(replacement);material.metalness=.28;material.roughness=.7;}
+    });
+    const ivory=0xc2c2b2,paintedMetal=0x83938d,frameColor=0x697a75,orange=0xa45a32;
+    const bolt=(parent,horizontal,vertical,depth,normal='front')=>{
+      const fastener=cyl(parent,horizontal,vertical,depth,.018,.018,.012,0x46534f,12,{metalness:.75,roughness:.5});
+      fastener.rotation.x=normal==='front'?Math.PI/2:0;
+      if(normal==='side')fastener.rotation.z=Math.PI/2;
+      return fastener;
+    };
+    const accessPanel=(parent,horizontal,vertical,depth,width,height,color=ivory)=>{
+      const panel=surface(box(parent,horizontal,vertical,depth,width,height,.035,color,{metalness:.24,roughness:.76}),'metal',width,height);
+      panel.material.color.setHex(color);
+      for(const side of [-1,1])for(const verticalSide of [-1,1])bolt(parent,horizontal+side*(width/2-.075),vertical+verticalSide*(height/2-.075),depth+.024);
+      return panel;
+    };
+    for(const side of [-1,1]) {
+      for(let panel=0;panel<6;panel++) {
+        const depth=-3.4+panel*2.6,bulkhead=new THREE.Group();bulkhead.position.set(side*4.65,0,depth);bulkhead.rotation.y=-side*Math.PI/2;g.add(bulkhead);
+        accessPanel(bulkhead,0,1.68,0,2.49,2.9,panel%3===0?0xaeb5a8:ivory);
+        accessPanel(bulkhead,0,3.7,-.035,2.49,1.05,0xadb5a9);
+        box(bulkhead,0,.38,.03,2.42,.07,.055,orange,{metalness:.1,roughness:.85});
+        if(panel%2===0) {
+          box(bulkhead,.7,1.8,.08,.035,.26,.055,0x52635a,{metalness:.68,roughness:.56});
+          for(let vent=0;vent<8;vent++)box(bulkhead,-.85+vent*.087,2.58,.028,.035,.24,.02,0x61756b,{metalness:.4,roughness:.72});
+          text(bulkhead,'ACCESS / '+String(panel+11).padStart(2,'0'),-.42,1.01,.041,.84,'#5c6b61');
+        }
+      }
+      const overhead=surface(box(g,side*2.05,4.38,3.75,1.4,.23,18.2,0xc9c8b8,{metalness:.22,roughness:.76}),'metal',2,14);overhead.material.color.setHex(0xc9c8b8);
+      const duct=cyl(g,side*3.57,4.09,3.3,.19,.19,18.7,paintedMetal,36,{metalness:.62,roughness:.6});duct.rotation.x=Math.PI/2;
+      for(let clamp=0;clamp<14;clamp++) {
+        const depth=-5.2+clamp*1.32,ring=new THREE.Mesh(new THREE.TorusGeometry(.197,.018,8,32),mat(0x586e63,{metalness:.74,roughness:.53}));
+        ring.position.set(side*3.57,4.09,depth);g.add(ring);
+        box(g,side*3.57,4.35,depth,.08,.3,.1,0x65796b,{metalness:.6,roughness:.64});
+      }
+      for(let cable=0;cable<3;cable++) {
+        const cablePath=new THREE.CatmullRomCurve3([new THREE.Vector3(side*(4.35-cable*.06),3.93,-6.9),new THREE.Vector3(side*(4.4-cable*.06),3.94,-3),new THREE.Vector3(side*(4.4-cable*.06),3.94,4),new THREE.Vector3(side*(4.32-cable*.06),3.85,12.5)]);
+        const conduit=new THREE.Mesh(new THREE.TubeGeometry(cablePath,32,.023,8,false),mat(cable===1?0x956342:0x394b44,{roughness:.83,metalness:.08}));g.add(conduit);
+      }
+    }
+    for(const side of [-1,1]) {
+      surface(box(g,side*3.04,2.18,-6.5,3.9,4.3,.28,ivory,{metalness:.3,roughness:.77}),'metal',3,3).material.color.setHex(ivory);
+      box(g,side*1.12,1.88,-6.3,.18,3.66,.24,frameColor,{metalness:.6,roughness:.59});
+      box(g,side*1.005,1.88,-6.27,.033,3.66,.07,0x273e32,{roughness:.95});
+      for(const vertical of [.25,1.48,2.86,3.46])bolt(g,side*1.11,vertical,-6.166);
+      text(g,side<0?'CABIN PRESSURE':'EMERGENCY SEAL',side*2.4,2.93,-6.325,1.23,'#53665a');
+      accessPanel(g,side*2.4,1.8,-6.327,1.25,1.18,0xb0b7a6);
+      box(g,side*2.4,1.57,-6.285,.7,.06,.025,orange,{roughness:.82});
+      collider(w,side*3.04,-6.5,3.9,.28);
+    }
+    box(g,0,3.86,-6.5,2.1,.86,.28,ivory,{metalness:.35,roughness:.7});
+    box(g,0,3.4,-6.3,2.42,.15,.24,frameColor,{metalness:.65,roughness:.55});
+    text(g,'HABITAT  /  01',0,3.85,-6.338,1.65,'#4e6156');
+    const serviceHatch=new THREE.Group();serviceHatch.position.set(0,0,13.14);serviceHatch.rotation.y=Math.PI;g.add(serviceHatch);
+    accessPanel(serviceHatch,0,1.65,0,2.12,3.25,0x9daaa0);
+    const hatchWheel=new THREE.Mesh(new THREE.TorusGeometry(.27,.03,10,48),mat(0x72887a,{metalness:.67,roughness:.54}));hatchWheel.position.set(.45,1.65,.07);serviceHatch.add(hatchWheel);
+    for(let spoke=0;spoke<3;spoke++)rod(serviceHatch,[.45,1.65,.075],[.45+Math.cos(spoke*Math.PI*2/3)*.27,1.65+Math.sin(spoke*Math.PI*2/3)*.27,.075],.018,0x718475);
+    text(serviceHatch,'AIRLOCK / KEEP CLEAR',0,2.85,.026,1.7,'#53685a');
+    for(const horizontal of [-2.8,2.8]) {
+      box(g,horizontal,3.76,-9.75,.13,.19,6.5,0xc4c4b2,{metalness:.22,roughness:.73});
+      for(let clamp=0;clamp<5;clamp++)bolt(g,horizontal,3.68,-12.3+clamp*1.25,'top');
+    }
+    surface(box(g,0,4.49,-9.4,6.35,.2,6.05,0xc7c9b9,{metalness:.2,roughness:.79}),'metal',4,4).material.color.setHex(0xc7c9b9);
+    accessPanel(g,0,3.52,-12.86,2.8,.62,0x667c71);
+    for(let switchIndex=0;switchIndex<10;switchIndex++) {
+      const horizontal=-1.11+switchIndex*.247;
+      box(g,horizontal,3.49,-12.801,.13,.22,.035,0x344d40,{roughness:.81});
+      glow(g,horizontal,3.63,-12.777,.045,.025,.012,switchIndex%3?0x9da479:0xbc7549,.45);
+      rod(g,[horizontal,3.49,-12.771],[horizontal,3.54,-12.704],.012,0xa9b4a1);
+    }
+    text(g,'FLIGHT / RCS / GRAV',0,3.93,-12.864,2.1,'#879b85');
+    const windscreenPaths=[
+      [[-4.5,.96,-13.31],[-3.03,4.32,-13.31]],[[4.5,.96,-13.31],[3.03,4.32,-13.31]],
+      [[-3.03,4.32,-13.31],[3.03,4.32,-13.31]],[[-4.5,.96,-13.31],[4.5,.96,-13.31]]
+    ];
+    for(const [start,end] of windscreenPaths) {
+      rod(g,start,end,.075,0x283c31);
+      const innerStart=start.map((value,axis)=>axis===2?value+.08:value),innerEnd=end.map((value,axis)=>axis===2?value+.08:value);
+      rod(g,innerStart,innerEnd,.032,0x8e9e8b);
+    }
+    for(const side of [-1,1]) {
+      const diagonal=[side*1.4,1.54,-13.35];rod(g,diagonal,[side*.93,3.37,-13.35],.045,0x667d6d);
+      accessPanel(g,side*3.24,1.13,-11.74,1.15,.65,0x73877a);
+      for(let switchIndex=0;switchIndex<6;switchIndex++) {
+        const horizontal=side*3.24-.4+switchIndex*.16;
+        bolt(g,horizontal,1.14,-11.704);glow(g,horizontal,1.32,-11.71,.035,.025,.018,switchIndex%2?0x8fa187:orange,.32);
+      }
+      text(g,side<0?'ELECTRICAL':'LIFE SUPPORT',side*3.24,.94,-11.707,.88,'#bdc4ac');
+      const grab=new THREE.CatmullRomCurve3([new THREE.Vector3(side*2.13,1.05,-10.78),new THREE.Vector3(side*2.13,1.3,-10.78),new THREE.Vector3(side*2.13,1.32,-10.12),new THREE.Vector3(side*2.13,1.05,-10.12)]);
+      g.add(new THREE.Mesh(new THREE.TubeGeometry(grab,22,.028,10,false),mat(orange,{metalness:.28,roughness:.72})));
+    }
+    const chartBoard=new THREE.Group();chartBoard.position.set(3.35,1.4,-8.5);chartBoard.rotation.y=-.32;g.add(chartBoard);
+    accessPanel(chartBoard,0,0,0,.62,.88,0x5e7163);box(chartBoard,0,0,.026,.53,.73,.009,0xc1c6ad,{roughness:1});
+    for(let row=0;row<9;row++)box(chartBoard,-.03,.25-row*.062,.034,.36,.007,.003,0x7a8e73,{roughness:1});
+    text(g,'FRONTIER',0,.58,-13.185,1.95,'#a3b59a');
+    text(g,'CONSTELLATION  /  EXPLORATION VESSEL',0,3.17,-6.294,1.7,'#748878');
+    text(g,'01  /  FLIGHT DECK',0,3.79,-6.665,1.6,'#566d5d').rotation.y=Math.PI;
+    const cockpitShell=new THREE.Group();g.add(cockpitShell);
+    for(const side of [-1,1]) {
+      const sideWall=surface(box(cockpitShell,side*2.87,1.23,-10.04,.21,2.46,6.24,0xaeb6a7,{metalness:.27,roughness:.73}),'metal',2,4);sideWall.material.color.setHex(0xaeb6a7);
+      const windowBand=box(cockpitShell,side*2.86,2.92,-9.36,.22,1.46,4.86,0xbdc0ae,{metalness:.24,roughness:.72});
+      const slopingSide=surface(box(cockpitShell,side*2.73,3.9,-9.39,.86,.22,5.76,0xc7c9b8,{metalness:.22,roughness:.74}),'metal',2,4);slopingSide.rotation.z=side*.45;slopingSide.material.color.setHex(0xc7c9b8);
+      for(let station=0;station<5;station++) {
+        const depth=-11.6+station*1.12;
+        box(cockpitShell,side*2.72,1.53,depth,.11,2.85,.09,0x667d6c,{metalness:.56,roughness:.65});
+        for(const height of [.31,1.03,1.86,2.42])bolt(cockpitShell,side*2.651,height,depth,'side');
+      }
+      box(cockpitShell,side*2.55,.54,-9.55,.3,.11,5.1,0x6c735e,{metalness:.51,roughness:.72});
+      const rack=surface(box(cockpitShell,side*2.2,1.08,-8.18,.94,1.52,1.13,0x7a8d7b,{metalness:.45,roughness:.69}),'metal',2,2);rack.material.color.setHex(0x7a8d7b);
+      for(let drawer=0;drawer<3;drawer++) {
+        accessPanel(cockpitShell,side*2.2,.58+drawer*.42,-7.597,.77,.34,drawer===1?0x5b7260:0x9ca68d);
+        box(cockpitShell,side*2.2,.57+drawer*.42,-7.558,.23,.022,.048,0x445c4b,{metalness:.62,roughness:.6});
+      }
+      const sideDisplay=new THREE.Group();sideDisplay.position.set(side*2.67,1.77,-10.5);sideDisplay.rotation.y=-side*.8;cockpitShell.add(sideDisplay);
+      screen(sideDisplay,0,0,0,.74,.47,side<0?0xdda969:0x81d7eb);
+      const glareshield=box(cockpitShell,side*1.48,1.56,-11.91,1.25,.06,.27,0x273e30,{roughness:.92});glareshield.rotation.x=.03;
+      rod(cockpitShell,[side*1.4,.89,-13.35],[side*1.4,1.58,-13.35],.045,0x667d6d);
+      rod(cockpitShell,[side*.93,3.34,-13.35],[side*.93,4.41,-13.35],.045,0x667d6d);
+      box(cockpitShell,side*.94,3.76,-13.36,.2,.75,.14,0xb4bca8,{metalness:.33,roughness:.74});
+      point(cockpitShell,side*2.38,1.05,-10.42,side<0?0xe8b274:0xa7c1bd,.22,3.7);
+      glow(cockpitShell,side*2.52,.27,-9.4,.08,.025,4.25,0xbc9857,.45);
+      collider(w,side*2.85,-9.4,.22,5.5);
+      collider(w,side*2.2,-8.18,.95,1.2);
+    }
+    box(cockpitShell,0,4.28,-9.35,5.52,.23,5.9,0xc6c7b7,{metalness:.22,roughness:.75});
+    box(cockpitShell,0,1.56,-11.91,1.52,.06,.27,0x273e30,{roughness:.92});
+    box(cockpitShell,0,3.03,-11.35,.68,.12,1.87,0x425b47,{metalness:.45,roughness:.7});
+    for(let row=0;row<7;row++) {
+      for(const side of [-1,1])glow(cockpitShell,side*.19,2.96,-12.06+row*.22,.09,.018,.08,row%3?0x81966c:0xba7649,.35);
+    }
+    point(cockpitShell,0,3.58,-8.1,0xe7c396,.4,4.8);
+    w.previewCamera={position:pilot.seat.slice(),yaw:0,pitch:.035};
+    w.description = { en: 'The Frontier flight deck: instruments, pressure seals, and a sky without limits.', 'zh-CN': '开拓号驾驶舱：仪表、承压密封，以及没有边界的星空。', 'zh-TW': '開拓號駕駛艙：儀表、承壓密封，以及沒有邊界的星空。' }; return w;
   }
 
   function train(kit) {
@@ -517,5 +654,5 @@
     w.description=copy('A lamplit bedroom and study, opening onto a quiet balcony.','一间亮着暖灯的卧室兼书房，通往安静的星空阳台。','一間亮著暖燈的臥室兼書房，通往安靜的星空陽台。');
     return w;
   }
-  Object.assign(B, { spaceship, train, room });
+  Object.assign(B, { spaceship });
 })();

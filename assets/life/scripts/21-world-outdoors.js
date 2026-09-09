@@ -554,6 +554,269 @@
     return w;
   }
 
+  function terrainHeight(horizontal, depth, snow) {
+    const ridges = snow
+      ? [[-220,-320,320,185,245], [175,-420,495,190,245], [460,-160,390,170,205], [-480,155,350,230,255], [165,455,415,190,245]]
+      : [[-430,-365,150,320,215], [240,-440,245,290,230], [580,-230,235,220,320], [-420,370,180,270,210], [290,390,150,300,250]];
+    let elevation = snow ? -180 : -57;
+    for (const [centerX, centerZ, height, width, length] of ridges) {
+      const distance = Math.hypot((horizontal-centerX)/width,(depth-centerZ)/length);
+      elevation += height*Math.exp(-Math.pow(distance,1.45));
+    }
+    const detail = Math.sin(horizontal*.031+depth*.019)*Math.cos(depth*.047-horizontal*.007)*13
+      + Math.sin(horizontal*.093-depth*.065)*Math.cos(depth*.071)*4.2
+      + Math.sin(horizontal*.241+depth*.192)*1.4;
+    const shelf = 1-Math.min(1,Math.max(0,(Math.hypot(horizontal/1.15,depth)-18)/24));
+    return (elevation+detail)*(1-shelf*shelf*(3-2*shelf));
+  }
+
+  function mountainTerrain(parent, snow) {
+    const geometry = new THREE.PlaneGeometry(1500,1500,220,220);
+    geometry.rotateX(-Math.PI/2);
+    const positions = geometry.attributes.position;
+    const colors = [], stoneColor = new THREE.Color(snow?0x646d75:0x536354);
+    const snowColor = new THREE.Color(snow?0xe5edf0:0x8a9b7a);
+    for (let vertex=0;vertex<positions.count;vertex++) {
+      const horizontal=positions.getX(vertex),depth=positions.getZ(vertex),height=terrainHeight(horizontal,depth,snow);
+      positions.setY(vertex,height-.1);
+      const slope=Math.hypot(terrainHeight(horizontal+2,depth,snow)-height,terrainHeight(horizontal,depth+2,snow)-height)*.5;
+      const variation=.5+.5*Math.sin(horizontal*.033+depth*.031)*Math.sin(depth*.069);
+      const covering=snow?Math.max(0,Math.min(1,1.28-slope*.66+variation*.22)):Math.max(0,Math.min(1,.78-slope*.6+variation*.2));
+      const tint=stoneColor.clone().lerp(snowColor,covering).multiplyScalar(.83+variation*.17);
+      colors.push(tint.r,tint.g,tint.b);
+    }
+    geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+    geometry.computeVertexNormals();
+    const material=new THREE.MeshStandardMaterial({color:0xffffff,vertexColors:true,roughness:.94,metalness:0});
+    const terrain=new THREE.Mesh(geometry,material);terrain.receiveShadow=true;terrain.castShadow=true;parent.add(terrain);
+    K.surface(terrain,'concrete',100,100);terrain.material.color.setHex(0xffffff);
+    return terrain;
+  }
+
+  function ridgeFence(world, snow) {
+    for (const side of [-1,1]) {
+      for (let index=0;index<6;index++) {
+        const depth=-3+index*3.3,horizontal=side*(12+Math.sin(index*.65)*.9);
+        const post=K.cylinder(world.group,horizontal,.58,depth,.044,.055,1.16,snow?0x555c61:0x61554a,20,{metalness:snow?.62:.08,roughness:.73});
+        if(index<5) {
+          const nextX=side*(12+Math.sin((index+1)*.65)*.9),nextZ=depth+3.3;
+          const points=[new THREE.Vector3(horizontal,.87,depth),new THREE.Vector3((horizontal+nextX)/2,.71,(depth+nextZ)/2),new THREE.Vector3(nextX,.87,nextZ)];
+          const rope=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points),12,.015,6,false),new THREE.MeshStandardMaterial({color:snow?0x778084:0x8a806e,roughness:.84,metalness:snow?.45:0}));
+          world.group.add(rope);
+        }
+        post.userData.ridgeMarker=true;
+      }
+    }
+    collider(world,-13,7,1,25);collider(world,13,7,1,25);collider(world,0,-5,27,.3);
+  }
+
+  function gothicWindow(parent,horizontal,vertical,depth,width,height) {
+    const shape=new THREE.Shape();shape.moveTo(-width/2,0);shape.lineTo(-width/2,height*.67);
+    shape.quadraticCurveTo(-width*.45,height*.88,0,height);shape.quadraticCurveTo(width*.45,height*.88,width/2,height*.67);
+    shape.lineTo(width/2,0);shape.closePath();
+    const geometry=new THREE.ShapeGeometry(shape,12);
+    const windowMesh=new THREE.Mesh(geometry,new THREE.MeshStandardMaterial({color:0x26383c,roughness:.45,metalness:.12,side:THREE.DoubleSide}));
+    windowMesh.position.set(horizontal,vertical,depth);parent.add(windowMesh);
+    K.box(parent,horizontal,vertical+height*.44,depth+.025,.06,height*.83,.045,0x909082,{roughness:.85});
+    K.box(parent,horizontal,vertical+height*.43,depth+.025,width,.07,.05,0x929185,{roughness:.85});
+  }
+
+  function castleTower(parent,horizontal,depth,radius,height,roofHeight) {
+    const tower=K.group();tower.position.set(horizontal,0,depth);parent.add(tower);
+    const wall=K.cylinder(tower,0,height/2,0,radius*.93,radius,height,0x969387,40,{roughness:.93});
+    K.surface(wall,'concrete',Math.max(2,radius*1.8),height/3);wall.material.color.setHex(0xaca796);
+    for(const elevation of [height*.23,height*.58,height-.25])K.cylinder(tower,0,elevation,0,radius*1.005,radius*1.005,.26,0x8b8c81,40,{roughness:.87});
+    const roof=K.cylinder(tower,0,height+roofHeight/2,0,.07,radius*1.23,roofHeight,0x42555b,40,{metalness:.12,roughness:.76});
+    K.surface(roof,'metal',radius,roofHeight/2);roof.material.color.setHex(0x4f6469);
+    for(let band=1;band<8;band++) {
+      const ratio=band/8,ringRadius=radius*1.23*(1-ratio)+.07*ratio;
+      K.cylinder(tower,0,height+roofHeight*ratio,0,ringRadius+.016,ringRadius+.055,.06,0x37494e,40,{metalness:.19,roughness:.72});
+    }
+    K.cylinder(tower,0,height+roofHeight+.42,0,.035,.06,.85,0x485455,16,{metalness:.6});
+    for(let facade=0;facade<8;facade++) {
+      const angle=facade*Math.PI/4,windows=K.group();tower.add(windows);windows.rotation.y=angle;
+      for(const elevation of [height*.22,height*.53,height*.76])gothicWindow(windows,0,elevation,radius*.976,.55+radius*.18,1.6+radius*.28);
+    }
+    return tower;
+  }
+
+  function castleHall(parent,horizontal,depth,width,length,height) {
+    const hall=K.group();hall.position.set(horizontal,0,depth);parent.add(hall);
+    const wall=K.box(hall,0,height/2,0,width,height,length,0x9a978b,{roughness:.96});
+    K.surface(wall,'concrete',width/3,height/3);wall.material.color.setHex(0xaca796);
+    const roofShape=new THREE.Shape();roofShape.moveTo(-width*.56,0);roofShape.lineTo(0,width*.56);roofShape.lineTo(width*.56,0);roofShape.closePath();
+    const roof=new THREE.Mesh(new THREE.ExtrudeGeometry(roofShape,{depth:length+1,bevelEnabled:false}),new THREE.MeshStandardMaterial({color:0x4a5d61,roughness:.82,metalness:.1}));
+    roof.position.set(0,height,-length/2-.5);hall.add(roof);
+    for(let bay=0;bay<Math.floor(length/3);bay++) {
+      const depthOffset=-length/2+1.5+bay*3;
+      for(const side of [-1,1]) {
+        const face=K.group();face.position.set(side*(width/2+.015),0,depthOffset);face.rotation.y=side*Math.PI/2;hall.add(face);
+        gothicWindow(face,0,height*.36,0,1.15,height*.46);
+        K.box(hall,side*(width/2+.2),height*.43,depthOffset+1.35,.55,height*.86,.55,0x8b8c81,{roughness:.95});
+      }
+    }
+    for(const side of [-1,1]) {
+      const facade=K.group();facade.position.z=side*(length/2+.01);facade.rotation.y=side<0?Math.PI:0;hall.add(facade);
+      for(const horizontalOffset of [-width*.27,0,width*.27])gothicWindow(facade,horizontalOffset,height*.35,0,width*.16,height*.5);
+    }
+    return hall;
+  }
+
+  function hogwarts() {
+    const world=base('hogwarts',{en:'A mountain overlook above the Black Lake, facing the towers of Hogwarts.','zh-CN':'黑湖上方的山间观景点，远眺霍格沃兹的塔楼与庭院。','zh-TW':'黑湖上方的山間觀景點，遠眺霍格沃茲的塔樓與庭院。'});
+    world.spawn=[0,1.72,8];world.yaw=-.15;world.pitch=.045;
+    world.bounds={minX:-12,maxX:12,minZ:-4,maxZ:19};
+    world.environment={phase:'day',sunDirection:[-.6,.58,-.32],sunColor:0xfff1cf,sunIntensity:3.2,ambientIntensity:1.35,groundColor:0x78856c,fogColor:0xa5bbc4};
+    mountainTerrain(world.group,false);ridgeFence(world,false);
+    const lake=new THREE.Mesh(new THREE.PlaneGeometry(480,380,1,1),new THREE.MeshStandardMaterial({color:0x3f6f7b,roughness:.22,metalness:.3}));
+    lake.rotation.x=-Math.PI/2;lake.position.set(-25,-34,-160);world.group.add(lake);
+    const bluff=K.rock(world.group,-45,-190,52);bluff.position.y=-48;bluff.scale.set(71,37,50);
+    const castle=K.group();castle.position.set(-45,-15,-190);castle.rotation.y=.23;world.group.add(castle);
+    castleHall(castle,0,0,16,38,21);castleHall(castle,-23,-14,11,30,16);castleHall(castle,20,-19,13,36,20);
+    castleHall(castle,-4,-34,44,11,15);
+    castleTower(castle,-13,-17,5.2,49,17);castleTower(castle,13,-29,4.3,36,13);
+    castleTower(castle,-26,1,3.1,26,11);castleTower(castle,26,-3,3.8,32,14);
+    castleTower(castle,-26,-29,3.2,27,10);castleTower(castle,26,-37,3,30,11);
+    castleTower(castle,0,21,3.8,31,15);castleTower(castle,11,14,2.1,22,9);
+    for(let span=0;span<9;span++) {
+      const horizontal=30+span*8;
+      K.surface(K.box(castle,horizontal,-10,7,2.1,24,6,0x83877b,{roughness:1}),'concrete',2,5);
+      K.box(castle,horizontal+4,3,7,10.1,2,6.8,0x969689,{roughness:.94});
+      for(const side of [-1,1])K.box(castle,horizontal+4,4.25,7+side*3.15,8,.8,.38,0xa09e90,{roughness:.9});
+    }
+    const terrace=K.box(world.group,0,-.085,6.5,23,.16,24,0x6d7262,{roughness:1});K.surface(terrace,'soil',8,8);
+    for(let rock=0;rock<24;rock++) {
+      const horizontal=-10.5+rock*.91,depth=-3.5+Math.sin(rock*1.1)*.45;
+      scannedRock(world.group,horizontal,depth,.32+(rock%4)*.12,rock*.61);
+    }
+    for(const tree of [[-21,8,9],[22,13,11],[-27,24,13],[29,31,15]])scannedPine(world.group,...tree,.4);
+    for(let clump=0;clump<18;clump++)grassTuft(world.group,(clump%2?-1:1)*(8.5+clump%3),-1+clump,1+(clump%3)*.2,0x5d7151);
+    const seat=K.bench(world.group,-7,9,.12);
+    interaction(world,'highland-seat','Sit / stand above the lake','在湖上方坐下 / 起身','在湖上方坐下 / 起身',-7,1,9,2.4,sitAction(world,{en:'The lake and the castle stay quietly in view.','zh-CN':'湖水与城堡静静留在眼前。','zh-TW':'湖水與城堡靜靜留在眼前。'},1.08,seatAnchor(seat)));
+    return world;
+  }
+
+  function snowmountain() {
+    const world=base('snowmountain',{en:'A narrow high-alpine ridge above glaciers and an ocean of peaks.','zh-CN':'冰川上方的高山雪脊，群峰如海，山谷深不见底。','zh-TW':'冰川上方的高山雪脊，群峰如海，山谷深不見底。'});
+    world.spawn=[0,1.72,7];world.yaw=.15;world.pitch=.1;
+    world.bounds={minX:-12,maxX:12,minZ:-4,maxZ:19};
+    world.environment={phase:'day',sunDirection:[.62,.48,-.46],sunColor:0xfff0dc,sunIntensity:3.7,ambientIntensity:1.5,groundColor:0xabb9c4,fogColor:0xb9d1df};
+    mountainTerrain(world.group,true);ridgeFence(world,true);
+    const snowShelf=K.ground(world.group,0xe4eaf0,34,{roughness:.99,metalness:0});K.surface(snowShelf,'concrete',14,14);snowShelf.material.color.setHex(0xf0f4f7);snowShelf.position.set(0,-.006,8);
+    for(let rock=0;rock<21;rock++) {
+      const side=rock%2?-1:1,horizontal=side*(10+Math.sin(rock*.63)*2),depth=-4+rock*1.14;
+      const stoneNode=scannedRock(world.group,horizontal,depth,.45+(rock%5)*.28,rock*.72);
+      if(rock%3===0) {
+        const drift=K.sphere(world.group,horizontal,.25,depth,.85,0xe4edf1,{roughness:1});drift.scale.set(1.45,.25,1);
+      }
+    }
+    const cairn=K.group();cairn.position.set(7.8,0,4.6);world.group.add(cairn);
+    for(let layer=0;layer<6;layer++) {
+      const stoneNode=K.rock(cairn,Math.sin(layer*2.1)*.07,Math.cos(layer)*.08,.5-layer*.055);stoneNode.position.y=.15+layer*.21;
+    }
+    collider(world,7.8,4.6,1.2,1.2);
+    const summitPlate=K.box(world.group,7.7,.85,5.01,.46,.26,.025,0x5f6869,{metalness:.72,roughness:.48});
+    K.label(world.group,'SUMMIT',7.7,.87,5.04,.39,'#d0d5cf');
+    interaction(world,'summit-cairn','Read the summit marker','看看山顶标记','看看山頂標記',7.8,1,5.5,2.5,{en:'Only wind, ice, and the long way home.','zh-CN':'只有风、冰雪，以及漫长的归途。','zh-TW':'只有風、冰雪，以及漫長的歸途。'});
+    const pack=K.group();pack.position.set(-6.8,0,10);pack.rotation.y=-.35;world.group.add(pack);
+    const bag=K.box(pack,0,.36,0,.55,.72,.28,0x9c4e32,{roughness:1});K.surface(bag,'fabric',2,2);
+    for(const horizontal of [-.18,.18])K.box(pack,horizontal,.38,.15,.065,.61,.027,0x474a42,{roughness:.94});
+    K.box(pack,0,.34,.171,.38,.09,.025,0x51564e,{metalness:.2,roughness:.7});
+    K.cylinder(pack,.6,.55,.05,.017,.02,1.1,0x737e81,16,{metalness:.7,roughness:.36}).rotation.z=.22;
+    collider(world,-6.8,10,.65,.4);
+    interaction(world,'ridge-rest','Pause beside the expedition pack','在登山包旁歇息','在登山包旁歇息',-6.8,1,10.5,2.3,{en:'The ridge is quiet enough to hear your own breathing.','zh-CN':'雪脊安静得能听见自己的呼吸。','zh-TW':'雪脊安靜得能聽見自己的呼吸。'});
+    return world;
+  }
+
+  function shelter() {
+    const world=base('shelter',{en:'A lived-in refuge above a silent, broken city.','zh-CN':'废土都市之上，一间仍有生活痕迹的避难所。','zh-TW':'廢土都市之上，一間仍有生活痕跡的避難所。'});
+    const group=world.group;world.spawn=[0,1.72,2.8];world.yaw=-.08;world.pitch=.06;
+    world.bounds={minX:-6.5,maxX:6.5,minZ:-5.5,maxZ:10.5};
+    world.environment={phase:'night',sunDirection:[-.5,.7,.4],sunColor:0xb7d5ff,sunIntensity:1.05,ambientIntensity:.7,groundColor:0x55514a,fogColor:0x1c2734};
+    const slab=K.box(group,0,-.16,2.5,13.5,.32,17,0x74746a,{roughness:1});K.surface(slab,'concrete',5,6);
+    for(const side of [-1,1]) {
+      const wall=K.box(group,side*6.6,2.1,2.5,.55,4.2,17,0x74746b,{roughness:1});K.surface(wall,'concrete',6,2);
+      collider(world,side*6.6,2.5,.55,17);
+      K.box(group,side*6.21,2.4,3.8,.14,.12,12.4,0x7f7560,{metalness:.5,roughness:.72});
+      for(let bracket=0;bracket<6;bracket++)K.box(group,side*6.13,2.4,-1.6+bracket*2,.11,.35,.095,0x444a45,{metalness:.6});
+    }
+    K.surface(K.box(group,0,4.28,3,13.6,.36,16,0x737369,{roughness:1}),'concrete',6,6);
+    K.surface(K.box(group,0,2.1,10.8,13.5,4.2,.6,0x77766d,{roughness:1}),'concrete',6,2);collider(world,0,10.8,13.5,.6);
+    K.surface(K.box(group,0,.39,-5.8,13.5,.78,.6,0x88897d,{roughness:1}),'concrete',6,1);collider(world,0,-5.8,13.5,.6);
+    for(const horizontal of [-6.1,6.1])K.box(group,horizontal,2.45,-5.75,.2,3.65,.3,0x645e4d,{metalness:.7,roughness:.7});
+    K.box(group,0,4.03,-5.75,12.4,.22,.32,0x645e4d,{metalness:.65,roughness:.68});
+    const shutter=K.group();shutter.position.set(0,3.78,-5.69);group.add(shutter);
+    for(let slat=0;slat<4;slat++)K.box(shutter,0,-slat*.09,0,12,.08,.12,0x657064,{metalness:.68,roughness:.77});
+    let shutterTarget=3.78;
+    const city=K.group();city.position.y=-36;group.add(city);
+    const ruins=new THREE.MeshStandardMaterial({color:0x4c5457,roughness:.97,metalness:.08});
+    const concrete=new THREE.BoxGeometry(1,1,1);
+    let ruinSeed=91527;
+    const random=()=>{ruinSeed=(ruinSeed*16807)%2147483647;return (ruinSeed-1)/2147483646;};
+    for(let building=0;building<38;building++) {
+      const horizontal=(building%10-4.5)*31+(random()-.5)*15,depth=-85-Math.floor(building/10)*85-random()*35;
+      const width=10+random()*15,length=12+random()*18,floors=3+Math.floor(random()*16),height=floors*3.3;
+      const shell=new THREE.Mesh(concrete,ruins);shell.position.set(horizontal,height/2,depth);shell.scale.set(width,height,length);city.add(shell);
+      for(let floor=1;floor<floors;floor++) {
+        K.box(city,horizontal,floor*3.3,depth+length/2+.04,width+.35,.18,.45,0x75807d,{roughness:.94});
+        for(let bay=0;bay<Math.floor(width/3);bay++) {
+          if(random()<.18)continue;
+          const window=K.box(city,horizontal-width/2+1.5+bay*3,floor*3.3+1.35,depth+length/2+.085,1.63,1.85,.04,random()<.025?0xc49a65:0x182329,{emissive:random()<.025?0x745531:0,emissiveIntensity:.2,roughness:.83});
+        }
+      }
+      for(let remnant=0;remnant<5;remnant++) {
+        const remnantX=horizontal+(random()-.5)*width,remnantZ=depth+(random()-.5)*length;
+        K.box(city,remnantX,height+random()*1.4,remnantZ,.1,2+random()*3,.1,0x675b49,{metalness:.6,roughness:.85});
+      }
+      if(building%6===0) {
+        const antenna=K.cylinder(city,horizontal,height+4,depth,.055,.075,8,0x777b70,16,{metalness:.7,roughness:.6});
+        K.box(city,horizontal,height+6,depth,4,.05,.05,0x777b70,{metalness:.7});
+      }
+    }
+    K.ground(city,0x1c262b,1200,{roughness:1});
+    for(let street=0;street<4;street++)K.box(city,0,.015,-95-street*85,520,.02,14,0x293336,{roughness:1});
+    const bed=K.group();bed.position.set(-4.8,0,6.5);group.add(bed);
+    K.box(bed,0,.39,0,2.5,.16,3.8,0x525b54,{metalness:.7,roughness:.78});
+    K.surface(K.box(bed,0,.59,0,2.38,.24,3.6,0x8b8a75,{roughness:1}),'fabric',3,4);
+    K.surface(K.box(bed,0,.77,.55,2.42,.12,2.5,0x53645b,{roughness:1}),'fabric',3,3);
+    K.surface(K.box(bed,0,.82,-1.24,1.55,.25,.65,0xa7a394,{roughness:1}),'fabric',2,1);
+    for(const horizontal of [-1.05,1.05])for(const depth of [-1.6,1.6])K.cylinder(bed,horizontal,.18,depth,.055,.055,.36,0x5b625b,16,{metalness:.7});
+    collider(world,-4.8,6.5,2.5,3.8);
+    const desk=K.group();desk.position.set(4.8,0,4);group.add(desk);
+    K.surface(K.box(desk,0,.88,0,2.4,.16,4.1,0x695b48,{roughness:.9}),'wood',2,3);
+    for(const horizontal of [-.98,.98])for(const depth of [-1.7,1.7])K.box(desk,horizontal,.42,depth,.08,.84,.08,0x555f58,{metalness:.6});
+    K.box(desk,0,1.02,-.7,1.3,.045,1.6,0xb3ae97,{roughness:1});
+    K.cylinder(desk,.56,1.12,.65,.14,.12,.25,0xc2bda9,32,{roughness:.62});
+    const radio=K.box(desk,-.25,1.19,1.1,1,.42,.55,0x3f4e45,{metalness:.38,roughness:.83});
+    K.box(desk,-.42,1.22,1.382,.37,.17,.02,0x8a9f85,{emissive:0x506547,emissiveIntensity:.35});
+    for(let vent=0;vent<6;vent++)K.box(desk,.09+vent*.05,1.22,1.387,.018,.18,.015,0x212f2a);
+    K.cylinder(desk,.18,1.83,1.12,.01,.014,.9,0x8c9890,16,{metalness:.8}).rotation.z=.22;
+    collider(world,4.8,4,2.4,4.1);
+    const lampLight=K.point(group,4.5,2.6,3.1,0xffc38d,2.6,12);let lampOn=true;
+    K.cylinder(group,4.5,2.85,3.1,.07,.4,.35,0x83765e,32,{metalness:.6,roughness:.6});
+    K.cylinder(group,4.5,3.55,3.1,.018,.018,1.04,0x343f38,12,{metalness:.6});
+    K.point(group,-4.5,2.8,6.9,0xf1ad70,.8,8);
+    const stove=K.group();stove.position.set(-4.5,0,-2.2);group.add(stove);
+    K.cylinder(stove,0,.47,0,.48,.43,.94,0x39423d,40,{metalness:.72,roughness:.77});
+    K.box(stove,0,.42,.455,.47,.42,.055,0x1f2925,{metalness:.65,roughness:.65});
+    K.box(stove,0,.42,.486,.32,.25,.015,0x6d351e,{emissive:0xbb5120,emissiveIntensity:.45});
+    K.cylinder(stove,0,2.35,0,.1,.1,2.8,0x3d4841,24,{metalness:.66,roughness:.8});
+    collider(world,-4.5,-2.2,1.1,1.1);
+    const supplies=K.group();supplies.position.set(0,0,9.6);group.add(supplies);
+    for(let crate=0;crate<4;crate++) {
+      const horizontal=-2.8+crate*1.8;
+      K.surface(K.box(supplies,horizontal,.45,0,1.5,.9,.9,crate%2?0x777960:0x776650,{roughness:.92}),'wood',2,1);
+      for(const side of [-1,1])K.box(supplies,horizontal+side*.51,.45,.46,.07,.87,.04,0x454e43,{metalness:.58,roughness:.84});
+      collider(world,horizontal,9.6,1.5,.9);
+    }
+    K.label(group,'SHELTER  /  04',0,3.45,10.44,2.6,'#a3a899').rotation.y=Math.PI;
+    interaction(world,'shelter-shutter','Raise / lower the sunshade','升起 / 放下遮光帘','升起 / 放下遮光簾',5.7,1.9,-4.7,2.3,()=>{shutterTarget=shutterTarget>3?2.48:3.78;return {en:'The worn mechanism turns slowly.','zh-CN':'磨损的机构缓缓转动。','zh-TW':'磨損的機構緩緩轉動。'};});
+    interaction(world,'shelter-light','Switch the work lamp','切换工作灯','切換工作燈',4.8,1.5,3,2.5,()=>{lampOn=!lampOn;lampLight.intensity=lampOn?13:.5;return {en:lampOn?'A little warmth returns to the room.':'The city becomes clearer in the dark.','zh-CN':lampOn?'一点暖意重新回到房间。':'黑暗中，都市变得更清晰。','zh-TW':lampOn?'一點暖意重新回到房間。':'黑暗中，都市變得更清晰。'};});
+    interaction(world,'shelter-radio','Listen to the receiver','听听收音机','聽聽收音機',4.8,1.3,5.1,2.5,{en:'No voices tonight. The receiver still has power.','zh-CN':'今晚没有人声，接收器仍然通着电。','zh-TW':'今晚沒有人聲，接收器仍然通著電。'});
+    world.update=(delta)=>{shutter.position.y+=(shutterTarget-shutter.position.y)*Math.min(1,delta*1.8);};
+    return world;
+  }
+
   window.NightWorldBuilders = window.NightWorldBuilders || {};
-  Object.assign(window.NightWorldBuilders, { transit, lakeshore, observatory, loop });
+  Object.assign(window.NightWorldBuilders, { shelter, hogwarts, snowmountain });
 })();

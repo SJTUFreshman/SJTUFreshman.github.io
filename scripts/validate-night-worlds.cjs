@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * Regression checks for the seven environment builders.  This deliberately
+ * Regression checks for the four environment builders.  This deliberately
  * runs without a browser/WebGL context: Three's real math and geometry classes
  * catch malformed transforms while small scene-specific assertions catch the
  * easy-to-miss exploration regressions.
@@ -33,8 +33,8 @@ load('assets/life/scripts/21-world-outdoors.js');
 load('assets/life/scripts/22-world-interiors.js');
 
 const builders = window.NightWorldBuilders;
-const ids = ['transit', 'lakeshore', 'observatory', 'spaceship', 'train', 'room', 'loop'];
-assert.deepEqual(Object.keys(builders).sort(), ids.slice().sort(), 'all seven builders must be registered');
+const ids = ['spaceship', 'shelter', 'hogwarts', 'snowmountain'];
+assert.deepEqual(Object.keys(builders).sort(), ids.slice().sort(), 'all four builders must be registered');
 
 function finiteWorld(world, id) {
   assert(world?.group?.isGroup, `${id}: builder must return a THREE.Group`);
@@ -83,48 +83,10 @@ for (const id of ids) {
   world = builders[id](window.NightWorldKit);
   world.player = { x: world.spawn[0], y: world.spawn[1], z: world.spawn[2], distance: 0 };
 
-  if (id === 'lakeshore') {
-    assert(blocked(world, 0, -25), 'lakeshore: water must not be walkable');
-    assert(!blocked(world, -19, -25), 'lakeshore: dock approach must remain walkable');
-  }
-  if (id === 'observatory') {
-    assert(!blocked(world, 4, -5), 'observatory: telescope area must remain reachable');
-  }
-  if (id === 'train') {
-    const doors = world.interactions.find(item => item.id === 'train-door');
-    const state = world.train;
-    doors.action.call(world);
-    for (let i = 0; i < 80; i++) world.update(.016, i * .016, world.player);
-    assert(state.door > .8, 'train: doors should animate open with normal dt');
-    assert(world.colliders.some(c => c.enabled === false), 'train: open doorway should disable its collider');
-    Object.assign(world.player, { x: 2.43, z: 3 });
-    doors.action.call(world);
-    assert(state.open, 'train: doors must not close on a person in the doorway');
-  }
-  if (id === 'room') {
-    const seat = world.interactions.find(item => item.id === 'balcony-bench');
-    seat.action.call(world);
-    assert.equal(world.player.y, 1.1, 'room: sitting should lower the player');
-    world.player.x += .1;
-    world.update(.016, 1, world.player);
-    assert.equal(world.player.y, 1.68, 'room: moving should restore standing height');
-  }
-  if (id === 'loop') {
-    const initialChildren = world.group.children.length;
-    for (let i = 0; i < 30; i++) {
-      world.player.z = -90; world._cooldown = 0;
-      world.update(.05, i, world.player);
-      assert.equal(world.group.children.length, initialChildren, 'loop: crossing must not leak props');
-    }
-    world.player.z = -90; world._cooldown = 0; world.update(.05, 31, world.player);
-    const bell = world.interactions.find(item => item.id === 'loop-bell');
-    assert.equal(bell.position[0], 41, 'loop: interaction must follow phase-one bell');
-    assert.equal(bell.position[2], -29, 'loop: interaction must follow phase-one bell');
-  }
-  if (id === 'spaceship' || id === 'room') {
+  if (id === 'spaceship') {
     const lights = []; world.group.traverse(object => { if(object.isPointLight) lights.push(object); });
     const original = lights.map(light => light.intensity);
-    const action = world.interactions.find(item => item.id === (id === 'spaceship' ? 'cabin-lights' : 'reading-light'));
+    const action = world.interactions.find(item => item.id === 'cabin-lights');
     action.action.call(world);
     assert(lights.some((light, i) => light.intensity < original[i]), `${id}: light switch must affect real lights`);
     action.action.call(world);
@@ -183,9 +145,9 @@ function runtimeChecks() {
   });
   load('assets/life/scripts/03-math-orientation.js');
   const RealRenderer=THREE.WebGLRenderer;
-  let lastView;
+  let lastView, rendererCount = 0;
   THREE.WebGLRenderer=class {
-    constructor(options){this.domElement=options.canvas;this.shadowMap={};}
+    constructor(options){this.domElement=options.canvas;this.shadowMap={};rendererCount++;}
     setClearColor(){} setPixelRatio(){} setSize(){}
     render(scene,view){scene.updateMatrixWorld(true);lastView=view;}
   };
@@ -199,8 +161,36 @@ function runtimeChecks() {
       const event={type:up?'keyup':'keydown',code,target,repeat:false,preventDefault(){},stopImmediatePropagation(){}};
       (up?global:document).dispatchEvent(event);
     };
+    assert.equal(api.currentId,'spaceship','runtime: default scene must be the ship');
+    assert.equal(api.mode,'observe','runtime: visitors must start in observation mode');
+    assert.equal(rendererCount,0,'runtime: observation must not create a heavy scene renderer');
+    assert.equal(api.world.group.children.length,0,'runtime: observation must not build exploration geometry');
+    assert(api.world.pilot.active,'runtime: default spaceship must be seated and piloting');
+    assert.deepEqual([api.player.x,api.player.y,api.player.z],api.world.pilot.seat,'runtime: default camera must occupy pilot seat');
+    assert.equal(api.setViewMode('explore'),false,'runtime: exploration must remain locked until discovered');
+    for(const id of ids){assert(api.select(id),`runtime could not select ${id}`);frames(2);assert.equal(api.world.group.children.length,0,`runtime: ${id} observation must not build meshes`);}
+    api.select('shelter');frames(2);
+    const observationStart={...api.player};key('KeyW');api.setMotion(1,1);frames();key('KeyW',true);api.clearInput();
+    assert.deepEqual(api.player,observationStart,'runtime: observation must stay at its selected viewpoint');
+    assert(api.look(35,20),'runtime: observation must support free look');
+    api.select('spaceship');frames(2);
+    const observeShip=api.world,observePilot=observeShip.pilot;
+    const beforeHeadLook=observeShip.flight.orientation.slice();
+    assert(api.look(160,40),'runtime: cockpit must support independent head movement');frames(2);
+    assert.deepEqual(observeShip.flight.orientation,beforeHeadLook,'runtime: looking around must not steer the ship');
+    key('KeyW');key('KeyD');key('KeyQ');frames(12);key('KeyW',true);key('KeyD',true);key('KeyQ',true);api.clearInput();
+    assert(Math.abs(observeShip.flight.orientation[0])>.01,'runtime: observation controls must pitch the ship');
+    assert(Math.abs(observeShip.flight.orientation[1])>.01,'runtime: observation controls must yaw the ship');
+    assert(Math.abs(observeShip.flight.orientation[2])>.01,'runtime: observation controls must roll the ship');
+    key('KeyF');api.interact();frames(2);assert(observePilot.active,'runtime: observation must not allow leaving the helm');
+    api.setThrottle(1);frames(60);api.clearInput();assert(observePilot.speed>20,'runtime: observation must allow thrust');
+    assert.equal(rendererCount,0,'runtime: cockpit piloting must not initialize exploration rendering');
+    assert(api.unlockExploration(),'runtime: discovery must unlock exploration');
+    assert.equal(api.mode,'explore','runtime: unlock must enter exploration');
+    assert.equal(rendererCount,1,'runtime: exploration renderer must initialize lazily');
+    assert(api.world.pilot.active,'runtime: entering exploration must preserve occupied helm');
     for(const id of ids){assert(api.select(id),`runtime could not select ${id}`);frames(2);finiteWorld(api.world,id);}
-    api.select('transit');frames(2);
+    api.select('shelter');frames(2);
     const start=api.player.z;
     key('KeyW');frames();key('KeyW',true);api.clearInput();
     assert(api.player.z<start-2,'runtime: W must move forward');
@@ -226,21 +216,14 @@ function runtimeChecks() {
     assert(api.skyPointVisible(720,450),'runtime: sky-only mode must not occlude sky targets');
     api.setViewMode('explore');api.clearInput();
 
-    // Functional transitions must continue with reduced ambient motion.
-    global.REDUCED_MOTION=true;api.select('train');
-    api.world.interactions.find(item=>item.id==='train-door').action();frames(45);
-    assert(api.world.train.door>.99,'runtime: reduced motion must not freeze an opening door');
-    api.select('room');
-    const curtains=api.world.group.children.filter(object=>object.isGroup&&object.userData.curtain);
-    assert.equal(curtains.length,2,'runtime fixture: both curtain panels must be present');
-    api.world.interactions.find(item=>item.id==='curtains').action();frames(35);
-    assert(curtains.every(panel=>panel.scale.x>3),'runtime: reduced motion must not freeze closing curtains');
-    global.REDUCED_MOTION=false;
+    global.REDUCED_MOTION=true;api.select('shelter');
+    for(const item of api.world.interactions){item.action.call(api.world);frames(2);}
+    finiteWorld(api.world,'reduced-motion shelter');global.REDUCED_MOTION=false;
 
     api.select('spaceship');frames(2);
     const ship=api.world,pilot=ship.pilot;
     ship.interactions.find(item=>item.id==='pilot-seat').action();
-    api.setMotion(1,0);frames(60);api.clearInput();
+    api.setThrottle(1);frames(60);api.clearInput();
     assert(pilot.speed>20,'runtime: pilot thrust must increase speed');
     assert(ship.flight.position.length()>20,'runtime: flight must change spatial position');
     const positionBeforeTurn=ship.flight.position.clone();
@@ -257,9 +240,22 @@ function runtimeChecks() {
     api.reset();frames(2);
     assert.equal(ship.flight.position.length(),0,'runtime: arrival reset must reset ship translation');
     assert.deepEqual([api.player.x,api.player.y,api.player.z],ship.spawn,'runtime: arrival reset must restore spawn');
-    const exterior=ship.flight.exterior;api.select('room');
+    const exterior=ship.flight.exterior;api.select('shelter');
     assert.equal(exterior.children.length,0,'runtime: scene switch must dispose exterior flight objects');
     frames(2);
+    api.setViewMode('observe');
+    const originalBuilder=builders.shelter;
+    builders.shelter=()=>{throw new Error('Expected test build failure');};
+    const originalError=console.error;console.error=()=>{};
+    try { assert.equal(api.setViewMode('explore'),false,'runtime: failed exploration build must be reported'); }
+    finally { builders.shelter=originalBuilder;console.error=originalError; }
+    assert.equal(api.mode,'observe','runtime: failed exploration must retain observation mode');
+    assert(!api.world.fullScene,'runtime: failed exploration must retain lightweight world');
+    assert(api.setViewMode('explore'),'runtime: recovered builder must allow retry');frames(2);
+    canvas.dispatchEvent({type:'webglcontextlost',preventDefault(){}});
+    assert.equal(api.mode,'observe','runtime: lost exploration context must fall back to observation');
+    assert(api.ready,'runtime: context loss must not disable panorama observation');
+    assert(api.error,'runtime: context loss must expose a recoverable error');
   } finally { THREE.WebGLRenderer=RealRenderer; }
 }
 

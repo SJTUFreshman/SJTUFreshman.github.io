@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "projection": "equirectangular",
+  "alpha": "straight",
+  "quality": "preview-only",
+  "scenes": {
+    "spaceship": { "preview": null, "sky": "night" },
+    "shelter": { "preview": null, "sky": "night" },
+    "hogwarts": { "preview": null, "sky": "clear" },
+    "snowmountain": { "preview": null, "sky": "clear" }
+  }
+}

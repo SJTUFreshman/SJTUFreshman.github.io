@@ -335,6 +335,7 @@ function drawConstellations(basis, time, webglRendered, catalogBasis = basis) {
 
     const context = overlayContext;
     const active = state.activePortal;
+    const daytimeGuides = skyRenderingParameters().daylight > 0.5;
     portalDefinitions.forEach((portal, portalIndex) => {
         const center = projectDirection(portal.direction, basis, overlayWidth, overlayHeight);
         const points = portal.patternPoints.map(point =>
@@ -377,9 +378,11 @@ function drawConstellations(basis, time, webglRendered, catalogBasis = basis) {
         const warm = Boolean(portal.home);
 
         context.save();
-        context.globalCompositeOperation = 'screen';
+        context.globalCompositeOperation = daytimeGuides ? 'source-over' : 'screen';
         context.lineWidth = focused || selected ? 0.9 : 0.55;
-        context.strokeStyle = warm
+        context.strokeStyle = daytimeGuides
+            ? `rgba(20,48,70,${Math.min(0.9, edgeAlpha * 2.1)})`
+            : warm
             ? `rgba(255,218,158,${edgeAlpha})`
             : `rgba(202,220,255,${edgeAlpha})`;
         portal.patternEdges.forEach(([startIndex, endIndex]) => {
@@ -419,6 +422,19 @@ function drawConstellations(basis, time, webglRendered, catalogBasis = basis) {
                 ? 2.9 + homeExpansion
                 : (isAnchor ? 2.25 : 1.35 + (index % 3) * 0.22);
             const interactionScale = starSelected ? 1.72 : starHovered ? 1.46 : 1;
+            if (daytimeGuides) {
+                const guideRadius = (isAnchor ? 3.5 : 2.1) * interactionScale;
+                context.globalAlpha = Math.min(0.9, astronomicalVisibility * (focused || selected ? 2.6 : 1.8));
+                context.strokeStyle = 'rgba(18,43,63,0.9)';
+                context.fillStyle = 'rgba(225,243,255,0.42)';
+                context.lineWidth = starSelected || starHovered ? 1.2 : 0.8;
+                context.beginPath();
+                context.arc(point.x, point.y, guideRadius, 0, Math.PI * 2);
+                context.fill();
+                context.stroke();
+                context.globalAlpha = 1;
+                return;
+            }
             drawStarGlow(
                 context,
                 point.x,

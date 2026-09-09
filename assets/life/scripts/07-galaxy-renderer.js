@@ -57,11 +57,15 @@ class GalaxyRenderer {
                 uniform vec3 uUp;
                 uniform vec3 uForward;
                 uniform vec3 uZenith;
+                uniform vec3 uEast;
+                uniform vec3 uNorth;
                 uniform vec3 uSunDirection;
                 uniform float uFov;
                 uniform float uTime;
                 uniform float uSunAltitude;
                 uniform float uSpace;
+                uniform float uCloudCoverage;
+                uniform float uHaze;
 
                 float hash(vec2 point) {
                     vec3 mixed = fract(point.xyx * 0.1031);
@@ -90,6 +94,13 @@ class GalaxyRenderer {
                         amplitude *= 0.47;
                     }
                     return value;
+                }
+
+                float cloudField(vec2 point) {
+                    float base = fbm(point * 0.56);
+                    float billows = fbm(point * 2.1 + vec2(base * 2.5));
+                    float detail = noise(point * 8.1);
+                    return base * 0.63 + billows * 0.32 + detail * 0.05;
                 }
 
                 void main() {
@@ -204,6 +215,45 @@ class GalaxyRenderer {
                     skyColor = mix(skyColor, daylightSky, daylight);
                     skyColor += vec3(0.30, 0.16, 0.22) *
                         horizonBand * twilight * (1.0 - sunAlignment) * 0.08;
+                    if (uCloudCoverage > 0.0 && daylight > 0.001 && uSpace < 0.5) {
+                        float cosineSun = clamp(dot(ray, uSunDirection), -1.0, 1.0);
+                        float viewAir = 1.0 / (skyAltitude + 0.095);
+                        float solarAir = 1.0 / (max(sin(radians(uSunAltitude)), 0.0) + 0.075);
+                        vec3 rayleigh = vec3(0.0058, 0.0135, 0.0331);
+                        vec3 solarTransmittance = exp(-rayleigh * solarAir * 3.3 * uHaze);
+                        vec3 viewTransmittance = exp(-rayleigh * viewAir * 4.6 * uHaze);
+                        float rayleighPhase = 0.75 * (1.0 + cosineSun * cosineSun);
+                        float miePhase = 0.12 / pow(max(1.72 - 1.7 * cosineSun, 0.025), 1.3);
+                        vec3 scattered = (vec3(1.0) - viewTransmittance) * rayleighPhase;
+                        scattered *= mix(vec3(0.45, 0.61, 0.87), solarTransmittance, 0.64);
+                        scattered += solarTransmittance * miePhase * (0.018 + 0.02 * uHaze);
+                        scattered += vec3(0.19, 0.25, 0.33) * exp(-skyAltitude * 8.0) * fullDay;
+                        vec3 sunset = mix(vec3(0.77, 0.21, 0.052), vec3(0.99, 0.58, 0.24), skyAltitude);
+                        float sunsetBand = exp(-skyAltitude * 5.4) * pow(max(cosineSun, 0.0), 1.8) * twilight;
+                        scattered += sunset * sunsetBand * 0.65;
+                        float counterSun = pow(max(-cosineSun, 0.0), 2.0);
+                        scattered += vec3(0.17, 0.052, 0.08) * exp(-pow((skyAltitude - 0.12) * 10.0, 2.0)) * counterSun * twilight;
+                        skyColor = mix(skyColor, scattered, daylight * 0.82);
+
+                        vec2 horizontalRay = vec2(dot(ray, uEast), dot(ray, uNorth));
+                        vec2 cloudPoint = horizontalRay / max(sinAltitude, 0.075) * 2.2;
+                        cloudPoint += vec2(uTime * 0.0012, -uTime * 0.0004);
+                        float cloudMass = cloudField(cloudPoint);
+                        float coverageThreshold = 0.68 - uCloudCoverage * 0.48;
+                        float cloudDensity = smoothstep(coverageThreshold, coverageThreshold + 0.12, cloudMass);
+                        vec2 sunWind = vec2(dot(uSunDirection, uEast), dot(uSunDirection, uNorth));
+                        float sunlightDensity = cloudField(cloudPoint + sunWind * 0.23);
+                        float cloudOcclusion = clamp((sunlightDensity - cloudMass) * 5.0 + 0.45, 0.0, 1.0);
+                        vec3 cloudShadow = mix(vec3(0.15, 0.19, 0.29), vec3(0.39, 0.47, 0.57), fullDay);
+                        vec3 cloudSunlight = mix(vec3(1.05, 0.47, 0.19), vec3(1.08, 1.05, 0.98), fullDay);
+                        vec3 cloudColor = mix(cloudSunlight, cloudShadow, cloudOcclusion * 0.72);
+                        float silverLining = pow(max(cosineSun, 0.0), 18.0) * (1.0 - cloudDensity) * cloudDensity * 3.0;
+                        cloudColor += solarTransmittance * silverLining * 0.9;
+                        float cloudDistance = exp(-pow(0.055 / max(sinAltitude, 0.02), 1.3));
+                        cloudColor = mix(skyColor, cloudColor, cloudDistance);
+                        float cloudAlpha = cloudDensity * smoothstep(0.015, 0.11, sinAltitude) * daylight * 0.94;
+                        skyColor = mix(skyColor, cloudColor, cloudAlpha);
+                    }
                     vec3 groundNight = vec3(0.007, 0.010, 0.015);
                     vec3 groundDay = vec3(0.075, 0.090, 0.098);
                     vec3 ground = mix(groundNight, groundDay, daylight);
@@ -375,12 +425,16 @@ class GalaxyRenderer {
                 up: this.gl.getUniformLocation(this.backgroundProgram, 'uUp'),
                 forward: this.gl.getUniformLocation(this.backgroundProgram, 'uForward'),
                 zenith: this.gl.getUniformLocation(this.backgroundProgram, 'uZenith'),
+                east: this.gl.getUniformLocation(this.backgroundProgram, 'uEast'),
+                north: this.gl.getUniformLocation(this.backgroundProgram, 'uNorth'),
                 sunDirection: this.gl.getUniformLocation(this.backgroundProgram, 'uSunDirection'),
                 fov: this.gl.getUniformLocation(this.backgroundProgram, 'uFov'),
                 resolution: this.gl.getUniformLocation(this.backgroundProgram, 'uResolution'),
                 time: this.gl.getUniformLocation(this.backgroundProgram, 'uTime'),
                 sunAltitude: this.gl.getUniformLocation(this.backgroundProgram, 'uSunAltitude'),
-                space: this.gl.getUniformLocation(this.backgroundProgram, 'uSpace')
+                space: this.gl.getUniformLocation(this.backgroundProgram, 'uSpace'),
+                cloudCoverage: this.gl.getUniformLocation(this.backgroundProgram, 'uCloudCoverage'),
+                haze: this.gl.getUniformLocation(this.backgroundProgram, 'uHaze')
             };
             this.starLocations = {
                 direction: this.gl.getAttribLocation(this.starProgram, 'aDirection'),
@@ -523,6 +577,7 @@ class GalaxyRenderer {
     }
 
     render(time, basis) {
+        if (window.NightPanorama?.coversSky?.()) return true;
         if (!this.ready || !this.gl) return false;
         const gl = this.gl;
         const sky = skyRenderingParameters();
@@ -544,9 +599,13 @@ class GalaxyRenderer {
         );
         gl.uniform1f(this.backgroundLocations.time, Math.min(time * 0.001, 60));
         gl.uniform3fv(this.backgroundLocations.zenith, sky.zenith);
+        gl.uniform3fv(this.backgroundLocations.east, sky.east);
+        gl.uniform3fv(this.backgroundLocations.north, sky.north);
         gl.uniform3fv(this.backgroundLocations.sunDirection, sky.sunDirection);
         gl.uniform1f(this.backgroundLocations.sunAltitude, sky.sunAltitude);
         gl.uniform1f(this.backgroundLocations.space, window.NightWorld?.inSpace() ? 1 : 0);
+        gl.uniform1f(this.backgroundLocations.cloudCoverage, sky.cloudCoverage || 0);
+        gl.uniform1f(this.backgroundLocations.haze, sky.haze || 1);
         gl.drawArrays(gl.TRIANGLES, 0, 6);
 
         gl.enable(gl.BLEND);

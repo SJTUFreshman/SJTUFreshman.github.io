@@ -374,7 +374,7 @@ function traceScreenPolygon(context, polygon) {
 }
 
 function drawLocalHorizon(basis) {
-    if (window.NightWorld?.ready && window.NightWorld.mode === 'explore' && (state.scene === 'roam' || state.scene === 'entry')) return;
+    if (window.NightWorld?.ready && window.NightWorld.mode !== 'sky' && (state.scene === 'roam' || state.scene === 'entry')) return;
     const context = overlayContext;
     const width = overlayWidth;
     const height = overlayHeight;
@@ -1092,6 +1092,10 @@ function drawCelestialBodies(basis, time) {
         context.globalCompositeOperation = 'screen';
         if (natural && distantAlpha > 0.001) {
             if (profile.id === 'sun') {
+                if (window.NightPanorama?.coversSky?.()) {
+                    context.restore();
+                    return;
+                }
                 drawAngularSun(
                     context,
                     profile,

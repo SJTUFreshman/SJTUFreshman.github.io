@@ -84,7 +84,7 @@ const lifeRuntimeScripts = lifeScripts.filter(resource =>
 const lifeStylesheets = localStylesheetResources(lifeHtml).filter(resource =>
     resource.relativePath.startsWith('assets/life/styles/')
 );
-assert.equal(lifeRuntimeScripts.length, 23, 'life.html must load the sky and environment runtime scripts');
+assert.equal(lifeRuntimeScripts.length, 24, 'life.html must load the sky, panorama and environment runtime scripts');
 assert.equal(lifeStylesheets.length, 8, 'life.html must load the sky and environment stylesheets');
 assert(
     lifeHtml.split(/\r?\n/).length < 1000,
@@ -1175,7 +1175,7 @@ const mockWindow = {
 
 const runtimeContext = {
     Astronomy,
-    CustomEvent: class {},
+    CustomEvent: class { constructor(type, options = {}) { this.type = type; this.detail = options.detail; } },
     Date,
     Element: MockElement,
     HTMLImageElement: MockElement,

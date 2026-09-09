@@ -4,7 +4,8 @@
     const T = window.THREE, K = window.NightWorldKit;
     const listeners = new Set(), keys = new Set();
     const player = { x: 0, y: 1.72, z: 0, distance: 0 };
-    const motion = { forward: 0, strafe: 0, vx: 0, vz: 0 };
+    const motion = { forward: 0, strafe: 0, thrust: 0, vx: 0, vz: 0 };
+    const sceneIds = ['spaceship', 'shelter', 'hogwarts', 'snowmountain'];
     let renderer, scene, view, world, moonLight, lastTime, elapsed = 0, target, audio, transition = 0;
     const nightDateCache = new Map();
     let menuReturn = null, wasRoam = true, savedOrientation, savedFov, message = '', messageUntil = 0;
@@ -12,23 +13,30 @@
     const lookMatrix = T ? new T.Matrix4() : null;
     const vector = T ? new T.Vector3() : null;
     const api = window.NightWorld = {
-        ready: false, error: '', currentId: 'transit', mode: 'explore', audioEnabled: false,
+        ready: false, error: '', currentId: 'spaceship', mode: 'observe', skyMode: 'night', explorationUnlocked: false, audioEnabled: false,
         player, world: null,
         onChange(fn) { listeners.add(fn); return () => listeners.delete(fn); },
         getSnapshot() {
             return { id: api.currentId, ready: api.ready, error: api.error, walking: Math.hypot(motion.vx, motion.vz) > .05,
-                position: { ...player }, distance: player.distance, mode: api.mode,
+                position: { ...player }, distance: player.distance, mode: api.mode, skyMode: api.skyMode, explorationUnlocked: api.explorationUnlocked,
                 interaction: target ? { label: local(target.label) } : null,
                 piloting: Boolean(world?.pilot?.active), speed: world?.pilot?.speed || 0,
                 graphics: renderer ? { geometries: renderer.info?.memory.geometries, textures: renderer.info?.memory.textures,
                     triangles: renderer.info?.render.triangles, calls: renderer.info?.render.calls } : null,
+                panorama: window.NightPanorama?.getSnapshot?.() || null,
                 audioEnabled: api.audioEnabled, message: performance.now() < messageUntil ? message : '' };
         },
         select(id) {
             const builder = window.NightWorldBuilders?.[id];
-            if (!renderer || !builder) return false;
+            if (!scene || !sceneIds.includes(id)) return false;
             let next;
-            try { next = builder(K); validateWorld(next); }
+            try {
+                if (api.mode === 'explore') {
+                    if (!builder) throw new Error('The exploration scene is unavailable.');
+                    ensureRenderer(); next = builder(K); next.fullScene = true;
+                } else next = observationWorld(id);
+                validateWorld(next);
+            }
             catch (error) {
                 if(next?.group)K.disposeGroup(next.group);
                 api.error = error.message; console.error('Could not create environment:', id, error); changed(); return false;
@@ -37,12 +45,17 @@
                 scene.remove(world.group); K.disposeGroup(world.group);
                 if (world.flight) { scene.remove(world.flight.exterior); K.disposeGroup(world.flight.exterior); }
             }
+            const sameScene = api.currentId === id;
             world = api.world = next; api.currentId = id; api.error = '';
+            api.skyMode = ['hogwarts','snowmountain'].includes(id) ? (sameScene && api.skyMode === 'dusk' ? 'dusk' : 'clear') : 'night';
+            window.SceneSky?.setMode?.(api.skyMode);
             world.player = player; scene.add(world.group);
             scene.fog = new T.FogExp2(0x111b29, id === 'spaceship' ? .00065 : ['room','train'].includes(id) ? .004 : .008);
+            applyEnvironment(next.environment);
             if (id === 'spaceship') {
                 world.group.traverse(o => { if (o.userData.ground) o.visible = false; });
-                world.flight = createFlightField(); scene.add(world.flight.exterior);
+                world.flight = next.fullScene ? createFlightField() : { exterior: new T.Group(), objects: [], position: new T.Vector3(), orientation: [0,0,0,1] };
+                scene.add(world.flight.exterior);
             }
             // Reserve a bounded set of nearby point lights; lamps remain emissive at distance.
             const lights = [];
@@ -55,40 +68,70 @@
                 key.shadow.bias=-.0003;key.shadow.normalBias=.018;key.shadow.radius=3;
             }
             world.lights = lights; reset(); transition = performance.now();
+            window.NightPanorama?.select?.(id, api.skyMode);
             try { localStorage.setItem('runde:night-world:v1', id); } catch (_) { /* Optional preference. */ }
             api.ready = true; document.body.classList.add('world-ready'); changed(); return true;
         },
         reset,
+        setSkyMode(mode) {
+            if (!['hogwarts','snowmountain'].includes(api.currentId) || !['clear','dusk'].includes(mode)) return false;
+            api.skyMode = mode; window.SceneSky?.setMode?.(mode);
+            applyEnvironment(world?.environment);
+            window.NightPanorama?.setSkyMode?.(mode); window.NightPanorama?.select?.(api.currentId, mode); changed(); return true;
+        },
         setMotion(forward, strafe) { motion.forward = Math.max(-1, Math.min(1, forward)); motion.strafe = Math.max(-1, Math.min(1, strafe)); },
-        clearInput() { keys.clear(); motion.forward = motion.strafe = motion.vx = motion.vz = 0; },
+        setThrottle(value) { motion.thrust = Math.max(-1, Math.min(1, value)); },
+        clearInput() { keys.clear(); motion.forward = motion.strafe = motion.thrust = motion.vx = motion.vz = 0; },
+        unlockExploration() {
+            if (!api.ready) return false;
+            api.explorationUnlocked = true;
+            if (!api.setViewMode('explore')) { changed(); return false; }
+            window.dispatchEvent(new CustomEvent('nightworld:exploration-unlocked'));
+            message = local({ en: 'Exploration unlocked. This mode uses your device to render the world.', 'zh-CN': '探索模式已解锁。此模式将由你的设备实时渲染场景。', 'zh-TW': '探索模式已解鎖。此模式將由你的裝置即時渲染場景。' });
+            messageUntil = performance.now() + 6500;
+            changed(); return true;
+        },
         setViewMode(mode) {
-            if (!['explore','sky'].includes(mode)) return;
+            if (!['observe','explore','sky'].includes(mode) || (mode === 'explore' && !api.explorationUnlocked)) return false;
+            const previousMode = api.mode;
+            const previousPosition = { ...player };
+            const flightState = world?.flight ? { orientation: world.flight.orientation.slice(), position: world.flight.position.clone(), speed: world.pilot.speed, throttle: world.pilot.throttle, active: world.pilot.active } : null;
+            const headOrientation = world ? localOrientation(camera.targetOrientation).slice() : null;
             api.mode = mode; api.clearInput(); clearCameraRoll();
-            if (world?.pilot?.active) leavePilot();
+            if (world && Boolean(world.fullScene) !== (mode === 'explore')) {
+                if (!api.select(api.currentId)) { api.mode = previousMode; changed(); return false; }
+                if (mode === 'sky' || previousMode === 'sky') Object.assign(player, previousPosition);
+                if (flightState && world.flight) {
+                    world.flight.orientation = flightState.orientation;
+                    world.flight.position.copy(flightState.position);
+                    Object.assign(world.pilot, { speed: flightState.speed, throttle: flightState.throttle, active: flightState.active });
+                    if (flightState.active) [player.x, player.y, player.z] = world.pilot.seat;
+                    if (headOrientation) camera.orientation = camera.targetOrientation = globalOrientation(headOrientation);
+                }
+            }
+            if (mode === 'observe') observePosition();
+            if (mode === 'sky' && world?.pilot?.active) leavePilot();
             if (mode === 'sky') {
                 camera.targetOrientation = constrainOrientationAboveHorizon(camera.targetOrientation, camera.lastStableYaw);
             }
             document.body.classList.toggle('world-explore-mode', mode === 'explore');
-            document.body.classList.toggle('world-sky-mode', mode === 'sky'); changed();
+            document.body.classList.toggle('world-observe-mode', mode === 'observe');
+            document.body.classList.toggle('world-sky-mode', mode === 'sky');
+            window.NightPanorama?.setMode?.(mode); changed(); return true;
         },
         look(dx, dy, multiplier = 1) {
-            if (!api.ready || api.mode !== 'explore' || state.scene !== 'roam' || state.modalOpen || state.gateOpen) return false;
+            if (!api.ready || api.mode === 'sky' || state.scene !== 'roam' || state.modalOpen || state.gateOpen) return false;
             const sensitivity = (COARSE_POINTER ? .0032 : .00175) * multiplier;
-            if (world?.pilot?.active) {
-                camera.targetOrientation = quatNormalize(quatMultiply(camera.targetOrientation,
-                    quatMultiply(quatAxisAngle(0,1,0,dx*sensitivity),quatAxisAngle(1,0,0,dy*sensitivity))));
-                return true;
-            }
             const pose = decomposeYawPitchRoll(localOrientation(camera.targetOrientation), camera.lastStableYaw);
             camera.targetOrientation = globalOrientation(orientationFromYawPitchRoll(pose.yaw + dx * sensitivity,
                 Math.max(-Math.PI * .485, Math.min(Math.PI * .485, pose.pitch - dy * sensitivity)), 0));
             camera.lastStableYaw = pose.yaw + dx * sensitivity;
             return true;
         },
-        freeLook() { return api.ready && api.mode === 'explore' && state.scene === 'roam'; },
-        inSpace() { return api.ready && api.currentId==='spaceship' && api.mode==='explore' && (state.scene==='roam'||state.scene==='entry'); },
+        freeLook() { return api.ready && api.mode !== 'sky' && state.scene === 'roam'; },
+        inSpace() { return api.ready && api.currentId==='spaceship' && api.mode!=='sky' && (state.scene==='roam'||state.scene==='entry'); },
         interact() {
-            if (!allowed()) return;
+            if (!allowed() || api.mode !== 'explore') return;
             if (world?.pilot?.active) { leavePilot(); return; }
             if (!target) return;
             const result = typeof target.action === 'function' ? target.action.call(world) : target.action;
@@ -107,11 +150,11 @@
             changed();
         },
         tick(time) {
-            if (!api.ready || !renderer) return;
+            if (!api.ready) return;
             const dt = Math.max(0, Math.min(.05, (time - (lastTime ?? time)) / 1000)); lastTime = time;
             const roaming = state.scene === 'roam' || state.scene === 'entry';
             if (wasRoam && !roaming) { savedOrientation = camera.orientation.slice(); savedFov = camera.fov; api.clearInput(); }
-            if (!wasRoam && roaming && savedOrientation && api.mode === 'explore') {
+            if (!wasRoam && roaming && savedOrientation && api.mode !== 'sky') {
                 camera.orientation = savedOrientation.slice(); camera.targetOrientation = savedOrientation.slice();
                 camera.fov = savedFov; camera.targetFov = savedFov; savedOrientation = null;
             }
@@ -122,12 +165,15 @@
             syncCamera();
             findInteraction();
             const visible = api.mode === 'explore' && roaming;
-            renderer.domElement.style.opacity = visible ? String(Math.min(1, (time - transition) / (REDUCED_MOTION ? 1 : 650))) : '0';
-            renderer.domElement.style.visibility = visible ? 'visible' : 'hidden';
-            if (visible) {
+            if (renderer) {
+                renderer.domElement.style.opacity = visible ? String(Math.min(1, (time - transition) / (REDUCED_MOTION ? 1 : 650))) : '0';
+                renderer.domElement.style.visibility = visible ? 'visible' : 'hidden';
+            }
+            if (visible && renderer) {
                 updateShadowLight();
                 updateLights(); renderer.render(scene, view);
             }
+            window.NightPanorama?.render?.({ orientation: localOrientation(camera.orientation), shipOrientation: world.flight?.orientation || [0,0,0,1], width: window.innerWidth, height: window.innerHeight, fov: camera.fov, visible: api.mode === 'observe' && roaming, time });
             if (audio && api.audioEnabled) updateAudio();
         },
         skyDate() {
@@ -156,7 +202,8 @@
             return new Date(timestamp);
         },
         skyPointVisible(x, y) {
-            if (!api.ready || api.mode !== 'explore' || state.scene !== 'roam') return true;
+            if (!api.ready || api.mode === 'sky' || state.scene !== 'roam') return true;
+            if (api.mode === 'observe') return window.NightPanorama?.canSeeSky?.(x / window.innerWidth * 2 - 1, 1 - y / window.innerHeight * 2) ?? true;
             ray.setFromCamera({ x: x / window.innerWidth * 2 - 1, y: 1 - y / window.innerHeight * 2 }, view);
             return !ray.intersectObjects(world.group.children, true).some(hit => {
                 for (let node=hit.object; node; node=node.parent) if (!node.visible) return false;
@@ -169,7 +216,14 @@
     function changed() { listeners.forEach(fn => fn(api.getSnapshot())); }
     function localOrientation(q) { return world?.flight ? quatMultiply(quatConjugate(world.flight.orientation),q) : q; }
     function globalOrientation(q) { return world?.flight ? quatMultiply(world.flight.orientation,q) : q; }
-    function allowed() { return api.ready && api.mode === 'explore' && state.scene === 'roam' && state.hasEntered && !state.modalOpen && !state.gateOpen && !state.altHeld && !document.hidden && !document.body.classList.contains('world-menu-open'); }
+    function allowed() { return api.ready && api.mode !== 'sky' && state.scene === 'roam' && state.hasEntered && !state.modalOpen && !state.gateOpen && !state.altHeld && !document.hidden && !document.body.classList.contains('world-menu-open'); }
+    function observationWorld(id) {
+        const metadata = window.NightPanorama?.getScene?.(id) || {};
+        const observation = metadata.observation || { position: [0,1.68,0], yaw: 0, pitch: .09 };
+        const result = { id, group: new T.Group(), spawn: observation.position.slice(), observation, colliders: [], interactions: [], fullScene: false };
+        if (id === 'spaceship') result.pilot = { seat: metadata.pilot?.seat || [0,1.68,-9.95], exit: metadata.pilot?.exit || [1.65,1.68,-8.75], active: true, throttle: 0, speed: 0, distance: 0 };
+        return result;
+    }
     function validateWorld(w) {
         if (!w?.group?.isGroup || !w.spawn?.every(Number.isFinite)) throw new Error('Invalid world or arrival position');
         w.group.updateMatrixWorld(true);
@@ -184,7 +238,19 @@
         camera.orientation = orientationFromYawPitch(world.yaw || 0, world.pitch ?? .09);
         camera.targetOrientation = camera.orientation.slice(); camera.lastStableYaw = world.yaw || 0;
         camera.fov = camera.targetFov = 62 * DEG; savedOrientation = null;
+        if (api.mode === 'observe') observePosition();
         changed();
+    }
+    function observePosition() {
+        if (!world) return;
+        const observation = world.observation || {};
+        const position = world.pilot?.seat || observation.position || world.spawn;
+        [player.x, player.y, player.z] = position;
+        player.distance = 0;
+        if (world.pilot) { world.pilot.active = true; world.pilot.throttle = 0; }
+        const yaw = observation.yaw ?? world.yaw ?? 0, pitch = observation.pitch ?? world.pitch ?? .09;
+        camera.targetOrientation = globalOrientation(orientationFromYawPitch(yaw, pitch));
+        camera.orientation = camera.targetOrientation.slice(); camera.lastStableYaw = yaw;
     }
     function leavePilot() {
         const pilot = world.pilot; pilot.active = false; pilot.throttle = 0;
@@ -236,8 +302,7 @@
     function updateFlight(dt) {
         const flight=world.flight;
         if(!flight)return;
-        if(world.pilot.active) flight.orientation=camera.orientation.slice();
-        else world.pilot.speed*=Math.exp(-dt*.8);
+        if(!world.pilot.active) world.pilot.speed*=Math.exp(-dt*.8);
         const q=flight.orientation;
         // Mirror the sky's +Z-forward convention into Three's -Z-forward frame.
         world.group.quaternion.set(-q[0],-q[1],q[2],q[3]);
@@ -259,15 +324,21 @@
         const pose = decomposeYawPitchRoll(localOrientation(camera.targetOrientation), camera.lastStableYaw);
         if (world.pilot?.active) {
             const p = world.pilot;
-            p.throttle = Math.max(0, Math.min(1, (p.throttle || 0) + f * dt * .35));
+            const thrust = (keys.has('ShiftLeft') || keys.has('ShiftRight') ? 1 : 0) - (keys.has('ControlLeft') || keys.has('ControlRight') ? 1 : 0) + motion.thrust;
+            p.throttle = Math.max(0, Math.min(1, (p.throttle || 0) + thrust * dt * .35));
             p.speed = (p.speed || 0) + (p.throttle * 180 - (p.speed || 0)) * (1 - Math.exp(-dt * 1.4));
             p.distance = (p.distance || 0) + p.speed * dt;
             const roll = (keys.has('KeyQ') ? 1 : 0) - (keys.has('KeyE') ? 1 : 0);
-            camera.targetOrientation = quatNormalize(quatMultiply(camera.targetOrientation,
-                quatMultiply(quatAxisAngle(0,1,0,s*dt*.7),quatAxisAngle(0,0,1,roll*dt*.65))));
+            const oldOrientation = world.flight.orientation;
+            world.flight.orientation = quatNormalize(quatMultiply(oldOrientation,
+                quatMultiply(quatAxisAngle(0,1,0,s*dt*.7), quatMultiply(quatAxisAngle(1,0,0,f*dt*.65), quatAxisAngle(0,0,1,roll*dt*.65)))));
+            const attitudeChange = quatMultiply(world.flight.orientation, quatConjugate(oldOrientation));
+            camera.targetOrientation = quatNormalize(quatMultiply(attitudeChange, camera.targetOrientation));
+            camera.orientation = quatNormalize(quatMultiply(attitudeChange, camera.orientation));
             if (keys.has('Space')) p.throttle = Math.max(0, p.throttle - dt * 1.5);
             return;
         }
+        if (api.mode !== 'explore') { motion.vx = motion.vz = 0; return; }
         const length = Math.max(1, Math.hypot(f, s)), speed = keys.has('ShiftLeft') || keys.has('ShiftRight') ? 7 : 3.1;
         const tx = (Math.sin(pose.yaw)*f + Math.cos(pose.yaw)*s) / length * speed;
         const tz = (-Math.cos(pose.yaw)*f + Math.sin(pose.yaw)*s) / length * speed;
@@ -290,7 +361,7 @@
     }
     function findInteraction() {
         target = null;
-        if (!allowed()) return;
+        if (!allowed() || api.mode !== 'explore') return;
         if (world.pilot?.active) { target = { label: { en: 'F · leave the pilot seat', 'zh-CN': 'F · 离开驾驶位', 'zh-TW': 'F · 離開駕駛位' } }; return; }
         let best = Infinity;
         for (const item of world.interactions) {
@@ -314,8 +385,20 @@
     function updateShadowLight() {
         if(!moonLight)return;
         const center=world.flight?world.flight.position:view.position;
-        moonLight.position.set(center.x-18,center.y+32,center.z+15);
+        const sky = window.SceneSky?.snapshot?.();
+        const direction = api.skyMode !== 'night' && sky?.sunDirection ? [sky.sunDirection[0],sky.sunDirection[1],-sky.sunDirection[2]] : world.environment?.sunDirection || [-.45,.8,.375];
+        moonLight.position.set(center.x+direction[0]*40,center.y+direction[1]*40,center.z+direction[2]*40);
         moonLight.target.position.copy(center);moonLight.target.updateMatrixWorld(true);
+    }
+    function applyEnvironment(environment) {
+        if (!environment || !moonLight) return;
+        const dusk = api.skyMode === 'dusk';
+        moonLight.color.setHex(dusk ? 0xffb77a : environment.sunColor ?? 0xb7d5ff);
+        moonLight.intensity = dusk ? 1.6 : environment.sunIntensity ?? 1.05;
+        scene.fog = new T.FogExp2(dusk ? 0x9f8793 : environment.fogColor ?? 0x111b29, environment.phase === 'day' ? .003 : .00065);
+        for (const light of scene.children) {
+            if (light.isHemisphereLight) { light.intensity = dusk ? .7 : environment.ambientIntensity ?? .8; light.groundColor.setHex(environment.groundColor ?? 0x554b42); }
+        }
     }
     function resize() {
         if (!renderer) return;
@@ -360,7 +443,7 @@
         const now=audio.ctx.currentTime, id=api.currentId, pilot=world?.pilot, throttle=pilot?.throttle||0;
         const trainSpeed=world?.train?.speed||0, trainAmount=Math.min(1,trainSpeed/8);
         const indoor=['spaceship','train','room'].includes(id);
-        const active=api.audioEnabled&&api.mode==='explore'&&!document.hidden&&state.scene==='roam'&&!state.modalOpen&&!state.gateOpen;
+        const active=api.audioEnabled&&api.mode!=='sky'&&!document.hidden&&state.scene==='roam'&&!state.modalOpen&&!state.gateOpen;
         const target=(value)=>active?value:0;
         if(audio.world!==world){audio.world=world;audio.nextClick=now+.18;audio.nextCrackle=now+.3;audio.fire=null;world?.group?.traverse(node=>{if(node.userData.flames)audio.fire=node;});}
         audio.filter.frequency.setTargetAtTime(id==='lakeshore'?900:indoor?260:520,now,.55);
@@ -390,13 +473,15 @@
         } else if(fireLevel<=.01) audio.nextCrackle=now+.5;
     }
     document.addEventListener('keydown', event => {
+        if (event.code === 'KeyE' && event.shiftKey && event.altKey) return;
         const worldControl=event.target?.closest?.('#environmentUI');
-        if (!api.ready || api.mode !== 'explore' || !allowed() || (isInteractiveKeyTarget(event.target) && !worldControl)) return;
+        if (!api.ready || !allowed() || (isInteractiveKeyTarget(event.target) && !worldControl)) return;
+        if (api.mode === 'observe' && !world.pilot?.active) return;
         if (worldControl && event.code==='Space') return;
-        if (['KeyW','KeyA','KeyS','KeyD','KeyQ','ShiftLeft','ShiftRight','Space'].includes(event.code) || (world.pilot?.active && event.code==='KeyE')) {
+        if (['KeyW','KeyA','KeyS','KeyD','KeyQ','ShiftLeft','ShiftRight','ControlLeft','ControlRight','Space'].includes(event.code) || (world.pilot?.active && event.code==='KeyE')) {
             event.preventDefault(); event.stopImmediatePropagation(); keys.add(event.code); return;
         }
-        if (event.code==='KeyF' && world.pilot?.active) { event.preventDefault(); event.stopImmediatePropagation(); leavePilot(); }
+        if (event.code==='KeyF' && world.pilot?.active && api.mode === 'explore') { event.preventDefault(); event.stopImmediatePropagation(); leavePilot(); }
         else if (event.code==='KeyE' && !event.repeat) { event.preventDefault(); event.stopImmediatePropagation(); api.interact(); }
     }, true);
     window.addEventListener('keyup', event => keys.delete(event.code), true);
@@ -422,14 +507,28 @@
         }
     });
     window.addEventListener('resize',resize);
+    function ensureRenderer() {
+        if (renderer) return;
+        const canvas = document.getElementById('environmentCanvas');
+        let candidate;
+        try {
+            candidate = new T.WebGLRenderer({ canvas, alpha: true, antialias: !COARSE_POINTER, powerPreference: 'high-performance' });
+            candidate.setClearColor(0x000000, 0); candidate.outputColorSpace = T.SRGBColorSpace;
+            candidate.toneMapping = T.ACESFilmicToneMapping; candidate.toneMappingExposure = 1.4;
+            candidate.shadowMap.enabled = !COARSE_POINTER; candidate.shadowMap.type = T.PCFSoftShadowMap;
+            renderer = candidate; resize();
+        } catch (error) { candidate?.dispose?.(); renderer = null; throw error; }
+        canvas.addEventListener('webglcontextlost', event => {
+            event.preventDefault(); api.clearInput(); api.setViewMode('observe');
+            renderer?.dispose?.(); renderer = null;
+            api.error = 'Exploration graphics were interrupted. Observation remains available.'; changed();
+        }, { once: true });
+    }
     function initialize() {
         if(!T||!K) { api.error='The environment renderer is unavailable.'; changed(); return; }
         try {
             const canvas=document.getElementById('environmentCanvas');
-            renderer=new T.WebGLRenderer({canvas,alpha:true,antialias:!COARSE_POINTER,powerPreference:'high-performance'});
-            renderer.setClearColor(0x000000,0); renderer.outputColorSpace=T.SRGBColorSpace;
-            renderer.toneMapping=T.ACESFilmicToneMapping; renderer.toneMappingExposure=1.4;
-            renderer.shadowMap.enabled=!COARSE_POINTER;renderer.shadowMap.type=T.PCFSoftShadowMap;
+            canvas.style.visibility = 'hidden';
             scene=new T.Scene(); view=new T.PerspectiveCamera(62,1,.08,1600);
             scene.add(new T.HemisphereLight(0xa1bfed,0x554b42,.8));
             scene.add(new T.AmbientLight(0xb3b2c4,.24));
@@ -438,10 +537,9 @@
             moonLight.shadow.camera.top=38;moonLight.shadow.camera.bottom=-38;moonLight.shadow.camera.far=120;
             moonLight.shadow.bias=-.0002;moonLight.shadow.normalBias=.035;moonLight.shadow.radius=3;
             scene.add(moonLight,moonLight.target);
-            resize(); let saved='transit'; try{saved=localStorage.getItem('runde:night-world:v1')||saved;}catch(_){}
-            api.select(window.NightWorldBuilders?.[saved]?saved:'transit'); api.setViewMode('explore');
+            resize(); let saved='spaceship'; try{saved=localStorage.getItem('runde:night-world:v1')||saved;}catch(_){}
+            api.select(sceneIds.includes(saved)&&window.NightWorldBuilders?.[saved]?saved:'spaceship'); api.setViewMode('observe');
             refreshAstronomicalSky(api.skyDate()); updateEntryLocationCopy();
-            canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();api.error='Graphics context lost. Reload to restore the environment.';api.ready=false;changed();});
             window.dispatchEvent(new CustomEvent('nightworld:ready'));
         } catch(error) { api.error=error.message; console.error('Environment renderer unavailable:',error); changed(); }
     }
