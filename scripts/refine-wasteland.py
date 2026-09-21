@@ -243,13 +243,15 @@ def _ruins(scene, builder, helpers):
     styles = ('rendered tenement', 'reinforced office frame', 'masonry apartment', 'industrial warehouse')
     palette = ((1.18, 1.07, .80), (.80, .94, 1.02), (1.10, .68, .42), (.86, .92, .69))
     definitions = [(json.loads(source['offline_parameters']), helpers['bounds'](source)[0]) for source in targets]
-    background = ((-38, 124, 24, 22, 6), (34, 142, 28, 21, 8), (-20, 170, 26, 24, 5),
-                  (18, 207, 32, 24, 9), (-45, 223, 25, 27, 7), (48, 238, 32, 22, 6),
-                  (-30, -110, 22, 21, 5), (29, -137, 28, 23, 8), (-29, -164, 31, 25, 7),
-                  (12, -200, 30, 24, 6), (-49, -228, 29, 25, 9), (49, -243, 33, 22, 7))
-    for across, north, width, length, floors in background:
+    background = ((-38, 124, 24, 22, 6, 0), (34, 142, 28, 21, 8, math.pi / 2),
+                  (-20, 170, 26, 24, 5, 0), (18, 207, 32, 24, 9, math.pi / 2),
+                  (-45, 223, 25, 27, 7, 0), (48, 238, 32, 22, 6, math.pi / 2),
+                  (-30, -110, 22, 21, 5, math.pi / 2), (29, -137, 28, 23, 8, 0),
+                  (-29, -164, 31, 25, 7, math.pi / 2), (12, -200, 30, 24, 6, 0),
+                  (-49, -228, 29, 25, 9, math.pi / 2), (49, -243, 33, 22, 7, 0))
+    for across, north, width, length, floors, yaw in background:
         definitions.append(({'width': width, 'length': length, 'height': floors * 3.25,
-                             'floors': floors, 'yaw': 0}, Vector((across, north, 0))))
+                             'floors': floors, 'yaw': yaw}, Vector((across, north, 0))))
     batches, reports = [], []
     for building_index, (parameters, center) in enumerate(definitions):
         if building_index in industrial['REPLACED_BUILDINGS']:
@@ -267,7 +269,7 @@ def _ruins(scene, builder, helpers):
         yaw = round(float(parameters.get('yaw', 0)) / (math.pi / 2)) * (math.pi / 2)
         transform = Matrix.Translation((center.x, center.y, -.025)) @ Matrix.Rotation(yaw, 4, 'Z')
         randomizer = random.Random(8623 + building_index * 173)
-        style = building_index % len(styles)
+        style = random.Random(32817 + building_index * 421).randrange(len(styles))
         material_list = [
             _ruin_surface(builder, f'building {building_index:02d} stained aggregate concrete', 'concrete', (.84, .88, .83), building_index * 7.17),
             _ruin_surface(builder, f'building {building_index:02d} weathered facade', 'masonry' if style in (2, 3) else 'plaster', palette[style], building_index * 13.8),
@@ -279,16 +281,18 @@ def _ruins(scene, builder, helpers):
         batch = helpers['batch'](builder.collection, f'Wasteland/ruin {building_index:02d} {styles[style]} fractured shell', material_list)
         detail = helpers['batch'](builder.collection, f'Wasteland/ruin {building_index:02d} exposed reinforcement and facade detail', material_list)
         floor_height = height / floors
-        damage_mode = ('retained shell', 'corner collapse', 'diagonal shear', 'partial upper bay')[building_index % 4]
-        damage_start = floor_height * (floors - (2 + building_index % 3))
-        damage_center = width * randomizer.uniform(-.23, .23)
+        damage_roll = randomizer.random()
+        damage_mode = ('retained shell' if damage_roll < .38 else
+                       'partial upper bay' if damage_roll < .62 else
+                       'corner collapse' if damage_roll < .82 else 'diagonal shear')
+        damage_start = floor_height * (floors - randomizer.randint(1, min(3, floors - 1)))
+        damage_center = width * randomizer.uniform(-.34, .34)
         damage_radius = width * randomizer.uniform(.13, .20)
         damage_depth = min(3.8, length * randomizer.uniform(.13, .22))
-        crown_start = max(2, floors - 3)
-        crown_loss = width * (.27 if building_index % 4 == 1 else .16 if building_index % 4 == 2 else 0)
-        crown_side = -1 if building_index % 3 == 0 else 1
+        crown_side = randomizer.choice((-1, 1))
         local_observer = transform.inverted() @ Vector((0, -2.8, 1.72))
-        damaged_side = 1 if local_observer.y > 0 else -1
+        observer_side = 1 if local_observer.y > 0 else -1
+        damaged_side = randomizer.choice((-1, 1))
         fracture_count = 0
         collapsed_count = 0
         rebar_count = 0
@@ -301,10 +305,10 @@ def _ruins(scene, builder, helpers):
                 return 0
             progress = min(1, (elevation - damage_start) / max(floor_height, height - damage_start))
             centerline = damage_center
-            radius = damage_radius * (.45 + .70 * progress)
+            radius = damage_radius * (.76 + .24 * progress)
             if damage_mode == 'corner collapse':
                 centerline = crown_side * width * .49
-                radius = width * (.10 + .20 * progress)
+                radius = width * (.14 + .09 * progress)
             elif damage_mode == 'diagonal shear':
                 centerline += width * .31 * (progress - .5)
             elif damage_mode == 'partial upper bay':
@@ -314,13 +318,7 @@ def _ruins(scene, builder, helpers):
             segment = math.floor((horizontal - damage_center + damage_radius) / .39)
             floor_offset = max(0, round((elevation - damage_start) / floor_height) - 1)
             fracture = (.0, .21, -.08, .12, -.03, .26, .05)[(segment + building_index) % 7]
-            falloff = 1 - abs(horizontal - centerline) / radius
-            return max(.45, damage_depth * (.35 + .65 * falloff) + fracture + (.0, .14, -.09, .08)[floor_offset % 4])
-
-        def crown_limits(level):
-            setback = crown_loss * max(0, (level - crown_start) / (floors - crown_start))
-            return (-width / 2 + (setback if crown_side < 0 else 0),
-                    width / 2 - (setback if crown_side > 0 else 0))
+            return max(.45, damage_depth * (.79 + .21 * progress) + fracture + (.0, .14, -.09, .08)[floor_offset % 4])
 
         bay_count = max(3, round(width / (2.75, 4.65, 3.1, 4.9)[style]))
         bay_weights = [randomizer.uniform(.84, 1.16) for _ in range(bay_count)]
@@ -329,7 +327,7 @@ def _ruins(scene, builder, helpers):
             boundaries.append(boundaries[-1] + width * weight / sum(bay_weights))
         for floor in range(floors + 1):
             elevation = floor * floor_height
-            slab_first, slab_last = crown_limits(floor)
+            slab_first, slab_last = -width / 2, width / 2
             perimeter = []
             for side in (-1, 1):
                 sections = range(33) if side == -1 else reversed(range(33))
@@ -346,7 +344,7 @@ def _ruins(scene, builder, helpers):
                     batch.box((horizontal, far_side, elevation + .4), (.45, .45, .8), place, 2)
                 continue
             ceiling = elevation + floor_height
-            upper_first, upper_last = crown_limits(floor + 1)
+            upper_first, upper_last = slab_first, slab_last
             for side in (-1, 1):
                 for bay, (first, last) in enumerate(zip(boundaries[:-1], boundaries[1:])):
                     first, last = max(first, upper_first), min(last, upper_last)
@@ -524,7 +522,7 @@ def _ruins(scene, builder, helpers):
                                 forward + math.sin(section * math.tau / 5) * randomizer.uniform(.09, .31)) for section in range(5)]
                     batch.prism([place(across, along, elevation + .23 + rubble_height * randomizer.uniform(.6, 1)) for across, along in corners],
                                 [place(across, along, elevation + .23) for across, along in corners], 2)
-        _urban_facade_remnants(batch, detail, place, width, length, floor_height, building_index, style, damaged_side)
+        _urban_facade_remnants(batch, detail, place, width, length, floor_height, building_index, style, observer_side)
         for debris in range(90 if damage_mode != 'retained shell' else 16):
             deposit_center = crown_side * width * .35 if damage_mode == 'corner collapse' else damage_center
             horizontal = max(-width * .48, min(width * .48, randomizer.gauss(deposit_center, width * .14)))
@@ -550,7 +548,8 @@ def _ruins(scene, builder, helpers):
                         'damage_mode': damage_mode, 'background_block': building_index >= len(targets),
                         'maximum_notch_width_fraction': round(damage_radius * 2 / width, 3),
                         'maximum_notch_depth_m': round(damage_depth + .40, 3),
-                        'single_roof_corner_loss_m': round(crown_loss, 3)})
+                        'damaged_face_toward_observer': damaged_side == observer_side,
+                        'retained_rectangular_sidewalls': True})
     for instance in list(scene.objects):
         if instance.get('offline_role') in ('wasteland-building', 'wasteland-city-proxy'):
             instance.hide_render = True

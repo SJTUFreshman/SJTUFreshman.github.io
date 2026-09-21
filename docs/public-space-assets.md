@@ -44,6 +44,8 @@ The packed reload reports **106/106 loaded and packed image datablocks**. The tw
 
 These images establish working source geometry and textures, **not photoreal approval**. Remaining issues include constant roughness, obvious polygonal close-up edges, flat small panel details, and no calibrated physical dimensions. The recommendation is to reuse inspected rack/module geometry in the offline Blender build after scale calibration and authored material refinement. Keep the Life sky independent and do not ship the source FBX or these diagnostic images to the browser. The Life consecutive clean-review count remains **0**, and no panorama or manifest is installed.
 
+The isolated inspector now has an opt-in `authored_surface_response` diagnostic for the missing roughness maps. It remaps each eligible material's existing NASA Diffuse UV luminance into a restrained roughness range and records the interpretation in `nasa_authored_surface_response`; glass, light materials, and materials without a source Diffuse map remain unchanged. This is a review aid for A800 comparisons, not recovered NASA metadata or photoreal approval.
+
 ## Cupola opening diagnostic, 2026-09-17
 
 Job `164545` completed with exit code `0:0` in 61 seconds on NVIDIA A800-SXM4-80GB. The three 1600×1100, 64-sample images in `.render-work/nasa-inspect-20260916-r3/` were opened and reviewed. All use the same camera as r2 and the recorded material repairs; the added studio lamp is removed and the neutral environment is made brighter to diagnose transmission. This neutral environment is a study backdrop, not Life's sky.

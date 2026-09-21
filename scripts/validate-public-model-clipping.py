@@ -4,6 +4,7 @@ import math
 import os
 from pathlib import Path
 import runpy
+import tempfile
 import unittest
 
 import bpy
@@ -11,6 +12,7 @@ from mathutils import Euler, Matrix, Vector
 
 
 CLIP = runpy.run_path(str(Path(__file__).with_name('render-public-model-study.py')))['clip_meshes_above']
+CASTLE = runpy.run_path(str(Path(__file__).with_name('filter-hohenzollern-skirt.py')))
 TOLERANCE = 5e-5
 VERTICES = [(-1, -1, -1), (1, -1, -1), (1, 1, -1), (-1, 1, -1),
             (-1, -1, 1), (1, -1, 1), (1, 1, 1), (-1, 1, 1)]
@@ -171,6 +173,131 @@ class MountainClippingTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'Invalid clip_below_z'):
                     CLIP([instance], threshold)
                 self.assertEqual(len(instance.data.polygons), 6)
+
+    def test_castle_cut_boundary_matches_transformed_world_intersections(self):
+        cases = [
+            (Matrix.Identity(4), Matrix.Identity(4)),
+            (transform((8, -3, 4), (.37, -.61, .52), (1.6, .7, 2.3)),
+             transform((-.4, .9, -1.1), (.21, .46, -.31), (.8, 1.4, .55))),
+            (transform((-5, 7, -2), (.48, .73, -.29), (-1.2, 2, .6)),
+             transform((1.3, -.6, 2.1), (-.34, .56, .41), (.7, 1.5, 1.1))),
+        ]
+        for parent_matrix, local_matrix in cases:
+            with self.subTest(parent_matrix=tuple(parent_matrix)):
+                instance = self.make_cube(parent_matrix, local_matrix)
+                world = [instance.matrix_world @ vertex.co for vertex in instance.data.vertices]
+                threshold = min(point.z for point in world) + .43 * (max(point.z for point in world)
+                                                                     - min(point.z for point in world))
+                expected = []
+                for polygon in instance.data.polygons:
+                    expected.extend(point for point in clipped_polygon([world[index] for index in polygon.vertices],
+                                                                        threshold)
+                                    if abs(point.z - threshold) < TOLERANCE)
+                mesh, loops, report = CASTLE['_clip_boundary'](instance, threshold)
+                try:
+                    self.assertEqual(len(loops), 1)
+                    self.assertEqual(report['retained_source_open_edges'], 0)
+                    self.assertTrue(report['all_cut_boundary_edges_consumed'])
+                    self.assertEqual(sum(len(loop) for loop in loops), report['cut_boundary_edges'])
+                    self.assertGreaterEqual(min((instance.matrix_world @ vertex.co).z for vertex in mesh.verts),
+                                            threshold - TOLERANCE)
+                    for point in loops[0]:
+                        self.assertAlmostEqual(point[2], threshold, delta=TOLERANCE)
+                        self.assertLessEqual(min((Vector(point) - candidate).length for candidate in expected),
+                                             TOLERANCE)
+                    for point in expected:
+                        self.assertLessEqual(min((point - Vector(candidate)).length for candidate in loops[0]),
+                                             TOLERANCE)
+                    self.assertEqual(len(instance.data.polygons), 6)
+                finally:
+                    mesh.free()
+
+    def test_castle_closed_component_cannot_hide_open_or_branch_component(self):
+        points = {0: (0, 0, 0), 1: (2, 0, 0), 2: (2, 2, 0), 3: (0, 2, 0),
+                  4: (5, 0, 0), 5: (6, 0, 0), 6: (6, 1, 0), 7: (7, 0, 0)}
+        closed = [(0, 1), (1, 2), (2, 3), (3, 0)]
+        for remainder in ([(4, 5)], [(4, 5), (5, 6), (6, 4), (5, 7)]):
+            with self.subTest(remainder=remainder):
+                with self.assertRaisesRegex(ValueError, 'open or branched'):
+                    CASTLE['_boundary_loops'](points, closed + remainder)
+        with self.assertRaisesRegex(ValueError, 'Duplicate'):
+            CASTLE['_boundary_loops'](points, closed + [(1, 0)])
+
+    def test_castle_multiple_loops_account_for_every_edge(self):
+        points = {0: (0, 0, 0), 1: (2, 0, 0), 2: (2, 2, 0), 3: (0, 2, 0),
+                  4: (5, 0, 0), 5: (6, 0, 0), 6: (6, 1, 0)}
+        edges = [(1, 0), (4, 5), (2, 1), (5, 6), (3, 2), (6, 4), (0, 3)]
+        loops = CASTLE['_boundary_loops'](points, edges)
+        self.assertEqual(sorted(map(len, loops)), [3, 4])
+        self.assertEqual(sum(map(len, loops)), len(edges))
+        self.assertEqual({point for loop in loops for point in loop}, set(points.values()))
+
+    def test_castle_actual_open_cut_is_rejected_without_mutating_source(self):
+        instance = self.make_cube()
+        instance.data.clear_geometry()
+        instance.data.from_pydata(VERTICES, [], FACES[:-1])
+        with self.assertRaisesRegex(ValueError, 'open or branched'):
+            CASTLE['_clip_boundary'](instance, 0)
+        self.assertEqual(len(instance.data.polygons), 5)
+        self.assertEqual(min(vertex.co.z for vertex in instance.data.vertices), -1)
+
+    def test_castle_source_holes_are_reported_separately_from_cut_loops(self):
+        instance = self.make_cube()
+        instance.data.clear_geometry()
+        instance.data.from_pydata(VERTICES, [], [face for index, face in enumerate(FACES) if index != 1])
+        mesh, loops, report = CASTLE['_clip_boundary'](instance, 0)
+        try:
+            self.assertEqual(len(loops), 1)
+            self.assertEqual(report['cut_boundary_edges'], 4)
+            self.assertEqual(report['retained_source_open_edges'], 4)
+        finally:
+            mesh.free()
+
+    def test_castle_empty_cut_and_obsolete_options_leave_source_unchanged(self):
+        instance = self.make_cube()
+        with self.assertRaisesRegex(ValueError, 'all source faces'):
+            CASTLE['_clip_boundary'](instance, 2)
+        with self.assertRaisesRegex(ValueError, 'no real'):
+            CASTLE['apply']({instance}, {'clip_source_below_z': -2, 'lower_z': -3})
+        with self.assertRaisesRegex(ValueError, 'Obsolete'):
+            CASTLE['apply']({instance}, {'clip_source_below_z': 0, 'segments': 96})
+        self.assertEqual(len(instance.data.polygons), 6)
+        self.assertEqual(min(vertex.co.z for vertex in instance.data.vertices), -1)
+
+    def test_castle_diagnostic_uvs_share_normal_map_and_physical_scale(self):
+        instance = self.make_cube()
+        objects = {instance}
+        with tempfile.TemporaryDirectory(prefix='life-castle-boundary-') as directory:
+            image_paths = {}
+            for name, color in [('diffuse', (.4, .3, .2, 1)), ('normal', (.5, .5, 1, 1))]:
+                image = bpy.data.images.new(f'Boundary test {name}', width=2, height=2)
+                image.pixels = color * 4
+                image.file_format = 'PNG'
+                image.filepath_raw = str(Path(directory) / f'{name}.png')
+                image.save()
+                image_paths[name] = image.filepath_raw
+            report = CASTLE['apply'](objects, {'clip_source_below_z': 0, 'lower_z': -2,
+                                              'texture_tile_size': 2, **image_paths})
+            walls = next(item for item in objects if item != instance)
+            self.assertEqual(report['real_boundary_edges'], 4)
+            self.assertEqual(report['diagnostic_bottom_open_edges'], 4)
+            self.assertEqual(report['retained_source_open_edges'], 0)
+            self.assertEqual(report['top_caps_added'], 0)
+            self.assertFalse(report['source_surface_closed'])
+            self.assertFalse(report['photographic_acceptance'])
+            self.assertEqual(len(walls.data.polygons), 4)
+            uv_name = CASTLE['UV_NAME']
+            uv_layer = walls.data.uv_layers[uv_name]
+            nodes = walls.data.materials[0].node_tree.nodes
+            self.assertEqual([node.uv_map for node in nodes if node.type == 'NORMAL_MAP'], [uv_name])
+            self.assertEqual([node.uv_map for node in nodes if node.type == 'UVMAP'], [uv_name])
+            for polygon in walls.data.polygons:
+                self.assertAlmostEqual(polygon.normal.z, 0, delta=TOLERANCE)
+                coordinates = [uv_layer.data[index].uv for index in polygon.loop_indices]
+                self.assertAlmostEqual(max(point.x for point in coordinates) - min(point.x for point in coordinates),
+                                       1, delta=TOLERANCE)
+                self.assertAlmostEqual(max(point.y for point in coordinates) - min(point.y for point in coordinates),
+                                       1, delta=TOLERANCE)
 
 
 if __name__ == '__main__':

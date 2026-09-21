@@ -140,6 +140,53 @@ def repair_imported_materials():
     return changes
 
 
+def authored_surface_response():
+    changes = []
+    for material in bpy.data.materials:
+        if not material.use_nodes or material.get('nasa_authored_surface_response'):
+            continue
+        name = material.name.lower()
+        if any(token in name for token in ('glass', 'light', 'lights')):
+            continue
+        shader = next((node for node in material.node_tree.nodes
+                       if node.type == 'BSDF_PRINCIPLED'), None)
+        if shader is None or shader.inputs['Roughness'].is_linked:
+            continue
+        if any(token in name for token in ('rack', 'metal', 'hub', 'patch')):
+            center, spread = .32, .12
+        elif any(token in name for token in ('bulkhead', 'diffuse', 'misc')):
+            center, spread = .43, .08
+        else:
+            center, spread = .38, .1
+        nodes, links = material.node_tree.nodes, material.node_tree.links
+        diffuse_link = next((link for link in links
+                             if link.to_node == shader and link.to_socket == shader.inputs['Base Color']
+                             and link.from_node.type == 'TEX_IMAGE' and link.from_node.image), None)
+        if diffuse_link is None:
+            continue
+        luminance = nodes.new('ShaderNodeRGBToBW')
+        luminance.name = 'NASA authored diffuse luminance'
+        ramp = nodes.new('ShaderNodeMapRange')
+        ramp.name = 'NASA authored surface roughness range'
+        ramp.clamp = True
+        ramp.inputs['From Min'].default_value = .08
+        ramp.inputs['From Max'].default_value = .92
+        ramp.inputs['To Min'].default_value = max(.04, center - spread)
+        ramp.inputs['To Max'].default_value = min(.92, center + spread)
+        links.new(diffuse_link.from_socket, luminance.inputs['Color'])
+        links.new(luminance.outputs['Val'], ramp.inputs['Value'])
+        links.new(ramp.outputs['Result'], shader.inputs['Roughness'])
+        material['nasa_authored_surface_response'] = json.dumps({
+            'source': 'authored remap of source Diffuse luminance; source FBX has no roughness map',
+            'coordinate_space': 'source Diffuse UV',
+            'roughness_range': [max(.04, center - spread), min(.92, center + spread)]
+        })
+        changes.append({'material': material.name, 'socket': 'Roughness',
+                        'range': [max(.04, center - spread), min(.92, center + spread)],
+                        'reason': 'Explicit diagnostic remap of source Diffuse luminance; no NASA roughness map exists'})
+    return changes
+
+
 def render_views(scene, specification, directory):
     settings = json.loads(specification.read_text(encoding='utf-8'))
     world = bpy.data.worlds.new('NASA inspection neutral studio')
@@ -163,11 +210,20 @@ def render_views(scene, specification, directory):
     camera_data.clip_start = .015
     camera_data.clip_end = 2000
     reports, changes = [], []
+    repaired, authored = False, False
     for view in settings['views']:
-        if view.get('repair_pbr') and not changes:
-            changes = repair_imported_materials()
-        elif changes and not view.get('repair_pbr'):
+        if view.get('authored_surface_response') and not view.get('repair_pbr'):
+            raise ValueError('Authored surface response requires repaired materials')
+        if repaired and not view.get('repair_pbr'):
             raise ValueError('Original material views must precede diagnostic repaired views')
+        if authored and not view.get('authored_surface_response'):
+            raise ValueError('Repair-only views must precede authored surface response views')
+        if view.get('repair_pbr') and not repaired:
+            changes.extend(repair_imported_materials())
+            repaired = True
+        if view.get('authored_surface_response') and not authored:
+            changes.extend(authored_surface_response())
+            authored = True
         world.node_tree.nodes['Background'].inputs['Color'].default_value = view.get('world_color', [.32, .38, .46, 1])
         world.node_tree.nodes['Background'].inputs['Strength'].default_value = view.get('world_strength', .22)
         scene.render.film_transparent = view.get('transparent_background', False)
@@ -209,6 +265,7 @@ def render_views(scene, specification, directory):
         bpy.ops.render.render(write_still=True)
         reports.append({**view, 'image': target.name, 'sha256': digest(target),
                         'resolution': [1600, 1100], 'samples': scene.cycles.samples,
+                        'material_state': {'repair_pbr': repaired, 'authored_surface_response': authored},
                         'camera_axis_clearance': clearance})
         for instance in lights:
             bpy.data.objects.remove(instance, do_unlink=True)

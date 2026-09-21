@@ -224,12 +224,13 @@ def _factory(library, builder, helpers, grade, building_index, center, bays, dep
     for north in (-length / 6, length / 6):
         batch.box((0, north, height / 2), (width - .34, .16, height - .24), place, 0)
     roof_height = height + .17
-    tooth_count = 3 if depth_bays >= 7 else 2
+    tooth_count = 2 + ((building_index + (1 if bays >= 7 else 0)) % 2)
     tooth_depth = length / tooth_count
     for tooth in range(tooth_count):
         first = -length / 2 + tooth * tooth_depth
         last = first + tooth_depth
-        ridge = last - .8
+        ridge_offset = .62 + .18 * ((building_index + tooth) % 3)
+        ridge = last - ridge_offset
         for section in range(bays * 24):
             left = -width / 2 - .13 + section / (bays * 24) * (width + .26)
             right = -width / 2 - .13 + (section + 1) / (bays * 24) * (width + .26)
