@@ -29,8 +29,8 @@ def parse_args():
     parser.add_argument('--mode', choices=('clear', 'dusk'), required=True)
     parser.add_argument('--scene', default='hogwarts')
     parser.add_argument('--sun-direction', nargs=3, type=float)
-    parser.add_argument('--cloud-scale', type=float, default=5.0)
-    parser.add_argument('--cloud-density', type=float, default=0.012)
+    parser.add_argument('--cloud-scale', type=float, default=3.0)
+    parser.add_argument('--cloud-density', type=float, default=0.003)
     return parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
 
 
@@ -82,6 +82,9 @@ def make_sky_world(scene, mode, sun_direction):
     sky = nodes.new('ShaderNodeTexSky')
     texcoord = nodes.new('ShaderNodeTexCoord')
     separate = nodes.new('ShaderNodeSeparateXYZ')
+    outgoing = nodes.new('ShaderNodeMath')
+    outgoing.operation = 'MULTIPLY'
+    outgoing.inputs[1].default_value = -1.0
     horizon = nodes.new('ShaderNodeMapRange')
     horizon.clamp = True
     horizon.inputs['From Min'].default_value = -1.0
@@ -89,11 +92,12 @@ def make_sky_world(scene, mode, sun_direction):
     horizon.inputs['To Min'].default_value = 0.0
     horizon.inputs['To Max'].default_value = 1.0
     lower = nodes.new('ShaderNodeRGB')
-    lower.outputs['Color'].default_value = (0.035, 0.052, 0.075, 1.0) if mode == 'clear' else (0.085, 0.045, 0.032, 1.0)
+    lower.outputs['Color'].default_value = (0.22, 0.32, 0.5, 1.0) if mode == 'clear' else (0.35, 0.14, 0.08, 1.0)
     blend = nodes.new('ShaderNodeMixRGB')
     blend.blend_type = 'MIX'
     links.new(texcoord.outputs['Normal'], separate.inputs['Vector'])
-    links.new(separate.outputs['Z'], horizon.inputs['Value'])
+    links.new(separate.outputs['Z'], outgoing.inputs[0])
+    links.new(outgoing.outputs[0], horizon.inputs['Value'])
     links.new(horizon.outputs['Result'], blend.inputs[0])
     links.new(lower.outputs['Color'], blend.inputs[1])
     links.new(sky.outputs['Color'], blend.inputs[2])
@@ -106,17 +110,17 @@ def make_sky_world(scene, mode, sun_direction):
     sky.dust_density = 1.25 if mode == 'dusk' else 0.9
     sky.ozone_density = 0.35
     sky.ground_albedo = 0.14
-    background.inputs['Strength'].default_value = 0.12 if mode == 'clear' else 0.3
+    background.inputs['Strength'].default_value = 0.72 if mode == 'clear' else 0.8
     links.new(blend.outputs['Color'], background.inputs['Color'])
     links.new(background.outputs['Background'], output.inputs['Surface'])
     return world
 
 
 def make_cloud_volume(args):
-    bpy.ops.mesh.primitive_uv_sphere_add(segments=96, ring_count=64, radius=1, location=(0, 0, 0))
+    bpy.ops.mesh.primitive_cube_add(size=2, location=(0, 0, 1700))
     cloud_box = bpy.context.object
     cloud_box.name = 'DaySky/CloudVolume'
-    cloud_box.scale = (900, 900, 460)
+    cloud_box.scale = (18000, 18000, 550)
     bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
     material = bpy.data.materials.new('DaySky/CloudVolumeMaterial')
     material.use_nodes = True
@@ -134,6 +138,9 @@ def make_cloud_volume(args):
     noise.inputs['Roughness'].default_value = 0.68
     noise.inputs['Lacunarity'].default_value = 2.2
     texcoord = nodes.new('ShaderNodeTexCoord')
+    cloud_coordinates = nodes.new('ShaderNodeVectorMath')
+    cloud_coordinates.operation = 'MULTIPLY'
+    cloud_coordinates.inputs[1].default_value = (32, 32, 1)
     density_ramp = nodes.new('ShaderNodeValToRGB')
     density_ramp.color_ramp.elements[0].position = 0.56
     density_ramp.color_ramp.elements[1].position = 0.69
@@ -144,7 +151,7 @@ def make_cloud_volume(args):
     altitude = nodes.new('ShaderNodeMapRange')
     altitude.clamp = True
     altitude.inputs['From Min'].default_value = 0.05
-    altitude.inputs['From Max'].default_value = 0.42
+    altitude.inputs['From Max'].default_value = 0.22
     altitude.inputs['To Min'].default_value = 0.0
     altitude.inputs['To Max'].default_value = 1.0
     multiply_altitude = nodes.new('ShaderNodeMath')
@@ -158,7 +165,8 @@ def make_cloud_volume(args):
     cloud_top.inputs['To Max'].default_value = 0.0
     envelope = nodes.new('ShaderNodeMath')
     envelope.operation = 'MULTIPLY'
-    links.new(texcoord.outputs['Generated'], noise.inputs['Vector'])
+    links.new(texcoord.outputs['Generated'], cloud_coordinates.inputs[0])
+    links.new(cloud_coordinates.outputs['Vector'], noise.inputs['Vector'])
     links.new(noise.outputs['Fac'], density_ramp.inputs['Fac'])
     links.new(density_ramp.outputs['Color'], multiply.inputs[0])
     links.new(texcoord.outputs['Generated'], separate.inputs['Vector'])
@@ -216,6 +224,7 @@ def main():
         direction = Vector((horizontal.x * math.cos(elevation), horizontal.y * math.cos(elevation), math.sin(elevation)))
     make_sky_world(scene, args.mode, direction)
     make_cloud_volume(args)
+    create_sun(scene, direction, args.mode)
     camera_data = bpy.data.cameras.new('DaySky/EquirectangularCamera')
     camera_data.type = 'PANO'
     camera_data.panorama_type = 'EQUIRECTANGULAR'

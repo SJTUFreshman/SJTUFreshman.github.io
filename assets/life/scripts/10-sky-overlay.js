@@ -170,7 +170,7 @@ function drawFallbackSpace(basis, time) {
         ];
         if (!isAboveHorizon(localDirection)) return;
         const altitude = Math.asin(clamp(localDirection[1], -1, 1)) / DEG;
-        const extinction = atmosphericExtinction(altitude);
+        const extinction = skyHasHorizon() ? atmosphericExtinction(altitude) : 0;
         const apparentMagnitude = star.magnitude + (
             Number.isFinite(extinction) ? extinction : 0
         );
@@ -179,11 +179,11 @@ function drawFallbackSpace(basis, time) {
             sky.magnitudeLimit + 0.25,
             apparentMagnitude
         );
-        const horizonVisibility = smoothstep(
+        const horizonVisibility = skyHasHorizon() ? smoothstep(
             0,
             Math.sin(1 * DEG),
             localDirection[1]
-        );
+        ) : 1;
         const skyVisibility = magnitudeVisibility * horizonVisibility;
         if (skyVisibility <= 0.001) return;
         const point = projectDirection(star.direction, basis, overlayWidth, overlayHeight);
@@ -374,6 +374,7 @@ function traceScreenPolygon(context, polygon) {
 }
 
 function drawLocalHorizon(basis) {
+    if (!skyHasHorizon()) return;
     if (window.NightWorld?.ready && window.NightWorld.mode !== 'sky' && (state.scene === 'roam' || state.scene === 'entry')) return;
     const context = overlayContext;
     const width = overlayWidth;
@@ -627,8 +628,7 @@ function createMeteorShowerSelection() {
 }
 
 function meteorShowerSkyVisibility() {
-    const sunAltitude = celestialBodies.find(profile => profile.id === 'sun')
-        ?.current?.altitude;
+    const sunAltitude = celestialSceneSunAltitude();
     if (!Number.isFinite(sunAltitude)) {
         return skyModel.available ? 0 : 1;
     }
@@ -1064,7 +1064,7 @@ function drawAngularMoon(context, profile, point, basis, alpha) {
 function drawCelestialBodies(basis, time) {
     const context = overlayContext;
     celestialBodies.forEach(profile => {
-        const direction = profile.current?.direction;
+        const direction = celestialSceneDirection(profile);
         if (!direction) {
             profile.screen = null;
             updateCelestialButton(profile, null);

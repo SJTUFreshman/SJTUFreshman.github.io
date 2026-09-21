@@ -161,19 +161,31 @@
     }
     // windscreen frame and pilot deck
     box(g,0,.46,-13.4,9.6,.92,.35,0x17252e,{metalness:.7});
-    rod(g,[-4.6,.9,-13.4],[-3.1,4.4,-13.4],.095,0x728894); rod(g,[4.6,.9,-13.4],[3.1,4.4,-13.4],.095,0x728894); rod(g,[-3.1,4.4,-13.4],[3.1,4.4,-13.4],.095,0x728894);
-    box(g,0,.82,-11.75,7,.35,1.35,0x26343a,{metalness:.6});
-    const hud = screen(g,0,1.23,-11.95,1.38,.56);
-    screen(g,-1.48,1.21,-11.96,1.12,.51,0xdda969); screen(g,1.48,1.21,-11.96,1.12,.51);
+    rod(g,[-4.6,.9,-13.4],[-3.1,4.4,-13.4],.075,0x728894); rod(g,[4.6,.9,-13.4],[3.1,4.4,-13.4],.075,0x728894); rod(g,[-3.1,4.4,-13.4],[3.1,4.4,-13.4],.075,0x728894);
+    for(const side of [-1,1]) {
+      const foot=K.group();foot.position.set(side*4.55,.91,-13.4);g.add(foot);
+      K.cylinder(foot,0,0,0,.17,.2,.18,0x56645f,24,{metalness:.66,roughness:.48});
+      const cap=K.box(foot,0,.09,0,.36,.08,.36,0x8b947f,{metalness:.58,roughness:.52});
+      cap.rotation.y=Math.PI/4;
+    }
+    for(const side of [-1,1]) {
+      const header=K.group();header.position.set(side*3.1,4.39,-13.4);g.add(header);
+      K.cylinder(header,0,0,0,.16,.2,.16,0x53635c,24,{metalness:.66,roughness:.46});
+      K.box(header,0,-.09,0,.34,.07,.34,0x8e967d,{metalness:.58,roughness:.5});
+    }
+    const flightDeck=K.group();flightDeck.position.y=-.2;g.add(flightDeck);
+    box(flightDeck,0,.82,-11.75,7,.35,1.35,0x26343a,{metalness:.6});
+    const hud = screen(flightDeck,0,1.23,-11.95,1.38,.56);
+    screen(flightDeck,-1.48,1.21,-11.96,1.12,.51,0xdda969); screen(flightDeck,1.48,1.21,-11.96,1.12,.51);
     for(const x of [-1.48,0,1.48]){
-      const panel=surface(box(g,x,1.007,-11.5,x?1.18:1.42,.035,.42,0x75838a,{metalness:.7,roughness:.4}),'metal');
+      const panel=surface(box(flightDeck,x,1.007,-11.5,x?1.18:1.42,.035,.42,0x75838a,{metalness:.7,roughness:.4}),'metal');
       for(let i=0;i<5;i++){
-        const dial=cyl(g,x-.58+i*.28,1.05,-11.49,.047,.052,.075,0x28353c,20,{metalness:.55});
-        box(g,dial.position.x,1.092,-11.472,.008,.006,.025,0xb8c4c7);
-        for(const dz of [-.11,.11]){const bolt=cyl(g,x-.75+i*.34,1.032,-11.5+dz,.009,.009,.018,0x20282e,12,{metalness:.8});}
+        const dial=cyl(flightDeck,x-.58+i*.28,1.05,-11.49,.047,.052,.075,0x28353c,20,{metalness:.55});
+        box(flightDeck,dial.position.x,1.092,-11.472,.008,.006,.025,0xb8c4c7);
+        for(const dz of [-.11,.11]){const bolt=cyl(flightDeck,x-.75+i*.34,1.032,-11.5+dz,.009,.009,.018,0x20282e,12,{metalness:.8});}
       }
     }
-    for (let i=0;i<8;i++) glow(g,-.72+i*.205,1.015,-11.15,.07,.014,.12,i%3 ? 0x5899b3 : 0xd39c59,.8);
+    for (let i=0;i<8;i++) glow(flightDeck,-.72+i*.205,1.015,-11.15,.07,.014,.12,i%3 ? 0x5899b3 : 0xd39c59,.8);
     for (const x of [-.68,.68]) { box(g,x,.9,-10.35,.16,.12,.66,0x475963); rod(g,[x,.95,-10.45],[x,1.25,-10.65],.055,0x17232a); }
     upholstery(g,0,.52,-9.9,.74,.2,.83,0x4d555d);
     const chairBack=upholstery(g,0,1.06,-9.48,.72,.99,.22,0x424e56,true);chairBack.rotation.x=.075;
@@ -365,7 +377,7 @@
       }
       const sideDisplay=new THREE.Group();sideDisplay.position.set(side*2.67,1.77,-10.5);sideDisplay.rotation.y=-side*.8;cockpitShell.add(sideDisplay);
       screen(sideDisplay,0,0,0,.74,.47,side<0?0xdda969:0x81d7eb);
-      const glareshield=box(cockpitShell,side*1.48,1.56,-11.91,1.25,.06,.27,0x273e30,{roughness:.92});glareshield.rotation.x=.03;
+      const glareshield=box(flightDeck,side*1.48,1.56,-11.91,1.25,.06,.27,0x273e30,{roughness:.92});glareshield.rotation.x=.03;
       rod(cockpitShell,[side*1.4,.89,-13.35],[side*1.4,1.58,-13.35],.045,0x667d6d);
       rod(cockpitShell,[side*.93,3.34,-13.35],[side*.93,4.41,-13.35],.045,0x667d6d);
       box(cockpitShell,side*.94,3.76,-13.36,.2,.75,.14,0xb4bca8,{metalness:.33,roughness:.74});
@@ -375,13 +387,13 @@
       collider(w,side*2.2,-8.18,.95,1.2);
     }
     box(cockpitShell,0,4.28,-9.35,5.52,.23,5.9,0xc6c7b7,{metalness:.22,roughness:.75});
-    box(cockpitShell,0,1.56,-11.91,1.52,.06,.27,0x273e30,{roughness:.92});
+    box(flightDeck,0,1.56,-11.91,1.52,.06,.27,0x273e30,{roughness:.92});
     box(cockpitShell,0,3.03,-11.35,.68,.12,1.87,0x425b47,{metalness:.45,roughness:.7});
     for(let row=0;row<7;row++) {
       for(const side of [-1,1])glow(cockpitShell,side*.19,2.96,-12.06+row*.22,.09,.018,.08,row%3?0x81966c:0xba7649,.35);
     }
     point(cockpitShell,0,3.58,-8.1,0xe7c396,.4,4.8);
-    w.previewCamera={position:pilot.seat.slice(),yaw:0,pitch:.035};
+    w.previewCamera={position:pilot.seat.slice(),yaw:0,pitch:.015};
     w.description = { en: 'The Frontier flight deck: instruments, pressure seals, and a sky without limits.', 'zh-CN': '开拓号驾驶舱：仪表、承压密封，以及没有边界的星空。', 'zh-TW': '開拓號駕駛艙：儀表、承壓密封，以及沒有邊界的星空。' }; return w;
   }
 

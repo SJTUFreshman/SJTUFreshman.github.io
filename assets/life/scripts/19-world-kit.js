@@ -169,6 +169,7 @@
                 textureSets.set(key,{map:type==='fabric'||type==='metal'?null:load(diff,true),normalMap:load(normal,false),roughnessMap:load(rough,false)});
             }
             const m=mesh.material.clone();m.userData.shared=false;
+            m.userData.surfaceType=type;
             Object.assign(m,textureSets.get(key));
             const normalStrength={wood:.3,soil:.3,fabric:.16,concrete:.32,metal:.2}[type];
             const roughnessFloor={wood:.62,soil:.86,fabric:.9,concrete:.76,metal:.42}[type];

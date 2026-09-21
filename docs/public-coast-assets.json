@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "provider": "Poly Haven",
+  "providerLicenseUrl": "https://polyhaven.com/license",
+  "updated": "2026-09-14",
+  "assets": [
+    {
+      "id": "coastal_cliff_04",
+      "resolution": "8k",
+      "provider": "Poly Haven",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "source": "https://polyhaven.com/a/coastal_cliff_04",
+      "filesApi": "https://api.polyhaven.com/files/coastal_cliff_04",
+      "infoApi": "https://api.polyhaven.com/info/coastal_cliff_04",
+      "description": "Free 8K model of a weathered coastal cliff with layered rock faces, eroded ledges, scattered boulders and a grassy top, with high-detail textures.",
+      "authors": {
+        "Rob Tuytel": "Photography, processing",
+        "Rico Cilliers": "cleanup"
+      },
+      "polycount": 2883111,
+      "dimensions": [
+        86773.23913574219,
+        24247.532844543457,
+        10999.708712100983
+      ],
+      "retrieved": "2026-09-14",
+      "files": [
+        {
+          "path": ".render-work/public-models/polyhaven/coastal_cliff_04/coastal_cliff_04_8k.gltf",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/coastal_cliff_04/coastal_cliff_04_8k.gltf",
+          "bytes": 2828,
+          "md5": "35cfcf864448d72fcd62bc2152cc4979",
+          "sha256": "47bc65ca635cb5bab93a78c7daabf2e217363a10ffadaa022c5da988f102133d",
+          "reused": false
+        },
+        {
+          "path": ".render-work/public-models/polyhaven/coastal_cliff_04/textures/coastal_cliff_04_diff_8k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/8k/coastal_cliff_04/coastal_cliff_04_diff_8k.jpg",
+          "bytes": 26219382,
+          "md5": "a667682c456577d5ea212aec5b38f50c",
+          "sha256": "c0871b917f255e6b3124215b4ce2532a01d5b231ed7ea8c875eba45fc2e412fa",
+          "reused": false
+        },
+        {
+          "path": ".render-work/public-models/polyhaven/coastal_cliff_04/coastal_cliff_04.bin",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/coastal_cliff_04/coastal_cliff_04.bin",
+          "bytes": 43704136,
+          "md5": "77612519fa9eb44129ba40943612c3c3",
+          "sha256": "f7c3a18acc848552b91b0de931ba8439d5f2a8849bd0d4ac718878aa4a90abcf",
+          "reused": false
+        },
+        {
+          "path": ".render-work/public-models/polyhaven/coastal_cliff_04/textures/coastal_cliff_04_arm_8k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/8k/coastal_cliff_04/coastal_cliff_04_arm_8k.jpg",
+          "bytes": 34287435,
+          "md5": "d55001abbbcd454a55c8c190109d23df",
+          "sha256": "5d7248948528c7681601e72700f55f0b79ef89270a0189bf6392c4a4ba72b160",
+          "reused": false
+        },
+        {
+          "path": ".render-work/public-models/polyhaven/coastal_cliff_04/textures/coastal_cliff_04_nor_gl_8k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/8k/coastal_cliff_04/coastal_cliff_04_nor_gl_8k.jpg",
+          "bytes": 56058459,
+          "md5": "d4d0bc462ec275caecd7b26fb7696225",
+          "sha256": "84c132dda19e7bcfbdb3b0b9008523158c66943ab58be08e19389824b40e06d4",
+          "reused": false
+        }
+      ],
+      "gltfTriangleCount": 1537926,
+      "gltfVertexCount": 789032,
+      "dimensionsUnit": "millimetres (provider metadata)"
+    }
+  ],
+  "purpose": "Offline castle shoreline source; not installed or photographically approved"
+}

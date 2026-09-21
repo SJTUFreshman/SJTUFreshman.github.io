@@ -527,7 +527,7 @@ function projectedAngularDiscGeometry(
     fov = camera.fov
 ) {
     const current = profile?.current;
-    const direction = current?.direction;
+    const direction = celestialSceneDirection(profile);
     const horizontalDiameter = current?.angularDiameter;
     const verticalDiameter = Number.isFinite(current?.apparentVerticalDiameter)
         ? current.apparentVerticalDiameter

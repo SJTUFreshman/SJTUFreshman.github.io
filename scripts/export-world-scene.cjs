@@ -56,8 +56,11 @@ window.NightWorldKit.label = function captureLabel(parent, text, x, y, z, width,
 };
 window.NightWorldKit.model = function captureModel(parent, id, x, y, z, options) {
   const holder = originalModel.call(this, parent, id, x, y, z, options);
-  const modelPath = path.join(__dirname, '..', 'assets', 'life', 'models', id, `${id}_1k.gltf`);
-  if (fs.existsSync(modelPath)) {
+  const modelRoot = path.join(__dirname, '..', 'assets', 'life', 'models', id);
+  const modelPath = ['8k', '4k', '2k', '1k']
+    .map(resolution => path.join(modelRoot, `${id}_${resolution}.gltf`))
+    .find(candidate => fs.existsSync(candidate));
+  if (modelPath) {
     holder.userData.assetId = id;
     holder.userData.assetOptions = { height: options?.height || null, rotationY: options?.rotationY || 0 };
     options?.onLoad?.(holder);
@@ -81,10 +84,12 @@ function materialId(material) {
   if (materialIds.has(material)) return materialIds.get(material);
   const id = materials.length;
   const color = material.color ? material.color.getHex() : 0xffffff;
-  const value = { id, color: `#${color.toString(16).padStart(6, '0')}`, roughness: material.roughness ?? 0.85,
+  const surfaceType = material.userData?.surfaceType || material.userData?.textureType || null;
+  const offlineMaterial = material.userData?.offlineMaterial || null;
+  const value = { id, surfaceType, offlineMaterial, color: `#${color.toString(16).padStart(6, '0')}`, roughness: material.roughness ?? 0.85,
     metalness: material.metalness ?? 0, opacity: material.opacity ?? 1, transparent: Boolean(material.transparent),
     emissive: material.emissive ? `#${material.emissive.getHex().toString(16).padStart(6, '0')}` : '#000000',
-    emissiveIntensity: material.emissiveIntensity ?? 0, textures: {} };
+    emissiveIntensity: material.emissiveIntensity ?? 0, normalScale: material.normalScale?.toArray() || [1, 1], textures: {} };
   for (const [key, texture] of [['baseColor', material.map], ['normal', material.normalMap], ['roughness', material.roughnessMap]]) {
     if (texture?.userData?.sourcePath) value.textures[key] = { path: texture.userData.sourcePath, repeat: texture.repeat.toArray() };
   }
@@ -109,10 +114,10 @@ world.group.traverse(object => {
   if (object.isLight) lights.push({ type: object.type, color: `#${object.color.getHex().toString(16).padStart(6, '0')}`, intensity: object.intensity, distance: object.distance || 0, position: object.getWorldPosition(new THREE.Vector3()).toArray() });
   if (object.userData.renderLabel) labels.push({ ...object.userData.renderLabel, matrix: Array.from(object.matrixWorld.elements) });
   else if (object.userData.screenCanvas) screens.push({ width: object.geometry.parameters.width, height: object.geometry.parameters.height, canvasWidth: object.userData.screenCanvas.width, canvasHeight: object.userData.screenCanvas.height, commands: object.userData.screenCanvas.commands, matrix: Array.from(object.matrixWorld.elements) });
-  else if (object.isMesh && object.geometry) objects.push({ type: 'mesh', geometry: geometryId(object.geometry), material: materialId(Array.isArray(object.material) ? object.material[0] : object.material), matrix: Array.from(object.matrixWorld.elements), castShadow: Boolean(object.castShadow), receiveShadow: Boolean(object.receiveShadow) });
+  else if (object.isMesh && object.geometry) objects.push({ type: 'mesh', geometry: geometryId(object.geometry), material: materialId(Array.isArray(object.material) ? object.material[0] : object.material), matrix: Array.from(object.matrixWorld.elements), castShadow: Boolean(object.castShadow), receiveShadow: Boolean(object.receiveShadow), offlineRole: object.userData.offlineRole || null, offlineParameters: object.userData.offlineParameters || null });
 });
 const observation = world.previewCamera || { position: world.spawn, yaw: world.yaw || 0, pitch: world.pitch || 0 };
-const output = { version: 1, coordinateSystem: 'three-y-up-right-handed', scene: sceneId, environment: world.environment || { phase: 'night' }, observation, spawn: world.spawn, bounds: world.bounds, geometry: geometries, materials, objects, lights, assets, labels, screens, exportedAt: new Date().toISOString() };
+const output = { version: 1, coordinateSystem: 'three-y-up-right-handed', scene: sceneId, artRevision: world.artRevision || null, environment: world.environment || { phase: 'night' }, observation, spawn: world.spawn, bounds: world.bounds, geometry: geometries, materials, objects, lights, assets, labels, screens, exportedAt: new Date().toISOString() };
 const target = path.resolve(process.cwd(), outputFile);
 fs.mkdirSync(path.dirname(target), { recursive: true });
 fs.writeFileSync(target, JSON.stringify(output));

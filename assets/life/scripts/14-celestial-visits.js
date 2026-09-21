@@ -71,7 +71,7 @@ function celestialVisitProjectionAnchor(profile, orientation, fov) {
         )
         : null;
     const point = discGeometry?.center || projectDirection(
-        profile.current.direction,
+        celestialSceneDirection(profile),
         basis,
         overlayWidth,
         overlayHeight,
@@ -559,7 +559,7 @@ function startCelestialFlight(profile, source = 'gaze') {
         approachScreen: { ...originAnchor.screen },
         approachDiscGeometry: originAnchor.discGeometry,
         focusOrientation: routePointFraming(
-            profile.current.direction,
+            celestialSceneDirection(profile),
             panelOnLeft,
             focusFov
         ),
@@ -578,7 +578,7 @@ function startCelestialFlight(profile, source = 'gaze') {
             duration: REDUCED_MOTION ? 1 : 1060,
             fromOrientation: camera.orientation.slice(),
             toOrientation: routePointFraming(
-                profile.current.direction,
+                celestialSceneDirection(profile),
                 panelOnLeft,
                 focusFov
             ),
@@ -995,7 +995,8 @@ function renderCelestialPanel(profile) {
                 `${current.phaseAngle.toFixed(1)}°`
             )
             : '',
-        ui.scaleNote
+        ui.scaleNote,
+        profile.id === 'sun' && window.SceneSky?.snapshot().alignment ? ui.calibrationNote : ''
     ].filter(Boolean).join(' · ');
 }
 

@@ -141,6 +141,7 @@ assets/vendor/three-0.160.1.min.js（vendor 依赖，非本目录分片）
 - 远程 URL、vendor 文件、data URL 和越出上述目录的路径会被忽略。
 - 引用按 HTML 顺序收集并去重；缺失文件或非 UTF-8 文件会让构建明确失败。
 - 新增可见文案的 CSS/JS 必须位于上述目录并在 `life.html` 中真实引用，否则字体扫描不会看到其中字符。
+- `life.html` 的所有本地脚本与 CSS 使用同一个 `?v=` 发布版本。任何分片公共 API 变更后整体更新该版本，避免浏览器将新调用方与旧 helper 混载；验证器会拒绝缺少版本或版本不一致的资源。字体扫描与本地资源解析会正确忽略 query string。
 
 修改中文、繁体字或其他新字形后，重新运行字体构建并确认 `fonts/edukai-site-subset.woff2` 的变更符合预期。
 
@@ -162,6 +163,8 @@ node scripts/validate-life-runtime.cjs
 node scripts/validate-night-worlds.cjs
 git diff --check
 ```
+
+本地 HTTP 服务已启动时，再运行 `node scripts/validate-life-http.cjs http://localhost:8765/life.html`，检查实际提供的每个版本化脚本/CSS 与磁盘一致、语法有效，并以页面真实顺序验证 `03` / `05` 的跨脚本 helper 依赖。
 
 可见文案或字形变化后再运行：
 

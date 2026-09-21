@@ -10,6 +10,7 @@
             observe: 'Observe', explore: 'Explore', sky: 'Just the sky', view: 'View mode', current: 'Here now',
             clear: 'Day', dusk: 'Dusk', quality: 'Panorama quality', auto: 'Auto', high: 'High', medium: 'Medium', low: 'Low',
             preview: 'Preview imagery · final production renders are not installed.', rendered: 'Offline panorama loaded', renderError: 'Panorama unavailable. Try another quality or scene.',
+            renderedReview: 'Pre-rendered review version · visual acceptance is not complete.', renderedDraft: 'Pre-rendered draft · production work is still in progress.',
             sound: 'Ambient sound', soundOn: 'Sound on', soundOff: 'Sound off', reset: 'Return to arrival point',
             loading: 'Preparing your surroundings…', error: 'The surroundings could not load. The sky is still available.',
             walk: 'W A S D · walk', look: 'Mouse · look', interact: 'Interact', hint: 'M · change surroundings',
@@ -24,7 +25,7 @@
             lakeshore: ['Stillwater', 'A jetty, a lighthouse, the breathing lake.', 'WATER / REFLECTION'],
             observatory: ['The old observatory', 'A weathered dome above the clouds.', 'STONE / STARLIGHT'],
             spaceship: ['Frontier', 'At the helm, with the entire sky ahead.', 'NASA-PUNK / DEEP SPACE'],
-            shelter: ['The city refuge', 'A quiet shelter above a ruined city.', 'WASTELAND / SHELTER'],
+            shelter: ['The courtyard settlement', 'An open-air refuge among ruined city streets.', 'WASTELAND / SETTLEMENT'],
             hogwarts: ['Above Hogwarts', 'A mountainside facing the castle and its lake.', 'CASTLE / DAYLIGHT'],
             snowmountain: ['The high ridge', 'Snow, sheer rock and a sky without limits.', 'ALPINE / DAYLIGHT'],
             train: ['The night train', 'A quiet platform. A journey without hurry.', 'RAIL / RHYTHM'],
@@ -37,6 +38,7 @@
             observe: '静静观景', explore: '自由探索', sky: '只看星空', view: '视角模式', current: '正在这里',
             clear: '晴天', dusk: '黄昏', quality: '全景画质', auto: '自动', high: '高', medium: '中', low: '低',
             preview: '当前为预览资源 · 最终制作级渲染尚未安装。', rendered: '已加载离线全景', renderError: '全景暂时无法加载，请尝试其他画质或场景。',
+            renderedReview: '预渲染评审版 · 尚未完成最终画质验收。', renderedDraft: '预渲染草稿 · 美术制作仍在进行。',
             sound: '环境声音', soundOn: '声音已开', soundOff: '声音已关', reset: '回到抵达位置',
             loading: '正在铺开这片风景…', error: '场景暂时无法加载，仍可继续欣赏星空。',
             walk: 'W A S D · 行走', look: '鼠标 · 环顾', interact: '互动', hint: 'M · 更换场景',
@@ -51,7 +53,7 @@
             lakeshore: ['静夜湖岸', '栈桥延向湖心，远处灯塔明灭。', '湖水 / 倒影'],
             observatory: ['旧日天文台', '越过石阶，在旧穹顶下抬头。', '石阶 / 星光'],
             spaceship: ['开拓号', '坐在驾驶位，驶向整片星空。', 'NASA 朋克 / 深空'],
-            shelter: ['废土避难所', '残破都市之上，一处安静的庇护。', '废土 / 庇护'],
+            shelter: ['废土聚落', '废弃街道之间，一处露天生活的小聚落。', '废土 / 聚落'],
             hogwarts: ['霍格沃兹山丘', '在城堡外的山上，远眺湖泊与尖塔。', '城堡 / 日光'],
             snowmountain: ['险峰之上', '冰雪、峭壁和没有边界的天空。', '雪岭 / 日光'],
             train: ['夜行列车', '没有催促的站台，缓慢经过的夜。', '铁轨 / 节奏'],
@@ -64,6 +66,7 @@
             observe: '靜靜觀景', explore: '自由探索', sky: '只看星空', view: '視角模式', current: '正在這裡',
             clear: '晴天', dusk: '黃昏', quality: '全景畫質', auto: '自動', high: '高', medium: '中', low: '低',
             preview: '目前為預覽資源 · 最終製作級渲染尚未安裝。', rendered: '已載入離線全景', renderError: '全景暫時無法載入，請嘗試其他畫質或場景。',
+            renderedReview: '預渲染評審版 · 尚未完成最終畫質驗收。', renderedDraft: '預渲染草稿 · 美術製作仍在進行。',
             sound: '環境聲音', soundOn: '聲音已開', soundOff: '聲音已關', reset: '回到抵達位置',
             loading: '正在鋪開這片風景…', error: '場景暫時無法載入，仍可繼續欣賞星空。',
             walk: 'W A S D · 行走', look: '滑鼠 · 環顧', interact: '互動', hint: 'M · 更換場景',
@@ -78,7 +81,7 @@
             lakeshore: ['靜夜湖岸', '棧橋延向湖心，遠處燈塔明滅。', '湖水 / 倒影'],
             observatory: ['舊日天文台', '越過石階，在舊穹頂下抬頭。', '石階 / 星光'],
             spaceship: ['開拓號', '坐在駕駛位，駛向整片星空。', 'NASA 朋克 / 深空'],
-            shelter: ['廢土避難所', '殘破都市之上，一處安靜的庇護。', '廢土 / 庇護'],
+            shelter: ['廢土聚落', '廢棄街道之間，一處露天生活的小聚落。', '廢土 / 聚落'],
             hogwarts: ['霍格華茲山丘', '在城堡外的山上，遠眺湖泊與尖塔。', '城堡 / 日光'],
             snowmountain: ['險峰之上', '冰雪、峭壁和沒有邊界的天空。', '雪嶺 / 日光'],
             train: ['夜行列車', '沒有催促的月臺，緩慢經過的夜。', '鐵軌 / 節奏'],
@@ -259,7 +262,8 @@
             setText(sound.querySelector('span'), audioEnabled ? t.soundOn : t.soundOff);
             const loadError = snapshot.error || (api && api.error);
             const panoramaStatus = mode === 'observe' ? snapshot.panorama : null;
-            const panoramaText = panoramaStatus?.status === 'preview' ? t.preview : panoramaStatus?.status === 'error' ? t.renderError : panoramaStatus?.status === 'loading' ? t.loading : panoramaStatus?.status === 'prerendered' ? t.rendered + (panoramaStatus.tier ? ' · ' + t[panoramaStatus.tier] : '') : '';
+            const renderedLabel = panoramaStatus?.production === 'approved' ? t.rendered : panoramaStatus?.production === 'review' ? t.renderedReview : t.renderedDraft;
+            const panoramaText = panoramaStatus?.status === 'preview' ? t.preview : panoramaStatus?.status === 'error' ? t.renderError : panoramaStatus?.status === 'loading' ? t.loading : panoramaStatus?.status === 'prerendered' ? renderedLabel + (panoramaStatus.tier ? ' · ' + t[panoramaStatus.tier] : '') : '';
             setText(status, loadError ? t.error : panoramaText || (ready ? '' : t.loading));
             status.hidden = ready && !loadError && !panoramaText;
             byId('worldReset').disabled = !ready;

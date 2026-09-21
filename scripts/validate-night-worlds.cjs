@@ -60,6 +60,91 @@ function blocked(world, x, z) {
     Math.abs(x - c.x) < c.w / 2 + .25 && Math.abs(z - c.z) < c.d / 2 + .25);
 }
 
+function streetSettlementChecks(world) {
+  const expectedObservation = { position: [0, 1.72, 2.8], yaw: -.08, pitch: .06 };
+  const observation = world.previewCamera || { position: world.spawn, yaw: world.yaw, pitch: world.pitch };
+  assert.deepEqual(observation, expectedObservation, 'shelter: preserve the default courtyard observation');
+  assert.deepEqual(world.spawn, expectedObservation.position, 'shelter: preserve the exploration spawn');
+  assert.equal(world.artRevision, 'street-settlement-v1', 'shelter: export the street settlement revision');
+  world.group.updateMatrixWorld(true);
+  const meshes = [], foundations = [], courtyard = [];
+  world.group.traverse(object => {
+    if (!object.isMesh) return;
+    let ancestor = object;
+    while (ancestor) {
+      if (!ancestor.visible) return;
+      ancestor = ancestor.parent;
+    }
+    meshes.push(object);
+    if (object.userData.offlineRole === 'wasteland-building') foundations.push(object);
+    if (object.userData.offlineRole === 'wasteland-courtyard-ground') courtyard.push(object);
+  });
+  assert(foundations.length > 0, 'shelter: street ruins need tagged building foundations');
+  assert.equal(courtyard.length, 1, 'shelter: one tagged street-level courtyard ground');
+  const flames = meshes.filter(object => object.material?.isShaderMaterial && Number.isFinite(object.userData.baseY));
+  assert(flames.length > 0, 'shelter: retain the interactive campfire flames');
+  assert(flames.every(object => object.userData.offlineRole === 'wasteland-fire-proxy'),
+    'shelter: shader-only flames must be explicitly replaced during offline rendering');
+  const shutterPanels = meshes.filter(object => object.userData.offlineRole === 'wasteland-shutter-proxy');
+  assert(shutterPanels.length > 0, 'shelter: mark the galley windbreak for offline cloth replacement');
+  const shutterBounds = new THREE.Box3();
+  for (const panel of shutterPanels) shutterBounds.union(new THREE.Box3().setFromObject(panel));
+  assert(shutterBounds.min.x > 4.2 && shutterBounds.max.z - shutterBounds.min.z < 1,
+    'shelter: the gathered windbreak must stay behind the galley, not span its open front');
+  for (const foundation of foundations) {
+    const parameters = foundation.userData.offlineParameters;
+    assert(parameters && parameters.height > 0, 'shelter: every ruin needs reconstruction dimensions');
+    assert.equal(parameters.groundHeight, 0, 'shelter: every ruin declares street-level support');
+    const bounds = new THREE.Box3().setFromObject(foundation);
+    assert(Math.abs(bounds.min.y) < 1e-5, `shelter: ruin foundation must start at ground zero, got ${bounds.min.y}`);
+  }
+  const groundBounds = new THREE.Box3().setFromObject(courtyard[0]);
+  assert(Math.abs(groundBounds.max.y) < 1e-5, 'shelter: courtyard surface must remain at street level');
+  const samples = [expectedObservation.position, [0, 1.72, -3], [0, 1.72, 8]];
+  const upward = new THREE.Vector3(0, 1, 0), downward = new THREE.Vector3(0, -1, 0);
+  const doubleSided = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide });
+  const raycastMeshes = meshes.map(source => {
+    const mesh = new THREE.Mesh(source.geometry, doubleSided);
+    mesh.matrixAutoUpdate = false;
+    mesh.matrixWorld.copy(source.matrixWorld);
+    return mesh;
+  });
+  try {
+    for (const position of samples) {
+      const origin = new THREE.Vector3(...position);
+      const overhead = new THREE.Raycaster(origin, upward).intersectObjects(raycastMeshes, false);
+      assert.equal(overhead.length, 0, `shelter: open courtyard sky above ${position.join(',')}`);
+      const ground = new THREE.Raycaster(origin, downward).intersectObjects(raycastMeshes, false)[0];
+      assert(ground && Math.abs(ground.point.y) < 1e-5, `shelter: courtyard must support the player at ground zero beneath ${position.join(',')}`);
+    }
+  } finally {
+    doubleSided.dispose();
+  }
+  for (let index = 0; index <= 80; index++) {
+    const depth = -6 + index * .2;
+    assert(depth >= world.bounds.minZ && depth <= world.bounds.maxZ, 'shelter: central route remains inside exploration bounds');
+    assert(!blocked(world, 0, depth), `shelter: central courtyard walking route is blocked at z=${depth}`);
+  }
+  const spacing = .25, visited = new Set(), reachable = [], queue = [[0, 0]];
+  for (let cursor = 0; cursor < queue.length; cursor++) {
+    const [column, row] = queue[cursor], key = `${column},${row}`;
+    if (visited.has(key)) continue;
+    visited.add(key);
+    const horizontal = world.spawn[0] + column * spacing, depth = world.spawn[2] + row * spacing;
+    if (horizontal < world.bounds.minX || horizontal > world.bounds.maxX || depth < world.bounds.minZ || depth > world.bounds.maxZ || blocked(world, horizontal, depth)) continue;
+    reachable.push([horizontal, world.spawn[1], depth]);
+    for (const [deltaX, deltaZ] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      if (!blocked(world, horizontal + deltaX * spacing / 2, depth + deltaZ * spacing / 2)) queue.push([column + deltaX, row + deltaZ]);
+    }
+  }
+  for (const identifier of ['shelter-light', 'shelter-radio', 'shelter-shutter', 'shelter-camp']) {
+    const interaction = world.interactions.find(item => item.id === identifier);
+    assert(interaction, `shelter: preserve the ${identifier} interaction`);
+    assert(reachable.some(position => Math.hypot(...position.map((coordinate, axis) => coordinate - interaction.position[axis])) < interaction.radius),
+      `shelter: ${identifier} must be within reach from a collision-free walking route`);
+  }
+}
+
 for (const id of ids) {
   let world = builders[id](window.NightWorldKit);
   finiteWorld(world, id);
@@ -83,6 +168,7 @@ for (const id of ids) {
   world = builders[id](window.NightWorldKit);
   world.player = { x: world.spawn[0], y: world.spawn[1], z: world.spawn[2], distance: 0 };
 
+  if (id === 'shelter') streetSettlementChecks(world);
   if (id === 'spaceship') {
     const lights = []; world.group.traverse(object => { if(object.isPointLight) lights.push(object); });
     const original = lights.map(light => light.intensity);
@@ -167,6 +253,18 @@ function runtimeChecks() {
     assert.equal(api.world.group.children.length,0,'runtime: observation must not build exploration geometry');
     assert(api.world.pilot.active,'runtime: default spaceship must be seated and piloting');
     assert.deepEqual([api.player.x,api.player.y,api.player.z],api.world.pilot.seat,'runtime: default camera must occupy pilot seat');
+    const metadata = { observation: { position: [2,1.9,-8], yaw: .2, pitch: .04 }, pilot: { seat: [2,1.9,-8], exit: [3,1.9,-7] } };
+    const initialShipOrientation = api.world.flight.orientation.slice();
+    api.world.pilot.speed = 22; api.world.pilot.throttle = .4;
+    window.dispatchEvent(new CustomEvent('nightpanorama:metadata',{detail:{scene:'spaceship',metadata}}));
+    assert.deepEqual([api.player.x,api.player.y,api.player.z],metadata.observation.position,'runtime: late manifest metadata must replace default observation position');
+    assert.deepEqual(api.world.pilot.seat,metadata.pilot.seat,'runtime: late manifest must update pilot seat');
+    assert.deepEqual(api.world.flight.orientation,initialShipOrientation,'runtime: metadata correction must not steer the ship');
+    assert.equal(api.world.pilot.speed,22,'runtime: metadata correction must retain ship speed');
+    assert.equal(api.world.pilot.throttle,.4,'runtime: metadata correction must retain throttle');
+    const correctedPosition = { ...api.player };
+    window.dispatchEvent(new CustomEvent('nightpanorama:metadata',{detail:{scene:'shelter',metadata:{observation:{position:[99,99,99],yaw:0,pitch:0}}}}));
+    assert.deepEqual(api.player,correctedPosition,'runtime: stale metadata from a different scene must be ignored');
     assert.equal(api.setViewMode('explore'),false,'runtime: exploration must remain locked until discovered');
     for(const id of ids){assert(api.select(id),`runtime could not select ${id}`);frames(2);assert.equal(api.world.group.children.length,0,`runtime: ${id} observation must not build meshes`);}
     api.select('shelter');frames(2);
@@ -188,6 +286,9 @@ function runtimeChecks() {
     assert(api.unlockExploration(),'runtime: discovery must unlock exploration');
     assert.equal(api.mode,'explore','runtime: unlock must enter exploration');
     assert.equal(rendererCount,1,'runtime: exploration renderer must initialize lazily');
+    const exploredPosition = { ...api.player };
+    window.dispatchEvent(new CustomEvent('nightpanorama:metadata',{detail:{scene:'spaceship',metadata}}));
+    assert.deepEqual(api.player,exploredPosition,'runtime: metadata must not teleport an exploring player');
     assert(api.world.pilot.active,'runtime: entering exploration must preserve occupied helm');
     for(const id of ids){assert(api.select(id),`runtime could not select ${id}`);frames(2);finiteWorld(api.world,id);}
     api.select('shelter');frames(2);

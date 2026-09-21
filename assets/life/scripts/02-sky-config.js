@@ -550,6 +550,7 @@ const celestialUi = {
         geometry: (diameter, phaseAngle) =>
             `Angular diameter ${diameter} · phase angle ${phaseAngle}`,
         scaleNote: 'The distant sky follows apparent magnitude and visibility. This close-up is magnified rather than size-scaled; position, phase, lighting, axis and ring tilt follow the current observation. Surface maps and animated cloud, solar-granulation and corona detail are representative reference imagery, not a live spacecraft feed.',
+        calibrationNote: 'In this scene the Sun is positioned to match the pre-rendered sky. The altitude and azimuth above remain astronomical calculations for the stated observation, not the scenic Sun position.',
         unavailable: 'Astronomical coordinates unavailable',
         au: value => `${value} AU`
     },
@@ -577,6 +578,7 @@ const celestialUi = {
         geometry: (diameter, phaseAngle) =>
             `视角直径 ${diameter} · 相位角 ${phaseAngle}`,
         scaleNote: '远景按实际视星等与可见条件呈现；此处是放大观测近景，并非天体尺寸比例。方位、盈亏、受光、自转轴与行星环倾角依据当前观测计算；表面图、动态云层、太阳米粒组织与日冕细节为代表性参考可视化，并非航天器实时画面。',
+        calibrationNote: '本预渲染场景的太阳画面已按天空素材方向校准。上方地平高度与方位角仍为所示观测条件下的天文计算值，并非场景太阳的美术方位。',
         unavailable: '天文坐标暂不可用',
         au: value => `${value} 天文单位`
     },
@@ -604,6 +606,7 @@ const celestialUi = {
         geometry: (diameter, phaseAngle) =>
             `視角直徑 ${diameter} · 相位角 ${phaseAngle}`,
         scaleNote: '遠景按實際視星等與可見條件呈現；此處是放大觀測近景，並非天體尺寸比例。方位、盈虧、受光、自轉軸與行星環傾角依據目前觀測計算；表面圖、動態雲層、太陽米粒組織與日冕細節為代表性參考視覺化，並非太空船即時畫面。',
+        calibrationNote: '本預渲染場景的太陽畫面已按天空素材方向校準。上方地平高度與方位角仍為所示觀測條件下的天文計算值，並非場景太陽的美術方位。',
         unavailable: '天文座標暫不可用',
         au: value => `${value} 天文單位`
     }

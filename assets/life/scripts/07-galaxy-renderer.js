@@ -166,11 +166,11 @@ class GalaxyRenderer {
                     ) * softHalo * (0.22 + structure * 0.18);
                     galaxy += vec3(0.24, 0.16, 0.10) * bulge * (0.12 + structure * 0.18);
                     galaxy *= 1.0 - dust * 0.62;
-                    galaxy *= smoothstep(
+                    galaxy *= mix(smoothstep(
                         0.0,
                         sin(radians(8.0)),
                         sinAltitude
-                    );
+                    ), 1.0, uSpace);
 
                     float distantHaze = noise(aroundPlane * 3.4 + vec2(signedLatitude * 1.7));
                     base += vec3(0.025, 0.031, 0.062) * distantHaze * 0.28;
@@ -288,6 +288,7 @@ class GalaxyRenderer {
                 uniform float uDpr;
                 uniform float uTime;
                 uniform float uMagnitudeLimit;
+                uniform float uSpace;
                 uniform vec2 uResolution;
                 varying float vAlpha;
                 varying float vTemperature;
@@ -307,18 +308,18 @@ class GalaxyRenderer {
                         cos(radians(zenithDegrees)) +
                         0.50572 * pow(96.07995 - zenithDegrees, -1.6364)
                     );
-                    float extinction = max(0.0, (airmass - 1.0) * 0.2);
+                    float extinction = max(0.0, (airmass - 1.0) * 0.2) * (1.0 - uSpace);
                     float apparentMagnitude = aMagnitude + extinction;
                     float magnitudeVisibility = 1.0 - smoothstep(
                         uMagnitudeLimit - 0.35,
                         uMagnitudeLimit + 0.25,
                         apparentMagnitude
                     );
-                    float horizonVisibility = smoothstep(
+                    float horizonVisibility = mix(smoothstep(
                         0.0,
                         sin(radians(1.0)),
                         sinAltitude
-                    );
+                    ), 1.0, uSpace);
                     float tangent = tan(uFov * 0.5);
                     vec2 projected = vec2(
                         (x / max(z, 0.001)) / (tangent * uAspect),
@@ -453,6 +454,7 @@ class GalaxyRenderer {
                 dpr: this.gl.getUniformLocation(this.starProgram, 'uDpr'),
                 time: this.gl.getUniformLocation(this.starProgram, 'uTime'),
                 magnitudeLimit: this.gl.getUniformLocation(this.starProgram, 'uMagnitudeLimit'),
+                space: this.gl.getUniformLocation(this.starProgram, 'uSpace'),
                 resolution: this.gl.getUniformLocation(this.starProgram, 'uResolution')
             };
             this.ready = true;
@@ -603,7 +605,7 @@ class GalaxyRenderer {
         gl.uniform3fv(this.backgroundLocations.north, sky.north);
         gl.uniform3fv(this.backgroundLocations.sunDirection, sky.sunDirection);
         gl.uniform1f(this.backgroundLocations.sunAltitude, sky.sunAltitude);
-        gl.uniform1f(this.backgroundLocations.space, window.NightWorld?.inSpace() ? 1 : 0);
+        gl.uniform1f(this.backgroundLocations.space, skyHasHorizon() ? 0 : 1);
         gl.uniform1f(this.backgroundLocations.cloudCoverage, sky.cloudCoverage || 0);
         gl.uniform1f(this.backgroundLocations.haze, sky.haze || 1);
         gl.drawArrays(gl.TRIANGLES, 0, 6);
@@ -632,6 +634,7 @@ class GalaxyRenderer {
         gl.uniform1f(this.starLocations.time, time);
         gl.uniform3fv(this.starLocations.zenith, sky.zenith);
         gl.uniform1f(this.starLocations.magnitudeLimit, sky.magnitudeLimit);
+        gl.uniform1f(this.starLocations.space, skyHasHorizon() ? 0 : 1);
         gl.uniform2f(
             this.starLocations.resolution,
             this.canvas.width,

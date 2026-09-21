@@ -71,7 +71,7 @@ function updateGazeTarget(time) {
     const exitRadius = enterRadius + 28;
     const focusedItem = state.focusedCelestial || state.focusedPortal;
     const focusedDirection = state.focusedCelestial
-        ? state.focusedCelestial.current?.direction
+        ? celestialSceneDirection(state.focusedCelestial)
         : state.focusedPortal?.direction;
     const focusedAboveHorizon = state.focusedCelestial
         ? celestialAboveHorizon(state.focusedCelestial)

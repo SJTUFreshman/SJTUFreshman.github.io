@@ -180,17 +180,23 @@ function constrainOrientationAboveHorizon(
     quaternion,
     fallbackYaw = INITIAL_CAMERA.yaw
 ) {
+    if (!skyHasHorizon()) return quatNormalize(quaternion);
     const pose = decomposeYawPitchRoll(quaternion, fallbackYaw);
     const pitch = Math.max(pose.pitch, MIN_CAMERA_ALTITUDE);
     if (Math.abs(pitch - pose.pitch) < 1e-10) return quatNormalize(quaternion);
     return orientationFromYawPitchRoll(pose.yaw, pitch, pose.roll);
 }
 
+function skyHasHorizon() {
+    const environment = window.NightWorld;
+    return !(environment?.ready && environment.currentId === 'spaceship' && environment.mode !== 'sky');
+}
+
 function isAboveHorizon(direction, margin = 0) {
     return Boolean(
         direction &&
         Number.isFinite(direction[1]) &&
-        direction[1] > margin + GEOMETRIC_HORIZON_EPSILON
+        (!skyHasHorizon() || direction[1] > margin + GEOMETRIC_HORIZON_EPSILON)
     );
 }
 

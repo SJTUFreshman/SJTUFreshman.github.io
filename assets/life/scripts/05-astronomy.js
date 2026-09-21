@@ -8,9 +8,17 @@ window.SceneSky = (() => {
         dusk: Object.freeze({ cloudCoverage: 0.31, haze: 1.15 })
     });
     const observationCache = new Map();
-    let mode = 'live';
+    let mode = 'live', alignment = null;
     return Object.freeze({
         get mode() { return mode; },
+        get calibratedSunAltitude() { return alignment ? Math.asin(Math.max(-1, Math.min(1, alignment.sunDirection[1]))) * 180 / Math.PI : null; },
+        get calibratedSunDirection() { return alignment ? [...alignment.sunDirection] : null; },
+        setAlignment(value) {
+            if (value !== null && (value?.kind !== 'art-direction-calibration' || value.coordinateSystem !== 'sky-y-up-plus-z' || !Array.isArray(value.sunDirection) || value.sunDirection.length !== 3 || !value.sunDirection.every(Number.isFinite) || !Number.isFinite(Math.hypot(...value.sunDirection)) || Math.hypot(...value.sunDirection) < .00001)) return false;
+            const next = value === null ? null : { kind: value.kind, coordinateSystem: value.coordinateSystem, sunDirection: value.sunDirection.map(component => component / Math.hypot(...value.sunDirection)) };
+            if (JSON.stringify(next) === JSON.stringify(alignment)) return true;
+            alignment = next; skyModel.nextRefreshAt = 0; return true;
+        },
         setMode(value) {
             const requested = value === 'day' ? 'clear' : value;
             if (!Object.prototype.hasOwnProperty.call(presets, requested)) return false;
@@ -26,8 +34,9 @@ window.SceneSky = (() => {
                 mode,
                 ...presets[mode],
                 observationDate: skyModel.date?.toISOString() || null,
-                sunAltitude: sun?.altitude ?? -90,
-                sunDirection: sun?.direction ? [...sun.direction] : [0, -1, 0]
+                sunAltitude: alignment ? Math.asin(Math.max(-1, Math.min(1, alignment.sunDirection[1]))) * 180 / Math.PI : sun?.altitude ?? -90,
+                sunDirection: alignment ? [...alignment.sunDirection] : sun?.direction ? [...sun.direction] : [0, -1, 0],
+                alignment: alignment ? { ...alignment, sunDirection: [...alignment.sunDirection] } : null
             };
         },
         observationDate(referenceDate = new Date()) {
@@ -149,6 +158,8 @@ function celestialUpperLimbAltitude(profile) {
 
 function celestialAboveHorizon(profile) {
     if (!profile?.current) return false;
+    if (profile.id === 'sun' && Number.isFinite(window.SceneSky?.calibratedSunAltitude)) return isAboveHorizon(celestialSceneDirection(profile));
+    if (!skyHasHorizon()) return isAboveHorizon(profile.current.direction);
     if (profile.angularDisc) {
         return celestialUpperLimbAltitude(profile) >= 0;
     }
@@ -166,8 +177,10 @@ function twilightMagnitudeLimit(sunAltitude) {
 
 function skyRenderingParameters() {
     const sun = celestialBodies.find(profile => profile.id === 'sun')?.current;
-    const sunAltitude = Number.isFinite(sun?.altitude) ? sun.altitude : -90;
-    const localSunDirection = sun?.direction || [0, -1, 0];
+    const presentation = window.SceneSky?.snapshot();
+    const sourceAltitude = presentation?.alignment ? presentation.sunAltitude : sun?.altitude;
+    const sunAltitude = skyHasHorizon() && Number.isFinite(sourceAltitude) ? sourceAltitude : -90;
+    const localSunDirection = presentation?.alignment ? presentation.sunDirection : sun?.direction || [0, -1, 0];
     const horizontalSunLength = Math.hypot(
         localSunDirection[0],
         localSunDirection[2]
@@ -179,7 +192,6 @@ function skyRenderingParameters() {
             localSunDirection[2] / horizontalSunLength
         ]
         : null;
-    const presentation = window.SceneSky?.snapshot();
     return {
         mode: presentation?.mode || 'live',
         cloudCoverage: presentation?.cloudCoverage || 0,
@@ -201,29 +213,37 @@ function skyRenderingParameters() {
     };
 }
 
+function celestialSceneDirection(profile) {
+    return (profile?.id === 'sun' ? window.SceneSky?.calibratedSunDirection : null) || profile?.current?.direction;
+}
+
+function celestialSceneSunAltitude() {
+    return window.SceneSky?.calibratedSunAltitude ?? celestialBodies.find(profile => profile.id === 'sun')?.current?.altitude;
+}
+
 function naturalStarVisibilityAtDirection(direction, magnitude = 0) {
     if (!isAboveHorizon(direction)) return 0;
+    const terrestrial = skyHasHorizon();
     const altitude = Math.asin(clamp(direction[1], -1, 1)) / DEG;
-    const extinction = atmosphericExtinction(altitude);
+    const extinction = terrestrial ? atmosphericExtinction(altitude) : 0;
     const apparentMagnitude = magnitude + (
         Number.isFinite(extinction) ? extinction : 0
     );
-    const limit = twilightMagnitudeLimit(
-        celestialBodies.find(profile => profile.id === 'sun')?.current?.altitude
-    );
+    const limit = terrestrial ? twilightMagnitudeLimit(celestialSceneSunAltitude()) : 6.5;
     const magnitudeVisibility = 1 - smoothstep(
         limit - 0.35,
         limit + 0.25,
         apparentMagnitude
     );
-    const horizonVisibility = smoothstep(0, Math.sin(1 * DEG), direction[1]);
+    const horizonVisibility = terrestrial ? smoothstep(0, Math.sin(1 * DEG), direction[1]) : 1;
     return clamp(magnitudeVisibility * horizonVisibility, 0, 1);
 }
 
 function daylightConstellationGuideAtDirection(direction, magnitude = 0) {
+    if (!skyHasHorizon()) return 0;
     if (!isAboveHorizon(direction)) return 0;
-    const sun = celestialBodies.find(profile => profile.id === 'sun')?.current;
-    const sunAltitude = sun?.altitude;
+    const sunProfile = celestialBodies.find(profile => profile.id === 'sun');
+    const sunAltitude = celestialSceneSunAltitude();
     if (!Number.isFinite(sunAltitude) || sunAltitude <= -6) return 0;
     const daylight = smoothstep(-6, 2, sunAltitude);
     const horizonVisibility = smoothstep(
@@ -231,7 +251,7 @@ function daylightConstellationGuideAtDirection(direction, magnitude = 0) {
         Math.sin(4 * DEG),
         direction[1]
     );
-    const separation = angularSeparationDegrees(direction, sun.direction);
+    const separation = angularSeparationDegrees(direction, celestialSceneDirection(sunProfile));
     const glareVisibility = Number.isFinite(separation)
         ? lerp(0.5, 1, smoothstep(10, 55, separation))
         : 0.75;
@@ -308,11 +328,12 @@ function classifyCelestialVisibility(profile, sunAltitude) {
     const extinctionAltitude = profile.angularDisc
         ? Math.max(0.1, celestialDisplayAltitude(profile))
         : current.altitude;
-    current.extinction = atmosphericExtinction(extinctionAltitude);
+    const terrestrial = skyHasHorizon();
+    current.extinction = terrestrial ? atmosphericExtinction(extinctionAltitude) : 0;
     current.apparentMagnitude = current.magnitude + (
         Number.isFinite(current.extinction) ? current.extinction : 0
     );
-    current.skyMagnitudeLimit = twilightMagnitudeLimit(sunAltitude);
+    current.skyMagnitudeLimit = terrestrial ? twilightMagnitudeLimit(sunAltitude) : 6.5;
     current.aboveHorizon = celestialAboveHorizon(profile);
     current.nakedEyeAlpha = 0;
 
@@ -329,7 +350,7 @@ function classifyCelestialVisibility(profile, sunAltitude) {
         current.nakedEyeVisible = false;
         return;
     }
-    if (profile.visibilityModel === 'moon' && sunAltitude > -6) {
+    if (terrestrial && profile.visibilityModel === 'moon' && sunAltitude > -6) {
         current.daylightContrast = moonDaylightContrast(profile, sunAltitude);
         current.nakedEyeAlpha = smoothstep(
             0.08,
@@ -481,7 +502,7 @@ function calculateCelestialPositions() {
             sunCurrent.direction
         );
     });
-    const sunAltitude = sunCurrent?.altitude;
+    const sunAltitude = celestialSceneSunAltitude();
     celestialBodies.forEach(profile => classifyCelestialVisibility(profile, sunAltitude));
     updateCelestialNavigationCopy();
 }
@@ -518,7 +539,7 @@ function refreshAstronomicalSky(date = new Date()) {
                 celestialAboveHorizon(state.activeCelestial)
             ) {
                 state.celestialVisit.focusOrientation = routePointFraming(
-                    state.activeCelestial.current.direction,
+                    celestialSceneDirection(state.activeCelestial),
                     state.panelOnLeft,
                     state.celestialVisit.focusFov
                 );

@@ -70,7 +70,7 @@
             world.lights = lights; reset(); transition = performance.now();
             window.NightPanorama?.select?.(id, api.skyMode);
             try { localStorage.setItem('runde:night-world:v1', id); } catch (_) { /* Optional preference. */ }
-            api.ready = true; document.body.classList.add('world-ready'); changed(); return true;
+            api.ready = true; skyModel.nextRefreshAt = 0; document.body.classList.add('world-ready'); changed(); return true;
         },
         reset,
         setSkyMode(mode) {
@@ -117,7 +117,7 @@
             document.body.classList.toggle('world-explore-mode', mode === 'explore');
             document.body.classList.toggle('world-observe-mode', mode === 'observe');
             document.body.classList.toggle('world-sky-mode', mode === 'sky');
-            window.NightPanorama?.setMode?.(mode); changed(); return true;
+            window.NightPanorama?.setMode?.(mode); skyModel.nextRefreshAt = 0; changed(); return true;
         },
         look(dx, dy, multiplier = 1) {
             if (!api.ready || api.mode === 'sky' || state.scene !== 'roam' || state.modalOpen || state.gateOpen) return false;
@@ -223,6 +223,26 @@
         const result = { id, group: new T.Group(), spawn: observation.position.slice(), observation, colliders: [], interactions: [], fullScene: false };
         if (id === 'spaceship') result.pilot = { seat: metadata.pilot?.seat || [0,1.68,-9.95], exit: metadata.pilot?.exit || [1.65,1.68,-8.75], active: true, throttle: 0, speed: 0, distance: 0 };
         return result;
+    }
+    function syncObservation(event) {
+        const detail = event.detail, observation = detail?.metadata?.observation;
+        if (!world || world.fullScene || detail.scene !== api.currentId || api.mode !== 'observe' || !observation) return;
+        if (!Array.isArray(observation.position) || observation.position.length !== 3 || !observation.position.every(Number.isFinite) || !Number.isFinite(observation.yaw) || !Number.isFinite(observation.pitch)) return;
+        if (JSON.stringify(world.observation) === JSON.stringify(observation)) return;
+        const previous = world.observation || {}, oldBase = orientationFromYawPitch(previous.yaw ?? 0, previous.pitch ?? .09);
+        const newBase = orientationFromYawPitch(observation.yaw, observation.pitch);
+        const adjustment = quatMultiply(newBase, quatConjugate(oldBase));
+        camera.orientation = globalOrientation(quatNormalize(quatMultiply(adjustment, localOrientation(camera.orientation))));
+        camera.targetOrientation = globalOrientation(quatNormalize(quatMultiply(adjustment, localOrientation(camera.targetOrientation))));
+        camera.lastStableYaw += observation.yaw - (previous.yaw ?? 0);
+        world.observation = { ...observation, position: observation.position.slice() };
+        world.spawn = observation.position.slice();
+        if (world.pilot) {
+            world.pilot.seat = (detail.metadata.pilot?.seat || observation.position).slice();
+            if (detail.metadata.pilot?.exit?.every(Number.isFinite)) world.pilot.exit = detail.metadata.pilot.exit.slice();
+        }
+        [player.x, player.y, player.z] = world.pilot?.seat || observation.position;
+        changed();
     }
     function validateWorld(w) {
         if (!w?.group?.isGroup || !w.spawn?.every(Number.isFinite)) throw new Error('Invalid world or arrival position');
@@ -507,6 +527,7 @@
         }
     });
     window.addEventListener('resize',resize);
+    window.addEventListener('nightpanorama:metadata', syncObservation);
     function ensureRenderer() {
         if (renderer) return;
         const canvas = document.getElementById('environmentCanvas');

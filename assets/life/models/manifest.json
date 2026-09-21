@@ -1,0 +1,627 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "provider": "Poly Haven",
+  "providerLicenseUrl": "https://polyhaven.com/license",
+  "updated": "2026-09-14",
+  "assets": [
+    {
+      "id": "large_castle_door",
+      "resolution": "4k",
+      "provider": "Poly Haven",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "source": "https://polyhaven.com/a/large_castle_door",
+      "filesApi": "https://api.polyhaven.com/files/large_castle_door",
+      "infoApi": "https://api.polyhaven.com/info/large_castle_door",
+      "description": "Free 4K model - arched medieval double wooden door with weathered wood, iron straps, rivets, ring handles and small barred windows; fortified character.",
+      "authors": {
+        "Tina": "All"
+      },
+      "polycount": 12640,
+      "dimensions": [
+        2012.115716934204,
+        338.9068990945816,
+        2964.752435684204
+      ],
+      "retrieved": "2026-09-14",
+      "files": [
+        {
+          "path": "assets/life/models/large_castle_door/large_castle_door_4k.gltf",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/large_castle_door/large_castle_door_4k.gltf",
+          "bytes": 6111,
+          "md5": "3abd0c23643758b5508027147c54dbd8",
+          "sha256": "874736c4202b0c1082156ad7e95180def6f716de91362f8248fcabc9abdff145",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/large_castle_door/textures/large_castle_door_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/large_castle_door/large_castle_door_nor_gl_4k.jpg",
+          "bytes": 18078086,
+          "md5": "22f88b49fcd07b466a1add2ecf8912bd",
+          "sha256": "e4e656909b836b2bb71adb1adf69d8820a62e2fd3be2caf5b36c7c8720b5eea1",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/large_castle_door/large_castle_door.bin",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/large_castle_door/large_castle_door.bin",
+          "bytes": 422436,
+          "md5": "ed0cee2626677b1a520de7bd868d09cc",
+          "sha256": "7db2eb9d2b81207a30c849ba5de0f2c25085add88e437bc69764ce792758ff76",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/large_castle_door/textures/large_castle_door_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/large_castle_door/large_castle_door_diff_4k.jpg",
+          "bytes": 12106778,
+          "md5": "ba6bbeffc53a0aa0b1b118ace608ed1e",
+          "sha256": "b38856085d56f25bc2655f8be4d05a1091a19317f526e33c96b202c87e813f81",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/large_castle_door/textures/large_castle_door_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/large_castle_door/large_castle_door_arm_4k.jpg",
+          "bytes": 13843417,
+          "md5": "9291c781b0b336236b8807901e12783f",
+          "sha256": "36e5f8a728f6d2cf809e3ef82dcd4209b46c67ae9814916cd22362b2cc203eef",
+          "reused": true
+        }
+      ]
+    },
+    {
+      "id": "modular_electricity_poles",
+      "resolution": "4k",
+      "provider": "Poly Haven",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "source": "https://polyhaven.com/a/modular_electricity_poles",
+      "filesApi": "https://api.polyhaven.com/files/modular_electricity_poles",
+      "infoApi": "https://api.polyhaven.com/info/modular_electricity_poles",
+      "description": "Free 8K modular electricity poles: realistic weathered wooden utility poles with transformers, crossarms, insulators, junction boxes and cable segments - perfect for urban scenes.",
+      "authors": {
+        "James Ray Cock": "All"
+      },
+      "polycount": 200610,
+      "dimensions": [
+        13119.13776397705,
+        1957.2706818580627,
+        7000.0002812594175
+      ],
+      "retrieved": "2026-09-14",
+      "files": [
+        {
+          "path": "assets/life/models/modular_electricity_poles/modular_electricity_poles_4k.gltf",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/modular_electricity_poles/modular_electricity_poles_4k.gltf",
+          "bytes": 149324,
+          "md5": "b2808506d5a37f409d60c470a715abee",
+          "sha256": "a4651f126747c4a71e5f144ace2726bbfd252f71f7f54987df78a8eb2d00d713",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_electricity_poles/textures/modular_electricity_poles_pieces_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_electricity_poles/modular_electricity_poles_pieces_diff_4k.jpg",
+          "bytes": 8482227,
+          "md5": "883b1cadd262eb08057e7dedd5a1e928",
+          "sha256": "3ae3c20de121123e2035ed0985954219a9ff8230180000a13480093ee6b84049",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_electricity_poles/modular_electricity_poles.bin",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/modular_electricity_poles/modular_electricity_poles.bin",
+          "bytes": 7215652,
+          "md5": "c6214884e3bd6ea4a2ea20b795c648f4",
+          "sha256": "143bc8cd007674c74a6bac784a24fd4181234c07498b3a2bbdbf6abcd8a5897f",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_electricity_poles/textures/modular_electricity_poles_pieces_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_electricity_poles/modular_electricity_poles_pieces_arm_4k.jpg",
+          "bytes": 11183966,
+          "md5": "fb84ff035cdde937eba865dfa25b72ad",
+          "sha256": "e267a9033b0b4bd53f68fd83b40cdb4d7df682a2364349a5f8d92622f37bfbf0",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_electricity_poles/textures/modular_electricity_poles_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_electricity_poles/modular_electricity_poles_diff_4k.jpg",
+          "bytes": 10066538,
+          "md5": "a5f04134008bc8617a36c8741ca06373",
+          "sha256": "a630bbafc637d38db1472c88fffbd6b8202ffa1c7c22d9575a73b325fc3e1ad7",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_electricity_poles/textures/modular_electricity_poles_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_electricity_poles/modular_electricity_poles_nor_gl_4k.jpg",
+          "bytes": 14567934,
+          "md5": "47a7cea771b89f19e9d05038382ecc79",
+          "sha256": "1c278ad56b392fc53d91a56b764796c0317bd03a1c4fd6c10c4d6af932b53b7d",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_electricity_poles/textures/modular_electricity_poles_pieces_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_electricity_poles/modular_electricity_poles_pieces_nor_gl_4k.jpg",
+          "bytes": 9531579,
+          "md5": "fbc104e5205ff983c9c8c184f6f7bc01",
+          "sha256": "cbdf933477e2f4a2ac36cc6c29aff2b332a68174bbeb4ed7b594f02c35bd3df4",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_electricity_poles/textures/modular_electricity_poles_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_electricity_poles/modular_electricity_poles_arm_4k.jpg",
+          "bytes": 10141508,
+          "md5": "82563a13deb04d7ace973f7b18d0d973",
+          "sha256": "f1f12346bb01b1e9bc374e94a9933dd822d035039add49859bd63ab6a5623fd5",
+          "reused": false
+        }
+      ]
+    },
+    {
+      "id": "modular_factory_facade",
+      "resolution": "4k",
+      "provider": "Poly Haven",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "source": "https://polyhaven.com/a/modular_factory_facade",
+      "filesApi": "https://api.polyhaven.com/files/modular_factory_facade",
+      "infoApi": "https://api.polyhaven.com/info/modular_factory_facade",
+      "description": "Free 8K modular factory facade model with brick panels, varied windows, doors and loading bays - industrial warehouse exterior tiles for flexible assembly.",
+      "authors": {
+        "James Ray Cock": "All"
+      },
+      "polycount": 175014,
+      "dimensions": [
+        53329.99801635742,
+        5356.249764561653,
+        29000
+      ],
+      "retrieved": "2026-09-14",
+      "files": [
+        {
+          "path": "assets/life/models/modular_factory_facade/modular_factory_facade_4k.gltf",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/modular_factory_facade/modular_factory_facade_4k.gltf",
+          "bytes": 372666,
+          "md5": "070ebef3234e847f56ad37a97309ef2e",
+          "sha256": "2a6fe32cd911a371171da1986c4c5747590577ae116f7d351fa9d7a10a05d2b4",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_windows_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_windows_nor_gl_4k.jpg",
+          "bytes": 11881088,
+          "md5": "c91219b6159338b826c9e90f4d48e155",
+          "sha256": "4cbcdfb23fc6f3fca43cd1adb5a61a9a79ee7bb98765cb52afa5ca7f6b8d635e",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_brick_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_brick_diff_4k.jpg",
+          "bytes": 16319198,
+          "md5": "b37f82a8ca107d2a66d04de9efa42f92",
+          "sha256": "8649ad9d985844eb478a712a4d5a96c6d08abd07df08fbdcf8cc616c6e657423",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_brick_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_brick_arm_4k.jpg",
+          "bytes": 8904127,
+          "md5": "65b6a0b0ad4df1caf17d9c8539f31cfe",
+          "sha256": "5de39e9f831d405b2aa5e82e3fb72186d5e858a7f76f7444507bbb568b74676e",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_garage_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_garage_nor_gl_4k.jpg",
+          "bytes": 13189576,
+          "md5": "86acdf6ad4ee255c1897804d88929a21",
+          "sha256": "c68e54c5f4a6c0e9c36730336fa8e58b991420eafa8adc189904eea1c0341424",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_trim_01_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_trim_01_arm_4k.jpg",
+          "bytes": 13460532,
+          "md5": "4c2d3d763c10ff6534af6e7b290253e1",
+          "sha256": "55b9842f760a3fb2002f7a18a28180b1331ec7783fbd6d40d7cad0dcd0aed069",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_doors_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_doors_arm_4k.jpg",
+          "bytes": 9340387,
+          "md5": "c4444efb3b4cd4ab84f30e693b5388c7",
+          "sha256": "fd720afca1e7f984f949f756db88eb45abb6af8ad07ad6315f3ad15eaa4a544b",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_windows_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_windows_arm_4k.jpg",
+          "bytes": 13257674,
+          "md5": "666c7c207270e4ad2b3351d7fd4a417c",
+          "sha256": "c17a281f7d50de823a15d62778981823ad14ccf3b7d1756c9e9ac7dad391cfed",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_trim_01_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_trim_01_nor_gl_4k.jpg",
+          "bytes": 16910042,
+          "md5": "a531d63b061ba947f8999b43cf020375",
+          "sha256": "e908657d41cff2a2e2b7f4dca8cd19c06bb0994b77b49a6d1aea54482d9b3523",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_brick_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_brick_nor_gl_4k.jpg",
+          "bytes": 10182584,
+          "md5": "1974578199f57851ccc659314da25f9b",
+          "sha256": "d97c7f75f3bd537744d1686b2a908b1d3aa4cb9113762a50477c809979988971",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_trim_01_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_trim_01_diff_4k.jpg",
+          "bytes": 10316441,
+          "md5": "7366fcd35989e658401bbebe22e69d6d",
+          "sha256": "fdb36325457e85e99d53f12b43693ac0d97eb8b7061a1e7b27272c6f4468e510",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_garage_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_garage_diff_4k.jpg",
+          "bytes": 8042194,
+          "md5": "b95c003696b90ac82db47603a6c6d648",
+          "sha256": "978214b8ab0ea46be1844492595937138930395b2845b7e32849318cf8e6172f",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_doors_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_doors_nor_gl_4k.jpg",
+          "bytes": 7942407,
+          "md5": "8648001ff77f40706ce031f8a76b1831",
+          "sha256": "506d9148769f06178bcd822c09095f093669381609efd130610056bcf62fdc1f",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_doors_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_doors_diff_4k.jpg",
+          "bytes": 7434692,
+          "md5": "399de29e3a2e5b6e17998fae48d4c286",
+          "sha256": "88cc202ccdc0b7d4dee39581410417f33bf1830ba5d9e0df8637b255ca123945",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_garage_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_garage_arm_4k.jpg",
+          "bytes": 9612038,
+          "md5": "84939050758cfdbd41d8fa4c3368cdb2",
+          "sha256": "be41b5d2febd4b1fb14996c825c2bba00685801b533fbe0b7bc0aedf885663bf",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/textures/modular_factory_facade_windows_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_factory_facade/modular_factory_facade_windows_diff_4k.jpg",
+          "bytes": 8922099,
+          "md5": "91c06a8b54e027e8b04fca725d07db43",
+          "sha256": "fbf7d84c35acd54b9dc5fde79fc025d0dc0d5c57f5abd706dfb9c32005814b8e",
+          "reused": false
+        },
+        {
+          "path": "assets/life/models/modular_factory_facade/modular_factory_facade.bin",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/modular_factory_facade/modular_factory_facade.bin",
+          "bytes": 6269260,
+          "md5": "225eee006759007851584344b0b22847",
+          "sha256": "12702fb065a838695e0621e1aac3947af92d32c439fb965c8b0563ad691fed70",
+          "reused": false
+        }
+      ]
+    },
+    {
+      "id": "modular_fort_01",
+      "resolution": "4k",
+      "provider": "Poly Haven",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "source": "https://polyhaven.com/a/modular_fort_01",
+      "filesApi": "https://api.polyhaven.com/files/modular_fort_01",
+      "infoApi": "https://api.polyhaven.com/info/modular_fort_01",
+      "description": "Free 8K modular fort model - weathered colonial stone blocks, battlements, towers, ramparts and an arched gate with mossy, aged surface detail.",
+      "authors": {
+        "Rico Cilliers": "All"
+      },
+      "polycount": 28218,
+      "dimensions": [
+        71375.29754638672,
+        42669.87609863281,
+        13672.092854976654
+      ],
+      "retrieved": "2026-09-14",
+      "files": [
+        {
+          "path": "assets/life/models/modular_fort_01/modular_fort_01_4k.gltf",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/modular_fort_01/modular_fort_01_4k.gltf",
+          "bytes": 71433,
+          "md5": "1cf227fcd0ce1d89cd92b19ae5a3b6cd",
+          "sha256": "bc8b7a4c959a23c1cb7c336e7db2891b268cf61cda2a71627437f97c91ac797d",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/modular_fort_01/textures/modular_fort_01_wall_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_fort_01/modular_fort_01_wall_nor_gl_4k.jpg",
+          "bytes": 16840071,
+          "md5": "c6746f55395592e39341bd2aab5d99f3",
+          "sha256": "18599d17d9755af8a40c6a37c58c70be067b842145f94a1a5d03801ac72e23b2",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/modular_fort_01/textures/modular_fort_01_trim_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_fort_01/modular_fort_01_trim_nor_gl_4k.jpg",
+          "bytes": 16465831,
+          "md5": "760632609ef06bcd9d49a62162876173",
+          "sha256": "b2c1571a277b782759efd59d26b6613240809e089690cb43c6150906c747984a",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/modular_fort_01/modular_fort_01.bin",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/modular_fort_01/modular_fort_01.bin",
+          "bytes": 1288144,
+          "md5": "49bfa2a55e65c997840799099ad6ffa5",
+          "sha256": "de86e71af4cd5b37006914a8e7ae7de59b245b73364317f1886285a6aa797f57",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/modular_fort_01/textures/modular_fort_01_wall_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_fort_01/modular_fort_01_wall_arm_4k.jpg",
+          "bytes": 12729696,
+          "md5": "fb663616475a1ed8133a279a3dabf7eb",
+          "sha256": "be11ef4e9ff7635998e2db6880c555cf1c5f69793ea4fd3a1fee59fe8761b806",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/modular_fort_01/textures/modular_fort_01_plaster_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_fort_01/modular_fort_01_plaster_nor_gl_4k.jpg",
+          "bytes": 18711130,
+          "md5": "a589a539ca90b8feb6ce40907c61171a",
+          "sha256": "a76aea190d45cef82fb94496cf4e9d34586eef3406e8e83f02ca0e6000ce50ea",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/modular_fort_01/textures/modular_fort_01_wall_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_fort_01/modular_fort_01_wall_diff_4k.jpg",
+          "bytes": 14400479,
+          "md5": "74c67c50ac8a1af0c834114683a221bd",
+          "sha256": "097a96f3991ea22c4610e8f65783dd3fe8eb80785527027213c0c98437b9ec64",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/modular_fort_01/textures/modular_fort_01_plaster_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_fort_01/modular_fort_01_plaster_arm_4k.jpg",
+          "bytes": 10989119,
+          "md5": "1fe45f575b5cd2bac5a6989b400c71fe",
+          "sha256": "b276fe3c7e102761e7b9dad216b0f08e2830f0dc1b4648b07fcca94091887695",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/modular_fort_01/textures/modular_fort_01_plaster_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_fort_01/modular_fort_01_plaster_diff_4k.jpg",
+          "bytes": 16298194,
+          "md5": "365e68d8797716b3e7cd387b32fedadf",
+          "sha256": "44cb2d32d190ad95873754f0c0bf7dcf16db4744ed18c1c7d171e32e58559bba",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/modular_fort_01/textures/modular_fort_01_trim_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_fort_01/modular_fort_01_trim_diff_4k.jpg",
+          "bytes": 12601946,
+          "md5": "22c3d8f8e885f16c916953a009da3c4c",
+          "sha256": "42de78116beba077dbc5cc5d2788ba67d14c988121e4970f972488eb6df62209",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/modular_fort_01/textures/modular_fort_01_trim_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/modular_fort_01/modular_fort_01_trim_arm_4k.jpg",
+          "bytes": 11387622,
+          "md5": "45e4273bdfda795bebaa0a6c89b58a4b",
+          "sha256": "fc42582c889964c5bbfd2eaa435ad5c711be28cfefcf3937dd73e3184ed9a208",
+          "reused": true
+        }
+      ]
+    },
+    {
+      "id": "mountainside",
+      "resolution": "4k",
+      "provider": "Poly Haven",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "source": "https://polyhaven.com/a/mountainside",
+      "filesApi": "https://api.polyhaven.com/files/mountainside",
+      "infoApi": "https://api.polyhaven.com/info/mountainside",
+      "description": "Free 8K Mountainside model: a weathered cliff rock face with layered, jagged boulders, visible lichen patches, and rugged earthy, high-detail surface textures.",
+      "authors": {
+        "Dario Barresi": "Photography",
+        "Rico Cilliers": "processing"
+      },
+      "polycount": 287755,
+      "dimensions": [
+        10214.37692642212,
+        5254.634857177734,
+        10526.674702763557
+      ],
+      "retrieved": "2026-09-14",
+      "files": [
+        {
+          "path": "assets/life/models/mountainside/mountainside_4k.gltf",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/mountainside/mountainside_4k.gltf",
+          "bytes": 2776,
+          "md5": "6189b48359e782b3d116016af57e3606",
+          "sha256": "5c93eeffba983be5ac1974e469db6f0cb65f47c92b76f6a98ca4f7aa885823ed",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/mountainside/textures/mountainside_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/mountainside/mountainside_diff_4k.jpg",
+          "bytes": 13492897,
+          "md5": "111e596e02d0ec169ab822427fb7ece9",
+          "sha256": "a8dce0eb7e1a0979bd627644ce74d4cf504935cfbae1d4cd8c7fc734145eb089",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/mountainside/textures/mountainside_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/mountainside/mountainside_arm_4k.jpg",
+          "bytes": 10546227,
+          "md5": "7ac2b5f8a7a9717d42161a30d4a38031",
+          "sha256": "ad469f25399543b80af34f1bc96835187d579af7452c4f8d9a2a3ee708197de6",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/mountainside/mountainside.bin",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/mountainside/mountainside.bin",
+          "bytes": 4409280,
+          "md5": "a4ac37444e3313bd9f9ff459eb71418d",
+          "sha256": "08e4ca60e050045de8224d12d23af84f9406bc558943038114d81e184158d953",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/mountainside/textures/mountainside_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/mountainside/mountainside_nor_gl_4k.jpg",
+          "bytes": 16250646,
+          "md5": "eb9ce5226771b941338360091f284ad4",
+          "sha256": "b6f6e083f8731219fb509e424cdd5233829a504063082374c216a8dcd543c6da",
+          "reused": true
+        }
+      ]
+    },
+    {
+      "id": "rock_07",
+      "resolution": "4k",
+      "provider": "Poly Haven",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "source": "https://polyhaven.com/a/rock_07",
+      "filesApi": "https://api.polyhaven.com/files/rock_07",
+      "infoApi": "https://api.polyhaven.com/info/rock_07",
+      "description": "Free 8K model: weathered boulder with rugged erosion-worn surfaces and rich earth tones, perfect for realistic landscapes and trail or geological scenes.",
+      "authors": {
+        "Jenelle van Heerden": "All"
+      },
+      "polycount": 27830,
+      "dimensions": [
+        169.10234838724136,
+        320.554181933403,
+        143.77418451476842
+      ],
+      "retrieved": "2026-09-14",
+      "files": [
+        {
+          "path": "assets/life/models/rock_07/rock_07_4k.gltf",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/rock_07/rock_07_4k.gltf",
+          "bytes": 2979,
+          "md5": "00c41fa453f9644021f5ec4ddf19742e",
+          "sha256": "03f0a155776cc01a7fa490e3c7c3193c04da72ddc6ca17e5ed254ab7edfe4d25",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/rock_07/rock_07.bin",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/rock_07/rock_07.bin",
+          "bytes": 468936,
+          "md5": "817b2cfd1626cb06f18a825f87f58ec3",
+          "sha256": "e4a532a6d6cf4a08c288f501b790f32cba0528136a29959ce774c3cd39369e7e",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/rock_07/textures/rock_07_arm_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/rock_07/rock_07_arm_4k.jpg",
+          "bytes": 2308060,
+          "md5": "2674759c048370ae200e9573f2dbd426",
+          "sha256": "e58597f48eda2e5bbc7bf8deaec1a61d050c655caef375d17e7b8d51c8e9be91",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/rock_07/textures/rock_07_nor_gl_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/rock_07/rock_07_nor_gl_4k.jpg",
+          "bytes": 9934279,
+          "md5": "70835832d757ed97293565f573bf68b3",
+          "sha256": "6a3fd625213ba878f362caab2aa97ceb99b7f7069d3628ccfce328c5e74e9252",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/rock_07/textures/rock_07_diff_4k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/4k/rock_07/rock_07_diff_4k.jpg",
+          "bytes": 7671132,
+          "md5": "f6ee75f0540e35919406483601b259aa",
+          "sha256": "cbd36cb09f28730c3e79fcc2fee35e35509be21cd89bf1220c2d4f0c90dabfcb",
+          "reused": true
+        }
+      ]
+    },
+    {
+      "id": "rock_09",
+      "resolution": "1k",
+      "provider": "Poly Haven",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "providerLicenseUrl": "https://polyhaven.com/license",
+      "source": "https://polyhaven.com/a/rock_09",
+      "filesApi": "https://api.polyhaven.com/files/rock_09",
+      "infoApi": "https://api.polyhaven.com/info/rock_09",
+      "description": "Free 8K weathered boulder model with rugged, rust-brown stone, detailed dirt and erosion - ideal for natural terrain and landscape scenes.",
+      "authors": {
+        "Jenelle van Heerden": "All"
+      },
+      "polycount": 23280,
+      "dimensions": [
+        74.13503155112267,
+        144.81624960899353,
+        32.94885210925713
+      ],
+      "retrieved": "2026-09-14",
+      "files": [
+        {
+          "path": "assets/life/models/rock_09/rock_09_1k.gltf",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/rock_09/rock_09_1k.gltf",
+          "bytes": 2745,
+          "md5": "d12ac6e8433fe1346fe6945154269f66",
+          "sha256": "636e57eb0090889627da18edaec202ff9f65f83101b94f91b7da4d21dc080ab9",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/rock_09/textures/rock_09_arm_1k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rock_09/rock_09_arm_1k.jpg",
+          "bytes": 322950,
+          "md5": "323d7cca17cd87656e7f80230a372368",
+          "sha256": "594e2cec49e6bb40bd9bab2649e37dcc261079456cf4d6f680f56770c19db5ea",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/rock_09/textures/rock_09_nor_gl_1k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rock_09/rock_09_nor_gl_1k.jpg",
+          "bytes": 757031,
+          "md5": "dc1a208133a23006582f792a309c2dcc",
+          "sha256": "2195b5c7da3a23af2a5f93dbb20f38bc069028509b106397bc8d2aee0bc55729",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/rock_09/textures/rock_09_diff_1k.jpg",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rock_09/rock_09_diff_1k.jpg",
+          "bytes": 595103,
+          "md5": "07f92b23d6e05fbd28cbabecdd98b321",
+          "sha256": "afb7ae5ae82238d304aba589391ac6bc87f7cf1dbfe50980c21f762cfdd87efd",
+          "reused": true
+        },
+        {
+          "path": "assets/life/models/rock_09/rock_09.bin",
+          "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/rock_09/rock_09.bin",
+          "bytes": 286592,
+          "md5": "6f2f71c9ca594566c1a3b29da27293a1",
+          "sha256": "780c37d6fc11ca3a01c3763535ef883908b6007271a46bd446d2289ded820751",
+          "reused": true
+        }
+      ]
+    }
+  ]
+}

@@ -84,6 +84,9 @@ const lifeRuntimeScripts = lifeScripts.filter(resource =>
 const lifeStylesheets = localStylesheetResources(lifeHtml).filter(resource =>
     resource.relativePath.startsWith('assets/life/styles/')
 );
+const releaseVersions = [...lifeScripts, ...lifeStylesheets].map(resource => new URL(resource.reference, 'https://life.invalid/').searchParams.get('v'));
+assert(releaseVersions.every(Boolean), 'Every local Life script and stylesheet must carry a cache-release version');
+assert.equal(new Set(releaseVersions).size, 1, 'All Life scripts and stylesheets must share one release version to prevent mixed cached runtimes');
 assert.equal(lifeRuntimeScripts.length, 24, 'life.html must load the sky, panorama and environment runtime scripts');
 assert.equal(lifeStylesheets.length, 8, 'life.html must load the sky and environment stylesheets');
 assert(
@@ -472,10 +475,10 @@ assert(
     'Night-sky base color must use a real altitude-derived tone'
 );
 assert(
-    /galaxy\s*\*=\s*smoothstep\(\s*0\.0\s*,\s*sin\(\s*radians\(\s*8\.0\s*\)\s*\)\s*,\s*sinAltitude\s*\)\s*;/.test(
+    /galaxy\s*\*=\s*mix\(smoothstep\(\s*0\.0\s*,\s*sin\(\s*radians\(\s*8\.0\s*\)\s*\)\s*,\s*sinAltitude\s*\),\s*1\.0,\s*uSpace\)\s*;/.test(
         galaxySource
     ),
-    'Milky Way transmission must rise from zero at 0 degrees to full strength at 8 degrees altitude'
+    'Milky Way transmission must retain atmospheric horizon fade on the ground and bypass it in space'
 );
 assert(
     /vec3\s+skyColor\s*=\s*mix\(\s*nightSky\s*,\s*twilightSky\s*,\s*twilightLift\s*\)\s*;\s*skyColor\s*=\s*mix\(\s*skyColor\s*,\s*daylightSky\s*,\s*daylight\s*\)\s*;/.test(

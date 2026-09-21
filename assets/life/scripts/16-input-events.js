@@ -374,7 +374,7 @@ function handleViewportResize() {
         visit.panelOnLeft = !usesCompactSkyLayout() &&
             Boolean(visit.preferredPanelOnLeft);
         visit.focusOrientation = routePointFraming(
-            visit.profile.current.direction,
+            celestialSceneDirection(visit.profile),
             visit.panelOnLeft,
             visit.focusFov
         );
@@ -430,7 +430,7 @@ function handleViewportResize() {
         dom.celestialPanel.classList.toggle('is-left', state.panelOnLeft);
         dom.body.classList.toggle('panel-left', state.panelOnLeft);
         state.celestialVisit.focusOrientation = routePointFraming(
-            state.activeCelestial.current.direction,
+            celestialSceneDirection(state.activeCelestial),
             state.panelOnLeft,
             state.detailFov
         );

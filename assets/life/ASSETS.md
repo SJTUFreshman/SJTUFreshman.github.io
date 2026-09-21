@@ -13,6 +13,16 @@ or when a local asset cannot load.
 These are purely environmental visuals: none is mapped to Home, Projects or
 another site content section.
 
+## Optional offline high-poly packages
+
+Additional 4K Poly Haven glTF packages for offline panorama composition are
+listed in `assets/life/models/manifest.json` and are downloaded with
+`node scripts/fetch-world-models.cjs`. The current packages are
+`large_castle_door`, `modular_fort_01`, `mountainside`, and `rock_07`; each directory contains the
+official glTF descriptor, buffer, and referenced texture files. They are CC0
+1.0, with per-file source URLs and MD5/SHA-256 verification in the manifest.
+They are not loaded by the website's default runtime.
+
 ## Integration
 
 The seven model entry points are:
