@@ -25,6 +25,7 @@ def args():
  parser.add_argument('--exposure',type=float,default=0)
  parser.add_argument('--proxy-only',action='store_true')
  parser.add_argument('--measured-terrain',action='store_true')
+ parser.add_argument('--nasa-interior',help='Verified NASA ISS FBX; replace the offline spaceship interior only')
  return parser.parse_args(sys.argv[sys.argv.index('--')+1:])
 def vec(v): return (float(v[0]),-float(v[2]),float(v[1]))
 def col(v):
@@ -215,7 +216,8 @@ def sky_image(scene,output):
    hidden.append(instance);instance.hide_render=True
  scene.render.film_transparent=False
  scene.render.image_settings.color_mode='RGB'
- scene.cycles.device='CPU'
+ # NASA integration keeps its sky pass on the same allocated A800.
+ scene.cycles.device=render_device if scene.get('nasa_integration_report') else 'CPU'
  scene.cycles.samples=1
  scene.cycles.use_denoising=False
  scene.render.filepath=str(Path(output).resolve())
@@ -241,6 +243,10 @@ def main():
  if a.width!=a.height*2:raise ValueError('Panoramas must have a 2:1 aspect ratio')
  if a.sky_output and not a.hdri:raise ValueError('--sky-output requires --hdri for matched lighting')
  if a.measured_terrain and (a.proxy_only or d.get('scene')!='snowmountain'):raise ValueError('--measured-terrain requires a refined snowmountain scene')
+ if a.nasa_interior and (a.proxy_only or a.measured_terrain or d.get('scene')!='spaceship'):raise ValueError('--nasa-interior requires a refined spaceship scene')
+ if a.nasa_interior:
+  render_nasa(s,a,d)
+  return
  if not a.proxy_only and d.get('scene')=='spaceship':
   displays=runpy.run_path(str(Path(__file__).resolve().with_name('refine-flight-displays.py')))
   d=displays['refine'](d)
@@ -271,5 +277,25 @@ def main():
  out=Path(a.output).resolve();blend=Path(a.blend).resolve();out.parent.mkdir(parents=True,exist_ok=True);blend.parent.mkdir(parents=True,exist_ok=True);s.render.filepath=str(out);bpy.ops.file.pack_all();bpy.ops.wm.save_as_mainfile(filepath=str(blend));print('ALPHA_COMPOSITE RGBA film_transparent',s.render.film_transparent)
  if not a.save_only:bpy.ops.render.render(write_still=True);print('PANORAMA_OUTPUT',out)
  if not a.save_only and a.sky_output:sky_image(s,a.sky_output)
+ print('BLEND_OUTPUT',blend)
+
+def render_nasa(scene,options,description):
+ import hashlib,os
+ helper=runpy.run_path(str(Path(__file__).with_name('integrate-nasa-interior.py')))
+ report=helper['integrate'](scene,description,options.nasa_interior,Path(options.blend).resolve().parent)
+ scene.view_settings.view_transform='AgX';scene.view_settings.look='AgX - Medium High Contrast';scene.view_settings.exposure=options.exposure
+ environment(scene,options,description.get('environment',{}))
+ data=bpy.data.cameras.new('NightWorld/equirectangular');data.type='PANO';data.panorama_type='EQUIRECTANGULAR';data.clip_start=.01;data.clip_end=1000
+ camera=bpy.data.objects.new('NightWorld/camera',data);scene.collection.objects.link(camera);camera.location=vec(description['observation']['position']);camera.rotation_euler=(math.pi/2,0,0);scene.camera=camera
+ output=Path(options.output).resolve();blend=Path(options.blend).resolve();output.parent.mkdir(parents=True,exist_ok=True);blend.parent.mkdir(parents=True,exist_ok=True)
+ scene.render.filepath=str(output);bpy.ops.file.pack_all();bpy.ops.wm.save_as_mainfile(filepath=str(blend))
+ report.update({'job_id':os.environ['SLURM_JOB_ID'],'output':str(output),'blend':str(blend),'dimensions':[options.width,options.height],'samples':options.samples,'sky_baked_into_scene':False,'rendered':False})
+ if not options.save_only:
+  bpy.ops.render.render(write_still=True)
+  with output.open('rb') as stream:report['output_sha256']=hashlib.file_digest(stream,'sha256').hexdigest()
+  report['rendered']=True
+  if options.sky_output:sky_image(scene,options.sky_output)
+ output.with_suffix('.evidence.json').write_text(json.dumps(report,indent=2)+'\n')
+ if report['rendered']:print('PANORAMA_OUTPUT',output)
  print('BLEND_OUTPUT',blend)
 if __name__=='__main__':main()

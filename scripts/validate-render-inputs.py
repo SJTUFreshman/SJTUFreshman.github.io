@@ -156,7 +156,7 @@ class InputValidation:
             self.error(context, 'queue entry must be a nonempty list of argument strings')
             return
         options = {}
-        tracked = ('--scene', '--output', '--blend', '--hdri', '--asset-root')
+        tracked = ('--scene', '--output', '--blend', '--hdri', '--asset-root', '--nasa-interior')
         index = 0
         while index < len(entry):
             argument = entry[index]
@@ -184,9 +184,18 @@ class InputValidation:
             return
         if '--hdri' in options:
             self.file(options['--hdri'], self.workdir, f'{context} --hdri')
+        if '--nasa-interior' in options:
+            self.file(options['--nasa-interior'], self.workdir, f'{context} --nasa-interior')
         if '--scene' in options:
             source = self.file(options['--scene'], self.workdir, f'{context} --scene')
-            self.scene(source, root, context)
+            if '--nasa-interior' in options:
+                description = self.json(source, context)
+                if not isinstance(description, dict) or description.get('scene') != 'spaceship':
+                    self.error(context, '--nasa-interior requires a spaceship descriptor')
+                if '--proxy-only' in entry or '--measured-terrain' in entry:
+                    self.error(context, '--nasa-interior cannot replace the proxy or measured terrain')
+            else:
+                self.scene(source, root, context)
         self.entries += 1
 
     def queue(self, value):

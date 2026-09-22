@@ -60,6 +60,7 @@ def main():
                   'camera_position': list(scene.camera.location), 'native_render': True,
                   'dimensions': [1600, 1100], 'samples': scene.cycles.samples,
                   'runtime_sky_rendered': False, 'views': [], 'visual_approval': False}
+        report['diagnostic_background_baked_in_native_views'] = bool(entry.get('matched_hdri'))
         report['diagnostic_hdri'] = entry.get('hdri')
         report['camera_horizon_correction'] = json.loads(scene.world.get('camera_horizon_correction', 'null'))
         with source.open('rb') as stream:

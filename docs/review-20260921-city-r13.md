@@ -3,7 +3,7 @@
 结论：**FAIL，不得安装 manifest，也不能称照片级真实。**
 
 本审查针对 A800 job `167943`（COMPLETED，远端目录
-`/data/home/rdc829/run/yangrunde/life_worlds/.render-work/review-city-20260921-r13`）的实际输出，未修改 manifest，未提交 GPU 作业。远端 `output-sha256.txt` 已下载到本地并逐项重算；18 项全部匹配：四张全景/天空为 `4096×2048`，晴天和黄昏各六张原生近景为 `1600×1100`，两份原生 evidence JSON 也匹配。
+`/data/home/scwb515/run/yangrunde/life_worlds/.render-work/review-city-20260921-r13`）的实际输出，未修改 manifest，未提交 GPU 作业。远端 `output-sha256.txt` 已下载到本地并逐项重算；18 项全部匹配：四张全景/天空为 `4096×2048`，晴天和黄昏各六张原生近景为 `1600×1100`，两份原生 evidence JSON 也匹配。
 
 ## 可复核证据
 

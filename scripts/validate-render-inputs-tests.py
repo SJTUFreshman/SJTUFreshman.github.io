@@ -57,6 +57,26 @@ class RenderInputTests(unittest.TestCase):
         self.assertIn('missing.hdr', result.errors[0])
         self.assertIn('textures.baseColor', result.errors[1])
 
+    def test_nasa_branch_requires_source_but_not_replaced_proxy_assets(self):
+        self.scene.update({'scene': 'spaceship', 'materials': [{'textures': {'normal': 'unused.jpg'}}]})
+        self.write_json('scene.json', self.scene)
+        self.entry.extend(['--nasa-interior', 'source.fbx'])
+        self.write_json('queue.json', [self.entry])
+        self.assertIn('--nasa-interior', '\n'.join(self.validate().errors))
+        self.write_file('source.fbx')
+        self.assertEqual(self.validate().errors, [])
+
+    def test_nasa_branch_rejects_other_scenes_and_proxy_mode(self):
+        self.write_file('source.fbx')
+        self.entry.extend(['--nasa-interior', 'source.fbx'])
+        self.write_json('queue.json', [self.entry])
+        self.assertIn('spaceship descriptor', '\n'.join(self.validate().errors))
+        self.scene['scene'] = 'spaceship'
+        self.write_json('scene.json', self.scene)
+        self.entry.append('--proxy-only')
+        self.write_json('queue.json', [self.entry])
+        self.assertIn('cannot replace the proxy', '\n'.join(self.validate().errors))
+
     def test_multiple_queues_and_additional_inputs(self):
         self.write_json('second.json', [self.entry])
         result = self.validate(('queue.json', 'second.json'), required_files=['missing-refinement.json'])
