@@ -579,7 +579,6 @@ class GalaxyRenderer {
     }
 
     render(time, basis) {
-        if (window.NightPanorama?.coversSky?.()) return true;
         if (!this.ready || !this.gl) return false;
         const gl = this.gl;
         const sky = skyRenderingParameters();

@@ -13,7 +13,7 @@ async function main() {
   const html = await response.text();
   const references = [...html.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="([^"]+)"[^>]*>/g)].map(match => match[1]).filter(reference => reference.startsWith('assets/') && /\.(?:js|css)(?:\?|$)/.test(reference));
   const versions = references.map(reference => new URL(reference, page).searchParams.get('v'));
-  assert(versions.length >= 32 && versions.every(Boolean), 'HTTP HTML must version every local runtime resource');
+  assert(versions.length >= 26 && versions.every(Boolean), 'HTTP HTML must version every local runtime resource');
   assert.equal(new Set(versions).size, 1, 'HTTP HTML must use a single release version');
   const downloaded = new Map();
   for (const reference of references) {
@@ -33,8 +33,7 @@ async function main() {
   for (const file of ['assets/life/scripts/03-math-orientation.js','assets/life/scripts/05-astronomy.js']) vm.runInContext(downloaded.get(file), context, { filename: file });
   assert.equal(typeof context.skyHasHorizon, 'function', 'HTTP-delivered math must export skyHasHorizon before astronomy calls it');
   assert.equal(context.naturalStarVisibilityAtDirection([0,-1,0]), 0, 'HTTP-delivered astronomy must resolve the math helper');
-  context.window.NightWorld={ready:true,currentId:'spaceship',mode:'observe'};
-  assert.equal(context.naturalStarVisibilityAtDirection([0,-1,0]), 1, 'HTTP-delivered space astronomy must use the new helper');
+  assert.equal(context.naturalStarVisibilityAtDirection([0,-1,0]), 0, 'HTTP-delivered astronomy must retain the local horizon');
   console.log(`Life HTTP validation passed (${references.length} versioned resources; ${versions[0]}; served bytes, syntax and cross-script helper linkage).`);
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });

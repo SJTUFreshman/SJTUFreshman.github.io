@@ -487,7 +487,6 @@ function drawConstellations(basis, time, webglRendered, catalogBasis = basis) {
 }
 
 function applyLook(deltaX, deltaY, multiplier = 1) {
-    if (window.NightWorld?.look(deltaX, deltaY, multiplier)) return;
     if (state.scene === 'flying' || state.scene === 'leaving-home' || state.scene === 'detail') return;
     const sensitivity = (COARSE_POINTER ? 0.0032 : 0.00175) * multiplier;
     const horizontalRotation = quatAxisAngle(
@@ -517,7 +516,6 @@ function applyLook(deltaX, deltaY, multiplier = 1) {
 }
 
 function enforceCameraSkyDome() {
-    if (window.NightWorld?.freeLook()) return;
     camera.orientation = constrainOrientationAboveHorizon(
         camera.orientation,
         camera.lastStableYaw

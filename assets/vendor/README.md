@@ -16,19 +16,5 @@ CDN at runtime.
 - License: MIT; the upstream copyright and license notice are retained in the
   minified distribution file.
 
-- `three-0.160.1.min.js`: Three.js 0.160.1 classic browser distribution build.
-- Source: https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js
-- SHA-256: `170C6789F43217C96B3170F4B42FAFE135DE7F7CD48497A4218F9757EE1D49FA`
-- Upstream: https://github.com/mrdoob/three.js
-- License: MIT; see `THREE-LICENSE.txt`, copied from the 0.160.1 package license at
-  https://cdn.jsdelivr.net/npm/three@0.160.1/LICENSE.
-
-Three.js is served locally for the optional, transparent 3D environment layer;
-the existing starfield and astronomy renderers remain separate. The page does
-not contact the dependency CDN at runtime.
-
-- `night-area-lights-0.160.1.js`: matching Three.js `RectAreaLightUniformsLib`, mechanically adapted to the existing classic-script engine.
-- Source: https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/lights/RectAreaLightUniformsLib.js
-- Upstream SHA-256: `08085bc942253cd54948bf936fecb66b54514a135872656e475a1cab09b55214`.
-- Adapted SHA-256: `ff8924b9b967bd0122108d8e8e00cbd1d54c414469cb11ebce65e957b49efc6a`.
-- Rebuild: `node assets/vendor/build-night-area-lights.cjs`. License: MIT, see `THREE-LICENSE.txt`; upstream LTC attribution is retained.
+The Life page uses these local dependencies for the interactive sky and its
+content views only. It does not load a 3D environment runtime.

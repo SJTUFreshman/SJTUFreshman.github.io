@@ -188,8 +188,7 @@ function constrainOrientationAboveHorizon(
 }
 
 function skyHasHorizon() {
-    const environment = window.NightWorld;
-    return !(environment?.ready && environment.currentId === 'spaceship' && environment.mode !== 'sky');
+    return true;
 }
 
 function isAboveHorizon(direction, margin = 0) {
