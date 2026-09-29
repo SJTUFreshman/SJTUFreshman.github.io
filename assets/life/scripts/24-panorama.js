@@ -3,10 +3,10 @@
   const defaults = {
     spaceship: { sky: 'night', observation: { position: [0, 1.68, -9.95], yaw: 0, pitch: .03 }, pilot: { seat: [0, 1.68, -9.95], exit: [1.65, 1.68, -8.75] } },
     shelter: { sky: 'night', observation: { position: [0, 1.68, -1.6], yaw: 0, pitch: .02 } },
-    hogwarts: { sky: 'clear', observation: { position: [0, 1.72, 6], yaw: 0, pitch: .03 } },
+    fontainesaintmichel: { sky: 'dusk', observation: { position: [0, 1.72, 0], yaw: 0, pitch: .03 } },
     snowmountain: { sky: 'clear', observation: { position: [0, 1.72, 5], yaw: 0, pitch: .03 } }
   };
-  const identity = [0, 0, 0, 1], layers = new Map(), tierOrder = ['high', 'medium', 'low'];
+  const identity = [0, 0, 0, 1], layers = new Map(), tierOrder = ['ultra', 'high', 'medium', 'low'];
   let manifest = null, manifestRequest, active = 'spaceship', mode = 'observe', skyMode = 'night', quality = 'auto';
   let status = 'preview', tier = null, error = '', production = 'draft', requestToken = 0, controller, requestKey = '';
   let recoveryTier = null, recoveryBlocked = false, recoveryLossRecorded = false;
@@ -30,7 +30,11 @@
         draw(layer, multiply(conjugate(layer.orientation), orientation));
       }
     },
-    coversSky() { return mode === 'observe' && pose.visible && status === 'prerendered' && Boolean(layers.get('sky')?.texture) && !layers.get('sky')?.lost; },
+    coversSky() {
+      if (mode !== 'observe' || !pose.visible || status !== 'prerendered') return false;
+      const sky = layers.get('sky'), scene = layers.get('scene');
+      return Boolean((sky?.texture && !sky.lost) || (scene?.authoredSky && scene.texture && !scene.lost));
+    },
     canSeeSky(horizontal, vertical) {
       const layer = layers.get('scene');
       if (mode !== 'observe' || !pose.visible || status !== 'prerendered' || !layer?.alpha || !layer.texture || layer.lost) return true;
@@ -84,8 +88,12 @@
     status = 'loading'; tier = null; error = ''; visibility(); notify();
     try {
       const catalog = await getManifest(); if (token !== requestToken) return false;
-      const entry = catalog.scenes[active], variant = entry?.variants?.[skyMode];
-      window.dispatchEvent(new CustomEvent('nightpanorama:metadata', { detail: { scene: active, metadata: api.getScene(active) } }));
+      const entry = catalog.scenes[active];
+      if (!entry?.variants?.[skyMode] && entry?.variants?.[entry.sky]) {
+        skyMode = entry.sky; requestKey = [active, skyMode, quality].join(':');
+      }
+      const variant = entry?.variants?.[skyMode];
+      window.dispatchEvent(new CustomEvent('nightpanorama:metadata', { detail: { scene: active, skyMode, metadata: api.getScene(active) } }));
       production = variant?.production || entry?.production || 'draft';
       if (!variant?.tiers || !Object.values(variant.tiers).some(value => value?.src)) { status = 'preview'; notify(); return false; }
       const foreground = await loadLayer('scene', variant, token, signal);
@@ -157,6 +165,7 @@
         upload(layer, bitmap); layer.orientation = normalized(variant.orientation || identity);
         if (name === 'scene') buildMask(layer, bitmap);
         layer.observation = variant.observation || null;
+        layer.authoredSky = name === 'scene' && variant.background === 'authored-sky';
         layer.tier = selected; bitmap.close?.(); return layer;
       } catch (failure) { bitmap?.close?.(); if (token === requestToken) releaseTexture(layer); if (failure.name === 'AbortError' || token !== requestToken) throw new DOMException('Aborted', 'AbortError'); lastError = failure; }
     }
@@ -186,7 +195,7 @@
     return recoveryTier ? tierOrder[Math.max(tierOrder.indexOf(requested), tierOrder.indexOf(recoveryTier))] : requested;
   }
   function draw(layer, orientation) {
-    const context = layer.context, effectiveQuality = preferredTier(), budget = effectiveQuality === 'high' ? 8294400 : effectiveQuality === 'low' ? 1228800 : 3686400;
+    const context = layer.context, effectiveQuality = preferredTier(), budget = ['ultra', 'high'].includes(effectiveQuality) ? 8294400 : effectiveQuality === 'low' ? 1228800 : 3686400;
     const ratio = Math.min(window.devicePixelRatio || 1, 2, Math.sqrt(budget / Math.max(1, pose.width * pose.height)));
     const width = Math.max(1, Math.round(pose.width * ratio)), height = Math.max(1, Math.round(pose.height * ratio));
     if (layer.canvas.width !== width || layer.canvas.height !== height) { layer.canvas.width = width; layer.canvas.height = height; }
@@ -200,7 +209,7 @@
     const sunDirection = rotate(sky.orientation, observation.sunDirection);
     if (window.SceneSky?.setAlignment?.({ ...observation, sunDirection }) === false) window.SceneSky.setAlignment(null);
   }
-  function releaseTexture(layer) { if (layer.texture && !layer.lost) layer.context.deleteTexture(layer.texture); layer.texture = null; layer.alpha = null; layer.canvas.style.visibility = 'hidden'; }
+  function releaseTexture(layer) { if (layer.texture && !layer.lost) layer.context.deleteTexture(layer.texture); layer.texture = null; layer.alpha = null; layer.authoredSky = false; layer.canvas.style.visibility = 'hidden'; }
   function disposeLayer(layer) { releaseTexture(layer); if (!layer.lost) { layer.context.deleteBuffer(layer.buffer); layer.context.deleteProgram(layer.program); } }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => load(), { once: true }); else load();
 })();

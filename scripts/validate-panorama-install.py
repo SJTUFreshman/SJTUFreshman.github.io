@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from PIL import Image
 
@@ -48,12 +49,37 @@ class PanoramaInstallationTests(unittest.TestCase):
     def test_tiers_only_include_real_source_resolution(self):
         self.assertEqual(INSTALLER.tier_dimensions(4096, 2048), [('low', 2048, 1024), ('medium', 4096, 2048)])
         self.assertEqual(INSTALLER.tier_dimensions(8192, 4096)[-1], ('high', 8192, 4096))
+        self.assertEqual(INSTALLER.tier_dimensions(16384, 8192),
+                         [('low', 2048, 1024), ('medium', 4096, 2048),
+                          ('high', 8192, 4096), ('ultra', 12288, 6144)])
+        self.assertTrue(all(width < 16384 for _, width, _ in INSTALLER.tier_dimensions(32768, 16384)))
 
     def test_reject_opaque_foreground(self):
         Image.new('RGB', (128, 64), 'black').save(self.foreground)
         with self.assertRaisesRegex(ValueError, 'transparent sky'):
             INSTALLER.install(self.args)
         self.assertFalse(Path(self.args.manifest).exists())
+
+    def test_authored_sky_preserves_complete_opaque_scene(self):
+        Image.new('RGB', (128, 64), (50, 100, 150)).save(self.foreground)
+        self.args.authored_sky = True
+        result = INSTALLER.install(self.args)
+        variant = json.loads(Path(self.args.manifest).read_text())['scenes']['spaceship']['variants']['night']
+        self.assertEqual(variant['background'], 'authored-sky')
+        self.assertNotIn('sky', variant)
+        with Image.open(self.root / result['tiers']['low']['src']) as image:
+            self.assertEqual(image.convert('RGBA').getchannel('A').getextrema(), (255, 255))
+        self.args.sky = str(self.foreground)
+        with self.assertRaisesRegex(ValueError, 'separate --sky'):
+            INSTALLER.install(self.args)
+
+    def test_authored_sky_rejects_transparency_without_changing_manifest(self):
+        INSTALLER.install(self.args)
+        before = Path(self.args.manifest).read_bytes()
+        self.args.authored_sky = True
+        with self.assertRaisesRegex(ValueError, 'fully opaque'):
+            INSTALLER.install(self.args)
+        self.assertEqual(Path(self.args.manifest).read_bytes(), before)
 
     def test_reject_camera_mismatch(self):
         INSTALLER.install(self.args)
@@ -79,6 +105,90 @@ class PanoramaInstallationTests(unittest.TestCase):
         result = INSTALLER.install(self.args)
         self.assertTrue(result['dryRun'])
         self.assertFalse(Path(self.args.manifest).exists())
+
+    def test_authored_phases_override_legacy_city_policy(self):
+        self.args.scene, self.args.phase = 'shelter', 'clear'
+        exported = {'scene': 'shelter', 'coordinateSystem': 'three-y-up-right-handed',
+                    'observation': self.observation, 'supportedPhases': ['clear', 'dusk'],
+                    'defaultPhase': 'dusk'}
+        self.export.write_text(json.dumps(exported))
+        INSTALLER.install(self.args)
+        entry = json.loads(Path(self.args.manifest).read_text())['scenes']['shelter']
+        self.assertEqual(entry['supportedPhases'], ['clear', 'dusk'])
+        self.assertEqual(entry['sky'], 'dusk')
+        self.args.phase = 'night'
+        with self.assertRaisesRegex(ValueError, 'supportedPhases'):
+            INSTALLER.install(self.args)
+
+    def test_fontaine_requires_explicit_phase_metadata(self):
+        self.assertIn('fontainesaintmichel', INSTALLER.SCENES)
+        self.args.scene, self.args.phase = 'fontainesaintmichel', 'clear'
+        exported = {'scene': self.args.scene, 'coordinateSystem': 'three-y-up-right-handed',
+                    'observation': self.observation}
+        self.export.write_text(json.dumps(exported))
+        with self.assertRaisesRegex(ValueError, 'supportedPhases'):
+            INSTALLER.install(self.args)
+        exported['supportedPhases'] = ['clear']
+        self.export.write_text(json.dumps(exported))
+        self.assertEqual(INSTALLER.install(self.args)['supportedPhases'], ['clear'])
+
+    def test_replace_scene_discards_stale_metadata_and_variants(self):
+        INSTALLER.install(self.args)
+        catalog = json.loads(Path(self.args.manifest).read_text())
+        catalog['scenes']['shelter'] = {'sentinel': 'keep other scenes'}
+        old = catalog['scenes']['spaceship']
+        old['pilot']['exit'] = [8, 9, 10]
+        old['source'] = {'name': 'old source'}
+        old['legacyExtra'] = True
+        old['variants']['clear'] = {'tiers': {}}
+        Path(self.args.manifest).write_text(json.dumps(catalog))
+        exported = json.loads(self.export.read_text())
+        exported['observation']['position'] = [4, 5, 6]
+        self.export.write_text(json.dumps(exported))
+        self.args.replace_scene = True
+        self.args.dry_run = True
+        before = Path(self.args.manifest).read_bytes()
+        self.assertEqual(INSTALLER.install(self.args)['removedVariants'], ['night', 'clear'])
+        self.assertEqual(Path(self.args.manifest).read_bytes(), before)
+        self.args.dry_run = False
+        INSTALLER.install(self.args)
+        catalog = json.loads(Path(self.args.manifest).read_text())
+        entry = catalog['scenes']['spaceship']
+        self.assertEqual(list(entry['variants']), ['night'])
+        self.assertEqual(entry['pilot'], {'seat': [4, 5, 6]})
+        self.assertNotIn('source', entry)
+        self.assertNotIn('legacyExtra', entry)
+        self.assertEqual(catalog['scenes']['shelter'], {'sentinel': 'keep other scenes'})
+        self.args.replace_scene = False
+        exported['supportedPhases'] = ['night', 'clear']
+        exported['source'] = {'name': 'fresh source'}
+        self.export.write_text(json.dumps(exported))
+        self.args.phase = 'clear'
+        INSTALLER.install(self.args)
+        entry = json.loads(Path(self.args.manifest).read_text())['scenes']['spaceship']
+        self.assertEqual(list(entry['variants']), ['night', 'clear'])
+        self.assertEqual(entry['source'], {'name': 'fresh source'})
+
+    def test_phase_removal_needs_explicit_replacement(self):
+        self.args.scene, self.args.phase = 'snowmountain', 'dusk'
+        exported = {'scene': self.args.scene, 'coordinateSystem': 'three-y-up-right-handed',
+                    'observation': self.observation}
+        self.export.write_text(json.dumps(exported))
+        INSTALLER.install(self.args)
+        exported['supportedPhases'] = ['clear']
+        self.export.write_text(json.dumps(exported))
+        self.args.phase = 'clear'
+        with self.assertRaisesRegex(ValueError, 'replace-scene'):
+            INSTALLER.install(self.args)
+
+    def test_replacement_failure_leaves_existing_manifest_unchanged(self):
+        INSTALLER.install(self.args)
+        before = Path(self.args.manifest).read_bytes()
+        self.args.replace_scene = True
+        with patch.object(INSTALLER, 'encode_tiers', side_effect=OSError('fixture encoder failure')):
+            with self.assertRaisesRegex(OSError, 'encoder failure'):
+                INSTALLER.install(self.args)
+        self.assertEqual(Path(self.args.manifest).read_bytes(), before)
 
     def test_sky_tiers_and_metadata(self):
         sky = self.root / 'sky.png'

@@ -266,7 +266,7 @@ function runtimeChecks() {
     window.dispatchEvent(new CustomEvent('nightpanorama:metadata',{detail:{scene:'shelter',metadata:{observation:{position:[99,99,99],yaw:0,pitch:0}}}}));
     assert.deepEqual(api.player,correctedPosition,'runtime: stale metadata from a different scene must be ignored');
     assert.equal(api.setViewMode('explore'),false,'runtime: exploration must remain locked until discovered');
-    for(const id of ids){assert(api.select(id),`runtime could not select ${id}`);frames(2);assert.equal(api.world.group.children.length,0,`runtime: ${id} observation must not build meshes`);}
+    for(const id of ['spaceship','shelter','snowmountain','fontainesaintmichel']){assert(api.select(id),`runtime could not select ${id}`);frames(2);assert.equal(api.world.group.children.length,0,`runtime: ${id} observation must not build meshes`);}
     api.select('shelter');frames(2);
     const observationStart={...api.player};key('KeyW');api.setMotion(1,1);frames();key('KeyW',true);api.clearInput();
     assert.deepEqual(api.player,observationStart,'runtime: observation must stay at its selected viewpoint');
@@ -290,7 +290,7 @@ function runtimeChecks() {
     window.dispatchEvent(new CustomEvent('nightpanorama:metadata',{detail:{scene:'spaceship',metadata}}));
     assert.deepEqual(api.player,exploredPosition,'runtime: metadata must not teleport an exploring player');
     assert(api.world.pilot.active,'runtime: entering exploration must preserve occupied helm');
-    for(const id of ids){assert(api.select(id),`runtime could not select ${id}`);frames(2);finiteWorld(api.world,id);}
+    for(const id of ['spaceship','shelter','snowmountain']){assert(api.select(id),`runtime could not select ${id}`);frames(2);finiteWorld(api.world,id);}
     api.select('shelter');frames(2);
     const start=api.player.z;
     key('KeyW');frames();key('KeyW',true);api.clearInput();

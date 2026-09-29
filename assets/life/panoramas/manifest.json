@@ -14,7 +14,7 @@
           -9.95
         ],
         "yaw": 0,
-        "pitch": 0.015
+        "pitch": 0.03
       },
       "production": "review",
       "pilot": {
@@ -28,36 +28,158 @@
         "night": {
           "production": "review",
           "orientation": [
-            0.0,
-            0.0,
-            0.0,
-            1.0
+            0,
+            0,
+            0,
+            1
           ],
           "tiers": {
             "low": {
-              "src": "assets/life/panoramas/spaceship-night-scene-low-a281281b87ce.webp",
               "width": 2048,
               "height": 1024,
-              "bytes": 294764,
-              "sha256": "a281281b87ce61ac88b0bc0ad43f215db46f5ccdaf7940df481b30a63e0b0a71"
+              "bytes": 317560,
+              "sha256": "e640a052f4c475feefe5871019b7bdac09bd862b5f90394e181420af33b9b009",
+              "src": "assets/life/panoramas/spaceship-night-scene-low-e640a052f4c4.webp"
             },
             "medium": {
-              "src": "assets/life/panoramas/spaceship-night-scene-medium-356e2faf9e71.webp",
               "width": 4096,
               "height": 2048,
-              "bytes": 836868,
-              "sha256": "356e2faf9e71fb65b982cfff8f39df140d0f576d2af1fd2383755f75a0fb05da"
+              "bytes": 1065878,
+              "sha256": "2990f2b7e093833ae3b3f95b32e947ee1947a3aa65e5c681619bdde322481e08",
+              "src": "assets/life/panoramas/spaceship-night-scene-medium-2990f2b7e093.webp"
             },
             "high": {
-              "src": "assets/life/panoramas/spaceship-night-scene-high-6a5df76f692d.webp",
               "width": 8192,
               "height": 4096,
-              "bytes": 2511380,
-              "sha256": "6a5df76f692dac732a45e8c404f9558536135ca22c919a5d7862e0cf033dc9b7"
+              "bytes": 3041666,
+              "sha256": "202d9441b93abef123c9b346738f67739278c2bf1788ef400fc1759ab4e7a590",
+              "src": "assets/life/panoramas/spaceship-night-scene-high-202d9441b93a.webp"
+            },
+            "ultra": {
+              "width": 12288,
+              "height": 6144,
+              "bytes": 6659910,
+              "sha256": "0d70e6f18ee0bcb92e074b5a42c211d04801cbf4fb2f293d79cb93172fdefc5d",
+              "src": "assets/life/panoramas/spaceship-night-scene-ultra-0d70e6f18ee0.webp"
             }
           }
         }
-      }
+      },
+      "exploration": {
+        "navigation": "float",
+        "distanceUnit": "source",
+        "environment": {
+          "sunIntensity": 0,
+          "ambientIntensity": 0.15,
+          "fillIntensity": 0.08,
+          "fogDensity": 0,
+          "exposure": 1
+        },
+        "areaLights": [
+          {
+            "position": [
+              0,
+              98,
+              -18.3500003815
+            ],
+            "direction": [
+              0,
+              0,
+              -1
+            ],
+            "color": [
+              1,
+              0.94,
+              0.85
+            ],
+            "power": 3000,
+            "width": 2.6586807764,
+            "height": 2.6586807764
+          },
+          {
+            "position": [
+              0,
+              98,
+              -14
+            ],
+            "direction": [
+              0,
+              0,
+              1
+            ],
+            "color": [
+              1,
+              0.94,
+              0.85
+            ],
+            "power": 180,
+            "width": 5.3173615527,
+            "height": 5.3173615527
+          },
+          {
+            "position": [
+              0,
+              82,
+              5
+            ],
+            "direction": [
+              0,
+              0.88047117,
+              -0.47409958
+            ],
+            "color": [
+              1,
+              0.94,
+              0.85
+            ],
+            "power": 250,
+            "width": 5.3173615527,
+            "height": 5.3173615527
+          }
+        ],
+        "radius": 0.25,
+        "moveSpeed": 5,
+        "spawn": [
+          0,
+          1.68,
+          -9.95
+        ],
+        "bounds": {
+          "minX": -55.3818626404,
+          "maxX": 171.2721557617,
+          "minZ": -25.621779632,
+          "maxZ": 59.764050293
+        },
+        "model": {
+          "url": "assets/life/models/nasa-iss-cupola/nasa-iss-internal.gltf",
+          "collisionUrl": "assets/life/models/nasa-iss-cupola/collision-window.gltf",
+          "position": [
+            0,
+            -96.32,
+            8.55
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": 1
+        }
+      },
+      "source": {
+        "provider": "NASA",
+        "url": "https://github.com/nasa/NASA-3D-Resources",
+        "sourceSha256": "bb884b3f5fdae3fe6116bd2241b44e8efb2f804de8785840431f400ebfa09816",
+        "camera": "cupola-withdrawn",
+        "renderMaster": "cupola-withdrawn-16k.png",
+        "renderMasterSha256": "a1c93b5e8f87c05b083a6456e941b714692a373acac994864d5d07284dbb55ec",
+        "physicalScaleVerified": false
+      },
+      "supportedPhases": [
+        "night"
+      ],
+      "defaultPhase": "night"
     },
     "shelter": {
       "preview": null,
@@ -100,19 +222,42 @@
         }
       }
     },
-    "hogwarts": {
-      "preview": null,
-      "sky": "clear",
+    "snowmountain": {
       "observation": {
         "position": [
-          0,
-          1.72,
-          -2
+          -1453.87921875,
+          267.9392578125,
+          1283.8560937500001
         ],
-        "yaw": -0.15,
-        "pitch": 0.045
+        "yaw": 0.687694705906684,
+        "pitch": 0
       },
       "production": "review",
+      "sky": "clear",
+      "supportedPhases": [
+        "clear"
+      ],
+      "defaultPhase": "clear",
+      "source": {
+        "provider": "Unreal Engine native render",
+        "sourceSha256": "09766479715126207556675c91e637d2b6a2d4ea9d03bf96ffcf2d3267341d55",
+        "map": "/Game/SnowyMountains/Maps/Overview/Overview",
+        "camera": "/Game/SnowyMountains/Maps/Overview/Overview.Overview:PersistentLevel.CameraActor_1",
+        "cameraPositionCm": [
+          -145387.921875,
+          128385.609375,
+          26793.92578125
+        ],
+        "cameraRotationDeg": [
+          0,
+          -50.59799575805664,
+          0
+        ],
+        "renderMaster": ".render-work/authored-worlds-20260927/snowmountain-175955-views/snow-final-cube/beauty-panorama-16384x8192-rgba16.png",
+        "renderMasterSha256": "829547e52751fd97d490588e2b308b153ce735657884f4dc8224e3e4f30b49a9",
+        "alpha": "opaque-authored-sky",
+        "sourceMaterial": "Snowy Mountains Landscape native terrain and authored sky"
+      },
       "variants": {
         "clear": {
           "production": "review",
@@ -124,249 +269,79 @@
           ],
           "tiers": {
             "low": {
-              "src": "assets/life/panoramas/hogwarts-clear-scene-low-fbec39b61f65.webp",
+              "src": "assets/life/panoramas/snowmountain-clear-scene-low-b71d2a875c9e.webp",
               "width": 2048,
               "height": 1024,
-              "bytes": 486008,
-              "sha256": "fbec39b61f65a07c542adb6cd99ce98bc951ef197ca2c6fd95b1069b6536f82e"
+              "bytes": 356624,
+              "sha256": "b71d2a875c9ef8bb209407435f0ca310fce622eac71fa000ae356d28cd15e3e5"
             },
             "medium": {
-              "src": "assets/life/panoramas/hogwarts-clear-scene-medium-2055ae66484f.webp",
+              "src": "assets/life/panoramas/snowmountain-clear-scene-medium-79463a024acf.webp",
               "width": 4096,
               "height": 2048,
-              "bytes": 1538404,
-              "sha256": "2055ae66484fcae3d400796bcf58c32f6bca1c2dbc63d3ca3586f6332979d5b4"
+              "bytes": 958206,
+              "sha256": "79463a024acfb5096cc6a8de793ed8a53ad585198112da9bd1fd23cd7727c5d2"
+            },
+            "high": {
+              "src": "assets/life/panoramas/snowmountain-clear-scene-high-c0d1b91b2e03.webp",
+              "width": 8192,
+              "height": 4096,
+              "bytes": 2588318,
+              "sha256": "c0d1b91b2e033756c0074d80c312e095cbc3897b592086a5dcb1e6197d367e4b"
+            },
+            "ultra": {
+              "src": "assets/life/panoramas/snowmountain-clear-scene-ultra-b6fffbb229b1.webp",
+              "width": 12288,
+              "height": 6144,
+              "bytes": 4922318,
+              "sha256": "b6fffbb229b116e580954af3bcae5ecaefe19c46a2f6fb31d788009e87db1279"
             }
           },
-          "sky": {
-            "production": "review",
-            "orientation": [
-              0.0,
-              0.0,
-              0.0,
-              1.0
-            ],
-            "tiers": {
-              "low": {
-                "src": "assets/life/panoramas/hogwarts-clear-sky-low-fec1ef550774.webp",
-                "width": 2048,
-                "height": 1024,
-                "bytes": 134062,
-                "sha256": "fec1ef55077458da38c553338c25486f3b8bc3f12077827b1d5a44458cdb5b75"
-              },
-              "medium": {
-                "src": "assets/life/panoramas/hogwarts-clear-sky-medium-94a194ee2ab7.webp",
-                "width": 4096,
-                "height": 2048,
-                "bytes": 338900,
-                "sha256": "94a194ee2ab7ca5c627aea52c86c7e0cc635702633e475373e96a7f87e45906a"
-              }
-            },
-            "observation": {
-              "kind": "art-direction-calibration",
-              "coordinateSystem": "sky-y-up-plus-z",
-              "sunDirection": [
-                0.5709659778474304,
-                0.7289686274214116,
-                -0.3776275842362034
-              ],
-              "source": {
-                "renderedImage": "hogwarts-sky-r12.png",
-                "renderedImageSha256": "da663da26be1bebd636a5b5520d1f50f224b079e33a3ef502f231caebe193f1a",
-                "width": 4096,
-                "height": 2048,
-                "projection": "equirectangular",
-                "uvConvention": "U0.5=+Z, U0.75=+X, V0=+Y; pixel-center coordinates",
-                "sunUV": [
-                  0.843,
-                  0.24
-                ],
-                "seedUV": [
-                  0.843,
-                  0.24
-                ],
-                "method": "explicit-uv",
-                "pixelAngularHalfDiagonalDegrees": 0.062148056940223906,
-                "declaredUncertaintyDegrees": 2.0,
-                "note": "Image art-direction calibration only; no astronomical observation date, location or physical ephemeris is inferred."
-              }
-            }
-          }
-        },
-        "dusk": {
-          "production": "review",
-          "orientation": [
-            0.0,
-            0.0,
-            0.0,
-            1.0
-          ],
-          "tiers": {
-            "low": {
-              "src": "assets/life/panoramas/hogwarts-dusk-scene-low-aca897867a9a.webp",
-              "width": 2048,
-              "height": 1024,
-              "bytes": 370600,
-              "sha256": "aca897867a9a536b304c80fe2242e09cf16090f26967f309968fafe1b6795e81"
-            },
-            "medium": {
-              "src": "assets/life/panoramas/hogwarts-dusk-scene-medium-ef38b217af6f.webp",
-              "width": 4096,
-              "height": 2048,
-              "bytes": 1138942,
-              "sha256": "ef38b217af6ffb22c143d99842ef11a0b787ef59ee3d2e7347b63d2528ba6e25"
-            }
-          },
-          "sky": {
-            "production": "review",
-            "orientation": [
-              0.0,
-              0.0,
-              0.0,
-              1.0
-            ],
-            "tiers": {
-              "low": {
-                "src": "assets/life/panoramas/hogwarts-dusk-sky-low-a983c7fb2a01.webp",
-                "width": 2048,
-                "height": 1024,
-                "bytes": 90714,
-                "sha256": "a983c7fb2a01a18fa6e8b27babf61cc1b38a19e4661e33e56744b764dd65f813"
-              },
-              "medium": {
-                "src": "assets/life/panoramas/hogwarts-dusk-sky-medium-3d4c9ce42adb.webp",
-                "width": 4096,
-                "height": 2048,
-                "bytes": 242840,
-                "sha256": "3d4c9ce42adb5b93a7a00159f1d6f4e8cd3ab1d900b4d0e4f8fdec7fac0369d4"
-              }
-            },
-            "observation": {
-              "kind": "art-direction-calibration",
-              "coordinateSystem": "sky-y-up-plus-z",
-              "sunDirection": [
-                0.7712909645905917,
-                0.09098020390357,
-                -0.6299467044429867
-              ],
-              "source": {
-                "renderedImage": "hogwarts-dusk-sky-r12.png",
-                "renderedImageSha256": "6f16a7aed9ba69a596d06c3110edfb2f269a0e0d4fc5dab9350d1b198ecfb018",
-                "width": 4096,
-                "height": 2048,
-                "projection": "equirectangular",
-                "uvConvention": "U0.5=+Z, U0.75=+X, V0=+Y; pixel-center coordinates",
-                "sunUV": [
-                  0.859,
-                  0.471
-                ],
-                "seedUV": [
-                  0.859,
-                  0.471
-                ],
-                "method": "explicit-uv",
-                "pixelAngularHalfDiagonalDegrees": 0.062148056940223906,
-                "declaredUncertaintyDegrees": 3.0,
-                "note": "Image art-direction calibration only; no astronomical observation date, location or physical ephemeris is inferred."
-              }
-            }
-          }
+          "background": "authored-sky"
         }
       }
     },
-    "snowmountain": {
-      "preview": null,
-      "sky": "clear",
+    "fontainesaintmichel": {
       "observation": {
         "position": [
-          0,
-          1.72,
-          7
+          22.42742329021196,
+          1.683712114277383,
+          23.9249997499432
         ],
-        "yaw": 0.15,
-        "pitch": 0.1
+        "yaw": -0.3883015369487308,
+        "pitch": 0.08192102391635828
       },
       "production": "review",
+      "sky": "dusk",
+      "supportedPhases": [
+        "dusk"
+      ],
+      "defaultPhase": "dusk",
+      "source": {
+        "provider": "Unreal Engine native render",
+        "sourceSha256": "1809d554f6be5349b8a9b92cd9fb39d143e8012b64431c1ff89a8d6a35dee9cb",
+        "map": "/Game/Paris/Demo/Maps/L_Paris_01_01_P",
+        "camera": "Fontaine-bike-square-front",
+        "cameraPositionCm": [
+          2242.742329021196,
+          2392.49997499432,
+          168.3712114277383
+        ],
+        "cameraRotationDeg": [
+          4.693728923797607,
+          -112.24803924560547,
+          0
+        ],
+        "renderMaster": ".render-work/authored-worlds-20260927/fontaine-175946-views/stencil-cube-final/beauty-panorama-16384x8192-rgba16.png",
+        "renderMasterSha256": "f2343b35723f3435944a2e7166f9671b07018ca66512f2bdc60e74d3fb9944f1",
+        "alpha": "opaque-authored-sky",
+        "lighting": "/Game/Paris/Demo/Maps/Sublevels/L_ParisLighting_01_03_Sunset",
+        "manualEV100": 6,
+        "renderJob": "175946",
+        "postprocessJob": "175977",
+        "sourceMaterial": "Fontaine Saint-Michel native geometry, materials and authored sky"
+      },
       "variants": {
-        "clear": {
-          "production": "review",
-          "orientation": [
-            0.0,
-            0.0,
-            0.0,
-            1.0
-          ],
-          "tiers": {
-            "low": {
-              "src": "assets/life/panoramas/snowmountain-clear-scene-low-be3854fd237b.webp",
-              "width": 2048,
-              "height": 1024,
-              "bytes": 67196,
-              "sha256": "be3854fd237b2ab3ebccfc6acbc11fcb14e8c19d0b2be625cd34e5e5540dfe38"
-            },
-            "medium": {
-              "src": "assets/life/panoramas/snowmountain-clear-scene-medium-94355c97e8d2.webp",
-              "width": 4096,
-              "height": 2048,
-              "bytes": 150320,
-              "sha256": "94355c97e8d2953fea729d444ff7ad0ede33f408830dc324a2319b2baa9ad8a2"
-            }
-          },
-          "sky": {
-            "production": "review",
-            "orientation": [
-              0.0,
-              0.0,
-              0.0,
-              1.0
-            ],
-            "tiers": {
-              "low": {
-                "src": "assets/life/panoramas/snowmountain-clear-sky-low-fec1ef550774.webp",
-                "width": 2048,
-                "height": 1024,
-                "bytes": 134062,
-                "sha256": "fec1ef55077458da38c553338c25486f3b8bc3f12077827b1d5a44458cdb5b75"
-              },
-              "medium": {
-                "src": "assets/life/panoramas/snowmountain-clear-sky-medium-94a194ee2ab7.webp",
-                "width": 4096,
-                "height": 2048,
-                "bytes": 338900,
-                "sha256": "94a194ee2ab7ca5c627aea52c86c7e0cc635702633e475373e96a7f87e45906a"
-              }
-            },
-            "observation": {
-              "kind": "art-direction-calibration",
-              "coordinateSystem": "sky-y-up-plus-z",
-              "sunDirection": [
-                0.5709659778474304,
-                0.7289686274214116,
-                -0.3776275842362034
-              ],
-              "source": {
-                "renderedImage": "snowmountain-sky-r10.png",
-                "renderedImageSha256": "01fd48cd41efa6a7825522fc8099677159a936f4ffc55be5ba4fe7fabfdecfe3",
-                "width": 4096,
-                "height": 2048,
-                "projection": "equirectangular",
-                "uvConvention": "U0.5=+Z, U0.75=+X, V0=+Y; pixel-center coordinates",
-                "sunUV": [
-                  0.843,
-                  0.24
-                ],
-                "seedUV": [
-                  0.843,
-                  0.24
-                ],
-                "method": "explicit-uv",
-                "pixelAngularHalfDiagonalDegrees": 0.062148056940223906,
-                "declaredUncertaintyDegrees": 2.0,
-                "note": "Image art-direction calibration only; no astronomical observation date, location or physical ephemeris is inferred."
-              }
-            }
-          }
-        },
         "dusk": {
           "production": "review",
           "orientation": [
@@ -377,74 +352,35 @@
           ],
           "tiers": {
             "low": {
-              "src": "assets/life/panoramas/snowmountain-dusk-scene-low-88cdb29c4f94.webp",
+              "src": "assets/life/panoramas/fontainesaintmichel-dusk-scene-low-5a151fccc49e.webp",
               "width": 2048,
               "height": 1024,
-              "bytes": 61732,
-              "sha256": "88cdb29c4f94f5fae783e17096ba5d7094474a5d552ff14a3dda8997e6812ef0"
+              "bytes": 390090,
+              "sha256": "5a151fccc49e649bf4c3dfeadb5eded84ff4b95b71bc6faf0d656d2a49fa026c"
             },
             "medium": {
-              "src": "assets/life/panoramas/snowmountain-dusk-scene-medium-96011c243948.webp",
+              "src": "assets/life/panoramas/fontainesaintmichel-dusk-scene-medium-afb858ee086b.webp",
               "width": 4096,
               "height": 2048,
-              "bytes": 141006,
-              "sha256": "96011c243948e9c8ba054285fdb9d134a0e76582f2024bb5348060318a8188c2"
+              "bytes": 1466054,
+              "sha256": "afb858ee086b48eff1e9e6ea1493537ff3bca6a7b5b81f7410fcb5b571d96e37"
+            },
+            "high": {
+              "src": "assets/life/panoramas/fontainesaintmichel-dusk-scene-high-fbefaf9265d3.webp",
+              "width": 8192,
+              "height": 4096,
+              "bytes": 5127472,
+              "sha256": "fbefaf9265d3537fa59e9f479fec7c4b4123bbdfaf8de34b9fa02f5c191a829e"
+            },
+            "ultra": {
+              "src": "assets/life/panoramas/fontainesaintmichel-dusk-scene-ultra-e074fb4ea615.webp",
+              "width": 12288,
+              "height": 6144,
+              "bytes": 10547450,
+              "sha256": "e074fb4ea61531fa4d4709d6b6228ef65df4897cf127ed65137796754246ca0b"
             }
           },
-          "sky": {
-            "production": "review",
-            "orientation": [
-              0.0,
-              0.0,
-              0.0,
-              1.0
-            ],
-            "tiers": {
-              "low": {
-                "src": "assets/life/panoramas/snowmountain-dusk-sky-low-a983c7fb2a01.webp",
-                "width": 2048,
-                "height": 1024,
-                "bytes": 90714,
-                "sha256": "a983c7fb2a01a18fa6e8b27babf61cc1b38a19e4661e33e56744b764dd65f813"
-              },
-              "medium": {
-                "src": "assets/life/panoramas/snowmountain-dusk-sky-medium-3d4c9ce42adb.webp",
-                "width": 4096,
-                "height": 2048,
-                "bytes": 242840,
-                "sha256": "3d4c9ce42adb5b93a7a00159f1d6f4e8cd3ab1d900b4d0e4f8fdec7fac0369d4"
-              }
-            },
-            "observation": {
-              "kind": "art-direction-calibration",
-              "coordinateSystem": "sky-y-up-plus-z",
-              "sunDirection": [
-                0.7712909645905917,
-                0.09098020390357,
-                -0.6299467044429867
-              ],
-              "source": {
-                "renderedImage": "snowmountain-dusk-sky-r10.png",
-                "renderedImageSha256": "fd92050ec91c665e0440b4496a0c73bcafbb27c8b6d680dc15ce5993e7bfc0b3",
-                "width": 4096,
-                "height": 2048,
-                "projection": "equirectangular",
-                "uvConvention": "U0.5=+Z, U0.75=+X, V0=+Y; pixel-center coordinates",
-                "sunUV": [
-                  0.859,
-                  0.471
-                ],
-                "seedUV": [
-                  0.859,
-                  0.471
-                ],
-                "method": "explicit-uv",
-                "pixelAngularHalfDiagonalDegrees": 0.062148056940223906,
-                "declaredUncertaintyDegrees": 3.0,
-                "note": "Image art-direction calibration only; no astronomical observation date, location or physical ephemeris is inferred."
-              }
-            }
-          }
+          "background": "authored-sky"
         }
       }
     }

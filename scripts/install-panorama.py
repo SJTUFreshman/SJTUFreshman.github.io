@@ -10,9 +10,11 @@ from pathlib import Path
 from PIL import Image
 
 
-SCENES = ('spaceship', 'shelter', 'hogwarts', 'snowmountain')
+SCENES = ('spaceship', 'shelter', 'hogwarts', 'snowmountain', 'fontainesaintmichel')
 PHASES = ('night', 'clear', 'dusk')
-TIER_WIDTHS = (('low', 2048), ('medium', 4096), ('high', 8192))
+TIER_WIDTHS = (('low', 2048), ('medium', 4096), ('high', 8192), ('ultra', 12288))
+LEGACY_PHASES = {'spaceship': ['night'], 'shelter': ['night'],
+                 'hogwarts': ['clear', 'dusk'], 'snowmountain': ['clear', 'dusk']}
 
 
 def read_json(path):
@@ -46,6 +48,20 @@ def tier_dimensions(width, height):
     return result or [('low', width, height)]
 
 
+def phase_metadata(exported, scene, requested):
+    phases = exported.get('supportedPhases', LEGACY_PHASES.get(scene))
+    if (not isinstance(phases, list) or not phases or
+            any(not isinstance(phase, str) or phase not in PHASES for phase in phases) or
+            len(phases) != len(set(phases))):
+        raise ValueError('Exported supportedPhases must be a nonempty unique list of supported phase names')
+    if requested not in phases:
+        raise ValueError(f'Phase {requested!r} is not in exported supportedPhases: {phases}')
+    default = exported.get('defaultPhase', phases[0])
+    if default not in phases:
+        raise ValueError('Exported defaultPhase must be in supportedPhases')
+    return phases.copy(), default
+
+
 def normalized_orientation(value, name):
     orientation = finite_vector(value, 4, name)
     length = math.hypot(*orientation)
@@ -70,12 +86,15 @@ def sky_calibration_metadata(value):
     return metadata
 
 
-def source_image(path, foreground=False):
+def source_image(path, foreground=False, authored_sky=False):
     with Image.open(path) as source:
         source.load()
         image = source.convert('RGBA' if foreground else 'RGB')
         tier_dimensions(*source.size)
-        if foreground:
+        if authored_sky:
+            if source.convert('RGBA').getchannel('A').getextrema() != (255, 255):
+                raise ValueError('Authored-sky panorama must be fully opaque')
+        elif foreground:
             if 'A' not in source.getbands() and 'transparency' not in source.info:
                 raise ValueError('Foreground must preserve transparent sky pixels')
             alpha = image.getchannel('A').getextrema()
@@ -110,18 +129,32 @@ def install(args):
     output = Path(args.output_dir).resolve() if args.output_dir else manifest_path.parent
     if not manifest_path.is_relative_to(root) or not output.is_relative_to(root):
         raise ValueError('Manifest and output directory must remain inside the site root')
-    if args.scene in ('spaceship', 'shelter') and args.phase != 'night':
-        raise ValueError('Ship and shelter use night resources')
-    if args.scene in ('hogwarts', 'snowmountain') and args.phase == 'night':
-        raise ValueError('Mountain scenes require clear or dusk resources')
     exported = read_json(args.scene_json)
     observation = observation_metadata(exported, args.scene)
+    phases, default_phase = phase_metadata(exported, args.scene, args.phase)
     catalog = read_json(manifest_path) if manifest_path.exists() else {'version': 1, 'projection': 'equirectangular', 'alpha': 'straight', 'scenes': {}}
     if catalog.get('version') != 1 or catalog.get('projection') != 'equirectangular':
         raise ValueError('Unsupported panorama manifest')
-    entry = copy.deepcopy(catalog.get('scenes', {}).get(args.scene, {}))
-    if entry.get('observation') and entry['observation'] != observation:
+    previous_entry = catalog.get('scenes', {}).get(args.scene, {})
+    authored_sky = bool(getattr(args, 'authored_sky', False))
+    if authored_sky and args.sky:
+        raise ValueError('--authored-sky cannot be combined with a separate --sky layer')
+    replace_scene = bool(getattr(args, 'replace_scene', False))
+    entry = {} if replace_scene else copy.deepcopy(previous_entry)
+    if not replace_scene and entry.get('observation') and entry['observation'] != observation:
         raise ValueError('Existing scene observation differs from the exported camera; re-render all variants consistently')
+    if any(phase not in phases for phase in entry.get('variants', {})):
+        raise ValueError('Existing variants conflict with supportedPhases; use --replace-scene to replace the complete scene')
+    if 'source' in exported and not isinstance(exported['source'], dict):
+        raise ValueError('Exported source metadata must be an object')
+    pilot = None
+    if args.scene == 'spaceship':
+        pilot = copy.deepcopy(exported.get('pilot', entry.get('pilot', {})))
+        if not isinstance(pilot, dict):
+            raise ValueError('Exported pilot metadata must be an object')
+        pilot['seat'] = observation['position'].copy()
+        if 'exit' in pilot:
+            finite_vector(pilot['exit'], 3, 'pilot.exit')
     if args.sky_metadata and not args.sky:
         raise ValueError('--sky-metadata requires --sky')
     sky_metadata = sky_calibration_metadata(read_json(args.sky_metadata)) if args.sky_metadata else None
@@ -131,24 +164,30 @@ def install(args):
             raise ValueError('Sky calibration hash does not match the supplied rendered sky')
     if getattr(args, 'sky_orientation', None) is not None and not args.sky:
         raise ValueError('--sky-orientation requires --sky')
-    foreground = source_image(args.foreground, foreground=True)
+    foreground = source_image(args.foreground, foreground=True, authored_sky=authored_sky)
     sky = source_image(args.sky) if args.sky else None
     orientation = normalized_orientation(args.orientation, 'orientation')
     sky_orientation = normalized_orientation(getattr(args, 'sky_orientation', None) or args.orientation, 'sky-orientation')
     if args.dry_run:
-        return {'scene': args.scene, 'phase': args.phase, 'production': 'review', 'observation': observation, 'tiers': tier_dimensions(*foreground.size), 'skyTiers': tier_dimensions(*sky.size) if sky else [], 'dryRun': True}
+        return {'scene': args.scene, 'phase': args.phase, 'production': 'review',
+                'observation': observation, 'supportedPhases': phases, 'defaultPhase': default_phase,
+                'replaceScene': replace_scene,
+                'removedVariants': list(previous_entry.get('variants', {})) if replace_scene else [],
+                'tiers': tier_dimensions(*foreground.size),
+                'skyTiers': tier_dimensions(*sky.size) if sky else [], 'dryRun': True}
     output.mkdir(parents=True, exist_ok=True)
     variant = {'production': 'review', 'orientation': orientation, 'tiers': encode_tiers(foreground, args.scene, args.phase, 'scene', output, root)}
+    if authored_sky:
+        variant['background'] = 'authored-sky'
     if sky:
         variant['sky'] = {'production': 'review', 'orientation': sky_orientation, 'tiers': encode_tiers(sky, args.scene, args.phase, 'sky', output, root)}
         if sky_metadata is not None:
             variant['sky']['observation'] = sky_metadata
-    entry.update({'observation': observation, 'production': 'review', 'sky': args.phase if args.scene not in ('hogwarts', 'snowmountain') else 'clear'})
-    if args.scene == 'spaceship':
-        pilot = copy.deepcopy(exported.get('pilot') or entry.get('pilot') or {})
-        pilot['seat'] = observation['position'].copy()
-        if 'exit' in pilot:
-            finite_vector(pilot['exit'], 3, 'pilot.exit')
+    entry.update({'observation': observation, 'production': 'review', 'sky': default_phase,
+                  'supportedPhases': phases, 'defaultPhase': default_phase})
+    if 'source' in exported:
+        entry['source'] = copy.deepcopy(exported['source'])
+    if pilot is not None:
         entry['pilot'] = pilot
     entry.setdefault('variants', {})[args.phase] = variant
     catalog.setdefault('scenes', {})[args.scene] = entry
@@ -163,7 +202,9 @@ def install(args):
     finally:
         if temporary.exists():
             temporary.unlink()
-    return {'scene': args.scene, 'phase': args.phase, 'production': 'review', 'manifest': str(manifest_path), 'tiers': variant['tiers'], 'skyTiers': variant.get('sky', {}).get('tiers', {})}
+    return {'scene': args.scene, 'phase': args.phase, 'production': 'review', 'manifest': str(manifest_path),
+            'replaceScene': replace_scene, 'supportedPhases': phases, 'defaultPhase': default_phase,
+            'tiers': variant['tiers'], 'skyTiers': variant.get('sky', {}).get('tiers', {})}
 
 
 def parse_args():
@@ -174,12 +215,16 @@ def parse_args():
     parser.add_argument('--foreground', required=True)
     parser.add_argument('--scene-json', required=True)
     parser.add_argument('--sky')
+    parser.add_argument('--authored-sky', action='store_true',
+                        help='Install an opaque complete panorama that preserves the authored sky in its scene layer')
     parser.add_argument('--sky-metadata')
     parser.add_argument('--manifest', default=str(root / 'assets/life/panoramas/manifest.json'))
     parser.add_argument('--output-dir')
     parser.add_argument('--site-root', default=str(root))
     parser.add_argument('--orientation', nargs=4, type=float, default=[0, 0, 0, 1])
     parser.add_argument('--sky-orientation', nargs=4, type=float)
+    parser.add_argument('--replace-scene', action='store_true',
+                        help='Replace this entire scene entry with the supplied camera and phase; discard all old variants and metadata')
     parser.add_argument('--dry-run', action='store_true')
     return parser.parse_args()
 

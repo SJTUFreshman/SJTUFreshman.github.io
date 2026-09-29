@@ -1,6 +1,6 @@
 # Life 页面分片维护指南
 
-`life.html` 只保留页面骨架、可访问性结构、站点内容区和资源引用。页面视觉与运行时分别拆到本目录的 8 个 CSS 和 24 个 classic JS 中：原有星空保留，默认观景使用可替换的离线全景资源，探索模式才启用 Three.js 实时场景。
+`life.html` 只保留页面骨架、可访问性结构、站点内容区和资源引用。页面视觉与运行时分别拆到本目录的 8 个 CSS 和 23 个 classic JS 中：原有星空保留，默认观景使用可替换的离线全景资源，探索模式才启用 Three.js 实时场景。
 
 ## CSS 分片
 
@@ -47,15 +47,16 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 17-content-ui.js
 18-bootstrap.js
 assets/vendor/three-0.160.1.min.js（vendor 依赖，非本目录分片）
+assets/vendor/night-gltf-loader-0.160.1.js
+assets/vendor/night-area-lights-0.160.1.js
 24-panorama.js
+25-authored-worlds.js
 19-world-kit.js
-21-world-outdoors.js
-22-world-interiors.js
 20-world-runtime.js
 23-world-ui.js
 ```
 
-`03` 必须先于 `04`：`04-dom-state.js` 在顶层创建 `camera`，会立即调用 `orientationFromYawPitch`。前 18 个文件按编号加载；环境文件的编号不等于依赖顺序。Three.js 必须先于 `19`，两个 builder 文件 `21` / `22` 必须先于创建场景的 `20`，最后加载 `23`。
+`03` 必须先于 `04`：`04-dom-state.js` 在顶层创建 `camera`，会立即调用 `orientationFromYawPitch`。前 18 个文件按编号加载；环境文件的编号不等于依赖顺序。Three.js 必须先于模型加载器、`19`、`25`，最后加载 `20` 和 `23`。历史程序化 builder `21` / `22` 不再由页面加载，仅保留离线旧版本回归用途。
 
 `assets/vendor/astronomy-engine-2.1.19.min.js` 必须在以上列表之前加载；头部的 Hipparcos 星表也必须先可用。
 
@@ -80,11 +81,10 @@ assets/vendor/three-0.160.1.min.js（vendor 依赖，非本目录分片）
 | `17-content-ui.js` | 语言切换、Thoughts、引用复制、ECharts 地图和 lightbox |
 | `18-bootstrap.js` | 最终初始化、开始渲染、StellarTransit ready/restore 与 bfcache 恢复 |
 | `19-world-kit.js` | Three.js 几何、材质、灯光、碰撞体与共享资源管理工具 |
-| `21-world-outdoors.js` | 废土避难所、霍格沃兹山丘与险峻雪山的独立场景 builder |
-| `22-world-interiors.js` | 开拓号飞船的独立场景 builder |
 | `20-world-runtime.js` | 环境 renderer、步行和驾驶、碰撞、场景切换、天空遮挡、永夜时间与可选环境声音 |
 | `23-world-ui.js` | 三语场景选择、模式和声音开关、交互提示、触屏移动与焦点管理 |
 | `24-panorama.js` | 默认固定机位全景资源加载与天空窗口命中测试 |
+| `25-authored-worlds.js` | 原始整景 glTF 异步加载、保留作者变换、地形行走与失重漂浮碰撞 |
 
 ## 跨文件状态约定
 
@@ -97,7 +97,7 @@ assets/vendor/three-0.160.1.min.js（vendor 依赖，非本目录分片）
 
 ## 独立环境与星空的边界
 
-四个环境 ID 为 `spaceship`、`shelter`、`hogwarts`、`snowmountain`。场景道具、地点和动作是纯环境体验，不对应 Home、Projects、Gallery 或任何内容板块。原有星座点击、恒星内容、天体观测和 Life 索引继续使用原有数据与导航机制。
+四个环境 ID 为 `spaceship`（NASA ISS）、`shelter`（ProjectsCity）、`fontainesaintmichel`、`snowmountain`。场景地点和动作是纯环境体验，不对应 Home、Projects、Gallery 或任何内容板块。原有星座点击、恒星内容、天体观测和 Life 索引继续使用原有数据与导航机制。迁移和资源验收进度见 `docs/authored-worlds-migration-20260928.md`。
 
 环境工具通过 `window.NightWorldKit` 暴露，builder 注册到 `window.NightWorldBuilders`，运行时和 UI 分别为 `window.NightWorld` 与 `window.NightWorldUI`。环境脚本使用 IIFE 隔离其内部变量，但仍读取原有共享的 `state`、`camera` 与 `skyModel`。场景通过透明 canvas 叠在原有星空之上，不替换星表或星空 renderer；墙体等实际几何会遮挡其背后的天空命中区。
 
@@ -107,21 +107,22 @@ assets/vendor/three-0.160.1.min.js（vendor 依赖，非本目录分片）
 
 永夜模式保留 Astronomy Engine 的位置计算，优先将观察时间冻结在本次访问日期、当前观察经度对应的当地太阳午夜。如果此时太阳仍高于 −18°（高纬夏季、极昼或极地暮光），改用同年、所在半球冬至日期的当地午夜，确保天文夜晚。正常夜间位置仍保留访问日期的星空；选定时间按观察地点和访问日期缓存，不随真实时钟推进到白天，也不是当前实时天空。改变观察位置时重新选择并验证观察时间；Astronomy Engine 不可用时保留普通午夜退路。不要在个别刷新入口直接用 `new Date()` 绕开这一约定。
 
-飞船、废土避难所使用 `night`；霍格沃兹山丘、雪山支持 `clear` 与 `dusk`。`SceneSky.observationDate()` 在原始夜间参考日期之上选择白天或黄昏观测时刻，主渲染循环只转换一次。切换白天/黄昏必须同时更新天空、离线全景与探索环境光照，禁止只改变天空颜色却留下不匹配的地面光照。
+可用时段由 manifest 中已安装的 `variants` 决定。`SceneSky.observationDate()` 在原始夜间参考日期之上选择白天或黄昏观测时刻，主渲染循环只转换一次。切换白天/黄昏必须同时更新天空、离线全景与探索环境光照，禁止只改变天空颜色却留下不匹配的地面光照。
 
 环境选择只在本机 `localStorage` 的 `runde:night-world:v1` 中保存；存储不可用时仍可使用默认场景。环境声音由 Web Audio 本地合成，默认关闭，由用户点击开启，不请求外部音频。原有语言和观察地点等偏好仍按原有机制维护。
 
-写实资源采用本地 glTF 模型与 PBR 材质；来源、许可、校验值和松树单变体提取流程见 `ASSETS.md`。近景松树在桌面 52 米、触屏 28 米之外切换为轻量程序化树木。模型异步加载期间保留几何替身，加载失败后再次进入场景可以重试；切换场景不会把迟到的模型挂回已销毁场景。桌面使用月光阴影和每场景最多一个点光源阴影，触屏关闭阴影以控制开销。
+整景模型从 manifest 的 `exploration.model` 读取，默认观景不下载模型。加载期间阻止移动，失败回到固定机位观景并显示错误；切换场景不会把迟到的模型挂回已销毁场景。`model.position/quaternion/scale` 是显式坐标变换，不对整景自动居中缩放。NASA 使用原始单位和失重漂浮，不把未标定源单位显示成米；其面光由原始候选渲染灯位转换为浏览器矩形面光，实时与离线渲染仍需分别验收。
 
 操作约定：
 
 - 默认观景：固定选定机位，鼠标／拖动 360° 环顾；飞船坐在驾驶位，`W/S` 俯仰、`A/D` 转向、`Q/E` 翻滚、`Shift/Ctrl` 油门、空格制动。头部环顾与飞船姿态独立，可通过驾驶让任意方向的星空进入舷窗。
 - 隐藏解锁：按 `Shift + Alt + E`，或打开场景菜单后连续点击／轻触菜单标题五次（相邻点击不超过 1.4 秒）。解锁仅限当前页面会话，显示实时渲染提示；之后菜单出现“自由探索”，可随时回到“静静观景”。
 - 探索模式：隐藏解锁后，鼠标／拖动环顾，`W A S D` 行走，`Shift` 加速，`E` 与附近且在视野内的道具互动。
+- NASA 舱内探索沿视线漂浮，`Space / Q` 上升／下降；保留舱壁碰撞，不假设源模型存在地板。
 - `M` 打开场景选择；其中可切换环境、选择“只看星空”、开关声音或返回抵达位置。`Esc` 关闭选择器，打开时暂停漫游并隔离背景焦点。
 - 飞船驾驶：默认观景和探索使用同一套姿态控制；仅探索模式可以按 `F` 或点击提示离开驾驶位。切换到探索保留当前驾驶状态。驾驶键与普通漫游键的含义不同。
 - 触屏：左下方向键移动（驾驶时控制俯仰／转向），`+ / −` 调整飞船油门，其余区域拖动环顾；点击交互提示执行动作。非飞船默认观景不显示移动控制。
-- 观景画质：场景菜单提供自动／高／中／低，由 `NightPanorama` 选择实际资源档位；晴天场景另有晴天／黄昏选择。菜单公开显示预览、加载与失败状态。
+- 观景画质：场景菜单提供自动／极高／高／中／低。极高最多 12288×6144，高 8192×4096，按设备纹理上限降档；默认自动在桌面使用中、触屏使用低。菜单显示真实资源状态，时段只展示已安装选项。
 - “只看星空”隐藏环境并保留原有星空操作，包括 `A / D` 翻滚、星座点击、内容访问与返回。原有 pointer-lock fallback、Alt 游标释放和 detail/modal 状态仍须一起验证。
 
 ## 生成内容边界

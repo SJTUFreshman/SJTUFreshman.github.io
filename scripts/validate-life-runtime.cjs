@@ -87,7 +87,8 @@ const lifeStylesheets = localStylesheetResources(lifeHtml).filter(resource =>
 const releaseVersions = [...lifeScripts, ...lifeStylesheets].map(resource => new URL(resource.reference, 'https://life.invalid/').searchParams.get('v'));
 assert(releaseVersions.every(Boolean), 'Every local Life script and stylesheet must carry a cache-release version');
 assert.equal(new Set(releaseVersions).size, 1, 'All Life scripts and stylesheets must share one release version to prevent mixed cached runtimes');
-assert.equal(lifeRuntimeScripts.length, 24, 'life.html must load the sky, panorama and environment runtime scripts');
+assert.equal(lifeRuntimeScripts.length, 23, 'life.html must load the sky, panorama and authored environment runtime scripts');
+assert(!lifeRuntimeScripts.some(resource => /2[12]-world-/.test(resource.relativePath)), 'Discarded procedural scenes must not load in Life');
 assert.equal(lifeStylesheets.length, 8, 'life.html must load the sky and environment stylesheets');
 assert(
     lifeHtml.split(/\r?\n/).length < 1000,

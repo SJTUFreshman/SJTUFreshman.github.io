@@ -1,13 +1,13 @@
 # 固定机位全景资源
 
-此目录服务于 `observe` 默认观景；不是自由移动场景，也不是最终画质已经完成的声明。浏览器投影离线全景并叠加交互天空，隐藏探索才加载完整实时几何。四个场景为 `spaceship`、`shelter`、`hogwarts`、`snowmountain`。
+此目录服务于 `observe` 默认观景；不是自由移动场景，也不是最终画质已经完成的声明。浏览器投影离线全景，可保留作者原始天空或通过透明区域显示交互天空，隐藏探索才加载完整实时几何。四个场景为 `spaceship`、`shelter`（ProjectsCity）、`fontainesaintmichel`、`snowmountain`。
 
 ## 资源与生产边界
 
 - `manifest.json` 是已安装全景的清单，具体字段以 `24-panorama.js` 的读取契约为准。
 - `*.scene.json` 是制作/导出中间产物，包含几何和材质描述；不是访客默认模式需要下载的资源，不应把它们当成已经烘焙好的图片。
-- 夜间场景使用 night 资源；山丘、雪山需要 clear/dusk 两套匹配光照的资源，不可只给同一底图套颜色滤镜。
-- 正式全景应包含天空透射/遮挡信息，使舷窗、窗外与开放天空保留星座命中，墙体、窗框、山体不能穿透点击。
+- 每个场景只提供已实际渲染的时段；使用 `supportedPhases/defaultPhase` 声明原生导出时段，不可只给同一底图套颜色滤镜。
+- 使用交互天空的全景包含天空透射/遮挡信息，使舷窗、窗外与开放天空保留星座命中，墙体、窗框、山体不能穿透点击。保留作者完整天空的全景阻止点击被遮住的天体，纯星空模式仍独立可用。
 - 低／中／高资源档位是交付分辨率选择；`draft`、`review`、`approved` 是生产验收状态，两者不能混用。
 
 渲染器的 `status` 为 `loading`、`preview`、`prerendered` 或 `error`。`prerendered` 仅说明离线图片已加载，不证明照片级、4K 或 120fps 指标已经通过。没有正式资源时必须显示预览提示，不得把程序化替身宣传为最终照片级资源。
@@ -16,9 +16,11 @@
 
 ## 相机和驾驶契约
 
-每套资源由固定 observation 机位完整覆盖 360°；镜头位置必须与 manifest 中 observation/pilot metadata 一致。飞船默认在驾驶座，环顾只改变头部本地四元数，`W/S` 俯仰、`A/D` 偏航、`Q/E` 翻滚改变飞船姿态。舱内全景随头部方向投影，舷窗外的星空使用全局相机姿态，因此舱内不用因飞船转向重新渲染。
+每套资源由固定 observation 机位完整覆盖 360°；镜头位置必须与 manifest 中 observation/pilot metadata 一致。NASA 场景默认在穹顶舱舷窗旁，环顾只改变头部本地四元数，`W/S` 俯仰、`A/D` 偏航、`Q/E` 翻滚改变飞船姿态。舱内全景随头部方向投影，舷窗外的星空使用全局相机姿态，因此舱内不用因飞船转向重新渲染。
 
-默认模式不允许离开驾驶座；隐藏探索才可以离座。不能用一张固定视点图片伪装成有真实位移视差的漫游。服务器的算力用于离线建模、烘焙和渲染，不会自动减轻实时探索时访客的本机渲染负担。
+默认模式固定在舷窗观景点；隐藏探索才可以漂入舱内。不能用一张固定视点图片伪装成有真实位移视差的漫游。服务器的算力用于离线建模、烘焙和渲染，不会自动减轻实时探索时访客的本机渲染负担。
+
+全景 shader 使用站点导航的 `+Z` 前向；`20-world-runtime.syncCamera` 将导航 `(x,y,z)` 转为 Three `(x,y,-z)`。因此纹理 `U=.5` 对应 Three `−Z`，`U=.75` 对应 `+X`，`V=0` 对应 `+Y`。NASA 原始坐标与 Three 一致，原生 Blender `−Z` 前向、`+Y` 上向的全景采用 identity orientation；不能额外补转 180°。variant orientation 表示纹理基底到导航基底，显示与 alpha 命中都只应用一次逆变换。
 
 ## 生产验收
 
@@ -36,12 +38,16 @@
 
 ```powershell
 python scripts/install-panorama.py --scene spaceship --phase night --foreground .render-work/remote/spaceship.png --scene-json .render-work/scenes/spaceship.scene.json --dry-run
-python scripts/install-panorama.py --scene hogwarts --phase clear --foreground .render-work/remote/hogwarts-clear.png --sky .render-work/remote/sky-clear.png --scene-json .render-work/scenes/hogwarts.scene.json --sky-metadata .render-work/remote/sky-clear-observation.json --dry-run
+python scripts/install-panorama.py --scene fontainesaintmichel --phase clear --foreground .render-work/remote/fontaine-clear.png --sky .render-work/remote/sky-clear.png --scene-json .render-work/scenes/fontaine.scene.json --sky-metadata .render-work/remote/sky-clear-observation.json --dry-run
 ```
 
-低／中／高档分别最多为 2048／4096／8192 像素宽；只生成源图支持的档位，小于 2048 的源图仅安装原尺寸 low，不放大后冒充更高画质。输出文件含内容哈希，可重复安装，不覆盖旧版本图片。前景必须为精确 2:1、保留透明天空和不透明场景的图像；天空图片可为 RGB。`--orientation x y z w` 默认为单位四元数，应使用离线方向图验证后的变换。
+低／中／高／极高档分别最多为 2048／4096／8192／12288 像素宽；只生成源图支持的档位，不放大。16K 母版独立归档，WebP 的尺寸上限不能容纳 16384 像素宽。输出文件含内容哈希，不覆盖旧版本图片。前景必须为精确 2:1、保留透明天空和不透明场景的图像；天空图片可为 RGB。`--orientation x y z w` 默认为单位四元数，应使用离线方向图验证后的变换。
+
+保留作者原始天空时使用 `--authored-sky`：输入必须为精确 2:1 的全不透明完整画面，不得同时传 `--sky`。安装器在 variant 记录 `background: authored-sky`；浏览器仅加载这一层，停止绘制被遮住的底层天空，切换纯星空模式时正常恢复。独立保存的透明地景母版不必强行用于默认观景。
 
 `--scene-json` 的场景 ID、坐标系与 observation 是机位的唯一来源；已有其他时段资源的机位不一致时拒绝安装。飞船驾驶位从该 observation 同步；浏览器异步得到 manifest 时只修正默认观景机位，不重置飞船姿态、速度，也不移动探索中的用户。
+
+更换整张原始场景时，对新场景首个时段使用 `--replace-scene`，会原子替换该场景，清空旧时段、驾驶出口和来源元数据；随后追加新时段时不再传此参数。先在工作目录的 staging manifest 完成所有时段和探索元数据再发布。历史安装器仍兼容旧城堡 ID，但页面不再展示或加载它。
 
 `--sky-metadata` 只接受显式美术方向校准，不可虚构 HDR 拍摄日期／地点。格式如下，`sunDirection` 是太阳在未旋转天空图中的 +Z-forward、Y-up 方向，安装时归一化；`source` 可保存真实来源与许可信息。`--sky-orientation x y z w` 可独立设置天空图旋转，默认与 `--orientation` 相同。浏览器将天空旋转应用一次，使太阳命中、镜头跟踪和场景光照对应天空图的太阳。切换至探索或纯星空模式时清除这项离线画面校准。
 
@@ -56,6 +62,8 @@ python scripts/install-panorama.py --scene hogwarts --phase clear --foreground .
 安装资源统一为 `production: review`，界面明确显示“预渲染评审版 · 尚未完成最终画质验收”。独立运行 `python scripts/validate-panorama-install.py` 检查尺寸、透明度、机位匹配、评审标记与 dry-run 行为，测试仅写入临时目录。
 
 ## 后台批处理与资源预检
+
+以下 Blender 队列属于历史程序化场景，仅用于旧版本回归。新成品 Unreal 场景在服务器原生引擎渲染，禁止经过 `refine-*` 旧重建流程；当前工作目录及作业证据见 `docs/authored-worlds-migration-20260928.md`。
 
 从远端 `/data/home/scwb515/run/yangrunde/life_worlds` 工作目录提交当前飞船 r13、城市 r8 队列：
 

@@ -1,0 +1,37 @@
+{
+  "asset_hashes_verified": 99,
+  "coordinate_landmarks_verified": [
+    {
+      "node": "Cupola_Int_Cabin",
+      "source_vertex_world": [
+        -6.577881336212158,
+        102.11705780029297,
+        -22.316173553466797
+      ],
+      "gltf_nearest_vertex_error": 1.1632439965211962e-06,
+      "world_bounds_max_error": 2.86102294921875e-06
+    },
+    {
+      "node": "Cupola_Int_Metal",
+      "source_vertex_world": [
+        8.450797080993652,
+        97.3449478149414,
+        -24.81727409362793
+      ],
+      "gltf_nearest_vertex_error": 1.778570732189592e-05,
+      "world_bounds_max_error": 1.430511474609375e-05
+    },
+    {
+      "node": "Cupola_Int_MSS_AV",
+      "source_vertex_world": [
+        5.628431797027588,
+        99.59943389892578,
+        -22.824851989746094
+      ],
+      "gltf_nearest_vertex_error": 1.4559549870441698e-05,
+      "world_bounds_max_error": 1.71661376953125e-05
+    }
+  ],
+  "export_yup_false_preserves_source_axes": true,
+  "total_bytes": 281049873
+}

@@ -26,3 +26,9 @@ CDN at runtime.
 Three.js is served locally for the optional, transparent 3D environment layer;
 the existing starfield and astronomy renderers remain separate. The page does
 not contact the dependency CDN at runtime.
+
+- `night-area-lights-0.160.1.js`: matching Three.js `RectAreaLightUniformsLib`, mechanically adapted to the existing classic-script engine.
+- Source: https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/lights/RectAreaLightUniformsLib.js
+- Upstream SHA-256: `08085bc942253cd54948bf936fecb66b54514a135872656e475a1cab09b55214`.
+- Adapted SHA-256: `ff8924b9b967bd0122108d8e8e00cbd1d54c414469cb11ebce65e957b49efc6a`.
+- Rebuild: `node assets/vendor/build-night-area-lights.cjs`. License: MIT, see `THREE-LICENSE.txt`; upstream LTC attribution is retained.

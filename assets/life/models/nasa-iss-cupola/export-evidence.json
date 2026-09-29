@@ -1,0 +1,1696 @@
+{
+  "job_id": "175277",
+  "source_blend": "/data/run01/scwb515/yangrunde/life_worlds/.render-work/nasa-original-views-20260927/r2/cupola-withdrawn-candidate.blend",
+  "source_sha256": "bb884b3f5fdae3fe6116bd2241b44e8efb2f804de8785840431f400ebfa09816",
+  "export_format": "GLTF_SEPARATE",
+  "coordinate_conversion": "export_yup=False; exact source x,y,z retained; no automatic Blender Z-up to glTF Y-up rotation",
+  "source_meshes": 265,
+  "exported_mesh_objects": 257,
+  "excluded_render_hidden_objects": [
+    "Cupola_Int_Glass",
+    "Cupola_WC_01",
+    "Cupola_WC_02",
+    "Cupola_WC_03",
+    "Cupola_WC_04",
+    "Cupola_WC_05",
+    "Cupola_WC_06",
+    "Cupola_WC_07"
+  ],
+  "source_bounds": {
+    "min": [
+      -55.38186264038086,
+      -47.48427200317383,
+      -34.17177963256836
+    ],
+    "max": [
+      171.27215576171875,
+      158.36709594726562,
+      51.21405029296875
+    ]
+  },
+  "visible_bounds": {
+    "min": [
+      -55.38186264038086,
+      -47.48427200317383,
+      -31.756927490234375
+    ],
+    "max": [
+      171.27215576171875,
+      158.36709594726562,
+      51.21405029296875
+    ]
+  },
+  "source_mesh_landmarks": [
+    {
+      "name": "Cupola_Int_Cabin",
+      "matrix_world": [
+        [
+          0.9999999403953552,
+          0.0,
+          0.0,
+          -8.571278158342466e-06
+        ],
+        [
+          0.0,
+          0.9999999403953552,
+          0.0,
+          98.04399871826172
+        ],
+        [
+          0.0,
+          0.0,
+          0.9999999403953552,
+          -18.28801918029785
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "vertex_zero_local": [
+        -6.577873229980469,
+        4.073060035705566,
+        -4.028153896331787
+      ],
+      "vertex_zero_source_world": [
+        -6.577881336212158,
+        102.11705780029297,
+        -22.316173553466797
+      ],
+      "bounds_source_world": {
+        "min": [
+          -10.350504875183105,
+          87.6935043334961,
+          -31.756927490234375
+        ],
+        "max": [
+          10.350482940673828,
+          108.39448547363281,
+          -18.287933349609375
+        ]
+      }
+    },
+    {
+      "name": "Cupola_Int_Metal",
+      "matrix_world": [
+        [
+          0.9999999403953552,
+          -7.105426934084528e-15,
+          0.0,
+          -8.57127997733187e-06
+        ],
+        [
+          7.105426934084528e-15,
+          0.9999999403953552,
+          0.0,
+          98.04401397705078
+        ],
+        [
+          0.0,
+          0.0,
+          0.9999999403953552,
+          -18.288015365600586
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "vertex_zero_local": [
+        8.450806617736816,
+        -0.6990640759468079,
+        -6.529258728027344
+      ],
+      "vertex_zero_source_world": [
+        8.450797080993652,
+        97.3449478149414,
+        -24.81727409362793
+      ],
+      "bounds_source_world": {
+        "min": [
+          -8.49210262298584,
+          90.32819366455078,
+          -24.81766700744629
+        ],
+        "max": [
+          8.492086410522461,
+          105.75982666015625,
+          -19.243022918701172
+        ]
+      }
+    },
+    {
+      "name": "Cupola_Int_MSS_AV",
+      "matrix_world": [
+        [
+          0.9999999403953552,
+          -7.105426934084528e-15,
+          0.0,
+          -8.571280886826571e-06
+        ],
+        [
+          7.105426934084528e-15,
+          0.9999999403953552,
+          0.0,
+          98.04400634765625
+        ],
+        [
+          0.0,
+          0.0,
+          0.9999999403953552,
+          -18.28801918029785
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "vertex_zero_local": [
+        5.628440856933594,
+        1.555426836013794,
+        -4.5368332862854
+      ],
+      "vertex_zero_source_world": [
+        5.628431797027588,
+        99.59943389892578,
+        -22.824851989746094
+      ],
+      "bounds_source_world": {
+        "min": [
+          2.430065155029297,
+          92.61067962646484,
+          -27.715728759765625
+        ],
+        "max": [
+          7.5954389572143555,
+          103.05838775634766,
+          -19.07264518737793
+        ]
+      }
+    }
+  ],
+  "observer_source": [
+    0,
+    98,
+    -18.5
+  ],
+  "observer_life": [
+    0,
+    1.68,
+    -9.95
+  ],
+  "source_to_life_matrix_scale1": [
+    [
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      -96.32
+    ],
+    [
+      0,
+      0,
+      1,
+      8.55
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "source_front": [
+    0,
+    0,
+    -1
+  ],
+  "source_up": [
+    0,
+    1,
+    0
+  ],
+  "navigation": {
+    "recommended_mode": "zero_gravity_free_flight",
+    "source_units_physically_calibrated": false,
+    "recommended_initial_position_source": [
+      0,
+      98,
+      -18.5
+    ],
+    "walkable_floor_not_defined": true,
+    "pilot_exit_not_defined": true,
+    "recommended_speed_source_units_per_second": 5,
+    "optional_wrapper_scale": 0.1,
+    "optional_scale_is_artistic_not_measured": true
+  },
+  "lighting": {
+    "area_lights": [
+      {
+        "name": "Camera-space front fill",
+        "type": "AREA",
+        "source_position": [
+          0.0,
+          98.0,
+          -18.350000381469727
+        ],
+        "source_direction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "watts": 3000.0,
+        "color_linear_rgb": [
+          1.0,
+          0.9399999976158142,
+          0.8500000238418579
+        ],
+        "diameter_source_units": 3.0,
+        "shape": "DISK"
+      },
+      {
+        "name": "Connection softbox",
+        "type": "AREA",
+        "source_position": [
+          0.0,
+          98.0,
+          -14.0
+        ],
+        "source_direction": [
+          8.742279078433057e-08,
+          8.74227694680485e-08,
+          1.0
+        ],
+        "watts": 180.0,
+        "color_linear_rgb": [
+          1.0,
+          0.9399999976158142,
+          0.8500000238418579
+        ],
+        "diameter_source_units": 6.0,
+        "shape": "DISK"
+      },
+      {
+        "name": "Node3 aisle softbox",
+        "type": "AREA",
+        "source_position": [
+          0.0,
+          82.0,
+          5.0
+        ],
+        "source_direction": [
+          0.0,
+          0.8804711699485779,
+          -0.4740995764732361
+        ],
+        "watts": 250.0,
+        "color_linear_rgb": [
+          1.0,
+          0.9399999976158142,
+          0.8500000238418579
+        ],
+        "diameter_source_units": 6.0,
+        "shape": "DISK"
+      }
+    ],
+    "world_color_linear_rgb": [
+      0.32,
+      0.4,
+      0.54
+    ],
+    "world_strength": 0.15,
+    "browser_area_lighting_requires_runtime_support": true
+  },
+  "source_texture_images": [
+    {
+      "name": "Airlock_1_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Airlock_1_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Airlock_1_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Airlock_2_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Airlock_2_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Airlock_2_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "BEAM_Int_Diffuse.png.001",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "loaded": true
+    },
+    {
+      "name": "BEAM_Int_Diffuse.png.003",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "loaded": true
+    },
+    {
+      "name": "BEAM_Int_Metallic.png.001",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "loaded": true
+    },
+    {
+      "name": "BEAM_Int_Normal.png.001",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Bishop_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Bishop_Diffuse.png.001",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Bishop_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Bishop_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Int_Bulkhead_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Int_Bulkhead_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Int_Bulkhead_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Racks01_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Racks01_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Racks01_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Racks02_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Racks02_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Racks02_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Racks03_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Racks03_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Columbus_Racks03_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Cupola_Int_Diffuse.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Cupola_Int_Diffuse.png.001",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Cupola_Int_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Cupola_Int_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "EXPRESS_Racks_ATLAS_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "EXPRESS_Racks_ATLAS_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "EXPRESS_Racks_ATLAS_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Generic_HubAndMetals_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Generic_HubAndMetals_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Generic_HubAndMetals_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Generic_Misc_Details_Diffuse.png",
+      "dimensions": [
+        4098,
+        4098
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Generic_Misc_Details_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JLP_Int_Bulkhead_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JLP_Int_Bulkhead_Diffuse.png.001",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JLP_Int_Bulkhead_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JLP_Int_Bulkhead_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JLP_Racks_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JLP_Racks_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JLP_Racks_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Bulkhead_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Bulkhead_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Bulkhead_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Racks_01_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Racks_01_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Racks_01_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Racks_02_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Racks_02_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Racks_02_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Racks_03_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Racks_03_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "JPM_Racks_03_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "NewRacks59-60_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "NewRacks59-60_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "NewRacks59-60_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node2_Int_Bulkhead_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node2_Int_Bulkhead_Diffuse.png.002",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node2_Int_Bulkhead_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node2_Int_Bulkhead_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node2_Int_Rack_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node2_Int_Rack_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node2_Int_Rack_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Bulkhead_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Bulkhead_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Bulkhead_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Rack_01_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Rack_01_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Rack_01_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Rack_02_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Rack_02_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Rack_02_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Rack_WHC_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Rack_WHC_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Node3_Int_Rack_WHC_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Patches1_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Patches1_Diffuse.png.001",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Patches2_Diffuse.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Patches2_Diffuse.png.001",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "loaded": true
+    },
+    {
+      "name": "PMM_01_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "PMM_01_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "PMM_01_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "Render Result",
+      "dimensions": [
+        0,
+        0
+      ],
+      "loaded": false
+    },
+    {
+      "name": "USLab_AFT_Bulkhead_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_AFT_Bulkhead_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_AFT_Bulkhead_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_FWD_Bulkhead_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_FWD_Bulkhead_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_FWD_Bulkhead_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_01_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_01_Diffuse.png.001",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_01_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_01_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_02_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_02_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_02_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_03_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_03_Diffuse.png.001",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_03_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_03_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_04_Diffuse.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_04_Metallic.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    },
+    {
+      "name": "USLab_Racks_04_Normal.png",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "loaded": true
+    }
+  ],
+  "files": [
+    {
+      "path": "nasa-iss-internal.bin",
+      "bytes": 23599240,
+      "sha256": "08bff66d2cbb7683477751d577703078c52a75efe1e9b7515f6bb85b413262a7"
+    },
+    {
+      "path": "nasa-iss-internal.gltf",
+      "bytes": 485196,
+      "sha256": "9593493e2ed108b2f21f92492c3a99d9cbc537355934aa41501b3711a7ca5c58"
+    },
+    {
+      "path": "textures/Airlock_1_Diffuse.png",
+      "bytes": 1779904,
+      "sha256": "58748b7f3d9fd912cfe7221d49e48ddd9a36a31a6acf89e710c5ec6f25fb2fd7"
+    },
+    {
+      "path": "textures/Airlock_1_Metallic.png",
+      "bytes": 493785,
+      "sha256": "5991b31f887806cb408ece3bcfb89a0760aad8047b4f574d283fadb98c92d4b1"
+    },
+    {
+      "path": "textures/Airlock_1_Normal.png",
+      "bytes": 3900785,
+      "sha256": "562d2ed4634796599cdba9860593946c0e3fd550889f090be0b7de4f390707c3"
+    },
+    {
+      "path": "textures/Airlock_2_Diffuse.png",
+      "bytes": 1369059,
+      "sha256": "0794f5a3d62c1662fac7dbcede80f93826bd3e075dca2f8160c15330c217b3a8"
+    },
+    {
+      "path": "textures/Airlock_2_Metallic.png",
+      "bytes": 321318,
+      "sha256": "76186e0b405e7c460dc0a70685090a7ad718fdd1a97a9d94a86c67e58d645b90"
+    },
+    {
+      "path": "textures/Airlock_2_Normal.png",
+      "bytes": 14922221,
+      "sha256": "02d35111e8298f36c8bb47107ca09a3e8f23ac168f2997718d4f505e0fe2843a"
+    },
+    {
+      "path": "textures/BEAM_Int_Diffuse.png",
+      "bytes": 292415,
+      "sha256": "d878500f34118caea5911b8fc5cfd1394e17f3d3706adb318b192358ba91bfae"
+    },
+    {
+      "path": "textures/BEAM_Int_Metallic.png",
+      "bytes": 121674,
+      "sha256": "c82dc55a66d02edc5f0bf994eeef3876c5689ad73a53b410ce33bc4911e71ad6"
+    },
+    {
+      "path": "textures/BEAM_Int_Normal.png",
+      "bytes": 2817682,
+      "sha256": "5bbd92df7be9c636217d043430447aaa6af4042989d7ca4467f76b69eaf1a27e"
+    },
+    {
+      "path": "textures/Bishop_Diffuse.png",
+      "bytes": 1625745,
+      "sha256": "9e15110a3da5edcf31cffe47a2b9b1938ca21fe44f655691e79b0946e950adbc"
+    },
+    {
+      "path": "textures/Bishop_Metallic.png",
+      "bytes": 511648,
+      "sha256": "a6849c75f65a088f39211cd9d89dfed6dc07c3d1bfed5169494eb67d733ab757"
+    },
+    {
+      "path": "textures/Bishop_Normal.png",
+      "bytes": 9656961,
+      "sha256": "e1d0b70bb464d741664b0989278ff9695ac7ff53de5931744ff65059a55a44c4"
+    },
+    {
+      "path": "textures/Columbus_Int_Bulkhead_Diffuse.png",
+      "bytes": 2230113,
+      "sha256": "7c981521259c209a307caa2fd889fe5bdad88f9d0eb05e6579018a5f91c54ac0"
+    },
+    {
+      "path": "textures/Columbus_Int_Bulkhead_Metallic.png",
+      "bytes": 362084,
+      "sha256": "0f86a7f13fadd0f64e798f9f838d33636a612b980d03891618035e7467086120"
+    },
+    {
+      "path": "textures/Columbus_Int_Bulkhead_Normal.png",
+      "bytes": 7901018,
+      "sha256": "b5cea2a5cc4c851919c09a85cb52dd4be0586454a6d7da7c992127642641eadb"
+    },
+    {
+      "path": "textures/Columbus_Racks01_Diffuse.png",
+      "bytes": 1873517,
+      "sha256": "5a1e004412ad56cb845c00da5b21adb0e487b3097dda41b8cff3fb505fb17af7"
+    },
+    {
+      "path": "textures/Columbus_Racks01_Metallic.png",
+      "bytes": 1288796,
+      "sha256": "f92c551b5f4bc0295c77d48936b985ccbdb02221a709622d8cd07d2f083d172e"
+    },
+    {
+      "path": "textures/Columbus_Racks01_Normal.png",
+      "bytes": 4095412,
+      "sha256": "d26e9933fb2e7b0df6278f0363e38d4e229b3a43f5a232961e6cfab233a7ca31"
+    },
+    {
+      "path": "textures/Columbus_Racks02_Diffuse.png",
+      "bytes": 807654,
+      "sha256": "25bb331dc46a02b3f940f63672ff1f0f7f0c16afa288690223c65e63edaa6aa5"
+    },
+    {
+      "path": "textures/Columbus_Racks02_Metallic.png",
+      "bytes": 377303,
+      "sha256": "9ecd7e08a31bbd9a453bbb41d30e0a8391f5e0fa305569f0b81dbd90806075cf"
+    },
+    {
+      "path": "textures/Columbus_Racks02_Normal.png",
+      "bytes": 8074967,
+      "sha256": "e5433f5a534e8bfc6d8b4a2db55dfbb586de302d995af81a830e40ffe38931dd"
+    },
+    {
+      "path": "textures/Columbus_Racks03_Diffuse.png",
+      "bytes": 1730948,
+      "sha256": "84e2ab08fea4201c7b71692ab6785fcb236d249b76d64ae9f33a227da5c291fc"
+    },
+    {
+      "path": "textures/Columbus_Racks03_Metallic.png",
+      "bytes": 978376,
+      "sha256": "ad501b364c1c9bdb7b124dce7f2a88279a1f5f4457c1084459acb3672a129ecf"
+    },
+    {
+      "path": "textures/Columbus_Racks03_Normal.png",
+      "bytes": 3255804,
+      "sha256": "ff0c671079f77f9a6037fc228255984e808f16a1670b11f5d0690bbce553bc55"
+    },
+    {
+      "path": "textures/Cupola_Int_Diffuse.png",
+      "bytes": 898067,
+      "sha256": "cbc098db92935aa7f5eab8914d6ac1e160a4e908ba7e3958c063d0e7884edd5b"
+    },
+    {
+      "path": "textures/Cupola_Int_Metallic.png",
+      "bytes": 559351,
+      "sha256": "c65701326dc672f76d84d335393798a168f1e0ff7399c0ec1e0a7ab7e37ab212"
+    },
+    {
+      "path": "textures/Cupola_Int_Normal.png",
+      "bytes": 10585255,
+      "sha256": "bb44e92591c9c4df89569a106ae0703325c8339ad20e04fafc4a1f1099ffaf9f"
+    },
+    {
+      "path": "textures/EXPRESS_Racks_ATLAS_Diffuse.png",
+      "bytes": 2017771,
+      "sha256": "ae360aefb09794e8c2f22ae47e27615e5a83ac3f021fdf90434e59f957480f6e"
+    },
+    {
+      "path": "textures/EXPRESS_Racks_ATLAS_Metallic.png",
+      "bytes": 651376,
+      "sha256": "763641d843aeb2adb5acee7c7e8b00a9ef20ae804bec9275d05fdfdf96633c9b"
+    },
+    {
+      "path": "textures/EXPRESS_Racks_ATLAS_Normal.png",
+      "bytes": 3595420,
+      "sha256": "59def913080c9eeefcd9d48335461445e23ae801486246bb67bf07577f0d6b51"
+    },
+    {
+      "path": "textures/Generic_HubAndMetals_Diffuse.png",
+      "bytes": 1204785,
+      "sha256": "eef088c7f81a382903c635150322e514084df82c86773cfa8a0bbcc8a8ec9038"
+    },
+    {
+      "path": "textures/Generic_HubAndMetals_Metallic.png",
+      "bytes": 459432,
+      "sha256": "11ae6479db1bdae0af7b816e352e614a7b8e67e9e17e022a0b7ae0bd9344065d"
+    },
+    {
+      "path": "textures/Generic_HubAndMetals_Normal.png",
+      "bytes": 3093108,
+      "sha256": "ea4b2d84938b4d61e4cf5391c2b54c9dae11ac05a95df26fa01ebb4b362f12f0"
+    },
+    {
+      "path": "textures/Generic_Misc_Details_Diffuse.png",
+      "bytes": 5421008,
+      "sha256": "6d3f97cf42cae8476bae4eee80a520f09311e1bcfd96141700bdf68505823c46"
+    },
+    {
+      "path": "textures/Generic_Misc_Details_Metallic.png",
+      "bytes": 330397,
+      "sha256": "bab2363c470a280d9ecca30a02fce3610af219b7f7e6682cc5db4d6116231368"
+    },
+    {
+      "path": "textures/JLP_Int_Bulkhead_Diffuse.png",
+      "bytes": 1379450,
+      "sha256": "f43494bd84317104f202a210844bdd5e617f0682a38731f501d6f30cdc391dce"
+    },
+    {
+      "path": "textures/JLP_Int_Bulkhead_Metallic.png",
+      "bytes": 343595,
+      "sha256": "93eefb088b5e316c4d42a37adc91466d785d471c9c907150551562be350ece67"
+    },
+    {
+      "path": "textures/JLP_Int_Bulkhead_Normal.png",
+      "bytes": 4560198,
+      "sha256": "c89caaf5165fe96a28b09d13232560a80241ce1653f0a81142dd22131bd6243f"
+    },
+    {
+      "path": "textures/JLP_Racks_Diffuse.png",
+      "bytes": 523150,
+      "sha256": "4d596f9193e83bc059f8a1b2f087d8822106b9f20c4bd27ce6ba9ef2ea92e7af"
+    },
+    {
+      "path": "textures/JLP_Racks_Metallic.png",
+      "bytes": 278566,
+      "sha256": "c59c1ff0ecaccc56806aed8475bb8929de9ef801e022e2e831bc558200fad4bd"
+    },
+    {
+      "path": "textures/JLP_Racks_Normal.png",
+      "bytes": 9268548,
+      "sha256": "da4f6fba2ab88ae90e7bbd83b880d81ee6343e9262f93e047796e4bd54e8cb2c"
+    },
+    {
+      "path": "textures/JPM_Bulkhead_Diffuse.png",
+      "bytes": 1166111,
+      "sha256": "cfce2abf0e91f96a3f95f773237eb955beb2f230e19b9d3921f7c3aeb23060a1"
+    },
+    {
+      "path": "textures/JPM_Bulkhead_Metallic.png",
+      "bytes": 689572,
+      "sha256": "b2c73d8283180b0657815d3b573b1b3a6c51c8f63345506954ef7ad5c7a69075"
+    },
+    {
+      "path": "textures/JPM_Bulkhead_Normal.png",
+      "bytes": 3260500,
+      "sha256": "483a1b525f0ffa8111c310bfb044aacda13e153c288b7afee3a75bfe950048e7"
+    },
+    {
+      "path": "textures/JPM_Racks_01_Diffuse.png",
+      "bytes": 1444468,
+      "sha256": "121ab4e9f0d104b22cbe75ea6bf8564dd6e65f08f332994446a3f094f12ab31f"
+    },
+    {
+      "path": "textures/JPM_Racks_01_Metallic.png",
+      "bytes": 630187,
+      "sha256": "6f7ee532f556a9ae92db8095b5f9ec5be21b505e0ae58eb17ec9bdc911e9f5a8"
+    },
+    {
+      "path": "textures/JPM_Racks_01_Normal.png",
+      "bytes": 4844694,
+      "sha256": "d1a556e8757811b0aac6e22aef61af0d689610a69ea7d5e841e3bca8fb25f021"
+    },
+    {
+      "path": "textures/JPM_Racks_02_Diffuse.png",
+      "bytes": 2477134,
+      "sha256": "14b45bb515574ceb98335761ba0aacf0a41b483ee4763ca1821938c739917b09"
+    },
+    {
+      "path": "textures/JPM_Racks_02_Metallic.png",
+      "bytes": 851464,
+      "sha256": "56ec1fee53f8ae43b811e1ac8adf760bad8572a3debc52a6f10b6acb46e8ce82"
+    },
+    {
+      "path": "textures/JPM_Racks_02_Normal.png",
+      "bytes": 6079034,
+      "sha256": "111ac6a9c9188e363c57e0db9fa81256b4287aa78575a0c7beeccabe42cb8f9b"
+    },
+    {
+      "path": "textures/JPM_Racks_03_Diffuse.png",
+      "bytes": 1277479,
+      "sha256": "481ba166c39153b685a326f915becd6072f7ddb3067d181aa0886907691b3260"
+    },
+    {
+      "path": "textures/JPM_Racks_03_Metallic.png",
+      "bytes": 1018438,
+      "sha256": "22a7356cdbc4fd0dd8e2faf988b436271acd0eacef3fd550098a90ad0bf5f930"
+    },
+    {
+      "path": "textures/JPM_Racks_03_Normal.png",
+      "bytes": 3566656,
+      "sha256": "13eb9bee732eaa6bb1fc9e4ca1806526eac1f239f819a4205b3a5c39e2ce41aa"
+    },
+    {
+      "path": "textures/NewRacks59-60_Diffuse.png",
+      "bytes": 1900343,
+      "sha256": "cc52753c24979d0eee0cdbf394d7eb58e79ff1aa8d25ce95e5e9e58eaf957a95"
+    },
+    {
+      "path": "textures/NewRacks59-60_Metallic.png",
+      "bytes": 379417,
+      "sha256": "258bb8cd28395149bee754249fcbb7c2eef2bd5084a2294639c60a6cc293445b"
+    },
+    {
+      "path": "textures/NewRacks59-60_Normal.png",
+      "bytes": 8848538,
+      "sha256": "95af155ea0eeddea2cd048313631835c0b56781993402bec9f1b7d5cc3338585"
+    },
+    {
+      "path": "textures/Node2_Int_Bulkhead_Diffuse.png",
+      "bytes": 2025142,
+      "sha256": "7f0b9e1b87d44b4b74e3ec73fe5bb8084b187db8ef776c726f35c1a89c230b5c"
+    },
+    {
+      "path": "textures/Node2_Int_Bulkhead_Metallic.png",
+      "bytes": 414312,
+      "sha256": "8351fd4a789692701422c29037ee644af072d43fd364268e1cdfe85dd739fd59"
+    },
+    {
+      "path": "textures/Node2_Int_Bulkhead_Normal.png",
+      "bytes": 3102818,
+      "sha256": "e016be688122e7d9b67871d2e0167f6038c8649c8772356854c84a21f55a3aac"
+    },
+    {
+      "path": "textures/Node2_Int_Rack_Diffuse.png",
+      "bytes": 1619346,
+      "sha256": "2947f4d55766ad18545917f33894687520f3bd3ed3a349dc9fc8dd6cd9fa21a5"
+    },
+    {
+      "path": "textures/Node2_Int_Rack_Metallic.png",
+      "bytes": 319672,
+      "sha256": "13b8cb63db39ed8e1e78e45d801e09eadb6d1866e9a14e566a2b9cd7e6fadf73"
+    },
+    {
+      "path": "textures/Node2_Int_Rack_Normal.png",
+      "bytes": 17443549,
+      "sha256": "4fc4be20be9e49553300b9efd76171eb268d7d190467eb8777c201169a3cdc60"
+    },
+    {
+      "path": "textures/Node3_Int_Bulkhead_Diffuse.png",
+      "bytes": 1356306,
+      "sha256": "3dfd3cf236786187979404fa0db1e94d561db63539a68e317f064a9118772439"
+    },
+    {
+      "path": "textures/Node3_Int_Bulkhead_Metallic.png",
+      "bytes": 430358,
+      "sha256": "e6ad0747535aa126bf477a0d1b887b248143026daddaa167c80d493004837bfc"
+    },
+    {
+      "path": "textures/Node3_Int_Bulkhead_Normal.png",
+      "bytes": 1513373,
+      "sha256": "9eb5eb049250bee8c274c807e0448c5894700083534ab35e3ad40564b251c432"
+    },
+    {
+      "path": "textures/Node3_Int_Rack_01_Diffuse.png",
+      "bytes": 672162,
+      "sha256": "ddcc2e71684dc2a62784ca2e9483f06703d8f07ce1198f32242e55fe19ae9b5e"
+    },
+    {
+      "path": "textures/Node3_Int_Rack_01_Metallic.png",
+      "bytes": 367856,
+      "sha256": "55430cf59ef4943948bfe06198206e15ae822f1216f61c9767252d5f15162f6f"
+    },
+    {
+      "path": "textures/Node3_Int_Rack_01_Normal.png",
+      "bytes": 2135209,
+      "sha256": "6633605c5177d8ea4b830f1d9dc26966c1f40521ccd82874ab5dedd76ae1c223"
+    },
+    {
+      "path": "textures/Node3_Int_Rack_02_Diffuse.png",
+      "bytes": 2088786,
+      "sha256": "ffc5a602d2649073446ae978adfe93897839ca7bc0cb8d6d8b47d259d7d289f2"
+    },
+    {
+      "path": "textures/Node3_Int_Rack_02_Metallic.png",
+      "bytes": 396590,
+      "sha256": "f28453f210d0a49eccc76580cf50eb9e944507ded22afcb994edcf79c156215d"
+    },
+    {
+      "path": "textures/Node3_Int_Rack_02_Normal.png",
+      "bytes": 5279116,
+      "sha256": "b17eef1175af396433b2afcbd5e54cc3b9f90ab9614d4b6731d3343d85218e81"
+    },
+    {
+      "path": "textures/Node3_Int_Rack_WHC_Diffuse.png",
+      "bytes": 262467,
+      "sha256": "295ac4eae21181d6d8d3cd45e1e4ed1b2dad5f62010715654916f4c65d11ada6"
+    },
+    {
+      "path": "textures/Node3_Int_Rack_WHC_Metallic.png",
+      "bytes": 323533,
+      "sha256": "1285a280f8fae6710f65d6ca6c5d8c55c0bc1d0e07ec06ea7e2c31311d91e979"
+    },
+    {
+      "path": "textures/Node3_Int_Rack_WHC_Normal.png",
+      "bytes": 6064060,
+      "sha256": "720fa816fa253b17cec2647485ad1780eb92684e2023ad6de0d00bab922d9b39"
+    },
+    {
+      "path": "textures/PMM_01_Diffuse.png",
+      "bytes": 900347,
+      "sha256": "ad9f9f7d7b135464b1106b6e2a8e6717344ad097284fcb2ee1c878690334dd6e"
+    },
+    {
+      "path": "textures/PMM_01_Metallic.png",
+      "bytes": 505388,
+      "sha256": "3d349805f442fc3749cd18200602a1c1faa759985d322c1f0b81fd022cf92799"
+    },
+    {
+      "path": "textures/PMM_01_Normal.png",
+      "bytes": 4511187,
+      "sha256": "e41ef3f97a524fb3aa7e35f9e831e1d7c57023dbae40b7a7de54592e4ca03de6"
+    },
+    {
+      "path": "textures/Patches1_Diffuse.png",
+      "bytes": 15981026,
+      "sha256": "38709fd1f1d487111d1dd5085b509a666feae0867cbd9f7b44afa0e5d2531910"
+    },
+    {
+      "path": "textures/Patches2_Diffuse.png",
+      "bytes": 1663613,
+      "sha256": "a9d71b0ea6ebfb7138b21d7444fbbb1e62b686879cedd1d00c743f5f56464315"
+    },
+    {
+      "path": "textures/USLab_AFT_Bulkhead_Diffuse.png",
+      "bytes": 798911,
+      "sha256": "7acc4583e14378825cc4bd060d537a5faee899eb688e83c16d1fc4bba7b9e080"
+    },
+    {
+      "path": "textures/USLab_AFT_Bulkhead_Metallic.png",
+      "bytes": 431332,
+      "sha256": "df6cc7c96bcaa1ca0e974bd5ec628de4f8733e5f16e4ce9c21342a93ece551d7"
+    },
+    {
+      "path": "textures/USLab_AFT_Bulkhead_Normal.png",
+      "bytes": 2361957,
+      "sha256": "97d07fb4878c56995bad0fce270e026cbdcc47a07215cb92127856ee371dcc05"
+    },
+    {
+      "path": "textures/USLab_FWD_Bulkhead_Diffuse.png",
+      "bytes": 927014,
+      "sha256": "355a5f50bf52707a375278ce3d413215a69c0cd9d9c4bb3ebec198b7c1df0981"
+    },
+    {
+      "path": "textures/USLab_FWD_Bulkhead_Metallic.png",
+      "bytes": 463050,
+      "sha256": "d720de2fe829df3efb9f1c97860e8ebbefe6f90ab05e91363e4cfb52b60591e4"
+    },
+    {
+      "path": "textures/USLab_FWD_Bulkhead_Normal.png",
+      "bytes": 2071801,
+      "sha256": "74379abfaf35dcd3a222cee75edf540d77eac6282f8abdbe9b2293c768e78646"
+    },
+    {
+      "path": "textures/USLab_Racks_01_Diffuse.png",
+      "bytes": 1141376,
+      "sha256": "5d8c1ad78f968931bf5f82f490382bce18fc5cc418e4dced31e89d012df05407"
+    },
+    {
+      "path": "textures/USLab_Racks_01_Metallic.png",
+      "bytes": 518908,
+      "sha256": "26dbd07d221f00d50ee78693aa90ea834633b3453b553c3057f5f339eb730ce3"
+    },
+    {
+      "path": "textures/USLab_Racks_01_Normal.png",
+      "bytes": 2805161,
+      "sha256": "1e87d51c48282a25d0679469fe011f3170e85013068845769d9163c2749fac63"
+    },
+    {
+      "path": "textures/USLab_Racks_02_Diffuse.png",
+      "bytes": 781916,
+      "sha256": "918233e4cd4cd6b0d9f654046c23f9d52d248c1f3993b94ad0b1eac08783b388"
+    },
+    {
+      "path": "textures/USLab_Racks_02_Metallic.png",
+      "bytes": 369528,
+      "sha256": "7d699b5ae7a536daf9f04c88992e0b93edf0999c0ab40e01bc4cc4a0b68b7ac7"
+    },
+    {
+      "path": "textures/USLab_Racks_02_Normal.png",
+      "bytes": 3620633,
+      "sha256": "ffc7abc9942ed47cafb276f7ed643370bffbc9125bfb00456cc926dc00af2b6b"
+    },
+    {
+      "path": "textures/USLab_Racks_03_Diffuse.png",
+      "bytes": 4635196,
+      "sha256": "8545928ea27f28ac87c9da3c09ae877fc4c83eb06111f415776f95cc234c7cfb"
+    },
+    {
+      "path": "textures/USLab_Racks_03_Metallic.png",
+      "bytes": 1429519,
+      "sha256": "4653d5e200692bd6c2ba883ec42e353ee0582105a79747ea786a3d823002804e"
+    },
+    {
+      "path": "textures/USLab_Racks_03_Normal.png",
+      "bytes": 8576931,
+      "sha256": "822be375c5f8872ce43da3a6fb323154c85a20fd11d940d468c6c0eede848988"
+    },
+    {
+      "path": "textures/USLab_Racks_04_Diffuse.png",
+      "bytes": 587693,
+      "sha256": "332c1a68bb0386a154833d0dfcb628560532cab99198ecc8f6f06611dc762879"
+    },
+    {
+      "path": "textures/USLab_Racks_04_Metallic.png",
+      "bytes": 333141,
+      "sha256": "9d5bcaf147f885c516ec433821be4377f2a286c6b3b01a5e2d96e2a495531c3d"
+    },
+    {
+      "path": "textures/USLab_Racks_04_Normal.png",
+      "bytes": 1342453,
+      "sha256": "a8bc4f2ad2e11d034476727684f03740e36c344c0243ee5054f676659648bfde"
+    }
+  ],
+  "total_asset_bytes": 281049873,
+  "max_asset_file_bytes": 23599240,
+  "geometry_uv_preserved": true,
+  "material_note": "Standard Blender glTF conversion with original image inputs; metallic/roughness may be channel packed by exporter",
+  "glass": "Original Cupola glass omitted exactly as in selected transparent panorama; no artificial replacement mesh",
+  "runtime_installed": false
+}

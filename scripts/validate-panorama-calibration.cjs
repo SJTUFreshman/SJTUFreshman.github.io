@@ -14,8 +14,9 @@ const near = (actual, expected) => assert(Math.abs(actual - expected) < 1e-10, `
 function fixture(observation = metadata, orientation = quarterTurn, options = {}) {
     const callbacks = new Map();
     const requests = [];
+    const metadataEvents = [];
     const context = {
-        window: { document: { body: { dataset: {} } }, matchMedia: () => ({ matches: false }), dispatchEvent() {} },
+        window: { document: { body: { dataset: {} } }, matchMedia: () => ({ matches: false }), dispatchEvent(event) { if (event.type === 'nightpanorama:metadata') metadataEvents.push(event.detail); } },
         document: {
             readyState: 'loading', baseURI: 'http://localhost/life.html', addEventListener() {},
             getElementById: id => canvases.get(id),
@@ -33,7 +34,7 @@ function fixture(observation = metadata, orientation = quarterTurn, options = {}
     for (const method of ['shaderSource', 'compileShader', 'attachShader', 'linkProgram', 'deleteShader', 'deleteProgram', 'bindBuffer', 'bufferData', 'bindTexture', 'pixelStorei', 'texParameteri', 'texImage2D', 'deleteTexture', 'deleteBuffer', 'viewport', 'useProgram', 'enableVertexAttribArray', 'vertexAttribPointer', 'activeTexture', 'uniform1i', 'uniform4fv', 'uniform2f', 'uniform1f', 'drawArrays']) graphics[method] = () => {};
     Object.assign(graphics, {
         NO_ERROR: 0, getError: () => 0, getShaderParameter: () => true, getProgramParameter: () => true,
-        getShaderPrecisionFormat: () => ({ precision: 23 }), getParameter: () => 8192, getAttribLocation: () => 0
+        getShaderPrecisionFormat: () => ({ precision: 23 }), getParameter: () => options.maxTexture || 8192, getAttribLocation: () => 0
     });
     const canvases = new Map(['panoramaCanvas', 'panoramaSkyCanvas'].map(id => [id, {
         style: {}, getContext: () => graphics,
@@ -41,17 +42,39 @@ function fixture(observation = metadata, orientation = quarterTurn, options = {}
     }]));
     const layerTiers = layer => Object.fromEntries((options.tiers || ['low']).map(tier => [tier, { src: `${layer}-${tier}.webp`, width: 128 }]));
     const variant = { production: 'review', tiers: layerTiers('foreground'), sky: { observation, orientation, tiers: layerTiers('sky') } };
-    const manifest = { version: 1, projection: 'equirectangular', scenes: { hogwarts: { variants: { clear: variant } }, snowmountain: { variants: { clear: variant } } } };
+    const manifest = { version: 1, projection: 'equirectangular', scenes: { fontainesaintmichel: { variants: { clear: variant } }, snowmountain: { variants: { clear: variant } } } };
+    if (options.ultraWidth) {
+        variant.tiers.ultra.width = options.ultraWidth;
+        variant.sky.tiers.ultra.width = options.ultraWidth;
+    }
     context.fetch = async url => { requests.push(url); return { ok: true, json: async () => manifest, blob: async () => ({ url }) }; };
     vm.createContext(context);
     vm.runInContext(skySource, context);
     vm.runInContext(source, context);
-    return { context, callbacks, requests, canvases, panorama: context.window.NightPanorama, sky: context.window.SceneSky };
+    return { context, callbacks, requests, canvases, manifest, metadataEvents, panorama: context.window.NightPanorama, sky: context.window.SceneSky };
 }
 
 async function main() {
+    const authored = fixture(null, quarterTurn, { opaque: true });
+    const authoredVariant = authored.manifest.scenes.fontainesaintmichel.variants.clear;
+    delete authoredVariant.sky;
+    authoredVariant.background = 'authored-sky';
+    await authored.panorama.select('fontainesaintmichel', 'clear');
+    authored.panorama.render({ visible: true, width: 1600, height: 900, fov: Math.PI / 3 });
+    assert.equal(authored.panorama.coversSky(), true, 'an opaque authored sky needs no second sky texture');
+    assert.equal(authored.panorama.canSeeSky(0, 0), false, 'the underlying astronomical sky is not visible');
+    assert.equal(authored.requests.some(url => url.includes('/sky-')), false, 'the complete panorama loads one image layer');
+    authored.panorama.setMode('sky');
+    assert.equal(authored.panorama.coversSky(), false);
+    assert.equal(authored.panorama.canSeeSky(0, 0), true);
+    authored.panorama.setMode('observe');
+    assert.equal(authored.panorama.coversSky(), true);
+    authored.callbacks.get('panoramaCanvas:webglcontextlost')({ preventDefault() {} });
+    assert.equal(authored.panorama.coversSky(), false, 'context loss releases authored-sky coverage');
+    await authored.panorama.select('shelter', 'night');
+    assert.equal(authored.panorama.coversSky(), false, 'a missing scene cannot retain authored-sky coverage');
     const { context, callbacks, panorama, sky } = fixture();
-    assert.equal(await panorama.select('hogwarts', 'clear'), true);
+    assert.equal(await panorama.select('fontainesaintmichel', 'clear'), true);
     assert.equal(panorama.getSnapshot().status, 'prerendered');
     near(sky.snapshot().sunDirection[0], .8);
     near(sky.snapshot().sunDirection[1], .6);
@@ -73,7 +96,7 @@ async function main() {
     assert.equal(panorama.coversSky(), false);
 
     const disposable = fixture();
-    await disposable.panorama.select('hogwarts', 'clear');
+    await disposable.panorama.select('fontainesaintmichel', 'clear');
     disposable.panorama.dispose();
     assert.equal(disposable.sky.snapshot().alignment, null);
 
@@ -83,7 +106,7 @@ async function main() {
         assert.equal(candidate.sky.snapshot().alignment, null);
     }
     const masking = fixture(metadata, quarterTurn, { opaque: true });
-    await masking.panorama.select('hogwarts', 'clear');
+    await masking.panorama.select('fontainesaintmichel', 'clear');
     assert.equal(masking.panorama.canSeeSky(0, 0), true, 'invisible panorama must never leave a blocking mask');
     masking.panorama.render({ visible: true, width: 1600, height: 900, fov: Math.PI / 3 });
     assert.equal(masking.panorama.canSeeSky(0, 0), false, 'visible opaque panorama must block the sky');
@@ -99,7 +122,7 @@ async function main() {
     assert.equal(masking.panorama.canSeeSky(0, 0), true, 'missing variants must not retain the old mask');
 
     const recovery = fixture(metadata, quarterTurn, { tiers: ['high', 'medium', 'low'], opaque: true });
-    await recovery.panorama.select('hogwarts', 'clear');
+    await recovery.panorama.select('fontainesaintmichel', 'clear');
     assert.equal(recovery.panorama.getSnapshot().tier, 'medium');
     recovery.panorama.render({ visible: true, width: 3840, height: 2160, fov: Math.PI / 3 });
     const lose = name => recovery.callbacks.get(`${name}:webglcontextlost`)({ preventDefault() {} });
@@ -133,6 +156,33 @@ async function main() {
     lose('panoramaCanvas');
     await restore('panoramaCanvas');
     assert.equal(recovery.panorama.getSnapshot().tier, 'medium', 'explicit high must recover one tier lower');
+    const ultra = fixture(metadata, quarterTurn, { tiers: ['ultra', 'high', 'medium', 'low'], ultraWidth: 12288, maxTexture: 16384 });
+    await ultra.panorama.select('fontainesaintmichel', 'clear');
+    await ultra.panorama.setQuality('ultra');
+    assert.equal(ultra.panorama.getSnapshot().tier, 'ultra', 'explicit ultra is available on a sufficiently large texture device');
+    ultra.callbacks.get('panoramaCanvas:webglcontextlost')({ preventDefault() {} });
+    ultra.callbacks.get('panoramaCanvas:webglcontextrestored')();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(ultra.panorama.getSnapshot().tier, 'high', 'ultra context loss falls back to the compatible 8K tier');
+    const limited = fixture(metadata, quarterTurn, { tiers: ['ultra', 'high', 'medium', 'low'], ultraWidth: 12288, maxTexture: 8192 });
+    await limited.panorama.select('fontainesaintmichel', 'clear');
+    await limited.panorama.setQuality('ultra');
+    assert.equal(limited.panorama.getSnapshot().tier, 'high');
+    assert(!limited.requests.some(url => url.includes('-ultra.webp')), 'oversized ultra assets are skipped before download');
+    const legacy = fixture();
+    await legacy.panorama.select('fontainesaintmichel', 'clear');
+    await legacy.panorama.setQuality('ultra');
+    assert.equal(legacy.panorama.getSnapshot().tier, 'low', 'old manifests remain usable with an explicit ultra preference');
+    const phaseFallback = fixture();
+    const sceneEntry = phaseFallback.manifest.scenes.fontainesaintmichel;
+    sceneEntry.sky = 'dusk';
+    sceneEntry.variants = { dusk: sceneEntry.variants.clear };
+    assert.equal(await phaseFallback.panorama.select('fontainesaintmichel'), true, 'late manifest phase replaces the pre-manifest default');
+    assert.equal(phaseFallback.panorama.getSnapshot().skyMode, 'dusk');
+    assert.equal(phaseFallback.metadataEvents.at(-1).skyMode, 'dusk', 'runtime metadata receives the effective loaded phase');
+    const requestsAfterFallback = phaseFallback.requests.length;
+    assert.equal(await phaseFallback.panorama.select('fontainesaintmichel', 'dusk'), true);
+    assert.equal(phaseFallback.requests.length, requestsAfterFallback, 'fallback cache key uses the effective phase');
     console.log('Panorama calibration validation passed (direction calibration, immutable astronomy, lifecycle, masking, quality downgrade and bounded recovery).');
 }
 

@@ -2,21 +2,21 @@
 (function () {
     'use strict';
 
-    const SCENES = ['spaceship', 'shelter', 'hogwarts', 'snowmountain'];
+    const SCENES = ['spaceship', 'shelter', 'fontainesaintmichel', 'snowmountain'];
     const COPY = {
         en: {
             where: 'YOU ARE HERE', choose: 'Choose a place', title: 'Somewhere under the stars',
             intro: 'Four places to pause. Turn your head and take it in.', close: 'Close places',
             observe: 'Observe', explore: 'Explore', sky: 'Just the sky', view: 'View mode', current: 'Here now',
-            clear: 'Day', dusk: 'Dusk', quality: 'Panorama quality', auto: 'Auto', high: 'High', medium: 'Medium', low: 'Low',
+            clear: 'Day', dusk: 'Dusk', quality: 'Panorama quality', auto: 'Auto', ultra: 'Ultra', high: 'High', medium: 'Medium', low: 'Low',
             preview: 'Preview imagery · final production renders are not installed.', rendered: 'Offline panorama loaded', renderError: 'Panorama unavailable. Try another quality or scene.',
             renderedReview: 'Pre-rendered review version · visual acceptance is not complete.', renderedDraft: 'Pre-rendered draft · production work is still in progress.',
             sound: 'Ambient sound', soundOn: 'Sound on', soundOff: 'Sound off', reset: 'Return to arrival point',
             loading: 'Preparing your surroundings…', error: 'The surroundings could not load. The sky is still available.',
-            walk: 'W A S D · walk', look: 'Mouse · look', interact: 'Interact', hint: 'M · change surroundings',
+            walk: 'W A S D · walk', float: 'W A S D · drift   Space / Q · up / down', rise: 'Drift up', descend: 'Drift down', look: 'Mouse · look', interact: 'Interact', hint: 'M · change surroundings',
             skyHint: 'A / D · roll the sky', touchHint: 'Left · move     Right · look',
-            observeHint: 'Mouse / drag · look around', leaveSeat: 'F · leave the seat',
-            distance: 'wandered', pilot: 'AT THE HELM', pilotHint: 'W / S · pitch   A / D · yaw   Q / E · roll\nShift / Ctrl · throttle   Space · brake   Mouse · look',
+            observeHint: 'Mouse / drag · look around', leaveSeat: 'F · drift into the station',
+            distance: 'wandered', pilot: 'AT THE WINDOW', pilotHint: 'W / S · pitch   A / D · yaw   Q / E · roll\nShift / Ctrl · throttle   Space · brake   Mouse · look',
             touchPilotHint: '↑ / ↓ · pitch   ← / → · yaw   + / − · throttle   Drag · look',
             pilotForward: 'Pitch up', pilotBack: 'Pitch down', pilotLeft: 'Turn left', pilotRight: 'Turn right', throttleUp: 'Increase throttle', throttleDown: 'Decrease throttle',
             move: 'Move through the environment', forward: 'Walk forward', back: 'Walk backward', left: 'Move left', right: 'Move right',
@@ -24,9 +24,9 @@
             transit: ['The waiting place', 'Embers in an endless clearing.', 'FIRE / SILENCE'],
             lakeshore: ['Stillwater', 'A jetty, a lighthouse, the breathing lake.', 'WATER / REFLECTION'],
             observatory: ['The old observatory', 'A weathered dome above the clouds.', 'STONE / STARLIGHT'],
-            spaceship: ['Frontier', 'At the helm, with the entire sky ahead.', 'NASA-PUNK / DEEP SPACE'],
-            shelter: ['The courtyard settlement', 'An open-air refuge among ruined city streets.', 'WASTELAND / SETTLEMENT'],
-            hogwarts: ['Above Hogwarts', 'A mountainside facing the castle and its lake.', 'CASTLE / DAYLIGHT'],
+            spaceship: ['Cupola', 'Seven windows open from the International Space Station.', 'NASA / SPACE STATION'],
+            shelter: ['Projects City', 'Walk through the weathered streets of a deserted city.', 'CITY / RUINS'],
+            fontainesaintmichel: ['Fontaine Saint-Michel', 'A Paris square held in stone, water and evening light.', 'PARIS / STONE / DUSK'],
             snowmountain: ['The high ridge', 'Snow, sheer rock and a sky without limits.', 'ALPINE / DAYLIGHT'],
             train: ['The night train', 'A quiet platform. A journey without hurry.', 'RAIL / RHYTHM'],
             room: ['A room with a view', 'Lamplight, familiar things, an open sky.', 'LAMPLIGHT / STILLNESS'],
@@ -36,15 +36,15 @@
             where: '此刻所在', choose: '选择一处风景', title: '在星空之下，停留片刻',
             intro: '四处值得停留的风景。环顾四周，慢慢欣赏。', close: '关闭场景选择',
             observe: '静静观景', explore: '自由探索', sky: '只看星空', view: '视角模式', current: '正在这里',
-            clear: '晴天', dusk: '黄昏', quality: '全景画质', auto: '自动', high: '高', medium: '中', low: '低',
+            clear: '晴天', dusk: '黄昏', quality: '全景画质', auto: '自动', ultra: '极高', high: '高', medium: '中', low: '低',
             preview: '当前为预览资源 · 最终制作级渲染尚未安装。', rendered: '已加载离线全景', renderError: '全景暂时无法加载，请尝试其他画质或场景。',
             renderedReview: '预渲染评审版 · 尚未完成最终画质验收。', renderedDraft: '预渲染草稿 · 美术制作仍在进行。',
             sound: '环境声音', soundOn: '声音已开', soundOff: '声音已关', reset: '回到抵达位置',
             loading: '正在铺开这片风景…', error: '场景暂时无法加载，仍可继续欣赏星空。',
-            walk: 'W A S D · 行走', look: '鼠标 · 环顾', interact: '互动', hint: 'M · 更换场景',
+            walk: 'W A S D · 行走', float: 'W A S D · 漂浮   空格 / Q · 上升 / 下降', rise: '向上漂浮', descend: '向下漂浮', look: '鼠标 · 环顾', interact: '互动', hint: 'M · 更换场景',
             skyHint: 'A / D · 翻转视角', touchHint: '左侧移动 · 右侧滑动环顾',
-            observeHint: '鼠标 / 滑动 · 环顾四周', leaveSeat: 'F · 离开驾驶位',
-            distance: '漫游', pilot: '驾驶中', pilotHint: 'W / S · 俯仰   A / D · 转向   Q / E · 翻滚\nShift / Ctrl · 油门   空格 · 制动   鼠标 · 环顾',
+            observeHint: '鼠标 / 滑动 · 环顾四周', leaveSeat: 'F · 漂入舱内',
+            distance: '漫游', pilot: '舷窗旁', pilotHint: 'W / S · 俯仰   A / D · 转向   Q / E · 翻滚\nShift / Ctrl · 油门   空格 · 制动   鼠标 · 环顾',
             touchPilotHint: '↑ / ↓ · 俯仰   ← / → · 转向   + / − · 油门   滑动 · 环顾',
             pilotForward: '向上俯仰', pilotBack: '向下俯仰', pilotLeft: '向左转向', pilotRight: '向右转向', throttleUp: '增加油门', throttleDown: '减小油门',
             move: '在场景中移动', forward: '向前走', back: '向后走', left: '向左移动', right: '向右移动',
@@ -52,9 +52,9 @@
             transit: ['永夜中转地', '空旷原野里，一堆未尽的篝火。', '余烬 / 寂静'],
             lakeshore: ['静夜湖岸', '栈桥延向湖心，远处灯塔明灭。', '湖水 / 倒影'],
             observatory: ['旧日天文台', '越过石阶，在旧穹顶下抬头。', '石阶 / 星光'],
-            spaceship: ['开拓号', '坐在驾驶位，驶向整片星空。', 'NASA 朋克 / 深空'],
-            shelter: ['废土聚落', '废弃街道之间，一处露天生活的小聚落。', '废土 / 聚落'],
-            hogwarts: ['霍格沃兹山丘', '在城堡外的山上，远眺湖泊与尖塔。', '城堡 / 日光'],
+            spaceship: ['穹顶舱', '从国际空间站的七面舷窗望向星空。', 'NASA / 空间站'],
+            shelter: ['废墟城市', '沿着空旷街道，走进风化的城市。', '城市 / 废墟'],
+            fontainesaintmichel: ['圣米歇尔喷泉', '巴黎石墙、流水与安静夕照交汇的广场。', '巴黎 / 石墙 / 黄昏'],
             snowmountain: ['险峰之上', '冰雪、峭壁和没有边界的天空。', '雪岭 / 日光'],
             train: ['夜行列车', '没有催促的站台，缓慢经过的夜。', '铁轨 / 节奏'],
             room: ['有窗的房间', '一盏暖灯，几件旧物，一整片夜空。', '灯火 / 安宁'],
@@ -64,15 +64,15 @@
             where: '此刻所在', choose: '選擇一處風景', title: '在星空之下，停留片刻',
             intro: '四處值得停留的風景。環顧四周，慢慢欣賞。', close: '關閉場景選擇',
             observe: '靜靜觀景', explore: '自由探索', sky: '只看星空', view: '視角模式', current: '正在這裡',
-            clear: '晴天', dusk: '黃昏', quality: '全景畫質', auto: '自動', high: '高', medium: '中', low: '低',
+            clear: '晴天', dusk: '黃昏', quality: '全景畫質', auto: '自動', ultra: '極高', high: '高', medium: '中', low: '低',
             preview: '目前為預覽資源 · 最終製作級渲染尚未安裝。', rendered: '已載入離線全景', renderError: '全景暫時無法載入，請嘗試其他畫質或場景。',
             renderedReview: '預渲染評審版 · 尚未完成最終畫質驗收。', renderedDraft: '預渲染草稿 · 美術製作仍在進行。',
             sound: '環境聲音', soundOn: '聲音已開', soundOff: '聲音已關', reset: '回到抵達位置',
             loading: '正在鋪開這片風景…', error: '場景暫時無法載入，仍可繼續欣賞星空。',
-            walk: 'W A S D · 行走', look: '滑鼠 · 環顧', interact: '互動', hint: 'M · 更換場景',
+            walk: 'W A S D · 行走', float: 'W A S D · 漂浮   空白鍵 / Q · 上升 / 下降', rise: '向上漂浮', descend: '向下漂浮', look: '滑鼠 · 環顧', interact: '互動', hint: 'M · 更換場景',
             skyHint: 'A / D · 翻轉視角', touchHint: '左側移動 · 右側滑動環顧',
-            observeHint: '滑鼠 / 滑動 · 環顧四周', leaveSeat: 'F · 離開駕駛位',
-            distance: '漫遊', pilot: '駕駛中', pilotHint: 'W / S · 俯仰   A / D · 轉向   Q / E · 翻滾\nShift / Ctrl · 油門   空白鍵 · 制動   滑鼠 · 環顧',
+            observeHint: '滑鼠 / 滑動 · 環顧四周', leaveSeat: 'F · 漂入艙內',
+            distance: '漫遊', pilot: '舷窗旁', pilotHint: 'W / S · 俯仰   A / D · 轉向   Q / E · 翻滾\nShift / Ctrl · 油門   空白鍵 · 制動   滑鼠 · 環顧',
             touchPilotHint: '↑ / ↓ · 俯仰   ← / → · 轉向   + / − · 油門   滑動 · 環顧',
             pilotForward: '向上俯仰', pilotBack: '向下俯仰', pilotLeft: '向左轉向', pilotRight: '向右轉向', throttleUp: '增加油門', throttleDown: '減小油門',
             move: '在場景中移動', forward: '向前走', back: '向後走', left: '向左移動', right: '向右移動',
@@ -80,9 +80,9 @@
             transit: ['永夜中轉地', '空曠原野裡，一堆未盡的篝火。', '餘燼 / 寂靜'],
             lakeshore: ['靜夜湖岸', '棧橋延向湖心，遠處燈塔明滅。', '湖水 / 倒影'],
             observatory: ['舊日天文台', '越過石階，在舊穹頂下抬頭。', '石階 / 星光'],
-            spaceship: ['開拓號', '坐在駕駛位，駛向整片星空。', 'NASA 朋克 / 深空'],
-            shelter: ['廢土聚落', '廢棄街道之間，一處露天生活的小聚落。', '廢土 / 聚落'],
-            hogwarts: ['霍格華茲山丘', '在城堡外的山上，遠眺湖泊與尖塔。', '城堡 / 日光'],
+            spaceship: ['穹頂艙', '從國際太空站的七面舷窗望向星空。', 'NASA / 太空站'],
+            shelter: ['廢墟城市', '沿著空曠街道，走進風化的城市。', '城市 / 廢墟'],
+            fontainesaintmichel: ['聖米歇爾噴泉', '巴黎石牆、流水與安靜夕照交會的廣場。', '巴黎 / 石牆 / 黃昏'],
             snowmountain: ['險峰之上', '冰雪、峭壁和沒有邊界的天空。', '雪嶺 / 日光'],
             train: ['夜行列車', '沒有催促的月臺，緩慢經過的夜。', '鐵軌 / 節奏'],
             room: ['有窗的房間', '一盞暖燈，幾件舊物，一整片夜空。', '燈火 / 安寧'],
@@ -93,7 +93,7 @@
     // Small native illustrations keep the chooser light, with no image requests.
     const ART = {
         shelter: '<path d="M0 105V61h25v44h14V38h36v67h16V70h23v35h25V22h24v83h24V49h32v56h20V69h41v81H0Z" fill="#38424b"/><path d="M0 0h25v150H0Zm255 0h25v150h-25Z" fill="#71695f"/><path d="M25 125h230v25H25Z" fill="#292c2d"/><path d="M40 118h65v7H40m7-7V89h47v29" fill="#675c4b"/><circle cx="71" cy="77" r="8" fill="#ddb576" opacity=".8"/>',
-        hogwarts: '<path d="M0 0h280v150H0Z" fill="#9aafb9"/><path d="m0 95 56-38 60 37 74-40 90 41v55H0Z" fill="#6e7a72"/><path d="M90 92V51h18v41h11V35h14v57h16V59h24v33h16V42h14v50Z" fill="#a59e88"/><path d="m86 51 13-23 13 23m3-16 11-24 11 24m48 7 11-20 11 20" fill="#525f68"/><path d="M0 129q69-23 112 1t168-9v29H0Z" fill="#535e49"/>',
+        fontainesaintmichel: '<path d="M0 0h280v150H0Z" fill="#b8c8cf"/><path d="M0 87 44 73l31 15 57-28 42 23 57-24 49 18v73H0Z" fill="#8c8178"/><path d="M113 113V48h42v65m-51-65h60l-30-25Z" fill="#d9c2a2"/><path d="M132 74h14v39h-14m-37 16h76" stroke="#665d58" stroke-width="5"/><path d="M0 135h280v15H0Z" fill="#55636b"/><path d="M134 127q8-10 16 0t16 0" fill="none" stroke="#b5d4d8" stroke-width="5"/>',
         snowmountain: '<path d="M0 0h280v150H0Z" fill="#8ca8bd"/><path d="M0 138 55 51l28 31 63-77 47 68 31-27 56 91v13H0Z" fill="#dee6e8"/><path d="m55 51-7 49 26-8-9 29 38 2 43-118-24 91 37-18 34-5-27 58 58-85-8 57 33-4 31 38v13H0Z" fill="#6d8597"/><path d="m0 150 70-25 39 14 68-32 103 43Z" fill="#c6d5df"/>',
         transit: '<path d="M0 100Q70 86 140 96T280 93V150H0Z" fill="#171b22"/><ellipse cx="142" cy="119" rx="49" ry="10" fill="#c0773b" opacity=".09"/><path d="m126 120 29-8m-28 0 29 9" stroke="#795543" stroke-width="4"/><path d="M138 115q-10-9 3-25-2 13 8 17 2-8 0-12 15 16-2 24Z" fill="#e8a76a"/><path d="M143 116q-6-7 2-15 10 14-2 15Z" fill="#ffe0a3"/><path d="M72 116v-17h27v17M74 106h24" fill="none" stroke="#5d6269" stroke-width="2"/><circle cx="143" cy="79" r="1" fill="#edc892"/><circle cx="149" cy="65" r=".8" fill="#edc892"/>',
         lakeshore: '<path d="M0 88 24 82 51 88 88 72 126 86 164 78 201 85 245 73 280 82V100H0Z" fill="#1c2932"/><path d="M0 95H280V150H0Z" fill="#172731"/><path d="m123 150 14-46h7l23 46" fill="#3b3936"/><path d="M127 136h32m-27-13h19m-15-11h10" stroke="#777168" opacity=".55"/><path d="m209 91 3-38h10l3 38Z" fill="#738086"/><path d="M211 55V47h12v8m-14-9 8-8 8 8" fill="#c3bb9b"/><path d="m216 50-47 11v-19Z" fill="#f8e4a0" opacity=".08"/><path d="M211 105h15m-21 9h23m-19 11h21m-124-17h15m-52 25h34" stroke="#a4b4ba" opacity=".24"/>',
@@ -127,7 +127,7 @@
             '<div class="world-modal" id="worldModal" hidden><div class="world-menu-backdrop" data-world-dismiss></div><section class="world-menu" id="worldMenu" role="dialog" aria-modal="true" aria-labelledby="worldMenuTitle" aria-describedby="worldMenuIntro" tabindex="-1">' +
             '<header class="world-menu-header"><div><span class="world-eyebrow" data-world-copy="choose"></span><h2 id="worldMenuTitle" data-world-copy="title"></h2><p id="worldMenuIntro" data-world-copy="intro"></p></div><button class="world-icon-button world-menu-close" id="worldMenuClose" type="button">' + icon('close') + '</button></header>' +
             '<div class="world-cards">' + SCENES.map((id, index) => '<button class="world-card" type="button" data-world-id="' + id + '" aria-pressed="false"><span class="world-card-art world-art-' + id + '">' + svgScene(id) + '<span class="world-card-number">0' + (index + 1) + '</span><span class="world-card-current" data-world-copy="current"></span></span><span class="world-card-copy"><strong data-world-name="' + id + '"></strong><span data-world-description="' + id + '"></span><small data-world-tag="' + id + '"></small></span></button>').join('') + '</div>' +
-            '<footer class="world-menu-footer"><div class="world-view-control" role="group" id="worldViewControl"><button type="button" data-world-mode="observe" aria-pressed="true" data-world-copy="observe"></button><button type="button" data-world-mode="explore" aria-pressed="false" data-world-copy="explore"></button><button type="button" data-world-mode="sky" aria-pressed="false" data-world-copy="sky"></button></div><div class="world-view-control world-sky-control" role="group" id="worldSkyControl"><button type="button" data-world-sky="clear">Day</button><button type="button" data-world-sky="dusk">Dusk</button></div><div class="world-quality-control" role="group" id="worldQualityControl"><button type="button" data-world-quality="auto">Auto</button><button type="button" data-world-quality="high">High</button><button type="button" data-world-quality="medium">Medium</button><button type="button" data-world-quality="low">Low</button></div><div class="world-menu-tools"><button class="world-sound-button" id="worldSound" type="button" aria-pressed="false">' + icon('sound') + '<span></span></button><button class="world-icon-button" id="worldReset" type="button">' + icon('reset') + '</button></div></footer>' +
+            '<footer class="world-menu-footer"><div class="world-view-control" role="group" id="worldViewControl"><button type="button" data-world-mode="observe" aria-pressed="true" data-world-copy="observe"></button><button type="button" data-world-mode="explore" aria-pressed="false" data-world-copy="explore"></button><button type="button" data-world-mode="sky" aria-pressed="false" data-world-copy="sky"></button></div><div class="world-view-control world-sky-control" role="group" id="worldSkyControl"><button type="button" data-world-sky="clear">Day</button><button type="button" data-world-sky="dusk">Dusk</button></div><div class="world-quality-control" role="group" id="worldQualityControl"><button type="button" data-world-quality="auto">Auto</button><button type="button" data-world-quality="ultra">Ultra</button><button type="button" data-world-quality="high">High</button><button type="button" data-world-quality="medium">Medium</button><button type="button" data-world-quality="low">Low</button></div><div class="world-menu-tools"><button class="world-sound-button" id="worldSound" type="button" aria-pressed="false">' + icon('sound') + '<span></span></button><button class="world-icon-button" id="worldReset" type="button">' + icon('reset') + '</button></div></footer>' +
             '<p class="world-load-status" id="worldLoadStatus" role="status"></p></section></div>' +
             '<div class="world-arrival" id="worldArrival" aria-hidden="true"><span class="world-eyebrow" data-world-copy="entered"></span><strong></strong></div><div class="sr-only" id="worldAnnouncement" role="status" aria-live="polite" aria-atomic="true"></div>';
 
@@ -250,10 +250,11 @@
                 node.hidden = node.dataset.worldMode === 'explore' && !snapshot.explorationUnlocked;
             });
             root.querySelectorAll('[data-world-sky]').forEach(node => {
-                const available = ['hogwarts','snowmountain'].includes(id);
+                const phases = api?.getSkyModes?.(id) || [];
+                const available = phases.length > 1 && phases.includes(node.dataset.worldSky);
                 node.hidden = !available; setAttr(node, 'aria-pressed', available && node.dataset.worldSky === snapshot.skyMode);
             });
-            byId('worldSkyControl').hidden = !['hogwarts','snowmountain'].includes(id);
+            byId('worldSkyControl').hidden = (api?.getSkyModes?.(id) || []).length < 2;
             byId('worldQualityControl').hidden = mode !== 'observe';
             root.querySelectorAll('[data-world-quality]').forEach(node => setAttr(node, 'aria-pressed', node.dataset.worldQuality === quality));
             const audioEnabled = Boolean(snapshot.audioEnabled);
@@ -264,8 +265,8 @@
             const panoramaStatus = mode === 'observe' ? snapshot.panorama : null;
             const renderedLabel = panoramaStatus?.production === 'approved' ? t.rendered : panoramaStatus?.production === 'review' ? t.renderedReview : t.renderedDraft;
             const panoramaText = panoramaStatus?.status === 'preview' ? t.preview : panoramaStatus?.status === 'error' ? t.renderError : panoramaStatus?.status === 'loading' ? t.loading : panoramaStatus?.status === 'prerendered' ? renderedLabel + (panoramaStatus.tier ? ' · ' + t[panoramaStatus.tier] : '') : '';
-            setText(status, loadError ? t.error : panoramaText || (ready ? '' : t.loading));
-            status.hidden = ready && !loadError && !panoramaText;
+            setText(status, loadError ? t.error : snapshot.loading ? t.loading : panoramaText || (ready ? '' : t.loading));
+            status.hidden = ready && !snapshot.loading && !loadError && !panoramaText;
             byId('worldReset').disabled = !ready;
             sound.disabled = !ready;
             root.querySelectorAll('[data-world-id]').forEach(node => { node.disabled = !ready; });
@@ -282,22 +283,26 @@
             const messageText = ready && mode !== 'sky' ? localText(snapshot.message) : '';
             setText(actionMessage, messageText);
             actionMessage.hidden = !messageText;
-            const hint = mode === 'sky' ? t.skyHint : mode === 'observe' ? (snapshot.piloting ? (coarse.matches ? t.touchPilotHint : t.pilotHint) : t.observeHint) : snapshot.piloting ? (coarse.matches ? t.touchPilotHint : t.pilotHint) : coarse.matches ? t.touchHint : t.walk + '     ' + t.hint;
+            const hint = mode === 'sky' ? t.skyHint : mode === 'observe' ? (snapshot.piloting ? (coarse.matches ? t.touchPilotHint : t.pilotHint) : t.observeHint) : snapshot.piloting ? (coarse.matches ? t.touchPilotHint : t.pilotHint) : coarse.matches ? t.touchHint : (snapshot.navigation === 'float' ? t.float : t.walk) + '     ' + t.hint;
             setText(byId('worldWalkHint'), hint + (snapshot.piloting && mode === 'explore' && !coarse.matches ? '\n' + t.leaveSeat : ''));
             pad.querySelectorAll('[data-world-move]').forEach(node => {
                 const direction = node.dataset.worldMove;
                 const key = snapshot.piloting ? 'pilot' + direction.charAt(0).toUpperCase() + direction.slice(1) : direction;
                 setAttr(node, 'aria-label', t[key]);
             });
-            pad.querySelectorAll('[data-world-throttle]').forEach(node => { node.hidden = !snapshot.piloting; });
+            pad.querySelectorAll('[data-world-throttle]').forEach(node => {
+                node.hidden = !snapshot.piloting && snapshot.navigation !== 'float';
+                const up = Number(node.dataset.worldThrottle) > 0;
+                setAttr(node, 'aria-label', snapshot.piloting ? (up ? t.throttleUp : t.throttleDown) : (up ? t.rise : t.descend));
+            });
             let info = '';
             if (ready && mode !== 'sky') {
-                if (snapshot.piloting) info = t.pilot + '  ·  ' + Math.round(Number(snapshot.speed) || 0) + ' m/s';
-                else if (Number(snapshot.distance) >= 1) info = t.distance + '  ' + Math.floor(snapshot.distance) + ' m';
+                if (snapshot.piloting) info = t.pilot + (snapshot.distanceUnit === 'm' ? '  ·  ' + Math.round(Number(snapshot.speed) || 0) + ' m/s' : '');
+                else if (Number(snapshot.distance) >= 1 && snapshot.distanceUnit === 'm') info = t.distance + '  ' + Math.floor(snapshot.distance) + ' m';
             }
             if (info !== lastInfo) { lastInfo = info; setText(byId('worldDistance'), info); }
-            hud.hidden = !ready || open;
-            pad.hidden = !ready || mode === 'sky' || (mode === 'observe' && !snapshot.piloting) || open;
+            hud.hidden = !ready || snapshot.loading || open;
+            pad.hidden = !ready || snapshot.loading || mode === 'sky' || (mode === 'observe' && !snapshot.piloting) || open;
             if (lastReady && !ready) stopMotion();
             lastReady = ready;
         }
