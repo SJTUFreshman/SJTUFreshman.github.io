@@ -1,40 +1,3 @@
-const CAMERA_ROLL_SPEED = 50 * DEG;
-
-function clearCameraRoll() {
-    state.rollLeftHeld = false;
-    state.rollRightHeld = false;
-    state.rollVelocity = 0;
-}
-
-function updateCameraRoll(deltaSeconds) {
-    const allowed = (
-        state.scene === 'roam' &&
-        state.hasEntered &&
-        !state.altHeld &&
-        !state.modalOpen &&
-        !state.gateOpen
-    );
-    if (!allowed) {
-        clearCameraRoll();
-        return;
-    }
-    const intent = (state.rollLeftHeld ? 1 : 0) - (state.rollRightHeld ? 1 : 0);
-    const targetVelocity = intent * CAMERA_ROLL_SPEED;
-    const responseRate = intent === 0 ? 16 : 11;
-    const response = REDUCED_MOTION
-        ? 1
-        : 1 - Math.exp(-deltaSeconds * responseRate);
-    state.rollVelocity = lerp(state.rollVelocity, targetVelocity, response);
-    if (intent === 0 && Math.abs(state.rollVelocity) < 0.00015) {
-        state.rollVelocity = 0;
-    }
-    if (state.rollVelocity === 0 || deltaSeconds <= 0) return;
-    camera.targetOrientation = quatNormalize(quatMultiply(
-        camera.targetOrientation,
-        quatAxisAngle(0, 0, 1, state.rollVelocity * deltaSeconds)
-    ));
-}
-
 function canRestorePetHomepageFromHistory() {
     if (window.history.length <= 1) return false;
     try {
@@ -497,7 +460,6 @@ function updateCamera(time) {
         return;
     }
 
-    updateCameraRoll(deltaSeconds);
     const response = REDUCED_MOTION ? 1 : 1 - Math.exp(-deltaSeconds * 8.5);
     camera.orientation = quatSlerp(
         camera.orientation,
@@ -524,7 +486,6 @@ function startCelestialFlight(profile, source = 'gaze') {
         camera.orientation,
         camera.fov
     );
-    clearCameraRoll();
     if (state.scene === 'detail') {
         if (state.activePortal) closePortalPanel(false);
     }
@@ -604,7 +565,6 @@ function startPortalFlight(portal, source = 'gaze', action = 'open', arrivalHip 
         state.celestialFlight ||
         state.celestialVisit
     ) return;
-    clearCameraRoll();
     if (state.scene === 'detail') {
         if (state.activeCelestial) closeCelestialPanel(false);
         else closePortalPanel(false);
@@ -748,7 +708,6 @@ function cancelFlight(source = state.activationSource) {
 
 function releaseViewForDetail() {
     releaseRightZoom();
-    clearCameraRoll();
     state.lockRequestToken += 1;
     window.clearTimeout(state.lockRequestTimer);
     state.lockRequestTimer = null;

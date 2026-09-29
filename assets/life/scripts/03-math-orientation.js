@@ -178,11 +178,12 @@ function decomposeYawPitchRoll(quaternion, fallbackYaw = INITIAL_CAMERA.yaw) {
 
 function constrainOrientationAboveHorizon(
     quaternion,
-    fallbackYaw = INITIAL_CAMERA.yaw
+    fallbackYaw = INITIAL_CAMERA.yaw,
+    maximumPitch = MAX_CAMERA_ALTITUDE
 ) {
     if (!skyHasHorizon()) return quatNormalize(quaternion);
     const pose = decomposeYawPitchRoll(quaternion, fallbackYaw);
-    const pitch = Math.max(pose.pitch, MIN_CAMERA_ALTITUDE);
+    const pitch = clamp(pose.pitch, MIN_CAMERA_ALTITUDE, maximumPitch);
     if (Math.abs(pitch - pose.pitch) < 1e-10) return quatNormalize(quaternion);
     return orientationFromYawPitchRoll(pose.yaw, pitch, pose.roll);
 }
@@ -270,6 +271,29 @@ function toYawPitch(direction) {
         yaw: Math.atan2(direction[0], direction[2]),
         pitch: Math.asin(clamp(direction[1], -1, 1))
     };
+}
+
+function initialCameraPose() {
+    const footprints = portalDefinitions.find(portal => portal.id === 'footprints');
+    if (footprints?.direction) {
+        const pose = toYawPitch(footprints.direction);
+        return {
+            yaw: pose.yaw,
+            pitch: clamp(pose.pitch, MIN_CAMERA_ALTITUDE, MAX_CAMERA_ALTITUDE)
+        };
+    }
+    return {
+        yaw: INITIAL_CAMERA.yaw,
+        pitch: clamp(INITIAL_CAMERA.pitch, MIN_CAMERA_ALTITUDE, MAX_CAMERA_ALTITUDE)
+    };
+}
+
+function resetCameraToInitialView() {
+    const pose = initialCameraPose();
+    const orientation = orientationFromYawPitch(pose.yaw, pose.pitch);
+    camera.orientation = orientation.slice();
+    camera.targetOrientation = orientation.slice();
+    camera.lastStableYaw = pose.yaw;
 }
 
 function hipparcosDirection(hip) {

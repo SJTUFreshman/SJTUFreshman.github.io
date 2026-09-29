@@ -2,7 +2,8 @@ const LANGUAGES = ['en', 'zh-CN', 'zh-TW'];
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const COARSE_POINTER = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 const DEG = Math.PI / 180;
-const MIN_CAMERA_ALTITUDE = 0.25 * DEG;
+const MIN_CAMERA_ALTITUDE = 8 * DEG;
+const MAX_CAMERA_ALTITUDE = 78 * DEG;
 const ROUTE_PITCH_LIMIT = 89.5 * DEG;
 const HORIZON_NEAR_ALTITUDE = 8 * DEG;
 const GEOMETRIC_HORIZON_EPSILON = 1e-6;
@@ -26,8 +27,8 @@ const DEFAULT_OBSERVER_LOCATION = Object.freeze({
     source: 'life-fallback'
 });
 const INITIAL_CAMERA = Object.freeze({
-    yaw: 0.25,
-    pitch: 0.72
+    yaw: 0.04,
+    pitch: MIN_CAMERA_ALTITUDE
 });
 
 function readWeatherObserverLocation() {

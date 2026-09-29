@@ -125,7 +125,6 @@ function settleUnlockedView(reason, { focusGate = false } = {}) {
 }
 
 function enterFallbackMode() {
-    clearCameraRoll();
     state.lockRequestToken += 1;
     state.touchMode = true;
     state.lock = 'unavailable';
@@ -472,7 +471,6 @@ function recoverMissingAltKeyup() {
 }
 
 function suspendForModal() {
-    clearCameraRoll();
     state.modalOpen = true;
     state.lockIntent = 'modal';
     dom.body.classList.add('cursor-free');
@@ -490,7 +488,6 @@ function resumeAfterModal() {
 
 function resetTransientInput(focusGate = false) {
     releaseRightZoom();
-    clearCameraRoll();
     clearDragState();
     state.lockRequestToken += 1;
     window.clearTimeout(state.lockRequestTimer);

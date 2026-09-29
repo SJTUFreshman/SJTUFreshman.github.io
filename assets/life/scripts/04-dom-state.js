@@ -99,9 +99,6 @@ const state = {
     gateOpen: true,
     modalOpen: false,
     rightDown: false,
-    rollLeftHeld: false,
-    rollRightHeld: false,
-    rollVelocity: 0,
     touchMode: COARSE_POINTER,
     focusedPortal: null,
     pendingTarget: null,
@@ -147,10 +144,16 @@ function clearDragState() {
 }
 
 const camera = {
-    orientation: orientationFromYawPitch(INITIAL_CAMERA.yaw, INITIAL_CAMERA.pitch),
-    targetOrientation: orientationFromYawPitch(INITIAL_CAMERA.yaw, INITIAL_CAMERA.pitch),
+    orientation: orientationFromYawPitch(
+        initialCameraPose().yaw,
+        initialCameraPose().pitch
+    ),
+    targetOrientation: orientationFromYawPitch(
+        initialCameraPose().yaw,
+        initialCameraPose().pitch
+    ),
     fov: 62 * DEG,
     targetFov: 62 * DEG,
     inspectionOrientation: null,
-    lastStableYaw: INITIAL_CAMERA.yaw
+    lastStableYaw: initialCameraPose().yaw
 };

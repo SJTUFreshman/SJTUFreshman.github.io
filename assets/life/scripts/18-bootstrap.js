@@ -75,10 +75,7 @@ function restoreLifeAfterNavigation(focusGate = true) {
     state.lockRequestSource = null;
     releaseRightZoom();
     clearDragState();
-    const initialOrientation = orientationFromYawPitch(INITIAL_CAMERA.yaw, INITIAL_CAMERA.pitch);
-    camera.orientation = initialOrientation.slice();
-    camera.targetOrientation = initialOrientation.slice();
-    camera.lastStableYaw = INITIAL_CAMERA.yaw;
+    resetCameraToInitialView();
     camera.inspectionOrientation = null;
     state.detailFov = 43 * DEG;
     camera.fov = 62 * DEG;

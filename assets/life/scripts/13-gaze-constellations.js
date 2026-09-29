@@ -489,41 +489,52 @@ function drawConstellations(basis, time, webglRendered, catalogBasis = basis) {
 function applyLook(deltaX, deltaY, multiplier = 1) {
     if (state.scene === 'flying' || state.scene === 'leaving-home' || state.scene === 'detail') return;
     const sensitivity = (COARSE_POINTER ? 0.0032 : 0.00175) * multiplier;
-    const horizontalRotation = quatAxisAngle(
-        0,
-        1,
-        0,
-        deltaX * sensitivity
-    );
-    const verticalRotation = quatAxisAngle(
-        1,
-        0,
-        0,
-        deltaY * sensitivity
-    );
-    const proposed = quatNormalize(quatMultiply(
-        quatMultiply(camera.targetOrientation, horizontalRotation),
-        verticalRotation
-    ));
-    camera.targetOrientation = constrainOrientationAboveHorizon(
-        proposed,
-        camera.lastStableYaw
-    );
-    const forward = quatRotate(camera.targetOrientation, [0, 0, 1]);
-    if (Math.hypot(forward[0], forward[2]) > 1e-5) {
-        camera.lastStableYaw = Math.atan2(forward[0], forward[2]);
-    }
-}
-
-function enforceCameraSkyDome() {
-    camera.orientation = constrainOrientationAboveHorizon(
-        camera.orientation,
-        camera.lastStableYaw
-    );
-    camera.targetOrientation = constrainOrientationAboveHorizon(
+    const pose = decomposeYawPitchRoll(
         camera.targetOrientation,
         camera.lastStableYaw
     );
+    const yaw = pose.yaw + deltaX * sensitivity;
+    const pitch = clamp(
+        pose.pitch - deltaY * sensitivity,
+        MIN_CAMERA_ALTITUDE,
+        MAX_CAMERA_ALTITUDE
+    );
+    camera.lastStableYaw = yaw;
+    camera.targetOrientation = orientationFromYawPitch(yaw, pitch);
+}
+
+function enforceCameraSkyDome() {
+    const maximumPitch = state.scene === 'roam'
+        ? MAX_CAMERA_ALTITUDE
+        : ROUTE_PITCH_LIMIT;
+    camera.orientation = constrainOrientationAboveHorizon(
+        camera.orientation,
+        camera.lastStableYaw,
+        maximumPitch
+    );
+    camera.targetOrientation = constrainOrientationAboveHorizon(
+        camera.targetOrientation,
+        camera.lastStableYaw,
+        maximumPitch
+    );
+    if (state.scene === 'roam') {
+        const orientationPose = decomposeYawPitchRoll(
+            camera.orientation,
+            camera.lastStableYaw
+        );
+        const targetPose = decomposeYawPitchRoll(
+            camera.targetOrientation,
+            camera.lastStableYaw
+        );
+        camera.orientation = orientationFromYawPitch(
+            orientationPose.yaw,
+            clamp(orientationPose.pitch, MIN_CAMERA_ALTITUDE, MAX_CAMERA_ALTITUDE)
+        );
+        camera.targetOrientation = orientationFromYawPitch(
+            targetPose.yaw,
+            clamp(targetPose.pitch, MIN_CAMERA_ALTITUDE, MAX_CAMERA_ALTITUDE)
+        );
+    }
     const pose = decomposeYawPitchRoll(
         camera.orientation,
         camera.lastStableYaw

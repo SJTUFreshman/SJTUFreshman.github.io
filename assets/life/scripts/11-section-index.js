@@ -228,7 +228,6 @@ function syncSectionDrawerAvailability() {
 function openSectionDrawer(source = 'pointer') {
     if (state.sectionDrawerOpen || sectionDrawerBlocked()) return false;
     releaseRightZoom();
-    clearCameraRoll();
     const pointerLocked = document.pointerLockElement === dom.world;
     const lockRequestPending = state.lock === 'requesting';
     state.drawerReturn = {

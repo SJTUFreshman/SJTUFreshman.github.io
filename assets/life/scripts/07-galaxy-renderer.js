@@ -254,13 +254,7 @@ class GalaxyRenderer {
                         float cloudAlpha = cloudDensity * smoothstep(0.015, 0.11, sinAltitude) * daylight * 0.94;
                         skyColor = mix(skyColor, cloudColor, cloudAlpha);
                     }
-                    vec3 groundNight = vec3(0.007, 0.010, 0.015);
-                    vec3 groundDay = vec3(0.075, 0.090, 0.098);
-                    vec3 ground = mix(groundNight, groundDay, daylight);
-                    ground += vec3(0.15, 0.065, 0.03) *
-                        warmScatter * smoothstep(-0.14, 0.0, sinAltitude);
-                    float geometricHorizon = smoothstep(-0.0035, 0.006, sinAltitude);
-                    vec3 color = mix(ground, skyColor, max(geometricHorizon,uSpace));
+                    vec3 color = skyColor;
                     float vignette = 1.0 - smoothstep(0.28, 1.35, length(centered * vec2(0.72, 0.9)));
                     color *= 0.91 + vignette * 0.09;
                     color = 1.0 - exp(-color * 1.68);

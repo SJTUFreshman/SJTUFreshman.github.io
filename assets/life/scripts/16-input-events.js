@@ -63,7 +63,6 @@ document.addEventListener('pointercancel', () => {
 });
 window.addEventListener('blur', () => {
     releaseRightZoom();
-    clearCameraRoll();
     clearDragState();
     if (state.sectionDrawerOpen) {
         resetTransientInput(false);
@@ -77,7 +76,6 @@ window.addEventListener('blur', () => {
 });
 document.addEventListener('visibilitychange', () => {
     releaseRightZoom();
-    clearCameraRoll();
     if (document.hidden) {
         if (state.sectionDrawerOpen) {
             resetTransientInput(false);
@@ -155,6 +153,7 @@ buildCelestialNavigation();
 state.meteorShower = createMeteorShowerSelection();
 refreshAstronomicalSky(new Date());
 buildPortalGeometry();
+resetCameraToInitialView();
 buildSectionDrawer();
 dom.sectionDrawerToggle.addEventListener('click', event => {
     const interactionSource = event.detail === 0 ? 'keyboard' : 'pointer';
@@ -207,7 +206,6 @@ document.addEventListener('keydown', event => {
         recoverMissingAltKeyup();
     }
     if (event.key === 'Alt') {
-        clearCameraRoll();
         if (!state.modalOpen && !state.gateOpen) {
             event.preventDefault();
             releaseCursorForAlt();
@@ -285,16 +283,6 @@ document.addEventListener('keydown', event => {
         return;
     }
     if (state.scene !== 'roam') return;
-    if (event.code === 'KeyA' || event.code === 'KeyD') {
-        if (event.altKey) {
-            clearCameraRoll();
-            return;
-        }
-        event.preventDefault();
-        if (event.code === 'KeyA') state.rollLeftHeld = true;
-        if (event.code === 'KeyD') state.rollRightHeld = true;
-        return;
-    }
     const keyboardStep = 0.055;
     if (event.key === 'ArrowLeft') {
         event.preventDefault();
@@ -312,8 +300,6 @@ document.addEventListener('keydown', event => {
 });
 
 window.addEventListener('keyup', event => {
-    if (event.code === 'KeyA') state.rollLeftHeld = false;
-    if (event.code === 'KeyD') state.rollRightHeld = false;
     if (
         event.key === 'Alt' ||
         event.code === 'AltLeft' ||

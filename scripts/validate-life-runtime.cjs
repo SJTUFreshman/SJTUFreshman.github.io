@@ -198,8 +198,9 @@ for (const required of [
     );
 }
 assert(
-    /const MIN_CAMERA_ALTITUDE = 0\.25 \* DEG;/.test(life),
-    'The camera center must keep a precise 0.25 degree clearance above the horizon'
+    /const MIN_CAMERA_ALTITUDE = 8 \* DEG;/.test(life) &&
+    /const MAX_CAMERA_ALTITUDE = 78 \* DEG;/.test(life),
+    'The manual camera must stay inside the 8–78 degree sky dome'
 );
 assert(htmlIds.has('entryLocation'), 'The entry gate must explain the observing location');
 assert(
@@ -1376,34 +1377,13 @@ const horizonCameraState = JSON.parse(vm.runInContext(`(() => {
         afterCrossing[1] > 0;
 
     const rolledStart = orientationFromYawPitchRoll(0.4, 50 * DEG, 0.8);
-    const rolledForward = quatRotate(rolledStart, [0, 0, 1]);
-    const rolledRight = quatRotate(rolledStart, [1, 0, 0]);
-    const rolledUp = quatRotate(rolledStart, [0, 1, 0]);
     camera.targetOrientation = rolledStart.slice();
-    applyLook(18, 0);
-    const rolledHorizontalForward = quatRotate(
+    applyLook(18, 18);
+    const rolledPose = decomposeYawPitchRoll(
         camera.targetOrientation,
-        [0, 0, 1]
+        camera.lastStableYaw
     );
-    camera.targetOrientation = rolledStart.slice();
-    applyLook(0, 18);
-    const rolledVerticalForward = quatRotate(
-        camera.targetOrientation,
-        [0, 0, 1]
-    );
-    const rolledScreenAxesPreserved =
-        dot(
-            rolledHorizontalForward.map((value, index) =>
-                value - rolledForward[index]
-            ),
-            rolledRight
-        ) > 0.02 &&
-        dot(
-            rolledVerticalForward.map((value, index) =>
-                value - rolledForward[index]
-            ),
-            rolledUp
-        ) < -0.02;
+    const uprightManualLook = Math.abs(rolledPose.roll) < 1e-8;
 
     camera.orientation = orientationFromYawPitchRoll(-0.9, -45 * DEG, 1.4);
     camera.targetOrientation = orientationFromYawPitchRoll(1.1, -72 * DEG, -0.8);
@@ -1444,15 +1424,15 @@ const horizonCameraState = JSON.parse(vm.runInContext(`(() => {
         lateralZenithDeflection,
         lateralZenithFinite,
         crossedZenith,
-        rolledScreenAxesPreserved,
+        uprightManualLook,
         enforcedOrientationAltitude,
         enforcedTargetAltitude
     });
 })()`, runtimeContext));
 assert.equal(
     horizonCameraState.minimumAltitude,
-    0.25 * Math.PI / 180,
-    'MIN_CAMERA_ALTITUDE must equal exactly 0.25 degrees'
+    8 * Math.PI / 180,
+    'MIN_CAMERA_ALTITUDE must equal exactly 8 degrees'
 );
 assert.equal(horizonCameraState.decompositionCases, 125);
 assert.equal(horizonCameraState.constraintCases, 100);
@@ -1478,8 +1458,8 @@ assert(
 );
 assert(horizonCameraState.legalPoseUnchanged);
 assert(
-    horizonCameraState.legalZenithUnchanged,
-    'The horizon constraint must not turn the zenith into an artificial upper wall'
+    !horizonCameraState.legalZenithUnchanged,
+    'The sky-dome constraint must keep the manual view below the zenith'
 );
 assert(
     horizonCameraState.lateralZenithFinite &&
@@ -1487,12 +1467,12 @@ assert(
     'Horizontal look input at the zenith must move the gaze instead of merely spinning it'
 );
 assert(
-    horizonCameraState.crossedZenith,
-    'Upward look input must pass smoothly across the zenith'
+    !horizonCameraState.crossedZenith,
+    'Upward look input must stop at the sky-dome ceiling'
 );
 assert(
-    horizonCameraState.rolledScreenAxesPreserved,
-    'Mouse look must continue to follow screen axes after A/D camera roll'
+    horizonCameraState.uprightManualLook,
+    'Manual mouse look must keep the camera upright'
 );
 assert(
     horizonCameraState.lookAltitude >= horizonCameraState.minimumAltitude - 1e-10,
@@ -4077,204 +4057,55 @@ assert.deepEqual(
 const cameraRollState = JSON.parse(vm.runInContext(`(() => {
     const savedOrientation = camera.orientation.slice();
     const savedTargetOrientation = camera.targetOrientation.slice();
-    const savedFov = camera.fov;
-    const savedTargetFov = camera.targetFov;
-    const identity = [0, 0, 0, 1];
-    const configureRoam = () => {
-        state.scene = 'roam';
-        state.hasEntered = true;
-        state.gateOpen = false;
-        state.modalOpen = false;
-        state.touchMode = false;
-        state.altHeld = false;
-        state.altReturnMode = null;
-        state.relockPending = false;
-        state.flight = null;
-        state.celestialFlight = null;
-        state.celestialVisit = null;
-        state.routePreview = null;
-        state.lock = 'keyboard-free';
-        state.lockIntent = null;
-        document.pointerLockElement = null;
-        clearCameraRoll();
-    };
-    const dispatchKeyDown = (code, { altKey = false } = {}) => {
-        const event = {
-            type: 'keydown',
-            code,
-            key: code === 'KeyA' ? 'a' : code === 'KeyD' ? 'd' : 'Alt',
-            altKey,
-            target: dom.world
-        };
-        document.dispatchEvent(event);
-        return event;
-    };
-    const dispatchKeyUp = code => {
-        const event = {
-            type: 'keyup',
-            code,
-            key: code === 'KeyA' ? 'a' : code === 'KeyD' ? 'd' : 'Alt',
-            altKey: false,
-            target: dom.world
-        };
-        window.dispatchEvent(event);
-        return event;
-    };
+    const savedScene = state.scene;
+    const savedEntered = state.hasEntered;
+    const savedGate = state.gateOpen;
     const quaternionDot = (left, right) => Math.abs(left.reduce(
         (sum, value, index) => sum + value * right[index],
         0
     ));
-    const sampleHold = (frames, deltaSeconds) => {
-        configureRoam();
-        camera.orientation = identity.slice();
-        camera.targetOrientation = identity.slice();
-        const event = dispatchKeyDown('KeyA');
-        for (let frame = 0; frame < frames; frame += 1) {
-            updateCameraRoll(deltaSeconds);
-        }
-        dispatchKeyUp('KeyA');
-        return {
-            orientation: camera.targetOrientation.slice(),
-            prevented: event.defaultPrevented
+    state.scene = 'roam';
+    state.hasEntered = true;
+    state.gateOpen = false;
+    state.modalOpen = false;
+    state.touchMode = false;
+    state.altHeld = false;
+    const dispatchKey = (type, code) => {
+        const event = {
+            type,
+            code,
+            key: code === 'KeyA' ? 'a' : 'd',
+            altKey: false,
+            target: dom.world
         };
+        (type === 'keydown' ? document : window).dispatchEvent(event);
+        return event;
     };
-    const sixtyFps = sampleHold(60, 1 / 60);
-    const thirtyFps = sampleHold(30, 1 / 30);
-    const frameRateAngularError = 2 * Math.acos(clamp(
-        quaternionDot(sixtyFps.orientation, thirtyFps.orientation),
-        -1,
-        1
-    ));
-    const forward = quatRotate(sixtyFps.orientation, [0, 0, 1]);
-    const right = quatRotate(sixtyFps.orientation, [1, 0, 0]);
-    const forwardInvariant = dot(forward, [0, 0, 1]) > 1 - 1e-12;
-    const rightRotated = dot(right, [1, 0, 0]) < 0.9;
-
-    configureRoam();
-    camera.orientation = identity.slice();
-    camera.targetOrientation = identity.slice();
-    dispatchKeyDown('KeyA');
-    for (let frame = 0; frame < 60; frame += 1) updateCameraRoll(1 / 60);
-    dispatchKeyUp('KeyA');
-    for (let frame = 0; frame < 180; frame += 1) updateCameraRoll(1 / 60);
-    const afterA = camera.targetOrientation.slice();
-    dispatchKeyDown('KeyD');
-    for (let frame = 0; frame < 60; frame += 1) updateCameraRoll(1 / 60);
-    dispatchKeyUp('KeyD');
-    for (let frame = 0; frame < 180; frame += 1) updateCameraRoll(1 / 60);
-    const afterAD = camera.targetOrientation.slice();
-    const aThenDReturns = (
-        quaternionDot(identity, afterA) < 0.99 &&
-        quaternionDot(identity, afterAD) > 1 - 1e-10
-    );
-
-    configureRoam();
-    const altChordEvent = dispatchKeyDown('KeyA', { altKey: true });
-    const altChordPassesThrough = (
-        !altChordEvent.defaultPrevented &&
-        !state.rollLeftHeld &&
-        state.rollVelocity === 0
-    );
-
-    const primeRoll = () => {
-        configureRoam();
-        dispatchKeyDown('KeyA');
-        updateCameraRoll(1 / 60);
-    };
-    primeRoll();
-    state.lock = 'locked';
-    document.pointerLockElement = dom.world;
-    dispatchKeyDown('Alt', { altKey: true });
-    const altClears = (
-        state.altHeld &&
-        !state.rollLeftHeld &&
-        !state.rollRightHeld &&
-        state.rollVelocity === 0
-    );
-
-    primeRoll();
-    window.dispatchEvent({ type: 'blur' });
-    const blurClears = (
-        !state.rollLeftHeld &&
-        !state.rollRightHeld &&
-        state.rollVelocity === 0
-    );
-
-    primeRoll();
-    document.hidden = true;
-    document.dispatchEvent({ type: 'visibilitychange' });
-    const visibilityClears = (
-        !state.rollLeftHeld &&
-        !state.rollRightHeld &&
-        state.rollVelocity === 0
-    );
-    document.hidden = false;
-    startRendering();
-
-    primeRoll();
-    const portal = portalDefinitions.find(candidate => !candidate.home);
-    startPortalFlight(portal, 'keyboard');
-    const flightClears = (
-        state.scene === 'flying' &&
-        !state.rollLeftHeld &&
-        !state.rollRightHeld &&
-        state.rollVelocity === 0
-    );
-    cancelFlight('keyboard');
-
-    primeRoll();
-    state.scene = 'detail';
-    updateCameraRoll(1 / 60);
-    const nonRoamClears = (
-        !state.rollLeftHeld &&
-        !state.rollRightHeld &&
-        state.rollVelocity === 0
-    );
-    const detailKey = dispatchKeyDown('KeyD');
-    const nonRoamIgnoresKey = (
-        !detailKey.defaultPrevented &&
-        !state.rollRightHeld
-    );
-
-    configureRoam();
+    const keyDownA = dispatchKey('keydown', 'KeyA');
+    const keyDownD = dispatchKey('keydown', 'KeyD');
+    const orientationUnchanged =
+        quaternionDot(savedTargetOrientation, camera.targetOrientation) > 1 - 1e-12;
+    dispatchKey('keyup', 'KeyA');
+    dispatchKey('keyup', 'KeyD');
+    state.scene = savedScene;
+    state.hasEntered = savedEntered;
+    state.gateOpen = savedGate;
     camera.orientation = savedOrientation;
     camera.targetOrientation = savedTargetOrientation;
-    camera.fov = savedFov;
-    camera.targetFov = savedTargetFov;
     return JSON.stringify({
-        keyAccepted: sixtyFps.prevented,
-        forwardInvariant,
-        rightRotated,
-        aThenDReturns,
-        frameRateAngularError,
-        altChordPassesThrough,
-        altClears,
-        blurClears,
-        visibilityClears,
-        flightClears,
-        nonRoamClears,
-        nonRoamIgnoresKey
+        keyDownPassesThrough: !keyDownA.defaultPrevented && !keyDownD.defaultPrevented,
+        orientationUnchanged,
+        keyStateAbsent: !('rollLeftHeld' in state) &&
+            !('rollRightHeld' in state) &&
+            !('rollVelocity' in state)
     });
 })()`, runtimeContext));
-assert(cameraRollState.keyAccepted, 'A must engage continuous roll in roam mode');
-assert(cameraRollState.forwardInvariant, 'Local-Z camera roll must preserve the view forward vector');
-assert(cameraRollState.rightRotated, 'Local-Z camera roll must rotate the camera right/up basis');
-assert(cameraRollState.aThenDReturns, 'Equal settled A/D holds must return near the original orientation');
 assert(
-    cameraRollState.frameRateAngularError < 0.01,
-    `Camera roll must remain frame-rate independent; angular error ${cameraRollState.frameRateAngularError}`
+    cameraRollState.keyDownPassesThrough,
+    'A/D must no longer claim keyboard input for camera roll'
 );
-for (const cleanup of [
-    'altChordPassesThrough',
-    'altClears',
-    'blurClears',
-    'visibilityClears',
-    'flightClears',
-    'nonRoamClears',
-    'nonRoamIgnoresKey'
-]) {
-    assert(cameraRollState[cleanup], `Camera roll input regression failed: ${cleanup}`);
-}
+assert(cameraRollState.orientationUnchanged, 'A/D must not change the camera orientation');
+assert(cameraRollState.keyStateAbsent, 'A/D must not create roll state');
 
 const altState = JSON.parse(vm.runInContext(`(() => {
     state.hasEntered = true;

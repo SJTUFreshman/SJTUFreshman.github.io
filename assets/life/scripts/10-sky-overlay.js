@@ -378,7 +378,6 @@ function drawLocalHorizon(basis) {
     const width = overlayWidth;
     const height = overlayHeight;
     const fov = camera.fov;
-    const groundPolygon = clipViewportToGround(basis, width, height, fov);
     const skyPolygon = clipViewportToHorizonHalfPlane(
         basis,
         false,
@@ -455,47 +454,9 @@ function drawLocalHorizon(basis) {
         context.restore();
     }
 
-    if (groundPolygon.length) {
-        const center = [width * 0.5, height * 0.5];
-        const lineAnchor = gradientLength > 1e-9
-            ? [
-                center[0] - skyNormal[0] * basis.forward[1] / gradientLength,
-                center[1] - skyNormal[1] * basis.forward[1] / gradientLength
-            ]
-            : center;
-        const extent = Math.hypot(width, height);
-        const groundGradient = context.createLinearGradient(
-            lineAnchor[0],
-            lineAnchor[1],
-            lineAnchor[0] - skyNormal[0] * extent,
-            lineAnchor[1] - skyNormal[1] * extent
-        );
-        const horizonColor = [
-            Math.round(lerp(10, 64, sky.daylight)),
-            Math.round(lerp(15, 76, sky.daylight)),
-            Math.round(lerp(23, 82, sky.daylight))
-        ];
-        const deepColor = [
-            Math.round(lerp(2, 18, sky.daylight)),
-            Math.round(lerp(4, 25, sky.daylight)),
-            Math.round(lerp(8, 29, sky.daylight))
-        ];
-        groundGradient.addColorStop(
-            0,
-            `rgb(${horizonColor[0]}, ${horizonColor[1]}, ${horizonColor[2]})`
-        );
-        groundGradient.addColorStop(
-            1,
-            `rgb(${deepColor[0]}, ${deepColor[1]}, ${deepColor[2]})`
-        );
-        traceScreenPolygon(context, groundPolygon);
-        context.fillStyle = groundGradient;
-        context.fill();
-    }
-
     if (horizon.length === 2) {
         const [start, end] = horizon;
-        context.strokeStyle = `rgba(213,226,247,${0.16 + sky.daylight * 0.08})`;
+        context.strokeStyle = `rgba(213,226,247,${0.08 + sky.daylight * 0.05})`;
         context.lineWidth = 0.85;
         context.beginPath();
         context.moveTo(start[0], start[1]);
@@ -522,10 +483,10 @@ function drawLocalHorizon(basis) {
             const major = degrees % 45 === 0;
             const length = cardinal ? 7 : major ? 5 : 3;
             context.strokeStyle = cardinal
-                ? 'rgba(222,233,250,0.42)'
+                ? 'rgba(222,233,250,0.28)'
                 : major
-                    ? 'rgba(205,220,244,0.22)'
-                    : 'rgba(196,214,241,0.12)';
+                    ? 'rgba(205,220,244,0.15)'
+                    : 'rgba(196,214,241,0.08)';
             context.lineWidth = cardinal ? 0.8 : 0.55;
             context.beginPath();
             context.moveTo(base.x, base.y);
@@ -551,7 +512,7 @@ function drawLocalHorizon(basis) {
                 point.y < 12 ||
                 point.y > height - 12
             ) return;
-            context.fillStyle = 'rgba(220,231,249,0.54)';
+            context.fillStyle = 'rgba(220,231,249,0.38)';
             context.font = '9px "IBM Plex Mono", monospace';
             context.textAlign = 'center';
             context.textBaseline = 'middle';

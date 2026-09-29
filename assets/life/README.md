@@ -47,6 +47,7 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 
 - 星空 renderer 使用 Hipparcos 星表和本地 Astronomy Engine 计算天空位置。
 - 星座连线、中心注视、命中按钮、恒星内容和 Life 索引组成唯一的页面导航主线。
+- 手动视角保持直立天穹：俯仰限制在地平线以上 8° 到天顶以下 12°，A/D 不再承担翻滚操作。
 - 本地观察地点仍可从主页天气设置同步；地平线和大气可见性仍按真实观察地点计算。
 - 页面不维护环境 canvas、全景贴图、场景选择器、漫游 HUD、Three.js renderer、glTF loader 或场景碰撞。
 - `galaxyWorld` 仍是星空和 pointer-lock 的交互容器，不代表地面环境。
@@ -72,4 +73,4 @@ node scripts/validate-life-http.cjs http://localhost:8765/life.html
 git diff --check
 ```
 
-浏览器回归至少检查：入场与 pointer lock、鼠标／触摸环顾、A/D 翻滚、星座点击和拉近、恒星内容、Life 索引、三语切换、地图、lightbox、Home 航线、StellarTransit 返回、窄屏和 reduced-motion。
+浏览器回归至少检查：入场与 pointer lock、鼠标／触摸环顾、天穹俯仰边界、星座点击和拉近、恒星内容、Life 索引、三语切换、地图、lightbox、Home 航线、StellarTransit 返回、窄屏和 reduced-motion。
