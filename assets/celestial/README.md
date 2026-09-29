@@ -14,6 +14,7 @@
 | `moon.webp` | Solar System Scope 2K Moon | JPEG 转高质量 WebP；保持 2048×1024 |
 | `mercury.webp` | Solar System Scope 2K Mercury | JPEG 转 WebP；保持 2048×1024 |
 | `venus.webp` | Solar System Scope 2K Venus Atmosphere | JPEG 转 WebP；保持 2048×1024 |
+| `earth.webp` | NASA Earth Observatory / Blue Marble，land_ocean_ice_2048 | JPEG 转 WebP，quality 90；保持 2048×1024 |
 | `mars.webp` | Solar System Scope 2K Mars | JPEG 转 WebP；保持 2048×1024 |
 | `jupiter.webp` | Solar System Scope 2K Jupiter | JPEG 转 WebP；保持 2048×1024 |
 | `saturn.webp` | Solar System Scope 2K Saturn | JPEG 转 WebP；保持 2048×1024 |
@@ -66,6 +67,11 @@ Solar System Scope 明确说明：尚未测绘的区域可能用与周边协调�
 - 太阳贴图只代表典型光球纹理，不包含当前时刻的太阳黑子、耀斑或日珥位置。
 
 ## NASA VTAD 模型纹理
+
+地球使用 NASA Earth Observatory 的 Blue Marble 陆地、海洋与冰层合成图：
+[2048×1024 原始 JPEG](https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57730/land_ocean_ice_2048.jpg)。
+Credit: NASA Goddard Space Flight Center / Reto Stöckli。转换为 WebP，未改变地形。
+这是一张静态地表合成图，不包含实时云层。
 
 天王星、海王星、冥王星和土星环来自 NASA Science 3D Resources 中
 NASA Visualization Technology Applications and Development（VTAD）发布的

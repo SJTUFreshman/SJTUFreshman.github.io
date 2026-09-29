@@ -87,8 +87,8 @@ const lifeStylesheets = localStylesheetResources(lifeHtml).filter(resource =>
 const releaseVersions = [...lifeScripts, ...lifeStylesheets].map(resource => new URL(resource.reference, 'https://life.invalid/').searchParams.get('v'));
 assert(releaseVersions.every(Boolean), 'Every local Life script and stylesheet must carry a cache-release version');
 assert.equal(new Set(releaseVersions).size, 1, 'All Life scripts and stylesheets must share one release version to prevent mixed cached runtimes');
-assert.equal(lifeRuntimeScripts.length, 18, 'life.html must load the complete interactive sky runtime');
-assert.equal(lifeStylesheets.length, 7, 'life.html must load the complete interactive sky styles');
+assert.equal(lifeRuntimeScripts.length, 22, 'life.html must load the complete hierarchical star-map runtime');
+assert.equal(lifeStylesheets.length, 10, 'life.html must load the complete hierarchical star-map styles');
 assert(
     lifeHtml.split(/\r?\n/).length < 1000,
     'life.html must remain below 1000 lines after decomposition'
@@ -270,7 +270,8 @@ assert(
     /@media \(max-width: 1024px\), \(max-aspect-ratio: 3\/2\)[\s\S]*?body\.route-preview-active \.portal-panel/.test(life),
     'CSS and camera logic must share the compact sky-panel breakpoint'
 );
-assert(!/\bid:\s*'earth'/.test(life), 'Earth must not be added as a selectable body');
+const observerSkyConfig = lifeRuntimeScripts.find(resource => resource.relativePath.endsWith('/02-sky-config.js')).source;
+assert(!/\bid:\s*'earth'/.test(observerSkyConfig), 'Earth is only selectable inside the solar-system map, not from the terrestrial observing sky');
 const expectedCelestialIds = [
     'sun',
     'moon',
@@ -1204,7 +1205,8 @@ const runtimeContext = {
 };
 runtimeContext.globalThis = runtimeContext;
 vm.createContext(runtimeContext);
-for (const resource of lifeRuntimeScripts) {
+const observerRuntimeScripts = lifeRuntimeScripts.filter(resource => !/(?:07-star-map-renderer|19-star-map|20-solar-system-map|21-deep-sky-map)\.js$/.test(resource.relativePath));
+for (const resource of observerRuntimeScripts) {
     assert.doesNotThrow(
         () => vm.runInContext(resource.source, runtimeContext, {
             filename: resource.relativePath,

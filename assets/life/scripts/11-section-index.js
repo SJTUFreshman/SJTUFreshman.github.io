@@ -22,6 +22,10 @@ function observerLocationLabel(lang = state.currentLang) {
 }
 
 function updateEntryLocationCopy() {
+    if (window.lifeStarMap) {
+        window.lifeStarMap.updateCopy();
+        return;
+    }
     const data = i18n[state.currentLang] || i18n.en || {};
     const fallback = skyModel.location.source === 'life-fallback';
     const key = fallback ? 'enter_location_fallback' : 'enter_location_synced';
@@ -57,6 +61,7 @@ function observerTimeLabel(date = skyModel.date || new Date()) {
 }
 
 function portalSkyVisibility(portal) {
+    if (window.lifeStarMap) return portal ? 1 : 0;
     if (!portal?.patternPoints?.length) return 0;
     return Math.max(
         0,
@@ -72,6 +77,7 @@ function portalSkyVisibility(portal) {
 }
 
 function portalSkyState(portal) {
+    if (window.lifeStarMap) return portal ? 'above' : 'below';
     const direction = portal?.direction;
     if (!direction || !isAboveHorizon(direction)) return 'below';
     if (portalSkyVisibility(portal) <= 0.025) return 'veiled';
@@ -81,13 +87,40 @@ function portalSkyState(portal) {
 }
 
 function portalAvailableInSky(portal) {
+    if (window.lifeStarMap) return Boolean(portal);
     const skyState = portalSkyState(portal);
     return (skyState === 'above' || skyState === 'near') &&
         portalSkyVisibility(portal) > 0.025;
 }
 
-function updateSectionDrawerCopy() {
+function sectionIndexCopy() {
     const ui = skyIndexUi[state.currentLang] || skyIndexUi.en;
+    if (!window.lifeStarMap) return ui;
+    const mapCopy = {
+        en: {
+            kicker: 'CONSTELLATION INDEX',
+            observer: () => 'A personal atlas · inspired by the real sky',
+            above: 'EXPLORE',
+            note: 'Choose a constellation to explore its stars and stories. Distances are compressed for this personal atlas.'
+        },
+        'zh-CN': {
+            kicker: '星座索引',
+            observer: () => '个人星图 · 灵感源自真实星空',
+            above: '探索',
+            note: '选择一片星座，探索其中的恒星与故事。星间距离经过压缩，组成这片个人星图。'
+        },
+        'zh-TW': {
+            kicker: '星座索引',
+            observer: () => '個人星圖 · 靈感源自真實星空',
+            above: '探索',
+            note: '選擇一片星座，探索其中的恆星與故事。星間距離經過壓縮，組成這片個人星圖。'
+        }
+    };
+    return { ...ui, ...(mapCopy[state.currentLang] || mapCopy.en) };
+}
+
+function updateSectionDrawerCopy() {
+    const ui = sectionIndexCopy();
     dom.sectionDrawerKicker.textContent = ui.kicker;
     dom.sectionDrawerTitle.textContent = ui.title;
     dom.sectionDrawerObserver.textContent = ui.observer(
@@ -227,6 +260,7 @@ function syncSectionDrawerAvailability() {
 
 function openSectionDrawer(source = 'pointer') {
     if (state.sectionDrawerOpen || sectionDrawerBlocked()) return false;
+    window.lifeStarMap?.clearInput();
     releaseRightZoom();
     const pointerLocked = document.pointerLockElement === dom.world;
     const lockRequestPending = state.lock === 'requesting';
@@ -257,7 +291,7 @@ function openSectionDrawer(source = 'pointer') {
     hideEntryGate();
     setSectionDrawerBackgroundInert(true);
     updateSectionDrawerCopy();
-    dom.status.textContent = (skyIndexUi[state.currentLang] || skyIndexUi.en).kicker;
+    dom.status.textContent = sectionIndexCopy().kicker;
     if (pointerLocked) document.exitPointerLock();
     requestAnimationFrame(() => {
         if (!state.sectionDrawerOpen) return;
@@ -342,6 +376,10 @@ function openPortalThroughIndex(
     source = 'drawer'
 ) {
     if (!portal || portal.home) return false;
+    if (window.lifeStarMap) {
+        window.lifeStarMap.openPortal(portal, source, arrivalHip);
+        return true;
+    }
     if (dom.body.classList.contains('panel-open')) {
         closePortalPanel(false, 'drawer');
     }
@@ -366,6 +404,10 @@ function openPortalThroughIndex(
 function openHomepageRouteFromIndex() {
     const homePortal = portalDefinitions.find(portal => portal.home);
     if (!homePortal) return false;
+    if (window.lifeStarMap) {
+        window.lifeStarMap.openPortal(homePortal, 'drawer', null);
+        return true;
+    }
     if (dom.body.classList.contains('panel-open')) {
         closePortalPanel(false, 'drawer');
     }

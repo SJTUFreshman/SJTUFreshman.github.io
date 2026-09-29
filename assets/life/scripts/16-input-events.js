@@ -1,3 +1,4 @@
+if (!window.lifeStarMap) {
 document.addEventListener('pointerlockchange', handlePointerLockChange);
 document.addEventListener('pointerlockerror', () => {
     if (state.lock !== 'requesting' || document.pointerLockElement === dom.world) return;
@@ -427,3 +428,4 @@ function handleViewportResize() {
     resizeMaps();
 }
 window.addEventListener('resize', handleViewportResize);
+}

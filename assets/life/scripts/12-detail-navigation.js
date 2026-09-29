@@ -188,7 +188,7 @@ function updateStarButtonPosition(portal, hip, projected, direction = null) {
     const cache = portal.starButtonScreens?.get(hip);
     const active = state.scene === 'detail' && state.activePortal === portal;
     const onScreen = active &&
-        isAboveHorizon(direction) &&
+        (Boolean(window.lifeStarMap) || isAboveHorizon(direction)) &&
         hitAreaIntersectsViewport(
         projected,
         usesCompactSkyLayout() ? 38 : 32
@@ -530,6 +530,7 @@ function selectPortalStar(portal, hip) {
 }
 
 function handlePortalStarAction(portal, hip) {
+    if (window.lifeStarMap?.handleStarAction(portal, hip)) return;
     if (portal.home) {
         previewHomeRoute(portal, hip);
         return;
@@ -540,8 +541,8 @@ function handlePortalStarAction(portal, hip) {
 function updatePortalButton(portal, projected) {
     const button = portal.button;
     if (!button) return;
-    const aboveHorizon = isAboveHorizon(portal.direction);
-    const observable = (portal.skyVisibility ?? 1) > 0.025;
+    const aboveHorizon = Boolean(window.lifeStarMap) || isAboveHorizon(portal.direction);
+    const observable = Boolean(window.lifeStarMap) || (portal.skyVisibility ?? 1) > 0.025;
     const onScreen = aboveHorizon &&
         observable &&
         state.scene === 'roam' &&

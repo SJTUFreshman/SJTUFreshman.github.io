@@ -70,6 +70,7 @@ const CELESTIAL_RENDER_PROFILES = Object.freeze({
     sun: { style: 0, atmosphere: 0, atmosphereColor: [1, 0.78, 0.42] },
     moon: { style: 9, atmosphere: 0, atmosphereColor: [0.72, 0.74, 0.78] },
     mercury: { style: 1, atmosphere: 0, atmosphereColor: [0.7, 0.7, 0.72] },
+    earth: { style: 1, atmosphere: 0.22, atmosphereColor: [0.22, 0.48, 1] },
     venus: { style: 2, atmosphere: 1, atmosphereColor: [1, 0.83, 0.55] },
     mars: { style: 3, atmosphere: 0.16, atmosphereColor: [1, 0.46, 0.22] },
     jupiter: { style: 4, atmosphere: 0.15, atmosphereColor: [0.56, 0.69, 0.9] },

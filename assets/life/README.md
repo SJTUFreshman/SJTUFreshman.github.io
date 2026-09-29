@@ -1,6 +1,22 @@
 # Life 页面维护指南
 
-`life.html` 是一片纯交互星空。访客通过拖动、自由视角和中心注视发现真实星辰与星座，再进入 Gallery、Footprints、Shelf、Thoughts、Friends、News、Publications、Projects、Notes 和 Home 等内容入口。页面不加载全景、Three.js、glTF 模型或其他地面场景。
+`life.html` 是一幅分层三维星图。右键拖动旋转、左键拖动平移、滚轮缩放；触屏单指旋转，双指缩放和平移。指针始终自由，不需要 Pointer Lock。访客通过带连线的星座进入 Gallery、Footprints、Shelf、Thoughts、Friends、News、Publications、Projects、Notes 和 Home 等内容。
+
+键盘方向键旋转，Shift + 方向键平移，`+` / `-` 缩放，`R` / `Home` 重置视角；`Esc` 逐层返回。界面不显示右下角控制栏或边界提示，距离和平移限制仍然生效。
+
+## 星图层级
+
+- 默认进入局部星域；局部范围内连续缩放，越过拉远阈值后用动画切到银河全景。银河全景的向内缩放触发动画返回局部，向外缩放停在边界。远处恒星是无平移视差的背景。
+- 局部星域展开内容星座。星座图形采用原 Hipparcos 天球几何，以浅纵深编排到可探索的区域，避免真实星际尺度破坏导航。
+- 太阳系在局部图中仅有一个入口。进入后展开太阳、八大行星及月球，选中后使用既有天体近景渲染与纹理。
+- 仙女座星系与猎户座大星云分别为单个入口；详情使用有明确波段、来源署名的 NASA 观测照片。
+- 银河盘、尘埃和空间布局是示意可视化；不把编排坐标标为真实物理距离。真实距离来自质量筛选的 Hipparcos 视差，详见 `../HIPPARCOS-DISTANCES-NOTICE.md`。
+
+## 新星图运行时
+
+`07-star-map-renderer.js` 提供 WebGL 体积尘埃、恒星和银河盘，失去 WebGL 时切换为 Canvas。`19-star-map.js` 管理有界相机、层级、星座、命中与输入；它在旧 `15` 之后、`16` 之前加载。`20-solar-system-map.js` 和 `21-deep-sky-map.js` 也在 `18` 初始化之前加载。`08-star-map.css`、`09-solar-system-map.css`、`10-deep-sky-map.css` 顺序追加到样式末尾。
+
+旧天球投影、太阳系近景、内容、三语、图片查看器及主页转场继续共享原模块。`window.lifeStarMap` 存在时，`15` 将帧委托给新星图，`16` 跳过旧 Pointer Lock 输入，`18` 初始化新入口。修改时注意不要让旧地平线/昼夜可见性影响三维导航。
 
 ## CSS 分片
 
@@ -28,6 +44,7 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 05-astronomy.js
 06-framing.js
 07-galaxy-renderer.js
+07-star-map-renderer.js
 08-closeup-layout.js
 09-closeup-renderer.js
 10-sky-overlay.js
@@ -36,21 +53,24 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 13-gaze-constellations.js
 14-celestial-visits.js
 15-render-lock.js
+19-star-map.js
+20-solar-system-map.js
+21-deep-sky-map.js
 16-input-events.js
 17-content-ui.js
 18-bootstrap.js
 ```
 
-`03` 必须先于 `04`：`04-dom-state.js` 在顶层创建 `camera`，会立即调用 `orientationFromYawPitch`。前 18 个文件按编号加载；天文库、ECharts、Hipparcos 星表和 StellarTransit 仍按 `life.html` 中的依赖顺序加载。
+`03` 必须先于 `04`：`04-dom-state.js` 在顶层创建 `camera`，会立即调用 `orientationFromYawPitch`。基础分片保持原顺序，星图 `19–21` 必须在旧 `16` 输入与 `18` 启动前加载。天文库、ECharts、Hipparcos 星表、视差数据和 StellarTransit 按 `life.html` 中的依赖顺序加载。
 
 ## 运行时边界
 
 - 星空 renderer 使用 Hipparcos 星表和本地 Astronomy Engine 计算天空位置。
 - 星座连线、中心注视、命中按钮、恒星内容和 Life 索引组成唯一的页面导航主线。
-- 手动视角保持直立天穹：俯仰限制在地平线以上 8° 到天顶以下 12°，A/D 不再承担翻滚操作。
-- 本地观察地点仍可从主页天气设置同步；地平线和大气可见性仍按真实观察地点计算。
+- 三维星图可绕观察中心旋转，俯仰接近两极时有限制；实际视角距离和平移中心都有硬上限，输入通过平滑插值靠近边界。
+- 旧地平线与观察地点计算仅保留为天文工具，星图入口始终可从索引访问。
 - 页面不维护环境 canvas、全景贴图、场景选择器、漫游 HUD、Three.js renderer、glTF loader 或场景碰撞。
-- `galaxyWorld` 仍是星空和 pointer-lock 的交互容器，不代表地面环境。
+- `galaxyWorld` 是星图手势容器，不代表地面环境。
 
 ## 内容生成
 
@@ -70,7 +90,8 @@ python -m py_compile site_renderer.py scripts/build-edukai-subset.py
 python site_renderer.py --check --life-only
 node scripts/validate-life-runtime.cjs
 node scripts/validate-life-http.cjs http://localhost:8765/life.html
+node scripts/validate-star-map.cjs --serve
 git diff --check
 ```
 
-浏览器回归至少检查：入场与 pointer lock、鼠标／触摸环顾、天穹俯仰边界、星座点击和拉近、恒星内容、Life 索引、三语切换、地图、lightbox、Home 航线、StellarTransit 返回、窄屏和 reduced-motion。
+浏览器回归至少检查：右键旋转、平移/缩放边界、触屏双指、星座连线和点击拉近、恒星内容、索引、三语、地图、lightbox、银河全景、太阳系逐层进入与返回、系外照片详情、主页转场、窄屏、无 WebGL 和 reduced-motion。新浏览器验证脚本使用 Playwright；可通过 `PLAYWRIGHT_MODULE_PATH` 指向已有安装，不要求给站点添加依赖。`--serve` 在测试进程中启动临时本地服务器并自动关闭，也可传入已有页面 URL。

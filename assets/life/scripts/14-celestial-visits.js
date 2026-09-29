@@ -155,6 +155,10 @@ function beginCelestialReturn(
     restoreFocus = true,
     interactionSource = state.activationSource
 ) {
+    if (window.lifeStarMap?.solarSystem?.active && state.celestialVisit?.solarSystem) {
+        window.lifeStarMap.solarSystem.closeBody(restoreFocus, interactionSource);
+        return;
+    }
     const visit = state.celestialVisit;
     if (!visit || visit.phase === 'returning') return;
     clearCelestialTextureWatchdog(visit);
@@ -557,6 +561,11 @@ function startCelestialFlight(profile, source = 'gaze') {
 }
 
 function startPortalFlight(portal, source = 'gaze', action = 'open', arrivalHip = null) {
+    if (window.lifeStarMap) {
+        if (action === 'home-departure') window.lifeStarMap.goHome();
+        else window.lifeStarMap.openPortal(portal, source, arrivalHip);
+        return;
+    }
     if (
         !portal ||
         state.scene === 'flying' ||
@@ -667,6 +676,10 @@ function focusAfterIndexedNavigation(target = dom.sectionDrawerToggle) {
 }
 
 function cancelFlight(source = state.activationSource) {
+    if (window.lifeStarMap) {
+        window.lifeStarMap.cancelFlight();
+        return;
+    }
     if (state.celestialVisit) {
         beginCelestialReturn(true, source);
         return;
@@ -825,6 +838,15 @@ function closePortalPanel(
         });
     }, REDUCED_MOTION ? 0 : 420);
     setFocusedPortal(null);
+    if (window.lifeStarMap) {
+        if (restoreFocus) {
+            window.lifeStarMap.returnToOverview(restoreFocus, interactionSource);
+            if (indexedReturnFocusTarget) {
+                focusAfterIndexedNavigation(indexedReturnFocusTarget);
+            }
+        }
+        return;
+    }
     if (indexedReturnFocusTarget) {
         focusAfterIndexedNavigation(indexedReturnFocusTarget);
         return;
@@ -887,6 +909,7 @@ function formatAngularDiameter(value) {
 
 function renderCelestialPanel(profile) {
     if (!profile) return;
+    if (window.lifeStarMap?.solarSystem?.renderBodyPanel(profile)) return;
     const ui = celestialUi[state.currentLang] || celestialUi.en;
     const current = profile.current;
     dom.celestialPanel.style.setProperty('--body-color', profile.color);

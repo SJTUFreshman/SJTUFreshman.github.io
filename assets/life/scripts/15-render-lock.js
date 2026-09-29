@@ -2,6 +2,12 @@ function renderFrame(time) {
     if (!renderingEnabled) return;
     frameRequest = 0;
     try {
+        if (window.lifeStarMap) {
+            window.lifeStarMap.render(time);
+            syncSectionDrawerAvailability();
+            renderFailureReported = false;
+            return;
+        }
         if (skyModel.available && time >= skyModel.nextRefreshAt) {
             refreshAstronomicalSky(new Date());
         }
@@ -66,6 +72,10 @@ function hideEntryGate() {
 }
 
 function showResumeGate(focusTrigger = true) {
+    if (window.lifeStarMap) {
+        settleUnlockedView('map');
+        return;
+    }
     if (state.touchMode || state.modalOpen || state.scene === 'detail') return;
     state.lock = 'suspended';
     dom.entryTrigger.disabled = false;
@@ -80,6 +90,13 @@ function settleUnlockedView(reason, { focusGate = false } = {}) {
     releaseRightZoom();
     dom.body.classList.remove('view-locked');
     dom.body.classList.add('cursor-free');
+    if (window.lifeStarMap) {
+        state.lock = state.modalOpen ? 'modal-free' : 'map-free';
+        state.lockIntent = null;
+        hideEntryGate();
+        window.lifeStarMap.updateCopy();
+        return;
+    }
     if (state.scene === 'leaving-home') {
         state.lock = 'navigation';
         hideEntryGate();
@@ -125,6 +142,10 @@ function settleUnlockedView(reason, { focusGate = false } = {}) {
 }
 
 function enterFallbackMode() {
+    if (window.lifeStarMap) {
+        window.lifeStarMap.enter();
+        return;
+    }
     state.lockRequestToken += 1;
     state.touchMode = true;
     state.lock = 'unavailable';
@@ -181,6 +202,10 @@ function handleLockFailure(error, token = state.lockRequestToken) {
 }
 
 function requestViewLock(source = 'entry') {
+    if (window.lifeStarMap) {
+        window.lifeStarMap.enter();
+        return false;
+    }
     state.hasEntered = true;
     dom.body.classList.add('has-entered');
     if (state.touchMode || typeof dom.world.requestPointerLock !== 'function') {
@@ -471,6 +496,7 @@ function recoverMissingAltKeyup() {
 }
 
 function suspendForModal() {
+    window.lifeStarMap?.clearInput();
     state.modalOpen = true;
     state.lockIntent = 'modal';
     dom.body.classList.add('cursor-free');
@@ -482,11 +508,20 @@ function suspendForModal() {
 function resumeAfterModal() {
     state.modalOpen = false;
     state.lockIntent = null;
+    if (window.lifeStarMap) {
+        settleUnlockedView('map');
+        return;
+    }
     if (state.touchMode) return;
     showResumeGate();
 }
 
 function resetTransientInput(focusGate = false) {
+    if (window.lifeStarMap) {
+        releaseRightZoom();
+        window.lifeStarMap.clearInput();
+        return;
+    }
     releaseRightZoom();
     clearDragState();
     state.lockRequestToken += 1;

@@ -1,0 +1,143 @@
+.deep-sky-view {
+    position: fixed;
+    z-index: 180;
+    inset: 0;
+    background: #020307;
+    color: #eeeae0;
+    isolation: isolate;
+    font-family: var(--ui);
+    animation: deep-sky-arrive 700ms ease both;
+}
+.deep-sky-view[hidden] { display: none; }
+.deep-sky-topbar {
+    position: absolute;
+    z-index: 3;
+    inset: 0 0 auto;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 22px 42px;
+    background: linear-gradient(#020307, transparent);
+}
+.deep-sky-observatory {
+    margin-right: auto;
+    color: #999eaa;
+    font: 10px/1.4 var(--mono);
+    letter-spacing: 0.19em;
+}
+.deep-sky-languages { display: flex; gap: 5px; }
+.deep-sky-view button {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font: 12px/1.5 var(--ui);
+    cursor: pointer;
+}
+.deep-sky-languages button { min-width: 34px; min-height: 38px; color: #828999; }
+.deep-sky-languages button[aria-pressed="true"] { color: #f4efe5; }
+.deep-sky-close { display: inline-flex; min-height: 44px; align-items: center; gap: 13px; padding: 8px 0 8px 12px; }
+.deep-sky-close > span:first-child { font-size: 21px; }
+.deep-sky-close kbd { color: #858b98; border: 1px solid #39404d; border-radius: 3px; padding: 1px 5px; font: 9px var(--mono); }
+.deep-sky-view :is(button, a):focus-visible { outline: 1px solid #c6d8ed; outline-offset: 5px; }
+.deep-sky-view :is(button, a):hover { color: #fff; }
+.deep-sky-figure { position: absolute; inset: 70px 38% 0 0; margin: 0; }
+.deep-sky-image-viewport { position: absolute; inset: 0 0 74px; overflow: hidden; touch-action: none; cursor: grab; }
+.image-dragging .deep-sky-image-viewport { cursor: grabbing; }
+.deep-sky-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: none;
+    object-fit: contain;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 650ms ease;
+    user-select: none;
+    pointer-events: none;
+    will-change: transform;
+}
+.image-ready .deep-sky-image { opacity: 1; }
+.deep-sky-image-status { position: absolute; top: 50%; left: 50%; width: min(70%, 300px); transform: translate(-50%, -50%); color: #9b9fad; text-align: center; font-size: 12px; }
+.deep-sky-figure figcaption { position: absolute; bottom: 31px; left: 42px; display: flex; flex-direction: column; gap: 6px; padding-right: 145px; }
+.deep-sky-image-caption { color: #a5acb9; font-size: 10px; letter-spacing: 0.07em; }
+.deep-sky-image-hint { color: #707886; font-size: 10px; }
+.deep-sky-image-tools { position: absolute; right: 28px; bottom: 31px; display: flex; align-items: center; gap: 2px; }
+.deep-sky-image-tools button { min-width: 35px; min-height: 35px; color: #bdc3cd; font: 12px var(--mono); }
+.deep-sky-image-tools button[data-deep-zoom="reset"] { min-width: 50px; font-size: 10px; }
+.deep-sky-card {
+    position: absolute;
+    right: 0;
+    top: 100px;
+    bottom: 0;
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 30px clamp(32px, 4.8vw, 100px) 60px 30px;
+    scrollbar-width: thin;
+    scrollbar-color: #343b49 transparent;
+}
+.deep-sky-catalogue { margin: 0 0 17px; color: #a4a6a8; font: 10px/1.5 var(--mono); letter-spacing: 0.15em; }
+.deep-sky-card h1 { margin: 0 0 7px; outline: none; color: #f1eadb; font: 400 clamp(34px, 4.4vw, 69px)/1.08 var(--editorial); letter-spacing: -0.035em; }
+body:is(.lang-zh-CN, .lang-zh-TW) .deep-sky-card h1 { font-family: var(--kai); font-size: clamp(34px, 3.8vw, 60px); line-height: 1.3; letter-spacing: 0.025em; }
+.deep-sky-category { margin: 9px 0 24px; color: #ada897; font-size: 11px; letter-spacing: 0.03em; }
+.deep-sky-description { max-width: 390px; margin: 0 0 28px; color: #b6bac4; font-size: 13px; line-height: 1.9; }
+.deep-sky-facts { margin: 0 0 26px; padding-top: 19px; border-top: 1px solid #242a34; display: grid; grid-template-columns: 1fr; gap: 0; }
+.deep-sky-facts dt { color: #7d8594; font-size: 10px; margin-top: 13px; }
+.deep-sky-facts dt:first-child { margin-top: 0; }
+.deep-sky-facts dd { margin: 3px 0 0; color: #dce0e6; font-size: 12px; }
+.deep-sky-provenance { border-top: 1px solid #242a34; padding-top: 18px; }
+.deep-sky-source-kicker { color: #858d9b; font: 9px var(--mono); letter-spacing: 0.13em; }
+.deep-sky-observation { margin: 10px 0 12px; color: #89919e; font-size: 11px; line-height: 1.8; }
+.deep-sky-credit { margin: 0 0 11px; color: #a3aab4; font-size: 9px; line-height: 1.6; }
+.deep-sky-source-links { display: flex; flex-wrap: wrap; gap: 10px 19px; }
+.deep-sky-source-links a { color: #b6c5d8; text-decoration: none; text-underline-offset: 3px; font-size: 10px; }
+.deep-sky-source-links a:hover { text-decoration: underline; }
+body.deep-sky-open :is(.life-mark, .language-switch, .control-legend, .map-footer, .map-entities, .portal-nav, .star-nav, .celestial-nav, .scene-status, #sectionDrawerToggle) { visibility: hidden !important; pointer-events: none !important; }
+body.deep-sky-open :is(#constellationCanvas, #starMapCanvas, #starMapFallbackCanvas) { visibility: hidden !important; }
+@keyframes deep-sky-arrive { from { opacity: 0; } to { opacity: 1; } }
+@media (max-height: 800px) and (min-width: 901px) {
+    .deep-sky-card { justify-content: flex-start; padding-top: 12px; padding-bottom: 25px; }
+    .deep-sky-description { margin-bottom: 18px; }
+    .deep-sky-category { margin-bottom: 15px; }
+    .deep-sky-facts { grid-template-columns: auto 1fr; gap: 11px 20px; margin-bottom: 19px; }
+    .deep-sky-facts dt, .deep-sky-facts dd { margin: 0; }
+}
+@media (max-width: 900px) {
+    .deep-sky-view { overflow-y: auto; overscroll-behavior: contain; }
+    .deep-sky-topbar { position: sticky; top: 0; height: 68px; padding: 10px 20px; gap: 12px; background: #020307ee; }
+    .deep-sky-observatory { font-size: 8px; letter-spacing: 0.1em; }
+    .deep-sky-close { gap: 6px; font-size: 11px; }
+    .deep-sky-close kbd { display: none; }
+    .deep-sky-languages { gap: 0; }
+    .deep-sky-languages button { min-width: 28px; font-size: 11px; }
+    .deep-sky-figure { position: relative; inset: auto; width: 100%; height: min(78vw, 58vh); min-height: 235px; }
+    .deep-sky-image-viewport { bottom: 55px; }
+    .deep-sky-figure figcaption { left: 24px; bottom: 10px; gap: 3px; }
+    .deep-sky-image-caption, .deep-sky-image-hint { font-size: 9px; }
+    .deep-sky-image-tools { right: 18px; bottom: 9px; }
+    .deep-sky-card { position: relative; inset: auto; width: 100%; overflow: visible; padding: 28px 28px max(36px, env(safe-area-inset-bottom)); }
+    .deep-sky-card h1 { font-size: 45px; }
+    .deep-sky-description { max-width: 100%; margin-bottom: 23px; }
+    .deep-sky-category { margin-bottom: 19px; }
+    .deep-sky-facts { grid-template-columns: 1fr 1.7fr; gap: 10px 20px; }
+    .deep-sky-facts dt, .deep-sky-facts dd { margin: 0; }
+    .deep-sky-provenance { max-width: 620px; }
+}
+@media (max-width: 420px) {
+    .deep-sky-topbar { padding-inline: 14px; gap: 7px; }
+    .deep-sky-observatory { max-width: 96px; }
+    .deep-sky-close > span:nth-child(2) { max-width: 81px; font-size: 10px; }
+    .deep-sky-card { padding-inline: 23px; }
+    .deep-sky-facts { grid-template-columns: 1fr; gap: 0; }
+    .deep-sky-facts dt { margin-top: 11px; }
+    .deep-sky-facts dd { margin-top: 3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .deep-sky-view { animation: none; }
+    .deep-sky-image { transition: none; }
+}

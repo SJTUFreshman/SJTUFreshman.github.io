@@ -1,8 +1,13 @@
-buildFallbackStars();
-resizeOverlay();
-setLang(state.currentLang);
-dom.status.textContent = 'AWAITING INPUT';
-setGateState(true, true);
+if (window.lifeStarMap) {
+    window.lifeStarMap.initialize();
+    setLang(state.currentLang);
+} else {
+    buildFallbackStars();
+    resizeOverlay();
+    setLang(state.currentLang);
+    dom.status.textContent = 'AWAITING INPUT';
+    setGateState(true, true);
+}
 startRendering();
 
 async function signalStellarDestinationReady() {
@@ -97,6 +102,12 @@ function restoreLifeAfterNavigation(focusGate = true) {
     hideAllStarButtons();
     state.focusedCelestial = null;
     setFocusedPortal(null);
+    if (window.lifeStarMap) {
+        window.lifeStarMap.reset();
+        settleUnlockedView('map');
+        startRendering();
+        return;
+    }
     if (state.hasEntered) {
         if (state.touchMode) {
             dom.body.classList.add('cursor-free');
