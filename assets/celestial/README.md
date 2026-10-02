@@ -184,3 +184,5 @@ python scripts/package-celestial-atlas.py --input assets/celestial/baked --outpu
 `python scripts/package-celestial-atlas-tests.py` 验证打包失败处理及完整网格；`node scripts/validate-baked-closeup.cjs` 验证查看器角度、4K 解码、缓存与请求竞态。`scripts/validate-star-map.cjs --serve all --baked-fixtures` 是明确标记的交互测试素材；正式图像验收应省略该参数，使用已经完成打包的真实帧。
 
 托管资源就绪后，运行 `node scripts/validate-star-map.cjs --serve all --hosted`，通过本地网页实际跨域读取线上帧，检查交互、4K 图像、手机和无 WebGL 场景。此模式不允许同时使用测试素材。
+
+若暂时没有自有域名，可用 Cloudflare Quick Tunnel 做 HTTPS 验证；它是临时地址，服务器重启或隧道重建后需要重新导出 `hosted/manifest.json` 并推送网站。长期运行应改用自有域名绑定的命名隧道或 CDN。
