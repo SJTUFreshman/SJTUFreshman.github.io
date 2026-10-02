@@ -8,6 +8,81 @@
     display: none;
 }
 
+.baked-celestial-view {
+    position: fixed;
+    inset: 0;
+    z-index: 6;
+    display: block;
+    overflow: hidden;
+    background: #020208;
+    color: #dbe2ee;
+    touch-action: none;
+    outline: none;
+}
+
+.baked-celestial-view[hidden] { display: none; }
+.baked-celestial-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: opacity 180ms ease;
+}
+
+.baked-celestial-controls {
+    position: absolute;
+    z-index: 1;
+    right: max(28px, env(safe-area-inset-right));
+    bottom: max(28px, env(safe-area-inset-bottom));
+    display: grid;
+    justify-items: end;
+    gap: 8px;
+    width: min(360px, calc(100vw - 56px));
+    color: #aebbd0;
+    font: 10px/1.5 var(--ui);
+    text-align: right;
+    text-shadow: 0 1px 10px #020208;
+}
+
+.baked-celestial-view.controls-on-left .baked-celestial-controls {
+    right: auto;
+    left: max(28px, env(safe-area-inset-left));
+    justify-items: start;
+    text-align: left;
+}
+
+.baked-celestial-view.is-compact .baked-celestial-controls {
+    bottom: calc(50dvh + max(20px, env(safe-area-inset-bottom)));
+}
+
+.baked-celestial-hint,
+.baked-celestial-status { margin: 0; }
+.baked-celestial-status { min-height: 15px; color: #e7c994; }
+.baked-celestial-buttons { display: flex; gap: 7px; }
+.baked-celestial-buttons button,
+.baked-celestial-retry {
+    min-height: 32px;
+    padding: 7px 11px;
+    border: 1px solid rgba(205,220,244,0.32);
+    border-radius: 3px;
+    background: rgba(5,9,18,0.72);
+    color: #dce7f4;
+    cursor: pointer;
+    font: inherit;
+}
+.baked-celestial-buttons button:hover,
+.baked-celestial-buttons button:focus-visible,
+.baked-celestial-retry:hover,
+.baked-celestial-retry:focus-visible { border-color: #f0d6a0; color: #f8e6c4; }
+.baked-celestial-retry[hidden] { display: none; }
+
+body.solar-body-active .baked-celestial-view {
+    z-index: 6;
+}
+body.solar-body-active .celestial-panel { z-index: 21; }
+
 .solar-map-header,
 .solar-map-points,
 .solar-map-picker,
@@ -213,6 +288,20 @@ body.solar-body-active .solar-map-picker {
 body.solar-system-active.section-drawer-open .solar-map-points { visibility: hidden; }
 
 @media (max-width: 760px) {
+    .baked-celestial-controls {
+        right: max(14px, env(safe-area-inset-right));
+        bottom: max(14px, env(safe-area-inset-bottom));
+        width: min(360px, calc(58vw - 28px));
+    }
+    .baked-celestial-view.controls-on-left .baked-celestial-controls {
+        right: auto;
+        left: max(14px, env(safe-area-inset-left));
+    }
+    .baked-celestial-view.is-compact .baked-celestial-controls { width: calc(100vw - 28px); }
+    .baked-celestial-view.is-compact .baked-celestial-canvas {
+        top: 0;
+        height: 58%;
+    }
     .solar-map-header { top: max(80px, calc(env(safe-area-inset-top) + 68px)); left: 25px; max-width: calc(100vw - 50px); }
     .solar-map-back { margin-bottom: 10px; font-size: 10px; }
     .solar-map-header h1 { font-size: clamp(24px, 6.8vw, 34px); }

@@ -87,7 +87,7 @@ const lifeStylesheets = localStylesheetResources(lifeHtml).filter(resource =>
 const releaseVersions = [...lifeScripts, ...lifeStylesheets].map(resource => new URL(resource.reference, 'https://life.invalid/').searchParams.get('v'));
 assert(releaseVersions.every(Boolean), 'Every local Life script and stylesheet must carry a cache-release version');
 assert.equal(new Set(releaseVersions).size, 1, 'All Life scripts and stylesheets must share one release version to prevent mixed cached runtimes');
-assert.equal(lifeRuntimeScripts.length, 22, 'life.html must load the complete hierarchical star-map runtime');
+assert.equal(lifeRuntimeScripts.length, 23, 'life.html must load the complete hierarchical star-map runtime');
 assert.equal(lifeStylesheets.length, 10, 'life.html must load the complete hierarchical star-map styles');
 assert(
     lifeHtml.split(/\r?\n/).length < 1000,
@@ -1204,6 +1204,7 @@ const runtimeContext = {
     window: mockWindow
 };
 runtimeContext.globalThis = runtimeContext;
+mockDocument.baseURI = 'https://life.invalid/';
 vm.createContext(runtimeContext);
 const observerRuntimeScripts = lifeRuntimeScripts.filter(resource => !/(?:07-star-map-renderer|19-star-map|20-solar-system-map|21-deep-sky-map)\.js$/.test(resource.relativePath));
 for (const resource of observerRuntimeScripts) {

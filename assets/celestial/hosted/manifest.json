@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "width": 3840,
+  "height": 2160,
+  "bodies": {
+    "sun": {
+      "azimuthCount": 180,
+      "elevations": [
+        -90.0,
+        -60.0,
+        -30.0,
+        0.0,
+        30.0,
+        60.0,
+        90.0
+      ],
+      "width": 3840,
+      "height": 2160,
+      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/sun/e{elevation}/a{azimuth}.webp",
+      "poster": "posters/sun-708fa8cbf34d8411.webp",
+      "defaultAzimuth": 0,
+      "defaultElevation": 3
+    },
+    "mercury": {
+      "azimuthCount": 180,
+      "elevations": [
+        -90.0,
+        -60.0,
+        -30.0,
+        0.0,
+        30.0,
+        60.0,
+        90.0
+      ],
+      "width": 3840,
+      "height": 2160,
+      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/mercury/e{elevation}/a{azimuth}.webp",
+      "poster": "posters/mercury-91910d60600207fa.webp",
+      "defaultAzimuth": 0,
+      "defaultElevation": 3
+    },
+    "venus": {
+      "azimuthCount": 180,
+      "elevations": [
+        -90.0,
+        -60.0,
+        -30.0,
+        0.0,
+        30.0,
+        60.0,
+        90.0
+      ],
+      "width": 3840,
+      "height": 2160,
+      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/venus/e{elevation}/a{azimuth}.webp",
+      "poster": "posters/venus-72a28a10234b778d.webp",
+      "defaultAzimuth": 0,
+      "defaultElevation": 3
+    },
+    "earth": {
+      "azimuthCount": 180,
+      "elevations": [
+        -90.0,
+        -60.0,
+        -30.0,
+        0.0,
+        30.0,
+        60.0,
+        90.0
+      ],
+      "width": 3840,
+      "height": 2160,
+      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/earth/e{elevation}/a{azimuth}.webp",
+      "poster": "posters/earth-1ae657430d0a44fd.webp",
+      "defaultAzimuth": 0,
+      "defaultElevation": 3
+    },
+    "moon": {
+      "azimuthCount": 180,
+      "elevations": [
+        -90.0,
+        -60.0,
+        -30.0,
+        0.0,
+        30.0,
+        60.0,
+        90.0
+      ],
+      "width": 3840,
+      "height": 2160,
+      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/moon/e{elevation}/a{azimuth}.webp",
+      "poster": "posters/moon-cea49c6525b27132.webp",
+      "defaultAzimuth": 0,
+      "defaultElevation": 3
+    },
+    "mars": {
+      "azimuthCount": 180,
+      "elevations": [
+        -90.0,
+        -60.0,
+        -30.0,
+        0.0,
+        30.0,
+        60.0,
+        90.0
+      ],
+      "width": 3840,
+      "height": 2160,
+      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/mars/e{elevation}/a{azimuth}.webp",
+      "poster": "posters/mars-25b70f9c2da46ff4.webp",
+      "defaultAzimuth": 0,
+      "defaultElevation": 3
+    },
+    "jupiter": {
+      "azimuthCount": 180,
+      "elevations": [
+        -90.0,
+        -60.0,
+        -30.0,
+        0.0,
+        30.0,
+        60.0,
+        90.0
+      ],
+      "width": 3840,
+      "height": 2160,
+      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/jupiter/e{elevation}/a{azimuth}.webp",
+      "poster": "posters/jupiter-105164266ed4f4ba.webp",
+      "defaultAzimuth": 0,
+      "defaultElevation": 3
+    },
+    "saturn": {
+      "azimuthCount": 180,
+      "elevations": [
+        -90.0,
+        -60.0,
+        -30.0,
+        0.0,
+        30.0,
+        60.0,
+        90.0
+      ],
+      "width": 3840,
+      "height": 2160,
+      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/saturn/e{elevation}/a{azimuth}.webp",
+      "poster": "posters/saturn-6ed11621a62c3069.webp",
+      "defaultAzimuth": 0,
+      "defaultElevation": 4
+    },
+    "uranus": {
+      "azimuthCount": 180,
+      "elevations": [
+        -90.0,
+        -60.0,
+        -30.0,
+        0.0,
+        30.0,
+        60.0,
+        90.0
+      ],
+      "width": 3840,
+      "height": 2160,
+      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/uranus/e{elevation}/a{azimuth}.webp",
+      "poster": "posters/uranus-52d1a25e62d0876f.webp",
+      "defaultAzimuth": 0,
+      "defaultElevation": 4
+    },
+    "neptune": {
+      "azimuthCount": 180,
+      "elevations": [
+        -90.0,
+        -60.0,
+        -30.0,
+        0.0,
+        30.0,
+        60.0,
+        90.0
+      ],
+      "width": 3840,
+      "height": 2160,
+      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/neptune/e{elevation}/a{azimuth}.webp",
+      "poster": "posters/neptune-14392ffcd2b25335.webp",
+      "defaultAzimuth": 0,
+      "defaultElevation": 3
+    }
+  }
+}

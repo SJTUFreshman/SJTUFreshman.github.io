@@ -91,7 +91,7 @@ function markCelestialTextureReady(visit, { error = false } = {}) {
         visit.textureReadyAt,
         visit.transition.startedAt + (REDUCED_MOTION ? 0 : 150)
     );
-    if (error) dom.status.textContent = 'USING RESILIENT SURFACE';
+    if (error && !visit.solarSystem) dom.status.textContent = 'USING RESILIENT SURFACE';
     return true;
 }
 
@@ -101,6 +101,10 @@ function resolveCelestialTextureFallback(visit, error) {
         visit.phase !== 'approach' ||
         visit.textureReady
     ) return false;
+    if (visit.solarSystem) {
+        bakedCelestialViewer.fail(error);
+        return markCelestialTextureReady(visit, { error: true });
+    }
     try {
         celestialCloseupRenderer.installFallbackSurface(visit.profile);
     } catch (fallbackError) {
@@ -117,7 +121,13 @@ function prepareCelestialVisitTexture(visit) {
             visit,
             new Error(`Celestial surface acquisition timed out for ${visit.profile.id}`)
         );
-    }, 4800);
+    }, visit.solarSystem ? 16000 : 4800);
+    if (visit.solarSystem) {
+        bakedCelestialViewer.prepare(visit.profile).then(ready => {
+            markCelestialTextureReady(visit, { error: !ready });
+        }).catch(error => resolveCelestialTextureFallback(visit, error));
+        return;
+    }
     celestialCloseupRenderer.prepare(visit.profile)
         .then(() => {
             markCelestialTextureReady(visit);

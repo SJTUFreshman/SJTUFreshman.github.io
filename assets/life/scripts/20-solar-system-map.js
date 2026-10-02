@@ -43,7 +43,7 @@ class SolarSystemMap {
                 closeup: 'PLANETARY ATLAS', badge: 'SURFACE PORTRAIT', loading: 'APPROACHING',
                 radius: 'Mean radius', orbit: 'Mean orbital distance', period: 'Orbital period',
                 parent: 'Orbits', type: 'Classification', scale: 'Display scale', scaled: 'Enlarged for exploration',
-                days: 'Earth days', years: 'Earth years', source: 'Static surface maps; the illustration is not a live spacecraft image.',
+                days: 'Earth days', years: 'Earth years', source: 'Pre-rendered views with fixed studio lighting; not a live spacecraft image or the current lunar phase.',
                 snapshot: 'Position snapshot', home: 'Earth', star: 'Star', planet: 'Planet', satellite: 'Natural satellite',
                 sunDescription: 'Our nearest star holds eight planets, their moons, and countless smaller worlds in its gravitational reach. Its light takes about eight minutes to reach Earth.',
                 moonDescription: 'Earth’s only natural satellite. Its cratered surface preserves the history of impacts, while its gravity helps shape Earth’s tides.',
@@ -57,7 +57,7 @@ class SolarSystemMap {
                 choose: '探索太阳系', bodyClose: '返回太阳系', closeup: '行星图鉴', badge: '天体近景', loading: '正在靠近',
                 radius: '平均半径', orbit: '平均轨道距离', period: '公转周期', parent: '围绕', type: '天体类型',
                 scale: '展示比例', scaled: '为探索而放大', days: '地球日', years: '地球年',
-                source: '表面来自静态全球贴图；这里不是实时航天器影像。', snapshot: '位置快照',
+                source: '离线预渲染视角，采用固定艺术光照；不是实时航天器影像，也不代表当前月相。', snapshot: '位置快照',
                 home: '地球', star: '恒星', planet: '行星', satellite: '天然卫星',
                 sunDescription: '离我们最近的恒星，以引力维系八颗行星、它们的卫星和无数小天体。阳光抵达地球约需八分钟。',
                 moonDescription: '地球唯一的天然卫星。布满撞击坑的表面保存着漫长的撞击历史，它的引力也参与塑造地球的潮汐。',
@@ -71,7 +71,7 @@ class SolarSystemMap {
                 choose: '探索太陽系', bodyClose: '返回太陽系', closeup: '行星圖鑑', badge: '天體近景', loading: '正在靠近',
                 radius: '平均半徑', orbit: '平均軌道距離', period: '公轉週期', parent: '圍繞', type: '天體類型',
                 scale: '展示比例', scaled: '為探索而放大', days: '地球日', years: '地球年',
-                source: '表面來自靜態全球貼圖；這裡不是即時太空船影像。', snapshot: '位置快照',
+                source: '離線預渲染視角，採用固定藝術光照；不是即時太空船影像，也不代表目前月相。', snapshot: '位置快照',
                 home: '地球', star: '恆星', planet: '行星', satellite: '天然衛星',
                 sunDescription: '離我們最近的恆星，以引力維繫八顆行星、它們的衛星和無數小天體。陽光抵達地球約需八分鐘。',
                 moonDescription: '地球唯一的天然衛星。佈滿撞擊坑的表面保存著漫長的撞擊歷史，它的引力也參與塑造地球的潮汐。',
@@ -202,7 +202,7 @@ class SolarSystemMap {
         this.updateCopy();
         this.bodies.forEach(body => {
             if (body.textureReady) return;
-            celestialCloseupRenderer.prepare(body.profile).then(() => {
+            celestialCloseupRenderer.loadImage(body.profile.texture).then(() => {
                 body.textureReady = true;
                 body.sphere = celestialCloseupRenderer.fallbackSphereFor(body.profile);
             }).catch(() => {
@@ -390,6 +390,7 @@ class SolarSystemMap {
         hideCelestialPanelForReturn();
         setCelestialVisitClasses(null);
         celestialCloseupRenderer.clear();
+        bakedCelestialViewer.clear();
         dom.body.classList.remove('solar-body-active');
         state.scene = 'roam';
     }
@@ -420,11 +421,15 @@ class SolarSystemMap {
                 return;
             }
         }
-        celestialCloseupRenderer.render(time, visit, visit.basis);
+        bakedCelestialViewer.render(time, visit);
     }
 
     render(time) {
         if (!this.active || !this.context) return;
+        if (this.visit?.phase === 'observing') {
+            this.renderVisit(time);
+            return;
+        }
         const delta = clamp((time - (this.lastFrame || time)) / 1000, 0, 0.05);
         this.lastFrame = time;
         const response = REDUCED_MOTION ? 1 : 1 - Math.exp(-delta * 13);
@@ -662,6 +667,7 @@ class SolarSystemMap {
         dom.status.textContent = this.visit ? `${this.visit.phase === 'approach' ? copy.loading : copy.closeup} / ${celestialName(this.visit.profile)}` : copy.name.toUpperCase();
         dom.world.setAttribute('aria-label', `${copy.name}. ${copy.instructions}`);
         if (this.visit?.phase === 'observing') this.renderBodyPanel(this.visit.profile);
+        bakedCelestialViewer.updateCopy();
     }
 
     resize() {
@@ -672,6 +678,7 @@ class SolarSystemMap {
         this.canvas.width = Math.round(this.width * this.dpr);
         this.canvas.height = Math.round(this.height * this.dpr);
         celestialCloseupRenderer.resize();
+        bakedCelestialViewer.resize();
         if (this.visit) {
             this.visit.panelOnLeft = false;
             const point = this.project(this.visit.body.position, this.view());
@@ -688,11 +695,12 @@ class SolarSystemMap {
             else this.exit();
             return true;
         }
+        if (this.visit && bakedCelestialViewer.handleKey(event)) return true;
         if (event.key === 'Tab' && this.visit?.phase === 'observing') {
-            const controls = Array.from(dom.celestialPanel.querySelectorAll('button:not([disabled]), a[href], [tabindex="0"]')).filter(element => element.getClientRects().length);
+            const controls = [bakedCelestialViewer.element, ...Array.from(bakedCelestialViewer.element?.querySelectorAll('button:not([disabled])') || []), ...Array.from(dom.celestialPanel.querySelectorAll('button:not([disabled]), a[href], [tabindex="0"]'))].filter(element => element && !element.hidden && !element.inert && element.getClientRects().length);
             const first = controls[0];
             const last = controls[controls.length - 1];
-            if (controls.length && (event.shiftKey ? document.activeElement === first || !dom.celestialPanel.contains(document.activeElement) : document.activeElement === last || !dom.celestialPanel.contains(document.activeElement))) {
+            if (controls.length && (event.shiftKey ? document.activeElement === first || !controls.includes(document.activeElement) : document.activeElement === last || !controls.includes(document.activeElement))) {
                 event.preventDefault();
                 (event.shiftKey ? last : first).focus({ preventScroll: true });
             }
