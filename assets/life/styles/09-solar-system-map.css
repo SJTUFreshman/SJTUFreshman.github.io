@@ -262,6 +262,13 @@ body.solar-system-active .solar-map-picker {
 .solar-body-item.is-moon { margin-left: -5px; padding-left: 3px; font-size: 9px; color: #7f8b9e; }
 .solar-body-dot { width: 6px; height: 6px; flex-shrink: 0; border-radius: 50%; background: var(--solar-color); box-shadow: 0 0 8px color-mix(in srgb, var(--solar-color), transparent 65%); }
 .solar-body-item.is-moon .solar-body-dot { width: 3px; height: 3px; }
+.solar-body-item.is-system { color: #d1c4a7; }
+.solar-body-item.is-system .solar-body-dot { width: 8px; height: 8px; box-shadow: 0 0 12px color-mix(in srgb, var(--solar-color), transparent 45%); }
+
+:is(#portalNav, #starNav, #mapEntities, .solar-map-points, .solar-map-header, .solar-map-footer, .deep-sky-image-controls) {
+    touch-action: none;
+}
+.solar-map-picker { touch-action: pan-x; }
 
 .solar-map-footer {
     position: fixed;

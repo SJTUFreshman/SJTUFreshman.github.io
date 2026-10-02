@@ -1,14 +1,14 @@
 const SOLAR_MAP_BODIES = Object.freeze([
-    { id: 'sun', au: 0, years: 0, radius: 17, inclination: 0 },
-    { id: 'mercury', au: 0.387, years: 0.241, radius: 2.5, inclination: 7 },
-    { id: 'venus', au: 0.723, years: 0.615, radius: 4.5, inclination: 3.39 },
-    { id: 'earth', au: 1, years: 1, radius: 4.7, inclination: 0 },
-    { id: 'moon', au: 0.00257, years: 0.0748, radius: 1.9, inclination: 5.15, parent: 'earth' },
-    { id: 'mars', au: 1.524, years: 1.881, radius: 3.5, inclination: 1.85 },
-    { id: 'jupiter', au: 5.203, years: 11.862, radius: 10.5, inclination: 1.30 },
-    { id: 'saturn', au: 9.537, years: 29.457, radius: 9, inclination: 2.49 },
-    { id: 'uranus', au: 19.191, years: 84.017, radius: 6.5, inclination: 0.77 },
-    { id: 'neptune', au: 30.069, years: 164.79, radius: 6.3, inclination: 1.77 }
+    { id: 'sun', au: 0, years: 0, radius: 17, inclination: 0, closeupScale: 0.76 },
+    { id: 'mercury', au: 0.387, years: 0.241, radius: 2.5, inclination: 7, closeupScale: 0.74 },
+    { id: 'venus', au: 0.723, years: 0.615, radius: 4.5, inclination: 3.39, closeupScale: 0.72 },
+    { id: 'earth', au: 1, years: 1, radius: 4.7, inclination: 0, closeupScale: 0.64 },
+    { id: 'moon', au: 0.00257, years: 0.0748, radius: 1.9, inclination: 5.15, parent: 'earth', closeupScale: 0.76 },
+    { id: 'mars', au: 1.524, years: 1.881, radius: 3.5, inclination: 1.85, closeupScale: 0.72 },
+    { id: 'jupiter', au: 5.203, years: 11.862, radius: 10.5, inclination: 1.30, closeupScale: 0.70 },
+    { id: 'saturn', au: 9.537, years: 29.457, radius: 9, inclination: 2.49, closeupScale: 0.62 },
+    { id: 'uranus', au: 19.191, years: 84.017, radius: 6.5, inclination: 0.77, closeupScale: 0.68 },
+    { id: 'neptune', au: 30.069, years: 164.79, radius: 6.3, inclination: 1.77, closeupScale: 0.70 }
 ]);
 
 class SolarSystemMap {
@@ -16,6 +16,8 @@ class SolarSystemMap {
         this.parent = parent;
         this.active = false;
         this.ready = false;
+        this.level = 'solar';
+        this.levelReturn = null;
         this.yaw = -0.28;
         this.pitch = 0.66;
         this.distance = 625;
@@ -37,6 +39,10 @@ class SolarSystemMap {
             en: {
                 name: 'Solar System', region: 'OUR STELLAR NEIGHBOURHOOD', back: 'Back to the local stars',
                 title: 'One star. Eight worlds.', subtitle: 'And the Moon, travelling with Earth.',
+                earthMoon: 'Earth–Moon System', earthMoonRegion: 'WITHIN THE SOLAR SYSTEM',
+                earthMoonTitle: 'Our home. Its companion.', earthMoonSubtitle: 'Choose Earth or the Moon to explore its surface.',
+                earthMoonNote: 'A view of the Earth–Moon system. Body sizes and orbital distance are enlarged independently for exploration.',
+                earthMoonChoose: 'Explore the Earth–Moon system', earthMoonBack: 'Return to the Earth–Moon system',
                 note: 'Positions follow an astronomical snapshot. Orbits and body sizes are compressed independently for exploration.',
                 instructions: 'Right drag to orbit · Scroll to approach · Choose a world',
                 choose: 'Explore the Solar System', bodyClose: 'Return to the Solar System',
@@ -52,6 +58,10 @@ class SolarSystemMap {
             'zh-CN': {
                 name: '太阳系', region: '我们所在的恒星系统', back: '返回局部星域',
                 title: '一颗恒星，八个世界。', subtitle: '还有与地球同行的月亮。',
+                earthMoon: '地月系', earthMoonRegion: '太阳系内的双星世界',
+                earthMoonTitle: '我们的家园，与它的月亮。', earthMoonSubtitle: '选择地球或月球，探索各自的近景。',
+                earthMoonNote: '地月系示意。天体大小与轨道距离分别放大，方便探索。',
+                earthMoonChoose: '探索地月系', earthMoonBack: '返回地月系',
                 note: '位置参考当前天文快照。轨道距离与天体大小分别压缩，方便探索。',
                 instructions: '右键拖动旋转 · 滚轮拉近 · 选择一颗星球',
                 choose: '探索太阳系', bodyClose: '返回太阳系', closeup: '行星图鉴', badge: '天体近景', loading: '正在靠近',
@@ -66,6 +76,10 @@ class SolarSystemMap {
             'zh-TW': {
                 name: '太陽系', region: '我們所在的恆星系統', back: '返回局部星域',
                 title: '一顆恆星，八個世界。', subtitle: '還有與地球同行的月亮。',
+                earthMoon: '地月系', earthMoonRegion: '太陽系內的雙星世界',
+                earthMoonTitle: '我們的家園，與它的月亮。', earthMoonSubtitle: '選擇地球或月球，探索各自的近景。',
+                earthMoonNote: '地月系示意。天體大小與軌道距離分別放大，方便探索。',
+                earthMoonChoose: '探索地月系', earthMoonBack: '返回地月系',
                 note: '位置參考目前天文快照。軌道距離與天體大小分別壓縮，方便探索。',
                 instructions: '右鍵拖動旋轉 · 滾輪拉近 · 選擇一顆星球',
                 choose: '探索太陽系', bodyClose: '返回太陽系', closeup: '行星圖鑑', badge: '天體近景', loading: '正在靠近',
@@ -78,7 +92,12 @@ class SolarSystemMap {
                 earthDescription: '被海洋覆蓋、被薄薄大氣包裹的家園。地球是目前唯一已知孕育生命的世界。'
             }
         };
-        return copies[state.currentLang] || copies.en;
+        const copy = copies[state.currentLang] || copies.en;
+        return this.level === 'earth-moon' ? {
+            ...copy, name: copy.earthMoon, region: copy.earthMoonRegion, back: copy.bodyClose,
+            title: copy.earthMoonTitle, subtitle: copy.earthMoonSubtitle, note: copy.earthMoonNote,
+            choose: copy.earthMoonChoose, bodyClose: copy.earthMoonBack
+        } : copy;
     }
 
     create() {
@@ -92,7 +111,7 @@ class SolarSystemMap {
         this.header = document.createElement('section');
         this.header.className = 'solar-map-header';
         this.header.innerHTML = '<button class="solar-map-back" type="button"><span aria-hidden="true">←</span><span></span></button><p class="solar-map-kicker"></p><h1></h1><p class="solar-map-subtitle"></p>';
-        this.header.querySelector('button').addEventListener('click', () => this.exit());
+        this.header.querySelector('button').addEventListener('click', () => this.back());
         this.nav = document.createElement('nav');
         this.nav.className = 'solar-map-points';
         this.picker = document.createElement('nav');
@@ -113,7 +132,7 @@ class SolarSystemMap {
         };
         this.bodies = SOLAR_MAP_BODIES.map(definition => {
             const source = definition.id === 'earth' ? earth : celestialBodies.find(body => body.id === definition.id);
-            const profile = { ...source, angularDisc: true, refracted: false, current: { ...source.current } };
+            const profile = { ...source, closeupScale: definition.closeupScale, angularDisc: true, refracted: false, current: { ...source.current } };
             const button = document.createElement('button');
             button.type = 'button';
             button.className = 'solar-body-hit';
@@ -125,22 +144,24 @@ class SolarSystemMap {
             item.dataset.body = definition.id;
             item.innerHTML = '<span class="solar-body-dot"></span><span class="solar-body-item-name"></span>';
             item.style.setProperty('--solar-color', profile.color);
-            if (definition.parent) item.classList.add('is-moon');
             const body = { ...definition, profile, button, item, position: [0, 0, 0], orbitRadius: 0, screen: null, textureReady: false };
-            [button, item].forEach(control => {
-                control.addEventListener('click', event => {
-                    if (performance.now() < (this.parent.suppressClickUntil || 0)) return;
-                    this.openBody(body, event.detail === 0 ? 'keyboard' : 'pointer');
-                });
-                control.addEventListener('mouseenter', () => { this.hover = body; });
-                control.addEventListener('mouseleave', () => { if (this.hover === body) this.hover = null; });
-                control.addEventListener('focus', () => { this.hover = body; });
-                control.addEventListener('blur', () => { if (this.hover === body) this.hover = null; });
-            });
+            this.bindBodyControls(body);
             this.nav.append(button);
             this.picker.append(item);
             return body;
         });
+        const earthBody = this.bodies.find(body => body.id === 'earth');
+        this.earthMoon = { ...earthBody, id: 'earth-moon', system: true,
+            button: earthBody.button.cloneNode(true), item: earthBody.item.cloneNode(true) };
+        [this.earthMoon.button, this.earthMoon.item].forEach(control => {
+            delete control.dataset.body;
+            control.dataset.system = 'earth-moon';
+            control.classList.add('is-system');
+        });
+        this.earthMoon.item.classList.add('solar-system-item');
+        earthBody.button.before(this.earthMoon.button);
+        earthBody.item.before(this.earthMoon.item);
+        this.bindBodyControls(this.earthMoon);
         this.nav.addEventListener('contextmenu', event => event.preventDefault());
         this.nav.addEventListener('pointerdown', event => {
             if (!this.canMove() || event.button !== 2) return;
@@ -176,6 +197,77 @@ class SolarSystemMap {
         this.resize();
     }
 
+    bindBodyControls(body) {
+        [body.button, body.item].forEach(control => {
+            control.addEventListener('click', event => {
+                if (performance.now() < (this.parent.suppressClickUntil || 0)) return;
+                if (body.system) this.enterEarthMoon();
+                else this.openBody(body, event.detail === 0 ? 'keyboard' : 'pointer');
+            });
+            control.addEventListener('mouseenter', () => { this.hover = body; });
+            control.addEventListener('mouseleave', () => { if (this.hover === body) this.hover = null; });
+            control.addEventListener('focus', () => { this.hover = body; });
+            control.addEventListener('blur', () => { if (this.hover === body) this.hover = null; });
+        });
+    }
+
+    visibleBodies() {
+        return this.level === 'earth-moon' ? this.bodies.filter(body => body.id === 'earth' || body.id === 'moon')
+            : this.bodies.flatMap(body => body.id === 'earth' ? [this.earthMoon] : body.id === 'moon' ? [] : [body]);
+    }
+
+    defaultPose() {
+        if (this.level === 'earth-moon') {
+            const direction = this.moonDirection || [1, 0, 0];
+            return { yaw: Math.atan2(-direction[2], direction[0]), pitch: 0.46, distance: window.innerWidth < 760 ? 480 : 330 };
+        }
+        return { yaw: -0.28, pitch: 0.66, distance: window.innerWidth < 760 ? 1040 : 625 };
+    }
+
+    reset() {
+        if (!this.canMove()) return;
+        this.parent.clearInput();
+        this.clearInput();
+        this.target = this.defaultPose();
+    }
+
+    setLevel(level, pose = null) {
+        this.parent.clearInput();
+        this.clearInput();
+        this.level = level;
+        this.hover = null;
+        this.lastFrame = 0;
+        const earth = this.bodies.find(body => body.id === 'earth');
+        const moon = this.bodies.find(body => body.id === 'moon');
+        earth.position = level === 'earth-moon' ? this.moonDirection.map(value => value * -30) : earth.solarPosition.slice();
+        moon.position = level === 'earth-moon' ? this.moonDirection.map(value => value * 68) : moon.solarPosition.slice();
+        earth.radius = level === 'earth-moon' ? 14 : 4.7;
+        moon.radius = level === 'earth-moon' ? 3.8 : 1.9;
+        earth.orbitRadius = level === 'earth-moon' ? 0 : earth.solarOrbitRadius;
+        moon.orbitRadius = level === 'earth-moon' ? 98 : 10;
+        this.target = pose || this.defaultPose();
+        Object.assign(this, this.target);
+        this.currentView = this.view();
+        this.updateCopy();
+    }
+
+    enterEarthMoon() {
+        if (!this.canMove() || this.level !== 'solar') return;
+        this.levelReturn = { ...this.target };
+        this.levelReturnFocus = document.activeElement;
+        this.setLevel('earth-moon');
+        this.header.querySelector('button').focus({ preventScroll: true });
+    }
+
+    back() {
+        if (!this.canMove()) return;
+        if (this.level !== 'earth-moon') { this.exit(); return; }
+        this.setLevel('solar', this.levelReturn);
+        this.levelReturn = null;
+        const control = this.levelReturnFocus?.matches('[data-system="earth-moon"]') ? this.levelReturnFocus : this.earthMoon.item;
+        control.focus({ preventScroll: true });
+    }
+
     enter() {
         this.create();
         if (this.active || state.modalOpen || state.scene === 'leaving-home') return;
@@ -190,6 +282,7 @@ class SolarSystemMap {
         this.distance = this.target.distance * (REDUCED_MOTION ? 1 : 1.15);
         this.snapshotDate = new Date();
         this.calculatePositions();
+        this.setLevel('solar');
         state.scene = 'roam';
         state.activePortal = null;
         state.activeCelestial = null;
@@ -222,6 +315,8 @@ class SolarSystemMap {
         this.clearInput();
         this.clearVisit();
         this.active = false;
+        this.level = 'solar';
+        this.levelReturn = null;
         this.hover = null;
         this.lastFrame = 0;
         dom.body.classList.remove('solar-system-active', 'solar-body-active');
@@ -270,7 +365,14 @@ class SolarSystemMap {
             body.profile.current.phaseAngle = 45;
             body.profile.current.ringTilt = 23;
             body.profile.current.angularDiameter = 0.01;
+            body.solarPosition = body.position.slice();
+            body.solarOrbitRadius = body.orbitRadius;
         });
+        const earth = this.bodies.find(body => body.id === 'earth');
+        const moon = this.bodies.find(body => body.id === 'moon');
+        this.moonDirection = normalize(moon.position.map((value, axis) => value - earth.position[axis]));
+        this.earthMoon.position = earth.position.slice();
+        this.earthMoon.orbitRadius = earth.orbitRadius;
     }
 
     canMove() {
@@ -293,10 +395,10 @@ class SolarSystemMap {
 
     zoom(delta) {
         if (!this.canMove()) return;
-        const maximum = window.innerWidth < 760 ? 1500 : 1100;
+        const maximum = this.level === 'earth-moon' ? (window.innerWidth < 760 ? 800 : 650) : window.innerWidth < 760 ? 1500 : 1100;
         const desired = this.target.distance * Math.exp(clamp(delta, -180, 180) * 0.0026);
         if (this.target.distance >= maximum && delta > 0) {
-            this.exit();
+            this.back();
             return;
         }
         this.target.distance = clamp(desired, 180, maximum);
@@ -329,7 +431,7 @@ class SolarSystemMap {
     }
 
     openBody(body, source = 'pointer') {
-        if (!this.canMove()) return;
+        if (!this.canMove() || !this.visibleBodies().includes(body) || body.system) return;
         this.parent.clearInput();
         this.clearInput();
         state.activationSource = source;
@@ -445,7 +547,7 @@ class SolarSystemMap {
         context.save();
         context.globalAlpha = 1 - (this.visit?.visualProgress || 0) * 0.9;
         this.drawOrbits(context);
-        const ordered = this.bodies.map(body => {
+        const ordered = this.visibleBodies().map(body => {
             body.screen = this.project(body.position);
             return body;
         }).sort((left, right) => right.screen.depth - left.screen.depth);
@@ -483,7 +585,7 @@ class SolarSystemMap {
     }
 
     drawOrbits(context) {
-        for (const body of this.bodies) {
+        for (const body of this.visibleBodies()) {
             if (!body.orbitRadius) continue;
             const origin = body.parent ? this.bodies.find(item => item.id === body.parent).position : [0, 0, 0];
             const highlighted = this.hover === body;
@@ -537,7 +639,8 @@ class SolarSystemMap {
         context.beginPath();
         context.arc(0, 0, radius, 0, Math.PI * 2);
         context.clip();
-        if (body.sphere) context.drawImage(body.sphere, -radius, -radius, radius * 2, radius * 2);
+        const sphere = body.system ? this.bodies.find(item => item.id === 'earth').sphere : body.sphere;
+        if (sphere) context.drawImage(sphere, -radius, -radius, radius * 2, radius * 2);
         else {
             const gradient = context.createRadialGradient(-radius * 0.28, -radius * 0.26, 0, 0, 0, radius * 1.2);
             gradient.addColorStop(0, body.profile.color);
@@ -559,6 +662,13 @@ class SolarSystemMap {
         }
         context.restore();
         ring(true);
+        if (body.system) {
+            const companionRadius = Math.max(1.5, radius * 0.28);
+            context.fillStyle = '#b7bfca';
+            context.beginPath();
+            context.arc(radius * 1.55, -radius * 0.8, companionRadius, 0, Math.PI * 2);
+            context.fill();
+        }
         if (this.hover === body) {
             context.strokeStyle = 'rgba(225,228,230,0.72)';
             context.lineWidth = 0.7;
@@ -571,12 +681,12 @@ class SolarSystemMap {
 
     positionLabels(context) {
         const rectangles = [];
-        const ordered = this.bodies.slice().sort((left, right) => Number(right === this.hover) - Number(left === this.hover));
+        const ordered = this.visibleBodies().sort((left, right) => Number(right === this.hover) - Number(left === this.hover));
         const candidates = [[0, 32], [0, -32], [42, 0], [-42, 0], [30, 47], [-30, -47], [58, 30], [-58, 30], [0, 65], [0, -65]];
         for (const body of ordered) {
             if (body.button.hidden) continue;
             const label = body.button.querySelector('.solar-body-name');
-            const labelWidth = Math.max(30, celestialName(body.profile).length * (state.currentLang === 'en' ? 5.8 : 11));
+            const labelWidth = Math.max(30, label.textContent.length * (state.currentLang === 'en' ? 5.8 : 11));
             let placement = null;
             for (const [offsetX, offsetY] of candidates) {
                 const centerX = body.screen.x + offsetX;
@@ -584,7 +694,7 @@ class SolarSystemMap {
                 const rectangle = { left: centerX - labelWidth * 0.5 - 5, right: centerX + labelWidth * 0.5 + 5, top: centerY - 9, bottom: centerY + 9 };
                 if (rectangle.left < 12 || rectangle.right > this.width - 12 || rectangle.top < 78 || rectangle.bottom > this.height - 165) continue;
                 if (rectangles.some(other => rectangle.left < other.right && rectangle.right > other.left && rectangle.top < other.bottom && rectangle.bottom > other.top)) continue;
-                const coversBody = this.bodies.some(other => {
+                const coversBody = this.visibleBodies().some(other => {
                     if (!other.screen?.visible) return false;
                     const radius = Math.max(4, other.radius * other.screen.scale) + 4;
                     return rectangle.left < other.screen.x + radius && rectangle.right > other.screen.x - radius && rectangle.top < other.screen.y + radius && rectangle.bottom > other.screen.y - radius;
@@ -656,12 +766,18 @@ class SolarSystemMap {
         this.footer.querySelector('.solar-map-note').textContent = copy.note;
         this.nav.setAttribute('aria-label', copy.choose);
         this.picker.setAttribute('aria-label', copy.choose);
-        this.bodies.forEach(body => {
-            const name = celestialName(body.profile);
+        const visibleBodies = this.visibleBodies();
+        [...this.bodies, this.earthMoon].forEach(body => {
+            const visible = visibleBodies.includes(body);
+            body.button.hidden = !visible;
+            body.button.inert = !visible || Boolean(this.visit);
+            body.item.hidden = !visible;
+            body.item.inert = !visible || Boolean(this.visit);
+            const name = body.system ? copy.earthMoon : celestialName(body.profile);
             body.button.querySelector('.solar-body-name').textContent = name;
-            body.button.setAttribute('aria-label', `${name} · ${localized(body.profile.kinds)}`);
+            body.button.setAttribute('aria-label', body.system ? copy.earthMoonChoose : `${name} · ${localized(body.profile.kinds)}`);
             body.item.querySelector('.solar-body-item-name').textContent = name;
-            body.item.setAttribute('aria-label', `${name}${body.parent ? ` · ${copy.home}` : ''}`);
+            body.item.setAttribute('aria-label', body.system ? copy.earthMoonChoose : `${name}${body.parent ? ` · ${copy.home}` : ''}`);
         });
         this.header.querySelector('button').tabIndex = this.visit ? -1 : 0;
         dom.status.textContent = this.visit ? `${this.visit.phase === 'approach' ? copy.loading : copy.closeup} / ${celestialName(this.visit.profile)}` : copy.name.toUpperCase();
@@ -692,10 +808,16 @@ class SolarSystemMap {
         if (event.key === 'Escape') {
             event.preventDefault();
             if (this.visit) this.closeBody(true, 'keyboard');
-            else this.exit();
+            else this.back();
             return true;
         }
         if (this.visit && bakedCelestialViewer.handleKey(event)) return true;
+        if (!this.visit && (event.key.toLowerCase() === 'r' || event.key === 'Home')
+            && !event.target.closest('button, a, input, textarea, select, [contenteditable="true"]')) {
+            event.preventDefault();
+            this.reset();
+            return true;
+        }
         if (event.key === 'Tab' && this.visit?.phase === 'observing') {
             const controls = [bakedCelestialViewer.element, ...Array.from(bakedCelestialViewer.element?.querySelectorAll('button:not([disabled])') || []), ...Array.from(dom.celestialPanel.querySelectorAll('button:not([disabled]), a[href], [tabindex="0"]'))].filter(element => element && !element.hidden && !element.inert && element.getClientRects().length);
             const first = controls[0];

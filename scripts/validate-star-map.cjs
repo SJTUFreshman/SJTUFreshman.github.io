@@ -195,6 +195,14 @@ async function openBakedBody(page, body) {
         && !bakedCelestialViewer.error, body);
 }
 
+async function openEarthMoon(page) {
+    const solar = page.locator('.solar-body-item[data-system="earth-moon"]');
+    if (await solar.count() && await solar.first().isVisible()) {
+        await solar.first().click();
+        await page.waitForFunction(() => window.lifeStarMap.solarSystem.level === 'earth-moon');
+    }
+}
+
 async function bakedControlsAreUncovered(page) {
     return page.evaluate(() => [...document.querySelectorAll('.baked-celestial-buttons button')].every(button => {
         const rectangle = button.getBoundingClientRect();
@@ -388,11 +396,13 @@ async function desktopChecks(browser) {
     const beforeSolar = await pose(page);
     await page.locator('[data-map-entity="solar"]').click();
     await page.waitForFunction(() => window.lifeStarMap.solarSystem.active);
-    check(await page.locator('.solar-body-item:visible').count() === 10,
-        'Entering the Solar System reveals the Sun, eight planets, and the Moon');
+    check(await page.locator('.solar-body-item:visible').count() === 9
+        && await page.locator('.solar-body-item[data-system="earth-moon"]:visible').count() === 1
+        && await page.locator('.solar-body-item[data-body="earth"]:visible, .solar-body-item[data-body="moon"]:visible').count() === 0,
+        'Entering the Solar System reveals eight worlds and a single Earth–Moon system entry');
     await page.waitForFunction(() => window.lifeStarMap.solarSystem.bodies.every(body => body.textureReady && body.sphere));
     await screenshot(page, 'solar-system');
-    for (const body of ['sun', 'earth', 'moon']) {
+    for (const body of ['sun']) {
         await page.locator(`.solar-body-item[data-body="${body}"]`).click();
         await page.waitForFunction(expected => state.activeCelestial?.id === expected
             && document.querySelector('#celestialPanel').getAttribute('aria-hidden') === 'false', body);
@@ -404,6 +414,27 @@ async function desktopChecks(browser) {
         await page.locator('#celestialClose').click();
         await page.waitForFunction(() => window.lifeStarMap.solarSystem.active && !window.lifeStarMap.solarSystem.visit);
     }
+    await page.locator('.solar-body-item[data-system="earth-moon"]').click();
+    await page.waitForFunction(() => window.lifeStarMap.solarSystem.level === 'earth-moon');
+    check(await page.locator('.solar-body-item:visible').count() === 2
+        && await page.locator('.solar-body-item[data-body="earth"]:visible').count() === 1
+        && await page.locator('.solar-body-item[data-body="moon"]:visible').count() === 1,
+        'Opening the Earth–Moon system reveals Earth and Moon as its child bodies');
+    for (const body of ['earth', 'moon']) {
+        await page.locator(`.solar-body-item[data-body="${body}"]`).click();
+        await page.waitForFunction(expected => state.activeCelestial?.id === expected
+            && document.querySelector('#celestialPanel').getAttribute('aria-hidden') === 'false', body);
+        check((await page.locator('#celestialDescription').textContent()).length > 50,
+            `${body}: selecting a child body opens its astronomical description`);
+        await page.waitForFunction(() => Boolean(bakedCelestialViewer.lastImage) && !bakedCelestialViewer.error);
+        await page.locator('#celestialClose').click();
+        await page.waitForFunction(() => window.lifeStarMap.solarSystem.level === 'earth-moon'
+            && window.lifeStarMap.solarSystem.active && !window.lifeStarMap.solarSystem.visit);
+    }
+    await page.locator('.solar-map-back').click();
+    await page.waitForFunction(() => window.lifeStarMap.solarSystem.level === 'solar');
+    check(await page.locator('.solar-body-item[data-system="earth-moon"]:visible').count() === 1,
+        'Returning from the Earth–Moon system restores the Solar System level');
     await page.locator('.solar-map-back').click();
     await page.waitForFunction(() => !window.lifeStarMap.solarSystem.active);
     await settle(page);
@@ -493,6 +524,7 @@ async function mobileChecks(browser) {
     await settle(page);
     await page.locator('[data-map-entity="solar"]').tap();
     await page.waitForFunction(() => window.lifeStarMap.solarSystem.active);
+    await openEarthMoon(page);
     await openBakedBody(page, 'earth');
     check(await bakedControlsAreUncovered(page), 'The mobile close-up controls are visible above the information panel');
     await screenshot(page, 'earth-mobile');
@@ -524,6 +556,7 @@ async function fallbackChecks() {
         });
         await page.locator('[data-map-entity="solar"]').click();
         await page.waitForFunction(() => window.lifeStarMap.solarSystem.active);
+        await openEarthMoon(page);
         await openBakedBody(page, 'earth');
         await bakedInteractionChecks(page, 'without WebGL');
         await screenshot(page, 'canvas-fallback');
@@ -547,6 +580,7 @@ async function reducedMotionChecks(browser) {
     samePose(await pose(page), before, 'Reduced-motion navigation restores the original view');
     await page.locator('[data-map-entity="solar"]').click();
     await page.waitForFunction(() => window.lifeStarMap.solarSystem.active);
+    await openEarthMoon(page);
     await openBakedBody(page, 'earth');
     const angle = await page.evaluate(() => bakedCelestialViewer.azimuth);
     await page.waitForTimeout(180);

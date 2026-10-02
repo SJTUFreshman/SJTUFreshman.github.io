@@ -358,6 +358,17 @@ class LifeStarMap {
         return state.hasEntered && !state.modalOpen && !state.gateOpen && !this.flight && state.scene === 'roam';
     }
 
+    isMapSurface(target) {
+        return target instanceof Element && Boolean(target.closest(
+            '#galaxyWorld, #portalNav, #starNav, #mapEntities, .solar-map-points, .solar-map-picker, .solar-map-header, .solar-map-footer, .baked-celestial-view, .deep-sky-image-viewport'
+        ));
+    }
+
+    isMapKeyboardContext(event) {
+        return this.isMapSurface(event.target) || this.isMapSurface(document.activeElement)
+            || this.canMove() && state.scene === 'roam' && !state.modalOpen && !state.gateOpen;
+    }
+
     snapshot() {
         return { yaw: this.yaw, pitch: this.pitch, distance: this.distance, center: this.center.slice() };
     }
@@ -450,7 +461,7 @@ class LifeStarMap {
     }
 
     reset() {
-        if (this.solarSystem?.active) return this.solarSystem.exit();
+        if (this.solarSystem?.active) return this.solarSystem.reset?.() || this.solarSystem.exit();
         if (this.deepSky?.active) return this.closeDeepSky();
         if (state.modalOpen || state.scene === 'leaving-home') return;
         if (state.scene === 'detail') closePortalPanel(false);
@@ -638,6 +649,10 @@ class LifeStarMap {
         dom.world.addEventListener('contextmenu', event => event.preventDefault());
         dom.portalNav.addEventListener('contextmenu', event => event.preventDefault());
         dom.starNav.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('wheel', event => {
+            if (!this.isMapSurface(event.target)) return;
+            if (event.ctrlKey || event.metaKey) event.preventDefault();
+        }, { capture: true, passive: false });
         const pointerDown = event => {
             if (!this.canMove() || (event.pointerType === 'mouse' && ![0, 1, 2].includes(event.button))) return;
             if (event.pointerType === 'mouse' && event.currentTarget !== dom.world && event.button !== 2 && event.button !== 1) return;
@@ -724,6 +739,11 @@ class LifeStarMap {
                 else trapSectionDrawerFocus(event);
                 return;
             }
+            const browserZoomKey = event.key === '+' || event.key === '=' || event.key === '-';
+            if ((event.ctrlKey || event.metaKey) && browserZoomKey && this.isMapSurface(event.target)) {
+                event.preventDefault();
+                if (!this.canMove()) return;
+            }
             if (event.key === 'Escape') {
                 this.clearInput();
                 if (this.flight) this.cancelFlight();
@@ -731,6 +751,7 @@ class LifeStarMap {
                 return;
             }
             if (event.target instanceof Element && event.target.closest('button, a, input, textarea, select, [contenteditable="true"]')) return;
+            if ((event.ctrlKey || event.metaKey) && !this.isMapKeyboardContext(event)) return;
             if (!this.canMove()) return;
             const movements = { ArrowLeft: [-14, 0], ArrowRight: [14, 0], ArrowUp: [0, -14], ArrowDown: [0, 14] };
             if (movements[event.key]) {
