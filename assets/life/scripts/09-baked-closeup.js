@@ -367,13 +367,13 @@ class BakedCelestialViewer {
         this.element.inert = visit.phase === 'returning' || state.sectionDrawerOpen;
         this.canvas.style.opacity = String(clamp(visit.visualProgress, 0, 1));
         if (visit.phase === 'observing' && this.body && !this.paused && !this.drag && time >= this.resumeAt && !state.sectionDrawerOpen && !state.modalOpen) {
-            this.azimuth = (this.azimuth + delta * 0.24) % 360;
+            this.azimuth = (this.azimuth + delta * 1.8) % 360;
             this.dirty = true;
         }
         if (this.body && visit.phase !== 'returning') {
             const samples = this.samples();
             this.prefetch(samples);
-            if (this.dirty && time - this.lastDraw >= 1000 / 60) this.draw(samples, time);
+            if (this.dirty && time - this.lastDraw >= 1000 / 24) this.draw(samples, time);
         }
         return Boolean(this.lastImage);
     }
@@ -392,8 +392,7 @@ class BakedCelestialViewer {
             const image = layer.image || this.cache.get(layer.url);
             accumulated += layer.weight;
             context.globalAlpha = layer.weight / accumulated;
-            const scale = Math.max(this.canvas.width / image.width, this.canvas.height / image.height)
-                * clamp(Number(this.profile?.closeupScale) || 1, 0.62, 1.05);
+            const scale = Math.max(this.canvas.width / image.width, this.canvas.height / image.height);
             const width = image.width * scale;
             const height = image.height * scale;
             const compact = usesCompactSkyLayout();

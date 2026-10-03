@@ -1,14 +1,14 @@
 const SOLAR_MAP_BODIES = Object.freeze([
-    { id: 'sun', au: 0, years: 0, radius: 17, inclination: 0, closeupScale: 0.76 },
-    { id: 'mercury', au: 0.387, years: 0.241, radius: 2.5, inclination: 7, closeupScale: 0.74 },
-    { id: 'venus', au: 0.723, years: 0.615, radius: 4.5, inclination: 3.39, closeupScale: 0.72 },
-    { id: 'earth', au: 1, years: 1, radius: 4.7, inclination: 0, closeupScale: 0.64 },
-    { id: 'moon', au: 0.00257, years: 0.0748, radius: 1.9, inclination: 5.15, parent: 'earth', closeupScale: 0.76 },
-    { id: 'mars', au: 1.524, years: 1.881, radius: 3.5, inclination: 1.85, closeupScale: 0.72 },
-    { id: 'jupiter', au: 5.203, years: 11.862, radius: 10.5, inclination: 1.30, closeupScale: 0.70 },
-    { id: 'saturn', au: 9.537, years: 29.457, radius: 9, inclination: 2.49, closeupScale: 0.62 },
-    { id: 'uranus', au: 19.191, years: 84.017, radius: 6.5, inclination: 0.77, closeupScale: 0.68 },
-    { id: 'neptune', au: 30.069, years: 164.79, radius: 6.3, inclination: 1.77, closeupScale: 0.70 }
+    { id: 'sun', au: 0, years: 0, radius: 17, inclination: 0 },
+    { id: 'mercury', au: 0.387, years: 0.241, radius: 2.5, inclination: 7 },
+    { id: 'venus', au: 0.723, years: 0.615, radius: 4.5, inclination: 3.39 },
+    { id: 'earth', au: 1, years: 1, radius: 4.7, inclination: 0 },
+    { id: 'moon', au: 0.00257, years: 0.0748, radius: 1.9, inclination: 5.15, parent: 'earth' },
+    { id: 'mars', au: 1.524, years: 1.881, radius: 3.5, inclination: 1.85 },
+    { id: 'jupiter', au: 5.203, years: 11.862, radius: 10.5, inclination: 1.30 },
+    { id: 'saturn', au: 9.537, years: 29.457, radius: 9, inclination: 2.49 },
+    { id: 'uranus', au: 19.191, years: 84.017, radius: 6.5, inclination: 0.77 },
+    { id: 'neptune', au: 30.069, years: 164.79, radius: 6.3, inclination: 1.77 }
 ]);
 
 class SolarSystemMap {
@@ -132,7 +132,7 @@ class SolarSystemMap {
         };
         this.bodies = SOLAR_MAP_BODIES.map(definition => {
             const source = definition.id === 'earth' ? earth : celestialBodies.find(body => body.id === definition.id);
-            const profile = { ...source, closeupScale: definition.closeupScale, angularDisc: true, refracted: false, current: { ...source.current } };
+            const profile = { ...source, angularDisc: true, refracted: false, current: { ...source.current } };
             const button = document.createElement('button');
             button.type = 'button';
             button.className = 'solar-body-hit';
