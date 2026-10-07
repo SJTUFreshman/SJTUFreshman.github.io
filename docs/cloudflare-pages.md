@@ -53,8 +53,12 @@ requests background access to refresh its login. Credentials stay outside Git.
 For the initial setup, create the Direct Upload project once:
 
 ```powershell
-npx --yes wrangler@4.148.0 pages project create sjtufreshman --production-branch main
+npx --yes wrangler@4.148.0 pages project create sjtufreshman --production-branch main --force
 ```
+
+Wrangler 4.148.0 otherwise delegates new project creation to Workers. The
+creation-only `--force` option selects Pages directly. Once this Pages project
+exists, regular `pages deploy` commands use it without that option.
 
 Publish the successfully prepared directory:
 
