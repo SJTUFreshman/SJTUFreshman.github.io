@@ -286,6 +286,7 @@ body.solar-system-active .solar-map-picker {
 
 body.solar-body-active .solar-map-header,
 body.solar-body-active .solar-map-footer,
+body.solar-body-active .solar-map-points,
 body.solar-body-active .solar-map-picker {
     visibility: hidden;
     opacity: 0;

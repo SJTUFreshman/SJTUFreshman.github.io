@@ -147,9 +147,99 @@ Imaging Camera 取得的三组彩色滤镜影像。
 
 海王星原色图在极点存在经度收束尖角。`scripts/prepare-celestial-polar-texture.py` 用 Pillow / NumPy 生成独立派生图：只在南北各 3.6° 范围内以平滑曲线向同纬度平均色过渡，其余像素保持原样，原文件不修改。将派生图命名为 `Derived/Neptune color map.png` 并附同名 JSON；渲染器优先读取 `Derived`，把处理范围和原图/派生图 SHA256 写入渲染记录。
 
-当前烤制规格为每颗星体 180 个方位角（间隔 2°）× 7 个俯仰角（−90° 至 +90°，间隔 30°），每张均为 3840×2160、Cycles 64 samples、WebP quality 90。十颗共 12,600 张。水平邻帧淡变，垂直选择最近的已烤视角，因此上下拖动是离散视角切换。光照固定，不表示实时观测、当前天气或当前月相。
+此前发布的 v2 烤制规格为每颗星体 180 个方位角（间隔 2°）× 7 个俯仰角（−90° 至 +90°，间隔 30°），每张均为 3840×2160、Cycles 64 samples、WebP quality 90。十颗共 12,600 张，画面本身已经裁切为局部近景；旧版使用水平邻帧淡变，垂直选择最近的已烤视角。光照固定，不表示实时观测、当前天气或当前月相。
 
-网页使用 Canvas2D 展示按需加载的图片，不创建太阳系近景的实时 3D 场景。图片解码和浏览器合成仍使用系统资源；4K 屏保留 4K 解码，小屏按实际显示像素解码，缓存数量受内存预算限制。自动旋转、暂停、鼠标/触屏拖动和方向键均由图片查看器负责。
+#### 完整球体烤制规格（v4）
+
+新版样片可使用 `scripts/render-celestial-full-sphere.slurm` 和
+`scripts/render-celestial-model.py --framing full-sphere`：输出包含整颗球体及安全边距的
+4096×4096 方形 RGBA 帧，`render*.json` 的 `presentation` 记录归一化 `sphereRect`、正交投影、每个
+俯仰角的 `spinAxes`，以及可选的独立 `clouds`、`rings` 帧路径。云层不烤进地表，播放器可以单独
+快速移动云层；`cloudShadows: not-baked-into-surface` 的含义是地表不会出现与云层运动
+不同步的固定云影，代价是此层暂不提供随云实时变化的投影阴影。`sphereRect` 描述实体球，
+不包含大气晕或星环，播放器据此按屏幕宽高比安全取景。星环使用每个俯仰角一张独立帧，
+避免表面自转造成星环变形。云层按独立、更快的经度相位移动，并叠加纬度相关风场扭曲。打包器会拒绝不透明、触碰边界或缺少完整视角网格的帧，
+并将附加层作为独立可校验资源发布。
+
+网页按需加载烘焙图片，使用轻量 WebGL 球面重投影实现相邻方位角之间的连续运动，
+不运行原始模型、材质或实时光照。地表与静态云层各使用一张纹理，方位角之间以重投影衔接；
+具有气候时间序列的云层默认只显示最近的一个时间帧，并在球面纬度方向施加局部风场扭曲，
+因此运动连续且不会把两个时刻叠成虚影。只有同时显式设置 `allowTemporalBlend: true` 和
+`interpolation: crossfade` 才会读取相邻时间帧进行预乘透明度混合。
+星空依据已有 Hipparcos 星表投影，随拖动的相机方向变化，自转时保持固定。
+GPU 不可用或上下文丢失时仍可用 Canvas2D 查看已烘焙的完整帧。
+
+近景按星体分别设置球缘位置、半径与上下偏移：岩质天体更靠近表面，太阳与气态行星
+保留较多星空，土星与天王星为星环预留空间。桌面构图以说明面板之外的实际可见区域
+为基准，面板换边时镜像取景；手机使用上方 55% 画面独立取景。面板尺寸、开合与换边
+通过事件更新布局缓存，动画帧不重复读取 DOM 布局。完整球体仍保留在资源里，近距离
+裁切会放大源纹理，不能将屏幕的 4K 画布尺寸等同于原生 4K 地表细节。
+星环层可使用独立的烘焙相机，以 `ringSphereRect` 记录同一实体球在星环帧内的位置和
+尺寸；播放器据此与地表对齐，使地表能使用更紧凑的完整球体画幅，同时保留完整星环。
+图片解码和浏览器合成仍使用系统资源；小屏按实际显示像素解码，缓存数量受内存预算限制。
+自动旋转、暂停、鼠标/触屏拖动和方向键均由图片查看器负责。
+重投影使用球面近似，烘焙光照与地形细节在切换源帧时仍可能有少量差异；俯仰仍选择最近的
+30° 烘焙视角。旧版不透明帧保留原有播放逻辑，直到新版完整清单通过验证后才切换。
+
+#### 气候时间序列（v6）
+
+地球等具有动态天气的天体可以把云层作为时间序列发布。云层路径使用固定的时间目录：
+`earth/clouds/t{time}/e{elevation}/a{azimuth}.webp`，其中 `time` 从 `000` 开始补足三位；
+每个时间点仍包含完整的俯仰×方位网格。渲染记录的 `presentation.climate` 至少包含
+`frameCount`，可同时声明 `model`、`simulation`、`timeStepSeconds`、`loopSeconds`、
+`stepHours`、`periodHours`、`timeUnit`、`timeOrigin`、`source`、`surfaceReuse`、
+`interpolation`、`windModel`、`densityModel`、`shadowMode`、`timePad` 和 `description`。其中
+`timePad` 为时间目录的数字补零宽度（`0`–`6`，默认 `3`）；`allowTemporalBlend` 和
+`localWarp` 只用于明确控制播放器行为，默认关闭跨帧混合并启用局部风场扭曲。当同时声明
+`timeStepSeconds` 与 `loopSeconds` 时，后者必须等于 `frameCount × timeStepSeconds`。
+渲染器也可以在每个分片的顶层 `climate` 记录 `timeIndex`；打包器会收集这些索引，
+补齐 `frameCount` 与 `timeIndices`，并把旧的静态云模式升级为时间目录模式。
+
+旧版 `earth/clouds/e{elevation}/a{azimuth}.webp` 清单继续有效；只有出现 `{time}` 时才
+要求 climate 元数据和全部时间帧。时间序列的每个分辨率层沿用相同的 `t{time}` 目录结构，
+发布器会把 climate 元数据、时间模式和每一帧的 SHA256 一并写入本地及托管清单。
+当前气候烘焙批处理默认覆盖 `earth` 与 `mars`（通过 `CLIMATE_BODIES` 可扩展到其他
+具有云层的天体）；没有动态云资源的天体继续使用 v5 静态云层或表面帧。
+动态云层母版默认按 2048×2048 烘焙，地表仍保留 8K 母版；打包器会按清单生成 2K、4K
+云层档位，避免为透明云层重复承担 8K 渲染和下载成本。
+
+`generate-celestial-climate.py` 的 v2.1 使用周期性纬向喷流、南北形变和密度生消生成
+视觉关键帧。地球与火星通过 `--body` 使用各自的云量、纬带配置；这是受物理现象启发的
+外观模型，不是求解大气流体方程的天气模拟。完整周期在浮点计算和量化后均返回同一帧。
+生成后需用 `climate.json` 保留模型版本、天体、帧数与时间步长；改变这些参数时使用新目录。
+
+渲染器只替换 Earth/Mars 原云图节点，保留各材质原有颜色空间及 UV。
+检查透明样片时应先进行 alpha 合成；不能把透明像素的 RGB 直接当成可见云层。
+每个时间分片的记录命名为 `render-t000-ROW-COLUMN.json`，避免被下一时间帧覆盖。
+`render-celestial-climate.slurm` 的 `CLIMATE_JOB_ROOT` 可隔离样片输出与场景，
+`CLIMATE_VIEW_FRAMES=3:0,3:45,4:90` 可先验三个视角；正式发布仍要求全部视角和时间帧。
+
+#### 多分辨率母版（v5）
+
+`scripts/render-celestial-multires-production.slurm` 使用 8192×8192、Cycles 128 samples、
+WebP quality 96 输出完整透明母版；土星和天王星的地表、星环采用独立相机范围。
+打包时使用 `--resolution-widths 2048,4096` 从同一母版生成 2K、4K 两档，保持角度、
+光影与归一化球体位置一致。每档图片、海报与来源哈希都记录在单颗资源包中，
+完整验证后才将按宽度排序的 `resolutions` 写入网页清单。
+
+播放器结合屏幕物理像素、设备像素比及近景球面放大倍率选择分辨率，先显示低分辨率
+预览，再替换为当前画面需要的清晰度。8K 图片只将当前可见区域及旋转安全边距保留为
+解码位图，避免完整 8K 位图长期占用缓存；浏览器内部解码仍可能短暂使用额外内存。
+桌面与触屏的位图缓存预算分别为 256 MiB、64 MiB，云层、星环与替换中的图片均计入。
+显示像素需求超过最高档时仍受母版纹理和烘焙分辨率限制。
+
+分批提交受集群任务数限制时，使用
+`scripts/complete-celestial-multires-production.py` 等待已有数组成功，再提交剩余分片；
+初始 4 片、后续 16 片、剩余 20 片和打包 10 片必须逐片成功才进入下一阶段。
+已手动提交的剩余数组用 `--remaining-job JOB_ID` 接管；分批或替换个别分片时可重复指定
+`--remaining-job JOB_ID:18,19,21-29,31-38 --remaining-job REPLACEMENT_JOB_ID:39`。
+接管记录中的索引不得重叠；被替换且未接管的取消分片不阻塞其他分片。已有打包数组可用
+`--package-job JOB_ID` 接管。任务号、预期索引和连接错误均保存在 `--status` 指定的文件中，
+同一状态文件同时只允许一个接续进程；进程退出后锁自动释放。
+查询或同步脚本时遇到 SSH 断线会持续重试。提交只对明确的 `AssocMaxSubmitJobLimit` 重试；
+若提交过程中断线或返回不明，先保留待确认记录，查询集群确认任务号后用接管参数恢复，
+避免重复提交。前序分片已逐片验证完成后直接提交下一阶段，不引用可能已从调度器清除的依赖。
+该程序完成时状态为 `package-complete`，后续仍需全量清单校验、资源安装、真实浏览器验收与发布。
 
 ### 本地生成
 
@@ -161,6 +251,25 @@ Imaging Camera 取得的三组彩色滤镜影像。
 
 可用一次性收取程序替代手动传输：`python scripts/sync-celestial-atlas.py --job JOB_ID --remote-root REMOTE_BAKED_DIRECTORY --staging .render-work/celestial-delivery --browser-check`。程序等待这一个 20 分片作业，按星体取回完成的真实帧、打包并校验；全部就绪后发布本地 manifest 并执行真实资源浏览器检查，完成后退出。阶段和错误写入 staging 中的 `status.json`。浏览器检查需要现有 Playwright 环境（可通过 `PLAYWRIGHT_MODULE_PATH` 指定），不使用测试图片替代缺失帧。网络中断或渲染失败会保留已取回资源，修复后可用同一命令继续。
 
+v4 正式作业使用 `scripts/render-celestial-full-sphere-production.slurm`：40 个分片，
+每颗四片，最多 8 卡并行，180 个方位角 × 7 个俯仰角，64 samples、WebP quality 94。
+完整产物包括 12,600 张地表、地球/火星的 2,520 张云层以及土星/天王星的 14 张星环，
+共 15,134 张，另加海报与元数据。云层没有再次有损压缩。
+
+集群限制同时提交的任务数量时，可先提交 `--array=0-19%8`，再用
+`scripts/complete-celestial-production.py --initial-job JOB_ID --remote-root ATLAS_ROOT --blender BLENDER_BIN --staging STAGING --output OUTPUT`
+接续剩余 20–39 分片。程序等待前批成功完成，随后提交后批和计算节点上的全量解码打包任务，
+最后取回并逐文件校验哈希。状态记录在 `STAGING/production-status.json`；同一命令可以恢复，
+不得同时启动多个接续进程。失败时保留状态和已有帧，不发布清单。
+此流程仅准备本地资源，不能替代实际网页验收、资源托管和 GitHub Pages 发布。
+
+直接同步已完成的多批 v4 作业可使用重复的 `--job`，并指定 `--layout full-sphere`
+（默认 4096×4096、每颗四分片）。`--verified-remote --remote-archive-root DIRECTORY`
+仅用于已经在计算节点完整解码验证的包。
+如果某个尚未启动的分片被取消并在另一数组接续，可用
+`--replacement-task 189070_39:189096_39` 明确声明相同分片的替代关系，并用 `--job`
+包含两个数组。同步器仅在替代片有效时排除原取消片，仍要求最终全部分片成功。
+
 如果已在服务器计算节点完成上述完整打包和解码校验，可连同 `package.json`、海报和 `render-metadata/` 一起取回。用 `python scripts/package-celestial-atlas.py --input assets/celestial/baked --output assets/celestial/baked --verify-only --body earth --hash-only` 复核单颗；全部取回后，把 `--body earth` 换成 `--manifest` 发布入口。此模式省去重复像素解码，仍检查文件格式、尺寸、完整视角网格、全部文件字节的 SHA256、海报及渲染记录；只用于已在可信环境完整验证的资源包。默认验证仍会完整解码。
 
 生成的完整 `assets/celestial/baked/` 已被 Git 忽略。此次 12,600 张视角帧实测合计 8,627,301,634 字节（8.627 GB / 8.035 GiB，另有海报与校验记录），超过 GitHub Pages 的 1 GB 发布上限。
@@ -168,6 +277,12 @@ Imaging Camera 取得的三组彩色滤镜影像。
 ### 外置资源托管
 
 完整帧通过独立资源仓库的 GitHub Releases 分发到静态资源服务器；网站仓库只保留 `assets/celestial/hosted/manifest.json` 和十张海报。资源服务器使用 HTTPS、允许页面跨域读取，并为每次发布分配独立版本目录；同一版本的帧禁止覆盖，可返回 `Cache-Control: public, max-age=31536000, immutable`。
+
+`scripts/manage-celestial-release.py prepare` 会将超过 1900 MiB 的单颗归档拆为
+`.tar.part001` 等文件，使用 schema 2 发布清单记录每片和完整归档的 SHA256。
+上传时包含清单所列全部分片；安装器逐片验证并流式读取，不需要额外拼接出整包。
+旧版 schema 1 单文件归档仍可安装。腾讯云部署操作只限 `/data/life-celestial-assets`，
+不得修改 TeachMaster 或其他站点、服务和配置。
 
 资源上传并可用后，使用真实 HTTPS 版本目录导出网站入口：
 
@@ -182,6 +297,18 @@ python scripts/package-celestial-atlas.py --input assets/celestial/baked --outpu
 ### 验证
 
 `python scripts/package-celestial-atlas-tests.py` 验证打包失败处理及完整网格；`node scripts/validate-baked-closeup.cjs` 验证查看器角度、4K 解码、缓存与请求竞态。`scripts/validate-star-map.cjs --serve all --baked-fixtures` 是明确标记的交互测试素材；正式图像验收应省略该参数，使用已经完成打包的真实帧。
+
+`node scripts/validate-celestial-compositor.cjs` 验证 GPU 资源与上下文恢复，
+`node scripts/validate-celestial-starfield.cjs` 验证星表投影，
+`python scripts/validate-celestial-sync.py`、`python scripts/validate-celestial-production.py`
+和 `python scripts/validate-celestial-multires-production.py`
+验证分批作业接续。`node scripts/validate-celestial-gpu-browser.cjs` 使用真实 Blender 样片
+检查源图像素、云层透明度、各画幅、源帧切换和 Chrome GPU；报告保留实际渲染器及帧耗时。
+样片测试不等同于 15,134 张正式资源的完整验收，也不保证所有设备达到固定帧率。
+
+多分辨率裁切验收使用 `node scripts/validate-celestial-multires-browser.cjs`，覆盖真实 8K
+样片、4K 桌面、面板换边和移动端，并比较裁切结果与完整源图；它只读取 `.render-work`
+中的评审样片，不会把样片当作正式发布资源。
 
 托管资源就绪后，运行 `node scripts/validate-star-map.cjs --serve all --hosted`，通过本地网页实际跨域读取线上帧，检查交互、4K 图像、手机和无 WebGL 场景。此模式不允许同时使用测试素材。
 

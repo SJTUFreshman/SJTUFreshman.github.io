@@ -107,6 +107,222 @@ class CelestialReleaseTests(unittest.TestCase):
         second = self.prepare(self.root / 'other-release')
         self.assertEqual(first, second)
 
+    def test_multipart_assets_roundtrip_when_archive_exceeds_limit(self):
+        with contextlib.redirect_stdout(io.StringIO()):
+            release = RELEASE.prepare(self.source, self.output, self.version, max_asset_bytes=997)
+        self.assertEqual(release['schema'], 2)
+        self.assertTrue(all(len(asset.get('parts', [])) > 1 for asset in release['assets']))
+        self.assertFalse(any((self.output / asset['name']).exists() for asset in release['assets']))
+        destination = self.install()
+        self.assertTrue((destination / 'public/earth/e0/a001.webp').is_file())
+        self.assertTrue((destination / 'private/moon/package.json').is_file())
+
+    def test_multipart_tampering_is_rejected_before_extraction(self):
+        with contextlib.redirect_stdout(io.StringIO()):
+            release = RELEASE.prepare(self.source, self.output, self.version, max_asset_bytes=997)
+        part = release['assets'][0]['parts'][1]
+        filename = self.output / part['name']
+        data = filename.read_bytes()
+        filename.write_bytes(bytes([data[0] ^ 1]) + data[1:])
+        with self.assertRaisesRegex(ValueError, 'asset checksum'):
+            self.install()
+        self.assert_not_installed()
+
+    def test_multipart_missing_or_reordered_parts_are_rejected(self):
+        with contextlib.redirect_stdout(io.StringIO()):
+            release = RELEASE.prepare(self.source, self.output, self.version, max_asset_bytes=997)
+        parts = release['assets'][0]['parts']
+        parts[0], parts[1] = parts[1], parts[0]
+        with self.assertRaisesRegex(ValueError, 'reordered'):
+            RELEASE.validate_release(release)
+        parts[0], parts[1] = parts[1], parts[0]
+        (self.output / parts[0]['name']).unlink()
+        with self.assertRaisesRegex(ValueError, 'Missing regular file'):
+            self.install()
+        self.assert_not_installed()
+
+    def write_source_checksums(self):
+        records = {path.relative_to(self.source).as_posix(): RELEASE.checksum(path)
+                   for path in self.source.rglob('*') if path.is_file() and path.name != 'SHA256SUMS'}
+        (self.source / 'SHA256SUMS').write_text('\n'.join(f'{digest}  {name}' for name, digest in sorted(records.items())) + '\n')
+
+    def add_cloud_layer(self):
+        package_path = self.source / 'earth/package.json'
+        package = RELEASE.read_json(package_path)
+        cloud_frames = []
+        for column in range(2):
+            relative = f'earth/clouds/e0/a{column:03d}.webp'
+            destination = self.source / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(f'validated-transparent-cloud:{column}'.encode())
+            cloud_frames.append({'path': relative, 'sha256': RELEASE.checksum(destination), 'bytes': destination.stat().st_size})
+        cloud_poster = 'earth/clouds/poster.webp'
+        (self.source / cloud_poster).write_bytes((self.source / cloud_frames[0]['path']).read_bytes())
+        package['presentation'] = {'framing': 'full-sphere', 'transparent': True,
+            'cloudFramePattern': 'earth/clouds/e{elevation}/a{azimuth}.webp', 'cloudPoster': cloud_poster}
+        package['layers'] = {'cloud': {'frames': cloud_frames, 'poster': {'path': cloud_poster,
+            'source': cloud_frames[0]['path'], 'sha256': cloud_frames[0]['sha256']}}}
+        RELEASE.write_json(package_path, package)
+        self.write_source_checksums()
+
+    def test_square_grid_and_cloud_layer_roundtrip(self):
+        for body in self.bodies:
+            package_path = self.source / body / 'package.json'
+            package = RELEASE.read_json(package_path)
+            package.update({'width': 4096, 'height': 4096})
+            RELEASE.write_json(package_path, package)
+        self.add_cloud_layer()
+        release = self.prepare()
+        self.assertEqual((release['grid']['width'], release['grid']['height']), (4096, 4096))
+        destination = self.install()
+        self.assertEqual(self.install(), destination)
+        self.assertEqual((destination / 'public/earth/clouds/e0/a001.webp').read_bytes(), (self.source / 'earth/clouds/e0/a001.webp').read_bytes())
+        self.assertEqual(len(list((destination / 'public').rglob('*.webp'))), 9)
+
+    def test_cloud_layer_requires_complete_records_and_safe_pattern(self):
+        self.add_cloud_layer()
+        package = RELEASE.read_json(self.source / 'earth/package.json')
+        package['presentation']['cloudFramePattern'] = '../other/e{elevation}/a{azimuth}.webp'
+        with self.assertRaisesRegex(ValueError, 'Unexpected cloud frame pattern'):
+            RELEASE.package_records(package, 'earth')
+        package['presentation']['cloudFramePattern'] = 'earth/clouds/e{elevation}/a{azimuth}.webp'
+        package['layers']['cloud']['frames'].pop()
+        with self.assertRaisesRegex(ValueError, 'Incomplete cloud frame records'):
+            RELEASE.package_records(package, 'earth')
+
+    def test_timed_climate_cloud_layer_roundtrip(self):
+        self.add_cloud_layer()
+        package_path = self.source / 'earth/package.json'
+        package = RELEASE.read_json(package_path)
+        for frame in package['layers']['cloud']['frames']:
+            (self.source / frame['path']).unlink()
+        timed_frames = []
+        for time in range(2):
+            for column in range(2):
+                relative = f'earth/clouds/t{time:03d}/e0/a{column:03d}.webp'
+                path = self.source / relative
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(f'validated-transparent-climate-cloud:{time}:{column}'.encode())
+                timed_frames.append({'path': relative, 'sha256': RELEASE.checksum(path), 'bytes': path.stat().st_size})
+        cloud_poster = 'earth/clouds/poster.webp'
+        (self.source / cloud_poster).write_bytes((self.source / timed_frames[0]['path']).read_bytes())
+        package['presentation'].update({
+            'cloudFramePattern': 'earth/clouds/t{time}/e{elevation}/a{azimuth}.webp',
+            'climate': {'model': 'earth-weather-v6', 'frameCount': 2, 'timeStepSeconds': 3600, 'loopSeconds': 7200}
+        })
+        package['layers']['cloud']['frames'] = timed_frames
+        package['layers']['cloud']['poster'].update({'source': timed_frames[0]['path'], 'sha256': timed_frames[0]['sha256']})
+        RELEASE.write_json(package_path, package)
+        self.write_source_checksums()
+        self.prepare()
+        destination = self.install()
+        self.assertEqual((destination / 'public/earth/clouds/t001/e0/a001.webp').read_bytes(),
+                         (self.source / 'earth/clouds/t001/e0/a001.webp').read_bytes())
+
+    def test_climate_metadata_cannot_publish_static_cloud_pattern(self):
+        self.add_cloud_layer()
+        package_path = self.source / 'earth/package.json'
+        package = RELEASE.read_json(package_path)
+        package['presentation']['climate'] = {'model': 'earth-weather-v6', 'frameCount': 2,
+                                              'timeIndices': [0, 1]}
+        RELEASE.write_json(package_path, package)
+        with self.assertRaisesRegex(ValueError, 'timed cloud'):
+            RELEASE.package_records(package, 'earth')
+
+    def add_resolutions(self):
+        self.add_cloud_layer()
+        package_path = self.source / 'earth/package.json'
+        package = RELEASE.read_json(package_path)
+        resolutions = []
+        for width in (960, 1920):
+            height = round(self.grid['height'] * width / self.grid['width'])
+            resolution = {'id': f'{width}px', 'width': width, 'height': height, 'layers': {}}
+            for layer, master in [(None, package), *package['layers'].items()]:
+                entry = resolution if layer is None else {'width': width, 'height': height}
+                frames = []
+                for frame in master['frames']:
+                    relative = frame['path'].replace('earth/', f'earth/resolutions/{width}/', 1)
+                    filename = self.source / relative
+                    filename.parent.mkdir(parents=True, exist_ok=True)
+                    filename.write_bytes(f'reduced:{width}:{frame["path"]}'.encode())
+                    frames.append({'path': relative, 'sha256': RELEASE.checksum(filename),
+                                   'bytes': filename.stat().st_size, 'source': frame['path'],
+                                   'sourceSha256': frame['sha256']})
+                entry['frames'] = frames
+                poster_path = master['poster']['path'].replace('earth/', f'earth/resolutions/{width}/', 1)
+                (self.source / poster_path).write_bytes((self.source / frames[0]['path']).read_bytes())
+                entry['poster'] = {'path': poster_path, 'source': frames[0]['path'], 'sha256': frames[0]['sha256']}
+                if layer:
+                    resolution['layers'][layer] = entry
+            resolutions.append(resolution)
+        package['resolutions'] = resolutions
+        RELEASE.write_json(package_path, package)
+        self.write_source_checksums()
+        return package
+
+    def test_resolution_tiers_roundtrip_with_clouds_and_master_provenance(self):
+        self.add_resolutions()
+        self.prepare()
+        destination = self.install()
+        for width in (960, 1920):
+            for layer in ('', 'clouds/'):
+                relative = f'earth/resolutions/{width}/{layer}e0/a001.webp'
+                self.assertEqual((destination / 'public' / relative).read_bytes(), (self.source / relative).read_bytes())
+        self.assertEqual(self.install(), destination)
+
+    def test_resolution_tiers_reject_incomplete_changed_source_and_unsafe_paths(self):
+        package = self.add_resolutions()
+        original = json.dumps(package)
+        mutations = [
+            lambda value: value['resolutions'][0]['frames'].pop(),
+            lambda value: value['resolutions'][0]['frames'][0].update(sourceSha256='0' * 64),
+            lambda value: value['resolutions'][0]['frames'][0].update(path='../outside.webp'),
+            lambda value: value['resolutions'].reverse(),
+            lambda value: value['resolutions'][0]['layers'].clear(),
+            lambda value: value.update(resolutions={})
+        ]
+        for mutate in mutations:
+            candidate = json.loads(original)
+            mutate(candidate)
+            with self.assertRaises(ValueError):
+                RELEASE.package_records(candidate, 'earth')
+
+    def test_resolution_tampering_is_rejected_during_installation(self):
+        self.add_resolutions()
+        self.prepare()
+
+        def tamper(entries):
+            for index, (member, data) in enumerate(entries):
+                if member.name == 'earth/resolutions/1920/clouds/e0/a001.webp':
+                    entries[index] = (member, bytes([data[0] ^ 1]) + data[1:])
+
+        self.rewrite_archive('earth', tamper)
+        with self.assertRaisesRegex(ValueError, 'checksum or byte count'):
+            self.install()
+        self.assert_not_installed()
+
+    def test_mismatched_body_grid_is_not_published(self):
+        package_path = self.source / 'moon/package.json'
+        package = RELEASE.read_json(package_path)
+        package['width'] = 4096
+        RELEASE.write_json(package_path, package)
+        self.write_source_checksums()
+        with self.assertRaisesRegex(ValueError, 'Package grid differs from the release'):
+            self.prepare()
+        self.assertFalse((self.output / 'release.json').exists())
+
+    def test_cloud_tampering_rejected_even_with_updated_tar_checksum(self):
+        self.add_cloud_layer()
+        self.prepare()
+        def tamper(entries):
+            for index, (member, data) in enumerate(entries):
+                if member.name == 'earth/clouds/e0/a001.webp':
+                    entries[index] = (member, bytes([data[0] ^ 1]) + data[1:])
+        self.rewrite_archive('earth', tamper)
+        with self.assertRaisesRegex(ValueError, 'checksum or byte count'):
+            self.install()
+        self.assert_not_installed()
+
     def test_corrupt_archive_rejected_before_installation(self):
         release = self.prepare()
         with (self.output / release['assets'][0]['name']).open('ab') as archive:
