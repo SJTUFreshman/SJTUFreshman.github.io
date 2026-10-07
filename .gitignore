@@ -1,3 +1,4 @@
 /.render-work/
 /assets/celestial/baked/
 __pycache__/
+/.wrangler/

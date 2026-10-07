@@ -1,0 +1,3 @@
+name = "sjtufreshman"
+pages_build_output_dir = ".render-work/cloudflare-pages/site"
+compatibility_date = "2026-10-07"
