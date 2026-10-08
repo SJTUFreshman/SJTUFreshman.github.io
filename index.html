@@ -9,6 +9,14 @@
     <title>Runde Yang</title>
     <script>
     (function () {
+        if (!/\.github\.io$/i.test(window.location.hostname)) return;
+        const target = new URL(window.location.href);
+        target.hostname = 'sjtufreshman.pages.dev';
+        window.location.replace(target.href);
+    })();
+    </script>
+    <script>
+    (function () {
         try {
             const storageKey = 'runde:route-transition:v1';
             const raw = sessionStorage.getItem(storageKey);

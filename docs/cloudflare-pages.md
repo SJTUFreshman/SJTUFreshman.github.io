@@ -5,6 +5,13 @@ The Pages deployment contains the complete public website and the existing
 from the same origin as the website. Tencent's existing asset service remains
 available, and the tracked hosted manifest still supports the GitHub Pages site.
 
+The GitHub repository remains the source repository. Its GitHub Pages entry
+points now redirect visitors from `sjtufreshman.github.io` to
+`https://sjtufreshman.pages.dev`; the redirect is enabled only on a `*.github.io`
+hostname, so the same tracked HTML remains safe to stage for Pages. Cloudflare
+Direct Upload is the production publisher; pushing GitHub commits does not by
+itself create a new Pages deployment.
+
 ## Build the public directory
 
 Run from the repository root with Python 3.10+ and the complete local atlas in
