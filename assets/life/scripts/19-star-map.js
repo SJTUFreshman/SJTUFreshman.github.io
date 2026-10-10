@@ -10,6 +10,7 @@ class LifeStarMap {
         this.target = { yaw: this.yaw, pitch: this.pitch, distance: this.distance, center: this.center.slice() };
         this.fov = 52 * DEG;
         this.pointers = new Map();
+        this.wheelOrbitUntil = 0;
         this.groups = new Map();
         this.flight = null;
         this.lastFrame = 0;
@@ -620,6 +621,7 @@ class LifeStarMap {
         }
         this.pointers.clear();
         this.gesture = null;
+        this.wheelOrbitUntil = 0;
         dom.body.classList.remove('map-dragging');
         state.rightDown = false;
     }
@@ -643,6 +645,28 @@ class LifeStarMap {
             this.distance = this.target.distance;
         }
         resizeMaps();
+    }
+
+    handleWheel(event) {
+        if (!this.canMove()) return;
+        event.preventDefault();
+        if (!event.deltaX && !event.deltaY) return;
+        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
+        if (event.ctrlKey || event.metaKey) {
+            this.wheelOrbitUntil = 0;
+            this.zoom(event.deltaY * unit);
+            return;
+        }
+        const now = performance.now();
+        const continuous = event.deltaMode === 0 && (now < this.wheelOrbitUntil || event.deltaX !== 0
+            || Math.abs(event.deltaY) < 50 || !Number.isInteger(event.deltaY));
+        if (continuous) {
+            this.wheelOrbitUntil = now + 200;
+            this.orbit(event.deltaX, event.deltaY);
+        } else {
+            this.wheelOrbitUntil = 0;
+            this.zoom(event.deltaY * unit);
+        }
     }
 
     bindInputs() {
@@ -706,12 +730,7 @@ class LifeStarMap {
         dom.world.addEventListener('pointerup', release);
         dom.world.addEventListener('pointercancel', release);
         dom.world.addEventListener('lostpointercapture', release);
-        const wheel = event => {
-            if (!this.canMove()) return;
-            event.preventDefault();
-            const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
-            this.zoom(delta);
-        };
+        const wheel = event => this.handleWheel(event);
         dom.world.addEventListener('wheel', wheel, { passive: false });
         dom.portalNav.addEventListener('wheel', wheel, { passive: false });
         document.getElementById('mapEntities').addEventListener('wheel', wheel, { passive: false });
@@ -776,9 +795,9 @@ class LifeStarMap {
         if (this.solarSystem?.active) { this.solarSystem.updateCopy(); return; }
         if (this.deepSky?.active) { this.deepSky.updateCopy(); return; }
         const copies = {
-            en: { orbit: 'Right drag · orbit', pan: 'Left drag · pan', zoom: 'Scroll · approach', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'An interpreted star map. Constellation shapes and stellar colours follow Hipparcos; distances are composed for exploration.', scale: 'NEAR / FAR' },
-            'zh-CN': { orbit: '右键拖动 · 旋转', pan: '左键拖动 · 平移', zoom: '滚轮 · 拉近与远离', touch: '单指旋转 / 双指缩放与平移', select: '选择一个星座', reset: '回到全景', home: '返回主页', closer: '拉近星图', farther: '拉远星图', overview: '局部星图', detail: '星座', flight: '正在靠近', note: '这是一幅经过编排的星图。星座形状与恒星颜色参考 Hipparcos 星表，展示距离经过压缩，方便探索。', scale: '近 / 远' },
-            'zh-TW': { orbit: '右鍵拖動 · 旋轉', pan: '左鍵拖動 · 平移', zoom: '滾輪 · 拉近與遠離', touch: '單指旋轉 / 雙指縮放與平移', select: '選擇一個星座', reset: '回到全景', home: '返回主頁', closer: '拉近星圖', farther: '拉遠星圖', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '這是一幅經過編排的星圖。星座形狀與恆星顏色參考 Hipparcos 星表，展示距離經過壓縮，方便探索。', scale: '近 / 遠' }
+            en: { orbit: 'Right drag / Two-finger slide · orbit', pan: 'Left drag · pan', zoom: 'Mouse wheel / Pinch · zoom', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'An interpreted star map. Constellation shapes and stellar colours follow Hipparcos; distances are composed for exploration.', scale: 'NEAR / FAR' },
+            'zh-CN': { orbit: '右键拖动 / 触控板双指滑动 · 旋转', pan: '左键拖动 · 平移', zoom: '滚轮 / 双指捏合 · 缩放', touch: '单指旋转 / 双指缩放与平移', select: '选择一个星座', reset: '回到全景', home: '返回主页', closer: '拉近星图', farther: '拉远星图', overview: '局部星图', detail: '星座', flight: '正在靠近', note: '这是一幅经过编排的星图。星座形状与恒星颜色参考 Hipparcos 星表，展示距离经过压缩，方便探索。', scale: '近 / 远' },
+            'zh-TW': { orbit: '右鍵拖動 / 觸控板雙指滑動 · 旋轉', pan: '左鍵拖動 · 平移', zoom: '滾輪 / 雙指捏合 · 縮放', touch: '單指旋轉 / 雙指縮放與平移', select: '選擇一個星座', reset: '回到全景', home: '返回主頁', closer: '拉近星圖', farther: '拉遠星圖', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '這是一幅經過編排的星圖。星座形狀與恆星顏色參考 Hipparcos 星表，展示距離經過壓縮，方便探索。', scale: '近 / 遠' }
         };
         const copy = copies[state.currentLang] || copies.en;
         document.querySelectorAll('[data-map-copy]').forEach(element => { element.textContent = copy[element.dataset.mapCopy] || ''; });

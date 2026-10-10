@@ -617,7 +617,10 @@ def replace_code_region(text: str, name: str, replacement: str, fallback_pattern
 
 def render_home_i18n(content: dict[str, Any]) -> str:
     home = content["home"]
-    i18n = {lang: dict(home["labels"][lang]) for lang in LANGS}
+    i18n = {
+        lang: {key: value for key, value in home["labels"][lang].items() if key not in {"nav_notes", "title_notes"}}
+        for lang in LANGS
+    }
 
     for lang in LANGS:
         i18n[lang]["hero_name"] = lang_value(home["hero"]["name_html"], lang)
@@ -626,7 +629,6 @@ def render_home_i18n(content: dict[str, Any]) -> str:
         i18n[lang]["hero_location"] = lang_value(home["hero"]["location"], lang)
         i18n[lang]["life_card_title"] = lang_value(home["life_card"]["title"], lang)
         i18n[lang]["life_card_desc"] = lang_value(home["life_card"]["desc"], lang)
-        i18n[lang]["notes_empty"] = lang_value(home["notes_empty"], lang)
 
     for index, item in enumerate(home["news"]):
         key = key_for("news", item, index)
@@ -876,31 +878,6 @@ def render_home_gallery(content: dict[str, Any]) -> str:
             </div>
             <div class="life-card-arrow"><i class="fas fa-long-arrow-alt-right"></i> <span class="en-only" style="font-size:0.8rem;letter-spacing:0.05em;">EXPLORE</span></div>
         </a>
-    </section>"""
-
-
-def render_notes(content: dict[str, Any]) -> str:
-    notes = content["home"].get("notes", [])
-    if notes:
-        body = "\n".join(
-            f"""            <a href="{esc(item.get("href", "#"))}" class="note-item" target="_blank">
-                <span class="note-icon"><i class="{esc(item.get("icon", "far fa-file-pdf"))}"></i></span>
-                <div class="note-info">
-                    <div class="note-title">{esc(item.get("title", ""))}</div>
-                    <div class="note-meta">{esc(item.get("meta", ""))}</div>
-                </div>
-                <span class="note-arrow"><i class="fas fa-chevron-right"></i></span>
-            </a>"""
-            for item in notes
-        )
-    else:
-        body = '            <div class="notes-empty" data-key="notes_empty">Notes coming soon...</div>'
-    return """    <!-- ===== Notes ===== -->
-    <section id="notes" class="fade-in">
-        <div class="section-title" data-key="title_notes">Notes</div>
-        <div class="notes-grid" id="notesGrid">
-""" + body + """
-        </div>
     </section>"""
 
 
@@ -1209,7 +1186,6 @@ def render_home(root: Path, content: dict[str, Any], write: bool) -> str:
     text = replace_region(text, "HOME_PUBLICATIONS", render_publications(content), r'<!-- ===== Publications ===== -->\s*<section id="publications".*?</section>')
     text = replace_region(text, "HOME_PROJECTS", render_projects(content), r'<!-- ===== Projects ===== -->\s*<section id="projects".*?</section>')
     text = replace_region(text, "HOME_GALLERY", render_home_gallery(content), r'<!-- ===== Gallery ===== -->\s*<section id="gallery".*?</section>')
-    text = replace_region(text, "HOME_NOTES", render_notes(content), r'<!-- ===== Notes ===== -->\s*<section id="notes".*?</section>')
     text = replace_region(text, "HOME_FOOTER", f'<footer class="footer">\n    {content["site"]["footer"]}\n</footer>', r'<footer class="footer">.*?</footer>')
     text = replace_code_region(text, "HOME_I18N", render_home_i18n(content), r'/\* ===== i18n Content ===== \*/\s*const i18n = \{.*?\};')
     text = replace_code_region(text, "HOME_CITATIONS", render_citations(content), r'/\* ===== Citations ===== \*/\s*const citations = \{.*?\};')

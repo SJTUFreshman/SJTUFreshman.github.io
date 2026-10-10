@@ -929,55 +929,6 @@
             .life-card-star.three { right: 122px; }
         }
 
-        /* ========== Notes Section ========== */
-        .notes-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-        .note-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 16px;
-            background: var(--bg-alt);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            transition: all var(--transition);
-            cursor: pointer;
-        }
-        .note-item:hover {
-            border-color: #ccc;
-            box-shadow: var(--shadow);
-        }
-        .note-icon {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            width: 20px;
-            text-align: center;
-        }
-        .note-info { flex: 1; }
-        .note-title {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text);
-        }
-        .note-meta {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            font-family: var(--font-en);
-        }
-        .note-arrow {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-        .notes-empty {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            font-style: italic;
-            padding: 20px 0;
-        }
-
         /* ========== Visitor Map ========== */
         .visitor-section {
             text-align: center;
@@ -1091,7 +1042,6 @@
         .section-title,
         .news-date,
         .pub-btn,
-        .note-meta,
         .footer {
             font-family: var(--font-ui);
         }
@@ -1113,7 +1063,6 @@
             <a href="#news" class="nav-link" data-key="nav_news">News</a>
             <a href="#publications" class="nav-link" data-key="nav_pubs">Publications</a>
             <a href="#projects" class="nav-link" data-key="nav_projects">Projects</a>
-            <a href="#notes" class="nav-link" data-key="nav_notes">Notes</a>
             <div class="nav-lang">
                 <button class="lang-btn active" onclick="setLang('en')">EN</button>
                 <button class="lang-btn" onclick="setLang('zh-CN')">简</button>
@@ -1327,14 +1276,6 @@
         </a>
     </section>
 
-    <!-- ===== Notes ===== -->
-    <section id="notes" class="fade-in">
-        <div class="section-title" data-key="title_notes">Notes</div>
-        <div class="notes-grid" id="notesGrid">
-            <div class="notes-empty" data-key="notes_empty">Notes coming soon...</div>
-        </div>
-    </section>
-
     <!-- ===== Visitor Map ===== -->
     <div class="visitor-section">
         <div class="clustrmaps-wrap"></div>
@@ -1355,11 +1296,9 @@ const i18n = {
         "nav_news": "News",
         "nav_pubs": "Publications",
         "nav_projects": "Projects",
-        "nav_notes": "Notes",
         "title_news": "News",
         "title_pubs": "Publications",
         "title_projects": "Projects",
-        "title_notes": "Notes",
         "weather_loc": "Shanghai",
         "hero_name": "Runde Yang <span style=\"font-weight:400;font-size:0.65em;color:var(--text-secondary);\">楊潤德</span>",
         "hero_title": "Undergraduate · School of AI, Shanghai Jiao Tong University",
@@ -1368,7 +1307,6 @@ const i18n = {
         "life_card_title": "Beyond Research",
         "life_card_desc": "Footprints map, bookshelf, thoughts, and more.",
         "life_card_cta": "Enter the night sky",
-        "notes_empty": "Notes coming soon...",
         "news_1": "25-26 Spring Finals finished.",
         "proj_appcopilot": "A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.",
         "proj_teachmaster": "A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos."
@@ -1378,11 +1316,9 @@ const i18n = {
         "nav_news": "动态",
         "nav_pubs": "论文",
         "nav_projects": "项目",
-        "nav_notes": "笔记",
         "title_news": "动态",
         "title_pubs": "发表论文",
         "title_projects": "项目经历",
-        "title_notes": "笔记",
         "weather_loc": "上海",
         "hero_name": "杨润德",
         "hero_title": "上海交通大学 · 人工智能学院 本科生",
@@ -1391,7 +1327,6 @@ const i18n = {
         "life_card_title": "科研之外",
         "life_card_desc": "足迹地图、书影、随笔，以及更多。",
         "life_card_cta": "进入星空",
-        "notes_empty": "笔记即将上线……",
         "news_1": "期末终验考完啦！",
         "proj_appcopilot": "一个多模态多智能体设备端助手，探索工具使用、规划和鲁棒的 UI 定位。",
         "proj_teachmaster": "一个多智能体框架，使用代码作为中间语义表示，自动生成结构化的教育视频。"
@@ -1401,11 +1336,9 @@ const i18n = {
         "nav_news": "動態",
         "nav_pubs": "論文",
         "nav_projects": "項目",
-        "nav_notes": "筆記",
         "title_news": "動態",
         "title_pubs": "發表論文",
         "title_projects": "項目經歷",
-        "title_notes": "筆記",
         "weather_loc": "上海",
         "hero_name": "楊潤德",
         "hero_title": "上海交通大學 · 人工智能學院 本科生",
@@ -1414,7 +1347,6 @@ const i18n = {
         "life_card_title": "科研之外",
         "life_card_desc": "足跡地圖、書影、隨筆，以及更多。",
         "life_card_cta": "進入星空",
-        "notes_empty": "筆記即將上線……",
         "news_1": "期末终于考完啦！",
         "proj_appcopilot": "一個多模態多智能體設備端助手，探索工具使用、規劃和魯棒的 UI 定位。",
         "proj_teachmaster": "一個多智能體框架，使用代碼作為中間語義表示，自動生成結構化的教育視頻。"

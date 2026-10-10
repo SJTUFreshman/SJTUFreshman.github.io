@@ -24,8 +24,8 @@ const launchOptions = {
 const errors = [];
 const checks = [];
 const selectedGroup = process.argv.slice(3).find(argument => !argument.startsWith('--')) || 'all';
-assert(['all', 'desktop', 'mobile', 'fallback', 'reduced-motion'].includes(selectedGroup),
-    'Test group must be all, desktop, mobile, fallback, or reduced-motion');
+assert(['all', 'input', 'desktop', 'mobile', 'fallback', 'reduced-motion'].includes(selectedGroup),
+    'Test group must be all, input, desktop, mobile, fallback, or reduced-motion');
 
 function check(condition, message) {
     assert(condition, message);
@@ -155,6 +155,89 @@ async function reset(page) {
 
 async function screenshot(page, name) {
     await page.screenshot({ path: path.join(outputDirectory, name + (useBakedFixtures ? '-fixture' : '') + '.png') });
+}
+
+async function wheelInputChecks(page, selector, solar = false) {
+    const samples = await page.evaluate(({ selector, solar }) => {
+        const map = window.lifeStarMap;
+        const view = solar ? map.solarSystem : map;
+        const surface = document.querySelector(selector);
+        const read = () => JSON.parse(JSON.stringify(view.target));
+        const dispatch = options => {
+            const event = new WheelEvent('wheel', { bubbles: true, cancelable: true, ...options });
+            surface.dispatchEvent(event);
+            return { ...read(), prevented: event.defaultPrevented };
+        };
+        map.clearInput();
+        const before = read();
+        const vertical = dispatch({ deltaY: 12 });
+        const horizontal = dispatch({ deltaX: 20 });
+        const momentum = dispatch({ deltaY: 120 });
+        const pinchIn = dispatch({ deltaY: -35, ctrlKey: true });
+        const pinchOut = dispatch({ deltaY: 20, metaKey: true });
+        const fractional = dispatch({ deltaX: 2.5, deltaY: 1.5 });
+        map.clearInput();
+        const wheel = dispatch({ deltaY: 100 });
+        const lines = dispatch({ deltaY: -3, deltaMode: 1 });
+        const pages = dispatch({ deltaY: -1, deltaMode: 2 });
+        const modalOpen = state.modalOpen;
+        state.modalOpen = true;
+        const blockedSlide = dispatch({ deltaX: 15, deltaY: 10 });
+        const blockedPinch = dispatch({ deltaY: -20, ctrlKey: true });
+        state.modalOpen = modalOpen;
+        map.clearInput();
+        return { before, vertical, horizontal, momentum, pinchIn, pinchOut, fractional, wheel, lines, pages, blockedSlide, blockedPinch };
+    }, { selector, solar });
+    const label = `${solar ? 'Solar System' : 'Star map'} ${selector}`;
+    const sameAngles = (first, second) => first.yaw === second.yaw && first.pitch === second.pitch;
+    check(samples.vertical.pitch > samples.before.pitch && samples.vertical.yaw === samples.before.yaw
+        && samples.vertical.distance === samples.before.distance,
+        `${label}: vertical trackpad movement rotates without zooming`);
+    check(samples.horizontal.yaw < samples.vertical.yaw && samples.horizontal.pitch === samples.vertical.pitch
+        && samples.horizontal.distance === samples.before.distance,
+        `${label}: horizontal trackpad movement rotates without zooming`);
+    check(samples.momentum.pitch > samples.horizontal.pitch && samples.momentum.distance === samples.before.distance,
+        `${label}: faster movement in the same gesture stays in rotation mode`);
+    check(sameAngles(samples.pinchIn, samples.momentum) && samples.pinchIn.distance < samples.momentum.distance
+        && sameAngles(samples.pinchOut, samples.pinchIn) && samples.pinchOut.distance > samples.pinchIn.distance,
+        `${label}: pinch modifiers change only zoom, even immediately after sliding`);
+    check(samples.fractional.yaw < samples.pinchOut.yaw && samples.fractional.pitch > samples.pinchOut.pitch
+        && samples.fractional.distance === samples.pinchOut.distance,
+        `${label}: fractional diagonal movement resumes rotation after pinching`);
+    check(sameAngles(samples.wheel, samples.fractional) && samples.wheel.distance > samples.fractional.distance
+        && sameAngles(samples.lines, samples.wheel) && samples.lines.distance < samples.wheel.distance
+        && sameAngles(samples.pages, samples.lines) && samples.pages.distance < samples.lines.distance,
+        `${label}: mouse wheel steps and line/page units retain zoom after input is cleared`);
+    for (const sample of Object.values(samples)) {
+        assert.deepEqual(sample.center, samples.before.center, `${label}: wheel gestures must not pan`);
+    }
+    check(['vertical', 'horizontal', 'momentum', 'pinchIn', 'pinchOut', 'fractional', 'wheel', 'lines', 'pages']
+        .every(name => samples[name].prevented), `${label}: handled gestures prevent browser scrolling and zooming`);
+    check([samples.blockedSlide, samples.blockedPinch].every(sample => sameAngles(sample, samples.pages)
+        && sample.distance === samples.pages.distance), `${label}: open content blocks camera gestures`);
+    await reset(page);
+}
+
+async function inputChecks(browser) {
+    const context = await browser.newContext({ viewport: { width: 1440, height: 960 } });
+    const page = await context.newPage();
+    monitor(page, 'input');
+    await load(page);
+    for (const selector of ['#galaxyWorld', '#portalNav', '#mapEntities']) await wheelInputChecks(page, selector);
+    const point = await emptyPoint(page);
+    const beforePinch = await pose(page);
+    const client = await context.newCDPSession(page);
+    await client.send('Input.synthesizePinchGesture', { ...point, scaleFactor: 1.4, relativeSpeed: 600, gestureSourceType: 'mouse' });
+    await settle(page);
+    const afterPinch = await pose(page);
+    check(afterPinch.distance < beforePinch.distance && Math.abs(afterPinch.yaw - beforePinch.yaw) < 0.003
+        && Math.abs(afterPinch.pitch - beforePinch.pitch) < 0.003 && await page.evaluate(() => visualViewport.scale === 1),
+        'A browser-generated trackpad pinch zooms the star map without rotating or scaling the page');
+    await reset(page);
+    await page.locator('[data-map-entity="solar"]').click();
+    await page.waitForFunction(() => window.lifeStarMap.solarSystem.active);
+    for (const selector of ['#galaxyWorld', '.solar-map-points']) await wheelInputChecks(page, selector, true);
+    await context.close();
 }
 
 async function prepareBakedFixtures(browser) {
@@ -645,7 +728,7 @@ async function main() {
         hostedPage.searchParams.set('celestialAtlas', 'hosted');
         pageUrl = hostedPage.href;
     }
-    for (const [group, run] of [['desktop', desktopChecks], ['mobile', mobileChecks], ['reduced-motion', reducedMotionChecks]]) {
+    for (const [group, run] of [['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['reduced-motion', reducedMotionChecks]]) {
         if (selectedGroup !== 'all' && selectedGroup !== group) continue;
         const browser = await chromium.launch(launchOptions);
         try {

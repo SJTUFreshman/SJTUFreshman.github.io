@@ -44,7 +44,7 @@ class SolarSystemMap {
                 earthMoonNote: 'A view of the Earth–Moon system. Body sizes and orbital distance are enlarged independently for exploration.',
                 earthMoonChoose: 'Explore the Earth–Moon system', earthMoonBack: 'Return to the Earth–Moon system',
                 note: 'Positions follow an astronomical snapshot. Orbits and body sizes are compressed independently for exploration.',
-                instructions: 'Right drag to orbit · Scroll to approach · Choose a world',
+                instructions: 'Right drag / Two-finger slide to orbit · Mouse wheel / Pinch to zoom',
                 choose: 'Explore the Solar System', bodyClose: 'Return to the Solar System',
                 closeup: 'PLANETARY ATLAS', badge: 'SURFACE PORTRAIT', loading: 'APPROACHING',
                 radius: 'Mean radius', orbit: 'Mean orbital distance', period: 'Orbital period',
@@ -63,7 +63,7 @@ class SolarSystemMap {
                 earthMoonNote: '地月系示意。天体大小与轨道距离分别放大，方便探索。',
                 earthMoonChoose: '探索地月系', earthMoonBack: '返回地月系',
                 note: '位置参考当前天文快照。轨道距离与天体大小分别压缩，方便探索。',
-                instructions: '右键拖动旋转 · 滚轮拉近 · 选择一颗星球',
+                instructions: '右键拖动 / 触控板双指滑动旋转 · 滚轮 / 双指捏合缩放',
                 choose: '探索太阳系', bodyClose: '返回太阳系', closeup: '行星图鉴', badge: '天体近景', loading: '正在靠近',
                 radius: '平均半径', orbit: '平均轨道距离', period: '公转周期', parent: '围绕', type: '天体类型',
                 scale: '展示比例', scaled: '为探索而放大', days: '地球日', years: '地球年',
@@ -81,7 +81,7 @@ class SolarSystemMap {
                 earthMoonNote: '地月系示意。天體大小與軌道距離分別放大，方便探索。',
                 earthMoonChoose: '探索地月系', earthMoonBack: '返回地月系',
                 note: '位置參考目前天文快照。軌道距離與天體大小分別壓縮，方便探索。',
-                instructions: '右鍵拖動旋轉 · 滾輪拉近 · 選擇一顆星球',
+                instructions: '右鍵拖動 / 觸控板雙指滑動旋轉 · 滾輪 / 雙指捏合縮放',
                 choose: '探索太陽系', bodyClose: '返回太陽系', closeup: '行星圖鑑', badge: '天體近景', loading: '正在靠近',
                 radius: '平均半徑', orbit: '平均軌道距離', period: '公轉週期', parent: '圍繞', type: '天體類型',
                 scale: '展示比例', scaled: '為探索而放大', days: '地球日', years: '地球年',
@@ -186,11 +186,7 @@ class SolarSystemMap {
         this.nav.addEventListener('pointercancel', release);
         this.nav.addEventListener('lostpointercapture', release);
         window.addEventListener('blur', release);
-        this.nav.addEventListener('wheel', event => {
-            if (!this.canMove()) return;
-            event.preventDefault();
-            this.zoom(event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1));
-        }, { passive: false });
+        this.nav.addEventListener('wheel', event => this.parent.handleWheel(event), { passive: false });
         dom.celestialClose.addEventListener('click', event => {
             if (this.active) this.closeBody(true, event.detail === 0 ? 'keyboard' : 'pointer');
         });
