@@ -27,11 +27,11 @@
         {
             id: 'euro-usa',
             keys: ['euro_usa', 'europe_usa', 'euro-usa', 'euroUsa'],
-            title: { en: 'Europe + USA', 'zh-CN': '欧洲与美国', 'zh-TW': '歐洲與美國' },
+            title: { en: 'Europe + USA', 'zh-CN': '欧美', 'zh-TW': '歐美' },
             label: {
                 en: 'Visited places in Europe and the United States',
-                'zh-CN': '欧洲与美国到访地点',
-                'zh-TW': '歐洲與美國到訪地點'
+                'zh-CN': '欧美到访地点',
+                'zh-TW': '歐美到訪地點'
             }
         }
     ];
@@ -40,8 +40,6 @@
         en: {
             zoomIn: 'Zoom in', zoomOut: 'Zoom out', reset: 'Reset map',
             expand: 'View large map', close: 'Close large map', actual: 'Original resolution',
-            visited: 'Visited terrain', unvisited: 'Unvisited', corridor: 'Journey corridors',
-            count: '{count} places · rail & road', pending: 'Places yet to explore',
             unavailable: 'Map unavailable', mapLoading: 'Loading map',
             retry: 'Retry', controls: 'Map controls', route: 'Footprint route',
             rail: 'Rail journey', road: 'Road journey',
@@ -51,8 +49,6 @@
         'zh-CN': {
             zoomIn: '放大地图', zoomOut: '缩小地图', reset: '重置地图',
             expand: '查看大图', close: '关闭大图', actual: '原始分辨率',
-            visited: '到访地形', unvisited: '未到访', corridor: '沿途足迹',
-            count: '{count} 座城市 · 铁路与自驾', pending: '留待未来点亮',
             unavailable: '地图暂不可用', mapLoading: '正在加载地图',
             retry: '重新加载', controls: '地图控制', route: '足迹线路',
             rail: '铁路旅程', road: '自驾旅程',
@@ -62,8 +58,6 @@
         'zh-TW': {
             zoomIn: '放大地圖', zoomOut: '縮小地圖', reset: '重置地圖',
             expand: '查看大圖', close: '關閉大圖', actual: '原始解析度',
-            visited: '到訪地形', unvisited: '未到訪', corridor: '沿途足跡',
-            count: '{count} 座城市 · 鐵路與自駕', pending: '留待未來點亮',
             unavailable: '地圖暫不可用', mapLoading: '正在載入地圖',
             retry: '重新載入', controls: '地圖控制', route: '足跡路線',
             rail: '鐵路旅程', road: '自駕旅程',
@@ -173,26 +167,11 @@
             number.textContent = `0${index + 1}`;
             const title = document.createElement('h3');
             title.dataset.atlasTitle = definition.id;
-            const subtitle = document.createElement('span');
-            subtitle.className = 'footprints-map-subtitle';
-            heading.append(number, title, subtitle);
+            heading.append(number, title);
             const mapBox = document.createElement('div');
             mapBox.id = `${definition.id}Map`;
             mapBox.className = 'map-box footprints-map-box';
             card.append(heading, mapBox);
-            const legend = document.createElement('div');
-            legend.className = 'footprints-map-legend';
-            ['visited', 'corridor', 'unvisited'].forEach(key => {
-                const item = document.createElement('span');
-                item.className = `footprints-legend-${key}`;
-                const swatch = document.createElement('i');
-                swatch.setAttribute('aria-hidden', 'true');
-                const text = document.createElement('span');
-                text.dataset.atlasCopy = key;
-                item.append(swatch, text);
-                legend.append(item);
-            });
-            card.append(legend);
             const attribution = document.createElement('div');
             attribution.className = 'footprints-map-attribution';
             [
@@ -485,10 +464,6 @@
                 const card = document.querySelector(`[data-atlas-card="${definition.id}"]`);
                 const openButton = card.querySelector('.footprints-map-open');
                 if (openButton) { openButton.textContent = `↗ ${labels.expand}`; openButton.setAttribute('aria-label', labels.expand); }
-                const count = regions.filter(region => region.visited).length;
-                card.querySelector('.footprints-map-subtitle').textContent = count ? labels.count.replace('{count}', count) : labels.pending;
-                card.querySelector('.footprints-legend-visited').hidden = count === 0;
-                card.querySelector('.footprints-legend-corridor').hidden = !map.routes?.length;
                 cityGroup.querySelectorAll('[data-city-id]').forEach(element => {
                     const city = element._footprintsCity;
                     const label = city ? nameOf(city.data) : '';

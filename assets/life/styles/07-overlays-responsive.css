@@ -39,7 +39,7 @@
 .footprints-map-card .map-card-title {
     display: grid;
     grid-template-columns: 30px 1fr auto;
-    grid-template-areas: 'number title expand' '. subtitle expand';
+    grid-template-areas: 'number title expand';
     align-items: baseline;
     gap: 12px;
     padding: 18px 20px 15px;
@@ -62,13 +62,6 @@
     color: #9a8055;
     font-size: 0.7rem;
     letter-spacing: 0.1em;
-}
-
-.footprints-map-subtitle {
-    grid-area: subtitle;
-    color: #777c70;
-    font-size: 0.64rem;
-    letter-spacing: 0.04em;
 }
 
 .footprints-map-open {
@@ -110,41 +103,6 @@
     font: 12px Georgia, serif;
     letter-spacing: 0.12em;
     pointer-events: none;
-}
-
-.footprints-map-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 23px;
-    padding: 12px 20px 5px;
-    color: #6e7569;
-    font: 10px var(--ui);
-}
-
-.footprints-map-legend > span {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.footprints-map-legend > [hidden] {
-    display: none;
-}
-
-.footprints-map-legend i {
-    width: 14px;
-    height: 9px;
-    border: 1px solid rgba(58, 76, 69, 0.2);
-    background: #fff;
-}
-
-.footprints-legend-visited i {
-    background: linear-gradient(125deg, #d2ad63, #9fb69b 45%, #8faeb9);
-}
-
-.footprints-legend-corridor i {
-    height: 5px;
-    background: linear-gradient(125deg, #c99483, #a39181 45%, #d4c5a0);
 }
 
 .footprints-map-attribution {
@@ -378,10 +336,6 @@
         grid-template-columns: 22px 1fr auto;
         gap: 5px 10px;
         padding: 14px;
-    }
-
-    .footprints-map-subtitle {
-        grid-column: 2;
     }
 
     .footprints-map-controls {
