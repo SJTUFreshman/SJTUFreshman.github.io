@@ -987,22 +987,19 @@ def render_life_gallery(content: dict[str, Any]) -> str:
 
 def render_footprints(content: dict[str, Any]) -> str:
     hip = star_binding(content, "footprints", "footprints-map")
-    country_names = [
-        lang_value(country.get("label", {}), "en") or str(country.get("map_name") or "")
-        for country in content["life"]["footprints"].get("visited_countries", [])
-        if isinstance(country, dict)
-    ]
-    summary = f"Countries visited: {', '.join(filter(None, country_names))}"
     return f"""            <section id="footprints" class="portal-content" data-portal-content="footprints" hidden>
-                <p class="sr-only" id="visitedCountriesSummary">{esc(summary)}</p>
                 <div class="maps-list" data-portal-entry="footprints-map" data-star-hip="{esc(hip)}">
                     <article class="map-card">
-                        <div class="map-card-title" data-key="chart_world">Countries visited</div>
-                        <div id="worldMap" class="map-box" role="img" aria-describedby="visitedCountriesSummary"></div>
+                        <div class="map-card-title" data-key="chart_china">China</div>
+                        <div id="chinaMap" class="map-box" role="img" aria-label="Cities and routes visited in Mainland China"></div>
                     </article>
                     <article class="map-card">
-                        <div class="map-card-title" data-key="chart_china">China</div>
-                        <div id="chinaMap" class="map-box" role="img" aria-label="Cities visited in Mainland China"></div>
+                        <div class="map-card-title" data-key="chart_east_asia">East Asia</div>
+                        <div id="eastAsiaMap" class="map-box" role="img" aria-label="East Asia footprints"></div>
+                    </article>
+                    <article class="map-card">
+                        <div class="map-card-title" data-key="chart_europe_usa">Europe + United States</div>
+                        <div id="euroUsaMap" class="map-box" role="img" aria-label="Europe and United States footprints"></div>
                     </article>
                 </div>
             </section>"""

@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --partition=hp_a800
+#SBATCH --gpus=1
+#SBATCH --time=00:15:00
+#SBATCH --job-name=relief-shengsi-final
+#SBATCH --output=logs/final-shengsi-%j.out
+set -euo pipefail
+ROOT=/data/home/scwb515/run/yangrunde/relief-atlas-20261008
+BLENDER=/data/home/scwb515/run/yangrunde/life_worlds/tools/blender-4.5.3-linux-x64/blender
+cd "$ROOT"
+export OMP_NUM_THREADS=8
+"$BLENDER" --background --threads 8 --python-exit-code 1 --python "$ROOT/render_atlas.py" -- --root "$ROOT" --map shengsi
+"$BLENDER" --background --threads 8 --python-exit-code 1 --python "$ROOT/pack_labels.py" -- --root "$ROOT" --only shengsi --verify

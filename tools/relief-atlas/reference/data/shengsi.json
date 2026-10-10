@@ -1,0 +1,64 @@
+{
+  "id": "shengsi",
+  "bounds": [
+    121.95,
+    30.48,
+    123.0,
+    30.97
+  ],
+  "projection": "+proj=eqc +lat_ts=30.7 +lat_0=30.7 +lon_0=122.475 +datum=WGS84 +units=m +no_defs",
+  "crs_wkt": "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"World Geodetic System 1984\",ELLIPSOID[\"WGS 84\",6378137,298.257223563,LENGTHUNIT[\"metre\",1]],ID[\"EPSG\",6326]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Equidistant Cylindrical\",ID[\"EPSG\",1028]],PARAMETER[\"Latitude of 1st standard parallel\",30.7,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8823]],PARAMETER[\"Latitude of natural origin\",30.7,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",122.475,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+  "extent_km": [
+    -50.25211644159115,
+    -24.52190569064098,
+    50.25211644159359,
+    30.05626251418412
+  ],
+  "shape": [
+    1249,
+    2300
+  ],
+  "pixel_size_m": 43.69749255790641,
+  "elevation_units": "m above DEM vertical reference; negative inland elevations preserved",
+  "coordinate_units": "km; pixel centers; x increases east, y decreases from north to south",
+  "geo_to_xy": "pyproj.Transformer.from_crs('EPSG:4326', projection, always_xy=True).transform(lon, lat), then divide both coordinates by 1000",
+  "zoom": 12,
+  "tile_count": 91,
+  "region_names": {
+    "1": "陆地"
+  },
+  "region_labels": [],
+  "land_pixels": 74188,
+  "elevation_range_land_m": [
+    0.7500412464141846,
+    290.0547180175781
+  ],
+  "mask_source": "Terrarium elevation > 0.75 m plus actual OSM Yangshan coastline polygons",
+  "dem_source": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium",
+  "geographic_coordinates": "EPSG:4326; DataV coordinates treated as lon/lat without datum correction",
+  "supplemental_coastline": {
+    "url": "https://api.openstreetmap.org/api/0.6/map?bbox=121.96,30.58,122.15,30.66",
+    "cache": "cache/yangshan_osm_land.geojson",
+    "attribution": "© OpenStreetMap contributors; ODbL 1.0",
+    "retrieved": "2026-10-08",
+    "supplemental_land_pixels": 9448,
+    "supplemental_elevation_m": 1.5,
+    "method": "Only closed polygons formed by natural=coastline ways; original DEM retained where its land mask was valid.",
+    "limitation": "1.5 m on reclaimed areas is a display elevation, not a measured elevation; coastline is mapped by OpenStreetMap contributors.",
+    "rejected_source": "DataV 330922 county polygon contains a maritime corridor and was rejected as a land mask."
+  },
+  "north_coastline_correction": {
+    "url": "https://api.openstreetmap.org/api/0.6/map?bbox=122.38,30.73,122.50,30.80",
+    "cache": "cache/sijiao_north_osm_land.geojson",
+    "attribution": "© OpenStreetMap contributors; ODbL 1.0",
+    "window": [
+      122.38,
+      30.748,
+      122.5,
+      30.8
+    ],
+    "removed_pixels": 2831,
+    "method": "Intersect existing land mask with actual closed OSM coastlines inside the correction window; only removes false DEM land and never adds land.",
+    "reason": "Terrarium DEM contains large circular positive-elevation artefacts around northern islands which extend beyond mapped coastlines."
+  }
+}

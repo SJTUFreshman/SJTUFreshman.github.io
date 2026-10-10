@@ -1,0 +1,10 @@
+JobID|JobName|State|Elapsed|AllocTRES|NodeList
+199305|relief-light-preview|COMPLETED|00:00:11|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a21g02
+199305.batch|batch|COMPLETED|00:00:11|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a21g02
+199305.extern|extern|COMPLETED|00:00:11|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a21g02
+199315|relief-light32|COMPLETED|00:01:03|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a11g02
+199315.batch|batch|COMPLETED|00:01:03|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a11g02
+199315.extern|extern|COMPLETED|00:01:03|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a11g02
+199330|relief-light32-pack|COMPLETED|00:01:00|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g01
+199330.batch|batch|COMPLETED|00:01:00|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g01
+199330.extern|extern|COMPLETED|00:01:00|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g01

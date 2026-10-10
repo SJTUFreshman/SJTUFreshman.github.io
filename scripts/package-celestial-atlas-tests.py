@@ -459,6 +459,157 @@ class CelestialPackageTests(unittest.TestCase):
                     PACKAGER.parse_args(self.arguments(f'--resolution-widths={widths}'))
         self.assertEqual(PACKAGER.parse_args(self.arguments('--resolution-widths', '12,8')).resolution_widths, [8, 12])
 
+    def test_derivative_resume_reuses_verified_receipts_without_reencoding(self):
+        self.write_full_sphere()
+        options = ('--body', 'earth', '--resolution-widths', '8', '--resume-derivatives')
+        self.run_package(*options)
+        frame = self.output / 'earth/resolutions/8/clouds/e0/a000.webp'
+        receipt = json.loads(PACKAGER.derivative_receipt_path(frame).read_text())
+        self.assertEqual(receipt['sourceSha256'], PACKAGER.checksum(self.output / receipt['source']))
+        self.assertEqual(receipt['sha256'], PACKAGER.checksum(frame))
+        self.assertEqual(receipt['encoding'], PACKAGER.resolution_encoding(8))
+        self.assertEqual((receipt['width'], receipt['height']), (8, 4))
+        self.assertEqual(receipt['provenance'], 'encoded-from-master')
+        with mock.patch.object(PACKAGER, 'resize_image', side_effect=AssertionError('Verified derivatives must be reused')):
+            self.run_package(*options)
+        self.run_package('--body', 'earth', '--verify-only', '--hash-only')
+
+    def test_derivative_resume_reencodes_missing_corrupt_or_untrusted_frames(self):
+        self.write_grid(('earth',))
+        options = ('--body', 'earth', '--resolution-widths', '8', '--resume-derivatives')
+        self.run_package(*options)
+        frame = self.output / 'earth/resolutions/8/e0/a000.webp'
+        receipt_path = PACKAGER.derivative_receipt_path(frame)
+        mutations = {
+            'missing-frame': lambda: frame.unlink(),
+            'corrupt-frame': lambda: frame.write_bytes(b'broken WebP'),
+            'different-valid-frame': lambda: Image.new('RGB', (8, 4), (255, 0, 0)).save(frame, 'WEBP'),
+            'missing-receipt': lambda: receipt_path.unlink(),
+            'invalid-receipt': lambda: receipt_path.write_text('{'),
+            'wrong-dimensions': lambda: receipt_path.write_text(json.dumps({**json.loads(receipt_path.read_text()), 'width': 7})),
+        }
+        for mutation, change in mutations.items():
+            with self.subTest(mutation=mutation):
+                change()
+                with mock.patch.object(PACKAGER, 'resize_image', wraps=PACKAGER.resize_image) as resize:
+                    self.run_package(*options)
+                self.assertEqual(resize.call_count, 1)
+                self.assertEqual(resize.call_args.args[1], frame.resolve())
+                self.run_package('--body', 'earth', '--verify-only', '--hash-only')
+
+    def test_derivative_resume_invalidates_changed_source_or_encoding(self):
+        self.write_grid(('earth',))
+        options = ('--body', 'earth', '--resolution-widths', '8', '--resume-derivatives')
+        self.run_package(*options)
+        Image.new('RGB', (16, 8), (250, 0, 0)).save(self.source / 'earth/e0/a000.webp', 'WEBP')
+        with mock.patch.object(PACKAGER, 'resize_image', wraps=PACKAGER.resize_image) as resize:
+            self.run_package(*options)
+        self.assertEqual(resize.call_count, 1)
+        encoding = {**PACKAGER.resolution_encoding(8), 'quality': 96}
+        with mock.patch.object(PACKAGER, 'resolution_encoding', return_value=encoding):
+            with mock.patch.object(PACKAGER, 'resize_image', wraps=PACKAGER.resize_image) as resize:
+                self.run_package(*options)
+            self.assertEqual(resize.call_count, 2)
+            self.run_package('--body', 'earth', '--verify-only', '--hash-only')
+
+    def test_derivative_default_reencodes_and_does_not_write_receipts(self):
+        self.write_grid(('earth',))
+        options = ('--body', 'earth', '--resolution-widths', '8')
+        self.run_package(*options)
+        self.assertEqual(list(self.output.rglob('*.receipt.json')), [])
+        with mock.patch.object(PACKAGER, 'resize_image', wraps=PACKAGER.resize_image) as resize:
+            self.run_package(*options)
+        self.assertEqual(resize.call_count, 2)
+
+    def test_derivative_adoption_decodes_and_compares_existing_in_place_frames(self):
+        self.write_full_sphere()
+        options = ('--body', 'earth', '--resolution-widths', '8', '--input-format', 'webp')
+        self.run_package(*options, output=self.source)
+        with mock.patch.object(PACKAGER, 'resize_image', side_effect=AssertionError('Valid legacy derivatives should be adopted')):
+            self.run_package(*options, '--resume-derivatives', '--adopt-existing-derivatives', output=self.source)
+        receipts = list(self.source.rglob('*.receipt.json'))
+        self.assertEqual(len(receipts), 4)
+        for receipt_path in receipts:
+            receipt = json.loads(receipt_path.read_text())
+            self.assertEqual(receipt['provenance'], 'adopted-existing-derivative')
+            self.assertEqual(receipt['validation']['method'], 'full-decode-and-lanczos-pixel-comparison')
+        self.run_package('--body', 'earth', '--verify-only', '--hash-only', output=self.source)
+
+    def test_derivative_adoption_rejects_wrong_images_and_stale_receipts(self):
+        self.write_grid(('earth',))
+        options = ('--body', 'earth', '--resolution-widths', '8', '--input-format', 'webp')
+        self.run_package(*options, output=self.source)
+        frame = self.source / 'earth/resolutions/8/e0/a000.webp'
+        Image.new('RGB', (8, 4), (255, 0, 0)).save(frame, 'WEBP')
+        resume_options = (*options, '--resume-derivatives', '--adopt-existing-derivatives')
+        with mock.patch.object(PACKAGER, 'resize_image', wraps=PACKAGER.resize_image) as resize:
+            self.run_package(*resume_options, output=self.source)
+        self.assertEqual(resize.call_count, 1)
+        receipt_path = PACKAGER.derivative_receipt_path(frame)
+        receipt = json.loads(receipt_path.read_text())
+        self.assertEqual(receipt['provenance'], 'encoded-from-master')
+        receipt['encoding']['quality'] = 20
+        receipt_path.write_text(json.dumps(receipt))
+        with mock.patch.object(PACKAGER, 'resize_image', wraps=PACKAGER.resize_image) as resize:
+            self.run_package(*resume_options, output=self.source)
+        self.assertEqual(resize.call_count, 1)
+
+    def test_derivative_adoption_rejects_source_changes_during_validation(self):
+        self.write_grid(('earth',))
+        options = ('--body', 'earth', '--resolution-widths', '8', '--input-format', 'webp', '--workers', '1')
+        self.run_package(*options, output=self.source)
+        adopt = PACKAGER.adopt_derivative
+
+        def change_source(source, destination, args):
+            result = adopt(source, destination, args)
+            Image.new('RGB', (16, 8), (255, 0, 0)).save(source, 'WEBP')
+            return result
+
+        with mock.patch.object(PACKAGER, 'adopt_derivative', side_effect=change_source):
+            with self.assertRaisesRegex(ValueError, 'Master changed while deriving'):
+                self.run_package(*options, '--resume-derivatives', '--adopt-existing-derivatives', output=self.source)
+        self.assertEqual(list(self.source.rglob('*.receipt.json')), [])
+
+    def test_derivative_resume_checks_master_hash_before_reuse(self):
+        self.write_grid(('earth',))
+        self.run_package('--body', 'earth', '--resolution-widths', '8', '--resume-derivatives')
+        package = json.loads((self.output / 'earth/package.json').read_text())
+        args = PACKAGER.parse_args(self.arguments('--body', 'earth', '--resolution-widths', '8', '--resume-derivatives'))
+        tier_args = PACKAGER.resolution_arguments(args, args, 8)
+        record = package['frames'][0]
+        Image.new('RGB', (16, 8), (255, 0, 0)).save(self.output / record['path'], 'WEBP')
+        with self.assertRaisesRegex(ValueError, 'Master changed before deriving'):
+            PACKAGER.derive_frame(record, tier_args, 8)
+
+    def test_derivative_resume_requires_explicit_safe_arguments(self):
+        for options in [('--resume-derivatives',), ('--adopt-existing-derivatives',),
+                        ('--resume-derivatives', '--resolution-widths', '8', '--verify-only', '--body', 'earth'),
+                        ('--resume-derivatives', '--resolution-widths', '8', '--adopt-existing-derivatives'),
+                        ('--resume-derivatives', '--resolution-widths', '8', '--adopt-existing-derivatives', '--input-format', 'webp')]:
+            with self.subTest(options=options), contextlib.redirect_stderr(io.StringIO()):
+                with self.assertRaises(SystemExit):
+                    PACKAGER.parse_args(self.arguments(*options))
+
+    def test_derivative_checkpoints_survive_interrupted_package(self):
+        self.write_grid(('earth',))
+        options = ('--body', 'earth', '--resolution-widths', '8', '--resume-derivatives', '--workers', '1')
+        derive = PACKAGER.derive_frame
+
+        def fail_second(record, args, width):
+            if record['path'].endswith('a001.webp'):
+                raise RuntimeError('interrupted derivation')
+            return derive(record, args, width)
+
+        with mock.patch.object(PACKAGER, 'derive_frame', side_effect=fail_second):
+            with self.assertRaisesRegex(RuntimeError, 'interrupted derivation'):
+                self.run_package(*options)
+        self.assertFalse((self.output / 'earth/package.json').exists())
+        self.assertEqual(len(list(self.output.rglob('*.receipt.json'))), 1)
+        with mock.patch.object(PACKAGER, 'resize_image', wraps=PACKAGER.resize_image) as resize:
+            self.run_package(*options)
+        self.assertEqual(resize.call_count, 1)
+        self.run_package('--body', 'earth', '--verify-only', '--hash-only')
+
     def test_in_place_webp_validation_avoids_reencoding(self):
         self.write_grid()
         original = (self.source / 'earth/e0/a000.webp').read_bytes()

@@ -6,12 +6,13 @@ import math
 import os
 import shutil
 import tempfile
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urljoin, urlsplit
 
-from PIL import Image
+from PIL import Image, ImageChops, ImageStat
 
 
 BODIES = ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune')
@@ -29,6 +30,8 @@ def parse_args(argv=None):
     parser.add_argument('--height', type=int, default=2160)
     parser.add_argument('--quality', type=int, default=90, help='PNG conversion quality; existing WebP bytes are preserved.')
     parser.add_argument('--resolution-widths', help='Comma-separated smaller widths derived directly from each packaged master, for example 2048,4096.')
+    parser.add_argument('--resume-derivatives', action='store_true', help='Reuse derived frames only when their atomic receipts match source/output hashes, dimensions and encoding parameters.')
+    parser.add_argument('--adopt-existing-derivatives', action='store_true', help='With --resume-derivatives and in-place WebP input, validate and adopt legacy derived frames without receipts from this same pipeline.')
     parser.add_argument('--workers', type=int, default=8, help='Concurrent frame decoders, from 1 to 16.')
     parser.add_argument('--input-format', choices=('auto', 'png', 'webp'), default='auto')
     parser.add_argument('--poster-frame', action='append', default=[], metavar='BODY:ROW:COLUMN')
@@ -77,6 +80,10 @@ def parse_args(argv=None):
         args.frame_base_url = args.frame_base_url.rstrip('/') + '/'
     args.input = args.input.resolve()
     args.output = args.output.resolve()
+    if args.resume_derivatives and (args.verify_only or not args.resolution_widths):
+        parser.error('--resume-derivatives requires packaging with --resolution-widths.')
+    if args.adopt_existing_derivatives and (not args.resume_derivatives or args.input != args.output or args.input_format != 'webp'):
+        parser.error('--adopt-existing-derivatives requires --resume-derivatives, identical input/output and --input-format webp.')
     if args.hosted_output:
         args.hosted_output = args.hosted_output.resolve()
         if not args.manifest or not args.frame_base_url or urlsplit(args.frame_base_url).scheme != 'https':
@@ -441,19 +448,96 @@ def resize_image(source, destination, width, height, quality):
     atomic_write(destination, encode)
 
 
+def file_state(filename):
+    status = filename.stat()
+    return status.st_dev, status.st_ino, status.st_size, status.st_mtime_ns, status.st_ctime_ns
+
+
+def derivative_receipt_path(destination):
+    return destination.with_name(destination.name + '.receipt.json')
+
+
+def derivative_receipt_parameters(record, tier_args, width, relative):
+    return {'version': 1, 'pipeline': 'pillow-lanczos-webp-v1',
+            'source': record['path'], 'sourceSha256': record['sha256'],
+            'path': relative.as_posix(), 'width': tier_args.width, 'height': tier_args.height,
+            'encoding': resolution_encoding(width)}
+
+
+def adopt_derivative(source, destination, tier_args):
+    validate_image(destination, tier_args, 'WEBP')
+    with Image.open(source) as master, Image.open(destination) as derived:
+        master.load()
+        derived.load()
+        mode = 'RGBA' if 'A' in master.getbands() else 'RGB'
+        if derived.mode != mode:
+            return None
+        expected = master.convert(mode).resize((tier_args.width, tier_args.height), Image.Resampling.LANCZOS)
+        if mode == 'RGBA':
+            alpha_difference = ImageChops.difference(expected.getchannel('A'), derived.getchannel('A'))
+            if alpha_difference.getextrema()[1] > 1:
+                return None
+            expected = expected.convert('RGBa')
+            derived = derived.convert('RGBa')
+        difference = ImageStat.Stat(ImageChops.difference(expected, derived))
+        mean_error, rms_error = max(difference.mean[:3]), max(difference.rms[:3])
+        if mean_error > 4 or rms_error > 12:
+            return None
+        return {'method': 'full-decode-and-lanczos-pixel-comparison',
+                'maxChannelMeanError': mean_error, 'maxChannelRmsError': rms_error,
+                'meanErrorLimit': 4, 'rmsErrorLimit': 12, 'alphaErrorLimit': 1}
+
+
+def reusable_derivative(source, destination, tier_args, parameters):
+    receipt_path = derivative_receipt_path(destination)
+    if not destination.is_file():
+        return None
+    receipt_exists = receipt_path.exists()
+    if not receipt_exists and not getattr(tier_args, 'adopt_existing_derivatives', False):
+        return None
+    try:
+        before = file_state(destination)
+        digest = checksum(destination)
+        if receipt_exists:
+            receipt = json.loads(receipt_path.read_text(encoding='utf-8'))
+            if (not isinstance(receipt, dict) or any(receipt.get(key) != value for key, value in parameters.items()) or
+                    receipt.get('sha256') != digest or receipt.get('bytes') != before[2]):
+                return None
+            validate_image(destination, tier_args, 'WEBP')
+        else:
+            validation = adopt_derivative(source, destination, tier_args)
+            if validation is None:
+                return None
+            receipt = {**parameters, 'sha256': digest, 'bytes': before[2],
+                       'provenance': 'adopted-existing-derivative', 'validation': validation}
+        if file_state(destination) != before or checksum(destination) != digest:
+            raise ValueError(f'Derived frame changed during resume validation: {destination}')
+        return receipt
+    except (OSError, ValueError, SyntaxError):
+        return None
+
+
 def derive_frame(record, tier_args, width):
     source = tier_args.output / record['path']
     relative = resolution_path(record['path'], width)
     destination = tier_args.output / relative
+    source_state = file_state(source)
     if checksum(source) != record['sha256']:
         raise ValueError(f'Master changed before deriving resolution: {source}')
-    resize_image(source, destination, tier_args.width, tier_args.height,
-                 resolution_encoding(width)['quality'])
-    validate_image(destination, tier_args, 'WEBP')
-    if checksum(source) != record['sha256']:
+    parameters = derivative_receipt_parameters(record, tier_args, width, relative)
+    resume = getattr(tier_args, 'resume_derivatives', False)
+    receipt = reusable_derivative(source, destination, tier_args, parameters) if resume else None
+    if receipt is None:
+        resize_image(source, destination, tier_args.width, tier_args.height,
+                     resolution_encoding(width)['quality'])
+        validate_image(destination, tier_args, 'WEBP')
+        receipt = {**parameters, 'sha256': checksum(destination), 'bytes': destination.stat().st_size,
+                   'provenance': 'encoded-from-master'}
+    if checksum(source) != record['sha256'] or file_state(source) != source_state:
         raise ValueError(f'Master changed while deriving resolution: {source}')
-    digest = checksum(destination)
-    return {'path': relative.as_posix(), 'sha256': digest, 'bytes': destination.stat().st_size,
+    if resume:
+        atomic_json(derivative_receipt_path(destination), receipt)
+    return {'path': relative.as_posix(), 'sha256': receipt['sha256'], 'bytes': receipt['bytes'],
             'source': record['path'], 'sourceSha256': record['sha256'],
             'sourceFormat': 'WEBP', 'encoding': 'derived-resize',
             'quality': resolution_encoding(width)['quality']}
@@ -480,8 +564,7 @@ def derive_resolution(body, width, args, presentation, master_metadata):
             'encoding': resolution_encoding(width), 'frames': [], 'layers': {}}
     image_args = resolution_arguments(args, image_arguments(args, presentation), width)
     image_args.full_sphere = False
-    with ThreadPoolExecutor(max_workers=args.workers) as executor:
-        entries = list(executor.map(lambda record: derive_frame(record, image_args, width), master_metadata['frames']))
+    entries = derive_frames(master_metadata['frames'], image_args, width, f'{body} surface')
     tier['frames'] = entries
     tier['poster'] = derive_poster(master_metadata['poster'], width, image_args)
     if presentation:
@@ -491,11 +574,23 @@ def derive_resolution(body, width, args, presentation, master_metadata):
             layer_master = master_metadata['layers'][layer]
             layer_args = resolution_arguments(args, image_arguments(args, presentation, layer), width)
             layer_args.full_sphere = False
-            with ThreadPoolExecutor(max_workers=args.workers) as executor:
-                records = list(executor.map(lambda record: derive_frame(record, layer_args, width), layer_master['frames']))
+            records = derive_frames(layer_master['frames'], layer_args, width, f'{body} {layer}')
             tier['layers'][layer] = {'frames': records, 'width': layer_args.width, 'height': layer_args.height,
                                      'poster': derive_poster(layer_master['poster'], width, layer_args)}
     return tier
+
+
+def derive_frames(records, image_args, width, label):
+    results = []
+    started = time.monotonic()
+    with ThreadPoolExecutor(max_workers=image_args.workers) as executor:
+        for count, result in enumerate(executor.map(lambda record: derive_frame(record, image_args, width), records), 1):
+            results.append(result)
+            if count % 32 == 0 or count == len(records):
+                elapsed = time.monotonic() - started
+                remaining = elapsed / count * (len(records) - count)
+                print(f'DERIVED {label} {width}px {count}/{len(records)} elapsed={elapsed:.1f}s eta={remaining:.1f}s', flush=True)
+    return results
 
 
 def package_body(body, args):

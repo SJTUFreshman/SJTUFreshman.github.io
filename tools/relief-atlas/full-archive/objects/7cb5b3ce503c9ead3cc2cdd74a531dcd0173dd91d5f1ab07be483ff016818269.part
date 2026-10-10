@@ -1,0 +1,79 @@
+{
+  "created": "2026-10-08",
+  "purpose": "Real-elevation relief-map art study, not an official or navigational map.",
+  "dem": {
+    "provider": "AWS elevation-tiles-prod / Mapzen Terrarium",
+    "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium",
+    "encoding": "R*256 + G + B/256 - 32768 metres",
+    "resampling": "bilinear",
+    "attribution": "Mapzen terrain tiles; underlying elevation providers include SRTM, GMTED and other public elevation sources; see https://github.com/tilezen/joerd/blob/master/docs/attribution.md"
+  },
+  "boundaries": [
+    {
+      "source": "Alibaba DataV China province boundaries",
+      "url": "https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json",
+      "cache": "cache/china_admin1.json"
+    },
+    {
+      "source": "Alibaba DataV Fujian prefecture boundaries",
+      "url": "https://geo.datav.aliyun.com/areas_v3/bound/350000_full.json",
+      "cache": "cache/fujian_admin2.json"
+    },
+    {
+      "source": "geoBoundaries Taiwan ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TWN/ADM1/geoBoundaries-TWN-ADM1.geojson",
+      "cache": "cache/taiwan_admin1.geojson",
+      "metadata": {
+        "boundaryID": "TWN-ADM1-90331920",
+        "boundaryName": "Taiwan",
+        "boundaryISO": "TWN",
+        "boundaryYearRepresented": "2017",
+        "boundaryType": "ADM1",
+        "boundaryCanonical": "Chinese Taipei",
+        "boundarySource": "OpenStreetMap, Wambacher",
+        "boundaryLicense": "Open Data Commons Open Database License 1.0",
+        "licenseDetail": "Open Data Commons Open Database License 1.0",
+        "licenseSource": "www.openstreetmap.org/copyright",
+        "boundarySourceURL": "wambachers-osm.website/boundaries/",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "buildDate": "Dec 12, 2023",
+        "Continent": "Asia",
+        "UNSDG-region": "Eastern and South-Eastern Asia",
+        "UNSDG-subregion": "Eastern Asia",
+        "worldBankIncomeGroup": "High-income Countries",
+        "admUnitCount": "22",
+        "meanVertices": "5188.0",
+        "minVertices": "882",
+        "maxVertices": "12189",
+        "meanPerimeterLengthKM": "304.3594471411499",
+        "minPerimeterLengthKM": "48.28051470750128",
+        "maxPerimeterLengthKM": "561.6664122244339",
+        "meanAreaSqKM": "1655.424911994538",
+        "minAreaSqKM": "27.810136821377352",
+        "maxAreaSqKM": "4600.7008452505015",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TWN/ADM1/geoBoundaries-TWN-ADM1-all.zip",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TWN/ADM1/geoBoundaries-TWN-ADM1.geojson",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TWN/ADM1/geoBoundaries-TWN-ADM1.topojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TWN/ADM1/geoBoundaries-TWN-ADM1-PREVIEW.png",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TWN/ADM1/geoBoundaries-TWN-ADM1_simplified.geojson"
+      },
+      "status": "actual subdivisions"
+    },
+    {
+      "source": "OpenStreetMap natural=coastline, Yangshan port and nearby islands",
+      "url": "https://api.openstreetmap.org/api/0.6/map?bbox=121.96,30.58,122.15,30.66",
+      "cache": "cache/yangshan_osm_land.geojson",
+      "license": "ODbL 1.0",
+      "attribution": "© OpenStreetMap contributors"
+    }
+  ],
+  "limitations": [
+    "Boundary data are third-party general-purpose visualisation vectors, not authoritative standard-map approval data.",
+    "DataV longitude/latitude are used without datum correction; local registration uncertainty can reach several hundred metres.",
+    "National map extent is 73–135.2°E, 18–53.7°N; southern offshore island groups require a separate inset.",
+    "National province mask preserves negative inland elevations; ocean pixels outside the mask are set to zero.",
+    "Hainan and most of Shengsi use elevation > 0.75 m; tidal flats and very low islands can be omitted. Yangshan uses supplemental real OSM coastlines for reclaimed lowlands, assigned a 1.5 m display elevation rather than a measured height.",
+    "Source tiles are sampled onto finite-resolution grids, with maximum dimension 2300 pixels; no synthetic mountain noise is introduced.",
+    "Terrain is subsequently vertically exaggerated for visualisation by the Blender renderer."
+  ]
+}

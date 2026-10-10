@@ -1,0 +1,32 @@
+{
+  "width": 2480,
+  "height": 2000,
+  "map_rect": [
+    399.6285714285714,
+    315.0,
+    2125.3714285714286,
+    1760.0
+  ],
+  "extent_km": [
+    -2624.4476223708134,
+    -1859.1363261490812,
+    2206.579015442124,
+    2185.981672019646
+  ],
+  "projection": "+proj=aea +lat_1=25 +lat_2=47 +lat_0=35 +lon_0=105 +datum=WGS84 +units=m +no_defs",
+  "background": "#dad5c3",
+  "vertical_exaggeration": 22.0,
+  "render_engine": "Blender 4.5.3 / Cycles CUDA",
+  "gpu_devices": [
+    "NVIDIA A800-SXM4-80GB"
+  ],
+  "samples": 96,
+  "lighting": {
+    "sun_elevation_degrees": 32.0,
+    "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+    "sun_energy": 3.664663076400757,
+    "sun_angular_diameter_degrees": 3.0,
+    "world_strength": 0.45,
+    "horizontal_illuminance_matched_to_previous": true
+  }
+}

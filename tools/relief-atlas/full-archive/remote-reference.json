@@ -1,0 +1,1071 @@
+{
+  "version": 1,
+  "name": "remote-reference",
+  "created_at": "2026-10-10T01:30:34.256087+00:00",
+  "source": "C:\\Andrew_Allender\\SJTUFreshman.github.io\\.render-work\\relief-archive-sources\\remote-reference",
+  "excluded_files": [],
+  "chunk_bytes": 50331648,
+  "directories": [
+    "__pycache__",
+    "data",
+    "lighting_review",
+    "logs",
+    "outputs",
+    "renders",
+    "scenes"
+  ],
+  "files": [
+    {
+      "path": "__pycache__/render_atlas.cpython-311.pyc",
+      "bytes": 22218,
+      "sha256": "3145ab9f5cfb670337d68bf45eab3745f77789851b326e8ff657aace50b90e9c",
+      "mtime_ns": 1791477687528756500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/3145ab9f5cfb670337d68bf45eab3745f77789851b326e8ff657aace50b90e9c.part",
+          "bytes": 22218,
+          "sha256": "3145ab9f5cfb670337d68bf45eab3745f77789851b326e8ff657aace50b90e9c"
+        }
+      ]
+    },
+    {
+      "path": "compare_lighting.py",
+      "bytes": 5610,
+      "sha256": "71137e359818ad5d1524e7ec8f4d6e0048cba34b9c7c1a6e435a37adb6b1e44b",
+      "mtime_ns": 1791478377879858500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/71137e359818ad5d1524e7ec8f4d6e0048cba34b9c7c1a6e435a37adb6b1e44b.part",
+          "bytes": 5610,
+          "sha256": "71137e359818ad5d1524e7ec8f4d6e0048cba34b9c7c1a6e435a37adb6b1e44b"
+        }
+      ]
+    },
+    {
+      "path": "compose_atlas.py",
+      "bytes": 28224,
+      "sha256": "2b141f033b06eb2ad11ca34050975d054b0ac401aad9275abb3ea03918c19204",
+      "mtime_ns": 1791468734123626600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/2b141f033b06eb2ad11ca34050975d054b0ac401aad9275abb3ea03918c19204.part",
+          "bytes": 28224,
+          "sha256": "2b141f033b06eb2ad11ca34050975d054b0ac401aad9275abb3ea03918c19204"
+        }
+      ]
+    },
+    {
+      "path": "data/china.json",
+      "bytes": 9976,
+      "sha256": "11dfbc8449a19a46114972354801b1d9e9d557d04e2ae9784cb426643e8ff6f2",
+      "mtime_ns": 1791447017149841900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/11dfbc8449a19a46114972354801b1d9e9d557d04e2ae9784cb426643e8ff6f2.part",
+          "bytes": 9976,
+          "sha256": "11dfbc8449a19a46114972354801b1d9e9d557d04e2ae9784cb426643e8ff6f2"
+        }
+      ]
+    },
+    {
+      "path": "data/china.npz",
+      "bytes": 7894077,
+      "sha256": "f622eeb563669ffeaa9a6936286f6398a767e3db30ff4e88adc57bee7bbf4aab",
+      "mtime_ns": 1791447004453866400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/data/china.npz",
+          "bytes": 7894077,
+          "sha256": "f622eeb563669ffeaa9a6936286f6398a767e3db30ff4e88adc57bee7bbf4aab"
+        }
+      ]
+    },
+    {
+      "path": "data/china_layout.json",
+      "bytes": 809,
+      "sha256": "07b23d82c692004b878af46101c64eab93e99d5734828c79ca972874d65ffa60",
+      "mtime_ns": 1791478003658842800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/07b23d82c692004b878af46101c64eab93e99d5734828c79ca972874d65ffa60.part",
+          "bytes": 809,
+          "sha256": "07b23d82c692004b878af46101c64eab93e99d5734828c79ca972874d65ffa60"
+        }
+      ]
+    },
+    {
+      "path": "data/fujian_taiwan.json",
+      "bytes": 8915,
+      "sha256": "6c48e4c0f82e33a04a67f25cef8681cb6f8568ce439ac416d7e4d07a2628b778",
+      "mtime_ns": 1791447017873840400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/6c48e4c0f82e33a04a67f25cef8681cb6f8568ce439ac416d7e4d07a2628b778.part",
+          "bytes": 8915,
+          "sha256": "6c48e4c0f82e33a04a67f25cef8681cb6f8568ce439ac416d7e4d07a2628b778"
+        }
+      ]
+    },
+    {
+      "path": "data/fujian_taiwan.npz",
+      "bytes": 5871174,
+      "sha256": "7d7fee516932e6103d69353d11ae2c5cf562672c9ade15ebec783639c4d303eb",
+      "mtime_ns": 1791447010033855700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/data/fujian_taiwan.npz",
+          "bytes": 5871174,
+          "sha256": "7d7fee516932e6103d69353d11ae2c5cf562672c9ade15ebec783639c4d303eb"
+        }
+      ]
+    },
+    {
+      "path": "data/fujian_taiwan_layout.json",
+      "bytes": 815,
+      "sha256": "40c096f5b34515b6753842db325b557b8746403948f3880c41582cd387c57862",
+      "mtime_ns": 1791478021571041900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/40c096f5b34515b6753842db325b557b8746403948f3880c41582cd387c57862.part",
+          "bytes": 815,
+          "sha256": "40c096f5b34515b6753842db325b557b8746403948f3880c41582cd387c57862"
+        }
+      ]
+    },
+    {
+      "path": "data/hainan.json",
+      "bytes": 2153,
+      "sha256": "4f8bbbcea83dba9a9610da7ec0d2bf587436415d9dc09a24b7d8c512dd2abfee",
+      "mtime_ns": 1791446679847383300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/4f8bbbcea83dba9a9610da7ec0d2bf587436415d9dc09a24b7d8c512dd2abfee.part",
+          "bytes": 2153,
+          "sha256": "4f8bbbcea83dba9a9610da7ec0d2bf587436415d9dc09a24b7d8c512dd2abfee"
+        }
+      ]
+    },
+    {
+      "path": "data/hainan.npz",
+      "bytes": 5798969,
+      "sha256": "be5095b003e54c29a826db8a7474a59f03814721bffa1b8b0a88e5de709d57c7",
+      "mtime_ns": 1791447016157844000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/data/hainan.npz",
+          "bytes": 5798969,
+          "sha256": "be5095b003e54c29a826db8a7474a59f03814721bffa1b8b0a88e5de709d57c7"
+        }
+      ]
+    },
+    {
+      "path": "data/hainan_layout.json",
+      "bytes": 804,
+      "sha256": "9de7984b87e4d5ccafcc534a17d97e5717dfcf1abff5259bdcbb40a742c76d1e",
+      "mtime_ns": 1791477976282538400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9de7984b87e4d5ccafcc534a17d97e5717dfcf1abff5259bdcbb40a742c76d1e.part",
+          "bytes": 804,
+          "sha256": "9de7984b87e4d5ccafcc534a17d97e5717dfcf1abff5259bdcbb40a742c76d1e"
+        }
+      ]
+    },
+    {
+      "path": "data/shengsi.json",
+      "bytes": 3598,
+      "sha256": "4de6592ffd854912dab6c9a8aee5d31011fb8e6eb98ad78bb52518d63e9b2912",
+      "mtime_ns": 1791472174667353700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/4de6592ffd854912dab6c9a8aee5d31011fb8e6eb98ad78bb52518d63e9b2912.part",
+          "bytes": 3598,
+          "sha256": "4de6592ffd854912dab6c9a8aee5d31011fb8e6eb98ad78bb52518d63e9b2912"
+        }
+      ]
+    },
+    {
+      "path": "data/shengsi.npz",
+      "bytes": 331274,
+      "sha256": "b6a58290d0b7272b1426b166447fe71e8855e1dbaa93218eba2982b0abcf1259",
+      "mtime_ns": 1791472174047357100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/data/shengsi.npz",
+          "bytes": 331274,
+          "sha256": "b6a58290d0b7272b1426b166447fe71e8855e1dbaa93218eba2982b0abcf1259"
+        }
+      ]
+    },
+    {
+      "path": "data/shengsi_layout.json",
+      "bytes": 807,
+      "sha256": "7c4e68a6ddd872d9b7f9ac244c48cfb5b33f3eacacc1c113cb04ba4fc78dd168",
+      "mtime_ns": 1791477992010713200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/7c4e68a6ddd872d9b7f9ac244c48cfb5b33f3eacacc1c113cb04ba4fc78dd168.part",
+          "bytes": 807,
+          "sha256": "7c4e68a6ddd872d9b7f9ac244c48cfb5b33f3eacacc1c113cb04ba4fc78dd168"
+        }
+      ]
+    },
+    {
+      "path": "data_notes.json",
+      "bytes": 4640,
+      "sha256": "7cb5b3ce503c9ead3cc2cdd74a531dcd0173dd91d5f1ab07be483ff016818269",
+      "mtime_ns": 1791472179711326600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/7cb5b3ce503c9ead3cc2cdd74a531dcd0173dd91d5f1ab07be483ff016818269.part",
+          "bytes": 4640,
+          "sha256": "7cb5b3ce503c9ead3cc2cdd74a531dcd0173dd91d5f1ab07be483ff016818269"
+        }
+      ]
+    },
+    {
+      "path": "finalize_shengsi.slurm",
+      "bytes": 622,
+      "sha256": "9d361350d48e90f43984893d5e78610e27fa5e6ff97672b66fe26c03b98beafa",
+      "mtime_ns": 1791472178987330500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9d361350d48e90f43984893d5e78610e27fa5e6ff97672b66fe26c03b98beafa.part",
+          "bytes": 622,
+          "sha256": "9d361350d48e90f43984893d5e78610e27fa5e6ff97672b66fe26c03b98beafa"
+        }
+      ]
+    },
+    {
+      "path": "index.html",
+      "bytes": 2776,
+      "sha256": "497f9a42e68ecd723ebc02c4dc327ee0721185e505f56572a01f5ffc6197495d",
+      "mtime_ns": 1791478744624751500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/497f9a42e68ecd723ebc02c4dc327ee0721185e505f56572a01f5ffc6197495d.part",
+          "bytes": 2776,
+          "sha256": "497f9a42e68ecd723ebc02c4dc327ee0721185e505f56572a01f5ffc6197495d"
+        }
+      ]
+    },
+    {
+      "path": "lighting_review/hainan_before.png",
+      "bytes": 5692242,
+      "sha256": "8ed4b56c562995a9d23113fa5b2b4b58678a5e64c97deaecfaf6fd15be7403d4",
+      "mtime_ns": 1791478916864196100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/lighting_review/hainan_before.png",
+          "bytes": 5692242,
+          "sha256": "8ed4b56c562995a9d23113fa5b2b4b58678a5e64c97deaecfaf6fd15be7403d4"
+        }
+      ]
+    },
+    {
+      "path": "lighting_review/hainan_candidates.jpg",
+      "bytes": 486943,
+      "sha256": "102bef29794a225058f141be45cc6e6e30e202cbc216582f6fd24b3cad409e1d",
+      "mtime_ns": 1791478917492191800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/lighting_review/hainan_candidates.jpg",
+          "bytes": 486943,
+          "sha256": "102bef29794a225058f141be45cc6e6e30e202cbc216582f6fd24b3cad409e1d"
+        }
+      ]
+    },
+    {
+      "path": "lighting_review/hainan_sun_24.json",
+      "bytes": 256,
+      "sha256": "bdf03d54fa184f7d31416447472fbfce0b0e8ba130795f21a345134366ccefb6",
+      "mtime_ns": 1791477696600934800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/bdf03d54fa184f7d31416447472fbfce0b0e8ba130795f21a345134366ccefb6.part",
+          "bytes": 256,
+          "sha256": "bdf03d54fa184f7d31416447472fbfce0b0e8ba130795f21a345134366ccefb6"
+        }
+      ]
+    },
+    {
+      "path": "lighting_review/hainan_sun_24.png",
+      "bytes": 1583396,
+      "sha256": "20a549d916e964f9883db2285673994c1ee08813967efaa8f795a8426a3a0e5a",
+      "mtime_ns": 1791477696600934800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/lighting_review/hainan_sun_24.png",
+          "bytes": 1583396,
+          "sha256": "20a549d916e964f9883db2285673994c1ee08813967efaa8f795a8426a3a0e5a"
+        }
+      ]
+    },
+    {
+      "path": "lighting_review/hainan_sun_32.json",
+      "bytes": 255,
+      "sha256": "5d8c93ff37871341a756a6e1ee5fefedd33148f8e76b66090c4691789b29f3d0",
+      "mtime_ns": 1791477692620856600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/5d8c93ff37871341a756a6e1ee5fefedd33148f8e76b66090c4691789b29f3d0.part",
+          "bytes": 255,
+          "sha256": "5d8c93ff37871341a756a6e1ee5fefedd33148f8e76b66090c4691789b29f3d0"
+        }
+      ]
+    },
+    {
+      "path": "lighting_review/hainan_sun_32.png",
+      "bytes": 1554223,
+      "sha256": "142109c105469304e7bf39380486b8e1e377d53d8307c6df757df238a70dca2a",
+      "mtime_ns": 1791477692616856500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/lighting_review/hainan_sun_32.png",
+          "bytes": 1554223,
+          "sha256": "142109c105469304e7bf39380486b8e1e377d53d8307c6df757df238a70dca2a"
+        }
+      ]
+    },
+    {
+      "path": "logs/final-shengsi-199042.out",
+      "bytes": 11717,
+      "sha256": "f415143781fc138709102839cd3ca6eb8c915185db035dee8a8490fea222ff0b",
+      "mtime_ns": 1791472201173958600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f415143781fc138709102839cd3ca6eb8c915185db035dee8a8490fea222ff0b.part",
+          "bytes": 11717,
+          "sha256": "f415143781fc138709102839cd3ca6eb8c915185db035dee8a8490fea222ff0b"
+        }
+      ]
+    },
+    {
+      "path": "logs/light-preview-199305.out",
+      "bytes": 11773,
+      "sha256": "7d333bc552d60bbe15b132e03a90e986258d4ca728d1dfc938aa88ba01e72e6b",
+      "mtime_ns": 1791477696652935800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/7d333bc552d60bbe15b132e03a90e986258d4ca728d1dfc938aa88ba01e72e6b.part",
+          "bytes": 11773,
+          "sha256": "7d333bc552d60bbe15b132e03a90e986258d4ca728d1dfc938aa88ba01e72e6b"
+        }
+      ]
+    },
+    {
+      "path": "logs/pack-197920.out",
+      "bytes": 27811,
+      "sha256": "584a0d31ccaca2c19523bd1d4485fd1756d25390d1c5d2a8048067c668ce5e4f",
+      "mtime_ns": 1791448944000164900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/584a0d31ccaca2c19523bd1d4485fd1756d25390d1c5d2a8048067c668ce5e4f.part",
+          "bytes": 27811,
+          "sha256": "584a0d31ccaca2c19523bd1d4485fd1756d25390d1c5d2a8048067c668ce5e4f"
+        }
+      ]
+    },
+    {
+      "path": "logs/pack-198964.out",
+      "bytes": 27879,
+      "sha256": "d50552d1f62cead7e39692358671585383b1215217b5f23bfbd5aa6dfb099ba2",
+      "mtime_ns": 1791470413212864600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/d50552d1f62cead7e39692358671585383b1215217b5f23bfbd5aa6dfb099ba2.part",
+          "bytes": 27879,
+          "sha256": "d50552d1f62cead7e39692358671585383b1215217b5f23bfbd5aa6dfb099ba2"
+        }
+      ]
+    },
+    {
+      "path": "logs/pack-199330.out",
+      "bytes": 31139,
+      "sha256": "4be4c38893a01e08a2bd8faf45ff959216b9c2c122c4754cffade603fd084025",
+      "mtime_ns": 1791478439157946100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/4be4c38893a01e08a2bd8faf45ff959216b9c2c122c4754cffade603fd084025.part",
+          "bytes": 31139,
+          "sha256": "4be4c38893a01e08a2bd8faf45ff959216b9c2c122c4754cffade603fd084025"
+        }
+      ]
+    },
+    {
+      "path": "logs/relief-197797.out",
+      "bytes": 6016,
+      "sha256": "04944bfdb6570dd12b08bed423f09d2e020c5e1c1f157e2333bf465617b62f50",
+      "mtime_ns": 1791446752909812000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/04944bfdb6570dd12b08bed423f09d2e020c5e1c1f157e2333bf465617b62f50.part",
+          "bytes": 6016,
+          "sha256": "04944bfdb6570dd12b08bed423f09d2e020c5e1c1f157e2333bf465617b62f50"
+        }
+      ]
+    },
+    {
+      "path": "logs/relief-197816.out",
+      "bytes": 28306,
+      "sha256": "c11667e549a610c4cf23b4e7dc57d4856ba1bde7df54c0323cf4a6ef37bbcb60",
+      "mtime_ns": 1791447126016944800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/c11667e549a610c4cf23b4e7dc57d4856ba1bde7df54c0323cf4a6ef37bbcb60.part",
+          "bytes": 28306,
+          "sha256": "c11667e549a610c4cf23b4e7dc57d4856ba1bde7df54c0323cf4a6ef37bbcb60"
+        }
+      ]
+    },
+    {
+      "path": "logs/relief-197840.out",
+      "bytes": 28306,
+      "sha256": "a44293b7c0bb736838cf0f9f40f5181dfcf8c747dff6f3a5a8b917ebf45a595d",
+      "mtime_ns": 1791447626872558700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/a44293b7c0bb736838cf0f9f40f5181dfcf8c747dff6f3a5a8b917ebf45a595d.part",
+          "bytes": 28306,
+          "sha256": "a44293b7c0bb736838cf0f9f40f5181dfcf8c747dff6f3a5a8b917ebf45a595d"
+        }
+      ]
+    },
+    {
+      "path": "logs/relief-197872.out",
+      "bytes": 5885,
+      "sha256": "283d7da06daceebd9310116cd4c7c7504808b5077cec05bc064afa9df301f95f",
+      "mtime_ns": 1791447982801971800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/283d7da06daceebd9310116cd4c7c7504808b5077cec05bc064afa9df301f95f.part",
+          "bytes": 5885,
+          "sha256": "283d7da06daceebd9310116cd4c7c7504808b5077cec05bc064afa9df301f95f"
+        }
+      ]
+    },
+    {
+      "path": "logs/relief-198879.out",
+      "bytes": 5885,
+      "sha256": "d1a3df738b7a13d46fe85938c9b5207c4bc940657824a6ec20416a95812adb4c",
+      "mtime_ns": 1791468747889043100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/d1a3df738b7a13d46fe85938c9b5207c4bc940657824a6ec20416a95812adb4c.part",
+          "bytes": 5885,
+          "sha256": "d1a3df738b7a13d46fe85938c9b5207c4bc940657824a6ec20416a95812adb4c"
+        }
+      ]
+    },
+    {
+      "path": "logs/relief-199315.out",
+      "bytes": 28030,
+      "sha256": "1a7b00074169349e8c4e4d0cab8a0057232b34d1ed59ccae8808e7637f3e561b",
+      "mtime_ns": 1791478035607210300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/1a7b00074169349e8c4e4d0cab8a0057232b34d1ed59ccae8808e7637f3e561b.part",
+          "bytes": 28030,
+          "sha256": "1a7b00074169349e8c4e4d0cab8a0057232b34d1ed59ccae8808e7637f3e561b"
+        }
+      ]
+    },
+    {
+      "path": "logs/scene_lighting_report.json",
+      "bytes": 2713,
+      "sha256": "a1d58cb0ad556bb65d7e8e2a9d4887716990b24ca4f9cf5567abf455bfa24086",
+      "mtime_ns": 1791478439117945300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/a1d58cb0ad556bb65d7e8e2a9d4887716990b24ca4f9cf5567abf455bfa24086.part",
+          "bytes": 2713,
+          "sha256": "a1d58cb0ad556bb65d7e8e2a9d4887716990b24ca4f9cf5567abf455bfa24086"
+        }
+      ]
+    },
+    {
+      "path": "logs/slurm-completed.txt",
+      "bytes": 1453,
+      "sha256": "d0071c0960b814fba4d81f3372dba6d7da4c07692df43fb01d717cf48113366b",
+      "mtime_ns": 1791464170691474600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/d0071c0960b814fba4d81f3372dba6d7da4c07692df43fb01d717cf48113366b.part",
+          "bytes": 1453,
+          "sha256": "d0071c0960b814fba4d81f3372dba6d7da4c07692df43fb01d717cf48113366b"
+        }
+      ]
+    },
+    {
+      "path": "logs/slurm-lighting-completed.txt",
+      "bytes": 907,
+      "sha256": "09ac9251da91cb872dbdc0a0f99e31a92052d63cf098cd617fe93ef23a9a2147",
+      "mtime_ns": 1791478745708745500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/09ac9251da91cb872dbdc0a0f99e31a92052d63cf098cd617fe93ef23a9a2147.part",
+          "bytes": 907,
+          "sha256": "09ac9251da91cb872dbdc0a0f99e31a92052d63cf098cd617fe93ef23a9a2147"
+        }
+      ]
+    },
+    {
+      "path": "outputs/china.png",
+      "bytes": 4779779,
+      "sha256": "989bd3c9a4dd8aeea37332ae4f4bea55aeb17e9c70770d0e5e310c0b707b26dd",
+      "mtime_ns": 1791478832500258400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/china.png",
+          "bytes": 4779779,
+          "sha256": "989bd3c9a4dd8aeea37332ae4f4bea55aeb17e9c70770d0e5e310c0b707b26dd"
+        }
+      ]
+    },
+    {
+      "path": "outputs/china_blender.png",
+      "bytes": 6535146,
+      "sha256": "d8cd49e1b4cb2064d8229ebec29cb208bd173d5dd1882fb9a9bc7aaeea7295bb",
+      "mtime_ns": 1791569759254428900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/china_blender.png",
+          "bytes": 6535146,
+          "sha256": "d8cd49e1b4cb2064d8229ebec29cb208bd173d5dd1882fb9a9bc7aaeea7295bb"
+        }
+      ]
+    },
+    {
+      "path": "outputs/china_labels.png",
+      "bytes": 111992,
+      "sha256": "df946bba406da7aea114e71aa3d8605b0f3e94874499e7643cc515d8a302b4c7",
+      "mtime_ns": 1791478374070801900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/china_labels.png",
+          "bytes": 111992,
+          "sha256": "df946bba406da7aea114e71aa3d8605b0f3e94874499e7643cc515d8a302b4c7"
+        }
+      ]
+    },
+    {
+      "path": "outputs/contact_sheet.jpg",
+      "bytes": 647481,
+      "sha256": "d6241a98f1852ff8ac381bb98a827d8b3813a28a101f0e962fe04573dc3f8e33",
+      "mtime_ns": 1791478841812205600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/contact_sheet.jpg",
+          "bytes": 647481,
+          "sha256": "d6241a98f1852ff8ac381bb98a827d8b3813a28a101f0e962fe04573dc3f8e33"
+        }
+      ]
+    },
+    {
+      "path": "outputs/fujian_taiwan.png",
+      "bytes": 4409684,
+      "sha256": "6498bed6716354897e392990329de9ed993625150ce2e3edb3d7cde3afb4a147",
+      "mtime_ns": 1791478840996210300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/fujian_taiwan.png",
+          "bytes": 4409684,
+          "sha256": "6498bed6716354897e392990329de9ed993625150ce2e3edb3d7cde3afb4a147"
+        }
+      ]
+    },
+    {
+      "path": "outputs/fujian_taiwan_blender.png",
+      "bytes": 6030628,
+      "sha256": "6f6c897bc51bd11427c6fe85ff6e9352967332721d36b934c8fccba8522b8842",
+      "mtime_ns": 1791569764566394700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/fujian_taiwan_blender.png",
+          "bytes": 6030628,
+          "sha256": "6f6c897bc51bd11427c6fe85ff6e9352967332721d36b934c8fccba8522b8842"
+        }
+      ]
+    },
+    {
+      "path": "outputs/fujian_taiwan_labels.png",
+      "bytes": 88121,
+      "sha256": "eeadb6b0724f0f27aeeac0ac90bcff10d9e2773c3f5527e746f19d6b085d6e4b",
+      "mtime_ns": 1791478374374800200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/fujian_taiwan_labels.png",
+          "bytes": 88121,
+          "sha256": "eeadb6b0724f0f27aeeac0ac90bcff10d9e2773c3f5527e746f19d6b085d6e4b"
+        }
+      ]
+    },
+    {
+      "path": "outputs/hainan.png",
+      "bytes": 4351972,
+      "sha256": "06db5a67a5027436a01a6c3d08e2aac2633aea86374ed628694ba15d192e136d",
+      "mtime_ns": 1791478836732234400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/hainan.png",
+          "bytes": 4351972,
+          "sha256": "06db5a67a5027436a01a6c3d08e2aac2633aea86374ed628694ba15d192e136d"
+        }
+      ]
+    },
+    {
+      "path": "outputs/hainan_blender.png",
+      "bytes": 5932871,
+      "sha256": "c0caa4b8bb3944e98422377f78ea819da181ad76fcde07f8f30615511d9b7007",
+      "mtime_ns": 1791569769822360900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/hainan_blender.png",
+          "bytes": 5932871,
+          "sha256": "c0caa4b8bb3944e98422377f78ea819da181ad76fcde07f8f30615511d9b7007"
+        }
+      ]
+    },
+    {
+      "path": "outputs/hainan_labels.png",
+      "bytes": 60491,
+      "sha256": "22ffc63f14fae9a4fd04624524b01c8e9320743a21d7496277c1af9af3ba7d2c",
+      "mtime_ns": 1791478374886797400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/hainan_labels.png",
+          "bytes": 60491,
+          "sha256": "22ffc63f14fae9a4fd04624524b01c8e9320743a21d7496277c1af9af3ba7d2c"
+        }
+      ]
+    },
+    {
+      "path": "outputs/lighting_comparison.jpg",
+      "bytes": 369952,
+      "sha256": "322bf4a2779080d82b352ec1333a4dc2a3e87689b43adf3dfa733029537efde7",
+      "mtime_ns": 1791478842376202400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/lighting_comparison.jpg",
+          "bytes": 369952,
+          "sha256": "322bf4a2779080d82b352ec1333a4dc2a3e87689b43adf3dfa733029537efde7"
+        }
+      ]
+    },
+    {
+      "path": "outputs/shengsi.png",
+      "bytes": 2437846,
+      "sha256": "87a4529681619f912298c9fb1ad91f0150b97adc907bb0dcdd622918b187e02a",
+      "mtime_ns": 1791478828236282600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/shengsi.png",
+          "bytes": 2437846,
+          "sha256": "87a4529681619f912298c9fb1ad91f0150b97adc907bb0dcdd622918b187e02a"
+        }
+      ]
+    },
+    {
+      "path": "outputs/shengsi_blender.png",
+      "bytes": 3796517,
+      "sha256": "0538016ace1a3061604c6458dbd9290c9be8df680cc7991e893c8e58e2477287",
+      "mtime_ns": 1791569773286338500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/shengsi_blender.png",
+          "bytes": 3796517,
+          "sha256": "0538016ace1a3061604c6458dbd9290c9be8df680cc7991e893c8e58e2477287"
+        }
+      ]
+    },
+    {
+      "path": "outputs/shengsi_labels.png",
+      "bytes": 60235,
+      "sha256": "9c1eca8128c0c2ed8056e9819c88b79745905c1e2b29bf54f57444a0c88c5db4",
+      "mtime_ns": 1791478375162795800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/outputs/shengsi_labels.png",
+          "bytes": 60235,
+          "sha256": "9c1eca8128c0c2ed8056e9819c88b79745905c1e2b29bf54f57444a0c88c5db4"
+        }
+      ]
+    },
+    {
+      "path": "pack_labels.py",
+      "bytes": 3098,
+      "sha256": "7086de4bbe1a58724ec970f2ac71ffbb381271c1240b4c5bd26c482ba0969d09",
+      "mtime_ns": 1791477970949007400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/7086de4bbe1a58724ec970f2ac71ffbb381271c1240b4c5bd26c482ba0969d09.part",
+          "bytes": 3098,
+          "sha256": "7086de4bbe1a58724ec970f2ac71ffbb381271c1240b4c5bd26c482ba0969d09"
+        }
+      ]
+    },
+    {
+      "path": "pack_labels.slurm",
+      "bytes": 620,
+      "sha256": "555883f3a3007bb7fa586bc04ba29db26658282b5c1ad1e28693c2cae22875eb",
+      "mtime_ns": 1791477971189005700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/555883f3a3007bb7fa586bc04ba29db26658282b5c1ad1e28693c2cae22875eb.part",
+          "bytes": 620,
+          "sha256": "555883f3a3007bb7fa586bc04ba29db26658282b5c1ad1e28693c2cae22875eb"
+        }
+      ]
+    },
+    {
+      "path": "package_delivery.py",
+      "bytes": 1452,
+      "sha256": "12990c555dc5aac53007714741d4f6e73e01700cc05c71a9880aad8756970cec",
+      "mtime_ns": 1791478744832750300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/12990c555dc5aac53007714741d4f6e73e01700cc05c71a9880aad8756970cec.part",
+          "bytes": 1452,
+          "sha256": "12990c555dc5aac53007714741d4f6e73e01700cc05c71a9880aad8756970cec"
+        }
+      ]
+    },
+    {
+      "path": "prepare_data.py",
+      "bytes": 20978,
+      "sha256": "f335280fcdaac03bdf757d113917ff3aa8a1c5bb019d988cc8e0ad60942ecc03",
+      "mtime_ns": 1791472179399328300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f335280fcdaac03bdf757d113917ff3aa8a1c5bb019d988cc8e0ad60942ecc03.part",
+          "bytes": 20978,
+          "sha256": "f335280fcdaac03bdf757d113917ff3aa8a1c5bb019d988cc8e0ad60942ecc03"
+        }
+      ]
+    },
+    {
+      "path": "preview_lighting.py",
+      "bytes": 1901,
+      "sha256": "b7e0350f9316f0fac37bd5e8c13a7ae6d570d6df1edfb60e6234b231094ffece",
+      "mtime_ns": 1791477683755273000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b7e0350f9316f0fac37bd5e8c13a7ae6d570d6df1edfb60e6234b231094ffece.part",
+          "bytes": 1901,
+          "sha256": "b7e0350f9316f0fac37bd5e8c13a7ae6d570d6df1edfb60e6234b231094ffece"
+        }
+      ]
+    },
+    {
+      "path": "preview_lighting.slurm",
+      "bytes": 516,
+      "sha256": "80c7c451d8ca394f5bb75218e52c0cd29f858283d9958680c2f6ab7ec2d64a3f",
+      "mtime_ns": 1791477683979271800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/80c7c451d8ca394f5bb75218e52c0cd29f858283d9958680c2f6ab7ec2d64a3f.part",
+          "bytes": 516,
+          "sha256": "80c7c451d8ca394f5bb75218e52c0cd29f858283d9958680c2f6ab7ec2d64a3f"
+        }
+      ]
+    },
+    {
+      "path": "qa_report.json",
+      "bytes": 4727,
+      "sha256": "d6f1701f51935b5bd2916a99d360ab2cfc6258a33e5c794cf9c176e3b4a9d4be",
+      "mtime_ns": 1791478910823821300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/d6f1701f51935b5bd2916a99d360ab2cfc6258a33e5c794cf9c176e3b4a9d4be.part",
+          "bytes": 4727,
+          "sha256": "d6f1701f51935b5bd2916a99d360ab2cfc6258a33e5c794cf9c176e3b4a9d4be"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "bytes": 6940,
+      "sha256": "e72024f436b4ad3a41c991a504aad8bf2e041839c37f4559ce87c64f2f982a7e",
+      "mtime_ns": 1791478377295862500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e72024f436b4ad3a41c991a504aad8bf2e041839c37f4559ce87c64f2f982a7e.part",
+          "bytes": 6940,
+          "sha256": "e72024f436b4ad3a41c991a504aad8bf2e041839c37f4559ce87c64f2f982a7e"
+        }
+      ]
+    },
+    {
+      "path": "render.slurm",
+      "bytes": 761,
+      "sha256": "5c1c6432881fef1b614283461498690b96b3942c89e57895506423e5a9f85e96",
+      "mtime_ns": 1791447060269750000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/5c1c6432881fef1b614283461498690b96b3942c89e57895506423e5a9f85e96.part",
+          "bytes": 761,
+          "sha256": "5c1c6432881fef1b614283461498690b96b3942c89e57895506423e5a9f85e96"
+        }
+      ]
+    },
+    {
+      "path": "render_atlas.py",
+      "bytes": 12226,
+      "sha256": "f7fc291fde8ec112443d46b277d76dc4b16764f88b73b106a8b898f216982e6a",
+      "mtime_ns": 1791477683527274300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f7fc291fde8ec112443d46b277d76dc4b16764f88b73b106a8b898f216982e6a.part",
+          "bytes": 12226,
+          "sha256": "f7fc291fde8ec112443d46b277d76dc4b16764f88b73b106a8b898f216982e6a"
+        }
+      ]
+    },
+    {
+      "path": "renders/china_terrain.png",
+      "bytes": 6492149,
+      "sha256": "b35fd0ce68842109defa598b79a8afca319554023b034b05bbef1e82154669ee",
+      "mtime_ns": 1791569734780421300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/renders/china_terrain.png",
+          "bytes": 6492149,
+          "sha256": "b35fd0ce68842109defa598b79a8afca319554023b034b05bbef1e82154669ee"
+        }
+      ]
+    },
+    {
+      "path": "renders/fujian_taiwan_terrain.png",
+      "bytes": 5963259,
+      "sha256": "6132cb0c54b903cf493f7ef9e4302c7ef702a5004663ec4f8c791ad607ef7e33",
+      "mtime_ns": 1791569740760388000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/renders/fujian_taiwan_terrain.png",
+          "bytes": 5963259,
+          "sha256": "6132cb0c54b903cf493f7ef9e4302c7ef702a5004663ec4f8c791ad607ef7e33"
+        }
+      ]
+    },
+    {
+      "path": "renders/hainan_preview.png",
+      "bytes": 1389902,
+      "sha256": "f33e7f3d5a2549f1e24b6aa2ed5e50cd90f01ff736d5f7a3ec132d92059fb318",
+      "mtime_ns": 1791569742484377800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/renders/hainan_preview.png",
+          "bytes": 1389902,
+          "sha256": "f33e7f3d5a2549f1e24b6aa2ed5e50cd90f01ff736d5f7a3ec132d92059fb318"
+        }
+      ]
+    },
+    {
+      "path": "renders/hainan_terrain.png",
+      "bytes": 5893983,
+      "sha256": "30e7c1ef4f6e48f39fa7da9b7f5106f8374142eb4f55cc34940c91666b3fe397",
+      "mtime_ns": 1791569747968345500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/renders/hainan_terrain.png",
+          "bytes": 5893983,
+          "sha256": "30e7c1ef4f6e48f39fa7da9b7f5106f8374142eb4f55cc34940c91666b3fe397"
+        }
+      ]
+    },
+    {
+      "path": "renders/shengsi_terrain.png",
+      "bytes": 3706668,
+      "sha256": "340f24d9ba740d07f45a848538ca2e6e5c0119451844c8d8c126523668882b14",
+      "mtime_ns": 1791569751292325900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/renders/shengsi_terrain.png",
+          "bytes": 3706668,
+          "sha256": "340f24d9ba740d07f45a848538ca2e6e5c0119451844c8d8c126523668882b14"
+        }
+      ]
+    },
+    {
+      "path": "scenes/china.blend",
+      "bytes": 69841270,
+      "sha256": "89eb468867b4c84be05c424b07071dae392d214994b3f987b555a0abd06bc500",
+      "mtime_ns": 1791595669484915300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/scenes/china.blend",
+          "bytes": 69841270,
+          "sha256": "89eb468867b4c84be05c424b07071dae392d214994b3f987b555a0abd06bc500"
+        }
+      ]
+    },
+    {
+      "path": "scenes/fujian_taiwan.blend",
+      "bytes": 50314995,
+      "sha256": "6ac461a21af09565f7060d43d275b5e6413bccf6be5aec7446bec4e92d3ec66d",
+      "mtime_ns": 1791478423757622300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/scenes/fujian_taiwan.blend",
+          "bytes": 50314995,
+          "sha256": "6ac461a21af09565f7060d43d275b5e6413bccf6be5aec7446bec4e92d3ec66d"
+        }
+      ]
+    },
+    {
+      "path": "scenes/hainan.blend",
+      "bytes": 61979098,
+      "sha256": "c2a564e3e138619cff9a352852be33d84e8d4bf63e0850945f3b2fac64a34c8f",
+      "mtime_ns": 1791595721724622200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/scenes/hainan.blend",
+          "bytes": 61979098,
+          "sha256": "c2a564e3e138619cff9a352852be33d84e8d4bf63e0850945f3b2fac64a34c8f"
+        }
+      ]
+    },
+    {
+      "path": "scenes/shengsi.blend",
+      "bytes": 2186227,
+      "sha256": "fc1af9f1ce87af59fe313758021517eb51579f0b08a33657d5cce5e4a4e60980",
+      "mtime_ns": 1791478381988745400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/scenes/shengsi.blend",
+          "bytes": 2186227,
+          "sha256": "fc1af9f1ce87af59fe313758021517eb51579f0b08a33657d5cce5e4a4e60980"
+        }
+      ]
+    },
+    {
+      "path": "shengsi.json",
+      "bytes": 3598,
+      "sha256": "4de6592ffd854912dab6c9a8aee5d31011fb8e6eb98ad78bb52518d63e9b2912",
+      "mtime_ns": 1791468733011634500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/4de6592ffd854912dab6c9a8aee5d31011fb8e6eb98ad78bb52518d63e9b2912.part",
+          "bytes": 3598,
+          "sha256": "4de6592ffd854912dab6c9a8aee5d31011fb8e6eb98ad78bb52518d63e9b2912"
+        }
+      ]
+    },
+    {
+      "path": "shengsi.npz",
+      "bytes": 331274,
+      "sha256": "b6a58290d0b7272b1426b166447fe71e8855e1dbaa93218eba2982b0abcf1259",
+      "mtime_ns": 1791468732735636400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/reference/data/shengsi.npz",
+          "bytes": 331274,
+          "sha256": "b6a58290d0b7272b1426b166447fe71e8855e1dbaa93218eba2982b0abcf1259"
+        }
+      ]
+    },
+    {
+      "path": "verify_delivery.py",
+      "bytes": 2772,
+      "sha256": "59da4480cfab578da1da051f7cc8f8923a9d3af98b599a31e2cb70d7b03b7159",
+      "mtime_ns": 1791478376895865200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/59da4480cfab578da1da051f7cc8f8923a9d3af98b599a31e2cb70d7b03b7159.part",
+          "bytes": 2772,
+          "sha256": "59da4480cfab578da1da051f7cc8f8923a9d3af98b599a31e2cb70d7b03b7159"
+        }
+      ]
+    },
+    {
+      "path": "verify_scene_lighting.py",
+      "bytes": 2956,
+      "sha256": "1c517ee4f8262d69be7cbefc0880c308db1c6c1ba456352f7222a0d7a157d211",
+      "mtime_ns": 1791478376391868600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/1c517ee4f8262d69be7cbefc0880c308db1c6c1ba456352f7222a0d7a157d211.part",
+          "bytes": 2956,
+          "sha256": "1c517ee4f8262d69be7cbefc0880c308db1c6c1ba456352f7222a0d7a157d211"
+        }
+      ]
+    }
+  ],
+  "file_count": 75,
+  "total_bytes": 277296681
+}

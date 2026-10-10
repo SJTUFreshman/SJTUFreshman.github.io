@@ -1,0 +1,39 @@
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE_PATH);
+(async () => {
+    const browser = await chromium.launch({ channel: 'chrome', headless: true, args: ['--enable-unsafe-swiftshader'] });
+    const context = await browser.newContext({ viewport: { width: 900, height: 800 }, isMobile: true, hasTouch: true });
+    const page = await context.newPage();
+    await page.goto('http://127.0.0.1:8765/life.html');
+    await page.waitForFunction(() => window.lifeStarMap?.initialized && !window.lifeStarMap.flight);
+    console.log(await page.evaluate(() => ({ classes: document.body.className, sheets: [...document.styleSheets].map(sheet => sheet.href), oldCanvas: getComputedStyle(document.querySelector('#spaceCanvas')).display })));
+    const client = await context.newCDPSession(page);
+    const read = () => page.evaluate(() => ({ scale: visualViewport.scale, width: innerWidth, dpr: devicePixelRatio, distance: lifeStarMap.target.distance }));
+    for (const selector of ['#galaxyWorld', '[data-map-entity="solar"]']) {
+        const point = selector === '#galaxyWorld' ? { x: 700, y: 450 } : await page.locator(selector).boundingBox().then(box => ({ x: box.x + box.width / 2, y: box.y + box.height / 2 }));
+        console.log(selector, 'before', await read(), point, await page.evaluate(point => document.elementFromPoint(point.x, point.y)?.outerHTML.slice(0, 170), point));
+        await client.send('Input.synthesizePinchGesture', { x: point.x, y: point.y, scaleFactor: 1.6, relativeSpeed: 600, gestureSourceType: 'touch' });
+        await page.waitForTimeout(600);
+        console.log(selector, 'after touch', await read());
+        await client.send('Emulation.setPageScaleFactor', { pageScaleFactor: 1 });
+        await client.send('Input.synthesizePinchGesture', { x: point.x, y: point.y, scaleFactor: 1.6, relativeSpeed: 600, gestureSourceType: 'mouse' });
+        await page.waitForTimeout(600);
+        console.log(selector, 'after mouse', await read());
+        await client.send('Emulation.setPageScaleFactor', { pageScaleFactor: 1 });
+    }
+    await page.evaluate(() => { lifeStarMap.solarSystem.enter(); });
+    await page.waitForTimeout(800);
+    for (const selector of ['.solar-map-picker', '.solar-map-header']) {
+        const box = await page.locator(selector).boundingBox();
+        const point = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+        console.log(selector, 'before', await read(), point);
+        await client.send('Input.synthesizePinchGesture', { x: point.x, y: point.y, scaleFactor: 1.6, relativeSpeed: 600, gestureSourceType: 'touch' });
+        await page.waitForTimeout(600);
+        console.log(selector, 'after touch', await read());
+        await client.send('Emulation.setPageScaleFactor', { pageScaleFactor: 1 });
+        await client.send('Input.synthesizePinchGesture', { x: point.x, y: point.y, scaleFactor: 1.6, relativeSpeed: 600, gestureSourceType: 'mouse' });
+        await page.waitForTimeout(600);
+        console.log(selector, 'after mouse', await read());
+        await client.send('Emulation.setPageScaleFactor', { pageScaleFactor: 1 });
+    }
+    await browser.close();
+})();

@@ -202,55 +202,6 @@ document.querySelectorAll('.lang-btn').forEach(button => {
 
 let mapsInitializing = false;
 let mapsReady = false;
-let chinaMapChart = null;
-let worldMapChart = null;
-
-function waitForECharts(timeout = 7000) {
-    const started = performance.now();
-    return new Promise((resolve, reject) => {
-        const check = () => {
-            if (window.echarts) {
-                resolve(window.echarts);
-                return;
-            }
-            if (performance.now() - started > timeout) {
-                reject(new Error('ECharts did not load'));
-                return;
-            }
-            window.setTimeout(check, 100);
-        };
-        check();
-    });
-}
-
-function worldSeriesData() {
-    return visitedCountries.map(country => {
-        const displayName = country.label?.[state.currentLang] || country.label?.en || country.map_name;
-        return {
-            name: country.map_name,
-            value: 1,
-            itemStyle: { areaColor: '#30343a' },
-            emphasis: { itemStyle: { areaColor: '#51575f' } },
-            label: {
-                show: true,
-                formatter: displayName,
-                color: '#fff',
-                fontFamily: '"IBM Plex Sans", "PingFang SC", "Microsoft YaHei UI", sans-serif',
-                fontSize: 9
-            }
-        };
-    });
-}
-
-function currentCountrySummary() {
-    return document.getElementById('visitedCountriesSummary')?.textContent ||
-        'Mainland China and Taiwan';
-}
-
-function mapFailure(element, error) {
-    console.error('Map failed:', error);
-    element.innerHTML = '<div style="height:100%;display:grid;place-items:center;color:#999;font:12px IBM Plex Sans,sans-serif;">Map unavailable</div>';
-}
 
 function footprintsMapIsVisible() {
     const entry = document.querySelector('[data-portal-entry="footprints-map"]');
@@ -264,184 +215,41 @@ function footprintsMapIsVisible() {
 
 async function initMaps() {
     if (!footprintsMapIsVisible()) return;
+    if (!window.footprintsAtlas) {
+        console.warn('Footprints atlas module is not loaded');
+        return;
+    }
     if (mapsReady || mapsInitializing) {
         resizeMaps();
         return;
     }
     mapsInitializing = true;
-    const chinaElement = document.getElementById('chinaMap');
-    const worldElement = document.getElementById('worldMap');
     try {
-        const echarts = await waitForECharts();
-        const [chinaResponse, worldResponse] = await Promise.all([
-            fetch('assets/maps/china_city_full.json'),
-            fetch('assets/maps/world.json')
-        ]);
-        if (!chinaResponse.ok || !worldResponse.ok) {
-            throw new Error(`Map HTTP ${chinaResponse.status}/${worldResponse.status}`);
-        }
-        const [chinaGeoJson, worldGeoJson] = await Promise.all([
-            chinaResponse.json(),
-            worldResponse.json()
-        ]);
-        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        await window.footprintsAtlas.init({
+            root: document.querySelector('[data-portal-entry="footprints-map"]'),
+            language: state.currentLang
+        });
         if (!footprintsMapIsVisible()) {
             mapsInitializing = false;
             return;
         }
-        echarts.getInstanceByDom(chinaElement)?.dispose();
-        echarts.getInstanceByDom(worldElement)?.dispose();
-        chinaElement.replaceChildren();
-        worldElement.replaceChildren();
-        chinaMapChart = echarts.init(chinaElement, null, { renderer: 'canvas' });
-        worldMapChart = echarts.init(worldElement, null, { renderer: 'canvas' });
-
-        const cityFeatures = [];
-        const districtByParent = new Map();
-        for (const feature of chinaGeoJson.features) {
-            const properties = feature.properties || {};
-            if (properties.level === 'city') {
-                cityFeatures.push(feature);
-            } else if (
-                properties.level === 'province' &&
-                (properties.name === '台湾省' || properties.name === '臺灣省')
-            ) {
-                cityFeatures.push(feature);
-            } else if (
-                properties.level === 'district' &&
-                properties.parent?.adcode
-            ) {
-                const key = String(properties.parent.adcode);
-                if (!districtByParent.has(key)) districtByParent.set(key, []);
-                districtByParent.get(key).push(feature);
-            }
-        }
-
-        const municipalities = new Map([
-            ['北京市', '110000'],
-            ['上海市', '310000'],
-            ['天津市', '120000'],
-            ['重庆市', '500000']
-        ]);
-        const cityNames = new Set(cityFeatures.map(feature => feature.properties?.name).filter(Boolean));
-        const visitedExpanded = new Set();
-        visited.forEach(name => {
-            if (!municipalities.has(name) || cityNames.has(name)) {
-                visitedExpanded.add(name);
-                return;
-            }
-            const districts = districtByParent.get(municipalities.get(name));
-            if (districts?.length) {
-                districts.forEach(feature => visitedExpanded.add(feature.properties.name));
-            } else {
-                visitedExpanded.add(name);
-            }
-        });
-
-        const mergedFeatures = [...cityFeatures];
-        municipalities.forEach(adcode => {
-            if (districtByParent.has(adcode)) mergedFeatures.push(...districtByParent.get(adcode));
-        });
-        echarts.registerMap('china_life_cities', {
-            type: 'FeatureCollection',
-            features: mergedFeatures
-        });
-        echarts.registerMap('world_life_footprints', worldGeoJson);
-
-        chinaMapChart.setOption({
-            animation: !REDUCED_MOTION,
-            backgroundColor: 'transparent',
-            tooltip: { trigger: 'item' },
-            aria: {
-                enabled: true,
-                label: { enabled: true, description: document.getElementById('chinaMap').getAttribute('aria-label') }
-            },
-            series: [{
-                type: 'map',
-                map: 'china_life_cities',
-                roam: true,
-                center: [104, 35],
-                zoom: 0.95,
-                scaleLimit: { min: 0.9, max: 2.5 },
-                label: { show: false },
-                itemStyle: { areaColor: '#f1efe9', borderColor: '#d3d0c8', borderWidth: 0.7 },
-                emphasis: { itemStyle: { areaColor: '#dad7cf' }, label: { show: false } },
-                data: Array.from(visitedExpanded).map(name => ({
-                    name,
-                    itemStyle: { areaColor: '#30343a' }
-                }))
-            }]
-        });
-
-        worldMapChart.setOption({
-            animation: !REDUCED_MOTION,
-            backgroundColor: 'transparent',
-            tooltip: {
-                trigger: 'item',
-                formatter: params => {
-                    const country = visitedCountries.find(item => item.map_name === params.name);
-                    return country
-                        ? (country.label?.[state.currentLang] || country.label?.en || params.name)
-                        : params.name;
-                }
-            },
-            aria: {
-                enabled: true,
-                label: { enabled: true, description: currentCountrySummary() }
-            },
-            series: [{
-                type: 'map',
-                map: 'world_life_footprints',
-                roam: true,
-                center: [10, 18],
-                zoom: 0.98,
-                scaleLimit: { min: 0.9, max: 5 },
-                itemStyle: { areaColor: '#f1efe9', borderColor: '#d3d0c8', borderWidth: 0.65 },
-                emphasis: { itemStyle: { areaColor: '#dad7cf' }, label: { show: false } },
-                data: worldSeriesData()
-            }]
-        });
         mapsReady = true;
         mapsInitializing = false;
         resizeMaps();
     } catch (error) {
         mapsReady = false;
         mapsInitializing = false;
-        chinaMapChart?.dispose();
-        worldMapChart?.dispose();
-        window.echarts?.getInstanceByDom?.(chinaElement)?.dispose();
-        window.echarts?.getInstanceByDom?.(worldElement)?.dispose();
-        chinaMapChart = null;
-        worldMapChart = null;
-        mapFailure(chinaElement, error);
-        mapFailure(worldElement, error);
+        console.error('Footprints atlas failed:', error);
+        window.footprintsAtlas.fail?.(error);
     }
 }
 
 function updateMapLanguage() {
-    if (!mapsReady) return;
-    worldMapChart?.setOption({
-        aria: {
-            enabled: true,
-            label: { enabled: true, description: currentCountrySummary() }
-        },
-        series: [{ data: worldSeriesData() }]
-    });
-    chinaMapChart?.setOption({
-        aria: {
-            enabled: true,
-            label: {
-                enabled: true,
-                description: document.getElementById('chinaMap').getAttribute('aria-label')
-            }
-        }
-    });
+    window.footprintsAtlas?.updateLanguage?.(state.currentLang);
 }
 
 function resizeMaps() {
-    if (!mapsReady) return;
-    chinaMapChart?.resize();
-    worldMapChart?.resize();
+    window.footprintsAtlas?.resize?.();
 }
 
 let lightboxItems = [];

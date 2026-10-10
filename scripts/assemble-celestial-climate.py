@@ -177,13 +177,14 @@ def assemble(master, climate, output, frame_count=8, resolution_widths=(2048, 40
     return configuration
 
 
-def package_body(output, body, workers=2):
+def package_body(output, body, workers=2, resume_derivatives=False):
     output = Path(output).resolve()
     configuration = read_json(output / 'climate-assembly.json')
     if body not in configuration['climateBodies']:
         raise ValueError('Only the assembled climate bodies need repackaging.')
     package = copy.deepcopy(read_json(regular_file(output, f'{body}/source-metadata/v5-package.json')))
     args = package_args(output, package, workers)
+    args.resume_derivatives = resume_derivatives
     if (output / body / 'package.json').exists():
         PACKAGER.verify_body(body, args)
         return
@@ -210,8 +211,7 @@ def package_body(output, body, workers=2):
     for tier in package['resolutions']:
         layer_args = PACKAGER.resolution_arguments(args, cloud_args, tier['width'])
         layer_args.full_sphere = False
-        with ThreadPoolExecutor(max_workers=workers) as executor:
-            tier_frames = list(executor.map(lambda record: PACKAGER.derive_frame(record, layer_args, tier['width']), frames))
+        tier_frames = PACKAGER.derive_frames(frames, layer_args, tier['width'], f'{body} climate')
         tier['layers']['cloud'] = {'frames': tier_frames, 'width': layer_args.width, 'height': layer_args.height,
                                    'poster': PACKAGER.derive_poster(cloud['poster'], tier['width'], layer_args)}
     PACKAGER.atomic_json(output / body / 'package.json', package)
@@ -256,6 +256,7 @@ def main(argv=None):
     package.add_argument('--output', type=Path, required=True)
     package.add_argument('--body', choices=CLIMATE_BODIES, required=True)
     package.add_argument('--workers', type=int, default=2)
+    package.add_argument('--resume-derivatives', action='store_true')
     publication = commands.add_parser('publish')
     publication.add_argument('--output', type=Path, required=True)
     publication.add_argument('--workers', type=int, default=2)
@@ -266,7 +267,7 @@ def main(argv=None):
         assemble(args.master, args.climate, args.output, args.frame_count,
                  tuple(int(value) for value in args.resolution_widths.split(',')))
     elif args.command == 'package':
-        package_body(args.output, args.body, args.workers)
+        package_body(args.output, args.body, args.workers, args.resume_derivatives)
     else:
         publish(args.output, args.workers, args.frame_base_url, args.hosted_output)
 

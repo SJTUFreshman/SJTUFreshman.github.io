@@ -1,0 +1,16 @@
+JobID|JobName|State|Elapsed|AllocTRES|NodeList
+197797|relief-hainan|COMPLETED|00:00:11|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a12g03
+197797.batch|batch|COMPLETED|00:00:11|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a12g03
+197797.extern|extern|COMPLETED|00:00:11|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a12g03
+197816|relief-atlas|COMPLETED|00:01:05|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a12g03
+197816.batch|batch|COMPLETED|00:01:05|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a12g03
+197816.extern|extern|COMPLETED|00:01:05|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a12g03
+197840|relief-colors|COMPLETED|00:01:08|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g01
+197840.batch|batch|COMPLETED|00:01:08|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g01
+197840.extern|extern|COMPLETED|00:01:08|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g01
+197872|relief-atlas|COMPLETED|00:00:11|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g01
+197872.batch|batch|COMPLETED|00:00:11|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g01
+197872.extern|extern|COMPLETED|00:00:11|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g01
+197920|relief-pack|COMPLETED|00:01:00|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a26g02
+197920.batch|batch|COMPLETED|00:01:00|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a26g02
+197920.extern|extern|COMPLETED|00:01:00|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a26g02

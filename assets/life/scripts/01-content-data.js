@@ -15,6 +15,8 @@ const i18n = {
         "title_home": "Home",
         "chart_china": "China",
         "chart_world": "Countries visited",
+        "chart_east_asia": "East Asia",
+        "chart_europe_usa": "Europe + United States",
         "enter_galaxy": "Enter the galaxy",
         "enter_hint": "Click once to take control of the view",
         "enter_location_synced": "Current observing location: {location} · synced from homepage weather",
@@ -105,6 +107,8 @@ const i18n = {
         "title_home": "主页",
         "chart_china": "中国",
         "chart_world": "到访国家和地区",
+        "chart_east_asia": "东亚",
+        "chart_europe_usa": "欧洲与美国",
         "enter_galaxy": "进入星河",
         "enter_hint": "点击一次，接管视角",
         "enter_location_synced": "当前观测位置：{location} · 与主页天气同步",
@@ -195,6 +199,8 @@ const i18n = {
         "title_home": "主頁",
         "chart_china": "中國",
         "chart_world": "到訪國家和地區",
+        "chart_east_asia": "東亞",
+        "chart_europe_usa": "歐洲與美國",
         "enter_galaxy": "進入星河",
         "enter_hint": "點擊一次，接管視角",
         "enter_location_synced": "目前觀測位置：{location} · 與主頁天氣同步",
@@ -310,7 +316,10 @@ const visited = [
     "咸阳市",
     "临汾市",
     "嘉兴市",
-    "太原市"
+    "太原市",
+    "成都市",
+    "兰州市",
+    "重庆市"
 ];
 /* SITEGEN:LIFE_VISITED_END */
 

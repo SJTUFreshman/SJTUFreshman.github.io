@@ -222,6 +222,21 @@ WebP quality 96 输出完整透明母版；土星和天王星的地表、星环�
 光影与归一化球体位置一致。每档图片、海报与来源哈希都记录在单颗资源包中，
 完整验证后才将按宽度排序的 `resolutions` 写入网页清单。
 
+超时后续包可添加 `--resume-derivatives`。每帧完成时原子写入
+`.webp.receipt.json`，再次运行时核对母版与输出 SHA256、尺寸、编码参数和完整解码，
+只复用验证通过的派生帧。没有 receipt 的历史输出默认重新生成；确认来自同一流水线时，
+可在原地 WebP 打包中同时添加 `--adopt-existing-derivatives`，先比较母版缩放像素与
+旧帧的颜色、透明度，再生成 receipt。验证不通过的帧重新编码，receipt 不进入发布包。
+Slurm 对应环境变量为 `PACKAGE_RESUME=1`、`PACKAGE_ADOPT_EXISTING=1`，
+`CELESTIAL_SCRIPT_ROOT` 可指向一次运行专用的脚本目录。
+
+气候完整收尾按依赖执行：地球与火星 v5 包完成 →
+`complete-celestial-climate-package.slurm` 的 `CLIMATE_PACKAGE_STAGE=assemble` →
+分别以 `CLIMATE_PACKAGE_STAGE=package,BODY=earth|mars` 打包动态云层 →
+`publish-celestial-climate.slurm` 完整校验并生成本地清单 →
+`prepare-celestial-climate-release.slurm` 生成分卷归档（设置新的 `CELESTIAL_RELEASE_VERSION`）。
+组装读取生产目录的 `render*.json` 和完整时间视角网格；归档完成后仍需传输、安装与网页验收。
+
 播放器结合屏幕物理像素、设备像素比及近景球面放大倍率选择分辨率，先显示低分辨率
 预览，再替换为当前画面需要的清晰度。8K 图片只将当前可见区域及旋转安全边距保留为
 解码位图，避免完整 8K 位图长期占用缓存；浏览器内部解码仍可能短暂使用额外内存。

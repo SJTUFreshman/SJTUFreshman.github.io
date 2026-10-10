@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "name": "website-support",
+  "created_at": "2026-10-10T01:30:05.200379+00:00",
+  "source": "C:\\Andrew_Allender\\SJTUFreshman.github.io\\.render-work\\relief-archive-sources\\website-support",
+  "excluded_files": [],
+  "chunk_bytes": 50331648,
+  "directories": [
+    ".render-work",
+    "scripts",
+    "scripts/__pycache__"
+  ],
+  "files": [
+    {
+      "path": ".render-work/probe-map-zoom.cjs",
+      "bytes": 3162,
+      "sha256": "475ef3fb8ea3dcbb2dd9b268e7e868fb57c38d64438597f6318822af8c9e4c00",
+      "mtime_ns": 1790973119274882100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/475ef3fb8ea3dcbb2dd9b268e7e868fb57c38d64438597f6318822af8c9e4c00.part",
+          "bytes": 3162,
+          "sha256": "475ef3fb8ea3dcbb2dd9b268e7e868fb57c38d64438597f6318822af8c9e4c00"
+        }
+      ]
+    },
+    {
+      "path": "scripts/__pycache__/build-footprint-atlas.cpython-313.pyc",
+      "bytes": 26294,
+      "sha256": "71c8a34ef5dda3be7c67c169998350734944fa630efb338fe10d208dfd804e3f",
+      "mtime_ns": 1791568464894555400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/71c8a34ef5dda3be7c67c169998350734944fa630efb338fe10d208dfd804e3f.part",
+          "bytes": 26294,
+          "sha256": "71c8a34ef5dda3be7c67c169998350734944fa630efb338fe10d208dfd804e3f"
+        }
+      ]
+    },
+    {
+      "path": "scripts/__pycache__/colorize-footprint-relief.cpython-313.pyc",
+      "bytes": 4180,
+      "sha256": "e35a2ddf9843eb77ce373a03f3a1d2cb8e110be942dc7e9ae6eeae82bd1d0e5e",
+      "mtime_ns": 1791564299827982600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e35a2ddf9843eb77ce373a03f3a1d2cb8e110be942dc7e9ae6eeae82bd1d0e5e.part",
+          "bytes": 4180,
+          "sha256": "e35a2ddf9843eb77ce373a03f3a1d2cb8e110be942dc7e9ae6eeae82bd1d0e5e"
+        }
+      ]
+    },
+    {
+      "path": "scripts/__pycache__/prepare-footprint-routes.cpython-313.pyc",
+      "bytes": 38552,
+      "sha256": "a90ac26a1122952d6c21347584571c548781eed1a9b189a8e015fb7e6cead085",
+      "mtime_ns": 1791568464922062600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/a90ac26a1122952d6c21347584571c548781eed1a9b189a8e015fb7e6cead085.part",
+          "bytes": 38552,
+          "sha256": "a90ac26a1122952d6c21347584571c548781eed1a9b189a8e015fb7e6cead085"
+        }
+      ]
+    },
+    {
+      "path": "scripts/__pycache__/render-footprint-atlas.cpython-313.pyc",
+      "bytes": 11958,
+      "sha256": "84fdf3930aa61de35da9eb5381e3f31328cc81e6b095285cc58d57605ac6eea5",
+      "mtime_ns": 1791595028840073900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/84fdf3930aa61de35da9eb5381e3f31328cc81e6b095285cc58d57605ac6eea5.part",
+          "bytes": 11958,
+          "sha256": "84fdf3930aa61de35da9eb5381e3f31328cc81e6b095285cc58d57605ac6eea5"
+        }
+      ]
+    },
+    {
+      "path": "scripts/__pycache__/validate-footprint-atlas.cpython-313.pyc",
+      "bytes": 17218,
+      "sha256": "b938ef863dd99443f5bde3e5d285bf37761157ae0cefcd896f6fc9b936b349bb",
+      "mtime_ns": 1791595028858686000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b938ef863dd99443f5bde3e5d285bf37761157ae0cefcd896f6fc9b936b349bb.part",
+          "bytes": 17218,
+          "sha256": "b938ef863dd99443f5bde3e5d285bf37761157ae0cefcd896f6fc9b936b349bb"
+        }
+      ]
+    }
+  ],
+  "file_count": 6,
+  "total_bytes": 101364
+}

@@ -1,0 +1,8 @@
+{
+  "sun_elevation_degrees": 24.0,
+  "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+  "sun_energy": 4.7745280265808105,
+  "sun_angular_diameter_degrees": 3.0,
+  "world_strength": 0.45,
+  "horizontal_illuminance_matched_to_previous": true
+}

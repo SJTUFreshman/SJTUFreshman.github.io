@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>地形浮雕 · 四幅地图</title>
+<style>
+body{margin:0;background:#eeece4;color:#343b35;font-family:Georgia,"Songti SC",SimSun,serif}main{max-width:1440px;margin:auto;padding:64px 5vw}header{margin-bottom:50px}small{letter-spacing:.2em;color:#778277}h1{font-size:44px;font-weight:500;letter-spacing:.12em;margin:16px 0}header p{color:#6d776e;line-height:1.8}section{display:grid;grid-template-columns:1fr 1fr;gap:42px}article{min-width:0}img{width:100%;display:block;box-shadow:0 12px 40px #3332}h2{font-weight:400;font-size:24px;margin:20px 0 10px}a{color:#566d64;text-underline-offset:5px}nav{display:flex;gap:24px;font-size:14px}footer{margin-top:64px;color:#777f75;line-height:1.9;font-size:14px}@media(max-width:750px){section{grid-template-columns:1fr}h1{font-size:30px}}
+</style>
+<main>
+<header><small>SHADED RELIEF / BLENDER ATLAS</small><h1>地形浮雕 · 四幅地图</h1><p>真实高程、斜光与地理纹理。以四幅参考图的配色和排版为线索，制作可编辑的 Blender 地图。</p><p>斜光更新 · 太阳高度 32° · 2026.10.09<br><a href="outputs/lighting_comparison.jpg">查看光照调整前后对比</a></p></header>
+<section>
+<article><a href="outputs/shengsi.png"><img src="outputs/shengsi.png" alt="蓝色海面的嵊泗列岛浮雕"></a><h2>嵊泗列岛</h2><nav><a href="outputs/shengsi.png" download>高清 PNG</a><a href="scenes/shengsi.blend" download>Blender 工程</a></nav></article>
+<article><a href="outputs/china.png"><img src="outputs/china.png" alt="纸色背景的中国省域地形"></a><h2>中国省域地形</h2><nav><a href="outputs/china.png" download>高清 PNG</a><a href="scenes/china.blend" download>Blender 工程</a></nav></article>
+<article><a href="outputs/hainan.png"><img src="outputs/hainan.png" alt="冰蓝色的雷州半岛与海南岛浮雕"></a><h2>雷州半岛与海南岛</h2><nav><a href="outputs/hainan.png" download>高清 PNG</a><a href="scenes/hainan.blend" download>Blender 工程</a></nav></article>
+<article><a href="outputs/fujian_taiwan.png"><img src="outputs/fujian_taiwan.png" alt="福建与台湾的分区设色地形"></a><h2>福建与台湾</h2><nav><a href="outputs/fujian_taiwan.png" download>高清 PNG</a><a href="scenes/fujian_taiwan.blend" download>Blender 工程</a></nav></article>
+</section>
+<footer>Blender 4.5.3 · Cycles · NVIDIA A800 · 2026.10<br>高程：Mapzen / AWS Terrain Tiles。边界：DataV、geoBoundaries / © OpenStreetMap contributors。<br><a href="README.md">制作说明与复现步骤</a> · <a href="data_notes.json">数据来源</a><br>视觉建模试作；垂直高度经过夸张。</footer>
+</main>
+</html>

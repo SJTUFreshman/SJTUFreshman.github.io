@@ -17,9 +17,19 @@ esac
 
 python_bin=${PYTHON_BIN:-/data/apps/miniforge3/25.11.0-1/bin/python}
 output_root=${OUTPUT_ROOT:-$ATLAS_ROOT/baked-multires-v5/master}
+script_root=${CELESTIAL_SCRIPT_ROOT:-$ATLAS_ROOT}
+resume_args=()
+if [[ "${PACKAGE_RESUME:-0}" == 1 ]]; then
+    resume_args+=(--resume-derivatives)
+fi
+if [[ "${PACKAGE_ADOPT_EXISTING:-0}" == 1 ]]; then
+    resume_args+=(--adopt-existing-derivatives)
+fi
+exec 9>"$output_root/$BODY/.package.lock"
+flock -n 9
 
-"$python_bin" "$ATLAS_ROOT/package-celestial-atlas.py" \
+"$python_bin" -u "$script_root/package-celestial-atlas.py" \
     --input "$output_root" --output "$output_root" --body "$BODY" \
-    --input-format webp --workers 2 --width 8192 --height 8192 \
+    --input-format webp --workers "${PACKAGE_WORKERS:-1}" --width 8192 --height 8192 \
     --resolution-widths 2048,4096 \
-    --azimuth-count 180 --elevations=-90,-60,-30,0,30,60,90
+    --azimuth-count 180 --elevations=-90,-60,-30,0,30,60,90 "${resume_args[@]}"

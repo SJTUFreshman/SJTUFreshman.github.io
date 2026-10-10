@@ -1,0 +1,70 @@
+{
+  "shengsi": {
+    "sun_elevation_degrees": 32.000000166711786,
+    "sun_azimuth_degrees": 321.84277228173517,
+    "lighting": {
+      "sun_elevation_degrees": 32.0,
+      "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+      "sun_energy": 3.664663076400757,
+      "sun_angular_diameter_degrees": 3.0,
+      "world_strength": 0.45,
+      "horizontal_illuminance_matched_to_previous": true
+    },
+    "packed_labels_sha256": "9c1eca8128c0c2ed8056e9819c88b79745905c1e2b29bf54f57444a0c88c5db4",
+    "scene_sha256": "fc1af9f1ce87af59fe313758021517eb51579f0b08a33657d5cce5e4a4e60980",
+    "resolution_percentage": 100,
+    "samples": 96,
+    "status": "passed"
+  },
+  "china": {
+    "sun_elevation_degrees": 32.000000166711786,
+    "sun_azimuth_degrees": 321.84277228173517,
+    "lighting": {
+      "sun_elevation_degrees": 32.0,
+      "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+      "sun_energy": 3.664663076400757,
+      "sun_angular_diameter_degrees": 3.0,
+      "world_strength": 0.45,
+      "horizontal_illuminance_matched_to_previous": true
+    },
+    "packed_labels_sha256": "df946bba406da7aea114e71aa3d8605b0f3e94874499e7643cc515d8a302b4c7",
+    "scene_sha256": "89eb468867b4c84be05c424b07071dae392d214994b3f987b555a0abd06bc500",
+    "resolution_percentage": 100,
+    "samples": 96,
+    "status": "passed"
+  },
+  "hainan": {
+    "sun_elevation_degrees": 32.000000166711786,
+    "sun_azimuth_degrees": 321.84277228173517,
+    "lighting": {
+      "sun_elevation_degrees": 32.0,
+      "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+      "sun_energy": 3.664663076400757,
+      "sun_angular_diameter_degrees": 3.0,
+      "world_strength": 0.45,
+      "horizontal_illuminance_matched_to_previous": true
+    },
+    "packed_labels_sha256": "22ffc63f14fae9a4fd04624524b01c8e9320743a21d7496277c1af9af3ba7d2c",
+    "scene_sha256": "c2a564e3e138619cff9a352852be33d84e8d4bf63e0850945f3b2fac64a34c8f",
+    "resolution_percentage": 100,
+    "samples": 96,
+    "status": "passed"
+  },
+  "fujian_taiwan": {
+    "sun_elevation_degrees": 32.000000166711786,
+    "sun_azimuth_degrees": 321.84277228173517,
+    "lighting": {
+      "sun_elevation_degrees": 32.0,
+      "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+      "sun_energy": 3.664663076400757,
+      "sun_angular_diameter_degrees": 3.0,
+      "world_strength": 0.45,
+      "horizontal_illuminance_matched_to_previous": true
+    },
+    "packed_labels_sha256": "eeadb6b0724f0f27aeeac0ac90bcff10d9e2773c3f5527e746f19d6b085d6e4b",
+    "scene_sha256": "6ac461a21af09565f7060d43d275b5e6413bccf6be5aec7446bec4e92d3ec66d",
+    "resolution_percentage": 100,
+    "samples": 96,
+    "status": "passed"
+  }
+}

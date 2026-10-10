@@ -87,7 +87,7 @@ const lifeStylesheets = localStylesheetResources(lifeHtml).filter(resource =>
 const releaseVersions = [...lifeScripts, ...lifeStylesheets].map(resource => new URL(resource.reference, 'https://life.invalid/').searchParams.get('v'));
 assert(releaseVersions.every(Boolean), 'Every local Life script and stylesheet must carry a cache-release version');
 assert.equal(new Set(releaseVersions).size, 1, 'All Life scripts and stylesheets must share one release version to prevent mixed cached runtimes');
-assert.equal(lifeRuntimeScripts.length, 25, 'life.html must load the complete hierarchical star-map runtime and celestial compositor');
+assert.equal(lifeRuntimeScripts.length, 26, 'life.html must load the complete hierarchical star-map runtime, footprints atlas, and celestial compositor');
 assert.equal(lifeStylesheets.length, 10, 'life.html must load the complete hierarchical star-map styles');
 assert(
     lifeHtml.split(/\r?\n/).length < 1000,

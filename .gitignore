@@ -2,3 +2,5 @@
 /assets/celestial/baked/
 __pycache__/
 /.wrangler/
+/tools/relief-atlas/reference/cache/terrarium/
+/tools/relief-atlas/reference/relief-atlas-delivery.zip

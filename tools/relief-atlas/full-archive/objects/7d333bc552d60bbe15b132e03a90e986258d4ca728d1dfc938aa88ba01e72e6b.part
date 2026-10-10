@@ -1,0 +1,101 @@
+Blender 4.5.3 LTS (hash 67807e1800cc built 2025-09-09 01:38:15)
+Read blend: "/data/home/scwb515/run/yangrunde/relief-atlas-20261008/scenes/hainan.blend"
+Fra:1 Mem:125.99M (Peak 125.99M) | Time:00:00.17 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Terrain / hainan
+Fra:1 Mem:125.99M (Peak 125.99M) | Time:00:00.17 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | North-west sun / relief shadows
+Fra:1 Mem:368.60M (Peak 391.07M) | Time:00:00.30 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:368.29M (Peak 391.07M) | Time:00:00.30 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:368.29M (Peak 391.07M) | Time:00:00.30 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:368.29M (Peak 391.07M) | Time:00:00.30 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:368.29M (Peak 391.07M) | Time:00:00.30 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:368.38M (Peak 394.57M) | Time:00:00.49 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:407.70M (Peak 407.70M) | Time:00:00.50 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:407.69M (Peak 407.70M) | Time:00:00.51 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:407.70M (Peak 407.70M) | Time:00:00.51 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:574.00M (Peak 574.00M) | Time:00:00.87 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Building BVH 29%, duplicates 0%
+Fra:1 Mem:574.00M (Peak 574.00M) | Time:00:01.04 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Packing BVH triangles and strands
+Fra:1 Mem:585.09M (Peak 585.09M) | Time:00:01.04 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Packing BVH nodes
+Fra:1 Mem:580.10M (Peak 626.94M) | Time:00:01.20 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:580.10M (Peak 626.94M) | Time:00:01.21 | Mem:125.52M, Peak:125.52M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.24 | Mem:125.52M, Peak:125.52M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.57M, Peak:203.57M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.57M, Peak:203.57M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.57M, Peak:203.57M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.57M, Peak:203.57M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.57M, Peak:203.57M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.65M, Peak:203.65M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.65M, Peak:203.65M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.65M, Peak:203.65M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.65M, Peak:203.65M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.57M, Peak:203.65M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.66M, Peak:203.66M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.66M, Peak:203.66M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:658.15M (Peak 658.15M) | Time:00:01.25 | Mem:203.66M, Peak:203.66M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:671.66M (Peak 671.66M) | Time:00:01.25 | Mem:1391.66M, Peak:1391.66M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:758.64M (Peak 758.64M) | Time:00:01.27 | Remaining:00:00.83 | Mem:1478.64M, Peak:1478.64M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:795.26M (Peak 850.20M) | Time:00:03.85 | Mem:1478.64M, Peak:1478.64M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:795.26M (Peak 850.20M) | Time:00:03.85 | Mem:1478.64M, Peak:1478.64M | Scene, ViewLayer | Finished
+Saved: '/data/home/scwb515/run/yangrunde/relief-atlas-20261008/lighting_review/hainan_sun_32.png'
+Time: 00:04.11 (Saving: 00:00.13)
+
+PREVIEW COMPLETE hainan_sun_32 ['NVIDIA A800-SXM4-80GB']
+Fra:1 Mem:231.62M (Peak 231.62M) | Time:00:00.15 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Terrain / hainan
+Fra:1 Mem:231.62M (Peak 231.62M) | Time:00:00.15 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | North-west sun / relief shadows
+Fra:1 Mem:368.61M (Peak 391.08M) | Time:00:00.25 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:368.30M (Peak 391.08M) | Time:00:00.25 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:368.30M (Peak 391.08M) | Time:00:00.25 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:368.30M (Peak 391.08M) | Time:00:00.25 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:368.30M (Peak 391.08M) | Time:00:00.25 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:368.39M (Peak 394.58M) | Time:00:00.39 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:407.71M (Peak 407.71M) | Time:00:00.40 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:407.71M (Peak 407.71M) | Time:00:00.41 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:407.71M (Peak 407.71M) | Time:00:00.41 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:574.01M (Peak 574.01M) | Time:00:00.77 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Building BVH 30%, duplicates 0%
+Fra:1 Mem:574.01M (Peak 574.01M) | Time:00:00.94 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Packing BVH triangles and strands
+Fra:1 Mem:585.10M (Peak 585.10M) | Time:00:00.95 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Packing BVH nodes
+Fra:1 Mem:580.11M (Peak 626.95M) | Time:00:01.10 | Mem:39.32M, Peak:39.32M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:580.11M (Peak 626.95M) | Time:00:01.11 | Mem:125.52M, Peak:125.52M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.14 | Mem:125.52M, Peak:125.52M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.57M, Peak:203.57M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.57M, Peak:203.57M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.57M, Peak:203.57M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.57M, Peak:203.57M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.57M, Peak:203.57M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.65M, Peak:203.65M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.65M, Peak:203.65M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.65M, Peak:203.65M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.65M, Peak:203.65M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.57M, Peak:203.65M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.66M, Peak:203.66M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:658.16M (Peak 658.16M) | Time:00:01.15 | Mem:203.66M, Peak:203.66M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:658.17M (Peak 658.17M) | Time:00:01.15 | Mem:203.66M, Peak:203.66M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:671.67M (Peak 671.67M) | Time:00:01.16 | Mem:1391.66M, Peak:1391.66M | Scene, ViewLayer | Sample 0/48
+Fra:1 Mem:758.65M (Peak 758.65M) | Time:00:01.18 | Remaining:00:00.82 | Mem:1478.64M, Peak:1478.64M | Scene, ViewLayer | Sample 1/48
+Fra:1 Mem:795.28M (Peak 850.21M) | Time:00:03.72 | Mem:1478.64M, Peak:1478.64M | Scene, ViewLayer | Sample 48/48
+Fra:1 Mem:795.28M (Peak 850.21M) | Time:00:03.72 | Mem:1478.64M, Peak:1478.64M | Scene, ViewLayer | Finished
+Saved: '/data/home/scwb515/run/yangrunde/relief-atlas-20261008/lighting_review/hainan_sun_24.png'
+Time: 00:03.97 (Saving: 00:00.11)
+
+PREVIEW COMPLETE hainan_sun_24 ['NVIDIA A800-SXM4-80GB']
+
+Blender quit
+Error: Not freed memory blocks: 1, total unfreed memory 0.000008 MB

@@ -1,0 +1,39 @@
+{
+  "id": "hainan",
+  "bounds": [
+    108.45,
+    17.95,
+    111.45,
+    21.8
+  ],
+  "projection": "+proj=eqc +lat_ts=20 +lat_0=20 +lon_0=109.95 +datum=WGS84 +units=m +no_defs",
+  "crs_wkt": "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"World Geodetic System 1984\",ELLIPSOID[\"WGS 84\",6378137,298.257223563,LENGTHUNIT[\"metre\",1]],ID[\"EPSG\",6326]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Equidistant Cylindrical\",ID[\"EPSG\",1028]],PARAMETER[\"Latitude of 1st standard parallel\",20,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8823]],PARAMETER[\"Latitude of natural origin\",20,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",109.95,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+  "extent_km": [
+    -156.90915607212563,
+    -228.20495612621082,
+    157.07230768816328,
+    200.37508342789272
+  ],
+  "shape": [
+    2300,
+    1685
+  ],
+  "pixel_size_m": 186.33914763221892,
+  "elevation_units": "m above DEM vertical reference; negative inland elevations preserved",
+  "coordinate_units": "km; pixel centers; x increases east, y decreases from north to south",
+  "geo_to_xy": "pyproj.Transformer.from_crs('EPSG:4326', projection, always_xy=True).transform(lon, lat), then divide both coordinates by 1000",
+  "zoom": 10,
+  "tile_count": 130,
+  "region_names": {
+    "1": "陆地"
+  },
+  "region_labels": [],
+  "land_pixels": 1563637,
+  "elevation_range_land_m": [
+    0.7500275373458862,
+    1777.009033203125
+  ],
+  "mask_source": "Terrarium elevation > 0.75 m",
+  "dem_source": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium",
+  "geographic_coordinates": "EPSG:4326; DataV coordinates treated as lon/lat without datum correction"
+}

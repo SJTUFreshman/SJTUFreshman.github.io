@@ -1,0 +1,79 @@
+{
+  "china": {
+    "lighting": {
+      "sun_elevation_degrees": 32,
+      "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+      "sun_energy": 3.664663076400757,
+      "sun_angular_diameter_degrees": 3,
+      "world_strength": 0.45,
+      "horizontal_illuminance_matched_to_previous": true
+    },
+    "render_engine": "Blender 4.5.3 / Cycles CUDA",
+    "samples": 192,
+    "native_render_size": [
+      6000,
+      5024
+    ],
+    "gpu_devices": [
+      "NVIDIA A800-SXM4-80GB"
+    ],
+    "unvisited_material": "#ffffff",
+    "administrative_outlines": false,
+    "slurm_job": 203503,
+    "outputs": {
+      "china-colour.png": "4c4903b1bfb86c7c56ce8f063cdeb29cf528ffa80c56e5dc14349646b1c58652",
+      "china-relief.png": "5574041b5cc8e4e6659a1519a8243406f90ba3d3c21ff648940a6a2e903c464a"
+    }
+  },
+  "east_asia": {
+    "lighting": {
+      "sun_elevation_degrees": 32,
+      "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+      "sun_energy": 3.664663076400757,
+      "sun_angular_diameter_degrees": 3,
+      "world_strength": 0.45,
+      "horizontal_illuminance_matched_to_previous": true
+    },
+    "render_engine": "Blender 4.5.3 / Cycles CUDA",
+    "samples": 192,
+    "native_render_size": [
+      6000,
+      4770
+    ],
+    "gpu_devices": [
+      "NVIDIA A800-SXM4-80GB"
+    ],
+    "unvisited_material": "#ffffff",
+    "administrative_outlines": false,
+    "slurm_job": 203524,
+    "outputs": {
+      "east_asia-colour.png": "8d5f10c537217fb380c499e79f4a5d059cfd97f1e771880498b473ad56352de4",
+      "east_asia-relief.png": "e8d67833a352ef902f034e391fa516ef4701ae3b0c21e3ceab7ae1ef63903a0a"
+    }
+  },
+  "europe_usa": {
+    "lighting": {
+      "sun_elevation_degrees": 32,
+      "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+      "sun_energy": 3.664663076400757,
+      "sun_angular_diameter_degrees": 3,
+      "world_strength": 0.45,
+      "horizontal_illuminance_matched_to_previous": true
+    },
+    "render_engine": "Blender 4.5.3 / Cycles CUDA",
+    "samples": 192,
+    "native_render_size": [
+      8000,
+      2827
+    ],
+    "gpu_devices": [
+      "NVIDIA A800-SXM4-80GB"
+    ],
+    "unvisited_material": "#ffffff",
+    "administrative_outlines": false,
+    "slurm_job": 203541,
+    "outputs": {
+      "europe_usa-relief.png": "8512ad635c2edf5493d832e6c6e159f16c9628e68f83eefb1f00da84704ded2d"
+    }
+  }
+}

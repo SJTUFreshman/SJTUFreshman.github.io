@@ -1,0 +1,30 @@
+{
+  "relief": {
+    "file": "east_asia-relief.blend",
+    "sha256": "c42873919da7c4e673eae82dd4d75162cdd138a34241a990f06d2919de14dfea",
+    "bytes": 68880190,
+    "vertices": 2138781,
+    "resolution": [
+      6000,
+      4770
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false
+  },
+  "colour": {
+    "file": "east_asia-colour.blend",
+    "sha256": "71719d6cc07484a5a76f38ad55d713296cbee623b8be01b640f3f0847614fc90",
+    "bytes": 68942541,
+    "vertices": 2138781,
+    "resolution": [
+      6000,
+      4770
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false
+  }
+}
