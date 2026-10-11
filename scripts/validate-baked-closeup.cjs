@@ -93,7 +93,7 @@ async function main() {
     assert.equal(viewer.samples().length, 1, 'Five-degree azimuth and thirty-degree elevation samples must not blend distant surface features');
     assert(viewer.samples()[0].url.includes('/e3/'), 'A coarse elevation selects the nearest captured latitude');
     viewer.body.azimuthCount = 360;
-    assert.equal(viewer.samples().length, 2, 'Legacy dense cropped captures retain their original adjacent-frame playback');
+    assert.equal(viewer.samples().length, 1, 'Dense cropped captures also display one source without crossfading');
     assert(viewer.samples().every(sample => sample.url.includes('/e3/')), 'Angular selection must retain the nearest captured latitude');
     viewer.body.sphereRect = { x: 0.1, y: 0.1, width: 0.8, height: 0.8 };
     viewer.body.transparent = true;
@@ -114,13 +114,10 @@ async function main() {
     viewer.cloudAzimuth = 42.5;
     viewer.cloudTime = 4.5;
     const climateSamples = viewer.samples().filter(sample => sample.layer === 'clouds');
-    assert.equal(climateSamples.length, 2, 'Climate playback selects adjacent temporal cloud frames');
-    assert.equal(climateSamples[0].timeIndex, 1);
-    assert.equal(climateSamples[1].timeIndex, 2);
-    assert(Math.abs(climateSamples[0].weight - 0.5) < 1e-12 && Math.abs(climateSamples[1].weight - 0.5) < 1e-12,
-        'Adjacent climate frames crossfade by the fractional time position');
-    assert(climateSamples[0].url.includes('/t001/') && climateSamples[1].url.includes('/t002/'),
-        'Climate frame URLs include a stable three-digit time component');
+    assert.equal(climateSamples.length, 1, 'Even legacy crossfade metadata cannot enable cloud ghosting');
+    assert.equal(climateSamples[0].timeIndex, 2);
+    assert.equal(climateSamples[0].weight, 1);
+    assert(climateSamples[0].url.includes('/t002/'), 'Climate frame URLs include a stable three-digit time component');
     viewer.body.climate.allowTemporalBlend = false;
     const singleClimateSamples = viewer.samples().filter(sample => sample.layer === 'clouds');
     assert.equal(singleClimateSamples.length, 1, 'Climate playback uses one temporal source by default to avoid cloud ghosting');
@@ -138,7 +135,7 @@ async function main() {
     viewer.body.resolutions = [climateVariant];
     const variantClimateSamples = viewer.samples().filter(sample => sample.layer === 'clouds');
     assert.equal(variantClimateSamples[0].url,
-        'https://life.invalid/assets/celestial/hosted/earth/clouds-4k/t001/e3/a043.webp',
+        'https://life.invalid/assets/celestial/hosted/earth/clouds-4k/t002/e3/a043.webp',
         'Climate metadata can discover a timed cloud pattern from the selected resolution tier');
     assert.notEqual(climateSamples[0].azimuth, viewer.samples().find(sample => sample.layer === 'surface').azimuth,
         'Climate playback preserves the independent cloud azimuth phase');
@@ -153,6 +150,70 @@ async function main() {
     assert.equal(viewer.samples().filter(sample => sample.layer === 'clouds').length, 1,
         'A single climate frame remains usable as a static timed cloud layer');
     delete viewer.body.climate;
+
+    const autoplay = configuredViewer();
+    Object.assign(autoplay.body, { azimuthCount: 180, transparent: true,
+        sphereRect: { x: 0.1, y: 0.1, width: 0.8, height: 0.8 },
+        cloudFramePattern: 'earth/clouds/t{time}/e{elevation}/a{azimuth}.webp',
+        climate: { frameCount: 8, timeStepSeconds: 10800, loopSeconds: 86400 } });
+    const availableSample = autoplay.availableSample;
+    autoplay.availableSample = sample => sample;
+    for (const [bodyId, seconds] of [['earth', 150], ['mars', 150], ['jupiter', 90], ['saturn', 90], ['moon', 120]]) {
+        autoplay.profile = { id: bodyId };
+        assert.equal(autoplay.rotationSeconds(), seconds);
+        for (const rate of [0.5, 1, 2]) {
+            autoplay.azimuth = autoplay.cloudAzimuth = autoplay.cloudTime = 0;
+            autoplay.setPlaybackRate(rate);
+            assert(autoplay.advancePlayback(1));
+            assert(Math.abs(autoplay.azimuth - 360 / seconds * rate) < 1e-10);
+            assert(Math.abs(autoplay.cloudAzimuth - autoplay.azimuth * 1.12) < 1e-10);
+            assert.equal(autoplay.cloudTime, 24 / 32 * rate, 'Surface and independent climate clocks follow the chosen speed');
+        }
+    }
+    autoplay.setPlaybackRate(3);
+    assert.equal(autoplay.playbackRate, 2, 'Only the three offered playback rates are accepted');
+    const phases = () => [autoplay.azimuth, autoplay.cloudAzimuth, autoplay.cloudTime];
+    const beforeBuffer = phases();
+    autoplay.availableSample = () => null;
+    assert.equal(autoplay.advancePlayback(1), false);
+    assert.deepEqual(phases(), beforeBuffer, 'A missing next frame freezes both clocks instead of jumping or blending');
+    assert.equal(autoplay.waitingSamples.length, 2);
+    const requests = [];
+    autoplay.request = url => { requests.push(url); return Promise.resolve(null); };
+    autoplay.prefetch(autoplay.samples());
+    assert(autoplay.waitingSamples.every(sample => requests.includes(sample.url)), 'Buffering queues every required replacement');
+    autoplay.availableSample = availableSample;
+    for (const sample of [...autoplay.samples(), ...autoplay.waitingSamples]) {
+        if (autoplay.cache.has(sample.url)) continue;
+        const image = frame(64, 64);
+        autoplay.cache.set(sample.url, image);
+        autoplay.cacheBytes += image.width * image.height * 4;
+    }
+    const obsoleteBufferedFrame = frame(64, 64);
+    autoplay.cache.set('obsolete-buffered-frame', obsoleteBufferedFrame);
+    autoplay.cacheBytes += obsoleteBufferedFrame.width * obsoleteBufferedFrame.height * 4;
+    autoplay.frameCapacity = () => 6;
+    autoplay.evict();
+    assert(obsoleteBufferedFrame.closed);
+    assert(autoplay.waitingSamples.every(sample => autoplay.cache.has(sample.url)),
+        'Cache pressure must not discard decoded replacements before playback can consume them');
+    assert(autoplay.advancePlayback(1), 'Playback resumes when all replacements are decoded');
+    assert.equal(autoplay.waitingSamples.length, 0);
+    autoplay.prefetch = () => {};
+    autoplay.draw = () => {};
+    autoplay.paused = true;
+    autoplay.lastTick = 1000;
+    const beforePause = phases();
+    autoplay.render(1100, { profile: autoplay.profile, phase: 'observing', visualProgress: 1 });
+    assert.deepEqual(phases(), beforePause, 'Pause freezes the surface, cloud longitude and climate evolution');
+    autoplay.element.contains = target => target === autoplay.element;
+    for (const key of ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']) {
+        assert(autoplay.handleKey({ key, target: autoplay.element, preventDefault() {} }));
+        assert.deepEqual(phases(), beforePause, 'Arrow keys cannot change the fixed camera or rotation');
+    }
+    autoplay.handleKey({ code: 'Space', target: autoplay.element, preventDefault() {} });
+    assert.equal(autoplay.paused, false);
+    autoplay.clear();
 
     const tierViewer = configuredViewer({ coarse: false, width: 1920, height: 1080, dpr: 1, compact: false });
     tierViewer.body = {

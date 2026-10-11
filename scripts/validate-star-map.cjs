@@ -299,23 +299,33 @@ async function bakedInteractionChecks(page, label) {
     await page.waitForFunction(start => bakedCelestialViewer.azimuth > start + 0.2, initial.azimuth);
     check(await page.locator('.baked-celestial-pause').isVisible(), `${label}: the pre-rendered view rotates automatically`);
     await page.locator('.baked-celestial-pause').click();
-    const paused = await page.evaluate(() => bakedCelestialViewer.azimuth);
+    const paused = await page.evaluate(() => ({ azimuth: bakedCelestialViewer.azimuth,
+        cloudAzimuth: bakedCelestialViewer.cloudAzimuth, cloudTime: bakedCelestialViewer.cloudTime }));
     await page.waitForTimeout(180);
-    check(await page.evaluate(start => bakedCelestialViewer.paused && bakedCelestialViewer.azimuth === start, paused),
-        `${label}: the pause button stops rotation`);
+    check(await page.evaluate(start => bakedCelestialViewer.paused && Object.entries(start)
+        .every(([key, value]) => bakedCelestialViewer[key] === value), paused),
+        `${label}: the pause button stops both the surface and climate clocks`);
     await page.locator('#bakedCelestialView').focus();
     await page.keyboard.press('ArrowRight');
     await page.keyboard.press('ArrowUp');
-    check(await page.evaluate(start => Math.abs(bakedCelestialViewer.azimuth - start.azimuth) > 3
-        && bakedCelestialViewer.elevation === start.elevation + 10, initial), `${label}: keyboard input explores baked angles`);
+    check(await page.evaluate(start => bakedCelestialViewer.azimuth === start.azimuth, paused)
+        && await page.evaluate(start => bakedCelestialViewer.elevation === start.elevation, initial),
+        `${label}: arrow keys preserve the fixed viewing angle`);
     const point = await page.locator('.baked-celestial-canvas').boundingBox();
     await page.mouse.move(point.x + point.width * 0.25, point.y + point.height * 0.35);
     await page.mouse.down();
     const beforeDrag = await page.evaluate(() => bakedCelestialViewer.azimuth);
     await page.mouse.move(point.x + point.width * 0.25 + 80, point.y + point.height * 0.35 + 20, { steps: 6 });
     await page.mouse.up();
-    check(await page.evaluate(start => Math.abs(bakedCelestialViewer.azimuth - start) > 10 && !bakedCelestialViewer.drag, beforeDrag),
-        `${label}: pointer dragging changes the baked angle and releases capture`);
+    check(await page.evaluate(start => bakedCelestialViewer.azimuth === start, beforeDrag),
+        `${label}: pointer dragging cannot move the close-up`);
+    for (const rate of [0.5, 2, 1]) {
+        const button = page.locator(`[data-playback-rate="${rate}"]`);
+        await button.click();
+        check(await button.getAttribute('aria-pressed') === 'true'
+            && await page.evaluate(expected => bakedCelestialViewer.playbackRate === expected && bakedCelestialViewer.paused, rate),
+            `${label}: ${rate}x is selectable without resuming paused playback`);
+    }
     const sampling = await page.evaluate(() => ({
         samples: bakedCelestialViewer.samples(),
         azimuth: bakedCelestialViewer.azimuth,
@@ -324,35 +334,23 @@ async function bakedInteractionChecks(page, label) {
         manifestUrl: bakedCelestialViewer.manifestUrl
     }));
     const spacing = 360 / sampling.body.azimuthCount;
-    const azimuth = ((sampling.azimuth % 360) + 360) % 360;
     const nearestElevation = sampling.body.elevations.map((value, index) => ({
         index, distance: Math.abs(value - sampling.elevation)
     })).sort((first, second) => first.distance - second.distance)[0].index;
-    const capturedAngles = Array.from({ length: sampling.body.azimuthCount }, (unused, index) => {
-        const difference = Math.abs(index * spacing - azimuth);
-        const distance = Math.min(difference, 360 - difference);
-        const pathname = sampling.body.framePattern.replace('{elevation}', String(nearestElevation))
-            .replace('{azimuth}', String(index).padStart(3, '0'));
-        return { url: new URL(pathname, sampling.manifestUrl).href, distance,
-            weight: Math.max(0, 1 - distance / spacing) };
-    });
-    const expectedSamples = spacing > 2
-        ? capturedAngles.filter(sample => sample.distance <= spacing * 0.5 + 1e-9)
-        : capturedAngles.filter(sample => sample.weight > 0.001);
-    const samplesMatch = sampling.samples.every(sample => {
-        const expected = expectedSamples.find(candidate => candidate.url === sample.url);
-        return expected && Number.isFinite(sample.weight) && sample.weight > 0 && sample.weight <= 1
-            && Math.abs(sample.weight - (spacing > 2 ? 1 : expected.weight)) < 1e-9;
-    });
-    const totalWeight = sampling.samples.reduce((total, sample) => total + sample.weight, 0);
-    check(samplesMatch && new Set(sampling.samples.map(sample => sample.url)).size === sampling.samples.length
-        && sampling.samples.length === (spacing > 2 ? 1 : expectedSamples.length)
-        && Math.abs(totalWeight - 1) <= 0.001 + 1e-9,
-    `${label}: captured angles follow manifest spacing, nearest latitude and valid blend weights`);
+    const surfaceSamples = sampling.samples.filter(sample => sample.layer === 'surface');
+    const cloudSamples = sampling.samples.filter(sample => sample.layer === 'clouds');
+    check(surfaceSamples.length === 1 && cloudSamples.length <= 1
+        && sampling.samples.every(sample => sample.weight === 1 && sample.elevation === nearestElevation
+            && Math.abs(sample.azimuth / spacing - Math.round(sample.azimuth / spacing)) < 1e-9),
+        `${label}: every layer uses exactly one captured frame at full opacity`);
     await page.waitForFunction(() => bakedCelestialViewer.activeLoads === 0 && bakedCelestialViewer.queue.length === 0);
     check(await page.evaluate(() => bakedCelestialViewer.cacheBytes <= bakedCelestialViewer.cacheBudget
         && [...bakedCelestialViewer.cache.values()].every(image => image.width > 0 && image.height > 0)),
         `${label}: decoded images stay within the memory budget`);
+    await page.locator('#bakedCelestialView').focus();
+    await page.keyboard.press('Space');
+    await page.waitForFunction(start => !bakedCelestialViewer.paused && bakedCelestialViewer.azimuth !== start.azimuth, paused);
+    check(await bakedControlsAreUncovered(page), `${label}: playback controls remain uncovered and keyboard resume works`);
     await page.locator('.baked-celestial-return').click();
     await page.waitForFunction(() => !window.lifeStarMap.solarSystem.visit);
     check(await page.evaluate(() => !bakedCelestialViewer.profile && !bakedCelestialViewer.cache.size
@@ -671,8 +669,11 @@ async function reducedMotionChecks(browser) {
         'Reduced-motion visitors receive a stationary baked close-up');
     await page.locator('#bakedCelestialView').focus();
     await page.keyboard.press('ArrowRight');
-    check(await page.evaluate(previous => bakedCelestialViewer.azimuth !== previous, angle),
-        'Reduced-motion visitors can still explore the captured angles manually');
+    check(await page.evaluate(previous => bakedCelestialViewer.azimuth === previous, angle),
+        'Reduced-motion visitors retain the same fixed camera');
+    await page.locator('.baked-celestial-pause').click();
+    await page.waitForFunction(previous => !bakedCelestialViewer.paused && bakedCelestialViewer.azimuth !== previous, angle);
+    check(true, 'Reduced-motion visitors can explicitly start playback');
     await page.locator('.baked-celestial-return').click();
     await page.waitForFunction(() => !window.lifeStarMap.solarSystem.visit);
     await context.close();

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "width": 3840,
-  "height": 2160,
+  "width": 8192,
+  "height": 8192,
   "bodies": {
     "sun": {
       "azimuthCount": 180,
@@ -14,12 +14,260 @@
         60.0,
         90.0
       ],
-      "width": 3840,
-      "height": 2160,
-      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/sun/e{elevation}/a{azimuth}.webp",
-      "poster": "posters/sun-708fa8cbf34d8411.webp",
+      "width": 8192,
+      "height": 8192,
+      "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/sun/e{elevation}/a{azimuth}.webp",
+      "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/sun/resolutions/2048/poster.webp",
       "defaultAzimuth": 0,
-      "defaultElevation": 3
+      "defaultElevation": 3,
+      "framing": "full-sphere",
+      "transparent": true,
+      "sphereRect": {
+        "x": 0.1454004307019715,
+        "y": 0.1454004307019715,
+        "width": 0.709199138596057,
+        "height": 0.709199138596057
+      },
+      "projection": "orthographic",
+      "spinAxes": [
+        [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        [
+          0.0,
+          0.5000000596046448,
+          -0.8660255074501038
+        ],
+        [
+          0.0,
+          0.866025447845459,
+          -0.5000002384185791
+        ],
+        [
+          0.0,
+          1.0000001192092896,
+          0.0
+        ],
+        [
+          0.0,
+          0.866025447845459,
+          0.5000002384185791
+        ],
+        [
+          0.0,
+          0.5000000596046448,
+          0.8660255074501038
+        ],
+        [
+          0.0,
+          1.1920928955078125e-07,
+          1.0000001192092896
+        ]
+      ],
+      "spinAxisCoordinates": "right-up-toward-camera",
+      "resolutions": [
+        {
+          "id": "2k",
+          "width": 2048,
+          "height": 2048,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/sun/resolutions/2048/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/sun/resolutions/2048/poster.webp",
+          "posterWidth": 2048,
+          "posterHeight": 2048,
+          "sphereRect": {
+            "x": 0.1454004307019715,
+            "y": 0.1454004307019715,
+            "width": 0.709199138596057,
+            "height": 0.709199138596057
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              -0.8660255074501038
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              -0.5000002384185791
+            ],
+            [
+              0.0,
+              1.0000001192092896,
+              0.0
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              0.5000002384185791
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              0.8660255074501038
+            ],
+            [
+              0.0,
+              1.1920928955078125e-07,
+              1.0000001192092896
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "4k",
+          "width": 4096,
+          "height": 4096,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/sun/resolutions/4096/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/sun/resolutions/4096/poster.webp",
+          "posterWidth": 4096,
+          "posterHeight": 4096,
+          "sphereRect": {
+            "x": 0.1454004307019715,
+            "y": 0.1454004307019715,
+            "width": 0.709199138596057,
+            "height": 0.709199138596057
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              -0.8660255074501038
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              -0.5000002384185791
+            ],
+            [
+              0.0,
+              1.0000001192092896,
+              0.0
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              0.5000002384185791
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              0.8660255074501038
+            ],
+            [
+              0.0,
+              1.1920928955078125e-07,
+              1.0000001192092896
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "8k",
+          "width": 8192,
+          "height": 8192,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/sun/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/sun/poster.webp",
+          "posterWidth": 8192,
+          "posterHeight": 8192,
+          "framing": "full-sphere",
+          "transparent": true,
+          "sphereRect": {
+            "x": 0.1454004307019715,
+            "y": 0.1454004307019715,
+            "width": 0.709199138596057,
+            "height": 0.709199138596057
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              -0.8660255074501038
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              -0.5000002384185791
+            ],
+            [
+              0.0,
+              1.0000001192092896,
+              0.0
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              0.5000002384185791
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              0.8660255074501038
+            ],
+            [
+              0.0,
+              1.1920928955078125e-07,
+              1.0000001192092896
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        }
+      ],
+      "posterWidth": 2048,
+      "posterHeight": 2048,
+      "availableElevations": [
+        3
+      ]
     },
     "mercury": {
       "azimuthCount": 180,
@@ -32,12 +280,260 @@
         60.0,
         90.0
       ],
-      "width": 3840,
-      "height": 2160,
-      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/mercury/e{elevation}/a{azimuth}.webp",
-      "poster": "posters/mercury-91910d60600207fa.webp",
+      "width": 8192,
+      "height": 8192,
+      "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mercury/e{elevation}/a{azimuth}.webp",
+      "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mercury/resolutions/2048/poster.webp",
       "defaultAzimuth": 0,
-      "defaultElevation": 3
+      "defaultElevation": 3,
+      "framing": "full-sphere",
+      "transparent": true,
+      "sphereRect": {
+        "x": 0.06,
+        "y": 0.06,
+        "width": 0.88,
+        "height": 0.88
+      },
+      "projection": "orthographic",
+      "spinAxes": [
+        [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        [
+          0.0,
+          0.5000000596046448,
+          -0.8660255074501038
+        ],
+        [
+          0.0,
+          0.866025447845459,
+          -0.5000002384185791
+        ],
+        [
+          0.0,
+          1.0000001192092896,
+          0.0
+        ],
+        [
+          0.0,
+          0.866025447845459,
+          0.5000002384185791
+        ],
+        [
+          0.0,
+          0.5000000596046448,
+          0.8660255074501038
+        ],
+        [
+          0.0,
+          1.1920928955078125e-07,
+          1.0000001192092896
+        ]
+      ],
+      "spinAxisCoordinates": "right-up-toward-camera",
+      "resolutions": [
+        {
+          "id": "2k",
+          "width": 2048,
+          "height": 2048,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mercury/resolutions/2048/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mercury/resolutions/2048/poster.webp",
+          "posterWidth": 2048,
+          "posterHeight": 2048,
+          "sphereRect": {
+            "x": 0.06,
+            "y": 0.06,
+            "width": 0.88,
+            "height": 0.88
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              -0.8660255074501038
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              -0.5000002384185791
+            ],
+            [
+              0.0,
+              1.0000001192092896,
+              0.0
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              0.5000002384185791
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              0.8660255074501038
+            ],
+            [
+              0.0,
+              1.1920928955078125e-07,
+              1.0000001192092896
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "4k",
+          "width": 4096,
+          "height": 4096,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mercury/resolutions/4096/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mercury/resolutions/4096/poster.webp",
+          "posterWidth": 4096,
+          "posterHeight": 4096,
+          "sphereRect": {
+            "x": 0.06,
+            "y": 0.06,
+            "width": 0.88,
+            "height": 0.88
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              -0.8660255074501038
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              -0.5000002384185791
+            ],
+            [
+              0.0,
+              1.0000001192092896,
+              0.0
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              0.5000002384185791
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              0.8660255074501038
+            ],
+            [
+              0.0,
+              1.1920928955078125e-07,
+              1.0000001192092896
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "8k",
+          "width": 8192,
+          "height": 8192,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mercury/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mercury/poster.webp",
+          "posterWidth": 8192,
+          "posterHeight": 8192,
+          "framing": "full-sphere",
+          "transparent": true,
+          "sphereRect": {
+            "x": 0.06,
+            "y": 0.06,
+            "width": 0.88,
+            "height": 0.88
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              -0.8660255074501038
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              -0.5000002384185791
+            ],
+            [
+              0.0,
+              1.0000001192092896,
+              0.0
+            ],
+            [
+              0.0,
+              0.866025447845459,
+              0.5000002384185791
+            ],
+            [
+              0.0,
+              0.5000000596046448,
+              0.8660255074501038
+            ],
+            [
+              0.0,
+              1.1920928955078125e-07,
+              1.0000001192092896
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        }
+      ],
+      "posterWidth": 2048,
+      "posterHeight": 2048,
+      "availableElevations": [
+        3
+      ]
     },
     "venus": {
       "azimuthCount": 180,
@@ -50,12 +546,260 @@
         60.0,
         90.0
       ],
-      "width": 3840,
-      "height": 2160,
-      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/venus/e{elevation}/a{azimuth}.webp",
-      "poster": "posters/venus-72a28a10234b778d.webp",
+      "width": 8192,
+      "height": 8192,
+      "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/venus/e{elevation}/a{azimuth}.webp",
+      "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/venus/resolutions/2048/poster.webp",
       "defaultAzimuth": 0,
-      "defaultElevation": 3
+      "defaultElevation": 3,
+      "framing": "full-sphere",
+      "transparent": true,
+      "sphereRect": {
+        "x": 0.07115056230871564,
+        "y": 0.07115056230871564,
+        "width": 0.8576988753825687,
+        "height": 0.8576988753825687
+      },
+      "projection": "orthographic",
+      "spinAxes": [
+        [
+          -0.04559462144970894,
+          -0.12835851311683655,
+          -0.9906793832778931
+        ],
+        [
+          -0.20528781414031982,
+          -0.5779285430908203,
+          -0.7898454666137695
+        ],
+        [
+          -0.3099742531776428,
+          -0.872642993927002,
+          -0.37737324833869934
+        ],
+        [
+          -0.33160334825515747,
+          -0.9335334300994873,
+          0.13621601462364197
+        ],
+        [
+          -0.2643795907497406,
+          -0.7442842125892639,
+          0.6133062243461609
+        ],
+        [
+          -0.12631556391716003,
+          -0.35560494661331177,
+          0.9260613322257996
+        ],
+        [
+          0.04559463635087013,
+          0.12835857272148132,
+          0.9906793832778931
+        ]
+      ],
+      "spinAxisCoordinates": "right-up-toward-camera",
+      "resolutions": [
+        {
+          "id": "2k",
+          "width": 2048,
+          "height": 2048,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/venus/resolutions/2048/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/venus/resolutions/2048/poster.webp",
+          "posterWidth": 2048,
+          "posterHeight": 2048,
+          "sphereRect": {
+            "x": 0.07115056230871564,
+            "y": 0.07115056230871564,
+            "width": 0.8576988753825687,
+            "height": 0.8576988753825687
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -0.04559462144970894,
+              -0.12835851311683655,
+              -0.9906793832778931
+            ],
+            [
+              -0.20528781414031982,
+              -0.5779285430908203,
+              -0.7898454666137695
+            ],
+            [
+              -0.3099742531776428,
+              -0.872642993927002,
+              -0.37737324833869934
+            ],
+            [
+              -0.33160334825515747,
+              -0.9335334300994873,
+              0.13621601462364197
+            ],
+            [
+              -0.2643795907497406,
+              -0.7442842125892639,
+              0.6133062243461609
+            ],
+            [
+              -0.12631556391716003,
+              -0.35560494661331177,
+              0.9260613322257996
+            ],
+            [
+              0.04559463635087013,
+              0.12835857272148132,
+              0.9906793832778931
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "4k",
+          "width": 4096,
+          "height": 4096,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/venus/resolutions/4096/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/venus/resolutions/4096/poster.webp",
+          "posterWidth": 4096,
+          "posterHeight": 4096,
+          "sphereRect": {
+            "x": 0.07115056230871564,
+            "y": 0.07115056230871564,
+            "width": 0.8576988753825687,
+            "height": 0.8576988753825687
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -0.04559462144970894,
+              -0.12835851311683655,
+              -0.9906793832778931
+            ],
+            [
+              -0.20528781414031982,
+              -0.5779285430908203,
+              -0.7898454666137695
+            ],
+            [
+              -0.3099742531776428,
+              -0.872642993927002,
+              -0.37737324833869934
+            ],
+            [
+              -0.33160334825515747,
+              -0.9335334300994873,
+              0.13621601462364197
+            ],
+            [
+              -0.2643795907497406,
+              -0.7442842125892639,
+              0.6133062243461609
+            ],
+            [
+              -0.12631556391716003,
+              -0.35560494661331177,
+              0.9260613322257996
+            ],
+            [
+              0.04559463635087013,
+              0.12835857272148132,
+              0.9906793832778931
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "8k",
+          "width": 8192,
+          "height": 8192,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/venus/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/venus/poster.webp",
+          "posterWidth": 8192,
+          "posterHeight": 8192,
+          "framing": "full-sphere",
+          "transparent": true,
+          "sphereRect": {
+            "x": 0.07115056230871564,
+            "y": 0.07115056230871564,
+            "width": 0.8576988753825687,
+            "height": 0.8576988753825687
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -0.04559462144970894,
+              -0.12835851311683655,
+              -0.9906793832778931
+            ],
+            [
+              -0.20528781414031982,
+              -0.5779285430908203,
+              -0.7898454666137695
+            ],
+            [
+              -0.3099742531776428,
+              -0.872642993927002,
+              -0.37737324833869934
+            ],
+            [
+              -0.33160334825515747,
+              -0.9335334300994873,
+              0.13621601462364197
+            ],
+            [
+              -0.2643795907497406,
+              -0.7442842125892639,
+              0.6133062243461609
+            ],
+            [
+              -0.12631556391716003,
+              -0.35560494661331177,
+              0.9260613322257996
+            ],
+            [
+              0.04559463635087013,
+              0.12835857272148132,
+              0.9906793832778931
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        }
+      ],
+      "posterWidth": 2048,
+      "posterHeight": 2048,
+      "availableElevations": [
+        3
+      ]
     },
     "earth": {
       "azimuthCount": 180,
@@ -68,12 +812,398 @@
         60.0,
         90.0
       ],
-      "width": 3840,
-      "height": 2160,
-      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/earth/e{elevation}/a{azimuth}.webp",
-      "poster": "posters/earth-1ae657430d0a44fd.webp",
+      "width": 8192,
+      "height": 8192,
+      "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/e{elevation}/a{azimuth}.webp",
+      "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/resolutions/2048/poster.webp",
       "defaultAzimuth": 0,
-      "defaultElevation": 3
+      "defaultElevation": 3,
+      "framing": "full-sphere",
+      "transparent": true,
+      "sphereRect": {
+        "x": 0.07115053816184391,
+        "y": 0.07115053816184391,
+        "width": 0.8576989236763122,
+        "height": 0.8576989236763122
+      },
+      "projection": "orthographic",
+      "spinAxes": [
+        [
+          -1.4901162970204496e-08,
+          0.0,
+          -1.0000001192092896
+        ],
+        [
+          0.19913442432880402,
+          0.4586344361305237,
+          -0.8660255074501038
+        ],
+        [
+          0.3449109196662903,
+          0.7943781614303589,
+          -0.5000002384185791
+        ],
+        [
+          0.39826884865760803,
+          0.9172688722610474,
+          0.0
+        ],
+        [
+          0.3449109196662903,
+          0.7943781614303589,
+          0.5000002384185791
+        ],
+        [
+          0.19913442432880402,
+          0.4586344361305237,
+          0.8660255074501038
+        ],
+        [
+          1.4901162970204496e-08,
+          0.0,
+          1.000000238418579
+        ]
+      ],
+      "spinAxisCoordinates": "right-up-toward-camera",
+      "cloudFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/clouds/t{time}/e{elevation}/a{azimuth}.webp",
+      "cloudWidth": 2048,
+      "cloudHeight": 2048,
+      "cloudTransparent": true,
+      "cloudSphereRect": {
+        "x": 0.07072168197712575,
+        "y": 0.07072168197712575,
+        "width": 0.8585566360457485,
+        "height": 0.8585566360457485
+      },
+      "cloudPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/resolutions/2048/clouds/poster.webp",
+      "climate": {
+        "model": "moisture-lifecycle-v2.1",
+        "modelVersion": "2.1",
+        "timePad": 3,
+        "frameCount": 8,
+        "timeStepSeconds": 10800.0,
+        "loopSeconds": 86400.0,
+        "timeUnit": "hours",
+        "surfaceReuse": "v5",
+        "interpolation": "step",
+        "simulation": "physically-inspired moisture transport and cloud lifecycle",
+        "timeIndices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "resolutions": [
+        {
+          "id": "2k",
+          "width": 2048,
+          "height": 2048,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/resolutions/2048/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/resolutions/2048/poster.webp",
+          "posterWidth": 2048,
+          "posterHeight": 2048,
+          "sphereRect": {
+            "x": 0.07115053816184391,
+            "y": 0.07115053816184391,
+            "width": 0.8576989236763122,
+            "height": 0.8576989236763122
+          },
+          "cloudSphereRect": {
+            "x": 0.07072168197712575,
+            "y": 0.07072168197712575,
+            "width": 0.8585566360457485,
+            "height": 0.8585566360457485
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -1.4901162970204496e-08,
+              0.0,
+              -1.0000001192092896
+            ],
+            [
+              0.19913442432880402,
+              0.4586344361305237,
+              -0.8660255074501038
+            ],
+            [
+              0.3449109196662903,
+              0.7943781614303589,
+              -0.5000002384185791
+            ],
+            [
+              0.39826884865760803,
+              0.9172688722610474,
+              0.0
+            ],
+            [
+              0.3449109196662903,
+              0.7943781614303589,
+              0.5000002384185791
+            ],
+            [
+              0.19913442432880402,
+              0.4586344361305237,
+              0.8660255074501038
+            ],
+            [
+              1.4901162970204496e-08,
+              0.0,
+              1.000000238418579
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "climate": {
+            "model": "moisture-lifecycle-v2.1",
+            "modelVersion": "2.1",
+            "timePad": 3,
+            "frameCount": 8,
+            "timeStepSeconds": 10800.0,
+            "loopSeconds": 86400.0,
+            "timeUnit": "hours",
+            "surfaceReuse": "v5",
+            "interpolation": "step",
+            "simulation": "physically-inspired moisture transport and cloud lifecycle",
+            "timeIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "cloudFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/resolutions/2048/clouds/t{time}/e{elevation}/a{azimuth}.webp",
+          "cloudPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/resolutions/2048/clouds/poster.webp",
+          "cloudWidth": 512,
+          "cloudHeight": 512,
+          "cloudPosterWidth": 512,
+          "cloudPosterHeight": 512
+        },
+        {
+          "id": "4k",
+          "width": 4096,
+          "height": 4096,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/resolutions/4096/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/resolutions/4096/poster.webp",
+          "posterWidth": 4096,
+          "posterHeight": 4096,
+          "sphereRect": {
+            "x": 0.07115053816184391,
+            "y": 0.07115053816184391,
+            "width": 0.8576989236763122,
+            "height": 0.8576989236763122
+          },
+          "cloudSphereRect": {
+            "x": 0.07072168197712575,
+            "y": 0.07072168197712575,
+            "width": 0.8585566360457485,
+            "height": 0.8585566360457485
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -1.4901162970204496e-08,
+              0.0,
+              -1.0000001192092896
+            ],
+            [
+              0.19913442432880402,
+              0.4586344361305237,
+              -0.8660255074501038
+            ],
+            [
+              0.3449109196662903,
+              0.7943781614303589,
+              -0.5000002384185791
+            ],
+            [
+              0.39826884865760803,
+              0.9172688722610474,
+              0.0
+            ],
+            [
+              0.3449109196662903,
+              0.7943781614303589,
+              0.5000002384185791
+            ],
+            [
+              0.19913442432880402,
+              0.4586344361305237,
+              0.8660255074501038
+            ],
+            [
+              1.4901162970204496e-08,
+              0.0,
+              1.000000238418579
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "climate": {
+            "model": "moisture-lifecycle-v2.1",
+            "modelVersion": "2.1",
+            "timePad": 3,
+            "frameCount": 8,
+            "timeStepSeconds": 10800.0,
+            "loopSeconds": 86400.0,
+            "timeUnit": "hours",
+            "surfaceReuse": "v5",
+            "interpolation": "step",
+            "simulation": "physically-inspired moisture transport and cloud lifecycle",
+            "timeIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "cloudFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/resolutions/4096/clouds/t{time}/e{elevation}/a{azimuth}.webp",
+          "cloudPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/resolutions/4096/clouds/poster.webp",
+          "cloudWidth": 1024,
+          "cloudHeight": 1024,
+          "cloudPosterWidth": 1024,
+          "cloudPosterHeight": 1024
+        },
+        {
+          "id": "8k",
+          "width": 8192,
+          "height": 8192,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/poster.webp",
+          "posterWidth": 8192,
+          "posterHeight": 8192,
+          "framing": "full-sphere",
+          "transparent": true,
+          "sphereRect": {
+            "x": 0.07115053816184391,
+            "y": 0.07115053816184391,
+            "width": 0.8576989236763122,
+            "height": 0.8576989236763122
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -1.4901162970204496e-08,
+              0.0,
+              -1.0000001192092896
+            ],
+            [
+              0.19913442432880402,
+              0.4586344361305237,
+              -0.8660255074501038
+            ],
+            [
+              0.3449109196662903,
+              0.7943781614303589,
+              -0.5000002384185791
+            ],
+            [
+              0.39826884865760803,
+              0.9172688722610474,
+              0.0
+            ],
+            [
+              0.3449109196662903,
+              0.7943781614303589,
+              0.5000002384185791
+            ],
+            [
+              0.19913442432880402,
+              0.4586344361305237,
+              0.8660255074501038
+            ],
+            [
+              1.4901162970204496e-08,
+              0.0,
+              1.000000238418579
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "cloudWidth": 2048,
+          "cloudHeight": 2048,
+          "cloudTransparent": true,
+          "cloudSphereRect": {
+            "x": 0.07072168197712575,
+            "y": 0.07072168197712575,
+            "width": 0.8585566360457485,
+            "height": 0.8585566360457485
+          },
+          "climate": {
+            "model": "moisture-lifecycle-v2.1",
+            "modelVersion": "2.1",
+            "timePad": 3,
+            "frameCount": 8,
+            "timeStepSeconds": 10800.0,
+            "loopSeconds": 86400.0,
+            "timeUnit": "hours",
+            "surfaceReuse": "v5",
+            "interpolation": "step",
+            "simulation": "physically-inspired moisture transport and cloud lifecycle",
+            "timeIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "cloudFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/clouds/t{time}/e{elevation}/a{azimuth}.webp",
+          "cloudPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/earth/clouds/poster.webp",
+          "cloudPosterWidth": 2048,
+          "cloudPosterHeight": 2048
+        }
+      ],
+      "posterWidth": 2048,
+      "posterHeight": 2048,
+      "cloudPosterWidth": 512,
+      "cloudPosterHeight": 512,
+      "availableElevations": [
+        3
+      ]
     },
     "moon": {
       "azimuthCount": 180,
@@ -86,12 +1216,260 @@
         60.0,
         90.0
       ],
-      "width": 3840,
-      "height": 2160,
-      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/moon/e{elevation}/a{azimuth}.webp",
-      "poster": "posters/moon-cea49c6525b27132.webp",
+      "width": 8192,
+      "height": 8192,
+      "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/moon/e{elevation}/a{azimuth}.webp",
+      "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/moon/resolutions/2048/poster.webp",
       "defaultAzimuth": 0,
-      "defaultElevation": 3
+      "defaultElevation": 3,
+      "framing": "full-sphere",
+      "transparent": true,
+      "sphereRect": {
+        "x": 0.06,
+        "y": 0.06,
+        "width": 0.88,
+        "height": 0.88
+      },
+      "projection": "orthographic",
+      "spinAxes": [
+        [
+          -9.31322685637781e-10,
+          -1.1920928955078125e-07,
+          -1.0000001192092896
+        ],
+        [
+          0.013458357192575932,
+          0.4998188316822052,
+          -0.8660255670547485
+        ],
+        [
+          0.02331055887043476,
+          0.8657116889953613,
+          -0.5000002384185791
+        ],
+        [
+          0.02691671811044216,
+          0.9996378421783447,
+          0.0
+        ],
+        [
+          0.02331055887043476,
+          0.8657116889953613,
+          0.5000002384185791
+        ],
+        [
+          0.013458357192575932,
+          0.4998188316822052,
+          0.8660255670547485
+        ],
+        [
+          1.862645371275562e-09,
+          0.0,
+          1.000000238418579
+        ]
+      ],
+      "spinAxisCoordinates": "right-up-toward-camera",
+      "resolutions": [
+        {
+          "id": "2k",
+          "width": 2048,
+          "height": 2048,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/moon/resolutions/2048/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/moon/resolutions/2048/poster.webp",
+          "posterWidth": 2048,
+          "posterHeight": 2048,
+          "sphereRect": {
+            "x": 0.06,
+            "y": 0.06,
+            "width": 0.88,
+            "height": 0.88
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -9.31322685637781e-10,
+              -1.1920928955078125e-07,
+              -1.0000001192092896
+            ],
+            [
+              0.013458357192575932,
+              0.4998188316822052,
+              -0.8660255670547485
+            ],
+            [
+              0.02331055887043476,
+              0.8657116889953613,
+              -0.5000002384185791
+            ],
+            [
+              0.02691671811044216,
+              0.9996378421783447,
+              0.0
+            ],
+            [
+              0.02331055887043476,
+              0.8657116889953613,
+              0.5000002384185791
+            ],
+            [
+              0.013458357192575932,
+              0.4998188316822052,
+              0.8660255670547485
+            ],
+            [
+              1.862645371275562e-09,
+              0.0,
+              1.000000238418579
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "4k",
+          "width": 4096,
+          "height": 4096,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/moon/resolutions/4096/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/moon/resolutions/4096/poster.webp",
+          "posterWidth": 4096,
+          "posterHeight": 4096,
+          "sphereRect": {
+            "x": 0.06,
+            "y": 0.06,
+            "width": 0.88,
+            "height": 0.88
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -9.31322685637781e-10,
+              -1.1920928955078125e-07,
+              -1.0000001192092896
+            ],
+            [
+              0.013458357192575932,
+              0.4998188316822052,
+              -0.8660255670547485
+            ],
+            [
+              0.02331055887043476,
+              0.8657116889953613,
+              -0.5000002384185791
+            ],
+            [
+              0.02691671811044216,
+              0.9996378421783447,
+              0.0
+            ],
+            [
+              0.02331055887043476,
+              0.8657116889953613,
+              0.5000002384185791
+            ],
+            [
+              0.013458357192575932,
+              0.4998188316822052,
+              0.8660255670547485
+            ],
+            [
+              1.862645371275562e-09,
+              0.0,
+              1.000000238418579
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "8k",
+          "width": 8192,
+          "height": 8192,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/moon/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/moon/poster.webp",
+          "posterWidth": 8192,
+          "posterHeight": 8192,
+          "framing": "full-sphere",
+          "transparent": true,
+          "sphereRect": {
+            "x": 0.06,
+            "y": 0.06,
+            "width": 0.88,
+            "height": 0.88
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -9.31322685637781e-10,
+              -1.1920928955078125e-07,
+              -1.0000001192092896
+            ],
+            [
+              0.013458357192575932,
+              0.4998188316822052,
+              -0.8660255670547485
+            ],
+            [
+              0.02331055887043476,
+              0.8657116889953613,
+              -0.5000002384185791
+            ],
+            [
+              0.02691671811044216,
+              0.9996378421783447,
+              0.0
+            ],
+            [
+              0.02331055887043476,
+              0.8657116889953613,
+              0.5000002384185791
+            ],
+            [
+              0.013458357192575932,
+              0.4998188316822052,
+              0.8660255670547485
+            ],
+            [
+              1.862645371275562e-09,
+              0.0,
+              1.000000238418579
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        }
+      ],
+      "posterWidth": 2048,
+      "posterHeight": 2048,
+      "availableElevations": [
+        3
+      ]
     },
     "mars": {
       "azimuthCount": 180,
@@ -104,12 +1482,398 @@
         60.0,
         90.0
       ],
-      "width": 3840,
-      "height": 2160,
-      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/mars/e{elevation}/a{azimuth}.webp",
-      "poster": "posters/mars-25b70f9c2da46ff4.webp",
+      "width": 8192,
+      "height": 8192,
+      "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/e{elevation}/a{azimuth}.webp",
+      "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/resolutions/2048/poster.webp",
       "defaultAzimuth": 0,
-      "defaultElevation": 3
+      "defaultElevation": 3,
+      "framing": "full-sphere",
+      "transparent": true,
+      "sphereRect": {
+        "x": 0.07061723120464947,
+        "y": 0.07061723120464947,
+        "width": 0.8587655375907011,
+        "height": 0.8587655375907011
+      },
+      "projection": "orthographic",
+      "spinAxes": [
+        [
+          0.0,
+          0.0,
+          -1.0000001192092896
+        ],
+        [
+          0.2128107249736786,
+          0.4524507522583008,
+          -0.8660256862640381
+        ],
+        [
+          0.368598997592926,
+          0.7836676836013794,
+          -0.5000002384185791
+        ],
+        [
+          0.42562150955200195,
+          0.9049015045166016,
+          0.0
+        ],
+        [
+          0.368598997592926,
+          0.7836676836013794,
+          0.5000002384185791
+        ],
+        [
+          0.2128107249736786,
+          0.4524507522583008,
+          0.8660256862640381
+        ],
+        [
+          4.4703490686970326e-08,
+          1.1920928955078125e-07,
+          1.000000238418579
+        ]
+      ],
+      "spinAxisCoordinates": "right-up-toward-camera",
+      "cloudFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/clouds/t{time}/e{elevation}/a{azimuth}.webp",
+      "cloudWidth": 2048,
+      "cloudHeight": 2048,
+      "cloudTransparent": true,
+      "cloudSphereRect": {
+        "x": 0.0701879382228755,
+        "y": 0.0701879382228755,
+        "width": 0.859624123554249,
+        "height": 0.859624123554249
+      },
+      "cloudPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/resolutions/2048/clouds/poster.webp",
+      "climate": {
+        "model": "moisture-lifecycle-v2.1",
+        "modelVersion": "2.1",
+        "timePad": 3,
+        "frameCount": 8,
+        "timeStepSeconds": 10800.0,
+        "loopSeconds": 86400.0,
+        "timeUnit": "hours",
+        "surfaceReuse": "v5",
+        "interpolation": "step",
+        "simulation": "physically-inspired moisture transport and cloud lifecycle",
+        "timeIndices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "resolutions": [
+        {
+          "id": "2k",
+          "width": 2048,
+          "height": 2048,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/resolutions/2048/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/resolutions/2048/poster.webp",
+          "posterWidth": 2048,
+          "posterHeight": 2048,
+          "sphereRect": {
+            "x": 0.07061723120464947,
+            "y": 0.07061723120464947,
+            "width": 0.8587655375907011,
+            "height": 0.8587655375907011
+          },
+          "cloudSphereRect": {
+            "x": 0.0701879382228755,
+            "y": 0.0701879382228755,
+            "width": 0.859624123554249,
+            "height": 0.859624123554249
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              0.0,
+              0.0,
+              -1.0000001192092896
+            ],
+            [
+              0.2128107249736786,
+              0.4524507522583008,
+              -0.8660256862640381
+            ],
+            [
+              0.368598997592926,
+              0.7836676836013794,
+              -0.5000002384185791
+            ],
+            [
+              0.42562150955200195,
+              0.9049015045166016,
+              0.0
+            ],
+            [
+              0.368598997592926,
+              0.7836676836013794,
+              0.5000002384185791
+            ],
+            [
+              0.2128107249736786,
+              0.4524507522583008,
+              0.8660256862640381
+            ],
+            [
+              4.4703490686970326e-08,
+              1.1920928955078125e-07,
+              1.000000238418579
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "climate": {
+            "model": "moisture-lifecycle-v2.1",
+            "modelVersion": "2.1",
+            "timePad": 3,
+            "frameCount": 8,
+            "timeStepSeconds": 10800.0,
+            "loopSeconds": 86400.0,
+            "timeUnit": "hours",
+            "surfaceReuse": "v5",
+            "interpolation": "step",
+            "simulation": "physically-inspired moisture transport and cloud lifecycle",
+            "timeIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "cloudFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/resolutions/2048/clouds/t{time}/e{elevation}/a{azimuth}.webp",
+          "cloudPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/resolutions/2048/clouds/poster.webp",
+          "cloudWidth": 512,
+          "cloudHeight": 512,
+          "cloudPosterWidth": 512,
+          "cloudPosterHeight": 512
+        },
+        {
+          "id": "4k",
+          "width": 4096,
+          "height": 4096,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/resolutions/4096/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/resolutions/4096/poster.webp",
+          "posterWidth": 4096,
+          "posterHeight": 4096,
+          "sphereRect": {
+            "x": 0.07061723120464947,
+            "y": 0.07061723120464947,
+            "width": 0.8587655375907011,
+            "height": 0.8587655375907011
+          },
+          "cloudSphereRect": {
+            "x": 0.0701879382228755,
+            "y": 0.0701879382228755,
+            "width": 0.859624123554249,
+            "height": 0.859624123554249
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              0.0,
+              0.0,
+              -1.0000001192092896
+            ],
+            [
+              0.2128107249736786,
+              0.4524507522583008,
+              -0.8660256862640381
+            ],
+            [
+              0.368598997592926,
+              0.7836676836013794,
+              -0.5000002384185791
+            ],
+            [
+              0.42562150955200195,
+              0.9049015045166016,
+              0.0
+            ],
+            [
+              0.368598997592926,
+              0.7836676836013794,
+              0.5000002384185791
+            ],
+            [
+              0.2128107249736786,
+              0.4524507522583008,
+              0.8660256862640381
+            ],
+            [
+              4.4703490686970326e-08,
+              1.1920928955078125e-07,
+              1.000000238418579
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "climate": {
+            "model": "moisture-lifecycle-v2.1",
+            "modelVersion": "2.1",
+            "timePad": 3,
+            "frameCount": 8,
+            "timeStepSeconds": 10800.0,
+            "loopSeconds": 86400.0,
+            "timeUnit": "hours",
+            "surfaceReuse": "v5",
+            "interpolation": "step",
+            "simulation": "physically-inspired moisture transport and cloud lifecycle",
+            "timeIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "cloudFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/resolutions/4096/clouds/t{time}/e{elevation}/a{azimuth}.webp",
+          "cloudPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/resolutions/4096/clouds/poster.webp",
+          "cloudWidth": 1024,
+          "cloudHeight": 1024,
+          "cloudPosterWidth": 1024,
+          "cloudPosterHeight": 1024
+        },
+        {
+          "id": "8k",
+          "width": 8192,
+          "height": 8192,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/poster.webp",
+          "posterWidth": 8192,
+          "posterHeight": 8192,
+          "framing": "full-sphere",
+          "transparent": true,
+          "sphereRect": {
+            "x": 0.07061723120464947,
+            "y": 0.07061723120464947,
+            "width": 0.8587655375907011,
+            "height": 0.8587655375907011
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              0.0,
+              0.0,
+              -1.0000001192092896
+            ],
+            [
+              0.2128107249736786,
+              0.4524507522583008,
+              -0.8660256862640381
+            ],
+            [
+              0.368598997592926,
+              0.7836676836013794,
+              -0.5000002384185791
+            ],
+            [
+              0.42562150955200195,
+              0.9049015045166016,
+              0.0
+            ],
+            [
+              0.368598997592926,
+              0.7836676836013794,
+              0.5000002384185791
+            ],
+            [
+              0.2128107249736786,
+              0.4524507522583008,
+              0.8660256862640381
+            ],
+            [
+              4.4703490686970326e-08,
+              1.1920928955078125e-07,
+              1.000000238418579
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "cloudWidth": 2048,
+          "cloudHeight": 2048,
+          "cloudTransparent": true,
+          "cloudSphereRect": {
+            "x": 0.0701879382228755,
+            "y": 0.0701879382228755,
+            "width": 0.859624123554249,
+            "height": 0.859624123554249
+          },
+          "climate": {
+            "model": "moisture-lifecycle-v2.1",
+            "modelVersion": "2.1",
+            "timePad": 3,
+            "frameCount": 8,
+            "timeStepSeconds": 10800.0,
+            "loopSeconds": 86400.0,
+            "timeUnit": "hours",
+            "surfaceReuse": "v5",
+            "interpolation": "step",
+            "simulation": "physically-inspired moisture transport and cloud lifecycle",
+            "timeIndices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "cloudFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/clouds/t{time}/e{elevation}/a{azimuth}.webp",
+          "cloudPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/mars/clouds/poster.webp",
+          "cloudPosterWidth": 2048,
+          "cloudPosterHeight": 2048
+        }
+      ],
+      "posterWidth": 2048,
+      "posterHeight": 2048,
+      "cloudPosterWidth": 512,
+      "cloudPosterHeight": 512,
+      "availableElevations": [
+        3
+      ]
     },
     "jupiter": {
       "azimuthCount": 180,
@@ -122,12 +1886,260 @@
         60.0,
         90.0
       ],
-      "width": 3840,
-      "height": 2160,
-      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/jupiter/e{elevation}/a{azimuth}.webp",
-      "poster": "posters/jupiter-105164266ed4f4ba.webp",
+      "width": 8192,
+      "height": 8192,
+      "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/jupiter/e{elevation}/a{azimuth}.webp",
+      "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/jupiter/resolutions/2048/poster.webp",
       "defaultAzimuth": 0,
-      "defaultElevation": 3
+      "defaultElevation": 3,
+      "framing": "full-sphere",
+      "transparent": true,
+      "sphereRect": {
+        "x": 0.07115006971823268,
+        "y": 0.07115006971823268,
+        "width": 0.8576998605635346,
+        "height": 0.8576998605635346
+      },
+      "projection": "orthographic",
+      "spinAxes": [
+        [
+          -0.0005066060111857951,
+          -0.009437620639801025,
+          -0.9999554753303528
+        ],
+        [
+          0.026361510157585144,
+          0.49108564853668213,
+          -0.8707122802734375
+        ],
+        [
+          0.0461660735309124,
+          0.8600229620933533,
+          -0.508162796497345
+        ],
+        [
+          0.0536004938185215,
+          0.9985178709030151,
+          -0.009451180696487427
+        ],
+        [
+          0.04667269065976143,
+          0.8694605827331543,
+          0.4917929172515869
+        ],
+        [
+          0.027238983660936356,
+          0.5074321031570435,
+          0.861261248588562
+        ],
+        [
+          0.0005066209123469889,
+          0.009437650442123413,
+          0.999955415725708
+        ]
+      ],
+      "spinAxisCoordinates": "right-up-toward-camera",
+      "resolutions": [
+        {
+          "id": "2k",
+          "width": 2048,
+          "height": 2048,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/jupiter/resolutions/2048/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/jupiter/resolutions/2048/poster.webp",
+          "posterWidth": 2048,
+          "posterHeight": 2048,
+          "sphereRect": {
+            "x": 0.07115006971823268,
+            "y": 0.07115006971823268,
+            "width": 0.8576998605635346,
+            "height": 0.8576998605635346
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -0.0005066060111857951,
+              -0.009437620639801025,
+              -0.9999554753303528
+            ],
+            [
+              0.026361510157585144,
+              0.49108564853668213,
+              -0.8707122802734375
+            ],
+            [
+              0.0461660735309124,
+              0.8600229620933533,
+              -0.508162796497345
+            ],
+            [
+              0.0536004938185215,
+              0.9985178709030151,
+              -0.009451180696487427
+            ],
+            [
+              0.04667269065976143,
+              0.8694605827331543,
+              0.4917929172515869
+            ],
+            [
+              0.027238983660936356,
+              0.5074321031570435,
+              0.861261248588562
+            ],
+            [
+              0.0005066209123469889,
+              0.009437650442123413,
+              0.999955415725708
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "4k",
+          "width": 4096,
+          "height": 4096,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/jupiter/resolutions/4096/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/jupiter/resolutions/4096/poster.webp",
+          "posterWidth": 4096,
+          "posterHeight": 4096,
+          "sphereRect": {
+            "x": 0.07115006971823268,
+            "y": 0.07115006971823268,
+            "width": 0.8576998605635346,
+            "height": 0.8576998605635346
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -0.0005066060111857951,
+              -0.009437620639801025,
+              -0.9999554753303528
+            ],
+            [
+              0.026361510157585144,
+              0.49108564853668213,
+              -0.8707122802734375
+            ],
+            [
+              0.0461660735309124,
+              0.8600229620933533,
+              -0.508162796497345
+            ],
+            [
+              0.0536004938185215,
+              0.9985178709030151,
+              -0.009451180696487427
+            ],
+            [
+              0.04667269065976143,
+              0.8694605827331543,
+              0.4917929172515869
+            ],
+            [
+              0.027238983660936356,
+              0.5074321031570435,
+              0.861261248588562
+            ],
+            [
+              0.0005066209123469889,
+              0.009437650442123413,
+              0.999955415725708
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "8k",
+          "width": 8192,
+          "height": 8192,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/jupiter/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/jupiter/poster.webp",
+          "posterWidth": 8192,
+          "posterHeight": 8192,
+          "framing": "full-sphere",
+          "transparent": true,
+          "sphereRect": {
+            "x": 0.07115006971823268,
+            "y": 0.07115006971823268,
+            "width": 0.8576998605635346,
+            "height": 0.8576998605635346
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -0.0005066060111857951,
+              -0.009437620639801025,
+              -0.9999554753303528
+            ],
+            [
+              0.026361510157585144,
+              0.49108564853668213,
+              -0.8707122802734375
+            ],
+            [
+              0.0461660735309124,
+              0.8600229620933533,
+              -0.508162796497345
+            ],
+            [
+              0.0536004938185215,
+              0.9985178709030151,
+              -0.009451180696487427
+            ],
+            [
+              0.04667269065976143,
+              0.8694605827331543,
+              0.4917929172515869
+            ],
+            [
+              0.027238983660936356,
+              0.5074321031570435,
+              0.861261248588562
+            ],
+            [
+              0.0005066209123469889,
+              0.009437650442123413,
+              0.999955415725708
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        }
+      ],
+      "posterWidth": 2048,
+      "posterHeight": 2048,
+      "availableElevations": [
+        3
+      ]
     },
     "saturn": {
       "azimuthCount": 180,
@@ -140,12 +2152,310 @@
         60.0,
         90.0
       ],
-      "width": 3840,
-      "height": 2160,
-      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/saturn/e{elevation}/a{azimuth}.webp",
-      "poster": "posters/saturn-6ed11621a62c3069.webp",
+      "width": 8192,
+      "height": 8192,
+      "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/e{elevation}/a{azimuth}.webp",
+      "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/resolutions/2048/poster.webp",
       "defaultAzimuth": 0,
-      "defaultElevation": 4
+      "defaultElevation": 4,
+      "framing": "full-sphere",
+      "transparent": true,
+      "sphereRect": {
+        "x": 0.07115008821788255,
+        "y": 0.07115008821788255,
+        "width": 0.8576998235642349,
+        "height": 0.8576998235642349
+      },
+      "projection": "orthographic",
+      "ringSphereRect": {
+        "x": 0.3109385102104224,
+        "y": 0.3109385102104224,
+        "width": 0.37812297957915514,
+        "height": 0.37812297957915514
+      },
+      "ringFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/rings/e{elevation}/a000.webp",
+      "ringWidth": 8192,
+      "ringHeight": 8192,
+      "ringTransparent": true,
+      "spinAxes": [
+        [
+          -0.034630436450242996,
+          -0.06991717219352722,
+          -0.9969518184661865
+        ],
+        [
+          0.1912556290626526,
+          0.3861357271671295,
+          -0.9023972749710083
+        ],
+        [
+          0.3658948540687561,
+          0.7387238144874573,
+          -0.5660461783409119
+        ],
+        [
+          0.44249287247657776,
+          0.89337158203125,
+          -0.07802340388298035
+        ],
+        [
+          0.40052518248558044,
+          0.8086408376693726,
+          0.43090569972991943
+        ],
+        [
+          0.2512371838092804,
+          0.5072357058525085,
+          0.8243737816810608
+        ],
+        [
+          0.03463037684559822,
+          0.06991708278656006,
+          0.9969519376754761
+        ]
+      ],
+      "spinAxisCoordinates": "right-up-toward-camera",
+      "ringPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/resolutions/2048/rings/poster.webp",
+      "resolutions": [
+        {
+          "id": "2k",
+          "width": 2048,
+          "height": 2048,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/resolutions/2048/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/resolutions/2048/poster.webp",
+          "posterWidth": 2048,
+          "posterHeight": 2048,
+          "sphereRect": {
+            "x": 0.07115008821788255,
+            "y": 0.07115008821788255,
+            "width": 0.8576998235642349,
+            "height": 0.8576998235642349
+          },
+          "ringSphereRect": {
+            "x": 0.3109385102104224,
+            "y": 0.3109385102104224,
+            "width": 0.37812297957915514,
+            "height": 0.37812297957915514
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -0.034630436450242996,
+              -0.06991717219352722,
+              -0.9969518184661865
+            ],
+            [
+              0.1912556290626526,
+              0.3861357271671295,
+              -0.9023972749710083
+            ],
+            [
+              0.3658948540687561,
+              0.7387238144874573,
+              -0.5660461783409119
+            ],
+            [
+              0.44249287247657776,
+              0.89337158203125,
+              -0.07802340388298035
+            ],
+            [
+              0.40052518248558044,
+              0.8086408376693726,
+              0.43090569972991943
+            ],
+            [
+              0.2512371838092804,
+              0.5072357058525085,
+              0.8243737816810608
+            ],
+            [
+              0.03463037684559822,
+              0.06991708278656006,
+              0.9969519376754761
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "ringFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/resolutions/2048/rings/e{elevation}/a000.webp",
+          "ringPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/resolutions/2048/rings/poster.webp",
+          "ringWidth": 2048,
+          "ringHeight": 2048,
+          "ringPosterWidth": 2048,
+          "ringPosterHeight": 2048
+        },
+        {
+          "id": "4k",
+          "width": 4096,
+          "height": 4096,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/resolutions/4096/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/resolutions/4096/poster.webp",
+          "posterWidth": 4096,
+          "posterHeight": 4096,
+          "sphereRect": {
+            "x": 0.07115008821788255,
+            "y": 0.07115008821788255,
+            "width": 0.8576998235642349,
+            "height": 0.8576998235642349
+          },
+          "ringSphereRect": {
+            "x": 0.3109385102104224,
+            "y": 0.3109385102104224,
+            "width": 0.37812297957915514,
+            "height": 0.37812297957915514
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -0.034630436450242996,
+              -0.06991717219352722,
+              -0.9969518184661865
+            ],
+            [
+              0.1912556290626526,
+              0.3861357271671295,
+              -0.9023972749710083
+            ],
+            [
+              0.3658948540687561,
+              0.7387238144874573,
+              -0.5660461783409119
+            ],
+            [
+              0.44249287247657776,
+              0.89337158203125,
+              -0.07802340388298035
+            ],
+            [
+              0.40052518248558044,
+              0.8086408376693726,
+              0.43090569972991943
+            ],
+            [
+              0.2512371838092804,
+              0.5072357058525085,
+              0.8243737816810608
+            ],
+            [
+              0.03463037684559822,
+              0.06991708278656006,
+              0.9969519376754761
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "ringFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/resolutions/4096/rings/e{elevation}/a000.webp",
+          "ringPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/resolutions/4096/rings/poster.webp",
+          "ringWidth": 4096,
+          "ringHeight": 4096,
+          "ringPosterWidth": 4096,
+          "ringPosterHeight": 4096
+        },
+        {
+          "id": "8k",
+          "width": 8192,
+          "height": 8192,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/poster.webp",
+          "posterWidth": 8192,
+          "posterHeight": 8192,
+          "framing": "full-sphere",
+          "transparent": true,
+          "sphereRect": {
+            "x": 0.07115008821788255,
+            "y": 0.07115008821788255,
+            "width": 0.8576998235642349,
+            "height": 0.8576998235642349
+          },
+          "projection": "orthographic",
+          "ringSphereRect": {
+            "x": 0.3109385102104224,
+            "y": 0.3109385102104224,
+            "width": 0.37812297957915514,
+            "height": 0.37812297957915514
+          },
+          "ringWidth": 8192,
+          "ringHeight": 8192,
+          "ringTransparent": true,
+          "spinAxes": [
+            [
+              -0.034630436450242996,
+              -0.06991717219352722,
+              -0.9969518184661865
+            ],
+            [
+              0.1912556290626526,
+              0.3861357271671295,
+              -0.9023972749710083
+            ],
+            [
+              0.3658948540687561,
+              0.7387238144874573,
+              -0.5660461783409119
+            ],
+            [
+              0.44249287247657776,
+              0.89337158203125,
+              -0.07802340388298035
+            ],
+            [
+              0.40052518248558044,
+              0.8086408376693726,
+              0.43090569972991943
+            ],
+            [
+              0.2512371838092804,
+              0.5072357058525085,
+              0.8243737816810608
+            ],
+            [
+              0.03463037684559822,
+              0.06991708278656006,
+              0.9969519376754761
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "ringFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/rings/e{elevation}/a000.webp",
+          "ringPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/saturn/rings/poster.webp",
+          "ringPosterWidth": 8192,
+          "ringPosterHeight": 8192
+        }
+      ],
+      "posterWidth": 2048,
+      "posterHeight": 2048,
+      "ringPosterWidth": 2048,
+      "ringPosterHeight": 2048,
+      "availableElevations": [
+        4
+      ]
     },
     "uranus": {
       "azimuthCount": 180,
@@ -158,12 +2468,310 @@
         60.0,
         90.0
       ],
-      "width": 3840,
-      "height": 2160,
-      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/uranus/e{elevation}/a{azimuth}.webp",
-      "poster": "posters/uranus-52d1a25e62d0876f.webp",
+      "width": 8192,
+      "height": 8192,
+      "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/e{elevation}/a{azimuth}.webp",
+      "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/resolutions/2048/poster.webp",
       "defaultAzimuth": 0,
-      "defaultElevation": 4
+      "defaultElevation": 4,
+      "framing": "full-sphere",
+      "transparent": true,
+      "sphereRect": {
+        "x": 0.0711500991201705,
+        "y": 0.0711500991201705,
+        "width": 0.857699801759659,
+        "height": 0.857699801759659
+      },
+      "projection": "orthographic",
+      "ringSphereRect": {
+        "x": 0.29877287953361953,
+        "y": 0.29877287953361953,
+        "width": 0.402454240932761,
+        "height": 0.402454240932761
+      },
+      "ringFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/rings/e{elevation}/a000.webp",
+      "ringWidth": 8192,
+      "ringHeight": 8192,
+      "ringTransparent": true,
+      "spinAxes": [
+        [
+          -0.17042598128318787,
+          0.02361324429512024,
+          -0.9850877523422241
+        ],
+        [
+          0.3402898907661438,
+          -0.047148674726486206,
+          -0.9391379356384277
+        ],
+        [
+          0.7598252892494202,
+          -0.1052771806716919,
+          -0.6415469646453857
+        ],
+        [
+          0.975766122341156,
+          -0.13519680500030518,
+          -0.17205387353897095
+        ],
+        [
+          0.9302511215209961,
+          -0.1288904845714569,
+          0.3435409963130951
+        ],
+        [
+          0.6354760527610779,
+          -0.0880480706691742,
+          0.767084002494812
+        ],
+        [
+          0.17042572796344757,
+          -0.023613274097442627,
+          0.9850878119468689
+        ]
+      ],
+      "spinAxisCoordinates": "right-up-toward-camera",
+      "ringPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/resolutions/2048/rings/poster.webp",
+      "resolutions": [
+        {
+          "id": "2k",
+          "width": 2048,
+          "height": 2048,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/resolutions/2048/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/resolutions/2048/poster.webp",
+          "posterWidth": 2048,
+          "posterHeight": 2048,
+          "sphereRect": {
+            "x": 0.0711500991201705,
+            "y": 0.0711500991201705,
+            "width": 0.857699801759659,
+            "height": 0.857699801759659
+          },
+          "ringSphereRect": {
+            "x": 0.29877287953361953,
+            "y": 0.29877287953361953,
+            "width": 0.402454240932761,
+            "height": 0.402454240932761
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -0.17042598128318787,
+              0.02361324429512024,
+              -0.9850877523422241
+            ],
+            [
+              0.3402898907661438,
+              -0.047148674726486206,
+              -0.9391379356384277
+            ],
+            [
+              0.7598252892494202,
+              -0.1052771806716919,
+              -0.6415469646453857
+            ],
+            [
+              0.975766122341156,
+              -0.13519680500030518,
+              -0.17205387353897095
+            ],
+            [
+              0.9302511215209961,
+              -0.1288904845714569,
+              0.3435409963130951
+            ],
+            [
+              0.6354760527610779,
+              -0.0880480706691742,
+              0.767084002494812
+            ],
+            [
+              0.17042572796344757,
+              -0.023613274097442627,
+              0.9850878119468689
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "ringFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/resolutions/2048/rings/e{elevation}/a000.webp",
+          "ringPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/resolutions/2048/rings/poster.webp",
+          "ringWidth": 2048,
+          "ringHeight": 2048,
+          "ringPosterWidth": 2048,
+          "ringPosterHeight": 2048
+        },
+        {
+          "id": "4k",
+          "width": 4096,
+          "height": 4096,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/resolutions/4096/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/resolutions/4096/poster.webp",
+          "posterWidth": 4096,
+          "posterHeight": 4096,
+          "sphereRect": {
+            "x": 0.0711500991201705,
+            "y": 0.0711500991201705,
+            "width": 0.857699801759659,
+            "height": 0.857699801759659
+          },
+          "ringSphereRect": {
+            "x": 0.29877287953361953,
+            "y": 0.29877287953361953,
+            "width": 0.402454240932761,
+            "height": 0.402454240932761
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              -0.17042598128318787,
+              0.02361324429512024,
+              -0.9850877523422241
+            ],
+            [
+              0.3402898907661438,
+              -0.047148674726486206,
+              -0.9391379356384277
+            ],
+            [
+              0.7598252892494202,
+              -0.1052771806716919,
+              -0.6415469646453857
+            ],
+            [
+              0.975766122341156,
+              -0.13519680500030518,
+              -0.17205387353897095
+            ],
+            [
+              0.9302511215209961,
+              -0.1288904845714569,
+              0.3435409963130951
+            ],
+            [
+              0.6354760527610779,
+              -0.0880480706691742,
+              0.767084002494812
+            ],
+            [
+              0.17042572796344757,
+              -0.023613274097442627,
+              0.9850878119468689
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "ringFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/resolutions/4096/rings/e{elevation}/a000.webp",
+          "ringPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/resolutions/4096/rings/poster.webp",
+          "ringWidth": 4096,
+          "ringHeight": 4096,
+          "ringPosterWidth": 4096,
+          "ringPosterHeight": 4096
+        },
+        {
+          "id": "8k",
+          "width": 8192,
+          "height": 8192,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/poster.webp",
+          "posterWidth": 8192,
+          "posterHeight": 8192,
+          "framing": "full-sphere",
+          "transparent": true,
+          "sphereRect": {
+            "x": 0.0711500991201705,
+            "y": 0.0711500991201705,
+            "width": 0.857699801759659,
+            "height": 0.857699801759659
+          },
+          "projection": "orthographic",
+          "ringSphereRect": {
+            "x": 0.29877287953361953,
+            "y": 0.29877287953361953,
+            "width": 0.402454240932761,
+            "height": 0.402454240932761
+          },
+          "ringWidth": 8192,
+          "ringHeight": 8192,
+          "ringTransparent": true,
+          "spinAxes": [
+            [
+              -0.17042598128318787,
+              0.02361324429512024,
+              -0.9850877523422241
+            ],
+            [
+              0.3402898907661438,
+              -0.047148674726486206,
+              -0.9391379356384277
+            ],
+            [
+              0.7598252892494202,
+              -0.1052771806716919,
+              -0.6415469646453857
+            ],
+            [
+              0.975766122341156,
+              -0.13519680500030518,
+              -0.17205387353897095
+            ],
+            [
+              0.9302511215209961,
+              -0.1288904845714569,
+              0.3435409963130951
+            ],
+            [
+              0.6354760527610779,
+              -0.0880480706691742,
+              0.767084002494812
+            ],
+            [
+              0.17042572796344757,
+              -0.023613274097442627,
+              0.9850878119468689
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera",
+          "ringFramePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/rings/e{elevation}/a000.webp",
+          "ringPoster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/uranus/rings/poster.webp",
+          "ringPosterWidth": 8192,
+          "ringPosterHeight": 8192
+        }
+      ],
+      "posterWidth": 2048,
+      "posterHeight": 2048,
+      "ringPosterWidth": 2048,
+      "ringPosterHeight": 2048,
+      "availableElevations": [
+        4
+      ]
     },
     "neptune": {
       "azimuthCount": 180,
@@ -176,12 +2784,262 @@
         60.0,
         90.0
       ],
-      "width": 3840,
-      "height": 2160,
-      "framePattern": "https://dns-schemes-pump-launched.trycloudflare.com/neptune/e{elevation}/a{azimuth}.webp",
-      "poster": "posters/neptune-14392ffcd2b25335.webp",
+      "width": 8192,
+      "height": 8192,
+      "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/neptune/e{elevation}/a{azimuth}.webp",
+      "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/neptune/resolutions/2048/poster.webp",
       "defaultAzimuth": 0,
-      "defaultElevation": 3
+      "defaultElevation": 3,
+      "framing": "full-sphere",
+      "transparent": true,
+      "sphereRect": {
+        "x": 0.07115007952194258,
+        "y": 0.07115007952194258,
+        "width": 0.8576998409561148,
+        "height": 0.8576998409561148
+      },
+      "projection": "orthographic",
+      "spinAxes": [
+        [
+          2.368321538881446e-08,
+          -0.4743955135345459,
+          -0.8803117275238037
+        ],
+        [
+          -1.4636010181590109e-09,
+          0.029317259788513184,
+          -0.9995701313018799
+        ],
+        [
+          -2.621824890525204e-08,
+          0.5251744985580444,
+          -0.8509945869445801
+        ],
+        [
+          -4.394773966964749e-08,
+          0.8803118467330933,
+          -0.4743955433368683
+        ],
+        [
+          -4.990146607042334e-08,
+          0.9995702505111694,
+          0.029317408800125122
+        ],
+        [
+          -4.2484138873533084e-08,
+          0.8509944677352905,
+          0.525174617767334
+        ],
+        [
+          -2.368322071788498e-08,
+          0.47439566254615784,
+          0.8803118467330933
+        ]
+      ],
+      "spinAxisCoordinates": "right-up-toward-camera",
+      "resolutions": [
+        {
+          "id": "2k",
+          "width": 2048,
+          "height": 2048,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/neptune/resolutions/2048/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/neptune/resolutions/2048/poster.webp",
+          "posterWidth": 2048,
+          "posterHeight": 2048,
+          "sphereRect": {
+            "x": 0.07115007952194258,
+            "y": 0.07115007952194258,
+            "width": 0.8576998409561148,
+            "height": 0.8576998409561148
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              2.368321538881446e-08,
+              -0.4743955135345459,
+              -0.8803117275238037
+            ],
+            [
+              -1.4636010181590109e-09,
+              0.029317259788513184,
+              -0.9995701313018799
+            ],
+            [
+              -2.621824890525204e-08,
+              0.5251744985580444,
+              -0.8509945869445801
+            ],
+            [
+              -4.394773966964749e-08,
+              0.8803118467330933,
+              -0.4743955433368683
+            ],
+            [
+              -4.990146607042334e-08,
+              0.9995702505111694,
+              0.029317408800125122
+            ],
+            [
+              -4.2484138873533084e-08,
+              0.8509944677352905,
+              0.525174617767334
+            ],
+            [
+              -2.368322071788498e-08,
+              0.47439566254615784,
+              0.8803118467330933
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "4k",
+          "width": 4096,
+          "height": 4096,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/neptune/resolutions/4096/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/neptune/resolutions/4096/poster.webp",
+          "posterWidth": 4096,
+          "posterHeight": 4096,
+          "sphereRect": {
+            "x": 0.07115007952194258,
+            "y": 0.07115007952194258,
+            "width": 0.8576998409561148,
+            "height": 0.8576998409561148
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              2.368321538881446e-08,
+              -0.4743955135345459,
+              -0.8803117275238037
+            ],
+            [
+              -1.4636010181590109e-09,
+              0.029317259788513184,
+              -0.9995701313018799
+            ],
+            [
+              -2.621824890525204e-08,
+              0.5251744985580444,
+              -0.8509945869445801
+            ],
+            [
+              -4.394773966964749e-08,
+              0.8803118467330933,
+              -0.4743955433368683
+            ],
+            [
+              -4.990146607042334e-08,
+              0.9995702505111694,
+              0.029317408800125122
+            ],
+            [
+              -4.2484138873533084e-08,
+              0.8509944677352905,
+              0.525174617767334
+            ],
+            [
+              -2.368322071788498e-08,
+              0.47439566254615784,
+              0.8803118467330933
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        },
+        {
+          "id": "8k",
+          "width": 8192,
+          "height": 8192,
+          "azimuthCount": 180,
+          "elevations": [
+            -90.0,
+            -60.0,
+            -30.0,
+            0.0,
+            30.0,
+            60.0,
+            90.0
+          ],
+          "framePattern": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/neptune/e{elevation}/a{azimuth}.webp",
+          "poster": "https://sjtufreshman.pages.dev/assets/celestial/releases/20261011-climate-autoplay-v1/neptune/poster.webp",
+          "posterWidth": 8192,
+          "posterHeight": 8192,
+          "framing": "full-sphere",
+          "transparent": true,
+          "sphereRect": {
+            "x": 0.07115007952194258,
+            "y": 0.07115007952194258,
+            "width": 0.8576998409561148,
+            "height": 0.8576998409561148
+          },
+          "projection": "orthographic",
+          "spinAxes": [
+            [
+              2.368321538881446e-08,
+              -0.4743955135345459,
+              -0.8803117275238037
+            ],
+            [
+              -1.4636010181590109e-09,
+              0.029317259788513184,
+              -0.9995701313018799
+            ],
+            [
+              -2.621824890525204e-08,
+              0.5251744985580444,
+              -0.8509945869445801
+            ],
+            [
+              -4.394773966964749e-08,
+              0.8803118467330933,
+              -0.4743955433368683
+            ],
+            [
+              -4.990146607042334e-08,
+              0.9995702505111694,
+              0.029317408800125122
+            ],
+            [
+              -4.2484138873533084e-08,
+              0.8509944677352905,
+              0.525174617767334
+            ],
+            [
+              -2.368322071788498e-08,
+              0.47439566254615784,
+              0.8803118467330933
+            ]
+          ],
+          "spinAxisCoordinates": "right-up-toward-camera"
+        }
+      ],
+      "posterWidth": 2048,
+      "posterHeight": 2048,
+      "availableElevations": [
+        3
+      ]
     }
-  }
+  },
+  "playbackMode": "autoplay",
+  "releaseVersion": "20261011-climate-autoplay-v1"
 }

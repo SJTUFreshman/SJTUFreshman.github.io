@@ -16,7 +16,8 @@
     overflow: hidden;
     background: #020208;
     color: #dbe2ee;
-    touch-action: none;
+    touch-action: manipulation;
+    cursor: default;
     outline: none;
 }
 
@@ -28,7 +29,6 @@
     height: 100%;
     display: block;
     object-fit: cover;
-    transition: opacity 180ms ease;
 }
 
 .baked-celestial-controls {
@@ -61,6 +61,12 @@
 .baked-celestial-status { margin: 0; }
 .baked-celestial-status { min-height: 15px; color: #e7c994; }
 .baked-celestial-buttons { display: flex; gap: 7px; }
+.baked-celestial-speeds button { min-width: 48px; }
+.baked-celestial-speeds button[aria-pressed="true"] {
+    background: #ead5aa;
+    border-color: #ead5aa;
+    color: #13151b;
+}
 .baked-celestial-buttons button,
 .baked-celestial-retry {
     min-height: 32px;
@@ -76,6 +82,8 @@
 .baked-celestial-buttons button:focus-visible,
 .baked-celestial-retry:hover,
 .baked-celestial-retry:focus-visible { border-color: #f0d6a0; color: #f8e6c4; }
+.baked-celestial-speeds button[aria-pressed="true"]:hover,
+.baked-celestial-speeds button[aria-pressed="true"]:focus-visible { color: #13151b; }
 .baked-celestial-retry[hidden] { display: none; }
 
 body.solar-body-active .baked-celestial-view {

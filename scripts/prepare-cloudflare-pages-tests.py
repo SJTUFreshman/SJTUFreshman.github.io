@@ -4,6 +4,7 @@ import importlib.util
 import io
 import json
 import subprocess
+import tarfile
 import tempfile
 import unittest
 from pathlib import Path
@@ -77,6 +78,110 @@ class PreparePagesTests(unittest.TestCase):
     def prepare(self, **kwargs):
         with contextlib.redirect_stdout(io.StringIO()):
             return PAGES.prepare(self.root, self.output, **kwargs)
+
+    def make_autoplay(self):
+        patch = mock.patch.object(PAGES.AUTOPLAY, 'BODIES', ('earth',))
+        patch.start()
+        self.addCleanup(patch.stop)
+        self.autoplay_root = self.root / '.render-work' / 'autoplay'
+        self.autoplay_version = 'test-autoplay-v1'
+        descriptor = {**self.grid, 'defaultElevation': 1, 'defaultAzimuth': 0,
+                      'framePattern': 'earth/e{elevation}/a{azimuth}.webp',
+                      'cloudFramePattern': 'earth/clouds/t{time}/e{elevation}/a{azimuth}.webp',
+                      'poster': 'earth/resolutions/2048/poster.webp',
+                      'metadata': 'earth/package.json',
+                      'climate': {'frameCount': 2, 'timeStepSeconds': 43200, 'loopSeconds': 86400}}
+        descriptor['resolutions'] = [{**self.grid, 'width': 2048, 'height': 2048,
+                                      'framePattern': 'earth/resolutions/2048/e{elevation}/a{azimuth}.webp',
+                                      'cloudFramePattern': 'earth/resolutions/2048/clouds/t{time}/e{elevation}/a{azimuth}.webp',
+                                      'poster': descriptor['poster'], 'metadata': 'earth/private.json'}]
+        self.autoplay_manifest = {'version': 1, 'bodies': {'earth': descriptor}}
+        manifest_bytes = PAGES.json_bytes(self.autoplay_manifest)
+        self.write('.render-work/autoplay/manifest.json', manifest_bytes)
+        paths = [descriptor['poster']]
+        for prefix in ['earth', 'earth/resolutions/2048']:
+            for column in range(2):
+                paths.append(f'{prefix}/e1/a{column:03d}.webp')
+                for time_index in range(2):
+                    paths.append(f'{prefix}/clouds/t{time_index:03d}/e1/a{column:03d}.webp')
+        records = {}
+        for relative in paths:
+            data = b'RIFF\x10\x00\x00\x00WEBP' + relative.encode()
+            self.write('.render-work/autoplay/' + relative, data)
+            records[relative] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+        self.autoplay_inventory = {'schema': 1, 'version': self.autoplay_version,
+                                   'sourceManifestSha256': hashlib.sha256(manifest_bytes).hexdigest(), 'files': records}
+        self.write('.render-work/autoplay/inventory.json', PAGES.json_bytes(self.autoplay_inventory))
+
+    def test_autoplay_preserves_all_rotations_cloud_times_and_resolutions(self):
+        self.make_autoplay()
+        report = self.prepare(autoplay_root=self.autoplay_root, version=self.autoplay_version)
+        self.assertEqual(report['atlasMode'], 'autoplay')
+        self.assertEqual(report['verifiedAtlasFiles'], 13)
+        manifest = json.loads((self.output / PAGES.MANIFEST_PATH).read_text())
+        self.assertEqual(manifest['playbackMode'], 'autoplay')
+        self.assertEqual(manifest['bodies']['earth']['availableElevations'], [1])
+        self.assertNotIn('metadata', json.dumps(manifest))
+        for relative, record in self.autoplay_inventory['files'].items():
+            destination = self.output / 'assets/celestial/releases' / self.autoplay_version / relative
+            self.assertEqual(hashlib.sha256(destination.read_bytes()).hexdigest(), record['sha256'])
+        self.assertFalse(list(self.output.rglob('e0')))
+        self.assertFalse(list(self.output.rglob('inventory.json')))
+        self.assertEqual(manifest['bodies']['earth']['climate']['frameCount'], 2)
+
+    def test_autoplay_missing_cloud_time_is_rejected_before_copy(self):
+        self.make_autoplay()
+        del self.autoplay_inventory['files']['earth/clouds/t001/e1/a001.webp']
+        self.write('.render-work/autoplay/inventory.json', PAGES.json_bytes(self.autoplay_inventory))
+        with self.assertRaisesRegex(ValueError, 'every selected frame'):
+            self.prepare(autoplay_root=self.autoplay_root, version=self.autoplay_version)
+        self.assertFalse(self.output.exists())
+
+    def test_autoplay_corrupt_frame_cannot_produce_success_report(self):
+        self.make_autoplay()
+        frame = self.autoplay_root / 'earth/clouds/t001/e1/a001.webp'
+        frame.write_bytes(frame.read_bytes()[:-1] + b'!')
+        with self.assertRaisesRegex(ValueError, 'SHA256 mismatch'):
+            self.prepare(autoplay_root=self.autoplay_root, version=self.autoplay_version)
+        self.assertFalse(self.output.with_name('site-report.json').exists())
+
+    def test_autoplay_manifest_changes_and_wrong_versions_are_rejected(self):
+        self.make_autoplay()
+        with self.assertRaisesRegex(ValueError, 'inventory must match'):
+            self.prepare(autoplay_root=self.autoplay_root, version='another-release')
+        self.autoplay_manifest['bodies']['earth']['defaultAzimuth'] = 1
+        self.write('.render-work/autoplay/manifest.json', PAGES.json_bytes(self.autoplay_manifest))
+        with self.assertRaisesRegex(ValueError, 'inventory must match'):
+            self.prepare(autoplay_root=self.autoplay_root, version=self.autoplay_version)
+
+    def test_autoplay_public_paths_cannot_escape_the_release(self):
+        self.make_autoplay()
+        for path in ['../private.webp', 'earth/../private.webp', 'earth\\private.webp', 'https://invalid/frame.webp']:
+            with self.subTest(path=path):
+                self.autoplay_manifest['bodies']['earth']['poster'] = path
+                with self.assertRaisesRegex(ValueError, 'Unsafe public frame path'):
+                    PAGES.AUTOPLAY.selected_files(self.autoplay_manifest)
+
+    def test_autoplay_export_verifies_source_and_preserves_manifest_bytes(self):
+        self.package['renderMetadata'] = []
+        self.save_package()
+        manifest_path = self.baked / 'manifest.json'
+        manifest_bytes = json.dumps(json.loads(manifest_path.read_text()), separators=(',', ':')).encode()
+        manifest_path.write_bytes(manifest_bytes)
+        records = [*self.package['frames'], self.package['poster']]
+        sums = ''.join(f'{record["sha256"]}  {record["path"]}\n' for record in records)
+        package_hash = hashlib.sha256((self.baked / 'earth/package.json').read_bytes()).hexdigest()
+        self.write('assets/celestial/baked/SHA256SUMS', (sums + f'{package_hash}  earth/package.json\n').encode())
+        exported = self.root / '.render-work' / 'exported'
+        with mock.patch.object(PAGES.AUTOPLAY, 'BODIES', ('earth',)), contextlib.redirect_stdout(io.StringIO()):
+            PAGES.AUTOPLAY.export(self.baked, exported, 'export-test')
+        self.assertEqual((exported / 'manifest.json').read_bytes(), manifest_bytes)
+        inventory = json.loads((exported / 'inventory.json').read_text())
+        self.assertEqual(inventory['sourceManifestSha256'], hashlib.sha256(manifest_bytes).hexdigest())
+        with tarfile.open(exported / 'earth.tar') as archive:
+            self.assertEqual(set(archive.getnames()), {'earth/e0/a000.webp', 'earth/e0/a001.webp', 'earth/poster.webp'})
+            for member in archive:
+                self.assertEqual(hashlib.sha256(archive.extractfile(member).read()).hexdigest(), inventory['files'][member.name]['sha256'])
 
     def test_same_origin_release_preserves_all_public_assets_and_excludes_sources(self):
         original = (self.baked / 'manifest.json').read_bytes()

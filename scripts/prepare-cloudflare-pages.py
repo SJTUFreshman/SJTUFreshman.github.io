@@ -1,5 +1,6 @@
 import argparse
 import hashlib
+import importlib.util
 import json
 import re
 import subprocess
@@ -17,6 +18,9 @@ STATIC_SUFFIXES = {'.html', '.css', '.js', '.json', '.png', '.jpg', '.jpeg', '.w
 MAX_FILES = 20000
 MAX_BYTES = 25 * 1024 * 1024
 MANIFEST_PATH = 'assets/celestial/hosted/manifest.json'
+AUTOPLAY_SPEC = importlib.util.spec_from_file_location('autoplay', Path(__file__).with_name('export-celestial-autoplay.py'))
+AUTOPLAY = importlib.util.module_from_spec(AUTOPLAY_SPEC)
+AUTOPLAY_SPEC.loader.exec_module(AUTOPLAY)
 
 
 def source_file(root, relative):
@@ -130,6 +134,27 @@ def validate_output(root, output):
     return resolved, report
 
 
+def autoplay_files(source, version):
+    source = source.resolve()
+    manifest_path = source_file(source, 'manifest.json')
+    manifest = read_json(manifest_path)
+    inventory = read_json(source_file(source, 'inventory.json'))
+    selected = AUTOPLAY.selected_files(manifest)
+    expected = {relative for paths in selected.values() for relative in paths}
+    if (inventory.get('schema') != 1 or inventory.get('version') != version or
+            inventory.get('sourceManifestSha256') != hashlib.sha256(manifest_path.read_bytes()).hexdigest() or
+            set(inventory.get('files', {})) != expected):
+        raise ValueError('Autoplay inventory must match the manifest and every selected frame.')
+    entries = {}
+    for relative in sorted(expected):
+        record = inventory['files'][relative]
+        frame = source_file(source, relative)
+        if (not re.fullmatch(r'[0-9a-f]{64}', str(record.get('sha256', ''))) or record.get('bytes') != frame.stat().st_size):
+            raise ValueError(f'Invalid autoplay frame record: {relative}')
+        entries[f'assets/celestial/releases/{version}/{relative}'] = {'source': frame, 'sha256': record['sha256'], 'webp': True}
+    return entries, AUTOPLAY.public_manifest(manifest, version)
+
+
 def copy_entry(entry, destination):
     destination.parent.mkdir(parents=True, exist_ok=True)
     digest = hashlib.sha256()
@@ -161,15 +186,17 @@ def copy_entry(entry, destination):
     return {'bytes': size, 'sha256': checksum}
 
 
-def prepare(root, output, version='20261002-4k-v1', external_atlas=False):
+def prepare(root, output, version='20261002-4k-v1', external_atlas=False, autoplay_root=None):
     root = root.resolve()
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,79}', version):
         raise ValueError('Version must be a simple release name of at most 80 characters.')
     output, report_path = validate_output(root, output)
     entries = public_files(root)
     frame_count = 0
+    if external_atlas and autoplay_root:
+        raise ValueError('Autoplay and external atlas modes are mutually exclusive.')
     if not external_atlas:
-        frames, manifest = atlas_files(root, version)
+        frames, manifest = autoplay_files(autoplay_root, version) if autoplay_root else atlas_files(root, version)
         if set(frames) & set(entries):
             raise ValueError('Release frame paths collide with tracked website files.')
         entries.update(frames)
@@ -180,7 +207,7 @@ def prepare(root, output, version='20261002-4k-v1', external_atlas=False):
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         '<h1>Page not found</h1><p><a href="/">Return home</a></p></html>\n').encode('utf-8')}
     entries['_headers'] = {'data': (
-        '/assets/celestial/releases/*\n  Cache-Control: public, max-age=31536000, immutable\n'
+        '/assets/celestial/releases/*\n  Cache-Control: public, max-age=31536000, immutable\n  Access-Control-Allow-Origin: *\n'
         '/assets/celestial/hosted/manifest.json\n  Cache-Control: public, max-age=0, must-revalidate\n'
         '/pet-cache-worker.js\n  Cache-Control: no-cache\n').encode('utf-8')}
     for relative, entry in entries.items():
@@ -197,7 +224,7 @@ def prepare(root, output, version='20261002-4k-v1', external_atlas=False):
             print(f'Copied and verified {index}/{len(entries)} files.', flush=True)
     report = {
         'preparedAt': datetime.now(timezone.utc).isoformat(), 'output': str(output),
-        'atlasMode': 'external' if external_atlas else 'same-origin',
+        'atlasMode': 'external' if external_atlas else 'autoplay' if autoplay_root else 'same-origin',
         'releaseVersion': None if external_atlas else version,
         'fileCount': len(records), 'totalBytes': sum(record['bytes'] for record in records.values()),
         'verifiedAtlasFiles': frame_count, 'limits': {'files': MAX_FILES, 'fileBytes': MAX_BYTES},
@@ -214,9 +241,10 @@ def main(argv=None):
     parser.add_argument('--output', type=Path, default=Path('.render-work/cloudflare-pages/site'))
     parser.add_argument('--version', default='20261002-4k-v1')
     parser.add_argument('--external-atlas', action='store_true', help='Keep the existing Tencent-hosted atlas manifest.')
+    parser.add_argument('--autoplay-root', type=Path, help='Verified fixed-elevation, all-azimuth and all-climate-time export.')
     args = parser.parse_args(argv)
     try:
-        prepare(ROOT, args.output, args.version, args.external_atlas)
+        prepare(ROOT, args.output, args.version, args.external_atlas, args.autoplay_root)
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
         parser.exit(1, f'Preparation failed: {error}\nDo not deploy a partially prepared directory. Use a new empty output for retry.\n')
     return 0

@@ -27,6 +27,8 @@ class BakedCelestialViewer {
         this.cameraPitch = 0;
         this.cloudAzimuth = 0;
         this.cloudTime = 0;
+        this.playbackRate = 1;
+        this.waitingSamples = [];
         this.paused = REDUCED_MOTION;
         this.dirty = true;
     }
@@ -34,19 +36,19 @@ class BakedCelestialViewer {
     copy() {
         const copies = {
             en: {
-                view: 'Pre-rendered planetary close-up', drag: 'Drag to rotate · ↑ ↓ ← → to explore',
+                view: 'Planetary close-up', hint: 'Slow rotation · Space to pause', speed: 'Playback speed',
                 pause: 'Pause rotation', resume: 'Resume rotation', back: 'Back to Solar System',
                 loading: 'Loading close-up…', unavailable: 'This close-up could not be loaded.',
                 retry: 'Retry', partial: 'Showing the last loaded view; retry to load more angles.'
             },
             'zh-CN': {
-                view: '预渲染天体近景', drag: '拖动旋转 · 方向键探索', pause: '暂停自转',
+                view: '天体近景', hint: '缓慢自转 · 空格键暂停', speed: '播放速度', pause: '暂停自转',
                 resume: '恢复自转', back: '返回太阳系', loading: '正在载入近景…',
                 unavailable: '暂时无法载入这颗天体的近景。', retry: '重新载入',
                 partial: '正在显示已载入的视角；可重试载入更多角度。'
             },
             'zh-TW': {
-                view: '預渲染天體近景', drag: '拖動旋轉 · 方向鍵探索', pause: '暫停自轉',
+                view: '天體近景', hint: '緩慢自轉 · 空白鍵暫停', speed: '播放速度', pause: '暫停自轉',
                 resume: '恢復自轉', back: '返回太陽系', loading: '正在載入近景…',
                 unavailable: '暫時無法載入這顆天體的近景。', retry: '重新載入',
                 partial: '正在顯示已載入的視角；可重試載入更多角度。'
@@ -65,7 +67,7 @@ class BakedCelestialViewer {
         this.element.className = 'baked-celestial-view';
         this.element.tabIndex = 0;
         this.element.setAttribute('role', 'group');
-        this.element.innerHTML = '<canvas class="baked-celestial-canvas" aria-hidden="true"></canvas><div class="baked-celestial-controls"><p class="baked-celestial-hint"></p><div class="baked-celestial-buttons"><button type="button" class="baked-celestial-pause"></button><button type="button" class="baked-celestial-return"></button></div><p class="baked-celestial-status" role="status" aria-live="polite"></p><button type="button" class="baked-celestial-retry" hidden></button></div>';
+        this.element.innerHTML = '<canvas class="baked-celestial-canvas" aria-hidden="true"></canvas><div class="baked-celestial-controls"><p class="baked-celestial-hint"></p><div class="baked-celestial-buttons baked-celestial-speeds" role="group"><button type="button" data-playback-rate="0.5">0.5×</button><button type="button" data-playback-rate="1">1×</button><button type="button" data-playback-rate="2">2×</button></div><div class="baked-celestial-buttons"><button type="button" class="baked-celestial-pause"></button><button type="button" class="baked-celestial-return"></button></div><p class="baked-celestial-status" role="status" aria-live="polite"></p><button type="button" class="baked-celestial-retry" hidden></button></div>';
         this.element.hidden = true;
         document.body.append(this.element);
         this.canvas = this.element.querySelector('canvas');
@@ -75,32 +77,12 @@ class BakedCelestialViewer {
         this.retryButton = this.element.querySelector('.baked-celestial-retry');
         this.statusElement = this.element.querySelector('.baked-celestial-status');
         this.pauseButton.addEventListener('click', () => this.togglePause());
+        this.speedButtons = Array.from(this.element.querySelectorAll('[data-playback-rate]'));
+        this.speedButtons.forEach(button => button.addEventListener('click', () => this.setPlaybackRate(Number(button.dataset.playbackRate))));
         this.returnButton.addEventListener('click', event => window.lifeStarMap?.solarSystem?.closeBody(true, event.detail === 0 ? 'keyboard' : 'pointer'));
         this.retryButton.addEventListener('click', () => this.retry());
-        this.element.addEventListener('contextmenu', event => event.preventDefault());
-        this.element.addEventListener('pointerdown', event => {
-            if (!this.canInteract() || event.target.closest('button') || this.drag || (event.pointerType === 'mouse' && ![0, 2].includes(event.button))) return;
-            event.preventDefault();
-            this.element.focus({ preventScroll: true });
-            this.drag = { pointerId: event.pointerId, x: event.clientX, y: event.clientY };
-            this.element.setPointerCapture(event.pointerId);
-            this.element.classList.add('is-dragging');
-            this.resumeAt = performance.now() + 2600;
-        });
-        this.element.addEventListener('pointermove', event => {
-            if (this.drag?.pointerId !== event.pointerId) return;
-            this.rotate((event.clientX - this.drag.x) * -0.24, (event.clientY - this.drag.y) * 0.24);
-            this.drag.x = event.clientX;
-            this.drag.y = event.clientY;
-        });
-        ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(type => {
-            this.element.addEventListener(type, event => {
-                if (this.drag?.pointerId === event.pointerId) this.releaseInput();
-            });
-        });
-        window.addEventListener('blur', () => this.releaseInput());
+        window.addEventListener('blur', () => { this.lastTick = 0; });
         document.addEventListener('visibilitychange', () => {
-            this.releaseInput();
             this.lastTick = 0;
             if (!document.hidden) this.pump();
         });
@@ -127,7 +109,12 @@ class BakedCelestialViewer {
         if (!this.element) return;
         const copy = this.copy();
         this.element.setAttribute('aria-label', `${celestialName(this.profile || {})} · ${copy.view}`);
-        this.element.querySelector('.baked-celestial-hint').textContent = copy.drag;
+        this.element.querySelector('.baked-celestial-hint').textContent = copy.hint;
+        this.element.querySelector('.baked-celestial-speeds').setAttribute('aria-label', copy.speed);
+        this.speedButtons.forEach(button => {
+            button.setAttribute('aria-pressed', String(Number(button.dataset.playbackRate) === this.playbackRate));
+            button.disabled = !this.body;
+        });
         this.pauseButton.textContent = this.paused ? copy.resume : copy.pause;
         this.pauseButton.setAttribute('aria-pressed', String(this.paused));
         this.pauseButton.disabled = !this.body;
@@ -172,7 +159,7 @@ class BakedCelestialViewer {
         this.loading = true;
         this.error = false;
         this.paused = REDUCED_MOTION;
-        this.resumeAt = 0;
+        this.playbackRate = 1;
         this.element.hidden = false;
         this.element.inert = false;
         this.canvas.style.opacity = '0';
@@ -255,14 +242,8 @@ class BakedCelestialViewer {
         const step = Number.isFinite(stepHours) && stepHours > 0 ? stepHours
             : Number.isFinite(periodHours) && periodHours > 0 ? periodHours / frameCount : 1;
         const period = Number.isFinite(periodHours) && periodHours > 0 ? periodHours : step * frameCount;
-        const cycleSeconds = Number(climate.cycleSeconds);
-        const hoursPerSecond = Number(climate.hoursPerSecond ?? climate.playbackHoursPerSecond ?? climate.timeScale);
-        const speed = Number.isFinite(hoursPerSecond) && hoursPerSecond > 0 ? hoursPerSecond
-            : period / (Number.isFinite(cycleSeconds) && cycleSeconds > 0 ? cycleSeconds : 48);
-        const angularVelocity = Number(climate.cloudAngularVelocity);
-        return { ...climate, frameCount, stepHours: step, periodHours: period, hoursPerSecond: speed,
-            cloudAngularVelocity: Number.isFinite(angularVelocity) && angularVelocity > 0 ? angularVelocity : null,
-            interpolate: climate.allowTemporalBlend === true && climate.interpolation === 'crossfade' };
+        return { ...climate, frameCount, stepHours: step, periodHours: period, hoursPerSecond: period / 32,
+            interpolate: false };
     }
 
     climateFrameIndex(time = this.cloudTime) {
@@ -321,11 +302,7 @@ class BakedCelestialViewer {
         if (!this.fullSphere()) {
             const column = ((this.azimuth % 360 + 360) % 360) / 360 * count;
             const sample = (index, weight) => ({ url: this.frameUrl(elevation, index), layer: 'surface', elevation, azimuth: index * 360 / count, weight });
-            if (360 / count > 2) return [sample(Math.round(column) % count, 1)];
-            const left = Math.floor(column) % count;
-            const fraction = column - Math.floor(column);
-            return [sample(left, 1 - fraction), sample((left + 1) % count, fraction)]
-                .filter(frame => frame.weight > 0.001).sort((first, second) => second.weight - first.weight);
+            return [sample(Math.round(column) % count, 1)];
         }
         const variant = this.resolution();
         const surface = (() => {
@@ -341,9 +318,7 @@ class BakedCelestialViewer {
             const column = Math.round(((azimuth % 360 + 360) % 360) / 360 * count) % count;
             const capturedAzimuth = column * 360 / count;
             const times = this.climateFrameIndex();
-            const entries = times?.fraction > 0.001 && climate.interpolate && climate.frameCount > 1
-                ? [[times.lower, 1 - times.fraction], [times.upper, times.fraction]]
-                : [[times && times.fraction >= 0.5 ? times.upper : times?.lower || 0, 1]];
+            const entries = [[times && times.fraction >= 0.5 ? times.upper : times?.lower || 0, 1]];
             for (const [timeIndex, weight] of entries) cloudSamples.push({
                 url: this.frameUrl(elevation, column, 'clouds', variant, timeIndex), layer: 'clouds', variant,
                 elevation, azimuth: capturedAzimuth, timeIndex, time: timeIndex * climate.stepHours,
@@ -589,13 +564,13 @@ class BakedCelestialViewer {
                 this.lastSurfaceSample = task.sample || this.samples()[0];
             }
             this.dirty = true;
-            if (this.samples().some(sample => sample.url === task.url) || task.url === this.posterUrl) this.error = false;
+            if ([...this.samples(), ...this.waitingSamples].some(sample => sample.url === task.url) || task.url === this.posterUrl) this.error = false;
             this.evict();
             this.updateCopy();
         } catch (error) {
             if (task.generation === this.generation) {
                 this.failures.set(task.url, performance.now() + 30000);
-                if ((!this.lastImage && task.url === this.posterUrl) || this.samples().some(sample => sample.url === task.url)) {
+                if ((!this.lastImage && task.url === this.posterUrl) || [...this.samples(), ...this.waitingSamples].some(sample => sample.url === task.url)) {
                     this.error = true;
                     this.updateCopy();
                 }
@@ -613,7 +588,12 @@ class BakedCelestialViewer {
     }
 
     evict() {
-        const pinned = new Set(this.samples().map(sample => sample.url));
+        const pinned = new Set();
+        for (const sample of [...this.samples(), ...this.waitingSamples]) {
+            pinned.add(sample.url);
+            const available = this.availableSample(sample);
+            if (available) pinned.add(available.url);
+        }
         const ring = this.ringSample();
         if (ring) pinned.add(ring.url);
         const cacheLimit = Math.min(8, Math.max(pinned.size, this.frameCapacity() - 2));
@@ -635,7 +615,7 @@ class BakedCelestialViewer {
     prefetch(samples) {
         const desired = new Map();
         const preview = this.body.resolutions?.[0];
-        for (const sample of samples) {
+        for (const sample of [...samples, ...this.waitingSamples]) {
             if (preview && sample.variant !== preview && !this.cache.has(sample.url)) {
                 const fallback = this.sampleAtResolution(sample, preview);
                 desired.set(fallback.url, fallback);
@@ -650,16 +630,26 @@ class BakedCelestialViewer {
             }
             desired.set(ring.url, ring);
         }
-        const prefetchLimit = Math.max(desired.size, Math.min(COARSE_POINTER ? 3 : 5, this.frameCapacity() - 3));
-        for (const offset of [1, -1, 2]) {
+        const prefetchLimit = Math.max(desired.size, Math.min(COARSE_POINTER ? 4 : 6, this.frameCapacity() - 3));
+        for (const offset of [1, 2]) {
             if (desired.size >= prefetchLimit) break;
             for (const sample of samples) {
                 if (desired.size >= prefetchLimit) break;
                 const column = Math.round(sample.azimuth / 360 * this.body.azimuthCount);
                 const nextColumn = (column + offset + this.body.azimuthCount) % this.body.azimuthCount;
-                const url = this.frameUrl(sample.elevation, nextColumn, sample.layer, sample.variant, sample.timeIndex);
-                desired.set(url, { ...sample, url, azimuth: nextColumn * 360 / this.body.azimuthCount });
+                const variant = preview || sample.variant;
+                const url = this.frameUrl(sample.elevation, nextColumn, sample.layer, variant, sample.timeIndex);
+                desired.set(url, { ...sample, variant, url, azimuth: nextColumn * 360 / this.body.azimuthCount });
             }
+        }
+        const climate = this.climateConfig();
+        const upcomingCloud = samples.find(sample => sample.layer === 'clouds' && sample.timeIndex !== undefined);
+        if (upcomingCloud && climate?.frameCount > 1 && desired.size < prefetchLimit) {
+            const timeIndex = (upcomingCloud.timeIndex + 1) % climate.frameCount;
+            const column = Math.round(upcomingCloud.azimuth / 360 * this.body.azimuthCount);
+            const variant = preview || upcomingCloud.variant;
+            const url = this.frameUrl(upcomingCloud.elevation, column, 'clouds', variant, timeIndex);
+            desired.set(url, { ...upcomingCloud, variant, url, timeIndex, time: timeIndex * climate.stepHours });
         }
         this.queue = this.queue.filter(task => {
             if (desired.has(task.url) || this.posterUrls.has(task.url)) return true;
@@ -670,6 +660,30 @@ class BakedCelestialViewer {
         for (const [url, sample] of desired) this.request(url, sample);
     }
 
+    rotationSeconds() {
+        if (['earth', 'mars'].includes(this.profile?.id)) return 150;
+        if (['jupiter', 'saturn'].includes(this.profile?.id)) return 90;
+        return 120;
+    }
+
+    advancePlayback(delta) {
+        const previous = { azimuth: this.azimuth, cloudAzimuth: this.cloudAzimuth, cloudTime: this.cloudTime };
+        const seconds = delta * this.playbackRate;
+        const rotationSpeed = 360 / this.rotationSeconds();
+        this.azimuth = (this.azimuth + seconds * rotationSpeed) % 360;
+        this.cloudAzimuth = (this.cloudAzimuth + seconds * rotationSpeed * 1.12) % 360;
+        this.advanceClimate(seconds);
+        const candidates = this.samples();
+        if (candidates.some(sample => !this.availableSample(sample))) {
+            Object.assign(this, previous);
+            this.waitingSamples = candidates;
+            return false;
+        }
+        this.waitingSamples = [];
+        this.dirty = true;
+        return true;
+    }
+
     render(time, visit) {
         if (!this.profile || visit.profile.id !== this.profile.id || document.hidden) return false;
         const delta = this.lastTick ? Math.min(0.1, Math.max(0, (time - this.lastTick) / 1000)) : 0;
@@ -677,14 +691,8 @@ class BakedCelestialViewer {
         this.visit = visit;
         this.element.inert = visit.phase === 'returning' || state.sectionDrawerOpen;
         this.canvas.style.opacity = String(clamp(visit.visualProgress, 0, 1));
-        if (visit.phase === 'observing' && this.body && !this.paused && !this.drag && time >= this.resumeAt && !state.sectionDrawerOpen && !state.modalOpen) {
-            const rotationSpeed = this.fullSphere() ? (this.body.angularVelocity ?? 0.24) : 1.8;
-            this.azimuth = (this.azimuth + delta * rotationSpeed + 360) % 360;
-            const climate = this.climateConfig();
-            const cloudSpeed = climate?.cloudAngularVelocity ?? this.body.cloudAngularVelocity ?? rotationSpeed * (climate ? 3 : 1.12);
-            this.cloudAzimuth = (this.cloudAzimuth + delta * cloudSpeed + 360) % 360;
-            this.advanceClimate(delta);
-            this.dirty = true;
+        if (visit.phase === 'observing' && this.body && !this.paused && !state.sectionDrawerOpen && !state.modalOpen) {
+            this.advancePlayback(delta);
         }
         if (this.body && visit.phase !== 'returning') {
             const samples = this.samples();
@@ -713,17 +721,12 @@ class BakedCelestialViewer {
             const displayedSurface = surface || this.lastSurfaceSample;
             const displayedElevation = displayedSurface?.elevation ?? this.body.defaultElevation ?? 0;
             const layers = [this.sphereLayer(image, displayedSurface, framing)];
-            const cloudCandidates = samples.filter(sample => sample.layer === 'clouds' && sample.elevation === displayedElevation)
-                .map(sample => this.availableSample(sample)).filter(Boolean);
-            const loadedClouds = cloudCandidates.map(sample => ({ sample, image: this.cache.get(sample.url) })).filter(entry => entry.image);
-            if (loadedClouds.length) {
-                const totalWeight = loadedClouds.reduce((sum, entry) => sum + Math.max(0, entry.sample.weight ?? 1), 0) || 1;
-                for (const entry of loadedClouds) {
-                    const weight = Math.max(0, entry.sample.weight ?? 1) / totalWeight;
-                    layers.push(this.sphereLayer(entry.image, entry.sample, framing, 'clouds', weight));
-                    this.lastCloudImage = entry.image;
-                    this.lastCloudSample = entry.sample;
-                }
+            const cloud = this.availableSample(samples.find(sample => sample.layer === 'clouds' && sample.elevation === displayedElevation));
+            if (cloud) {
+                const cloudImage = this.cache.get(cloud.url);
+                layers.push(this.sphereLayer(cloudImage, cloud, framing, 'clouds'));
+                this.lastCloudImage = cloudImage;
+                this.lastCloudSample = cloud;
             } else if (this.lastCloudSample?.elevation === displayedElevation && this.lastCloudImage) {
                 layers.push(this.sphereLayer(this.lastCloudImage, this.lastCloudSample, framing, 'clouds', 1));
             }
@@ -740,20 +743,11 @@ class BakedCelestialViewer {
                 this.lastRingSample = ring;
             }
         } else {
-            const available = samples.filter(sample => this.cache.has(sample.url));
-            const layers = available.length ? available : [{ image: this.lastImage, weight: 1 }];
-            let accumulated = 0;
-            for (const layer of layers) {
-                const legacyImage = layer.image || this.cache.get(layer.url);
-                accumulated += layer.weight;
-                context.globalAlpha = layer.weight / accumulated;
-                const scale = Math.max(this.canvas.width / legacyImage.width, this.canvas.height / legacyImage.height);
-                const width = legacyImage.width * scale;
-                const height = legacyImage.height * scale;
-                const compact = usesCompactSkyLayout();
-                const offsetX = compact ? (this.canvas.width - width) * 0.18 : (this.canvas.width - width) * 0.5;
-                context.drawImage(legacyImage, offsetX, (this.canvas.height - height) * 0.5, width, height);
-            }
+            const scale = Math.max(this.canvas.width / image.width, this.canvas.height / image.height);
+            const width = image.width * scale;
+            const height = image.height * scale;
+            const offsetX = (this.canvas.width - width) * (usesCompactSkyLayout() ? 0.18 : 0.5);
+            context.drawImage(image, offsetX, (this.canvas.height - height) * 0.5, width, height);
         }
         this.lastImage = image;
         if (surface) this.lastSurfaceSample = surface;
@@ -806,7 +800,6 @@ class BakedCelestialViewer {
         return { key, image, premultiplied: metadata?.premultiplied === true, rectangle,
             framing: { ...framing, radius: framing.radius * sourceRectangle.width / this.body.sphereRect.width }, axis, angle,
             climatePhase, climateWarp,
-            blendGroup: layer === 'clouds' && sample?.timeIndex !== undefined ? 'climate' : null,
             opacity: clamp(opacity, 0, 1) };
     }
 
@@ -819,28 +812,7 @@ class BakedCelestialViewer {
     }
 
     drawLayerFrames(layers) {
-        for (let index = 0; index < layers.length; index += 1) {
-            const layer = layers[index];
-            const next = layers[index + 1];
-            if (!layer.blendGroup || next?.blendGroup !== layer.blendGroup) {
-                this.drawLayerFrame(layer);
-                continue;
-            }
-            this.climateCanvas ||= document.createElement('canvas');
-            if (this.climateCanvas.width !== this.canvas.width || this.climateCanvas.height !== this.canvas.height) {
-                this.climateCanvas.width = this.canvas.width;
-                this.climateCanvas.height = this.canvas.height;
-            }
-            const context = this.climateCanvas.getContext('2d');
-            context.clearRect(0, 0, this.climateCanvas.width, this.climateCanvas.height);
-            context.globalCompositeOperation = 'lighter';
-            context.globalAlpha = 1;
-            this.drawLayerFrame(layer, context);
-            this.drawLayerFrame(next, context);
-            context.globalCompositeOperation = 'source-over';
-            this.context.drawImage(this.climateCanvas, 0, 0);
-            index += 1;
-        }
+        layers.forEach(layer => this.drawLayerFrame(layer));
     }
 
     drawLayerFrame({ image, rectangle, framing, opacity = 1 }, context = this.context) {
@@ -872,37 +844,23 @@ class BakedCelestialViewer {
         return this.body && this.visit?.phase === 'observing' && !state.sectionDrawerOpen && !state.modalOpen;
     }
 
-    rotate(horizontal, vertical) {
-        if (!this.canInteract()) return;
-        this.azimuth = ((this.azimuth + horizontal) % 360 + 360) % 360;
-        this.cloudAzimuth = ((this.cloudAzimuth + horizontal) % 360 + 360) % 360;
-        this.cameraYaw = ((this.cameraYaw + horizontal) % 360 + 360) % 360;
-        this.cameraPitch = clamp(this.cameraPitch + vertical, -89, 89);
-        this.elevation = clamp(this.elevation + vertical, this.body.elevations[0], this.body.elevations[this.body.elevations.length - 1]);
-        this.resumeAt = performance.now() + 2600;
-        this.dirty = true;
-    }
-
-    releaseInput() {
-        const pointer = this.drag?.pointerId;
-        this.drag = null;
-        this.element?.classList.remove('is-dragging');
-        if (pointer !== undefined && this.element?.hasPointerCapture(pointer)) this.element.releasePointerCapture(pointer);
-        this.resumeAt = performance.now() + 2600;
+    setPlaybackRate(rate) {
+        if (![0.5, 1, 2].includes(rate)) return;
+        this.playbackRate = rate;
+        this.lastTick = 0;
+        this.updateCopy();
     }
 
     togglePause() {
         this.paused = !this.paused;
-        this.resumeAt = 0;
+        this.lastTick = 0;
         this.updateCopy();
     }
 
     handleKey(event) {
         if (!this.canInteract() || !this.element.contains(event.target)) return false;
-        const moves = { ArrowLeft: [-5, 0], ArrowRight: [5, 0], ArrowUp: [0, 10], ArrowDown: [0, -10] };
-        if (moves[event.key]) {
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
             event.preventDefault();
-            this.rotate(...moves[event.key]);
             return true;
         }
         if (event.code === 'Space' && event.target === this.element) {
@@ -930,7 +888,6 @@ class BakedCelestialViewer {
 
     clear() {
         this.generation += 1;
-        this.releaseInput();
         this.controllers.forEach(controller => controller.abort());
         this.controllers.clear();
         this.queue.forEach(task => task.resolve(null));
@@ -952,12 +909,9 @@ class BakedCelestialViewer {
         this.lastRingImage = null;
         this.lastRingSample = null;
         this.cloudTime = 0;
+        this.waitingSamples = [];
         this.starfield?.clear();
         this.compositor?.clear();
-        if (this.climateCanvas) {
-            this.climateCanvas.width = 1;
-            this.climateCanvas.height = 1;
-        }
         this.lastTick = 0;
         this.lastDraw = 0;
         this.loading = false;
