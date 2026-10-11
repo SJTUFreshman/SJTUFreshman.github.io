@@ -689,7 +689,9 @@ def render_life_i18n(content: dict[str, Any]) -> str:
         i18n[lang]["life_about_name"] = plain_html_text(
             lang_value(home["hero"].get("name_html", {}), lang)
         )
-        i18n[lang]["life_about_title"] = lang_value(home["hero"].get("title", {}), lang)
+        i18n[lang]["life_about_title"] = plain_html_text(
+            lang_value(home["hero"].get("title", {}), lang)
+        )
         i18n[lang]["life_about_bio"] = lang_value(home["hero"].get("bio", {}), lang)
         i18n[lang]["life_about_location"] = lang_value(home["hero"].get("location", {}), lang)
         i18n[lang]["notes_empty"] = lang_value(home.get("notes_empty", {}), lang)
@@ -1031,7 +1033,7 @@ def _render_life_about_archive(content: dict[str, Any]) -> str:
                     </div>
                     <div class="about-copy">
                         <h3 data-key="life_about_name">{esc(plain_html_text(lang_value(hero.get("name_html", {}), "en")))}</h3>
-                        <p class="about-role" data-key="life_about_title">{esc(lang_value(hero.get("title", {}), "en"))}</p>
+                        <p class="about-role" data-key="life_about_title">{esc(plain_html_text(lang_value(hero.get("title", {}), "en")))}</p>
                         <p class="about-bio" data-key="life_about_bio">{esc(lang_value(hero.get("bio", {}), "en"))}</p>
                         <div class="about-links">
                             <a class="about-link" href="mailto:{esc(email)}">

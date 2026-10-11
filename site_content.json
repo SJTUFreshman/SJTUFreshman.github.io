@@ -57,9 +57,9 @@
         "zh-TW": "楊潤德"
       },
       "title": {
-        "en": "Undergraduate · School of AI, Shanghai Jiao Tong University",
-        "zh-CN": "上海交通大学 · 人工智能学院 本科生",
-        "zh-TW": "上海交通大學 · 人工智能學院 本科生"
+        "en": "Undergraduate<span class=\"hero-title-separator\">·</span><a href=\"https://ai.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">School of AI</a>, <a href=\"https://www.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">Shanghai Jiao Tong University</a>",
+        "zh-CN": "<a href=\"https://www.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">上海交通大学</a><span class=\"hero-title-separator\">·</span><a href=\"https://ai.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">人工智能学院</a> <span class=\"hero-role\">本科生</span>",
+        "zh-TW": "<a href=\"https://www.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">上海交通大學</a><span class=\"hero-title-separator\">·</span><a href=\"https://ai.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">人工智能學院</a> <span class=\"hero-role\">本科生</span>"
       },
       "bio": {
         "en": "Class of 2028. Currently focusing on Multi-Agent Systems. Always learning, always curious.",
@@ -109,7 +109,7 @@
         "id": "PRISM_2026",
         "title": "PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning",
         "authors_html": "Qiran Zhang, Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jingru Fan, Shu Yao, Jie Zhang, Tianle Zhou, Huatao Li, Ruijie Shi, Yihan Li, Chen Qian",
-        "venue": "arXiv preprint arXiv:2605.19382",
+        "venue": "NeurIPS 2026",
         "paper_url": "https://arxiv.org/abs/2605.19382",
         "code_url": "#",
         "citation": "@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,\n      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning}, \n      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},\n      year={2026},\n      eprint={2605.19382},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2605.19382}, \n}"

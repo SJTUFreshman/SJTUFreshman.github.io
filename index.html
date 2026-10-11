@@ -368,6 +368,24 @@
             margin-bottom: 16px;
             font-weight: 400;
         }
+        .hero-title a {
+            white-space: nowrap;
+            text-decoration: underline;
+            text-decoration-color: rgba(109,142,208,0.32);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.2em;
+            transition: color var(--transition), text-decoration-color var(--transition);
+        }
+        .hero-title a:hover,
+        .hero-title a:focus-visible {
+            color: var(--accent-pink);
+            text-decoration-color: currentColor;
+        }
+        .hero-title-separator {
+            margin-inline: 0.22em;
+            font-family: var(--font-ui);
+        }
+        .hero-role { white-space: nowrap; }
 
         .hero-bio {
             font-size: 0.95rem;
@@ -1090,6 +1108,27 @@
             font-family: var(--font-ui);
         }
 
+        html:lang(zh) .hero-title { font-size: 1.125rem; }
+        html:lang(zh) .hero-bio {
+            font-size: 1.0625rem;
+            line-height: 1.85;
+        }
+        html:lang(zh) .news-item { font-size: 1rem; }
+        html:lang(zh) .project-desc {
+            font-size: 0.96875rem;
+            line-height: 1.75;
+        }
+        html:lang(zh) .section-title {
+            font-size: 0.875rem;
+            letter-spacing: 0.08em;
+        }
+        html:lang(zh) .nav-link { font-size: 0.9375rem; }
+        html:lang(zh) [data-key="hero_location"] { font-size: 0.96875rem; }
+        html:lang(zh) .weather-desc,
+        html:lang(zh) .weather-loc { font-size: 0.875rem; }
+        html:lang(zh) .life-card-desc { font-size: 1rem; }
+        html:lang(zh) .life-card-cta { font-size: 0.8125rem; }
+
         /* Scrollbar */
         html { overflow-x: hidden; }
         ::-webkit-scrollbar { width: 6px; }
@@ -1180,7 +1219,7 @@
         <img src="me_at_dorm.jpg" alt="Runde Yang" class="hero-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
         <div class="hero-info">
             <h1 class="hero-name" id="heroName">Runde Yang <span style="font-weight:400;font-size:0.65em;color:var(--text-secondary);">楊潤德</span></h1>
-            <p class="hero-title" data-key="hero_title">Undergraduate · School of AI, Shanghai Jiao Tong University</p>
+            <p class="hero-title" data-key="hero_title">Undergraduate<span class="hero-title-separator">·</span><a href="https://ai.sjtu.edu.cn/" target="_blank" rel="noopener noreferrer">School of AI</a>, <a href="https://www.sjtu.edu.cn/" target="_blank" rel="noopener noreferrer">Shanghai Jiao Tong University</a></p>
             <p class="hero-bio" data-key="hero_bio">Class of 2028. Currently focusing on Multi-Agent Systems. Always learning, always curious.</p>
             <div class="hero-links">
                 <a class="hero-link" id="emailLink"><i class="fas fa-envelope"></i> <span id="emailText"></span></a>
@@ -1225,7 +1264,7 @@
             <div class="pub-item">
                 <div class="pub-title-text en-only">PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning</div>
                 <div class="pub-authors en-only">Qiran Zhang, Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jingru Fan, Shu Yao, Jie Zhang, Tianle Zhou, Huatao Li, Ruijie Shi, Yihan Li, Chen Qian</div>
-                <div class="pub-venue en-only">arXiv preprint arXiv:2605.19382</div>
+                <div class="pub-venue en-only">NeurIPS 2026</div>
                 <div class="pub-actions">
                     <a href="https://arxiv.org/abs/2605.19382" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
                     <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
@@ -1345,7 +1384,7 @@ const i18n = {
         "title_projects": "Projects",
         "weather_loc": "Shanghai",
         "hero_name": "Runde Yang <span style=\"font-weight:400;font-size:0.65em;color:var(--text-secondary);\">楊潤德</span>",
-        "hero_title": "Undergraduate · School of AI, Shanghai Jiao Tong University",
+        "hero_title": "Undergraduate<span class=\"hero-title-separator\">·</span><a href=\"https://ai.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">School of AI</a>, <a href=\"https://www.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">Shanghai Jiao Tong University</a>",
         "hero_bio": "Class of 2028. Currently focusing on Multi-Agent Systems. Always learning, always curious.",
         "hero_location": "Shanghai, China",
         "life_card_title": "Beyond Research",
@@ -1365,7 +1404,7 @@ const i18n = {
         "title_projects": "项目经历",
         "weather_loc": "上海",
         "hero_name": "杨润德",
-        "hero_title": "上海交通大学 · 人工智能学院 本科生",
+        "hero_title": "<a href=\"https://www.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">上海交通大学</a><span class=\"hero-title-separator\">·</span><a href=\"https://ai.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">人工智能学院</a> <span class=\"hero-role\">本科生</span>",
         "hero_bio": "24 级本科生，目前从事多智能体系统相关工作。持续学习中。",
         "hero_location": "中国 上海",
         "life_card_title": "科研之外",
@@ -1385,7 +1424,7 @@ const i18n = {
         "title_projects": "項目經歷",
         "weather_loc": "上海",
         "hero_name": "楊潤德",
-        "hero_title": "上海交通大學 · 人工智能學院 本科生",
+        "hero_title": "<a href=\"https://www.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">上海交通大學</a><span class=\"hero-title-separator\">·</span><a href=\"https://ai.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">人工智能學院</a> <span class=\"hero-role\">本科生</span>",
         "hero_bio": "24 級本科生，目前從事多智能體系統相關工作。持續學習中。",
         "hero_location": "中國 上海",
         "life_card_title": "科研之外",
