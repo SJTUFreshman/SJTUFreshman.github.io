@@ -1,7 +1,16 @@
 const thoughtReaderLabels = {
-    en: { read: 'Read essay', mode: 'Reading room', close: 'Back to stars', language: 'Essay language' },
-    'zh-CN': { read: '阅读全文', mode: '随笔阅读', close: '返回星图', language: '随笔语言' },
-    'zh-TW': { read: '閱讀全文', mode: '隨筆閱讀', close: '返回星圖', language: '隨筆語言' }
+    en: {
+        read: 'Read essay', mode: 'Thoughts', close: 'Back to stars', language: 'Essay language',
+        hint: 'Scroll to read', progress: 'Reading progress', navigation: 'Reading navigation'
+    },
+    'zh-CN': {
+        read: '阅读全文', mode: '随笔', close: '返回星图', language: '随笔语言',
+        hint: '向下阅读', progress: '阅读进度', navigation: '阅读导航'
+    },
+    'zh-TW': {
+        read: '閱讀全文', mode: '隨筆', close: '返回星圖', language: '隨筆語言',
+        hint: '由右至左閱讀', progress: '閱讀進度', navigation: '閱讀導覽'
+    }
 };
 
 const lightboxLabels = {
@@ -28,6 +37,37 @@ const lightboxLabels = {
 const thoughtReader = document.getElementById('thoughtReader');
 let thoughtReaderTrigger = null;
 
+function updateThoughtReaderProgress() {
+    if (!thoughtReader?.open) return;
+    const scrollArea = thoughtReader.querySelector('.thought-reader-scroll');
+    const vertical = thoughtReader.lang === 'zh-TW';
+    const maximum = vertical
+        ? scrollArea.scrollWidth - scrollArea.clientWidth
+        : scrollArea.scrollHeight - scrollArea.clientHeight;
+    const position = vertical ? -scrollArea.scrollLeft : scrollArea.scrollTop;
+    const percentage = maximum > 1 ? Math.round(Math.max(0, Math.min(1, position / maximum)) * 100) : 100;
+    const progress = thoughtReader.querySelector('.thought-reader-progress');
+    progress.textContent = `${percentage}%`;
+    progress.setAttribute('aria-valuenow', String(percentage));
+    thoughtReader.querySelector('[data-reader-step="-1"]').disabled = position <= 1;
+    thoughtReader.querySelector('[data-reader-step="1"]').disabled = position >= maximum - 1;
+}
+
+function resetThoughtReaderPosition() {
+    thoughtReader.querySelector('.thought-reader-scroll').scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    updateThoughtReaderProgress();
+}
+
+function advanceThoughtReader(direction) {
+    const scrollArea = thoughtReader.querySelector('.thought-reader-scroll');
+    const columnWidth = parseFloat(getComputedStyle(thoughtReader.querySelector('.thought-reader-body')).lineHeight);
+    const columns = Math.max(1, Math.floor(scrollArea.clientWidth / columnWidth) - 2);
+    scrollArea.scrollBy({
+        left: -direction * columns * columnWidth,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+    });
+}
+
 function updateThoughtReader() {
     if (!thoughtReader) return;
     const labels = thoughtReaderLabels[state.currentLang] || thoughtReaderLabels.en;
@@ -37,42 +77,83 @@ function updateThoughtReader() {
     if (!thoughtReaderTrigger) return;
     const item = thoughtReaderTrigger.closest('.thought-item');
     const moment = thoughtReaderTrigger.closest('.portal-moment');
+    let scrollArea = thoughtReader.querySelector('.thought-reader-scroll');
+    const restoreScrollFocus = document.activeElement === scrollArea;
+    const changesAxis = (thoughtReader.lang === 'zh-TW') !== (state.currentLang === 'zh-TW');
+    if (thoughtReader.open && changesAxis) {
+        const replacement = scrollArea.cloneNode(false);
+        replacement.append(...scrollArea.childNodes);
+        scrollArea.replaceWith(replacement);
+        scrollArea = replacement;
+        scrollArea.querySelector('.thought-reader-article').style.animation = 'none';
+    }
+    thoughtReader.lang = state.currentLang;
     thoughtReader.querySelector('.thought-reader-mode').textContent = labels.mode;
     thoughtReader.querySelector('.thought-reader-close').textContent = labels.close;
+    thoughtReader.querySelector('.thought-reader-hint').textContent = labels.hint;
+    thoughtReader.querySelector('.thought-reader-progress').setAttribute('aria-label', labels.progress);
+    const pagination = thoughtReader.querySelector('.thought-reader-pagination');
+    pagination.hidden = state.currentLang !== 'zh-TW';
+    pagination.setAttribute('aria-label', labels.navigation);
     const language = thoughtReader.querySelector('.thought-reader-language');
     language.setAttribute('aria-label', labels.language);
     language.value = state.currentLang;
     thoughtReader.querySelector('#thoughtReaderTitle').textContent = moment.querySelector('h3').textContent;
-    thoughtReader.querySelector('.thought-reader-date').textContent = item.querySelector('.thought-date').textContent;
+    const dateParts = item.querySelector('.thought-date').textContent.split(/(\d+)/).map(part => {
+        if (!/^\d+$/.test(part)) return document.createTextNode(part);
+        const numeral = document.createElement('span');
+        if (part.length <= 2) numeral.className = 'thought-reader-numeral';
+        numeral.textContent = part;
+        return numeral;
+    });
+    thoughtReader.querySelector('.thought-reader-date').replaceChildren(...dateParts);
     const paragraphs = item.querySelector('.thought-text').textContent.trim().split(/\n\s*\n/).map(text => {
         const paragraph = document.createElement('p');
         paragraph.textContent = text;
         return paragraph;
     });
     thoughtReader.querySelector('.thought-reader-body').replaceChildren(...paragraphs);
+    resetThoughtReaderPosition();
+    if (restoreScrollFocus) scrollArea.focus({ preventScroll: true });
 }
 
 function openThoughtReader(button) {
     if (!thoughtReader || state.modalOpen) return;
     thoughtReaderTrigger = button;
+    thoughtReader.querySelector('.thought-reader-article').style.animation = '';
     updateThoughtReader();
     suspendForModal();
     thoughtReader.showModal();
     const scrollArea = thoughtReader.querySelector('.thought-reader-scroll');
-    scrollArea.scrollTop = 0;
+    resetThoughtReaderPosition();
     scrollArea.focus({ preventScroll: true });
 }
 
 if (thoughtReader) {
+    thoughtReader.addEventListener('scroll', updateThoughtReaderProgress, { passive: true, capture: true });
+    const resizeObserver = new ResizeObserver(updateThoughtReaderProgress);
+    resizeObserver.observe(thoughtReader);
+    resizeObserver.observe(thoughtReader.querySelector('.thought-reader-body'));
+    thoughtReader.addEventListener('wheel', event => {
+        const scrollArea = event.target.closest('.thought-reader-scroll');
+        if (!scrollArea || thoughtReader.lang !== 'zh-TW' || event.ctrlKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+        event.preventDefault();
+        const unit = event.deltaMode === 1 ? 24 : event.deltaMode === 2 ? scrollArea.clientWidth : 1;
+        scrollArea.scrollLeft -= event.deltaY * unit;
+    }, { passive: false });
+    thoughtReader.querySelectorAll('[data-reader-step]').forEach(button => {
+        button.addEventListener('click', () => advanceThoughtReader(Number(button.dataset.readerStep)));
+    });
     thoughtReader.querySelector('.thought-reader-close').addEventListener('click', () => thoughtReader.close());
     thoughtReader.querySelector('.thought-reader-language').addEventListener('change', event => {
         setLang(event.target.value);
-        thoughtReader.querySelector('.thought-reader-scroll').scrollTop = 0;
     });
     thoughtReader.addEventListener('keydown', event => {
         event.stopPropagation();
+        const scrollArea = thoughtReader.querySelector('.thought-reader-scroll');
         if (event.key === 'Tab') {
-            const focusable = Array.from(thoughtReader.querySelectorAll('button, select, [tabindex="0"]'));
+            const focusable = Array.from(thoughtReader.querySelectorAll('button, select, [tabindex="0"]'))
+                .filter(element => !element.disabled && element.getClientRects().length);
             const first = focusable[0];
             const last = focusable[focusable.length - 1];
             if (event.shiftKey && document.activeElement === first) {
@@ -85,6 +166,16 @@ if (thoughtReader) {
         } else if (event.key === 'Escape') {
             event.preventDefault();
             thoughtReader.close();
+        } else if (thoughtReader.lang === 'zh-TW' && event.target === scrollArea && !event.ctrlKey && !event.metaKey && !event.altKey) {
+            const forward = ['PageDown', 'ArrowLeft', 'ArrowDown'].includes(event.key) || (event.key === ' ' && !event.shiftKey);
+            const backward = ['PageUp', 'ArrowRight', 'ArrowUp'].includes(event.key) || (event.key === ' ' && event.shiftKey);
+            if (forward || backward) {
+                event.preventDefault();
+                advanceThoughtReader(forward ? 1 : -1);
+            } else if (event.key === 'Home' || event.key === 'End') {
+                event.preventDefault();
+                scrollArea.scrollTo({ left: event.key === 'Home' ? 0 : -scrollArea.scrollWidth, behavior: 'instant' });
+            }
         }
     });
     thoughtReader.addEventListener('close', () => {

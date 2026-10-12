@@ -656,7 +656,6 @@ def render_life_i18n(content: dict[str, Any]) -> str:
     home_title_keys = {
         "title_about": "nav_about",
         "title_news": "title_news",
-        "title_publications": "title_pubs",
         "title_projects": "title_projects",
         "title_notes": "title_notes",
     }
@@ -794,6 +793,8 @@ def render_resource_link(url: str | None, class_name: str, icon: str, label: str
 def render_publications(content: dict[str, Any]) -> str:
     rows = []
     for item in content["home"]["publications"]:
+        if item.get("selected") is False:
+            continue
         paper = render_resource_link(item.get("paper_url"), "pub-btn", "far fa-file-pdf", "Paper")
         code = render_resource_link(item.get("code_url"), "pub-btn", "fab fa-github", "Code")
         cite = item.get("id") or ""
@@ -1170,7 +1171,7 @@ def render_citations(content: dict[str, Any]) -> str:
     citations = {
         item["id"]: item["citation"]
         for item in content["home"].get("publications", [])
-        if item.get("id") and item.get("citation")
+        if item.get("id") and item.get("citation") and item.get("selected") is not False
     }
     return "/* ===== Citations ===== */\nconst citations = " + json_js(citations) + ";"
 

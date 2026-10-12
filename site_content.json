@@ -131,6 +131,16 @@
         "paper_url": "https://arxiv.org/abs/2602.05353",
         "code_url": "#",
         "citation": ""
+      },
+      {
+        "id": "AppCopilot_2025",
+        "selected": false,
+        "title": "AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent",
+        "authors_html": "Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian",
+        "venue": "arXiv preprint arXiv:2509.02444",
+        "paper_url": "https://arxiv.org/abs/2509.02444",
+        "code_url": "",
+        "citation": "@misc{fan2025appcopilotgeneralaccuratelonghorizon,\n  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},\n  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},\n  year={2025},\n  eprint={2509.02444},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2509.02444}\n}"
       }
     ],
     "projects": [
@@ -272,6 +282,7 @@
         "title_thoughts": "Thoughts",
         "title_friends": "Friends",
         "title_home": "Home",
+        "title_publications": "Publications",
         "chart_china": "China",
         "chart_world": "Countries visited",
         "chart_east_asia": "East Asia",
@@ -306,6 +317,7 @@
         "title_thoughts": "随笔",
         "title_friends": "友链",
         "title_home": "主页",
+        "title_publications": "论文",
         "chart_china": "中国",
         "chart_world": "到访国家和地区",
         "chart_east_asia": "东亚",
@@ -340,6 +352,7 @@
         "title_thoughts": "隨筆",
         "title_friends": "友鏈",
         "title_home": "主頁",
+        "title_publications": "論文",
         "chart_china": "中國",
         "chart_world": "到訪國家和地區",
         "chart_east_asia": "東亞",
@@ -680,7 +693,8 @@
         "ModelSlices_2026": 677,
         "Generative_2025": 113963,
         "PRISM_2026": 113963,
-        "AgentXRay_2026": 113963
+        "AgentXRay_2026": 113963,
+        "AppCopilot_2025": 677
       },
       "projects": {
         "appcopilot": 81693,

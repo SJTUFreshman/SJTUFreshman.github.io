@@ -490,6 +490,11 @@ async function contentChecks(browser) {
         const before = await pose(page);
         await trigger.click();
         await page.locator('#thoughtReader[open]').waitFor();
+        check(await page.evaluate(() => document.querySelector('#thoughtReader').getAnimations()
+            .some(animation => animation.playState === 'running')),
+        `${label}: opening an essay plays the paper entrance transition`);
+        await page.evaluate(() => Promise.allSettled(document.querySelector('#thoughtReader')
+            .getAnimations({ subtree: true }).map(animation => animation.finished)));
         const readingLayout = await page.evaluate(() => {
             const reader = document.querySelector('#thoughtReader');
             const article = reader.querySelector('.thought-reader-article');
@@ -499,6 +504,7 @@ async function contentChecks(browser) {
                 width: article.getBoundingClientRect().width,
                 size: parseFloat(getComputedStyle(body).fontSize),
                 font: getComputedStyle(body).fontFamily,
+                writingMode: getComputedStyle(body).writingMode,
                 overflow: reader.scrollWidth > reader.clientWidth || scrollArea.scrollWidth > scrollArea.clientWidth,
                 scrollable: scrollArea.scrollHeight > scrollArea.clientHeight,
                 focused: document.activeElement === scrollArea,
@@ -510,7 +516,8 @@ async function contentChecks(browser) {
             };
         });
         check(readingLayout.width >= (label === 'desktop' ? 760 : viewport.width - 65)
-            && readingLayout.size >= (label === 'desktop' ? 20 : 18) && !readingLayout.font.includes('EduKai')
+            && readingLayout.size >= 22 && readingLayout.font.includes('EduKai')
+            && readingLayout.writingMode === 'horizontal-tb'
             && !readingLayout.overflow, `${label}: essays use a wide, clear body without horizontal overflow`);
         check(readingLayout.scrollable && readingLayout.focused && readingLayout.modal,
             `${label}: the reader focuses its scrollable article and makes the background inactive`);
@@ -525,9 +532,84 @@ async function contentChecks(browser) {
         check(await page.evaluate(() => Array.from(document.querySelectorAll('.thought-reader-body p'), paragraph => paragraph.textContent)
             .join('\n\n') === i18n['zh-TW'].thought_0629.trim().split(/\n\s*\n/).join('\n\n')),
         `${label}: language changes update the complete essay inside the reader`);
+        const verticalLayout = await page.evaluate(() => {
+            const reader = document.querySelector('#thoughtReader');
+            const scrollArea = reader.querySelector('.thought-reader-scroll');
+            const body = reader.querySelector('.thought-reader-body');
+            return {
+                writingMode: getComputedStyle(body).writingMode,
+                font: getComputedStyle(body).fontFamily,
+                horizontal: scrollArea.scrollWidth > scrollArea.clientWidth,
+                vertical: scrollArea.scrollHeight > scrollArea.clientHeight + 1,
+                atStart: scrollArea.scrollLeft === 0 && scrollArea.scrollTop === 0,
+                titleOnRight: reader.querySelector('h2').getBoundingClientRect().left >= body.getBoundingClientRect().right,
+                previousDisabled: reader.querySelector('[data-reader-step="-1"]').disabled,
+                nextEnabled: !reader.querySelector('[data-reader-step="1"]').disabled
+            };
+        });
+        check(verticalLayout.writingMode === 'vertical-rl' && verticalLayout.font.includes('EduKai')
+            && verticalLayout.horizontal && !verticalLayout.vertical && verticalLayout.atStart && verticalLayout.titleOnRight
+            && verticalLayout.previousDisabled && verticalLayout.nextEnabled,
+        `${label}: Traditional Chinese starts on the right and flows left in Kai columns without vertical clipping`);
+        await screenshot(page, `essay-traditional-${label}`);
+        await page.locator('[data-reader-step="1"]').click();
+        await page.waitForFunction(() => document.querySelector('.thought-reader-scroll').scrollLeft < -50);
+        await page.locator('.thought-reader-scroll').focus();
+        await page.keyboard.press('Home');
+        await page.waitForFunction(() => document.querySelector('.thought-reader-scroll').scrollLeft === 0);
+        await page.keyboard.press('PageDown');
+        await page.waitForFunction(() => document.querySelector('.thought-reader-scroll').scrollLeft < -50);
+        check(true, `${label}: continuation controls and PageDown advance through the vertical essay`);
+        await page.keyboard.press('Home');
+        await page.locator('.thought-reader-scroll').dispatchEvent('wheel', { deltaY: 180, bubbles: true, cancelable: true });
+        await page.waitForFunction(() => document.querySelector('.thought-reader-scroll').scrollLeft < -100);
+        check(await page.evaluate(() => document.querySelector('.thought-reader-scroll')
+            .dispatchEvent(new WheelEvent('wheel', { deltaY: 50, ctrlKey: true, cancelable: true }))),
+        `${label}: the reader converts ordinary wheel scrolling but preserves pinch zoom`);
+        if (label !== 'desktop') {
+            await page.locator('.thought-reader-scroll').focus();
+            await page.keyboard.press('Home');
+            const bounds = await page.locator('.thought-reader-scroll').boundingBox();
+            const session = await context.newCDPSession(page);
+            const start = { x: bounds.x + bounds.width * 0.3, y: bounds.y + bounds.height * 0.5 };
+            await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...start, id: 1 }] });
+            for (const distance of [20, 40, 60, 90, 120]) {
+                await session.send('Input.dispatchTouchEvent', {
+                    type: 'touchMove', touchPoints: [{ x: start.x + distance, y: start.y, id: 1 }]
+                });
+            }
+            await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+            await page.waitForFunction(() => document.querySelector('.thought-reader-scroll').scrollLeft < -20);
+            check(true, `${label}: a horizontal touch swipe advances the vertical columns`);
+            await session.detach();
+        }
+        await page.locator('.thought-reader-scroll').focus();
+        await page.keyboard.press('End');
+        await page.waitForFunction(() => document.querySelector('.thought-reader-progress').getAttribute('aria-valuenow') === '100');
+        check(await page.evaluate(() => {
+            const scrollArea = document.querySelector('.thought-reader-scroll');
+            const paragraph = document.querySelector('.thought-reader-body p:last-child');
+            const range = document.createRange();
+            range.setStart(paragraph.firstChild, paragraph.textContent.length - 1);
+            range.setEnd(paragraph.firstChild, paragraph.textContent.length);
+            const lastCharacter = range.getBoundingClientRect();
+            const viewport = scrollArea.getBoundingClientRect();
+            return lastCharacter.left >= viewport.left && lastCharacter.right <= viewport.right
+                && lastCharacter.top >= viewport.top && lastCharacter.bottom <= viewport.bottom
+                && document.querySelector('[data-reader-step="1"]').disabled;
+        }), `${label}: the final character remains reachable, with progress and continuation controls at the end`);
+        samePose(await pose(page), before, `${label}: vertical reading leaves the star camera unchanged`);
         await page.locator('.thought-reader-language').selectOption('en');
         check(await page.locator('.thought-reader-body').textContent() === "See Chinese version, record of last night's dream.",
             `${label}: the reader preserves the existing English text`);
+        check(await page.evaluate(() => {
+            const body = document.querySelector('.thought-reader-body');
+            const scrollArea = document.querySelector('.thought-reader-scroll');
+            return getComputedStyle(body).writingMode === 'horizontal-tb'
+                && getComputedStyle(body).fontFamily.includes('Newsreader')
+                && scrollArea.scrollLeft === 0 && scrollArea.scrollTop === 0
+                && document.querySelector('.thought-reader-pagination').hidden;
+        }), `${label}: English returns to horizontal editorial type and resets the reading position`);
         await page.locator('.thought-reader-language').selectOption('zh-CN');
         await page.locator('.thought-reader-scroll').focus();
         for (let step = 0; step < 5; step++) {
@@ -548,10 +630,40 @@ async function contentChecks(browser) {
         check(await page.evaluate(() => document.querySelector('#thoughtReaderTitle').textContent
             === document.querySelector('[data-moment="thought-2026-01-16"] h3').textContent),
         `${label}: opening another essay replaces the reader content`);
+        await page.keyboard.press('Escape');
+        await page.waitForFunction(() => !state.modalOpen);
+        await page.keyboard.press('Enter');
+        await page.locator('#thoughtReader[open]').waitFor();
+        check(await page.evaluate(() => state.modalOpen && document.querySelector('#thoughtReader').matches(':modal')),
+            `${label}: Escape during entrance can be followed by reopening without a stuck modal`);
         await page.locator('.thought-reader-close').click();
         await page.waitForFunction(() => !state.modalOpen);
         check(await firstEssay.evaluate(button => document.activeElement === button),
             `${label}: the close button restores the essay trigger`);
+        await page.locator('#portalClose').click();
+        await settle(page);
+
+        await page.locator('#sectionDrawerToggle').click();
+        await page.locator('#sectionDrawerList [data-portal-id="publications"]').click();
+        await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'publications');
+        await settle(page);
+        const publicationTitles = new Set();
+        for (const hip of [113963, 677]) {
+            await page.locator(`[data-star-portal="publications"][data-star-hip="${hip}"]`).focus();
+            await page.keyboard.press('Enter');
+            for (const title of await page.locator('#publications .publication-entry:not([hidden]) .pub-title-text').allTextContents()) {
+                publicationTitles.add(title);
+            }
+        }
+        check(publicationTitles.size === 5 && Array.from(publicationTitles).some(title => title.startsWith('AppCopilot:'))
+            && await page.locator('#publications [data-portal-entry="AppCopilot_2025"] a.pub-btn').getAttribute('href') === 'https://arxiv.org/abs/2509.02444',
+        `${label}: Pegasus includes all five complete publications, including AppCopilot`);
+        for (const [language, expected] of [['en', 'Publications'], ['zh-CN', '论文'], ['zh-TW', '論文']]) {
+            await page.locator(`.lang-btn[data-lang="${language}"]`).click();
+            check(await page.evaluate(() => dom.panelTitle.textContent) === expected,
+                `${label}: Pegasus uses the complete publication heading in ${language}`);
+        }
+        await screenshot(page, `publications-${label}`);
         await page.locator('#portalClose').click();
         await settle(page);
 
@@ -708,6 +820,22 @@ async function reducedMotionChecks(browser) {
     await page.keyboard.press('Escape');
     await settle(page);
     samePose(await pose(page), before, 'Reduced-motion navigation restores the original view');
+    await page.locator('#sectionDrawerToggle').click();
+    await page.locator('#sectionDrawerList [data-portal-id="thoughts"]').click();
+    await page.waitForFunction(() => state.scene === 'detail');
+    await page.locator('[data-star-portal="thoughts"][data-star-hip="95947"]').click();
+    await page.locator('[data-portal-entry="thought-2026-06-29"] [data-thought-reader]').click();
+    await page.locator('#thoughtReader[open]').waitFor();
+    check(await page.evaluate(() => document.querySelector('#thoughtReader').getAnimations({ subtree: true }).length === 0),
+        'Reduced-motion visitors enter the essay immediately without paper or text animations');
+    await page.locator('.thought-reader-language').selectOption('zh-TW');
+    await page.locator('[data-reader-step="1"]').click();
+    check(await page.evaluate(() => document.querySelector('.thought-reader-scroll').scrollLeft < 0),
+        'Reduced-motion vertical reading advances without smooth scrolling');
+    await page.keyboard.press('Escape');
+    await page.waitForFunction(() => !state.modalOpen);
+    await page.locator('#portalClose').click();
+    await settle(page);
     await solarMarkerChecks(page, 'reduced motion');
     await context.close();
 }

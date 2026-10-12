@@ -187,30 +187,45 @@
 }
 
 .thought-reader {
-    width: min(1020px, calc(100vw - 64px));
-    height: min(1020px, 92dvh);
+    --reader-ink: #302c27;
+    --reader-muted: #847b6d;
+    --reader-rule: #e8e2d7;
+    width: min(1180px, calc(100vw - 80px));
+    height: min(980px, calc(100dvh - 64px));
     max-width: none;
     max-height: none;
     margin: auto;
     padding: 0;
     overflow: hidden;
-    border: 1px solid rgba(109, 142, 208, 0.22);
-    border-radius: 18px;
-    background: var(--life-paper, #fffdfd);
-    color: #30384b;
-    box-shadow: 0 28px 100px rgba(0, 0, 0, 0.4);
-    font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
-    font-size: 14px;
+    border: 1px solid #eee9df;
+    border-radius: 2px;
+    background: #fffefb;
+    color: var(--reader-ink);
+    box-shadow: 0 32px 110px rgba(0, 0, 0, 0.35);
+    font-family: var(--ui);
+    font-size: 13px;
     letter-spacing: normal;
 }
 
 .thought-reader[open] {
     display: flex;
     flex-direction: column;
+    animation: thought-reader-enter 780ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.thought-reader::before {
+    content: '';
+    position: absolute;
+    inset: 100px auto 78px 0;
+    width: 104px;
+    background: url('../reader-bamboo.svg') left bottom / 104px auto no-repeat;
+    pointer-events: none;
 }
 
 .thought-reader::backdrop {
-    background: rgba(7, 12, 26, 0.76);
+    background: rgba(8, 14, 24, 0.8);
+    backdrop-filter: blur(5px);
+    animation: thought-reader-dim 500ms ease-out both;
 }
 
 .thought-reader-toolbar {
@@ -219,12 +234,16 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 16px 28px;
-    border-bottom: 1px solid #e5e8ef;
+    margin: 0 32px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--reader-rule);
 }
 
 .thought-reader-mode {
-    color: #667189;
+    color: #865d50;
+    font-family: var(--kai);
+    font-size: 21px;
+    letter-spacing: 0.2em;
 }
 
 .thought-reader-controls {
@@ -234,64 +253,85 @@
 }
 
 .thought-reader-language,
-.thought-reader-close {
+.thought-reader-close,
+.thought-reader-pagination button {
     min-height: 44px;
     padding: 8px 12px;
-    border: 1px solid #d5dce9;
-    border-radius: 8px;
-    background: #fff;
+    border: 1px solid var(--reader-rule);
+    border-radius: 3px;
+    background: transparent;
     color: inherit;
     font: inherit;
     cursor: pointer;
 }
 
-.thought-reader-close:hover {
-    background: #eef3ff;
-    border-color: #6d8ed0;
+.thought-reader-close:hover,
+.thought-reader-pagination button:enabled:hover {
+    background: #f5f3ec;
+    border-color: #aaa48e;
 }
 
 .thought-reader :focus-visible {
-    outline: 2px solid #6d8ed0;
+    outline: 2px solid #8b957a;
     outline-offset: -3px;
 }
 
 .thought-reader-scroll {
+    flex: 1;
     min-height: 0;
-    padding: 48px 56px 72px;
-    overflow-y: auto;
+    margin-left: 104px;
+    padding: 42px 60px 56px 30px;
+    overflow: auto;
     overscroll-behavior: contain;
-    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: #cdc8bb transparent;
+    writing-mode: horizontal-tb;
+}
+
+.thought-reader-scroll:focus-visible {
+    outline: 1px solid #dedecf;
+    outline-offset: -1px;
 }
 
 .thought-reader-article {
-    max-width: 800px;
+    max-width: 760px;
     margin: 0 auto;
-    overflow-wrap: break-word;
+    font-family: var(--kai);
+    overflow-wrap: anywhere;
+}
+
+.thought-reader-article header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 38px;
 }
 
 .thought-reader-date {
-    margin: 0 0 14px;
-    color: #667189;
+    order: -1;
+    margin: 0 0 18px;
+    color: var(--reader-muted);
     font-size: 14px;
+    letter-spacing: 0.1em;
 }
 
 .thought-reader h2 {
-    margin: 0 0 32px;
+    margin: 0;
     font-family: inherit;
-    font-size: clamp(26px, 3vw, 36px);
-    font-weight: 600;
+    font-size: clamp(30px, 3vw, 38px);
+    font-weight: 400;
     line-height: 1.4;
     text-wrap: balance;
 }
 
 .thought-reader-body {
-    font-size: 20px;
-    line-height: 1.95;
-    letter-spacing: 0.012em;
+    font-size: 24px;
+    line-height: 2.1;
+    letter-spacing: 0.025em;
 }
 
 .thought-reader-body p {
-    margin: 0 0 1.35em;
+    margin: 0 0 1em;
+    text-indent: 2em;
     white-space: pre-line;
 }
 
@@ -299,8 +339,134 @@
     margin-bottom: 0;
 }
 
+.thought-reader:lang(en) .thought-reader-article,
+.thought-reader:lang(en) .thought-reader-mode {
+    font-family: var(--editorial);
+}
+
+.thought-reader:lang(en) .thought-reader-body {
+    line-height: 1.8;
+    letter-spacing: normal;
+}
+
+.thought-reader:lang(en) .thought-reader-body p {
+    text-indent: 0;
+}
+
+.thought-reader:lang(zh-TW) .thought-reader-scroll {
+    direction: rtl;
+    padding: 36px 48px 36px 24px;
+}
+
+.thought-reader:lang(zh-TW) .thought-reader-article {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    direction: ltr;
+    width: max-content;
+    min-width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+}
+
+.thought-reader:lang(zh-TW) .thought-reader-article header {
+    display: block;
+    margin: 0 0 0 42px;
+}
+
+.thought-reader:lang(zh-TW) h2 {
+    margin-left: 24px;
+    letter-spacing: 0.15em;
+    text-wrap: wrap;
+}
+
+.thought-reader:lang(zh-TW) .thought-reader-date {
+    margin: 0;
+    font-size: 16px;
+}
+
+.thought-reader:lang(zh-TW) .thought-reader-numeral {
+    text-combine-upright: all;
+}
+
+.thought-reader:lang(zh-TW) .thought-reader-body {
+    line-height: 2.4;
+    letter-spacing: 0.1em;
+}
+
+.thought-reader:lang(zh-TW) .thought-reader-body p {
+    margin: 0 0 0 1em;
+    hanging-punctuation: last;
+}
+
+.thought-reader:lang(zh-TW) .thought-reader-body p:last-child {
+    margin-left: 0;
+}
+
+.thought-reader-footer {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 20px;
+    min-height: 66px;
+    margin: 0 32px;
+    padding: 10px 0;
+    border-top: 1px solid var(--reader-rule);
+    color: var(--reader-muted);
+}
+
+.thought-reader-progress {
+    min-width: 4ch;
+    color: #736e5e;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+}
+
+.thought-reader-hint {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+}
+
+.thought-reader-pagination {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.thought-reader-pagination button {
+    border-color: transparent;
+    color: var(--reader-ink);
+}
+
+.thought-reader-pagination button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.thought-reader[open] .thought-reader-article,
+.thought-reader[open] .thought-reader-toolbar,
+.thought-reader[open] .thought-reader-footer {
+    animation: thought-reader-ink 550ms 220ms ease-out both;
+}
+
 .thought-reader ::selection {
-    background: #e7ebf8;
+    background: #e1e7d7;
+}
+
+@keyframes thought-reader-enter {
+    0%, 12% { opacity: 0; transform: translateY(32px) scale(0.975); }
+    100% { opacity: 1; transform: none; }
+}
+
+@keyframes thought-reader-dim {
+    from { background-color: transparent; backdrop-filter: blur(0); }
+    to { background-color: rgba(8, 14, 24, 0.8); backdrop-filter: blur(5px); }
+}
+
+@keyframes thought-reader-ink {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @media (max-width: 640px) {
@@ -313,21 +479,86 @@
     }
 
     .thought-reader-toolbar {
-        flex-wrap: wrap;
-        padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 12px max(16px, env(safe-area-inset-left));
+        gap: 8px;
+        margin: 0 18px;
+        padding: max(10px, env(safe-area-inset-top)) 0 10px;
+    }
+
+    .thought-reader-mode {
+        font-size: 18px;
+        letter-spacing: 0.08em;
     }
 
     .thought-reader-controls {
-        gap: 8px;
+        gap: 6px;
         margin-left: auto;
     }
 
-    .thought-reader-scroll {
-        padding: 28px max(22px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+    .thought-reader-language,
+    .thought-reader-close {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .thought-reader::before {
+        inset: auto auto 74px 0;
+        width: 20px;
+        height: 260px;
+        background-size: 62px auto;
+        opacity: 0.65;
+    }
+
+    .thought-reader-scroll,
+    .thought-reader:lang(zh-TW) .thought-reader-scroll {
+        margin-left: 0;
+        padding: 28px max(24px, env(safe-area-inset-right)) 32px max(24px, env(safe-area-inset-left));
     }
 
     .thought-reader-body {
-        font-size: 18px;
+        font-size: 22px;
+    }
+
+    .thought-reader:lang(zh-TW) .thought-reader-body {
+        line-height: 2.2;
+    }
+
+    .thought-reader:lang(zh-TW) .thought-reader-article header {
+        margin-left: 24px;
+    }
+
+    .thought-reader:lang(zh-TW) h2 {
+        font-size: 30px;
+        margin-left: 16px;
+    }
+
+    .thought-reader-footer {
+        gap: 10px;
+        margin: 0 18px;
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+
+    .thought-reader-hint {
+        font-size: 11px;
+        letter-spacing: 0;
+    }
+
+    .thought-reader-pagination {
+        gap: 0;
+    }
+
+    .thought-reader-pagination button {
+        padding: 6px;
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .thought-reader[open],
+    .thought-reader::backdrop,
+    .thought-reader[open] .thought-reader-article,
+    .thought-reader[open] .thought-reader-toolbar,
+    .thought-reader[open] .thought-reader-footer {
+        animation: none;
     }
 }
 

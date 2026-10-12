@@ -1022,6 +1022,7 @@ const runtimeContext = {
     Date,
     Element: MockElement,
     HTMLImageElement: MockElement,
+    ResizeObserver: class { observe() {} },
     URL,
     URLSearchParams,
     __mockAnimationFrames: mockAnimationFrameControl,
