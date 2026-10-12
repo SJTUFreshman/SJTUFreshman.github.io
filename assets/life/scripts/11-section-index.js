@@ -11,10 +11,6 @@ function localized(mapping, lang = state.currentLang) {
     return mapping?.[lang] || mapping?.en || '';
 }
 
-function celestialName(profile, lang = state.currentLang) {
-    return localized(profile?.names, lang) || profile?.body || '';
-}
-
 function observerLocationLabel(lang = state.currentLang) {
     const label = skyModel.location.label;
     if (typeof label === 'string') return label;
@@ -422,7 +418,6 @@ function openHomepageRouteFromIndex() {
 
 function performDrawerPortalNavigation(portal, source = 'pointer') {
     if (!portal) return false;
-    state.drawerNavigationSource = source;
     if (portalAvailableInSky(portal)) {
         startPortalFlight(
             portal,
@@ -446,39 +441,13 @@ function navigateFromSectionDrawer(portal, source = 'pointer') {
         return true;
     }
     closeSectionDrawer({ restoreControl: false, focusToggle: false });
-    if (state.celestialVisit) {
-        state.pendingDrawerPortal = portal;
-        state.pendingDrawerHome = false;
-        state.drawerNavigationSource = source;
-        beginCelestialReturn(false, 'drawer');
-        return true;
-    }
     return performDrawerPortalNavigation(portal, source);
 }
 
 function navigateHomeFromSectionDrawer(source = 'pointer') {
     if (!state.sectionDrawerOpen) return false;
     closeSectionDrawer({ restoreControl: false, focusToggle: false });
-    if (state.celestialVisit) {
-        state.pendingDrawerPortal = null;
-        state.pendingDrawerHome = true;
-        state.drawerNavigationSource = source;
-        beginCelestialReturn(false, 'drawer');
-        return true;
-    }
     return openHomepageRouteFromIndex();
-}
-
-function flushPendingDrawerNavigation() {
-    const portal = state.pendingDrawerPortal;
-    const home = state.pendingDrawerHome;
-    const source = state.drawerNavigationSource || 'pointer';
-    state.pendingDrawerPortal = null;
-    state.pendingDrawerHome = false;
-    state.drawerNavigationSource = null;
-    if (home) return openHomepageRouteFromIndex();
-    if (portal) return performDrawerPortalNavigation(portal, source);
-    return false;
 }
 
 function trapSectionDrawerFocus(event) {

@@ -40,21 +40,18 @@ async function main() {
     const worldMouse = await pinch('#galaxyWorld', 'mouse');
     assert(Math.abs(worldMouse.scale - 1) < 0.01, 'Trackpad pinch over star map must not change browser page scale');
     assert.notEqual(worldMouse.distance, worldBefore.distance, 'Trackpad pinch over star map must change map distance');
-    await page.evaluate(() => lifeStarMap.solarSystem.enter());
-    await page.waitForFunction(() => document.body.classList.contains('solar-system-active'));
-    for (const selector of ['.solar-map-picker', '.solar-map-header']) {
+    for (const selector of ['#mapEntities', '#portalNav']) {
         const result = await pinch(selector, 'mouse');
         assert(Math.abs(result.scale - 1) < 0.01, `${selector} must consume trackpad pinch without browser page zoom`);
     }
     const prevented = await page.evaluate(() => {
-        const target = document.querySelector('.solar-map-picker');
-        let observed = false;
-        target.addEventListener('wheel', event => { observed = event.defaultPrevented; }, { once: true });
-        target.dispatchEvent(new WheelEvent('wheel', { bubbles: true, cancelable: true, ctrlKey: true, deltaY: 1 }));
-        return observed;
+        const target = document.querySelector('#mapEntities');
+        const event = new WheelEvent('wheel', { bubbles: true, cancelable: true, ctrlKey: true, deltaY: 1 });
+        target.dispatchEvent(event);
+        return event.defaultPrevented;
     });
-    assert.equal(prevented, true, 'Ctrl-wheel over solar map must be preventDefaulted before browser zoom');
-    console.log('Map zoom validation passed: touch pinch, trackpad pinch, solar overlays, and ctrl-wheel.');
+    assert.equal(prevented, true, 'Ctrl-wheel over map labels must be preventDefaulted before browser zoom');
+    console.log('Map zoom validation passed: touch pinch, trackpad pinch, map labels, and ctrl-wheel.');
     await browser.close();
 }
 

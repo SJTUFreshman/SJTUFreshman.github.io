@@ -7,8 +7,7 @@ body.star-map {
 .star-map .reticle,
 .star-map .gaze-label,
 .star-map .gaze-instruction,
-.star-map .entry-gate,
-.star-map .celestial-nav {
+.star-map .entry-gate {
     display: none;
 }
 
@@ -91,7 +90,7 @@ body.star-map {
 .star-map .portal-hit.map-portal:hover,
 .star-map .portal-hit.map-portal.is-highlighted,
 .star-map .portal-hit.map-portal:focus-visible,
-.star-map .map-entity:hover,
+.star-map .map-entity:not([aria-disabled="true"]):hover,
 .star-map .map-entity:focus-visible {
     color: #fff5da;
     box-shadow: none;
@@ -218,6 +217,10 @@ body:not(.lang-en) .map-portal-copy strong {
     border: 1px solid #acbaca8c;
     border-radius: 50%;
     box-shadow: 0 0 18px #9dbdea30;
+}
+
+.map-entity[aria-disabled="true"] {
+    cursor: default;
 }
 
 .map-entity small {

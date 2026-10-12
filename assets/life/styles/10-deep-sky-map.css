@@ -97,7 +97,7 @@ body:is(.lang-zh-CN, .lang-zh-TW) .deep-sky-card h1 { font-family: var(--kai); f
 .deep-sky-source-links { display: flex; flex-wrap: wrap; gap: 10px 19px; }
 .deep-sky-source-links a { color: #b6c5d8; text-decoration: none; text-underline-offset: 3px; font-size: 10px; }
 .deep-sky-source-links a:hover { text-decoration: underline; }
-body.deep-sky-open :is(.life-mark, .language-switch, .control-legend, .map-footer, .map-entities, .portal-nav, .star-nav, .celestial-nav, .scene-status, #sectionDrawerToggle) { visibility: hidden !important; pointer-events: none !important; }
+body.deep-sky-open :is(.life-mark, .language-switch, .control-legend, .map-footer, .map-entities, .portal-nav, .star-nav, .scene-status, #sectionDrawerToggle) { visibility: hidden !important; pointer-events: none !important; }
 body.deep-sky-open :is(#constellationCanvas, #starMapCanvas, #starMapFallbackCanvas) { visibility: hidden !important; }
 @keyframes deep-sky-arrive { from { opacity: 0; } to { opacity: 1; } }
 @media (max-height: 800px) and (min-width: 901px) {

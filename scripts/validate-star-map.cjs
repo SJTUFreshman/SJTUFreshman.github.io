@@ -10,10 +10,6 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE_PATH || 'playwright')
 let pageUrl = new URL('life.html', process.argv[2] === '--serve' ? 'http://127.0.0.1/' : process.argv[2] || 'http://localhost:8765/').href;
 let localServer = null;
 const outputDirectory = path.resolve(__dirname, '../.render-work/star-map');
-const useBakedFixtures = process.argv.includes('--baked-fixtures');
-const useHostedAtlas = process.argv.includes('--hosted');
-assert(!(useBakedFixtures && useHostedAtlas), 'Hosted atlas validation must use real remote frames, not fixtures');
-const fixtureDirectory = path.resolve(__dirname, '../.render-work/baked-viewer-fixtures');
 const launchOptions = {
     headless: true,
     ...(process.env.CHROME_EXECUTABLE_PATH
@@ -35,6 +31,12 @@ function check(condition, message) {
 
 function monitor(page, label) {
     page.stylesheetDiagnostics = [];
+    page.retiredRequests = [];
+    page.on('request', request => {
+        if (/assets\/celestial\/|solar-system-map|closeup|celestial-(?:starfield|compositor|visits)/.test(request.url())) {
+            page.retiredRequests.push(request.url());
+        }
+    });
     page.on('pageerror', error => errors.push(`${label}: ${error.stack || error.message}`));
     page.on('console', message => {
         if (message.type() === 'error' && !message.location().url?.endsWith('/favicon.ico')) {
@@ -77,19 +79,18 @@ async function load(page) {
     await settle(page);
     const styles = await page.evaluate(() => ({
         portal: getComputedStyle(document.querySelector('#portalPanel')).position,
-        celestial: getComputedStyle(document.querySelector('#celestialPanel')).position,
         oldCanvas: getComputedStyle(document.querySelector('#spaceCanvas')).display
     }));
-    if (styles.portal !== 'fixed' || styles.celestial !== 'fixed' || styles.oldCanvas !== 'none') {
+    if (styles.portal !== 'fixed' || styles.oldCanvas !== 'none') {
         console.error('Stylesheet diagnostics:', page.stylesheetDiagnostics);
         console.error('Applied stylesheet rules:', await page.evaluate(() => Array.from(document.styleSheets).map(sheet => {
             try {
                 return { href: sheet.href, disabled: sheet.disabled, rules: sheet.cssRules.length,
-                    panelRules: Array.from(sheet.cssRules).filter(rule => ['.portal-panel', '.celestial-panel'].includes(rule.selectorText)).map(rule => rule.cssText) };
+                    panelRules: Array.from(sheet.cssRules).filter(rule => ['.portal-panel'].includes(rule.selectorText)).map(rule => rule.cssText) };
             } catch (error) { return { href: sheet.href, disabled: sheet.disabled, error: error.message }; }
         })));
     }
-    assert.deepEqual(styles, { portal: 'fixed', celestial: 'fixed', oldCanvas: 'none' },
+    assert.deepEqual(styles, { portal: 'fixed', oldCanvas: 'none' },
         'All star map and existing detail stylesheets must be loaded and applied');
 }
 
@@ -154,13 +155,13 @@ async function reset(page) {
 }
 
 async function screenshot(page, name) {
-    await page.screenshot({ path: path.join(outputDirectory, name + (useBakedFixtures ? '-fixture' : '') + '.png') });
+    await page.screenshot({ path: path.join(outputDirectory, name + '.png') });
 }
 
-async function wheelInputChecks(page, selector, solar = false) {
-    const samples = await page.evaluate(({ selector, solar }) => {
+async function wheelInputChecks(page, selector) {
+    const samples = await page.evaluate(({ selector }) => {
         const map = window.lifeStarMap;
-        const view = solar ? map.solarSystem : map;
+        const view = map;
         const surface = document.querySelector(selector);
         const read = () => JSON.parse(JSON.stringify(view.target));
         const dispatch = options => {
@@ -187,8 +188,8 @@ async function wheelInputChecks(page, selector, solar = false) {
         state.modalOpen = modalOpen;
         map.clearInput();
         return { before, vertical, horizontal, momentum, pinchIn, pinchOut, fractional, wheel, lines, pages, blockedSlide, blockedPinch };
-    }, { selector, solar });
-    const label = `${solar ? 'Solar System' : 'Star map'} ${selector}`;
+    }, { selector });
+    const label = `Star map ${selector}`;
     const sameAngles = (first, second) => first.yaw === second.yaw && first.pitch === second.pitch;
     check(samples.vertical.pitch > samples.before.pitch && samples.vertical.yaw === samples.before.yaw
         && samples.vertical.distance === samples.before.distance,
@@ -234,128 +235,35 @@ async function inputChecks(browser) {
         && Math.abs(afterPinch.pitch - beforePinch.pitch) < 0.003 && await page.evaluate(() => visualViewport.scale === 1),
         'A browser-generated trackpad pinch zooms the star map without rotating or scaling the page');
     await reset(page);
-    await page.locator('[data-map-entity="solar"]').click();
-    await page.waitForFunction(() => window.lifeStarMap.solarSystem.active);
-    for (const selector of ['#galaxyWorld', '.solar-map-points']) await wheelInputChecks(page, selector, true);
+    await solarMarkerChecks(page, 'input');
     await context.close();
 }
 
-async function prepareBakedFixtures(browser) {
-    fs.mkdirSync(fixtureDirectory, { recursive: true });
-    const page = await browser.newPage();
-    const bodies = ['sun', 'mercury', 'venus', 'earth', 'moon', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
-    const manifest = { version: 1, testFixture: true, bodies: {} };
-    for (const [index, body] of bodies.entries()) {
-        const image = await page.evaluate(({ body, index }) => {
-            const canvas = document.createElement('canvas');
-            canvas.width = 960;
-            canvas.height = 540;
-            const context = canvas.getContext('2d');
-            context.fillStyle = '#020208';
-            context.fillRect(0, 0, canvas.width, canvas.height);
-            context.fillStyle = `hsl(${index * 34} 50% 55%)`;
-            context.beginPath();
-            context.arc(280, 320, 250, 0, Math.PI * 2);
-            context.fill();
-            context.fillStyle = 'white';
-            context.font = '24px sans-serif';
-            context.fillText(`TEST FIXTURE: ${body}`, 30, 90);
-            return canvas.toDataURL('image/png').split(',')[1];
-        }, { body, index });
-        fs.writeFileSync(path.join(fixtureDirectory, body + '.png'), Buffer.from(image, 'base64'));
-        manifest.bodies[body] = { azimuthCount: 72, elevations: [-90, -60, -30, 0, 30, 60, 90],
-            width: 960, height: 540, framePattern: `${body}/e{elevation}/a{azimuth}.png`,
-            poster: `${body}/poster.png`, defaultAzimuth: 0, defaultElevation: 3 };
+async function solarMarkerChecks(page, label, touch = false) {
+    const marker = page.locator('[data-map-entity="solar"]');
+    check(await marker.isVisible() && await marker.getAttribute('aria-disabled') === 'true',
+        `${label}: the Solar System marker remains visible and unavailable`);
+    const before = await pose(page);
+    const initialUrl = page.url();
+    const assertUnchanged = async activation => {
+        await page.waitForTimeout(300);
+        samePose(await pose(page), before, `${label}: ${activation} leaves the camera unchanged`);
+        check(await page.evaluate(() => state.scene === 'roam' && !window.lifeStarMap.flight
+            && !window.lifeStarMap.pendingEntity && !state.activePortal && !state.modalOpen
+            && !document.querySelector('#celestialPanel, #bakedCelestialView, .solar-map, .solar-map-picker')
+            && !('solarSystem' in window.lifeStarMap)) && page.url() === initialUrl,
+        `${label}: ${activation} opens no page, flight, or planet view`);
+    };
+    const bounds = await marker.boundingBox();
+    if (touch) await page.touchscreen.tap(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+    else await page.mouse.click(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+    await assertUnchanged(touch ? 'tap' : 'click');
+    await marker.focus();
+    for (const key of ['Enter', 'Space']) {
+        await page.keyboard.press(key);
+        await assertUnchanged(key);
     }
-    fs.writeFileSync(path.join(fixtureDirectory, 'manifest.json'), JSON.stringify(manifest));
-    await page.close();
-}
-
-async function openBakedBody(page, body) {
-    await page.locator(`.solar-body-item[data-body="${body}"]`).click();
-    await page.waitForFunction(expected => window.lifeStarMap.solarSystem.visit?.phase === 'observing'
-        && bakedCelestialViewer.profile?.id === expected && Boolean(bakedCelestialViewer.lastImage)
-        && !bakedCelestialViewer.error, body);
-}
-
-async function openEarthMoon(page) {
-    const solar = page.locator('.solar-body-item[data-system="earth-moon"]');
-    if (await solar.count() && await solar.first().isVisible()) {
-        await solar.first().click();
-        await page.waitForFunction(() => window.lifeStarMap.solarSystem.level === 'earth-moon');
-    }
-}
-
-async function bakedControlsAreUncovered(page) {
-    return page.evaluate(() => [...document.querySelectorAll('.baked-celestial-buttons button')].every(button => {
-        const rectangle = button.getBoundingClientRect();
-        return rectangle.width > 0 && rectangle.height > 0
-            && document.elementFromPoint(rectangle.x + rectangle.width / 2, rectangle.y + rectangle.height / 2)?.closest('button') === button;
-    }));
-}
-
-async function bakedInteractionChecks(page, label) {
-    const initial = await page.evaluate(() => ({ azimuth: bakedCelestialViewer.azimuth, elevation: bakedCelestialViewer.elevation }));
-    await page.waitForFunction(start => bakedCelestialViewer.azimuth > start + 0.2, initial.azimuth);
-    check(await page.locator('.baked-celestial-pause').isVisible(), `${label}: the pre-rendered view rotates automatically`);
-    await page.locator('.baked-celestial-pause').click();
-    const paused = await page.evaluate(() => ({ azimuth: bakedCelestialViewer.azimuth,
-        cloudAzimuth: bakedCelestialViewer.cloudAzimuth, cloudTime: bakedCelestialViewer.cloudTime }));
-    await page.waitForTimeout(180);
-    check(await page.evaluate(start => bakedCelestialViewer.paused && Object.entries(start)
-        .every(([key, value]) => bakedCelestialViewer[key] === value), paused),
-        `${label}: the pause button stops both the surface and climate clocks`);
-    await page.locator('#bakedCelestialView').focus();
-    await page.keyboard.press('ArrowRight');
-    await page.keyboard.press('ArrowUp');
-    check(await page.evaluate(start => bakedCelestialViewer.azimuth === start.azimuth, paused)
-        && await page.evaluate(start => bakedCelestialViewer.elevation === start.elevation, initial),
-        `${label}: arrow keys preserve the fixed viewing angle`);
-    const point = await page.locator('.baked-celestial-canvas').boundingBox();
-    await page.mouse.move(point.x + point.width * 0.25, point.y + point.height * 0.35);
-    await page.mouse.down();
-    const beforeDrag = await page.evaluate(() => bakedCelestialViewer.azimuth);
-    await page.mouse.move(point.x + point.width * 0.25 + 80, point.y + point.height * 0.35 + 20, { steps: 6 });
-    await page.mouse.up();
-    check(await page.evaluate(start => bakedCelestialViewer.azimuth === start, beforeDrag),
-        `${label}: pointer dragging cannot move the close-up`);
-    for (const rate of [0.5, 2, 1]) {
-        const button = page.locator(`[data-playback-rate="${rate}"]`);
-        await button.click();
-        check(await button.getAttribute('aria-pressed') === 'true'
-            && await page.evaluate(expected => bakedCelestialViewer.playbackRate === expected && bakedCelestialViewer.paused, rate),
-            `${label}: ${rate}x is selectable without resuming paused playback`);
-    }
-    const sampling = await page.evaluate(() => ({
-        samples: bakedCelestialViewer.samples(),
-        azimuth: bakedCelestialViewer.azimuth,
-        elevation: bakedCelestialViewer.elevation,
-        body: bakedCelestialViewer.body,
-        manifestUrl: bakedCelestialViewer.manifestUrl
-    }));
-    const spacing = 360 / sampling.body.azimuthCount;
-    const nearestElevation = sampling.body.elevations.map((value, index) => ({
-        index, distance: Math.abs(value - sampling.elevation)
-    })).sort((first, second) => first.distance - second.distance)[0].index;
-    const surfaceSamples = sampling.samples.filter(sample => sample.layer === 'surface');
-    const cloudSamples = sampling.samples.filter(sample => sample.layer === 'clouds');
-    check(surfaceSamples.length === 1 && cloudSamples.length <= 1
-        && sampling.samples.every(sample => sample.weight === 1 && sample.elevation === nearestElevation
-            && Math.abs(sample.azimuth / spacing - Math.round(sample.azimuth / spacing)) < 1e-9),
-        `${label}: every layer uses exactly one captured frame at full opacity`);
-    await page.waitForFunction(() => bakedCelestialViewer.activeLoads === 0 && bakedCelestialViewer.queue.length === 0);
-    check(await page.evaluate(() => bakedCelestialViewer.cacheBytes <= bakedCelestialViewer.cacheBudget
-        && [...bakedCelestialViewer.cache.values()].every(image => image.width > 0 && image.height > 0)),
-        `${label}: decoded images stay within the memory budget`);
-    await page.locator('#bakedCelestialView').focus();
-    await page.keyboard.press('Space');
-    await page.waitForFunction(start => !bakedCelestialViewer.paused && bakedCelestialViewer.azimuth !== start.azimuth, paused);
-    check(await bakedControlsAreUncovered(page), `${label}: playback controls remain uncovered and keyboard resume works`);
-    await page.locator('.baked-celestial-return').click();
-    await page.waitForFunction(() => !window.lifeStarMap.solarSystem.visit);
-    check(await page.evaluate(() => !bakedCelestialViewer.profile && !bakedCelestialViewer.cache.size
-        && !bakedCelestialViewer.pending.size && bakedCelestialViewer.cacheBytes === 0),
-        `${label}: returning releases decoded frames and pending work`);
+    check(page.retiredRequests.length === 0, `${label}: no retired solar scripts, textures, or frames are requested`);
 }
 
 async function desktopChecks(browser) {
@@ -474,52 +382,7 @@ async function desktopChecks(browser) {
     'Scrolling inward from the galaxy automatically returns to the local region');
     await reset(page);
 
-    const beforeSolar = await pose(page);
-    await page.locator('[data-map-entity="solar"]').click();
-    await page.waitForFunction(() => window.lifeStarMap.solarSystem.active);
-    check(await page.locator('.solar-body-item:visible').count() === 9
-        && await page.locator('.solar-body-item[data-system="earth-moon"]:visible').count() === 1
-        && await page.locator('.solar-body-item[data-body="earth"]:visible, .solar-body-item[data-body="moon"]:visible').count() === 0,
-        'Entering the Solar System reveals eight worlds and a single Earth–Moon system entry');
-    await page.waitForFunction(() => window.lifeStarMap.solarSystem.bodies.every(body => body.textureReady && body.sphere));
-    await screenshot(page, 'solar-system');
-    for (const body of ['sun']) {
-        await page.locator(`.solar-body-item[data-body="${body}"]`).click();
-        await page.waitForFunction(expected => state.activeCelestial?.id === expected
-            && document.querySelector('#celestialPanel').getAttribute('aria-hidden') === 'false', body);
-        check((await page.locator('#celestialDescription').textContent()).length > 50,
-            `${body}: selecting an inner body opens its astronomical description`);
-        await page.waitForFunction(() => Boolean(bakedCelestialViewer.lastImage) && !bakedCelestialViewer.error);
-        check(await page.evaluate(() => !celestialCloseupRenderer.activeProfile), `${body}: solar-system close-ups do not prepare a realtime 3D body`);
-        if (body === 'earth') await screenshot(page, 'earth-detail');
-        await page.locator('#celestialClose').click();
-        await page.waitForFunction(() => window.lifeStarMap.solarSystem.active && !window.lifeStarMap.solarSystem.visit);
-    }
-    await page.locator('.solar-body-item[data-system="earth-moon"]').click();
-    await page.waitForFunction(() => window.lifeStarMap.solarSystem.level === 'earth-moon');
-    check(await page.locator('.solar-body-item:visible').count() === 2
-        && await page.locator('.solar-body-item[data-body="earth"]:visible').count() === 1
-        && await page.locator('.solar-body-item[data-body="moon"]:visible').count() === 1,
-        'Opening the Earth–Moon system reveals Earth and Moon as its child bodies');
-    for (const body of ['earth', 'moon']) {
-        await page.locator(`.solar-body-item[data-body="${body}"]`).click();
-        await page.waitForFunction(expected => state.activeCelestial?.id === expected
-            && document.querySelector('#celestialPanel').getAttribute('aria-hidden') === 'false', body);
-        check((await page.locator('#celestialDescription').textContent()).length > 50,
-            `${body}: selecting a child body opens its astronomical description`);
-        await page.waitForFunction(() => Boolean(bakedCelestialViewer.lastImage) && !bakedCelestialViewer.error);
-        await page.locator('#celestialClose').click();
-        await page.waitForFunction(() => window.lifeStarMap.solarSystem.level === 'earth-moon'
-            && window.lifeStarMap.solarSystem.active && !window.lifeStarMap.solarSystem.visit);
-    }
-    await page.locator('.solar-map-back').click();
-    await page.waitForFunction(() => window.lifeStarMap.solarSystem.level === 'solar');
-    check(await page.locator('.solar-body-item[data-system="earth-moon"]:visible').count() === 1,
-        'Returning from the Earth–Moon system restores the Solar System level');
-    await page.locator('.solar-map-back').click();
-    await page.waitForFunction(() => !window.lifeStarMap.solarSystem.active);
-    await settle(page);
-    samePose(await pose(page), beforeSolar, 'Leaving the Solar System restores the local star map');
+    await solarMarkerChecks(page, 'desktop');
     const contextLoss = await page.evaluateHandle(() => window.lifeStarMap.renderer.gl.getExtension('WEBGL_lose_context'));
     await contextLoss.evaluate(extension => extension.loseContext());
     await page.locator('#starMapFallbackCanvas').waitFor({ state: 'visible' });
@@ -603,18 +466,8 @@ async function mobileChecks(browser) {
     await screenshot(page, 'constellation-mobile');
     await page.locator('#portalClose').tap();
     await settle(page);
-    await page.locator('[data-map-entity="solar"]').tap();
-    await page.waitForFunction(() => window.lifeStarMap.solarSystem.active);
-    await openEarthMoon(page);
-    await openBakedBody(page, 'earth');
-    check(await bakedControlsAreUncovered(page), 'The mobile close-up controls are visible above the information panel');
-    await screenshot(page, 'earth-mobile');
-    await page.setViewportSize({ width: 700, height: 390 });
-    await page.waitForFunction(() => !bakedCelestialViewer.element.classList.contains('is-compact'));
-    check(await bakedControlsAreUncovered(page), 'The close-up controls remain usable beside the landscape phone information panel');
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.waitForFunction(() => bakedCelestialViewer.element.classList.contains('is-compact'));
-    await bakedInteractionChecks(page, 'mobile');
+    await reset(page);
+    await solarMarkerChecks(page, 'mobile', true);
     check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'The mobile star map has no horizontal page overflow');
     await context.close();
 }
@@ -631,15 +484,8 @@ async function fallbackChecks() {
         const before = await pose(page);
         await drag(page, 'right', 90, 0);
         check(Math.abs((await pose(page)).yaw - before.yaw) > 0.1, 'Orbit controls remain usable without WebGL');
-        await page.evaluate(() => {
-            celestialCloseupRenderer.prepare = () => { throw new Error('Realtime body preparation is forbidden in the baked view'); };
-            celestialCloseupRenderer.render = () => { throw new Error('Realtime body rendering is forbidden in the baked view'); };
-        });
-        await page.locator('[data-map-entity="solar"]').click();
-        await page.waitForFunction(() => window.lifeStarMap.solarSystem.active);
-        await openEarthMoon(page);
-        await openBakedBody(page, 'earth');
-        await bakedInteractionChecks(page, 'without WebGL');
+        await reset(page);
+        await solarMarkerChecks(page, 'without WebGL');
         await screenshot(page, 'canvas-fallback');
     } finally {
         await browser.close();
@@ -659,23 +505,7 @@ async function reducedMotionChecks(browser) {
     await page.keyboard.press('Escape');
     await settle(page);
     samePose(await pose(page), before, 'Reduced-motion navigation restores the original view');
-    await page.locator('[data-map-entity="solar"]').click();
-    await page.waitForFunction(() => window.lifeStarMap.solarSystem.active);
-    await openEarthMoon(page);
-    await openBakedBody(page, 'earth');
-    const angle = await page.evaluate(() => bakedCelestialViewer.azimuth);
-    await page.waitForTimeout(180);
-    check(await page.evaluate(previous => bakedCelestialViewer.paused && bakedCelestialViewer.azimuth === previous, angle),
-        'Reduced-motion visitors receive a stationary baked close-up');
-    await page.locator('#bakedCelestialView').focus();
-    await page.keyboard.press('ArrowRight');
-    check(await page.evaluate(previous => bakedCelestialViewer.azimuth === previous, angle),
-        'Reduced-motion visitors retain the same fixed camera');
-    await page.locator('.baked-celestial-pause').click();
-    await page.waitForFunction(previous => !bakedCelestialViewer.paused && bakedCelestialViewer.azimuth !== previous, angle);
-    check(true, 'Reduced-motion visitors can explicitly start playback');
-    await page.locator('.baked-celestial-return').click();
-    await page.waitForFunction(() => !window.lifeStarMap.solarSystem.visit);
+    await solarMarkerChecks(page, 'reduced motion');
     await context.close();
 }
 
@@ -687,15 +517,6 @@ async function serveRepository() {
     localServer = http.createServer(async (request, response) => {
         try {
             const pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1').pathname);
-            if (useBakedFixtures && pathname.startsWith('/assets/celestial/baked/')) {
-                const match = pathname.match(/^\/assets\/celestial\/baked\/([a-z]+)\/(?:poster|e[0-6]\/a0(?:[0-6]\d|7[01]))\.png$/);
-                const fixture = pathname.endsWith('/manifest.json') ? 'manifest.json' : match ? match[1] + '.png' : null;
-                if (!fixture) { response.writeHead(404).end(); return; }
-                const buffer = await fs.promises.readFile(path.join(fixtureDirectory, fixture));
-                response.writeHead(200, { 'Content-Type': fixture.endsWith('.json') ? 'application/json' : 'image/png', 'Cache-Control': 'no-store' });
-                response.end(buffer);
-                return;
-            }
             const filename = path.resolve(root, '.' + pathname);
             const relative = path.relative(root, filename);
             if (relative.startsWith('..') || path.isAbsolute(relative)) {
@@ -718,17 +539,7 @@ async function serveRepository() {
 
 async function main() {
     fs.mkdirSync(outputDirectory, { recursive: true });
-    if (useBakedFixtures) {
-        assert.equal(process.argv[2], '--serve', 'Baked fixtures are only available with the local test server');
-        const browser = await chromium.launch(launchOptions);
-        try { await prepareBakedFixtures(browser); } finally { await browser.close(); }
-    }
     if (process.argv[2] === '--serve') await serveRepository();
-    if (useHostedAtlas) {
-        const hostedPage = new URL(pageUrl);
-        hostedPage.searchParams.set('celestialAtlas', 'hosted');
-        pageUrl = hostedPage.href;
-    }
     for (const [group, run] of [['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['reduced-motion', reducedMotionChecks]]) {
         if (selectedGroup !== 'all' && selectedGroup !== group) continue;
         const browser = await chromium.launch(launchOptions);

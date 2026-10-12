@@ -566,18 +566,12 @@
     .portal-panel {
         width: clamp(286px, 42vw, 340px);
     }
-
-    .celestial-panel {
-        width: clamp(286px, 40vw, 330px);
-    }
 }
 
 @media (max-aspect-ratio: 3/2),
        (max-width: 1024px) and (max-aspect-ratio: 16/9) {
     .portal-panel,
-    .portal-panel.is-left,
-    .celestial-panel,
-    .celestial-panel.is-left {
+    .portal-panel.is-left {
         top: auto;
         left: max(10px, env(safe-area-inset-left));
         right: max(10px, env(safe-area-inset-right));
@@ -596,17 +590,11 @@
         max-height: calc(100dvh - 100px);
     }
 
-    body.celestial-open .celestial-panel {
-        transform: translateY(0) scale(1);
-    }
-
-    .portal-panel-header,
-    .celestial-panel-header {
+    .portal-panel-header {
         padding: 18px 62px 14px 20px;
     }
 
-    .portal-panel-body,
-    .celestial-panel-body {
+    .portal-panel-body {
         padding: 18px 20px 28px;
     }
 
@@ -622,8 +610,7 @@
 }
 
 @media (max-height: 520px) and (min-aspect-ratio: 3/2) {
-    .portal-panel,
-    .celestial-panel {
+    .portal-panel {
         top: max(78px, calc(env(safe-area-inset-top) + 64px));
         left: auto;
         right: max(18px, env(safe-area-inset-right));
@@ -637,19 +624,13 @@
         width: clamp(180px, 34vw, 280px);
     }
 
-    .celestial-panel {
-        width: clamp(176px, 33vw, 270px);
-    }
-
-    .portal-panel.is-left,
-    .celestial-panel.is-left {
+    .portal-panel.is-left {
         right: auto;
         left: max(18px, env(safe-area-inset-left));
         transform-origin: left center;
     }
 
-    body.panel-open .portal-panel,
-    body.celestial-open .celestial-panel {
+    body.panel-open .portal-panel {
         transform: translateX(0) scale(1);
     }
 }
@@ -830,11 +811,6 @@
     .portal-hit {
         width: 88px;
         height: 88px;
-    }
-
-    .celestial-hit {
-        width: 94px;
-        height: 94px;
     }
 
     .gaze-instruction {

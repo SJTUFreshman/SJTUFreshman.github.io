@@ -4,24 +4,6 @@ function updateGazeTarget(time) {
         if (state.focusedPortal !== state.activePortal) setFocusedPortal(state.activePortal);
         return;
     }
-    if (state.scene === 'detail' && state.activeCelestial) {
-        if (state.focusedCelestial !== state.activeCelestial) {
-            setFocusedCelestial(state.activeCelestial);
-        }
-        return;
-    }
-
-    if (
-        state.hoverCelestial &&
-        state.hoverCelestial.buttonVisible &&
-        celestialAboveHorizon(state.hoverCelestial) &&
-        state.lock !== 'locked'
-    ) {
-        if (state.focusedCelestial !== state.hoverCelestial) {
-            setFocusedCelestial(state.hoverCelestial);
-        }
-        return;
-    }
     if (
         state.hoverPortal &&
         state.hoverPortal.buttonVisible &&
@@ -51,31 +33,10 @@ function updateGazeTarget(time) {
             bestDistance = distance;
         }
     });
-    celestialBodies.forEach(profile => {
-        if (
-            !celestialAboveHorizon(profile) ||
-            profile.buttonVisible === false ||
-            !profile.screen?.visible
-        ) return;
-        const distance = Math.hypot(
-            profile.screen.x - overlayWidth * 0.5,
-            profile.screen.y - overlayHeight * 0.5
-        );
-        if (distance < bestDistance) {
-            best = { kind: 'celestial', item: profile };
-            bestDistance = distance;
-        }
-    });
-
     const enterRadius = clamp(Math.min(overlayWidth, overlayHeight) * 0.085, 48, 74);
     const exitRadius = enterRadius + 28;
-    const focusedItem = state.focusedCelestial || state.focusedPortal;
-    const focusedDirection = state.focusedCelestial
-        ? celestialSceneDirection(state.focusedCelestial)
-        : state.focusedPortal?.direction;
-    const focusedAboveHorizon = state.focusedCelestial
-        ? celestialAboveHorizon(state.focusedCelestial)
-        : isAboveHorizon(focusedDirection);
+    const focusedItem = state.focusedPortal;
+    const focusedAboveHorizon = isAboveHorizon(focusedItem?.direction);
     if (
         focusedItem?.screen?.visible &&
         focusedItem.buttonVisible !== false &&
@@ -90,11 +51,7 @@ function updateGazeTarget(time) {
 
     if (!best || bestDistance > enterRadius) {
         state.pendingTarget = null;
-        if (state.focusedCelestial) {
-            setFocusedCelestial(null);
-        } else if (state.focusedPortal) {
-            setFocusedPortal(null);
-        }
+        if (state.focusedPortal) setFocusedPortal(null);
         return;
     }
 
@@ -108,11 +65,7 @@ function updateGazeTarget(time) {
     }
 
     if (time - state.pendingSince >= (REDUCED_MOTION ? 0 : 145)) {
-        if (best.kind === 'celestial') {
-            setFocusedCelestial(best.item);
-        } else {
-            setFocusedPortal(best.item);
-        }
+        setFocusedPortal(best.item);
         state.pendingTarget = null;
     }
 }
@@ -134,43 +87,16 @@ function renderGazeCopy(portal) {
     dom.gazeDescription.textContent = localized(story?.reason);
 }
 
-function renderCelestialGazeCopy(profile) {
-    if (!profile) {
-        renderGazeCopy(null);
-        return;
-    }
-    const others = LANGUAGES.filter(lang => lang !== state.currentLang);
-    const ui = celestialUi[state.currentLang] || celestialUi.en;
-    dom.gazePrimary.textContent = celestialName(profile);
-    dom.gazeSecondary.textContent = others
-        .map(lang => celestialName(profile, lang))
-        .join(' / ');
-    dom.gazeConstellation.textContent = localized(profile.kinds);
-    const visibility = {
-        'naked-eye': ui.nakedEye,
-        marginal: ui.marginal,
-        telescope: ui.telescope,
-        daylight: ui.daylight,
-        'below-horizon': ui.belowHorizon
-    }[profile.current?.observationMode] || ui.unavailable;
-    dom.gazeDescription.textContent = profile.current
-        ? `${visibility} · ${ui.altitude} ${
-            celestialDisplayAltitude(profile).toFixed(1)
-        }° · ${ui.inspect}`
-        : ui.unavailable;
-}
-
 function scheduleGazeCopyClear() {
     state.gazeClearTimer = window.setTimeout(() => {
-        if (!state.focusedPortal && !state.focusedCelestial) renderGazeCopy(null);
+        if (!state.focusedPortal) renderGazeCopy(null);
         state.gazeClearTimer = null;
     }, REDUCED_MOTION ? 0 : 580);
 }
 
 function setFocusedPortal(portal) {
-    if (portal) state.focusedCelestial = null;
     state.focusedPortal = portal;
-    const hasTarget = Boolean(portal || state.focusedCelestial);
+    const hasTarget = Boolean(portal);
     dom.body.classList.toggle('has-target', hasTarget);
     window.clearTimeout(state.announcementTimer);
     window.clearTimeout(state.gazeClearTimer);
@@ -178,7 +104,7 @@ function setFocusedPortal(portal) {
     state.gazeClearTimer = null;
     dom.gazeAnnouncement.textContent = '';
     if (!portal) {
-        if (!state.focusedCelestial) scheduleGazeCopyClear();
+        scheduleGazeCopyClear();
         return;
     }
     renderGazeCopy(portal);
@@ -190,32 +116,6 @@ function setFocusedPortal(portal) {
                 LANGUAGES.map(lang => portalName(portal, lang)).join(' / '),
                 localized(story?.name),
                 localized(story?.reason)
-            ].filter(Boolean).join(' · ');
-        }
-    }, REDUCED_MOTION ? 0 : 420);
-}
-
-function setFocusedCelestial(profile) {
-    if (profile) state.focusedPortal = null;
-    state.focusedCelestial = profile;
-    const hasTarget = Boolean(profile || state.focusedPortal);
-    dom.body.classList.toggle('has-target', hasTarget);
-    window.clearTimeout(state.announcementTimer);
-    window.clearTimeout(state.gazeClearTimer);
-    state.announcementTimer = null;
-    state.gazeClearTimer = null;
-    dom.gazeAnnouncement.textContent = '';
-    if (!profile) {
-        if (!state.focusedPortal) scheduleGazeCopyClear();
-        return;
-    }
-    renderCelestialGazeCopy(profile);
-    state.announcementTimer = window.setTimeout(() => {
-        if (state.focusedCelestial === profile) {
-            dom.gazeAnnouncement.textContent = [
-                LANGUAGES.map(lang => celestialName(profile, lang)).join(' / '),
-                localized(profile.kinds),
-                (celestialUi[state.currentLang] || celestialUi.en).inspect
             ].filter(Boolean).join(' · ');
         }
     }, REDUCED_MOTION ? 0 : 420);
@@ -454,7 +354,6 @@ function drawConstellations(basis, time, webglRendered, catalogBasis = basis) {
         context.restore();
     });
 
-    drawCelestialBodies(basis, time);
     drawHomeRoutePreview(basis, time);
 
     if (

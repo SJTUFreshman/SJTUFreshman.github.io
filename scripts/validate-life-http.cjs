@@ -28,7 +28,7 @@ async function main() {
   }
   const scripts = references.filter(reference => reference.includes('assets/life/scripts/')).map(reference => reference.split('?')[0]);
   assert(scripts.indexOf('assets/life/scripts/03-math-orientation.js') < scripts.indexOf('assets/life/scripts/05-astronomy.js'), 'Math helpers must precede astronomy');
-  const context = { window: {}, GEOMETRIC_HORIZON_EPSILON: .00001, DEG: Math.PI/180, INITIAL_CAMERA:{yaw:0}, MIN_CAMERA_ALTITUDE:.005, celestialBodies:[] };
+  const context = { window: {}, GEOMETRIC_HORIZON_EPSILON: .00001, DEG: Math.PI/180, INITIAL_CAMERA:{yaw:0}, MIN_CAMERA_ALTITUDE:.005 };
   vm.createContext(context);
   for (const file of ['assets/life/scripts/03-math-orientation.js','assets/life/scripts/05-astronomy.js']) vm.runInContext(downloaded.get(file), context, { filename: file });
   assert.equal(typeof context.skyHasHorizon, 'function', 'HTTP-delivered math must export skyHasHorizon before astronomy calls it');

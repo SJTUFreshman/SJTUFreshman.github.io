@@ -638,3 +638,5 @@ class GalaxyRenderer {
         return true;
     }
 }
+
+const galaxyRenderer = new GalaxyRenderer(dom.spaceCanvas);

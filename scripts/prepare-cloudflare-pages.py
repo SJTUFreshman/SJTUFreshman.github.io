@@ -1,26 +1,18 @@
 import argparse
 import hashlib
-import importlib.util
 import json
-import re
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BODIES = ('sun', 'mercury', 'venus', 'earth', 'moon', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune')
-GRID = {'width': 3840, 'height': 2160, 'azimuthCount': 180, 'elevations': [-90, -60, -30, 0, 30, 60, 90]}
 PUBLIC_ROOTS = {'assets', 'documents', 'fonts', 'images'}
 ROOT_FILES = {'index.html', 'life.html', 'pet-cache-worker.js', 'me_at_dorm.jpg', 'official_portray.png'}
 STATIC_SUFFIXES = {'.html', '.css', '.js', '.json', '.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg',
                    '.ico', '.woff', '.woff2', '.ttf', '.otf', '.pdf', '.md', '.txt'}
 MAX_FILES = 20000
 MAX_BYTES = 25 * 1024 * 1024
-MANIFEST_PATH = 'assets/celestial/hosted/manifest.json'
-AUTOPLAY_SPEC = importlib.util.spec_from_file_location('autoplay', Path(__file__).with_name('export-celestial-autoplay.py'))
-AUTOPLAY = importlib.util.module_from_spec(AUTOPLAY_SPEC)
-AUTOPLAY_SPEC.loader.exec_module(AUTOPLAY)
 
 
 def source_file(root, relative):
@@ -34,13 +26,6 @@ def source_file(root, relative):
     if source.stat().st_size > MAX_BYTES:
         raise ValueError(f'File exceeds the Pages 25 MiB limit: {relative}')
     return source
-
-
-def read_json(path):
-    value = json.loads(path.read_text(encoding='utf-8'))
-    if not isinstance(value, dict):
-        raise ValueError(f'Expected a JSON object: {path}')
-    return value
 
 
 def json_bytes(value):
@@ -57,67 +42,13 @@ def public_files(root):
             continue
         if (any(part.startswith('.') or part in {'__pycache__', 'render-metadata'} for part in parts) or
                 PurePosixPath(relative).suffix.lower() not in STATIC_SUFFIXES or
-                relative.startswith(('assets/celestial/baked/', 'assets/celestial/releases/')) or
+                relative.startswith('assets/celestial/') or
                 parts[-1] == 'package.json'):
             continue
         entries[relative] = {'source': source_file(root, relative)}
-    if not ROOT_FILES.issubset(entries) or MANIFEST_PATH not in entries:
-        raise ValueError('Tracked website entry points or hosted atlas manifest are missing.')
+    if not ROOT_FILES.issubset(entries):
+        raise ValueError('Tracked website entry points are missing.')
     return entries
-
-
-def atlas_files(root, version):
-    baked = root / 'assets' / 'celestial' / 'baked'
-    manifest = read_json(source_file(root, 'assets/celestial/baked/manifest.json'))
-    if (manifest.get('version') != 1 or manifest.get('width') != GRID['width'] or
-            manifest.get('height') != GRID['height'] or set(manifest.get('bodies', {})) != set(BODIES)):
-        raise ValueError('The local atlas must contain the complete legacy 4K ten-body release.')
-    prefix = f'assets/celestial/releases/{version}'
-    entries = {}
-    public_manifest = {'version': 1, 'width': GRID['width'], 'height': GRID['height'], 'bodies': {}}
-    for body in BODIES:
-        descriptor = manifest['bodies'][body]
-        package = read_json(source_file(baked, f'{body}/package.json'))
-        if (not isinstance(descriptor, dict) or package.get('version') != 1 or package.get('body') != body or
-                any(descriptor.get(key) != value or package.get(key) != value for key, value in GRID.items()) or
-                any(package.get(key) for key in ('presentation', 'layers', 'resolutions')) or
-                set(descriptor) - set(GRID) - {'framePattern', 'poster', 'defaultAzimuth', 'defaultElevation', 'metadata'}):
-            raise ValueError(f'Unsupported or inconsistent legacy atlas description: {body}')
-        pattern = f'{body}/e{{elevation}}/a{{azimuth}}.webp'
-        if (descriptor.get('framePattern') != pattern or descriptor.get('poster') != f'{body}/poster.webp' or
-                descriptor.get('metadata') != f'{body}/package.json'):
-            raise ValueError(f'Unexpected atlas paths: {body}')
-        expected = {f'{body}/e{row}/a{column:03d}.webp'
-                    for row in range(len(GRID['elevations'])) for column in range(GRID['azimuthCount'])}
-        records = package.get('frames', [])
-        if (not isinstance(records, list) or len(records) != len(expected) or
-                any(not isinstance(record, dict) for record in records) or
-                {record.get('path') for record in records} != expected):
-            raise ValueError(f'Incomplete or duplicate frame records: {body}')
-        actual = {path.relative_to(baked).as_posix() for path in (baked / body).glob('e*/a*.webp')}
-        if actual != expected:
-            raise ValueError(f'Local files do not match the complete frame grid: {body}')
-        records_by_path = {record['path']: record for record in records}
-        poster = package.get('poster', {})
-        row, column = poster.get('elevation'), poster.get('azimuth')
-        if (type(row) is not int or type(column) is not int or not 0 <= row < len(GRID['elevations']) or
-                not 0 <= column < GRID['azimuthCount'] or poster.get('path') != f'{body}/poster.webp' or
-                poster.get('source') != f'{body}/e{row}/a{column:03d}.webp' or
-                descriptor.get('defaultElevation') != row or descriptor.get('defaultAzimuth') != column or
-                poster.get('sha256') != records_by_path[poster['source']].get('sha256')):
-            raise ValueError(f'Poster does not match its selected viewpoint: {body}')
-        for record in [*records, poster]:
-            relative = record['path']
-            source = source_file(baked, relative)
-            if (not re.fullmatch(r'[0-9a-f]{64}', str(record.get('sha256', ''))) or
-                    'bytes' in record and record['bytes'] != source.stat().st_size):
-                raise ValueError(f'Invalid frame checksum or byte count: {relative}')
-            entries[f'{prefix}/{relative}'] = {'source': source, 'sha256': record['sha256'], 'webp': True}
-        public_manifest['bodies'][body] = {
-            **GRID, 'framePattern': f'/{prefix}/{pattern}', 'poster': f'/{prefix}/{body}/poster.webp',
-            'defaultAzimuth': column, 'defaultElevation': row,
-        }
-    return entries, public_manifest
 
 
 def validate_output(root, output):
@@ -134,27 +65,6 @@ def validate_output(root, output):
     return resolved, report
 
 
-def autoplay_files(source, version):
-    source = source.resolve()
-    manifest_path = source_file(source, 'manifest.json')
-    manifest = read_json(manifest_path)
-    inventory = read_json(source_file(source, 'inventory.json'))
-    selected = AUTOPLAY.selected_files(manifest)
-    expected = {relative for paths in selected.values() for relative in paths}
-    if (inventory.get('schema') != 1 or inventory.get('version') != version or
-            inventory.get('sourceManifestSha256') != hashlib.sha256(manifest_path.read_bytes()).hexdigest() or
-            set(inventory.get('files', {})) != expected):
-        raise ValueError('Autoplay inventory must match the manifest and every selected frame.')
-    entries = {}
-    for relative in sorted(expected):
-        record = inventory['files'][relative]
-        frame = source_file(source, relative)
-        if (not re.fullmatch(r'[0-9a-f]{64}', str(record.get('sha256', ''))) or record.get('bytes') != frame.stat().st_size):
-            raise ValueError(f'Invalid autoplay frame record: {relative}')
-        entries[f'assets/celestial/releases/{version}/{relative}'] = {'source': frame, 'sha256': record['sha256'], 'webp': True}
-    return entries, AUTOPLAY.public_manifest(manifest, version)
-
-
 def copy_entry(entry, destination):
     destination.parent.mkdir(parents=True, exist_ok=True)
     digest = hashlib.sha256()
@@ -164,11 +74,7 @@ def copy_entry(entry, destination):
         if source.resolve() != source:
             raise ValueError(f'Source became a symlink: {source}')
         with source.open('rb') as incoming, destination.open('xb') as outgoing:
-            first = True
             for chunk in iter(lambda: incoming.read(1024 * 1024), b''):
-                if first and entry.get('webp') and (chunk[:4] != b'RIFF' or chunk[8:12] != b'WEBP'):
-                    raise ValueError(f'Invalid WebP container: {source}')
-                first = False
                 size += len(chunk)
                 if size > MAX_BYTES:
                     raise ValueError(f'File exceeds 25 MiB: {source}')
@@ -186,29 +92,15 @@ def copy_entry(entry, destination):
     return {'bytes': size, 'sha256': checksum}
 
 
-def prepare(root, output, version='20261002-4k-v1', external_atlas=False, autoplay_root=None):
+def prepare(root, output):
     root = root.resolve()
-    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,79}', version):
-        raise ValueError('Version must be a simple release name of at most 80 characters.')
     output, report_path = validate_output(root, output)
     entries = public_files(root)
-    frame_count = 0
-    if external_atlas and autoplay_root:
-        raise ValueError('Autoplay and external atlas modes are mutually exclusive.')
-    if not external_atlas:
-        frames, manifest = autoplay_files(autoplay_root, version) if autoplay_root else atlas_files(root, version)
-        if set(frames) & set(entries):
-            raise ValueError('Release frame paths collide with tracked website files.')
-        entries.update(frames)
-        frame_count = len(frames)
-        entries[MANIFEST_PATH] = {'data': json_bytes(manifest)}
     entries['404.html'] = {'data': (
         '<!doctype html><html lang="en"><meta charset="utf-8"><title>Page not found</title>'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         '<h1>Page not found</h1><p><a href="/">Return home</a></p></html>\n').encode('utf-8')}
     entries['_headers'] = {'data': (
-        '/assets/celestial/releases/*\n  Cache-Control: public, max-age=31536000, immutable\n  Access-Control-Allow-Origin: *\n'
-        '/assets/celestial/hosted/manifest.json\n  Cache-Control: public, max-age=0, must-revalidate\n'
         '/pet-cache-worker.js\n  Cache-Control: no-cache\n').encode('utf-8')}
     for relative, entry in entries.items():
         entry['bytes'] = entry['source'].stat().st_size if 'source' in entry else len(entry['data'])
@@ -224,10 +116,8 @@ def prepare(root, output, version='20261002-4k-v1', external_atlas=False, autopl
             print(f'Copied and verified {index}/{len(entries)} files.', flush=True)
     report = {
         'preparedAt': datetime.now(timezone.utc).isoformat(), 'output': str(output),
-        'atlasMode': 'external' if external_atlas else 'autoplay' if autoplay_root else 'same-origin',
-        'releaseVersion': None if external_atlas else version,
         'fileCount': len(records), 'totalBytes': sum(record['bytes'] for record in records.values()),
-        'verifiedAtlasFiles': frame_count, 'limits': {'files': MAX_FILES, 'fileBytes': MAX_BYTES},
+        'limits': {'files': MAX_FILES, 'fileBytes': MAX_BYTES},
         'files': records,
     }
     with report_path.open('xb') as destination:
@@ -239,12 +129,9 @@ def prepare(root, output, version='20261002-4k-v1', external_atlas=False, autopl
 def main(argv=None):
     parser = argparse.ArgumentParser(description='Prepare a verified static Cloudflare Pages upload directory.')
     parser.add_argument('--output', type=Path, default=Path('.render-work/cloudflare-pages/site'))
-    parser.add_argument('--version', default='20261002-4k-v1')
-    parser.add_argument('--external-atlas', action='store_true', help='Keep the existing Tencent-hosted atlas manifest.')
-    parser.add_argument('--autoplay-root', type=Path, help='Verified fixed-elevation, all-azimuth and all-climate-time export.')
     args = parser.parse_args(argv)
     try:
-        prepare(ROOT, args.output, args.version, args.external_atlas, args.autoplay_root)
+        prepare(ROOT, args.output)
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
         parser.exit(1, f'Preparation failed: {error}\nDo not deploy a partially prepared directory. Use a new empty output for retry.\n')
     return 0

@@ -128,9 +128,7 @@ a:focus-visible {
 }
 
 #spaceCanvas,
-#constellationCanvas,
-#celestialCloseupCanvas,
-#celestialCloseupFallbackCanvas {
+#constellationCanvas {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -145,27 +143,6 @@ a:focus-visible {
 #constellationCanvas {
     z-index: 2;
     pointer-events: none;
-}
-
-#celestialCloseupCanvas,
-#celestialCloseupFallbackCanvas {
-    z-index: 4;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 260ms ease;
-}
-
-#celestialCloseupFallbackCanvas {
-    z-index: 5;
-}
-
-body.celestial-transition #celestialCloseupCanvas,
-body.celestial-transition #celestialCloseupFallbackCanvas,
-body.celestial-closeup #celestialCloseupCanvas,
-body.celestial-closeup #celestialCloseupFallbackCanvas,
-body.celestial-returning #celestialCloseupCanvas,
-body.celestial-returning #celestialCloseupFallbackCanvas {
-    opacity: 1;
 }
 
 .space-vignette,
@@ -276,8 +253,7 @@ body:not(.has-entered) .language-switch,
     transition: opacity 500ms ease;
 }
 
-body.panel-open .control-legend,
-body.celestial-open .control-legend {
+body.panel-open .control-legend {
     opacity: 0.2;
 }
 
@@ -530,8 +506,7 @@ body.has-target .gaze-label {
     transform: translate(-50%, 0);
 }
 
-body.panel-open .gaze-label,
-body.celestial-open .gaze-label {
+body.panel-open .gaze-label {
     opacity: 0;
 }
 
@@ -588,20 +563,6 @@ body.lang-zh-TW .gaze-constellation {
 }
 
 body.has-target .gaze-instruction,
-body.panel-open .gaze-instruction,
-body.celestial-open .gaze-instruction {
+body.panel-open .gaze-instruction {
     opacity: 0;
-}
-
-body.celestial-transition .reticle,
-body.celestial-transition .gaze-label,
-body.celestial-transition .gaze-instruction,
-body.celestial-closeup .reticle,
-body.celestial-closeup .gaze-label,
-body.celestial-closeup .gaze-instruction,
-body.celestial-returning .reticle,
-body.celestial-returning .gaze-label,
-body.celestial-returning .gaze-instruction {
-    opacity: 0;
-    pointer-events: none;
 }

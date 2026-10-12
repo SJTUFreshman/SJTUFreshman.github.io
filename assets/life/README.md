@@ -2,7 +2,7 @@
 
 `life.html` 是一幅分层三维星图。右键拖动旋转、左键拖动平移、滚轮缩放；触控板双指滑动旋转、捏合缩放；触屏单指旋转，双指缩放和平移。指针始终自由，不需要 Pointer Lock。访客通过带连线的星座进入 Gallery、Footprints、Shelf、Thoughts、Friends、News、Publications、Projects、Notes 和 Home 等内容。
 
-星图与太阳系共用滚轮手势处理：浏览器的 Ctrl / Meta + wheel 捏合事件只缩放，连续像素滚动控制旋转，同一段滑动的加速和惯性保持旋转。浏览器不直接提供输入设备类型，因此按行、按页和较大的整数步进识别为普通鼠标滚轮；少数驱动或平滑滚轮可能无法准确区分，仍可用 Ctrl + 滚轮缩放。
+星图的滚轮手势处理：浏览器的 Ctrl / Meta + wheel 捏合事件只缩放，连续像素滚动控制旋转，同一段滑动的加速和惯性保持旋转。浏览器不直接提供输入设备类型，因此按行、按页和较大的整数步进识别为普通鼠标滚轮；少数驱动或平滑滚轮可能无法准确区分，仍可用 Ctrl + 滚轮缩放。
 
 键盘方向键旋转，Shift + 方向键平移，`+` / `-` 缩放，`R` / `Home` 重置视角；`Esc` 逐层返回。界面不显示右下角控制栏或边界提示，距离和平移限制仍然生效。
 
@@ -10,15 +10,15 @@
 
 - 默认进入局部星域；局部范围内连续缩放，越过拉远阈值后用动画切到银河全景。银河全景的向内缩放触发动画返回局部，向外缩放停在边界。远处恒星是无平移视差的背景。
 - 局部星域展开内容星座。星座图形采用原 Hipparcos 天球几何，以浅纵深编排到可探索的区域，避免真实星际尺度破坏导航。
-- 太阳系在局部图中仅有一个入口。进入后展开太阳、八大行星及月球，选中后使用既有天体近景渲染与纹理。
+- 太阳系在局部图中仅保留一个标记。点击、触屏和键盘激活均无动作，不移动镜头、不打开页面、不请求行星资源；内部场景、近景、播放控制和纹理已移除。
 - 仙女座星系与猎户座大星云分别为单个入口；详情使用有明确波段、来源署名的 NASA 观测照片。
 - 银河盘、尘埃和空间布局是示意可视化；不把编排坐标标为真实物理距离。真实距离来自质量筛选的 Hipparcos 视差，详见 `../HIPPARCOS-DISTANCES-NOTICE.md`。
 
 ## 新星图运行时
 
-`07-star-map-renderer.js` 提供 WebGL 体积尘埃、恒星和银河盘，失去 WebGL 时切换为 Canvas。`19-star-map.js` 管理有界相机、层级、星座、命中与输入；它在旧 `15` 之后、`16` 之前加载。`20-solar-system-map.js` 和 `21-deep-sky-map.js` 也在 `18` 初始化之前加载。`08-star-map.css`、`09-solar-system-map.css`、`10-deep-sky-map.css` 顺序追加到样式末尾。
+`07-star-map-renderer.js` 提供 WebGL 体积尘埃、恒星和银河盘，失去 WebGL 时切换为 Canvas。`19-star-map.js` 管理有界相机、层级、星座、命中与输入；它在旧 `15` 之后、`16` 之前加载。`21-deep-sky-map.js` 也在 `18` 初始化之前加载。`08-star-map.css`、`10-deep-sky-map.css` 顺序追加到基础样式之后。
 
-旧天球投影、太阳系近景、内容、三语、图片查看器及主页转场继续共享原模块。`window.lifeStarMap` 存在时，`15` 将帧委托给新星图，`16` 跳过旧 Pointer Lock 输入，`18` 初始化新入口。修改时注意不要让旧地平线/昼夜可见性影响三维导航。
+旧天球投影、内容、三语、图片查看器及主页转场继续共享原模块。`window.lifeStarMap` 存在时，`15` 将帧委托给新星图，`16` 跳过旧 Pointer Lock 输入，`18` 初始化新入口。修改时注意不要让旧地平线/昼夜可见性影响三维导航。
 
 ## CSS 分片
 
@@ -28,8 +28,8 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 | --- | --- | --- |
 | 1 | `styles/01-foundation-sky.css` | 字体、变量、reset、天空 canvas、站点标记、语言切换、入场门、准星与 gaze UI |
 | 2 | `styles/02-section-drawer.css` | 左侧 Life 索引、遮罩、可见性状态与抽屉按钮 |
-| 3 | `styles/03-sky-navigation.css` | 星座、天体、恒星的透明命中区、标签和交互状态 |
-| 4 | `styles/04-detail-panels.css` | 星座内容面板、天体观测面板、star reader 与 Home 航线预览 |
+| 3 | `styles/03-sky-navigation.css` | 星座、恒星的透明命中区、标签和交互状态 |
+| 4 | `styles/04-detail-panels.css` | 星座内容面板、star reader 与 Home 航线预览 |
 | 5 | `styles/05-life-content.css` | Gallery、Shelf、Thoughts、Friends、About 等 Life 原生内容样式 |
 | 6 | `styles/06-homepage-parity.css` | News、Publications、Projects、Notes 等与主页保持一致的内容样式 |
 | 7 | `styles/07-overlays-responsive.css` | 地图、lightbox、转场 veil、响应式布局、触屏和 reduced-motion 收尾规则 |
@@ -47,19 +47,17 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 06-framing.js
 07-galaxy-renderer.js
 07-star-map-renderer.js
-08-closeup-layout.js
-09-closeup-renderer.js
 10-sky-overlay.js
 11-section-index.js
 12-detail-navigation.js
 13-gaze-constellations.js
-14-celestial-visits.js
+14-portal-navigation.js
 15-render-lock.js
 19-star-map.js
-20-solar-system-map.js
 21-deep-sky-map.js
 16-input-events.js
 17-content-ui.js
+22-footprints-atlas.js
 18-bootstrap.js
 ```
 
@@ -98,4 +96,4 @@ node scripts/validate-star-map.cjs --serve
 git diff --check
 ```
 
-浏览器回归至少检查：右键旋转、平移/缩放边界、触屏双指、星座连线和点击拉近、恒星内容、索引、三语、地图、lightbox、银河全景、太阳系逐层进入与返回、系外照片详情、主页转场、窄屏、无 WebGL 和 reduced-motion。新浏览器验证脚本使用 Playwright；可通过 `PLAYWRIGHT_MODULE_PATH` 指向已有安装，不要求给站点添加依赖。`--serve` 在测试进程中启动临时本地服务器并自动关闭，也可传入已有页面 URL。
+浏览器回归至少检查：右键旋转、平移/缩放边界、触屏双指、星座连线和点击拉近、恒星内容、索引、三语、地图、lightbox、银河全景、太阳系标记无动作且不加载资源、系外照片详情、主页转场、窄屏、无 WebGL 和 reduced-motion。新浏览器验证脚本使用 Playwright；可通过 `PLAYWRIGHT_MODULE_PATH` 指向已有安装，不要求给站点添加依赖。`--serve` 在测试进程中启动临时本地服务器并自动关闭，也可传入已有页面 URL。

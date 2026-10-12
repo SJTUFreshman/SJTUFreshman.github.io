@@ -15,7 +15,6 @@
 }
 
 .portal-panel,
-.celestial-panel,
 .deep-sky-card {
     --paper: var(--life-paper);
     --paper-soft: var(--life-paper-soft);
@@ -34,23 +33,19 @@
     backdrop-filter: blur(20px) saturate(1.08);
 }
 
-.portal-panel-header,
-.celestial-panel-header {
+.portal-panel-header {
     border-bottom-color: var(--life-rule-soft);
 }
 
-.portal-panel-kicker,
-.celestial-panel-kicker {
+.portal-panel-kicker {
     color: var(--life-blue);
 }
 
-.portal-panel-title,
-.celestial-panel-title {
+.portal-panel-title {
     color: var(--life-pink);
 }
 
-.portal-panel-names,
-.celestial-panel-subtitle {
+.portal-panel-names {
     color: var(--life-ink-faint);
 }
 
@@ -71,13 +66,11 @@
     color: var(--life-pink);
 }
 
-.portal-panel-body,
-.celestial-panel-body {
+.portal-panel-body {
     scrollbar-color: rgba(109, 142, 208, 0.34) transparent;
 }
 
-.portal-panel-body::-webkit-scrollbar-thumb,
-.celestial-panel-body::-webkit-scrollbar-thumb {
+.portal-panel-body::-webkit-scrollbar-thumb {
     background: rgba(109, 142, 208, 0.34);
 }
 
@@ -210,68 +203,14 @@
     color: var(--life-pink);
 }
 
-:is(.portal-panel, .celestial-panel, .deep-sky-card) :is(button, a, [tabindex]):focus-visible {
+:is(.portal-panel, .deep-sky-card) :is(button, a, [tabindex]):focus-visible {
     outline: 2px solid var(--life-blue);
     outline-offset: 3px;
 }
 
-:is(.portal-panel, .celestial-panel, .deep-sky-card)::selection,
-:is(.portal-panel, .celestial-panel, .deep-sky-card) ::selection {
+:is(.portal-panel, .deep-sky-card)::selection,
+:is(.portal-panel, .deep-sky-card) ::selection {
     background: rgba(212, 116, 170, 0.18);
-}
-
-.celestial-panel {
-    background:
-        radial-gradient(circle at 88% 8%, rgba(212, 116, 170, 0.13), transparent 38%),
-        radial-gradient(circle at 8% 92%, rgba(109, 142, 208, 0.1), transparent 42%),
-        var(--life-paper-soft);
-}
-
-.celestial-observation-badge {
-    border-color: rgba(212, 116, 170, 0.34);
-    background: var(--life-pink-soft);
-    color: var(--life-pink);
-}
-
-.celestial-observation-badge::before {
-    border-color: var(--life-pink);
-    box-shadow: 0 0 8px rgba(212, 116, 170, 0.44);
-}
-
-.celestial-description,
-.celestial-facts li,
-.celestial-observer-note {
-    color: var(--life-ink-soft);
-}
-
-.celestial-metrics {
-    border-color: var(--life-rule);
-    background: var(--life-rule);
-}
-
-.celestial-metric {
-    background: rgba(255, 255, 255, 0.82);
-}
-
-.celestial-metric dt {
-    color: var(--life-ink-faint);
-}
-
-.celestial-metric dd {
-    color: var(--life-ink);
-}
-
-.celestial-facts li {
-    border-left-color: rgba(109, 142, 208, 0.46);
-    background: linear-gradient(90deg, var(--life-blue-soft), rgba(255, 255, 255, 0.36));
-}
-
-.celestial-facts li::before {
-    color: var(--life-pink);
-}
-
-.celestial-observer-note {
-    border-top-color: var(--life-rule-soft);
 }
 
 .star-reader {
@@ -454,8 +393,7 @@ body.route-preview-active .star-reader {
 }
 
 @media (max-width: 680px) {
-    .portal-panel,
-    .celestial-panel {
+    .portal-panel {
         border-radius: 14px;
     }
 

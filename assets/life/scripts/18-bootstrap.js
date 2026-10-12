@@ -53,17 +53,11 @@ function restoreLifeAfterNavigation(focusGate = true) {
         closeSectionDrawer({ restoreControl: false, focusToggle: false });
     }
     state.flight = null;
-    state.celestialFlight = null;
-    state.celestialVisit = null;
     state.routePreview = null;
-    state.pendingDrawerPortal = null;
-    state.pendingDrawerHome = false;
-    state.drawerNavigationSource = null;
     state.scene = state.hasEntered ? 'roam' : 'entry';
     state.activePortal = null;
     state.activePortalOpenedThroughIndex = false;
     state.portalReturnFocusTarget = null;
-    state.activeCelestial = null;
     state.activeStarHip = null;
     state.hoverStarHip = null;
     state.homeWarpProgress = 0;
@@ -87,20 +81,12 @@ function restoreLifeAfterNavigation(focusGate = true) {
     dom.veil.classList.remove('is-active');
     dom.body.classList.remove(
         'panel-open',
-        'celestial-open',
         'panel-left',
         'view-locked',
         'section-drawer-open',
-        'celestial-transition',
-        'celestial-closeup',
-        'celestial-returning'
     );
-    celestialCloseupRenderer.clear();
-    dom.celestialPanel.classList.remove('is-left');
-    dom.celestialPanel.setAttribute('aria-hidden', 'true');
     hideHomeRoutePreview();
     hideAllStarButtons();
-    state.focusedCelestial = null;
     setFocusedPortal(null);
     if (window.lifeStarMap) {
         window.lifeStarMap.reset();

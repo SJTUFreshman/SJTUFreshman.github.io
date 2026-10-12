@@ -87,7 +87,7 @@ const lifeStylesheets = localStylesheetResources(lifeHtml).filter(resource =>
 const releaseVersions = [...lifeScripts, ...lifeStylesheets].map(resource => new URL(resource.reference, 'https://life.invalid/').searchParams.get('v'));
 assert(releaseVersions.every(Boolean), 'Every local Life script and stylesheet must carry a cache-release version');
 assert.equal(new Set(releaseVersions).size, 1, 'All Life scripts and stylesheets must share one release version to prevent mixed cached runtimes');
-assert.equal(lifeRuntimeScripts.length, 26, 'life.html must load the complete hierarchical star-map runtime, footprints atlas, and celestial compositor');
+assert.equal(lifeRuntimeScripts.length, 20, 'life.html must load the star-map, portal, and footprints runtimes');
 assert.equal(lifeStylesheets.length, 10, 'life.html must load the complete hierarchical star-map styles');
 assert(
     lifeHtml.split(/\r?\n/).length < 1000,
@@ -167,10 +167,6 @@ for (const required of [
     'launchHomeRoute',
     'interstellarRouteFraming',
     'refreshAstronomicalSky',
-    'startCelestialFlight',
-    'beginCelestialReturn',
-    'completeCelestialReturn',
-    'celestialStageLayout',
     'drawMeteorShower',
     'updateEntryLocationCopy'
 ]) {
@@ -246,12 +242,10 @@ assert(
     'The route card must not nest a second live region'
 );
 assert(
-    /id="portalPanel"[^>]*\sinert/.test(lifeHtml) &&
-    /id="celestialPanel"[^>]*\sinert/.test(lifeHtml),
+    /id="portalPanel"[^>]*\sinert/.test(lifeHtml),
     'Closed detail panels must start inert'
 );
 assert(
-    /startCelestialFlight\(profile, event\.detail === 0 \? 'keyboard' : 'pointer'\)/.test(life) &&
     /startPortalFlight\(portal, event\.detail === 0 \? 'keyboard' : 'pointer'\)/.test(life),
     'Synthetic keyboard clicks must retain their activation source'
 );
@@ -260,7 +254,7 @@ assert(
     'Viewport changes must have a testable flight-reframing path'
 );
 assert(
-    /@media \(max-aspect-ratio: 3\/2\),\s*\(max-width: 1024px\) and \(max-aspect-ratio: 16\/9\)[\s\S]*?\.portal-panel,[\s\S]*?\.celestial-panel/.test(life) &&
+    /@media \(max-aspect-ratio: 3\/2\),\s*\(max-width: 1024px\) and \(max-aspect-ratio: 16\/9\)[\s\S]*?\.portal-panel/.test(life) &&
     /const COMPACT_SKY_MAX_WIDTH = 1024;/.test(life) &&
     /const COMPACT_SKY_MAX_ASPECT = 3 \/ 2;/.test(life) &&
     /const COMPACT_SKY_NARROW_MAX_ASPECT = 16 \/ 9;/.test(life) &&
@@ -270,166 +264,10 @@ assert(
     /@media \(max-width: 1024px\), \(max-aspect-ratio: 3\/2\)[\s\S]*?body\.route-preview-active \.portal-panel/.test(life),
     'CSS and camera logic must share the compact sky-panel breakpoint'
 );
-const observerSkyConfig = lifeRuntimeScripts.find(resource => resource.relativePath.endsWith('/02-sky-config.js')).source;
-assert(!/\bid:\s*'earth'/.test(observerSkyConfig), 'Earth is only selectable inside the solar-system map, not from the terrestrial observing sky');
-const expectedCelestialIds = [
-    'sun',
-    'moon',
-    'mercury',
-    'venus',
-    'mars',
-    'jupiter',
-    'saturn',
-    'uranus',
-    'neptune',
-    'pluto'
-];
-for (const bodyId of expectedCelestialIds) {
-    assert(
-        life.includes(`id: '${bodyId}'`),
-        `${bodyId} must be present in the live sky`
-    );
-}
-
-const celestialAssetPaths = [
-    'assets/celestial/sun.webp',
-    'assets/celestial/moon.webp',
-    'assets/celestial/mercury.webp',
-    'assets/celestial/venus.webp',
-    'assets/celestial/mars.webp',
-    'assets/celestial/jupiter.webp',
-    'assets/celestial/saturn.webp',
-    'assets/celestial/uranus.webp',
-    'assets/celestial/neptune.webp',
-    'assets/celestial/pluto.webp',
-    'assets/celestial/saturn-ring.png'
-];
-for (const assetPath of celestialAssetPaths) {
-    const absolutePath = path.join(root, ...assetPath.split('/'));
-    assert(fs.existsSync(absolutePath), `${assetPath} must exist locally`);
-    assert(fs.statSync(absolutePath).size > 0, `${assetPath} must not be empty`);
-}
-const surfaceTextureReferences = [
-    ...life.matchAll(/^\s*texture:\s*'(assets\/celestial\/[^']+)'/gm)
-].map(match => match[1]);
-assert.equal(
-    surfaceTextureReferences.length,
-    10,
-    'Each selectable celestial body must declare exactly one local surface texture'
-);
-assert.deepEqual(
-    new Set(surfaceTextureReferences),
-    new Set(celestialAssetPaths.slice(0, 10)),
-    'The ten celestial profiles must reference the expected local surface textures'
-);
-assert(
-    life.includes("ringTexture: 'assets/celestial/saturn-ring.png'"),
-    'Saturn must declare its local ring texture'
-);
-assert(
-    !/<(?:img|source)\b[^>]*(?:src|srcset)=["'][^"']*assets\/celestial\//i.test(lifeHtml),
-    'Celestial textures must not be requested by first-screen HTML image elements'
-);
-assert(
-    !/<link\b[^>]*(?:rel=["']preload["'][^>]*href=["'][^"']*assets\/celestial\/|href=["'][^"']*assets\/celestial\/[^>]*rel=["']preload["'])/i.test(lifeHtml),
-    'Celestial textures must not be preloaded on first screen'
-);
-
-assert(!/\bdrawRadius\b/.test(life), 'Distant bodies must not use illustrative drawRadius values');
-const distantBodyRenderer = life.match(
-    /function drawCelestialBodies\([^)]*\) \{([\s\S]*?)\n\}\n\nfunction orderedPortalNames/
-);
-assert(distantBodyRenderer, 'Could not extract the distant celestial renderer');
-assert(
-    !/\bellipse\s*\(/.test(distantBodyRenderer[1]) &&
-    !/profile\.id\s*===\s*['"]saturn['"]/.test(distantBodyRenderer[1]),
-    'Saturn must remain a point source in the distant naked-eye sky'
-);
-assert(
-    !/time\s*\*\s*0\.00005/.test(life) &&
-    !/for\s*\([^)]*index\s*<\s*8[^)]*\)[\s\S]{0,700}profile\.id\s*===\s*['"]sun['"]/.test(life),
-    'The distant Sun must not use decorative radial rays'
-);
-assert(
-    !/context\.arc\(\s*point\.x\s*-\s*radius\s*\*\s*0\.3[\s\S]{0,180}point\.y\s*-\s*radius\s*\*\s*0\.3/.test(life),
-    'Distant bodies must not use the old fake specular highlight'
-);
-assert(
-    /current\.nakedEyeVisible/.test(distantBodyRenderer[1]) &&
-    /drawNakedEyePoint/.test(distantBodyRenderer[1]) &&
-    /drawAngularSun/.test(distantBodyRenderer[1]) &&
-    /drawObservationReticle/.test(distantBodyRenderer[1]),
-    'The distant renderer must separate natural point sources from assisted finding reticles'
-);
-
-for (const mode of [
-    'naked-eye',
-    'marginal',
-    'telescope',
-    'daylight',
-    'below-horizon'
-]) {
-    assert(
-        life.includes(`'${mode}'`),
-        `Celestial visibility classification must include ${mode}`
-    );
-}
-const closeupRendererSource = life.match(
-    /class CelestialCloseupRenderer \{([\s\S]*?)\n\}\n\nconst galaxyRenderer/
-);
-assert(closeupRendererSource, 'Could not extract the celestial close-up renderer');
-assert(
-    !/easeInOutCubic\s*\(\s*clamp\(visit\.visualProgress/.test(
-        closeupRendererSource[1]
-    ),
-    'The close-up renderer must not ease an already-eased visual progress twice'
-);
-assert(
-    /uFlattening/.test(closeupRendererSource[1]) &&
-    /polarRadius/.test(closeupRendererSource[1]) &&
-    /profile\.flattening/.test(closeupRendererSource[1]),
-    'The close-up renderer must apply each body’s physical flattening'
-);
-assert(
-    /uLightView/.test(closeupRendererSource[1]) &&
-    /terminator/.test(closeupRendererSource[1]) &&
-    /incidence/.test(closeupRendererSource[1]) &&
-    /profile\.current\?\.hc/.test(closeupRendererSource[1]),
-    'The close-up renderer must light the visible phase from the current Sun direction'
-);
-assert(
-    /Astronomy\.RotationAxis\(profile\.body,\s*skyModel\.time\)/.test(life) &&
-    /bodyMatrices\(profile,\s*basis\)/.test(closeupRendererSource[1]) &&
-    /current\?\.spin/.test(closeupRendererSource[1]) &&
-    /current\?\.northEqj/.test(closeupRendererSource[1]),
-    'Close-up body orientation must follow Astronomy.RotationAxis'
-);
-assert(
-    /ring_tilt/.test(life) &&
-    /ringDistance\s*<\s*sphereNear/.test(closeupRendererSource[1]) &&
-    /ringOutsideBody/.test(closeupRendererSource[1]) &&
-    /lightBody\s*=\s*normalize\(uViewToBody\s*\*\s*lightView\)/.test(
-        closeupRendererSource[1]
-    ) &&
-    /ringShadowDistance/.test(closeupRendererSource[1]) &&
-    /planetShadow/.test(closeupRendererSource[1]),
-    'Saturn’s ring plane, lighting, tilt and front/back body occlusion must be modeled'
-);
-assert(
-    /const paths = \[profile\.texture\]/.test(closeupRendererSource[1]) &&
-    /if \(profile\.ringTexture\) paths\.push\(profile\.ringTexture\)/.test(closeupRendererSource[1]) &&
-    /celestialCloseupRenderer\.prepare\(visit\.profile\)/.test(life) &&
-    !/celestialBodies\.(?:forEach|map)\([\s\S]{0,240}(?:prepare|loadImage)/.test(life),
-    'Only the selected celestial profile may prepare/load its surface resources'
-);
-assert(
-    /if \(state\.scene === 'flying'\) \{[\s\S]{0,180}cancelFlight\('keyboard'\)/.test(life) &&
-    /function cancelFlight\([^)]*\) \{[\s\S]{0,180}state\.celestialVisit[\s\S]{0,120}beginCelestialReturn/.test(life),
-    'Escape during a celestial approach must begin the shared return path'
-);
+assert(!/CelestialCloseupRenderer|SolarSystemMap|BakedCelestialViewer|assets\/celestial\//.test(life), 'The retired solar viewer and resources must stay removed');
 
 const galaxyRendererSource = life.match(
-    /class GalaxyRenderer \{([\s\S]*?)\n\}\n\nfunction celestialStageLayout/
+    /class GalaxyRenderer \{([\s\S]*?)\n\}\n\nconst galaxyRenderer/
 );
 assert(galaxyRendererSource, 'Could not extract the Milky Way renderer');
 const galaxySource = galaxyRendererSource[1];
@@ -553,7 +391,7 @@ assert(
 );
 
 const skyParametersSource = life.match(
-    /function skyRenderingParameters\(\) \{([\s\S]*?)\n\}\n\nfunction starVisibilityAtDirection/
+    /function skyRenderingParameters\(\) \{([\s\S]*?)\n\}\n\nfunction sceneSunDirection/
 );
 assert(skyParametersSource, 'Could not extract skyRenderingParameters()');
 assert(
@@ -955,7 +793,7 @@ class MockElement {
     }
     getContext(kind) {
         if (
-            (this.id === 'spaceCanvas' || this.id === 'celestialCloseupCanvas') &&
+            this.id === 'spaceCanvas' &&
             kind !== '2d'
         ) return null;
         return mockCanvasContext();
@@ -1206,7 +1044,7 @@ const runtimeContext = {
 runtimeContext.globalThis = runtimeContext;
 mockDocument.baseURI = 'https://life.invalid/';
 vm.createContext(runtimeContext);
-const observerRuntimeScripts = lifeRuntimeScripts.filter(resource => !/(?:07-star-map-renderer|19-star-map|20-solar-system-map|21-deep-sky-map)\.js$/.test(resource.relativePath));
+const observerRuntimeScripts = lifeRuntimeScripts.filter(resource => !/(?:07-star-map-renderer|19-star-map|21-deep-sky-map)\.js$/.test(resource.relativePath));
 for (const resource of observerRuntimeScripts) {
     assert.doesNotThrow(
         () => vm.runInContext(resource.source, runtimeContext, {
@@ -1692,41 +1530,6 @@ assert.deepEqual(
     'The ground half-plane must clip the viewport correctly at every roll, FOV and aspect ratio'
 );
 
-const celestialNavigationState = JSON.parse(vm.runInContext(`(() => {
-    const ids = celestialBodies.map(profile => profile.id);
-    const buttons = celestialBodies.map(profile => profile.button);
-    return JSON.stringify({
-        ids,
-        uniqueIds: new Set(ids).size,
-        buttonCount: buttons.filter(Boolean).length,
-        buttonIds: buttons.map(button => button?.dataset?.celestialId || null),
-        imageCount: celestialCloseupRenderer.images.size,
-        pendingImageCount: celestialCloseupRenderer.imagePromises.size,
-        textureCount: celestialCloseupRenderer.textures.size,
-        activeProfile: celestialCloseupRenderer.activeProfile?.id || null
-    });
-})()`, runtimeContext));
-assert.deepEqual(
-    celestialNavigationState,
-    {
-        ids: expectedCelestialIds,
-        uniqueIds: 10,
-        buttonCount: 10,
-        buttonIds: expectedCelestialIds,
-        imageCount: 0,
-        pendingImageCount: 0,
-        textureCount: 0,
-        activeProfile: null
-    },
-    'The live sky must build exactly ten non-Earth hit targets without loading close-up textures'
-);
-assert.ok(
-    !life.includes('celestial-catalog') &&
-    !life.includes('catalogButton') &&
-    !/\^Digit\[1-9\]/.test(life),
-    'The removed 1–9 observation catalog and its numeric shortcut must not return'
-);
-
 const sectionDrawerMarkup = lifeHtml.match(
     /<aside\b[^>]*\bid="sectionDrawer"[\s\S]*?<\/aside>/
 );
@@ -1834,10 +1637,8 @@ const drawerModalState = JSON.parse(vm.runInContext(`(() => {
         dom.entryGate,
         dom.world,
         dom.panel,
-        dom.celestialPanel,
         dom.lightbox,
         dom.portalNav,
-        dom.celestialNav,
         dom.starNav
     ];
     const managed = [
@@ -1852,7 +1653,6 @@ const drawerModalState = JSON.parse(vm.runInContext(`(() => {
     );
     const trackedBodyClasses = [
         'panel-open',
-        'celestial-open',
         'section-drawer-open',
         'cursor-free',
         'view-locked'
@@ -1893,17 +1693,11 @@ const drawerModalState = JSON.parse(vm.runInContext(`(() => {
         state.altReturnMode = null;
         state.altPreviousLock = null;
         state.relockPending = false;
-        state.pendingDrawerPortal = null;
-        state.pendingDrawerHome = false;
-        state.drawerNavigationSource = null;
         state.drawerReturn = null;
         state.flight = null;
-        state.celestialFlight = null;
-        state.celestialVisit = null;
         document.pointerLockElement = null;
         dom.body.classList.remove(
             'panel-open',
-            'celestial-open',
             'section-drawer-open',
             'view-locked'
         );
@@ -1933,9 +1727,7 @@ const drawerModalState = JSON.parse(vm.runInContext(`(() => {
             dom.entryGate.classList.contains('is-hidden'),
         worldRestored: !dom.world.inert,
         panelInert: dom.panel.inert,
-        celestialPanelInert: dom.celestialPanel.inert,
         portalNavRestored: !dom.portalNav.inert,
-        celestialNavRestored: !dom.celestialNav.inert,
         starNavInert: dom.starNav.inert,
         drawerInert: dom.sectionDrawer.inert,
         toggleRestored: !dom.sectionDrawerToggle.inert
@@ -1951,7 +1743,6 @@ const drawerModalState = JSON.parse(vm.runInContext(`(() => {
         world: dom.world.inert,
         panel: dom.panel.inert,
         portalNav: dom.portalNav.inert,
-        celestialNav: dom.celestialNav.inert,
         starNav: dom.starNav.inert
     };
     const detailDrawerOpened = openSectionDrawer('keyboard');
@@ -1966,7 +1757,6 @@ const drawerModalState = JSON.parse(vm.runInContext(`(() => {
         dom.world.inert === detailBefore.world &&
         dom.panel.inert === detailBefore.panel &&
         dom.portalNav.inert === detailBefore.portalNav &&
-        dom.celestialNav.inert === detailBefore.celestialNav &&
         dom.starNav.inert === detailBefore.starNav
     );
 
@@ -2006,9 +1796,6 @@ const drawerModalState = JSON.parse(vm.runInContext(`(() => {
 
     configureRoam();
     openSectionDrawer('pointer');
-    state.pendingDrawerPortal = portalDefinitions.find(portal => !portal.home);
-    state.pendingDrawerHome = true;
-    state.drawerNavigationSource = 'keyboard';
     state.altHeld = true;
     state.altReturnMode = 'locked';
     state.relockPending = true;
@@ -2018,9 +1805,6 @@ const drawerModalState = JSON.parse(vm.runInContext(`(() => {
     const blurClearedDrawerAndPending = (
         !state.sectionDrawerOpen &&
         !state.modalOpen &&
-        state.pendingDrawerPortal === null &&
-        !state.pendingDrawerHome &&
-        state.drawerNavigationSource === null &&
         !state.altHeld &&
         state.altReturnMode === null &&
         !state.relockPending &&
@@ -2032,9 +1816,6 @@ const drawerModalState = JSON.parse(vm.runInContext(`(() => {
 
     configureRoam();
     openSectionDrawer('pointer');
-    state.pendingDrawerPortal = portalDefinitions.find(portal => !portal.home);
-    state.pendingDrawerHome = true;
-    state.drawerNavigationSource = 'pointer';
     state.altHeld = true;
     state.altReturnMode = 'locked';
     state.relockPending = true;
@@ -2045,9 +1826,6 @@ const drawerModalState = JSON.parse(vm.runInContext(`(() => {
     const visibilityClearedDrawerAndPending = (
         !state.sectionDrawerOpen &&
         !state.modalOpen &&
-        state.pendingDrawerPortal === null &&
-        !state.pendingDrawerHome &&
-        state.drawerNavigationSource === null &&
         !state.altHeld &&
         state.altReturnMode === null &&
         !state.relockPending &&
@@ -2111,9 +1889,7 @@ assert.deepEqual(drawerModalState, {
         gateHidden: true,
         worldRestored: true,
         panelInert: true,
-        celestialPanelInert: true,
         portalNavRestored: true,
-        celestialNavRestored: true,
         starNavInert: true,
         drawerInert: true,
         toggleRestored: true
@@ -2138,10 +1914,8 @@ const drawerCloseSourceState = JSON.parse(vm.runInContext(`(() => {
     const managed = [
         dom.world,
         dom.panel,
-        dom.celestialPanel,
         dom.lightbox,
         dom.portalNav,
-        dom.celestialNav,
         dom.starNav,
         dom.sectionDrawer,
         dom.sectionDrawerToggle
@@ -2178,7 +1952,7 @@ const drawerCloseSourceState = JSON.parse(vm.runInContext(`(() => {
         state.lockIntent = null;
         state.drawerReturn = null;
         document.pointerLockElement = dom.world;
-        dom.body.classList.remove('panel-open', 'celestial-open', 'section-drawer-open');
+        dom.body.classList.remove('panel-open', 'section-drawer-open');
         dom.body.classList.add('view-locked');
         dom.sectionDrawer.inert = true;
         dom.sectionDrawer.setAttribute('aria-hidden', 'true');
@@ -2283,26 +2057,6 @@ const belowHorizonHitState = JSON.parse(vm.runInContext(`(() => {
     updatePortalButton(portal, projected);
     const portalAboveEnabled = !portal.button.hidden && !portal.button.inert;
 
-    const celestial = celestialBodies.find(profile => profile.id === 'venus');
-    const savedCelestialCurrent = celestial.current;
-    const savedCelestialVisible = celestial.buttonVisible;
-    celestial.buttonVisible = undefined;
-    celestial.button.hidden = false;
-    celestial.button.inert = false;
-    celestial.current = {
-        ...(savedCelestialCurrent || {}),
-        direction: below,
-        nakedEyeVisible: true,
-        observationMode: 'naked-eye'
-    };
-    updateCelestialButton(celestial, projected);
-    const celestialBelowDisabled =
-        celestial.button.hidden && celestial.button.inert;
-    celestial.current.direction = above;
-    updateCelestialButton(celestial, projected);
-    const celestialAboveEnabled =
-        !celestial.button.hidden && !celestial.button.inert;
-
     const hip = portal.patternHips[0];
     const starIndex = portal.patternHips.indexOf(hip);
     const savedStarDirection = portal.patternPoints[starIndex];
@@ -2324,8 +2078,6 @@ const belowHorizonHitState = JSON.parse(vm.runInContext(`(() => {
     portal.direction = savedPortalDirection;
     portal.buttonVisible = savedPortalVisible;
     portal.skyVisibility = savedPortalSkyVisibility;
-    celestial.current = savedCelestialCurrent;
-    celestial.buttonVisible = savedCelestialVisible;
     portal.patternPoints[starIndex] = savedStarDirection;
     Object.assign(starCache, savedStarCache);
     state.scene = saved.scene;
@@ -2333,8 +2085,6 @@ const belowHorizonHitState = JSON.parse(vm.runInContext(`(() => {
     return JSON.stringify({
         portalBelowDisabled,
         portalAboveEnabled,
-        celestialBelowDisabled,
-        celestialAboveEnabled,
         starBelowDisabled,
         starAboveEnabled,
         horizonRejected: !isAboveHorizon([0, 0, 1]),
@@ -2345,8 +2095,6 @@ const belowHorizonHitState = JSON.parse(vm.runInContext(`(() => {
 assert.deepEqual(belowHorizonHitState, {
     portalBelowDisabled: true,
     portalAboveEnabled: true,
-    celestialBelowDisabled: true,
-    celestialAboveEnabled: true,
     starBelowDisabled: true,
     starAboveEnabled: true,
     horizonRejected: true,
@@ -2366,8 +2114,6 @@ const drawerNavigationState = JSON.parse(vm.runInContext(`(() => {
         gateOpen: state.gateOpen,
         modalOpen: state.modalOpen,
         sectionDrawerOpen: state.sectionDrawerOpen,
-        celestialFlight: state.celestialFlight,
-        celestialVisit: state.celestialVisit,
         flight: state.flight
     };
     const originalStartPortalFlight = startPortalFlight;
@@ -2401,8 +2147,6 @@ const drawerNavigationState = JSON.parse(vm.runInContext(`(() => {
     state.hasEntered = true;
     state.gateOpen = false;
     state.modalOpen = false;
-    state.celestialFlight = null;
-    state.celestialVisit = null;
     state.flight = null;
     state.sectionDrawerOpen = true;
     navigateFromSectionDrawer(hiddenPortal, 'keyboard');
@@ -2467,7 +2211,7 @@ const indexedNavigationRuntimeState = JSON.parse(vm.runInContext(`(() => {
         buttonInert: portal.button.inert,
         buttonVisible: portal.buttonVisible
     }));
-    const sun = celestialBodies.find(profile => profile.id === 'sun');
+    const sun = { get current() { return skySun; }, set current(value) { skySun = value; } };
     const savedSunCurrent = sun.current;
     const savedWidth = window.innerWidth;
     const savedHeight = window.innerHeight;
@@ -2476,10 +2220,8 @@ const indexedNavigationRuntimeState = JSON.parse(vm.runInContext(`(() => {
     const managedElements = [
         dom.world,
         dom.panel,
-        dom.celestialPanel,
         dom.lightbox,
         dom.portalNav,
-        dom.celestialNav,
         dom.starNav,
         dom.sectionDrawer,
         dom.sectionDrawerToggle
@@ -2510,10 +2252,7 @@ const indexedNavigationRuntimeState = JSON.parse(vm.runInContext(`(() => {
         state.modalOpen = false;
         state.sectionDrawerOpen = false;
         state.flight = null;
-        state.celestialFlight = null;
-        state.celestialVisit = null;
         state.activePortal = null;
-        state.activeCelestial = null;
         state.routePreview = null;
         state.portalReturnFocusTarget = null;
         state.activePortalOpenedThroughIndex = false;
@@ -2524,7 +2263,6 @@ const indexedNavigationRuntimeState = JSON.parse(vm.runInContext(`(() => {
         dom.body.classList.remove(
             'panel-open',
             'panel-left',
-            'celestial-open',
             'section-drawer-open',
             'view-locked'
         );
@@ -2767,7 +2505,7 @@ assert.deepEqual(indexedNavigationRuntimeState, {
     drawerPanelEscapeFocus: true
 }, 'Indexed navigation must direct-open hidden views, fly to daylight-visible constellations, reframe visible flights, and restore Escape focus');
 
-const runtimeSky = JSON.parse(vm.runInContext(`(() => {
+vm.runInContext(`
     skyModel.location = {
         ...DEFAULT_OBSERVER_LOCATION,
         latitude: 31.2304,
@@ -2776,400 +2514,10 @@ const runtimeSky = JSON.parse(vm.runInContext(`(() => {
     };
     skyModel.observer = null;
     refreshAstronomicalSky(new Date('2026-07-29T06:55:00.000Z'));
-    return JSON.stringify(celestialBodies.map(profile => ({
-        id: profile.id,
-        body: profile.body,
-        altitude: profile.current?.altitude,
-        apparentAltitude: profile.current?.apparentAltitude,
-        apparentDiscCenterAltitude: profile.current?.apparentDiscCenterAltitude,
-        apparentUpperAltitude: profile.current?.apparentUpperAltitude,
-        apparentLowerAltitude: profile.current?.apparentLowerAltitude,
-        apparentVerticalDiameter: profile.current?.apparentVerticalDiameter,
-        azimuth: profile.current?.azimuth,
-        direction: profile.current?.direction,
-        geometricDirection: profile.current?.geometricDirection,
-        angularDiameter: profile.current?.angularDiameter,
-        northEqj: profile.current?.northEqj,
-        spin: profile.current?.spin,
-        phase: profile.current?.phase,
-        phaseAngle: profile.current?.phaseAngle,
-        ringTilt: profile.current?.ringTilt,
-        observationMode: profile.current?.observationMode,
-        nakedEyeVisible: profile.current?.nakedEyeVisible
-    })));
-})()`, runtimeContext));
-for (const body of runtimeSky) {
-    const expected = expectedAltitude.get(body.body);
-    assert.notEqual(expected, undefined, `Unexpected runtime body ${body.body}`);
-    assert(
-        Math.abs(body.altitude - expected) < 0.003,
-        `${body.body} runtime altitude must match the verified reference`
-    );
-    assert(body.direction?.every(Number.isFinite));
-    const directionAltitude = Math.asin(body.direction[1]) * 180 / Math.PI;
-    const directionAzimuth = (
-        Math.atan2(body.direction[0], body.direction[2]) * 180 / Math.PI + 360
-    ) % 360;
-    const displayAltitude = Number.isFinite(body.apparentDiscCenterAltitude)
-        ? body.apparentDiscCenterAltitude
-        : body.altitude;
-    if (body.id === 'sun' || body.id === 'moon') {
-        assert(Number.isFinite(body.apparentAltitude));
-        assert(Number.isFinite(body.apparentUpperAltitude));
-        assert(Number.isFinite(body.apparentLowerAltitude));
-        assert(Number.isFinite(body.apparentVerticalDiameter));
-        assert(body.apparentUpperAltitude >= body.apparentLowerAltitude);
-        assert(
-            Math.abs(
-                body.apparentDiscCenterAltitude -
-                (body.apparentUpperAltitude + body.apparentLowerAltitude) * 0.5
-            ) < 1e-12,
-            `${body.body} visual center must bisect its refracted limbs`
-        );
-        assert(
-            Math.abs(
-                body.apparentVerticalDiameter -
-                (body.apparentUpperAltitude - body.apparentLowerAltitude) *
-                    Math.PI / 180
-            ) < 1e-12,
-            `${body.body} vertical diameter must preserve differential refraction`
-        );
-    }
-    assert(
-        Math.abs(directionAltitude - displayAltitude) < 1e-10,
-        `${body.body} scene direction must preserve its display altitude`
-    );
-    assert(
-        Math.abs(directionAzimuth - body.azimuth) < 1e-10,
-        `${body.body} scene direction must preserve azimuth`
-    );
-    const azimuthRadians = body.azimuth * Math.PI / 180;
-    const altitudeRadians = displayAltitude * Math.PI / 180;
-    const reconstructedDirection = [
-        Math.sin(azimuthRadians) * Math.cos(altitudeRadians),
-        Math.sin(altitudeRadians),
-        Math.cos(azimuthRadians) * Math.cos(altitudeRadians)
-    ];
-    reconstructedDirection.forEach((value, index) => {
-        assert(
-            Math.abs(value - body.direction[index]) < 1e-10,
-            `${body.body} direction must retain the east-up-north azimuth/altitude convention`
-        );
-    });
-    if (body.id === 'sun' || body.id === 'moon') {
-        const rawRefraction = body.altitude >= -2 && body.altitude <= 90
-            ? Astronomy.Refraction('normal', body.altitude)
-            : 0;
-        const expectedRefraction = Number.isFinite(rawRefraction)
-            ? Math.min(1, Math.max(0, rawRefraction))
-            : 0;
-        const expectedApparentAltitude = body.altitude + expectedRefraction;
-        assert(
-            Math.abs(body.apparentAltitude - expectedApparentAltitude) < 1e-10,
-            `${body.body} apparent altitude must equal geometric altitude plus atmospheric refraction`
-        );
-        assert(
-            Math.abs(
-                body.direction[1] -
-                Math.sin(body.apparentDiscCenterAltitude * Math.PI / 180)
-            ) < 1e-12,
-            `${body.body} scene direction must use its refracted visual-center altitude`
-        );
-    } else {
-        assert(body.geometricDirection?.every(Number.isFinite));
-        body.direction.forEach((value, index) => {
-            assert(
-                Math.abs(value - body.geometricDirection[index]) < 1e-12,
-                `${body.body} must retain the unrefracted geometric direction`
-            );
-        });
-    }
-    assert(body.angularDiameter > 0, `${body.body} must have a positive angular diameter`);
-    assert(body.northEqj?.every(Number.isFinite), `${body.body} must expose a finite rotation axis`);
-    assert(Number.isFinite(body.spin), `${body.body} must expose a finite rotation phase`);
-    assert(body.phase >= 0 && body.phase <= 1, `${body.body} phase must remain normalized`);
-    assert(Number.isFinite(body.phaseAngle), `${body.body} phase angle must remain finite`);
-    if (body.id === 'moon') {
-        assert(
-            Math.abs(body.phase - expectedTopocentricMoonPhase) < 1e-12,
-            'Moon phase must use the current observer rather than Earth center'
-        );
-        assert(
-            Math.abs(
-                body.phaseAngle - expectedTopocentricMoonPhaseAngle
-            ) < 1e-10,
-            'Moon phase angle must match the topocentric Sun-Moon-observer geometry'
-        );
-    }
-    assert(Number.isFinite(body.ringTilt), `${body.body} ring tilt must remain finite`);
-    assert(
-        [
-            'naked-eye',
-            'marginal',
-            'telescope',
-            'daylight',
-            'below-horizon'
-        ].includes(body.observationMode),
-        `${body.body} must receive a physical observation-mode classification`
-    );
-}
-
-const angularDiscProjectionState = JSON.parse(vm.runInContext(`(() => {
-    const width = 1600;
-    const height = 900;
-    const fov = 62 * DEG;
-    const basis = {
-        right: [1, 0, 0],
-        up: [0, 1, 0],
-        forward: [0, 0, 1]
-    };
-    const angularDiameter = 0.5 * DEG;
-    const profileAt = (direction, verticalScale = 1) => ({
-        current: {
-            direction,
-            angularDiameter,
-            apparentVerticalDiameter: angularDiameter * verticalScale
-        }
-    });
-    const centered = projectedAngularDiscGeometry(
-        profileAt([0, 0, 1]),
-        basis,
-        width,
-        height,
-        fov
-    );
-    const offAxisDirection = normalize([
-        Math.sin(45 * DEG),
-        0,
-        Math.cos(45 * DEG)
-    ]);
-    const offAxis = projectedAngularDiscGeometry(
-        profileAt(offAxisDirection),
-        basis,
-        width,
-        height,
-        fov
-    );
-    const flattened = projectedAngularDiscGeometry(
-        profileAt(offAxisDirection, 0.5),
-        basis,
-        width,
-        height,
-        fov
-    );
-    const horizontalLength = geometry => Math.hypot(
-        geometry.horizontal.x,
-        geometry.horizontal.y
-    );
-    const verticalLength = geometry => Math.hypot(
-        geometry.vertical.x,
-        geometry.vertical.y
-    );
-    const localLight = { x: 0.6, y: 0.8 };
-    const screenLight = {
-        x:
-            offAxis.horizontal.x * localLight.x +
-            offAxis.vertical.x * localLight.y,
-        y:
-            offAxis.horizontal.y * localLight.x +
-            offAxis.vertical.y * localLight.y
-    };
-    const recoveredLight = angularDiscLocalDirection(
-        offAxis,
-        Math.atan2(screenLight.y, screenLight.x)
-    );
-    const visitProfile = {
-        angularDisc: true,
-        current: { angularDiameter }
-    };
-    const savedApproachStartRadius = celestialCloseupRenderer.startRadiusForVisit({
-        phase: 'approach',
-        profile: visitProfile,
-        origin: { fov },
-        approachDiscGeometry: { areaRadius: 7.25 },
-        originDiscGeometry: { areaRadius: 3.5 }
-    });
-    const savedReturnStartRadius = celestialCloseupRenderer.startRadiusForVisit({
-        phase: 'returning',
-        profile: visitProfile,
-        origin: { fov },
-        approachDiscGeometry: { areaRadius: 7.25 },
-        originDiscGeometry: { areaRadius: 3.5 }
-    });
-    let crossfadeFloor = 1;
-    for (let index = 0; index <= 1000; index += 1) {
-        const progress = index / 1000;
-        const distant = 1 - smoothstep(0.02, 0.32, progress);
-        const closeup = smoothstep(0.04, 0.26, progress);
-        crossfadeFloor = Math.min(
-            crossfadeFloor,
-            1 - (1 - distant) * (1 - closeup)
-        );
-    }
-    return JSON.stringify({
-        centeredAtOpticalAxis:
-            Math.abs(centered.center.x - width * 0.5) < 1e-12 &&
-            Math.abs(centered.center.y - height * 0.5) < 1e-12,
-        radialScale: horizontalLength(offAxis) / horizontalLength(centered),
-        tangentialScale: verticalLength(offAxis) / verticalLength(centered),
-        differentialRefractionScale:
-            verticalLength(flattened) / verticalLength(offAxis),
-        lightRecoveryError: Math.hypot(
-            recoveredLight.x - localLight.x,
-            recoveredLight.y - localLight.y
-        ),
-        finiteMatrix:
-            Number.isFinite(offAxis.determinant) &&
-            Math.abs(offAxis.determinant) > 1e-8 &&
-            Number.isFinite(offAxis.areaRadius),
-        savedApproachStartRadius,
-        savedReturnStartRadius,
-        crossfadeFloor
-    });
-})()`, runtimeContext));
-assert.equal(
-    angularDiscProjectionState.centeredAtOpticalAxis,
-    true,
-    'Angular-disc projection must preserve the optical-axis center'
-);
-assert(
-    Math.abs(angularDiscProjectionState.radialScale - 2) < 0.001,
-    'A disc 45 degrees off-axis must receive the gnomonic secant-squared radial scale'
-);
-assert(
-    Math.abs(angularDiscProjectionState.tangentialScale - Math.SQRT2) < 0.001,
-    'A disc 45 degrees off-axis must receive the gnomonic secant tangential scale'
-);
-assert(
-    Math.abs(angularDiscProjectionState.differentialRefractionScale - 0.5) <
-        0.001,
-    'Differential atmospheric compression must survive the camera projection'
-);
-assert(
-    angularDiscProjectionState.lightRecoveryError < 1e-12,
-    'Moonlight direction must be inverse-mapped through the full projected disc matrix'
-);
-assert.equal(
-    angularDiscProjectionState.finiteMatrix,
-    true,
-    'Angular-disc projection must expose a finite, invertible local matrix'
-);
-assert.equal(
-    angularDiscProjectionState.savedApproachStartRadius,
-    7.25,
-    'Close-up approach must reuse its live projection radius without a size jump'
-);
-assert.equal(
-    angularDiscProjectionState.savedReturnStartRadius,
-    3.5,
-    'Close-up return must target the original-sky projection radius'
-);
-assert(
-    angularDiscProjectionState.crossfadeFloor > 0.79,
-    'Distant and close-up celestial layers must crossfade without a brightness dropout'
-);
-
-const solarUpperLimbState = JSON.parse(vm.runInContext(`(() => {
-    const sun = celestialBodies.find(profile => profile.id === 'sun');
-    const savedCurrent = sun.current;
-    sun.current = {
-        altitude: -1,
-        apparentAltitude: -0.2,
-        angularDiameter: 0.532 * DEG,
-        magnitude: -26.7
-    };
-    classifyCelestialVisibility(sun, -10);
-    const apparentUpperLimbVisible =
-        sun.current.observationMode === 'naked-eye' &&
-        sun.current.nakedEyeVisible;
-    sun.current.apparentAltitude = -0.4;
-    classifyCelestialVisibility(sun, -10);
-    const apparentUpperLimbBelow =
-        sun.current.observationMode === 'below-horizon' &&
-        !sun.current.nakedEyeVisible;
-    sun.current = savedCurrent;
-    return JSON.stringify({
-        apparentUpperLimbVisible,
-        apparentUpperLimbBelow
-    });
-})()`, runtimeContext));
-assert.deepEqual(solarUpperLimbState, {
-    apparentUpperLimbVisible: true,
-    apparentUpperLimbBelow: true
-}, 'Solar visibility must follow the refracted apparent upper limb');
-
-const visibilityState = JSON.parse(vm.runInContext(`(() => {
-    const classify = ({
-        id = 'test',
-        altitude = 45,
-        apparentAltitude = altitude,
-        angularDiameter = 0.532 * DEG,
-        magnitude = 0,
-        sunAltitude = -20
-    }) => {
-        const configuredProfile = celestialBodies.find(candidate => candidate.id === id) || {};
-        const directionAltitude = configuredProfile.refracted
-            ? apparentAltitude
-            : altitude;
-        const profile = {
-            ...configuredProfile,
-            id,
-            current: {
-                direction: horizontalDirection(180, directionAltitude),
-                altitude,
-                apparentAltitude,
-                angularDiameter,
-                magnitude
-            }
-        };
-        classifyCelestialVisibility(profile, sunAltitude);
-        return {
-            mode: profile.current.observationMode,
-            visible: profile.current.nakedEyeVisible
-        };
-    };
-    return JSON.stringify({
-        nakedEye: classify({ id: 'mars', magnitude: 0.5 }),
-        marginal: classify({ id: 'uranus', magnitude: 5.7 }),
-        telescopeNeptune: classify({ id: 'neptune', magnitude: 7.8 }),
-        telescopePluto: classify({ id: 'pluto', magnitude: 14.1 }),
-        daylight: classify({
-            id: 'jupiter',
-            magnitude: -2,
-            sunAltitude: 8
-        }),
-        belowHorizon: classify({
-            id: 'venus',
-            altitude: -0.01,
-            magnitude: -4
-        }),
-        sunAbove: classify({
-            id: 'sun',
-            altitude: -0.8,
-            apparentAltitude: -0.2,
-            magnitude: -26.7
-        }),
-        sunBelow: classify({
-            id: 'sun',
-            altitude: -0.9,
-            apparentAltitude: -0.4,
-            magnitude: -26.7
-        })
-    });
-})()`, runtimeContext));
-assert.deepEqual(visibilityState, {
-    nakedEye: { mode: 'naked-eye', visible: true },
-    marginal: { mode: 'marginal', visible: true },
-    telescopeNeptune: { mode: 'telescope', visible: false },
-    telescopePluto: { mode: 'telescope', visible: false },
-    daylight: { mode: 'daylight', visible: false },
-    belowHorizon: { mode: 'below-horizon', visible: false },
-    sunAbove: { mode: 'naked-eye', visible: true },
-    sunBelow: { mode: 'below-horizon', visible: false }
-}, 'Visibility modes must keep Neptune and Pluto out of the natural naked-eye sky');
+`, runtimeContext);
 
 const skyVisibilityState = JSON.parse(vm.runInContext(`(() => {
-    const sun = celestialBodies.find(profile => profile.id === 'sun');
+    const sun = { get current() { return skySun; }, set current(value) { skySun = value; } };
     const savedCurrent = sun.current;
     const limits = [-30, -18, -12, -6, 0, 12].map(twilightMagnitudeLimit);
     sun.current = {
@@ -3241,7 +2589,7 @@ assert(Math.abs(skyVisibilityState.daytimeZenithLength - 1) < 1e-10);
 assert(Math.abs(skyVisibilityState.daytimeSunLength - 1) < 1e-10);
 
 const atmosphericRenderState = JSON.parse(vm.runInContext(`(() => {
-    const sun = celestialBodies.find(profile => profile.id === 'sun');
+    const sun = { get current() { return skySun; }, set current(value) { skySun = value; } };
     const savedSunCurrent = sun.current;
     const savedSkyRenderingParameters = skyRenderingParameters;
     const savedFallbackStars = fallbackStars;
@@ -3372,203 +2720,6 @@ assert.deepEqual(atmosphericRenderState, {
     fallbackUsesProjectedZenith: true,
     unprojectableSunAddsNoWarmStop: true
 }, 'Fallback atmosphere rendering must follow the real zenith and visible solar horizon azimuth');
-
-const closeupGeometryState = JSON.parse(vm.runInContext(`(() => {
-    const basis = cameraBasis();
-    const determinant = matrix => (
-        matrix[0] * (matrix[4] * matrix[8] - matrix[7] * matrix[5]) -
-        matrix[3] * (matrix[1] * matrix[8] - matrix[7] * matrix[2]) +
-        matrix[6] * (matrix[1] * matrix[5] - matrix[4] * matrix[2])
-    );
-    return JSON.stringify(celestialBodies.map(profile => {
-        const matrices = celestialCloseupRenderer.bodyMatrices(profile, basis);
-        const light = celestialCloseupRenderer.lightInView(profile, basis);
-        return {
-            id: profile.id,
-            flattening: profile.flattening,
-            viewDeterminant: determinant(matrices.viewToBody),
-            bodyDeterminant: determinant(matrices.bodyToView),
-            matricesFinite: [
-                ...matrices.viewToBody,
-                ...matrices.bodyToView
-            ].every(Number.isFinite),
-            lightFinite: light.every(Number.isFinite),
-            lightLength: vectorLength(light),
-            phase: profile.current.phase,
-            ringTilt: profile.current.ringTilt
-        };
-    }));
-})()`, runtimeContext));
-assert.equal(closeupGeometryState.length, 10);
-for (const body of closeupGeometryState) {
-    assert(body.flattening >= 0 && body.flattening < 0.2);
-    assert(body.matricesFinite, `${body.id} close-up matrices must remain finite`);
-    assert(body.lightFinite, `${body.id} close-up light vector must remain finite`);
-    assert(Math.abs(Math.abs(body.viewDeterminant) - 1) < 1e-5);
-    assert(Math.abs(Math.abs(body.bodyDeterminant) - 1) < 1e-5);
-    assert(Math.abs(body.lightLength - 1) < 1e-10);
-    assert(body.phase >= 0 && body.phase <= 1);
-    assert(Number.isFinite(body.ringTilt));
-}
-assert(
-    closeupGeometryState.find(body => body.id === 'saturn').flattening >
-    closeupGeometryState.find(body => body.id === 'jupiter').flattening,
-    'Saturn’s greater oblateness must be represented in the close-up geometry'
-);
-
-const closeupFailureState = JSON.parse(vm.runInContext(`(() => {
-    const profile = celestialBodies.find(body => body.id === 'venus');
-    const basis = cameraBasis();
-    const visit = {
-        profile,
-        panelOnLeft: false,
-        startScreen: { x: window.innerWidth * 0.5, y: window.innerHeight * 0.5 },
-        textureReady: true,
-        visualProgress: 1
-    };
-    const makeFallbackCanvas = counter => {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        const originalDrawImage = context.drawImage;
-        context.drawImage = (...args) => {
-            counter.frames += 1;
-            return originalDrawImage(...args);
-        };
-        canvas.getContext = kind => kind === '2d' ? context : null;
-        return canvas;
-    };
-    const renderFrames = renderer => {
-        let successfulFrames = 0;
-        for (let frame = 0; frame < 60; frame += 1) {
-            if (renderer.render(frame * (1000 / 60), visit, basis)) {
-                successfulFrames += 1;
-            }
-        }
-        return successfulFrames;
-    };
-
-    const noContextCounter = { frames: 0 };
-    let noContextRequests = 0;
-    const noContextCanvas = document.createElement('canvas');
-    noContextCanvas.getContext = kind => {
-        if (kind === 'webgl' || kind === 'experimental-webgl') {
-            noContextRequests += 1;
-        }
-        return null;
-    };
-    const noContextRenderer = new CelestialCloseupRenderer(
-        noContextCanvas,
-        makeFallbackCanvas(noContextCounter)
-    );
-    noContextRenderer.installFallbackSurface(profile);
-    const noContextFrames = renderFrames(noContextRenderer);
-
-    const shaderCounter = { frames: 0 };
-    let shaderContextRequests = 0;
-    let programAttempts = 0;
-    let shaderAttempts = 0;
-    let compileAttempts = 0;
-    const failingGl = {
-        VERTEX_SHADER: 1,
-        FRAGMENT_SHADER: 2,
-        COMPILE_STATUS: 3,
-        createProgram() {
-            programAttempts += 1;
-            return {};
-        },
-        createShader() {
-            shaderAttempts += 1;
-            return {};
-        },
-        shaderSource() {},
-        compileShader() {
-            compileAttempts += 1;
-        },
-        getShaderParameter() {
-            return false;
-        },
-        getShaderInfoLog() {
-            return 'forced shader compile failure';
-        },
-        deleteShader() {}
-    };
-    const shaderCanvas = document.createElement('canvas');
-    shaderCanvas.getContext = kind => {
-        if (kind === 'webgl' || kind === 'experimental-webgl') {
-            shaderContextRequests += 1;
-            return failingGl;
-        }
-        return null;
-    };
-    const shaderRenderer = new CelestialCloseupRenderer(
-        shaderCanvas,
-        makeFallbackCanvas(shaderCounter)
-    );
-    shaderRenderer.installFallbackSurface(profile);
-    const originalWarn = console.warn;
-    console.warn = () => {};
-    const shaderFrames = renderFrames(shaderRenderer);
-    console.warn = originalWarn;
-
-    const originalCloseupRender = celestialCloseupRenderer.render;
-    const originalConsoleError = console.error;
-    const wasRendering = renderingEnabled;
-    __mockAnimationFrames.reset();
-    celestialCloseupRenderer.render = () => {
-        throw new Error('forced close-up frame failure');
-    };
-    console.error = () => {};
-    renderingEnabled = true;
-    renderFrame(performance.now());
-    const frameLoopRecovered = __mockAnimationFrames.count() === 1;
-    celestialCloseupRenderer.render = originalCloseupRender;
-    console.error = originalConsoleError;
-    if (wasRendering) startRendering();
-    else stopRendering();
-
-    return JSON.stringify({
-        frameLoopRecovered,
-        noContext: {
-            contextRequests: noContextRequests,
-            fallbackFrames: noContextCounter.frames,
-            successfulFrames: noContextFrames,
-            failedLatched: noContextRenderer.webglFailed,
-            ready: noContextRenderer.ready
-        },
-        shader: {
-            contextRequests: shaderContextRequests,
-            programAttempts,
-            shaderAttempts,
-            compileAttempts,
-            fallbackFrames: shaderCounter.frames,
-            successfulFrames: shaderFrames,
-            failedLatched: shaderRenderer.webglFailed,
-            failureReported: shaderRenderer.failureReported,
-            ready: shaderRenderer.ready
-        }
-    });
-})()`, runtimeContext));
-assert.deepEqual(closeupFailureState, {
-    frameLoopRecovered: true,
-    noContext: {
-        contextRequests: 2,
-        fallbackFrames: 60,
-        successfulFrames: 60,
-        failedLatched: true,
-        ready: false
-    },
-    shader: {
-        contextRequests: 1,
-        programAttempts: 1,
-        shaderAttempts: 1,
-        compileAttempts: 1,
-        fallbackFrames: 60,
-        successfulFrames: 60,
-        failedLatched: true,
-        failureReported: true,
-        ready: false
-    }
-}, 'WebGL acquisition or shader failure must latch once and keep every frame alive through the 2D fallback');
 
 const tangentContinuity = JSON.parse(vm.runInContext(`(() => {
     const samples = [];
@@ -4160,52 +3311,16 @@ const panelState = JSON.parse(vm.runInContext(`(() => {
         state.scene === 'roam' &&
         state.lock === 'keyboard-free';
 
-    const testBody = celestialBodies.find(profile => profile.id === 'jupiter');
-    state.activationSource = 'pointer';
-    dom.celestialPanelBody.scrollTop = 77;
-    const visit = {
-        profile: testBody,
-        phase: 'approach',
-        preferredPanelOnLeft: true,
-        panelOnLeft: true,
-        visualProgress: 1,
-        origin: {
-            orientation: camera.orientation.slice(),
-            targetOrientation: camera.targetOrientation.slice(),
-            fov: camera.fov,
-            targetFov: camera.targetFov,
-            wasPointerLocked: false,
-            lock: state.lock
-        }
-    };
-    state.celestialVisit = visit;
-    state.activeCelestial = testBody;
-    openCelestialPanel(testBody, true);
-    const celestialOpened = !dom.celestialPanel.inert &&
-        dom.body.classList.contains('celestial-open') &&
-        visit.phase === 'observing' &&
-        state.panelSidePreference &&
-        dom.celestialPanelBody.scrollTop === 0;
-    document.activeElement = dom.celestialPanel;
-    closeCelestialPanel(true, 'keyboard');
-    const celestialClosed = dom.celestialPanel.inert &&
-        !dom.body.classList.contains('celestial-open') &&
-        state.scene === 'flying' &&
-        visit.phase === 'returning' &&
-        state.activeCelestial === testBody;
-    completeCelestialReturn(visit);
-    return JSON.stringify({ portalOpened, portalClosed, celestialOpened, celestialClosed });
+    return JSON.stringify({ portalOpened, portalClosed });
 })()`, runtimeContext));
 assert.deepEqual(panelState, {
     portalOpened: true,
-    portalClosed: true,
-    celestialOpened: true,
-    celestialClosed: true
-}, 'Detail panels must open interactively and celestial close must retain its return state');
+    portalClosed: true
+}, 'Portal panels must open interactively and return keyboard focus');
 
 const routeState = JSON.parse(vm.runInContext(`(() => {
     const home = portalDefinitions.find(portal => portal.home);
-    const sun = celestialBodies.find(profile => profile.id === 'sun');
+    const sun = { get current() { return skySun; }, set current(value) { skySun = value; } };
     const savedSunAltitude = sun.current?.altitude;
     if (sun.current) sun.current.altitude = -30;
     const sourceHip = Number(Object.keys(homeStarTargets).find(hip =>
@@ -4443,378 +3558,10 @@ assert.deepEqual(routeResizeState, {
     settledResizeTransitions: true
 }, 'Resizing a route preview must preserve phase and smoothly cross layout breakpoints');
 
-const selectedTextureState = JSON.parse(vm.runInContext(`(() => {
-    const originalPrepare = celestialCloseupRenderer.prepare;
-    const prepareCalls = [];
-    celestialCloseupRenderer.prepare = profile => {
-        prepareCalls.push(profile.id);
-        return {
-            then() {
-                return { catch() {} };
-            }
-        };
-    };
-    const testBody = celestialBodies.find(profile => profile.id === 'jupiter');
-    const savedOrientation = camera.orientation.slice();
-    const savedTargetOrientation = camera.targetOrientation.slice();
-    const savedFov = camera.fov;
-    const savedTargetFov = camera.targetFov;
-    testBody.screen = { visible: true, x: 1100, y: 420 };
-    state.scene = 'roam';
-    state.gateOpen = false;
-    state.modalOpen = false;
-    state.touchMode = false;
-    state.celestialVisit = null;
-    state.celestialFlight = null;
-    state.flight = null;
-    document.pointerLockElement = null;
-    startCelestialFlight(testBody, 'keyboard');
-    const selected = state.celestialVisit?.profile?.id;
-    const visit = state.celestialVisit;
-    visit.restoreFocus = false;
-    completeCelestialReturn(visit);
-    celestialCloseupRenderer.prepare = originalPrepare;
-    camera.orientation = savedOrientation;
-    camera.targetOrientation = savedTargetOrientation;
-    camera.fov = savedFov;
-    camera.targetFov = savedTargetFov;
-    return JSON.stringify({ prepareCalls, selected });
-})()`, runtimeContext));
-assert.deepEqual(selectedTextureState, {
-    prepareCalls: ['jupiter'],
-    selected: 'jupiter'
-}, 'Starting a close-up must prepare only the selected celestial profile');
-
-const celestialTextureWatchdogState = JSON.parse(vm.runInContext(`(() => {
-    __mockTimers.reset();
-    const profile = celestialBodies.find(body => body.id === 'venus');
-    const savedScreen = profile.screen;
-    const savedSurface = celestialCloseupRenderer.images.get(profile.texture);
-    const hadSurface = celestialCloseupRenderer.images.has(profile.texture);
-    const hadImageConstructor = 'Image' in globalThis;
-    const originalImageConstructor = globalThis.Image;
-    class NeverSettlingImage {
-        set src(value) {
-            this.currentSrc = value;
-        }
-    }
-    globalThis.Image = NeverSettlingImage;
-    profile.screen = { visible: true, x: 980, y: 390 };
-    state.scene = 'roam';
-    state.hasEntered = true;
-    state.gateOpen = false;
-    state.modalOpen = false;
-    state.touchMode = false;
-    state.altHeld = false;
-    state.celestialVisit = null;
-    state.celestialFlight = null;
-    state.flight = null;
-    document.pointerLockElement = null;
-
-    startCelestialFlight(profile, 'keyboard');
-    const visit = state.celestialVisit;
-    const timersBefore = __mockTimers.snapshot();
-    const watchdogDelay = timersBefore.find(
-        timer => timer.id === visit.textureWatchdog
-    )?.delay ?? null;
-    const imageTimeoutDelay = Math.max(
-        ...timersBefore
-            .filter(timer => timer.id !== visit.textureWatchdog)
-            .map(timer => timer.delay)
-    );
-    const originalWarn = console.warn;
-    console.warn = () => {};
-    __mockTimers.runAll();
-    console.warn = originalWarn;
-    const fallbackInstalled = (
-        celestialCloseupRenderer.images.get(profile.texture)?.tagName === 'CANVAS'
-    );
-    const fallbackReady = (
-        visit.textureReady &&
-        visit.textureError &&
-        visit.textureWatchdog === null &&
-        Number.isFinite(visit.visualStartedAt)
-    );
-    const observingAt = Math.max(
-        visit.transition.startedAt + visit.transition.duration,
-        visit.visualStartedAt + visit.visualDuration
-    ) + 1;
-    updateCamera(observingAt);
-    const observingReached = (
-        visit.profile.id === 'venus' &&
-        visit.phase === 'observing' &&
-        state.scene === 'detail' &&
-        state.celestialVisit === visit &&
-        state.celestialFlight === null &&
-        !dom.celestialPanel.inert
-    );
-
-    completeCelestialReturn(visit);
-    celestialCloseupRenderer.imagePromises.delete(profile.texture);
-    if (hadSurface) {
-        celestialCloseupRenderer.images.set(profile.texture, savedSurface);
-    } else {
-        celestialCloseupRenderer.images.delete(profile.texture);
-    }
-    profile.screen = savedScreen;
-    if (hadImageConstructor) {
-        globalThis.Image = originalImageConstructor;
-    } else {
-        delete globalThis.Image;
-    }
-    __mockTimers.reset();
-    return JSON.stringify({
-        imageTimeoutDelay,
-        watchdogDelay,
-        watchdogFollowsImageTimeout: watchdogDelay > imageTimeoutDelay,
-        fallbackInstalled,
-        fallbackReady,
-        observingReached
-    });
-})()`, runtimeContext));
-assert.deepEqual(celestialTextureWatchdogState, {
-    imageTimeoutDelay: 4000,
-    watchdogDelay: 4800,
-    watchdogFollowsImageTimeout: true,
-    fallbackInstalled: true,
-    fallbackReady: true,
-    observingReached: true
-}, 'A never-settling Venus image must time out to a generated surface and still complete its observing approach');
-
-const celestialStageState = JSON.parse(vm.runInContext(`(() => {
-    const profiles = [
-        celestialBodies.find(profile => profile.id === 'jupiter'),
-        celestialBodies.find(profile => profile.id === 'saturn')
-    ];
-    const viewports = [
-        [320, 568],
-        [360, 800],
-        [568, 320],
-        [844, 390],
-        [1024, 576],
-        [1025, 683],
-        [1440, 900],
-        [2560, 1080]
-    ];
-    const failures = [];
-    let cases = 0;
-    viewports.forEach(([width, height]) => {
-        profiles.forEach(profile => {
-            const layouts = [false, true].map(panelOnLeft =>
-                celestialStageLayout(profile, panelOnLeft, width, height)
-            );
-            layouts.forEach((stage, index) => {
-                const panelOnLeft = Boolean(index);
-                const finite = [
-                    stage.centerX,
-                    stage.centerY,
-                    stage.radius
-                ].every(Number.isFinite) && stage.radius > 0;
-                const diskInsideViewport = finite &&
-                    stage.centerX - stage.radius >= -0.5 &&
-                    stage.centerX + stage.radius <= width + 0.5 &&
-                    stage.centerY - stage.radius >= -0.5 &&
-                    stage.centerY + stage.radius <= height + 0.5;
-                let clearOfDesktopPanel = true;
-                if (!usesCompactSkyLayout(width, height)) {
-                    const shortLandscape =
-                        height <= SHORT_SKY_MAX_HEIGHT &&
-                        width / Math.max(1, height) >= SHORT_SKY_MIN_ASPECT;
-                    const panelWidth = shortLandscape
-                        ? clamp(width * 0.33, 176, 270)
-                        : clamp(width * 0.38, 350, 540);
-                    const panelInset = shortLandscape ? 18 : 28;
-                    if (panelOnLeft) {
-                        clearOfDesktopPanel =
-                            stage.centerX - stage.radius >=
-                            Math.min(width, panelInset + panelWidth + 18) - 0.5;
-                    } else {
-                        clearOfDesktopPanel =
-                            stage.centerX + stage.radius <=
-                            Math.max(
-                                0,
-                                width - panelInset - panelWidth - 18
-                            ) + 0.5;
-                    }
-                }
-                if (!finite || !diskInsideViewport || !clearOfDesktopPanel) {
-                    failures.push({
-                        width,
-                        height,
-                        profile: profile.id,
-                        panelOnLeft,
-                        stage,
-                        finite,
-                        diskInsideViewport,
-                        clearOfDesktopPanel
-                    });
-                }
-                cases += 1;
-            });
-            const compact = usesCompactSkyLayout(width, height);
-            const mirrored = compact
-                ? Math.abs(layouts[0].centerX - layouts[1].centerX) < 1e-9
-                : Math.abs(layouts[0].centerX + layouts[1].centerX - width) < 1e-9;
-            if (!mirrored) {
-                failures.push({
-                    width,
-                    height,
-                    profile: profile.id,
-                    mirrored: false,
-                    layouts
-                });
-            }
-        });
-    });
-    return JSON.stringify({ cases, failures });
-})()`, runtimeContext));
-assert.equal(celestialStageState.cases, 32);
-assert.deepEqual(
-    celestialStageState.failures,
-    [],
-    'The magnified celestial stage must remain responsive and clear of its panel'
-);
-
-const celestialVisitState = JSON.parse(vm.runInContext(`(() => {
-    const originalPrepare = celestialCloseupRenderer.prepare;
-    const prepareCalls = [];
-    celestialCloseupRenderer.prepare = profile => {
-        prepareCalls.push(profile.id);
-        return {
-            then() {
-                return { catch() {} };
-            }
-        };
-    };
-    const savedWidth = window.innerWidth;
-    const savedHeight = window.innerHeight;
-    const testBody = celestialBodies.find(profile => profile.id === 'jupiter');
-    window.innerWidth = 1440;
-    window.innerHeight = 900;
-    resizeOverlay();
-    testBody.screen = { visible: true, x: 1200, y: 420 };
-    state.scene = 'roam';
-    state.gateOpen = false;
-    state.modalOpen = false;
-    state.touchMode = false;
-    state.lock = 'keyboard-free';
-    state.celestialVisit = null;
-    state.celestialFlight = null;
-    state.flight = null;
-    state.activeCelestial = null;
-    document.pointerLockElement = null;
-
-    const originOrientation = orientationFromYawPitch(0.37, -0.21);
-    const originTargetOrientation = orientationFromYawPitch(0.44, -0.17);
-    camera.orientation = originOrientation.slice();
-    camera.targetOrientation = originTargetOrientation.slice();
-    camera.fov = 0.91;
-    camera.targetFov = 0.87;
-    startCelestialFlight(testBody, 'keyboard');
-    const visit = state.celestialVisit;
-    const originJson = JSON.stringify(visit.origin);
-    const approachCreated = visit.phase === 'approach' &&
-        state.scene === 'flying' &&
-        state.celestialFlight === visit &&
-        dom.portalNav.inert &&
-        dom.celestialNav.inert &&
-        dom.body.classList.contains('celestial-transition') &&
-        prepareCalls.join(',') === 'jupiter';
-
-    const approachTime = visit.transition.startedAt +
-        visit.transition.duration * 0.43;
-    updateCamera(approachTime);
-    const beforeResizeOrientation = camera.orientation.slice();
-    const beforeResizeFov = camera.fov;
-    window.innerWidth = 600;
-    window.innerHeight = 900;
-    handleViewportResize();
-    const resizeDot = Math.abs(beforeResizeOrientation.reduce(
-        (sum, value, index) => sum + value * camera.orientation[index],
-        0
-    ));
-    const responsiveApproach = !visit.panelOnLeft &&
-        resizeDot > 1 - 1e-12 &&
-        Math.abs(camera.fov - beforeResizeFov) < 1e-12 &&
-        visit.transition.fromOrientation.every(Number.isFinite) &&
-        visit.transition.toOrientation.every(Number.isFinite) &&
-        Number.isFinite(visit.transition.fromFov) &&
-        Number.isFinite(visit.transition.toFov) &&
-        JSON.stringify(visit.origin) === originJson;
-
-    resolveCelestialTextureFallback(visit);
-    updateCamera(Math.max(
-        visit.transition.startedAt + visit.transition.duration,
-        visit.visualStartedAt + visit.visualDuration
-    ) + 1);
-    const observingReached = visit.phase === 'observing' &&
-        state.scene === 'detail' &&
-        state.celestialVisit === visit &&
-        state.celestialFlight === null &&
-        state.activeCelestial === testBody &&
-        !dom.celestialPanel.inert &&
-        dom.body.classList.contains('celestial-closeup');
-
-    const beforeEscapeOrientation = camera.orientation.slice();
-    const beforeEscapeFov = camera.fov;
-    cancelFlight('keyboard');
-    const escapeDot = Math.abs(beforeEscapeOrientation.reduce(
-        (sum, value, index) => sum + value * camera.orientation[index],
-        0
-    ));
-    const escapeStartsReturnWithoutSnap = visit.phase === 'returning' &&
-        state.scene === 'flying' &&
-        state.celestialVisit === visit &&
-        state.celestialFlight === visit &&
-        dom.celestialPanel.inert &&
-        dom.body.classList.contains('celestial-returning') &&
-        escapeDot > 1 - 1e-12 &&
-        Math.abs(camera.fov - beforeEscapeFov) < 1e-12;
-
-    updateCamera(visit.transition.startedAt + visit.transition.duration + 1);
-    const exactOriginRestored =
-        state.celestialVisit === null &&
-        state.celestialFlight === null &&
-        state.scene === 'roam' &&
-        camera.orientation.every(
-            (value, index) => Math.abs(value - originOrientation[index]) < 1e-12
-        ) &&
-        camera.targetOrientation.every(
-            (value, index) =>
-                Math.abs(value - originTargetOrientation[index]) < 1e-12
-        ) &&
-        Math.abs(camera.fov - 0.91) < 1e-12 &&
-        Math.abs(camera.targetFov - 0.87) < 1e-12 &&
-        !dom.body.classList.contains('celestial-transition') &&
-        !dom.body.classList.contains('celestial-closeup') &&
-        !dom.body.classList.contains('celestial-returning') &&
-        !dom.portalNav.inert &&
-        !dom.celestialNav.inert;
-
-    celestialCloseupRenderer.prepare = originalPrepare;
-    window.innerWidth = savedWidth;
-    window.innerHeight = savedHeight;
-    resizeOverlay();
-    return JSON.stringify({
-        approachCreated,
-        responsiveApproach,
-        observingReached,
-        escapeStartsReturnWithoutSnap,
-        exactOriginRestored
-    });
-})()`, runtimeContext));
-assert.deepEqual(celestialVisitState, {
-    approachCreated: true,
-    responsiveApproach: true,
-    observingReached: true,
-    escapeStartsReturnWithoutSnap: true,
-    exactOriginRestored: true
-}, 'Celestial visits must approach, observe, return smoothly, and restore their exact origin');
-
 const meteorState = JSON.parse(vm.runInContext(`(() => {
     const originalCrypto = window.crypto;
     const originalRandom = Math.random;
-    const sun = celestialBodies.find(profile => profile.id === 'sun');
+    const sun = { get current() { return skySun; }, set current(value) { skySun = value; } };
     const originalSunCurrent = sun.current;
     const originalHasEntered = state.hasEntered;
     window.crypto = null;
@@ -4949,7 +3696,5 @@ console.log(
     `${routeFramingState.cases} responsive route frames ` +
     `(max FOV ${routeFramingState.maximumFov.toFixed(1)}°); ` +
     `${constellationFramingState.cases} star hit-area frames; ` +
-    `${celestialStageState.cases} close-up stage frames; ` +
-    `${closeupGeometryState.length} close-up body geometries; ` +
     `${astronomyGridCases} astronomy grid cases`
 );

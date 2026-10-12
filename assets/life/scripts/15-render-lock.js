@@ -18,7 +18,6 @@ function renderFrame(time) {
         const catalogBasis = cameraBasisForCatalog(basis);
         const webglRendered = galaxyRenderer.render(REDUCED_MOTION ? 0 : time, catalogBasis);
         drawConstellations(basis, time, webglRendered, catalogBasis);
-        celestialCloseupRenderer.render(time, state.celestialVisit, basis);
         renderFailureReported = false;
     } catch (error) {
         if (!renderFailureReported) {
@@ -53,11 +52,8 @@ function setGateState(open, focusTrigger = false) {
     dom.entryGate.setAttribute('aria-hidden', String(!open));
     dom.world.inert = open || drawerOpen;
     dom.panel.inert = open || drawerOpen || !dom.body.classList.contains('panel-open');
-    dom.celestialPanel.inert = open || drawerOpen ||
-        !dom.body.classList.contains('celestial-open');
     dom.lightbox.inert = open || drawerOpen;
     dom.portalNav.inert = open || drawerOpen || state.scene === 'detail';
-    dom.celestialNav.inert = open || drawerOpen || state.scene === 'detail';
     dom.starNav.inert = open || drawerOpen || state.scene !== 'detail';
     syncSectionDrawerAvailability();
     if (open && focusTrigger && !document.hidden) {
@@ -110,9 +106,7 @@ function settleUnlockedView(reason, { focusGate = false } = {}) {
     if (state.scene === 'detail') {
         state.lock = 'detail-free';
         hideEntryGate();
-        dom.status.textContent = state.activeCelestial
-            ? 'MAGNIFIED OBSERVATION · CURSOR FREE'
-            : 'DETAIL · CURSOR FREE';
+        dom.status.textContent = 'DETAIL · CURSOR FREE';
         return;
     }
     if (state.touchMode) {
@@ -332,7 +326,7 @@ function handlePointerLockChange() {
         dom.body.classList.remove('cursor-free');
         hideEntryGate();
         dom.status.textContent = state.scene === 'detail'
-            ? (state.activeCelestial ? 'MAGNIFIED OBSERVATION' : 'DETAIL')
+            ? 'DETAIL'
             : 'FREE LOOK';
         dom.world.focus({ preventScroll: true });
         return;
@@ -384,10 +378,7 @@ function handlePointerLockChange() {
 
     if (state.detailUnlockPending || state.lockIntent === 'detail') {
         const shouldRelock = state.detailRelockPending &&
-            (
-                state.scene === 'roam' ||
-                state.celestialVisit?.phase === 'returning'
-            ) &&
+            state.scene === 'roam' &&
             !state.modalOpen &&
             !state.altHeld;
         state.detailUnlockPending = false;
@@ -398,11 +389,7 @@ function handlePointerLockChange() {
             dom.body.classList.remove('view-locked');
             dom.body.classList.add('cursor-free');
             hideEntryGate();
-            queueMicrotask(() => requestViewLock(
-                state.celestialVisit?.phase === 'returning'
-                    ? 'celestial-return'
-                    : 'detail-close'
-            ));
+            queueMicrotask(() => requestViewLock('detail-close'));
         } else {
             settleUnlockedView('detail');
         }
@@ -534,9 +521,6 @@ function resetTransientInput(focusGate = false) {
     state.detailUnlockPending = false;
     state.detailRelockPending = false;
     state.altPreviousLock = null;
-    state.pendingDrawerPortal = null;
-    state.pendingDrawerHome = false;
-    state.drawerNavigationSource = null;
     if (state.sectionDrawerOpen) {
         closeSectionDrawer({ restoreControl: false, focusToggle: false });
     }
@@ -553,9 +537,7 @@ function resetTransientInput(focusGate = false) {
         state.lock = 'detail-free';
         dom.body.classList.add('cursor-free');
         hideEntryGate();
-        dom.status.textContent = state.activeCelestial
-            ? 'MAGNIFIED OBSERVATION · CURSOR FREE'
-            : 'DETAIL · CURSOR FREE';
+        dom.status.textContent = 'DETAIL · CURSOR FREE';
         return;
     }
     if (state.hasEntered) showResumeGate(focusGate);

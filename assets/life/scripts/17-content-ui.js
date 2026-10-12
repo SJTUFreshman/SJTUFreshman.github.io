@@ -187,11 +187,8 @@ function setLang(lang) {
     updateMapAccessibility();
     updateThoughtToggles();
     updateCitationButtons();
-    updateCelestialNavigationCopy();
     updateSectionDrawerCopy();
     updateActivePortalCopy();
-    if (state.focusedCelestial) renderCelestialGazeCopy(state.focusedCelestial);
-    if (state.activeCelestial) renderCelestialPanel(state.activeCelestial);
     updateMapLanguage();
     window.lifeStarMap?.updateCopy();
 }

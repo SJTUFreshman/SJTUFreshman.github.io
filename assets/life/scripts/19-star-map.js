@@ -30,7 +30,6 @@ class LifeStarMap {
         buildPortalGeometry();
         buildSectionDrawer();
         this.buildGroups();
-        this.solarSystem = new SolarSystemMap(this);
         this.deepSky = new DeepSkyMap(this);
         this.buildEntities();
         this.renderer = new StarMapRenderer(
@@ -154,19 +153,12 @@ class LifeStarMap {
             button.type = 'button';
             button.className = 'map-entity';
             button.dataset.mapEntity = entity.id;
+            if (entity.id === 'solar') button.setAttribute('aria-disabled', 'true');
             button.innerHTML = entity.subtitles ? '<span></span><small></small>' : '<span></span>';
             button.addEventListener('click', () => {
-                if (this.suppressClickUntil > performance.now()) return;
+                if (entity.id === 'solar' || this.suppressClickUntil > performance.now()) return;
                 if (entity.id === 'region') {
                     this.showLocal();
-                } else if (entity.id === 'solar') {
-                    this.systemReturn = this.snapshot();
-                    this.pendingEntity = entity.id;
-                    state.scene = 'flying';
-                    this.animateTo({ ...this.snapshot(), center: entity.position.slice(), distance: 150 }, () => {
-                        this.pendingEntity = null;
-                        this.solarSystem.enter();
-                    });
                 } else this.openDeepSky(entity);
             });
             entity.button = button;
@@ -286,7 +278,6 @@ class LifeStarMap {
     }
 
     orbit(deltaX, deltaY) {
-        if (this.solarSystem?.active) return this.solarSystem.orbit(deltaX, deltaY);
         if (this.deepSky?.active) return this.deepSky.orbit(deltaX, deltaY);
         if (!this.canMove()) return;
         this.lastInputTime = performance.now();
@@ -295,7 +286,6 @@ class LifeStarMap {
     }
 
     zoom(delta) {
-        if (this.solarSystem?.active) return this.solarSystem.zoom(delta);
         if (this.deepSky?.active) return this.deepSky.zoom(delta);
         if (!this.canMove()) return;
         this.lastInputTime = performance.now();
@@ -343,7 +333,6 @@ class LifeStarMap {
     }
 
     pan(deltaX, deltaY) {
-        if (this.solarSystem?.active) return this.solarSystem.orbit(deltaX, deltaY);
         if (!this.canMove()) return;
         this.lastInputTime = performance.now();
         const view = this.currentView || this.view();
@@ -354,14 +343,13 @@ class LifeStarMap {
     }
 
     canMove() {
-        if (this.solarSystem?.active) return this.solarSystem.canMove();
         if (this.deepSky?.active) return false;
         return state.hasEntered && !state.modalOpen && !state.gateOpen && !this.flight && state.scene === 'roam';
     }
 
     isMapSurface(target) {
         return target instanceof Element && Boolean(target.closest(
-            '#galaxyWorld, #portalNav, #starNav, #mapEntities, .solar-map-points, .solar-map-picker, .solar-map-header, .solar-map-footer, .baked-celestial-view, .deep-sky-image-viewport'
+            '#galaxyWorld, #portalNav, #starNav, #mapEntities, .deep-sky-image-viewport'
         ));
     }
 
@@ -392,7 +380,6 @@ class LifeStarMap {
     }
 
     openPortal(portal, source = 'pointer', arrivalHip = null) {
-        if (this.solarSystem?.active) this.solarSystem.exit(false);
         if (this.deepSky?.active) this.deepSky.exit();
         if (!portal || state.modalOpen || state.scene === 'leaving-home') return;
         if (!this.overview) this.overview = this.snapshot();
@@ -429,7 +416,7 @@ class LifeStarMap {
 
     cancelFlight() {
         if (this.pendingEntity) {
-            const destination = this.pendingEntity === 'solar' ? this.systemReturn : this.deepReturn;
+            const destination = this.deepReturn;
             this.pendingEntity = null;
             this.frozenGalaxyMix = null;
             state.scene = 'roam';
@@ -462,7 +449,6 @@ class LifeStarMap {
     }
 
     reset() {
-        if (this.solarSystem?.active) return this.solarSystem.reset?.() || this.solarSystem.exit();
         if (this.deepSky?.active) return this.closeDeepSky();
         if (state.modalOpen || state.scene === 'leaving-home') return;
         if (state.scene === 'detail') closePortalPanel(false);
@@ -496,7 +482,6 @@ class LifeStarMap {
     goHome() {
         if (state.scene === 'leaving-home') return;
         this.clearInput();
-        if (this.solarSystem?.active) this.solarSystem.exit(false);
         if (this.deepSky?.active) this.deepSky.exit();
         state.scene = 'leaving-home';
         if (window.StellarTransit) {
@@ -508,7 +493,6 @@ class LifeStarMap {
 
     render(time) {
         if (!this.initialized) return;
-        if (this.solarSystem?.active) { this.solarSystem.render(time); return; }
         if (this.deepSky?.active) { this.deepSky.render(time); return; }
         const delta = Math.min(0.05, Math.max(0, (time - (this.lastFrame || time)) / 1000));
         this.lastFrame = time;
@@ -615,7 +599,6 @@ class LifeStarMap {
     }
 
     clearInput() {
-        this.solarSystem?.clearInput();
         for (const pointerId of this.pointers.keys()) {
             if (dom.world.hasPointerCapture?.(pointerId)) dom.world.releasePointerCapture(pointerId);
         }
@@ -629,7 +612,6 @@ class LifeStarMap {
     resize() {
         this.rendererViewKey = null;
         this.fov = (window.innerWidth / window.innerHeight < 0.85 ? 78 : 52) * DEG;
-        if (this.solarSystem?.active) this.solarSystem.resize();
         if (this.deepSky?.active) this.deepSky.resize();
         resizeOverlay();
         this.renderer?.resize();
@@ -751,7 +733,6 @@ class LifeStarMap {
                 if (event.key === 'Escape') { event.preventDefault(); closeLightbox(); }
                 return;
             }
-            if (this.solarSystem?.active && this.solarSystem.handleKey(event)) return;
             if (this.deepSky?.active && event.key === 'Escape') { event.preventDefault(); this.closeDeepSky(); return; }
             if (state.sectionDrawerOpen) {
                 if (event.key === 'Escape') { event.preventDefault(); closeSectionDrawer({ interactionSource: 'keyboard' }); }
@@ -792,7 +773,6 @@ class LifeStarMap {
 
     updateCopy() {
         if (!this.initialized) return;
-        if (this.solarSystem?.active) { this.solarSystem.updateCopy(); return; }
         if (this.deepSky?.active) { this.deepSky.updateCopy(); return; }
         const copies = {
             en: { orbit: 'Right drag / Two-finger slide · orbit', pan: 'Left drag · pan', zoom: 'Mouse wheel / Pinch · zoom', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'An interpreted star map. Constellation shapes and stellar colours follow Hipparcos; distances are composed for exploration.', scale: 'NEAR / FAR' },

@@ -9,7 +9,6 @@ const context = {
     console,
     Date,
     skyModel: { location: { latitude: 31.23, longitude: 121.47, height: 0 }, nextRefreshAt: 42 },
-    celestialBodies: []
 };
 vm.createContext(context);
 for (const filename of ['assets/vendor/astronomy-engine-2.1.19.min.js', 'assets/life/scripts/05-astronomy.js']) {
@@ -51,7 +50,7 @@ for (const latitude of [-89, -75, -31.23, 0, 31.23, 75, 89]) {
     }
 }
 
-context.celestialBodies.push({ id: 'sun', current: { altitude: 22, direction: [0.5, 0.3, 0.8] } });
+vm.runInContext('skySun = { altitude: 22, direction: [0.5, 0.3, 0.8] };', context);
 context.skyModel.date = reference;
 const snapshot = sky.snapshot();
 snapshot.sunDirection[0] = 100;
@@ -66,13 +65,13 @@ calibration.sunDirection[0] = 20;
 assert.equal(sky.snapshot().sunDirection[0], 0, 'calibration must copy input vectors');
 assert(Math.abs(sky.snapshot().sunAltitude - 36.86989764584402) < 1e-10);
 assert.equal(sky.snapshot().sunDirection[1], .6);
-assert.equal(context.celestialSceneDirection(context.celestialBodies[0])[1], .6);
-assert.equal(context.celestialSceneSunAltitude(), sky.snapshot().sunAltitude);
+assert.equal(context.sceneSunDirection()[1], .6);
+assert.equal(context.sceneSunAltitude(), sky.snapshot().sunAltitude);
 sky.snapshot().alignment.sunDirection[1] = -1;
 sky.calibratedSunDirection[1] = -1;
 assert.equal(sky.snapshot().sunDirection[1], .6, 'returned calibration vectors must not mutate presentation state');
-assert.equal(context.celestialBodies[0].current.direction[0], .5, 'calibration must not change astronomical coordinates');
-assert.equal(context.celestialBodies[0].current.altitude, 22);
+assert.equal(vm.runInContext('skySun.direction[0]', context), .5, 'calibration must not change astronomical coordinates');
+assert.equal(vm.runInContext('skySun.altitude', context), 22);
 assert.equal(JSON.stringify(context.skyModel.location), locationBefore, 'calibration must not overwrite the user observer');
 assert.equal(+sky.observationDate(reference), dateBefore, 'calibration is not a fabricated capture epoch');
 for (const value of [undefined, {}, { ...calibration, coordinateSystem: 'wrong' }, { ...calibration, sunDirection: [0,0,0] }, { ...calibration, sunDirection: [0,Infinity,0] }, { ...calibration, sunDirection: [0,1] }]) assert.equal(sky.setAlignment(value), false);
@@ -80,5 +79,5 @@ assert.equal(sky.snapshot().sunDirection[1], .6, 'invalid metadata must not alte
 assert.equal(sky.setAlignment(null), true);
 assert.equal(sky.snapshot().alignment, null);
 assert.equal(sky.snapshot().sunAltitude, 22);
-assert.equal(context.celestialSceneDirection(context.celestialBodies[0])[0], .5);
+assert.equal(context.sceneSunDirection()[0], .5);
 console.log(`Scene sky validation passed (${cases} fixed-observation cases; cache isolation, aliases, calibration and immutable astronomy).`);

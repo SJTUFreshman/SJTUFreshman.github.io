@@ -43,9 +43,7 @@ dom.world.addEventListener('mousedown', event => {
         return;
     }
     if (event.button === 0 && state.scene === 'roam') {
-        if (state.focusedCelestial) {
-            startCelestialFlight(state.focusedCelestial, 'gaze');
-        } else if (state.focusedPortal) {
+        if (state.focusedPortal) {
             startPortalFlight(state.focusedPortal, 'gaze');
         }
     }
@@ -139,9 +137,7 @@ dom.world.addEventListener('pointerup', event => {
     const wasTap = dragState.moved < 9 && !dragState.longPressed;
     clearDragState();
     if (wasTap && state.scene === 'roam') {
-        if (state.focusedCelestial) {
-            startCelestialFlight(state.focusedCelestial, 'touch');
-        } else if (state.focusedPortal) {
+        if (state.focusedPortal) {
             startPortalFlight(state.focusedPortal, 'touch');
         }
     }
@@ -150,7 +146,6 @@ dom.world.addEventListener('lostpointercapture', () => {
     clearDragState();
 });
 
-buildCelestialNavigation();
 state.meteorShower = createMeteorShowerSelection();
 refreshAstronomicalSky(new Date());
 buildPortalGeometry();
@@ -198,7 +193,7 @@ portalDefinitions.forEach(portal => {
 
 function isInteractiveKeyTarget(target) {
     return target instanceof Element && Boolean(target.closest(
-        'button, a, input, textarea, select, summary, [role="button"], [contenteditable="true"], .portal-panel-body, .celestial-panel-body'
+        'button, a, input, textarea, select, summary, [role="button"], [contenteditable="true"], .portal-panel-body'
     ));
 }
 
@@ -232,10 +227,6 @@ document.addEventListener('keydown', event => {
         }
         if (state.scene === 'detail') {
             event.preventDefault();
-            if (state.activeCelestial) {
-                closeCelestialPanel(true, 'keyboard');
-                return;
-            }
             if (state.routePreview) {
                 cancelHomeRoutePreview();
                 return;
@@ -268,11 +259,6 @@ document.addEventListener('keydown', event => {
     }
     if (isInteractiveKeyTarget(event.target)) return;
     if ((event.key === 'Enter' || event.key === ' ') && state.scene === 'roam') {
-        if (state.focusedCelestial) {
-            event.preventDefault();
-            startCelestialFlight(state.focusedCelestial, 'keyboard');
-            return;
-        }
         if (state.focusedPortal) {
             event.preventDefault();
             startPortalFlight(state.focusedPortal, 'keyboard');
@@ -315,9 +301,6 @@ window.addEventListener('keyup', event => {
 dom.panelClose.addEventListener('click', event => {
     closePortalPanel(true, event.detail === 0 ? 'keyboard' : 'pointer');
 });
-dom.celestialClose.addEventListener('click', event => {
-    closeCelestialPanel(true, event.detail === 0 ? 'keyboard' : 'pointer');
-});
 dom.homeRouteLaunch.addEventListener('click', event => {
     launchHomeRoute(
         state.portalReturnFocusTarget === dom.sectionDrawerToggle
@@ -335,45 +318,9 @@ window.addEventListener('storage', event => {
 });
 function handleViewportResize() {
     galaxyRenderer.resize();
-    celestialCloseupRenderer.resize();
     resizeOverlay();
     const now = performance.now();
-    if (state.celestialVisit) {
-        refreshCelestialOriginAnchor(state.celestialVisit);
-        if (
-            state.celestialVisit.phase === 'approach' &&
-            state.celestialVisit.visualAnchorSet
-        ) {
-            refreshCelestialApproachAnchor(state.celestialVisit);
-        }
-    }
-    if (
-        state.celestialVisit?.phase === 'approach' &&
-        state.celestialVisit.profile.current?.direction
-    ) {
-        const visit = state.celestialVisit;
-        const transition = visit.transition;
-        const progress = clamp(
-            (now - transition.startedAt) / transition.duration,
-            0,
-            1
-        );
-        visit.panelOnLeft = !usesCompactSkyLayout() &&
-            Boolean(visit.preferredPanelOnLeft);
-        visit.focusOrientation = routePointFraming(
-            celestialSceneDirection(visit.profile),
-            visit.panelOnLeft,
-            visit.focusFov
-        );
-        visit.transition = {
-            startedAt: now,
-            duration: Math.max(1, transition.duration * (1 - progress)),
-            fromOrientation: camera.orientation.slice(),
-            toOrientation: visit.focusOrientation.slice(),
-            fromFov: camera.fov,
-            toFov: visit.focusFov
-        };
-    } else if (state.flight && state.flight.action !== 'home-departure') {
+    if (state.flight && state.flight.action !== 'home-departure') {
         const flight = state.flight;
         const progress = clamp((now - flight.startedAt) / flight.duration, 0, 1);
         flight.startOrientation = camera.orientation.slice();
@@ -406,24 +353,6 @@ function handleViewportResize() {
             camera.targetFov = framing.fov;
         }
         state.panelRect = dom.panel.getBoundingClientRect();
-    } else if (
-        state.scene === 'detail' &&
-        state.activeCelestial?.current?.direction &&
-        state.celestialVisit?.phase === 'observing'
-    ) {
-        state.panelOnLeft = !usesCompactSkyLayout() &&
-            state.panelSidePreference;
-        state.celestialVisit.panelOnLeft = state.panelOnLeft;
-        dom.celestialPanel.classList.toggle('is-left', state.panelOnLeft);
-        dom.body.classList.toggle('panel-left', state.panelOnLeft);
-        state.celestialVisit.focusOrientation = routePointFraming(
-            celestialSceneDirection(state.activeCelestial),
-            state.panelOnLeft,
-            state.detailFov
-        );
-        camera.targetOrientation = state.celestialVisit.focusOrientation.slice();
-        camera.inspectionOrientation = state.celestialVisit.focusOrientation.slice();
-        camera.targetFov = state.detailFov;
     }
     resizeMaps();
 }
