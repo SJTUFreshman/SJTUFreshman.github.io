@@ -1,11 +1,12 @@
 (function () {
     'use strict';
 
-    const ATLAS_VERSION = '20261010-relief-hd2';
+    const ATLAS_VERSION = '20261012-porcelain';
     const ATLAS_URL = `assets/maps/relief/atlas.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
             id: 'china',
+            maxScale: 3,
             keys: ['china'],
             title: { en: 'China', 'zh-CN': '中国', 'zh-TW': '中國' },
             label: {
@@ -16,6 +17,7 @@
         },
         {
             id: 'east-asia',
+            maxScale: 2,
             keys: ['east_asia', 'east-asia', 'eastAsia'],
             title: { en: 'East Asia', 'zh-CN': '东亚', 'zh-TW': '東亞' },
             label: {
@@ -26,6 +28,7 @@
         },
         {
             id: 'euro-usa',
+            maxScale: 2,
             keys: ['euro_usa', 'europe_usa', 'euro-usa', 'euroUsa'],
             title: { en: 'Europe + USA', 'zh-CN': '欧美', 'zh-TW': '歐美' },
             label: {
@@ -39,7 +42,7 @@
     const copy = {
         en: {
             zoomIn: 'Zoom in', zoomOut: 'Zoom out', reset: 'Reset map',
-            expand: 'View large map', close: 'Close large map', actual: 'Original resolution',
+            expand: 'View large map', close: 'Close large map', maximum: 'Maximum zoom',
             unavailable: 'Map unavailable', mapLoading: 'Loading map',
             retry: 'Retry', controls: 'Map controls', route: 'Footprint route',
             rail: 'Rail journey', road: 'Road journey',
@@ -48,7 +51,7 @@
         },
         'zh-CN': {
             zoomIn: '放大地图', zoomOut: '缩小地图', reset: '重置地图',
-            expand: '查看大图', close: '关闭大图', actual: '原始分辨率',
+            expand: '查看大图', close: '关闭大图', maximum: '最大缩放',
             unavailable: '地图暂不可用', mapLoading: '正在加载地图',
             retry: '重新加载', controls: '地图控制', route: '足迹线路',
             rail: '铁路旅程', road: '自驾旅程',
@@ -57,7 +60,7 @@
         },
         'zh-TW': {
             zoomIn: '放大地圖', zoomOut: '縮小地圖', reset: '重置地圖',
-            expand: '查看大圖', close: '關閉大圖', actual: '原始解析度',
+            expand: '查看大圖', close: '關閉大圖', maximum: '最大縮放',
             unavailable: '地圖暫不可用', mapLoading: '正在載入地圖',
             retry: '重新載入', controls: '地圖控制', route: '足跡路線',
             rail: '鐵路旅程', road: '自駕旅程',
@@ -203,7 +206,7 @@
             ['zoom-out', '−', labels.zoomOut],
             ['zoom-in', '+', labels.zoomIn],
             ['reset', '↺', labels.reset],
-            ['actual', '1:1', labels.actual],
+            ['maximum', `${instance.maxScale * 100}%`, labels.maximum],
             ['expand', labels.expand, labels.expand]
         ].forEach(([action, text, label]) => {
             const button = document.createElement('button');
@@ -219,7 +222,7 @@
                 if (action === 'zoom-in') instance.zoomBy(1.4);
                 if (action === 'zoom-out') instance.zoomBy(1 / 1.4);
                 if (action === 'reset') instance.resetView();
-                if (action === 'actual') instance.zoomTo(instance.width / (instance.fitWidth * (window.devicePixelRatio || 1)));
+                if (action === 'maximum') instance.zoomTo(instance.maxScale);
                 if (action === 'expand') instance.openViewer();
             });
             controls.append(button);
@@ -285,7 +288,7 @@
         box.replaceChildren();
         box.classList.add('footprints-map-shell');
         box.style.aspectRatio = `${width} / ${height}`;
-        box.style.backgroundColor = map.display_background || map.background || '#dad5c3';
+        box.style.backgroundColor = map.display_background || map.background || '#839fab';
         box.setAttribute('role', 'region');
         box.setAttribute('aria-label', mapDefinition(definition.id).label[currentLanguage] || mapDefinition(definition.id).label.en);
         const viewport = document.createElement('div');
@@ -349,6 +352,7 @@
         const instance = {
             definition, map, box, viewport, stage, svg, source, colorSource, width, height,
             cities, regions, regionById, visitedIds,
+            maxScale: definition.maxScale,
             scale: 1, panX: 0, panY: 0, activeCity: null, viewer: null,
             updateTransform() {
                 const viewportWidth = viewport.clientWidth;
@@ -358,7 +362,7 @@
                 const fitWidth = width * fitScale;
                 const fitHeight = height * fitScale;
                 this.fitWidth = fitWidth;
-                this.maxScale = Math.max(8, width / (fitWidth * (window.devicePixelRatio || 1)));
+                this.scale = Math.max(1, Math.min(this.maxScale, this.scale));
                 svg.style.setProperty('--footprints-label-size', `${12 / (fitScale * this.scale)}px`);
                 svg.style.setProperty('--footprints-label-outline', `${3 / (fitScale * this.scale)}px`);
                 const maxPanX = Math.max(0, (fitWidth * this.scale - viewportWidth) / 2);
@@ -379,7 +383,7 @@
                 const bounds = viewport.getBoundingClientRect();
                 const anchorX = clientX == null ? 0 : clientX - bounds.left - bounds.width / 2;
                 const anchorY = clientY == null ? 0 : clientY - bounds.top - bounds.height / 2;
-                const scale = Math.max(1, Math.min(this.maxScale || 8, value));
+                const scale = Math.max(1, Math.min(this.maxScale, value));
                 const ratio = scale / this.scale;
                 this.panX = anchorX + (this.panX - anchorX) * ratio;
                 this.panY = anchorY + (this.panY - anchorY) * ratio;
@@ -454,7 +458,7 @@
                 box.querySelectorAll('[data-map-action="zoom-in"]').forEach(button => button.setAttribute('aria-label', labels.zoomIn));
                 box.querySelectorAll('[data-map-action="zoom-out"]').forEach(button => button.setAttribute('aria-label', labels.zoomOut));
                 box.querySelectorAll('[data-map-action="reset"]').forEach(button => button.setAttribute('aria-label', labels.reset));
-                box.querySelectorAll('[data-map-action="actual"]').forEach(button => button.setAttribute('aria-label', labels.actual));
+                box.querySelectorAll('[data-map-action="maximum"]').forEach(button => button.setAttribute('aria-label', labels.maximum));
                 box.querySelectorAll('[data-map-action="expand"]').forEach(button => {
                     button.setAttribute('aria-label', labels.expand);
                     button.textContent = labels.expand;
@@ -600,7 +604,7 @@
         viewport.addEventListener('dblclick', event => {
             event.preventDefault();
             event.stopPropagation();
-            instance.zoomTo(instance.scale >= 4 ? 1 : instance.scale * 2, event.clientX, event.clientY);
+            instance.zoomTo(instance.scale >= instance.maxScale ? 1 : instance.scale * 2, event.clientX, event.clientY);
         });
         viewport.addEventListener('wheel', event => {
             if (!event.ctrlKey && !event.metaKey && !instance.viewer) return;

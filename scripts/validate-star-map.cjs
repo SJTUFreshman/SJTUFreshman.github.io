@@ -20,8 +20,8 @@ const launchOptions = {
 const errors = [];
 const checks = [];
 const selectedGroup = process.argv.slice(3).find(argument => !argument.startsWith('--')) || 'all';
-assert(['all', 'input', 'desktop', 'mobile', 'content', 'fallback', 'reduced-motion'].includes(selectedGroup),
-    'Test group must be all, input, desktop, mobile, content, fallback, or reduced-motion');
+assert(['all', 'input', 'desktop', 'mobile', 'content', 'footprints', 'fallback', 'reduced-motion'].includes(selectedGroup),
+    'Test group must be all, input, desktop, mobile, content, footprints, fallback, or reduced-motion');
 
 function check(condition, message) {
     assert(condition, message);
@@ -241,27 +241,25 @@ async function inputChecks(browser) {
 
 async function solarMarkerChecks(page, label, touch = false) {
     const marker = page.locator('[data-map-entity="solar"]');
-    check(await marker.isVisible() && await marker.getAttribute('aria-disabled') === 'true',
-        `${label}: the Solar System marker remains visible and unavailable`);
-    const before = await pose(page);
-    const initialUrl = page.url();
-    const assertUnchanged = async activation => {
-        await page.waitForTimeout(300);
-        samePose(await pose(page), before, `${label}: ${activation} leaves the camera unchanged`);
-        check(await page.evaluate(() => state.scene === 'roam' && !window.lifeStarMap.flight
-            && !window.lifeStarMap.pendingEntity && !state.activePortal && !state.modalOpen
-            && !document.querySelector('#celestialPanel, #bakedCelestialView, .solar-map, .solar-map-picker')
-            && !('solarSystem' in window.lifeStarMap)) && page.url() === initialUrl,
-        `${label}: ${activation} opens no page, flight, or planet view`);
-    };
-    const bounds = await marker.boundingBox();
-    if (touch) await page.touchscreen.tap(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
-    else await page.mouse.click(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
-    await assertUnchanged(touch ? 'tap' : 'click');
-    await marker.focus();
-    for (const key of ['Enter', 'Space']) {
-        await page.keyboard.press(key);
-        await assertUnchanged(key);
+    check(await marker.isVisible() && await marker.getAttribute('aria-disabled') !== 'true',
+        `${label}: the Solar System marker is an available homepage link`);
+    await page.route('https://api.open-meteo.com/v1/forecast?*', route => route.fulfill({
+        json: { current: { temperature_2m: 21, weather_code: 0 } }
+    }));
+    await page.route('https://clustrmaps.com/**', route => route.fulfill({
+        contentType: 'application/javascript', body: ''
+    }));
+    for (const activation of [touch ? 'tap' : 'click', 'Enter', 'Space']) {
+        if (activation === 'tap') await marker.tap();
+        else if (activation === 'click') await marker.click();
+        else {
+            await marker.focus();
+            await page.keyboard.press(activation);
+        }
+        await page.waitForURL(url => url.origin === new URL(pageUrl).origin && /^\/(?:index(?:\.html)?)?$/.test(url.pathname));
+        await page.locator('.hero-title').waitFor({ state: 'visible' });
+        check(true, `${label}: Solar System ${activation} returns to the homepage`);
+        await load(page);
     }
     check(page.retiredRequests.length === 0, `${label}: no retired solar scripts, textures, or frames are requested`);
 }
@@ -566,6 +564,8 @@ async function contentChecks(browser) {
             }));
             await page.goto(new URL('index.html', pageUrl).href, { waitUntil: 'domcontentloaded' });
             await page.getByRole('button', { name: 'EN', exact: true }).click();
+            check(await page.getByRole('link', { name: 'Shanghai Jiao Tong University', exact: true }).getAttribute('href')
+                === 'https://en.sjtu.edu.cn/', 'The English university link opens SJTU’s English website');
             const titles = await page.locator('#publications .pub-title-text').allTextContents();
             check(titles[0] === 'Collaborative Learning and Reasoning over Model Slices'
                 && titles.length === 4 && titles.every(title => !title.includes('AppCopilot')),
@@ -585,12 +585,88 @@ async function contentChecks(browser) {
             check(page.url() === originalUrl, 'Clicking an unavailable Code button does not jump or navigate');
             for (const [language, label, expected] of [['en', 'EN', 'Selected Publications'], ['zh-CN', '简', '精选论文'], ['zh-TW', '繁', '精選論文']]) {
                 await page.getByRole('button', { name: label, exact: true }).click();
+                check(await page.locator('.hero-title a').filter({ hasText: /Shanghai Jiao Tong University|上海交通大[学學]/ }).getAttribute('href')
+                    === (language === 'en' ? 'https://en.sjtu.edu.cn/' : 'https://www.sjtu.edu.cn/'),
+                `${language}: the university destination follows the selected language`);
                 check(await page.locator('[data-key="title_pubs"]').textContent() === expected
                     && await page.locator('[data-key="nav_pubs"]').textContent() === expected,
                 `${language}: the publication heading and navigation use the selected label`);
             }
             await page.locator('#publications').scrollIntoViewIfNeeded();
             await screenshot(page, 'selected-publications');
+        }
+        await context.close();
+    }
+}
+
+async function footprintsChecks(browser) {
+    for (const [label, viewportSize] of [['desktop', { width: 1440, height: 960 }], ['mobile', { width: 390, height: 844 }]]) {
+        const context = await browser.newContext({ viewport: viewportSize, hasTouch: true, isMobile: label === 'mobile' });
+        const page = await context.newPage();
+        monitor(page, `footprints-${label}`);
+        await load(page);
+        await page.locator('#sectionDrawerToggle').click();
+        await page.locator('#sectionDrawerList [data-portal-id="footprints"]').click();
+        await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'footprints');
+        await settle(page);
+        await page.locator('.footprints-map-controls').first().waitFor();
+        const session = await context.newCDPSession(page);
+        for (const [identifier, maximum] of [['china', 300], ['east-asia', 200], ['euro-usa', 200]]) {
+            const box = page.locator(`#${identifier}Map`);
+            const viewport = box.locator('.footprints-map-viewport');
+            const readout = box.locator('.footprints-map-zoom');
+            const resetView = () => box.locator('[data-map-action="reset"]').click();
+            const assertZoom = async (expected, method) => check(await readout.textContent() === `${expected}%`,
+                `${label} ${identifier}: ${method} respects ${maximum}% maximum`);
+            await box.scrollIntoViewIfNeeded();
+            await page.waitForFunction(id => !document.getElementById(id).classList.contains('is-map-loading'), `${identifier}Map`);
+            check(await box.locator('.footprints-map-terrain').evaluate(image => image.naturalWidth >= 6000)
+                && await box.evaluate(element => getComputedStyle(element).backgroundColor === 'rgb(131, 159, 171)'),
+            `${label} ${identifier}: the high-resolution map uses the new blue-grey sea`);
+            for (const expanded of [false, true]) {
+                if (expanded) await box.locator('[data-map-action="expand"]').click();
+                await resetView();
+                for (let attempt = 0; attempt < 6; attempt++) {
+                    const zoomIn = box.locator('[data-map-action="zoom-in"]');
+                    if (await zoomIn.isEnabled()) await zoomIn.click();
+                }
+                await assertZoom(maximum, `${expanded ? 'large map' : 'inline map'} buttons`);
+                check(await box.locator('[data-map-action="zoom-in"]').isDisabled(), `${label} ${identifier}: the zoom-in button disables at the cap`);
+                await resetView();
+                await viewport.focus();
+                for (let attempt = 0; attempt < 10; attempt++) await page.keyboard.press('+');
+                await assertZoom(maximum, 'keyboard');
+                await resetView();
+                await viewport.dispatchEvent('wheel', { deltaY: -5000, ctrlKey: !expanded, bubbles: true, cancelable: true });
+                await viewport.dispatchEvent('wheel', { deltaY: -5000, ctrlKey: !expanded, bubbles: true, cancelable: true });
+                await viewport.dispatchEvent('wheel', { deltaY: -5000, ctrlKey: !expanded, bubbles: true, cancelable: true });
+                await assertZoom(maximum, 'wheel / trackpad pinch');
+                await resetView();
+                for (let attempt = 0; attempt < (maximum === 300 ? 2 : 1); attempt++) await viewport.dblclick({ position: { x: 24, y: 24 } });
+                await assertZoom(maximum, 'double-click');
+                await viewport.dblclick({ position: { x: 24, y: 24 } });
+                await assertZoom(100, 'double-click reset');
+                await box.locator('[data-map-action="maximum"]').click();
+                await assertZoom(maximum, 'maximum-zoom shortcut');
+                await page.setViewportSize({ width: viewportSize.width - 30, height: viewportSize.height - 30 });
+                await assertZoom(maximum, 'window resize');
+                await page.setViewportSize(viewportSize);
+                if (expanded) {
+                    await resetView();
+                    const bounds = await viewport.boundingBox();
+                    const center = { x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 };
+                    const points = span => [{ x: center.x - span, y: center.y, id: 1 }, { x: center.x + span, y: center.y, id: 2 }];
+                    await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: points(15) });
+                    for (const span of [30, 50, 75, 100]) await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: points(span) });
+                    await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+                    await assertZoom(maximum, 'touch pinch');
+                    check(await page.evaluate(() => visualViewport.scale === 1), `${label} ${identifier}: pinching keeps page zoom unchanged`);
+                    await resetView();
+                    await screenshot(page, `footprints-${label}-${identifier}`);
+                    await page.keyboard.press('Escape');
+                    await assertZoom(100, 'large-map close');
+                }
+            }
         }
         await context.close();
     }
@@ -664,7 +740,7 @@ async function serveRepository() {
 async function main() {
     fs.mkdirSync(outputDirectory, { recursive: true });
     if (process.argv[2] === '--serve') await serveRepository();
-    for (const [group, run] of [['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['content', contentChecks], ['reduced-motion', reducedMotionChecks]]) {
+    for (const [group, run] of [['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['content', contentChecks], ['footprints', footprintsChecks], ['reduced-motion', reducedMotionChecks]]) {
         if (selectedGroup !== 'all' && selectedGroup !== group) continue;
         const browser = await chromium.launch(launchOptions);
         try {

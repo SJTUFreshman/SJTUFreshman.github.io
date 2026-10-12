@@ -153,11 +153,12 @@ class LifeStarMap {
             button.type = 'button';
             button.className = 'map-entity';
             button.dataset.mapEntity = entity.id;
-            if (entity.id === 'solar') button.setAttribute('aria-disabled', 'true');
             button.innerHTML = entity.subtitles ? '<span></span><small></small>' : '<span></span>';
             button.addEventListener('click', () => {
-                if (entity.id === 'solar' || this.suppressClickUntil > performance.now()) return;
-                if (entity.id === 'region') {
+                if (this.suppressClickUntil > performance.now()) return;
+                if (entity.id === 'solar') {
+                    this.goHome();
+                } else if (entity.id === 'region') {
                     this.showLocal();
                 } else this.openDeepSky(entity);
             });

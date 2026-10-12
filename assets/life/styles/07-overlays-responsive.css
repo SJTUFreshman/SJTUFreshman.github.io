@@ -83,7 +83,7 @@
     min-height: 0;
     max-height: min(640px, 66dvh);
     overflow: hidden;
-    background: #d5d0bf;
+    background: #839fab;
 }
 
 .footprints-map-shell::after {
@@ -244,7 +244,7 @@
     cursor: pointer;
 }
 
-.footprints-map-control-actual {
+.footprints-map-control-maximum {
     font-size: 0.72rem;
 }
 

@@ -28,7 +28,7 @@ CONFIGS = {
     "china": {"title": {"en": "China", "zh-CN": "中国", "zh-TW": "中國"}, "width": STYLE["render_widths"]["china"], "exaggeration": 22},
     "east_asia": {"title": {"en": "East Asia", "zh-CN": "东亚", "zh-TW": "東亞"},
                   "bounds": [103, 18, 147, 47], "latitude": 34, "width": STYLE["render_widths"]["east_asia"], "exaggeration": 16},
-    "europe_usa": {"title": {"en": "Europe + USA", "zh-CN": "欧洲与美国", "zh-TW": "歐洲與美國"},
+    "europe_usa": {"title": {"en": "Europe + USA", "zh-CN": "欧美", "zh-TW": "歐美"},
                    "bounds": [-128, 24, 40, 66], "latitude": 45, "width": STYLE["render_widths"]["europe_usa"], "exaggeration": 30},
 }
 
@@ -238,25 +238,58 @@ def route_data(metadata, journeys, provinces):
     return output
 
 
-def package(identifiers):
+def terrain_coverage(grid_path, size):
+    with np.load(grid_path) as grid:
+        mask = grid["mask"].astype(bool) & np.isfinite(grid["elevation"])
+    faces = mask[:-1, :-1] & mask[1:, :-1] & mask[1:, 1:] & mask[:-1, 1:]
+    coverage = Image.fromarray(faces.astype(np.uint8) * 255)
+    return coverage.resize((size[0] * 2, size[1] * 2), Image.Resampling.NEAREST).resize(size, Image.Resampling.BOX)
+
+
+def display_render(image, coverage, background, variant):
+    settings = STYLE["display"]
+    sea = np.array([int(settings["sea"][index:index + 2], 16) for index in (1, 3, 5)], dtype=np.float32)
+    source = np.asarray(image.convert("RGB"))
+    output = np.empty_like(source)
+    alpha = np.asarray(coverage)
+    for start in range(0, image.height, 256):
+        stop = start + 256
+        pixels = source[start:stop].astype(np.float32)
+        land = alpha[start:stop, :, None].astype(np.float32) / 255
+        water = pixels * (sea / np.asarray(background, dtype=np.float32))
+        if variant == "relief":
+            luminance = pixels @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32)
+            white = 255 * (1 - settings["white_shadow_strength"] * (1 - luminance / 255) ** settings["white_shadow_gamma"])
+            terrain = white[:, :, None]
+        else:
+            terrain = pixels
+        output[start:stop] = np.rint(np.clip(terrain * land + water * (1 - land), 0, 255)).astype(np.uint8)
+    return Image.fromarray(output)
+
+
+def package(identifiers, render_root=WORK):
     journeys = read_json(ROOT / "assets" / "maps" / "footprint-journeys.json")["routes"]
     routes = load_module(ROOT / "scripts" / "prepare-footprint-routes.py", "footprint_routes")
     provinces, _, _ = routes.load_provinces(routes.DEFAULT_PROVINCE_PATH)
     maps = read_json(OUTPUT / "atlas.json")["maps"] if (OUTPUT / "atlas.json").exists() else {}
     OUTPUT.mkdir(parents=True, exist_ok=True)
     for identifier in identifiers:
-        metadata = read_json(WORK / "data" / (identifier + ".json"))
+        metadata = read_json(render_root / "data" / (identifier + ".json"))
+        metadata["title"] = CONFIGS[identifier]["title"]
         metadata["region_colors"] = {str(index): colour for index, colour in enumerate(metadata["palette"], start=1)}
-        render_report = read_json(WORK / "renders" / (identifier + "-render.json"))
+        render_report = read_json(render_root / "renders" / (identifier + "-render.json"))
+        coverage = terrain_coverage(render_root / "data" / (identifier + ".npz"), (metadata["width"], metadata["height"]))
         for variant in ("relief", "colour") if identifier != "europe_usa" else ("relief",):
-            with Image.open(WORK / "renders" / f"{identifier}-{variant}.png") as image:
+            with Image.open(render_root / "renders" / f"{identifier}-{variant}.png") as image:
                 assert image.size == (metadata["width"], metadata["height"])
                 if variant == "relief":
                     samples = image.convert("RGB").resize((160, 160), Image.Resampling.NEAREST)
                     background = max(samples.getcolors(25600), key=lambda item: item[0])[1]
-                    metadata["display_background"] = "#" + "".join(f"{channel:02x}" for channel in background)
-                image.convert("RGB").save(OUTPUT / f"{identifier}-{variant}.webp", quality=95, method=6)
+                styled = display_render(image, coverage, background, variant)
+                styled.save(OUTPUT / f"{identifier}-{variant}.webp", quality=95, method=6)
         metadata.update(render_report)
+        metadata["display_background"] = STYLE["display"]["sea"]
+        metadata["display_treatment"] = STYLE["display"]
         metadata["route_display"] = "coloured_terrain_corridor"
         metadata["routes"] = route_data(metadata, journeys, provinces) if identifier != "europe_usa" else []
         maps[identifier] = metadata
@@ -269,6 +302,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--prepare", action="store_true")
     parser.add_argument("--package", action="store_true")
+    parser.add_argument("--render-root", type=Path, default=WORK, help="Prepared data and original PNGs to package; accepts the archived footprints directory")
     parser.add_argument("--reuse-dem", action="store_true", help="Reuse prepared grids when only resolution, colours or visits change")
     parser.add_argument("--maps", nargs="+", choices=CONFIGS, default=list(CONFIGS))
     arguments = parser.parse_args()
@@ -278,7 +312,7 @@ def main():
         for identifier in arguments.maps:
             prepare_map(identifier, CONFIGS[identifier], source, provinces, colours, arguments.reuse_dem)
     if arguments.package:
-        package(arguments.maps)
+        package(arguments.maps, arguments.render_root)
     if not arguments.prepare and not arguments.package:
         parser.error("Choose --prepare before rendering, or --package after rendering")
 

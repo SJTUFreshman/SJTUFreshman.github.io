@@ -4,7 +4,7 @@ Production is served at `https://sjtufreshman.pages.dev`. GitHub remains the
 source repository; the GitHub Pages entry points redirect visitors to Pages.
 This is a Direct Upload project, so pushing commits does not deploy the site.
 
-The Solar System is a noninteractive marker on the Life star map. Its interior,
+The Solar System is a link back to the homepage on the Life star map. Its interior,
 planet close-ups, playback runtime, textures and frame atlas are retired. The
 public build excludes the entire `assets/celestial/` tree, including any old
 files left in a local checkout. Rendering archives are not needed to build.
@@ -53,10 +53,12 @@ node scripts/validate-star-map.cjs https://sjtufreshman.pages.dev/
 Check `/`, `/life`, the pet service worker, and Chinese-named public assets.
 The old `/assets/celestial/hosted/manifest.json` and frame URLs must return
 HTTP 404 on the new production deployment. The browser suite checks that mouse,
-touch, Enter and Space activation of the Solar System marker leaves the camera
-and page unchanged and makes no solar resource requests. It also checks
+touch, Enter and Space activation of the Solar System marker returns to the
+homepage and makes no retired solar resource requests. It also checks
 constellation content, gallery, index, deep-sky views, map gestures, mobile,
-WebGL fallback and reduced motion.
+WebGL fallback and reduced motion. The footprints group checks the bright-white
+maps, shared blue-grey ocean, and hard zoom caps (China 300%; East Asia and
+Europe/USA 200%) through inline and modal controls on desktop and mobile.
 
 Cloudflare retains previous deployments for rollback; their archived contents
 are separate from the current production website.

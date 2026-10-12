@@ -53,13 +53,13 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 
 | 地图 | 原生渲染宽度 | 投影及范围 | 设计 |
 | --- | --- | --- | --- |
-| 中国 | 6000 px | 原参考图 Albers 投影 | 暖纸色、矿物色省份 |
-| 东亚 | 6000 px | 等距圆柱，103–147° E / 18–47° N | 灰海蓝、同一省份配色 |
-| 欧洲与美国 | 8000 px | 等距圆柱，128° W–40° E / 24–66° N | 浅海青、连续大西洋视野 |
+| 中国 | 6000 px | 原参考图 Albers 投影 | 亮白陆地、蓝灰海洋、矿物色省份 |
+| 东亚 | 6000 px | 等距圆柱，103–147° E / 18–47° N | 亮白陆地、蓝灰海洋、同一省份配色 |
+| 欧美 | 8000 px | 等距圆柱，128° W–40° E / 24–66° N | 亮白陆地、蓝灰海洋、连续大西洋视野 |
 
 统一用 Blender 4.5.3 / Cycles CUDA、192 采样原生重渲，未对旧成图放大插值。DEM 网格沿用已核验的高程采样：中国 2300×1926、东亚 2400×1908、欧美 3000×1061。图像分辨率与地形数据分辨率是两个独立指标；这三张是区域尺度浮雕图。
 
-`footprints-style.json` 集中定义省份颜料、三张图的底色、渲染宽度、采样数和线路显示宽度。省份的配色分组沿用原中国工程，再使用网站专用的赭石、鼠尾草绿、陶土、灰蓝、砂岩与紫灰调色板。原四图配色保留在原工程中。
+`footprints-style.json` 集中定义省份颜料、三张图的原始底色、网页显示色调、渲染宽度、采样数和线路显示宽度。`display` 使用东亚原图海色作为参考，将海洋统一为 `#839fab`，并用连续曲线提亮白色陆地中间调；陆地掩膜按原 DEM 网格面和正交相机范围生成，保留地形与沿岸阴影。省份的配色分组沿用原中国工程，再使用网站专用的赭石、鼠尾草绿、陶土、灰蓝、砂岩与紫灰调色板。归档 PNG、Blender 工程和 SHA-256 均保留原始内容，网页色调处理在打包阶段完成。
 
 所有未到访区域保留纯白漫反射材质和真实地形阴影。32° 西北日光与原四图一致。铁路与公路按真实路网生成投影缓冲多边形，分别显示为约 30 km、26 km 宽的地形走廊。这是为了区域地图可读性所作的宽度夸张，不是交通设施实际宽度，也不会把沿线整座城市标为到访。
 
@@ -68,13 +68,13 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 | 制作步骤 | 仓库脚本 |
 | --- | --- |
 | 铁路、公路网络重建与省界分段 | `../../scripts/prepare-footprint-routes.py` |
-| DEM、投影、城市和走廊几何、WebP 打包 | `../../scripts/build-footprint-atlas.py` |
+| DEM、投影、城市和走廊几何、亮白色调与海色、WebP 打包 | `../../scripts/build-footprint-atlas.py` |
 | 三张图的白色与彩色材质渲染 | `../../scripts/render-footprint-atlas.py` |
 | 参数化 GPU 提交 | `../../scripts/render-footprint-atlas.slurm` |
 | 地理对齐、走廊覆盖、高清素材与源工程检查 | `../../scripts/validate-footprint-atlas.py` |
 | 所有文件的清单、SHA-256、分卷归档、验证及还原 | `../../scripts/archive-relief-projects.py` |
 | 服务器全部文件的核验快照，复用本机相同内容 | `../../scripts/snapshot-relief-project.py` |
-| 网页显示、8 倍缩放、原始分辨率、大图及触摸交互 | `../../assets/life/scripts/22-footprints-atlas.js` |
+| 网页显示、中国 300% / 东亚与欧美 200% 缩放上限、大图及触摸交互 | `../../assets/life/scripts/22-footprints-atlas.js` |
 
 ## 重建网站素材
 
@@ -125,7 +125,13 @@ node scripts/validate-life-runtime.cjs
 node scripts/validate-life-http.cjs http://127.0.0.1:8765/life.html
 ```
 
-页面仅按需加载 `assets/maps/relief/` 的高清 WebP、裁切几何与地区元数据，不加载 Blender 工程。查看大图后可滚轮缩放、双指缩放和拖动；`1:1` 按屏幕像素密度显示原生分辨率，`↺` 恢复适配，Esc 关闭大图并返回原按钮。
+仅调整网站亮白色调和海色时，可直接使用归档源文件，无需 Blender 或下载：
+
+```powershell
+python scripts/build-footprint-atlas.py --package --render-root tools/relief-atlas/footprints
+```
+
+页面仅按需加载 `assets/maps/relief/` 的高清 WebP、裁切几何与地区元数据，不加载 Blender 工程。查看大图后可滚轮缩放、双指缩放和拖动；中国最多 300%，东亚和欧美最多 200%，百分比按钮直达上限，`↺` 恢复适配，Esc 关闭大图并返回原按钮。所有缩放入口、窗口大小变化及像素密度共用固定上限。
 
 ## 重建原四图
 
