@@ -1,7 +1,7 @@
-const thoughtToggleLabels = {
-    en: { more: 'Read more', less: 'Collapse' },
-    'zh-CN': { more: '展开', less: '收起' },
-    'zh-TW': { more: '展開', less: '收起' }
+const thoughtReaderLabels = {
+    en: { read: 'Read essay', mode: 'Reading room', close: 'Back to stars', language: 'Essay language' },
+    'zh-CN': { read: '阅读全文', mode: '随笔阅读', close: '返回星图', language: '随笔语言' },
+    'zh-TW': { read: '閱讀全文', mode: '隨筆閱讀', close: '返回星圖', language: '隨筆語言' }
 };
 
 const lightboxLabels = {
@@ -25,15 +25,74 @@ const lightboxLabels = {
     }
 };
 
-function updateThoughtToggles() {
-    const labels = thoughtToggleLabels[state.currentLang] || thoughtToggleLabels.en;
-    document.querySelectorAll('[data-thought-toggle]').forEach(button => {
-        const text = button.previousElementSibling;
-        if (!text) return;
-        const expanded = button.getAttribute('aria-expanded') === 'true';
-        text.classList.toggle('thought-text-expanded', expanded);
-        text.classList.toggle('thought-text-collapsed', !expanded);
-        button.textContent = expanded ? labels.less : labels.more;
+const thoughtReader = document.getElementById('thoughtReader');
+let thoughtReaderTrigger = null;
+
+function updateThoughtReader() {
+    if (!thoughtReader) return;
+    const labels = thoughtReaderLabels[state.currentLang] || thoughtReaderLabels.en;
+    document.querySelectorAll('[data-thought-reader]').forEach(button => {
+        button.textContent = labels.read;
+    });
+    if (!thoughtReaderTrigger) return;
+    const item = thoughtReaderTrigger.closest('.thought-item');
+    const moment = thoughtReaderTrigger.closest('.portal-moment');
+    thoughtReader.querySelector('.thought-reader-mode').textContent = labels.mode;
+    thoughtReader.querySelector('.thought-reader-close').textContent = labels.close;
+    const language = thoughtReader.querySelector('.thought-reader-language');
+    language.setAttribute('aria-label', labels.language);
+    language.value = state.currentLang;
+    thoughtReader.querySelector('#thoughtReaderTitle').textContent = moment.querySelector('h3').textContent;
+    thoughtReader.querySelector('.thought-reader-date').textContent = item.querySelector('.thought-date').textContent;
+    const paragraphs = item.querySelector('.thought-text').textContent.trim().split(/\n\s*\n/).map(text => {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = text;
+        return paragraph;
+    });
+    thoughtReader.querySelector('.thought-reader-body').replaceChildren(...paragraphs);
+}
+
+function openThoughtReader(button) {
+    if (!thoughtReader || state.modalOpen) return;
+    thoughtReaderTrigger = button;
+    updateThoughtReader();
+    suspendForModal();
+    thoughtReader.showModal();
+    const scrollArea = thoughtReader.querySelector('.thought-reader-scroll');
+    scrollArea.scrollTop = 0;
+    scrollArea.focus({ preventScroll: true });
+}
+
+if (thoughtReader) {
+    thoughtReader.querySelector('.thought-reader-close').addEventListener('click', () => thoughtReader.close());
+    thoughtReader.querySelector('.thought-reader-language').addEventListener('change', event => {
+        setLang(event.target.value);
+        thoughtReader.querySelector('.thought-reader-scroll').scrollTop = 0;
+    });
+    thoughtReader.addEventListener('keydown', event => {
+        event.stopPropagation();
+        if (event.key === 'Tab') {
+            const focusable = Array.from(thoughtReader.querySelectorAll('button, select, [tabindex="0"]'));
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        } else if (event.key === 'Escape') {
+            event.preventDefault();
+            thoughtReader.close();
+        }
+    });
+    thoughtReader.addEventListener('close', () => {
+        resumeAfterModal();
+        if (thoughtReaderTrigger?.isConnected && thoughtReaderTrigger.getClientRects().length) {
+            thoughtReaderTrigger.focus({ preventScroll: true });
+        }
+        thoughtReaderTrigger = null;
     });
 }
 
@@ -88,11 +147,9 @@ document.addEventListener('click', event => {
         return;
     }
 
-    const button = event.target.closest('[data-thought-toggle]');
+    const button = event.target.closest('[data-thought-reader]');
     if (!button) return;
-    const expanded = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', String(!expanded));
-    updateThoughtToggles();
+    openThoughtReader(button);
 });
 
 function updateActivePortalCopy() {
@@ -185,7 +242,7 @@ function setLang(lang) {
     }
 
     updateMapAccessibility();
-    updateThoughtToggles();
+    updateThoughtReader();
     updateCitationButtons();
     updateSectionDrawerCopy();
     updateActivePortalCopy();

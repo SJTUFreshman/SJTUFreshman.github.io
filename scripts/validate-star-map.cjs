@@ -20,8 +20,8 @@ const launchOptions = {
 const errors = [];
 const checks = [];
 const selectedGroup = process.argv.slice(3).find(argument => !argument.startsWith('--')) || 'all';
-assert(['all', 'input', 'desktop', 'mobile', 'fallback', 'reduced-motion'].includes(selectedGroup),
-    'Test group must be all, input, desktop, mobile, fallback, or reduced-motion');
+assert(['all', 'input', 'desktop', 'mobile', 'content', 'fallback', 'reduced-motion'].includes(selectedGroup),
+    'Test group must be all, input, desktop, mobile, content, fallback, or reduced-motion');
 
 function check(condition, message) {
     assert(condition, message);
@@ -472,6 +472,130 @@ async function mobileChecks(browser) {
     await context.close();
 }
 
+async function contentChecks(browser) {
+    for (const [label, viewport] of [
+        ['desktop', { width: 1440, height: 960 }],
+        ['mobile', { width: 390, height: 844 }],
+        ['small-mobile', { width: 320, height: 640 }]
+    ]) {
+        const context = await browser.newContext({ viewport, isMobile: label !== 'desktop', hasTouch: label !== 'desktop' });
+        const page = await context.newPage();
+        monitor(page, `content-${label}`);
+        await load(page);
+        await page.locator('.lang-btn[data-lang="zh-CN"]').click();
+        await page.locator('#sectionDrawerToggle').click();
+        await page.locator('#sectionDrawerList [data-portal-id="thoughts"]').click();
+        await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'thoughts');
+        await settle(page);
+        await page.locator('[data-star-portal="thoughts"][data-star-hip="95947"]').click();
+        const trigger = page.locator('[data-portal-entry="thought-2026-06-29"] [data-thought-reader]');
+        const before = await pose(page);
+        await trigger.click();
+        await page.locator('#thoughtReader[open]').waitFor();
+        const readingLayout = await page.evaluate(() => {
+            const reader = document.querySelector('#thoughtReader');
+            const article = reader.querySelector('.thought-reader-article');
+            const body = reader.querySelector('.thought-reader-body');
+            const scrollArea = reader.querySelector('.thought-reader-scroll');
+            return {
+                width: article.getBoundingClientRect().width,
+                size: parseFloat(getComputedStyle(body).fontSize),
+                font: getComputedStyle(body).fontFamily,
+                overflow: reader.scrollWidth > reader.clientWidth || scrollArea.scrollWidth > scrollArea.clientWidth,
+                scrollable: scrollArea.scrollHeight > scrollArea.clientHeight,
+                focused: document.activeElement === scrollArea,
+                modal: reader.matches(':modal') && state.modalOpen,
+                title: reader.querySelector('h2').textContent,
+                expectedTitle: document.querySelector('[data-moment="thought-2026-06-29"] h3').textContent,
+                paragraphs: Array.from(body.querySelectorAll('p'), paragraph => paragraph.textContent),
+                expectedParagraphs: i18n['zh-CN'].thought_0629.trim().split(/\n\s*\n/)
+            };
+        });
+        check(readingLayout.width >= (label === 'desktop' ? 760 : viewport.width - 65)
+            && readingLayout.size >= (label === 'desktop' ? 20 : 18) && !readingLayout.font.includes('EduKai')
+            && !readingLayout.overflow, `${label}: essays use a wide, clear body without horizontal overflow`);
+        check(readingLayout.scrollable && readingLayout.focused && readingLayout.modal,
+            `${label}: the reader focuses its scrollable article and makes the background inactive`);
+        assert.deepEqual(readingLayout.paragraphs, readingLayout.expectedParagraphs);
+        check(readingLayout.title === readingLayout.expectedTitle,
+            `${label}: the reader preserves the complete essay, title, and paragraph breaks`);
+        await screenshot(page, `essay-${label}`);
+        await page.keyboard.press('PageDown');
+        await page.waitForFunction(() => document.querySelector('.thought-reader-scroll').scrollTop > 0);
+        samePose(await pose(page), before, `${label}: reading and scrolling preserve the star map camera`);
+        await page.locator('.thought-reader-language').selectOption('zh-TW');
+        check(await page.evaluate(() => Array.from(document.querySelectorAll('.thought-reader-body p'), paragraph => paragraph.textContent)
+            .join('\n\n') === i18n['zh-TW'].thought_0629.trim().split(/\n\s*\n/).join('\n\n')),
+        `${label}: language changes update the complete essay inside the reader`);
+        await page.locator('.thought-reader-language').selectOption('en');
+        check(await page.locator('.thought-reader-body').textContent() === "See Chinese version, record of last night's dream.",
+            `${label}: the reader preserves the existing English text`);
+        await page.locator('.thought-reader-language').selectOption('zh-CN');
+        await page.locator('.thought-reader-scroll').focus();
+        for (let step = 0; step < 5; step++) {
+            await page.keyboard.press('Tab');
+            check(await page.evaluate(() => document.querySelector('#thoughtReader').contains(document.activeElement)),
+                `${label}: Tab keeps keyboard focus within the reader (${step + 1})`);
+        }
+        await page.keyboard.press('Escape');
+        await page.waitForFunction(() => !state.modalOpen && !document.querySelector('#thoughtReader').open);
+        check(await trigger.evaluate(button => document.activeElement === button)
+            && await page.evaluate(() => state.scene === 'detail' && state.activePortal?.id === 'thoughts' && state.activeStarHip === 95947),
+        `${label}: Escape returns focus to the same essay without closing its constellation`);
+        await page.locator('[data-star-portal="thoughts"][data-star-hip="100453"]').click();
+        const firstEssay = page.locator('[data-portal-entry="thought-2026-01-16"] [data-thought-reader]');
+        await firstEssay.focus();
+        await page.keyboard.press('Enter');
+        await page.locator('#thoughtReader[open]').waitFor();
+        check(await page.evaluate(() => document.querySelector('#thoughtReaderTitle').textContent
+            === document.querySelector('[data-moment="thought-2026-01-16"] h3').textContent),
+        `${label}: opening another essay replaces the reader content`);
+        await page.locator('.thought-reader-close').click();
+        await page.waitForFunction(() => !state.modalOpen);
+        check(await firstEssay.evaluate(button => document.activeElement === button),
+            `${label}: the close button restores the essay trigger`);
+        await page.locator('#portalClose').click();
+        await settle(page);
+
+        if (label === 'desktop') {
+            await page.route('https://api.open-meteo.com/v1/forecast?*', route => route.fulfill({
+                json: { current: { temperature_2m: 21, weather_code: 0 } }
+            }));
+            await page.route('https://clustrmaps.com/**', route => route.fulfill({
+                contentType: 'application/javascript', body: ''
+            }));
+            await page.goto(new URL('index.html', pageUrl).href, { waitUntil: 'domcontentloaded' });
+            await page.getByRole('button', { name: 'EN', exact: true }).click();
+            const titles = await page.locator('#publications .pub-title-text').allTextContents();
+            check(titles[0] === 'Collaborative Learning and Reasoning over Model Slices'
+                && titles.length === 4 && titles.every(title => !title.includes('AppCopilot')),
+            'Selected Publications leads with Model Slices and omits the AppCopilot publication');
+            check(await page.locator('#publications .pub-item').first().locator('a.pub-btn').getAttribute('href')
+                === 'https://arxiv.org/abs/2610.12927', 'The new paper links to its supplied arXiv page');
+            check(await page.locator('a.pub-btn[href="#"], a.project-link[href="#"], a.pub-btn[href=""], a.project-link[href=""]').count() === 0
+                && await page.locator('.pub-btn:disabled, .project-link:disabled').count() === 7,
+            'All empty Paper and Code destinations are native disabled buttons');
+            const paperButton = page.locator('#publications .pub-item').first().locator('a.pub-btn');
+            await paperButton.focus();
+            await page.keyboard.press('Tab');
+            check(await page.evaluate(() => document.activeElement?.textContent.includes('Cite')),
+                'Keyboard navigation skips unavailable Code buttons');
+            const originalUrl = page.url();
+            await page.locator('.pub-btn:disabled').first().click({ force: true });
+            check(page.url() === originalUrl, 'Clicking an unavailable Code button does not jump or navigate');
+            for (const [language, label, expected] of [['en', 'EN', 'Selected Publications'], ['zh-CN', '简', '精选论文'], ['zh-TW', '繁', '精選論文']]) {
+                await page.getByRole('button', { name: label, exact: true }).click();
+                check(await page.locator('[data-key="title_pubs"]').textContent() === expected
+                    && await page.locator('[data-key="nav_pubs"]').textContent() === expected,
+                `${language}: the publication heading and navigation use the selected label`);
+            }
+            await page.locator('#publications').scrollIntoViewIfNeeded();
+            await screenshot(page, 'selected-publications');
+        }
+        await context.close();
+    }
+}
+
 async function fallbackChecks() {
     const browser = await chromium.launch({ ...launchOptions, args: [...launchOptions.args, '--disable-webgl'] });
     try {
@@ -540,7 +664,7 @@ async function serveRepository() {
 async function main() {
     fs.mkdirSync(outputDirectory, { recursive: true });
     if (process.argv[2] === '--serve') await serveRepository();
-    for (const [group, run] of [['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['reduced-motion', reducedMotionChecks]]) {
+    for (const [group, run] of [['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['content', contentChecks], ['reduced-motion', reducedMotionChecks]]) {
         if (selectedGroup !== 'all' && selectedGroup !== group) continue;
         const browser = await chromium.launch(launchOptions);
         try {

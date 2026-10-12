@@ -365,7 +365,7 @@ function openPortalPanel(portal, panelOnLeft = false, preferredHip = null) {
     } else {
         selectPortalStar(portal, firstStarHip);
     }
-    updateThoughtToggles();
+    updateThoughtReader();
     refreshPortalPanelRect();
     releaseViewForDetail();
     requestAnimationFrame(() => dom.panelClose.focus({ preventScroll: true }));

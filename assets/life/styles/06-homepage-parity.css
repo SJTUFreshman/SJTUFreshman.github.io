@@ -102,7 +102,7 @@
     transition: color var(--transition);
 }
 
-.homepage-parity .pub-btn:hover,
+.homepage-parity .pub-btn:hover:not(:disabled),
 .homepage-parity .pub-btn:focus-visible {
     color: var(--text);
 }
@@ -186,7 +186,7 @@
     transition: all var(--transition);
 }
 
-.homepage-parity .project-link:hover,
+.homepage-parity .project-link:hover:not(:disabled),
 .homepage-parity .project-link:focus-visible {
     border-color: var(--text);
     color: var(--text);

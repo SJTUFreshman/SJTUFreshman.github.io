@@ -9,12 +9,12 @@
       "en": {
         "nav_about": "About",
         "nav_news": "News",
-        "nav_pubs": "Publications",
+        "nav_pubs": "Selected Publications",
         "nav_projects": "Projects",
         "nav_gallery": "Gallery",
         "nav_notes": "Notes",
         "title_news": "News",
-        "title_pubs": "Publications",
+        "title_pubs": "Selected Publications",
         "title_projects": "Projects",
         "title_gallery": "Gallery",
         "title_notes": "Notes",
@@ -23,12 +23,12 @@
       "zh-CN": {
         "nav_about": "关于",
         "nav_news": "动态",
-        "nav_pubs": "论文",
+        "nav_pubs": "精选论文",
         "nav_projects": "项目",
         "nav_gallery": "光影",
         "nav_notes": "笔记",
         "title_news": "动态",
-        "title_pubs": "发表论文",
+        "title_pubs": "精选论文",
         "title_projects": "项目经历",
         "title_gallery": "光影",
         "title_notes": "笔记",
@@ -37,12 +37,12 @@
       "zh-TW": {
         "nav_about": "關於",
         "nav_news": "動態",
-        "nav_pubs": "論文",
+        "nav_pubs": "精選論文",
         "nav_projects": "項目",
         "nav_gallery": "光影",
         "nav_notes": "筆記",
         "title_news": "動態",
-        "title_pubs": "發表論文",
+        "title_pubs": "精選論文",
         "title_projects": "項目經歷",
         "title_gallery": "光影",
         "title_notes": "筆記",
@@ -97,6 +97,15 @@
     ],
     "publications": [
       {
+        "id": "ModelSlices_2026",
+        "title": "Collaborative Learning and Reasoning over Model Slices",
+        "authors_html": "<b>Yuheng Wang</b>†, <b>Runde Yang</b>†, Zhuohan Bao, Qiran Zhang, Huatao Li, Yiyang Zheng, Lin Wu, Jingru Fan, Shu Yao, Yihan Li, Zhi Li, Chen Qian",
+        "venue": "arXiv preprint arXiv:2610.12927",
+        "paper_url": "https://arxiv.org/abs/2610.12927",
+        "code_url": "",
+        "citation": "@misc{wang2026collaborativelearningslices,\n  title={Collaborative Learning and Reasoning over Model Slices},\n  author={Yuheng Wang and Runde Yang and Zhuohan Bao and Qiran Zhang and Huatao Li and Yiyang Zheng and Lin Wu and Jingru Fan and Shu Yao and Yihan Li and Zhi Li and Chen Qian},\n  year={2026},\n  eprint={2610.12927},\n  archivePrefix={arXiv},\n  url={https://arxiv.org/abs/2610.12927}\n}"
+      },
+      {
         "id": "Generative_2025",
         "title": "Generative Teaching via Code (TeachMaster)",
         "authors_html": "Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian",
@@ -122,15 +131,6 @@
         "paper_url": "https://arxiv.org/abs/2602.05353",
         "code_url": "#",
         "citation": ""
-      },
-      {
-        "id": "AppCopilot_2025",
-        "title": "AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent",
-        "authors_html": "Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian",
-        "venue": "arXiv preprint arXiv:2509.02444",
-        "paper_url": "#",
-        "code_url": "#",
-        "citation": "@misc{fan2025appcopilotgeneralaccuratelonghorizon,\n  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},\n  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},\n  year={2025},\n  eprint={2509.02444},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2509.02444}\n}"
       }
     ],
     "projects": [
@@ -677,10 +677,10 @@
         "news_1": 97649
       },
       "publications": {
+        "ModelSlices_2026": 677,
         "Generative_2025": 113963,
         "PRISM_2026": 113963,
-        "AgentXRay_2026": 113963,
-        "AppCopilot_2025": 677
+        "AgentXRay_2026": 113963
       },
       "projects": {
         "appcopilot": 81693,

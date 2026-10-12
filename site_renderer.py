@@ -782,11 +782,20 @@ def render_home_news(content: dict[str, Any]) -> str:
     </section>"""
 
 
+def render_resource_link(url: str | None, class_name: str, icon: str, label: str, label_key: str = "") -> str:
+    href = str(url or "").strip()
+    available = bool(href and href != "#")
+    tag = "a" if available else "button"
+    attributes = f'href="{esc(href)}"' if available else 'type="button" disabled aria-disabled="true"'
+    label_html = f'<span data-key="{esc(label_key)}">{esc(label)}</span>' if label_key else esc(label)
+    return f'<{tag} class="{esc(class_name)}" {attributes}><i class="{esc(icon)}" aria-hidden="true"></i> {label_html}</{tag}>'
+
+
 def render_publications(content: dict[str, Any]) -> str:
     rows = []
     for item in content["home"]["publications"]:
-        paper = item.get("paper_url") or "#"
-        code = item.get("code_url") or "#"
+        paper = render_resource_link(item.get("paper_url"), "pub-btn", "far fa-file-pdf", "Paper")
+        code = render_resource_link(item.get("code_url"), "pub-btn", "fab fa-github", "Code")
         cite = item.get("id") or ""
         cite_button = ""
         if item.get("citation"):
@@ -797,13 +806,13 @@ def render_publications(content: dict[str, Any]) -> str:
                 <div class="pub-authors en-only">{item.get("authors_html", "")}</div>
                 <div class="pub-venue en-only">{item.get("venue", "")}</div>
                 <div class="pub-actions">
-                    <a href="{esc(paper)}" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
-                    <a href="{esc(code)}" class="pub-btn"><i class="fab fa-github"></i> Code</a>{cite_button}
+                    {paper}
+                    {code}{cite_button}
                 </div>
             </div>""")
     return """    <!-- ===== Publications ===== -->
     <section id="publications" class="fade-in">
-        <div class="section-title" data-key="title_pubs">Publications</div>
+        <div class="section-title" data-key="title_pubs">Selected Publications</div>
         <div class="pub-list">
 """ + "\n".join(rows) + """
         </div>
@@ -822,8 +831,8 @@ def render_projects(content: dict[str, Any]) -> str:
                     <div class="project-name en-only">{esc(item.get("name", ""))}</div>
                     <div class="project-desc" data-key="{esc(key)}">{lang_value(item.get("desc", {}), "en")}</div>
                     <div class="project-links">
-                        <a href="{esc(item.get("paper_url") or "#")}" class="project-link"><i class="far fa-file-alt"></i> Paper</a>
-                        <a href="{esc(item.get("code_url") or "#")}" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        {render_resource_link(item.get("paper_url"), "project-link", "far fa-file-alt", "Paper")}
+                        {render_resource_link(item.get("code_url"), "project-link", "fab fa-github", "Code")}
                     </div>
                 </div>
             </div>""")
@@ -904,12 +913,10 @@ def render_thought_items(items: list[dict[str, Any]]) -> str:
         text_values = item.get("text", {})
         should_collapse = any(len(lang_value(text_values, lang)) > THOUGHT_COLLAPSE_CHARS for lang in LANGS)
         text_class = "thought-text thought-text-collapsed" if should_collapse else "thought-text"
-        toggle = ""
-        if should_collapse:
-            toggle = '\n                <button class="thought-toggle" type="button" data-thought-toggle aria-expanded="false">Read more</button>'
+        reader_button = '\n                <button class="thought-toggle" type="button" data-thought-reader aria-haspopup="dialog" aria-controls="thoughtReader">Read essay</button>'
         rows.append(f"""            <div class="thought-item">
                 <div class="thought-date" data-key="{esc('date_' + key)}">{lang_value(item.get("date", {}), "en")}</div>
-                <div class="{text_class}" data-key="{esc(key)}">{lang_value(text_values, "en")}</div>{toggle}
+                <div class="{text_class}" data-key="{esc(key)}">{lang_value(text_values, "en")}</div>{reader_button}
             </div>""")
     return "\n".join(rows)
 
@@ -1088,14 +1095,8 @@ def render_life_publications(content: dict[str, Any]) -> str:
                          <div class="pub-authors en-only">{item.get("authors_html", "")}</div>
                          <div class="pub-venue en-only">{esc(item.get("venue", ""))}</div>
                          <div class="pub-actions">
-                            <a class="pub-btn" href="{esc(item.get("paper_url") or "#")}">
-                                <i class="far fa-file-pdf" aria-hidden="true"></i>
-                                <span data-key="life_action_paper">Paper</span>
-                            </a>
-                            <a class="pub-btn" href="{esc(item.get("code_url") or "#")}">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                                <span data-key="life_action_code">Code</span>
-                            </a>
+                            {render_resource_link(item.get("paper_url"), "pub-btn", "far fa-file-pdf", "Paper", "life_action_paper")}
+                            {render_resource_link(item.get("code_url"), "pub-btn", "fab fa-github", "Code", "life_action_code")}
 {cite_button}
                          </div>{citation_source}
                     </div>""")
@@ -1119,14 +1120,8 @@ def render_life_projects(content: dict[str, Any]) -> str:
                              <div class="project-name en-only">{esc(item.get("name", ""))}</div>
                              <div class="project-desc" data-key="{esc(desc_key)}">{esc(lang_value(item.get("desc", {}), "en"))}</div>
                              <div class="project-links">
-                                <a class="project-link" href="{esc(item.get("paper_url") or "#")}">
-                                    <i class="far fa-file-alt" aria-hidden="true"></i>
-                                    <span data-key="life_action_paper">Paper</span>
-                                </a>
-                                <a class="project-link" href="{esc(item.get("code_url") or "#")}">
-                                    <i class="fab fa-github" aria-hidden="true"></i>
-                                    <span data-key="life_action_code">Code</span>
-                                </a>
+                                {render_resource_link(item.get("paper_url"), "project-link", "far fa-file-alt", "Paper", "life_action_paper")}
+                                {render_resource_link(item.get("code_url"), "project-link", "fab fa-github", "Code", "life_action_code")}
                              </div>
                          </div>
                     </div>""")

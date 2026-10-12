@@ -174,14 +174,6 @@
     pointer-events: none;
 }
 
-.thought-text-expanded {
-    max-height: none;
-}
-
-.thought-text-expanded::after {
-    display: none;
-}
-
 .thought-toggle {
     margin-top: 10px;
     padding: 0 0 2px;
@@ -192,6 +184,151 @@
     font-family: var(--ui);
     font-size: 0.72rem;
     cursor: pointer;
+}
+
+.thought-reader {
+    width: min(1020px, calc(100vw - 64px));
+    height: min(1020px, 92dvh);
+    max-width: none;
+    max-height: none;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgba(109, 142, 208, 0.22);
+    border-radius: 18px;
+    background: var(--life-paper, #fffdfd);
+    color: #30384b;
+    box-shadow: 0 28px 100px rgba(0, 0, 0, 0.4);
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+    font-size: 14px;
+    letter-spacing: normal;
+}
+
+.thought-reader[open] {
+    display: flex;
+    flex-direction: column;
+}
+
+.thought-reader::backdrop {
+    background: rgba(7, 12, 26, 0.76);
+}
+
+.thought-reader-toolbar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 28px;
+    border-bottom: 1px solid #e5e8ef;
+}
+
+.thought-reader-mode {
+    color: #667189;
+}
+
+.thought-reader-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.thought-reader-language,
+.thought-reader-close {
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid #d5dce9;
+    border-radius: 8px;
+    background: #fff;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.thought-reader-close:hover {
+    background: #eef3ff;
+    border-color: #6d8ed0;
+}
+
+.thought-reader :focus-visible {
+    outline: 2px solid #6d8ed0;
+    outline-offset: -3px;
+}
+
+.thought-reader-scroll {
+    min-height: 0;
+    padding: 48px 56px 72px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+}
+
+.thought-reader-article {
+    max-width: 800px;
+    margin: 0 auto;
+    overflow-wrap: break-word;
+}
+
+.thought-reader-date {
+    margin: 0 0 14px;
+    color: #667189;
+    font-size: 14px;
+}
+
+.thought-reader h2 {
+    margin: 0 0 32px;
+    font-family: inherit;
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 600;
+    line-height: 1.4;
+    text-wrap: balance;
+}
+
+.thought-reader-body {
+    font-size: 20px;
+    line-height: 1.95;
+    letter-spacing: 0.012em;
+}
+
+.thought-reader-body p {
+    margin: 0 0 1.35em;
+    white-space: pre-line;
+}
+
+.thought-reader-body p:last-child {
+    margin-bottom: 0;
+}
+
+.thought-reader ::selection {
+    background: #e7ebf8;
+}
+
+@media (max-width: 640px) {
+    .thought-reader {
+        width: 100vw;
+        height: 100dvh;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+    }
+
+    .thought-reader-toolbar {
+        flex-wrap: wrap;
+        padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 12px max(16px, env(safe-area-inset-left));
+    }
+
+    .thought-reader-controls {
+        gap: 8px;
+        margin-left: auto;
+    }
+
+    .thought-reader-scroll {
+        padding: 28px max(22px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+    }
+
+    .thought-reader-body {
+        font-size: 18px;
+    }
 }
 
 .friends-list {

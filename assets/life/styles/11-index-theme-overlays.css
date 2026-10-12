@@ -165,7 +165,7 @@
     color: var(--life-blue);
 }
 
-.portal-panel .project-link:hover,
+.portal-panel .project-link:hover:not(:disabled),
 .portal-panel .project-link:focus-visible {
     border-color: rgba(212, 116, 170, 0.5);
     background: var(--life-pink-soft);
@@ -181,11 +181,17 @@
     transition: color var(--transition), background var(--transition), border-color var(--transition);
 }
 
-.portal-panel .pub-btn:hover,
+.portal-panel .pub-btn:hover:not(:disabled),
 .portal-panel .pub-btn:focus-visible {
     border-color: rgba(212, 116, 170, 0.18);
     background: var(--life-pink-soft);
     color: var(--life-pink);
+}
+
+.portal-panel .pub-btn:disabled,
+.portal-panel .project-link:disabled {
+    opacity: 0.48;
+    cursor: not-allowed;
 }
 
 .portal-panel .shelf-icon,

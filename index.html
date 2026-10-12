@@ -548,7 +548,7 @@
             border-radius: 999px;
             transition: color var(--transition), background var(--transition), border-color var(--transition);
         }
-        .pub-btn:hover {
+        .pub-btn:hover:not(:disabled) {
             color: var(--accent-pink);
             background: var(--accent-pink-soft);
             border-color: rgba(209,111,159,0.18);
@@ -624,6 +624,7 @@
         }
 
         .project-link {
+            font-family: var(--font-en);
             font-size: 0.8rem;
             padding: 4px 10px;
             border: 1px solid var(--border);
@@ -635,10 +636,16 @@
             gap: 4px;
             transition: all var(--transition);
         }
-        .project-link:hover {
+        .project-link:hover:not(:disabled) {
             border-color: var(--accent-light);
             color: var(--text);
             background: var(--accent-pink-soft);
+        }
+
+        .pub-btn:disabled,
+        .project-link:disabled {
+            opacity: 0.48;
+            cursor: not-allowed;
         }
 
         /* ========== Life Preview ========== */
@@ -1212,7 +1219,7 @@
         <div class="nav-links" id="navLinks">
             <a href="#about" class="nav-link" data-key="nav_about">About</a>
             <a href="#news" class="nav-link" data-key="nav_news">News</a>
-            <a href="#publications" class="nav-link" data-key="nav_pubs">Publications</a>
+            <a href="#publications" class="nav-link" data-key="nav_pubs">Selected Publications</a>
             <a href="#projects" class="nav-link" data-key="nav_projects">Projects</a>
             <div class="nav-lang">
                 <button class="lang-btn active" onclick="setLang('en')">EN</button>
@@ -1317,15 +1324,25 @@
 
     <!-- ===== Publications ===== -->
     <section id="publications" class="fade-in">
-        <div class="section-title" data-key="title_pubs">Publications</div>
+        <div class="section-title" data-key="title_pubs">Selected Publications</div>
         <div class="pub-list">
+            <div class="pub-item">
+                <div class="pub-title-text en-only">Collaborative Learning and Reasoning over Model Slices</div>
+                <div class="pub-authors en-only"><b>Yuheng Wang</b>†, <b>Runde Yang</b>†, Zhuohan Bao, Qiran Zhang, Huatao Li, Yiyang Zheng, Lin Wu, Jingru Fan, Shu Yao, Yihan Li, Zhi Li, Chen Qian</div>
+                <div class="pub-venue en-only">arXiv preprint arXiv:2610.12927</div>
+                <div class="pub-actions">
+                    <a class="pub-btn" href="https://arxiv.org/abs/2610.12927"><i class="far fa-file-pdf" aria-hidden="true"></i> Paper</a>
+                    <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
+                    <button class="pub-btn" onclick="copyCitation(&quot;ModelSlices_2026&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
+                </div>
+            </div>
             <div class="pub-item">
                 <div class="pub-title-text en-only">Generative Teaching via Code (TeachMaster)</div>
                 <div class="pub-authors en-only">Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian</div>
                 <div class="pub-venue en-only">ACL 2026 Industry Track</div>
                 <div class="pub-actions">
-                    <a href="https://arxiv.org/abs/2601.04204v1" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
-                    <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
+                    <a class="pub-btn" href="https://arxiv.org/abs/2601.04204v1"><i class="far fa-file-pdf" aria-hidden="true"></i> Paper</a>
+                    <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
                     <button class="pub-btn" onclick="copyCitation(&quot;Generative_2025&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
                 </div>
             </div>
@@ -1334,8 +1351,8 @@
                 <div class="pub-authors en-only">Qiran Zhang, Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jingru Fan, Shu Yao, Jie Zhang, Tianle Zhou, Huatao Li, Ruijie Shi, Yihan Li, Chen Qian</div>
                 <div class="pub-venue en-only">NeurIPS 2026</div>
                 <div class="pub-actions">
-                    <a href="https://arxiv.org/abs/2605.19382" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
-                    <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
+                    <a class="pub-btn" href="https://arxiv.org/abs/2605.19382"><i class="far fa-file-pdf" aria-hidden="true"></i> Paper</a>
+                    <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
                     <button class="pub-btn" onclick="copyCitation(&quot;PRISM_2026&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
                 </div>
             </div>
@@ -1344,18 +1361,8 @@
                 <div class="pub-authors en-only">Ruijie Shi, Houbin Zhang, Yuecheng Han, Yuheng Wang, Jingru Fan, <b>Runde Yang</b>, Yufan Dang, Huatao Li, Dewen Liu, Yuan Cheng, Chen Qian</div>
                 <div class="pub-venue en-only">ICML 2026</div>
                 <div class="pub-actions">
-                    <a href="https://arxiv.org/abs/2602.05353" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
-                    <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
-                </div>
-            </div>
-            <div class="pub-item">
-                <div class="pub-title-text en-only">AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent</div>
-                <div class="pub-authors en-only">Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian</div>
-                <div class="pub-venue en-only">arXiv preprint arXiv:2509.02444</div>
-                <div class="pub-actions">
-                    <a href="#" class="pub-btn"><i class="far fa-file-pdf"></i> Paper</a>
-                    <a href="#" class="pub-btn"><i class="fab fa-github"></i> Code</a>
-                    <button class="pub-btn" onclick="copyCitation(&quot;AppCopilot_2025&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
+                    <a class="pub-btn" href="https://arxiv.org/abs/2602.05353"><i class="far fa-file-pdf" aria-hidden="true"></i> Paper</a>
+                    <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
                 </div>
             </div>
         </div>
@@ -1373,8 +1380,8 @@
                     <div class="project-name en-only">AppCopilot</div>
                     <div class="project-desc" data-key="proj_appcopilot">A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.</div>
                     <div class="project-links">
-                        <a href="#" class="project-link"><i class="far fa-file-alt"></i> Paper</a>
-                        <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        <button class="project-link" type="button" disabled aria-disabled="true"><i class="far fa-file-alt" aria-hidden="true"></i> Paper</button>
+                        <button class="project-link" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
                     </div>
                 </div>
             </div>
@@ -1386,8 +1393,8 @@
                     <div class="project-name en-only">TeachMaster</div>
                     <div class="project-desc" data-key="proj_teachmaster">A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.</div>
                     <div class="project-links">
-                        <a href="https://arxiv.org/abs/2601.04204v1" class="project-link"><i class="far fa-file-alt"></i> Paper</a>
-                        <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        <a class="project-link" href="https://arxiv.org/abs/2601.04204v1"><i class="far fa-file-alt" aria-hidden="true"></i> Paper</a>
+                        <button class="project-link" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
                     </div>
                 </div>
             </div>
@@ -1445,10 +1452,10 @@ const i18n = {
     "en": {
         "nav_about": "About",
         "nav_news": "News",
-        "nav_pubs": "Publications",
+        "nav_pubs": "Selected Publications",
         "nav_projects": "Projects",
         "title_news": "News",
-        "title_pubs": "Publications",
+        "title_pubs": "Selected Publications",
         "title_projects": "Projects",
         "weather_loc": "Shanghai",
         "hero_name": "Runde Yang <span style=\"font-weight:400;font-size:0.65em;color:var(--text-secondary);\">楊潤德</span>",
@@ -1465,10 +1472,10 @@ const i18n = {
     "zh-CN": {
         "nav_about": "关于",
         "nav_news": "动态",
-        "nav_pubs": "论文",
+        "nav_pubs": "精选论文",
         "nav_projects": "项目",
         "title_news": "动态",
-        "title_pubs": "发表论文",
+        "title_pubs": "精选论文",
         "title_projects": "项目经历",
         "weather_loc": "上海",
         "hero_name": "杨润德",
@@ -1485,10 +1492,10 @@ const i18n = {
     "zh-TW": {
         "nav_about": "關於",
         "nav_news": "動態",
-        "nav_pubs": "論文",
+        "nav_pubs": "精選論文",
         "nav_projects": "項目",
         "title_news": "動態",
-        "title_pubs": "發表論文",
+        "title_pubs": "精選論文",
         "title_projects": "項目經歷",
         "weather_loc": "上海",
         "hero_name": "楊潤德",
@@ -1693,9 +1700,9 @@ fetchWeather();
 
 /* ===== Citations ===== */
 const citations = {
+    "ModelSlices_2026": "@misc{wang2026collaborativelearningslices,\n  title={Collaborative Learning and Reasoning over Model Slices},\n  author={Yuheng Wang and Runde Yang and Zhuohan Bao and Qiran Zhang and Huatao Li and Yiyang Zheng and Lin Wu and Jingru Fan and Shu Yao and Yihan Li and Zhi Li and Chen Qian},\n  year={2026},\n  eprint={2610.12927},\n  archivePrefix={arXiv},\n  url={https://arxiv.org/abs/2610.12927}\n}",
     "Generative_2025": "@misc{wang2025generativeteachingcode,\n  title={Generative Teaching via Code},\n  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},\n  year={2025},\n  eprint={2601.04204},\n  archivePrefix={arXiv},\n  primaryClass={cs.CY},\n  url={https://arxiv.org/abs/2601.04204}\n}",
-    "PRISM_2026": "@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,\n      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning}, \n      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},\n      year={2026},\n      eprint={2605.19382},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2605.19382}, \n}",
-    "AppCopilot_2025": "@misc{fan2025appcopilotgeneralaccuratelonghorizon,\n  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},\n  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},\n  year={2025},\n  eprint={2509.02444},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2509.02444}\n}"
+    "PRISM_2026": "@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,\n      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning}, \n      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},\n      year={2026},\n      eprint={2605.19382},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2605.19382}, \n}"
 };
 
 function copyCitation(id) {
