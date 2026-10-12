@@ -61,6 +61,8 @@ def load_geography():
 
 
 def cities(colours):
+    # 新增到访城市只编辑 site_content.json 的 life.footprints.visited_china。
+    # 使用地图中的地级市全称（如“昆明市”）；直辖市按整市合并，不能填区县名或简称。
     visited = set(read_json(ROOT / "site_content.json")["life"]["footprints"]["visited_china"])
     municipalities = {110000: "北京市", 120000: "天津市", 310000: "上海市", 500000: "重庆市"}
     grouped = {}
@@ -83,6 +85,8 @@ def cities(colours):
 
 
 def regional_units(identifier):
+    # 海外行政单元目前仅备好几何，尚未配置到访记录或彩色材质；visited_countries 是旧地图字段。
+    # 扩展海外点亮时，需同时为这里的区域 ID 设置 visited、准备相应的省/州材质栅格并重渲。
     features = read_json(WORK / "cache" / "ne_10m_admin_1_states_provinces.geojson")["features"]
     grouped = {}
     for feature in features:
@@ -203,6 +207,7 @@ def polygon_path(geometry):
 
 
 def route_data(metadata, journeys, provinces):
+    # 输入是 prepare-footprint-routes.py 生成的真实路网；此处只投影和裁切，不连接途经点画直线。
     projection = Transformer.from_crs("EPSG:4326", metadata["projection"], always_xy=True)
     west, south, east, north = metadata["extent_km"]
     width, height = metadata["width"], metadata["height"]
@@ -228,6 +233,7 @@ def route_data(metadata, journeys, provinces):
                                  "points": [[round(horizontal, 2), round(vertical, 2)] for horizontal, vertical in simplified.coords]})
         if segments:
             corridor_width = STYLE["corridor_width_km"][journey["kind"]]
+            # 配置是整条走廊的总宽度（km），buffer 使用半宽（m）；只点亮沿途窄带，不标记沿途整座城市。
             route_line = transform(projection.transform, shape(journey["geometry"]))
             corridor = route_line.buffer(corridor_width*500, quad_segs=6).intersection(land)
             corridor = affine_transform(corridor, pixel_transform).intersection(box(0, 0, width, height))
@@ -238,36 +244,9 @@ def route_data(metadata, journeys, provinces):
     return output
 
 
-def terrain_coverage(grid_path, size):
-    with np.load(grid_path) as grid:
-        mask = grid["mask"].astype(bool) & np.isfinite(grid["elevation"])
-    faces = mask[:-1, :-1] & mask[1:, :-1] & mask[1:, 1:] & mask[:-1, 1:]
-    coverage = Image.fromarray(faces.astype(np.uint8) * 255)
-    return coverage.resize((size[0] * 2, size[1] * 2), Image.Resampling.NEAREST).resize(size, Image.Resampling.BOX)
-
-
-def display_render(image, coverage, background, variant):
-    settings = STYLE["display"]
-    sea = np.array([int(settings["sea"][index:index + 2], 16) for index in (1, 3, 5)], dtype=np.float32)
-    source = np.asarray(image.convert("RGB"))
-    output = np.empty_like(source)
-    alpha = np.asarray(coverage)
-    for start in range(0, image.height, 256):
-        stop = start + 256
-        pixels = source[start:stop].astype(np.float32)
-        land = alpha[start:stop, :, None].astype(np.float32) / 255
-        water = pixels * (sea / np.asarray(background, dtype=np.float32))
-        if variant == "relief":
-            luminance = pixels @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32)
-            white = 255 * (1 - settings["white_shadow_strength"] * (1 - luminance / 255) ** settings["white_shadow_gamma"])
-            terrain = white[:, :, None]
-        else:
-            terrain = pixels
-        output[start:stop] = np.rint(np.clip(terrain * land + water * (1 - land), 0, 255)).astype(np.uint8)
-    return Image.fromarray(output)
-
-
-def package(identifiers, render_root=WORK):
+def package(identifiers, render_root):
+    # 复用已经渲好的白色/全省彩色 PNG；新增中国城市或路线只更新裁切几何，无需重跑 Blender。
+    visited = set(read_json(ROOT / "site_content.json")["life"]["footprints"]["visited_china"])
     journeys = read_json(ROOT / "assets" / "maps" / "footprint-journeys.json")["routes"]
     routes = load_module(ROOT / "scripts" / "prepare-footprint-routes.py", "footprint_routes")
     provinces, _, _ = routes.load_provinces(routes.DEFAULT_PROVINCE_PATH)
@@ -276,20 +255,27 @@ def package(identifiers, render_root=WORK):
     for identifier in identifiers:
         metadata = read_json(render_root / "data" / (identifier + ".json"))
         metadata["title"] = CONFIGS[identifier]["title"]
+        if identifier == "china":
+            unknown = visited - {region["name"] for region in metadata["regions"]}
+            if unknown:
+                raise ValueError("Unknown prefecture-level city names: " + ", ".join(sorted(unknown)))
+        for region in metadata["regions"]:
+            if "province" in region:
+                region["visited"] = region["name"] in visited
         metadata["region_colors"] = {str(index): colour for index, colour in enumerate(metadata["palette"], start=1)}
         render_report = read_json(render_root / "renders" / (identifier + "-render.json"))
-        coverage = terrain_coverage(render_root / "data" / (identifier + ".npz"), (metadata["width"], metadata["height"]))
         for variant in ("relief", "colour") if identifier != "europe_usa" else ("relief",):
             with Image.open(render_root / "renders" / f"{identifier}-{variant}.png") as image:
                 assert image.size == (metadata["width"], metadata["height"])
                 if variant == "relief":
                     samples = image.convert("RGB").resize((160, 160), Image.Resampling.NEAREST)
                     background = max(samples.getcolors(25600), key=lambda item: item[0])[1]
-                styled = display_render(image, coverage, background, variant)
-                styled.save(OUTPUT / f"{identifier}-{variant}.webp", quality=95, method=6)
+                # 只进行 WebP 编码，禁止提亮、曲线或海色替换；阴影与海色必须来自 Blender 原始渲染。
+                image.convert("RGB").save(OUTPUT / f"{identifier}-{variant}.webp", quality=95, method=6)
         metadata.update(render_report)
-        metadata["display_background"] = STYLE["display"]["sea"]
-        metadata["display_treatment"] = STYLE["display"]
+        metadata["background"] = render_report.get("sea_material", metadata["background"])
+        metadata["display_background"] = "#" + "".join(f"{channel:02x}" for channel in background)
+        metadata["source_archive"] = render_root.resolve().relative_to(ROOT).as_posix()
         metadata["route_display"] = "coloured_terrain_corridor"
         metadata["routes"] = route_data(metadata, journeys, provinces) if identifier != "europe_usa" else []
         maps[identifier] = metadata
@@ -302,7 +288,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--prepare", action="store_true")
     parser.add_argument("--package", action="store_true")
-    parser.add_argument("--render-root", type=Path, default=WORK, help="Prepared data and original PNGs to package; accepts the archived footprints directory")
+    parser.add_argument("--render-root", type=Path, default=ROOT / STYLE["render_archive"], help="Prepared data and native PNGs; defaults to the production archive in footprints-style.json")
     parser.add_argument("--reuse-dem", action="store_true", help="Reuse prepared grids when only resolution, colours or visits change")
     parser.add_argument("--maps", nargs="+", choices=CONFIGS, default=list(CONFIGS))
     arguments = parser.parse_args()

@@ -23,7 +23,7 @@
 
 ## 全部文件归档与还原
 
-[`full-archive/README.md`](full-archive/README.md) 列出本机原四图工程、网站工作目录、网站生产工程、补充调试文件和服务器两套工程的完整清单。所有快照均不排除任何文件；原始 ZIP、DEM 下载瓦片、缓存、日志、渲染中间结果、旧图、QA 截图和 Python 字节码都保留。
+[`full-archive/README.md`](full-archive/README.md) 列出本机原四图工程、网站工作目录、网站生产工程、补充调试文件、服务器原两套工程，以及本次纯白材质版本的服务器/本机完整清单。所有快照均不排除任何文件；原始 ZIP、DEM 下载瓦片、缓存、日志、渲染中间结果、旧图、QA 截图和 Python 字节码都保留。
 
 每个快照保存原始目录结构、每个文件的字节数、时间戳和 SHA-256。相同内容复用仓库内的二进制素材或内容寻址分卷；大文件切为不超过 48 MiB 的分卷，避免 GitHub 单文件大小限制。还原后文件名、目录结构和内容与对应源目录一致。文本也按原始字节保存，保留原始换行符。服务器原始清单在 `full-archive/provenance/`，逐文件核对过下载前后的大小和 SHA-256。
 
@@ -38,16 +38,17 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 
 ## 三张网站地图
 
-`footprints/` 保存网站三图的完整生产素材：
+当前生产目录为 `footprints/material-white-20261012/`，由 `footprints-style.json` 的 `render_archive` 指定。下表路径均相对于该生产目录；原版仍完整保存在 `footprints/data/`、`footprints/scenes/`、`footprints/renders/`。
 
 | 内容 | 路径 |
 | --- | --- |
-| 中国白色 / 省份彩色地形工程 | `footprints/scenes/china-relief.blend`、`china-colour.blend` |
-| 东亚白色 / 省份彩色地形工程 | `footprints/scenes/east_asia-relief.blend`、`east_asia-colour.blend` |
-| 欧美白色地形工程 | `footprints/scenes/europe_usa-relief.blend` |
-| 三套 DEM、陆地掩膜、省份编号、投影和城市数据 | `footprints/data/` |
-| 五张原始高清 PNG 及渲染报告 | `footprints/renders/` |
-| 工程重新打开后的网格、材质、相机、光照验证和 SHA-256 | `footprints/scenes/*-scenes.json` |
+| 中国白色 / 省份彩色地形工程 | `scenes/china-relief.blend`、`scenes/china-colour.blend` |
+| 东亚白色 / 省份彩色地形工程 | `scenes/east_asia-relief.blend`、`scenes/east_asia-colour.blend` |
+| 欧美白色地形工程 | `scenes/europe_usa-relief.blend` |
+| 三套 DEM、陆地掩膜、省份编号、投影和城市数据 | `data/` |
+| 五张原始高清 PNG 及渲染报告 | `renders/` |
+| 工程重新打开后的网格、材质、相机、光照验证和 SHA-256 | `scenes/*-scenes.json` |
+| 三种海洋材质预览、生产日志、原生渲染脚本与配色输入 | `previews/`、`logs/`、`*.py`、`*.slurm`、`footprints-style.json` |
 
 这些工程由生成网站 PNG 的同一脚本、已核验 DEM 和参数导出。中国、东亚各保留两个材质版本，欧美尚无到访区域，因此保留白色版本，共五个 `.blend`。全部工程独立可打开，不依赖外置纹理；渲染输出使用相对路径指向旁边的 `renders/`。网站最终的城市与路线裁切在 `assets/maps/relief/atlas.json`，路线来源在 `assets/maps/footprint-journeys.json`；两者也随仓库保存。
 
@@ -59,7 +60,7 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 
 统一用 Blender 4.5.3 / Cycles CUDA、192 采样原生重渲，未对旧成图放大插值。DEM 网格沿用已核验的高程采样：中国 2300×1926、东亚 2400×1908、欧美 3000×1061。图像分辨率与地形数据分辨率是两个独立指标；这三张是区域尺度浮雕图。
 
-`footprints-style.json` 集中定义省份颜料、三张图的原始底色、网页显示色调、渲染宽度、采样数和线路显示宽度。`display` 使用东亚原图海色作为参考，将海洋统一为 `#839fab`，并用连续曲线提亮白色陆地中间调；陆地掩膜按原 DEM 网格面和正交相机范围生成，保留地形与沿岸阴影。省份的配色分组沿用原中国工程，再使用网站专用的赭石、鼠尾草绿、陶土、灰蓝、砂岩与紫灰调色板。归档 PNG、Blender 工程和 SHA-256 均保留原始内容，网页色调处理在打包阶段完成。
+`footprints-style.json` 集中定义 Blender 的省份颜料、纯白未到访材质、海洋材质、渲染宽度、采样数和线路显示宽度。海色与陆地材质都在 Cycles 中渲染，打包仅把原始 PNG 编码为 WebP，不做提亮曲线、压淡阴影或二次换海色。省份的配色分组沿用原中国工程，再使用网站专用的赭石、鼠尾草绿、陶土、灰蓝、砂岩与紫灰调色板。`render_archive` 指向本次独立保存的生产工程；历史 PNG、Blender 工程和 SHA-256 仍保留原始内容。
 
 所有未到访区域保留纯白漫反射材质和真实地形阴影。32° 西北日光与原四图一致。铁路与公路按真实路网生成投影缓冲多边形，分别显示为约 30 km、26 km 宽的地形走廊。这是为了区域地图可读性所作的宽度夸张，不是交通设施实际宽度，也不会把沿线整座城市标为到访。
 
@@ -68,7 +69,7 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 | 制作步骤 | 仓库脚本 |
 | --- | --- |
 | 铁路、公路网络重建与省界分段 | `../../scripts/prepare-footprint-routes.py` |
-| DEM、投影、城市和走廊几何、亮白色调与海色、WebP 打包 | `../../scripts/build-footprint-atlas.py` |
+| DEM、投影、城市和走廊几何、原生 PNG → WebP 打包 | `../../scripts/build-footprint-atlas.py` |
 | 三张图的白色与彩色材质渲染 | `../../scripts/render-footprint-atlas.py` |
 | 参数化 GPU 提交 | `../../scripts/render-footprint-atlas.slurm` |
 | 地理对齐、走廊覆盖、高清素材与源工程检查 | `../../scripts/validate-footprint-atlas.py` |
@@ -86,7 +87,7 @@ python scripts/prepare-footprint-routes.py
 python scripts/build-footprint-atlas.py --prepare
 ```
 
-更改配色、分辨率或到访城市时，可使用 `--prepare --reuse-dem` 复用 `.render-work/footprints/data/` 内的 DEM。网络来源与边界未更改时，无需重新请求线路服务；已发布的 `assets/maps/footprint-journeys.json` 即为完整路网输入。
+新增中国到访城市时，编辑 `site_content.json` 后直接 `--package` 即可，打包器会读取最新名单。完整操作和脚本注释入口见 [`ADDING-FOOTPRINTS.md`](ADDING-FOOTPRINTS.md)。更改配色、分辨率等渲染输入时，可使用 `--prepare --reuse-dem` 复用 `.render-work/footprints/data/` 内的 DEM，并在新目录重渲。网络来源与边界未更改时，无需重新请求线路服务；已发布的 `assets/maps/footprint-journeys.json` 即为完整路网输入。
 
 本机有 CUDA 时，分别渲染 `china`、`east_asia`、`europe_usa`：
 
@@ -94,12 +95,17 @@ python scripts/build-footprint-atlas.py --prepare
 blender --background --threads 8 --python-exit-code 1 --python scripts/render-footprint-atlas.py -- --root .render-work/footprints --map china
 ```
 
-加 `--save-scene` 可保存各材质版本的可编辑工程；`--scene-only` 仅导出并重新打开校验工程，不重复渲染。Slurm 可设置 `ATLAS_SCENE_ONLY=1`。已经归档的工程位于 `tools/relief-atlas/footprints/scenes/`。
+加 `--save-scene` 会保存并重新打开校验各材质版本的可编辑工程，包括纯白 Base Color 和零自发光检查；`--scene-only` 仅导出及校验工程，不重复渲染。Slurm 默认保存工程，也可设置 `ATLAS_SCENE_ONLY=1`。旧版工程位于 `tools/relief-atlas/footprints/scenes/`，当前版本由配色文件的 `render_archive` 指定。
 
-直接用归档 DEM 重建工程或高清 PNG，无需下载或预处理：
+直接复制归档 DEM 到新的工作目录再重建，无需下载或预处理，也不会覆盖历史工程：
+
+```powershell
+New-Item -ItemType Directory .render-work/footprints-rebuild
+Copy-Item tools/relief-atlas/footprints/material-white-20261012/data .render-work/footprints-rebuild/data -Recurse
+```
 
 ```text
-blender --background --threads 8 --python-exit-code 1 --python scripts/render-footprint-atlas.py -- --root tools/relief-atlas/footprints --map china --scene-only
+blender --background --threads 8 --python-exit-code 1 --python scripts/render-footprint-atlas.py -- --root .render-work/footprints-rebuild --map china --scene-only
 ```
 
 将 `china` 换成另外两个地图 ID 可导出其工程；移除 `--scene-only` 即渲染原尺寸 PNG。
@@ -112,9 +118,9 @@ export BLENDER_BIN=/path/to/blender-4.5.3-linux-x64/blender
 sbatch scripts/render-footprint-atlas.slurm
 ```
 
-可追加 `china` 等地图 ID，只渲染指定地图。`REPO_ROOT`、`ATLAS_WORK`、`REFERENCE_ROOT`、`RENDER_SCRIPT` 支持环境变量覆盖。下载准备与传输可在本机/登录节点处理，渲染仅在 GPU 计算节点执行。磁盘空间不足时分图渲染，回传并核验 SHA-256 后清理同一任务的重复中间图。
+可追加 `china` 等地图 ID，只渲染指定地图。`REPO_ROOT`、`ATLAS_WORK`、`REFERENCE_ROOT`、`RENDER_SCRIPT`、`STYLE_FILE` 支持环境变量覆盖。下载准备与传输可在本机/登录节点处理，渲染仅在 GPU 计算节点执行。所有输入、中间文件和结果先完整归档，再考虑清理远端副本。
 
-把 `renders/` 回传到 `.render-work/footprints/renders/` 后：
+把新工程、原始 PNG、输入和日志归档到独立目录，并更新 `render_archive` 后：
 
 ```powershell
 python scripts/build-footprint-atlas.py --package
@@ -125,10 +131,10 @@ node scripts/validate-life-runtime.cjs
 node scripts/validate-life-http.cjs http://127.0.0.1:8765/life.html
 ```
 
-仅调整网站亮白色调和海色时，可直接使用归档源文件，无需 Blender 或下载：
+复用当前原始渲染、更新到访城市或路线时，无需 Blender 或下载：
 
 ```powershell
-python scripts/build-footprint-atlas.py --package --render-root tools/relief-atlas/footprints
+python scripts/build-footprint-atlas.py --package
 ```
 
 页面仅按需加载 `assets/maps/relief/` 的高清 WebP、裁切几何与地区元数据，不加载 Blender 工程。查看大图后可滚轮缩放、双指缩放和拖动；中国最多 300%，东亚和欧美最多 200%，百分比按钮直达上限，`↺` 恢复适配，Esc 关闭大图并返回原按钮。所有缩放入口、窗口大小变化及像素密度共用固定上限。

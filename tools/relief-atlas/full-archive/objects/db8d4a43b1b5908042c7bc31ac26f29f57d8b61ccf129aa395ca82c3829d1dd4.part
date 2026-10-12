@@ -1,0 +1,121 @@
+PASS desktop china: the high-resolution map uses the new blue-grey sea
+PASS desktop china: inline map buttons respects 300% maximum
+PASS desktop china: the zoom-in button disables at the cap
+PASS desktop china: keyboard respects 300% maximum
+PASS desktop china: wheel / trackpad pinch respects 300% maximum
+PASS desktop china: double-click respects 300% maximum
+PASS desktop china: double-click reset respects 300% maximum
+PASS desktop china: maximum-zoom shortcut respects 300% maximum
+PASS desktop china: window resize respects 300% maximum
+PASS desktop china: large map buttons respects 300% maximum
+PASS desktop china: the zoom-in button disables at the cap
+PASS desktop china: keyboard respects 300% maximum
+PASS desktop china: wheel / trackpad pinch respects 300% maximum
+PASS desktop china: double-click respects 300% maximum
+PASS desktop china: double-click reset respects 300% maximum
+PASS desktop china: maximum-zoom shortcut respects 300% maximum
+PASS desktop china: window resize respects 300% maximum
+PASS desktop china: touch pinch respects 300% maximum
+PASS desktop china: pinching keeps page zoom unchanged
+PASS desktop china: large-map close respects 300% maximum
+PASS desktop east-asia: the high-resolution map uses the new blue-grey sea
+PASS desktop east-asia: inline map buttons respects 200% maximum
+PASS desktop east-asia: the zoom-in button disables at the cap
+PASS desktop east-asia: keyboard respects 200% maximum
+PASS desktop east-asia: wheel / trackpad pinch respects 200% maximum
+PASS desktop east-asia: double-click respects 200% maximum
+PASS desktop east-asia: double-click reset respects 200% maximum
+PASS desktop east-asia: maximum-zoom shortcut respects 200% maximum
+PASS desktop east-asia: window resize respects 200% maximum
+PASS desktop east-asia: large map buttons respects 200% maximum
+PASS desktop east-asia: the zoom-in button disables at the cap
+PASS desktop east-asia: keyboard respects 200% maximum
+PASS desktop east-asia: wheel / trackpad pinch respects 200% maximum
+PASS desktop east-asia: double-click respects 200% maximum
+PASS desktop east-asia: double-click reset respects 200% maximum
+PASS desktop east-asia: maximum-zoom shortcut respects 200% maximum
+PASS desktop east-asia: window resize respects 200% maximum
+PASS desktop east-asia: touch pinch respects 200% maximum
+PASS desktop east-asia: pinching keeps page zoom unchanged
+PASS desktop east-asia: large-map close respects 200% maximum
+PASS desktop euro-usa: the high-resolution map uses the new blue-grey sea
+PASS desktop euro-usa: inline map buttons respects 200% maximum
+PASS desktop euro-usa: the zoom-in button disables at the cap
+PASS desktop euro-usa: keyboard respects 200% maximum
+PASS desktop euro-usa: wheel / trackpad pinch respects 200% maximum
+PASS desktop euro-usa: double-click respects 200% maximum
+PASS desktop euro-usa: double-click reset respects 200% maximum
+PASS desktop euro-usa: maximum-zoom shortcut respects 200% maximum
+PASS desktop euro-usa: window resize respects 200% maximum
+PASS desktop euro-usa: large map buttons respects 200% maximum
+PASS desktop euro-usa: the zoom-in button disables at the cap
+PASS desktop euro-usa: keyboard respects 200% maximum
+PASS desktop euro-usa: wheel / trackpad pinch respects 200% maximum
+PASS desktop euro-usa: double-click respects 200% maximum
+PASS desktop euro-usa: double-click reset respects 200% maximum
+PASS desktop euro-usa: maximum-zoom shortcut respects 200% maximum
+PASS desktop euro-usa: window resize respects 200% maximum
+PASS desktop euro-usa: touch pinch respects 200% maximum
+PASS desktop euro-usa: pinching keeps page zoom unchanged
+PASS desktop euro-usa: large-map close respects 200% maximum
+PASS mobile china: the high-resolution map uses the new blue-grey sea
+PASS mobile china: inline map buttons respects 300% maximum
+PASS mobile china: the zoom-in button disables at the cap
+PASS mobile china: keyboard respects 300% maximum
+PASS mobile china: wheel / trackpad pinch respects 300% maximum
+PASS mobile china: double-click respects 300% maximum
+PASS mobile china: double-click reset respects 300% maximum
+PASS mobile china: maximum-zoom shortcut respects 300% maximum
+PASS mobile china: window resize respects 300% maximum
+PASS mobile china: large map buttons respects 300% maximum
+PASS mobile china: the zoom-in button disables at the cap
+PASS mobile china: keyboard respects 300% maximum
+PASS mobile china: wheel / trackpad pinch respects 300% maximum
+PASS mobile china: double-click respects 300% maximum
+PASS mobile china: double-click reset respects 300% maximum
+PASS mobile china: maximum-zoom shortcut respects 300% maximum
+PASS mobile china: window resize respects 300% maximum
+PASS mobile china: touch pinch respects 300% maximum
+PASS mobile china: pinching keeps page zoom unchanged
+PASS mobile china: large-map close respects 300% maximum
+PASS mobile east-asia: the high-resolution map uses the new blue-grey sea
+PASS mobile east-asia: inline map buttons respects 200% maximum
+PASS mobile east-asia: the zoom-in button disables at the cap
+PASS mobile east-asia: keyboard respects 200% maximum
+PASS mobile east-asia: wheel / trackpad pinch respects 200% maximum
+PASS mobile east-asia: double-click respects 200% maximum
+PASS mobile east-asia: double-click reset respects 200% maximum
+PASS mobile east-asia: maximum-zoom shortcut respects 200% maximum
+PASS mobile east-asia: window resize respects 200% maximum
+PASS mobile east-asia: large map buttons respects 200% maximum
+PASS mobile east-asia: the zoom-in button disables at the cap
+PASS mobile east-asia: keyboard respects 200% maximum
+PASS mobile east-asia: wheel / trackpad pinch respects 200% maximum
+PASS mobile east-asia: double-click respects 200% maximum
+PASS mobile east-asia: double-click reset respects 200% maximum
+PASS mobile east-asia: maximum-zoom shortcut respects 200% maximum
+PASS mobile east-asia: window resize respects 200% maximum
+PASS mobile east-asia: touch pinch respects 200% maximum
+PASS mobile east-asia: pinching keeps page zoom unchanged
+PASS mobile east-asia: large-map close respects 200% maximum
+PASS mobile euro-usa: the high-resolution map uses the new blue-grey sea
+PASS mobile euro-usa: inline map buttons respects 200% maximum
+PASS mobile euro-usa: the zoom-in button disables at the cap
+PASS mobile euro-usa: keyboard respects 200% maximum
+PASS mobile euro-usa: wheel / trackpad pinch respects 200% maximum
+PASS mobile euro-usa: double-click respects 200% maximum
+PASS mobile euro-usa: double-click reset respects 200% maximum
+PASS mobile euro-usa: maximum-zoom shortcut respects 200% maximum
+PASS mobile euro-usa: window resize respects 200% maximum
+PASS mobile euro-usa: large map buttons respects 200% maximum
+PASS mobile euro-usa: the zoom-in button disables at the cap
+PASS mobile euro-usa: keyboard respects 200% maximum
+PASS mobile euro-usa: wheel / trackpad pinch respects 200% maximum
+PASS mobile euro-usa: double-click respects 200% maximum
+PASS mobile euro-usa: double-click reset respects 200% maximum
+PASS mobile euro-usa: maximum-zoom shortcut respects 200% maximum
+PASS mobile euro-usa: window resize respects 200% maximum
+PASS mobile euro-usa: touch pinch respects 200% maximum
+PASS mobile euro-usa: pinching keeps page zoom unchanged
+PASS mobile euro-usa: large-map close respects 200% maximum
+Star map validation passed (120 interaction checks; screenshots in C:\Andrew_Allender\SJTUFreshman.github.io\.render-work\star-map).

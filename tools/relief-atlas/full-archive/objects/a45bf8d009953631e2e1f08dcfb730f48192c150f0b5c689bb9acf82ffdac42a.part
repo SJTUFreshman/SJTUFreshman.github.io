@@ -1,0 +1,84 @@
+"""Exercise city additions and railway refresh using isolated outputs and real caches."""
+
+from copy import deepcopy
+import importlib.util
+import json
+from pathlib import Path
+import shutil
+from unittest.mock import patch
+
+
+ROOT = Path(__file__).resolve().parents[3]
+WORK = Path(__file__).resolve().parent / "maintenance-check"
+WORK.mkdir(exist_ok=True)
+
+
+def load_script(filename, name):
+    spec = importlib.util.spec_from_file_location(name, ROOT / "scripts" / filename)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+builder = load_script("build-footprint-atlas.py", "maintenance_atlas")
+original_read = builder.read_json
+content = original_read(ROOT / "site_content.json")
+new_city = "天津市"
+assert new_city not in content["life"]["footprints"]["visited_china"]
+content["life"]["footprints"]["visited_china"].append(new_city)
+
+
+def with_added_city(path):
+    return deepcopy(content) if path == ROOT / "site_content.json" else original_read(path)
+
+
+builder.OUTPUT = WORK / "city-output"
+with patch.object(builder, "read_json", side_effect=with_added_city), patch.object(builder.Image.Image, "save") as encoder:
+    builder.package(["china", "east_asia"], ROOT / "tools/relief-atlas/footprints")
+    assert encoder.call_count == 4
+updated = original_read(builder.OUTPUT / "atlas.json")
+for identifier, metadata in updated["maps"].items():
+    expected = set(content["life"]["footprints"]["visited_china"])
+    available = {region["name"] for region in metadata["regions"] if "province" in region}
+    assert {region["name"] for region in metadata["regions"] if region["visited"]} == expected & available
+    assert any(region["name"] == new_city and region["visited"] for region in metadata["regions"])
+content["life"]["footprints"]["visited_china"].append("不存在的城市")
+with patch.object(builder, "read_json", side_effect=with_added_city):
+    try:
+        builder.package(["china"], ROOT / "tools/relief-atlas/footprints")
+    except ValueError as error:
+        assert "不存在的城市" in str(error)
+    else:
+        raise AssertionError("Unsupported city name was silently accepted")
+
+routes = load_script("prepare-footprint-routes.py", "maintenance_routes")
+cache = WORK / "route-cache"
+cache.mkdir(exist_ok=True)
+for pattern in ("brouter-*.json", "osrm-*.json", "rail-profile.json"):
+    for source in routes.DEFAULT_CACHE.parent.glob(pattern):
+        shutil.copyfile(source, cache / source.name)
+shutil.copyfile(cache / "brouter-beijing-shanghai-rail-0.json", cache / "brouter-maintenance-test-rail-0.json")
+routes.DEFAULT_CACHE = cache / "segments.json"
+routes.ROAD_CACHE = cache / "roads.json"
+itineraries = routes.build_routes()
+new_route = deepcopy(itineraries[0])
+new_route["id"] = "maintenance-test-rail"
+new_route["waypoints"] = new_route["waypoints"][:2]
+itineraries.append(new_route)
+rail_path = cache / "stale-rail-aggregate.json"
+rail_path.write_text('{"version":2,"routes":[]}', encoding="utf-8")
+with patch.object(routes, "build_routes", return_value=itineraries), \
+        patch.object(routes.requests, "get", side_effect=AssertionError("Unexpected network request")), \
+        patch.object(routes.requests, "post", side_effect=AssertionError("Unexpected profile request")), \
+        patch.object(routes, "urlopen", side_effect=AssertionError("Unexpected road request")):
+    refreshed = routes.prepare(routes.DEFAULT_PROVINCE_PATH, WORK / "test-journeys.json", routes.DEFAULT_CACHE,
+                               rail_path=rail_path, refresh_rail=True)
+assert len(refreshed["routes"]) == len(itineraries)
+added = next(route for route in refreshed["routes"] if route["id"] == new_route["id"])
+assert added["geometry_status"] == "network_routed" and len(added["geometry"]["coordinates"]) > 100
+assert added["source"]["verified_way_tags"] == "railway=rail for every routed edge"
+result = {"added_city_in_both_maps": new_city, "unknown_city_rejected": True,
+          "new_railway_in_refresh": new_route["id"], "requests_required": 0,
+          "production_content_unchanged": original_read(ROOT / "site_content.json")["life"]["footprints"]["visited_china"] != content["life"]["footprints"]["visited_china"]}
+(WORK / "result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+print(json.dumps(result, ensure_ascii=False, indent=2))

@@ -1,0 +1,39 @@
+"""Compare native sea materials with the website's city and route masks."""
+
+import json
+from pathlib import Path
+
+from PIL import Image, ImageChops, ImageDraw
+
+
+ROOT = Path(__file__).resolve().parents[3]
+WORK = Path(__file__).resolve().parent
+metadata = json.loads((ROOT / "assets/maps/relief/atlas.json").read_text(encoding="utf-8"))["maps"]["china"]
+preview = Image.open(WORK / "china-relief-8ca6b5.png")
+scale = preview.width / metadata["width"]
+mask = Image.new("1", preview.size)
+paths = [region["path"] for region in metadata["regions"] if region["visited"]]
+paths.extend(route["corridor_path"] for route in metadata["routes"])
+for path in paths:
+    region_mask = Image.new("1", preview.size)
+    for ring in path.replace("Z", "").split("M"):
+        if not ring:
+            continue
+        coordinates = [tuple(float(value) * scale for value in point.split(",")) for point in ring.split("L")]
+        ring_mask = Image.new("1", preview.size)
+        ImageDraw.Draw(ring_mask).polygon(coordinates, fill=1)
+        region_mask = ImageChops.logical_xor(region_mask, ring_mask)
+    mask = ImageChops.logical_or(mask, region_mask)
+
+sheet = Image.new("RGB", (2100, 670), "#101820")
+labels = ImageDraw.Draw(sheet)
+for index, colour in enumerate(("7595a6", "8ca6b5", "9eb5c0")):
+    relief = Image.open(WORK / f"china-relief-{colour}.png").convert("RGB")
+    pigments = Image.open(WORK / f"china-colour-{colour}.png").convert("RGB")
+    combined = Image.composite(pigments, relief, mask)
+    combined.save(WORK / f"china-composite-{colour}.png")
+    combined.thumbnail((690, 610), Image.Resampling.LANCZOS)
+    sheet.paste(combined, (index * 700 + 5, 45))
+    labels.text((index * 700 + 15, 15), f"Blender sea material: #{colour} / native white, no postprocessing", fill="white")
+sheet.save(WORK / "sea-material-comparison.jpg", quality=95)
+print((WORK / "sea-material-comparison.jpg").resolve())

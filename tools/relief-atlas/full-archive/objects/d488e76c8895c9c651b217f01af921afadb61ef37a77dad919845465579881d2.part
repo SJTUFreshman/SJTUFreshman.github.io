@@ -1,0 +1,27 @@
+{
+  "lighting": {
+    "sun_elevation_degrees": 32,
+    "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+    "sun_energy": 3.664663076400757,
+    "sun_angular_diameter_degrees": 3.0,
+    "world_strength": 0.45,
+    "horizontal_illuminance_matched_to_previous": true
+  },
+  "render_engine": "Blender 4.5.3 / Cycles CUDA",
+  "samples": 192,
+  "native_render_size": [
+    6000,
+    4770
+  ],
+  "gpu_devices": [
+    "NVIDIA A800-SXM4-80GB"
+  ],
+  "unvisited_material": "#ffffff",
+  "administrative_outlines": false,
+  "sea_material": "#8ca6b5",
+  "postprocessing": "none",
+  "outputs": {
+    "east_asia-relief.png": "f9bc26cfbaeb3a21b23003e3d9d2ea4e689bee17ae8c01bcf3123b2260fe8082",
+    "east_asia-colour.png": "5cde4fe1f30ff32c25eb36f732f3a5d24af8644df7bc9c700dee888a63e455b4"
+  }
+}

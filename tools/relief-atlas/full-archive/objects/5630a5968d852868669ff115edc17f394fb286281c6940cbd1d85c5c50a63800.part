@@ -1,0 +1,10 @@
+JobID|JobName|State|Elapsed|AllocTRES|NodeList
+213531|footprint-sea-study|FAILED|00:00:01|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g02
+213531.batch|batch|FAILED|00:00:01|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g02
+213531.extern|extern|COMPLETED|00:00:01|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g02
+213557|footprint-sea-study|COMPLETED|00:01:06|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g02
+213557.batch|batch|COMPLETED|00:01:06|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g02
+213557.extern|extern|COMPLETED|00:01:07|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a15g02
+213567|footprint-atlas|COMPLETED|00:08:54|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a18g01
+213567.batch|batch|COMPLETED|00:08:54|cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a18g01
+213567.extern|extern|COMPLETED|00:08:54|billing=8,cpu=8,gres/gpu=1,mem=125600M,node=1|d1n41a18g01

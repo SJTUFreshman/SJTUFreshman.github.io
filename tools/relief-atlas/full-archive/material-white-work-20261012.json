@@ -1,0 +1,1406 @@
+{
+  "version": 1,
+  "name": "material-white-work-20261012",
+  "created_at": "2026-10-12T14:24:33.364964+00:00",
+  "source": "C:\\Andrew_Allender\\SJTUFreshman.github.io\\.render-work\\footprints\\material-white-20261012",
+  "excluded_files": [],
+  "chunk_bytes": 50331648,
+  "directories": [
+    "maintenance-check",
+    "maintenance-check/city-output",
+    "maintenance-check/route-cache",
+    "native-download",
+    "qa",
+    "script-bytecode"
+  ],
+  "files": [
+    {
+      "path": "browser-check-local.txt",
+      "bytes": 7560,
+      "sha256": "db8d4a43b1b5908042c7bc31ac26f29f57d8b61ccf129aa395ca82c3829d1dd4",
+      "mtime_ns": 1791814774990844500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/db8d4a43b1b5908042c7bc31ac26f29f57d8b61ccf129aa395ca82c3829d1dd4.part",
+          "bytes": 7560,
+          "sha256": "db8d4a43b1b5908042c7bc31ac26f29f57d8b61ccf129aa395ca82c3829d1dd4"
+        }
+      ]
+    },
+    {
+      "path": "check-maintenance.py",
+      "bytes": 4378,
+      "sha256": "a45bf8d009953631e2e1f08dcfb730f48192c150f0b5c689bb9acf82ffdac42a",
+      "mtime_ns": 1791814061792500000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/a45bf8d009953631e2e1f08dcfb730f48192c150f0b5c689bb9acf82ffdac42a.part",
+          "bytes": 4378,
+          "sha256": "a45bf8d009953631e2e1f08dcfb730f48192c150f0b5c689bb9acf82ffdac42a"
+        }
+      ]
+    },
+    {
+      "path": "china-before-postprocessed.webp",
+      "bytes": 1631832,
+      "sha256": "9e4f6e9bd457a94ef7763ad15748414aecdaa0ba8f5c31a4175ad4a886381a1d",
+      "mtime_ns": 1791810599621296900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9e4f6e9bd457a94ef7763ad15748414aecdaa0ba8f5c31a4175ad4a886381a1d.part",
+          "bytes": 1631832,
+          "sha256": "9e4f6e9bd457a94ef7763ad15748414aecdaa0ba8f5c31a4175ad4a886381a1d"
+        }
+      ]
+    },
+    {
+      "path": "china-colour-7595a6.png",
+      "bytes": 1564116,
+      "sha256": "68f19984523ae25ff41e629be13349d10aa45fa6f934ff52c43bd7cfd6f8bf29",
+      "mtime_ns": 1791813753563413900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/previews/china-colour-7595a6.png",
+          "bytes": 1564116,
+          "sha256": "68f19984523ae25ff41e629be13349d10aa45fa6f934ff52c43bd7cfd6f8bf29"
+        }
+      ]
+    },
+    {
+      "path": "china-colour-8ca6b5.png",
+      "bytes": 1603173,
+      "sha256": "d7d17c184b42ddc7f364fe3baf521b77c116b39de8128e6679f6720aabc191ba",
+      "mtime_ns": 1791813755393001400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/previews/china-colour-8ca6b5.png",
+          "bytes": 1603173,
+          "sha256": "d7d17c184b42ddc7f364fe3baf521b77c116b39de8128e6679f6720aabc191ba"
+        }
+      ]
+    },
+    {
+      "path": "china-colour-9eb5c0.png",
+      "bytes": 1555718,
+      "sha256": "fd4e188326779fb09d57cfa82756364744cb507eb8b790eb96eb8cb88bdd0568",
+      "mtime_ns": 1791813757350850400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/previews/china-colour-9eb5c0.png",
+          "bytes": 1555718,
+          "sha256": "fd4e188326779fb09d57cfa82756364744cb507eb8b790eb96eb8cb88bdd0568"
+        }
+      ]
+    },
+    {
+      "path": "china-composite-7595a6.png",
+      "bytes": 1532385,
+      "sha256": "90534ca50130fe25723651fb58d2bcec3ad631de8c53f574ccf49a5599fd01cd",
+      "mtime_ns": 1791813809069578100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/90534ca50130fe25723651fb58d2bcec3ad631de8c53f574ccf49a5599fd01cd.part",
+          "bytes": 1532385,
+          "sha256": "90534ca50130fe25723651fb58d2bcec3ad631de8c53f574ccf49a5599fd01cd"
+        }
+      ]
+    },
+    {
+      "path": "china-composite-8ca6b5.png",
+      "bytes": 1547726,
+      "sha256": "9fdf7d8f91c94fdb87537d2bfd0da9b3942ba9d4abe49000cfae4814fb291c4f",
+      "mtime_ns": 1791813809578148000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9fdf7d8f91c94fdb87537d2bfd0da9b3942ba9d4abe49000cfae4814fb291c4f.part",
+          "bytes": 1547726,
+          "sha256": "9fdf7d8f91c94fdb87537d2bfd0da9b3942ba9d4abe49000cfae4814fb291c4f"
+        }
+      ]
+    },
+    {
+      "path": "china-composite-9eb5c0.png",
+      "bytes": 1486695,
+      "sha256": "99d1cee405d9044f5f1392819b2ad8aa13ba38f153508dc2b51a1d35f242cc82",
+      "mtime_ns": 1791813810106527400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/99d1cee405d9044f5f1392819b2ad8aa13ba38f153508dc2b51a1d35f242cc82.part",
+          "bytes": 1486695,
+          "sha256": "99d1cee405d9044f5f1392819b2ad8aa13ba38f153508dc2b51a1d35f242cc82"
+        }
+      ]
+    },
+    {
+      "path": "china-relief-7595a6.png",
+      "bytes": 1441834,
+      "sha256": "1dc9d6211908c38eca0f27dff5a916acb9d6dfcfa1b3987f99a9051205d2036d",
+      "mtime_ns": 1791813758910766100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/previews/china-relief-7595a6.png",
+          "bytes": 1441834,
+          "sha256": "1dc9d6211908c38eca0f27dff5a916acb9d6dfcfa1b3987f99a9051205d2036d"
+        }
+      ]
+    },
+    {
+      "path": "china-relief-8ca6b5.png",
+      "bytes": 1461688,
+      "sha256": "54d181aa0750e72ef44077ccfce54f71b4cf7439e33609d94f553b3f002e197b",
+      "mtime_ns": 1791813760495667700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/previews/china-relief-8ca6b5.png",
+          "bytes": 1461688,
+          "sha256": "54d181aa0750e72ef44077ccfce54f71b4cf7439e33609d94f553b3f002e197b"
+        }
+      ]
+    },
+    {
+      "path": "china-relief-9eb5c0.png",
+      "bytes": 1397918,
+      "sha256": "da43b47e5f1fd4188590cb32dc611460008b7f5a0652341dabbbd59e876ee46f",
+      "mtime_ns": 1791813762026070200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/previews/china-relief-9eb5c0.png",
+          "bytes": 1397918,
+          "sha256": "da43b47e5f1fd4188590cb32dc611460008b7f5a0652341dabbbd59e876ee46f"
+        }
+      ]
+    },
+    {
+      "path": "compare-seas.py",
+      "bytes": 1900,
+      "sha256": "d046fa34ed4cd4eed573e9d57eee5256b4febbced33630ee5911bbab89a30a3b",
+      "mtime_ns": 1791813807015474400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/d046fa34ed4cd4eed573e9d57eee5256b4febbced33630ee5911bbab89a30a3b.part",
+          "bytes": 1900,
+          "sha256": "d046fa34ed4cd4eed573e9d57eee5256b4febbced33630ee5911bbab89a30a3b"
+        }
+      ]
+    },
+    {
+      "path": "compare-shadows.py",
+      "bytes": 940,
+      "sha256": "67dbcacb7cd335d26d59eddbea1bbb4e6aac4d5037839799a99b6cb17447a6cd",
+      "mtime_ns": 1791814429385723400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/67dbcacb7cd335d26d59eddbea1bbb4e6aac4d5037839799a99b6cb17447a6cd.part",
+          "bytes": 940,
+          "sha256": "67dbcacb7cd335d26d59eddbea1bbb4e6aac4d5037839799a99b6cb17447a6cd"
+        }
+      ]
+    },
+    {
+      "path": "install-blender.sh",
+      "bytes": 668,
+      "sha256": "6b40f558c572e525bd3cafdbadc654da3cddea40503899dc46c7303d6e93906e",
+      "mtime_ns": 1791813391369214500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/6b40f558c572e525bd3cafdbadc654da3cddea40503899dc46c7303d6e93906e.part",
+          "bytes": 668,
+          "sha256": "6b40f558c572e525bd3cafdbadc654da3cddea40503899dc46c7303d6e93906e"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/city-output/atlas.json",
+      "bytes": 5021565,
+      "sha256": "f9089883c21481097aae5ac31f1b6549db8e46b2d2f73b058924882aeb2bff08",
+      "mtime_ns": 1791814090499668400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f9089883c21481097aae5ac31f1b6549db8e46b2d2f73b058924882aeb2bff08.part",
+          "bytes": 5021565,
+          "sha256": "f9089883c21481097aae5ac31f1b6549db8e46b2d2f73b058924882aeb2bff08"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/result.json",
+      "bytes": 204,
+      "sha256": "20004ba070e659f9d645b19ee20e4957042c966895061a5638fbb3c5dbc9ce42",
+      "mtime_ns": 1791814094427751300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/20004ba070e659f9d645b19ee20e4957042c966895061a5638fbb3c5dbc9ce42.part",
+          "bytes": 204,
+          "sha256": "20004ba070e659f9d645b19ee20e4957042c966895061a5638fbb3c5dbc9ce42"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-0.json",
+      "bytes": 22394,
+      "sha256": "da66409880a8942336a87ba22154d477d1221dca2fd0f79ad6a2e61dac500467",
+      "mtime_ns": 1791814091099007300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/da66409880a8942336a87ba22154d477d1221dca2fd0f79ad6a2e61dac500467.part",
+          "bytes": 22394,
+          "sha256": "da66409880a8942336a87ba22154d477d1221dca2fd0f79ad6a2e61dac500467"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-1.json",
+      "bytes": 60501,
+      "sha256": "b4d0b03d64708cb5dd7b1cfd2a9765b766f670bfbf1b3accf7f3a1cbf64ae2f7",
+      "mtime_ns": 1791814091102273100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b4d0b03d64708cb5dd7b1cfd2a9765b766f670bfbf1b3accf7f3a1cbf64ae2f7.part",
+          "bytes": 60501,
+          "sha256": "b4d0b03d64708cb5dd7b1cfd2a9765b766f670bfbf1b3accf7f3a1cbf64ae2f7"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-10.json",
+      "bytes": 7623,
+      "sha256": "a8d29f0d00b3050e97055ba23fb75957b6c67f20b146845fee5230d876658b9a",
+      "mtime_ns": 1791814091104333800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/a8d29f0d00b3050e97055ba23fb75957b6c67f20b146845fee5230d876658b9a.part",
+          "bytes": 7623,
+          "sha256": "a8d29f0d00b3050e97055ba23fb75957b6c67f20b146845fee5230d876658b9a"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-11.json",
+      "bytes": 9379,
+      "sha256": "22c5dcf58e6774c010bfe558d49b8777adae834bcc14e2f9e8b25cca96f37cc5",
+      "mtime_ns": 1791814091106532000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/22c5dcf58e6774c010bfe558d49b8777adae834bcc14e2f9e8b25cca96f37cc5.part",
+          "bytes": 9379,
+          "sha256": "22c5dcf58e6774c010bfe558d49b8777adae834bcc14e2f9e8b25cca96f37cc5"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-12.json",
+      "bytes": 19825,
+      "sha256": "f014b5a09857b374840b0c3a0835b3c0e43568199f0fbd217516df5f18c2e893",
+      "mtime_ns": 1791814091109899500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f014b5a09857b374840b0c3a0835b3c0e43568199f0fbd217516df5f18c2e893.part",
+          "bytes": 19825,
+          "sha256": "f014b5a09857b374840b0c3a0835b3c0e43568199f0fbd217516df5f18c2e893"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-2.json",
+      "bytes": 31116,
+      "sha256": "7577d690234a97935f84061d593a46bb503f59f075fc203723ca63a3b7b94a10",
+      "mtime_ns": 1791814091114038900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/7577d690234a97935f84061d593a46bb503f59f075fc203723ca63a3b7b94a10.part",
+          "bytes": 31116,
+          "sha256": "7577d690234a97935f84061d593a46bb503f59f075fc203723ca63a3b7b94a10"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-3.json",
+      "bytes": 31424,
+      "sha256": "31311e4339a73c1248adda37ca80a0bdbada583a4f444b8ff19333c363a74e81",
+      "mtime_ns": 1791814091115536600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/31311e4339a73c1248adda37ca80a0bdbada583a4f444b8ff19333c363a74e81.part",
+          "bytes": 31424,
+          "sha256": "31311e4339a73c1248adda37ca80a0bdbada583a4f444b8ff19333c363a74e81"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-4.json",
+      "bytes": 25092,
+      "sha256": "ac51773e3098eb74aa31a8b80088284c25c875f29dfbfba2dba58a5c76703771",
+      "mtime_ns": 1791814091117831200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/ac51773e3098eb74aa31a8b80088284c25c875f29dfbfba2dba58a5c76703771.part",
+          "bytes": 25092,
+          "sha256": "ac51773e3098eb74aa31a8b80088284c25c875f29dfbfba2dba58a5c76703771"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-5.json",
+      "bytes": 49574,
+      "sha256": "dd08bde75437b769f89ac52495b17731df6a8c934c30110616c1c55e257592b9",
+      "mtime_ns": 1791814091118875900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/dd08bde75437b769f89ac52495b17731df6a8c934c30110616c1c55e257592b9.part",
+          "bytes": 49574,
+          "sha256": "dd08bde75437b769f89ac52495b17731df6a8c934c30110616c1c55e257592b9"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-6.json",
+      "bytes": 23651,
+      "sha256": "8e95240bb8d0a718ca3e2633fc5d7cbaba8cd376ca6667b5dacc58cc5226bf11",
+      "mtime_ns": 1791814091122040900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/8e95240bb8d0a718ca3e2633fc5d7cbaba8cd376ca6667b5dacc58cc5226bf11.part",
+          "bytes": 23651,
+          "sha256": "8e95240bb8d0a718ca3e2633fc5d7cbaba8cd376ca6667b5dacc58cc5226bf11"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-7.json",
+      "bytes": 30959,
+      "sha256": "5d25aff5f24affdb005e0a2ec1357b5d608bb5bbc6b509d83cfa7ab09c2f9623",
+      "mtime_ns": 1791814091124537900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/5d25aff5f24affdb005e0a2ec1357b5d608bb5bbc6b509d83cfa7ab09c2f9623.part",
+          "bytes": 30959,
+          "sha256": "5d25aff5f24affdb005e0a2ec1357b5d608bb5bbc6b509d83cfa7ab09c2f9623"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-8.json",
+      "bytes": 16578,
+      "sha256": "9be851bd54fa08bcdec5fec883a85c1cf258906cffd97257e39ec95621ada9e8",
+      "mtime_ns": 1791814091125983600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9be851bd54fa08bcdec5fec883a85c1cf258906cffd97257e39ec95621ada9e8.part",
+          "bytes": 16578,
+          "sha256": "9be851bd54fa08bcdec5fec883a85c1cf258906cffd97257e39ec95621ada9e8"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-shanghai-rail-9.json",
+      "bytes": 11984,
+      "sha256": "e80f99d00c664c44ccb55a2d37f95a13f7c94e1e7aacaf38d0917a265f0a826b",
+      "mtime_ns": 1791814091129700300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e80f99d00c664c44ccb55a2d37f95a13f7c94e1e7aacaf38d0917a265f0a826b.part",
+          "bytes": 11984,
+          "sha256": "e80f99d00c664c44ccb55a2d37f95a13f7c94e1e7aacaf38d0917a265f0a826b"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-xian-rail-0.json",
+      "bytes": 50010,
+      "sha256": "bba5ae194df0be644856ee61c2118ac09ec4f6cef7f156dcafdf1203b73f2931",
+      "mtime_ns": 1791814091133085400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/bba5ae194df0be644856ee61c2118ac09ec4f6cef7f156dcafdf1203b73f2931.part",
+          "bytes": 50010,
+          "sha256": "bba5ae194df0be644856ee61c2118ac09ec4f6cef7f156dcafdf1203b73f2931"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-xian-rail-1.json",
+      "bytes": 41742,
+      "sha256": "b0f4470473b8c2723e8145160208edc5f52cdd4f160e8aa8a5c2782899e141bf",
+      "mtime_ns": 1791814091135252800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b0f4470473b8c2723e8145160208edc5f52cdd4f160e8aa8a5c2782899e141bf.part",
+          "bytes": 41742,
+          "sha256": "b0f4470473b8c2723e8145160208edc5f52cdd4f160e8aa8a5c2782899e141bf"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-xian-rail-2.json",
+      "bytes": 46034,
+      "sha256": "f0232fb71067d193abfb0beb2c8974749be0b3523bc4d68f06cac1b0d08beec1",
+      "mtime_ns": 1791814091136371900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f0232fb71067d193abfb0beb2c8974749be0b3523bc4d68f06cac1b0d08beec1.part",
+          "bytes": 46034,
+          "sha256": "f0232fb71067d193abfb0beb2c8974749be0b3523bc4d68f06cac1b0d08beec1"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-xian-rail-3.json",
+      "bytes": 21527,
+      "sha256": "a5fb6878595788cd5c4cc32a73da39a79ef1a877e3154c826f88f4b6cee8cdfb",
+      "mtime_ns": 1791814091138820900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/a5fb6878595788cd5c4cc32a73da39a79ef1a877e3154c826f88f4b6cee8cdfb.part",
+          "bytes": 21527,
+          "sha256": "a5fb6878595788cd5c4cc32a73da39a79ef1a877e3154c826f88f4b6cee8cdfb"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-xian-rail-4.json",
+      "bytes": 43484,
+      "sha256": "60e1a2a7d7092c375a9b02e8315b060945a703d39a5b2349123d5ed5c8daee82",
+      "mtime_ns": 1791814091140834000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/60e1a2a7d7092c375a9b02e8315b060945a703d39a5b2349123d5ed5c8daee82.part",
+          "bytes": 43484,
+          "sha256": "60e1a2a7d7092c375a9b02e8315b060945a703d39a5b2349123d5ed5c8daee82"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-xian-rail-5.json",
+      "bytes": 40998,
+      "sha256": "e5557b7393338a54e62cb5fb9a3905cf296ead808f94a86410b5fdcf435a9f2c",
+      "mtime_ns": 1791814091144192200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e5557b7393338a54e62cb5fb9a3905cf296ead808f94a86410b5fdcf435a9f2c.part",
+          "bytes": 40998,
+          "sha256": "e5557b7393338a54e62cb5fb9a3905cf296ead808f94a86410b5fdcf435a9f2c"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-xian-rail-6.json",
+      "bytes": 31505,
+      "sha256": "f712ad0f5c6353d11bef1a371587a4ab13f66591f755125727c61975d0b7d070",
+      "mtime_ns": 1791814091146587900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f712ad0f5c6353d11bef1a371587a4ab13f66591f755125727c61975d0b7d070.part",
+          "bytes": 31505,
+          "sha256": "f712ad0f5c6353d11bef1a371587a4ab13f66591f755125727c61975d0b7d070"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-xian-rail-7.json",
+      "bytes": 64295,
+      "sha256": "95d1265e9f268845b9f6ce3c15e187e8f3c7c745964a4fd1acddea3c2d72ab99",
+      "mtime_ns": 1791814091149893500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/95d1265e9f268845b9f6ce3c15e187e8f3c7c745964a4fd1acddea3c2d72ab99.part",
+          "bytes": 64295,
+          "sha256": "95d1265e9f268845b9f6ce3c15e187e8f3c7c745964a4fd1acddea3c2d72ab99"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-beijing-xian-rail-8.json",
+      "bytes": 24736,
+      "sha256": "88181c7462401ef98c837b631f09ca11e408ad0bf448429e8b3cf3c6c41d7a45",
+      "mtime_ns": 1791814091153542800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/88181c7462401ef98c837b631f09ca11e408ad0bf448429e8b3cf3c6c41d7a45.part",
+          "bytes": 24736,
+          "sha256": "88181c7462401ef98c837b631f09ca11e408ad0bf448429e8b3cf3c6c41d7a45"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-chengdu-chongqing-rail-0.json",
+      "bytes": 64330,
+      "sha256": "3daac4f16d1829cfef2fce3ef258b2e7d726b5444df746a65762c5f05ed9eb4c",
+      "mtime_ns": 1791814091156857700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/3daac4f16d1829cfef2fce3ef258b2e7d726b5444df746a65762c5f05ed9eb4c.part",
+          "bytes": 64330,
+          "sha256": "3daac4f16d1829cfef2fce3ef258b2e7d726b5444df746a65762c5f05ed9eb4c"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-chengdu-chongqing-rail-1.json",
+      "bytes": 54850,
+      "sha256": "bbcdfea0cfaa6098da3ff734da5ef149ab9152ecfa0247628fbfb7d94a3d5634",
+      "mtime_ns": 1791814091159829900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/bbcdfea0cfaa6098da3ff734da5ef149ab9152ecfa0247628fbfb7d94a3d5634.part",
+          "bytes": 54850,
+          "sha256": "bbcdfea0cfaa6098da3ff734da5ef149ab9152ecfa0247628fbfb7d94a3d5634"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-chengdu-chongqing-rail-2.json",
+      "bytes": 25850,
+      "sha256": "bf3f3a9cf472ce8681dcc8eea87ce73a03b931b775b41c8b39da4bcc8fe6542d",
+      "mtime_ns": 1791814091160832500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/bf3f3a9cf472ce8681dcc8eea87ce73a03b931b775b41c8b39da4bcc8fe6542d.part",
+          "bytes": 25850,
+          "sha256": "bf3f3a9cf472ce8681dcc8eea87ce73a03b931b775b41c8b39da4bcc8fe6542d"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-chengdu-chongqing-rail-3.json",
+      "bytes": 123528,
+      "sha256": "ed3fbfcda79b751541c929f43d72b80dce6d7e36fc979284030ee82013302395",
+      "mtime_ns": 1791814091164173600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/ed3fbfcda79b751541c929f43d72b80dce6d7e36fc979284030ee82013302395.part",
+          "bytes": 123528,
+          "sha256": "ed3fbfcda79b751541c929f43d72b80dce6d7e36fc979284030ee82013302395"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-lanzhou-chengdu-rail-0.json",
+      "bytes": 51622,
+      "sha256": "8db604991b4c3d9c90bc35116c0f143627ceb16bca6a8d7aed05722b969a150f",
+      "mtime_ns": 1791814091166663900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/8db604991b4c3d9c90bc35116c0f143627ceb16bca6a8d7aed05722b969a150f.part",
+          "bytes": 51622,
+          "sha256": "8db604991b4c3d9c90bc35116c0f143627ceb16bca6a8d7aed05722b969a150f"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-lanzhou-chengdu-rail-1.json",
+      "bytes": 11982,
+      "sha256": "39ae55503d50022a2d2d6abccf26933cd265febf5e102f27332e8b3d5bdb1d43",
+      "mtime_ns": 1791814091169020100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/39ae55503d50022a2d2d6abccf26933cd265febf5e102f27332e8b3d5bdb1d43.part",
+          "bytes": 11982,
+          "sha256": "39ae55503d50022a2d2d6abccf26933cd265febf5e102f27332e8b3d5bdb1d43"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-lanzhou-chengdu-rail-2.json",
+      "bytes": 23525,
+      "sha256": "782e36a29ec20eb83656a7b3e01a176352d99185d525a5a8a7cb6713165a145b",
+      "mtime_ns": 1791814091170032900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/782e36a29ec20eb83656a7b3e01a176352d99185d525a5a8a7cb6713165a145b.part",
+          "bytes": 23525,
+          "sha256": "782e36a29ec20eb83656a7b3e01a176352d99185d525a5a8a7cb6713165a145b"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-lanzhou-chengdu-rail-3.json",
+      "bytes": 25735,
+      "sha256": "04718c2b6396fc2b7b8ecdbad0553476a5e5705e4f245b19bb09ca4441ef31f2",
+      "mtime_ns": 1791814091172409000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/04718c2b6396fc2b7b8ecdbad0553476a5e5705e4f245b19bb09ca4441ef31f2.part",
+          "bytes": 25735,
+          "sha256": "04718c2b6396fc2b7b8ecdbad0553476a5e5705e4f245b19bb09ca4441ef31f2"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-maintenance-test-rail-0.json",
+      "bytes": 22394,
+      "sha256": "da66409880a8942336a87ba22154d477d1221dca2fd0f79ad6a2e61dac500467",
+      "mtime_ns": 1791814091227550800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/da66409880a8942336a87ba22154d477d1221dca2fd0f79ad6a2e61dac500467.part",
+          "bytes": 22394,
+          "sha256": "da66409880a8942336a87ba22154d477d1221dca2fd0f79ad6a2e61dac500467"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-qingdao-beijing-rail-0.json",
+      "bytes": 38905,
+      "sha256": "9880a5ef6bfbf9ba5c514b9fc5ed9f768d2b4112e2b8ef07179cd0629c18ae86",
+      "mtime_ns": 1791814091174974700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9880a5ef6bfbf9ba5c514b9fc5ed9f768d2b4112e2b8ef07179cd0629c18ae86.part",
+          "bytes": 38905,
+          "sha256": "9880a5ef6bfbf9ba5c514b9fc5ed9f768d2b4112e2b8ef07179cd0629c18ae86"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-qingdao-beijing-rail-1.json",
+      "bytes": 22446,
+      "sha256": "c2bf86c10efc3a2a668a24754c6764d541ac5f7a605fd993f036d37e23c1a799",
+      "mtime_ns": 1791814091177187700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/c2bf86c10efc3a2a668a24754c6764d541ac5f7a605fd993f036d37e23c1a799.part",
+          "bytes": 22446,
+          "sha256": "c2bf86c10efc3a2a668a24754c6764d541ac5f7a605fd993f036d37e23c1a799"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-qingdao-beijing-rail-2.json",
+      "bytes": 27616,
+      "sha256": "b2b4a0420c1d4948cd5d071e686b7b96688318ef82340b5628ad756bc9e8c630",
+      "mtime_ns": 1791814091179683300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b2b4a0420c1d4948cd5d071e686b7b96688318ef82340b5628ad756bc9e8c630.part",
+          "bytes": 27616,
+          "sha256": "b2b4a0420c1d4948cd5d071e686b7b96688318ef82340b5628ad756bc9e8c630"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-qingdao-beijing-rail-3.json",
+      "bytes": 30934,
+      "sha256": "6e3ffe0e5584ff9f21c20069cbd8dbdd32360d42594afa0445b9c2fe2b158f3a",
+      "mtime_ns": 1791814091182075800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/6e3ffe0e5584ff9f21c20069cbd8dbdd32360d42594afa0445b9c2fe2b158f3a.part",
+          "bytes": 30934,
+          "sha256": "6e3ffe0e5584ff9f21c20069cbd8dbdd32360d42594afa0445b9c2fe2b158f3a"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-qingdao-beijing-rail-4.json",
+      "bytes": 64121,
+      "sha256": "e47caa08e093e94431ed6a4fd83e8718d1310a52bd19cc0b0b5c4a13f6e8eab1",
+      "mtime_ns": 1791814091185443100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e47caa08e093e94431ed6a4fd83e8718d1310a52bd19cc0b0b5c4a13f6e8eab1.part",
+          "bytes": 64121,
+          "sha256": "e47caa08e093e94431ed6a4fd83e8718d1310a52bd19cc0b0b5c4a13f6e8eab1"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-qingdao-beijing-rail-5.json",
+      "bytes": 22701,
+      "sha256": "8e69ab34f2f437c03ebfdc298f5081bb975dba51c1cd5dfd56c3b778d2a02132",
+      "mtime_ns": 1791814091188093800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/8e69ab34f2f437c03ebfdc298f5081bb975dba51c1cd5dfd56c3b778d2a02132.part",
+          "bytes": 22701,
+          "sha256": "8e69ab34f2f437c03ebfdc298f5081bb975dba51c1cd5dfd56c3b778d2a02132"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-xian-lanzhou-rail-0.json",
+      "bytes": 6207,
+      "sha256": "5324b53df1ab869a3aa6191383072a16d0bf0eba668c01837b19d9d9e3bb28d1",
+      "mtime_ns": 1791814091189504600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/5324b53df1ab869a3aa6191383072a16d0bf0eba668c01837b19d9d9e3bb28d1.part",
+          "bytes": 6207,
+          "sha256": "5324b53df1ab869a3aa6191383072a16d0bf0eba668c01837b19d9d9e3bb28d1"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-xian-lanzhou-rail-1.json",
+      "bytes": 23128,
+      "sha256": "b0aefa4eae94901cefa7a614ce75911e4ac5962fc3c50dbeb60ba3c8cae383c1",
+      "mtime_ns": 1791814091192665800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b0aefa4eae94901cefa7a614ce75911e4ac5962fc3c50dbeb60ba3c8cae383c1.part",
+          "bytes": 23128,
+          "sha256": "b0aefa4eae94901cefa7a614ce75911e4ac5962fc3c50dbeb60ba3c8cae383c1"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-xian-lanzhou-rail-2.json",
+      "bytes": 39990,
+      "sha256": "a60472dd86046cadb7dfb7223ace1e578fb7a402f2dd55dd6ef5978f5f5b66e2",
+      "mtime_ns": 1791814091194816000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/a60472dd86046cadb7dfb7223ace1e578fb7a402f2dd55dd6ef5978f5f5b66e2.part",
+          "bytes": 39990,
+          "sha256": "a60472dd86046cadb7dfb7223ace1e578fb7a402f2dd55dd6ef5978f5f5b66e2"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-xian-lanzhou-rail-3.json",
+      "bytes": 66043,
+      "sha256": "65596e8779c1ee1976877f1da826c1357dfea74fadf135be484fa0c898f4aad4",
+      "mtime_ns": 1791814091198255000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/65596e8779c1ee1976877f1da826c1357dfea74fadf135be484fa0c898f4aad4.part",
+          "bytes": 66043,
+          "sha256": "65596e8779c1ee1976877f1da826c1357dfea74fadf135be484fa0c898f4aad4"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/brouter-xian-lanzhou-rail-4.json",
+      "bytes": 31077,
+      "sha256": "543b7269fee56f9b4678a4bac2faa6ed2f5b6535228cec0b9a81d4c23a903259",
+      "mtime_ns": 1791814091200767000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/543b7269fee56f9b4678a4bac2faa6ed2f5b6535228cec0b9a81d4c23a903259.part",
+          "bytes": 31077,
+          "sha256": "543b7269fee56f9b4678a4bac2faa6ed2f5b6535228cec0b9a81d4c23a903259"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/osrm-beijing-zhangjiakou-road.json",
+      "bytes": 281760,
+      "sha256": "e3b1cb6c8293de8d4b565bf9ad5847ca7d27d279238350d8bb4026791fbfdd61",
+      "mtime_ns": 1791814091206378400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e3b1cb6c8293de8d4b565bf9ad5847ca7d27d279238350d8bb4026791fbfdd61.part",
+          "bytes": 281760,
+          "sha256": "e3b1cb6c8293de8d4b565bf9ad5847ca7d27d279238350d8bb4026791fbfdd61"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/osrm-henan-jiangxi-shanghai-road.json",
+      "bytes": 452900,
+      "sha256": "22732662c322674157bbbb1fef3bdf93c763030570cfac460a24ea51bb419563",
+      "mtime_ns": 1791814091209882600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/22732662c322674157bbbb1fef3bdf93c763030570cfac460a24ea51bb419563.part",
+          "bytes": 452900,
+          "sha256": "22732662c322674157bbbb1fef3bdf93c763030570cfac460a24ea51bb419563"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/osrm-mudanjiang-beijing-road.json",
+      "bytes": 172815,
+      "sha256": "391e7a1735ed3527d2b6715d7d3cc02edb3c9198a8043af26401f13bf357f106",
+      "mtime_ns": 1791814091212360300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/391e7a1735ed3527d2b6715d7d3cc02edb3c9198a8043af26401f13bf357f106.part",
+          "bytes": 172815,
+          "sha256": "391e7a1735ed3527d2b6715d7d3cc02edb3c9198a8043af26401f13bf357f106"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/osrm-shanghai-mudanjiang-road.json",
+      "bytes": 350696,
+      "sha256": "79d3f6bd9aa592b56d8c1864689961048e7aac56be56ec43dc5e62c7a9171c66",
+      "mtime_ns": 1791814091216735300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/79d3f6bd9aa592b56d8c1864689961048e7aac56be56ec43dc5e62c7a9171c66.part",
+          "bytes": 350696,
+          "sha256": "79d3f6bd9aa592b56d8c1864689961048e7aac56be56ec43dc5e62c7a9171c66"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/osrm-xian-yinchuan-lanzhou-road.json",
+      "bytes": 411067,
+      "sha256": "ae6bcfe06e9f47d4b469f789d121ab54583e545fd6d674279a4de007bd6c55c3",
+      "mtime_ns": 1791814091220968200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/ae6bcfe06e9f47d4b469f789d121ab54583e545fd6d674279a4de007bd6c55c3.part",
+          "bytes": 411067,
+          "sha256": "ae6bcfe06e9f47d4b469f789d121ab54583e545fd6d674279a4de007bd6c55c3"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/osrm-yulin-xian-road.json",
+      "bytes": 193411,
+      "sha256": "d088c942ff28123d49df08bc65b45b7c8ddc6b2def3a65655d3fc1e666c97477",
+      "mtime_ns": 1791814091224063200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/d088c942ff28123d49df08bc65b45b7c8ddc6b2def3a65655d3fc1e666c97477.part",
+          "bytes": 193411,
+          "sha256": "d088c942ff28123d49df08bc65b45b7c8ddc6b2def3a65655d3fc1e666c97477"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/rail-profile.json",
+      "bytes": 37,
+      "sha256": "0573718540bab5d8496642f357b65da83e8145b0f6466e8136f023e8e1f49919",
+      "mtime_ns": 1791814091225168600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/0573718540bab5d8496642f357b65da83e8145b0f6466e8136f023e8e1f49919.part",
+          "bytes": 37,
+          "sha256": "0573718540bab5d8496642f357b65da83e8145b0f6466e8136f023e8e1f49919"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/roads.json",
+      "bytes": 1861055,
+      "sha256": "17c162e786e3f35ef3f05288a90076c3441a6d0890987dd657e948ca535aa244",
+      "mtime_ns": 1791814091788647000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/17c162e786e3f35ef3f05288a90076c3441a6d0890987dd657e948ca535aa244.part",
+          "bytes": 1861055,
+          "sha256": "17c162e786e3f35ef3f05288a90076c3441a6d0890987dd657e948ca535aa244"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/segments.json",
+      "bytes": 4962065,
+      "sha256": "c145d528fe0da2dc1cb6704c5ece5b4a63e026bd382d64b5e88eb8bc32eef13a",
+      "mtime_ns": 1791814094417086800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/c145d528fe0da2dc1cb6704c5ece5b4a63e026bd382d64b5e88eb8bc32eef13a.part",
+          "bytes": 4962065,
+          "sha256": "c145d528fe0da2dc1cb6704c5ece5b4a63e026bd382d64b5e88eb8bc32eef13a"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/route-cache/stale-rail-aggregate.json",
+      "bytes": 633346,
+      "sha256": "11e5ca6c714baf800d8aa396cb679a2126bdeaf8a265c5b8ba539b303d392814",
+      "mtime_ns": 1791814091907839800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/11e5ca6c714baf800d8aa396cb679a2126bdeaf8a265c5b8ba539b303d392814.part",
+          "bytes": 633346,
+          "sha256": "11e5ca6c714baf800d8aa396cb679a2126bdeaf8a265c5b8ba539b303d392814"
+        }
+      ]
+    },
+    {
+      "path": "maintenance-check/test-journeys.json",
+      "bytes": 4962767,
+      "sha256": "e2c469d461b1a7c4f32c153a1a9c81f2d77085a682d6c96131e4fb18302e9ed2",
+      "mtime_ns": 1791814094145033400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e2c469d461b1a7c4f32c153a1a9c81f2d77085a682d6c96131e4fb18302e9ed2.part",
+          "bytes": 4962767,
+          "sha256": "e2c469d461b1a7c4f32c153a1a9c81f2d77085a682d6c96131e4fb18302e9ed2"
+        }
+      ]
+    },
+    {
+      "path": "native-download/china-colour.blend",
+      "bytes": 69683762,
+      "sha256": "78e830ece1c0b4643d110ff1b9ab78c0faaacb359a3e7ac8cf8e60499a18d75b",
+      "mtime_ns": 1791814222388689700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/scenes/china-colour.blend",
+          "bytes": 69683762,
+          "sha256": "78e830ece1c0b4643d110ff1b9ab78c0faaacb359a3e7ac8cf8e60499a18d75b"
+        }
+      ]
+    },
+    {
+      "path": "native-download/china-colour.png",
+      "bytes": 29326625,
+      "sha256": "b8dc7a2c374e52a10fd69ec38d3c0f74d9898bd76a832a00b6728238281808a4",
+      "mtime_ns": 1791814283585937100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/renders/china-colour.png",
+          "bytes": 29326625,
+          "sha256": "b8dc7a2c374e52a10fd69ec38d3c0f74d9898bd76a832a00b6728238281808a4"
+        }
+      ]
+    },
+    {
+      "path": "native-download/china-relief.blend",
+      "bytes": 69620053,
+      "sha256": "f3649a1099648a872700d710e8d064c9a3273c61a4aaef45c78b5239538566cc",
+      "mtime_ns": 1791814261573799900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/scenes/china-relief.blend",
+          "bytes": 69620053,
+          "sha256": "f3649a1099648a872700d710e8d064c9a3273c61a4aaef45c78b5239538566cc"
+        }
+      ]
+    },
+    {
+      "path": "native-download/china-relief.png",
+      "bytes": 26121668,
+      "sha256": "19bc0b7ac67a06015897cb51e6d4b551100581ab7ac104a718ab19293741ae0c",
+      "mtime_ns": 1791814297990318500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/renders/china-relief.png",
+          "bytes": 26121668,
+          "sha256": "19bc0b7ac67a06015897cb51e6d4b551100581ab7ac104a718ab19293741ae0c"
+        }
+      ]
+    },
+    {
+      "path": "native-download/china-render.json",
+      "bytes": 786,
+      "sha256": "9e90cb19cc64e591c9971c26049c058791eca1ccabc12b4da4e4ef7bcad4b9cb",
+      "mtime_ns": 1791814299011700800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9e90cb19cc64e591c9971c26049c058791eca1ccabc12b4da4e4ef7bcad4b9cb.part",
+          "bytes": 786,
+          "sha256": "9e90cb19cc64e591c9971c26049c058791eca1ccabc12b4da4e4ef7bcad4b9cb"
+        }
+      ]
+    },
+    {
+      "path": "native-download/china-scenes.json",
+      "bytes": 892,
+      "sha256": "9b0a62648f61a500dae5428908b597569106e55634a417f104431e3f1789d7ba",
+      "mtime_ns": 1791814262781832000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9b0a62648f61a500dae5428908b597569106e55634a417f104431e3f1789d7ba.part",
+          "bytes": 892,
+          "sha256": "9b0a62648f61a500dae5428908b597569106e55634a417f104431e3f1789d7ba"
+        }
+      ]
+    },
+    {
+      "path": "native-download/east_asia-colour.blend",
+      "bytes": 68942958,
+      "sha256": "2f2e9c866b8834d6d911439071501173a36cb0ea96e184976e6b1f82978edafe",
+      "mtime_ns": 1791814407965582400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/scenes/east_asia-colour.blend",
+          "bytes": 68942958,
+          "sha256": "2f2e9c866b8834d6d911439071501173a36cb0ea96e184976e6b1f82978edafe"
+        }
+      ]
+    },
+    {
+      "path": "native-download/east_asia-colour.png",
+      "bytes": 27188822,
+      "sha256": "5cde4fe1f30ff32c25eb36f732f3a5d24af8644df7bc9c700dee888a63e455b4",
+      "mtime_ns": 1791814465983545600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/renders/east_asia-colour.png",
+          "bytes": 27188822,
+          "sha256": "5cde4fe1f30ff32c25eb36f732f3a5d24af8644df7bc9c700dee888a63e455b4"
+        }
+      ]
+    },
+    {
+      "path": "native-download/east_asia-relief.blend",
+      "bytes": 68880162,
+      "sha256": "0bf05d64865c426959e4c9626f9e9b2e391661b85b2cab811077fc8efb9050ec",
+      "mtime_ns": 1791814443892304500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/scenes/east_asia-relief.blend",
+          "bytes": 68880162,
+          "sha256": "0bf05d64865c426959e4c9626f9e9b2e391661b85b2cab811077fc8efb9050ec"
+        }
+      ]
+    },
+    {
+      "path": "native-download/east_asia-relief.png",
+      "bytes": 25063973,
+      "sha256": "f9bc26cfbaeb3a21b23003e3d9d2ea4e689bee17ae8c01bcf3123b2260fe8082",
+      "mtime_ns": 1791814480959978400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/material-white-20261012/renders/east_asia-relief.png",
+          "bytes": 25063973,
+          "sha256": "f9bc26cfbaeb3a21b23003e3d9d2ea4e689bee17ae8c01bcf3123b2260fe8082"
+        }
+      ]
+    },
+    {
+      "path": "native-download/east_asia-render.json",
+      "bytes": 794,
+      "sha256": "d488e76c8895c9c651b217f01af921afadb61ef37a77dad919845465579881d2",
+      "mtime_ns": 1791814481338004400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/d488e76c8895c9c651b217f01af921afadb61ef37a77dad919845465579881d2.part",
+          "bytes": 794,
+          "sha256": "d488e76c8895c9c651b217f01af921afadb61ef37a77dad919845465579881d2"
+        }
+      ]
+    },
+    {
+      "path": "native-download/east_asia-scenes.json",
+      "bytes": 900,
+      "sha256": "759e252eab00fc07e02d4676bfb7fd2610ad9477d064c47b1f2971c789f879c6",
+      "mtime_ns": 1791814444236380400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/759e252eab00fc07e02d4676bfb7fd2610ad9477d064c47b1f2971c789f879c6.part",
+          "bytes": 900,
+          "sha256": "759e252eab00fc07e02d4676bfb7fd2610ad9477d064c47b1f2971c789f879c6"
+        }
+      ]
+    },
+    {
+      "path": "native-fidelity.json",
+      "bytes": 1088,
+      "sha256": "f335f4bf0c5c471d40f90be66516eed912367a286b59a0fd2b0c4f78f001b0c0",
+      "mtime_ns": 1791814950815324500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f335f4bf0c5c471d40f90be66516eed912367a286b59a0fd2b0c4f78f001b0c0.part",
+          "bytes": 1088,
+          "sha256": "f335f4bf0c5c471d40f90be66516eed912367a286b59a0fd2b0c4f78f001b0c0"
+        }
+      ]
+    },
+    {
+      "path": "native-project-README.md",
+      "bytes": 2015,
+      "sha256": "b1858719b219fc80dbf00dce68815abd0242ac9b0ff664ee55024a8d84a4c2bc",
+      "mtime_ns": 1791814552456245900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b1858719b219fc80dbf00dce68815abd0242ac9b0ff664ee55024a8d84a4c2bc.part",
+          "bytes": 2015,
+          "sha256": "b1858719b219fc80dbf00dce68815abd0242ac9b0ff664ee55024a8d84a4c2bc"
+        }
+      ]
+    },
+    {
+      "path": "native-shadow-comparison.jpg",
+      "bytes": 491646,
+      "sha256": "6497b7b041039259e7c28eed4fd263c328102a638194f01e7c0e64a2852b8d88",
+      "mtime_ns": 1791814432966952000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/6497b7b041039259e7c28eed4fd263c328102a638194f01e7c0e64a2852b8d88.part",
+          "bytes": 491646,
+          "sha256": "6497b7b041039259e7c28eed4fd263c328102a638194f01e7c0e64a2852b8d88"
+        }
+      ]
+    },
+    {
+      "path": "preview-seas.slurm",
+      "bytes": 548,
+      "sha256": "5ae2146572b18b428e45e2da242763720634fd52ec33c6a98eaf481c85e13a67",
+      "mtime_ns": 1791813089800783300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/5ae2146572b18b428e45e2da242763720634fd52ec33c6a98eaf481c85e13a67.part",
+          "bytes": 548,
+          "sha256": "5ae2146572b18b428e45e2da242763720634fd52ec33c6a98eaf481c85e13a67"
+        }
+      ]
+    },
+    {
+      "path": "qa/footprints-desktop-china.png",
+      "bytes": 828451,
+      "sha256": "401e0d9e8128b67b6806e252ff7b3ba0f8af1c0ea304f70e7ec13015a4f7235e",
+      "mtime_ns": 1791814757710232300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/401e0d9e8128b67b6806e252ff7b3ba0f8af1c0ea304f70e7ec13015a4f7235e.part",
+          "bytes": 828451,
+          "sha256": "401e0d9e8128b67b6806e252ff7b3ba0f8af1c0ea304f70e7ec13015a4f7235e"
+        }
+      ]
+    },
+    {
+      "path": "qa/footprints-desktop-east-asia.png",
+      "bytes": 877557,
+      "sha256": "282c33fbf8939042ae9ffa19cf6588b90056e445a8837037a885f62dbcede52f",
+      "mtime_ns": 1791814760232784500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/282c33fbf8939042ae9ffa19cf6588b90056e445a8837037a885f62dbcede52f.part",
+          "bytes": 877557,
+          "sha256": "282c33fbf8939042ae9ffa19cf6588b90056e445a8837037a885f62dbcede52f"
+        }
+      ]
+    },
+    {
+      "path": "qa/footprints-desktop-euro-usa.png",
+      "bytes": 724310,
+      "sha256": "e77762257ccbff700e2e42521d87905b6a7ea4ae0049da33435b7adb65f2e3b1",
+      "mtime_ns": 1791814762897155200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e77762257ccbff700e2e42521d87905b6a7ea4ae0049da33435b7adb65f2e3b1.part",
+          "bytes": 724310,
+          "sha256": "e77762257ccbff700e2e42521d87905b6a7ea4ae0049da33435b7adb65f2e3b1"
+        }
+      ]
+    },
+    {
+      "path": "qa/footprints-mobile-china.png",
+      "bytes": 162895,
+      "sha256": "709648270463658bb8852f8bcd1686d42c110b39f4a3b50a04fcf6d4d89805d4",
+      "mtime_ns": 1791814769593665700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/709648270463658bb8852f8bcd1686d42c110b39f4a3b50a04fcf6d4d89805d4.part",
+          "bytes": 162895,
+          "sha256": "709648270463658bb8852f8bcd1686d42c110b39f4a3b50a04fcf6d4d89805d4"
+        }
+      ]
+    },
+    {
+      "path": "qa/footprints-mobile-east-asia.png",
+      "bytes": 156987,
+      "sha256": "bd2c9ae44e7fc1b9e8ba5239af98c0140480c3fae139f322df075f0217343d08",
+      "mtime_ns": 1791814772196186800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/bd2c9ae44e7fc1b9e8ba5239af98c0140480c3fae139f322df075f0217343d08.part",
+          "bytes": 156987,
+          "sha256": "bd2c9ae44e7fc1b9e8ba5239af98c0140480c3fae139f322df075f0217343d08"
+        }
+      ]
+    },
+    {
+      "path": "qa/footprints-mobile-euro-usa.png",
+      "bytes": 72821,
+      "sha256": "f67344d7ed45f9701b5ea62c9981b1d4d183b24ad42770dbb1413f1cf4f964fa",
+      "mtime_ns": 1791814774544341600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f67344d7ed45f9701b5ea62c9981b1d4d183b24ad42770dbb1413f1cf4f964fa.part",
+          "bytes": 72821,
+          "sha256": "f67344d7ed45f9701b5ea62c9981b1d4d183b24ad42770dbb1413f1cf4f964fa"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "bytes": 2548,
+      "sha256": "7f15cd24319d5300d2648d396a3b86371a69ed5997851f2af47d7b087f69ec2f",
+      "mtime_ns": 1791815066858636100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/7f15cd24319d5300d2648d396a3b86371a69ed5997851f2af47d7b087f69ec2f.part",
+          "bytes": 2548,
+          "sha256": "7f15cd24319d5300d2648d396a3b86371a69ed5997851f2af47d7b087f69ec2f"
+        }
+      ]
+    },
+    {
+      "path": "script-bytecode/build-footprint-atlas.cpython-313.pyc",
+      "bytes": 27685,
+      "sha256": "0f6d43fbf151d1288b642d969acb1b047df0a9975ec63d5dcf72af649b1b66fe",
+      "mtime_ns": 1791815066637822500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/0f6d43fbf151d1288b642d969acb1b047df0a9975ec63d5dcf72af649b1b66fe.part",
+          "bytes": 27685,
+          "sha256": "0f6d43fbf151d1288b642d969acb1b047df0a9975ec63d5dcf72af649b1b66fe"
+        }
+      ]
+    },
+    {
+      "path": "script-bytecode/colorize-footprint-relief.cpython-313.pyc",
+      "bytes": 4180,
+      "sha256": "e35a2ddf9843eb77ce373a03f3a1d2cb8e110be942dc7e9ae6eeae82bd1d0e5e",
+      "mtime_ns": 1791564299827982600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e35a2ddf9843eb77ce373a03f3a1d2cb8e110be942dc7e9ae6eeae82bd1d0e5e.part",
+          "bytes": 4180,
+          "sha256": "e35a2ddf9843eb77ce373a03f3a1d2cb8e110be942dc7e9ae6eeae82bd1d0e5e"
+        }
+      ]
+    },
+    {
+      "path": "script-bytecode/prepare-footprint-routes.cpython-313.pyc",
+      "bytes": 38836,
+      "sha256": "6891ab894b7fc94762b47f8f4f1fdf0ce2e6cc9725f3f39e8435fa1029262b30",
+      "mtime_ns": 1791815066650043500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/6891ab894b7fc94762b47f8f4f1fdf0ce2e6cc9725f3f39e8435fa1029262b30.part",
+          "bytes": 38836,
+          "sha256": "6891ab894b7fc94762b47f8f4f1fdf0ce2e6cc9725f3f39e8435fa1029262b30"
+        }
+      ]
+    },
+    {
+      "path": "script-bytecode/render-footprint-atlas.cpython-313.pyc",
+      "bytes": 15604,
+      "sha256": "5e4247468732950f89cf97caab2febce80ce64c7884b8f74c8bdf22bd16073fa",
+      "mtime_ns": 1791815066656105300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/5e4247468732950f89cf97caab2febce80ce64c7884b8f74c8bdf22bd16073fa.part",
+          "bytes": 15604,
+          "sha256": "5e4247468732950f89cf97caab2febce80ce64c7884b8f74c8bdf22bd16073fa"
+        }
+      ]
+    },
+    {
+      "path": "script-bytecode/validate-footprint-atlas.cpython-313.pyc",
+      "bytes": 23577,
+      "sha256": "04c19a1e3c1c33c3da239039d665e3557c96f47287c2e3f0dd75df5fb914621f",
+      "mtime_ns": 1791815066664343800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/04c19a1e3c1c33c3da239039d665e3557c96f47287c2e3f0dd75df5fb914621f.part",
+          "bytes": 23577,
+          "sha256": "04c19a1e3c1c33c3da239039d665e3557c96f47287c2e3f0dd75df5fb914621f"
+        }
+      ]
+    },
+    {
+      "path": "sea-material-comparison.jpg",
+      "bytes": 445470,
+      "sha256": "f10deb9ea8d6e8091fa974740ecfbd97f4d255eb0034b37014fa15980e378054",
+      "mtime_ns": 1791813810167658000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f10deb9ea8d6e8091fa974740ecfbd97f4d255eb0034b37014fa15980e378054.part",
+          "bytes": 445470,
+          "sha256": "f10deb9ea8d6e8091fa974740ecfbd97f4d255eb0034b37014fa15980e378054"
+        }
+      ]
+    }
+  ],
+  "file_count": 99,
+  "total_bytes": 424731247
+}

@@ -83,7 +83,7 @@
     min-height: 0;
     max-height: min(640px, 66dvh);
     overflow: hidden;
-    background: #839fab;
+    background: #8098a5;
 }
 
 .footprints-map-shell::after {

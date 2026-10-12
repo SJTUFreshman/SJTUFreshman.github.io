@@ -1,0 +1,40 @@
+{
+  "maps": 3,
+  "visited_china": 38,
+  "rail_routes": 6,
+  "road_routes": 6,
+  "native_render": {
+    "china": {
+      "shadow_contrast_ratio": 0.9994,
+      "luminance_slope": 0.9987,
+      "luminance_offset_255": 0.5038,
+      "sea": "#8098a5"
+    },
+    "east_asia": {
+      "shadow_contrast_ratio": 0.9993,
+      "luminance_slope": 0.9983,
+      "luminance_offset_255": 0.62,
+      "sea": "#8098a5"
+    },
+    "europe_usa": {
+      "shadow_contrast_ratio": 0.9997,
+      "luminance_slope": 0.9982,
+      "luminance_offset_255": 0.7375,
+      "sea": "#8098a5"
+    }
+  },
+  "network_coverage_percent": {
+    "beijing-shanghai-rail": 100.0,
+    "qingdao-beijing-rail": 100.0,
+    "beijing-xian-rail": 100.0,
+    "xian-lanzhou-rail": 100.0,
+    "lanzhou-chengdu-rail": 100.0,
+    "chengdu-chongqing-rail": 100.0,
+    "mudanjiang-beijing-road": 100.0,
+    "beijing-zhangjiakou-road": 100.0,
+    "yulin-xian-road": 100.0,
+    "xian-yinchuan-lanzhou-road": 100.0,
+    "henan-jiangxi-shanghai-road": 100.0,
+    "shanghai-mudanjiang-road": 100.0
+  }
+}

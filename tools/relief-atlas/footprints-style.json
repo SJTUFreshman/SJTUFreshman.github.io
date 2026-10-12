@@ -1,8 +1,9 @@
 {
-  "name": "Porcelain white / blue-grey sea / mineral pigments",
+  "name": "Pure white matte / blue-grey sea / mineral pigments",
   "palette": ["#d2ad63", "#9fb69b", "#c99483", "#8faeb9", "#d4c5a0", "#aa9bb5", "#b4c5a3", "#cfb77b"],
-  "backgrounds": {"china": "#e2ddcb", "east_asia": "#89aab6", "europe_usa": "#a4bcc0"},
-  "display": {"sea": "#839fab", "white_shadow_strength": 0.7, "white_shadow_gamma": 1.6},
+  "unvisited_material": "#ffffff",
+  "backgrounds": {"china": "#8ca6b5", "east_asia": "#8ca6b5", "europe_usa": "#8ca6b5"},
+  "render_archive": "tools/relief-atlas/footprints/material-white-20261012",
   "render_widths": {"china": 6000, "east_asia": 6000, "europe_usa": 8000},
   "corridor_width_km": {"rail": 30, "road": 26},
   "samples": 192

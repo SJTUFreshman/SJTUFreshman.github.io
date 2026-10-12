@@ -600,6 +600,7 @@ async function contentChecks(browser) {
 }
 
 async function footprintsChecks(browser) {
+    const productionAtlas = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../assets/maps/relief/atlas.json'), 'utf8'));
     for (const [label, viewportSize] of [['desktop', { width: 1440, height: 960 }], ['mobile', { width: 390, height: 844 }]]) {
         const context = await browser.newContext({ viewport: viewportSize, hasTouch: true, isMobile: label === 'mobile' });
         const page = await context.newPage();
@@ -611,7 +612,9 @@ async function footprintsChecks(browser) {
         await settle(page);
         await page.locator('.footprints-map-controls').first().waitFor();
         const session = await context.newCDPSession(page);
-        for (const [identifier, maximum] of [['china', 300], ['east-asia', 200], ['euro-usa', 200]]) {
+        for (const [identifier, atlasKey, maximum] of [['china', 'china', 300], ['east-asia', 'east_asia', 200], ['euro-usa', 'europe_usa', 200]]) {
+            const metadata = productionAtlas.maps[atlasKey];
+            const expectedSea = `rgb(${metadata.display_background.slice(1).match(/.{2}/g).map(channel => parseInt(channel, 16)).join(', ')})`;
             const box = page.locator(`#${identifier}Map`);
             const viewport = box.locator('.footprints-map-viewport');
             const readout = box.locator('.footprints-map-zoom');
@@ -620,8 +623,8 @@ async function footprintsChecks(browser) {
                 `${label} ${identifier}: ${method} respects ${maximum}% maximum`);
             await box.scrollIntoViewIfNeeded();
             await page.waitForFunction(id => !document.getElementById(id).classList.contains('is-map-loading'), `${identifier}Map`);
-            check(await box.locator('.footprints-map-terrain').evaluate(image => image.naturalWidth >= 6000)
-                && await box.evaluate(element => getComputedStyle(element).backgroundColor === 'rgb(131, 159, 171)'),
+            check(await box.locator('.footprints-map-terrain').evaluate((image, width) => image.naturalWidth === width, metadata.width)
+                && await box.evaluate((element, sea) => getComputedStyle(element).backgroundColor === sea, expectedSea),
             `${label} ${identifier}: the high-resolution map uses the new blue-grey sea`);
             for (const expanded of [false, true]) {
                 if (expanded) await box.locator('[data-map-action="expand"]').click();

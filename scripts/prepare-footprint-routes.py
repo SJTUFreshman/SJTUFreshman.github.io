@@ -40,6 +40,8 @@ assign costfactor switch railway=rail 1 100000
 ---context:node
 assign initialcost 0
 """
+# 新增铁路途经点时，同时在这里填真实车站附近的 [经度, 纬度]，名称须与 build_routes() 的 point 名称一致。
+# 公路使用途经点本身；铁路必须落到真实轨道网络，不能用城市中心代替车站。
 RAIL_STATIONS = {
     "北京": (116.4270, 39.9045), "天津": (117.2163, 39.1353),
     "德州": (116.2825, 37.4510), "济南": (116.9907, 36.6705),
@@ -99,6 +101,8 @@ def route(
 
 
 def build_routes() -> list[dict[str, Any]]:
+    # 在 routes 列表追加 route(...)：唯一英文 ID、三语名称、rail/road、按实际行程排序的途经点。
+    # 这里只描述行程，发布几何会由路由服务替换为真实路网；路过城市不会自动进入到访城市名单。
     beijing = point("北京", 116.405285, 39.904989)
     tianjin = point("天津", 117.190182, 39.125596)
     dezhou = point("德州", 116.357464, 37.434093)
@@ -590,11 +594,12 @@ def province_name(adcode: int, provinces: list[dict[str, Any]]) -> str:
     raise KeyError(adcode)
 
 
-def prepare(province_path: Path, output_path: Path, cache_path: Path, rail_path: Path = RAIL_CACHE, force_roads: bool = False) -> dict[str, Any]:
+def prepare(province_path: Path, output_path: Path, cache_path: Path, rail_path: Path = RAIL_CACHE, force_roads: bool = False, refresh_rail: bool = False) -> dict[str, Any]:
     provinces, _, colours = load_provinces(province_path)
     routes = build_routes()
     roads = fetch_road_routes(routes, force_roads)
-    if not rail_path.exists():
+    # 更改铁路行程后用 --refresh-rail 重建总表；未变的分段仍复用缓存，不用手动删除数据。
+    if refresh_rail or not rail_path.exists():
         fetch_rail_routes(routes, rail_path)
     replace_network_geometries(routes, roads, rail_path)
     for route_data in routes:
@@ -630,11 +635,12 @@ def main() -> None:
     parser.add_argument("--rail-geometries", type=Path, default=RAIL_CACHE)
     parser.add_argument("--fetch-roads-only", action="store_true")
     parser.add_argument("--force-roads", action="store_true")
+    parser.add_argument("--refresh-rail", action="store_true", help="Rebuild railway routes after adding/changing itineraries, reusing unchanged leg caches")
     arguments = parser.parse_args()
     if arguments.fetch_roads_only:
         fetch_road_routes(build_routes(), arguments.force_roads)
         return
-    result = prepare(arguments.provinces, arguments.output, arguments.cache, arguments.rail_geometries, arguments.force_roads)
+    result = prepare(arguments.provinces, arguments.output, arguments.cache, arguments.rail_geometries, arguments.force_roads, arguments.refresh_rail)
     route_count = len(result["routes"])
     segment_count = sum(len(item["segments"]) for item in result["routes"])
     print(f"Wrote {route_count} routes and {segment_count} province segments to {arguments.output}")

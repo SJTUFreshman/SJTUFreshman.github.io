@@ -74,7 +74,7 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 
 ## 内容生成
 
-Footprints 使用三张同光照的高清浮雕地图：中国、东亚为 6000 px 宽，跨大西洋的欧美连续地图为 8000 px 宽。未到访陆地经过亮白色调处理，海洋统一为参考东亚原图的蓝灰色；地形阴影和到访省份颜料保留。到访城市与真实路网沿线的窄幅地形走廊显露省份材质和山脊阴影；不会将沿线整座城市点亮。到访城市的名称和轮廓在悬停或键盘聚焦时出现。中国最多放大至适配尺寸的 300%，东亚和欧美最多 200%，内嵌地图和大图查看器的全部输入方式共用该上限。百分比按钮直达最大缩放，支持双指缩放、拖动与 Esc 关闭。地图来源、重建流程和行程推定范围见 [`../maps/relief/README.md`](../maps/relief/README.md)，四个原始 Blender 工程和全部制作脚本见 [`../../tools/relief-atlas/README.md`](../../tools/relief-atlas/README.md)。`22-footprints-atlas.js` 在 `17-content-ui.js` 后、`18-bootstrap.js` 前加载。
+Footprints 使用三张同光照的高清浮雕地图：中国、东亚为 6000 px 宽，跨大西洋的欧美连续地图为 8000 px 宽。未到访陆地使用 Blender 原生纯白、零自发光的哑光材质，海洋使用统一的灰蓝材质；发布时仅编码 WebP，不提亮成图或压淡地形阴影。到访城市与真实路网沿线的窄幅地形走廊显露省份材质和山脊阴影；不会将沿线整座城市点亮。到访城市的名称和轮廓在悬停或键盘聚焦时出现。中国最多放大至适配尺寸的 300%，东亚和欧美最多 200%，内嵌地图和大图查看器的全部输入方式共用该上限。百分比按钮直达最大缩放，支持双指缩放、拖动与 Esc 关闭。地图来源、重建流程和行程推定范围见 [`../maps/relief/README.md`](../maps/relief/README.md)，原始 Blender 工程与全部制作脚本见 [`../../tools/relief-atlas/README.md`](../../tools/relief-atlas/README.md)，新增城市与路线的步骤见 [`../../tools/relief-atlas/ADDING-FOOTPRINTS.md`](../../tools/relief-atlas/ADDING-FOOTPRINTS.md)。`22-footprints-atlas.js` 在 `17-content-ui.js` 后、`18-bootstrap.js` 前加载。
 
 `site_content.json` 是可编辑内容的来源。`site_renderer.py` 的 Life 渲染流程只维护两个产物：
 

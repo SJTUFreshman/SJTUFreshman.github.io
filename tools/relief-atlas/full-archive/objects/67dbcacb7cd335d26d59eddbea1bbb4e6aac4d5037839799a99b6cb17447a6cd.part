@@ -1,0 +1,22 @@
+"""Show the discarded postprocessing beside the native white material render."""
+
+from pathlib import Path
+
+from PIL import Image, ImageDraw
+
+
+WORK = Path(__file__).resolve().parent
+sheet = Image.new("RGB", (1840, 690), "#101820")
+labels = ImageDraw.Draw(sheet)
+sources = [
+    ("Previous published image / shadows compressed", WORK / "china-before-postprocessed.webp"),
+    ("Native pure-white material / original lighting and shadows", WORK / "native-download/china-relief.png"),
+]
+for index, (label, source) in enumerate(sources):
+    with Image.open(source) as original:
+        crop = original.crop((1050, 2550, 2850, 3800)).convert("RGB")
+        crop.thumbnail((900, 640), Image.Resampling.LANCZOS)
+        sheet.paste(crop, (index * 920 + 10, 45))
+        labels.text((index * 920 + 15, 15), label, fill="white")
+sheet.save(WORK / "native-shadow-comparison.jpg", quality=95)
+print((WORK / "native-shadow-comparison.jpg").resolve())

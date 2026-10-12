@@ -18,7 +18,7 @@ python scripts/prepare-cloudflare-pages-tests.py
 node scripts/validate-star-map.cjs --serve
 git add -A -- life.html assets scripts docs
 python scripts/prepare-cloudflare-pages.py --output .render-work/cloudflare-pages/site-YYYYMMDD
-npx --yes wrangler@4.148.0 pages deploy .render-work/cloudflare-pages/site-YYYYMMDD --project-name sjtufreshman --branch main
+npx --yes wrangler@4.149.0 pages deploy .render-work/cloudflare-pages/site-YYYYMMDD --project-name sjtufreshman --branch main
 ```
 
 Stage intended new files and deletions before building because the builder uses
@@ -40,7 +40,7 @@ an old atlas deployment, or the whole `.render-work` directory.
 If authentication has expired, run:
 
 ```powershell
-npx --yes wrangler@4.148.0 login --scopes account:read user:read pages:write
+npx --yes wrangler@4.149.0 login --scopes account:read user:read pages:write
 ```
 
 ## Verify
@@ -56,8 +56,8 @@ HTTP 404 on the new production deployment. The browser suite checks that mouse,
 touch, Enter and Space activation of the Solar System marker returns to the
 homepage and makes no retired solar resource requests. It also checks
 constellation content, gallery, index, deep-sky views, map gestures, mobile,
-WebGL fallback and reduced motion. The footprints group checks the bright-white
-maps, shared blue-grey ocean, and hard zoom caps (China 300%; East Asia and
+WebGL fallback and reduced motion. The footprints group checks the native white
+material maps, shared blue-grey ocean, and hard zoom caps (China 300%; East Asia and
 Europe/USA 200%) through inline and modal controls on desktop and mobile.
 
 Cloudflare retains previous deployments for rollback; their archived contents

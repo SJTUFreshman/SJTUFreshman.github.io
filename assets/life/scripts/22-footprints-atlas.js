@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    const ATLAS_VERSION = '20261012-porcelain';
+    // 城市或路线更新并重新打包后，同步修改此版本和 life.html 中脚本的 atlas 参数，避免旧地图缓存。
+    const ATLAS_VERSION = '20261012-native-white';
     const ATLAS_URL = `assets/maps/relief/atlas.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
@@ -288,7 +289,7 @@
         box.replaceChildren();
         box.classList.add('footprints-map-shell');
         box.style.aspectRatio = `${width} / ${height}`;
-        box.style.backgroundColor = map.display_background || map.background || '#839fab';
+        box.style.backgroundColor = map.display_background || map.background || '#8098a5';
         box.setAttribute('role', 'region');
         box.setAttribute('aria-label', mapDefinition(definition.id).label[currentLanguage] || mapDefinition(definition.id).label.en);
         const viewport = document.createElement('div');
@@ -479,6 +480,8 @@
             }
         };
 
+        // 城市与沿途走廊共用一个裁切：显露 Blender 的彩色地形，不覆盖色块或绘制路线描边。
+        // 到访名单与行程请修改生成脚本的输入，具体步骤见 tools/relief-atlas/ADDING-FOOTPRINTS.md。
         const visitedClipId = `footprints-${definition.id}-visited`;
         const visitedClip = svgElement('clipPath', { id: visitedClipId, clipPathUnits: 'userSpaceOnUse' });
         defs.append(visitedClip);

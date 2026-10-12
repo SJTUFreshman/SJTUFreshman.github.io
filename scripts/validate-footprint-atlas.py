@@ -43,9 +43,9 @@ def main():
     assert actual_visited == expected_visited
     assert {"成都市", "兰州市", "重庆市"} <= actual_visited
     lighting = None
-    display = read_json(ROOT / "tools/relief-atlas/footprints-style.json")["display"]
-    sea_colour = np.array([int(display["sea"][index:index + 2], 16) for index in (1, 3, 5)])
-    display_statistics = {}
+    style = read_json(ROOT / "tools/relief-atlas/footprints-style.json")
+    production = ROOT / style["render_archive"]
+    render_statistics = {}
     for identifier, metadata in atlas["maps"].items():
         assert metadata["continuous_extent"] and not metadata.get("panels")
         assert metadata["unvisited_material"] == "#ffffff"
@@ -71,32 +71,48 @@ def main():
             relief = image_arrays[metadata["image"]]
             colour = image_arrays[metadata["color_image"]]
             assert np.any(np.abs(relief - colour) > 5, axis=2).mean() > 0.01
-        assert metadata["display_background"] == display["sea"]
-        assert metadata["display_treatment"] == display
-        with Image.open(ROOT / "tools/relief-atlas/footprints/renders" / f"{identifier}-relief.png") as original:
-            original_pixels = np.asarray(original.convert("RGB"), dtype=np.int16)[::8, ::8]
+        assert metadata["postprocessing"] == "none" and "display_treatment" not in metadata
+        assert metadata["sea_material"] == style["backgrounds"][identifier]
+        assert metadata["source_archive"] == style["render_archive"]
+        for image_name, published_pixels in image_arrays.items():
+            source_path = production / "renders" / image_name.replace(".webp", ".png")
+            with source_path.open("rb") as source_file:
+                assert hashlib.file_digest(source_file, "sha256").hexdigest() == metadata["outputs"][source_path.name]
+            with Image.open(source_path) as original:
+                native_pixels = np.asarray(original.convert("RGB"))[::8, ::8].astype(np.int16)
+            difference = np.abs(published_pixels[::8, ::8] - native_pixels)
+            assert difference.mean() < 1.5 and np.percentile(difference, 95) <= 4, (identifier, "WebP must preserve the native Blender image without tonal edits")
+        with Image.open(production / "renders" / f"{identifier}-relief.png") as original:
+            original_pixels = np.asarray(original.convert("RGB"))[::8, ::8].astype(np.int16)
             samples = original.convert("RGB").resize((160, 160), Image.Resampling.NEAREST)
             original_sea = np.array(max(samples.getcolors(25600), key=lambda item: item[0])[1])
+        assert metadata["display_background"] == "#" + "".join(f"{channel:02x}" for channel in original_sea)
         neutral_land = (np.ptp(original_pixels, axis=2) <= 2) & (original_pixels.mean(axis=2) > 40)
         flat_sea = np.max(np.abs(original_pixels - original_sea), axis=2) <= 1
         published = image_arrays[metadata["image"]][::8, ::8]
         white_pixels = published[neutral_land]
         brightness = white_pixels.mean(axis=1)
-        assert np.median(brightness) >= 249, (identifier, "unvisited land must read as bright white")
-        assert np.percentile(brightness, 95) >= 254
-        assert brightness.std() > 5 and np.ptp(brightness) > 70, (identifier, "terrain shadows must remain visible")
-        assert np.percentile(np.ptp(white_pixels, axis=1), 95) <= 2, (identifier, "white land must stay neutral")
-        assert np.corrcoef(original_pixels[neutral_land].mean(axis=1), brightness)[0, 1] > 0.94
+        native_brightness = original_pixels[neutral_land].mean(axis=1)
+        assert brightness.std() > 12 and np.ptp(brightness) > 120, (identifier, "terrain shadows must remain visible")
+        shadow_contrast_ratio = brightness.std() / native_brightness.std()
+        assert 0.995 < shadow_contrast_ratio < 1.005, (identifier, "shadow contrast must not be flattened")
+        # WebP 的少量量化噪声对平坦陆地的相关系数影响更大；用明暗斜率和偏移直接检查是否提亮。
+        luminance_slope, luminance_offset = np.polyfit(native_brightness, brightness, 1)
+        assert abs(luminance_slope - 1) < 0.005 and abs(luminance_offset) < 1, (identifier, "native luminance must not be remapped")
         for pixels in image_arrays.values():
-            difference = np.abs(pixels[::8, ::8][flat_sea] - sea_colour)
+            difference = np.abs(pixels[::8, ::8][flat_sea] - original_sea)
             assert np.percentile(difference, 95) <= 2, (identifier, "both raster layers must share the sea colour")
-        if identifier in {"china", "east_asia"}:
-            with Image.open(ROOT / "tools/relief-atlas/footprints/renders" / f"{identifier}-colour.png") as original:
-                pigments = np.asarray(original.convert("RGB"), dtype=np.int16)[::8, ::8]
-            coloured_land = neutral_land & (np.ptp(pigments, axis=2) > 12)
-            difference = np.abs(image_arrays[metadata["color_image"]][::8, ::8][coloured_land] - pigments[coloured_land])
-            assert np.percentile(difference, 95) <= 5, (identifier, "visited province pigments must be preserved")
-        display_statistics[identifier] = {"land_median": round(float(np.median(brightness)), 2), "sea": metadata["display_background"]}
+        render_statistics[identifier] = {"shadow_contrast_ratio": round(float(shadow_contrast_ratio), 4),
+                                        "luminance_slope": round(float(luminance_slope), 4),
+                                        "luminance_offset_255": round(float(luminance_offset), 4),
+                                        "sea": metadata["display_background"]}
+        scene_reports = read_json(production / "scenes" / f"{identifier}-scenes.json")
+        assert scene_reports["relief"]["white_material_verified"]
+        for variant, report in scene_reports.items():
+            assert report["reopened"] and report["pigments_verified"] and report["lighting_verified"]
+            assert report["postprocessing"] == "none" and report["sea_material"] == metadata["sea_material"]
+            with (production / "scenes" / f"{identifier}-{variant}.blend").open("rb") as scene_file:
+                assert hashlib.file_digest(scene_file, "sha256").hexdigest() == report["sha256"]
         for region in metadata["regions"]:
             center_x, center_y = region["center"]
             assert 0 <= center_x <= metadata["width"] and 0 <= center_y <= metadata["height"]
@@ -142,7 +158,8 @@ def main():
     assert len([region for region in europe["regions"] if region.get("country") == "CHE"]) == 1
     assert len([region for region in europe["regions"] if region.get("country") == "FRA"]) >= 10
     assert len([region for region in europe["regions"] if region.get("country") == "USA"]) >= 48
-    assert len(journeys["routes"]) == 12
+    expected_routes = routes_module.build_routes()
+    assert {route["id"] for route in journeys["routes"]} == {route["id"] for route in expected_routes}
     rail_count = 0
     road_count = 0
     coverage = {}
@@ -167,7 +184,9 @@ def main():
         missing = source_line.difference(unary_union(rendered).buffer(0.000002)).length / source_line.length
         assert missing < 0.01, (route["id"], missing)
         coverage[route["id"]] = round((1-missing)*100, 3)
-    assert rail_count == road_count == 6
+    # 数量由行程输入推导，新增路线后仍检查全部线路，不把当前的六条铁路/六条公路写死。
+    assert rail_count == sum(route["kind"] == "rail" for route in expected_routes)
+    assert road_count == sum(route["kind"] == "road" for route in expected_routes)
     for identifier in ("shengsi", "china", "hainan", "fujian_taiwan"):
         reference = ROOT / "tools/relief-atlas/reference"
         assert (reference / "scenes" / (identifier + ".blend")).stat().st_size > 1000000
@@ -193,7 +212,7 @@ def main():
     for script in ("build-footprint-atlas.py", "prepare-footprint-routes.py", "render-footprint-atlas.py"):
         assert 'ROOT.parent / "relief-atlas-20261008"' not in (ROOT / "scripts" / script).read_text(encoding="utf-8")
     print(json.dumps({"maps": 3, "visited_china": len(actual_visited), "rail_routes": rail_count,
-                      "road_routes": road_count, "display": display_statistics, "network_coverage_percent": coverage}, ensure_ascii=False, indent=2))
+                      "road_routes": road_count, "native_render": render_statistics, "network_coverage_percent": coverage}, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
