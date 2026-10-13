@@ -1,5 +1,9 @@
 """Prepare network-routed footprint journeys and split them at province borders."""
 
+# 后续维护入口：tools/relief-atlas/ADDING-FOOTPRINTS.md（城市、公路、铁路示例及发布步骤）。
+# 本脚本维护行程；到访城市另改 site_content.json -> life.footprints.visited_china。
+# 修改后先运行本脚本，再运行 scripts/build-footprint-atlas.py --package；网页不直接读取本脚本。
+
 from __future__ import annotations
 
 import argparse
@@ -42,6 +46,8 @@ assign initialcost 0
 """
 # 新增铁路途经点时，同时在这里填真实车站附近的 [经度, 纬度]，名称须与 build_routes() 的 point 名称一致。
 # 公路使用途经点本身；铁路必须落到真实轨道网络，不能用城市中心代替车站。
+# 同城不同站请用不同键（如“上海”“上海虹桥”），不要覆盖老键使已有旅程一起改线。
+# 改车站坐标也要 --refresh-rail：总表存在时默认不重建，单改坐标不会自动刷新铁路。
 RAIL_STATIONS = {
     "北京": (116.4270, 39.9045), "天津": (117.2163, 39.1353),
     "德州": (116.2825, 37.4510), "济南": (116.9907, 36.6705),
@@ -69,6 +75,7 @@ PALETTE = json.loads((REFERENCE.parent / "footprints-style.json").read_text(enco
 
 
 def point(name: str, longitude: float, latitude: float) -> dict[str, Any]:
+    # 顺序是经度、纬度，路由端点使用 WGS84；不要直接粘贴 GCJ-02 / BD-09 地图坐标。
     return {"name": name, "coordinate": [round(longitude, 6), round(latitude, 6)]}
 
 
@@ -103,6 +110,9 @@ def route(
 def build_routes() -> list[dict[str, Any]]:
     # 在 routes 列表追加 route(...)：唯一英文 ID、三语名称、rail/road、按实际行程排序的途经点。
     # 这里只描述行程，发布几何会由路由服务替换为真实路网；路过城市不会自动进入到访城市名单。
+    # 至少两个途经点；rail 的每个 point 名称必须在 RAIL_STATIONS 中存在，road 则按 point 坐标寻路。
+    # ID 在所有 rail/road 条目间唯一且保持稳定；同一行程改顺序/站点时沿用 ID，新增行程使用新 ID。
+    # 精确走向用已知中间站/途经点约束；这里的 schematic 旧标记不允许绕过真实路网生成。
     beijing = point("北京", 116.405285, 39.904989)
     tianjin = point("天津", 117.190182, 39.125596)
     dezhou = point("德州", 116.357464, 37.434093)
@@ -398,6 +408,8 @@ def distance_metres(start: list[float], end: list[float]) -> float:
 
 
 def fetch_rail_routes(routes: list[dict[str, Any]], output: Path = RAIL_CACHE) -> None:
+    # --refresh-rail 重建总表并按完整请求 URL 复用分段；不是无条件重新下载所有轨道。
+    # 站名 KeyError 先补 RAIL_STATIONS；非铁路/分段不连通时修正真实站点，不能用直线或公路兜底。
     fetched = []
     profile_path = DEFAULT_CACHE.parent / "rail-profile.json"
     if profile_path.exists():
@@ -602,6 +614,7 @@ def prepare(province_path: Path, output_path: Path, cache_path: Path, rail_path:
     if refresh_rail or not rail_path.exists():
         fetch_rail_routes(routes, rail_path)
     replace_network_geometries(routes, roads, rail_path)
+    # 先核验网络几何再切省界；沿线地形点亮在打包器生成 corridor_path，不能直接把这些中心线画到网页。
     for route_data in routes:
         route_data["segments"] = split_route(route_data, provinces, colours)
         if not route_data["segments"]:

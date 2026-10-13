@@ -228,6 +228,14 @@
     animation: thought-reader-dim 500ms ease-out both;
 }
 
+.thought-reader[open].is-closing {
+    animation: thought-reader-exit 360ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+.thought-reader[open].is-closing::backdrop {
+    animation: thought-reader-undim 360ms ease-in both;
+}
+
 .thought-reader-toolbar {
     display: flex;
     flex-shrink: 0;
@@ -469,6 +477,16 @@
     to { opacity: 1; }
 }
 
+@keyframes thought-reader-exit {
+    from { opacity: var(--reader-exit-opacity, 1); transform: var(--reader-exit-transform, none); }
+    to { opacity: 0; transform: translateY(18px) scale(0.985); }
+}
+
+@keyframes thought-reader-undim {
+    from { background-color: var(--reader-exit-backdrop); backdrop-filter: var(--reader-exit-blur); }
+    to { background-color: transparent; backdrop-filter: blur(0); }
+}
+
 @media (max-width: 640px) {
     .thought-reader {
         width: 100vw;
@@ -555,6 +573,8 @@
 @media (prefers-reduced-motion: reduce) {
     .thought-reader[open],
     .thought-reader::backdrop,
+    .thought-reader[open].is-closing,
+    .thought-reader[open].is-closing::backdrop,
     .thought-reader[open] .thought-reader-article,
     .thought-reader[open] .thought-reader-toolbar,
     .thought-reader[open] .thought-reader-footer {

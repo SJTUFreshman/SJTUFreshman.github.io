@@ -973,6 +973,7 @@ def render_life_gallery(content: dict[str, Any]) -> str:
 
 
 def render_footprints(content: dict[str, Any]) -> str:
+    # 这里只生成三张浮雕图的挂载容器；新增城市/线路须按 tools/relief-atlas/ADDING-FOOTPRINTS.md 重新打包 atlas。
     hip = star_binding(content, "footprints", "footprints-map")
     return f"""            <section id="footprints" class="portal-content" data-portal-content="footprints" hidden>
                 <div class="maps-list" data-portal-entry="footprints-map" data-star-hip="{esc(hip)}">
@@ -1157,6 +1158,7 @@ def render_life_notes(content: dict[str, Any]) -> str:
 
 
 def render_visited(content: dict[str, Any]) -> str:
+    # 修改源名单后 --life-only 同步页面文案；还必须 build-footprint-atlas.py --package 才会点亮新城市。
     values = content["life"]["footprints"].get("visited_china", [])
     rows = ",\n".join(f"    {json.dumps(value, ensure_ascii=False)}" for value in values)
     return "const visited = [\n" + rows + "\n];"

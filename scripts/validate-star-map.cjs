@@ -470,6 +470,50 @@ async function mobileChecks(browser) {
     await context.close();
 }
 
+async function dismissThoughtReader(page, method, label) {
+    if (method === 'button') {
+        await page.locator('.thought-reader-close').click();
+    } else if (method === 'cancel') {
+        const cancellation = await page.evaluate(() => {
+            const reader = document.querySelector('#thoughtReader');
+            const opacity = Number(getComputedStyle(reader).opacity);
+            const transform = getComputedStyle(reader).transform;
+            const backdropColor = getComputedStyle(reader, '::backdrop').backgroundColor;
+            const backdropBlur = getComputedStyle(reader, '::backdrop').backdropFilter;
+            const event = new Event('cancel', { cancelable: true });
+            reader.dispatchEvent(event);
+            return event.defaultPrevented && Math.abs(Number(getComputedStyle(reader).opacity) - opacity) < 0.01
+                && getComputedStyle(reader).transform === transform
+                && getComputedStyle(reader, '::backdrop').backgroundColor === backdropColor
+                && getComputedStyle(reader, '::backdrop').backdropFilter === backdropBlur;
+        });
+        check(cancellation, `${label}: native cancellation continues from the current entrance opacity and position`);
+    } else {
+        await page.keyboard.press('Escape');
+    }
+    const transition = await page.evaluate(() => {
+        const reader = document.querySelector('#thoughtReader');
+        const animation = reader.getAnimations().find(item => item.animationName === 'thought-reader-exit');
+        if (!animation) return null;
+        const startOpacity = Number(getComputedStyle(reader).opacity);
+        animation.currentTime = animation.effect.getComputedTiming().duration / 2;
+        const midpointOpacity = Number(getComputedStyle(reader).opacity);
+        reader.dispatchEvent(new Event('cancel', { cancelable: true }));
+        return {
+            modal: reader.open && reader.matches(':modal') && state.modalOpen,
+            focused: reader.contains(document.activeElement),
+            backdrop: getComputedStyle(reader, '::backdrop').animationName === 'thought-reader-undim',
+            fading: midpointOpacity <= startOpacity && midpointOpacity < 1,
+            once: reader.getAnimations().filter(item => item.animationName === 'thought-reader-exit').length === 1
+                && reader.getAnimations().includes(animation)
+        };
+    });
+    check(transition?.modal && transition.focused && transition.backdrop && transition.fading && transition.once,
+        `${label}: ${method} fades the paper and backdrop, keeping one modal exit until completion`);
+    await page.waitForFunction(() => !state.modalOpen && !document.querySelector('#thoughtReader').open
+        && !document.querySelector('#thoughtReader').classList.contains('is-closing'));
+}
+
 async function contentChecks(browser) {
     for (const [label, viewport] of [
         ['desktop', { width: 1440, height: 960 }],
@@ -552,13 +596,21 @@ async function contentChecks(browser) {
             && verticalLayout.previousDisabled && verticalLayout.nextEnabled,
         `${label}: Traditional Chinese starts on the right and flows left in Kai columns without vertical clipping`);
         await screenshot(page, `essay-traditional-${label}`);
+        const pageAdvance = await page.evaluate(() => {
+            const scrollArea = document.querySelector('.thought-reader-scroll');
+            const columnWidth = parseFloat(getComputedStyle(document.querySelector('.thought-reader-body')).lineHeight);
+            const columns = Math.max(1, Math.floor(scrollArea.clientWidth / columnWidth) - 2);
+            return Math.min(columns * columnWidth, scrollArea.scrollWidth - scrollArea.clientWidth);
+        });
         await page.locator('[data-reader-step="1"]').click();
-        await page.waitForFunction(() => document.querySelector('.thought-reader-scroll').scrollLeft < -50);
+        await page.waitForFunction(distance => Math.abs(document.querySelector('.thought-reader-scroll').scrollLeft + distance) < 1,
+            pageAdvance);
         await page.locator('.thought-reader-scroll').focus();
         await page.keyboard.press('Home');
         await page.waitForFunction(() => document.querySelector('.thought-reader-scroll').scrollLeft === 0);
         await page.keyboard.press('PageDown');
-        await page.waitForFunction(() => document.querySelector('.thought-reader-scroll').scrollLeft < -50);
+        await page.waitForFunction(distance => Math.abs(document.querySelector('.thought-reader-scroll').scrollLeft + distance) < 1,
+            pageAdvance);
         check(true, `${label}: continuation controls and PageDown advance through the vertical essay`);
         await page.keyboard.press('Home');
         await page.locator('.thought-reader-scroll').dispatchEvent('wheel', { deltaY: 180, bubbles: true, cancelable: true });
@@ -617,8 +669,8 @@ async function contentChecks(browser) {
             check(await page.evaluate(() => document.querySelector('#thoughtReader').contains(document.activeElement)),
                 `${label}: Tab keeps keyboard focus within the reader (${step + 1})`);
         }
-        await page.keyboard.press('Escape');
-        await page.waitForFunction(() => !state.modalOpen && !document.querySelector('#thoughtReader').open);
+        await dismissThoughtReader(page, 'escape', label);
+        samePose(await pose(page), before, `${label}: the exit transition preserves the star map camera`);
         check(await trigger.evaluate(button => document.activeElement === button)
             && await page.evaluate(() => state.scene === 'detail' && state.activePortal?.id === 'thoughts' && state.activeStarHip === 95947),
         `${label}: Escape returns focus to the same essay without closing its constellation`);
@@ -630,14 +682,12 @@ async function contentChecks(browser) {
         check(await page.evaluate(() => document.querySelector('#thoughtReaderTitle').textContent
             === document.querySelector('[data-moment="thought-2026-01-16"] h3').textContent),
         `${label}: opening another essay replaces the reader content`);
-        await page.keyboard.press('Escape');
-        await page.waitForFunction(() => !state.modalOpen);
+        await dismissThoughtReader(page, 'cancel', label);
         await page.keyboard.press('Enter');
         await page.locator('#thoughtReader[open]').waitFor();
         check(await page.evaluate(() => state.modalOpen && document.querySelector('#thoughtReader').matches(':modal')),
             `${label}: Escape during entrance can be followed by reopening without a stuck modal`);
-        await page.locator('.thought-reader-close').click();
-        await page.waitForFunction(() => !state.modalOpen);
+        await dismissThoughtReader(page, 'button', label);
         check(await firstEssay.evaluate(button => document.activeElement === button),
             `${label}: the close button restores the essay trigger`);
         await page.locator('#portalClose').click();
@@ -832,7 +882,11 @@ async function reducedMotionChecks(browser) {
     await page.locator('[data-reader-step="1"]').click();
     check(await page.evaluate(() => document.querySelector('.thought-reader-scroll').scrollLeft < 0),
         'Reduced-motion vertical reading advances without smooth scrolling');
-    await page.keyboard.press('Escape');
+    check(await page.evaluate(() => {
+        document.querySelector('.thought-reader-close').click();
+        const reader = document.querySelector('#thoughtReader');
+        return !reader.open && !reader.classList.contains('is-closing') && reader.getAnimations().length === 0;
+    }), 'Reduced-motion visitors exit immediately without waiting for a closing animation');
     await page.waitForFunction(() => !state.modalOpen);
     await page.locator('#portalClose').click();
     await settle(page);

@@ -36,6 +36,8 @@ const lightboxLabels = {
 
 const thoughtReader = document.getElementById('thoughtReader');
 let thoughtReaderTrigger = null;
+let thoughtReaderExitAnimation = null;
+let thoughtReaderExitTimer = null;
 
 function updateThoughtReaderProgress() {
     if (!thoughtReader?.open) return;
@@ -129,6 +131,32 @@ function openThoughtReader(button) {
     scrollArea.focus({ preventScroll: true });
 }
 
+function closeThoughtReader() {
+    if (!thoughtReader?.open || thoughtReader.classList.contains('is-closing')) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        thoughtReader.close();
+        return;
+    }
+    const paperStyle = getComputedStyle(thoughtReader);
+    const backdropStyle = getComputedStyle(thoughtReader, '::backdrop');
+    thoughtReader.style.setProperty('--reader-exit-opacity', paperStyle.opacity);
+    thoughtReader.style.setProperty('--reader-exit-transform', paperStyle.transform);
+    thoughtReader.style.setProperty('--reader-exit-backdrop', backdropStyle.backgroundColor);
+    thoughtReader.style.setProperty('--reader-exit-blur', backdropStyle.backdropFilter);
+    thoughtReader.classList.add('is-closing');
+    const animation = thoughtReader.getAnimations().find(item => item.animationName === 'thought-reader-exit');
+    if (!animation) {
+        thoughtReader.close();
+        return;
+    }
+    thoughtReaderExitAnimation = animation;
+    const finish = () => {
+        if (thoughtReaderExitAnimation === animation && thoughtReader.open) thoughtReader.close();
+    };
+    thoughtReaderExitTimer = window.setTimeout(finish, 500);
+    animation.finished.then(finish, finish);
+}
+
 if (thoughtReader) {
     thoughtReader.addEventListener('scroll', updateThoughtReaderProgress, { passive: true, capture: true });
     const resizeObserver = new ResizeObserver(updateThoughtReaderProgress);
@@ -144,7 +172,11 @@ if (thoughtReader) {
     thoughtReader.querySelectorAll('[data-reader-step]').forEach(button => {
         button.addEventListener('click', () => advanceThoughtReader(Number(button.dataset.readerStep)));
     });
-    thoughtReader.querySelector('.thought-reader-close').addEventListener('click', () => thoughtReader.close());
+    thoughtReader.querySelector('.thought-reader-close').addEventListener('click', closeThoughtReader);
+    thoughtReader.addEventListener('cancel', event => {
+        event.preventDefault();
+        closeThoughtReader();
+    });
     thoughtReader.querySelector('.thought-reader-language').addEventListener('change', event => {
         setLang(event.target.value);
     });
@@ -165,7 +197,7 @@ if (thoughtReader) {
             }
         } else if (event.key === 'Escape') {
             event.preventDefault();
-            thoughtReader.close();
+            closeThoughtReader();
         } else if (thoughtReader.lang === 'zh-TW' && event.target === scrollArea && !event.ctrlKey && !event.metaKey && !event.altKey) {
             const forward = ['PageDown', 'ArrowLeft', 'ArrowDown'].includes(event.key) || (event.key === ' ' && !event.shiftKey);
             const backward = ['PageUp', 'ArrowRight', 'ArrowUp'].includes(event.key) || (event.key === ' ' && event.shiftKey);
@@ -179,6 +211,13 @@ if (thoughtReader) {
         }
     });
     thoughtReader.addEventListener('close', () => {
+        window.clearTimeout(thoughtReaderExitTimer);
+        thoughtReaderExitTimer = null;
+        thoughtReaderExitAnimation = null;
+        thoughtReader.classList.remove('is-closing');
+        for (const property of ['opacity', 'transform', 'backdrop', 'blur']) {
+            thoughtReader.style.removeProperty(`--reader-exit-${property}`);
+        }
         resumeAfterModal();
         if (thoughtReaderTrigger?.isConnected && thoughtReaderTrigger.getClientRects().length) {
             thoughtReaderTrigger.focus({ preventScroll: true });

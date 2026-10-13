@@ -1,5 +1,9 @@
 """Prepare aligned DEMs, then package Cycles rasters and interactive map geometry."""
 
+# 日常新增足迹先看 tools/relief-atlas/ADDING-FOOTPRINTS.md。
+# 城市名单 -> site_content.json；铁路/公路行程 -> prepare-footprint-routes.py -> footprint-journeys.json。
+# --package 把两类输入生成 atlas.json 裁切；--prepare 是准备重渲输入，不是新增城市的必经步骤。
+
 from __future__ import annotations
 
 import argparse
@@ -63,6 +67,7 @@ def load_geography():
 def cities(colours):
     # 新增到访城市只编辑 site_content.json 的 life.footprints.visited_china。
     # 使用地图中的地级市全称（如“昆明市”）；直辖市按整市合并，不能填区县名或简称。
+    # 可从当前生产归档 data/china.json 的 regions 查有效 name/id；没到访的途经市不要加入名单。
     visited = set(read_json(ROOT / "site_content.json")["life"]["footprints"]["visited_china"])
     municipalities = {110000: "北京市", 120000: "天津市", 310000: "上海市", 500000: "重庆市"}
     grouped = {}
@@ -207,6 +212,8 @@ def polygon_path(geometry):
 
 
 def route_data(metadata, journeys, provinces):
+    # EPSG:4326 -> 当前地图投影（米）-> 原生图片像素；不能在经纬度/像素空间直接 buffer 公里宽度。
+    # 中国与东亚各自投影和裁切；segments 记录中心线来源，corridor_path 才是网页显色区域。
     # 输入是 prepare-footprint-routes.py 生成的真实路网；此处只投影和裁切，不连接途经点画直线。
     projection = Transformer.from_crs("EPSG:4326", metadata["projection"], always_xy=True)
     west, south, east, north = metadata["extent_km"]
@@ -246,6 +253,8 @@ def route_data(metadata, journeys, provinces):
 
 def package(identifiers, render_root):
     # 复用已经渲好的白色/全省彩色 PNG；新增中国城市或路线只更新裁切几何，无需重跑 Blender。
+    # 新路线必须先生成 footprint-journeys.json；单跑 --package 不会访问路由服务或发现脚本中的新行程。
+    # 默认同时打包三张图，保证中国与东亚一致；render_root 由 footprints-style.json 的 render_archive 指定。
     visited = set(read_json(ROOT / "site_content.json")["life"]["footprints"]["visited_china"])
     journeys = read_json(ROOT / "assets" / "maps" / "footprint-journeys.json")["routes"]
     routes = load_module(ROOT / "scripts" / "prepare-footprint-routes.py", "footprint_routes")
@@ -260,6 +269,7 @@ def package(identifiers, render_root):
             if unknown:
                 raise ValueError("Unknown prefecture-level city names: " + ", ".join(sorted(unknown)))
         for region in metadata["regions"]:
+            # 归档元数据是渲染时的快照；用最新名单重算 visited，不能沿用旧快照中的到访状态。
             if "province" in region:
                 region["visited"] = region["name"] in visited
         metadata["region_colors"] = {str(index): colour for index, colour in enumerate(metadata["palette"], start=1)}
@@ -280,6 +290,7 @@ def package(identifiers, render_root):
         metadata["routes"] = route_data(metadata, journeys, provinces) if identifier != "europe_usa" else []
         maps[identifier] = metadata
     write_json(OUTPUT / "atlas.json", {"version": 3, "maps": maps})
+    # 打包后核验，再同步更新前端 ATLAS_VERSION、life.html 的 atlas= 和所有 Life 资源的共享 v=。
     print(json.dumps({identifier: {"visited": sum(region["visited"] for region in data["regions"]),
                                    "routes": len(data["routes"])} for identifier, data in maps.items()}))
 

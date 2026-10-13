@@ -1,7 +1,9 @@
 (function () {
     'use strict';
 
-    // 城市或路线更新并重新打包后，同步修改此版本和 life.html 中脚本的 atlas 参数，避免旧地图缓存。
+    // 维护指南：tools/relief-atlas/ADDING-FOOTPRINTS.md；这里是显示层，不是到访/行程数据的编辑入口。
+    // 新城市改 site_content.json 的 visited_china；新路线改 scripts/prepare-footprint-routes.py 再生成、打包。
+    // 城市或路线重新打包后，同步修改此版本、life.html 中脚本的 atlas= 及全部 Life 资源的共享 v=。
     const ATLAS_VERSION = '20261012-native-white';
     const ATLAS_URL = `assets/maps/relief/atlas.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
@@ -514,6 +516,7 @@
         });
 
         (map.routes || []).forEach(route => {
+            // corridor_path 由真实路网按公里宽度缓冲并裁到陆地；缺失时应重建数据，不能补一条彩色描边。
             if (!route.corridor_path) return;
             visitedClip.append(svgElement('path', {
                 d: route.corridor_path, 'clip-rule': 'evenodd',
