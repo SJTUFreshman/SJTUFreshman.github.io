@@ -1,4 +1,4 @@
-const STAR_MAP_LIMITS = Object.freeze({ minDistance: 72, localMaxDistance: 610, maxDistance: 1250, panRadius: 155, pitch: Math.PI * 0.475 });
+const STAR_MAP_LIMITS = Object.freeze({ minDistance: 72, localMaxDistance: 610, maxDistance: 800, panRadius: 155, pitch: Math.PI * 0.475 });
 
 class LifeStarMap {
     constructor() {
@@ -119,23 +119,6 @@ class LifeStarMap {
                 const valuesAtStar = starCatalogValues(group.portal.patternHips[index]);
                 values.push(...point, ...this.color(valuesAtStar.colorIndex), 1.7, clamp(19 - (valuesAtStar.magnitude || 3) * 1.4, 10, 23), 0);
             });
-        }
-        let seed = 81927;
-        const random = () => {
-            seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-            return seed / 4294967296;
-        };
-        for (let index = 0; index < 27000; index++) {
-            const bulge = index < 4500;
-            const radius = bulge ? Math.sqrt(-2 * Math.log(Math.max(0.0001, random()))) * 22
-                : Math.min(430, 12 - Math.log(Math.max(0.00001, random() * random())) * 67);
-            const arm = Math.floor(random() * 4) * Math.PI * 0.5;
-            const angle = bulge || random() < 0.28 ? random() * Math.PI * 2
-                : arm + Math.log1p(radius / 32) * 1.8 + (random() + random() + random() - 1.5) * (0.35 + radius * 0.0012);
-            const height = (random() + random() + random() - 1.5) * (bulge ? 22 : 10);
-            const color = bulge ? [1, 0.85 + random() * 0.09, 0.66] : this.color(random() * 1.3 - 0.15);
-            values.push(Math.cos(angle) * radius, height, Math.sin(angle) * radius, ...color,
-                0.08 + Math.pow(random(), 4) * 0.48, 2.5 + random() * 3.5, 2);
         }
         return new Float32Array(values);
     }
@@ -263,15 +246,16 @@ class LifeStarMap {
         const forward = outward.map(value => -value);
         const right = normalize(cross(forward, [0, 1, 0]));
         const up = normalize(cross(right, forward));
+        const galaxyFov = 2 * Math.atan(Math.tan(26 * DEG) * Math.max(1, 1.35 * window.innerHeight / window.innerWidth));
         return { position: this.center.map((value, axis) => value + outward[axis] * this.distance),
-            right, up, forward, fov: this.fov, galaxy: this.galaxyMix };
+            right, up, forward, fov: lerp(this.fov, galaxyFov, this.galaxyMix), galaxy: this.galaxyMix };
     }
 
     project(position, view = this.currentView || this.view(), absolute = false) {
         if (!absolute) position = position.map((value, axis) => lerp(value, [112, 2, 74][axis] + value * 0.09, this.galaxyMix));
         const relative = position.map((value, axis) => value - view.position[axis]);
         const depth = dot(relative, view.forward);
-        const focal = window.innerHeight * 0.5 / Math.tan(this.fov * 0.5);
+        const focal = window.innerHeight * 0.5 / Math.tan(view.fov * 0.5);
         const horizontal = window.innerWidth * 0.5 + dot(relative, view.right) / depth * focal;
         const vertical = window.innerHeight * 0.5 - dot(relative, view.up) / depth * focal;
         return { x: horizontal, y: vertical, depth,
@@ -308,7 +292,7 @@ class LifeStarMap {
         this.localReturnPose.distance = Math.min(this.localReturnPose.distance, this.homePose().distance);
         state.scene = 'flying';
         this.levelTransition = true;
-        this.animateTo({ yaw: this.yaw, pitch: 0.6, distance: STAR_MAP_LIMITS.maxDistance, center: [0, 0, 0] }, () => {
+        this.animateTo({ yaw: this.yaw, pitch: 0.7, distance: STAR_MAP_LIMITS.maxDistance, center: [0, 0, 0] }, () => {
             this.mapLevel = 'galaxy';
             this.levelTransition = false;
             state.scene = 'roam';
@@ -337,7 +321,7 @@ class LifeStarMap {
         if (!this.canMove()) return;
         this.lastInputTime = performance.now();
         const view = this.currentView || this.view();
-        const scale = this.distance * 2 * Math.tan(this.fov * 0.5) / window.innerHeight;
+        const scale = this.distance * 2 * Math.tan(view.fov * 0.5) / window.innerHeight;
         const next = this.target.center.map((value, axis) => value - view.right[axis] * deltaX * scale + view.up[axis] * deltaY * scale);
         const length = vectorLength(next);
         this.target.center = length > STAR_MAP_LIMITS.panRadius ? next.map(value => value / length * STAR_MAP_LIMITS.panRadius) : next;
@@ -430,7 +414,7 @@ class LifeStarMap {
             this.levelTransition = false;
             state.scene = 'roam';
             const destination = this.mapLevel === 'galaxy'
-                ? { yaw: this.yaw, pitch: 0.6, distance: STAR_MAP_LIMITS.maxDistance, center: [0, 0, 0] }
+                ? { yaw: this.yaw, pitch: 0.7, distance: STAR_MAP_LIMITS.maxDistance, center: [0, 0, 0] }
                 : this.localReturnPose || this.homePose();
             this.animateTo(destination);
             this.updateCopy();
@@ -516,13 +500,14 @@ class LifeStarMap {
             this.distance = lerp(this.distance, this.target.distance, response);
             this.center = this.center.map((value, axis) => lerp(value, this.target.center[axis], response));
         }
-        this.galaxyMix = this.frozenGalaxyMix ?? smoothstep(560, 1050, this.distance);
+        this.galaxyMix = this.frozenGalaxyMix ?? smoothstep(STAR_MAP_LIMITS.localMaxDistance, STAR_MAP_LIMITS.maxDistance, this.distance);
         if (!REDUCED_MOTION && this.galaxyMix > 0.96 && !this.flight && !this.pointers.size
             && !state.modalOpen && time - (this.lastInputTime || 0) > 4500) {
             this.target.yaw += delta * 0.014;
         }
         this.currentView = this.view();
-        const viewKey = [...this.currentView.position, this.yaw, this.pitch, this.galaxyMix].map(value => value.toFixed(4)).join(',') + this.renderer.ready;
+        const viewKey = [...this.currentView.position, this.yaw, this.pitch, this.galaxyMix].map(value => value.toFixed(4)).join(',')
+            + this.renderer.ready + ':' + this.renderer.assetVersion;
         if (viewKey !== this.rendererViewKey) {
             this.renderer.render(this.currentView);
             this.rendererViewKey = viewKey;
@@ -776,9 +761,9 @@ class LifeStarMap {
         if (!this.initialized) return;
         if (this.deepSky?.active) { this.deepSky.updateCopy(); return; }
         const copies = {
-            en: { orbit: 'Right drag / Two-finger slide · orbit', pan: 'Left drag · pan', zoom: 'Mouse wheel / Pinch · zoom', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'An interpreted star map. Constellation shapes and stellar colours follow Hipparcos; distances are composed for exploration.', scale: 'NEAR / FAR' },
-            'zh-CN': { orbit: '右键拖动 / 触控板双指滑动 · 旋转', pan: '左键拖动 · 平移', zoom: '滚轮 / 双指捏合 · 缩放', touch: '单指旋转 / 双指缩放与平移', select: '选择一个星座', reset: '回到全景', home: '返回主页', closer: '拉近星图', farther: '拉远星图', overview: '局部星图', detail: '星座', flight: '正在靠近', note: '这是一幅经过编排的星图。星座形状与恒星颜色参考 Hipparcos 星表，展示距离经过压缩，方便探索。', scale: '近 / 远' },
-            'zh-TW': { orbit: '右鍵拖動 / 觸控板雙指滑動 · 旋轉', pan: '左鍵拖動 · 平移', zoom: '滾輪 / 雙指捏合 · 縮放', touch: '單指旋轉 / 雙指縮放與平移', select: '選擇一個星座', reset: '回到全景', home: '返回主頁', closer: '拉近星圖', farther: '拉遠星圖', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '這是一幅經過編排的星圖。星座形狀與恆星顏色參考 Hipparcos 星表，展示距離經過壓縮，方便探索。', scale: '近 / 遠' }
+            en: { orbit: 'Right drag / Two-finger slide · orbit', pan: 'Left drag · pan', zoom: 'Mouse wheel / Pinch · zoom', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'Constellation shapes and stellar colours follow Hipparcos; distances are composed for exploration. The galaxy adapts ESA’s 2025 Gaia-based artist impression, with adjusted texture filtering, a volumetric bulge and illustrative dust. This is a reconstruction of the Milky Way’s external appearance.', scale: 'NEAR / FAR' },
+            'zh-CN': { orbit: '右键拖动 / 触控板双指滑动 · 旋转', pan: '左键拖动 · 平移', zoom: '滚轮 / 双指捏合 · 缩放', touch: '单指旋转 / 双指缩放与平移', select: '选择一个星座', reset: '回到全景', home: '返回主页', closer: '拉近星图', farther: '拉远星图', overview: '局部星图', detail: '星座', flight: '正在靠近', note: '星座形状与恒星颜色参考 Hipparcos 星表，展示距离经过编排。银河外观改编自 ESA 2025 年基于 Gaia 观测的艺术重建；调整了纹理滤波，并加入体积核球和示意尘埃层。', scale: '近 / 远' },
+            'zh-TW': { orbit: '右鍵拖動 / 觸控板雙指滑動 · 旋轉', pan: '左鍵拖動 · 平移', zoom: '滾輪 / 雙指捏合 · 縮放', touch: '單指旋轉 / 雙指縮放與平移', select: '選擇一個星座', reset: '回到全景', home: '返回主頁', closer: '拉近星圖', farther: '拉遠星圖', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '星座形狀與恆星顏色參考 Hipparcos 星表，展示距離經過編排。銀河外觀改編自 ESA 2025 年基於 Gaia 觀測的藝術重建；調整了紋理濾波，並加入體積核球和示意塵埃層。', scale: '近 / 遠' }
         };
         const copy = copies[state.currentLang] || copies.en;
         document.querySelectorAll('[data-map-copy]').forEach(element => { element.textContent = copy[element.dataset.mapCopy] || ''; });

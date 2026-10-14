@@ -3,6 +3,7 @@ body.star-map {
 }
 
 .star-map #spaceCanvas,
+.star-map .space-grain,
 .star-map .control-legend,
 .star-map .reticle,
 .star-map .gaze-label,
@@ -186,6 +187,13 @@ body:not(.lang-en) .map-portal-copy strong {
     inset: 0;
     z-index: 7;
     pointer-events: none;
+}
+
+.map-about a {
+    display: block;
+    margin-top: 10px;
+    color: #b9c8de;
+    text-underline-offset: 3px;
 }
 
 .map-entity {

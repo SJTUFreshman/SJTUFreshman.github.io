@@ -1,0 +1,29 @@
+# 银河外观素材
+
+ESA/Gaia/DPAC, Stefan Payne-Wardenaar.
+
+纹理改编自 ESA 于 2025 年发布的 [The best Milky Way map, by Gaia](https://www.esa.int/ESA_Multimedia/Images/2025/01/The_best_Milky_Way_map_by_Gaia)。[原始 JPEG（5000 × 5000）](https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2025/01/the_best_milky_way_map_by_gaia/26530986-1-eng-GB/The_best_Milky_Way_map_by_Gaia.jpg) 是基于 Gaia 观测的艺术重建：旋臂较不规则、不突出，中央棒的朝向也不同于旧的 Spitzer 示意图。银河系目前没有从外部拍摄的全貌照片；远侧结构仍有推定成分。
+
+侧面结构参考同一作者的 [Gaia edge-on reconstruction](https://www.esa.int/ESA_Multimedia/Images/2025/01/The_best_Milky_Way_map_by_Gaia_edge-on)：薄盘、暗尘埃带、突出的核球和轻微翘曲。运行时厚度与遮挡属于可视化估计，不是反演出的三维密度数据。
+
+质感对照 [ESO 对银河类似星系 NGC 6744 的可见光观测](https://www.eso.org/public/images/eso1118a/)，检查暖色中央恒星、较蓝的年轻恒星区和不连续的尘埃暗带。该观测仅作视觉参考；页面纹理仍来自银河自身的 Gaia 重建。
+
+这两个派生纹理按原图的 [CC BY-SA 3.0 IGO](https://creativecommons.org/licenses/by-sa/3.0/igo/) 授权分发。页面星图说明保留完整署名、来源链接、许可和改编说明。
+
+## 文件
+
+- `milky-way-starlight.webp`：4096 × 4096，WebP quality 96。轻度抑制彩色颗粒，保留部分高频亮度细节；淡出边缘并移除原图顶部的人马座矮星系，避免把盘外天体投影到银河盘上。
+- `milky-way-dust.webp`：2048 × 2048 的不透明 RGB 数据纹理。R 为根据局部暗部和暖色估计的尘埃遮挡，G 为分离的核球亮度，B 为核球蓝红比。使用不透明通道避免浏览器预乘 alpha 损失数据。
+- 原始 JPEG 的 SHA-256：`210366dd8e7b9167bdae2a648eacd1b482b6493e1212696ae8207d8b1a880741`。
+
+星光薄盘在最终画布分辨率下投影，并使用各向异性过滤保留斜视细节。核球单独进行 32 步体积积分，侧视恒星盘和尘埃采用 128 步积分。年轻恒星分配到较薄的层，老年恒星分配到较厚、偏暖的层；两层按 RGB 通道归一，保留正面总光度。弥散尘埃随半径衰减，窄尘埃层遮住侧视核球的中央部分。各厚度仍是示意参数。平滑体积层在较低分辨率绘制，再与清晰的盘面合成。银河画布支持最高 DPR 3，总像素上限约 830 万。Canvas 降级也直接使用高清纹理；星图不叠加装饰性颗粒。
+
+## 重建
+
+需要 Python、Pillow 和 NumPy。在仓库根目录运行：
+
+```powershell
+python scripts/build-galaxy-assets.py
+```
+
+脚本优先使用 `.render-work/gaia-milky-way-original.jpg`，缺失时从 ESA 下载。可用 `--source` 指定已下载的原图。运行时只加载本地生成文件，无需向 ESA 发起请求。两张纹理共约 3.1 MB，异步加载并在加载完成后刷新静止视图；网络失败时保留程序生成的兜底盘面。银河的厚度、翘曲和标签位置仍属于导航示意。

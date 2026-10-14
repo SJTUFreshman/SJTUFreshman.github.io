@@ -18,6 +18,10 @@
 
 `07-star-map-renderer.js` 提供 WebGL 体积尘埃、恒星和银河盘，失去 WebGL 时切换为 Canvas。`19-star-map.js` 管理有界相机、层级、星座、命中与输入；它在旧 `15` 之后、`16` 之前加载。`21-deep-sky-map.js` 也在 `18` 初始化之前加载。`08-star-map.css`、`10-deep-sky-map.css` 顺序追加到基础样式之后。
 
+银河全景保留外部旋臂视角，相机距离为 800，窄屏按横向视野适配。局部到银河的混合仅在局部缩放上限 610 之外发生；投影、标签、平移和渲染共用当前视野。银河外观改编自 ESA 2025 年基于 Gaia 的艺术重建，保留不规则旋臂、密集尘埃暗带和较暖的中央棒；来源、CC BY-SA 3.0 IGO 许可及重建步骤见 [`galaxy/README.md`](galaxy/README.md)。
+
+4096 px 星光纹理在最终画布分辨率下投影，使用各向异性过滤保留斜视细节。核球单独进行 32 步体积积分，低角度的年轻薄盘、较厚老年恒星层和尘埃采用 128 步积分；平滑体积层以较低分辨率计算，再与高清薄盘合成。银河支持最高 DPR 3、约 830 万像素，局部星图保留原有性能预算。银河全景不叠加随机旋臂粒子，星图不叠加装饰性颗粒，远处背景星也会变暗。Canvas 降级共用高清星光纹理；图片加载中或失败时使用程序旋臂兜底。素材加载完成后刷新静止画面，WebGL 恢复时重新上传纹理。
+
 旧天球投影、内容、三语、图片查看器及主页转场继续共享原模块。`window.lifeStarMap` 存在时，`15` 将帧委托给新星图，`16` 跳过旧 Pointer Lock 输入，`18` 初始化新入口。修改时注意不要让旧地平线/昼夜可见性影响三维导航。
 
 ## CSS 分片
@@ -93,7 +97,10 @@ python site_renderer.py --check --life-only
 node scripts/validate-life-runtime.cjs
 node scripts/validate-life-http.cjs http://localhost:8765/life.html
 node scripts/validate-star-map.cjs --serve
+node scripts/validate-star-map.cjs --serve visuals
 git diff --check
 ```
 
 浏览器回归至少检查：右键旋转、平移/缩放边界、触屏双指、星座连线和点击拉近、恒星内容、索引、三语、地图缩放上限、lightbox、银河全景、太阳系返回主页且不加载旧资源、系外照片详情、主页转场、窄屏、无 WebGL 和 reduced-motion。新浏览器验证脚本使用 Playwright；可通过 `PLAYWRIGHT_MODULE_PATH` 指向已有安装，不要求给站点添加依赖。`--serve` 在测试进程中启动临时本地服务器并自动关闭，也可传入已有页面 URL。可追加 `footprints` 单独检查三张地图在桌面和手机上的缩放上限。
+
+`visuals` 分组在普通桌面、高分桌面及手机模拟视口中读取实际 WebGL 像素，检查星点可见性、普通星与主星的明暗层次及渲染错误，并保存局部图和银河各角度截图。银河检查覆盖纹理分辨率、取景、侧视暗尘埃带与核球、纹理加载及 WebGL 恢复；模拟视口验证不能代替真实手机屏幕的观感检查。

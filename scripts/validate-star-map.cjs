@@ -20,8 +20,8 @@ const launchOptions = {
 const errors = [];
 const checks = [];
 const selectedGroup = process.argv.slice(3).find(argument => !argument.startsWith('--')) || 'all';
-assert(['all', 'input', 'desktop', 'mobile', 'content', 'footprints', 'fallback', 'reduced-motion'].includes(selectedGroup),
-    'Test group must be all, input, desktop, mobile, content, footprints, fallback, or reduced-motion');
+assert(['all', 'input', 'desktop', 'mobile', 'visuals', 'content', 'footprints', 'fallback', 'reduced-motion'].includes(selectedGroup),
+    'Test group must be all, input, desktop, mobile, visuals, content, footprints, fallback, or reduced-motion');
 
 function check(condition, message) {
     assert(condition, message);
@@ -837,6 +837,235 @@ async function footprintsChecks(browser) {
     }
 }
 
+async function visualChecks(browser) {
+    for (const device of [
+        { name: 'desktop', viewport: { width: 1440, height: 960 }, deviceScaleFactor: 1 },
+        { name: 'desktop-retina', viewport: { width: 1440, height: 960 }, deviceScaleFactor: 2 },
+        { name: 'mobile', viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true }
+    ]) {
+        const { name, ...options } = device;
+        const context = await browser.newContext({ ...options, reducedMotion: 'reduce' });
+        try {
+            const page = await context.newPage();
+            monitor(page, name);
+            await load(page);
+            await page.waitForFunction(() => window.lifeStarMap.renderer.galacticAssetsReady);
+            check(await page.evaluate(() => {
+                const renderer = window.lifeStarMap.renderer;
+                return renderer.galacticImage.naturalWidth === 4096 && renderer.galacticDustImage.naturalWidth === 2048;
+            }), `${name}: the Gaia reconstruction textures preserve 4K starlight and 2K structure`);
+            check(await page.evaluate(() => window.lifeStarMap.renderer.ready && window.lifeStarMap.galaxyMix === 0),
+                `${name}: the local map starts without leaking galactic particles`);
+            const home = await pose(page);
+            await page.evaluate(() => { window.lifeStarMap.target.distance = STAR_MAP_LIMITS.localMaxDistance; });
+            await settle(page);
+            check(await page.evaluate(() => window.lifeStarMap.galaxyMix === 0),
+                `${name}: the outer local zoom boundary retains the local star colours`);
+            await page.evaluate(home => { window.lifeStarMap.target = home; }, home);
+            await settle(page);
+            const result = await page.evaluate(() => {
+                const map = window.lifeStarMap;
+                const renderer = map.renderer;
+                const graphics = renderer.gl;
+                const originalStars = renderer.stars;
+                const view = { position: [0, 0, 320], right: [1, 0, 0], up: [0, 1, 0], forward: [0, 0, -1], fov: map.fov, galaxy: 0 };
+                const focal = renderer.height * 0.5 / Math.tan(view.fov * 0.5);
+                const samples = [];
+                const stars = [];
+                const profiles = [{ size: 2.8, light: 0.3 }, { size: 4.5, light: 0.65 }, { size: 14, light: 1.7 }, { size: 4.5, light: 0.15 }];
+                for (const [row, profile] of profiles.entries()) {
+                    for (const [column, colourIndex] of [-0.2, 0.65, 1.8].entries()) {
+                        const horizontal = (column - 1) * 64 + 0.27;
+                        const vertical = (row - 1.5) * 52 + 0.37;
+                        stars.push(horizontal * 320 / focal, -vertical * 320 / focal, 0,
+                            ...map.color(colourIndex), profile.light, profile.size, 0);
+                        samples.push({ horizontal, vertical, column, row });
+                    }
+                }
+                const capture = () => samples.map(sample => {
+                    const size = Math.round(24 * renderer.dpr);
+                    const pixels = new Uint8Array(size * size * 4);
+                    const left = Math.round((renderer.width * 0.5 + sample.horizontal) * renderer.dpr - size * 0.5);
+                    const bottom = Math.round((renderer.height * 0.5 - sample.vertical) * renderer.dpr - size * 0.5);
+                    graphics.readPixels(left, bottom, size, size, graphics.RGBA, graphics.UNSIGNED_BYTE, pixels);
+                    return pixels;
+                });
+                try {
+                    renderer.stars = new Float32Array(stars);
+                    const dark = renderer.stars.map((value, index) => index % 9 === 6 ? 0 : value);
+                    graphics.bindBuffer(graphics.ARRAY_BUFFER, renderer.starBuffer);
+                    graphics.bufferData(graphics.ARRAY_BUFFER, dark, graphics.STATIC_DRAW);
+                    renderer.render(view);
+                    const backgrounds = capture();
+                    graphics.bufferData(graphics.ARRAY_BUFFER, renderer.stars, graphics.STATIC_DRAW);
+                    renderer.render(view);
+                    const readings = capture().map((pixels, sampleIndex) => {
+                        const channels = [0, 0, 0];
+                        for (let offset = 0; offset < pixels.length; offset += 4) {
+                            channels.forEach((value, channel) => {
+                                channels[channel] += Math.max(0, pixels[offset + channel] - backgrounds[sampleIndex][offset + channel]);
+                            });
+                        }
+                        return channels;
+                    });
+                    return { readings, error: graphics.getError() };
+                } finally {
+                    renderer.stars = originalStars;
+                    graphics.bindBuffer(graphics.ARRAY_BUFFER, renderer.starBuffer);
+                    graphics.bufferData(graphics.ARRAY_BUFFER, originalStars, graphics.STATIC_DRAW);
+                    renderer.render(map.currentView);
+                }
+            });
+            check(result.error === 0, `${name}: the star render completes without WebGL errors`);
+            const brightness = result.readings.map(channels => channels.reduce((sum, value) => sum + value, 0));
+            check(brightness.every(value => Number.isFinite(value) && value > 0),
+                `${name}: all sampled star sizes and brightness levels remain visible`);
+            check([0, 1, 2].every(column => brightness[3 + column] > brightness[9 + column] * 3),
+                `${name}: equal-sized faint stars remain at least three times dimmer than brighter stars`);
+            check([0, 1, 2].every(column => brightness[6 + column] > brightness[3 + column] * 3),
+                `${name}: constellation stars retain a clear brightness hierarchy above ordinary stars`);
+            await screenshot(page, `local-${name}`);
+            await page.evaluate(() => window.lifeStarMap.showGalaxy());
+            await settle(page);
+            check(await page.evaluate(() => {
+                const renderer = window.lifeStarMap.renderer;
+                const expected = Math.min(devicePixelRatio, 3, Math.sqrt(8294400 / (innerWidth * innerHeight)));
+                return renderer.canvas.width === Math.round(innerWidth * expected)
+                    && renderer.canvas.height === Math.round(innerHeight * expected);
+            }), `${name}: the galactic disk renders at the display's pixel density within its pixel budget`);
+            const framing = await page.evaluate(() => {
+                const map = window.lifeStarMap;
+                return (map.project([360, 0, 0], map.currentView, true).x
+                    - map.project([-360, 0, 0], map.currentView, true).x) / innerWidth;
+            });
+            check(framing > 0.55 && framing < 0.85, `${name}: the galactic disk fills the viewport without losing its outer arms`);
+            await screenshot(page, `galaxy-${name}`);
+            if (name === 'desktop') {
+                for (const [angle, pitch] of [['edge', 0], ['inclined', 0.20], ['upper', 1.3], ['lower', -0.7]]) {
+                    await page.evaluate(pitch => {
+                        const map = window.lifeStarMap;
+                        map.target.pitch = pitch;
+                        map.target.yaw = pitch === 0 ? 0 : 0.8;
+                    }, pitch);
+                    await settle(page);
+                    check(await page.evaluate(() => window.lifeStarMap.renderer.gl.getError() === 0),
+                        `The ${angle} galactic view renders without WebGL errors`);
+                    if (angle === 'edge') {
+                        check(await page.evaluate(() => {
+                            const map = window.lifeStarMap;
+                            const renderer = map.renderer;
+                            const graphics = renderer.gl;
+                            renderer.render(map.currentView);
+                            return [24, -24].every(height => {
+                                const projected = map.project([0, height, 0], map.currentView, true);
+                                const pixels = new Uint8Array(3 * 3 * 4);
+                                graphics.readPixels(Math.round(projected.x * renderer.dpr) - 1,
+                                    Math.round((renderer.height - projected.y) * renderer.dpr) - 1,
+                                    3, 3, graphics.RGBA, graphics.UNSIGNED_BYTE, pixels);
+                                let brightness = 0;
+                                for (let offset = 0; offset < pixels.length; offset += 4) brightness += pixels[offset];
+                                return brightness / 9 > 35;
+                            });
+                        }), 'The edge-on bulge emits above and below the thin absorbing disk');
+                        check(await page.evaluate(() => {
+                            const map = window.lifeStarMap;
+                            const renderer = map.renderer;
+                            const graphics = renderer.gl;
+                            renderer.render(map.currentView);
+                            const brightness = height => {
+                                const projected = map.project([0, height, 0], map.currentView, true);
+                                const pixel = new Uint8Array(4);
+                                graphics.readPixels(Math.round(projected.x * renderer.dpr),
+                                    Math.round((renderer.height - projected.y) * renderer.dpr),
+                                    1, 1, graphics.RGBA, graphics.UNSIGNED_BYTE, pixel);
+                                return pixel[0] + pixel[1] + pixel[2];
+                            };
+                            return brightness(0) < Math.min(brightness(8), brightness(-8)) * 0.45;
+                        }), 'The exactly edge-on dust lane remains darker than the bulge on either side');
+                    }
+                    await screenshot(page, `galaxy-${angle}`);
+                }
+            }
+            const backgroundClean = await page.evaluate(() => {
+                const map = window.lifeStarMap;
+                const renderer = map.renderer;
+                const view = { position: [0, 550, 600], right: [1, 0, 0], up: [0, 0, 1], forward: [0, 1, 0], fov: map.fov, galaxy: 1 };
+                const graphics = renderer.gl;
+                renderer.render(view);
+                const pixels = new Uint8Array(renderer.canvas.width * renderer.canvas.height * 4);
+                graphics.readPixels(0, 0, renderer.canvas.width, renderer.canvas.height, graphics.RGBA, graphics.UNSIGNED_BYTE, pixels);
+                let brightPixels = 0;
+                for (let offset = 0; offset < pixels.length; offset += 4) {
+                    if (pixels[offset] + pixels[offset + 1] + pixels[offset + 2] > 105) brightPixels++;
+                }
+                renderer.render(map.currentView);
+                return brightPixels < renderer.canvas.width * renderer.canvas.height * 0.001;
+            });
+            check(backgroundClean, `${name}: rays facing away from the galaxy do not repeat its texture across the sky`);
+            if (name === 'desktop') {
+                const extensionAvailable = await page.evaluate(() => {
+                    const extension = window.lifeStarMap.renderer.gl.getExtension('WEBGL_lose_context');
+                    if (!extension) return false;
+                    window.visualContextRecovery = extension;
+                    extension.loseContext();
+                    return true;
+                });
+                check(extensionAvailable, 'The galaxy renderer supports a context recovery check');
+                await page.waitForFunction(() => !window.lifeStarMap.renderer.ready);
+                await page.evaluate(() => window.visualContextRecovery.restoreContext());
+                await page.waitForFunction(() => window.lifeStarMap.renderer.ready);
+                await settle(page);
+                check(await page.evaluate(() => {
+                    const map = window.lifeStarMap;
+                    const renderer = map.renderer;
+                    renderer.render(map.currentView);
+                    const pixel = new Uint8Array(4);
+                    renderer.gl.readPixels(Math.floor(renderer.canvas.width / 2), Math.floor(renderer.canvas.height / 2),
+                        1, 1, renderer.gl.RGBA, renderer.gl.UNSIGNED_BYTE, pixel);
+                    return pixel[0] > 80 && renderer.gl.getError() === 0;
+                }), 'Restoring WebGL uploads the galaxy textures again and preserves the luminous core');
+            }
+        } finally {
+            await context.close();
+        }
+    }
+    const context = await browser.newContext({ viewport: { width: 1100, height: 780 }, reducedMotion: 'reduce' });
+    let releaseAssets;
+    const assetsGate = new Promise(resolve => { releaseAssets = resolve; });
+    try {
+        const page = await context.newPage();
+        monitor(page, 'delayed-galaxy');
+        await page.route('**/assets/life/galaxy/*.webp?*', async route => {
+            await assetsGate;
+            await route.continue();
+        });
+        await load(page);
+        await page.evaluate(() => window.lifeStarMap.showGalaxy());
+        await settle(page);
+        const stationaryPose = await pose(page);
+        check(await page.evaluate(() => !window.lifeStarMap.renderer.galacticAssetsReady),
+            'A slow texture download leaves the galaxy controls available');
+        await page.evaluate(() => {
+            const renderer = window.lifeStarMap.renderer;
+            const render = renderer.render.bind(renderer);
+            renderer.render = view => {
+                render(view);
+                renderer.lastRenderedAssetVersion = renderer.assetVersion;
+            };
+        });
+        releaseAssets();
+        await page.waitForFunction(() => {
+            const renderer = window.lifeStarMap.renderer;
+            return renderer.galacticAssetsReady && renderer.lastRenderedAssetVersion === renderer.assetVersion;
+        });
+        check(JSON.stringify(await pose(page)) === JSON.stringify(stationaryPose),
+            'Downloaded galaxy detail replaces the fallback without camera motion or user input');
+    } finally {
+        releaseAssets();
+        await context.close();
+    }
+}
+
 async function fallbackChecks() {
     const browser = await chromium.launch({ ...launchOptions, args: [...launchOptions.args, '--disable-webgl'] });
     try {
@@ -852,6 +1081,33 @@ async function fallbackChecks() {
         await reset(page);
         await solarMarkerChecks(page, 'without WebGL');
         await screenshot(page, 'canvas-fallback');
+        await page.evaluate(() => window.lifeStarMap.showGalaxy());
+        await settle(page);
+        await page.waitForFunction(() => window.lifeStarMap.renderer.galacticAssetsReady);
+        check(await page.evaluate(() => {
+            const renderer = window.lifeStarMap.renderer;
+            const pixels = renderer.fallback.getImageData(
+                Math.floor(renderer.canvas.width * 0.5), Math.floor(renderer.canvas.height * 0.5), 1, 1).data;
+            return renderer.fallbackDisk().width === 4096 && pixels[0] > 80;
+        }), 'The canvas fallback preserves the galactic disk and luminous core');
+        await screenshot(page, 'galaxy-fallback');
+        await page.evaluate(() => window.lifeStarMap.showLocal());
+        await settle(page);
+        check(await page.locator('[data-map-entity="solar"]').isVisible(),
+            'The canvas fallback returns from the galaxy to the local region');
+        const unavailable = await browser.newPage({ viewport: { width: 1100, height: 780 }, reducedMotion: 'reduce' });
+        await unavailable.route('**/assets/life/galaxy/*.webp?*', route => route.abort('aborted'));
+        await load(unavailable);
+        await unavailable.waitForFunction(() => window.lifeStarMap.renderer.galacticAssetsFailed);
+        await unavailable.evaluate(() => window.lifeStarMap.showGalaxy());
+        await settle(unavailable);
+        check(await unavailable.evaluate(() => {
+            const renderer = window.lifeStarMap.renderer;
+            renderer.render(window.lifeStarMap.currentView);
+            return renderer.fallback.getImageData(Math.floor(renderer.canvas.width / 2),
+                Math.floor(renderer.canvas.height / 2), 1, 1).data[0] > 80;
+        }), 'Unavailable galaxy images retain a visible procedural fallback');
+        await unavailable.close();
     } finally {
         await browser.close();
     }
@@ -925,7 +1181,7 @@ async function serveRepository() {
 async function main() {
     fs.mkdirSync(outputDirectory, { recursive: true });
     if (process.argv[2] === '--serve') await serveRepository();
-    for (const [group, run] of [['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['content', contentChecks], ['footprints', footprintsChecks], ['reduced-motion', reducedMotionChecks]]) {
+    for (const [group, run] of [['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['visuals', visualChecks], ['content', contentChecks], ['footprints', footprintsChecks], ['reduced-motion', reducedMotionChecks]]) {
         if (selectedGroup !== 'all' && selectedGroup !== group) continue;
         const browser = await chromium.launch(launchOptions);
         try {
