@@ -288,6 +288,7 @@ class LifeStarMap {
 
     showGalaxy() {
         if (!this.canMove() || this.mapLevel === 'galaxy') return;
+        this.renderer.loadGalacticAssets();
         this.localReturnPose = this.snapshot();
         this.localReturnPose.distance = Math.min(this.localReturnPose.distance, this.homePose().distance);
         state.scene = 'flying';

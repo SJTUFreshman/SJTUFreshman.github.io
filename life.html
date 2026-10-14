@@ -59,29 +59,29 @@
             visibility: hidden !important;
         }
     </style>
-<script src="assets/stellar-transit.js?v=20261013-reader-exit" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
+<script src="assets/stellar-transit.js?v=20261015-life-startup" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
     <link rel="preload" href="fonts/edukai-site-subset.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-    <script src="assets/hipparcos-stars.js?v=20261013-reader-exit"></script>
-    <script src="assets/hipparcos-distances.js?v=20261013-reader-exit"></script>
-    <link rel="stylesheet" href="assets/life/styles/01-foundation-sky.css?v=20261013-reader-exit">
-    <link rel="stylesheet" href="assets/life/styles/02-section-drawer.css?v=20261013-reader-exit">
-    <link rel="stylesheet" href="assets/life/styles/03-sky-navigation.css?v=20261013-reader-exit">
-    <link rel="stylesheet" href="assets/life/styles/04-detail-panels.css?v=20261013-reader-exit">
-    <link rel="stylesheet" href="assets/life/styles/05-life-content.css?v=20261013-reader-exit">
-    <link rel="stylesheet" href="assets/life/styles/06-homepage-parity.css?v=20261013-reader-exit">
-    <link rel="stylesheet" href="assets/life/styles/07-overlays-responsive.css?v=20261013-reader-exit&atlas=20261012-native-white">
-    <link rel="stylesheet" href="assets/life/styles/08-star-map.css?v=20261013-reader-exit&galaxy=20261014-gaia-realism">
-    <link rel="stylesheet" href="assets/life/styles/10-deep-sky-map.css?v=20261013-reader-exit">
-    <link rel="stylesheet" href="assets/life/styles/11-index-theme-overlays.css?v=20261013-reader-exit">
+    <script src="assets/hipparcos-stars.js?v=20261015-life-startup" defer></script>
+    <script src="assets/hipparcos-distances.js?v=20261015-life-startup" defer></script>
+    <link rel="stylesheet" href="assets/life/styles/01-foundation-sky.css?v=20261015-life-startup">
+    <link rel="stylesheet" href="assets/life/styles/02-section-drawer.css?v=20261015-life-startup">
+    <link rel="stylesheet" href="assets/life/styles/03-sky-navigation.css?v=20261015-life-startup">
+    <link rel="stylesheet" href="assets/life/styles/04-detail-panels.css?v=20261015-life-startup">
+    <link rel="stylesheet" href="assets/life/styles/05-life-content.css?v=20261015-life-startup">
+    <link rel="stylesheet" href="assets/life/styles/06-homepage-parity.css?v=20261015-life-startup">
+    <link rel="stylesheet" href="assets/life/styles/07-overlays-responsive.css?v=20261015-life-startup&atlas=20261012-native-white">
+    <link rel="stylesheet" href="assets/life/styles/08-star-map.css?v=20261015-life-startup&galaxy=20261014-gaia-realism">
+    <link rel="stylesheet" href="assets/life/styles/10-deep-sky-map.css?v=20261015-life-startup">
+    <link rel="stylesheet" href="assets/life/styles/11-index-theme-overlays.css?v=20261015-life-startup">
     <noscript>
         <style>
             html, body { height: auto; overflow: auto; background: var(--life-paper); color: var(--life-ink); }
-            .galaxy-world, .life-mark, .language-switch, .control-legend, .scene-status,
-            .entry-gate, .reticle, .gaze-label, .gaze-instruction, .portal-nav, .star-nav,
+            .galaxy-world, .life-mark, .language-switch, .scene-status,
+            .portal-nav, .star-nav,
             .map-entities, .map-footer,
             .section-drawer-toggle, .section-drawer-scrim, .section-drawer,
             .portal-panel-header, .lightbox, .transition-veil { display: none !important; }
@@ -91,7 +91,7 @@
         </style>
     </noscript>
 </head>
-<body class="lang-en">
+<body class="lang-en star-map">
     <div class="galaxy-world" id="galaxyWorld" tabindex="-1" aria-label="Interactive galaxy">
         <canvas id="spaceCanvas" aria-hidden="true"></canvas>
         <canvas id="starMapCanvas" aria-hidden="true"></canvas>
@@ -112,13 +112,7 @@
         <button class="lang-btn" type="button" data-lang="zh-TW">繁</button>
     </div>
 
-    <div class="control-legend" aria-hidden="true">
-        <span data-key="control_look">Mouse · look around</span>
-        <span data-key="control_zoom">Hold right mouse · focus</span>
-        <span data-key="control_cursor">Hold Alt · free cursor</span>
-        <span data-key="control_select">Left click · enter constellation</span>
-    </div>
-    <div class="scene-status" id="sceneStatus">FREE LOOK</div>
+    <div class="scene-status" id="sceneStatus"></div>
 
     <nav class="map-entities" id="mapEntities" aria-label="Astronomical systems"></nav>
     <div class="map-footer">
@@ -129,28 +123,6 @@
         </details>
     </div>
 
-    <div class="entry-gate" id="entryGate" role="dialog" aria-modal="true" aria-labelledby="entryTitle" aria-describedby="entryHint entryLocation">
-        <button class="entry-trigger" id="entryTrigger" type="button">
-            <span class="entry-title" id="entryTitle" data-key="enter_galaxy">Enter the galaxy</span>
-            <span class="entry-hint" id="entryHint" data-key="enter_hint">Click once to take control of the view</span>
-            <span class="entry-location" id="entryLocation">Current observing location: Shanghai · default location</span>
-        </button>
-        <button class="entry-fallback" id="entryFallback" type="button" data-key="enter_fallback" hidden>Continue with drag controls</button>
-    </div>
-
-    <div class="reticle" id="reticle" aria-hidden="true">
-        <span class="r-top"></span>
-        <span class="r-right"></span>
-        <span class="r-bottom"></span>
-        <span class="r-left"></span>
-    </div>
-    <div class="gaze-label" id="gazeLabel" aria-hidden="true">
-        <span class="gaze-primary" id="gazePrimary"></span>
-        <span class="gaze-secondary" id="gazeSecondary"></span>
-        <span class="gaze-constellation" id="gazeConstellation"></span>
-        <p class="gaze-description" id="gazeDescription"></p>
-    </div>
-    <div class="gaze-instruction" data-key="gaze_hint">Bring a bright constellation to the centre</div>
     <div class="sr-only" id="gazeAnnouncement" aria-live="polite"></div>
 
     <button
@@ -578,7 +550,7 @@ I am profoundly moved.</div>
                 <div class="project-grid">
                     <div class="project-card project-entry" data-portal-entry="appcopilot" data-star-hip="81693">
                          <div class="project-img-wrap">
-                            <img src="images/AppCopilot.png" alt="AppCopilot">
+                            <img src="images/AppCopilot.png" alt="AppCopilot" loading="lazy" decoding="async">
                          </div>
                          <div class="project-body">
                              <div class="project-name en-only">AppCopilot</div>
@@ -591,7 +563,7 @@ I am profoundly moved.</div>
                     </div>
                     <div class="project-card project-entry" data-portal-entry="teachmaster" data-star-hip="81693">
                          <div class="project-img-wrap">
-                            <img src="images/TeachMaster.png" alt="TeachMaster">
+                            <img src="images/TeachMaster.png" alt="TeachMaster" loading="lazy" decoding="async">
                          </div>
                          <div class="project-body">
                              <div class="project-name en-only">TeachMaster</div>
@@ -686,26 +658,26 @@ I am profoundly moved.</div>
         <span data-key="home_departing">Returning home</span>
     </div>
 
-    <script src="assets/vendor/astronomy-engine-2.1.19.min.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/01-content-data.js?v=20261013-reader-exit&copy=20261010-relief-ui3"></script>
-    <script src="assets/life/scripts/02-sky-config.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/03-math-orientation.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/04-dom-state.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/05-astronomy.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/06-framing.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/07-galaxy-renderer.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/07-star-map-renderer.js?v=20261013-reader-exit&stars=20261014-gentle-stars"></script>
-    <script src="assets/life/scripts/10-sky-overlay.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/11-section-index.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/12-detail-navigation.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/13-gaze-constellations.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/14-portal-navigation.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/15-render-lock.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/19-star-map.js?v=20261013-reader-exit&input=20261010-trackpad&home=20261012-solar-home&stars=20261014-original-stars"></script>
-    <script src="assets/life/scripts/21-deep-sky-map.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/16-input-events.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/17-content-ui.js?v=20261013-reader-exit"></script>
-    <script src="assets/life/scripts/22-footprints-atlas.js?v=20261013-reader-exit&atlas=20261012-native-white"></script>
-    <script src="assets/life/scripts/18-bootstrap.js?v=20261013-reader-exit"></script>
+    <script src="assets/vendor/astronomy-engine-2.1.19.min.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/01-content-data.js?v=20261015-life-startup&copy=20261010-relief-ui3" defer></script>
+    <script src="assets/life/scripts/02-sky-config.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/03-math-orientation.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/04-dom-state.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/05-astronomy.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/06-framing.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/07-galaxy-renderer.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/07-star-map-renderer.js?v=20261015-life-startup&stars=20261014-gentle-stars" defer></script>
+    <script src="assets/life/scripts/10-sky-overlay.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/11-section-index.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/12-detail-navigation.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/13-gaze-constellations.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/14-portal-navigation.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/15-render-lock.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/19-star-map.js?v=20261015-life-startup&input=20261010-trackpad&home=20261012-solar-home&stars=20261014-original-stars" defer></script>
+    <script src="assets/life/scripts/21-deep-sky-map.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/16-input-events.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/17-content-ui.js?v=20261015-life-startup" defer></script>
+    <script src="assets/life/scripts/22-footprints-atlas.js?v=20261015-life-startup&atlas=20261012-native-white" defer></script>
+    <script src="assets/life/scripts/18-bootstrap.js?v=20261015-life-startup" defer></script>
 </body>
 </html>

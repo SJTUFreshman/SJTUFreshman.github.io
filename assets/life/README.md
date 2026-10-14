@@ -24,6 +24,8 @@
 
 旧天球投影、内容、三语、图片查看器及主页转场继续共享原模块。`window.lifeStarMap` 存在时，`15` 将帧委托给新星图，`16` 跳过旧 Pointer Lock 输入，`18` 初始化新入口。修改时注意不要让旧地平线/昼夜可见性影响三维导航。
 
+首屏 HTML 直接标记为星图模式，已经移除旧接管视角入口、Alt 控制说明、准星及注视提示；共享的无障碍播报仍保留。旧 UI 引用允许为空，仅在旧算法测试中提供节点。旧 `GalaxyRenderer` 延迟到实际使用时才初始化，正常星图启动不会创建它的 WebGL 上下文。银河高清图片在请求切换到银河时开始下载，实际绘制银河时才上传纹理；切回局部后完成的下载不会打断局部绘制。隐藏的项目图片按需加载。
+
 ## CSS 分片
 
 CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的基础规则，不要改用 `@import`。
@@ -40,7 +42,7 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 
 ## Classic JS 顺序
 
-这些文件共享同一个 classic-script 全局词法环境，不能改成 module，也不能改变顺序：
+星表、天文库及下列运行时使用 `defer` 并保持文档中的依赖顺序，使 HTML 和样式能先解析。这些文件共享同一个 classic-script 全局词法环境，不能改成 module、async，也不能改变顺序：
 
 ```text
 01-content-data.js
@@ -96,6 +98,7 @@ python -m py_compile site_renderer.py scripts/build-edukai-subset.py
 python site_renderer.py --check --life-only
 node scripts/validate-life-runtime.cjs
 node scripts/validate-life-http.cjs http://localhost:8765/life.html
+node scripts/validate-star-map.cjs --serve startup
 node scripts/validate-star-map.cjs --serve
 node scripts/validate-star-map.cjs --serve visuals
 git diff --check
@@ -104,3 +107,5 @@ git diff --check
 浏览器回归至少检查：右键旋转、平移/缩放边界、触屏双指、星座连线和点击拉近、恒星内容、索引、三语、地图缩放上限、lightbox、银河全景、太阳系返回主页且不加载旧资源、系外照片详情、主页转场、窄屏、无 WebGL 和 reduced-motion。新浏览器验证脚本使用 Playwright；可通过 `PLAYWRIGHT_MODULE_PATH` 指向已有安装，不要求给站点添加依赖。`--serve` 在测试进程中启动临时本地服务器并自动关闭，也可传入已有页面 URL。可追加 `footprints` 单独检查三张地图在桌面和手机上的缩放上限。
 
 `visuals` 分组在普通桌面、高分桌面及手机模拟视口中读取实际 WebGL 像素，检查星点可见性、普通星与主星的明暗层次及渲染错误，并保存局部图和银河各角度截图。银河检查覆盖纹理分辨率、取景、侧视暗尘埃带与核球、纹理加载及 WebGL 恢复；模拟视口验证不能代替真实手机屏幕的观感检查。
+
+`startup` 分组故意延迟星图脚本，确认初始化前后都没有退役提示，正常启动只创建当前星图的 WebGL 上下文，不下载银河纹理或隐藏项目图片，并检查三语切换、内容关闭与项目图片的按需加载。

@@ -78,6 +78,11 @@ function localStylesheetResources(html) {
 }
 
 const lifeScripts = localScriptResources(lifeHtml);
+for (const match of lifeHtml.matchAll(/<script\b([^>]*)>[\s\S]*?<\/script>/gi)) {
+    if (!attributeValue(match[1], 'src')) continue;
+    assert(/\bdefer\b/i.test(match[1]), 'External Life scripts must defer execution until the document is parsed');
+    assert(!/\basync\b/i.test(match[1]), 'External Life scripts must preserve their dependency order');
+}
 const lifeRuntimeScripts = lifeScripts.filter(resource =>
     resource.relativePath.startsWith('assets/life/scripts/')
 );
@@ -153,13 +158,33 @@ const htmlIds = new Set(
     [...lifeHtml.matchAll(/\bid="([^"]+)"/g)].map(match => match[1])
 );
 const allHtmlIds = [...lifeHtml.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+const retiredOptionalIds = new Set([
+    'entryGate', 'entryTrigger', 'entryFallback', 'entryTitle', 'entryHint', 'entryLocation',
+    'gazePrimary', 'gazeSecondary', 'gazeConstellation', 'gazeDescription'
+]);
 assert.equal(
     htmlIds.size,
     allHtmlIds.length,
     'life.html must not contain duplicate ids'
 );
-const missingIds = registeredIds.filter(id => !htmlIds.has(id));
+const missingIds = registeredIds.filter(id => !htmlIds.has(id) && !retiredOptionalIds.has(id));
 assert.deepEqual(missingIds, [], `Missing HTML ids: ${missingIds.join(', ')}`);
+for (const id of [...retiredOptionalIds, 'reticle', 'gazeLabel']) {
+    assert(!htmlIds.has(id), `Retired free-look UI #${id} must be removed from the document`);
+}
+assert(
+    !/<[^>]+class="[^"]*\b(?:control-legend|gaze-instruction)\b/.test(lifeHtml),
+    'Retired control and gaze hints must be removed from the document'
+);
+assert(htmlIds.has('gazeAnnouncement'), 'Shared accessible announcements must remain available');
+assert(/<body\b[^>]*class="[^"]*\bstar-map\b/.test(lifeHtml), 'The initial document must use the current star-map appearance');
+assert(!/>FREE LOOK<\/div>/.test(lifeHtml), 'The initial scene status must not flash retired free-look copy');
+const projectSection = lifeHtml.match(/<section\b[^>]*id="projects"[^>]*>([\s\S]*?)<\/section>/);
+assert(projectSection, 'The projects section must remain available');
+for (const match of projectSection[1].matchAll(/<img\b([^>]*)>/gi)) {
+    assert.equal(attributeValue(match[1], 'loading'), 'lazy', 'Hidden project images must load lazily');
+    assert.equal(attributeValue(match[1], 'decoding'), 'async', 'Hidden project images must decode asynchronously');
+}
 
 assert(!/homeRouteIndex|home-route-index|home-route-button/.test(life));
 for (const required of [
@@ -197,11 +222,6 @@ assert(
     /const MIN_CAMERA_ALTITUDE = 8 \* DEG;/.test(life) &&
     /const MAX_CAMERA_ALTITUDE = 78 \* DEG;/.test(life),
     'The manual camera must stay inside the 8–78 degree sky dome'
-);
-assert(htmlIds.has('entryLocation'), 'The entry gate must explain the observing location');
-assert(
-    /aria-describedby="entryHint entryLocation"/.test(lifeHtml),
-    'The entry-gate location must participate in its accessible description'
 );
 assert(
     !/GEOMETRIC HORIZON · 0°|几何地平线 · 0°|幾何地平線 · 0°/.test(lifeHtml),

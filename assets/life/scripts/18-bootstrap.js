@@ -2,11 +2,12 @@ if (window.lifeStarMap) {
     window.lifeStarMap.initialize();
     setLang(state.currentLang);
 } else {
+    dom.body.classList.remove('star-map');
     buildFallbackStars();
     resizeOverlay();
     setLang(state.currentLang);
-    dom.status.textContent = 'AWAITING INPUT';
-    setGateState(true, true);
+    state.hasEntered = true;
+    enterFallbackMode();
 }
 startRendering();
 
@@ -44,7 +45,7 @@ if (window.StellarTransit) {
     window.addEventListener('stellar:runtime-ready', signalStellarDestinationReady, { once: true });
 }
 window.addEventListener('stellar:arrival-complete', () => {
-    if (state.gateOpen) dom.entryTrigger.focus({ preventScroll: true });
+    if (state.gateOpen) dom.entryTrigger?.focus({ preventScroll: true });
 });
 
 function restoreLifeAfterNavigation(focusGate = true) {

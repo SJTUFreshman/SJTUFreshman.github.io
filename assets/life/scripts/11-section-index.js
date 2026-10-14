@@ -22,6 +22,7 @@ function updateEntryLocationCopy() {
         window.lifeStarMap.updateCopy();
         return;
     }
+    if (!dom.entryLocation) return;
     const data = i18n[state.currentLang] || i18n.en || {};
     const fallback = skyModel.location.source === 'life-fallback';
     const key = fallback ? 'enter_location_fallback' : 'enter_location_synced';

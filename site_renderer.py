@@ -1116,7 +1116,7 @@ def render_life_projects(content: dict[str, Any]) -> str:
         desc_key = f"proj_{key_for('project', item, index)}"
         rows.append(f"""                    <div class="project-card project-entry" data-portal-entry="{esc(item_id)}" data-star-hip="{esc(star_binding(content, "projects", item_id))}">
                          <div class="project-img-wrap">
-                            <img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", item.get("name", "")))}">
+                            <img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", item.get("name", "")))}" loading="lazy" decoding="async">
                          </div>
                          <div class="project-body">
                              <div class="project-name en-only">{esc(item.get("name", ""))}</div>

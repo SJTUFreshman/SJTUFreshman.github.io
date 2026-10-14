@@ -71,6 +71,7 @@ function updateGazeTarget(time) {
 }
 
 function renderGazeCopy(portal) {
+    if (!dom.gazePrimary || !dom.gazeSecondary || !dom.gazeConstellation || !dom.gazeDescription) return;
     if (!portal) {
         dom.gazePrimary.textContent = '';
         dom.gazeSecondary.textContent = '';

@@ -46,10 +46,11 @@ function stopRendering() {
 }
 
 function setGateState(open, focusTrigger = false) {
+    open = Boolean(open && dom.entryGate && !window.lifeStarMap);
     state.gateOpen = open;
     const drawerOpen = state.sectionDrawerOpen;
-    dom.entryGate.classList.toggle('is-hidden', !open);
-    dom.entryGate.setAttribute('aria-hidden', String(!open));
+    dom.entryGate?.classList.toggle('is-hidden', !open);
+    dom.entryGate?.setAttribute('aria-hidden', String(!open));
     dom.world.inert = open || drawerOpen;
     dom.panel.inert = open || drawerOpen || !dom.body.classList.contains('panel-open');
     dom.lightbox.inert = open || drawerOpen;
@@ -58,7 +59,7 @@ function setGateState(open, focusTrigger = false) {
     syncSectionDrawerAvailability();
     if (open && focusTrigger && !document.hidden) {
         requestAnimationFrame(() => {
-            if (state.gateOpen) dom.entryTrigger.focus({ preventScroll: true });
+            if (state.gateOpen) dom.entryTrigger?.focus({ preventScroll: true });
         });
     }
 }
@@ -73,6 +74,10 @@ function showResumeGate(focusTrigger = true) {
         return;
     }
     if (state.touchMode || state.modalOpen || state.scene === 'detail') return;
+    if (!dom.entryGate) {
+        enterFallbackMode();
+        return;
+    }
     state.lock = 'suspended';
     dom.entryTrigger.disabled = false;
     dom.body.classList.remove('view-locked', 'cursor-free');
@@ -153,8 +158,8 @@ function enterFallbackMode() {
     window.clearTimeout(state.lockRequestTimer);
     state.lockRequestTimer = null;
     state.scene = state.scene === 'entry' ? 'roam' : state.scene;
-    dom.entryTrigger.disabled = false;
-    dom.entryFallback.hidden = true;
+    if (dom.entryTrigger) dom.entryTrigger.disabled = false;
+    if (dom.entryFallback) dom.entryFallback.hidden = true;
     dom.body.classList.remove('view-locked');
     dom.body.classList.add('touch-mode', 'cursor-free', 'has-entered');
     hideEntryGate();
@@ -174,13 +179,13 @@ function handleLockFailure(error, token = state.lockRequestToken) {
     state.lockErrorHandled = true;
     const source = state.lockRequestSource;
     state.lockRequestSource = null;
-    dom.entryTrigger.disabled = false;
+    if (dom.entryTrigger) dom.entryTrigger.disabled = false;
     if (state.scene === 'detail' || state.modalOpen || state.scene === 'flying') {
         settleUnlockedView('lock-failure');
         return;
     }
     const unsupported = error?.name === 'NotSupportedError';
-    if (unsupported) {
+    if (unsupported || !dom.entryGate) {
         enterFallbackMode();
         return;
     }
@@ -202,7 +207,7 @@ function requestViewLock(source = 'entry') {
     }
     state.hasEntered = true;
     dom.body.classList.add('has-entered');
-    if (state.touchMode || typeof dom.world.requestPointerLock !== 'function') {
+    if (!dom.entryGate || state.touchMode || typeof dom.world.requestPointerLock !== 'function') {
         enterFallbackMode();
         return false;
     }
@@ -320,8 +325,8 @@ function handlePointerLockChange() {
         state.detailUnlockPending = false;
         state.detailRelockPending = false;
         state.scene = state.scene === 'entry' ? 'roam' : state.scene;
-        dom.entryTrigger.disabled = false;
-        dom.entryFallback.hidden = true;
+        if (dom.entryTrigger) dom.entryTrigger.disabled = false;
+        if (dom.entryFallback) dom.entryFallback.hidden = true;
         dom.body.classList.add('view-locked', 'has-entered');
         dom.body.classList.remove('cursor-free');
         hideEntryGate();
@@ -543,9 +548,9 @@ function resetTransientInput(focusGate = false) {
     if (state.hasEntered) showResumeGate(focusGate);
 }
 
-dom.entryTrigger.addEventListener('click', () => requestViewLock('entry'));
-dom.entryFallback.addEventListener('click', enterFallbackMode);
-dom.entryGate.addEventListener('click', event => {
+dom.entryTrigger?.addEventListener('click', () => requestViewLock('entry'));
+dom.entryFallback?.addEventListener('click', enterFallbackMode);
+dom.entryGate?.addEventListener('click', event => {
     if (!state.gateOpen || state.touchMode) return;
     if (event.target instanceof Element && event.target.closest('#entryFallback')) return;
     requestViewLock('entry');

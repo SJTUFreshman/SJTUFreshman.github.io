@@ -361,7 +361,7 @@ function setLang(lang) {
     dom.panelClose.setAttribute('aria-label', data.panel_close || 'Return to the galaxy');
     updateEntryLocationCopy();
 
-    if (!dom.entryGate.classList.contains('is-hidden')) {
+    if (dom.entryGate && !dom.entryGate.classList.contains('is-hidden')) {
         const resume = state.hasEntered && state.lock === 'suspended';
         dom.entryTitle.textContent = resume
             ? (data.resume_view || 'Click to return to free look')

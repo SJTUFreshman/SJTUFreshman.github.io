@@ -8,12 +8,14 @@ class StarMapRenderer {
         this.assetVersion = 0;
         this.resources = [];
         this.initialize();
-        this.loadGalacticAssets();
         canvas.addEventListener('webglcontextlost', event => {
             event.preventDefault();
             this.ready = false;
         });
-        canvas.addEventListener('webglcontextrestored', () => this.initialize());
+        canvas.addEventListener('webglcontextrestored', () => {
+            this.initialize();
+            this.assetVersion++;
+        });
     }
 
     program(vertexSource, fragmentSource) {
@@ -362,30 +364,29 @@ class StarMapRenderer {
                 new Uint8Array([0, 0, 0, 0]));
             context.generateMipmap(context.TEXTURE_2D);
         }
-        if (this.galacticImage) this.uploadGalacticAssets();
+        this.galacticUploadVersion = -1;
     }
 
     loadGalacticAssets() {
+        if (this.galacticAssetsPromise) return this.galacticAssetsPromise;
         const load = name => new Promise((resolve, reject) => {
             const image = new Image();
             image.onload = () => resolve(image);
             image.onerror = () => reject(new Error(`Cannot load ${name}`));
             image.src = `assets/life/galaxy/${name}.webp?v=20261014-gaia-4k`;
         });
-        Promise.all([load('milky-way-starlight'), load('milky-way-dust')]).then(([starlight, dust]) => {
+        this.galacticAssetsPromise = Promise.all([load('milky-way-starlight'), load('milky-way-dust')]).then(([starlight, dust]) => {
             this.galacticImage = starlight;
             this.galacticDustImage = dust;
             this.galacticAssetsReady = true;
             this.fallbackDiskImage = null;
             this.assetVersion++;
-            if (this.ready) this.uploadGalacticAssets();
         }).catch(error => {
             this.galacticAssetsFailed = true;
-            this.galacticImage = this.fallbackDisk();
             this.assetVersion++;
-            if (this.ready) this.uploadGalacticAssets();
             console.warn('Galaxy uses its procedural fallback:', error.message);
         });
+        return this.galacticAssetsPromise;
     }
 
     uploadGalacticAssets() {
@@ -407,6 +408,7 @@ class StarMapRenderer {
             context.generateMipmap(context.TEXTURE_2D);
         }
         context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, false);
+        this.galacticUploadVersion = this.assetVersion;
     }
 
     resize() {
@@ -460,6 +462,7 @@ class StarMapRenderer {
     }
 
     render(view) {
+        if (view.galaxy > 0) this.loadGalacticAssets();
         if (this.galaxyDetail !== (view.galaxy > 0.02)) {
             this.galaxyDetail = view.galaxy > 0.02;
             this.resize();
@@ -471,9 +474,9 @@ class StarMapRenderer {
             return;
         }
         const context = this.gl;
-        if (view.galaxy > 0 && !this.galacticImage) {
-            this.galacticImage = this.fallbackDisk();
-            this.uploadGalacticAssets();
+        if (view.galaxy > 0) {
+            if (!this.galacticImage) this.galacticImage = this.fallbackDisk();
+            if (this.galacticUploadVersion !== this.assetVersion) this.uploadGalacticAssets();
         }
         context.disable(context.DEPTH_TEST);
         context.disable(context.BLEND);

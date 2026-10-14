@@ -20,8 +20,8 @@ const launchOptions = {
 const errors = [];
 const checks = [];
 const selectedGroup = process.argv.slice(3).find(argument => !argument.startsWith('--')) || 'all';
-assert(['all', 'input', 'desktop', 'mobile', 'visuals', 'content', 'footprints', 'fallback', 'reduced-motion'].includes(selectedGroup),
-    'Test group must be all, input, desktop, mobile, visuals, content, footprints, fallback, or reduced-motion');
+assert(['all', 'startup', 'input', 'desktop', 'mobile', 'visuals', 'content', 'footprints', 'fallback', 'reduced-motion'].includes(selectedGroup),
+    'Test group must be all, startup, input, desktop, mobile, visuals, content, footprints, fallback, or reduced-motion');
 
 function check(condition, message) {
     assert(condition, message);
@@ -32,7 +32,9 @@ function check(condition, message) {
 function monitor(page, label) {
     page.stylesheetDiagnostics = [];
     page.retiredRequests = [];
+    page.galaxyRequests = [];
     page.on('request', request => {
+        if (/assets\/life\/galaxy\/.*\.webp/.test(request.url())) page.galaxyRequests.push(request.url());
         if (/assets\/celestial\/|solar-system-map|closeup|celestial-(?:starfield|compositor|visits)/.test(request.url())) {
             page.retiredRequests.push(request.url());
         }
@@ -217,6 +219,70 @@ async function wheelInputChecks(page, selector) {
     check([samples.blockedSlide, samples.blockedPinch].every(sample => sameAngles(sample, samples.pages)
         && sample.distance === samples.pages.distance), `${label}: open content blocks camera gestures`);
     await reset(page);
+}
+
+async function startupChecks(browser) {
+    const context = await browser.newContext({ viewport: { width: 1440, height: 960 } });
+    let releaseRuntime;
+    const runtimeGate = new Promise(resolve => { releaseRuntime = resolve; });
+    try {
+        const page = await context.newPage();
+        monitor(page, 'startup');
+        const projectRequests = [];
+        page.on('request', request => {
+            if (/images\/(?:AppCopilot|TeachMaster)\.png/.test(request.url())) projectRequests.push(request.url());
+        });
+        await page.addInitScript(() => {
+            window.startupWebGLContexts = [];
+            const getContext = HTMLCanvasElement.prototype.getContext;
+            HTMLCanvasElement.prototype.getContext = function (kind, ...options) {
+                if (kind.includes('webgl')) window.startupWebGLContexts.push(this.id);
+                return getContext.call(this, kind, ...options);
+            };
+        });
+        await page.route('**/19-star-map.js?*', async route => {
+            await runtimeGate;
+            await route.continue();
+        });
+        await page.goto(pageUrl, { waitUntil: 'commit' });
+        await page.waitForFunction(() => document.readyState !== 'loading'
+            && Array.from(document.querySelectorAll('link[href*="assets/life/styles/"]')).every(link => link.sheet));
+        const retiredHints = '#entryGate, #entryTrigger, #entryFallback, .control-legend, .reticle, .gaze-label, .gaze-instruction';
+        check(await page.locator(retiredHints).count() === 0
+            && await page.evaluate(() => document.body.classList.contains('star-map') && !window.lifeStarMap),
+        'A delayed star-map script never exposes the retired entry, pointer-lock, or gaze prompts');
+        releaseRuntime();
+        await page.waitForFunction(() => window.lifeStarMap?.initialized && window.lifeStarMap.lastFrame > 0);
+        await page.evaluate(() => document.fonts.ready);
+        await settle(page);
+        check(await page.evaluate(() => !window.startupWebGLContexts.includes('spaceCanvas')
+            && window.startupWebGLContexts.includes('starMapCanvas')),
+        'Startup creates only the current star-map WebGL context');
+        check(page.galaxyRequests.length === 0 && projectRequests.length === 0,
+            'Local startup does not download galaxy textures or hidden project images');
+        for (const language of ['zh-CN', 'zh-TW', 'en']) {
+            await page.locator(`.lang-btn[data-lang="${language}"]`).click();
+            await page.locator('#sectionDrawerToggle').click();
+            await page.waitForFunction(() => state.sectionDrawerOpen);
+            await page.keyboard.press('Escape');
+            await page.waitForFunction(() => !state.sectionDrawerOpen);
+        }
+        await page.locator('[data-portal-button="gallery"]').click();
+        await page.waitForFunction(() => state.scene === 'detail');
+        await page.locator('#portalClose').click();
+        await settle(page);
+        check(await page.locator(retiredHints).count() === 0
+            && await page.evaluate(() => !state.gateOpen && !dom.world.inert && !document.pointerLockElement),
+        'Language changes and closing navigation or content preserve the freely controlled map without retired prompts');
+        await page.locator('#sectionDrawerToggle').click();
+        await page.locator('#sectionDrawerList [data-portal-id="projects"]').click();
+        await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'projects');
+        await page.waitForFunction(() => Array.from(document.querySelectorAll('#projects img')).every(image => image.complete && image.naturalWidth > 0));
+        check(projectRequests.length === 2, 'Opening Projects loads both project illustrations on demand');
+    } finally {
+        releaseRuntime();
+        await context.close();
+    }
 }
 
 async function inputChecks(browser) {
@@ -849,11 +915,7 @@ async function visualChecks(browser) {
             const page = await context.newPage();
             monitor(page, name);
             await load(page);
-            await page.waitForFunction(() => window.lifeStarMap.renderer.galacticAssetsReady);
-            check(await page.evaluate(() => {
-                const renderer = window.lifeStarMap.renderer;
-                return renderer.galacticImage.naturalWidth === 4096 && renderer.galacticDustImage.naturalWidth === 2048;
-            }), `${name}: the Gaia reconstruction textures preserve 4K starlight and 2K structure`);
+            check(page.galaxyRequests.length === 0, `${name}: the local map starts without downloading galaxy textures`);
             check(await page.evaluate(() => window.lifeStarMap.renderer.ready && window.lifeStarMap.galaxyMix === 0),
                 `${name}: the local map starts without leaking galactic particles`);
             const home = await pose(page);
@@ -926,7 +988,16 @@ async function visualChecks(browser) {
                 `${name}: constellation stars retain a clear brightness hierarchy above ordinary stars`);
             await screenshot(page, `local-${name}`);
             await page.evaluate(() => window.lifeStarMap.showGalaxy());
+            await page.waitForFunction(() => {
+                const renderer = window.lifeStarMap.renderer;
+                return renderer.galacticAssetsReady && renderer.galacticUploadVersion === renderer.assetVersion;
+            });
             await settle(page);
+            check(await page.evaluate(() => {
+                const renderer = window.lifeStarMap.renderer;
+                return renderer.galacticImage.naturalWidth === 4096 && renderer.galacticDustImage.naturalWidth === 2048;
+            }), `${name}: the Gaia reconstruction textures preserve 4K starlight and 2K structure`);
+            check(page.galaxyRequests.length === 2, `${name}: entering the galaxy requests each texture only once`);
             check(await page.evaluate(() => {
                 const renderer = window.lifeStarMap.renderer;
                 const expected = Math.min(devicePixelRatio, 3, Math.sqrt(8294400 / (innerWidth * innerHeight)));
@@ -1064,6 +1135,45 @@ async function visualChecks(browser) {
         releaseAssets();
         await context.close();
     }
+    const localContext = await browser.newContext({ viewport: { width: 1100, height: 780 }, reducedMotion: 'reduce' });
+    let releaseLocalAssets;
+    const localAssetsGate = new Promise(resolve => { releaseLocalAssets = resolve; });
+    try {
+        const page = await localContext.newPage();
+        monitor(page, 'deferred-galaxy-upload');
+        await page.route('**/assets/life/galaxy/*.webp?*', async route => {
+            await localAssetsGate;
+            await route.continue();
+        });
+        await load(page);
+        await page.evaluate(() => window.lifeStarMap.showGalaxy());
+        await settle(page);
+        await page.evaluate(() => window.lifeStarMap.showLocal());
+        await settle(page);
+        await page.evaluate(() => {
+            const renderer = window.lifeStarMap.renderer;
+            const upload = renderer.uploadGalacticAssets.bind(renderer);
+            renderer.uploadsAfterLocalReturn = 0;
+            renderer.uploadGalacticAssets = () => {
+                renderer.uploadsAfterLocalReturn++;
+                upload();
+            };
+        });
+        releaseLocalAssets();
+        await page.waitForFunction(() => window.lifeStarMap.renderer.galacticAssetsReady);
+        await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+        check(await page.evaluate(() => window.lifeStarMap.galaxyMix === 0
+            && window.lifeStarMap.renderer.uploadsAfterLocalReturn === 0),
+        'A galaxy download finishing after returning to the local map does not upload its large textures');
+        await page.evaluate(() => window.lifeStarMap.showGalaxy());
+        await settle(page);
+        check(await page.evaluate(() => window.lifeStarMap.renderer.uploadsAfterLocalReturn === 1)
+            && page.galaxyRequests.length === 2,
+        'Returning to the galaxy uploads the downloaded textures once without downloading them again');
+    } finally {
+        releaseLocalAssets();
+        await localContext.close();
+    }
 }
 
 async function fallbackChecks() {
@@ -1072,6 +1182,7 @@ async function fallbackChecks() {
         const page = await browser.newPage({ viewport: { width: 1100, height: 780 } });
         monitor(page, 'fallback');
         await load(page);
+        check(page.galaxyRequests.length === 0, 'The canvas local map starts without downloading galaxy textures');
         check(await page.locator('#starMapFallbackCanvas').isVisible()
             && !await page.evaluate(() => window.lifeStarMap.renderer.ready),
         'A browser without WebGL receives the canvas star map fallback');
@@ -1098,8 +1209,8 @@ async function fallbackChecks() {
         const unavailable = await browser.newPage({ viewport: { width: 1100, height: 780 }, reducedMotion: 'reduce' });
         await unavailable.route('**/assets/life/galaxy/*.webp?*', route => route.abort('aborted'));
         await load(unavailable);
-        await unavailable.waitForFunction(() => window.lifeStarMap.renderer.galacticAssetsFailed);
         await unavailable.evaluate(() => window.lifeStarMap.showGalaxy());
+        await unavailable.waitForFunction(() => window.lifeStarMap.renderer.galacticAssetsFailed);
         await settle(unavailable);
         check(await unavailable.evaluate(() => {
             const renderer = window.lifeStarMap.renderer;
@@ -1181,7 +1292,7 @@ async function serveRepository() {
 async function main() {
     fs.mkdirSync(outputDirectory, { recursive: true });
     if (process.argv[2] === '--serve') await serveRepository();
-    for (const [group, run] of [['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['visuals', visualChecks], ['content', contentChecks], ['footprints', footprintsChecks], ['reduced-motion', reducedMotionChecks]]) {
+    for (const [group, run] of [['startup', startupChecks], ['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['visuals', visualChecks], ['content', contentChecks], ['footprints', footprintsChecks], ['reduced-motion', reducedMotionChecks]]) {
         if (selectedGroup !== 'all' && selectedGroup !== group) continue;
         const browser = await chromium.launch(launchOptions);
         try {

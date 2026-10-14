@@ -9,7 +9,7 @@ class GalaxyRenderer {
         this.dpr = 1;
         this.width = 1;
         this.height = 1;
-        this.initialize();
+        this.initialized = false;
         canvas.addEventListener('webglcontextlost', event => {
             event.preventDefault();
             this.ready = false;
@@ -18,6 +18,7 @@ class GalaxyRenderer {
     }
 
     initialize() {
+        this.initialized = true;
         const options = {
             alpha: false,
             antialias: false,
@@ -573,6 +574,7 @@ class GalaxyRenderer {
     }
 
     render(time, basis) {
+        if (!this.initialized) this.initialize();
         if (!this.ready || !this.gl) return false;
         const gl = this.gl;
         const sky = skyRenderingParameters();
