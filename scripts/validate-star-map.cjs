@@ -20,8 +20,8 @@ const launchOptions = {
 const errors = [];
 const checks = [];
 const selectedGroup = process.argv.slice(3).find(argument => !argument.startsWith('--')) || 'all';
-assert(['all', 'startup', 'input', 'desktop', 'mobile', 'visuals', 'content', 'footprints', 'fallback', 'reduced-motion'].includes(selectedGroup),
-    'Test group must be all, startup, input, desktop, mobile, visuals, content, footprints, fallback, or reduced-motion');
+assert(['all', 'startup', 'motion', 'input', 'desktop', 'mobile', 'visuals', 'content', 'footprints', 'fallback', 'reduced-motion'].includes(selectedGroup),
+    'Test group must be all, startup, motion, input, desktop, mobile, visuals, content, footprints, fallback, or reduced-motion');
 
 function check(condition, message) {
     assert(condition, message);
@@ -99,7 +99,7 @@ async function load(page) {
 async function settle(page) {
     await page.waitForFunction(() => {
         const map = window.lifeStarMap;
-        return !map.flight && Math.abs(map.distance - map.target.distance) < 0.15
+        return !map.flight && !map.pendingGalaxy && Math.abs(map.distance - map.target.distance) < 0.15
             && Math.abs(map.yaw - map.target.yaw) < 0.001
             && Math.abs(map.pitch - map.target.pitch) < 0.001
             && map.center.every((value, axis) => Math.abs(value - map.target.center[axis]) < 0.15);
@@ -281,6 +281,95 @@ async function startupChecks(browser) {
         check(projectRequests.length === 2, 'Opening Projects loads both project illustrations on demand');
     } finally {
         releaseRuntime();
+        await context.close();
+    }
+}
+
+async function motionChecks(browser) {
+    const context = await browser.newContext({ viewport: { width: 1440, height: 960 }, deviceScaleFactor: 2 });
+    try {
+        const page = await context.newPage();
+        monitor(page, 'motion');
+        await load(page);
+        const response = await page.evaluate(() => {
+            const map = window.lifeStarMap;
+            const before = map.snapshot();
+            map.orbit(35, 18);
+            return { before, actual: map.snapshot(), target: map.target };
+        });
+        check(Math.abs(response.actual.yaw - response.target.yaw) < 0.001
+            && Math.abs(response.actual.pitch - response.target.pitch) < 0.001
+            && Math.abs(response.actual.yaw - response.before.yaw) > 0.1,
+        'Active orbit input updates the camera immediately without an extra easing delay');
+        await page.waitForFunction(() => window.lifeStarMap.currentView.moving);
+        const movingLocal = await page.evaluate(() => {
+            const renderer = window.lifeStarMap.renderer;
+            return { cloud: [renderer.cloudWidth, renderer.cloudHeight], canvas: [renderer.canvas.width, renderer.canvas.height] };
+        });
+        check(movingLocal.cloud[0] <= 720 && movingLocal.cloud[1] <= 480,
+            'Rotating the local map bounds the soft volume layer to half-resolution');
+        await page.waitForFunction(() => !window.lifeStarMap.currentView.moving);
+        check(await page.evaluate(moving => {
+            const renderer = window.lifeStarMap.renderer;
+            return renderer.cloudWidth > moving.cloud[0] && renderer.cloudHeight > moving.cloud[1]
+                && renderer.canvas.width === moving.canvas[0] && renderer.canvas.height === moving.canvas[1];
+        }, movingLocal), 'Settling restores local cloud detail without changing the star canvas resolution');
+        await reset(page);
+        await page.evaluate(() => {
+            const map = window.lifeStarMap;
+            const renderer = map.renderer;
+            window.motionUploads = [];
+            const upload = renderer.uploadGalacticAssets.bind(renderer);
+            renderer.uploadGalacticAssets = (...args) => {
+                window.motionUploads.push({ flight: Boolean(map.flight), mix: map.galaxyMix });
+                return upload(...args);
+            };
+            window.galaxyBlendFrames = [];
+            const render = map.render.bind(map);
+            map.render = time => {
+                render(time);
+                if (map.levelTransition) window.galaxyBlendFrames.push({ time, mix: map.galaxyMix, width: renderer.cloudWidth, height: renderer.cloudHeight });
+            };
+            map.showGalaxy();
+        });
+        await settle(page);
+        const transition = await page.evaluate(() => ({ frames: window.galaxyBlendFrames, uploads: window.motionUploads }));
+        const firstTen = transition.frames.find(frame => frame.mix >= 0.1);
+        const firstNinety = transition.frames.find(frame => frame.mix >= 0.9);
+        check(firstTen && firstNinety && firstNinety.time - firstTen.time >= 500,
+            'The main galaxy blend spans at least half a second instead of a brief distance-threshold jump');
+        check(transition.frames.every((frame, index, frames) => !index || frame.mix >= frames[index - 1].mix),
+            'The local-to-galaxy blend progresses continuously without reversing');
+        check(transition.frames.every(frame => frame.width <= 720 && frame.height <= 480),
+            'The overlapping local and galaxy volume passes stay within the motion pixel budget');
+        check(transition.uploads.length > 0 && transition.uploads.every(upload => !upload.flight && upload.mix === 0),
+            'Galaxy textures finish uploading before the camera flight starts');
+        await page.waitForFunction(() => !window.lifeStarMap.currentView.moving);
+        const galaxyCanvas = await page.evaluate(() => [window.lifeStarMap.renderer.canvas.width, window.lifeStarMap.renderer.canvas.height]);
+        await page.evaluate(() => window.lifeStarMap.orbit(40, 0));
+        await page.waitForFunction(() => window.lifeStarMap.currentView.moving);
+        check(await page.evaluate(canvas => {
+            const renderer = window.lifeStarMap.renderer;
+            return renderer.cloudWidth <= 720 && renderer.cloudHeight <= 480
+                && renderer.canvas.width === canvas[0] && renderer.canvas.height === canvas[1]
+                && renderer.galacticImage.naturalWidth === 4096;
+        }, galaxyCanvas), 'Galaxy rotation preserves the full-resolution disk while reducing only the volume work');
+        await page.waitForFunction(() => !window.lifeStarMap.currentView.moving);
+        check(await page.evaluate(() => window.lifeStarMap.renderer.cloudWidth > 720),
+            'A settled galaxy restores its original volume resolution');
+        await page.evaluate(() => {
+            const map = window.lifeStarMap;
+            map.openPortal(portalDefinitions.find(portal => portal.id === 'gallery'));
+            map.cancelFlight();
+        });
+        await settle(page);
+        check(await page.evaluate(() => window.lifeStarMap.mapLevel === 'galaxy' && window.lifeStarMap.galaxyMix === 1),
+            'Cancelling a constellation flight from the galaxy restores both its view and zoom level');
+        await page.evaluate(() => window.lifeStarMap.showLocal());
+        await settle(page);
+        check(await page.evaluate(() => window.lifeStarMap.galaxyMix === 0),
+            'Returning from the galaxy completes the blend back to a clean local map');
+    } finally {
         await context.close();
     }
 }
@@ -1084,7 +1173,8 @@ async function visualChecks(browser) {
                 check(extensionAvailable, 'The galaxy renderer supports a context recovery check');
                 await page.waitForFunction(() => !window.lifeStarMap.renderer.ready);
                 await page.evaluate(() => window.visualContextRecovery.restoreContext());
-                await page.waitForFunction(() => window.lifeStarMap.renderer.ready);
+                await page.waitForFunction(() => window.lifeStarMap.renderer.ready
+                    && window.lifeStarMap.renderer.galacticUploadVersion === window.lifeStarMap.renderer.assetVersion);
                 await settle(page);
                 check(await page.evaluate(() => {
                     const map = window.lifeStarMap;
@@ -1111,26 +1201,23 @@ async function visualChecks(browser) {
             await route.continue();
         });
         await load(page);
-        await page.evaluate(() => window.lifeStarMap.showGalaxy());
-        await settle(page);
-        const stationaryPose = await pose(page);
-        check(await page.evaluate(() => !window.lifeStarMap.renderer.galacticAssetsReady),
-            'A slow texture download leaves the galaxy controls available');
-        await page.evaluate(() => {
-            const renderer = window.lifeStarMap.renderer;
-            const render = renderer.render.bind(renderer);
-            renderer.render = view => {
-                render(view);
-                renderer.lastRenderedAssetVersion = renderer.assetVersion;
-            };
-        });
+        await page.evaluate(() => { window.lifeStarMap.showGalaxy(); });
+        await page.waitForFunction(() => window.lifeStarMap.pendingGalaxy);
+        check(await page.evaluate(() => !window.lifeStarMap.renderer.galacticAssetsReady
+            && window.lifeStarMap.galaxyMix === 0 && window.lifeStarMap.canMove()),
+            'A slow galaxy download keeps the local map visible and controllable');
+        check(await page.evaluate(() => {
+            const map = window.lifeStarMap;
+            const before = map.yaw;
+            map.orbit(30, 0);
+            return Math.abs(map.yaw - before) > 0.1 && Boolean(map.pendingGalaxy);
+        }), 'Preparing galaxy assets does not block orbit input');
         releaseAssets();
-        await page.waitForFunction(() => {
-            const renderer = window.lifeStarMap.renderer;
-            return renderer.galacticAssetsReady && renderer.lastRenderedAssetVersion === renderer.assetVersion;
-        });
-        check(JSON.stringify(await pose(page)) === JSON.stringify(stationaryPose),
-            'Downloaded galaxy detail replaces the fallback without camera motion or user input');
+        await settle(page);
+        check(await page.evaluate(() => window.lifeStarMap.mapLevel === 'galaxy'
+            && window.lifeStarMap.renderer.galacticUploadVersion === window.lifeStarMap.renderer.assetVersion
+            && !window.lifeStarMap.renderer.fallbackDiskImage),
+            'The first galaxy flight uses prepared high-resolution images without a temporary procedural disk');
     } finally {
         releaseAssets();
         await context.close();
@@ -1146,17 +1233,28 @@ async function visualChecks(browser) {
             await route.continue();
         });
         await load(page);
-        await page.evaluate(() => window.lifeStarMap.showGalaxy());
-        await settle(page);
+        await page.evaluate(() => { window.lifeStarMap.showGalaxy(); });
+        await page.waitForFunction(() => window.lifeStarMap.pendingGalaxy);
         await page.evaluate(() => window.lifeStarMap.showLocal());
         await settle(page);
+        check(await page.evaluate(() => {
+            const map = window.lifeStarMap;
+            map.showGalaxy();
+            map.zoom(-30);
+            return !map.pendingGalaxy && map.galaxyMix === 0;
+        }), 'Zooming inward cancels a pending galaxy visit');
+        await settle(page);
+        await page.evaluate(() => { window.lifeStarMap.showGalaxy(); });
+        await page.keyboard.press('Escape');
+        check(await page.evaluate(() => !window.lifeStarMap.pendingGalaxy && !window.lifeStarMap.flight),
+            'Escape cancels preparation without starting an unwanted camera flight');
         await page.evaluate(() => {
             const renderer = window.lifeStarMap.renderer;
             const upload = renderer.uploadGalacticAssets.bind(renderer);
             renderer.uploadsAfterLocalReturn = 0;
-            renderer.uploadGalacticAssets = () => {
+            renderer.uploadGalacticAssets = (...args) => {
                 renderer.uploadsAfterLocalReturn++;
-                upload();
+                return upload(...args);
             };
         });
         releaseLocalAssets();
@@ -1292,7 +1390,7 @@ async function serveRepository() {
 async function main() {
     fs.mkdirSync(outputDirectory, { recursive: true });
     if (process.argv[2] === '--serve') await serveRepository();
-    for (const [group, run] of [['startup', startupChecks], ['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['visuals', visualChecks], ['content', contentChecks], ['footprints', footprintsChecks], ['reduced-motion', reducedMotionChecks]]) {
+    for (const [group, run] of [['startup', startupChecks], ['motion', motionChecks], ['input', inputChecks], ['desktop', desktopChecks], ['mobile', mobileChecks], ['visuals', visualChecks], ['content', contentChecks], ['footprints', footprintsChecks], ['reduced-motion', reducedMotionChecks]]) {
         if (selectedGroup !== 'all' && selectedGroup !== group) continue;
         const browser = await chromium.launch(launchOptions);
         try {

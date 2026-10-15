@@ -19,6 +19,7 @@ class LifeStarMap {
         this.selected = null;
         this.galaxyMix = 0;
         this.mapLevel = 'local';
+        this.pendingGalaxy = null;
     }
 
     initialize() {
@@ -268,10 +269,13 @@ class LifeStarMap {
         this.lastInputTime = performance.now();
         this.target.yaw -= deltaX * 0.0042;
         this.target.pitch = clamp(this.target.pitch + deltaY * 0.0042, -STAR_MAP_LIMITS.pitch, STAR_MAP_LIMITS.pitch);
+        this.yaw = this.target.yaw;
+        this.pitch = this.target.pitch;
     }
 
     zoom(delta) {
         if (this.deepSky?.active) return this.deepSky.zoom(delta);
+        if (delta < 0) this.cancelPendingGalaxy();
         if (!this.canMove()) return;
         this.lastInputTime = performance.now();
         if (this.mapLevel === 'galaxy') {
@@ -279,6 +283,7 @@ class LifeStarMap {
             return;
         }
         const desired = this.target.distance * Math.exp(clamp(delta, -180, 180) * 0.0026);
+        if (delta > 0 && desired > STAR_MAP_LIMITS.localMaxDistance * 0.85) this.renderer.loadGalacticAssets();
         if (desired > STAR_MAP_LIMITS.localMaxDistance && delta > 0) {
             this.showGalaxy();
             return;
@@ -286,14 +291,42 @@ class LifeStarMap {
         this.target.distance = clamp(desired, STAR_MAP_LIMITS.minDistance, STAR_MAP_LIMITS.localMaxDistance);
     }
 
-    showGalaxy() {
-        if (!this.canMove() || this.mapLevel === 'galaxy') return;
-        this.renderer.loadGalacticAssets();
+    cancelPendingGalaxy() {
+        if (!this.pendingGalaxy) return false;
+        this.pendingGalaxy = null;
+        this.updateCopy();
+        return true;
+    }
+
+    async showGalaxy() {
+        if (!this.canMove() || this.mapLevel === 'galaxy' || this.pendingGalaxy) return;
+        const request = {};
+        this.pendingGalaxy = request;
+        this.updateCopy();
+        try {
+            await this.renderer.loadGalacticAssets();
+            if (this.pendingGalaxy !== request) return;
+            if (!this.canMove() || this.mapLevel !== 'local') {
+                this.cancelPendingGalaxy();
+                return;
+            }
+            await this.renderer.prepareGalacticAssets();
+            if (this.pendingGalaxy !== request) return;
+            if (!this.canMove() || this.mapLevel !== 'local') {
+                this.cancelPendingGalaxy();
+                return;
+            }
+        } catch (error) {
+            if (this.pendingGalaxy === request) this.cancelPendingGalaxy();
+            console.warn('Galaxy preparation failed:', error);
+            return;
+        }
+        this.pendingGalaxy = null;
         this.localReturnPose = this.snapshot();
         this.localReturnPose.distance = Math.min(this.localReturnPose.distance, this.homePose().distance);
         state.scene = 'flying';
         this.levelTransition = true;
-        this.animateTo({ yaw: this.yaw, pitch: 0.7, distance: STAR_MAP_LIMITS.maxDistance, center: [0, 0, 0] }, () => {
+        this.animateTo({ yaw: this.yaw, pitch: 0.7, distance: STAR_MAP_LIMITS.maxDistance, center: [0, 0, 0], galaxy: 1 }, () => {
             this.mapLevel = 'galaxy';
             this.levelTransition = false;
             state.scene = 'roam';
@@ -305,6 +338,7 @@ class LifeStarMap {
     }
 
     showLocal() {
+        if (this.cancelPendingGalaxy()) return;
         if (this.flight || state.modalOpen) return;
         state.scene = 'flying';
         this.levelTransition = true;
@@ -326,6 +360,7 @@ class LifeStarMap {
         const next = this.target.center.map((value, axis) => value - view.right[axis] * deltaX * scale + view.up[axis] * deltaY * scale);
         const length = vectorLength(next);
         this.target.center = length > STAR_MAP_LIMITS.panRadius ? next.map(value => value / length * STAR_MAP_LIMITS.panRadius) : next;
+        this.center = this.target.center.slice();
     }
 
     canMove() {
@@ -345,12 +380,13 @@ class LifeStarMap {
     }
 
     snapshot() {
-        return { yaw: this.yaw, pitch: this.pitch, distance: this.distance, center: this.center.slice() };
+        return { yaw: this.yaw, pitch: this.pitch, distance: this.distance, center: this.center.slice(), galaxy: this.galaxyMix };
     }
 
     animateTo(destination, completion = null) {
         this.clearInput();
-        this.flight = { from: this.snapshot(), to: destination, started: performance.now(), duration: REDUCED_MOTION ? 0 : 850, completion };
+        this.flight = { from: this.snapshot(), to: destination, fromGalaxy: this.galaxyMix, toGalaxy: destination.galaxy ?? 0,
+            started: performance.now(), duration: REDUCED_MOTION ? 0 : 850, completion };
         this.target = { ...destination, center: destination.center.slice() };
     }
 
@@ -368,8 +404,12 @@ class LifeStarMap {
     openPortal(portal, source = 'pointer', arrivalHip = null) {
         if (this.deepSky?.active) this.deepSky.exit();
         if (!portal || state.modalOpen || state.scene === 'leaving-home') return;
-        if (!this.overview) this.overview = this.snapshot();
-        this.portalReturnLevel = this.mapLevel;
+        this.pendingEntity = null;
+        this.frozenGalaxyMix = null;
+        if (!this.overview) {
+            this.overview = this.snapshot();
+            this.portalReturnLevel = this.mapLevel;
+        }
         this.mapLevel = 'local';
         if (state.scene === 'detail') closePortalPanel(false, source);
         state.activationSource = source;
@@ -401,6 +441,7 @@ class LifeStarMap {
     }
 
     cancelFlight() {
+        if (this.cancelPendingGalaxy()) return true;
         if (this.pendingEntity) {
             const destination = this.deepReturn;
             this.pendingEntity = null;
@@ -415,7 +456,7 @@ class LifeStarMap {
             this.levelTransition = false;
             state.scene = 'roam';
             const destination = this.mapLevel === 'galaxy'
-                ? { yaw: this.yaw, pitch: 0.7, distance: STAR_MAP_LIMITS.maxDistance, center: [0, 0, 0] }
+                ? { yaw: this.yaw, pitch: 0.7, distance: STAR_MAP_LIMITS.maxDistance, center: [0, 0, 0], galaxy: 1 }
                 : this.localReturnPose || this.homePose();
             this.animateTo(destination);
             this.updateCopy();
@@ -424,6 +465,7 @@ class LifeStarMap {
         this.flight = null;
         this.selected = null;
         state.scene = 'roam';
+        this.mapLevel = this.overview ? this.portalReturnLevel || this.mapLevel : 'local';
         this.animateTo(this.overview || this.homePose());
         this.overview = null;
         this.updateCopy();
@@ -435,6 +477,7 @@ class LifeStarMap {
     }
 
     reset() {
+        this.cancelPendingGalaxy();
         if (this.deepSky?.active) return this.closeDeepSky();
         if (state.modalOpen || state.scene === 'leaving-home') return;
         if (state.scene === 'detail') closePortalPanel(false);
@@ -490,6 +533,7 @@ class LifeStarMap {
             this.pitch = lerp(flight.from.pitch, flight.to.pitch, amount);
             this.distance = lerp(flight.from.distance, flight.to.distance, amount);
             this.center = flight.from.center.map((value, axis) => lerp(value, flight.to.center[axis], amount));
+            this.galaxyMix = lerp(flight.fromGalaxy, flight.toGalaxy, smoothstep(0, 1, progress));
             if (progress >= 1) {
                 this.flight = null;
                 flight.completion?.();
@@ -501,14 +545,21 @@ class LifeStarMap {
             this.distance = lerp(this.distance, this.target.distance, response);
             this.center = this.center.map((value, axis) => lerp(value, this.target.center[axis], response));
         }
-        this.galaxyMix = this.frozenGalaxyMix ?? smoothstep(STAR_MAP_LIMITS.localMaxDistance, STAR_MAP_LIMITS.maxDistance, this.distance);
-        if (!REDUCED_MOTION && this.galaxyMix > 0.96 && !this.flight && !this.pointers.size
-            && !state.modalOpen && time - (this.lastInputTime || 0) > 4500) {
+        if (this.frozenGalaxyMix != null) this.galaxyMix = this.frozenGalaxyMix;
+        const automaticOrbit = !REDUCED_MOTION && this.galaxyMix > 0.96 && !this.flight && !this.pointers.size
+            && !state.modalOpen && time - (this.lastInputTime || 0) > 4500;
+        if (automaticOrbit) {
             this.target.yaw += delta * 0.014;
         }
         this.currentView = this.view();
+        const poseUnsettled = (!automaticOrbit && Math.abs(this.yaw - this.target.yaw) > 0.0001)
+            || Math.abs(this.pitch - this.target.pitch) > 0.0001
+            || Math.abs(this.distance - this.target.distance) > 0.01
+            || this.center.some((value, axis) => Math.abs(value - this.target.center[axis]) > 0.01);
+        this.currentView.moving = Boolean(this.flight || this.pointers.size || poseUnsettled
+            || time - (this.lastInputTime ?? -Infinity) < 150);
         const viewKey = [...this.currentView.position, this.yaw, this.pitch, this.galaxyMix].map(value => value.toFixed(4)).join(',')
-            + this.renderer.ready + ':' + this.renderer.assetVersion;
+            + this.renderer.ready + ':' + this.renderer.assetVersion + ':' + this.currentView.moving;
         if (viewKey !== this.rendererViewKey) {
             this.renderer.render(this.currentView);
             this.rendererViewKey = viewKey;
@@ -586,6 +637,7 @@ class LifeStarMap {
     }
 
     clearInput() {
+        this.cancelPendingGalaxy();
         for (const pointerId of this.pointers.keys()) {
             if (dom.world.hasPointerCapture?.(pointerId)) dom.world.releasePointerCapture(pointerId);
         }
@@ -769,7 +821,9 @@ class LifeStarMap {
         const copy = copies[state.currentLang] || copies.en;
         document.querySelectorAll('[data-map-copy]').forEach(element => { element.textContent = copy[element.dataset.mapCopy] || ''; });
         document.getElementById('mapInputHint').textContent = COARSE_POINTER ? copy.touch : `${copy.orbit}     ${copy.pan}     ${copy.zoom}`;
-        dom.status.textContent = state.scene === 'detail' ? `${copy.detail} / ${portalName(this.selected, state.currentLang)}` : state.scene === 'flying' ? copy.flight : copy.overview;
+        const preparing = { en: 'Preparing galaxy', 'zh-CN': '正在准备银河', 'zh-TW': '正在準備銀河' };
+        dom.status.textContent = this.pendingGalaxy ? preparing[state.currentLang] || preparing.en
+            : state.scene === 'detail' ? `${copy.detail} / ${portalName(this.selected, state.currentLang)}` : state.scene === 'flying' ? copy.flight : copy.overview;
         for (const group of this.groups.values()) {
             const button = group.portal.button;
             button.querySelector('.map-portal-number').textContent = String(group.index + 1).padStart(2, '0');

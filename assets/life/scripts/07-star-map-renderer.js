@@ -6,15 +6,20 @@ class StarMapRenderer {
         this.stars = stars;
         this.ready = false;
         this.assetVersion = 0;
+        this.contextVersion = 0;
         this.resources = [];
         this.initialize();
         canvas.addEventListener('webglcontextlost', event => {
             event.preventDefault();
             this.ready = false;
+            this.contextVersion++;
+            this.galacticPreparation = null;
+            this.assetVersion++;
         });
         canvas.addEventListener('webglcontextrestored', () => {
             this.initialize();
             this.assetVersion++;
+            if (this.galacticPreparationRequested) this.prepareGalacticAssets();
         });
     }
 
@@ -41,6 +46,8 @@ class StarMapRenderer {
     }
 
     initialize() {
+        this.contextVersion++;
+        this.galacticPreparation = null;
         this.gl = this.canvas.getContext('webgl', {
             alpha: false, antialias: false, depth: false, stencil: false,
             powerPreference: 'high-performance'
@@ -329,6 +336,13 @@ class StarMapRenderer {
             context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_T, context.CLAMP_TO_EDGE);
             this.framebuffer = context.createFramebuffer();
             this.uniforms = new Map();
+            this.attributes = new Map();
+            this.cloudWidth = 0;
+            this.cloudHeight = 0;
+            this.maxTextureSize = context.getParameter(context.MAX_TEXTURE_SIZE);
+            for (const program of [this.cloudProgram, this.copyProgram]) this.attribute(program, 'aPosition');
+            this.starAttributes = [['aPosition', 3, 0], ['aColor', 3, 3], ['aLight', 1, 6], ['aSize', 1, 7], ['aBackground', 1, 8]]
+                .map(([name, size, offset]) => [this.attribute(this.starProgram, name), size, offset]);
             this.createGalacticDisk();
             this.ready = true;
             this.resize();
@@ -345,6 +359,16 @@ class StarMapRenderer {
             this.uniforms.set(program, locations);
         }
         if (!locations.has(name)) locations.set(name, this.gl.getUniformLocation(program, name));
+        return locations.get(name);
+    }
+
+    attribute(program, name) {
+        let locations = this.attributes.get(program);
+        if (!locations) {
+            locations = new Map();
+            this.attributes.set(program, locations);
+        }
+        if (!locations.has(name)) locations.set(name, this.gl.getAttribLocation(program, name));
         return locations.get(name);
     }
 
@@ -369,15 +393,29 @@ class StarMapRenderer {
 
     loadGalacticAssets() {
         if (this.galacticAssetsPromise) return this.galacticAssetsPromise;
-        const load = name => new Promise((resolve, reject) => {
-            const image = new Image();
-            image.onload = () => resolve(image);
-            image.onerror = () => reject(new Error(`Cannot load ${name}`));
-            image.src = `assets/life/galaxy/${name}.webp?v=20261014-gaia-4k`;
-        });
+        const load = async name => {
+            const response = await fetch(`assets/life/galaxy/${name}.webp?v=20261014-gaia-4k`);
+            if (!response.ok) throw new Error(`Cannot load ${name}: ${response.status}`);
+            const blob = await response.blob();
+            const source = URL.createObjectURL(blob);
+            try {
+                const image = await new Promise((resolve, reject) => {
+                    const picture = new Image();
+                    picture.decoding = 'async';
+                    picture.onload = () => resolve(picture);
+                    picture.onerror = () => reject(new Error(`Cannot decode ${name}`));
+                    picture.src = source;
+                });
+                if (image.decode) await image.decode();
+                return { image, blob };
+            } finally {
+                URL.revokeObjectURL(source);
+            }
+        };
         this.galacticAssetsPromise = Promise.all([load('milky-way-starlight'), load('milky-way-dust')]).then(([starlight, dust]) => {
-            this.galacticImage = starlight;
-            this.galacticDustImage = dust;
+            this.galacticImage = starlight.image;
+            this.galacticDustImage = dust.image;
+            this.galacticBlobs = [starlight.blob, dust.blob];
             this.galacticAssetsReady = true;
             this.fallbackDiskImage = null;
             this.assetVersion++;
@@ -389,26 +427,71 @@ class StarMapRenderer {
         return this.galacticAssetsPromise;
     }
 
-    uploadGalacticAssets() {
-        const context = this.gl;
-        context.activeTexture(context.TEXTURE0);
-        context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, true);
-        context.pixelStorei(context.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
-        for (const [texture, image] of [[this.galacticDisk, this.galacticImage], [this.galacticDust, this.galacticDustImage]]) {
-            if (!image) continue;
-            const limit = context.getParameter(context.MAX_TEXTURE_SIZE);
-            let upload = image;
-            if (image.width > limit || image.height > limit) {
-                upload = document.createElement('canvas');
-                upload.width = upload.height = Math.min(2048, limit);
-                upload.getContext('2d').drawImage(image, 0, 0, upload.width, upload.height);
+    prepareGalacticAssets() {
+        if (this.galacticPreparation) return this.galacticPreparation;
+        this.galacticPreparationRequested = true;
+        const version = this.contextVersion;
+        this.galacticPreparation = (async () => {
+            await this.loadGalacticAssets();
+            if (version !== this.contextVersion) return this.prepareGalacticAssets();
+            if (!this.galacticImage) this.galacticImage = this.fallbackDisk();
+            if (this.ready) {
+                try {
+                    await this.uploadGalacticAssets(version);
+                } catch (error) {
+                    if (version !== this.contextVersion) return this.prepareGalacticAssets();
+                    this.ready = false;
+                    console.warn('Galaxy uses its canvas renderer:', error.message);
+                }
             }
-            context.bindTexture(context.TEXTURE_2D, texture);
-            context.texImage2D(context.TEXTURE_2D, 0, context.RGBA, context.RGBA, context.UNSIGNED_BYTE, upload);
-            context.generateMipmap(context.TEXTURE_2D);
+            if (version !== this.contextVersion) return this.prepareGalacticAssets();
+            this.assetVersion++;
+            if (this.ready) this.galacticUploadVersion = this.assetVersion;
+        })();
+        return this.galacticPreparation;
+    }
+
+    async uploadGalacticAssets(version = this.contextVersion) {
+        const context = this.gl;
+        const textures = [this.galacticDisk, this.galacticDust];
+        const sources = [this.galacticImage, this.galacticDustImage];
+        for (const [index, image] of sources.entries()) {
+            if (!image || version !== this.contextVersion || !this.ready) continue;
+            const limit = this.maxTextureSize;
+            let upload = image;
+            let bitmap = null;
+            if (this.galacticBlobs?.[index] && typeof createImageBitmap === 'function') {
+                const options = { imageOrientation: 'flipY', premultiplyAlpha: 'none' };
+                if (image.width > limit || image.height > limit) {
+                    options.resizeWidth = options.resizeHeight = Math.min(2048, limit);
+                    options.resizeQuality = 'high';
+                }
+                try {
+                    bitmap = await createImageBitmap(this.galacticBlobs[index], options);
+                    upload = bitmap;
+                } catch {
+                    bitmap = null;
+                }
+            }
+            try {
+                await new Promise(resolve => requestAnimationFrame(resolve));
+                if (version !== this.contextVersion || !this.ready) return;
+                if (!bitmap && (image.width > limit || image.height > limit)) {
+                    upload = document.createElement('canvas');
+                    upload.width = upload.height = Math.min(2048, limit);
+                    upload.getContext('2d').drawImage(image, 0, 0, upload.width, upload.height);
+                }
+                context.activeTexture(context.TEXTURE0);
+                context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, !bitmap);
+                context.pixelStorei(context.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+                context.bindTexture(context.TEXTURE_2D, textures[index]);
+                context.texImage2D(context.TEXTURE_2D, 0, context.RGBA, context.RGBA, context.UNSIGNED_BYTE, upload);
+                context.generateMipmap(context.TEXTURE_2D);
+                context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, false);
+            } finally {
+                bitmap?.close();
+            }
         }
-        context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, false);
-        this.galacticUploadVersion = this.assetVersion;
     }
 
     resize() {
@@ -417,21 +500,26 @@ class StarMapRenderer {
         const pixelRatioLimit = this.galaxyDetail ? Math.min(3, Math.sqrt(8294400 / (this.width * this.height)))
             : COARSE_POINTER ? 1.5 : 1.75;
         this.dpr = Math.min(window.devicePixelRatio || 1, pixelRatioLimit);
-        this.canvas.width = Math.round(this.width * this.dpr);
-        this.canvas.height = Math.round(this.height * this.dpr);
-        this.fallbackCanvas.width = this.canvas.width;
-        this.fallbackCanvas.height = this.canvas.height;
+        const width = Math.round(this.width * this.dpr);
+        const height = Math.round(this.height * this.dpr);
+        for (const canvas of [this.canvas, this.fallbackCanvas]) {
+            if (canvas.width !== width) canvas.width = width;
+            if (canvas.height !== height) canvas.height = height;
+        }
         if (!this.ready) return;
-        this.resizeCloudTarget(this.galaxyDetail || false);
+        this.resizeCloudTarget(this.galaxyDetail || false, this.moving || false);
     }
 
-    resizeCloudTarget(galaxy) {
-        this.galaxyDetail = galaxy;
+    resizeCloudTarget(galaxy, moving) {
         const context = this.gl;
-        const cloudScale = galaxy ? Math.min(this.dpr, 1.5, 2160 / this.width, 2160 / this.height)
+        const cloudScale = moving ? Math.min(0.5, 1200 / this.width, 900 / this.height)
+            : galaxy ? Math.min(this.dpr, 1.5, 2160 / this.width, 2160 / this.height)
             : Math.min(0.75, 1200 / this.width, 900 / this.height);
-        this.cloudWidth = Math.max(1, Math.round(this.width * cloudScale));
-        this.cloudHeight = Math.max(1, Math.round(this.height * cloudScale));
+        const width = Math.max(1, Math.round(this.width * cloudScale));
+        const height = Math.max(1, Math.round(this.height * cloudScale));
+        if (this.cloudWidth === width && this.cloudHeight === height) return;
+        this.cloudWidth = width;
+        this.cloudHeight = height;
         context.bindTexture(context.TEXTURE_2D, this.texture);
         context.texImage2D(context.TEXTURE_2D, 0, context.RGBA, this.cloudWidth, this.cloudHeight, 0, context.RGBA, context.UNSIGNED_BYTE, null);
         context.bindFramebuffer(context.FRAMEBUFFER, this.framebuffer);
@@ -454,7 +542,7 @@ class StarMapRenderer {
     drawQuad(program) {
         const context = this.gl;
         context.bindBuffer(context.ARRAY_BUFFER, this.quad);
-        const location = context.getAttribLocation(program, 'aPosition');
+        const location = this.attribute(program, 'aPosition');
         context.enableVertexAttribArray(location);
         context.vertexAttribPointer(location, 2, context.FLOAT, false, 0, 0);
         context.drawArrays(context.TRIANGLES, 0, 6);
@@ -462,22 +550,26 @@ class StarMapRenderer {
     }
 
     render(view) {
-        if (view.galaxy > 0) this.loadGalacticAssets();
-        if (this.galaxyDetail !== (view.galaxy > 0.02)) {
-            this.galaxyDetail = view.galaxy > 0.02;
+        const galaxy = view.galaxy > 0;
+        if (galaxy && (!this.galacticImage || this.ready && this.galacticUploadVersion !== this.assetVersion)) {
+            this.prepareGalacticAssets();
+        }
+        const galaxyDetail = view.galaxy > 0.02;
+        const moving = Boolean(view.moving);
+        if (this.galaxyDetail !== galaxyDetail || this.moving !== moving) {
+            this.galaxyDetail = galaxyDetail;
+            this.moving = moving;
             this.resize();
         }
-        this.canvas.hidden = !this.ready;
-        this.fallbackCanvas.hidden = this.ready;
-        if (!this.ready) {
+        const available = this.ready && (!galaxy || this.galacticUploadVersion === this.assetVersion);
+        this.canvas.hidden = !available;
+        this.fallbackCanvas.hidden = available;
+        if (!available) {
+            if (galaxy && !this.galacticImage) return;
             this.renderFallback(view);
             return;
         }
         const context = this.gl;
-        if (view.galaxy > 0) {
-            if (!this.galacticImage) this.galacticImage = this.fallbackDisk();
-            if (this.galacticUploadVersion !== this.assetVersion) this.uploadGalacticAssets();
-        }
         context.disable(context.DEPTH_TEST);
         context.disable(context.BLEND);
         context.bindFramebuffer(context.FRAMEBUFFER, this.framebuffer);
@@ -511,14 +603,12 @@ class StarMapRenderer {
         this.viewUniforms(this.starProgram, view);
         context.uniform1f(this.uniform(this.starProgram, 'uDpr'), this.dpr);
         context.bindBuffer(context.ARRAY_BUFFER, this.starBuffer);
-        const attributes = [['aPosition', 3, 0], ['aColor', 3, 3], ['aLight', 1, 6], ['aSize', 1, 7], ['aBackground', 1, 8]];
-        for (const [name, size, offset] of attributes) {
-            const location = context.getAttribLocation(this.starProgram, name);
+        for (const [location, size, offset] of this.starAttributes) {
             context.enableVertexAttribArray(location);
             context.vertexAttribPointer(location, size, context.FLOAT, false, 36, offset * 4);
         }
         context.drawArrays(context.POINTS, 0, this.stars.length / 9);
-        for (const [name] of attributes) context.disableVertexAttribArray(context.getAttribLocation(this.starProgram, name));
+        for (const [location] of this.starAttributes) context.disableVertexAttribArray(location);
         context.disable(context.BLEND);
     }
 
