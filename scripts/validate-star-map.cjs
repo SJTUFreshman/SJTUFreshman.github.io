@@ -275,10 +275,13 @@ async function startupChecks(browser) {
             && await page.evaluate(() => !state.gateOpen && !dom.world.inert && !document.pointerLockElement),
         'Language changes and closing navigation or content preserve the freely controlled map without retired prompts');
         await page.locator('#sectionDrawerToggle').click();
-        await page.locator('#sectionDrawerList [data-portal-id="projects"]').click();
-        await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'projects');
-        await page.waitForFunction(() => Array.from(document.querySelectorAll('#projects img')).every(image => image.complete && image.naturalWidth > 0));
-        check(projectRequests.length === 2, 'Opening Projects loads both project illustrations on demand');
+        check(await page.locator('#news, #publications, #projects, [data-portal-id="news"], [data-portal-id="publications"], [data-portal-id="projects"]').count() === 0,
+            'Retired academic sections have no Life content or navigation targets');
+        await page.locator('#sectionDrawerList [data-portal-id="wine"]').click();
+        await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'wine');
+        await page.locator('#wine .wine-empty').waitFor({ state: 'visible' });
+        check(projectRequests.length === 0,
+            'Wine Diary opens its empty state without downloading removed project illustrations', projectRequests);
     } finally {
         releaseRuntime();
         await context.close();
@@ -506,8 +509,8 @@ async function desktopChecks(browser) {
             id: button.dataset.portalId, label: button.getAttribute('aria-label'), inert: button.inert,
             disabled: button.disabled, text: button.textContent.trim()
         })));
-        check(entries.length === 9 && entries.every(entry => entry.label && entry.text && !entry.inert && !entry.disabled),
-            `${language}: all nine life sections remain accessible through the index`);
+        check(entries.length === 7 && entries.every(entry => entry.label && entry.text && !entry.inert && !entry.disabled),
+            `${language}: all seven life sections remain accessible through the index`);
         drawerTitles.push(await page.locator('#sectionDrawerList').getAttribute('aria-label'));
         await page.keyboard.press('Escape');
         await page.waitForFunction(() => !state.sectionDrawerOpen);
@@ -874,26 +877,17 @@ async function contentChecks(browser) {
         await settle(page);
 
         await page.locator('#sectionDrawerToggle').click();
-        await page.locator('#sectionDrawerList [data-portal-id="publications"]').click();
-        await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'publications');
+        await page.locator('#sectionDrawerList [data-portal-id="wine"]').click();
+        await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'wine');
         await settle(page);
-        const publicationTitles = new Set();
-        for (const hip of [113963, 677]) {
-            await page.locator(`[data-star-portal="publications"][data-star-hip="${hip}"]`).focus();
-            await page.keyboard.press('Enter');
-            for (const title of await page.locator('#publications .publication-entry:not([hidden]) .pub-title-text').allTextContents()) {
-                publicationTitles.add(title);
-            }
-        }
-        check(publicationTitles.size === 5 && Array.from(publicationTitles).some(title => title.startsWith('AppCopilot:'))
-            && await page.locator('#publications [data-portal-entry="AppCopilot_2025"] a.pub-btn').getAttribute('href') === 'https://arxiv.org/abs/2509.02444',
-        `${label}: Pegasus includes all five complete publications, including AppCopilot`);
-        for (const [language, expected] of [['en', 'Publications'], ['zh-CN', '论文'], ['zh-TW', '論文']]) {
+        for (const [language, expected] of [['en', 'Wine Diary'], ['zh-CN', '品酒日记'], ['zh-TW', '品酒日記']]) {
             await page.locator(`.lang-btn[data-lang="${language}"]`).click();
-            check(await page.evaluate(() => dom.panelTitle.textContent) === expected,
-                `${label}: Pegasus uses the complete publication heading in ${language}`);
+            check(await page.locator('#portalPanelTitle').textContent() === expected
+                && await page.locator('#constellationMeaningText').isVisible()
+                && await page.locator('#wine .wine-empty').isVisible(),
+                `${label}: Wine Diary shows its constellation meaning and empty state in ${language}`);
         }
-        await screenshot(page, `publications-${label}`);
+        await screenshot(page, `wine-${label}`);
         await page.locator('#portalClose').click();
         await settle(page);
 

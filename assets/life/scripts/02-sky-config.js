@@ -107,33 +107,19 @@ const portalDefinitions = [
         pattern: 'gemini'
     },
     {
-        id: 'news',
-        titleKey: 'title_news',
-        fallbackYaw: -2.02,
-        fallbackPitch: 0.24,
-        pattern: 'aquila'
-    },
-    {
-        id: 'publications',
-        titleKey: 'title_publications',
-        fallbackYaw: 2.5,
-        fallbackPitch: 0.18,
-        pattern: 'pegasus'
-    },
-    {
-        id: 'projects',
-        titleKey: 'title_projects',
-        fallbackYaw: 2,
-        fallbackPitch: 0.5,
-        pattern: 'hercules'
-    },
-    {
         id: 'profile',
         titleKey: 'title_profile',
         sharedContent: true,
         fallbackYaw: 1.18,
         fallbackPitch: 0.52,
-        pattern: 'coronaBorealis'
+        pattern: 'orion'
+    },
+    {
+        id: 'wine',
+        titleKey: 'title_wine',
+        fallbackYaw: 2.15,
+        fallbackPitch: 0.16,
+        pattern: 'crater'
     },
     {
         id: 'home',
@@ -183,38 +169,18 @@ const constellationPatterns = {
     },
     orion: {
         hips: [26207, 27989, 25336, 26727, 26311, 25930, 27366, 24436],
-        contentOrder: [27989, 24436, 25336, 27366, 26207, 26311, 26727, 25930],
+        contentOrder: [26207, 27989, 24436, 25336, 27366, 26311, 26727, 25930],
         focusHip: 26311,
         fallbackPoints: [[0,0.09],[-0.06,0.045],[0.055,0.05],[-0.035,0],[0,0],[0.035,0],[-0.055,-0.09],[0.06,-0.085]],
         edges: [[0,1],[0,2],[1,3],[2,5],[3,4],[4,5],[3,6],[5,7]]
     },
-    aquila: {
-        hips: [97649, 97278, 98036, 95501, 93747, 93244, 97804, 99473, 93805],
-        contentOrder: [97649, 93244, 99473, 93805, 93747, 98036, 97278, 97804, 95501],
-        focusHip: 97649,
-        fallbackPoints: [[0,0],[-0.012,0.047],[0.018,-0.037],[-0.055,0.006],[-0.1,0.045],[-0.13,0.07],[0.052,-0.018],[0.105,-0.055],[-0.09,-0.035]],
-        edges: [[5,4],[4,3],[3,0],[0,6],[6,7],[1,0],[0,2],[3,8]]
-    },
-    pegasus: {
-        hips: [113963, 113881, 677, 1067, 112029, 109427, 107315],
-        contentOrder: [113963, 677, 113881, 1067, 107315, 112029, 109427],
-        focusHip: 113963,
-        fallbackPoints: [[0.04,-0.045],[0.04,0.055],[-0.065,0.06],[-0.065,-0.045],[0.095,-0.06],[0.14,-0.065],[0.195,-0.08]],
-        edges: [[0,1],[1,2],[2,3],[3,0],[0,4],[4,5],[5,6]]
-    },
-    hercules: {
-        hips: [81833, 84380, 83207, 81693, 80816, 80170, 84379, 84345],
-        contentOrder: [81693, 84380, 81833, 83207, 84345, 80170, 80816, 84379],
-        focusHip: 83207,
-        fallbackPoints: [[-0.035,0.04],[0.04,0.05],[0.045,-0.025],[-0.035,-0.035],[-0.09,-0.07],[-0.14,-0.09],[0.095,-0.065],[0.14,-0.1]],
-        edges: [[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[2,6],[6,7]]
-    },
-    coronaBorealis: {
-        hips: [76267, 75695, 76127, 76669, 76952, 77512, 78159, 78493, 79119],
-        contentOrder: [76267, 76669, 79119, 75695, 78493, 76127, 78159, 76952, 77512],
-        focusHip: 76267,
-        fallbackPoints: [[0,-0.055],[-0.04,-0.035],[-0.075,-0.005],[-0.1,0.035],[0.04,-0.035],[0.075,-0.005],[0.095,0.035],[0.085,0.075],[0.055,0.105]],
-        edges: [[0,1],[1,2],[2,3],[0,4],[4,5],[5,6],[6,7],[7,8]]
+    crater: {
+        // Original cup outline, projected from these Hipparcos catalogue positions.
+        hips: [53740, 54682, 55705, 55282, 55687, 56633, 58188, 57283],
+        contentOrder: [56633, 55282, 53740, 55705, 54682, 55687, 57283, 58188],
+        focusHip: 55282,
+        fallbackPoints: [[-0.075,-0.025],[-0.043,-0.075],[-0.005,-0.018],[-0.02,0.015],[-0.005,0.06],[0.027,0.072],[0.08,-0.012],[0.05,-0.025]],
+        edges: [[4,5],[4,3],[3,2],[2,7],[7,6],[6,5],[2,1],[1,0]]
     },
     ursaMinor: {
         hips: [11767, 85822, 82080, 79822, 77055, 72607, 75097, 70692, 69112, 74605, 73199],
@@ -291,7 +257,7 @@ const constellationStories = {
             'zh-TW': '北河二與北河三讓陪伴變得可見：兩束不同的光並肩前行。雙子座因此收納那些與這條人生軌跡相遇的人和群體。'
         }
     },
-    about: {
+    profile: {
         name: { en: 'Orion', 'zh-CN': '猎户座', 'zh-TW': '獵戶座' },
         epithet: {
             en: 'A portrait drawn in starlight',
@@ -299,61 +265,22 @@ const constellationStories = {
             'zh-TW': '由星光勾出的肖像'
         },
         reason: {
-            en: 'Orion’s head, shoulders, belt and feet form the sky’s clearest human silhouette. About belongs here because it introduces the person behind every other constellation, not another archive.',
-            'zh-CN': '猎户座以头、双肩、腰带和双足组成夜空最清楚的人形，像一幅由星光勾出的肖像。About 放在这里，因为它介绍的是其余星座背后的那个人，而不是另一份档案。',
-            'zh-TW': '獵戶座以頭、雙肩、腰帶和雙足組成夜空最清楚的人形，像一幅由星光勾出的肖像。About 放在這裡，因為它介紹的是其餘星座背後的那個人，而不是另一份檔案。'
+            en: 'Orion’s head, shoulders, belt and feet sketch a human figure in the night sky. Here that starlit portrait introduces the person behind the other constellations: a photograph, a few words and, in time, a collection of userboxes.',
+            'zh-CN': '猎户座的头、双肩、腰带与双足，在夜空中勾出一个人的轮廓。这幅星光肖像适合介绍其余星座背后的那个人：一张照片、几段自述，以及慢慢添上的用户框。',
+            'zh-TW': '獵戶座的頭、雙肩、腰帶與雙足，在夜空中勾出一個人的輪廓。這幅星光肖像適合介紹其餘星座背後的那個人：一張照片、幾段自述，以及慢慢添上的使用者框。'
         }
     },
-    news: {
-        name: { en: 'Aquila', 'zh-CN': '天鹰座', 'zh-TW': '天鷹座' },
+    wine: {
+        name: { en: 'Crater', 'zh-CN': '巨爵座', 'zh-TW': '巨爵座' },
         epithet: {
-            en: 'Dispatches carried across the Milky Way',
-            'zh-CN': '越过银河的短讯',
-            'zh-TW': '越過銀河的短訊'
+            en: 'A cup for remembered flavours',
+            'zh-CN': '盛放风味记忆的杯子',
+            'zh-TW': '盛放風味記憶的杯子'
         },
         reason: {
-            en: 'Aquila crosses the Milky Way in flight. Altair and its flanking stars form the first clear signal, while the wings carry brief dispatches outward; each News item is a flash of arrival on one continuing route.',
-            'zh-CN': '天鹰座展翼越过银河，牛郎星与两侧恒星组成最清楚的信号，双翼再把短讯送向远处。每条 News 都是一瞬抵达，也共同留下连续的时间航迹。',
-            'zh-TW': '天鷹座展翼越過銀河，牛郎星與兩側恆星組成最清楚的信號，雙翼再把短訊送向遠處。每條 News 都是一瞬抵達，也共同留下連續的時間航跡。'
-        }
-    },
-    publications: {
-        name: { en: 'Pegasus · Great Square', 'zh-CN': '飞马座 · 秋季四边形', 'zh-TW': '飛馬座 · 秋季四邊形' },
-        epithet: {
-            en: 'Research given a page and wings',
-            'zh-CN': '让研究拥有页面与翅膀',
-            'zh-TW': '讓研究擁有頁面與翅膀'
-        },
-        reason: {
-            en: 'In myth, Pegasus opened Hippocrene—the Muses’ spring—with a hoofbeat. The Great Square reads like a page, and the horse’s line carries finished research outward: insight made public and given wings.',
-            'zh-CN': '传说飞马一踏涌出缪斯之泉 Hippocrene。秋季四边形像展开的一页，飞马的星线再把完成的研究送向远方：让洞见成为公开作品，也让它获得翅膀。',
-            'zh-TW': '傳說飛馬一踏湧出繆斯之泉 Hippocrene。秋季四邊形像展開的一頁，飛馬的星線再把完成的研究送向遠方：讓洞見成為公開作品，也讓它獲得翅膀。'
-        }
-    },
-    projects: {
-        name: { en: 'Hercules', 'zh-CN': '武仙座', 'zh-TW': '武仙座' },
-        epithet: {
-            en: 'Intent made into work',
-            'zh-CN': '把意图做成作品',
-            'zh-TW': '把意圖做成作品'
-        },
-        reason: {
-            en: 'Hercules is remembered through his labors: each challenge became work carried through. Its Keystone supplies a stable architecture and its limbs extend into different tasks, so Projects is where intent becomes something built.',
-            'zh-CN': '武仙因一项项劳作而被记住：每个挑战都被真正做完。中央的 Keystone 像稳定架构，向外伸展的四肢像不同任务，因此 Projects 正是把意图变成成品的地方。',
-            'zh-TW': '武仙因一項項勞作而被記住：每個挑戰都被真正做完。中央的 Keystone 像穩定架構，向外伸展的四肢像不同任務，因此 Projects 正是把意圖變成成品的地方。'
-        }
-    },
-    profile: {
-        name: { en: 'Corona Borealis', 'zh-CN': '北冕座', 'zh-TW': '北冕座' },
-        epithet: {
-            en: 'Small pieces of a person',
-            'zh-CN': '由不同侧面拼成的我',
-            'zh-TW': '由不同側面拼成的我'
-        },
-        reason: {
-            en: 'The separate stars of Corona Borealis form one open arc. Here, a portrait and a collection of userboxes bring together the different sides of a person.',
-            'zh-CN': '北冕座的星星各自闪耀，又连成一道开放的弧线。这里用一张照片和一组用户框，慢慢拼出我的不同侧面。',
-            'zh-TW': '北冕座的星星各自閃耀，又連成一道開放的弧線。這裡用一張照片和一組使用者框，慢慢拼出我的不同側面。'
+            en: 'Crater is the celestial cup; its Latin name comes from the Greek vessel used to mix wine and water. It is a fitting home for a wine diary, holding the aromas, flavours and moments worth remembering.',
+            'zh-CN': '巨爵座是天上的杯子；它的拉丁名 Crater 源自古希腊用来调和葡萄酒与水的酒器。把品酒日记放在这里，是想让这只星空中的杯子，盛下值得记住的香气、滋味与片刻。',
+            'zh-TW': '巨爵座是天上的杯子；它的拉丁名 Crater 源自古希臘用來調和葡萄酒與水的酒器。把品酒日記放在這裡，是想讓這隻星空中的杯子，盛下值得記住的香氣、滋味與片刻。'
         }
     },
     home: {
@@ -364,14 +291,22 @@ const constellationStories = {
             'zh-TW': '歸途的星座'
         },
         reason: {
-            en: 'Polaris remains close to the north celestial pole while the sky turns around it. Here it is Home; nine other real stars in Ursa Minor become direct routes into the visible constellations of this life.',
-            'zh-CN': '天空绕北天极旋转，而北极星近乎不动。在这里，它就是 Home；小熊座另外九颗真实恒星成为通往当前生活板块星座的航线。',
-            'zh-TW': '天空繞北天極旋轉，而北極星近乎不動。在這裡，它就是 Home；小熊座另外九顆真實恆星成為通往目前生活板塊星座的航線。'
+            en: 'Polaris remains close to the north celestial pole while the sky turns around it. Here it is Home; seven other real stars in Ursa Minor become direct routes into the visible constellations of this life.',
+            'zh-CN': '天空绕北天极旋转，而北极星近乎不动。在这里，它就是 Home；小熊座另外七颗真实恒星成为通往当前生活板块星座的航线。',
+            'zh-TW': '天空繞北天極旋轉，而北極星近乎不動。在這裡，它就是 Home；小熊座另外七顆真實恆星成為通往目前生活板塊星座的航線。'
         }
     }
 };
 
 const starProfiles = {
+    53740: { names: { en: 'α Crateris', 'zh-CN': '巨爵座 α', 'zh-TW': '巨爵座 α' }, designation: 'α Crateris' },
+    54682: { names: { en: 'β Crateris', 'zh-CN': '巨爵座 β', 'zh-TW': '巨爵座 β' }, designation: 'β Crateris' },
+    55705: { names: { en: 'γ Crateris', 'zh-CN': '巨爵座 γ', 'zh-TW': '巨爵座 γ' }, designation: 'γ Crateris' },
+    55282: { names: { en: 'δ Crateris', 'zh-CN': '巨爵座 δ', 'zh-TW': '巨爵座 δ' }, designation: 'δ Crateris' },
+    55687: { names: { en: 'ε Crateris', 'zh-CN': '巨爵座 ε', 'zh-TW': '巨爵座 ε' }, designation: 'ε Crateris' },
+    56633: { names: { en: 'θ Crateris', 'zh-CN': '巨爵座 θ', 'zh-TW': '巨爵座 θ' }, designation: 'θ Crateris' },
+    58188: { names: { en: 'η Crateris', 'zh-CN': '巨爵座 η', 'zh-TW': '巨爵座 η' }, designation: 'η Crateris' },
+    57283: { names: { en: 'ζ Crateris', 'zh-CN': '巨爵座 ζ', 'zh-TW': '巨爵座 ζ' }, designation: 'ζ Crateris' },
     746: { names: { en: 'Caph', 'zh-CN': 'Caph · 仙后座 β', 'zh-TW': 'Caph · 仙后座 β' }, designation: 'β Cassiopeiae' },
     3179: { names: { en: 'Schedar', 'zh-CN': 'Schedar · 仙后座 α', 'zh-TW': 'Schedar · 仙后座 α' }, designation: 'α Cassiopeiae' },
     4427: { names: { en: 'Gamma Cassiopeiae', 'zh-CN': '仙后座 γ', 'zh-TW': '仙后座 γ' }, designation: 'γ Cassiopeiae' },
@@ -461,20 +396,19 @@ const homeStarTargets = {
     79822: { type: 'portal', portalId: 'thoughts' },
     77055: { type: 'portal', portalId: 'friends' },
     72607: { type: 'portal', portalId: 'footprints' },
-    70692: { type: 'portal', portalId: 'news' },
-    69112: { type: 'portal', portalId: 'publications' },
-    74605: { type: 'portal', portalId: 'projects' },
-    73199: { type: 'portal', portalId: 'profile' }
+    69112: { type: 'portal', portalId: 'profile' },
+    73199: { type: 'portal', portalId: 'wine' }
 };
 
 const starUiCopy = {
     en: {
         sectionKicker: 'LIFE ARCHIVE',
         constellationNote: 'CONSTELLATION NOTE',
+        constellationMeaning: 'Why this constellation',
         starNote: 'STAR NOTE',
         chooseMeta: count => `${count} real stars · choose one to continue`,
         choose: 'Move the cursor across the constellation and choose a star. Filled rings carry content; every other star still has its own story.',
-        homeMeta: count => `${count} real stars · Home + nine direct routes`,
+        homeMeta: count => `${count} real stars · Home + seven direct routes`,
         homeChoose: 'Choose a star to preview its route. The view will trace the course first; navigation begins only after you confirm Launch.',
         routePreviewMeta: 'INTERSTELLAR ROUTE PREVIEW',
         departure: 'Departure',
@@ -490,10 +424,11 @@ const starUiCopy = {
     'zh-CN': {
         sectionKicker: '生活档案',
         constellationNote: '星座附注',
+        constellationMeaning: '星座寓意',
         starNote: '恒星附注',
         chooseMeta: count => `${count} 颗真实恒星 · 请选择一颗继续`,
         choose: '把鼠标移到星座中的恒星并选择。带细环的星已有内容；其余恒星也仍有自己的介绍。',
-        homeMeta: count => `${count} 颗真实恒星 · Home 与九条直达航线`,
+        homeMeta: count => `${count} 颗真实恒星 · Home 与七条直达航线`,
         homeChoose: '选择一颗恒星预览航线。视角会先沿航线望向目的地；只有再次确认“启航”后才会真正跳转。',
         routePreviewMeta: '星际航线预览',
         departure: '启程星',
@@ -509,10 +444,11 @@ const starUiCopy = {
     'zh-TW': {
         sectionKicker: '生活檔案',
         constellationNote: '星座附註',
+        constellationMeaning: '星座寓意',
         starNote: '恆星附註',
         chooseMeta: count => `${count} 顆真實恆星 · 請選擇一顆繼續`,
         choose: '把滑鼠移到星座中的恆星並選擇。帶細環的星已有內容；其餘恆星也仍有自己的介紹。',
-        homeMeta: count => `${count} 顆真實恆星 · Home 與九條直達航線`,
+        homeMeta: count => `${count} 顆真實恆星 · Home 與七條直達航線`,
         homeChoose: '選擇一顆恆星預覽航線。視角會先沿航線望向目的地；只有再次確認「啟航」後才會真正跳轉。',
         routePreviewMeta: '星際航線預覽',
         departure: '啟程星',

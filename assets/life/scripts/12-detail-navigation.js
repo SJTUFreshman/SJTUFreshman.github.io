@@ -1,3 +1,11 @@
+function updateConstellationMeaning(portal) {
+    const story = constellationStories[portal.id];
+    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
+    dom.constellationMeaningKicker.textContent = ui.constellationMeaning;
+    dom.constellationMeaningTitle.textContent = `${localized(story.name)} · ${localized(story.epithet)}`;
+    dom.constellationMeaningText.textContent = localized(story.reason);
+}
+
 function starName(hip, lang = state.currentLang) {
     return localized(starProfiles[hip]?.names, lang) || `HIP ${hip}`;
 }
@@ -12,7 +20,7 @@ function starCatalogValues(hip) {
 }
 
 function starEntries(portal, hip) {
-    // A user page is one document, reachable from every star in its constellation.
+    // Shared sections are one document, reachable from every star in their constellation.
     if (portal.sharedContent && portal.patternHips.includes(hip)) {
         return Array.from(portal.content?.children || []);
     }

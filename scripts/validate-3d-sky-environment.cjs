@@ -14,9 +14,9 @@ const output = path.join(root, '.render-work', '3d-sky-environment');
 const baseline = { window: {}, DEG: Math.PI / 180 };
 vm.runInNewContext(execFileSync('git', ['show', '2dcb662:assets/life/scripts/19-star-map.js'], { cwd: root, encoding: 'utf8' }), baseline);
 const baselinePrototype = Object.getPrototypeOf(baseline.window.lifeStarMap);
-const originalMethods = Object.fromEntries(['buildGroups', 'view', 'project', 'orbit', 'pan', 'zoom', 'detailDestination']
-    // The former Notes portal is now Profile; its placement and stars are retained.
-    .map(name => [name, baselinePrototype[name].toString().replace(/\bnotes:/g, 'profile:')]));
+const originalMethods = Object.fromEntries(['view', 'project', 'orbit', 'pan', 'zoom', 'detailDestination']
+    // Portal membership and placements may change; projection and controls stay stable.
+    .map(name => [name, baselinePrototype[name].toString()]));
 const checks = [], errors = [], measurements = [];
 let pageUrl = process.argv.find(value => /^https?:\/\//.test(value)) || 'http://127.0.0.1:8787/life.html';
 let server;
@@ -73,7 +73,7 @@ async function geometryChecks(page) {
             near: Math.min(...environment), far: Math.max(...environment),
             radialBins: new Set(environment.map(radius => Math.floor(radius / 100))).size };
     }, { methods: originalMethods, buildStars: baselinePrototype.buildStars.toString() });
-    check(parity.changed.length === 0, 'Original constellation geometry, projection and camera controls are unchanged', parity.changed);
+    check(parity.changed.length === 0, 'Original projection and camera controls are unchanged', parity.changed);
     check(parity.preserved && parity.originalCount > 5000, 'All original catalog and constellation star records are preserved exactly', parity);
     check(parity.environmentCount > 1000 && parity.beyondLocal > 1000 && parity.beyondVolume > 500,
         'Thousands of finite-distance arm stars continue beyond the original local sphere', parity);

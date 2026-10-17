@@ -107,7 +107,7 @@ async function interaction(page, label) {
 }
 
 async function desktop(browser) {
-    const context = await browser.newContext({ viewport: { width: 1440, height: 960 }, reducedMotion: 'reduce' });
+    const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
     try {
         const page = await context.newPage();
         monitor(page, 'desktop');
@@ -150,7 +150,7 @@ async function desktop(browser) {
         await page.evaluate(() => window.lifeStarMap.reset());
         await settle(page);
         await interaction(page, 'Desktop');
-        for (const id of ['gallery', 'thoughts', 'projects']) {
+        for (const id of ['gallery', 'thoughts', 'profile', 'wine']) {
             await page.locator('#sectionDrawerToggle').click();
             await page.locator(`#sectionDrawerList [data-portal-id="${id}"]`).click();
             await page.waitForFunction(id => state.scene === 'detail' && state.activePortal?.id === id, id);

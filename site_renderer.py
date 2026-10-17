@@ -39,28 +39,8 @@ CONSTELLATION_HIP_ORDER = {
     "shelf": (91262, 91971, 92420, 93194, 92791),
     "thoughts": (102098, 100453, 95947, 97165, 102488),
     "friends": (36850, 37826, 32246, 35550, 30343, 31681),
-    "about": (27989, 24436, 25336, 27366, 26207, 26311, 26727, 25930),
-    "news": (97649, 93244, 99473, 93805, 93747, 98036, 97278, 97804, 95501),
-    "publications": (
-        113963,
-        677,
-        113881,
-        1067,
-        107315,
-        112029,
-        109427,
-    ),
-    "projects": (
-        81693,
-        84380,
-        81833,
-        83207,
-        84345,
-        80170,
-        80816,
-        84379,
-    ),
-    "profile": (76267, 76669, 79119, 75695, 78493, 76127, 78159, 76952, 77512),
+    "profile": (26207, 27989, 24436, 25336, 27366, 26311, 26727, 25930),
+    "wine": (56633, 55282, 53740, 55705, 54682, 55687, 57283, 58188),
 }
 CONSTELLATION_HIPS = {
     stream: set(hips)
@@ -389,20 +369,8 @@ def star_entry_ids(content: dict[str, Any]) -> dict[str, list[str]]:
             str(friend["id"])
             for friend in content["life"].get("friends", [])
         ],
-        "about": ["about-profile"],
-        "news": [
-            str(item["id"])
-            for item in content["home"].get("news", [])
-        ],
-        "publications": [
-            str(item["id"])
-            for item in content["home"].get("publications", [])
-        ],
-        "projects": [
-            str(item["id"])
-            for item in content["home"].get("projects", [])
-        ],
         "profile": [],
+        "wine": [],
     }
 
 
@@ -440,7 +408,6 @@ def moment_header_weight(moment: dict[str, Any]) -> int:
 def star_entry_weights(content: dict[str, Any]) -> dict[str, dict[str, int]]:
     """Estimate fully expanded content height in consistent panel-line units."""
     life = content["life"]
-    home = content["home"]
     weights: dict[str, dict[str, int]] = {
         stream: {}
         for stream in CONSTELLATION_HIP_ORDER
@@ -473,27 +440,6 @@ def star_entry_weights(content: dict[str, Any]) -> dict[str, dict[str, int]]:
     for friend in life.get("friends", []):
         entry_id = str(friend.get("id") or "")
         weights["friends"][entry_id] = 5 + text_lines(friend.get("label", ""))
-    weights["about"]["about-profile"] = STAR_CONTENT_BUDGET
-    for item in home.get("news", []):
-        entry_id = str(item.get("id") or "")
-        weights["news"][entry_id] = (
-            5 + text_lines(item.get("date", "")) + text_lines(item.get("text", {}))
-        )
-    for item in home.get("publications", []):
-        entry_id = str(item.get("id") or "")
-        weights["publications"][entry_id] = (
-            9
-            + text_lines(item.get("title", ""))
-            + text_lines(item.get("authors_html", ""))
-            + text_lines(item.get("venue", ""))
-        )
-    for item in home.get("projects", []):
-        entry_id = str(item.get("id") or "")
-        weights["projects"][entry_id] = (
-            19
-            + text_lines(item.get("name", ""))
-            + text_lines(item.get("desc", {}))
-        )
     return weights
 
 
@@ -645,37 +591,12 @@ def render_life_i18n(content: dict[str, Any]) -> str:
     home = content["home"]
     i18n = {lang: dict(life["labels"][lang]) for lang in LANGS}
 
-    home_title_keys = {
-        "title_about": "nav_about",
-        "title_news": "title_news",
-        "title_projects": "title_projects",
-    }
     action_copy = {
-        "en": {
-            "life_action_email": "Email",
-            "life_action_paper": "Paper",
-            "life_action_code": "Code",
-            "life_action_cite": "Cite",
-            "life_action_copied": "Copied",
-        },
-        "zh-CN": {
-            "life_action_email": "邮件",
-            "life_action_paper": "论文",
-            "life_action_code": "代码",
-            "life_action_cite": "引用",
-            "life_action_copied": "已复制",
-        },
-        "zh-TW": {
-            "life_action_email": "郵件",
-            "life_action_paper": "論文",
-            "life_action_code": "程式碼",
-            "life_action_cite": "引用",
-            "life_action_copied": "已複製",
-        },
+        "en": {"life_action_email": "Email"},
+        "zh-CN": {"life_action_email": "邮件"},
+        "zh-TW": {"life_action_email": "郵件"},
     }
     for lang in LANGS:
-        for life_key, home_key in home_title_keys.items():
-            i18n[lang][life_key] = lang_value(home["labels"][lang], home_key)
         i18n[lang]["life_about_name"] = plain_html_text(
             lang_value(home["hero"].get("name_html", {}), lang)
         )
@@ -689,16 +610,6 @@ def render_life_i18n(content: dict[str, Any]) -> str:
             i18n[lang][f"profile_{key}"] = lang_value(value, lang)
         for box in life["profile"].get("userboxes", []):
             i18n[lang][f"userbox_{box['id']}"] = lang_value(box.get("text", {}), lang)
-
-    for index, item in enumerate(home.get("news", [])):
-        key = key_for("news", item, index)
-        for lang in LANGS:
-            i18n[lang][key] = lang_value(item.get("text", {}), lang)
-
-    for index, item in enumerate(home.get("projects", [])):
-        key = f"proj_{key_for('project', item, index)}"
-        for lang in LANGS:
-            i18n[lang][key] = lang_value(item.get("desc", {}), lang)
 
     for index, item in enumerate(life["gallery"]):
         key = key_for("cap", item, index)
@@ -1010,121 +921,10 @@ def render_friends(content: dict[str, Any]) -> str:
             </section>"""
 
 
-def render_life_about(content: dict[str, Any]) -> str:
-    """Keep the About content model intact while its Life portal is hidden."""
-    return ""
-
-
-def _render_life_about_archive(content: dict[str, Any]) -> str:
-    site = content["site"]
-    hero = content["home"]["hero"]
-    hip = star_binding(content, "about", "about-profile")
-    email = f"{site.get('email_user', '')}@{site.get('email_domain', '')}"
-    social_links = "\n".join(
-        f"""                            <a class="about-link" href="{esc(link.get("href") or "#")}" target="_blank" rel="noopener">
-                                <span class="about-link-mark" aria-hidden="true">↗</span>
-                                <span>{esc(link.get("label") or "Link")}</span>
-                            </a>"""
-        for link in hero.get("links", [])
-    )
-    return f"""            <section id="about" class="portal-content" data-portal-content="about" hidden>
-                <article class="about-card" data-portal-entry="about-profile" data-star-hip="{esc(hip)}">
-                    <div class="about-portrait">
-                        <img src="{esc(hero.get("avatar", ""))}" alt="Runde Yang" loading="lazy" decoding="async"
-                            onerror="this.hidden=true;this.nextElementSibling.hidden=false">
-                        <span class="about-portrait-fallback" hidden>RY</span>
-                    </div>
-                    <div class="about-copy">
-                        <h3 data-key="life_about_name">{esc(plain_html_text(lang_value(hero.get("name_html", {}), "en")))}</h3>
-                        <p class="about-role" data-key="life_about_title">{esc(plain_html_text(lang_value(hero.get("title", {}), "en")))}</p>
-                        <p class="about-bio" data-key="life_about_bio">{esc(lang_value(hero.get("bio", {}), "en"))}</p>
-                        <div class="about-links">
-                            <a class="about-link" href="mailto:{esc(email)}">
-                                <span class="about-link-mark" aria-hidden="true">✉</span>
-                                <span data-key="life_action_email">Email</span>
-                            </a>
-{social_links}
-                            <span class="about-link">
-                                <span class="about-link-mark" aria-hidden="true">⌖</span>
-                                <span data-key="life_about_location">{esc(lang_value(hero.get("location", {}), "en"))}</span>
-                            </span>
-                        </div>
-                    </div>
-                </article>
-            </section>"""
-
-
-def render_life_news(content: dict[str, Any]) -> str:
-    rows = []
-    for index, item in enumerate(content["home"].get("news", [])):
-        item_id = str(item.get("id") or "")
-        key = key_for("news", item, index)
-        rows.append(f"""                    <li class="news-item news-entry" data-portal-entry="{esc(item_id)}" data-star-hip="{esc(star_binding(content, "news", item_id))}">
-                        <span class="news-date">{esc(item.get("date", ""))}</span>
-                        <span class="news-text" data-key="{esc(key)}">{esc(lang_value(item.get("text", {}), "en"))}</span>
-                    </li>""")
-    return """            <section id="news" class="portal-content homepage-parity" data-portal-content="news" hidden>
-                <ul class="news-list">
-""" + "\n".join(rows) + """
-                </ul>
-            </section>"""
-
-
-def render_life_publications(content: dict[str, Any]) -> str:
-    rows = []
-    for item in content["home"].get("publications", []):
-        item_id = str(item.get("id") or "")
-        citation = "\n".join(
-            line.rstrip()
-            for line in str(item.get("citation") or "").strip().splitlines()
-        )
-        cite_button = ""
-        citation_source = ""
-        if citation:
-            cite_button = """                            <button class="pub-btn" type="button" data-copy-citation>
-                                <i class="fas fa-quote-right" aria-hidden="true"></i>
-                                <span data-key="life_action_cite">Cite</span>
-                            </button>"""
-            citation_source = f'\n                        <pre data-citation-source hidden>{esc(citation)}</pre>'
-        rows.append(f"""                    <div class="pub-item publication-entry" data-portal-entry="{esc(item_id)}" data-star-hip="{esc(star_binding(content, "publications", item_id))}">
-                         <div class="pub-title-text en-only">{esc(item.get("title", ""))}</div>
-                         <div class="pub-authors en-only">{item.get("authors_html", "")}</div>
-                         <div class="pub-venue en-only">{esc(item.get("venue", ""))}</div>
-                         <div class="pub-actions">
-                            {render_resource_link(item.get("paper_url"), "pub-btn", "far fa-file-pdf", "Paper", "life_action_paper")}
-                            {render_resource_link(item.get("code_url"), "pub-btn", "fab fa-github", "Code", "life_action_code")}
-{cite_button}
-                         </div>{citation_source}
-                    </div>""")
-    return """            <section id="publications" class="portal-content homepage-parity" data-portal-content="publications" hidden>
-                <div class="pub-list">
-""" + "\n".join(rows) + """
-                </div>
-            </section>"""
-
-
-def render_life_projects(content: dict[str, Any]) -> str:
-    rows = []
-    for index, item in enumerate(content["home"].get("projects", [])):
-        item_id = str(item.get("id") or "")
-        desc_key = f"proj_{key_for('project', item, index)}"
-        rows.append(f"""                    <div class="project-card project-entry" data-portal-entry="{esc(item_id)}" data-star-hip="{esc(star_binding(content, "projects", item_id))}">
-                         <div class="project-img-wrap">
-                            <img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", item.get("name", "")))}" loading="lazy" decoding="async">
-                         </div>
-                         <div class="project-body">
-                             <div class="project-name en-only">{esc(item.get("name", ""))}</div>
-                             <div class="project-desc" data-key="{esc(desc_key)}">{esc(lang_value(item.get("desc", {}), "en"))}</div>
-                             <div class="project-links">
-                                {render_resource_link(item.get("paper_url"), "project-link", "far fa-file-alt", "Paper", "life_action_paper")}
-                                {render_resource_link(item.get("code_url"), "project-link", "fab fa-github", "Code", "life_action_code")}
-                             </div>
-                         </div>
-                    </div>""")
-    return """            <section id="projects" class="portal-content homepage-parity" data-portal-content="projects" hidden>
-                <div class="project-grid">
-""" + "\n".join(rows) + """
-                </div>
+def render_life_wine(content: dict[str, Any]) -> str:
+    empty = content["life"]["labels"]["en"]["wine_empty"]
+    return f"""            <section id="wine" class="portal-content" data-portal-content="wine" hidden>
+                <p class="wine-empty" data-key="wine_empty">{esc(empty)}</p>
             </section>"""
 
 
@@ -1236,11 +1036,8 @@ def render_life_artifacts(
     html_text = replace_region(html_text, "LIFE_SHELF", render_shelf(content), r'<!-- Shelf -->\s*<section id="shelf".*?</section>')
     html_text = replace_region(html_text, "LIFE_THOUGHTS", render_thoughts(content), r'<!-- Thoughts -->\s*<section id="thoughts".*?</section>')
     html_text = replace_region(html_text, "LIFE_FRIENDS", render_friends(content), r'<!-- Friends -->\s*<section id="friends".*?</section>')
-    html_text = replace_region(html_text, "LIFE_ABOUT", render_life_about(content), r'<section id="about".*?</section>')
-    html_text = replace_region(html_text, "LIFE_NEWS", render_life_news(content), r'<section id="news".*?</section>')
-    html_text = replace_region(html_text, "LIFE_PUBLICATIONS", render_life_publications(content), r'<section id="publications".*?</section>')
-    html_text = replace_region(html_text, "LIFE_PROJECTS", render_life_projects(content), r'<section id="projects".*?</section>')
     html_text = replace_region(html_text, "LIFE_PROFILE", render_life_profile(content), r'<section id="profile".*?</section>')
+    html_text = replace_region(html_text, "LIFE_WINE", render_life_wine(content), r'<section id="wine".*?</section>')
     content_data_text = replace_code_region(content_data_text, "LIFE_I18N", render_life_i18n(content), r'/\* ===== i18n ===== \*/\s*const i18n = \{.*?\};')
     content_data_text = replace_code_region(content_data_text, "LIFE_VISITED", render_visited(content), r'const visited = \[.*?\];')
     content_data_text = replace_code_region(

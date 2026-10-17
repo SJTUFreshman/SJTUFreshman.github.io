@@ -179,11 +179,12 @@ assert(
 assert(htmlIds.has('gazeAnnouncement'), 'Shared accessible announcements must remain available');
 assert(/<body\b[^>]*class="[^"]*\bstar-map\b/.test(lifeHtml), 'The initial document must use the current star-map appearance');
 assert(!/>FREE LOOK<\/div>/.test(lifeHtml), 'The initial scene status must not flash retired free-look copy');
-const projectSection = lifeHtml.match(/<section\b[^>]*id="projects"[^>]*>([\s\S]*?)<\/section>/);
-assert(projectSection, 'The projects section must remain available');
-for (const match of projectSection[1].matchAll(/<img\b([^>]*)>/gi)) {
-    assert.equal(attributeValue(match[1], 'loading'), 'lazy', 'Hidden project images must load lazily');
-    assert.equal(attributeValue(match[1], 'decoding'), 'async', 'Hidden project images must decode asynchronously');
+for (const id of ['news', 'publications', 'projects', 'notes']) {
+    assert(!htmlIds.has(id), `Retired Life section ${id} must not be present`);
+    assert(!lifeHtml.includes(`data-portal-button="${id}"`), `Retired Life route ${id} must not be present`);
+}
+for (const id of ['profile', 'wine', 'constellationMeaning', 'constellationMeaningTitle', 'constellationMeaningText']) {
+    assert(htmlIds.has(id), `Life must include ${id}`);
 }
 
 assert(!/homeRouteIndex|home-route-index|home-route-button/.test(life));
@@ -1637,12 +1638,12 @@ const sectionDrawerState = JSON.parse(vm.runInContext(`(() => {
         accessibleClosed
     });
 })()`, runtimeContext));
-assert.equal(sectionDrawerState.listedCount, 9);
-assert.equal(sectionDrawerState.uniqueIds, 9);
+assert.equal(sectionDrawerState.listedCount, 7);
+assert.equal(sectionDrawerState.uniqueIds, 7);
 assert.deepEqual(
     sectionDrawerState.listedIds,
     sectionDrawerState.expectedContentIds,
-    'The drawer must list all nine content portals once, in their authored order'
+    'The drawer must list all seven content portals once, in their authored order'
 );
 assert(sectionDrawerState.homeSeparated);
 assert(sectionDrawerState.accessibleOpen);
@@ -3029,7 +3030,7 @@ assert.equal(
     routeFramingState.cases,
     routeFramingState.viewportCount * routeFramingState.routeTargetCount
 );
-assert.equal(routeFramingState.cases, 940);
+assert.equal(routeFramingState.routeTargetCount, 8);
 assert(
     routeFramingState.maximumFov < 125,
     `Responsive route framing must stay below the visual-quality FOV limit: ` +
@@ -3050,7 +3051,7 @@ const routeOrientationContinuity = JSON.parse(vm.runInContext(`(() => {
     const savedWidth = window.innerWidth;
     const savedHeight = window.innerHeight;
     const home = portalDefinitions.find(portal => portal.home);
-    const sourceHip = 70692;
+    const sourceHip = 69112;
     const source = home.patternPoints[home.patternHips.indexOf(sourceHip)];
     const destination = routeDestination(home, homeStarTargets[sourceHip]);
     const orientations = [1025, 1026].map(width => {
@@ -3516,7 +3517,7 @@ const routeResizeState = JSON.parse(vm.runInContext(`(() => {
     resizeOverlay();
     state.scene = 'roam';
     openPortalPanel(home, false);
-    previewHomeRoute(home, 70692);
+    previewHomeRoute(home, 69112);
     const settledPreview = state.routePreview;
     const settledAt = performance.now();
     settledPreview.startedAt = settledAt - settledPreview.duration;

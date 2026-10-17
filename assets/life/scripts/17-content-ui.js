@@ -288,6 +288,7 @@ function updateActivePortalCopy() {
     if (state.focusedPortal) renderGazeCopy(state.focusedPortal);
     if (state.activePortal && state.scene === 'detail') {
         const activePortal = state.activePortal;
+        updateConstellationMeaning(activePortal);
         dom.panelKicker.textContent =
             (starUiCopy[state.currentLang] || starUiCopy.en).sectionKicker;
         dom.panelTitle.textContent = portalName(activePortal, state.currentLang);

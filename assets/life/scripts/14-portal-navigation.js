@@ -341,6 +341,8 @@ function openPortalPanel(portal, panelOnLeft = false, preferredHip = null) {
     dom.panelKicker.textContent = ui.sectionKicker;
     dom.panelTitle.textContent = names[0];
     dom.panelNames.textContent = LANGUAGES.map(lang => portalName(portal, lang)).join(' / ');
+    updateConstellationMeaning(portal);
+    dom.panelBody.scrollTop = 0;
     dom.panel.inert = false;
     dom.panel.setAttribute('aria-hidden', 'false');
     dom.panelClose.setAttribute('aria-label', i18n[state.currentLang]?.panel_close || 'Return to the galaxy');

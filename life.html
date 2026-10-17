@@ -59,24 +59,24 @@
             visibility: hidden !important;
         }
     </style>
-<script src="assets/stellar-transit.js?v=20261018-profile-cloud-stability" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
-    <link rel="preload" href="fonts/edukai-site-subset.woff2?v=20261018-profile-cloud-stability" as="font" type="font/woff2" crossorigin>
+<script src="assets/stellar-transit.js?v=20261018-constellation-stories" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
+    <link rel="preload" href="fonts/edukai-site-subset.woff2?v=20261018-constellation-stories" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-    <script src="assets/hipparcos-stars.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/hipparcos-distances.js?v=20261018-profile-cloud-stability" defer></script>
-    <link rel="stylesheet" href="assets/life/styles/01-foundation-sky.css?v=20261018-profile-cloud-stability">
-    <link rel="stylesheet" href="assets/life/styles/02-section-drawer.css?v=20261018-profile-cloud-stability">
-    <link rel="stylesheet" href="assets/life/styles/03-sky-navigation.css?v=20261018-profile-cloud-stability">
-    <link rel="stylesheet" href="assets/life/styles/04-detail-panels.css?v=20261018-profile-cloud-stability">
-    <link rel="stylesheet" href="assets/life/styles/05-life-content.css?v=20261018-profile-cloud-stability">
-    <link rel="stylesheet" href="assets/life/styles/06-homepage-parity.css?v=20261018-profile-cloud-stability">
-    <link rel="stylesheet" href="assets/life/styles/07-overlays-responsive.css?v=20261018-profile-cloud-stability&atlas=20261016-administrative">
-    <link rel="stylesheet" href="assets/life/styles/08-star-map.css?v=20261018-profile-cloud-stability&galaxy=20261014-gaia-realism">
-    <link rel="stylesheet" href="assets/life/styles/10-deep-sky-map.css?v=20261018-profile-cloud-stability">
-    <link rel="stylesheet" href="assets/life/styles/11-index-theme-overlays.css?v=20261018-profile-cloud-stability">
+    <script src="assets/hipparcos-stars.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/hipparcos-distances.js?v=20261018-constellation-stories" defer></script>
+    <link rel="stylesheet" href="assets/life/styles/01-foundation-sky.css?v=20261018-constellation-stories">
+    <link rel="stylesheet" href="assets/life/styles/02-section-drawer.css?v=20261018-constellation-stories">
+    <link rel="stylesheet" href="assets/life/styles/03-sky-navigation.css?v=20261018-constellation-stories">
+    <link rel="stylesheet" href="assets/life/styles/04-detail-panels.css?v=20261018-constellation-stories">
+    <link rel="stylesheet" href="assets/life/styles/05-life-content.css?v=20261018-constellation-stories">
+    <link rel="stylesheet" href="assets/life/styles/06-homepage-parity.css?v=20261018-constellation-stories">
+    <link rel="stylesheet" href="assets/life/styles/07-overlays-responsive.css?v=20261018-constellation-stories&atlas=20261016-administrative">
+    <link rel="stylesheet" href="assets/life/styles/08-star-map.css?v=20261018-constellation-stories&galaxy=20261014-gaia-realism">
+    <link rel="stylesheet" href="assets/life/styles/10-deep-sky-map.css?v=20261018-constellation-stories">
+    <link rel="stylesheet" href="assets/life/styles/11-index-theme-overlays.css?v=20261018-constellation-stories">
     <noscript>
         <style>
             html, body { height: auto; overflow: auto; background: var(--life-paper); color: var(--life-ink); }
@@ -188,10 +188,8 @@
         <button class="portal-hit" type="button" data-portal-button="shelf" aria-label="Shelf / 书影 / 書影"></button>
         <button class="portal-hit" type="button" data-portal-button="thoughts" aria-label="Thoughts / 随笔 / 隨筆"></button>
         <button class="portal-hit" type="button" data-portal-button="friends" aria-label="Friends / 友链 / 友鏈"></button>
-        <button class="portal-hit" type="button" data-portal-button="news" aria-label="News / 动态 / 動態"></button>
-        <button class="portal-hit" type="button" data-portal-button="publications" aria-label="Publications / 论文 / 論文"></button>
-        <button class="portal-hit" type="button" data-portal-button="projects" aria-label="Projects / 项目经历 / 項目經歷"></button>
         <button class="portal-hit" type="button" data-portal-button="profile" aria-label="Meet Me Again / 重新认识我 / 重新認識我"></button>
+        <button class="portal-hit" type="button" data-portal-button="wine" aria-label="Wine Diary / 品酒日记 / 品酒日記"></button>
         <button class="portal-hit" type="button" data-portal-button="home" aria-label="Home / 主页 / 主頁"></button>
     </nav>
     <nav class="star-nav" id="starNav" aria-label="Stars in the selected constellation"></nav>
@@ -205,6 +203,11 @@
             <button class="portal-close" id="portalClose" type="button" aria-label="Return to the galaxy"></button>
         </header>
         <div class="portal-panel-body" id="portalPanelBody">
+            <section class="constellation-meaning" id="constellationMeaning" aria-labelledby="constellationMeaningTitle">
+                <div class="constellation-meaning-kicker" id="constellationMeaningKicker">Why this constellation</div>
+                <h3 id="constellationMeaningTitle"></h3>
+                <p id="constellationMeaningText"></p>
+            </section>
 <!-- SITEGEN:LIFE_GALLERY_START -->
         <section id="gallery" class="portal-content" data-portal-content="gallery" hidden>
             <div class="portal-moments">
@@ -439,158 +442,6 @@ I am profoundly moved.</div>
             </section>
 <!-- SITEGEN:LIFE_FRIENDS_END -->
 
-<!-- SITEGEN:LIFE_ABOUT_START -->
-
-<!-- SITEGEN:LIFE_ABOUT_END -->
-
-<!-- SITEGEN:LIFE_NEWS_START -->
-            <section id="news" class="portal-content homepage-parity" data-portal-content="news" hidden>
-                <ul class="news-list">
-                    <li class="news-item news-entry" data-portal-entry="news_1" data-star-hip="97649">
-                        <span class="news-date">2026/6/29</span>
-                        <span class="news-text" data-key="news_1">25-26 Spring Finals finished.</span>
-                    </li>
-                </ul>
-            </section>
-<!-- SITEGEN:LIFE_NEWS_END -->
-
-<!-- SITEGEN:LIFE_PUBLICATIONS_START -->
-            <section id="publications" class="portal-content homepage-parity" data-portal-content="publications" hidden>
-                <div class="pub-list">
-                    <div class="pub-item publication-entry" data-portal-entry="ModelSlices_2026" data-star-hip="677">
-                         <div class="pub-title-text en-only">Collaborative Learning and Reasoning over Model Slices</div>
-                         <div class="pub-authors en-only"><b>Yuheng Wang</b>†, <b>Runde Yang</b>†, Zhuohan Bao, Qiran Zhang, Huatao Li, Yiyang Zheng, Lin Wu, Jingru Fan, Shu Yao, Yihan Li, Zhi Li, Chen Qian</div>
-                         <div class="pub-venue en-only">arXiv preprint arXiv:2610.12927</div>
-                         <div class="pub-actions">
-                            <a class="pub-btn" href="https://arxiv.org/abs/2610.12927"><i class="far fa-file-pdf" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
-                            <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
-                            <button class="pub-btn" type="button" data-copy-citation>
-                                <i class="fas fa-quote-right" aria-hidden="true"></i>
-                                <span data-key="life_action_cite">Cite</span>
-                            </button>
-                         </div>
-                        <pre data-citation-source hidden>@misc{wang2026collaborativelearningslices,
-  title={Collaborative Learning and Reasoning over Model Slices},
-  author={Yuheng Wang and Runde Yang and Zhuohan Bao and Qiran Zhang and Huatao Li and Yiyang Zheng and Lin Wu and Jingru Fan and Shu Yao and Yihan Li and Zhi Li and Chen Qian},
-  year={2026},
-  eprint={2610.12927},
-  archivePrefix={arXiv},
-  url={https://arxiv.org/abs/2610.12927}
-}</pre>
-                    </div>
-                    <div class="pub-item publication-entry" data-portal-entry="Generative_2025" data-star-hip="113963">
-                         <div class="pub-title-text en-only">Generative Teaching via Code (TeachMaster)</div>
-                         <div class="pub-authors en-only">Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian</div>
-                         <div class="pub-venue en-only">ACL 2026 Industry Track</div>
-                         <div class="pub-actions">
-                            <a class="pub-btn" href="https://arxiv.org/abs/2601.04204v1"><i class="far fa-file-pdf" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
-                            <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
-                            <button class="pub-btn" type="button" data-copy-citation>
-                                <i class="fas fa-quote-right" aria-hidden="true"></i>
-                                <span data-key="life_action_cite">Cite</span>
-                            </button>
-                         </div>
-                        <pre data-citation-source hidden>@misc{wang2025generativeteachingcode,
-  title={Generative Teaching via Code},
-  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},
-  year={2025},
-  eprint={2601.04204},
-  archivePrefix={arXiv},
-  primaryClass={cs.CY},
-  url={https://arxiv.org/abs/2601.04204}
-}</pre>
-                    </div>
-                    <div class="pub-item publication-entry" data-portal-entry="PRISM_2026" data-star-hip="113963">
-                         <div class="pub-title-text en-only">PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning</div>
-                         <div class="pub-authors en-only">Qiran Zhang, Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jingru Fan, Shu Yao, Jie Zhang, Tianle Zhou, Huatao Li, Ruijie Shi, Yihan Li, Chen Qian</div>
-                         <div class="pub-venue en-only">NeurIPS 2026</div>
-                         <div class="pub-actions">
-                            <a class="pub-btn" href="https://arxiv.org/abs/2605.19382"><i class="far fa-file-pdf" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
-                            <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
-                            <button class="pub-btn" type="button" data-copy-citation>
-                                <i class="fas fa-quote-right" aria-hidden="true"></i>
-                                <span data-key="life_action_cite">Cite</span>
-                            </button>
-                         </div>
-                        <pre data-citation-source hidden>@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,
-      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning},
-      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},
-      year={2026},
-      eprint={2605.19382},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2605.19382},
-}</pre>
-                    </div>
-                    <div class="pub-item publication-entry" data-portal-entry="AgentXRay_2026" data-star-hip="113963">
-                         <div class="pub-title-text en-only">AgentXRay: White-Boxing Agentic Systems via Workflow Reconstruction</div>
-                         <div class="pub-authors en-only">Ruijie Shi, Houbin Zhang, Yuecheng Han, Yuheng Wang, Jingru Fan, <b>Runde Yang</b>, Yufan Dang, Huatao Li, Dewen Liu, Yuan Cheng, Chen Qian</div>
-                         <div class="pub-venue en-only">ICML 2026</div>
-                         <div class="pub-actions">
-                            <a class="pub-btn" href="https://arxiv.org/abs/2602.05353"><i class="far fa-file-pdf" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
-                            <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
-
-                         </div>
-                    </div>
-                    <div class="pub-item publication-entry" data-portal-entry="AppCopilot_2025" data-star-hip="677">
-                         <div class="pub-title-text en-only">AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent</div>
-                         <div class="pub-authors en-only">Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian</div>
-                         <div class="pub-venue en-only">arXiv preprint arXiv:2509.02444</div>
-                         <div class="pub-actions">
-                            <a class="pub-btn" href="https://arxiv.org/abs/2509.02444"><i class="far fa-file-pdf" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
-                            <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
-                            <button class="pub-btn" type="button" data-copy-citation>
-                                <i class="fas fa-quote-right" aria-hidden="true"></i>
-                                <span data-key="life_action_cite">Cite</span>
-                            </button>
-                         </div>
-                        <pre data-citation-source hidden>@misc{fan2025appcopilotgeneralaccuratelonghorizon,
-  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},
-  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},
-  year={2025},
-  eprint={2509.02444},
-  archivePrefix={arXiv},
-  primaryClass={cs.AI},
-  url={https://arxiv.org/abs/2509.02444}
-}</pre>
-                    </div>
-                </div>
-            </section>
-<!-- SITEGEN:LIFE_PUBLICATIONS_END -->
-
-<!-- SITEGEN:LIFE_PROJECTS_START -->
-            <section id="projects" class="portal-content homepage-parity" data-portal-content="projects" hidden>
-                <div class="project-grid">
-                    <div class="project-card project-entry" data-portal-entry="appcopilot" data-star-hip="81693">
-                         <div class="project-img-wrap">
-                            <img src="images/AppCopilot.png" alt="AppCopilot" loading="lazy" decoding="async">
-                         </div>
-                         <div class="project-body">
-                             <div class="project-name en-only">AppCopilot</div>
-                             <div class="project-desc" data-key="proj_appcopilot">A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.</div>
-                             <div class="project-links">
-                                <button class="project-link" type="button" disabled aria-disabled="true"><i class="far fa-file-alt" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></button>
-                                <button class="project-link" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
-                             </div>
-                         </div>
-                    </div>
-                    <div class="project-card project-entry" data-portal-entry="teachmaster" data-star-hip="81693">
-                         <div class="project-img-wrap">
-                            <img src="images/TeachMaster.png" alt="TeachMaster" loading="lazy" decoding="async">
-                         </div>
-                         <div class="project-body">
-                             <div class="project-name en-only">TeachMaster</div>
-                             <div class="project-desc" data-key="proj_teachmaster">A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.</div>
-                             <div class="project-links">
-                                <a class="project-link" href="https://arxiv.org/abs/2601.04204v1"><i class="far fa-file-alt" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
-                                <button class="project-link" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
-                             </div>
-                         </div>
-                    </div>
-                </div>
-            </section>
-<!-- SITEGEN:LIFE_PROJECTS_END -->
-
 <!-- SITEGEN:LIFE_PROFILE_START -->
             <section id="profile" class="portal-content wiki-profile" data-portal-content="profile" hidden>
                 <article class="wiki-page">
@@ -623,6 +474,12 @@ I am profoundly moved.</div>
                 </article>
             </section>
 <!-- SITEGEN:LIFE_PROFILE_END -->
+
+<!-- SITEGEN:LIFE_WINE_START -->
+            <section id="wine" class="portal-content" data-portal-content="wine" hidden>
+                <p class="wine-empty" data-key="wine_empty">No tasting notes yet.</p>
+            </section>
+<!-- SITEGEN:LIFE_WINE_END -->
             <section class="star-reader is-overview" id="starReader" aria-live="polite">
                 <div class="star-reader-kicker" id="starReaderKicker">CONSTELLATION NOTE</div>
                 <h3 class="star-reader-title" id="starReaderTitle">Cassiopeia</h3>
@@ -696,26 +553,26 @@ I am profoundly moved.</div>
         <span data-key="home_departing">Returning home</span>
     </div>
 
-    <script src="assets/vendor/astronomy-engine-2.1.19.min.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/01-content-data.js?v=20261018-profile-cloud-stability&copy=20261010-relief-ui3" defer></script>
-    <script src="assets/life/scripts/02-sky-config.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/03-math-orientation.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/04-dom-state.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/05-astronomy.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/06-framing.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/07-galaxy-renderer.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/07-star-map-renderer.js?v=20261018-profile-cloud-stability&stars=20261014-gentle-stars&motion=20261015-smooth" defer></script>
-    <script src="assets/life/scripts/10-sky-overlay.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/11-section-index.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/12-detail-navigation.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/13-gaze-constellations.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/14-portal-navigation.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/15-render-lock.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/19-star-map.js?v=20261018-profile-cloud-stability&input=20261010-trackpad&home=20261012-solar-home&stars=20261014-original-stars&motion=20261015-smooth" defer></script>
-    <script src="assets/life/scripts/21-deep-sky-map.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/16-input-events.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/17-content-ui.js?v=20261018-profile-cloud-stability" defer></script>
-    <script src="assets/life/scripts/22-footprints-atlas.js?v=20261018-profile-cloud-stability&atlas=20261016-administrative" defer></script>
-    <script src="assets/life/scripts/18-bootstrap.js?v=20261018-profile-cloud-stability" defer></script>
+    <script src="assets/vendor/astronomy-engine-2.1.19.min.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/01-content-data.js?v=20261018-constellation-stories&copy=20261010-relief-ui3" defer></script>
+    <script src="assets/life/scripts/02-sky-config.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/03-math-orientation.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/04-dom-state.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/05-astronomy.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/06-framing.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/07-galaxy-renderer.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/07-star-map-renderer.js?v=20261018-constellation-stories&stars=20261014-gentle-stars&motion=20261015-smooth" defer></script>
+    <script src="assets/life/scripts/10-sky-overlay.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/11-section-index.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/12-detail-navigation.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/13-gaze-constellations.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/14-portal-navigation.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/15-render-lock.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/19-star-map.js?v=20261018-constellation-stories&input=20261010-trackpad&home=20261012-solar-home&stars=20261014-original-stars&motion=20261015-smooth" defer></script>
+    <script src="assets/life/scripts/21-deep-sky-map.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/16-input-events.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/17-content-ui.js?v=20261018-constellation-stories" defer></script>
+    <script src="assets/life/scripts/22-footprints-atlas.js?v=20261018-constellation-stories&atlas=20261016-administrative" defer></script>
+    <script src="assets/life/scripts/18-bootstrap.js?v=20261018-constellation-stories" defer></script>
 </body>
 </html>

@@ -143,6 +143,48 @@ body.lang-zh-TW .portal-panel-title {
     border-radius: 99px;
 }
 
+.constellation-meaning {
+    margin: 0 0 24px;
+    padding: 0 0 20px;
+    border-bottom: 1px solid var(--rule);
+}
+
+.constellation-meaning-kicker {
+    color: var(--ink-soft);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+}
+
+.constellation-meaning h3 {
+    margin: 8px 0;
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.constellation-meaning p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+body.route-preview-active .constellation-meaning {
+    display: none;
+}
+
+.wine-empty {
+    margin: 24px 0;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+}
+
+.portal-panel:has(#wine:not([hidden])) .star-reader {
+    display: none;
+}
+
 .star-reader {
     display: flex;
     flex-direction: column;

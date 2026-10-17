@@ -42,6 +42,8 @@ async function labels(browser) {
                 const label = await profile.boundingBox();
                 check(await profile.isVisible() && label.y > 100 && label.y + label.height < viewport.height - 55,
                     `${viewport.width} × ${viewport.height}/${language}: the Meet Me Again label is visible above the footer at the default angle`);
+                const wineLabel = page.locator('[data-portal-button="wine"]');
+                check(await wineLabel.isVisible(), `${viewport.width}/${language}: Wine Diary has a visible default label`);
                 await profile.click();
                 await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'profile');
                 check(await page.locator('#profile').isVisible(), `${viewport.width}/${language}: Profile text opens the user page`);
@@ -55,6 +57,10 @@ async function labels(browser) {
                 const expectedTitle = { en: 'Meet Me Again', 'zh-CN': '重新认识我', 'zh-TW': '重新認識我' }[language];
                 check(profileState.title === expectedTitle && profileState.noNotes && profileState.fits && profileState.pending && profileState.shared,
                     `${viewport.width}/${language}: the user page replaces Notes, fits the panel and reserves userbox choices`, profileState);
+                check(await page.evaluate(() => state.activePortal.pattern === 'orion'
+                    && dom.constellationMeaningText.textContent === localized(constellationStories.profile.reason)),
+                    `${viewport.width}/${language}: Profile uses Orion and shows its localized meaning`);
+                if (language === 'zh-CN') await page.screenshot({ path: path.join(output, `profile-meaning-${viewport.width}.png`) });
                 await page.locator('.wiki-portrait img').evaluate(image => image.decode());
                 await page.locator('.wiki-page-nav a[href="#profile-userboxes"]').click();
                 check(await page.locator('.wiki-userbox-pending').isVisible(), `${viewport.width}/${language}: userbox navigation reaches its section`);
@@ -77,7 +83,7 @@ async function entry(browser, route, mobile) {
     try {
         await load(page, route);
         // Reorient the actual observer sky to bring each real constellation into view.
-        for (const id of ['profile', 'gallery', 'friends', 'thoughts']) {
+        for (const id of ['profile', 'wine', 'gallery', 'friends', 'thoughts']) {
             if (route === 'observatory.html') {
                 await page.evaluate(id => {
                     const map = window.lifeStarMap, vector = normalize(map.groups.get(id).center);
@@ -135,12 +141,65 @@ async function entry(browser, route, mobile) {
     } finally { await context.close(); }
 }
 
+async function meanings(browser, route, mobile) {
+    const page = await browser.newPage({ viewport: mobile ? { width: 320, height: 844 } : { width: 1365, height: 768 }, reducedMotion: 'reduce' });
+    page.on('pageerror', error => errors.push(error.message));
+    const label = `${route}/${mobile ? '320px' : 'desktop'}`;
+    try {
+        await load(page, route);
+        const membership = await page.evaluate(() => ({
+            ids: portalDefinitions.filter(portal => !portal.home).map(portal => portal.id),
+            removed: Boolean(document.querySelector('#news, #publications, #projects, #notes, [data-portal-button="news"], [data-portal-button="publications"], [data-portal-button="projects"]')),
+            targets: Object.values(homeStarTargets).filter(target => target.type === 'portal').map(target => target.portalId),
+            patterns: portalDefinitions.every(portal => constellationPatterns[portal.pattern].hips.every(hip => window.HipparcosSky.indexByHip.has(hip)))
+        }));
+        const expected = ['gallery', 'footprints', 'shelf', 'thoughts', 'friends', 'profile', 'wine'];
+        check(!membership.removed && membership.patterns && JSON.stringify(membership.ids) === JSON.stringify(expected)
+            && JSON.stringify(membership.targets.sort()) === JSON.stringify(expected.slice().sort()),
+            `${label}: seven content sections use catalogue stars and Home routes reach exactly these sections`);
+        for (const id of [...expected, 'home']) {
+            // The Home constellation has its own shared panel, while the solar marker opens the destination chooser.
+            await page.evaluate(id => window.lifeStarMap.openPortal(portalDefinitions.find(portal => portal.id === id)), id);
+            await page.waitForFunction(id => state.scene === 'detail' && state.activePortal?.id === id, id);
+            await settle(page);
+            for (const language of ['en', 'zh-CN', 'zh-TW']) {
+                await page.locator(`.lang-btn[data-lang="${language}"]`).click();
+                const meaning = await page.evaluate(() => {
+                    const portal = state.activePortal, story = constellationStories[portal.id], rect = dom.constellationMeaningText.getBoundingClientRect(), body = dom.panelBody.getBoundingClientRect();
+                    return {
+                        title: dom.constellationMeaningTitle.textContent,
+                        expectedTitle: `${localized(story.name)} · ${localized(story.epithet)}`,
+                        text: dom.constellationMeaningText.textContent, expected: localized(story.reason),
+                        aboveContent: document.getElementById('constellationMeaning').nextElementSibling?.matches('[data-portal-content]'),
+                        fits: dom.panelBody.scrollWidth <= dom.panelBody.clientWidth + 1,
+                        visible: rect.width > 0 && rect.top >= body.top - 1 && rect.top < body.bottom,
+                        emptyWine: portal.id !== 'wine' || (!portal.content.querySelector('[data-portal-entry]')
+                            && portal.content.querySelector('.wine-empty').textContent === i18n[state.currentLang].wine_empty)
+                    };
+                });
+                check(meaning.title === meaning.expectedTitle && meaning.text === meaning.expected && meaning.text.length > 25
+                    && meaning.aboveContent && meaning.fits && meaning.visible && meaning.emptyWine,
+                    `${label}/${id}/${language}: localized meaning is visible above content and fits the panel`);
+                await page.evaluate(() => selectPortalStar(state.activePortal, state.activePortal.patternHips.at(-1)));
+                check(await page.locator('#constellationMeaningText').textContent() === meaning.expected,
+                    `${label}/${id}/${language}: selecting another star retains the constellation meaning`);
+                if (id === 'wine' && language === 'zh-CN') await page.screenshot({ path: path.join(output, `wine-${route}-${mobile ? 'mobile' : 'desktop'}.png`) });
+            }
+            await page.locator('#portalClose').click();
+            await settle(page);
+        }
+    } finally { await page.close(); }
+}
+
 (async () => {
     fs.mkdirSync(output, { recursive: true });
     const browser = await chromium.launch({ headless: true, channel: 'chrome', args: ['--enable-unsafe-swiftshader'] });
     try {
         await labels(browser);
-        for (const route of ['life.html', 'observatory.html']) for (const mobile of [false, true]) await entry(browser, route, mobile);
+        for (const route of ['life.html', 'observatory.html']) for (const mobile of [false, true]) {
+            await entry(browser, route, mobile);
+            await meanings(browser, route, mobile);
+        }
     } finally { await browser.close(); }
     check(errors.length === 0, `No page exceptions: ${errors.join('; ')}`);
     console.log(`Constellation entry validation: ${checks.length} checks passed.`);

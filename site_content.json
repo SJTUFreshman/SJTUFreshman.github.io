@@ -270,7 +270,6 @@
         "title_thoughts": "Thoughts",
         "title_friends": "Friends",
         "title_home": "Home",
-        "title_publications": "Publications",
         "chart_china": "China",
         "chart_world": "Countries visited",
         "chart_east_asia": "East Asia",
@@ -292,7 +291,9 @@
         "home_departing": "Returning home",
         "galaxy_back": "Back to the galaxy",
         "galaxy_hint": "Follow the brighter stars through time",
-        "title_profile": "Meet Me Again"
+        "title_profile": "Meet Me Again",
+        "title_wine": "Wine Diary",
+        "wine_empty": "No tasting notes yet."
       },
       "zh-CN": {
         "nav_gallery": "光影",
@@ -306,7 +307,6 @@
         "title_thoughts": "随笔",
         "title_friends": "友链",
         "title_home": "主页",
-        "title_publications": "论文",
         "chart_china": "中国",
         "chart_world": "到访国家和地区",
         "chart_east_asia": "东亚",
@@ -328,7 +328,9 @@
         "home_departing": "正在返回主页",
         "galaxy_back": "返回星河",
         "galaxy_hint": "循着亮星，沿时间漫游",
-        "title_profile": "重新认识我"
+        "title_profile": "重新认识我",
+        "title_wine": "品酒日记",
+        "wine_empty": "暂时还没有品酒记录。"
       },
       "zh-TW": {
         "nav_gallery": "光影",
@@ -342,7 +344,6 @@
         "title_thoughts": "隨筆",
         "title_friends": "友鏈",
         "title_home": "主頁",
-        "title_publications": "論文",
         "chart_china": "中國",
         "chart_world": "到訪國家和地區",
         "chart_east_asia": "東亞",
@@ -364,7 +365,9 @@
         "home_departing": "正在返回主頁",
         "galaxy_back": "返回星河",
         "galaxy_hint": "循著亮星，沿時間漫遊",
-        "title_profile": "重新認識我"
+        "title_profile": "重新認識我",
+        "title_wine": "品酒日記",
+        "wine_empty": "暫時還沒有品酒紀錄。"
       }
     },
     "gallery": [
@@ -675,24 +678,8 @@
         "friend-yuheng-wang": 36850,
         "friend-qiran-zhang": 36850
       },
-      "about": {
-        "about-profile": 27989
-      },
-      "news": {
-        "news_1": 97649
-      },
-      "publications": {
-        "ModelSlices_2026": 677,
-        "Generative_2025": 113963,
-        "PRISM_2026": 113963,
-        "AgentXRay_2026": 113963,
-        "AppCopilot_2025": 677
-      },
-      "projects": {
-        "appcopilot": 81693,
-        "teachmaster": 81693
-      },
-      "profile": {}
+      "profile": {},
+      "wine": {}
     },
     "thoughts": [
       {
