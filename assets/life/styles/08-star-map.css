@@ -2,6 +2,138 @@ body.star-map {
     background: #03050b;
 }
 
+.solar-destination {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #eef0f2;
+    overflow: hidden;
+}
+
+.solar-destination::backdrop {
+    background: rgba(3, 6, 13, 0.38);
+    -webkit-backdrop-filter: blur(14px) saturate(0.6);
+    backdrop-filter: blur(14px) saturate(0.6);
+    animation: solar-backdrop-in 420ms ease both;
+}
+
+.solar-destination-choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+}
+
+.solar-destination-choices::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 36%;
+    bottom: 36%;
+    width: 1px;
+    background: linear-gradient(transparent, rgba(222, 232, 242, 0.22), transparent);
+    pointer-events: none;
+}
+
+.solar-destination-choice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 12px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font: 400 clamp(0.7rem, 2.25vw, 1.85rem) var(--editorial);
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 240ms ease, color 240ms ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body:not(.lang-en) .solar-destination-choice {
+    font-family: var(--kai);
+    font-size: clamp(1rem, 2.2vw, 1.8rem);
+    letter-spacing: 0.12em;
+}
+
+.solar-destination[open] .solar-destination-choice span {
+    animation: solar-copy-in 500ms ease both;
+}
+
+.solar-destination-choice:hover,
+.solar-destination-choice:focus-visible {
+    color: #fff;
+    background: rgba(220, 232, 248, 0.055);
+}
+
+.solar-destination-choice:focus-visible { outline: none; }
+.solar-destination-choice:focus-visible span { text-decoration: underline; text-underline-offset: 0.4em; text-decoration-thickness: 1px; }
+
+.solar-destination-close {
+    position: absolute;
+    top: max(20px, env(safe-area-inset-top));
+    right: max(20px, env(safe-area-inset-right));
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #b7c0cc;
+    font: 300 1.8rem var(--ui);
+    cursor: pointer;
+}
+
+.solar-destination-close:hover { color: #fff; }
+.solar-destination-close:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+
+.observatory-return {
+    position: fixed;
+    z-index: 15;
+    right: max(34px, env(safe-area-inset-right));
+    bottom: max(30px, env(safe-area-inset-bottom));
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 0 8px 16px;
+    color: #b7c4d4;
+    font: 0.68rem var(--ui);
+    text-decoration: none;
+    text-underline-offset: 5px;
+}
+
+.observatory-return:hover, .observatory-return:focus-visible { color: #fff; text-decoration: underline; }
+.panel-open .observatory-return, .deep-sky-open .observatory-return, .section-drawer-open .observatory-return { display: none; }
+body.observed-sky .map-footer { right: max(240px, 22vw); }
+
+@keyframes solar-backdrop-in {
+    from { background: rgba(3, 6, 13, 0); -webkit-backdrop-filter: blur(0px); backdrop-filter: blur(0px); }
+}
+
+@keyframes solar-copy-in {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+    .observatory-return { right: 22px; bottom: max(20px, env(safe-area-inset-bottom)); font-size: 0.62rem; }
+    body.observed-sky .map-footer { right: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .solar-destination::backdrop, .solar-destination[open] .solar-destination-choice span { animation: none; }
+    .solar-destination-choice { transition: none; }
+}
+
 .star-map #spaceCanvas,
 .star-map .space-grain,
 .star-map .control-legend,

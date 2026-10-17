@@ -411,7 +411,7 @@ async function inputChecks(browser) {
 async function solarMarkerChecks(page, label, touch = false) {
     const marker = page.locator('[data-map-entity="solar"]');
     check(await marker.isVisible() && await marker.getAttribute('aria-disabled') !== 'true',
-        `${label}: the Solar System marker is an available homepage link`);
+        `${label}: the Solar System marker is an available destination selector`);
     await page.route('https://api.open-meteo.com/v1/forecast?*', route => route.fulfill({
         json: { current: { temperature_2m: 21, weather_code: 0 } }
     }));
@@ -425,9 +425,16 @@ async function solarMarkerChecks(page, label, touch = false) {
             await marker.focus();
             await page.keyboard.press(activation);
         }
+        await page.locator('#solarDestination').waitFor({ state: 'visible' });
+        check(await page.evaluate(() => state.modalOpen && !window.lifeStarMap.canMove()),
+            `${label}: Solar System ${activation} opens the modal choice and suspends map gestures`);
+        const home = page.locator('#solarHome');
+        if (activation === 'tap') await home.tap();
+        else if (activation === 'click') await home.click();
+        else { await home.focus(); await page.keyboard.press(activation); }
         await page.waitForURL(url => url.origin === new URL(pageUrl).origin && /^\/(?:index(?:\.html)?)?$/.test(url.pathname));
         await page.locator('.hero-title').waitFor({ state: 'visible' });
-        check(true, `${label}: Solar System ${activation} returns to the homepage`);
+        check(true, `${label}: the right-hand choice activated with ${activation} returns to the homepage`);
         await load(page);
     }
     check(page.retiredRequests.length === 0, `${label}: no retired solar scripts, textures, or frames are requested`);

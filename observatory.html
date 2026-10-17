@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<!-- Generated from life.html by site_renderer.py; edit the shared source. -->
+<html lang="en" data-stellar-page="life">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#070914">
+    <title>Sky from the Solar System · Runde Yang</title>
+    <script>
+    (function () {
+        if (!/\.github\.io$/i.test(window.location.hostname)) return;
+        const target = new URL(window.location.href);
+        target.hostname = 'sjtufreshman.pages.dev';
+        target.pathname = '/observatory';
+        window.location.replace(target.href);
+    })();
+    </script>
+    <script>
+    (function () {
+        try {
+            const storageKey = 'runde:route-transition:v1';
+            const raw = sessionStorage.getItem(storageKey);
+            if (!raw) return;
+            const payload = JSON.parse(raw);
+            const age = Date.now() - payload?.at;
+            const valid = (
+                payload &&
+                payload.v === 1 &&
+                payload.from === 'index' &&
+                payload.to === 'life' &&
+                ['cool', 'home'].includes(payload.mode) &&
+                Number.isFinite(payload.at) &&
+                age >= 0 &&
+                age <= 15000
+            );
+            if (valid) {
+                document.documentElement.classList.add('stellar-arrival-pending');
+                window.setTimeout(
+                    () => document.documentElement.classList.remove('stellar-arrival-pending'),
+                    4500
+                );
+            } else {
+                sessionStorage.removeItem(storageKey);
+            }
+        } catch (error) {
+            try {
+                sessionStorage.removeItem('runde:route-transition:v1');
+            } catch (storageError) {
+                // Ignore unavailable storage.
+            }
+            // Storage is optional; Life remains directly usable.
+        }
+    })();
+    </script>
+    <style>
+        html.stellar-arrival-pending body {
+            background: #050814 !important;
+        }
+        html.stellar-arrival-pending body > :not(.stellar-transit-layer) {
+            visibility: hidden !important;
+        }
+    </style>
+<script src="assets/stellar-transit.js?v=20261017-solar-observatory" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
+    <link rel="preload" href="fonts/edukai-site-subset.woff2?v=20261017-solar-observatory" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <script src="assets/hipparcos-stars.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/hipparcos-distances.js?v=20261017-solar-observatory" defer></script>
+    <link rel="stylesheet" href="assets/life/styles/01-foundation-sky.css?v=20261017-solar-observatory">
+    <link rel="stylesheet" href="assets/life/styles/02-section-drawer.css?v=20261017-solar-observatory">
+    <link rel="stylesheet" href="assets/life/styles/03-sky-navigation.css?v=20261017-solar-observatory">
+    <link rel="stylesheet" href="assets/life/styles/04-detail-panels.css?v=20261017-solar-observatory">
+    <link rel="stylesheet" href="assets/life/styles/05-life-content.css?v=20261017-solar-observatory">
+    <link rel="stylesheet" href="assets/life/styles/06-homepage-parity.css?v=20261017-solar-observatory">
+    <link rel="stylesheet" href="assets/life/styles/07-overlays-responsive.css?v=20261017-solar-observatory&atlas=20261016-administrative">
+    <link rel="stylesheet" href="assets/life/styles/08-star-map.css?v=20261017-solar-observatory&galaxy=20261014-gaia-realism">
+    <link rel="stylesheet" href="assets/life/styles/10-deep-sky-map.css?v=20261017-solar-observatory">
+    <link rel="stylesheet" href="assets/life/styles/11-index-theme-overlays.css?v=20261017-solar-observatory">
+    <noscript>
+        <style>
+            html, body { height: auto; overflow: auto; background: var(--life-paper); color: var(--life-ink); }
+            .galaxy-world, .life-mark, .language-switch, .scene-status,
+            .portal-nav, .star-nav,
+            .map-entities, .map-footer,
+            .section-drawer-toggle, .section-drawer-scrim, .section-drawer,
+            .portal-panel-header, .lightbox, .transition-veil { display: none !important; }
+            .portal-panel { position: static; width: auto; opacity: 1; visibility: visible; transform: none; background: var(--life-paper); color: var(--life-ink); box-shadow: none; border: 0; }
+            .portal-panel-body { overflow: visible; padding: 32px max(20px, 5vw); }
+            .portal-content[hidden] { display: block !important; margin-bottom: 64px; }
+        </style>
+    </noscript>
+</head>
+<body class="lang-en star-map observed-sky">
+    <div class="galaxy-world" id="galaxyWorld" tabindex="-1" aria-label="Interactive galaxy">
+        <canvas id="spaceCanvas" aria-hidden="true"></canvas>
+        <canvas id="starMapCanvas" aria-hidden="true"></canvas>
+        <canvas id="starMapFallbackCanvas" aria-hidden="true" hidden></canvas>
+        <canvas id="constellationCanvas" aria-hidden="true"></canvas>
+        <div class="space-vignette" aria-hidden="true"></div>
+        <div class="space-grain" aria-hidden="true"></div>
+    </div>
+
+    <div class="life-mark" aria-hidden="true">
+        <strong>Runde Yang</strong>
+        <span>Life beyond research</span>
+    </div>
+
+    <div class="language-switch" aria-label="Language">
+        <button class="lang-btn active" type="button" data-lang="en">EN</button>
+        <button class="lang-btn" type="button" data-lang="zh-CN">简</button>
+        <button class="lang-btn" type="button" data-lang="zh-TW">繁</button>
+    </div>
+
+    <div class="scene-status" id="sceneStatus"></div>
+    <a class="sky-credit" id="skyCredit" href="https://www.eso.org/public/images/eso0932a/" target="_blank" rel="noopener noreferrer" hidden>ESO/S. Brunier</a>
+
+    <a class="observatory-return" id="observatoryReturn" href="life.html">← Return to the star map</a>
+
+    <nav class="map-entities" id="mapEntities" aria-label="Astronomical systems"></nav>
+    <div class="map-footer">
+        <span id="mapInputHint"></span>
+        <details class="map-about">
+            <summary aria-label="About this star map">i</summary>
+            <p><span data-map-copy="note"></span><a href="https://www.eso.org/public/images/eso0932a/" target="_blank" rel="noopener noreferrer">ESO/S. Brunier · CC BY 4.0</a><a href="https://www.esa.int/ESA_Multimedia/Images/2025/01/The_best_Milky_Way_map_by_Gaia" target="_blank" rel="noopener noreferrer">ESA/Gaia/DPAC, Stefan Payne-Wardenaar</a><a href="https://creativecommons.org/licenses/by-sa/3.0/igo/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0 IGO</a></p>
+        </details>
+    </div>
+
+    <div class="sr-only" id="gazeAnnouncement" aria-live="polite"></div>
+
+    <button
+        class="section-drawer-toggle"
+        id="sectionDrawerToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="sectionDrawer"
+        aria-label="Open life index"
+        inert
+    ></button>
+    <button
+        class="section-drawer-scrim"
+        id="sectionDrawerScrim"
+        type="button"
+        tabindex="-1"
+        aria-hidden="true"
+    ></button>
+    <aside
+        class="section-drawer"
+        id="sectionDrawer"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        aria-labelledby="sectionDrawerTitle"
+        aria-describedby="sectionDrawerObserver sectionDrawerNote"
+        inert
+    >
+        <header class="section-drawer-header">
+            <div class="section-drawer-kicker" id="sectionDrawerKicker">LIVE SKY INDEX</div>
+            <h2 class="section-drawer-title" id="sectionDrawerTitle">Life constellations</h2>
+            <p class="section-drawer-observer" id="sectionDrawerObserver"></p>
+            <button class="section-drawer-close" id="sectionDrawerClose" type="button" aria-label="Close life index"></button>
+        </header>
+        <nav class="section-drawer-list" id="sectionDrawerList" aria-label="Life sections"></nav>
+        <footer class="section-drawer-footer">
+            <button class="section-index-home" id="sectionDrawerHome" type="button">
+                <span class="section-index-number">⌂</span>
+                <span class="section-index-copy">
+                    <strong id="sectionDrawerHomeTitle">Homepage route</strong>
+                    <span id="sectionDrawerHomeMeta">Polaris course · confirm departure</span>
+                </span>
+            </button>
+            <p class="section-drawer-note" id="sectionDrawerNote">Sections hidden by the horizon or daylight remain available through this index.</p>
+        </footer>
+    </aside>
+
+    <nav class="portal-nav" id="portalNav" aria-label="Life constellations">
+        <button class="portal-hit" type="button" data-portal-button="gallery" aria-label="Gallery / 光影 / 光影"></button>
+        <button class="portal-hit" type="button" data-portal-button="footprints" aria-label="Footprints / 足迹 / 足跡"></button>
+        <button class="portal-hit" type="button" data-portal-button="shelf" aria-label="Shelf / 书影 / 書影"></button>
+        <button class="portal-hit" type="button" data-portal-button="thoughts" aria-label="Thoughts / 随笔 / 隨筆"></button>
+        <button class="portal-hit" type="button" data-portal-button="friends" aria-label="Friends / 友链 / 友鏈"></button>
+        <button class="portal-hit" type="button" data-portal-button="news" aria-label="News / 动态 / 動態"></button>
+        <button class="portal-hit" type="button" data-portal-button="publications" aria-label="Publications / 论文 / 論文"></button>
+        <button class="portal-hit" type="button" data-portal-button="projects" aria-label="Projects / 项目经历 / 項目經歷"></button>
+        <button class="portal-hit" type="button" data-portal-button="notes" aria-label="Notes / 笔记 / 筆記"></button>
+        <button class="portal-hit" type="button" data-portal-button="home" aria-label="Home / 主页 / 主頁"></button>
+    </nav>
+    <nav class="star-nav" id="starNav" aria-label="Stars in the selected constellation"></nav>
+
+    <aside class="portal-panel" id="portalPanel" aria-hidden="true" aria-labelledby="portalPanelTitle" inert>
+        <header class="portal-panel-header">
+            <div class="portal-panel-kicker" id="portalPanelKicker">CONSTELLATION</div>
+            <h2 class="portal-panel-title" id="portalPanelTitle" tabindex="-1">Gallery</h2>
+            <div class="portal-panel-names" id="portalPanelNames">Gallery / 光影 / 光影</div>
+            <div class="portal-panel-hint" data-key="panel_hint">Esc · end viewing</div>
+            <button class="portal-close" id="portalClose" type="button" aria-label="Return to the galaxy"></button>
+        </header>
+        <div class="portal-panel-body" id="portalPanelBody">
+<!-- SITEGEN:LIFE_GALLERY_START -->
+        <section id="gallery" class="portal-content" data-portal-content="gallery" hidden>
+            <div class="portal-moments">
+                <article class="portal-moment" data-moment="gallery-qiandao-2024-11" data-portal-entry="gallery-qiandao-2024-11" data-star-hip="746">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-qiandao-2024-11">Nov 2024</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-qiandao-2024-11">Qiandao Lake</span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-qiandao-2024-11">Stargazing camp, sunset, and the road there</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Stargazing camp"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/那日.jpg" alt="Stargazing" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_nari">Stargazing camp</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Qiandao Lake sunset"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/千島湖.jpg" alt="Qiandao Lake" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_qiandaohu">Qiandao Lake sunset</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="On the road to Qiandao Lake"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/千島湖路上.jpg" alt="Road" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_road">On the road to Qiandao Lake</div>
+                </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="gallery-orion-2025" data-portal-entry="gallery-orion-2025" data-star-hip="3179">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-orion-2025">2025</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-orion-2025"></span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-orion-2025">The Orion Nebula</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Orion Nebula, 2025"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/meteor.jpg" alt="Orion Nebula" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_meteor">Orion Nebula, 2025</div>
+                </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="gallery-nanjing-2025-03" data-portal-entry="gallery-nanjing-2025-03" data-star-hip="3179">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-nanjing-2025-03">Mar 2025</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-nanjing-2025-03">Nanjing</span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-nanjing-2025-03">Zijin Mountain in early spring</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Zijin Mountain, Nanjing"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/紫金山.jpg" alt="Zijin Mountain" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_zijinshan">Zijin Mountain, Nanjing</div>
+                </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="gallery-baking-2025-12" data-portal-entry="gallery-baking-2025-12" data-star-hip="4427">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-baking-2025-12">Dec 2025</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-baking-2025-12"></span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-baking-2025-12">A strawberry cake from the baking club</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Baking club strawberry cake"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/烘焙社草莓蛋糕.jpg" alt="Cake" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_cake">Baking club strawberry cake</div>
+                </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="gallery-campus-undated" data-portal-entry="gallery-campus-undated" data-star-hip="4427">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-campus-undated">Spring · Undated</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-campus-undated">Shanghai</span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-campus-undated">Spring on the SJTU campus</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="SJTU Campus in spring"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/美哉吾校.jpg" alt="Campus" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_campus">SJTU Campus in spring</div>
+                </div>
+                </div>
+                </article>
+            </div>
+        </section>
+<!-- SITEGEN:LIFE_GALLERY_END -->
+
+<!-- SITEGEN:LIFE_FOOTPRINTS_START -->
+            <section id="footprints" class="portal-content" data-portal-content="footprints" hidden>
+                <div class="maps-list" data-portal-entry="footprints-map" data-star-hip="54061">
+                    <article class="map-card">
+                        <div class="map-card-title" data-key="chart_china">China</div>
+                        <div id="chinaMap" class="map-box" role="img" aria-label="Cities and routes visited in Mainland China"></div>
+                    </article>
+                    <article class="map-card">
+                        <div class="map-card-title" data-key="chart_east_asia">East Asia</div>
+                        <div id="eastAsiaMap" class="map-box" role="img" aria-label="East Asia footprints"></div>
+                    </article>
+                    <article class="map-card">
+                        <div class="map-card-title" data-key="chart_europe_usa">Europe + United States</div>
+                        <div id="euroUsaMap" class="map-box" role="img" aria-label="Europe and United States footprints"></div>
+                    </article>
+                </div>
+            </section>
+<!-- SITEGEN:LIFE_FOOTPRINTS_END -->
+
+<!-- SITEGEN:LIFE_SHELF_START -->
+        <section id="shelf" class="portal-content" data-portal-content="shelf" hidden>
+            <div class="portal-moments">
+                <article class="portal-moment" data-moment="shelf-deep-learning" data-portal-entry="shelf-deep-learning" data-star-hip="91262">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_shelf-deep-learning">Recently</span>
+                            <span class="portal-moment-location" data-key="moment_location_shelf-deep-learning"></span>
+                        </div>
+                        <h3 data-key="moment_summary_shelf-deep-learning">Deep Learning — Ian Goodfellow</h3>
+                    </header>
+                <div class="shelf-list">
+            <div class="shelf-item">
+                <div class="shelf-icon"><i class="fas fa-book"></i></div>
+                <div class="shelf-info">
+                    <div class="shelf-title en-only">Deep Learning — Ian Goodfellow</div>
+                    <div class="shelf-comment" data-key="book_dl">Mathematical foundation is excellent. Not just a tool book, but a mind map.</div>
+                </div>
+            </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="shelf-interstellar" data-portal-entry="shelf-interstellar" data-star-hip="91262">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_shelf-interstellar">Recently</span>
+                            <span class="portal-moment-location" data-key="moment_location_shelf-interstellar"></span>
+                        </div>
+                        <h3 data-key="moment_summary_shelf-interstellar">Interstellar</h3>
+                    </header>
+                <div class="shelf-list">
+            <div class="shelf-item">
+                <div class="shelf-icon"><i class="fas fa-film"></i></div>
+                <div class="shelf-info">
+                    <div class="shelf-title en-only">Interstellar</div>
+                    <div class="shelf-comment" data-key="movie_interstellar">Love is the one thing that transcends time and space.</div>
+                </div>
+            </div>
+                </div>
+                </article>
+            </div>
+        </section>
+<!-- SITEGEN:LIFE_SHELF_END -->
+
+<!-- SITEGEN:LIFE_THOUGHTS_START -->
+        <section id="thoughts" class="portal-content" data-portal-content="thoughts" hidden>
+            <div class="portal-moments">
+                <article class="portal-moment" data-moment="thought-2026-01-16" data-portal-entry="thought-2026-01-16" data-star-hip="100453">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_thought-2026-01-16">Jan 16, 2026</span>
+                            <span class="portal-moment-location" data-key="moment_location_thought-2026-01-16"></span>
+                        </div>
+                        <h3 data-key="moment_summary_thought-2026-01-16">Spes non confundit</h3>
+                    </header>
+                <div class="thoughts-list">
+            <div class="thought-item">
+                <div class="thought-date" data-key="date_thought_1">Jan 16, 2026</div>
+                <div class="thought-text thought-text-collapsed" data-key="thought_1">Today, the weight of finals and endless tasks has finally lifted.
+
+My sleep has been a chaotic blur lately—restless and sparse.
+
+Around 9 PM, a wave of malaise drove me to bed, where I lingered in that hollow space between wakefulness and dreams. By 11:56 PM, I found myself fully awake, yet deeply fatigued.
+
+I began listening to 'The Shorekeeper’s Theme.' It is remarkably soothing, yet it carries a defiant, positive undertone: I want to play the piano, I want to train, I want to live—truly live—for myself. I crave a life of warmth and intensity; I refuse to be just another exam robot.
+
+We are meant to live lives of abundance; even when the world bears down on us, we must not allow our spirits to wither.
+
+In the embrace of the piano, my mind finally exhales. My soul drifts back to a carefree past, where beautiful moments flicker like scenes from a vintage film.
+
+I am profoundly moved.</div>
+                <button class="thought-toggle" type="button" data-thought-reader aria-haspopup="dialog" aria-controls="thoughtReader">Read essay</button>
+            </div>
+                </div>
+                </article>
+                <article class="portal-moment" data-moment="thought-2026-06-29" data-portal-entry="thought-2026-06-29" data-star-hip="95947">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_thought-2026-06-29">Jun 29, 2026</span>
+                            <span class="portal-moment-location" data-key="moment_location_thought-2026-06-29"></span>
+                        </div>
+                        <h3 data-key="moment_summary_thought-2026-06-29">Misericordiae Vultus</h3>
+                    </header>
+                <div class="thoughts-list">
+            <div class="thought-item">
+                <div class="thought-date" data-key="date_thought_0629">Jun 29, 2026</div>
+                <div class="thought-text thought-text-collapsed" data-key="thought_0629">See Chinese version, record of last night's dream.</div>
+                <button class="thought-toggle" type="button" data-thought-reader aria-haspopup="dialog" aria-controls="thoughtReader">Read essay</button>
+            </div>
+                </div>
+                </article>
+            </div>
+        </section>
+<!-- SITEGEN:LIFE_THOUGHTS_END -->
+
+<!-- SITEGEN:LIFE_FRIENDS_START -->
+        <section id="friends" class="portal-content" data-portal-content="friends" hidden>
+                <div class="friends-list">
+                    <a href="#" class="friend-link" data-portal-entry="friend-laboratory-partner" data-star-hip="36850">Laboratory Partner A</a>
+                    <a href="#" class="friend-link" data-portal-entry="friend-sjtu-ai-club" data-star-hip="36850">SJTU AI Club</a>
+                </div>
+            </section>
+<!-- SITEGEN:LIFE_FRIENDS_END -->
+
+<!-- SITEGEN:LIFE_ABOUT_START -->
+
+<!-- SITEGEN:LIFE_ABOUT_END -->
+
+<!-- SITEGEN:LIFE_NEWS_START -->
+            <section id="news" class="portal-content homepage-parity" data-portal-content="news" hidden>
+                <ul class="news-list">
+                    <li class="news-item news-entry" data-portal-entry="news_1" data-star-hip="97649">
+                        <span class="news-date">2026/6/29</span>
+                        <span class="news-text" data-key="news_1">25-26 Spring Finals finished.</span>
+                    </li>
+                </ul>
+            </section>
+<!-- SITEGEN:LIFE_NEWS_END -->
+
+<!-- SITEGEN:LIFE_PUBLICATIONS_START -->
+            <section id="publications" class="portal-content homepage-parity" data-portal-content="publications" hidden>
+                <div class="pub-list">
+                    <div class="pub-item publication-entry" data-portal-entry="ModelSlices_2026" data-star-hip="677">
+                         <div class="pub-title-text en-only">Collaborative Learning and Reasoning over Model Slices</div>
+                         <div class="pub-authors en-only"><b>Yuheng Wang</b>†, <b>Runde Yang</b>†, Zhuohan Bao, Qiran Zhang, Huatao Li, Yiyang Zheng, Lin Wu, Jingru Fan, Shu Yao, Yihan Li, Zhi Li, Chen Qian</div>
+                         <div class="pub-venue en-only">arXiv preprint arXiv:2610.12927</div>
+                         <div class="pub-actions">
+                            <a class="pub-btn" href="https://arxiv.org/abs/2610.12927"><i class="far fa-file-pdf" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
+                            <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
+                            <button class="pub-btn" type="button" data-copy-citation>
+                                <i class="fas fa-quote-right" aria-hidden="true"></i>
+                                <span data-key="life_action_cite">Cite</span>
+                            </button>
+                         </div>
+                        <pre data-citation-source hidden>@misc{wang2026collaborativelearningslices,
+  title={Collaborative Learning and Reasoning over Model Slices},
+  author={Yuheng Wang and Runde Yang and Zhuohan Bao and Qiran Zhang and Huatao Li and Yiyang Zheng and Lin Wu and Jingru Fan and Shu Yao and Yihan Li and Zhi Li and Chen Qian},
+  year={2026},
+  eprint={2610.12927},
+  archivePrefix={arXiv},
+  url={https://arxiv.org/abs/2610.12927}
+}</pre>
+                    </div>
+                    <div class="pub-item publication-entry" data-portal-entry="Generative_2025" data-star-hip="113963">
+                         <div class="pub-title-text en-only">Generative Teaching via Code (TeachMaster)</div>
+                         <div class="pub-authors en-only">Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jie Zhang, Jingru Fan, Ruoyu Fu, Tianle Zhou, Huatao Li, Siheng Chen, Weinan E, Chen Qian</div>
+                         <div class="pub-venue en-only">ACL 2026 Industry Track</div>
+                         <div class="pub-actions">
+                            <a class="pub-btn" href="https://arxiv.org/abs/2601.04204v1"><i class="far fa-file-pdf" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
+                            <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
+                            <button class="pub-btn" type="button" data-copy-citation>
+                                <i class="fas fa-quote-right" aria-hidden="true"></i>
+                                <span data-key="life_action_cite">Cite</span>
+                            </button>
+                         </div>
+                        <pre data-citation-source hidden>@misc{wang2025generativeteachingcode,
+  title={Generative Teaching via Code},
+  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},
+  year={2025},
+  eprint={2601.04204},
+  archivePrefix={arXiv},
+  primaryClass={cs.CY},
+  url={https://arxiv.org/abs/2601.04204}
+}</pre>
+                    </div>
+                    <div class="pub-item publication-entry" data-portal-entry="PRISM_2026" data-star-hip="113963">
+                         <div class="pub-title-text en-only">PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning</div>
+                         <div class="pub-authors en-only">Qiran Zhang, Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jingru Fan, Shu Yao, Jie Zhang, Tianle Zhou, Huatao Li, Ruijie Shi, Yihan Li, Chen Qian</div>
+                         <div class="pub-venue en-only">NeurIPS 2026</div>
+                         <div class="pub-actions">
+                            <a class="pub-btn" href="https://arxiv.org/abs/2605.19382"><i class="far fa-file-pdf" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
+                            <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
+                            <button class="pub-btn" type="button" data-copy-citation>
+                                <i class="fas fa-quote-right" aria-hidden="true"></i>
+                                <span data-key="life_action_cite">Cite</span>
+                            </button>
+                         </div>
+                        <pre data-citation-source hidden>@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,
+      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning},
+      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},
+      year={2026},
+      eprint={2605.19382},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2605.19382},
+}</pre>
+                    </div>
+                    <div class="pub-item publication-entry" data-portal-entry="AgentXRay_2026" data-star-hip="113963">
+                         <div class="pub-title-text en-only">AgentXRay: White-Boxing Agentic Systems via Workflow Reconstruction</div>
+                         <div class="pub-authors en-only">Ruijie Shi, Houbin Zhang, Yuecheng Han, Yuheng Wang, Jingru Fan, <b>Runde Yang</b>, Yufan Dang, Huatao Li, Dewen Liu, Yuan Cheng, Chen Qian</div>
+                         <div class="pub-venue en-only">ICML 2026</div>
+                         <div class="pub-actions">
+                            <a class="pub-btn" href="https://arxiv.org/abs/2602.05353"><i class="far fa-file-pdf" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
+                            <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
+
+                         </div>
+                    </div>
+                    <div class="pub-item publication-entry" data-portal-entry="AppCopilot_2025" data-star-hip="677">
+                         <div class="pub-title-text en-only">AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent</div>
+                         <div class="pub-authors en-only">Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian</div>
+                         <div class="pub-venue en-only">arXiv preprint arXiv:2509.02444</div>
+                         <div class="pub-actions">
+                            <a class="pub-btn" href="https://arxiv.org/abs/2509.02444"><i class="far fa-file-pdf" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
+                            <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
+                            <button class="pub-btn" type="button" data-copy-citation>
+                                <i class="fas fa-quote-right" aria-hidden="true"></i>
+                                <span data-key="life_action_cite">Cite</span>
+                            </button>
+                         </div>
+                        <pre data-citation-source hidden>@misc{fan2025appcopilotgeneralaccuratelonghorizon,
+  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},
+  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},
+  year={2025},
+  eprint={2509.02444},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI},
+  url={https://arxiv.org/abs/2509.02444}
+}</pre>
+                    </div>
+                </div>
+            </section>
+<!-- SITEGEN:LIFE_PUBLICATIONS_END -->
+
+<!-- SITEGEN:LIFE_PROJECTS_START -->
+            <section id="projects" class="portal-content homepage-parity" data-portal-content="projects" hidden>
+                <div class="project-grid">
+                    <div class="project-card project-entry" data-portal-entry="appcopilot" data-star-hip="81693">
+                         <div class="project-img-wrap">
+                            <img src="images/AppCopilot.png" alt="AppCopilot" loading="lazy" decoding="async">
+                         </div>
+                         <div class="project-body">
+                             <div class="project-name en-only">AppCopilot</div>
+                             <div class="project-desc" data-key="proj_appcopilot">A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.</div>
+                             <div class="project-links">
+                                <button class="project-link" type="button" disabled aria-disabled="true"><i class="far fa-file-alt" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></button>
+                                <button class="project-link" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
+                             </div>
+                         </div>
+                    </div>
+                    <div class="project-card project-entry" data-portal-entry="teachmaster" data-star-hip="81693">
+                         <div class="project-img-wrap">
+                            <img src="images/TeachMaster.png" alt="TeachMaster" loading="lazy" decoding="async">
+                         </div>
+                         <div class="project-body">
+                             <div class="project-name en-only">TeachMaster</div>
+                             <div class="project-desc" data-key="proj_teachmaster">A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.</div>
+                             <div class="project-links">
+                                <a class="project-link" href="https://arxiv.org/abs/2601.04204v1"><i class="far fa-file-alt" aria-hidden="true"></i> <span data-key="life_action_paper">Paper</span></a>
+                                <button class="project-link" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> <span data-key="life_action_code">Code</span></button>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </section>
+<!-- SITEGEN:LIFE_PROJECTS_END -->
+
+<!-- SITEGEN:LIFE_NOTES_START -->
+            <section id="notes" class="portal-content homepage-parity" data-portal-content="notes" hidden>
+                <div class="notes-grid">
+                    <div class="notes-empty" data-key="notes_empty">Notes coming soon...</div>
+                </div>
+            </section>
+<!-- SITEGEN:LIFE_NOTES_END -->
+            <section class="star-reader is-overview" id="starReader" aria-live="polite">
+                <div class="star-reader-kicker" id="starReaderKicker">CONSTELLATION NOTE</div>
+                <h3 class="star-reader-title" id="starReaderTitle">Cassiopeia</h3>
+                <div class="star-reader-meta" id="starReaderMeta">Choose one of its real stars</div>
+                <p class="star-reader-description" id="starReaderDescription"></p>
+                <p class="star-reader-status" id="starReaderStatus"></p>
+                <section class="home-route-preview" id="homeRoutePreview" hidden>
+                    <div class="home-route-endpoints">
+                        <div class="home-route-endpoint">
+                            <span id="homeRouteFromLabel">Departure</span>
+                            <strong id="homeRouteFrom"></strong>
+                        </div>
+                        <span class="home-route-arrow" aria-hidden="true"></span>
+                        <div class="home-route-endpoint">
+                            <span id="homeRouteToLabel">Destination</span>
+                            <strong id="homeRouteTo"></strong>
+                        </div>
+                    </div>
+                    <p class="home-route-summary" id="homeRouteSummary"></p>
+                    <div class="home-route-actions">
+                        <button class="home-route-launch" id="homeRouteLaunch" type="button">Launch</button>
+                        <button class="home-route-cancel" id="homeRouteCancel" type="button">Cancel</button>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </aside>
+
+    <dialog class="thought-reader" id="thoughtReader" aria-labelledby="thoughtReaderTitle">
+        <div class="thought-reader-toolbar">
+            <span class="thought-reader-mode">Reading room</span>
+            <div class="thought-reader-controls">
+                <select class="thought-reader-language" aria-label="Essay language">
+                    <option value="en">English</option>
+                    <option value="zh-CN">简体中文</option>
+                    <option value="zh-TW">繁體中文</option>
+                </select>
+                <button class="thought-reader-close" type="button">Back to stars</button>
+            </div>
+        </div>
+        <div class="thought-reader-scroll" tabindex="0" role="region" aria-labelledby="thoughtReaderTitle" aria-describedby="thoughtReaderHint">
+            <article class="thought-reader-article">
+                <header>
+                    <h2 id="thoughtReaderTitle"></h2>
+                    <p class="thought-reader-date"></p>
+                </header>
+                <div class="thought-reader-body"></div>
+            </article>
+        </div>
+        <footer class="thought-reader-footer">
+            <span class="thought-reader-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">0%</span>
+            <span class="thought-reader-hint" id="thoughtReaderHint"></span>
+            <nav class="thought-reader-pagination" hidden>
+                <button type="button" data-reader-step="1">← 續讀</button>
+                <button type="button" data-reader-step="-1">回看 →</button>
+            </nav>
+        </footer>
+    </dialog>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Gallery image viewer">
+        <button class="lightbox-close" type="button" aria-label="Close image viewer">&times;</button>
+        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">←</button>
+        <figure class="lightbox-figure">
+            <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+            <figcaption class="lightbox-caption" id="lightboxCaption" aria-live="polite"></figcaption>
+        </figure>
+        <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">→</button>
+    </div>
+
+    <div class="transition-veil" id="transitionVeil" aria-hidden="true">
+        <span data-key="home_departing">Returning home</span>
+    </div>
+
+    <script src="assets/vendor/astronomy-engine-2.1.19.min.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/01-content-data.js?v=20261017-solar-observatory&copy=20261010-relief-ui3" defer></script>
+    <script src="assets/life/scripts/02-sky-config.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/03-math-orientation.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/04-dom-state.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/05-astronomy.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/06-framing.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/07-galaxy-renderer.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/observatory/07-star-map-renderer.js?v=20261017-solar-observatory&stars=20261014-gentle-stars&motion=20261015-smooth" defer></script>
+    <script src="assets/life/scripts/10-sky-overlay.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/11-section-index.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/12-detail-navigation.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/13-gaze-constellations.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/14-portal-navigation.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/15-render-lock.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/observatory/19-star-map.js?v=20261017-solar-observatory&input=20261010-trackpad&home=20261012-solar-home&stars=20261014-original-stars&motion=20261015-smooth" defer></script>
+    <script src="assets/life/scripts/21-deep-sky-map.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/16-input-events.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/17-content-ui.js?v=20261017-solar-observatory" defer></script>
+    <script src="assets/life/scripts/22-footprints-atlas.js?v=20261017-solar-observatory&atlas=20261016-administrative" defer></script>
+    <script src="assets/life/scripts/18-bootstrap.js?v=20261017-solar-observatory" defer></script>
+</body>
+</html>

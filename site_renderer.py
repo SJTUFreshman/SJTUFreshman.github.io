@@ -1226,12 +1226,33 @@ def render_life_artifacts(
     return html_text, content_data_text
 
 
+def render_observatory(html_text: str) -> str:
+    """Share the Life shell/content while selecting the restored observer renderer."""
+    html_text = html_text.replace('<!DOCTYPE html>', '<!DOCTYPE html>\n<!-- Generated from life.html by site_renderer.py; edit the shared source. -->', 1)
+    html_text = html_text.replace('<title>Life Beyond Research · Runde Yang</title>', '<title>Sky from the Solar System · Runde Yang</title>', 1)
+    html_text = html_text.replace("target.pathname = '/life';", "target.pathname = '/observatory';", 1)
+    html_text = html_text.replace('<body class="lang-en star-map">', '<body class="lang-en star-map observed-sky">', 1)
+    for name in ('07-star-map-renderer.js', '19-star-map.js'):
+        html_text = html_text.replace(f'assets/life/scripts/{name}', f'assets/life/observatory/{name}')
+    html_text, replaced = re.subn(
+        r'    <!-- SOLAR_DESTINATION_START -->.*?    <!-- SOLAR_DESTINATION_END -->',
+        '    <a class="observatory-return" id="observatoryReturn" href="life.html">← Return to the star map</a>',
+        html_text,
+        count=1,
+        flags=re.DOTALL,
+    )
+    if replaced != 1:
+        raise RuntimeError('Life must contain the solar destination region to generate observatory.html')
+    return html_text
+
+
 def render_life(root: Path, content: dict[str, Any], write: bool) -> str:
     html_path = root / "life.html"
     content_data_path = root / "assets" / "life" / "scripts" / "01-content-data.js"
     html_text, content_data_text = render_life_artifacts(root, content)
     if write:
         html_path.write_text(html_text, encoding="utf-8", newline="\n")
+        (root / "observatory.html").write_text(render_observatory(html_text), encoding="utf-8", newline="\n")
         content_data_path.write_text(content_data_text, encoding="utf-8", newline="\n")
     return html_text
 
@@ -1286,6 +1307,7 @@ def check_life_render(root: Path = ROOT) -> tuple[str, str]:
     validate_content(content)
     html_text, content_data_text = render_life_artifacts(root, content)
     require_current_artifact(root / "life.html", html_text, root)
+    require_current_artifact(root / "observatory.html", render_observatory(html_text), root)
     require_current_artifact(
         root / "assets" / "life" / "scripts" / "01-content-data.js",
         content_data_text,
@@ -1301,6 +1323,7 @@ def check_site_render(root: Path = ROOT) -> tuple[str, str, str]:
     life_text, content_data_text = render_life_artifacts(root, content)
     require_current_artifact(root / "index.html", home_text, root)
     require_current_artifact(root / "life.html", life_text, root)
+    require_current_artifact(root / "observatory.html", render_observatory(life_text), root)
     require_current_artifact(
         root / "assets" / "life" / "scripts" / "01-content-data.js",
         content_data_text,

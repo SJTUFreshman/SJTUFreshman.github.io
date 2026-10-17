@@ -11,7 +11,7 @@ Run from anywhere:
     python scripts/build-edukai-subset.py
 
 Additional generated pages can be included with one or more ``--page`` options.
-Passing ``--page`` replaces the default index.html/life.html list.
+Passing ``--page`` replaces the default index.html/life.html/observatory.html list.
 """
 
 from __future__ import annotations
@@ -39,12 +39,13 @@ except ImportError as exc:  # pragma: no cover - only reached without build deps
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_FONT = REPO_ROOT / "fonts" / "edukai-5.0.woff2"
 DEFAULT_OUTPUT = REPO_ROOT / "fonts" / "edukai-site-subset.woff2"
-DEFAULT_PAGES = (REPO_ROOT / "index.html", REPO_ROOT / "life.html")
+DEFAULT_PAGES = (REPO_ROOT / "index.html", REPO_ROOT / "life.html", REPO_ROOT / "observatory.html")
 
 LIFE_PAGE = REPO_ROOT / 'life.html'
 LIFE_SOURCE_ROOTS = (
     (REPO_ROOT / 'assets' / 'life' / 'styles').resolve(),
     (REPO_ROOT / 'assets' / 'life' / 'scripts').resolve(),
+    (REPO_ROOT / 'assets' / 'life' / 'observatory').resolve(),
 )
 
 # Space is needed even if a future page happens to contain no literal spaces.
@@ -94,7 +95,7 @@ class LifeSourceReferenceParser(HTMLParser):
 
 
 def referenced_life_sources(page: Path, text: str) -> list[Path]:
-    if page.resolve() != LIFE_PAGE.resolve():
+    if page.resolve() not in {LIFE_PAGE.resolve(), (REPO_ROOT / 'observatory.html').resolve()}:
         return []
 
     parser = LifeSourceReferenceParser()
@@ -322,7 +323,7 @@ def parse_args() -> argparse.Namespace:
         dest="pages",
         help=(
             "UTF-8 page/template source to scan; repeat as needed. "
-            "Defaults to index.html and life.html."
+            "Defaults to index.html, life.html and observatory.html."
         ),
     )
     parser.add_argument(

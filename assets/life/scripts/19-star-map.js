@@ -33,6 +33,7 @@ class LifeStarMap {
         this.buildGroups();
         this.deepSky = new DeepSkyMap(this);
         this.buildEntities();
+        this.bindSolarDestination();
         this.renderer = new StarMapRenderer(
             document.getElementById('starMapCanvas'),
             document.getElementById('starMapFallbackCanvas'),
@@ -141,7 +142,7 @@ class LifeStarMap {
             button.addEventListener('click', () => {
                 if (this.suppressClickUntil > performance.now()) return;
                 if (entity.id === 'solar') {
-                    this.goHome();
+                    this.openSolarDestination();
                 } else if (entity.id === 'region') {
                     this.showLocal();
                 } else this.openDeepSky(entity);
@@ -508,6 +509,71 @@ class LifeStarMap {
         return true;
     }
 
+    bindSolarDestination() {
+        this.solarDestination = document.getElementById('solarDestination');
+        this.solarDestination.addEventListener('pointerdown', () => { this.solarPointerStarted = true; });
+        this.solarDestination.addEventListener('click', event => {
+            // Touch labels activate on pointerup; their later compatibility click
+            // must not activate the new choice underneath the same finger.
+            if (event.detail !== 0 && !this.solarPointerStarted) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+            this.solarPointerStarted = false;
+        }, true);
+        document.getElementById('solarDestinationClose').addEventListener('click', () => this.closeSolarDestination());
+        this.solarDestination.addEventListener('cancel', event => {
+            event.preventDefault();
+            this.closeSolarDestination();
+        });
+        this.solarDestination.addEventListener('keydown', event => {
+            if (event.key !== 'Tab') return;
+            const first = document.getElementById('solarObserve');
+            const last = document.getElementById('solarDestinationClose');
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        });
+        document.getElementById('solarHome').addEventListener('click', () => {
+            this.closeSolarDestination(false);
+            this.goHome();
+        });
+        // A cached Life page must return to a usable map, without an open dialog.
+        window.addEventListener('pagehide', () => this.closeSolarDestination(false));
+    }
+
+    openSolarDestination() {
+        if (!this.canMove() || this.solarDestination.open) return;
+        this.cancelPendingGalaxy();
+        this.solarReturnFocus = this.entities.find(entity => entity.id === 'solar')?.button;
+        this.solarPointerStarted = false;
+        suspendForModal();
+        this.solarDestination.showModal();
+    }
+
+    closeSolarDestination(restoreFocus = true) {
+        if (!this.solarDestination.open) return;
+        this.solarDestination.close();
+        resumeAfterModal();
+        if (restoreFocus) this.solarReturnFocus?.focus({ preventScroll: true });
+    }
+
+    updateSolarDestinationCopy() {
+        const labels = {
+            en: ['From the Solar System', 'View the sky from here', 'Return home', 'Return to the star map'],
+            'zh-CN': ['从太阳系出发', '在太阳系观景', '返回主页', '返回星图'],
+            'zh-TW': ['從太陽系出發', '在太陽系觀景', '返回主頁', '返回星圖']
+        }[state.currentLang] || ['From the Solar System', 'View the sky from here', 'Return home', 'Return to the star map'];
+        document.getElementById('solarDestinationTitle').textContent = labels[0];
+        document.querySelector('#solarObserve span').textContent = labels[1];
+        document.querySelector('#solarHome span').textContent = labels[2];
+        document.getElementById('solarDestinationClose').setAttribute('aria-label', labels[3]);
+    }
+
     goHome() {
         if (state.scene === 'leaving-home') return;
         this.clearInput();
@@ -771,6 +837,7 @@ class LifeStarMap {
         dom.homeRouteLaunch.addEventListener('click', () => this.goHome());
         dom.homeRouteCancel.addEventListener('click', () => closePortalPanel(true));
         document.addEventListener('keydown', event => {
+            if (this.solarDestination.open) return;
             if (dom.lightbox.classList.contains('active')) {
                 if (event.key === 'Escape') { event.preventDefault(); closeLightbox(); }
                 return;
@@ -815,6 +882,7 @@ class LifeStarMap {
 
     updateCopy() {
         if (!this.initialized) return;
+        this.updateSolarDestinationCopy();
         if (this.deepSky?.active) { this.deepSky.updateCopy(); return; }
         const copies = {
             en: { orbit: 'Right drag / Two-finger slide · orbit', pan: 'Left drag · pan', zoom: 'Mouse wheel / Pinch · zoom', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'Constellation shapes and stellar colours follow Hipparcos; distances are composed for exploration. The surrounding arm stars and clouds are a 3D illustration; the distant panorama is a dimmed, aligned ESO/S. Brunier photograph. The galaxy adapts ESA’s 2025 Gaia-based artist impression, with neutralised diffuse colour, clearer dust structure and a dust-occluded volumetric bulge. This is a reconstruction of the Milky Way’s external appearance.', scale: 'NEAR / FAR' },
