@@ -63,8 +63,8 @@ function entryPreview(entry) {
         const description = entry.querySelector('.project-desc, .project-entry-copy p')?.textContent.trim() || '';
         return [title, description].filter(Boolean).join(' · ');
     }
-    if (entry.classList.contains('wiki-page')) {
-        return entry.querySelector('.wiki-welcome')?.textContent.trim() || '';
+    if (entry.classList.contains('profile-page')) {
+        return entry.querySelector('.profile-welcome')?.textContent.trim() || '';
     }
     return entry.textContent.trim().replace(/\s+/g, ' ').slice(0, 110);
 }

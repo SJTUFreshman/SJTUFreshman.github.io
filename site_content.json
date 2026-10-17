@@ -783,16 +783,6 @@
     "profile": {
       "username": "SJTUFreshman",
       "copy": {
-        "namespace": {
-          "en": "User",
-          "zh-CN": "用户",
-          "zh-TW": "使用者"
-        },
-        "page": {
-          "en": "User page",
-          "zh-CN": "用户页",
-          "zh-TW": "使用者頁"
-        },
         "welcome": {
           "en": "Welcome to my little corner of the universe.",
           "zh-CN": "欢迎来到我的小小宇宙。",

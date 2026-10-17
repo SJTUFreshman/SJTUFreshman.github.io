@@ -2,143 +2,138 @@
     display: none;
 }
 
-/* A personal user page, with userbox choices supplied through site_content.json. */
-.wiki-profile {
+/* Site-styled personal profile; only the compact userboxes use the wiki format. */
+.personal-profile {
     container-type: inline-size;
-    color: #202122;
-    font-family: var(--ui);
-    font-size: 0.85rem;
-    line-height: 1.7;
+    color: var(--ink);
+    font-size: 0.95rem;
+    line-height: 1.8;
 }
 
-.wiki-page-heading {
-    border-bottom: 1px solid #a2a9b1;
-}
-
-.wiki-page-heading h3 {
-    margin: 0 0 6px;
-    font-family: var(--editorial);
-    font-size: clamp(1.25rem, 3vw, 1.65rem);
-    font-weight: 400;
-    line-height: 1.35;
-    overflow-wrap: anywhere;
-}
-
-.wiki-page-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 22px;
-    border-bottom: 1px solid #c8ccd1;
-}
-
-.wiki-profile a {
-    color: #365fa3;
+.personal-profile a {
+    color: var(--life-blue);
     text-decoration: none;
     text-underline-offset: 3px;
+    transition: color 180ms ease;
 }
 
-.wiki-profile a:hover {
+.personal-profile a:hover,
+.personal-profile a:focus-visible {
+    color: var(--life-pink);
     text-decoration: underline;
 }
 
-.wiki-page-nav a {
-    padding: 9px 0 7px;
-    border-bottom: 2px solid transparent;
+.personal-profile a:focus-visible {
+    outline: 2px solid var(--life-blue);
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
-.wiki-page-nav a:first-child {
-    border-bottom-color: #202122;
-    color: #202122;
-}
-
-.wiki-intro {
+.profile-intro {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 132px;
-    gap: 18px;
-    align-items: start;
-    scroll-margin-top: 12px;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 20px;
+    align-items: center;
 }
 
-.wiki-portrait {
-    grid-column: 2;
-    grid-row: 1;
+.profile-portrait {
     margin: 0;
-    padding: 5px;
-    border: 1px solid #a2a9b1;
-    background: #f8f9fa;
 }
 
-.wiki-portrait img {
+.profile-portrait img {
     display: block;
     width: 100%;
     height: auto;
     aspect-ratio: 1;
     object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px var(--life-blue-soft);
 }
 
-.wiki-portrait figcaption {
-    padding: 6px 2px 1px;
-    text-align: center;
-    font-size: 0.75rem;
-    line-height: 1.4;
-}
-
-.wiki-bio {
-    grid-column: 1;
-    grid-row: 1;
+.profile-heading {
     min-width: 0;
 }
 
-.wiki-bio p {
-    margin: 0 0 12px;
+.profile-heading h3 {
+    margin: 0;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 500;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
 }
 
-.wiki-bio .wiki-welcome {
-    font-weight: 600;
+.profile-handle {
+    margin: 3px 0 7px;
+    color: var(--ink-soft);
+    font: 0.65rem / 1.6 var(--mono);
+    overflow-wrap: anywhere;
 }
 
-.wiki-bio .wiki-location {
-    color: #54595d;
-    font-size: 0.78rem;
+.profile-role {
+    margin: 0;
+    color: var(--life-blue);
+    font-size: 0.85rem;
+    line-height: 1.6;
 }
 
-.wiki-profile h4 {
-    margin: 0 0 12px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #c8ccd1;
-    font-family: var(--editorial);
-    font-size: 1.25rem;
-    font-weight: 400;
-}
-
-.wiki-box-section {
+.profile-bio {
     margin-top: 24px;
-    scroll-margin-top: 12px;
+    color: var(--ink-soft);
 }
 
-.wiki-box-intro {
+.profile-bio p {
+    margin: 0 0 12px;
+}
+
+.profile-bio .profile-welcome {
+    color: var(--ink);
+    font-size: 1rem;
+}
+
+.profile-bio .profile-location {
+    margin-bottom: 0;
+    font-size: 0.82rem;
+}
+
+.personal-profile h4 {
+    margin: 0 0 8px;
+    color: var(--life-pink);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.profile-box-section,
+.profile-contact {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+}
+
+.profile-box-intro {
     margin: 0 0 14px;
-    color: #54595d;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
 }
 
 .wiki-userboxes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 225px), 1fr));
-    gap: 7px;
+    gap: 10px;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
 .wiki-userbox {
-    --box-border: #a3b5cf;
-    --box-mark: #dce7f5;
-    --box-paper: #f0f5fc;
+    --box-border: #d5dfec;
+    --box-mark: #e2eafa;
+    --box-paper: var(--life-blue-pale);
     display: grid;
     grid-template-columns: 48px minmax(0, 1fr);
     min-height: 52px;
     border: 1px solid var(--box-border);
+    border-radius: 4px;
+    overflow: hidden;
     background: var(--box-paper);
     line-height: 1.5;
 }
@@ -146,8 +141,7 @@
 .wiki-userbox[data-tone="green"] { --box-border: #a5b9a5; --box-mark: #d8e7d7; --box-paper: #f1f7ef; }
 .wiki-userbox[data-tone="amber"] { --box-border: #c5b995; --box-mark: #f1e4bd; --box-paper: #fbf7ea; }
 .wiki-userbox[data-tone="violet"] { --box-border: #b5a5c4; --box-mark: #e6dced; --box-paper: #f6f1fa; }
-.wiki-userbox[data-tone="neutral"],
-.wiki-userbox-pending { --box-border: #a2a9b1; --box-mark: #eaecf0; --box-paper: #f8f9fa; }
+.wiki-userbox[data-tone="neutral"] { --box-border: var(--life-rule); --box-mark: #eceef5; --box-paper: #f8f9fc; }
 
 .wiki-userbox-mark {
     display: grid;
@@ -166,14 +160,17 @@
     font-size: 0.78rem;
 }
 
-.wiki-contact {
-    margin-top: 28px;
-}
-
-.wiki-links {
+.profile-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 20px;
+    gap: 4px 20px;
+    font: 0.78rem / 1.6 var(--ui);
+}
+
+.profile-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
 }
 
 .portal-panel:has(#profile:not([hidden])) .star-reader {
@@ -181,15 +178,15 @@
 }
 
 @container (max-width: 340px) {
-    .wiki-intro {
-        grid-template-columns: minmax(0, 1fr) 100px;
-        gap: 12px;
+    .profile-intro {
+        grid-template-columns: 72px minmax(0, 1fr);
+        gap: 16px;
     }
 }
 
 @container (max-width: 250px) {
-    .wiki-intro { display: block; }
-    .wiki-portrait { width: 110px; margin: 0 auto 16px; }
+    .profile-intro { grid-template-columns: minmax(0, 1fr); text-align: center; }
+    .profile-portrait { width: 80px; margin: 0 auto; }
 }
 
 .portal-moments {

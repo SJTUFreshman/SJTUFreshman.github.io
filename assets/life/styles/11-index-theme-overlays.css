@@ -74,21 +74,6 @@
     background: rgba(109, 142, 208, 0.34);
 }
 
-.portal-panel:has(#profile:not([hidden])) {
-    background: #fff;
-    border-color: #c8ccd1;
-    border-radius: 5px;
-}
-
-.portal-panel:has(#profile:not([hidden])) .portal-panel-title {
-    color: #202122;
-}
-
-.portal-panel:has(#profile:not([hidden])) .portal-panel-header {
-    background: #f8f9fa;
-    border-bottom-color: #c8ccd1;
-}
-
 @media (max-aspect-ratio: 3/2), (max-width: 1024px) and (max-aspect-ratio: 16/9) {
     .portal-panel:has(#profile:not([hidden])) {
         max-height: calc(100dvh - 112px);

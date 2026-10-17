@@ -294,7 +294,7 @@ HERO_FIELDS = [
     ("Life Card Desc EN", "home.life_card.desc.en", "textarea"),
     ("Life Card Desc 简中", "home.life_card.desc.zh-CN", "textarea"),
     ("Life Card Desc 繁中", "home.life_card.desc.zh-TW", "textarea"),
-    ("User page username", "life.profile.username", "entry")
+    ("Profile handle", "life.profile.username", "entry")
 ]
 
 

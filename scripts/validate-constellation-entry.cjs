@@ -46,7 +46,7 @@ async function labels(browser) {
                 check(await wineLabel.isVisible(), `${viewport.width}/${language}: Wine Diary has a visible default label`);
                 await profile.click();
                 await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'profile');
-                check(await page.locator('#profile').isVisible(), `${viewport.width}/${language}: Profile text opens the user page`);
+                check(await page.locator('#profile').isVisible(), `${viewport.width}/${language}: Profile text opens the personal introduction`);
                 const profileState = await page.evaluate(() => {
                     const profile = document.querySelector('#profile'), body = document.querySelector('.portal-panel-body');
                     return { title: document.querySelector('#portalPanelTitle').textContent, noNotes: !document.querySelector('#notes, [data-portal-button="notes"]'),
@@ -56,14 +56,14 @@ async function labels(browser) {
                 });
                 const expectedTitle = { en: 'Meet Me Again', 'zh-CN': '重新认识我', 'zh-TW': '重新認識我' }[language];
                 check(profileState.title === expectedTitle && profileState.noNotes && profileState.fits && profileState.pending && profileState.shared,
-                    `${viewport.width}/${language}: the user page replaces Notes, fits the panel and reserves userbox choices`, profileState);
+                    `${viewport.width}/${language}: the personal introduction replaces Notes, fits the panel and reserves userbox choices`, profileState);
                 check(await page.evaluate(() => state.activePortal.pattern === 'orion'
                     && dom.constellationMeaningText.textContent === localized(constellationStories.profile.reason)),
                     `${viewport.width}/${language}: Profile uses Orion and shows its localized meaning`);
                 if (language === 'zh-CN') await page.screenshot({ path: path.join(output, `profile-meaning-${viewport.width}.png`) });
-                await page.locator('.wiki-portrait img').evaluate(image => image.decode());
-                await page.locator('.wiki-page-nav a[href="#profile-userboxes"]').click();
-                check(await page.locator('.wiki-userbox-pending').isVisible(), `${viewport.width}/${language}: userbox navigation reaches its section`);
+                await page.locator('.profile-portrait img').evaluate(image => image.decode());
+                await page.locator('.wiki-userbox-pending').scrollIntoViewIfNeeded();
+                check(await page.locator('.wiki-userbox-pending').isVisible(), `${viewport.width}/${language}: userboxes remain accessible in the scrolling panel`);
                 if (language === 'zh-CN') await page.screenshot({ path: path.join(output, `profile-${viewport.width}.png`) });
                 await page.locator('#portalClose').click();
                 await settle(page);

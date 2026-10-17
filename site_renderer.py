@@ -952,32 +952,31 @@ def render_life_profile(content: dict[str, Any]) -> str:
         '<div class="wiki-userbox wiki-userbox-pending"><span class="wiki-userbox-mark" aria-hidden="true">?</span>'
         f'<div class="wiki-userbox-text">{label("pending")}</div></div>'
     )
-    return f"""            <section id="profile" class="portal-content wiki-profile" data-portal-content="profile" hidden>
-                <article class="wiki-page">
-                    <div class="wiki-page-heading"><h3>{label('namespace')}:<span class="wiki-username">{esc(profile['username'])}</span></h3></div>
-                    <nav class="wiki-page-nav" aria-label="User page">
-                        <a href="#profile-intro">{label('page')}</a><a href="#profile-userboxes">{label('userboxes')}</a>
-                    </nav>
-                    <div id="profile-intro" class="wiki-intro">
-                        <figure class="wiki-portrait">
+    return f"""            <section id="profile" class="portal-content personal-profile" data-portal-content="profile" hidden>
+                <article class="profile-page">
+                    <header class="profile-intro">
+                        <figure class="profile-portrait">
                             <img src="{esc(hero['avatar'])}" alt="{esc(plain_html_text(lang_value(hero['name_html'], 'en')))}" loading="lazy" decoding="async" width="160" height="160">
-                            <figcaption data-key="life_about_name">{esc(plain_html_text(lang_value(hero['name_html'], 'en')))}</figcaption>
                         </figure>
-                        <div class="wiki-bio">
-                            <p class="wiki-welcome">{label('welcome')}</p>
-                            <p data-key="life_about_title">{esc(plain_html_text(lang_value(hero['title'], 'en')))}</p>
-                            <p data-key="life_about_bio">{esc(lang_value(hero['bio'], 'en'))}</p>
-                            <p class="wiki-location" data-key="life_about_location">{esc(lang_value(hero['location'], 'en'))}</p>
+                        <div class="profile-heading">
+                            <h3 data-key="life_about_name">{esc(plain_html_text(lang_value(hero['name_html'], 'en')))}</h3>
+                            <p class="profile-handle">@{esc(profile['username'])}</p>
+                            <p class="profile-role" data-key="life_about_title">{esc(plain_html_text(lang_value(hero['title'], 'en')))}</p>
                         </div>
+                    </header>
+                    <div class="profile-bio">
+                        <p class="profile-welcome">{label('welcome')}</p>
+                        <p data-key="life_about_bio">{esc(lang_value(hero['bio'], 'en'))}</p>
+                        <p class="profile-location" data-key="life_about_location">{esc(lang_value(hero['location'], 'en'))}</p>
                     </div>
-                    <section id="profile-userboxes" class="wiki-box-section" aria-labelledby="profile-box-heading">
+                    <section id="profile-userboxes" class="profile-box-section" aria-labelledby="profile-box-heading">
                         <h4 id="profile-box-heading">{label('userboxes')}</h4>
-                        <p class="wiki-box-intro">{label('userboxes_intro')}</p>
+                        <p class="profile-box-intro">{label('userboxes_intro')}</p>
                         {box_content}
                     </section>
-                    <footer class="wiki-contact">
+                    <footer class="profile-contact">
                         <h4>{label('contact')}</h4>
-                        <div class="wiki-links">{links}<a href="mailto:{esc(email)}" data-key="life_action_email">Email</a></div>
+                        <div class="profile-links">{links}<a href="mailto:{esc(email)}" data-key="life_action_email">Email</a></div>
                     </footer>
                 </article>
             </section>"""
