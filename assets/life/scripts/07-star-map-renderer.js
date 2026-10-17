@@ -303,13 +303,29 @@ class StarMapRenderer {
                                 float entry = max(0.0, (-projected - sqrt(intersection)) / quadratic);
                                 float exitDistance = max(0.0, (-projected + sqrt(intersection)) / quadratic);
                                 float stepSize = (exitDistance - entry) / 32.0;
+                                // The far half of the bulge is seen through the
+                                // warped dust disk; the near half stays in front.
+                                // Integrate this narrow layer analytically so it
+                                // cannot fall between the coarser bulge samples.
+                                float dustDistance = -uCamera.y / ray.y;
+                                vec3 dustPoint = uCamera + ray * dustDistance;
+                                for (int warpStep = 0; warpStep < 3; warpStep++) {
+                                    dustDistance = (diskWarp(dustPoint.xz) - uCamera.y) / ray.y;
+                                    dustPoint = uCamera + ray * dustDistance;
+                                }
+                                float dustColumn = texture2D(uGalacticDust, dustPoint.xz / 800.0 + 0.5).r;
+                                float dustDepth = (dustColumn * 0.46 + exp(-length(dustPoint.xz) / 180.0) * 0.018)
+                                    / max(abs(ray.y), 0.12);
+                                dustDepth *= step(0.0, dustDistance) * (1.0 - smoothstep(360.0, 430.0, length(dustPoint.xz)));
                                 vec3 light = vec3(0.0);
                                 for (int sampleIndex = 0; sampleIndex < 32; sampleIndex++) {
-                                    vec3 samplePoint = uCamera + ray * (entry + (float(sampleIndex) + 0.5) * stepSize);
+                                    float sampleDistance = entry + (float(sampleIndex) + 0.5) * stepSize;
+                                    vec3 samplePoint = uCamera + ray * sampleDistance;
                                     vec4 structure = texture2D(uGalacticDust, samplePoint.xz / 800.0 + 0.5);
                                     float thickness = 9.0 + 12.0 * exp(-dot(samplePoint.xz, samplePoint.xz) / 5200.0);
                                     float profile = exp(-0.5 * pow(samplePoint.y / thickness, 2.0)) / (2.5066 * thickness);
-                                    light += bulgeLight(structure.rgb) * profile * stepSize;
+                                    float behindDust = smoothstep(-2.0, 2.0, (sampleDistance - dustDistance) * abs(ray.y));
+                                    light += bulgeLight(structure.rgb) * profile * stepSize * exp(-dustDepth * behindDust);
                                 }
                                 color += light * surfaceWeight * uGalaxy;
                             }
@@ -688,7 +704,7 @@ class StarMapRenderer {
     loadGalacticAssets() {
         if (this.galacticAssetsPromise) return this.galacticAssetsPromise;
         const load = async name => {
-            const response = await fetch(`assets/life/galaxy/${name}.webp?v=20261014-gaia-4k`);
+            const response = await fetch(`assets/life/galaxy/${name}.webp?v=20261017-natural-galaxy`);
             if (!response.ok) throw new Error(`Cannot load ${name}: ${response.status}`);
             const blob = await response.blob();
             const source = URL.createObjectURL(blob);

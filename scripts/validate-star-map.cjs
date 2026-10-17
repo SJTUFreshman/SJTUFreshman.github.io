@@ -291,22 +291,36 @@ async function motionChecks(browser) {
         const page = await context.newPage();
         monitor(page, 'motion');
         await load(page);
-        const response = await page.evaluate(() => {
+        const response = await page.evaluate(async () => {
             const map = window.lifeStarMap;
             const before = map.snapshot();
             map.orbit(35, 18);
-            return { before, actual: map.snapshot(), target: map.target };
+            const actual = map.snapshot(), target = { ...map.target };
+            // Observe an actual drag across animation frames. A single input's
+            // 150ms moving window can end before a second automation round trip
+            // when a newly decoded sky texture is being uploaded.
+            const moving = await new Promise(resolve => {
+                let frames = 0, sample = null;
+                const advance = () => {
+                    const renderer = map.renderer;
+                    if (map.currentView.moving) sample = {
+                        cloud: [renderer.cloudWidth, renderer.cloudHeight],
+                        canvas: [renderer.canvas.width, renderer.canvas.height]
+                    };
+                    if (++frames >= 8) { resolve(sample); return; }
+                    map.orbit(2, 0);
+                    requestAnimationFrame(advance);
+                };
+                requestAnimationFrame(advance);
+            });
+            return { before, actual, target, moving };
         });
         check(Math.abs(response.actual.yaw - response.target.yaw) < 0.001
             && Math.abs(response.actual.pitch - response.target.pitch) < 0.001
             && Math.abs(response.actual.yaw - response.before.yaw) > 0.1,
         'Active orbit input updates the camera immediately without an extra easing delay');
-        await page.waitForFunction(() => window.lifeStarMap.currentView.moving);
-        const movingLocal = await page.evaluate(() => {
-            const renderer = window.lifeStarMap.renderer;
-            return { cloud: [renderer.cloudWidth, renderer.cloudHeight], canvas: [renderer.canvas.width, renderer.canvas.height] };
-        });
-        check(movingLocal.cloud[0] <= 720 && movingLocal.cloud[1] <= 480,
+        const movingLocal = response.moving;
+        check(movingLocal && movingLocal.cloud[0] <= 720 && movingLocal.cloud[1] <= 480,
             'Rotating the local map bounds the soft volume layer to half-resolution');
         await page.waitForFunction(() => !window.lifeStarMap.currentView.moving);
         check(await page.evaluate(moving => {
@@ -1099,6 +1113,34 @@ async function visualChecks(browser) {
                     - map.project([-360, 0, 0], map.currentView, true).x) / innerWidth;
             });
             check(framing > 0.55 && framing < 0.85, `${name}: the galactic disk fills the viewport without losing its outer arms`);
+            const galacticColour = await page.evaluate(() => {
+                const map = window.lifeStarMap, renderer = map.renderer, graphics = renderer.gl;
+                renderer.render(map.currentView);
+                const pixels = new Uint8Array(renderer.canvas.width * renderer.canvas.height * 4);
+                graphics.readPixels(0, 0, renderer.canvas.width, renderer.canvas.height,
+                    graphics.RGBA, graphics.UNSIGNED_BYTE, pixels);
+                let disk = 0, magenta = 0, blue = 0, core = 0, warm = 0;
+                for (let offset = 0; offset < pixels.length; offset += 4) {
+                    const [red, green, cool] = pixels.subarray(offset, offset + 3);
+                    const light = red * 0.2126 + green * 0.7152 + cool * 0.0722;
+                    if (light > 25 && light < 150) {
+                        disk++;
+                        if (Math.min(red, cool) > green * 1.045 + 1) magenta++;
+                        if (cool > red * 1.04 && green > red) blue++;
+                    }
+                    if (light > 180) {
+                        core++;
+                        if (red > green && green > cool) warm++;
+                    }
+                }
+                return { disk, magenta, blue, core, warm, area: pixels.length / 4, error: graphics.getError() };
+            });
+            check(galacticColour.error === 0 && galacticColour.disk > galacticColour.area * 0.015
+                && galacticColour.magenta < galacticColour.disk * 0.02,
+            `${name}: the visible galaxy disk has no broad pink or violet cast`);
+            check(galacticColour.blue > galacticColour.disk * 0.02 && galacticColour.core > 50
+                && galacticColour.warm > galacticColour.core * 0.8,
+            `${name}: the galaxy retains distinct cool stellar arms and a warm bright core`);
             await screenshot(page, `galaxy-${name}`);
             if (name === 'desktop') {
                 for (const [angle, pitch] of [['edge', 0], ['inclined', 0.20], ['upper', 1.3], ['lower', -0.7]]) {
