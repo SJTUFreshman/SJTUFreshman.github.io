@@ -12,6 +12,10 @@ function starCatalogValues(hip) {
 }
 
 function starEntries(portal, hip) {
+    // A user page is one document, reachable from every star in its constellation.
+    if (portal.sharedContent && portal.patternHips.includes(hip)) {
+        return Array.from(portal.content?.children || []);
+    }
     return portal.entriesByHip?.get(hip) || [];
 }
 
@@ -51,10 +55,8 @@ function entryPreview(entry) {
         const description = entry.querySelector('.project-desc, .project-entry-copy p')?.textContent.trim() || '';
         return [title, description].filter(Boolean).join(' · ');
     }
-    if (entry.classList.contains('note-entry')) {
-        const meta = entry.querySelector('.note-meta, .archive-meta')?.textContent.trim() || '';
-        const title = entry.querySelector('.note-title, strong')?.textContent.trim() || '';
-        return [meta, title].filter(Boolean).join(' · ');
+    if (entry.classList.contains('wiki-page')) {
+        return entry.querySelector('.wiki-welcome')?.textContent.trim() || '';
     }
     return entry.textContent.trim().replace(/\s+/g, ' ').slice(0, 110);
 }

@@ -31,20 +31,34 @@ async function load(page, route) {
 }
 
 async function labels(browser) {
-    for (const viewport of [{ width: 1365, height: 768 }, { width: 1280, height: 720 }, { width: 390, height: 844 }]) {
+    for (const viewport of [{ width: 1365, height: 768 }, { width: 1280, height: 720 }, { width: 390, height: 844 }, { width: 320, height: 844 }]) {
         const page = await browser.newPage({ viewport, reducedMotion: 'reduce' });
         page.on('pageerror', error => errors.push(error.message));
         try {
             await load(page, 'life.html');
             for (const language of ['en', 'zh-CN', 'zh-TW']) {
                 await page.locator(`.lang-btn[data-lang="${language}"]`).click();
-                const notes = page.locator('[data-portal-button="notes"]');
-                const label = await notes.boundingBox();
-                check(await notes.isVisible() && label.y > 100 && label.y + label.height < viewport.height - 55,
-                    `${viewport.width} × ${viewport.height}/${language}: the Notes label is visible above the footer at the default angle`);
-                await notes.click();
-                await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'notes');
-                check(await page.locator('#notes').isVisible(), `${viewport.width}/${language}: Notes text opens the notes content`);
+                const profile = page.locator('[data-portal-button="profile"]');
+                const label = await profile.boundingBox();
+                check(await profile.isVisible() && label.y > 100 && label.y + label.height < viewport.height - 55,
+                    `${viewport.width} × ${viewport.height}/${language}: the Meet Me Again label is visible above the footer at the default angle`);
+                await profile.click();
+                await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'profile');
+                check(await page.locator('#profile').isVisible(), `${viewport.width}/${language}: Profile text opens the user page`);
+                const profileState = await page.evaluate(() => {
+                    const profile = document.querySelector('#profile'), body = document.querySelector('.portal-panel-body');
+                    return { title: document.querySelector('#portalPanelTitle').textContent, noNotes: !document.querySelector('#notes, [data-portal-button="notes"]'),
+                        fits: body.scrollWidth <= body.clientWidth + 1,
+                        pending: profile.querySelectorAll('.wiki-userbox-pending').length === 1 && !profile.querySelector('.wiki-userboxes'),
+                        shared: state.activePortal.patternHips.every(hip => starEntries(state.activePortal, hip).length === 1) };
+                });
+                const expectedTitle = { en: 'Meet Me Again', 'zh-CN': '重新认识我', 'zh-TW': '重新認識我' }[language];
+                check(profileState.title === expectedTitle && profileState.noNotes && profileState.fits && profileState.pending && profileState.shared,
+                    `${viewport.width}/${language}: the user page replaces Notes, fits the panel and reserves userbox choices`, profileState);
+                await page.locator('.wiki-portrait img').evaluate(image => image.decode());
+                await page.locator('.wiki-page-nav a[href="#profile-userboxes"]').click();
+                check(await page.locator('.wiki-userbox-pending').isVisible(), `${viewport.width}/${language}: userbox navigation reaches its section`);
+                if (language === 'zh-CN') await page.screenshot({ path: path.join(output, `profile-${viewport.width}.png`) });
                 await page.locator('#portalClose').click();
                 await settle(page);
             }
@@ -63,7 +77,7 @@ async function entry(browser, route, mobile) {
     try {
         await load(page, route);
         // Reorient the actual observer sky to bring each real constellation into view.
-        for (const id of ['notes', 'gallery', 'friends', 'thoughts']) {
+        for (const id of ['profile', 'gallery', 'friends', 'thoughts']) {
             if (route === 'observatory.html') {
                 await page.evaluate(id => {
                     const map = window.lifeStarMap, vector = normalize(map.groups.get(id).center);
@@ -82,7 +96,7 @@ async function entry(browser, route, mobile) {
             await page.locator('#portalClose').click();
             await settle(page);
         }
-        const point = await pointFor(page, route === 'life.html' ? 'notes' : 'thoughts');
+        const point = await pointFor(page, route === 'life.html' ? 'profile' : 'thoughts');
         assert(point, `${label}: gesture target must be visible`);
         if (mobile) {
             const session = await context.newCDPSession(page);
@@ -92,7 +106,7 @@ async function entry(browser, route, mobile) {
             await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
             await settle(page);
             check(await page.evaluate(() => state.scene === 'roam' && !window.lifeStarMap.selected), `${label}: dragging from a star rotates without opening its content`);
-            const next = await pointFor(page, route === 'life.html' ? 'notes' : 'thoughts');
+            const next = await pointFor(page, route === 'life.html' ? 'profile' : 'thoughts');
             await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [touch(next.x, next.y, 1), touch(next.x + 45, next.y, 2)] });
             await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [touch(next.x - 10, next.y, 1), touch(next.x + 55, next.y, 2)] });
             await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
@@ -100,7 +114,7 @@ async function entry(browser, route, mobile) {
             check(await page.evaluate(() => state.scene === 'roam' && !window.lifeStarMap.selected), `${label}: pinching from a star zooms without opening content`);
         } else {
             for (const button of ['left', 'right']) {
-                const star = await pointFor(page, route === 'life.html' ? 'notes' : 'thoughts');
+                const star = await pointFor(page, route === 'life.html' ? 'profile' : 'thoughts');
                 await page.mouse.move(star.x, star.y);
                 await page.mouse.down({ button });
                 await page.mouse.move(star.x + 45, star.y + 10, { steps: 5 });

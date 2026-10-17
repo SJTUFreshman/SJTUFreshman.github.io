@@ -12,12 +12,10 @@
         "nav_pubs": "Selected Publications",
         "nav_projects": "Projects",
         "nav_gallery": "Gallery",
-        "nav_notes": "Notes",
         "title_news": "News",
         "title_pubs": "Selected Publications",
         "title_projects": "Projects",
         "title_gallery": "Gallery",
-        "title_notes": "Notes",
         "weather_loc": "Shanghai"
       },
       "zh-CN": {
@@ -26,12 +24,10 @@
         "nav_pubs": "精选论文",
         "nav_projects": "项目",
         "nav_gallery": "光影",
-        "nav_notes": "笔记",
         "title_news": "动态",
         "title_pubs": "精选论文",
         "title_projects": "项目经历",
         "title_gallery": "光影",
-        "title_notes": "笔记",
         "weather_loc": "上海"
       },
       "zh-TW": {
@@ -40,12 +36,10 @@
         "nav_pubs": "精選論文",
         "nav_projects": "項目",
         "nav_gallery": "光影",
-        "nav_notes": "筆記",
         "title_news": "動態",
         "title_pubs": "精選論文",
         "title_projects": "項目經歷",
         "title_gallery": "光影",
-        "title_notes": "筆記",
         "weather_loc": "上海"
       }
     },
@@ -260,13 +254,7 @@
         "zh-CN": "足迹地图、书影、随笔，以及更多。",
         "zh-TW": "足跡地圖、書影、隨筆，以及更多。"
       }
-    },
-    "notes_empty": {
-      "en": "Notes coming soon...",
-      "zh-CN": "笔记即将上线……",
-      "zh-TW": "筆記即將上線……"
-    },
-    "notes": []
+    }
   },
   "life": {
     "labels": {
@@ -303,7 +291,8 @@
         "panel_close": "Return to the galaxy",
         "home_departing": "Returning home",
         "galaxy_back": "Back to the galaxy",
-        "galaxy_hint": "Follow the brighter stars through time"
+        "galaxy_hint": "Follow the brighter stars through time",
+        "title_profile": "Meet Me Again"
       },
       "zh-CN": {
         "nav_gallery": "光影",
@@ -338,7 +327,8 @@
         "panel_close": "返回星河",
         "home_departing": "正在返回主页",
         "galaxy_back": "返回星河",
-        "galaxy_hint": "循着亮星，沿时间漫游"
+        "galaxy_hint": "循着亮星，沿时间漫游",
+        "title_profile": "重新认识我"
       },
       "zh-TW": {
         "nav_gallery": "光影",
@@ -373,7 +363,8 @@
         "panel_close": "返回星河",
         "home_departing": "正在返回主頁",
         "galaxy_back": "返回星河",
-        "galaxy_hint": "循著亮星，沿時間漫遊"
+        "galaxy_hint": "循著亮星，沿時間漫遊",
+        "title_profile": "重新認識我"
       }
     },
     "gallery": [
@@ -701,7 +692,7 @@
         "appcopilot": 81693,
         "teachmaster": 81693
       },
-      "notes": {}
+      "profile": {}
     },
     "thoughts": [
       {
@@ -801,6 +792,47 @@
           }
         }
       ]
+    },
+    "profile": {
+      "username": "SJTUFreshman",
+      "copy": {
+        "namespace": {
+          "en": "User",
+          "zh-CN": "用户",
+          "zh-TW": "使用者"
+        },
+        "page": {
+          "en": "User page",
+          "zh-CN": "用户页",
+          "zh-TW": "使用者頁"
+        },
+        "welcome": {
+          "en": "Welcome to my little corner of the universe.",
+          "zh-CN": "欢迎来到我的小小宇宙。",
+          "zh-TW": "歡迎來到我的小小宇宙。"
+        },
+        "userboxes": {
+          "en": "Userboxes",
+          "zh-CN": "用户框",
+          "zh-TW": "使用者框"
+        },
+        "userboxes_intro": {
+          "en": "Small boxes for the many sides of me.",
+          "zh-CN": "用一个个小方框，拼出我的不同侧面。",
+          "zh-TW": "用一個個小方框，拼出我的不同側面。"
+        },
+        "pending": {
+          "en": "Still choosing my userboxes.",
+          "zh-CN": "用户框还在挑选中。",
+          "zh-TW": "使用者框還在挑選中。"
+        },
+        "contact": {
+          "en": "Elsewhere",
+          "zh-CN": "也可以在这里找到我",
+          "zh-TW": "也可以在這裡找到我"
+        }
+      },
+      "userboxes": []
     }
   }
 }

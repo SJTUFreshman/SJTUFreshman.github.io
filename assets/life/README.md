@@ -1,6 +1,6 @@
 # Life 页面维护指南
 
-`life.html` 是一幅分层三维星图。右键拖动旋转、左键拖动平移、滚轮缩放；触控板双指滑动旋转、捏合缩放；触屏单指旋转，双指缩放和平移。指针始终自由，不需要 Pointer Lock。访客通过带连线的星座进入 Gallery、Footprints、Shelf、Thoughts、Friends、News、Publications、Projects、Notes 和 Home 等内容。
+`life.html` 是一幅分层三维星图。右键拖动旋转、左键拖动平移、滚轮缩放；触控板双指滑动旋转、捏合缩放；触屏单指旋转，双指缩放和平移。指针始终自由，不需要 Pointer Lock。访客通过带连线的星座进入 Gallery、Footprints、Shelf、Thoughts、Friends、News、Publications、Projects、Meet Me Again 和 Home 等内容。
 
 星图的滚轮手势处理：浏览器的 Ctrl / Meta + wheel 捏合事件只缩放，连续像素滚动控制旋转，同一段滑动的加速和惯性保持旋转。浏览器不直接提供输入设备类型，因此按行、按页和较大的整数步进识别为普通鼠标滚轮；少数驱动或平滑滚轮可能无法准确区分，仍可用 Ctrl + 滚轮缩放。
 
@@ -40,7 +40,13 @@
 
 首屏 HTML 直接标记为星图模式，已经移除旧接管视角入口、Alt 控制说明、准星及注视提示；共享的无障碍播报仍保留。旧 UI 引用允许为空，仅在旧算法测试中提供节点。旧 `GalaxyRenderer` 延迟到实际使用时才初始化，正常星图启动不会创建它的 WebGL 上下文。银河高清图片在向外缩放接近边界时预取，请求进入银河后先完成解码与纹理准备，再启动飞行。准备期间局部图仍可旋转，向内缩放、Esc、重置或导航可取消进入；下载期间取消后不会自动上传或跳转。隐藏的项目图片按需加载。
 
-旋转和平移直接跟随输入，缩放保留平滑插值。拖动、缩放和飞行时，仅柔和的体积云层使用半尺寸画布；停止操作后恢复原来的局部或银河体积精度。星点、星光亮度和银河高清薄盘保持原有质量，避免用降低整个画布清晰度来换取跟手性。
+旋转和平移直接跟随输入，缩放保留平滑插值。局部体积云固定使用半尺寸网格与 48 步中点积分，不随拖动启停切换采样数、网格或屏幕像素扰动；远处小于采样间隔的噪声细节按间隔滤除，减少旋转时的闪烁。银河柔和体积层固定为桌面 0.75、触屏 0.5 倍尺寸，上限 1200×900；星点、银河高清薄盘及摄影天幕仍按完整画布精度显示。`validate-cloud-stability.cjs` 读取实际体积像素，检查拖动启停一致性、微小旋转连续性及旋转返回后的重复性。
+
+## 重新认识我与用户框
+
+原 Notes 已由 `profile`（重新认识我 / Meet Me Again）替代，沿用北冕座及原来的星图位置。点标题、任何一颗所属恒星或索引均进入同一份用户页，照片与个人简介取自 `home.hero`。页面使用维基用户页式分节、照片栏及紧凑用户框，移动端可滚动查看。
+
+用户框由本人选择；当前 `life.profile.userboxes` 为空，只显示待选提示，不预置身份或偏好。选择后可用 Homepage Studio 的“生活 / 重新认识我 · 用户框”编辑，或者在 `site_content.json` 中逐项添加 `id`、左侧短符号 `mark`、`tone`（blue / green / amber / violet / neutral）、三语 `text`。文本按普通文字转义；多个用户框自动换列。修改后运行 `python site_renderer.py --life-only`，同时更新 Life 和观景页；新增中文字还需运行字体子集构建。
 
 ## CSS 分片
 
@@ -53,7 +59,7 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 | 3 | `styles/03-sky-navigation.css` | 星座、恒星的透明命中区、标签和交互状态 |
 | 4 | `styles/04-detail-panels.css` | 星座内容面板、star reader 与 Home 航线预览 |
 | 5 | `styles/05-life-content.css` | Gallery、Shelf、Thoughts、Friends、About 等 Life 原生内容样式 |
-| 6 | `styles/06-homepage-parity.css` | News、Publications、Projects、Notes 等与主页保持一致的内容样式 |
+| 6 | `styles/06-homepage-parity.css` | News、Publications、Projects 等与主页保持一致的内容样式 |
 | 7 | `styles/07-overlays-responsive.css` | 地图、lightbox、转场 veil、响应式布局、触屏和 reduced-motion 收尾规则 |
 
 ## Classic JS 顺序

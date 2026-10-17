@@ -29,11 +29,16 @@ def load_content() -> dict[str, Any]:
 
 
 def save_content(content: dict[str, Any]) -> None:
+    previous = load_content()
+    life_only = all(content.get(key) == previous.get(key) for key in ("site", "home"))
     site_renderer.validate_content(content, require_star_bindings=False)
     site_renderer.assign_missing_star_bindings(content)
     site_renderer.validate_content(content)
     CONTENT_FILE.write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    site_renderer.render_site(ROOT, write=True)
+    if life_only:
+        site_renderer.render_life_only(ROOT, write=True)
+    else:
+        site_renderer.render_site(ROOT, write=True)
 
 
 def make_unique_id(items: list[Any], base: str) -> str:
@@ -150,16 +155,17 @@ SECTION_SPECS: dict[str, dict[str, Any]] = {
             ("Caption 繁中", "caption.zh-TW", "entry")
         ]
     },
-    "主页 / Notes": {
-        "path": "home.notes",
-        "display": "title",
-        "default": {"id": "note_new", "title": "New note", "href": "documents/example.pdf", "meta": "PDF · 2026-01-01", "icon": "far fa-file-pdf"},
+    "生活 / 重新认识我 · 用户框": {
+        "path": "life.profile.userboxes",
+        "display": "text.zh-CN",
+        "default": {"id": "userbox_new", "mark": "", "tone": "blue", "text": {"en": "", "zh-CN": "", "zh-TW": ""}},
         "fields": [
             ("ID", "id", "entry"),
-            ("Title", "title", "entry"),
-            ("File / URL", "href", "file"),
-            ("Meta", "meta", "entry"),
-            ("Icon class", "icon", "entry")
+            ("左侧符号 / Short mark", "mark", "entry"),
+            ("配色 blue / green / amber / violet / neutral", "tone", "entry"),
+            ("Text EN", "text.en", "textarea"),
+            ("Text 简中", "text.zh-CN", "textarea"),
+            ("Text 繁中", "text.zh-TW", "textarea")
         ]
     },
     "生活 / Gallery": {
@@ -288,9 +294,7 @@ HERO_FIELDS = [
     ("Life Card Desc EN", "home.life_card.desc.en", "textarea"),
     ("Life Card Desc 简中", "home.life_card.desc.zh-CN", "textarea"),
     ("Life Card Desc 繁中", "home.life_card.desc.zh-TW", "textarea"),
-    ("Notes Empty EN", "home.notes_empty.en", "entry"),
-    ("Notes Empty 简中", "home.notes_empty.zh-CN", "entry"),
-    ("Notes Empty 繁中", "home.notes_empty.zh-TW", "entry")
+    ("User page username", "life.profile.username", "entry")
 ]
 
 

@@ -128,8 +128,9 @@ const portalDefinitions = [
         pattern: 'hercules'
     },
     {
-        id: 'notes',
-        titleKey: 'title_notes',
+        id: 'profile',
+        titleKey: 'title_profile',
+        sharedContent: true,
         fallbackYaw: 1.18,
         fallbackPitch: 0.52,
         pattern: 'coronaBorealis'
@@ -342,17 +343,17 @@ const constellationStories = {
             'zh-TW': '武仙因一項項勞作而被記住：每個挑戰都被真正做完。中央的 Keystone 像穩定架構，向外伸展的四肢像不同任務，因此 Projects 正是把意圖變成成品的地方。'
         }
     },
-    notes: {
+    profile: {
         name: { en: 'Corona Borealis', 'zh-CN': '北冕座', 'zh-TW': '北冕座' },
         epithet: {
-            en: 'Small records completing an open crown',
-            'zh-CN': '沿开放冠弧相连的短记',
-            'zh-TW': '沿開放冠弧相連的短記'
+            en: 'Small pieces of a person',
+            'zh-CN': '由不同侧面拼成的我',
+            'zh-TW': '由不同側面拼成的我'
         },
         reason: {
-            en: 'Corona Borealis is an open arc assembled from separate jewels. A note may be small and complete on its own, yet notes placed through time form a larger crown; unlike Thoughts’ inward diary, Notes keeps concise research fragments.',
-            'zh-CN': '北冕座是一道由独立宝石连成的开放冠弧。一则笔记可以短小而自足，沿时间排开后又会合成更大的形状；不同于 Thoughts 的内向日记，Notes 收纳简洁的研究片段。',
-            'zh-TW': '北冕座是一道由獨立寶石連成的開放冠弧。一則筆記可以短小而自足，沿時間排開後又會合成更大的形狀；不同於 Thoughts 的內向日記，Notes 收納簡潔的研究片段。'
+            en: 'The separate stars of Corona Borealis form one open arc. Here, a portrait and a collection of userboxes bring together the different sides of a person.',
+            'zh-CN': '北冕座的星星各自闪耀，又连成一道开放的弧线。这里用一张照片和一组用户框，慢慢拼出我的不同侧面。',
+            'zh-TW': '北冕座的星星各自閃耀，又連成一道開放的弧線。這裡用一張照片和一組使用者框，慢慢拼出我的不同側面。'
         }
     },
     home: {
@@ -463,7 +464,7 @@ const homeStarTargets = {
     70692: { type: 'portal', portalId: 'news' },
     69112: { type: 'portal', portalId: 'publications' },
     74605: { type: 'portal', portalId: 'projects' },
-    73199: { type: 'portal', portalId: 'notes' }
+    73199: { type: 'portal', portalId: 'profile' }
 };
 
 const starUiCopy = {

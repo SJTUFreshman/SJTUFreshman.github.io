@@ -60,7 +60,7 @@ CONSTELLATION_HIP_ORDER = {
         80816,
         84379,
     ),
-    "notes": (76267, 76669, 79119, 75695, 78493, 76127, 78159, 76952, 77512),
+    "profile": (76267, 76669, 79119, 75695, 78493, 76127, 78159, 76952, 77512),
 }
 CONSTELLATION_HIPS = {
     stream: set(hips)
@@ -137,7 +137,7 @@ def validate_content(
         ("home.publications", home.get("publications", [])),
         ("home.projects", home.get("projects", [])),
         ("home.gallery", home.get("gallery", [])),
-        ("home.notes", home.get("notes", [])),
+        ("life.profile.userboxes", life.get("profile", {}).get("userboxes", [])),
         ("life.gallery", life.get("gallery", [])),
         ("life.shelf", life.get("shelf", [])),
         ("life.thoughts", life.get("thoughts", [])),
@@ -402,10 +402,7 @@ def star_entry_ids(content: dict[str, Any]) -> dict[str, list[str]]:
             str(item["id"])
             for item in content["home"].get("projects", [])
         ],
-        "notes": [
-            str(item["id"])
-            for item in content["home"].get("notes", [])
-        ],
+        "profile": [],
     }
 
 
@@ -496,11 +493,6 @@ def star_entry_weights(content: dict[str, Any]) -> dict[str, dict[str, int]]:
             19
             + text_lines(item.get("name", ""))
             + text_lines(item.get("desc", {}))
-        )
-    for item in home.get("notes", []):
-        entry_id = str(item.get("id") or "")
-        weights["notes"][entry_id] = (
-            5 + text_lines(item.get("meta", "")) + text_lines(item.get("title", ""))
         )
     return weights
 
@@ -618,7 +610,7 @@ def replace_code_region(text: str, name: str, replacement: str, fallback_pattern
 def render_home_i18n(content: dict[str, Any]) -> str:
     home = content["home"]
     i18n = {
-        lang: {key: value for key, value in home["labels"][lang].items() if key not in {"nav_notes", "title_notes"}}
+        lang: dict(home["labels"][lang])
         for lang in LANGS
     }
 
@@ -657,7 +649,6 @@ def render_life_i18n(content: dict[str, Any]) -> str:
         "title_about": "nav_about",
         "title_news": "title_news",
         "title_projects": "title_projects",
-        "title_notes": "title_notes",
     }
     action_copy = {
         "en": {
@@ -693,8 +684,11 @@ def render_life_i18n(content: dict[str, Any]) -> str:
         )
         i18n[lang]["life_about_bio"] = lang_value(home["hero"].get("bio", {}), lang)
         i18n[lang]["life_about_location"] = lang_value(home["hero"].get("location", {}), lang)
-        i18n[lang]["notes_empty"] = lang_value(home.get("notes_empty", {}), lang)
         i18n[lang].update(action_copy[lang])
+        for key, value in life["profile"]["copy"].items():
+            i18n[lang][f"profile_{key}"] = lang_value(value, lang)
+        for box in life["profile"].get("userboxes", []):
+            i18n[lang][f"userbox_{box['id']}"] = lang_value(box.get("text", {}), lang)
 
     for index, item in enumerate(home.get("news", [])):
         key = key_for("news", item, index)
@@ -1134,26 +1128,58 @@ def render_life_projects(content: dict[str, Any]) -> str:
             </section>"""
 
 
-def render_life_notes(content: dict[str, Any]) -> str:
-    rows = []
-    for item in content["home"].get("notes", []):
-        item_id = str(item.get("id") or "")
-        rows.append(f"""                    <a class="note-item note-entry" href="{esc(item.get("href") or "#")}" target="_blank" rel="noopener"
-                         data-portal-entry="{esc(item_id)}" data-star-hip="{esc(star_binding(content, "notes", item_id))}">
-                        <span class="note-icon"><i class="{esc(item.get("icon", "far fa-file-pdf"))}" aria-hidden="true"></i></span>
-                        <div class="note-info">
-                            <div class="note-title">{esc(item.get("title", ""))}</div>
-                            <div class="note-meta">{esc(item.get("meta", ""))}</div>
+def render_life_profile(content: dict[str, Any]) -> str:
+    hero = content["home"]["hero"]
+    profile = content["life"]["profile"]
+    copy = profile["copy"]
+    def label(key: str) -> str:
+        return f'<span data-key="profile_{key}">{esc(lang_value(copy[key], "en"))}</span>'
+    links = "\n".join(
+        f'<a href="{esc(link["href"])}" target="_blank" rel="noopener noreferrer">{esc(link["label"])}</a>'
+        for link in hero.get("links", [])
+    )
+    email = f"{content['site']['email_user']}@{content['site']['email_domain']}"
+    boxes = []
+    for box in profile.get("userboxes", []):
+        tone = box.get("tone", "blue")
+        if tone not in {"blue", "green", "amber", "violet", "neutral"}:
+            tone = "blue"
+        boxes.append(f"""<li class="wiki-userbox" data-tone="{tone}">
+            <span class="wiki-userbox-mark" aria-hidden="true">{esc(box.get('mark', ''))}</span>
+            <span class="wiki-userbox-text" data-key="userbox_{esc(box['id'])}">{esc(lang_value(box.get('text', {}), 'en'))}</span>
+        </li>""")
+    box_content = '<ul class="wiki-userboxes">' + "\n".join(boxes) + '</ul>' if boxes else (
+        '<div class="wiki-userbox wiki-userbox-pending"><span class="wiki-userbox-mark" aria-hidden="true">?</span>'
+        f'<div class="wiki-userbox-text">{label("pending")}</div></div>'
+    )
+    return f"""            <section id="profile" class="portal-content wiki-profile" data-portal-content="profile" hidden>
+                <article class="wiki-page">
+                    <div class="wiki-page-heading"><h3>{label('namespace')}:<span class="wiki-username">{esc(profile['username'])}</span></h3></div>
+                    <nav class="wiki-page-nav" aria-label="User page">
+                        <a href="#profile-intro">{label('page')}</a><a href="#profile-userboxes">{label('userboxes')}</a>
+                    </nav>
+                    <div id="profile-intro" class="wiki-intro">
+                        <figure class="wiki-portrait">
+                            <img src="{esc(hero['avatar'])}" alt="{esc(plain_html_text(lang_value(hero['name_html'], 'en')))}" loading="lazy" decoding="async" width="160" height="160">
+                            <figcaption data-key="life_about_name">{esc(plain_html_text(lang_value(hero['name_html'], 'en')))}</figcaption>
+                        </figure>
+                        <div class="wiki-bio">
+                            <p class="wiki-welcome">{label('welcome')}</p>
+                            <p data-key="life_about_title">{esc(plain_html_text(lang_value(hero['title'], 'en')))}</p>
+                            <p data-key="life_about_bio">{esc(lang_value(hero['bio'], 'en'))}</p>
+                            <p class="wiki-location" data-key="life_about_location">{esc(lang_value(hero['location'], 'en'))}</p>
                         </div>
-                        <span class="note-arrow"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
-                     </a>""")
-    body = "\n".join(rows)
-    if not rows:
-        body = '                    <div class="notes-empty" data-key="notes_empty">Notes coming soon...</div>'
-    return """            <section id="notes" class="portal-content homepage-parity" data-portal-content="notes" hidden>
-                <div class="notes-grid">
-""" + body + """
-                </div>
+                    </div>
+                    <section id="profile-userboxes" class="wiki-box-section" aria-labelledby="profile-box-heading">
+                        <h4 id="profile-box-heading">{label('userboxes')}</h4>
+                        <p class="wiki-box-intro">{label('userboxes_intro')}</p>
+                        {box_content}
+                    </section>
+                    <footer class="wiki-contact">
+                        <h4>{label('contact')}</h4>
+                        <div class="wiki-links">{links}<a href="mailto:{esc(email)}" data-key="life_action_email">Email</a></div>
+                    </footer>
+                </article>
             </section>"""
 
 
@@ -1214,7 +1240,7 @@ def render_life_artifacts(
     html_text = replace_region(html_text, "LIFE_NEWS", render_life_news(content), r'<section id="news".*?</section>')
     html_text = replace_region(html_text, "LIFE_PUBLICATIONS", render_life_publications(content), r'<section id="publications".*?</section>')
     html_text = replace_region(html_text, "LIFE_PROJECTS", render_life_projects(content), r'<section id="projects".*?</section>')
-    html_text = replace_region(html_text, "LIFE_NOTES", render_life_notes(content), r'<section id="notes".*?</section>')
+    html_text = replace_region(html_text, "LIFE_PROFILE", render_life_profile(content), r'<section id="profile".*?</section>')
     content_data_text = replace_code_region(content_data_text, "LIFE_I18N", render_life_i18n(content), r'/\* ===== i18n ===== \*/\s*const i18n = \{.*?\};')
     content_data_text = replace_code_region(content_data_text, "LIFE_VISITED", render_visited(content), r'const visited = \[.*?\];')
     content_data_text = replace_code_region(

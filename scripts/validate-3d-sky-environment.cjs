@@ -15,7 +15,8 @@ const baseline = { window: {}, DEG: Math.PI / 180 };
 vm.runInNewContext(execFileSync('git', ['show', '2dcb662:assets/life/scripts/19-star-map.js'], { cwd: root, encoding: 'utf8' }), baseline);
 const baselinePrototype = Object.getPrototypeOf(baseline.window.lifeStarMap);
 const originalMethods = Object.fromEntries(['buildGroups', 'view', 'project', 'orbit', 'pan', 'zoom', 'detailDestination']
-    .map(name => [name, baselinePrototype[name].toString()]));
+    // The former Notes portal is now Profile; its placement and stars are retained.
+    .map(name => [name, baselinePrototype[name].toString().replace(/\bnotes:/g, 'profile:')]));
 const checks = [], errors = [], measurements = [];
 let pageUrl = process.argv.find(value => /^https?:\/\//.test(value)) || 'http://127.0.0.1:8787/life.html';
 let server;

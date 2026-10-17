@@ -321,13 +321,13 @@ async function motionChecks(browser) {
         'Active orbit input updates the camera immediately without an extra easing delay');
         const movingLocal = response.moving;
         check(movingLocal && movingLocal.cloud[0] <= 720 && movingLocal.cloud[1] <= 480,
-            'Rotating the local map bounds the soft volume layer to half-resolution');
+            'The local soft volume stays within its fixed half-resolution pixel budget');
         await page.waitForFunction(() => !window.lifeStarMap.currentView.moving);
         check(await page.evaluate(moving => {
             const renderer = window.lifeStarMap.renderer;
-            return renderer.cloudWidth > moving.cloud[0] && renderer.cloudHeight > moving.cloud[1]
+            return renderer.cloudWidth === moving.cloud[0] && renderer.cloudHeight === moving.cloud[1]
                 && renderer.canvas.width === moving.canvas[0] && renderer.canvas.height === moving.canvas[1];
-        }, movingLocal), 'Settling restores local cloud detail without changing the star canvas resolution');
+        }, movingLocal), 'Stopping a drag preserves both the cloud grid and full-resolution star canvas');
         await reset(page);
         await page.evaluate(() => {
             const map = window.lifeStarMap;
@@ -354,23 +354,27 @@ async function motionChecks(browser) {
             'The main galaxy blend spans at least half a second instead of a brief distance-threshold jump');
         check(transition.frames.every((frame, index, frames) => !index || frame.mix >= frames[index - 1].mix),
             'The local-to-galaxy blend progresses continuously without reversing');
-        check(transition.frames.every(frame => frame.width <= 720 && frame.height <= 480),
-            'The overlapping local and galaxy volume passes stay within the motion pixel budget');
+        check(transition.frames.every(frame => frame.width <= 1080 && frame.height <= 720),
+            'The overlapping local and galaxy volume passes stay within the bounded volume budget');
         check(transition.uploads.length > 0 && transition.uploads.every(upload => !upload.flight && upload.mix === 0),
             'Galaxy textures finish uploading before the camera flight starts');
         await page.waitForFunction(() => !window.lifeStarMap.currentView.moving);
-        const galaxyCanvas = await page.evaluate(() => [window.lifeStarMap.renderer.canvas.width, window.lifeStarMap.renderer.canvas.height]);
+        const galaxyCanvas = await page.evaluate(() => {
+            const renderer = window.lifeStarMap.renderer;
+            return [renderer.canvas.width, renderer.canvas.height, renderer.cloudWidth, renderer.cloudHeight];
+        });
         await page.evaluate(() => window.lifeStarMap.orbit(40, 0));
         await page.waitForFunction(() => window.lifeStarMap.currentView.moving);
         check(await page.evaluate(canvas => {
             const renderer = window.lifeStarMap.renderer;
-            return renderer.cloudWidth <= 720 && renderer.cloudHeight <= 480
+            return renderer.cloudWidth === canvas[2] && renderer.cloudHeight === canvas[3]
                 && renderer.canvas.width === canvas[0] && renderer.canvas.height === canvas[1]
                 && renderer.galacticImage.naturalWidth === 4096;
-        }, galaxyCanvas), 'Galaxy rotation preserves the full-resolution disk while reducing only the volume work');
+        }, galaxyCanvas), 'Galaxy rotation keeps a stable volume grid and the full-resolution disk');
         await page.waitForFunction(() => !window.lifeStarMap.currentView.moving);
-        check(await page.evaluate(() => window.lifeStarMap.renderer.cloudWidth > 720),
-            'A settled galaxy restores its original volume resolution');
+        check(await page.evaluate(canvas => window.lifeStarMap.renderer.cloudWidth === canvas[2]
+            && window.lifeStarMap.renderer.cloudHeight === canvas[3], galaxyCanvas),
+            'A settled galaxy retains the same volume grid without a quality pop');
         await page.evaluate(() => {
             const map = window.lifeStarMap;
             map.openPortal(portalDefinitions.find(portal => portal.id === 'gallery'));
@@ -511,9 +515,9 @@ async function desktopChecks(browser) {
     check(new Set(drawerTitles).size === 3, 'The constellation index switches between all three languages');
     await page.locator('.lang-btn[data-lang="en"]').click();
     await page.locator('#sectionDrawerToggle').click();
-    await page.locator('#sectionDrawerList [data-portal-id="notes"]').click();
-    await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'notes');
-    check(await page.locator('#notes').getAttribute('hidden') === null, 'An index entry opens its matching content');
+    await page.locator('#sectionDrawerList [data-portal-id="profile"]').click();
+    await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'profile');
+    check(await page.locator('#profile').getAttribute('hidden') === null, 'An index entry opens its matching content');
     await page.keyboard.press('Escape');
     await settle(page);
 

@@ -159,7 +159,6 @@ class StarMapRenderer {
                 uniform float uTangent;
                 uniform float uGalaxy;
                 uniform float uEnvironmentStrength;
-                uniform float uMoving;
                 uniform sampler2D uGalacticDisk;
                 uniform sampler2D uGalacticDust;
                 float hash(vec3 point) {
@@ -212,13 +211,13 @@ class StarMapRenderer {
                             float exitDistance = max(0.0, (-projected + sqrt(intersection)) / quadratic);
                             float transmission = 1.0;
                             vec3 light = vec3(0.0);
-                            float jitter = hash(vec3(floor(gl_FragCoord.xy), 8.1));
-                            float steps = mix(48.0, 32.0, uMoving);
+                            // Keep quadrature continuous as the camera turns. Screen-pixel
+                            // jitter and a moving/resting step switch made the same cloud jump.
+                            const float steps = 48.0;
                             for (int armStep = 0; armStep < 48; armStep++) {
-                                if (float(armStep) >= steps) break;
                                 float intervalStart = pow(float(armStep) / steps, 1.65);
                                 float intervalEnd = pow(float(armStep + 1) / steps, 1.65);
-                                float distance = mix(entry, exitDistance, mix(intervalStart, intervalEnd, 0.3 + jitter * 0.4));
+                                float distance = mix(entry, exitDistance, (intervalStart + intervalEnd) * 0.5);
                                 float stepSize = (exitDistance - entry) * (intervalEnd - intervalStart);
                                 vec3 point = uCamera + ray * distance;
                                 float radius = length(point.xz);
@@ -238,6 +237,11 @@ class StarMapRenderer {
                                     float coarse = noise(samplePoint + vec3(7.4, 3.7, 11.9));
                                     float detail = noise(samplePoint * 2.07 + vec3(21.0, 4.0, 8.0));
                                     float grain = noise(samplePoint * 4.13 + vec3(5.0, 27.0, 13.0));
+                                    // Average features smaller than a ray interval instead of
+                                    // letting undersampled distant dust flicker during rotation.
+                                    float footprint = length(ray * vec3(0.0036, 0.009, 0.0055)) * stepSize;
+                                    detail = mix(detail, 0.5, smoothstep(0.55, 1.5, footprint * 2.07));
+                                    grain = mix(grain, 0.5, smoothstep(0.55, 1.5, footprint * 4.13));
                                     float structure = coarse * 0.55 + detail * 0.30 + grain * 0.15;
                                     float density = arms * smoothstep(0.29, 0.75, structure);
                                     float dust = arms * smoothstep(0.38, 0.72, detail * 0.65 + grain * 0.35)
@@ -817,14 +821,15 @@ class StarMapRenderer {
             if (canvas.height !== height) canvas.height = height;
         }
         if (!this.ready) return;
-        this.resizeCloudTarget(this.galaxyDetail || false, this.moving || false);
+        this.resizeCloudTarget(this.galaxyDetail || false);
     }
 
-    resizeCloudTarget(galaxy, moving) {
+    resizeCloudTarget(galaxy) {
         const context = this.gl;
-        const cloudScale = moving ? Math.min(0.5, 1200 / this.width, 900 / this.height)
-            : galaxy ? Math.min(this.dpr, 1.5, 2160 / this.width, 2160 / this.height)
-            : Math.min(0.75, 1200 / this.width, 900 / this.height);
+        // A fixed sampling grid avoids reallocations and visible quality pops
+        // between pointer events. The sharp stars and sky use the full canvas.
+        const cloudScale = galaxy ? Math.min(this.dpr, COARSE_POINTER ? 0.5 : 0.75, 1200 / this.width, 900 / this.height)
+            : Math.min(0.5, 1200 / this.width, 900 / this.height);
         const width = Math.max(1, Math.round(this.width * cloudScale));
         const height = Math.max(1, Math.round(this.height * cloudScale));
         if (this.cloudWidth === width && this.cloudHeight === height) return;
@@ -848,7 +853,6 @@ class StarMapRenderer {
         context.uniform1f(this.uniform(program, 'uTangent'), Math.tan(view.fov * 0.5));
         context.uniform1f(this.uniform(program, 'uGalaxy'), view.galaxy || 0);
         context.uniform1f(this.uniform(program, 'uEnvironmentStrength'), this.environmentStrength);
-        context.uniform1f(this.uniform(program, 'uMoving'), view.moving ? 1 : 0);
     }
 
     drawQuad(program) {
@@ -869,9 +873,9 @@ class StarMapRenderer {
         }
         const galaxyDetail = view.galaxy > 0.02;
         const moving = Boolean(view.moving);
-        if (this.galaxyDetail !== galaxyDetail || this.moving !== moving) {
+        this.moving = moving;
+        if (this.galaxyDetail !== galaxyDetail) {
             this.galaxyDetail = galaxyDetail;
-            this.moving = moving;
             this.resize();
         }
         const available = this.ready && (!galaxy || this.galacticUploadVersion === this.assetVersion);

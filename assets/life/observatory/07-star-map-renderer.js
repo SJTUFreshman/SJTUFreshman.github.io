@@ -575,14 +575,14 @@ class StarMapRenderer {
             if (canvas.height !== height) canvas.height = height;
         }
         if (!this.ready) return;
-        this.resizeCloudTarget(this.galaxyDetail || false, this.moving || false);
+        this.resizeCloudTarget(this.galaxyDetail || false);
     }
 
-    resizeCloudTarget(galaxy, moving) {
+    resizeCloudTarget(galaxy) {
         const context = this.gl;
-        const cloudScale = moving ? Math.min(0.5, 1200 / this.width, 900 / this.height)
-            : galaxy ? Math.min(this.dpr, 1.5, 2160 / this.width, 2160 / this.height)
-            : Math.min(0.75, 1200 / this.width, 900 / this.height);
+        // Keep the galactic volume on one sampling grid throughout a gesture.
+        const cloudScale = galaxy ? Math.min(this.dpr, COARSE_POINTER ? 0.5 : 0.75, 1200 / this.width, 900 / this.height)
+            : Math.min(0.5, 1200 / this.width, 900 / this.height);
         const width = Math.max(1, Math.round(this.width * cloudScale));
         const height = Math.max(1, Math.round(this.height * cloudScale));
         if (this.cloudWidth === width && this.cloudHeight === height) return;
@@ -626,9 +626,9 @@ class StarMapRenderer {
         }
         const galaxyDetail = view.galaxy > 0.02;
         const moving = Boolean(view.moving);
-        if (this.galaxyDetail !== galaxyDetail || this.moving !== moving) {
+        this.moving = moving;
+        if (this.galaxyDetail !== galaxyDetail) {
             this.galaxyDetail = galaxyDetail;
-            this.moving = moving;
             this.resize();
         }
         const available = this.ready && (!galaxy || this.galacticUploadVersion === this.assetVersion);

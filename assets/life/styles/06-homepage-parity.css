@@ -192,69 +192,7 @@
     color: var(--text);
 }
 
-.homepage-parity .notes-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-}
-
-.homepage-parity .note-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 16px;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--text);
-    text-decoration: none;
-    transition: all var(--transition);
-    cursor: pointer;
-}
-
-.homepage-parity .note-item:hover,
-.homepage-parity .note-item:focus-visible {
-    border-color: #ccc;
-    box-shadow: var(--shadow);
-}
-
-.homepage-parity .note-icon {
-    width: 20px;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    text-align: center;
-}
-
-.homepage-parity .note-info {
-    flex: 1;
-}
-
-.homepage-parity .note-title {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text);
-}
-
-.homepage-parity .note-meta {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    font-family: var(--font-en);
-}
-
-.homepage-parity .note-arrow {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-}
-
-.homepage-parity .notes-empty {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    font-style: italic;
-    padding: 20px 0;
-}
-
 .homepage-parity .news-date,
-.homepage-parity .pub-btn,
-.homepage-parity .note-meta {
+.homepage-parity .pub-btn {
     font-family: var(--font-ui);
 }

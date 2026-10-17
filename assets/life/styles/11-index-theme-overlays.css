@@ -74,6 +74,27 @@
     background: rgba(109, 142, 208, 0.34);
 }
 
+.portal-panel:has(#profile:not([hidden])) {
+    background: #fff;
+    border-color: #c8ccd1;
+    border-radius: 5px;
+}
+
+.portal-panel:has(#profile:not([hidden])) .portal-panel-title {
+    color: #202122;
+}
+
+.portal-panel:has(#profile:not([hidden])) .portal-panel-header {
+    background: #f8f9fa;
+    border-bottom-color: #c8ccd1;
+}
+
+@media (max-aspect-ratio: 3/2), (max-width: 1024px) and (max-aspect-ratio: 16/9) {
+    .portal-panel:has(#profile:not([hidden])) {
+        max-height: calc(100dvh - 112px);
+    }
+}
+
 .portal-content.homepage-parity {
     --bg-alt: #ffffff;
     --text: var(--life-ink);
@@ -143,7 +164,6 @@
 }
 
 .portal-panel .project-card,
-.portal-panel .note-item,
 .portal-panel .friend-link {
     border-color: var(--life-rule);
     border-radius: 12px;
@@ -151,8 +171,6 @@
 }
 
 .portal-panel .project-card:hover,
-.portal-panel .note-item:hover,
-.portal-panel .note-item:focus-visible,
 .portal-panel .friend-link:hover {
     border-color: rgba(109, 142, 208, 0.44);
     box-shadow: 0 10px 30px rgba(98, 119, 183, 0.12);
