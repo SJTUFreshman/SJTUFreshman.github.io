@@ -39,7 +39,7 @@
 .footprints-map-card .map-card-title {
     display: grid;
     grid-template-columns: 30px 1fr auto;
-    grid-template-areas: 'number title expand';
+    grid-template-areas: 'number title actions';
     align-items: baseline;
     gap: 12px;
     padding: 18px 20px 15px;
@@ -64,8 +64,17 @@
     letter-spacing: 0.1em;
 }
 
-.footprints-map-open {
-    grid-area: expand;
+.footprints-map-title-actions {
+    grid-area: actions;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.footprints-map-open,
+.footprints-map-view-toggle {
     align-self: center;
     min-height: 40px;
     padding: 0 12px;
@@ -75,6 +84,24 @@
     color: #5f685b;
     font: 11px var(--ui);
     cursor: pointer;
+}
+
+.footprints-map-view-toggle {
+    border-color: #9bafa6;
+    background: #e2e9df;
+    color: #3b5850;
+}
+
+.footprints-map-view-toggle[aria-pressed='true'] {
+    border-color: #bba984;
+    background: #ece3ce;
+    color: #665736;
+}
+
+.footprints-map-open:focus-visible,
+.footprints-map-view-toggle:focus-visible {
+    outline: 2px solid #536778;
+    outline-offset: 3px;
 }
 
 .footprints-map-shell {
@@ -297,11 +324,14 @@
 }
 
 .footprints-viewer-header h2 {
+    flex: 1;
+    min-width: 0;
     margin: 0;
     font: 500 1.15rem Georgia, 'Noto Serif SC', 'Songti SC', serif;
 }
 
 .footprints-viewer-close {
+    flex: 0 0 44px;
     width: 44px;
     height: 44px;
     border: 1px solid #d3d0c2;
@@ -333,9 +363,14 @@
 
 @media (max-width: 600px) {
     .footprints-map-card .map-card-title {
-        grid-template-columns: 22px 1fr auto;
+        grid-template-columns: 22px minmax(0, 1fr);
+        grid-template-areas: 'number title' 'actions actions';
         gap: 5px 10px;
         padding: 14px;
+    }
+
+    .footprints-map-title-actions {
+        margin-top: 5px;
     }
 
     .footprints-map-controls {
@@ -361,7 +396,19 @@
     }
 
     .footprints-viewer-header {
+        gap: 8px;
+        padding-left: 14px;
         padding-top: max(9px, env(safe-area-inset-top));
+    }
+
+    .footprints-viewer-header h2 {
+        font-size: 1rem;
+    }
+
+    .footprints-viewer-header .footprints-map-view-toggle {
+        max-width: 42%;
+        padding: 5px 9px;
+        line-height: 1.35;
     }
 
     .footprints-map-hint {

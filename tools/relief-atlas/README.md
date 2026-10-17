@@ -50,7 +50,7 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 | 工程重新打开后的网格、材质、相机、光照验证和 SHA-256 | `scenes/*-scenes.json` |
 | 三种海洋材质预览、生产日志、原生渲染脚本与配色输入 | `previews/`、`logs/`、`*.py`、`*.slurm`、`footprints-style.json` |
 
-这些工程由生成网站 PNG 的同一脚本、已核验 DEM 和参数导出。中国、东亚各保留两个材质版本，欧美尚无到访区域，因此保留白色版本，共五个 `.blend`。全部工程独立可打开，不依赖外置纹理；渲染输出使用相对路径指向旁边的 `renders/`。网站最终的城市与路线裁切在 `assets/maps/relief/atlas.json`，路线来源在 `assets/maps/footprint-journeys.json`；两者也随仓库保存。
+这些工程由生成网站 PNG 的同一脚本、已核验 DEM 和参数导出。该历史生产目录保留五个 `.blend`：中国和东亚各有白色／省色版本，欧美为白色版本。新增概览工程独立归档在 `footprints/administrative-20261016/`：`scenes/east_asia-colour.blend` 按中国省份、日本八大地方和韩国六个文化区烤制；`scenes/europe_usa-colour.blend` 按国家／地区烤制。该目录同时保存新材质编号的 DEM、区域元数据、原生 PNG、场景验收报告及可离线重建的原始边界压缩文件。中国概览复用旧省色工程，海外到访名单仍为空，只有实际到访地区会显色。全部工程独立可打开，不依赖外置纹理；渲染输出使用相对路径指向旁边的 `renders/`。网站最终的城市与路线裁切在 `assets/maps/relief/atlas.json`，路线来源在 `assets/maps/footprint-journeys.json`；两者也随仓库保存。
 
 | 地图 | 原生渲染宽度 | 投影及范围 | 设计 |
 | --- | --- | --- | --- |
@@ -70,6 +70,8 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 | --- | --- |
 | 铁路、公路网络重建与省界分段 | `../../scripts/prepare-footprint-routes.py` |
 | DEM、投影、城市和走廊几何、原生 PNG → WebP 打包 | `../../scripts/build-footprint-atlas.py` |
+| 省级／文化区／国家概览准备与打包 | `../../scripts/build-footprint-overviews.py` |
+| 概览分组、到访来源、材质与原始工程检查 | `../../scripts/validate-footprint-overviews.py` |
 | 三张图的白色与彩色材质渲染 | `../../scripts/render-footprint-atlas.py` |
 | 参数化 GPU 提交 | `../../scripts/render-footprint-atlas.slurm` |
 | 地理对齐、走廊覆盖、高清素材与源工程检查 | `../../scripts/validate-footprint-atlas.py` |

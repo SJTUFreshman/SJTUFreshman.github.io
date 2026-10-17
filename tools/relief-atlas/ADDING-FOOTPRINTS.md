@@ -1,12 +1,15 @@
 # 后续怎样添加城市和路线
 
-日常新增中国城市、铁路或自驾足迹，只需要更新名单或行程，再重新打包。白色底图与全省彩色底图已经对齐，浏览器按最新城市、沿途走廊显露彩色地形，无需每次重跑 Blender。
+日常新增中国城市、铁路或自驾足迹，只需要更新名单或行程，再重新打包。三张图默认按省／文化区／国家显示，按钮可切回原来的城市与路线详情。白色底图与彩色地形已经对齐，浏览器按实际到访地区、城市和沿途走廊显露彩色地形，无需每次重跑 Blender。
 
 ## 先找对编辑入口
 
 | 想改什么 | 编辑位置 |
 | --- | --- |
-| 新到访的中国城市 | `site_content.json` → `life.footprints.visited_china` |
+| 新到访的中国城市（自动点亮其所属省） | `site_content.json` → `life.footprints.visited_china` |
+| 日本／韩国文化区到访 | 同一处的 `visited_overseas_regions`（稳定区域 ID） |
+| 欧美等国家到访 | 同一处的 `visited_country_codes`（地图国家代码） |
+| 日本／韩国文化区划分 | `tools/relief-atlas/cultural-regions.json` |
 | 铁路、自驾的途经顺序 | `scripts/prepare-footprint-routes.py` → `build_routes()` |
 | 铁路途经车站的坐标 | 同一脚本的 `RAIL_STATIONS` |
 | 省份颜料、海洋材质、走廊宽度 | `tools/relief-atlas/footprints-style.json` |
@@ -30,7 +33,7 @@ python scripts/build-footprint-atlas.py --package
 python scripts/validate-footprint-atlas.py
 ```
 
-打包器直接读取最新名单，同时更新中国和东亚中可见的城市；地图范围以外的城市不会出现在该图上。拼错或不支持的城市全称会报错。已有地形和省份材质不变，原始工程不被改写。
+打包器直接读取最新名单，同时更新中国和东亚中可见的城市及其所属省；地图范围以外的城市不会出现在该图上。拼错或不支持的城市全称会报错。已有地形和省份材质不变，原始工程不被改写。
 
 城市点亮表示实际到访。经过一座城市只想显示旅程时，将它放进路线途经点即可，不要因此把它加入到访名单。
 
@@ -99,11 +102,40 @@ python scripts/validate-footprint-atlas.py
 
 `corridor_width_km` 是地图上彩色地形走廊的总宽度：目前铁路 30 km、自驾 26 km，是为区域图可读性设置的显示宽度。走廊在省界处沿用省份材质，不会把途经整座城市都标成到访。
 
+## 省级、文化区和国家概览
+
+三个地图各有独立切换按钮；概览与详细视图共用同一白色地形，`atlas.json` 的 `maps.*.overview` 保存概览单元，原有 `regions` 和 `routes` 仍保存详细城市／旅程。
+
+- 中国概览按照省级行政区显示。到访省份只从 `visited_china` 中实际到访城市的 `province` 推导，不能用铁路、公路经过的省份来推导；不需要再维护一份到访省名单。
+- 东亚中的中国部分用同一省名单；日本用八大地方（九州和冲绳合并），韩国用首都圈、关东、湖西、湖南、岭南、济州六个文化区。文化分组仅用于展示，具体成员见 `cultural-regions.json` 的 `members`，键为 Natural Earth 的 `iso_3166_2`。朝鲜及周边国家各自作为一个单元。
+- 欧美按国家／地区聚合。原始 Natural Earth `adm0_a3` 是稳定代码，通常为 ISO 3166-1 alpha-3，例如 `FRA`、`DEU`、`USA`；它也有 `ALD`、`CYN` 等独立地区扩展码，严格使用实际元数据里的 ID。一个国家整体使用同一个原生 Blender 颜料颜色。
+- 未到访的省、文化区、国家保持原来的白色材质，不能为了展示配色而虚构到访。当前海外到访数组均为空。
+
+`build-footprint-overviews.py` 分成两阶段：`--prepare` 在独立归档准备新的区域几何与 DEM 材质编号，供 Blender 渲染；`--package` 用已渲染图片更新概览。旧的 `build-footprint-atlas.py --package` 会自动调用概览打包，不会在日常更新时丢失概览，也不会重复压缩图片。
+
 ## 海外地点
 
-东亚的中国城市与中国图共用名单。日本、韩国及欧美目前只准备了行政单元几何；`visited_countries` 是旧地图字段，改它不会点亮当前浮雕图。
+新到访日本或韩国时，往 `life.footprints.visited_overseas_regions` 添加文化区 ID，例如 `"JPN:kanto"` 或 `"KOR:capital"`；完整 ID 在 `cultural-regions.json`。一个文化区只要确实到访其中一处即可点亮，不要把仅途经的地区加入。国家列表不能代替这些文化区记录。
 
-首次增加海外足迹，需要扩展 `build-footprint-atlas.py` 的 `regional_units()`：按区域 ID 设置到访、把相同 ID 的颜料写进 DEM 材质编号，并生成相应彩色渲染。欧美目前仅有白色底图。海外铁路/公路还需要扩展路由与陆地裁切，当前路线流程仅覆盖中国。相关位置已注明，避免只改名单却以为地图生效。
+新到访欧美或其他以国家显示的地区时，往 `visited_country_codes` 添加地图中的国家代码，例如 `"FRA"` 或 `"USA"`。这里只记录新国家级足迹；中国仍然从实际城市自动推导，日本和韩国仍然使用文化区列表。原来的 `visited_countries` 是旧地图文案字段，不能用它点亮当前浮雕图。
+
+```powershell
+python scripts/build-footprint-atlas.py --package
+python scripts/validate-footprint-atlas.py
+python scripts/validate-footprint-overviews.py
+```
+
+这会更新概览的到访状态，无需再次跑 Blender。海外原详细图仍保持原始展示，不会把新增国家到访伪装成去过所有州／府县。以后需要海外细级城市、铁路或公路，仍需扩展 `build-footprint-atlas.py` 的 `regional_units()`、路由及陆地裁切，再准备相应细级材质；当前中国路线流程不覆盖海外。
+
+概览渲染归档在 `footprints/administrative-20261016/`，其中有 `data/`、原生 PNG、Blender 工程以及压缩的原始 Natural Earth GeoJSON。中国概览复用 `material-white-20261012` 的全省彩色渲染。不要重写这两个历史目录；更改分组或颜料后用 `--render-root NEW_RENDER_ROOT` 准备并渲染新归档，并同步代码中的默认 `ARCHIVE` 路径。新归档缺少几何源时，把已有归档的 `cache/*.geojson.gz` 复制进去即可离线重建。
+
+```powershell
+python scripts/build-footprint-overviews.py --prepare --render-root NEW_RENDER_ROOT
+# 新的 east_asia / europe_usa 彩色版需以原相机、DEM、光照 --variants colour --save-scene 渲染。
+python scripts/build-footprint-overviews.py --package --render-root NEW_RENDER_ROOT
+```
+
+`stable_colour(ID)` 生成稳定的低饱和矿物色；新增国家或改变排序不会重设旧国家颜色。中国省色与既有全省彩色图完全一致。配置文件分组必须覆盖日本 47 个都道府县、韩国 17 个一级行政单元且每个恰好出现一次；构建器会拒绝漏项、重复项和未知到访 ID。
 
 ## 什么时候才需要 Blender
 
@@ -126,6 +158,7 @@ blender --background --threads 8 --python-exit-code 1 --python scripts/render-fo
 
 ```powershell
 python scripts/validate-footprint-atlas.py
+python scripts/validate-footprint-overviews.py
 python site_renderer.py --check --life-only
 node scripts/validate-life-runtime.cjs
 node scripts/validate-star-map.cjs --serve footprints
@@ -136,7 +169,8 @@ node scripts/validate-star-map.cjs --serve footprints
 
 发布前逐项检查实际变更：
 
-- 新城市在中国图及其范围内的东亚图上点亮，旧城市仍保留；沿途未到访城市不整片变色。
+- 新城市在详细图上点亮，其所属省在中国及东亚概览点亮；旧城市仍保留，沿途未到访城市和省份不整片变色。
+- 日本／韩国只点亮实际到访文化区，欧美只点亮实际到访国家。各图切换后视角、缩放保留，互不改变其他图的显示模式。
 - 新行程 ID 出现在 `footprint-journeys.json`，并在范围相交的地图 `routes` 中包含非空 `corridor_path`；横跨省份时显露对应省份的地形颜色，山脊和阴影连续。
 - 本地大图仍限制中国 300%、东亚／欧美 200%；图片原生清晰度、海色、纯白地形阴影不因新增足迹改变。
 - 提交源名单／行程脚本、生成的行程与地图数据、实际改变的 WebP、页面生成文件和版本号。日常足迹更新不修改历史归档。

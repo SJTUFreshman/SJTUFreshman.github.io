@@ -20,11 +20,16 @@ def main():
     parser.add_argument("--sea-colour", help="Override the Blender sea material for a colour study")
     parser.add_argument("--save-scene", action="store_true")
     parser.add_argument("--scene-only", action="store_true", help="Save and reopen production scenes without repeating the render")
+    parser.add_argument("--variants", nargs="+", choices=("relief", "colour"),
+                        help="Render selected material layers; overview projects only need colour over the existing white base")
     arguments = parser.parse_args(sys.argv[sys.argv.index("--") + 1:])
     if arguments.preview and (arguments.save_scene or arguments.scene_only):
         parser.error("Preview renders cannot overwrite production scenes")
     if arguments.scene_only:
         arguments.save_scene = True
+    # 独立概览工程可只烤制彩色材质；保持旧详细图的白色底图、相机、DEM 和光照。
+    selected_variants = arguments.variants or (("relief", "colour") if arguments.map != "europe_usa" else ("relief",))
+    variants = [variant for variant in ("relief", "colour") if variant in selected_variants]
     sys.path.insert(0, str(arguments.reference_root))
     from render_atlas import linear_color, make_terrain, matte_material, setup_lighting
 
@@ -93,13 +98,16 @@ def main():
     vertex_count = len(terrain.data.vertices)
     attribute = terrain.data.color_attributes["ReliefColor"]
     saved_scenes = []
-    for variant in ("relief", "colour") if arguments.map != "europe_usa" else ("relief",):
+    for variant in variants:
         if variant == "colour":
             terrain.data.materials[0] = province_material
             mask = data["mask"].astype(bool) & np.isfinite(data["elevation"])
             regions = data["region"][mask]
             for region_id, color in metadata.get("region_colors", {}).items():
                 colors[regions == int(region_id), :3] = linear_color(color)
+        else:
+            terrain.data.materials[0] = white_material
+            colors[:] = 1
         attribute.data.foreach_set("color", colors.ravel())
         terrain.data.update()
         scene.render.filepath = f"//../renders/{arguments.map}-{variant}.png"
@@ -157,7 +165,7 @@ def main():
               "gpu_devices": gpu_devices, "unvisited_material": style["unvisited_material"], "administrative_outlines": False,
               "sea_material": sea_colour, "postprocessing": "none",
               "outputs": {f"{arguments.map}-{variant}.png": hashlib.sha256((renders / f"{arguments.map}-{variant}.png").read_bytes()).hexdigest()
-                          for variant in ("relief", "colour") if (renders / f"{arguments.map}-{variant}.png").exists()}}
+                          for variant in variants if (renders / f"{arguments.map}-{variant}.png").exists()}}
     (renders / (arguments.map + "-render.json")).write_text(json.dumps(report, indent=2), encoding="utf-8")
     print("COMPLETE", arguments.map, flush=True)
 

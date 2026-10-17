@@ -783,6 +783,8 @@
         "兰州市",
         "重庆市"
       ],
+      "visited_overseas_regions": [],
+      "visited_country_codes": [],
       "visited_countries": [
         {
           "map_name": "China",

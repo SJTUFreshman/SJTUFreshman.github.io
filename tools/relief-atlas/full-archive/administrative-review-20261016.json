@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "name": "administrative-review-20261016",
+  "created_at": "2026-10-17T01:46:46.861837+00:00",
+  "source": "C:\\Users\\Administrator.DESKTOP-RN0CUUV\\.codex\\worktrees\\footprint-region-views\\SJTUFreshman.github.io\\.render-work\\footprint-overviews",
+  "excluded_files": [],
+  "chunk_bytes": 50331648,
+  "directories": [],
+  "files": [
+    {
+      "path": "desktop-china.png",
+      "bytes": 890665,
+      "sha256": "5cafde7284ef1de730bc13bef49fce0871c64e9d4f05441999e989f3720549ef",
+      "mtime_ns": 1792170623436759300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/5cafde7284ef1de730bc13bef49fce0871c64e9d4f05441999e989f3720549ef.part",
+          "bytes": 890665,
+          "sha256": "5cafde7284ef1de730bc13bef49fce0871c64e9d4f05441999e989f3720549ef"
+        }
+      ]
+    },
+    {
+      "path": "desktop-east-asia.png",
+      "bytes": 921619,
+      "sha256": "b8d1b286478c8fa23d2a3489e958646080f39683291648b41b8bcc72836cb303",
+      "mtime_ns": 1792170628380658800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b8d1b286478c8fa23d2a3489e958646080f39683291648b41b8bcc72836cb303.part",
+          "bytes": 921619,
+          "sha256": "b8d1b286478c8fa23d2a3489e958646080f39683291648b41b8bcc72836cb303"
+        }
+      ]
+    },
+    {
+      "path": "desktop-euro-usa.png",
+      "bytes": 685810,
+      "sha256": "abf77c4c9c193fb87bd966b7b57043945b75df68da37138275f799f717ee33e5",
+      "mtime_ns": 1792170632983320100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/abf77c4c9c193fb87bd966b7b57043945b75df68da37138275f799f717ee33e5.part",
+          "bytes": 685810,
+          "sha256": "abf77c4c9c193fb87bd966b7b57043945b75df68da37138275f799f717ee33e5"
+        }
+      ]
+    },
+    {
+      "path": "east_asia-all-pigments.jpg",
+      "bytes": 353210,
+      "sha256": "ffd984397987a9bfee0fb3ac830bcde03ee0cecd3cd3b2ba5468dfef7649f476",
+      "mtime_ns": 1792168670626684600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/ffd984397987a9bfee0fb3ac830bcde03ee0cecd3cd3b2ba5468dfef7649f476.part",
+          "bytes": 353210,
+          "sha256": "ffd984397987a9bfee0fb3ac830bcde03ee0cecd3cd3b2ba5468dfef7649f476"
+        }
+      ]
+    },
+    {
+      "path": "europe_usa-all-pigments.jpg",
+      "bytes": 157651,
+      "sha256": "366675de03eb355059959c8c9bb1a63e58916b219386ba8f60fe758cbcb620bb",
+      "mtime_ns": 1792168671109666400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/366675de03eb355059959c8c9bb1a63e58916b219386ba8f60fe758cbcb620bb.part",
+          "bytes": 157651,
+          "sha256": "366675de03eb355059959c8c9bb1a63e58916b219386ba8f60fe758cbcb620bb"
+        }
+      ]
+    },
+    {
+      "path": "mobile-china.png",
+      "bytes": 179072,
+      "sha256": "f873a9b5a3ef68f3715c5c5d7dbd0f156044c7f313b408b9cf80011339cc9681",
+      "mtime_ns": 1792170668833652800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f873a9b5a3ef68f3715c5c5d7dbd0f156044c7f313b408b9cf80011339cc9681.part",
+          "bytes": 179072,
+          "sha256": "f873a9b5a3ef68f3715c5c5d7dbd0f156044c7f313b408b9cf80011339cc9681"
+        }
+      ]
+    },
+    {
+      "path": "mobile-east-asia.png",
+      "bytes": 176730,
+      "sha256": "1962c1e5d4313ef98ecaac342a02f174bf7c129cf14ae60805b8da1bade12cc0",
+      "mtime_ns": 1792170672502660400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/1962c1e5d4313ef98ecaac342a02f174bf7c129cf14ae60805b8da1bade12cc0.part",
+          "bytes": 176730,
+          "sha256": "1962c1e5d4313ef98ecaac342a02f174bf7c129cf14ae60805b8da1bade12cc0"
+        }
+      ]
+    },
+    {
+      "path": "mobile-euro-usa.png",
+      "bytes": 76119,
+      "sha256": "9c8750391909c2320cd4a1c187780057fc7cfaa37036c423f24895ca42b6ed0f",
+      "mtime_ns": 1792170676094395000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9c8750391909c2320cd4a1c187780057fc7cfaa37036c423f24895ca42b6ed0f.part",
+          "bytes": 76119,
+          "sha256": "9c8750391909c2320cd4a1c187780057fc7cfaa37036c423f24895ca42b6ed0f"
+        }
+      ]
+    }
+  ],
+  "file_count": 8,
+  "total_bytes": 3440876
+}

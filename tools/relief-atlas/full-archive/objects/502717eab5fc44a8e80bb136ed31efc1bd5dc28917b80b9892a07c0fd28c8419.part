@@ -1,0 +1,19 @@
+{
+  "colour": {
+    "file": "east_asia-colour.blend",
+    "sha256": "56cdb9b78cc1661811e7725fa28e621aa558b9095f7ddb73ad86fe2ee93102df",
+    "bytes": 68955029,
+    "vertices": 2138781,
+    "resolution": [
+      6000,
+      4770
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false,
+    "white_material_verified": false,
+    "postprocessing": "none",
+    "sea_material": "#8ca6b5"
+  }
+}

@@ -4,7 +4,7 @@
     // 维护指南：tools/relief-atlas/ADDING-FOOTPRINTS.md；这里是显示层，不是到访/行程数据的编辑入口。
     // 新城市改 site_content.json 的 visited_china；新路线改 scripts/prepare-footprint-routes.py 再生成、打包。
     // 城市或路线重新打包后，同步修改此版本、life.html 中脚本的 atlas= 及全部 Life 资源的共享 v=。
-    const ATLAS_VERSION = '20261012-native-white';
+    const ATLAS_VERSION = '20261016-administrative';
     const ATLAS_URL = `assets/maps/relief/atlas.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
@@ -12,6 +12,10 @@
             maxScale: 3,
             keys: ['china'],
             title: { en: 'China', 'zh-CN': '中国', 'zh-TW': '中國' },
+            views: {
+                overview: { en: 'By province', 'zh-CN': '按省查看', 'zh-TW': '按省查看' },
+                detail: { en: 'Cities and routes', 'zh-CN': '城市与路线', 'zh-TW': '城市與路線' }
+            },
             label: {
                 en: 'Cities and routes visited in China',
                 'zh-CN': '中国到访城市与足迹线路',
@@ -23,6 +27,10 @@
             maxScale: 2,
             keys: ['east_asia', 'east-asia', 'eastAsia'],
             title: { en: 'East Asia', 'zh-CN': '东亚', 'zh-TW': '東亞' },
+            views: {
+                overview: { en: 'Cultural regions', 'zh-CN': '文化地区', 'zh-TW': '文化地區' },
+                detail: { en: 'Detailed regions', 'zh-CN': '细分地区', 'zh-TW': '細分地區' }
+            },
             label: {
                 en: 'Visited places in East Asia',
                 'zh-CN': '东亚到访地点',
@@ -34,6 +42,10 @@
             maxScale: 2,
             keys: ['euro_usa', 'europe_usa', 'euro-usa', 'euroUsa'],
             title: { en: 'Europe + USA', 'zh-CN': '欧美', 'zh-TW': '歐美' },
+            views: {
+                overview: { en: 'By country', 'zh-CN': '按国家查看', 'zh-TW': '按國家查看' },
+                detail: { en: 'Detailed regions', 'zh-CN': '细分地区', 'zh-TW': '細分地區' }
+            },
             label: {
                 en: 'Visited places in Europe and the United States',
                 'zh-CN': '欧美到访地点',
@@ -49,6 +61,8 @@
             unavailable: 'Map unavailable', mapLoading: 'Loading map',
             retry: 'Retry', controls: 'Map controls', route: 'Footprint route',
             rail: 'Rail journey', road: 'Road journey',
+            currentView: 'Current view', switchTo: 'Switch to',
+            overviewUnavailable: 'Regional map unavailable. You can still switch to the detailed map.',
             hint: 'Ctrl + scroll or pinch to zoom · drag to explore · double-click to zoom',
             keyboard: 'Arrow keys to pan, plus and minus to zoom, 0 to reset.'
         },
@@ -58,6 +72,8 @@
             unavailable: '地图暂不可用', mapLoading: '正在加载地图',
             retry: '重新加载', controls: '地图控制', route: '足迹线路',
             rail: '铁路旅程', road: '自驾旅程',
+            currentView: '当前视图', switchTo: '切换为',
+            overviewUnavailable: '地区地图加载失败，仍可切换至细分地图。',
             hint: 'Ctrl + 滚轮或双指缩放 · 拖动查看 · 双击放大',
             keyboard: '方向键平移，加减键缩放，0 重置。'
         },
@@ -67,6 +83,8 @@
             unavailable: '地圖暫不可用', mapLoading: '正在載入地圖',
             retry: '重新載入', controls: '地圖控制', route: '足跡路線',
             rail: '鐵路旅程', road: '自駕旅程',
+            currentView: '目前視圖', switchTo: '切換為',
+            overviewUnavailable: '地區地圖載入失敗，仍可切換至細分地圖。',
             hint: 'Ctrl + 滾輪或雙指縮放 · 拖動查看 · 雙擊放大',
             keyboard: '方向鍵平移，加減鍵縮放，0 重設。'
         }
@@ -237,6 +255,22 @@
         return controls;
     }
 
+    function viewToggleFor(instance) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'footprints-map-view-toggle';
+        button.dataset.mapAction = 'toggle-view';
+        button.setAttribute('aria-controls', instance.box.id);
+        button.addEventListener('click', event => {
+            event.preventDefault();
+            event.stopPropagation();
+            instance.setView(instance.view === 'overview' ? 'detail' : 'overview');
+        });
+        instance.viewButtons.add(button);
+        instance.updateViewButtons();
+        return button;
+    }
+
     function matchVisited(map, item, byId) {
         if (item?.visited === false) return false;
         if (item?.visited === true || item?.active === true) return true;
@@ -273,6 +307,12 @@
         const height = Number(map.height || map.projection?.height || 650);
         const source = imageUrl(map.image || map.raster || map.src);
         const colorSource = imageUrl(map.color_image || map.colorImage || map.image);
+        // 粗图的地区归并与到访标记由 atlas 生成器维护；不能在显示层按国家名猜测到访记录。
+        // 两种视图各自裁切原生彩色 Blender 图，只切换图层，保留同一套缩放/平移与输入监听。
+        const overview = map.overview;
+        const overviewRegions = Array.isArray(overview?.regions) ? overview.regions : [];
+        const hasOverview = Boolean(overview && Array.isArray(overview.regions));
+        const overviewColorSource = imageUrl(overview?.color_image);
         const regions = Array.isArray(map.regions) ? map.regions : [];
         const citySource = Array.isArray(map.cities)
             ? map.cities
@@ -316,45 +356,37 @@
             'aria-label': definition.label[currentLanguage] || definition.label.en
         });
         const defs = svgElement('defs');
+        const detailLayer = svgElement('g', { 'data-atlas-view': 'detail' });
+        const overviewLayer = svgElement('g', { 'data-atlas-view': 'overview' });
         const fillGroup = svgElement('g', { class: 'footprints-map-visited-terrain' });
         const cityGroup = svgElement('g', { class: 'footprints-map-cities' });
-        svg.append(defs, fillGroup, cityGroup);
+        const overviewFillGroup = svgElement('g', { class: 'footprints-map-visited-terrain' });
+        const overviewRegionGroup = svgElement('g', { class: 'footprints-map-regions' });
+        detailLayer.append(fillGroup, cityGroup);
+        overviewLayer.append(overviewFillGroup, overviewRegionGroup);
+        svg.append(defs, detailLayer, overviewLayer);
         stage.append(terrain, svg);
         viewport.append(stage);
         box.append(viewport, status);
-        let terrainLoaded = false;
-        let colorLoaded = false;
-        let assetFailed = false;
-        const updateAssetState = message => {
-            if (message) {
-                assetFailed = true;
-                box.classList.add('is-map-error');
-                status.classList.add('is-visible');
-                status.textContent = message;
-                return;
-            }
-            if (!assetFailed && terrainLoaded && colorLoaded) {
-                box.classList.remove('is-map-loading');
-                status.classList.remove('is-visible');
-            }
+        const assets = {
+            terrain: 'loading', detail: 'loading',
+            overview: hasOverview ? 'loading' : 'unavailable'
         };
-        box.classList.add('is-map-loading');
-        terrain.addEventListener('load', () => {
-            terrainLoaded = true;
-            updateAssetState();
-        });
-        terrain.addEventListener('error', () => updateAssetState(currentCopy().unavailable));
-        terrain.src = source;
-        const colorPreload = new Image();
-        colorPreload.addEventListener('load', () => {
-            colorLoaded = true;
-            updateAssetState();
-        });
-        colorPreload.addEventListener('error', () => updateAssetState(currentCopy().unavailable));
-        colorPreload.src = colorSource;
+        // 每种彩色图独立记录加载状态：粗图损坏时仍允许切回可用的明细图，不能锁死整张卡片。
+        const updateAssetState = () => {
+            const failed = assets.terrain === 'error' || assets[instance.view] === 'error';
+            const loading = !failed && (assets.terrain === 'loading' || assets[instance.view] === 'loading');
+            box.classList.toggle('is-map-error', failed);
+            box.classList.toggle('is-map-loading', loading);
+            status.classList.toggle('is-visible', failed || loading);
+            status.textContent = failed
+                ? (assets.terrain !== 'error' && instance.view === 'overview' ? currentCopy().overviewUnavailable : currentCopy().unavailable)
+                : (loading ? currentCopy().mapLoading : '');
+        };
         const instance = {
             definition, map, box, viewport, stage, svg, source, colorSource, width, height,
             cities, regions, regionById, visitedIds,
+            view: hasOverview ? 'overview' : 'detail', viewButtons: new Set(),
             maxScale: definition.maxScale,
             scale: 1, panX: 0, panY: 0, activeCity: null, viewer: null,
             updateTransform() {
@@ -400,6 +432,36 @@
             resetView() {
                 this.scale = 1; this.panX = 0; this.panY = 0; this.updateTransform();
             },
+            updateViewButtons() {
+                const nextView = this.view === 'overview' ? 'detail' : 'overview';
+                const label = localized(definition.views[nextView]);
+                const currentLabel = localized(definition.views[this.view]);
+                const mapLabel = `${localized(definition.title)} · ${currentLabel}`;
+                box.setAttribute('aria-label', mapLabel);
+                svg.setAttribute('aria-label', mapLabel);
+                viewport.setAttribute('aria-label', `${mapLabel}. ${currentCopy().keyboard}`);
+                this.viewButtons.forEach(button => {
+                    button.textContent = label;
+                    button.setAttribute('aria-label', `${currentCopy().switchTo}: ${label}. ${currentCopy().currentView}: ${currentLabel}`);
+                    button.setAttribute('aria-pressed', String(this.view === 'detail'));
+                    button.title = button.getAttribute('aria-label');
+                    button.hidden = !hasOverview;
+                });
+            },
+            setView(view) {
+                if (view !== 'detail' && view !== 'overview') return;
+                if (view === 'overview' && !hasOverview) return;
+                this.view = view;
+                this.setActive(null, true);
+                box.dataset.mapView = view;
+                [[detailLayer, 'detail'], [overviewLayer, 'overview']].forEach(([layer, mode]) => {
+                    const active = mode === view;
+                    layer.style.display = active ? '' : 'none';
+                    layer.setAttribute('aria-hidden', String(!active));
+                });
+                this.updateViewButtons();
+                updateAssetState();
+            },
             openViewer() {
                 if (this.viewer) return;
                 const returnFocus = document.activeElement;
@@ -421,7 +483,8 @@
                 close.textContent = '×';
                 close.setAttribute('aria-label', currentCopy().close);
                 close.addEventListener('click', () => viewer.close());
-                header.append(title, close);
+                const viewToggle = viewToggleFor(this);
+                header.append(title, viewToggle, close);
                 const hint = document.createElement('p');
                 hint.className = 'footprints-map-hint';
                 hint.dataset.atlasCopy = 'hint';
@@ -436,6 +499,7 @@
                 viewer.addEventListener('close', () => {
                     placeholder.replaceWith(box);
                     this.viewer = null;
+                    this.viewButtons.delete(viewToggle);
                     viewer.remove();
                     this.resetView();
                     returnFocus?.focus?.({ preventScroll: true });
@@ -447,16 +511,13 @@
             setActive(city, force = false) {
                 if (this.activeCity === city && !force) return;
                 this.activeCity = city || null;
-                cityGroup.querySelectorAll('.is-active').forEach(element => element.classList.remove('is-active'));
+                svg.querySelectorAll('.footprints-city.is-active').forEach(element => element.classList.remove('is-active'));
                 if (city) city.element?.classList.add('is-active');
             },
             updateLanguage() {
                 const labels = currentCopy();
-                const mapLabel = definition.label[currentLanguage] || definition.label.en;
-                box.setAttribute('aria-label', mapLabel);
-                svg.setAttribute('aria-label', mapLabel);
-                viewport.setAttribute('aria-label', `${mapLabel}. ${labels.keyboard}`);
-                status.textContent = assetFailed ? labels.unavailable : (terrainLoaded && colorLoaded ? '' : labels.mapLoading);
+                updateAssetState();
+                this.updateViewButtons();
                 box.querySelector('.footprints-map-controls')?.setAttribute('aria-label', labels.controls);
                 box.querySelectorAll('[data-map-action="zoom-in"]').forEach(button => button.setAttribute('aria-label', labels.zoomIn));
                 box.querySelectorAll('[data-map-action="zoom-out"]').forEach(button => button.setAttribute('aria-label', labels.zoomOut));
@@ -471,7 +532,7 @@
                 const card = document.querySelector(`[data-atlas-card="${definition.id}"]`);
                 const openButton = card.querySelector('.footprints-map-open');
                 if (openButton) { openButton.textContent = `↗ ${labels.expand}`; openButton.setAttribute('aria-label', labels.expand); }
-                cityGroup.querySelectorAll('[data-city-id]').forEach(element => {
+                svg.querySelectorAll('[data-city-id], [data-region-id]').forEach(element => {
                     const city = element._footprintsCity;
                     const label = city ? nameOf(city.data) : '';
                     element.setAttribute('aria-label', label);
@@ -481,6 +542,30 @@
                 });
             }
         };
+
+        function appendRegionHit(target, item, path, center, attribute, index) {
+            const group = svgElement('g', {
+                class: 'footprints-city', tabindex: 0, role: 'button',
+                [attribute]: item.id || nameOf(item) || `region-${index}`
+            });
+            group._footprintsCity = { data: item, element: group };
+            group.append(svgElement('path', { d: path, class: 'footprints-city-hit', fill: 'transparent', stroke: 'transparent', 'vector-effect': 'non-scaling-stroke' }));
+            const label = svgElement('text', { x: center[0], y: center[1] - 9, class: 'footprints-city-label-text', 'text-anchor': 'middle' });
+            label.textContent = nameOf(item);
+            group.append(label);
+            const title = svgElement('title');
+            title.textContent = nameOf(item);
+            group.prepend(title);
+            group.addEventListener('pointerenter', () => instance.setActive(group._footprintsCity));
+            group.addEventListener('pointerleave', () => { if (document.activeElement !== group) instance.setActive(null); });
+            group.addEventListener('focus', () => instance.setActive(group._footprintsCity));
+            group.addEventListener('blur', () => instance.setActive(null));
+            group.addEventListener('click', event => { event.stopPropagation(); instance.setActive(group._footprintsCity, true); });
+            group.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); instance.setActive(group._footprintsCity, true); }
+            });
+            target.append(group);
+        }
 
         // 城市与沿途走廊共用一个裁切：显露 Blender 的彩色地形，不覆盖色块或绘制路线描边。
         // 到访名单与行程请修改生成脚本的输入，具体步骤见 tools/relief-atlas/ADDING-FOOTPRINTS.md。
@@ -495,24 +580,7 @@
             if (!visitedCity || !path) return;
             const center = centerOf(city, path || geometryPath(region?.geometry));
             visitedClip.append(svgElement('path', { d: path, 'clip-rule': 'evenodd', 'data-clip-city': city.id }));
-            const group = svgElement('g', { class: 'footprints-city', tabindex: 0, role: 'button', 'data-city-id': city.id || city.name || `city-${index}` });
-            group._footprintsCity = { data: city, element: group };
-            group.append(svgElement('path', { d: path, class: 'footprints-city-hit', fill: 'transparent', stroke: 'transparent', 'vector-effect': 'non-scaling-stroke' }));
-            const label = svgElement('text', { x: center[0], y: center[1] - 9, class: 'footprints-city-label-text', 'text-anchor': 'middle' });
-            label.textContent = nameOf(city);
-            group.append(label);
-            const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-            title.textContent = nameOf(city);
-            group.prepend(title);
-            group.addEventListener('pointerenter', () => instance.setActive(group._footprintsCity));
-            group.addEventListener('pointerleave', () => { if (document.activeElement !== group) instance.setActive(null); });
-            group.addEventListener('focus', () => instance.setActive(group._footprintsCity));
-            group.addEventListener('blur', () => instance.setActive(null));
-            group.addEventListener('click', event => { event.stopPropagation(); instance.setActive(group._footprintsCity, true); });
-            group.addEventListener('keydown', event => {
-                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); instance.setActive(group._footprintsCity, true); }
-            });
-            cityGroup.append(group);
+            appendRegionHit(cityGroup, city, path, center, 'data-city-id', index);
         });
 
         (map.routes || []).forEach(route => {
@@ -527,18 +595,56 @@
             fillGroup.append(svgElement('image', { href: colorSource, x: 0, y: 0, width, height, preserveAspectRatio: 'none', class: 'footprints-map-visited-image', 'clip-path': `url(#${visitedClipId})` }));
         }
 
+        // overview.regions.visited 是粗图唯一的点亮依据。路过省份不算到访，路线只在明细图显示。
+        // 彩色材质必须由生成器按省／文化区／国家烤制，特别是欧美同一国家保持一种颜色。
+        const overviewClipId = `footprints-${definition.id}-overview-visited`;
+        const overviewClip = svgElement('clipPath', { id: overviewClipId, clipPathUnits: 'userSpaceOnUse' });
+        defs.append(overviewClip);
+        overviewRegions.forEach((region, index) => {
+            const path = geometryPath(region.geometry || region.path || region.d);
+            if (!path) return;
+            if (region.visited === true) {
+                overviewClip.append(svgElement('path', { d: path, 'clip-rule': 'evenodd', 'data-clip-region': region.id }));
+            }
+            appendRegionHit(overviewRegionGroup, region, path, centerOf(region, path), 'data-region-id', index);
+        });
+        if (overviewClip.childElementCount && overviewColorSource) {
+            overviewFillGroup.append(svgElement('image', { href: overviewColorSource, x: 0, y: 0, width, height, preserveAspectRatio: 'none', class: 'footprints-map-visited-image', 'clip-path': `url(#${overviewClipId})` }));
+        }
+
+        terrain.addEventListener('load', () => { assets.terrain = 'ready'; updateAssetState(); });
+        terrain.addEventListener('error', () => { assets.terrain = 'error'; updateAssetState(); });
+        terrain.src = source;
+        const preloadColor = (view, url) => {
+            if (!url) { assets[view] = 'error'; return; }
+            const image = new Image();
+            image.addEventListener('load', () => { assets[view] = 'ready'; updateAssetState(); });
+            image.addEventListener('error', () => {
+                assets[view] = 'error';
+                console.error(`Footprints ${definition.id} ${view} image unavailable: ${url}`);
+                updateAssetState();
+            });
+            image.src = url;
+        };
+        preloadColor('detail', colorSource);
+        if (hasOverview) preloadColor('overview', overviewColorSource);
+
         box.append(controlsFor(instance));
         const openButton = document.createElement('button');
         openButton.type = 'button';
         openButton.className = 'footprints-map-open';
         openButton.setAttribute('aria-haspopup', 'dialog');
         openButton.addEventListener('click', () => instance.openViewer());
-        box.closest('.footprints-map-card').querySelector('.map-card-title').append(openButton);
+        const titleActions = document.createElement('div');
+        titleActions.className = 'footprints-map-title-actions';
+        titleActions.append(viewToggleFor(instance), openButton);
+        box.closest('.footprints-map-card').querySelector('.map-card-title').append(titleActions);
         const north = document.createElement('div');
         north.className = 'footprints-map-north';
         north.setAttribute('aria-hidden', 'true');
         north.textContent = 'N ↑';
         box.append(north);
+        instance.setView(instance.view);
         instance.updateTransform();
         let drag = null;
         let suppressClick = false;

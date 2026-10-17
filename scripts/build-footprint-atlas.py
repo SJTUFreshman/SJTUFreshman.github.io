@@ -290,6 +290,10 @@ def package(identifiers, render_root):
         metadata["routes"] = route_data(metadata, journeys, provinces) if identifier != "europe_usa" else []
         maps[identifier] = metadata
     write_json(OUTPUT / "atlas.json", {"version": 3, "maps": maps})
+    # 概览是默认视图：新增城市后同步推导到访省，不能只更新细分图或丢掉已归档的文化区/国家层。
+    # 新层复用已烤制材质，仅重新计算到访裁切；无需联网、重渲或重新编码概览图片。
+    overviews = load_module(ROOT / "scripts" / "build-footprint-overviews.py", "footprint_overviews")
+    overviews.package(identifiers, encode_images=False)
     # 打包后核验，再同步更新前端 ATLAS_VERSION、life.html 的 atlas= 和所有 Life 资源的共享 v=。
     print(json.dumps({identifier: {"visited": sum(region["visited"] for region in data["regions"]),
                                    "routes": len(data["routes"])} for identifier, data in maps.items()}))
