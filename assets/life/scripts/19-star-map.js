@@ -12,6 +12,8 @@ class LifeStarMap {
         this.pointers = new Map();
         this.wheelOrbitUntil = 0;
         this.groups = new Map();
+        this.labelLayout = new StarMapLabelLayout();
+        this.labelOrder = null;
         this.flight = null;
         this.lastFrame = 0;
         this.hover = null;
@@ -154,35 +156,37 @@ class LifeStarMap {
 
     drawEntities() {
         const languageIndex = Math.max(0, LANGUAGES.indexOf(state.currentLang));
-        const occupied = [...(this.portalRects || []), ...(this.galaxyMix < 0.28 ? this.projectedPortalStars || [] : []).map(point =>
-            ({ left: point.x - 12, right: point.x + 12, top: point.y - 12, bottom: point.y + 12 }))];
+        const occupied = [...(this.portalRects || [])];
+        const stars = this.galaxyMix < 0.28 ? this.projectedPortalStars || [] : [];
         for (const entity of this.entities) {
+            const key = `entity:${entity.id}`;
             const projected = this.project(entity.position, this.currentView, entity.level === 'galaxy');
             const levelVisible = entity.level === 'galaxy' ? this.galaxyMix > 0.72 : this.galaxyMix < 0.23;
-            const visible = levelVisible && projected.visible && state.scene === 'roam' && !this.flight;
-            entity.button.hidden = !visible;
-            entity.button.inert = !visible;
-            if (!visible) continue;
+            const active = levelVisible && projected.visible && state.scene === 'roam' && !this.flight;
+            if (!active) {
+                entity.button.hidden = true;
+                entity.button.inert = true;
+                this.labelLayout.hide(key);
+                continue;
+            }
             const labelWidth = window.innerWidth < 760 ? 132 : 168;
-            let labelX = clamp(projected.x, labelWidth * 0.5 + 14, window.innerWidth - labelWidth * 0.5 - 14);
-            let labelY = projected.y;
+            const anchorX = clamp(projected.x, labelWidth * 0.5 + 14, window.innerWidth - labelWidth * 0.5 - 14);
             const verticalOffsets = [0, -65, 65, -108, 108, -156, 156, -220, 220, -280, 280];
-            const positions = verticalOffsets.map(offset => [labelX, projected.y + offset]);
+            const positions = verticalOffsets.map(offset => [anchorX, projected.y + offset]);
             for (const offset of [-labelWidth, labelWidth]) {
-                const x = clamp(labelX + offset, labelWidth * 0.5 + 14, window.innerWidth - labelWidth * 0.5 - 14);
+                const x = clamp(anchorX + offset, labelWidth * 0.5 + 14, window.innerWidth - labelWidth * 0.5 - 14);
                 positions.push(...verticalOffsets.map(offsetY => [x, projected.y + offsetY]));
             }
-            for (const [x, y] of positions) {
-                const candidate = { left: x - labelWidth * 0.5, right: x + labelWidth * 0.5,
-                    top: y - 28, bottom: y + 52 };
-                if (candidate.top < 106 || candidate.bottom > window.innerHeight - 105) continue;
-                if (occupied.some(rect => candidate.left < rect.right + 8 && candidate.right > rect.left - 8
-                    && candidate.top < rect.bottom + 6 && candidate.bottom > rect.top - 6)) continue;
-                labelX = x;
-                labelY = y;
-                occupied.push(candidate);
-                break;
-            }
+            const candidates = positions.map(([x, y]) => ({ left: x - labelWidth * 0.5, right: x + labelWidth * 0.5,
+                top: y - 28, bottom: y + 52 }));
+            const rect = this.labelLayout.place(key, projected, candidates, occupied, stars,
+                { left: 12, right: window.innerWidth - 12, top: 106, bottom: window.innerHeight - 105 });
+            entity.button.hidden = !rect;
+            entity.button.inert = !rect;
+            if (!rect) continue;
+            occupied.push(rect);
+            const labelX = (rect.left + rect.right) * 0.5, labelY = rect.top + 28;
+            entity.button.style.opacity = rect.opacity;
             entity.button.style.width = `${labelWidth}px`;
             entity.button.style.transform = `translate3d(${labelX}px,${labelY}px,0) translate(-50%,-35%)`;
             entity.button.querySelector('span').textContent = entity.names[languageIndex];
@@ -194,7 +198,7 @@ class LifeStarMap {
                 context.beginPath();
                 context.moveTo(projected.x, projected.y - 12);
                 context.lineTo(labelX, labelY - 12);
-                context.strokeStyle = 'rgba(162,180,203,.22)';
+                context.strokeStyle = `rgba(162,180,203,${0.22 * rect.opacity})`;
                 context.lineWidth = 0.7;
                 context.stroke();
             }
@@ -650,10 +654,12 @@ class LifeStarMap {
         context.setTransform(overlayDpr, 0, 0, overlayDpr, 0, 0);
         context.clearRect(0, 0, overlayWidth, overlayHeight);
         const labelRects = [];
+        this.labelLayout.beginFrame(delta);
         this.projectedPortalStars = Array.from(this.groups.values()).flatMap(group => group.points.map(point => this.project(point))).filter(point => point.visible);
-        const ordered = Array.from(this.groups.values()).sort((left, right) =>
-            Number(right.portal === this.hover) - Number(left.portal === this.hover)
-            || this.project(right.center).y - this.project(left.center).y);
+        // Allocate collision priority once per viewport. Hover and changing screen
+        // height must not make neighbouring labels exchange positions each frame.
+        const ordered = this.labelOrder ||= Array.from(this.groups.values()).sort((left, right) =>
+            this.project(right.center).y - this.project(left.center).y || left.index - right.index);
         for (const group of ordered) {
             const portal = group.portal;
             const selected = this.selected === portal;
@@ -701,14 +707,16 @@ class LifeStarMap {
             if (!selected) portal.starButtons.forEach(button => { button.hidden = true; button.inert = true; });
             const center = this.project(group.center);
             portal.screen = center;
-            const visiblePoints = points.filter(point => point.visible);
-            const labelRect = this.placePortalLabel(center, visiblePoints, labelRects);
+            const labelsActive = this.galaxyMix < 0.28 && state.scene === 'roam' && !this.flight;
+            const labelRect = labelsActive ? this.placePortalLabel(group, center, points, labelRects) : null;
+            if (!labelsActive) this.labelLayout.hide(`portal:${portal.id}`);
             const visible = this.galaxyMix < 0.28 && state.scene === 'roam' && !this.flight && Boolean(labelRect);
             portal.button.hidden = !visible;
             portal.button.inert = !visible;
             portal.buttonVisible = visible;
             if (visible) {
                 labelRects.push(labelRect);
+                portal.button.style.opacity = labelRect.opacity;
                 portal.button.style.transform = `translate3d(${(labelRect.left + labelRect.right) * 0.5}px,${labelRect.top}px,0) translateX(-50%)`;
                 portal.button.classList.toggle('is-highlighted', emphasized);
             }
@@ -716,30 +724,29 @@ class LifeStarMap {
         this.portalRects = labelRects;
     }
 
-    placePortalLabel(center, points, occupied) {
-        if (!points.length || center.depth <= 8) return null;
+    placePortalLabel(group, center, points, occupied) {
+        const key = `portal:${group.portal.id}`;
+        if (!points.some(point => point.visible) || center.depth <= 8) {
+            this.labelLayout.hide(key);
+            return null;
+        }
+        // Include offscreen stars on the front hemisphere: clipping individual
+        // vertices out of the bounds made the label anchor jump at screen edges.
+        const front = points.filter(point => point.depth > 8 && Number.isFinite(point.x) && Number.isFinite(point.y));
         const width = window.innerWidth < 760 ? 112 : 154, height = 44;
-        const top = Math.min(...points.map(point => point.y));
-        const bottom = Math.max(...points.map(point => point.y));
-        const left = Math.min(...points.map(point => point.x));
-        const right = Math.max(...points.map(point => point.x));
+        const top = Math.min(...front.map(point => point.y));
+        const bottom = Math.max(...front.map(point => point.y));
+        const left = Math.min(...front.map(point => point.x));
+        const right = Math.max(...front.map(point => point.x));
         const x = clamp(center.x, width * 0.5 + 14, overlayWidth - width * 0.5 - 14);
-        // Try the familiar below-star position, then above and beside the figure.
-        // A constellation near the footer must not lose its name altogether.
         const candidates = [[x, bottom + 16], [x, top - height - 16],
             [right + width * 0.5 + 16, center.y - height * 0.5],
             [left - width * 0.5 - 16, center.y - height * 0.5],
-            [x, bottom + 16 + height + 10], [x, top - height * 2 - 26]];
-        for (const [labelX, labelY] of candidates) {
-            const rect = { left: labelX - width * 0.5, right: labelX + width * 0.5, top: labelY, bottom: labelY + height };
-            if (rect.left < 12 || rect.right > overlayWidth - 12 || rect.top < 110 || rect.bottom > overlayHeight - (window.innerWidth < 760 ? 110 : 60)) continue;
-            if (occupied.some(other => rect.left < other.right + 8 && rect.right > other.left - 8
-                && rect.top < other.bottom + 8 && rect.bottom > other.top - 8)) continue;
-            if (this.projectedPortalStars.some(point => point.x > rect.left - 10 && point.x < rect.right + 10
-                && point.y > rect.top - 10 && point.y < rect.bottom + 10)) continue;
-            return rect;
-        }
-        return null;
+            [x, bottom + 16 + height + 10], [x, top - height * 2 - 26]]
+            .map(([labelX, labelY]) => ({ left: labelX - width * 0.5, right: labelX + width * 0.5,
+                top: labelY, bottom: labelY + height }));
+        return this.labelLayout.place(key, center, candidates, occupied, this.projectedPortalStars,
+            { left: 12, right: overlayWidth - 12, top: 110, bottom: overlayHeight - (window.innerWidth < 760 ? 110 : 60) });
     }
 
     portalStarAt(x, y, touch = false) {
@@ -773,6 +780,8 @@ class LifeStarMap {
 
     resize() {
         this.rendererViewKey = null;
+        this.labelLayout.clear();
+        this.labelOrder = null;
         this.fov = (window.innerWidth / window.innerHeight < 0.85 ? 78 : 52) * DEG;
         if (this.deepSky?.active) this.deepSky.resize();
         resizeOverlay();
