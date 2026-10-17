@@ -3,10 +3,20 @@ class StarMapRenderer {
         this.canvas = canvas;
         this.fallbackCanvas = fallbackCanvas;
         this.fallback = fallbackCanvas.getContext('2d');
-        this.stars = stars;
+        this.localStars = stars;
+        // Keep the nearby Hipparcos catalogue intact, then add a sparse finite
+        // continuation of the Milky Way.  These points stay in galactic
+        // coordinates and therefore retain parallax while the observer moves.
+        this.environmentStars = this.buildEnvironmentStars();
+        this.stars = new Float32Array(stars.length + this.environmentStars.length);
+        this.stars.set(stars);
+        this.stars.set(this.environmentStars, stars.length);
+        this.environmentStarCount = this.environmentStars.length / 9;
+        this.environmentStrength = 1;
         this.ready = false;
         this.assetVersion = 0;
         this.contextVersion = 0;
+        this.skyVersion = 0;
         this.resources = [];
         this.initialize();
         canvas.addEventListener('webglcontextlost', event => {
@@ -20,7 +30,57 @@ class StarMapRenderer {
             this.initialize();
             this.assetVersion++;
             if (this.galacticPreparationRequested) this.prepareGalacticAssets();
+            if (this.skySource) this.prepareSkyAsset(this.skySource).catch(error => {
+                console.warn('Milky Way environment could not restore its texture:', error.message);
+            });
         });
+        requestAnimationFrame(() => this.loadSkyAssets());
+    }
+
+    buildEnvironmentStars() {
+        const values = [];
+        let seed = 0x51f15e;
+        const random = () => {
+            seed += 0x6d2b79f5;
+            let value = Math.imul(seed ^ seed >>> 15, seed | 1);
+            value ^= value + Math.imul(value ^ value >>> 7, value | 61);
+            return ((value ^ value >>> 14) >>> 0) / 4294967296;
+        };
+        const add = (x, y, z, warmth, light, size) => values.push(x, y, z,
+            lerp(0.72, 1, warmth), lerp(0.84, 0.79, warmth), lerp(1, 0.61, warmth), light, size, 3);
+        // Four finite, offset arm segments.  Their uneven density and waviness
+        // keep the background from reading as a concentric shell.
+        const arms = [
+            { z: 105, curve: 0.000075, wave: 135, frequency: 0.00125, spread: 145, weight: 1.0 },
+            { z: -1130, curve: 0.000045, wave: 180, frequency: 0.00088, spread: 205, weight: 0.68 },
+            { z: 1570, curve: 0.000055, wave: 215, frequency: 0.00102, spread: 230, weight: 0.55 },
+            { z: 780, curve: -0.00008, wave: 170, frequency: 0.00155, spread: 190, weight: 0.42 }
+        ];
+        this.environmentClouds = [];
+        for (const arm of arms) {
+            for (let sample = 0; sample < 27; sample++) {
+                const x = sample * 235 - 3055;
+                const z = arm.z + arm.curve * x * x + Math.sin(x * arm.frequency) * arm.wave;
+                if (Math.hypot(x, z) > 330 && Math.hypot(x, z) < 3600) {
+                    this.environmentClouds.push({ position: [x, Math.sin(x * 0.0014 + z * 0.0006) * 30, z],
+                        radius: arm.spread * (0.95 + random() * 0.45), weight: arm.weight * (0.55 + random() * 0.45) });
+                }
+            }
+            for (let index = 0; index < 6200; index++) {
+                const x = random() * 6500 - 3250;
+                const centre = arm.z + arm.curve * x * x + Math.sin(x * arm.frequency) * arm.wave;
+                const z = centre + (random() + random() + random() - 1.5) * arm.spread;
+                const y = (random() + random() + random() - 1.5) * (44 + Math.abs(x) * 0.007);
+                const radius = Math.hypot(x, z);
+                if (radius < 180 || radius > 3600) continue;
+                const clump = random();
+                if (clump > arm.weight * 0.52) continue;
+                const warmth = clamp(0.18 + random() * 0.7 + (clump < 0.055 ? 0.2 : 0), 0, 1);
+                const light = clamp((0.038 + random() * 0.21) * arm.weight * (clump < 0.055 ? 2.8 : 1), 0.024, 0.38);
+                add(x, y, z, warmth, light, clamp(2.0 + random() * 3.2 + (clump < 0.055 ? 1.6 : 0), 2, 7));
+            }
+        }
+        return new Float32Array(values);
     }
 
     program(vertexSource, fragmentSource) {
@@ -72,6 +132,8 @@ class StarMapRenderer {
                 uniform float uAspect;
                 uniform float uTangent;
                 uniform float uGalaxy;
+                uniform float uEnvironmentStrength;
+                uniform float uMoving;
                 uniform sampler2D uGalacticDisk;
                 uniform sampler2D uGalacticDust;
                 float hash(vec3 point) {
@@ -108,6 +170,67 @@ class StarMapRenderer {
                     vec2 screen = (vUv * 2.0 - 1.0) * vec2(uAspect, 1.0) * uTangent;
                     vec3 ray = normalize(uForward + screen.x * uRight + screen.y * uUp);
                     vec3 color = vec3(0.007, 0.009, 0.017);
+                    float localTransmission = 1.0;
+                    // A finite volume surrounds the original neighbourhood.  The
+                    // local spur continues outwards, with adjacent arm fragments
+                    // at different depths.  Do not anchor this field to the eye.
+                    if (uGalaxy < 1.0 && uEnvironmentStrength > 0.0) {
+                        vec3 extent = vec3(4200.0, 560.0, 3400.0);
+                        vec3 origin = uCamera / extent;
+                        vec3 direction = ray / extent;
+                        float quadratic = dot(direction, direction);
+                        float projected = dot(origin, direction);
+                        float intersection = projected * projected - quadratic * (dot(origin, origin) - 1.0);
+                        if (intersection > 0.0) {
+                            float entry = max(0.0, (-projected - sqrt(intersection)) / quadratic);
+                            float exitDistance = max(0.0, (-projected + sqrt(intersection)) / quadratic);
+                            float transmission = 1.0;
+                            vec3 light = vec3(0.0);
+                            float jitter = hash(vec3(floor(gl_FragCoord.xy), 8.1));
+                            float steps = mix(48.0, 32.0, uMoving);
+                            for (int armStep = 0; armStep < 48; armStep++) {
+                                if (float(armStep) >= steps) break;
+                                float intervalStart = pow(float(armStep) / steps, 1.65);
+                                float intervalEnd = pow(float(armStep + 1) / steps, 1.65);
+                                float distance = mix(entry, exitDistance, mix(intervalStart, intervalEnd, 0.3 + jitter * 0.4));
+                                float stepSize = (exitDistance - entry) * (intervalEnd - intervalStart);
+                                vec3 point = uCamera + ray * distance;
+                                float radius = length(point.xz);
+                                float localSpur = 105.0 + point.x * point.x * 0.000075 + sin(point.x * 0.00125) * 135.0;
+                                float innerArm = -1130.0 + point.x * point.x * 0.000045 + sin(point.x * 0.00088) * 180.0;
+                                float outerArm = 1570.0 + point.x * point.x * 0.000055 + sin(point.x * 0.00102) * 215.0;
+                                float branch = 780.0 - point.x * point.x * 0.00008 + sin(point.x * 0.00155) * 170.0;
+                                vec4 offsets = (point.z - vec4(localSpur, innerArm, outerArm, branch)) / vec4(205.0, 310.0, 350.0, 250.0);
+                                vec4 profiles = exp(-offsets * offsets * 1.4) * vec4(1.0, 0.67, 0.52, 0.32);
+                                float warp = sin(point.x * 0.0014 + point.z * 0.0006) * (15.0 + radius * 0.009);
+                                float height = point.y - warp;
+                                float vertical = exp(-pow(height / (84.0 + radius * 0.018), 2.0));
+                                float apron = smoothstep(165.0, 360.0, radius) * (1.0 - smoothstep(2900.0, 3950.0, radius));
+                                float arms = dot(profiles, vec4(1.0)) * vertical * apron;
+                                if (arms > 0.002) {
+                                    vec3 samplePoint = point * vec3(0.0036, 0.009, 0.0055);
+                                    float coarse = noise(samplePoint + vec3(7.4, 3.7, 11.9));
+                                    float detail = noise(samplePoint * 2.07 + vec3(21.0, 4.0, 8.0));
+                                    float grain = noise(samplePoint * 4.13 + vec3(5.0, 27.0, 13.0));
+                                    float structure = coarse * 0.55 + detail * 0.30 + grain * 0.15;
+                                    float density = arms * smoothstep(0.29, 0.75, structure);
+                                    float dust = arms * smoothstep(0.38, 0.72, detail * 0.65 + grain * 0.35)
+                                        * exp(-pow(height / 62.0, 2.0));
+                                    float opticalDepth = (density * 0.0017 + dust * 0.0065) * stepSize;
+                                    float absorption = exp(-opticalDepth);
+                                    vec3 tint = mix(vec3(0.33, 0.41, 0.53), vec3(0.54, 0.43, 0.31),
+                                        smoothstep(-1200.0, 900.0, point.z) * 0.7 + structure * 0.15);
+                                    float starFormation = smoothstep(0.42, 0.76, structure);
+                                    light += tint * density * (0.20 + starFormation * 0.95)
+                                        * (1.0 - smoothstep(0.12, 0.65, dust) * 0.60) * transmission * stepSize * 0.00165;
+                                    transmission *= absorption;
+                                }
+                            }
+                            float visibility = (1.0 - uGalaxy) * uEnvironmentStrength;
+                            color = color * mix(1.0, transmission, visibility) + light * visibility;
+                            localTransmission *= mix(1.0, transmission, visibility);
+                        }
+                    }
                     if (uGalaxy < 1.0) {
                         float band = exp(-pow((ray.y + ray.z * 0.24) * 3.0, 2.0));
                         float distant = field(ray * 6.0 + 11.0);
@@ -139,6 +262,7 @@ class StarMapRenderer {
                             transmission *= absorption;
                         }
                         color = mix(color * transmission + cloud, color, uGalaxy);
+                        localTransmission *= mix(transmission, 1.0, uGalaxy);
                     }
                     if (uGalaxy > 0.0) {
                         float surfaceWeight = smoothstep(0.12, 0.32, abs(ray.y));
@@ -212,7 +336,8 @@ class StarMapRenderer {
                     }
                     color = 1.0 - exp(-color * 1.45);
                     color += (hash(vec3(gl_FragCoord.xy, 0.0)) - 0.5) / 255.0;
-                    gl_FragColor = vec4(color, 1.0);
+                    // Keep the local volume's transmittance for the sharp, distant sky layer.
+                    gl_FragColor = vec4(color, localTransmission);
                 }
             `);
             this.copyProgram = this.program(`
@@ -226,6 +351,8 @@ class StarMapRenderer {
                 precision highp float;
                 varying vec2 vUv;
                 uniform sampler2D uTexture;
+                uniform sampler2D uSky;
+                uniform float uSkyOpacity;
                 uniform sampler2D uGalacticDisk;
                 uniform sampler2D uGalacticDust;
                 uniform vec3 uCamera;
@@ -239,11 +366,23 @@ class StarMapRenderer {
                     return -log(max(vec3(0.015), 1.0 - disk * 0.96)) / 1.45;
                 }
                 void main() {
-                    vec3 background = texture2D(uTexture, vUv).rgb;
+                    vec4 volume = texture2D(uTexture, vUv);
+                    vec3 background = volume.rgb;
+                    vec2 screen = (vUv * 2.0 - 1.0) * vec2(uAspect, 1.0) * uTangent;
+                    vec3 ray = normalize(uForward + screen.x * uRight + screen.y * uUp);
+                    if (uSkyOpacity > 0.0 && uGalaxy < 1.0) {
+                        // Galactic X/Y/Z are longitude 90 deg / north / centre. The
+                        // far field rotates with the view, with no local parallax.
+                        vec2 skyUv = vec2(fract(0.5 - atan(ray.x, ray.z) / 6.28318530718),
+                            0.5 + asin(clamp(ray.y, -1.0, 1.0)) / 3.14159265359);
+                        vec3 sky = texture2D(uSky, skyUv).rgb * 0.12;
+                        // Composite behind the unchanged 3D cloud, in its radiance
+                        // space, so foreground dust occludes the environment.
+                        float visibility = uSkyOpacity * (1.0 - uGalaxy) * volume.a;
+                        background = 1.0 - (1.0 - background) * pow(1.0 - sky, vec3(visibility));
+                    }
                     vec3 light = vec3(0.0);
                     if (uGalaxy > 0.0) {
-                        vec2 screen = (vUv * 2.0 - 1.0) * vec2(uAspect, 1.0) * uTangent;
-                        vec3 ray = normalize(uForward + screen.x * uRight + screen.y * uUp);
                         float surfaceWeight = smoothstep(0.12, 0.32, abs(ray.y));
                         if (surfaceWeight > 0.0) {
                             float distanceToDisk = -uCamera.y / ray.y;
@@ -283,12 +422,16 @@ class StarMapRenderer {
                 uniform float uTangent;
                 uniform float uDpr;
                 uniform float uGalaxy;
+                uniform float uEnvironmentStrength;
                 varying vec3 vColor;
                 varying float vLight;
                 varying float vSize;
+                varying float vEnvironment;
+                varying float vEnvironmentPath;
                 void main() {
                     float background = step(0.5, aBackground) * (1.0 - step(1.5, aBackground));
-                    float galaxy = step(1.5, aBackground);
+                    float galaxy = step(1.5, aBackground) * (1.0 - step(2.5, aBackground));
+                    float environment = step(2.5, aBackground);
                     vec3 position = aPosition;
                     if (aBackground < 0.5) position = mix(position, vec3(112.0, 2.0, 74.0) + position * 0.09, uGalaxy);
                     vec3 relative = position - uCamera * (1.0 - background);
@@ -297,6 +440,7 @@ class StarMapRenderer {
                     gl_Position = vec4(plane / (uTangent * vec2(uAspect, 1.0)), 0.0, max(depth, 0.001));
                     if (depth <= 1.0) gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
                     float distanceGain = mix(clamp(320.0 / max(depth, 30.0), 0.48, 2.4), 1.0, max(background, galaxy));
+                    if (environment > 0.5) distanceGain = clamp(1000.0 / max(depth, 120.0), 0.30, 1.8);
                     vSize = max(3.0, aSize * uDpr * sqrt(distanceGain));
                     gl_PointSize = min(36.0 * uDpr, vSize);
                     vColor = aColor;
@@ -304,12 +448,19 @@ class StarMapRenderer {
                     vLight *= mix(1.0, uGalaxy, galaxy);
                     vLight *= 1.0 - background * uGalaxy * 0.90;
                     if (aBackground < 0.5) vLight *= 1.0 - uGalaxy;
+                    if (environment > 0.5) vLight *= (1.0 - uGalaxy) * uEnvironmentStrength;
+                    vEnvironment = environment;
+                    vEnvironmentPath = clamp(depth / 3000.0, 0.18, 1.0);
                 }
             `, `
                 precision mediump float;
+                uniform sampler2D uVolume;
+                uniform vec2 uViewport;
                 varying vec3 vColor;
                 varying float vLight;
                 varying float vSize;
+                varying float vEnvironment;
+                varying float vEnvironmentPath;
                 void main() {
                     vec2 local = (gl_PointCoord - 0.5) * 2.0;
                     float radius = length(local);
@@ -319,7 +470,12 @@ class StarMapRenderer {
                         * max(0.0, 1.0 - abs(local.y * vSize * 0.5));
                     float profile = mix(smallCore, core + halo * 0.12, smoothstep(3.0, 7.0, vSize));
                     vec3 color = mix(vColor, vec3(1.0, 0.98, 0.95), core * 0.65);
-                    gl_FragColor = vec4(color * profile * vLight * 1.08, 1.0);
+                    float visibility = 1.0;
+                    // The volume stores whole-ray transmittance.  A finite arm
+                    // star traverses only part of it; approximate that fraction
+                    // by its depth instead of applying all background dust.
+                    if (vEnvironment > 0.5) visibility = pow(texture2D(uVolume, gl_FragCoord.xy / uViewport).a, vEnvironmentPath);
+                    gl_FragColor = vec4(color * profile * vLight * 1.08 * visibility, 1.0);
                 }
             `);
             this.quad = context.createBuffer();
@@ -344,6 +500,8 @@ class StarMapRenderer {
             this.starAttributes = [['aPosition', 3, 0], ['aColor', 3, 3], ['aLight', 1, 6], ['aSize', 1, 7], ['aBackground', 1, 8]]
                 .map(([name, size, offset]) => [this.attribute(this.starProgram, name), size, offset]);
             this.createGalacticDisk();
+            this.skyTexture = this.createSkyTexture();
+            this.skyUploaded = false;
             this.ready = true;
             this.resize();
         } catch (error) {
@@ -389,6 +547,98 @@ class StarMapRenderer {
             context.generateMipmap(context.TEXTURE_2D);
         }
         this.galacticUploadVersion = -1;
+    }
+
+    createSkyTexture() {
+        const context = this.gl;
+        const texture = context.createTexture();
+        context.bindTexture(context.TEXTURE_2D, texture);
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_MIN_FILTER, context.LINEAR_MIPMAP_LINEAR);
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_MAG_FILTER, context.LINEAR);
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_S, context.REPEAT);
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_T, context.CLAMP_TO_EDGE);
+        context.texImage2D(context.TEXTURE_2D, 0, context.RGBA, 1, 1, 0, context.RGBA, context.UNSIGNED_BYTE,
+            new Uint8Array([0, 0, 0, 255]));
+        context.generateMipmap(context.TEXTURE_2D);
+        return texture;
+    }
+
+    skyOpacity() {
+        if (this.skyLoadedAt == null) return 0;
+        return REDUCED_MOTION ? 1 : smoothstep(0, 1, (performance.now() - this.skyLoadedAt) / 700);
+    }
+
+    loadSkyAssets() {
+        if (this.skyAssetsPromise) return this.skyAssetsPromise;
+        this.skyAssetsPromise = (async () => {
+            for (const name of ['milky-way-preview', 'milky-way-sky']) {
+                try {
+                    const response = await fetch(`assets/life/sky/${name}.webp?v=20261017-environment`, { priority: 'low' });
+                    if (!response.ok) throw new Error(`Cannot load ${name}: ${response.status}`);
+                    const blob = await response.blob();
+                    const url = URL.createObjectURL(blob);
+                    const image = new Image();
+                    image.decoding = 'async';
+                    try {
+                        image.src = url;
+                        await image.decode();
+                    } finally {
+                        URL.revokeObjectURL(url);
+                    }
+                    const source = { image, blob };
+                    this.skySource = source;
+                    await this.prepareSkyAsset(source);
+                } catch (error) {
+                    console.warn('Milky Way environment keeps its available detail:', error.message);
+                }
+            }
+        })();
+        return this.skyAssetsPromise;
+    }
+
+    async prepareSkyAsset(source) {
+        const version = this.contextVersion;
+        const context = this.gl;
+        let bitmap = null;
+        try {
+            if (this.ready) {
+                const limit = Math.min(this.maxTextureSize, COARSE_POINTER ? 4096 : 8192);
+                const width = Math.min(source.image.width, limit);
+                const height = Math.round(source.image.height * width / source.image.width);
+                if (typeof createImageBitmap === 'function') {
+                    bitmap = await createImageBitmap(source.blob, { imageOrientation: 'flipY', premultiplyAlpha: 'none',
+                        resizeWidth: width, resizeHeight: height, resizeQuality: 'high' }).catch(() => null);
+                }
+                // Keep the larger upload out of a drag or a galaxy camera flight.
+                while (this.lastView?.moving && version === this.contextVersion) {
+                    await new Promise(resolve => setTimeout(resolve, 120));
+                }
+                await new Promise(resolve => requestAnimationFrame(resolve));
+                if (version !== this.contextVersion || this.skySource !== source || !this.ready) return;
+                let upload = bitmap || source.image;
+                if (!bitmap && source.image.width > width) {
+                    upload = document.createElement('canvas');
+                    upload.width = width;
+                    upload.height = height;
+                    upload.getContext('2d').drawImage(source.image, 0, 0, width, height);
+                }
+                context.activeTexture(context.TEXTURE3);
+                context.bindTexture(context.TEXTURE_2D, this.skyTexture);
+                context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, !bitmap);
+                context.pixelStorei(context.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+                context.texImage2D(context.TEXTURE_2D, 0, context.RGBA, context.RGBA, context.UNSIGNED_BYTE, upload);
+                context.generateMipmap(context.TEXTURE_2D);
+                context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, false);
+                this.skyUploaded = true;
+                this.skyTextureWidth = width;
+            }
+            if (version !== this.contextVersion || this.skySource !== source) return;
+            this.skyImage = source.image;
+            this.skyLoadedAt ??= performance.now();
+            this.skyVersion++;
+        } finally {
+            bitmap?.close();
+        }
     }
 
     loadGalacticAssets() {
@@ -537,6 +787,8 @@ class StarMapRenderer {
         context.uniform1f(this.uniform(program, 'uAspect'), this.width / this.height);
         context.uniform1f(this.uniform(program, 'uTangent'), Math.tan(view.fov * 0.5));
         context.uniform1f(this.uniform(program, 'uGalaxy'), view.galaxy || 0);
+        context.uniform1f(this.uniform(program, 'uEnvironmentStrength'), this.environmentStrength);
+        context.uniform1f(this.uniform(program, 'uMoving'), view.moving ? 1 : 0);
     }
 
     drawQuad(program) {
@@ -550,6 +802,7 @@ class StarMapRenderer {
     }
 
     render(view) {
+        this.lastView = view;
         const galaxy = view.galaxy > 0;
         if (galaxy && (!this.galacticImage || this.ready && this.galacticUploadVersion !== this.assetVersion)) {
             this.prepareGalacticAssets();
@@ -596,12 +849,20 @@ class StarMapRenderer {
         context.activeTexture(context.TEXTURE2);
         context.bindTexture(context.TEXTURE_2D, this.galacticDust);
         context.uniform1i(this.uniform(this.copyProgram, 'uGalacticDust'), 2);
+        context.activeTexture(context.TEXTURE3);
+        context.bindTexture(context.TEXTURE_2D, this.skyTexture);
+        context.uniform1i(this.uniform(this.copyProgram, 'uSky'), 3);
+        context.uniform1f(this.uniform(this.copyProgram, 'uSkyOpacity'), this.skyUploaded ? this.skyOpacity() : 0);
         this.drawQuad(this.copyProgram);
         context.enable(context.BLEND);
         context.blendFunc(context.ONE, context.ONE);
         context.useProgram(this.starProgram);
         this.viewUniforms(this.starProgram, view);
         context.uniform1f(this.uniform(this.starProgram, 'uDpr'), this.dpr);
+        context.activeTexture(context.TEXTURE0);
+        context.bindTexture(context.TEXTURE_2D, this.texture);
+        context.uniform1i(this.uniform(this.starProgram, 'uVolume'), 0);
+        context.uniform2f(this.uniform(this.starProgram, 'uViewport'), this.canvas.width, this.canvas.height);
         context.bindBuffer(context.ARRAY_BUFFER, this.starBuffer);
         for (const [location, size, offset] of this.starAttributes) {
             context.enableVertexAttribArray(location);
@@ -659,12 +920,83 @@ class StarMapRenderer {
         return canvas;
     }
 
+    renderSkyFallback(view) {
+        const image = this.skyImage;
+        const galaxy = view.galaxy || 0;
+        if (!image || !image.naturalWidth || galaxy >= 1) return;
+        if (this.skyFallbackSource?.image !== image) {
+            const sourceCanvas = document.createElement('canvas');
+            sourceCanvas.width = Math.min(2048, image.naturalWidth);
+            sourceCanvas.height = Math.max(1, Math.round(image.naturalHeight * sourceCanvas.width / image.naturalWidth));
+            const sourceContext = sourceCanvas.getContext('2d', { willReadFrequently: true });
+            sourceContext.drawImage(image, 0, 0, sourceCanvas.width, sourceCanvas.height);
+            this.skyFallbackSource = {
+                image, width: sourceCanvas.width, height: sourceCanvas.height,
+                pixels: sourceContext.getImageData(0, 0, sourceCanvas.width, sourceCanvas.height).data
+            };
+            this.skyFallbackViewKey = null;
+        }
+        const scale = Math.min(1, (view.moving ? 480 : 960) / this.width, (view.moving ? 270 : 540) / this.height);
+        const width = Math.max(1, Math.round(this.width * scale));
+        const height = Math.max(1, Math.round(this.height * scale));
+        const key = [width, height, this.width / this.height, view.fov, ...view.right, ...view.up, ...view.forward].join(',');
+        if (this.skyFallbackViewKey !== key) {
+            const canvas = this.skyFallbackProjection ||= document.createElement('canvas');
+            if (canvas.width !== width) canvas.width = width;
+            if (canvas.height !== height) canvas.height = height;
+            const context = canvas.getContext('2d');
+            const output = this.skyFallbackPixels?.width === width && this.skyFallbackPixels.height === height
+                ? this.skyFallbackPixels : context.createImageData(width, height);
+            const source = this.skyFallbackSource;
+            const tangent = Math.tan(view.fov * 0.5), aspect = this.width / this.height;
+            for (let row = 0; row < height; row++) {
+                const vertical = (1 - (row + 0.5) * 2 / height) * tangent;
+                const rowX = view.forward[0] + vertical * view.up[0];
+                const rowY = view.forward[1] + vertical * view.up[1];
+                const rowZ = view.forward[2] + vertical * view.up[2];
+                for (let column = 0; column < width; column++) {
+                    const horizontal = ((column + 0.5) * 2 / width - 1) * aspect * tangent;
+                    const x = rowX + horizontal * view.right[0];
+                    const y = rowY + horizontal * view.right[1];
+                    const z = rowZ + horizontal * view.right[2];
+                    const longitude = Math.atan2(x, z);
+                    const latitude = Math.asin(Math.max(-1, Math.min(1, y / Math.sqrt(x * x + y * y + z * z))));
+                    const u = 0.5 - longitude / (Math.PI * 2);
+                    const v = 0.5 - latitude / Math.PI;
+                    const sourceX = ((u * source.width - 0.5) % source.width + source.width) % source.width;
+                    const sourceY = Math.max(0, Math.min(source.height - 1, v * source.height - 0.5));
+                    const left = Math.floor(sourceX), top = Math.floor(sourceY);
+                    const right = (left + 1) % source.width, bottom = Math.min(source.height - 1, top + 1);
+                    const fractionX = sourceX - left, fractionY = sourceY - top;
+                    const topLeft = (top * source.width + left) * 4, topRight = (top * source.width + right) * 4;
+                    const bottomLeft = (bottom * source.width + left) * 4, bottomRight = (bottom * source.width + right) * 4;
+                    const destination = (row * width + column) * 4;
+                    for (let channel = 0; channel < 3; channel++) {
+                        const upper = source.pixels[topLeft + channel] * (1 - fractionX) + source.pixels[topRight + channel] * fractionX;
+                        const lower = source.pixels[bottomLeft + channel] * (1 - fractionX) + source.pixels[bottomRight + channel] * fractionX;
+                        output.data[destination + channel] = (upper * (1 - fractionY) + lower * fractionY) * 0.12;
+                    }
+                    output.data[destination + 3] = 255;
+                }
+            }
+            context.putImageData(output, 0, 0);
+            this.skyFallbackPixels = output;
+            this.skyFallbackViewKey = key;
+        }
+        this.fallback.save();
+        this.fallback.globalAlpha = this.skyOpacity() * (1 - galaxy);
+        this.fallback.imageSmoothingEnabled = true;
+        this.fallback.drawImage(this.skyFallbackProjection, 0, 0, this.width, this.height);
+        this.fallback.restore();
+    }
+
     renderFallback(view) {
         const context = this.fallback;
         if (!context) return;
         context.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
         context.fillStyle = '#03050c';
         context.fillRect(0, 0, this.width, this.height);
+        this.renderSkyFallback(view);
         const focal = this.height * 0.5 / Math.tan(view.fov * 0.5);
         const project = position => {
             const depth = dot(position, view.forward);
@@ -673,6 +1005,25 @@ class StarMapRenderer {
                 this.height * 0.5 - dot(position, view.up) / depth * focal, depth];
         };
         const galaxy = view.galaxy || 0;
+        if (galaxy < 1 && this.environmentStrength > 0) {
+            const clouds = this.environmentClouds.map(cloud => ({ ...cloud,
+                projected: project(cloud.position.map((value, axis) => value - view.position[axis])) }))
+                .filter(cloud => cloud.projected).sort((a, b) => b.projected[2] - a.projected[2]);
+            context.save();
+            context.globalCompositeOperation = 'screen';
+            for (const cloud of clouds) {
+                const [x, y, depth] = cloud.projected;
+                const radius = focal * cloud.radius / depth;
+                const alpha = cloud.weight * 0.065 * (1 - galaxy) * this.environmentStrength;
+                const glow = context.createRadialGradient(x, y, 0, x, y, radius);
+                glow.addColorStop(0, `rgba(88,99,124,${alpha})`);
+                glow.addColorStop(0.45, `rgba(76,83,107,${alpha * 0.6})`);
+                glow.addColorStop(1, 'rgba(50,58,76,0)');
+                context.fillStyle = glow;
+                context.fillRect(x - radius, y - radius, radius * 2, radius * 2);
+            }
+            context.restore();
+        }
         if (galaxy > 0) {
             const center = project(view.position.map(value => -value));
             if (center) {
@@ -719,7 +1070,8 @@ class StarMapRenderer {
             });
             const projected = project(relative);
             if (!projected || projected[0] < 0 || projected[0] > this.width || projected[1] < 0 || projected[1] > this.height) continue;
-            const visibility = kind === 0 ? 1 - galaxy : kind === 2 ? galaxy : 1 - galaxy * 0.90;
+            const visibility = kind === 0 ? 1 - galaxy : kind === 2 ? galaxy
+                : kind === 3 ? (1 - galaxy) * this.environmentStrength : 1 - galaxy * 0.90;
             const light = Math.min(1, this.stars[offset + 6] * 0.7 * 1.08) * visibility;
             const color = [3, 4, 5].map(axis => Math.round(this.stars[offset + axis] * 255));
             context.fillStyle = `rgba(${color.join(',')},${light})`;

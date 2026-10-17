@@ -559,11 +559,14 @@ class LifeStarMap {
         this.currentView.moving = Boolean(this.flight || this.pointers.size || poseUnsettled
             || time - (this.lastInputTime ?? -Infinity) < 150);
         const viewKey = [...this.currentView.position, this.yaw, this.pitch, this.galaxyMix].map(value => value.toFixed(4)).join(',')
-            + this.renderer.ready + ':' + this.renderer.assetVersion + ':' + this.currentView.moving;
+            + this.renderer.ready + ':' + this.renderer.assetVersion + ':' + this.currentView.moving
+            + ':' + this.renderer.skyVersion + ':' + this.renderer.skyOpacity().toFixed(3);
         if (viewKey !== this.rendererViewKey) {
             this.renderer.render(this.currentView);
             this.rendererViewKey = viewKey;
         }
+        const skyCredit = document.getElementById('skyCredit');
+        if (skyCredit) skyCredit.hidden = !this.renderer.skyImage || this.galaxyMix >= 1;
         this.drawGroups(delta);
         this.drawEntities();
     }
@@ -814,9 +817,9 @@ class LifeStarMap {
         if (!this.initialized) return;
         if (this.deepSky?.active) { this.deepSky.updateCopy(); return; }
         const copies = {
-            en: { orbit: 'Right drag / Two-finger slide · orbit', pan: 'Left drag · pan', zoom: 'Mouse wheel / Pinch · zoom', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'Constellation shapes and stellar colours follow Hipparcos; distances are composed for exploration. The galaxy adapts ESA’s 2025 Gaia-based artist impression, with adjusted texture filtering, a volumetric bulge and illustrative dust. This is a reconstruction of the Milky Way’s external appearance.', scale: 'NEAR / FAR' },
-            'zh-CN': { orbit: '右键拖动 / 触控板双指滑动 · 旋转', pan: '左键拖动 · 平移', zoom: '滚轮 / 双指捏合 · 缩放', touch: '单指旋转 / 双指缩放与平移', select: '选择一个星座', reset: '回到全景', home: '返回主页', closer: '拉近星图', farther: '拉远星图', overview: '局部星图', detail: '星座', flight: '正在靠近', note: '星座形状与恒星颜色参考 Hipparcos 星表，展示距离经过编排。银河外观改编自 ESA 2025 年基于 Gaia 观测的艺术重建；调整了纹理滤波，并加入体积核球和示意尘埃层。', scale: '近 / 远' },
-            'zh-TW': { orbit: '右鍵拖動 / 觸控板雙指滑動 · 旋轉', pan: '左鍵拖動 · 平移', zoom: '滾輪 / 雙指捏合 · 縮放', touch: '單指旋轉 / 雙指縮放與平移', select: '選擇一個星座', reset: '回到全景', home: '返回主頁', closer: '拉近星圖', farther: '拉遠星圖', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '星座形狀與恆星顏色參考 Hipparcos 星表，展示距離經過編排。銀河外觀改編自 ESA 2025 年基於 Gaia 觀測的藝術重建；調整了紋理濾波，並加入體積核球和示意塵埃層。', scale: '近 / 遠' }
+            en: { orbit: 'Right drag / Two-finger slide · orbit', pan: 'Left drag · pan', zoom: 'Mouse wheel / Pinch · zoom', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'Constellation shapes and stellar colours follow Hipparcos; distances are composed for exploration. The surrounding arm stars and clouds are a 3D illustration; the distant panorama is a dimmed, aligned ESO/S. Brunier photograph. The galaxy adapts ESA’s 2025 Gaia-based artist impression, with adjusted texture filtering, a volumetric bulge and illustrative dust. This is a reconstruction of the Milky Way’s external appearance.', scale: 'NEAR / FAR' },
+            'zh-CN': { orbit: '右键拖动 / 触控板双指滑动 · 旋转', pan: '左键拖动 · 平移', zoom: '滚轮 / 双指捏合 · 缩放', touch: '单指旋转 / 双指缩放与平移', select: '选择一个星座', reset: '回到全景', home: '返回主页', closer: '拉近星图', farther: '拉远星图', overview: '局部星图', detail: '星座', flight: '正在靠近', note: '星座形状与恒星颜色参考 Hipparcos 星表，展示距离经过编排。周围旋臂的星群与云层为三维示意；最远景采用调暗、对齐后的 ESO/S. Brunier 银河实拍。银河外观改编自 ESA 2025 年基于 Gaia 观测的艺术重建；调整了纹理滤波，并加入体积核球和示意尘埃层。', scale: '近 / 远' },
+            'zh-TW': { orbit: '右鍵拖動 / 觸控板雙指滑動 · 旋轉', pan: '左鍵拖動 · 平移', zoom: '滾輪 / 雙指捏合 · 縮放', touch: '單指旋轉 / 雙指縮放與平移', select: '選擇一個星座', reset: '回到全景', home: '返回主頁', closer: '拉近星圖', farther: '拉遠星圖', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '星座形狀與恆星顏色參考 Hipparcos 星表，展示距離經過編排。周圍旋臂的星群與雲層為三維示意；最遠景採用調暗、對齊後的 ESO/S. Brunier 銀河實拍。銀河外觀改編自 ESA 2025 年基於 Gaia 觀測的藝術重建；調整了紋理濾波，並加入體積核球和示意塵埃層。', scale: '近 / 遠' }
         };
         const copy = copies[state.currentLang] || copies.en;
         document.querySelectorAll('[data-map-copy]').forEach(element => { element.textContent = copy[element.dataset.mapCopy] || ''; });

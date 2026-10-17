@@ -64,6 +64,21 @@ body.star-map {
     color: #aab7c9;
 }
 
+.sky-credit {
+    position: fixed;
+    top: 57px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 12;
+    color: #8998ad;
+    font: 0.5rem var(--ui);
+    text-decoration: none;
+    text-underline-offset: 3px;
+}
+
+.sky-credit:hover, .sky-credit:focus-visible { color: #d3deec; text-decoration: underline; }
+.sky-credit[hidden], .deep-sky-open .sky-credit { display: none; }
+
 .star-map .portal-hit.map-portal {
     display: flex;
     align-items: baseline;
@@ -260,6 +275,7 @@ body:not(.lang-en) .map-portal-copy strong {
     .star-map .life-mark strong { font-size: 0.98rem; }
     .star-map .life-mark span { font-size: 0.47rem; }
     .star-map .scene-status { top: 80px; font-size: 0.47rem; }
+    .sky-credit { top: 98px; font-size: 0.45rem; }
     .star-map .language-switch { right: 17px; top: 20px; }
     .map-footer { left: 22px; right: 22px; bottom: max(83px, calc(env(safe-area-inset-bottom) + 70px)); gap: 10px; font-size: 0.54rem; }
     .star-map .portal-hit.map-portal { width: 112px; gap: 5px; }
