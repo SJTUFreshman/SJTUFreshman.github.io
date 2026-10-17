@@ -66,20 +66,46 @@ class StarMapRenderer {
                         radius: arm.spread * (0.95 + random() * 0.45), weight: arm.weight * (0.55 + random() * 0.45) });
                 }
             }
-            for (let index = 0; index < 6200; index++) {
+            for (let index = 0; index < 12500; index++) {
                 const x = random() * 6500 - 3250;
                 const centre = arm.z + arm.curve * x * x + Math.sin(x * arm.frequency) * arm.wave;
                 const z = centre + (random() + random() + random() - 1.5) * arm.spread;
-                const y = (random() + random() + random() - 1.5) * (44 + Math.abs(x) * 0.007);
+                const y = Math.sin(x * 0.0014 + z * 0.0006) * 30
+                    + (random() + random() + random() - 1.5) * (78 + Math.abs(x) * 0.012);
                 const radius = Math.hypot(x, z);
                 if (radius < 180 || radius > 3600) continue;
                 const clump = random();
                 if (clump > arm.weight * 0.52) continue;
                 const warmth = clamp(0.18 + random() * 0.7 + (clump < 0.055 ? 0.2 : 0), 0, 1);
-                const light = clamp((0.038 + random() * 0.21) * arm.weight * (clump < 0.055 ? 2.8 : 1), 0.024, 0.38);
-                add(x, y, z, warmth, light, clamp(2.0 + random() * 3.2 + (clump < 0.055 ? 1.6 : 0), 2, 7));
+                const light = (0.16 + Math.pow(random(), 2) * 0.56) * (0.6 + arm.weight * 0.4)
+                    * (clump < 0.055 ? 1.6 : 1);
+                add(x, y, z, warmth, light, 4.0 + random() * 3.4);
             }
         }
+        this.armStarCount = values.length / 9;
+        // Older disk stars also populate the spaces between spiral arms. These
+        // have finite depths and a thicker vertical distribution, not a shell.
+        for (let index = 0; index < 8500; index++) {
+            const radius = 240 + Math.pow(random(), 0.65) * 4700;
+            const angle = random() * Math.PI * 2;
+            const x = Math.cos(angle) * radius, z = Math.sin(angle) * radius;
+            const height = index % 4 === 0 ? 1400 : 320;
+            const y = (random() + random() + random() - 1.5) * height;
+            const light = 0.11 + Math.pow(random(), 3) * 0.45;
+            add(x, y, z, 0.35 + random() * 0.65, light, 3.8 + random() * 2.6);
+        }
+        this.interarmStarCount = values.length / 9 - this.armStarCount;
+        // A much sparser halo carries a few foreground points above and below
+        // the disk; the actual far sky still comes from the ESO photograph and
+        // Hipparcos catalogue, with their observed angular distribution.
+        for (let index = 0; index < 2200; index++) {
+            const radius = 850 + random() * 4200;
+            const latitude = random() * 2 - 1, azimuth = random() * Math.PI * 2;
+            const plane = Math.sqrt(1 - latitude * latitude) * radius;
+            add(Math.cos(azimuth) * plane, latitude * radius, Math.sin(azimuth) * plane,
+                0.35 + random() * 0.65, 0.14 + Math.pow(random(), 3) * 0.35, 4 + random() * 2);
+        }
+        this.haloStarCount = values.length / 9 - this.armStarCount - this.interarmStarCount;
         return new Float32Array(values);
     }
 
@@ -375,7 +401,13 @@ class StarMapRenderer {
                         // far field rotates with the view, with no local parallax.
                         vec2 skyUv = vec2(fract(0.5 - atan(ray.x, ray.z) / 6.28318530718),
                             0.5 + asin(clamp(ray.y, -1.0, 1.0)) / 3.14159265359);
-                        vec3 sky = texture2D(uSky, skyUv).rgb * 0.12;
+                        // Retain the photographed all-sky field at readable
+                        // exposure even away from the bright Galactic plane.
+                        vec3 sky = texture2D(uSky, skyUv, 0.8).rgb * 0.32;
+                        // Equirectangular photos stretch individual pixels at
+                        // the poles; the real catalogue supplies sharp stars
+                        // there while the photographic field gently recedes.
+                        sky *= 1.0 - smoothstep(0.88, 0.998, abs(ray.y)) * 0.85;
                         // Composite behind the unchanged 3D cloud, in its radiance
                         // space, so foreground dust occludes the environment.
                         float visibility = uSkyOpacity * (1.0 - uGalaxy) * volume.a;
@@ -428,6 +460,7 @@ class StarMapRenderer {
                 varying float vSize;
                 varying float vEnvironment;
                 varying float vEnvironmentPath;
+                varying float vPixelRatio;
                 void main() {
                     float background = step(0.5, aBackground) * (1.0 - step(1.5, aBackground));
                     float galaxy = step(1.5, aBackground) * (1.0 - step(2.5, aBackground));
@@ -440,17 +473,20 @@ class StarMapRenderer {
                     gl_Position = vec4(plane / (uTangent * vec2(uAspect, 1.0)), 0.0, max(depth, 0.001));
                     if (depth <= 1.0) gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
                     float distanceGain = mix(clamp(320.0 / max(depth, 30.0), 0.48, 2.4), 1.0, max(background, galaxy));
-                    if (environment > 0.5) distanceGain = clamp(1000.0 / max(depth, 120.0), 0.30, 1.8);
+                    if (environment > 0.5) distanceGain = clamp(1500.0 / max(length(relative), 120.0), 0.55, 1.6);
                     vSize = max(3.0, aSize * uDpr * sqrt(distanceGain));
+                    if (environment > 0.5) vSize = max(4.0 * uDpr, vSize);
                     gl_PointSize = min(36.0 * uDpr, vSize);
                     vColor = aColor;
                     vLight = aLight * smoothstep(5.0, 24.0, depth) * mix(sqrt(distanceGain), 1.0, max(background, galaxy));
                     vLight *= mix(1.0, uGalaxy, galaxy);
                     vLight *= 1.0 - background * uGalaxy * 0.90;
+                    vLight *= mix(1.0, 2.2, background * (1.0 - uGalaxy));
                     if (aBackground < 0.5) vLight *= 1.0 - uGalaxy;
                     if (environment > 0.5) vLight *= (1.0 - uGalaxy) * uEnvironmentStrength;
                     vEnvironment = environment;
                     vEnvironmentPath = clamp(depth / 3000.0, 0.18, 1.0);
+                    vPixelRatio = uDpr;
                 }
             `, `
                 precision mediump float;
@@ -461,6 +497,7 @@ class StarMapRenderer {
                 varying float vSize;
                 varying float vEnvironment;
                 varying float vEnvironmentPath;
+                varying float vPixelRatio;
                 void main() {
                     vec2 local = (gl_PointCoord - 0.5) * 2.0;
                     float radius = length(local);
@@ -469,6 +506,13 @@ class StarMapRenderer {
                     float smallCore = max(0.0, 1.0 - abs(local.x * vSize * 0.5))
                         * max(0.0, 1.0 - abs(local.y * vSize * 0.5));
                     float profile = mix(smallCore, core + halo * 0.12, smoothstep(3.0, 7.0, vSize));
+                    if (vEnvironment > 0.5) {
+                        // A resolved subpixel core keeps distant stars visible
+                        // on desktop as well as high-DPR displays; the original
+                        // local-star profile is left intact.
+                        float pixelRadius = radius * vSize * 0.5 / vPixelRatio;
+                        profile = exp(-pixelRadius * pixelRadius / 0.46) + halo * 0.035;
+                    }
                     vec3 color = mix(vColor, vec3(1.0, 0.98, 0.95), core * 0.65);
                     float visibility = 1.0;
                     // The volume stores whole-ray transmittance.  A finite arm
@@ -971,10 +1015,11 @@ class StarMapRenderer {
                     const topLeft = (top * source.width + left) * 4, topRight = (top * source.width + right) * 4;
                     const bottomLeft = (bottom * source.width + left) * 4, bottomRight = (bottom * source.width + right) * 4;
                     const destination = (row * width + column) * 4;
+                    const polarFade = 1 - smoothstep(0.88, 0.998, Math.abs(Math.sin(latitude))) * 0.85;
                     for (let channel = 0; channel < 3; channel++) {
                         const upper = source.pixels[topLeft + channel] * (1 - fractionX) + source.pixels[topRight + channel] * fractionX;
                         const lower = source.pixels[bottomLeft + channel] * (1 - fractionX) + source.pixels[bottomRight + channel] * fractionX;
-                        output.data[destination + channel] = (upper * (1 - fractionY) + lower * fractionY) * 0.12;
+                        output.data[destination + channel] = (upper * (1 - fractionY) + lower * fractionY) * 0.32 * polarFade;
                     }
                     output.data[destination + 3] = 255;
                 }
@@ -1072,10 +1117,13 @@ class StarMapRenderer {
             if (!projected || projected[0] < 0 || projected[0] > this.width || projected[1] < 0 || projected[1] > this.height) continue;
             const visibility = kind === 0 ? 1 - galaxy : kind === 2 ? galaxy
                 : kind === 3 ? (1 - galaxy) * this.environmentStrength : 1 - galaxy * 0.90;
-            const light = Math.min(1, this.stars[offset + 6] * 0.7 * 1.08) * visibility;
+            const distanceGain = kind === 3 ? clamp(1500 / Math.max(Math.hypot(...relative), 120), 0.55, 1.6) : 1;
+            const fieldGain = kind === 1 ? lerp(2.2, 1, galaxy) : Math.sqrt(distanceGain);
+            const light = Math.min(1, this.stars[offset + 6] * 0.7 * 1.08 * fieldGain) * visibility;
             const color = [3, 4, 5].map(axis => Math.round(this.stars[offset + axis] * 255));
             context.fillStyle = `rgba(${color.join(',')},${light})`;
-            const radius = Math.max(0.35, this.stars[offset + 7] * 0.1);
+            const radius = kind === 3 ? Math.max(0.65, this.stars[offset + 7] * 0.12 * Math.sqrt(distanceGain))
+                : Math.max(0.35, this.stars[offset + 7] * 0.1);
             context.beginPath();
             context.arc(projected[0], projected[1], radius, 0, Math.PI * 2);
             context.fill();

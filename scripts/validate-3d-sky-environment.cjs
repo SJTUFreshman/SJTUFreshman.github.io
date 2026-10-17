@@ -152,6 +152,100 @@ async function cloudChecks(page) {
     measurements.push({ name: 'clouds', ...result });
 }
 
+async function outerFieldChecks(page, device) {
+    const result = await page.evaluate(() => {
+        const map = window.lifeStarMap, renderer = map.renderer, graphics = renderer.gl;
+        const saved = { stars: renderer.stars, sky: renderer.skyUploaded };
+        const view = { ...map.currentView, position: map.currentView.position.map(value => value * 610 / map.distance), moving: false };
+        const capture = () => {
+            renderer.render(view);
+            const pixels = new Uint8Array(renderer.canvas.width * renderer.canvas.height * 4);
+            graphics.readPixels(0, 0, renderer.canvas.width, renderer.canvas.height, graphics.RGBA, graphics.UNSIGNED_BYTE, pixels);
+            return pixels;
+        };
+        try {
+            const bright = capture();
+            const dim = saved.stars.map((value, index) => index % 9 === 6 && saved.stars[index + 2] === 3 ? 0 : value);
+            graphics.bindBuffer(graphics.ARRAY_BUFFER, renderer.starBuffer);
+            graphics.bufferData(graphics.ARRAY_BUFFER, dim, graphics.STATIC_DRAW);
+            const dark = capture();
+            const width = renderer.canvas.width, height = renderer.canvas.height;
+            let area = 0, visible = 0, clear = 0;
+            const sectors = new Set(), availableSectors = new Set();
+            for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+                // The local catalogue's projected sphere fits within this mask.
+                // Measure actual contrast outside it against all other layers.
+                const dx = x - width * 0.5, dy = y - height * 0.5;
+                if (Math.hypot(dx, dy) < height * 0.38) continue;
+                area++;
+                const sector = Math.floor((Math.atan2(dy, dx) + Math.PI) / (Math.PI / 4)) % 8;
+                availableSectors.add(sector);
+                const offset = (y * width + x) * 4;
+                const difference = Math.max(...[0, 1, 2].map(channel => bright[offset + channel] - dark[offset + channel]));
+                if (difference > 12) visible++;
+                if (difference > 30) {
+                    clear++;
+                    sectors.add(sector);
+                }
+            }
+            return { area, visible, clear, sectors: sectors.size, availableSectors: availableSectors.size, error: graphics.getError() };
+        } finally {
+            renderer.skyUploaded = saved.sky;
+            graphics.bindBuffer(graphics.ARRAY_BUFFER, renderer.starBuffer);
+            graphics.bufferData(graphics.ARRAY_BUFFER, saved.stars, graphics.STATIC_DRAW);
+            renderer.render(map.currentView);
+        }
+    });
+    check(result.error === 0 && result.visible > result.area * 0.002 && result.clear > result.area * 0.0005,
+        `${device}: finite arm stars are visibly brighter than the surrounding clouds outside the local sphere`, result);
+    check(result.sectors >= Math.min(6, result.availableSectors),
+        `${device}: visible outer stars extend around the visible perimeter rather than one arm only`, result);
+    measurements.push({ name: `${device}-outer-star-contrast`, ...result });
+}
+
+async function farSkyChecks(page) {
+    const result = await page.evaluate(() => {
+        const map = window.lifeStarMap, renderer = map.renderer, graphics = renderer.gl;
+        const saved = { stars: renderer.stars, sky: renderer.skyUploaded };
+        const results = [];
+        try {
+            renderer.stars = new Float32Array();
+            graphics.bindBuffer(graphics.ARRAY_BUFFER, renderer.starBuffer);
+            graphics.bufferData(graphics.ARRAY_BUFFER, renderer.stars, graphics.STATIC_DRAW);
+            for (const longitude of [0, Math.PI / 2, Math.PI, Math.PI * 1.5]) {
+                const latitude = Math.PI / 6;
+                const forward = [Math.sin(longitude) * Math.cos(latitude), Math.sin(latitude), Math.cos(longitude) * Math.cos(latitude)];
+                const right = [Math.cos(longitude), 0, -Math.sin(longitude)];
+                const up = cross(forward, right);
+                const view = { position: [0, 180, 430], forward, right, up, fov: Math.PI / 12, galaxy: 0, moving: false };
+                const capture = sky => {
+                    renderer.skyUploaded = sky; renderer.render(view);
+                    const pixels = new Uint8Array(renderer.canvas.width * renderer.canvas.height * 4);
+                    graphics.readPixels(0, 0, renderer.canvas.width, renderer.canvas.height, graphics.RGBA, graphics.UNSIGNED_BYTE, pixels);
+                    return pixels;
+                };
+                const full = capture(true), blank = capture(false);
+                let changed = 0, peak = 0;
+                for (let offset = 0; offset < full.length; offset += 4) {
+                    const delta = Math.max(full[offset] - blank[offset], full[offset + 1] - blank[offset + 1], full[offset + 2] - blank[offset + 2]);
+                    if (delta > 3) changed++;
+                    peak = Math.max(peak, delta);
+                }
+                results.push({ longitude, fraction: changed / (full.length / 4), peak });
+            }
+            return { directions: results, error: graphics.getError() };
+        } finally {
+            renderer.stars = saved.stars; renderer.skyUploaded = saved.sky;
+            graphics.bindBuffer(graphics.ARRAY_BUFFER, renderer.starBuffer);
+            graphics.bufferData(graphics.ARRAY_BUFFER, saved.stars, graphics.STATIC_DRAW);
+            renderer.render(map.currentView);
+        }
+    });
+    check(result.error === 0 && result.directions.every(direction => direction.fraction > 0.05 && direction.peak > 8),
+        'The real all-sky panorama remains visible away from the Galactic plane in all four directions', result);
+    measurements.push({ name: 'all-sky-coverage', ...result });
+}
+
 async function renderedParallaxChecks(page) {
     const result = await page.evaluate(() => {
         const map = window.lifeStarMap, renderer = map.renderer, graphics = renderer.gl;
@@ -378,10 +472,12 @@ async function serveRepository() {
         const page = await context.newPage(); monitor(page, 'desktop'); await load(page);
         check(await page.evaluate(() => window.lifeStarMap.renderer.ready), 'Desktop initializes the WebGL renderer');
         await geometryChecks(page); await cloudChecks(page); await renderedParallaxChecks(page);
+        await outerFieldChecks(page, 'Desktop'); await farSkyChecks(page);
         await visualCaptures(page, 'desktop'); await overviewChecks(page); await context.close();
         const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
         const mobile = await mobileContext.newPage(); monitor(mobile, 'mobile'); await load(mobile);
         check(await mobile.evaluate(() => window.lifeStarMap.renderer.ready), 'Mobile viewport initializes the WebGL environment');
+        await outerFieldChecks(mobile, 'Mobile');
         await visualCaptures(mobile, 'mobile'); await mobileContext.close();
         await skyLoadingChecks(browser);
     } finally { await browser.close(); }
