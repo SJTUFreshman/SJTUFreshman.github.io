@@ -24,8 +24,10 @@ spiral galaxy and not an AI-generated image.
 
 The [source description](https://www.eso.org/public/images/eso0932a/) explicitly
 withholds the full 800-million-pixel original. Both the public TIFF and large
-JPEG are 6000 × 3000. We therefore serve downsampled 4K, with no 8K upscale
-or claim of native 8K detail. The photograph combines tracked exposures taken
+JPEG are 6000 × 3000; the official zoomable viewer also exposes exactly that
+size. The observer page now serves the full native 6K image, while the 3D map
+keeps its downsampled 4K background. No 8K upscale or invented detail is used.
+The photograph combines tracked exposures taken
 over several months; its colour and faint dust detail exceed naked-eye
 perception, and some photographed bright objects are planets at those dates.
 It is a scenic background, not a current-epoch astrometric survey.
@@ -36,10 +38,13 @@ It is a scenic background, not a current-epoch astrometric survey.
 | --- | --- | --- | --- |
 | `milky-way-preview.webp` | 2048 × 1024 | WebP quality 92 | 545,142 |
 | `milky-way-sky.webp` | 4096 × 2048 | WebP quality 92 | 2,442,698 |
+| `milky-way-sky-native.webp` | 6000 × 3000 | WebP quality 96 | about 6.98 MB |
 
 Modifications are a **single rigid spherical rotation** to align the original
-panorama with standard Galactic coordinates, bilinear reprojection at the
-original resolution, Lanczos downsampling, and WebP compression. The source's
+panorama with standard Galactic coordinates and WebP compression. The shared
+2K/4K assets use bilinear reprojection and Lanczos downsampling. The native 6K
+observer asset uses cubic interpolation at the original dimensions to preserve
+small-scale detail through the coordinate rotation, with no downsampling. The source's
 sRGB colour values are retained. No sharpening, invented stars, painted dust,
 AI detail, or local shape warps are applied. Credit/licence information is
 also embedded in each WebP's XMP metadata.
@@ -98,10 +103,19 @@ Requires Python with Pillow, NumPy, and SciPy. From the repository root:
 
 ```powershell
 python scripts/build-local-sky-assets.py
+python scripts/build-local-sky-assets.py --observatory-detail-only --quality 96
 ```
 
 The script downloads the public original into
 `.render-work/galaxy-reference/eso0932a-original.tif` if absent, verifies its
 SHA-256 and dimensions, fits and checks the rigid rotation, prints individual
 landmark residuals, and writes both WebP files. A changed source is rejected
-until it has been checked and recalibrated.
+until it has been checked and recalibrated. `--observatory-detail-only` writes
+only the native observer texture, leaving the existing 3D-map assets unchanged.
+
+The observer renderer loads the small preview first, then the native image.
+It respects the device's maximum texture size; on capable mobile and desktop
+GPUs it uses all 6000 × 3000 pixels. The non-power-of-two image uses WebGL 1's
+required clamp/linear sampling instead of invalid mipmaps. The canvas supports
+DPR 2 within an 8.3-million-pixel budget. Canvas fallback retains a 4K source and
+up to 1440 × 900 steady projection, with a smaller projection during gestures.

@@ -154,7 +154,8 @@ class LifeStarMap {
 
     drawEntities() {
         const languageIndex = Math.max(0, LANGUAGES.indexOf(state.currentLang));
-        const occupied = [...(this.portalRects || [])];
+        const occupied = [...(this.portalRects || []), ...(this.galaxyMix < 0.28 ? this.projectedPortalStars || [] : []).map(point =>
+            ({ left: point.x - 12, right: point.x + 12, top: point.y - 12, bottom: point.y + 12 }))];
         for (const entity of this.entities) {
             const projected = this.project(entity.position, this.currentView, entity.level === 'galaxy');
             const levelVisible = entity.level === 'galaxy' ? this.galaxyMix > 0.72 : this.galaxyMix < 0.23;
@@ -163,15 +164,22 @@ class LifeStarMap {
             entity.button.inert = !visible;
             if (!visible) continue;
             const labelWidth = window.innerWidth < 760 ? 132 : 168;
-            const labelX = clamp(projected.x, labelWidth * 0.5 + 14, window.innerWidth - labelWidth * 0.5 - 14);
+            let labelX = clamp(projected.x, labelWidth * 0.5 + 14, window.innerWidth - labelWidth * 0.5 - 14);
             let labelY = projected.y;
-            for (const offset of [0, -65, 65, -108, 108]) {
-                const candidate = { left: labelX - labelWidth * 0.5, right: labelX + labelWidth * 0.5,
-                    top: projected.y + offset - 22, bottom: projected.y + offset + 48 };
+            const verticalOffsets = [0, -65, 65, -108, 108, -156, 156, -220, 220, -280, 280];
+            const positions = verticalOffsets.map(offset => [labelX, projected.y + offset]);
+            for (const offset of [-labelWidth, labelWidth]) {
+                const x = clamp(labelX + offset, labelWidth * 0.5 + 14, window.innerWidth - labelWidth * 0.5 - 14);
+                positions.push(...verticalOffsets.map(offsetY => [x, projected.y + offsetY]));
+            }
+            for (const [x, y] of positions) {
+                const candidate = { left: x - labelWidth * 0.5, right: x + labelWidth * 0.5,
+                    top: y - 28, bottom: y + 52 };
                 if (candidate.top < 106 || candidate.bottom > window.innerHeight - 105) continue;
                 if (occupied.some(rect => candidate.left < rect.right + 8 && candidate.right > rect.left - 8
                     && candidate.top < rect.bottom + 6 && candidate.bottom > rect.top - 6)) continue;
-                labelY = projected.y + offset;
+                labelX = x;
+                labelY = y;
                 occupied.push(candidate);
                 break;
             }
@@ -642,7 +650,10 @@ class LifeStarMap {
         context.setTransform(overlayDpr, 0, 0, overlayDpr, 0, 0);
         context.clearRect(0, 0, overlayWidth, overlayHeight);
         const labelRects = [];
-        const ordered = Array.from(this.groups.values()).sort((left, right) => Number(right.portal === this.hover) - Number(left.portal === this.hover));
+        this.projectedPortalStars = Array.from(this.groups.values()).flatMap(group => group.points.map(point => this.project(point))).filter(point => point.visible);
+        const ordered = Array.from(this.groups.values()).sort((left, right) =>
+            Number(right.portal === this.hover) - Number(left.portal === this.hover)
+            || this.project(right.center).y - this.project(left.center).y);
         for (const group of ordered) {
             const portal = group.portal;
             const selected = this.selected === portal;
@@ -661,8 +672,13 @@ class LifeStarMap {
             }
             context.stroke();
             points.forEach((point, index) => {
-                if (!point.visible) return;
                 const hip = portal.patternHips[index];
+                if (!point.visible) {
+                    const button = portal.starButtons.get(hip);
+                    button.hidden = true;
+                    button.inert = true;
+                    return;
+                }
                 const active = selected && (hip === state.activeStarHip || hip === state.hoverStarHip);
                 const glow = (dimmed ? 0.15 : 0.65 + group.emphasis * 0.25) * (1 - this.galaxyMix);
                 drawStarGlow(context, point.x, point.y, active ? 2.1 : 1.35, glow, false);
@@ -686,23 +702,60 @@ class LifeStarMap {
             const center = this.project(group.center);
             portal.screen = center;
             const visiblePoints = points.filter(point => point.visible);
-            const labelX = center.x;
-            const labelY = visiblePoints.length ? Math.max(...visiblePoints.map(point => point.y)) + 16 : center.y + 20;
-            const labelWidth = window.innerWidth < 760 ? 112 : 154;
-            const labelRect = { left: labelX - labelWidth * 0.5, right: labelX + labelWidth * 0.5, top: labelY, bottom: labelY + 43 };
-            const collides = labelRects.some(rect => labelRect.left < rect.right + 8 && labelRect.right > rect.left - 8 && labelRect.top < rect.bottom + 8 && labelRect.bottom > rect.top - 8);
-            const visible = this.galaxyMix < 0.28 && state.scene === 'roam' && !this.flight && center.visible && !collides
-                && labelRect.left > 12 && labelRect.right < overlayWidth - 12 && labelY > 98 && labelRect.bottom < overlayHeight - 95;
+            const labelRect = this.placePortalLabel(center, visiblePoints, labelRects);
+            const visible = this.galaxyMix < 0.28 && state.scene === 'roam' && !this.flight && Boolean(labelRect);
             portal.button.hidden = !visible;
             portal.button.inert = !visible;
             portal.buttonVisible = visible;
             if (visible) {
                 labelRects.push(labelRect);
-                portal.button.style.transform = `translate3d(${labelX}px,${labelY}px,0) translateX(-50%)`;
+                portal.button.style.transform = `translate3d(${(labelRect.left + labelRect.right) * 0.5}px,${labelRect.top}px,0) translateX(-50%)`;
                 portal.button.classList.toggle('is-highlighted', emphasized);
             }
         }
         this.portalRects = labelRects;
+    }
+
+    placePortalLabel(center, points, occupied) {
+        if (!points.length || center.depth <= 8) return null;
+        const width = window.innerWidth < 760 ? 112 : 154, height = 44;
+        const top = Math.min(...points.map(point => point.y));
+        const bottom = Math.max(...points.map(point => point.y));
+        const left = Math.min(...points.map(point => point.x));
+        const right = Math.max(...points.map(point => point.x));
+        const x = clamp(center.x, width * 0.5 + 14, overlayWidth - width * 0.5 - 14);
+        // Try the familiar below-star position, then above and beside the figure.
+        // A constellation near the footer must not lose its name altogether.
+        const candidates = [[x, bottom + 16], [x, top - height - 16],
+            [right + width * 0.5 + 16, center.y - height * 0.5],
+            [left - width * 0.5 - 16, center.y - height * 0.5],
+            [x, bottom + 16 + height + 10], [x, top - height * 2 - 26]];
+        for (const [labelX, labelY] of candidates) {
+            const rect = { left: labelX - width * 0.5, right: labelX + width * 0.5, top: labelY, bottom: labelY + height };
+            if (rect.left < 12 || rect.right > overlayWidth - 12 || rect.top < 110 || rect.bottom > overlayHeight - (window.innerWidth < 760 ? 110 : 60)) continue;
+            if (occupied.some(other => rect.left < other.right + 8 && rect.right > other.left - 8
+                && rect.top < other.bottom + 8 && rect.bottom > other.top - 8)) continue;
+            if (this.projectedPortalStars.some(point => point.x > rect.left - 10 && point.x < rect.right + 10
+                && point.y > rect.top - 10 && point.y < rect.bottom + 10)) continue;
+            return rect;
+        }
+        return null;
+    }
+
+    portalStarAt(x, y, touch = false) {
+        if (!this.canMove() || this.galaxyMix >= 0.28 || state.sectionDrawerOpen) return null;
+        let nearest = null, distance = touch ? 26 : 16;
+        for (const group of this.groups.values()) {
+            group.points.forEach((position, index) => {
+                const point = this.project(position);
+                if (!point.visible) return;
+                const separation = Math.hypot(point.x - x, point.y - y);
+                if (separation >= distance) return;
+                distance = separation;
+                nearest = { portal: group.portal, hip: group.portal.patternHips[index] };
+            });
+        }
+        return nearest;
     }
 
     clearInput() {
@@ -714,6 +767,7 @@ class LifeStarMap {
         this.gesture = null;
         this.wheelOrbitUntil = 0;
         dom.body.classList.remove('map-dragging');
+        dom.world.classList.remove('map-star-hover');
         state.rightDown = false;
     }
 
@@ -772,7 +826,9 @@ class LifeStarMap {
             if (event.pointerType === 'mouse' && event.currentTarget !== dom.world && event.button !== 2 && event.button !== 1) return;
             event.preventDefault();
             this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY, type: event.pointerType, button: event.button,
-                moved: 0, tapTarget: event.target.closest?.('[data-portal-button], [data-map-entity]'), multiple: false });
+                moved: 0, tapTarget: event.target.closest?.('[data-portal-button], [data-map-entity]'),
+                starTarget: event.currentTarget === dom.world ? this.portalStarAt(event.clientX, event.clientY, event.pointerType !== 'mouse') : null,
+                multiple: false });
             if (this.pointers.size > 1) this.pointers.forEach(pointer => { pointer.multiple = true; });
             this.gesture = null;
             this.dragDistance = 0;
@@ -784,7 +840,13 @@ class LifeStarMap {
         document.getElementById('mapEntities').addEventListener('pointerdown', pointerDown);
         dom.world.addEventListener('pointermove', event => {
             const pointer = this.pointers.get(event.pointerId);
-            if (!pointer) return;
+            if (!pointer) {
+                if (event.pointerType === 'mouse') {
+                    this.hover = this.portalStarAt(event.clientX, event.clientY)?.portal || null;
+                    dom.world.classList.toggle('map-star-hover', Boolean(this.hover));
+                }
+                return;
+            }
             const deltaX = event.clientX - pointer.x;
             const deltaY = event.clientY - pointer.y;
             this.dragDistance += Math.hypot(deltaX, deltaY);
@@ -805,8 +867,10 @@ class LifeStarMap {
         });
         const release = event => {
             const pointer = this.pointers.get(event.pointerId);
-            const tapTarget = event.type === 'pointerup' && pointer?.type !== 'mouse' && !pointer?.multiple
-                && pointer?.moved < 8 ? pointer.tapTarget : null;
+            const tap = event.type === 'pointerup' && pointer && !pointer.multiple && pointer.moved < 8
+                && (pointer.type !== 'mouse' || pointer.button === 0);
+            const tapTarget = tap && pointer.type !== 'mouse' ? pointer.tapTarget : null;
+            const starTarget = tap && !pointer.tapTarget ? pointer.starTarget : null;
             if (this.dragDistance > 5) this.suppressClickUntil = performance.now() + 250;
             this.pointers.delete(event.pointerId);
             this.gesture = null;
@@ -815,8 +879,14 @@ class LifeStarMap {
                 this.suppressClickUntil = 0;
                 tapTarget.click();
                 this.suppressClickUntil = performance.now() + 300;
+            } else if (starTarget && this.canMove()) {
+                this.openPortal(starTarget.portal, 'pointer', starTarget.hip);
+                this.suppressClickUntil = performance.now() + 300;
             }
         };
+        dom.world.addEventListener('pointerleave', () => {
+            if (!this.pointers.size) { this.hover = null; dom.world.classList.remove('map-star-hover'); }
+        });
         dom.world.addEventListener('pointerup', release);
         dom.world.addEventListener('pointercancel', release);
         dom.world.addEventListener('lostpointercapture', release);

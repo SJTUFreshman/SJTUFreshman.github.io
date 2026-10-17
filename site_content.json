@@ -680,8 +680,9 @@
         "thought-2026-06-29": 95947
       },
       "friends": {
-        "friend-laboratory-partner": 36850,
-        "friend-sjtu-ai-club": 36850
+        "friend-aail": 36850,
+        "friend-yuheng-wang": 36850,
+        "friend-qiran-zhang": 36850
       },
       "about": {
         "about-profile": 27989
@@ -732,14 +733,19 @@
     ],
     "friends": [
       {
-        "id": "friend-laboratory-partner",
-        "label": "Laboratory Partner A",
-        "href": "#"
+        "id": "friend-aail",
+        "label": "Agentic AI Lab (AAIL)",
+        "href": "https://www.aail.cn/"
       },
       {
-        "id": "friend-sjtu-ai-club",
-        "label": "SJTU AI Club",
-        "href": "#"
+        "id": "friend-yuheng-wang",
+        "label": "Yuheng Wang",
+        "href": "https://hendrick-wang.github.io/"
+      },
+      {
+        "id": "friend-qiran-zhang",
+        "label": "Qiran Zhang",
+        "href": "https://positionprivacy.github.io/"
       }
     ],
     "footprints": {

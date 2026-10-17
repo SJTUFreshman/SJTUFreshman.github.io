@@ -490,6 +490,7 @@ function buildPortalGeometry() {
             });
             button.addEventListener('click', event => {
                 event.preventDefault();
+                if (event.detail !== 0 && window.lifeStarMap?.suppressClickUntil > performance.now()) return;
                 handlePortalStarAction(portal, hip);
             });
             portal.starButtons.set(hip, button);

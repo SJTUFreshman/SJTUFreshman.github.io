@@ -384,9 +384,9 @@ class StarMapRenderer {
     loadSkyAssets() {
         if (this.skyAssetsPromise) return this.skyAssetsPromise;
         this.skyAssetsPromise = (async () => {
-            for (const name of ['milky-way-preview', 'milky-way-sky']) {
+            for (const name of ['milky-way-preview', 'milky-way-sky-native']) {
                 try {
-                    const response = await fetch(`assets/life/sky/${name}.webp?v=20261016`, { priority: 'low' });
+                    const response = await fetch(`assets/life/sky/${name}.webp?v=20261018-native-sky`, { priority: 'low' });
                     if (!response.ok) throw new Error(`Cannot load ${name}: ${response.status}`);
                     const blob = await response.blob();
                     const url = URL.createObjectURL(blob);
@@ -415,7 +415,7 @@ class StarMapRenderer {
         let bitmap = null;
         try {
             if (this.ready) {
-                const limit = Math.min(this.maxTextureSize, COARSE_POINTER ? 4096 : 8192);
+                const limit = Math.min(this.maxTextureSize, 8192);
                 const width = Math.min(source.image.width, limit);
                 const height = Math.round(source.image.height * width / source.image.width);
                 if (typeof createImageBitmap === 'function') {
@@ -440,7 +440,13 @@ class StarMapRenderer {
                 context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, !bitmap);
                 context.pixelStorei(context.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
                 context.texImage2D(context.TEXTURE_2D, 0, context.RGBA, context.RGBA, context.UNSIGNED_BYTE, upload);
-                context.generateMipmap(context.TEXTURE_2D);
+                // The native panorama is 6000 x 3000. WebGL 1 requires clamp
+                // and non-mipmapped filtering for non-power-of-two textures.
+                const powerOfTwo = value => (value & (value - 1)) === 0;
+                const mipmapped = powerOfTwo(width) && powerOfTwo(height);
+                context.texParameteri(context.TEXTURE_2D, context.TEXTURE_MIN_FILTER, mipmapped ? context.LINEAR_MIPMAP_LINEAR : context.LINEAR);
+                context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_S, mipmapped ? context.REPEAT : context.CLAMP_TO_EDGE);
+                if (mipmapped) context.generateMipmap(context.TEXTURE_2D);
                 context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, false);
                 this.skyUploaded = true;
                 this.skyTextureWidth = width;
@@ -560,8 +566,7 @@ class StarMapRenderer {
     resize() {
         this.width = Math.max(1, window.innerWidth);
         this.height = Math.max(1, window.innerHeight);
-        const pixelRatioLimit = this.galaxyDetail ? Math.min(3, Math.sqrt(8294400 / (this.width * this.height)))
-            : COARSE_POINTER ? 1.5 : 1.75;
+        const pixelRatioLimit = Math.min(this.galaxyDetail ? 3 : 2, Math.sqrt(8294400 / (this.width * this.height)));
         this.dpr = Math.min(window.devicePixelRatio || 1, pixelRatioLimit);
         const width = Math.round(this.width * this.dpr);
         const height = Math.round(this.height * this.dpr);
@@ -734,7 +739,7 @@ class StarMapRenderer {
         if (!image || !image.naturalWidth || galaxy >= 1) return;
         if (this.skyFallbackSource?.image !== image) {
             const sourceCanvas = document.createElement('canvas');
-            sourceCanvas.width = Math.min(2048, image.naturalWidth);
+            sourceCanvas.width = Math.min(4096, image.naturalWidth);
             sourceCanvas.height = Math.max(1, Math.round(image.naturalHeight * sourceCanvas.width / image.naturalWidth));
             const sourceContext = sourceCanvas.getContext('2d', { willReadFrequently: true });
             sourceContext.drawImage(image, 0, 0, sourceCanvas.width, sourceCanvas.height);
@@ -744,7 +749,7 @@ class StarMapRenderer {
             };
             this.skyFallbackViewKey = null;
         }
-        const scale = Math.min(1, (view.moving ? 480 : 960) / this.width, (view.moving ? 270 : 540) / this.height);
+        const scale = Math.min(this.dpr, (view.moving ? 640 : 1440) / this.width, (view.moving ? 360 : 900) / this.height);
         const width = Math.max(1, Math.round(this.width * scale));
         const height = Math.max(1, Math.round(this.height * scale));
         const key = [width, height, this.width / this.height, view.fov, ...view.right, ...view.up, ...view.forward].join(',');

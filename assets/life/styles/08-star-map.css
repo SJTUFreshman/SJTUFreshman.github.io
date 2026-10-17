@@ -162,6 +162,8 @@ body.observed-sky .map-footer { right: max(240px, 22vw); }
     cursor: grab;
 }
 
+.star-map .galaxy-world.map-star-hover { cursor: pointer; }
+
 .star-map.map-dragging,
 .star-map.map-dragging .galaxy-world {
     cursor: grabbing;

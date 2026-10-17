@@ -77,7 +77,7 @@ def calibration():
     return rotation
 
 
-def reproject(image, rotation):
+def reproject(image, rotation, order=1):
     """Apply one rigid sphere rotation, without locally warping the photograph."""
     width, height = image.size
     pixels = np.asarray(image)
@@ -98,11 +98,11 @@ def reproject(image, rotation):
         coordinates = (np.clip(v * height - .5, 0, height - 1), u * width + .5)
         for channel in range(3):
             result[start:end, :, channel] = map_coordinates(
-                pixels[:, :, channel], coordinates, order=1, mode="nearest", prefilter=False)
+                pixels[:, :, channel], coordinates, order=order, mode="nearest", prefilter=order > 1)
     return Image.fromarray(result)
 
 
-def build(source, output, quality):
+def build(source, output, quality, observatory_detail_only=False):
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     if digest != SOURCE_SHA256:
         raise ValueError(f"Source changed: expected {SOURCE_SHA256}, received {digest}; recalibrate before use")
@@ -112,19 +112,21 @@ def build(source, output, quality):
         # The original carries sRGB IEC61966-2.1. Keep its colour values.
         image = opened.convert("RGB")
         image.load()
-    image = reproject(image, calibration())
+    image = reproject(image, calibration(), order=3 if observatory_detail_only else 1)
     output.mkdir(parents=True, exist_ok=True)
+    sampling = b'cubic registration at native resolution' if observatory_detail_only else b'bilinear registration and downsampling'
     xmp = (b'<x:xmpmeta xmlns:x="adobe:ns:meta/"><rdf:RDF '
            b'xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">'
            b'<rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/" '
            b'dc:source="https://www.eso.org/public/images/eso0932a/" '
            b'dc:rights="ESO/S. Brunier; CC BY 4.0. Modified: rigid spherical '
-           b'registration to Galactic coordinates, downsampling, WebP compression."/>'
+           b'registration to Galactic coordinates; ' + sampling + b'; WebP compression."/>'
            b'</rdf:RDF></x:xmpmeta>')
-    for filename, size in (("milky-way-preview.webp", (2048, 1024)),
-                           ("milky-way-sky.webp", (4096, 2048))):
+    outputs = (("milky-way-sky-native.webp", (6000, 3000)),) if observatory_detail_only else (
+        ("milky-way-preview.webp", (2048, 1024)), ("milky-way-sky.webp", (4096, 2048)))
+    for filename, size in outputs:
         path = output / filename
-        image.resize(size, Image.Resampling.LANCZOS).save(
+        (image if image.size == size else image.resize(size, Image.Resampling.LANCZOS)).save(
             path, "WEBP", quality=quality, method=6, xmp=xmp)
         with Image.open(path) as check:
             if check.size != size:
@@ -138,13 +140,15 @@ def main():
     parser.add_argument("--source", type=Path,
                         default=ROOT / ".render-work/galaxy-reference/eso0932a-original.tif")
     parser.add_argument("--output", type=Path, default=ROOT / "assets/life/sky")
-    parser.add_argument("--quality", type=int, choices=range(88, 93), default=92)
+    parser.add_argument("--quality", type=int, choices=range(88, 101), default=92)
+    parser.add_argument("--observatory-detail-only", action="store_true",
+                        help="Preserve native 6000 x 3000 detail with cubic spherical sampling; leave shared 2K/4K files untouched")
     options = parser.parse_args()
     if not options.source.exists():
         options.source.parent.mkdir(parents=True, exist_ok=True)
         with urlopen(SOURCE_URL, timeout=120) as response:
             options.source.write_bytes(response.read())
-    build(options.source, options.output, options.quality)
+    build(options.source, options.output, options.quality, options.observatory_detail_only)
 
 
 if __name__ == "__main__":

@@ -120,7 +120,7 @@ async function desktop(browser) {
                 galaxy: map.galaxyMix, visible: !renderer.canvas.hidden };
         });
         check(state.ready && state.visible && state.observer && state.galaxy === 0
-            && state.image[0] === state.image[1] * 2 && state.texture >= 4096 && state.version >= 2,
+            && state.image[0] === state.image[1] * 2 && state.texture === 6000 && state.version >= 2,
         'Desktop loads preview and high-resolution observed equirectangular sky', state);
         check(page.skyRequests.length === 2 && page.galaxyRequests.length === 0,
             'Local startup requests its two sky images without exterior galaxy textures');
@@ -287,7 +287,7 @@ async function competing(browser) {
     try {
         const page = await context.newPage();
         monitor(page, 'competing');
-        await page.route('**/assets/life/sky/milky-way-sky.webp?*', async route => { await gate; await route.continue(); });
+        await page.route('**/assets/life/sky/milky-way-sky-native.webp?*', async route => { await gate; await route.continue(); });
         await load(page);
         await page.waitForFunction(() => window.lifeStarMap.renderer.skyUploaded && window.lifeStarMap.renderer.skyImage?.naturalWidth <= 2048);
         await page.evaluate(() => { void window.lifeStarMap.showGalaxy(); });
@@ -328,9 +328,9 @@ async function mobile(browser) {
         monitor(page, 'mobile');
         await load(page);
         await skyReady(page);
-        check(await page.evaluate(() => window.lifeStarMap.renderer.ready && window.lifeStarMap.renderer.skyTextureWidth === 4096
+        check(await page.evaluate(() => window.lifeStarMap.renderer.ready && window.lifeStarMap.renderer.skyTextureWidth === 6000
             && window.lifeStarMap.currentView.observer && window.lifeStarMap.galaxyMix === 0),
-        'Mobile displays the observed local sky within its 4K texture budget');
+        'Mobile displays the observed local sky at native 6K resolution');
         await page.screenshot({ path: path.join(outputDirectory, 'mobile-observed-sky.png') });
         await page.evaluate(() => window.lifeStarMap.orbit((Math.PI / 2) / 0.0042, 0));
         await settle(page);
@@ -340,9 +340,30 @@ async function mobile(browser) {
     } finally { await context.close(); }
 }
 
+async function limited(browser) {
+    const context = await browser.newContext({ viewport: { width: 1100, height: 780 }, reducedMotion: 'reduce' });
+    try {
+        await context.addInitScript(() => {
+            const getParameter = WebGLRenderingContext.prototype.getParameter;
+            WebGLRenderingContext.prototype.getParameter = function (parameter) {
+                return parameter === this.MAX_TEXTURE_SIZE ? 4096 : getParameter.call(this, parameter);
+            };
+        });
+        const page = await context.newPage();
+        monitor(page, 'limited GPU');
+        await load(page);
+        await skyReady(page);
+        const pixels = await frameSignature(page);
+        check(await page.evaluate(() => window.lifeStarMap.renderer.skyImage.naturalWidth === 6000
+            && window.lifeStarMap.renderer.skyTextureWidth === 4096 && window.lifeStarMap.renderer.ready)
+            && pixels.sum > 1000 && pixels.error === 0,
+        'A GPU limited to 4K downsamples the native sky into a valid, visible texture');
+    } finally { await context.close(); }
+}
+
 async function main() {
-    const groups = { desktop, mobile, delayed, failed, competing, fallback };
-    assert(selected === 'all' || groups[selected], 'Group must be all, desktop, mobile, delayed, failed, competing, or fallback');
+    const groups = { desktop, mobile, delayed, failed, competing, limited, fallback };
+    assert(selected === 'all' || groups[selected], 'Group must be all, desktop, mobile, delayed, failed, competing, limited, or fallback');
     fs.mkdirSync(outputDirectory, { recursive: true });
     for (const [name, run] of Object.entries(groups)) {
         if (selected !== 'all' && selected !== name) continue;
