@@ -110,48 +110,102 @@
 }
 
 .wiki-userboxes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 225px), 1fr));
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 2px;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
 .wiki-userbox {
-    --box-border: #d5dfec;
-    --box-mark: #e2eafa;
-    --box-paper: var(--life-blue-pale);
-    display: grid;
-    grid-template-columns: 48px minmax(0, 1fr);
-    min-height: 52px;
-    border: 1px solid var(--box-border);
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--box-paper);
-    line-height: 1.5;
+    flex: 0 1 240px;
+    width: 240px;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-family: Arial, 'Liberation Sans', 'Microsoft YaHei', 'Microsoft JhengHei', sans-serif;
+    font-size: 14px;
+    line-height: 1.25;
 }
 
-.wiki-userbox[data-tone="green"] { --box-border: #a5b9a5; --box-mark: #d8e7d7; --box-paper: #f1f7ef; }
-.wiki-userbox[data-tone="amber"] { --box-border: #c5b995; --box-mark: #f1e4bd; --box-paper: #fbf7ea; }
-.wiki-userbox[data-tone="violet"] { --box-border: #b5a5c4; --box-mark: #e6dced; --box-paper: #f6f1fa; }
-.wiki-userbox[data-tone="neutral"] { --box-border: var(--life-rule); --box-mark: #eceef5; --box-paper: #f8f9fc; }
+/* Template colors and cell geometry are preserved in the reviewed snapshots.
+   Only the outer width adapts to small panels; the surrounding profile keeps
+   the site's design. Credits: ../userboxes/sources.json. */
+.wiki-userbox .wikipediauserbox {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0;
+    background: #eee;
+    color-scheme: light;
+}
+
+.wiki-userbox table {
+    width: 100% !important;
+    border-spacing: 0;
+    font: inherit;
+}
+
+.wiki-userbox td {
+    box-sizing: content-box;
+    overflow-wrap: normal;
+}
+
+.wiki-userbox img {
+    vertical-align: middle;
+    border: 0;
+    border-radius: 0;
+}
+
+.personal-profile .wiki-userbox a {
+    color: #0645ad;
+    text-decoration: none;
+    transition: none;
+}
+
+.personal-profile .wiki-userbox a:visited { color: #0b0080; }
+.personal-profile .wiki-userbox a:hover,
+.personal-profile .wiki-userbox a:focus-visible { text-decoration: underline; }
+.wiki-userbox .center { text-align: center; }
+.wiki-userbox .mw-babel-box-level-5 { font-size: 0.85em; }
+.wiki-userbox-variant[hidden] { display: none; }
+
+.wiki-userbox-custom {
+    --box-border: #99b3ff;
+    --box-mark: #99b3ff;
+    --box-paper: #e0e8ff;
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    min-height: 47px;
+    border: 1px solid var(--box-border);
+    background: var(--box-paper);
+}
+
+.wiki-userbox[data-tone="green"] { --box-border: #6c6; --box-mark: #6c6; --box-paper: #cfc; }
+.wiki-userbox[data-tone="amber"] { --box-border: #cc0; --box-mark: #cc0; --box-paper: #ff9; }
+.wiki-userbox[data-tone="violet"] { --box-border: #dbd; --box-mark: #dbd; --box-paper: #fef; }
+.wiki-userbox[data-tone="neutral"] { --box-border: #999; --box-mark: #ddd; --box-paper: #eee; }
 
 .wiki-userbox-mark {
     display: grid;
     place-items: center;
-    padding: 5px;
+    padding: 0 1px 0 0;
     background: var(--box-mark);
-    font: 600 1.05rem var(--ui);
+    font-size: 14pt;
+    font-weight: bold;
     overflow-wrap: anywhere;
     text-align: center;
 }
 
 .wiki-userbox-text {
     align-self: center;
-    padding: 8px 10px;
+    padding: 0 4px;
     overflow-wrap: anywhere;
-    font-size: 0.78rem;
+    font-size: 10pt;
 }
 
 .profile-links {

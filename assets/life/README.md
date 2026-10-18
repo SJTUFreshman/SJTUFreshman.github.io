@@ -46,7 +46,9 @@
 
 原 Notes 已由 `profile`（重新认识我 / Meet Me Again）替代，对应猎户座，以头、肩、腰带和双足构成的星光肖像介绍其他板块背后的人。点标题、任何一颗所属恒星或索引均进入同一份个人介绍，照片与个人简介取自 `home.hero`。页面沿用站点的圆角面板、淡蓝粉配色、中英文字体与圆形头像；仅用户框保留维基式的紧凑双栏内容形式，没有用户页命名空间、页签或百科页面外观。移动端可滚动查看。
 
-用户框直接来自 `life.profile.userboxes`，不另加标题或说明段落。每项包含 `id`、左侧短符号 `mark`、`tone`（blue / green / amber / violet / neutral）和三语 `text`；文本按普通文字转义，多个用户框自动换列。可用 Homepage Studio 的“生活 / 重新认识我 · 用户框”编辑，或直接修改 `site_content.json`。修改后运行 `python site_renderer.py --life-only`，同时更新 Life 和观景页；新增中文字还需运行字体子集构建。
+用户框的选择与顺序来自 `life.profile.userboxes`，不另加标题或说明段落。已选择的 29 个框通过 `wiki_template` 指向 `userboxes/templates.json` 中经检查的维基百科模板快照，保留原配色、图标、矩形边框、两栏 / 三栏布局、链接与中文原文；英文正文使用 `text.en`。图片保存在本站，展示不依赖维基百科请求；切换语言时只显示对应版本。来源、图片署名、许可及适配说明见 [`userboxes/README.md`](userboxes/README.md) 和 `userboxes/sources.json`。
+
+不设 `wiki_template` 的新条目仍可通过 `mark`、`tone`（blue / green / amber / violet / neutral）和三语 `text` 创建普通用户框，文本按普通文字转义。修改后运行 `python site_renderer.py --life-only`，同时更新 Life 和观景页；模板保持紧凑无衬线字体，外围面板沿用站点字体。
 
 ## CSS 分片
 

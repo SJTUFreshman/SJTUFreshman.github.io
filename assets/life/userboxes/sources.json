@@ -1,0 +1,405 @@
+{
+  "retrieved": "2026-10-18",
+  "templates": {
+    "zh-professional": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_zh-5",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_zh-5?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "zh-traditional": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_zh-Hant-5",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_zh-Hant-5?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "zh-simplified": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_zh-Hans-5",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_zh-Hans-5?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "han-characters": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E6%BC%A2%E5%AD%97",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E6%BC%A2%E5%AD%97?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "chinese-graphology": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_the_study_of_Chinese_writing",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_the_study_of_Chinese_writing?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "traditional-characters": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%BE%A9%E6%B4%BB%E5%82%B3%E7%B5%B1%E5%AD%97",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%BE%A9%E6%B4%BB%E5%82%B3%E7%B5%B1%E5%AD%97?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "horizontal-vertical-writing": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E6%A9%AB%E7%9B%B4%E5%85%B1%E5%AD%98",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E6%A9%AB%E7%9B%B4%E5%85%B1%E5%AD%98?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "spoken-written-separation": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E8%A8%80%E6%96%87%E5%88%86%E9%9B%A2",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E8%A8%80%E6%96%87%E5%88%86%E9%9B%A2?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "alphabetic-transliteration": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%AD%97%E6%AF%8D%E9%9F%B3%E8%AD%AF",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%AD%97%E6%AF%8D%E9%9F%B3%E8%AD%AF?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "cursive-kaishu": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%AF%AB%E8%8D%89%E8%AD%98%E6%A5%B7",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%AF%AB%E8%8D%89%E8%AD%98%E6%A5%B7?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "font-design": {
+      "source": "https://zh.wikipedia.org/wiki/User%3ARealS-424/UBX/Font_Design",
+      "history": "https://zh.wikipedia.org/wiki/User%3ARealS-424/UBX/Font_Design?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "linguistics": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_Linguistics",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_Linguistics?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "american-english": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_AmerE",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_AmerE?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "no-swearing": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E7%84%A1%E9%AB%92%E8%A9%B1%E6%A6%82%E5%BF%B5",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E7%84%A1%E9%AB%92%E8%A9%B1%E6%A6%82%E5%BF%B5?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "single": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%96%AE%E8%BA%AB%E7%8B%97",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%96%AE%E8%BA%AB%E7%8B%97?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "behind-you": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%9C%A8%E4%BD%A0%E5%BE%8C%E9%9D%A2",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%9C%A8%E4%BD%A0%E5%BE%8C%E9%9D%A2?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "region-free": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_RegionFree",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_RegionFree?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "hate-pay-to-win": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_HatePay2Win",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_HatePay2Win?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "chinese-history": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E4%B8%AD%E5%9C%8B%E6%AD%B7%E5%8F%B2",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E4%B8%AD%E5%9C%8B%E6%AD%B7%E5%8F%B2?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "godfather": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E6%95%99%E7%88%B6%28%E9%9B%BB%E5%BD%B1%29",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E6%95%99%E7%88%B6%28%E9%9B%BB%E5%BD%B1%29?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "mood-for-love": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_Mood4Love",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_Mood4Love?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "writing": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%AF%AB%E4%BD%9C",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%AF%AB%E4%BD%9C?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "nature": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%A4%A7%E8%87%AA%E7%84%B6",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E5%A4%A7%E8%87%AA%E7%84%B6?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "china": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E4%B8%AD%E8%8F%AF%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9C%8B",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E4%B8%AD%E8%8F%AF%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9C%8B?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "stem": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_%E7%90%86%E5%B7%A5%E7%A7%91",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_%E7%90%86%E5%B7%A5%E7%A7%91?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "sjtu": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_SJTU",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_SJTU?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "piano": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_piano",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_piano?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "music": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_music",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_music?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    "greek-mythology": {
+      "source": "https://zh.wikipedia.org/wiki/Template%3AUser_Greek_mythology",
+      "history": "https://zh.wikipedia.org/wiki/Template%3AUser_Greek_mythology?action=history",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  },
+  "images": {
+    "Hanja_characters.PNG": {
+      "path": "assets/life/userboxes/ea8b8da7f900.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Hanja_characters.PNG/120px-Hanja_characters.PNG",
+      "sha256": "36dd0c49ab63b578e636852065f569fd9fb54b7b21da245a54d90c0238ef4340",
+      "description": "https://commons.wikimedia.org/wiki/File%3AHanja_characters.PNG",
+      "attribution": {
+        "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Mizunoryu\" title=\"User:Mizunoryu\">Mizunoryu</a>",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "LicenseShortName": "CC BY-SA 3.0",
+        "LicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "UsageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "AttributionRequired": "true"
+      }
+    },
+    "書.svg": {
+      "path": "assets/life/userboxes/514cd8ed0684.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/%E6%9B%B8.svg/120px-%E6%9B%B8.svg.png",
+      "sha256": "c048d5925ed1c57b4fd0ac3884c0e393f02549ec2cb2afeebc625a567c1b3f9c",
+      "description": "https://commons.wikimedia.org/wiki/File%3A%E6%9B%B8.svg",
+      "attribution": {
+        "Artist": "<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User:Erin_Silversmith\" title=\"User:Erin Silversmith\">Erin Silversmith</a> (<a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/User_talk:Erin_Silversmith\" title=\"User talk:Erin Silversmith\">talk</a><span style=\"white-space:nowrap\"><span typeof=\"mw:Entity\"> </span><span style=\"font-weight:bold;\">·</span></span> <a rel=\"mw:WikiLink\" href=\"https://commons.wikimedia.org/wiki/Special:Contributions/Erin_Silversmith\" title=\"Special:Contributions/Erin Silversmith\">contribs</a>)",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "LicenseShortName": "Public domain",
+        "LicenseUrl": "",
+        "UsageTerms": "Public domain",
+        "AttributionRequired": "false"
+      }
+    },
+    "漢-bigseal.svg": {
+      "path": "assets/life/userboxes/781038aed51d.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/%E6%BC%A2-bigseal.svg/120px-%E6%BC%A2-bigseal.svg.png",
+      "sha256": "a93558b40eb97991ab271027f04053ae8bf87294d061d82abd89283da0fdde63",
+      "description": "https://commons.wikimedia.org/wiki/File%3A%E6%BC%A2-bigseal.svg",
+      "attribution": {
+        "Artist": "Digital file creation, see the contributor names shown in the “<b><bdi>User</bdi></b>” column of the “<a href=\"#filehistory\"><bdi>File history</bdi></a>” section below.",
+        "Credit": "<p>Available sources for this ancient Chinese character:\n</p>\n<ul><li><a rel=\"nofollow\" class=\"external text\" href=\"http://xiaoxue.iis.sinica.edu.tw/yanbian?char=%E6%BC%A2\">Sinica Database</a></li>\n<li><a rel=\"nofollow\" class=\"external text\" href=\"https://hanziyuan.net/#%E6%BC%A2\">Chinese Etymology</a>.</li>\n<li><a rel=\"nofollow\" class=\"external text\" href=\"https://humanum.arts.cuhk.edu.hk/Lexis/lexi-mf/search.php?word=%E6%BC%A2\">Multi-function Chinese Character Database</a>.</li>\n<li><a rel=\"nofollow\" class=\"external text\" href=\"https://ctext.org/dictionary.pl?if=en&amp;char=%E6%BC%A2\">Chinese Text Project</a>.</li>\n<li><a rel=\"nofollow\" class=\"external text\" href=\"http://chinese-linguipedia.org/search_source_inner.html?word=%E6%BC%A2\">Chinese Linguipedia</a>.</li></ul>",
+        "LicenseShortName": "Public domain",
+        "LicenseUrl": "",
+        "UsageTerms": "Public domain",
+        "AttributionRequired": "false"
+      }
+    },
+    "Zhuyin_fanyi_2.png": {
+      "path": "assets/life/userboxes/866a5e8d7a5c.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Zhuyin_fanyi_2.png/120px-Zhuyin_fanyi_2.png",
+      "sha256": "cc09d7c350896ddac9c1fdbdb3306fcd25e5be533df05da81bf47da445975e97",
+      "description": "https://commons.wikimedia.org/wiki/File%3AZhuyin_fanyi_2.png",
+      "attribution": {
+        "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Betoseha\" title=\"User:Betoseha\">Betoseha</a>",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "LicenseShortName": "CC BY-SA 4.0",
+        "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "UsageTerms": "Creative Commons Attribution-Share Alike 4.0",
+        "AttributionRequired": "true"
+      }
+    },
+    "ゐ-caoshu.svg": {
+      "path": "assets/life/userboxes/a283c35d78ed.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/%E3%82%90-caoshu.svg/120px-%E3%82%90-caoshu.svg.png",
+      "sha256": "f4a31bb604d60acca7ef0489f9dcb753a1cfaea6a1d5627983376e43b438b5ae",
+      "description": "https://commons.wikimedia.org/wiki/File%3A%E3%82%90-caoshu.svg",
+      "attribution": {
+        "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Micheletb\" title=\"User:Micheletb\">Micheletb</a>",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "LicenseShortName": "CC BY-SA 3.0",
+        "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "UsageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "AttributionRequired": "true"
+      }
+    },
+    "A-small_glyphs.svg": {
+      "path": "assets/life/userboxes/b197ab0512c1.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/A-small_glyphs.svg/120px-A-small_glyphs.svg.png",
+      "sha256": "6b15f408031a0e620cab4ba45d139d2b541ffb18dea050c0e9ba889dc508f5d6",
+      "description": "https://commons.wikimedia.org/wiki/File%3AA-small_glyphs.svg",
+      "attribution": {
+        "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Wickey-nl\" title=\"User:Wickey-nl\">Wickey-nl</a>",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "LicenseShortName": "CC0",
+        "LicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "UsageTerms": "Creative Commons Zero, Public Domain Dedication",
+        "AttributionRequired": "false"
+      }
+    },
+    "Phonetik.svg": {
+      "path": "assets/life/userboxes/4ea930ed8980.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Phonetik.svg/120px-Phonetik.svg.png",
+      "sha256": "3a96894ef61b7408745d8baaf43b47a1729a1ed3bbe172801f85d16da2bbee06",
+      "description": "https://commons.wikimedia.org/wiki/File%3APhonetik.svg",
+      "attribution": {
+        "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Fvasconcellos\" title=\"User:Fvasconcellos\">Fvasconcellos</a>",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "LicenseShortName": "CC BY-SA 3.0",
+        "LicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "UsageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "AttributionRequired": "true"
+      }
+    },
+    "Shiba_inu_taiki.jpg": {
+      "path": "assets/life/userboxes/28965f6d8fb5.jpg",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Shiba_inu_taiki.jpg/120px-Shiba_inu_taiki.jpg",
+      "sha256": "299b1f51fdaa9e72dcc574f471dbee6f2fc5f44808beb4c37fb4a4369a438897",
+      "description": "https://commons.wikimedia.org/wiki/File%3AShiba_inu_taiki.jpg",
+      "attribution": {
+        "Artist": "Roberto Vasarri",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "LicenseShortName": "Public domain",
+        "LicenseUrl": "",
+        "UsageTerms": "Public domain",
+        "AttributionRequired": "false"
+      }
+    },
+    "Noto_Emoji_Oreo_1f436.svg": {
+      "path": "assets/life/userboxes/d61ed519d5e0.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Noto_Emoji_Oreo_1f436.svg/40px-Noto_Emoji_Oreo_1f436.svg.png",
+      "sha256": "db0f928403d8faba9f9a481afb985b55ab0287946f13b76080368d72bbd86648",
+      "description": "https://commons.wikimedia.org/wiki/File%3ANoto_Emoji_Oreo_1f436.svg",
+      "attribution": {
+        "Artist": "Google",
+        "Credit": "<a rel=\"nofollow\" class=\"external free\" href=\"https://github.com/googlei18n/noto-emoji/blob/f931bea/svg/emoji_u1f436.svg\">https://github.com/googlei18n/noto-emoji/blob/f931bea/svg/emoji_u1f436.svg</a>",
+        "LicenseShortName": "Apache License 2.0",
+        "LicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+        "UsageTerms": "Apache License, Version 2.0",
+        "AttributionRequired": "true"
+      }
+    },
+    "SMirC-vamp.svg": {
+      "path": "assets/life/userboxes/b2ac8355147d.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/SMirC-vamp.svg/120px-SMirC-vamp.svg.png",
+      "sha256": "16a420550a516878a0165122f6a86ee8ddbc0ff386c99a7ab5610a0192fa61fc",
+      "description": "https://commons.wikimedia.org/wiki/File%3ASMirC-vamp.svg",
+      "attribution": {
+        "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Chrkl\" title=\"User:Chrkl\">chris</a> <a href=\"//commons.wikimedia.org/wiki/User_talk:Chrkl\" title=\"User talk:Chrkl\">論</a>",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span> (<span lang=\"en\" dir=\"ltr\">Original text: <i><bdi lang=\"\">own design</bdi></i></span>)",
+        "LicenseShortName": "CC BY-SA 3.0",
+        "LicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "UsageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "AttributionRequired": "true"
+      }
+    },
+    "BlankMap-World.svg": {
+      "path": "assets/life/userboxes/8a618e946782.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/BlankMap-World.svg/250px-BlankMap-World.svg.png",
+      "sha256": "af1cd1ff2d200da683786c6b2b8c57209976415710adc907a597534f0c35506e",
+      "description": "https://commons.wikimedia.org/wiki/File%3ABlankMap-World.svg",
+      "attribution": {
+        "Artist": "<a href=\"https://en.wikipedia.org/wiki/User:Canuckguy\" class=\"extiw\" title=\"en:User:Canuckguy\">Canuckguy</a> <small>(<a href=\"https://en.wikipedia.org/wiki/en:User_talk:Canuckguy\" class=\"extiw\" title=\"w:en:User talk:Canuckguy\">talk</a>)</small> and many others (see File history)",
+        "Credit": "Adapted from <a href=\"//commons.wikimedia.org/wiki/File:%22Political_World%22_CIA_World_Factbook_map_2005.svg\" title='File:\"Political World\" CIA World Factbook map 2005.svg'>File:\"Political World\" CIA World Factbook map 2005.svg</a> which was originally based on <a rel=\"nofollow\" class=\"external text\" href=\"https://legacy.lib.utexas.edu/maps/world_maps/world_pol_2005.pdf\">CIA's 2005 political world map</a> (a vector-based PDF file which can now be found in <a rel=\"nofollow\" class=\"external text\" href=\"https://legacy.lib.utexas.edu/maps/world.html\">Perry–Castañeda Library Map Collection</a>).",
+        "LicenseShortName": "Public domain",
+        "LicenseUrl": "",
+        "UsageTerms": "Public domain",
+        "AttributionRequired": "false"
+      }
+    },
+    "Forbidden_City_Beijing_(3019178959).jpg": {
+      "path": "assets/life/userboxes/98f53899d853.jpg",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Forbidden_City_Beijing_%283019178959%29.jpg/120px-Forbidden_City_Beijing_%283019178959%29.jpg",
+      "sha256": "480012a5e75be68635f189be45a6cbd01ab780fbdafdfd7002ef8016450f8e41",
+      "description": "https://commons.wikimedia.org/wiki/File%3AForbidden_City_Beijing_%283019178959%29.jpg",
+      "attribution": {
+        "Artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/23442653@N00\">Dave Proffer</a>",
+        "Credit": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/deepphoto/3019178959/\">Forbidden City Beijing</a>",
+        "LicenseShortName": "CC BY 2.0",
+        "LicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "UsageTerms": "Creative Commons Attribution 2.0",
+        "AttributionRequired": "true"
+      }
+    },
+    "Inkwell_icon_-_Noun_Project_2512.svg": {
+      "path": "assets/life/userboxes/ce08b630b5a3.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Inkwell_icon_-_Noun_Project_2512.svg/120px-Inkwell_icon_-_Noun_Project_2512.svg.png",
+      "sha256": "9cd657c8a485f0129c6db996987965d16b0aaf36d4c3b8df9ecce46e97c0c530",
+      "description": "https://commons.wikimedia.org/wiki/File%3AInkwell_icon_-_Noun_Project_2512.svg",
+      "attribution": {
+        "Artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20130710090033/http://thenounproject.com/zimady/\">Adrian Park</a>. Archived from <a rel=\"nofollow\" class=\"external text\" href=\"http://thenounproject.com/zimady/\">the original</a> on <span class=\"mw-formatted-date\" title=\"2013-07-10\">10 July 2013</span>.",
+        "Credit": "<a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20130907053135/http://thenounproject.com/noun/inkwell/#icon-No2512\">The Noun Project</a>. Archived from <a rel=\"nofollow\" class=\"external text\" href=\"http://thenounproject.com/noun/inkwell/#icon-No2512\">the original</a> on <span class=\"mw-formatted-date\" title=\"2013-09-07\">7 September 2013</span>.",
+        "LicenseShortName": "CC BY 3.0",
+        "LicenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "UsageTerms": "Creative Commons Attribution 3.0",
+        "AttributionRequired": "true"
+      }
+    },
+    "Brussels_Zonienwoud.jpg": {
+      "path": "assets/life/userboxes/83c584926506.jpg",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Brussels_Zonienwoud.jpg/120px-Brussels_Zonienwoud.jpg",
+      "sha256": "1071553cd884fc00d40b295e325e47d552bc3c344417870739060113c47ff5f3",
+      "description": "https://commons.wikimedia.org/wiki/File%3ABrussels_Zonienwoud.jpg",
+      "attribution": {
+        "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Donarreiskoffer\" title=\"User:Donarreiskoffer\">Donarreiskoffer</a>",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "LicenseShortName": "CC BY 3.0",
+        "LicenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "UsageTerms": "Creative Commons Attribution 3.0",
+        "AttributionRequired": "true"
+      }
+    },
+    "Flag_of_the_People's_Republic_of_China_(alternate).svg": {
+      "path": "assets/life/userboxes/4708097ad595.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Flag_of_the_People%27s_Republic_of_China_%28alternate%29.svg/250px-Flag_of_the_People%27s_Republic_of_China_%28alternate%29.svg.png",
+      "sha256": "3fd072d304c42299abbcff31cc7b5b7c6a8727202e9c600672e25dc7e6cab366",
+      "description": "https://commons.wikimedia.org/wiki/File%3AFlag_of_the_People%27s_Republic_of_China_%28alternate%29.svg",
+      "attribution": {
+        "Artist": "<a href=\"//commons.wikimedia.org/wiki/User:Haisollokopas\" title=\"User:Haisollokopas\">Haisollokopas</a>",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span> based on this file:<span class=\"mw-image-border\" typeof=\"mw:File\"><a href=\"//commons.wikimedia.org/wiki/File:Flag_of_the_People%27s_Republic_of_China.svg\" class=\"mw-file-description\"><img src=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/120px-Flag_of_the_People%27s_Republic_of_China.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"100\" height=\"67\" class=\"mw-file-element\" srcset=\"https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/250px-Flag_of_the_People%27s_Republic_of_China.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"900\" data-file-height=\"600\"></a></span>",
+        "LicenseShortName": "Public domain",
+        "LicenseUrl": "",
+        "UsageTerms": "Public domain",
+        "AttributionRequired": "false"
+      }
+    },
+    "Bosendorfer_185.JPG": {
+      "path": "assets/life/userboxes/096e3aca1b6b.jpg",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Bosendorfer_185.JPG/120px-Bosendorfer_185.JPG",
+      "sha256": "e765aeb4d22854f3bd8f508b3ff8f13c0e734162e3e74ad12f2102623efa6371",
+      "description": "https://commons.wikimedia.org/wiki/File%3ABosendorfer_185.JPG",
+      "attribution": {
+        "Artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:NorCal_Bosie&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:NorCal Bosie (page does not exist)\">NorCal Bosie</a>",
+        "Credit": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+        "LicenseShortName": "Public domain",
+        "LicenseUrl": "",
+        "UsageTerms": "Public domain",
+        "AttributionRequired": "false"
+      }
+    },
+    "Musical_note_nicu_bucule_01.svg": {
+      "path": "assets/life/userboxes/eb88eee038f3.png",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Musical_note_nicu_bucule_01.svg/120px-Musical_note_nicu_bucule_01.svg.png",
+      "sha256": "ed576c57f868501d9c2f7f73b2389652f84c9c405ae2924e1f779ca874740ab0",
+      "description": "https://commons.wikimedia.org/wiki/File%3AMusical_note_nicu_bucule_01.svg",
+      "attribution": {
+        "Artist": "<a rel=\"mw:ExtLink nofollow\" href=\"https://openclipart.org/artist/nicubunu\" class=\"external text\">nicubunu</a>",
+        "Credit": "<a rel=\"mw:ExtLink nofollow\" href=\"https://openclipart.org/detail/22245/musical-note\" class=\"external free\">https://openclipart.org/detail/22245/musical-note</a>",
+        "LicenseShortName": "CC0",
+        "LicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "UsageTerms": "Creative Commons Zero, Public Domain Dedication",
+        "AttributionRequired": "false"
+      }
+    },
+    "TempleHephaistosAthens.jpg": {
+      "path": "assets/life/userboxes/d33e76e4b405.jpg",
+      "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/TempleHephaistosAthens.jpg/120px-TempleHephaistosAthens.jpg",
+      "sha256": "df0abb83fdf2c92dc90c6175535f21f89fc83c4723dbfc700c29f908c44c0876",
+      "description": "https://commons.wikimedia.org/wiki/File%3ATempleHephaistosAthens.jpg",
+      "attribution": {
+        "Artist": "",
+        "Credit": "",
+        "LicenseShortName": "CC BY-SA 3.0",
+        "LicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "UsageTerms": "Creative Commons Attribution-Share Alike 3.0",
+        "AttributionRequired": "true"
+      }
+    }
+  },
+  "changes": "Extracted userboxes from template pages, removed page scripts and styles, hosted thumbnail bytes locally, made links absolute, and used the existing English profile translations. Responsive width is applied by the site stylesheet."
+}

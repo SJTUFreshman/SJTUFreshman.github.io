@@ -340,6 +340,9 @@ function setLang(lang) {
         const key = element.dataset.key;
         if (data[key] !== undefined) element.textContent = data[key];
     });
+    document.querySelectorAll('[data-userbox-language]').forEach(element => {
+        element.hidden = element.dataset.userboxLanguage !== state.currentLang;
+    });
     document.querySelectorAll('.lang-btn').forEach(button => {
         button.classList.toggle('active', button.dataset.lang === state.currentLang);
     });

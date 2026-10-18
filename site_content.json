@@ -803,7 +803,8 @@
             "en": "This user can communicate in Chinese at a professional level.",
             "zh-CN": "这个用户能以专业汉语交流。",
             "zh-TW": "這位用戶能以專業漢語交流。"
-          }
+          },
+          "wiki_template": "zh-professional"
         },
         {
           "id": "zh-traditional",
@@ -813,7 +814,8 @@
             "en": "This user can communicate in Traditional Chinese at a professional level.",
             "zh-CN": "这个用户能以专业繁体中文交流。",
             "zh-TW": "這位用戶能以專業繁體中文交流。"
-          }
+          },
+          "wiki_template": "zh-traditional"
         },
         {
           "id": "zh-simplified",
@@ -823,7 +825,8 @@
             "en": "This user can communicate in Simplified Chinese at a professional level.",
             "zh-CN": "这个用户能以专业简体中文交流。",
             "zh-TW": "這位用戶能以專業簡體中文交流。"
-          }
+          },
+          "wiki_template": "zh-simplified"
         },
         {
           "id": "han-characters",
@@ -833,7 +836,8 @@
             "en": "This user likes Han characters.",
             "zh-CN": "这个用户喜欢汉字。",
             "zh-TW": "這個用戶喜歡漢字。"
-          }
+          },
+          "wiki_template": "han-characters"
         },
         {
           "id": "chinese-graphology",
@@ -843,7 +847,8 @@
             "en": "This user enjoys studying Chinese graphology.",
             "zh-CN": "这个用户喜欢钻研汉文字学。",
             "zh-TW": "這個用戶喜歡鑽研漢文字學。"
-          }
+          },
+          "wiki_template": "chinese-graphology"
         },
         {
           "id": "traditional-characters",
@@ -853,7 +858,8 @@
             "en": "This user supports the revival of traditional character forms.",
             "zh-CN": "这个用户支持恢复使用传统字形。",
             "zh-TW": "這個用戶支持恢復使用傳統字形。"
-          }
+          },
+          "wiki_template": "traditional-characters"
         },
         {
           "id": "horizontal-vertical-writing",
@@ -863,7 +869,8 @@
             "en": "This user believes horizontal and vertical writing should coexist.",
             "zh-CN": "这位用户认为横写与直写应共存共荣。",
             "zh-TW": "這位用戶認為橫寫與直寫應共存共榮。"
-          }
+          },
+          "wiki_template": "horizontal-vertical-writing"
         },
         {
           "id": "spoken-written-separation",
@@ -873,7 +880,8 @@
             "en": "This user supports a distinction between spoken and written language.",
             "zh-CN": "这位用户支持言文分离。",
             "zh-TW": "這位用戶支持言文分離。"
-          }
+          },
+          "wiki_template": "spoken-written-separation"
         },
         {
           "id": "alphabetic-transliteration",
@@ -883,7 +891,8 @@
             "en": "This user supports alphabetic transliteration.",
             "zh-CN": "这位用户支持字母音译。",
             "zh-TW": "這位用戶支持字母音譯。"
-          }
+          },
+          "wiki_template": "alphabetic-transliteration"
         },
         {
           "id": "cursive-kaishu",
@@ -893,7 +902,8 @@
             "en": "This user can write cursive script and read regular script.",
             "zh-CN": "这个用户会写草书，也能识读楷书。",
             "zh-TW": "這個用戶會寫草書，也能識讀楷書。"
-          }
+          },
+          "wiki_template": "cursive-kaishu"
         },
         {
           "id": "font-design",
@@ -903,7 +913,8 @@
             "en": "This user is interested in font design.",
             "zh-CN": "这个用户对字体设计感兴趣。",
             "zh-TW": "這個用戶對字體設計感興趣。"
-          }
+          },
+          "wiki_template": "font-design"
         },
         {
           "id": "linguistics",
@@ -913,7 +924,8 @@
             "en": "This user is interested in linguistics.",
             "zh-CN": "这个用户对语言学感兴趣。",
             "zh-TW": "這個用戶對語言學感興趣。"
-          }
+          },
+          "wiki_template": "linguistics"
         },
         {
           "id": "american-english",
@@ -923,7 +935,8 @@
             "en": "This user uses American English.",
             "zh-CN": "这个用户使用美式英语。",
             "zh-TW": "這個用戶使用美式英語。"
-          }
+          },
+          "wiki_template": "american-english"
         },
         {
           "id": "no-swearing",
@@ -933,7 +946,8 @@
             "en": "This user has no concept of swearing.",
             "zh-CN": "这个用户没有脏话概念。",
             "zh-TW": "這個用戶沒有髒話概念。"
-          }
+          },
+          "wiki_template": "no-swearing"
         },
         {
           "id": "single",
@@ -943,7 +957,8 @@
             "en": "This user is single.",
             "zh-CN": "这个用户是单身狗。",
             "zh-TW": "這個用戶是單身狗。"
-          }
+          },
+          "wiki_template": "single"
         },
         {
           "id": "behind-you",
@@ -953,7 +968,8 @@
             "en": "This user is behind you.",
             "zh-CN": "这个用户在你后面。",
             "zh-TW": "這個用戶在你後面。"
-          }
+          },
+          "wiki_template": "behind-you"
         },
         {
           "id": "region-free",
@@ -963,7 +979,8 @@
             "en": "This user supports region-free media.",
             "zh-CN": "这个用户支持跨区自由。",
             "zh-TW": "這個用戶支持跨區自由。"
-          }
+          },
+          "wiki_template": "region-free"
         },
         {
           "id": "hate-pay-to-win",
@@ -973,7 +990,8 @@
             "en": "This user hates pay-to-win games.",
             "zh-CN": "这个用户讨厌付费取胜。",
             "zh-TW": "這個用戶討厭付費取勝。"
-          }
+          },
+          "wiki_template": "hate-pay-to-win"
         },
         {
           "id": "chinese-history",
@@ -983,7 +1001,8 @@
             "en": "This user is interested in Chinese history.",
             "zh-CN": "这个用户对中国历史感兴趣。",
             "zh-TW": "這個用戶對中國歷史感興趣。"
-          }
+          },
+          "wiki_template": "chinese-history"
         },
         {
           "id": "godfather",
@@ -993,7 +1012,8 @@
             "en": "This user likes the film The Godfather.",
             "zh-CN": "这个用户喜欢电影《教父》。",
             "zh-TW": "這個用戶喜歡電影《教父》。"
-          }
+          },
+          "wiki_template": "godfather"
         },
         {
           "id": "mood-for-love",
@@ -1003,7 +1023,8 @@
             "en": "This user likes In the Mood for Love.",
             "zh-CN": "这个用户喜欢电影《花样年华》。",
             "zh-TW": "這個用戶喜歡電影《花樣年華》。"
-          }
+          },
+          "wiki_template": "mood-for-love"
         },
         {
           "id": "writing",
@@ -1013,7 +1034,8 @@
             "en": "This user likes writing.",
             "zh-CN": "这个用户喜欢写作。",
             "zh-TW": "這個用戶喜歡寫作。"
-          }
+          },
+          "wiki_template": "writing"
         },
         {
           "id": "nature",
@@ -1023,7 +1045,8 @@
             "en": "This user loves nature.",
             "zh-CN": "这个用户喜欢大自然。",
             "zh-TW": "這個用戶喜歡大自然。"
-          }
+          },
+          "wiki_template": "nature"
         },
         {
           "id": "china",
@@ -1033,7 +1056,8 @@
             "en": "This user is from the People's Republic of China.",
             "zh-CN": "这个用户来自中华人民共和国。",
             "zh-TW": "這個用戶來自中華人民共和國。"
-          }
+          },
+          "wiki_template": "china"
         },
         {
           "id": "stem",
@@ -1043,7 +1067,8 @@
             "en": "This user studies science and engineering.",
             "zh-CN": "这个用户学习理工科。",
             "zh-TW": "這個用戶學習理工科。"
-          }
+          },
+          "wiki_template": "stem"
         },
         {
           "id": "sjtu",
@@ -1053,7 +1078,8 @@
             "en": "This user studies at Shanghai Jiao Tong University.",
             "zh-CN": "这个用户就读于上海交通大学。",
             "zh-TW": "這個用戶就讀於上海交通大學。"
-          }
+          },
+          "wiki_template": "sjtu"
         },
         {
           "id": "piano",
@@ -1063,7 +1089,8 @@
             "en": "This user plays the piano.",
             "zh-CN": "这个用户会弹钢琴。",
             "zh-TW": "這個用戶會彈鋼琴。"
-          }
+          },
+          "wiki_template": "piano"
         },
         {
           "id": "music",
@@ -1073,7 +1100,8 @@
             "en": "This user likes music.",
             "zh-CN": "这个用户喜欢音乐。",
             "zh-TW": "這個用戶喜歡音樂。"
-          }
+          },
+          "wiki_template": "music"
         },
         {
           "id": "greek-mythology",
@@ -1083,7 +1111,8 @@
             "en": "This user is interested in Greek mythology.",
             "zh-CN": "这个用户对希腊神话感兴趣。",
             "zh-TW": "這個用戶對希臘神話感興趣。"
-          }
+          },
+          "wiki_template": "greek-mythology"
         }
       ]
     }

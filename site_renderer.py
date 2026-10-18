@@ -12,6 +12,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent
 CONTENT_FILE = ROOT / "site_content.json"
+USERBOX_TEMPLATES_FILE = ROOT / "assets/life/userboxes/templates.json"
 LANGS = ("en", "zh-CN", "zh-TW")
 THOUGHT_COLLAPSE_CHARS = 700
 MONTH_NAMES = (
@@ -939,12 +940,24 @@ def render_life_profile(content: dict[str, Any]) -> str:
         for link in hero.get("links", [])
     )
     email = f"{content['site']['email_user']}@{content['site']['email_domain']}"
+    templates = json.loads(USERBOX_TEMPLATES_FILE.read_text(encoding="utf-8"))
     boxes = []
     for box in profile.get("userboxes", []):
+        template = templates.get(box.get("wiki_template"))
+        if template:
+            variants = []
+            for lang in LANGS:
+                # Reviewed local snapshots retain the original template colors,
+                # images, links and emphasis. No live Wikipedia embed is needed.
+                markup = template["html"][lang].replace("{{text}}", esc(lang_value(box.get("text", {}), lang)))
+                hidden = "" if lang == "en" else " hidden"
+                variants.append(f'<div class="wiki-userbox-variant" data-userbox-language="{lang}"{hidden}>{markup}</div>')
+            boxes.append(f'<li class="wiki-userbox" data-userbox="{esc(box["id"])}">' + "\n".join(variants) + '</li>')
+            continue
         tone = box.get("tone", "blue")
         if tone not in {"blue", "green", "amber", "violet", "neutral"}:
             tone = "blue"
-        boxes.append(f"""<li class="wiki-userbox" data-tone="{tone}">
+        boxes.append(f"""<li class="wiki-userbox wiki-userbox-custom" data-tone="{tone}">
             <span class="wiki-userbox-mark" aria-hidden="true">{esc(box.get('mark', ''))}</span>
             <span class="wiki-userbox-text" data-key="userbox_{esc(box['id'])}">{esc(lang_value(box.get('text', {}), 'en'))}</span>
         </li>""")
