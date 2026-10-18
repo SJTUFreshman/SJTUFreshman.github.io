@@ -155,9 +155,9 @@ function refreshPortalPanelRect() {
 
 function hideHomeRoutePreview() {
     dom.body.classList.remove('route-preview-active');
-    dom.homeRoutePreview.hidden = true;
-    dom.homeRoutePreview.removeAttribute('aria-busy');
-    dom.homeRouteLaunch.disabled = false;
+    if (dom.homeRoutePreview) dom.homeRoutePreview.hidden = true;
+    dom.homeRoutePreview?.removeAttribute('aria-busy');
+    if (dom.homeRouteLaunch) dom.homeRouteLaunch.disabled = false;
     state.panelRect = null;
 }
 

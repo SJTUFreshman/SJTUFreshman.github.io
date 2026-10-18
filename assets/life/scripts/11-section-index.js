@@ -130,23 +130,9 @@ function updateSectionDrawerCopy() {
         state.sectionDrawerOpen ? ui.close : ui.open
     );
     dom.sectionDrawerClose.setAttribute('aria-label', ui.close);
-    dom.sectionDrawerHomeTitle.textContent = ui.homeTitle;
-    dom.sectionDrawerHomeMeta.textContent = ui.homeMeta;
-    dom.sectionDrawerHome.setAttribute(
-        'aria-label',
-        `${ui.homeTitle} · ${ui.homeMeta}`
-    );
-    if (
-        state.scene === 'detail' &&
-        state.activePortal?.home
-    ) {
-        dom.sectionDrawerHome.setAttribute('aria-current', 'page');
-    } else {
-        dom.sectionDrawerHome.removeAttribute('aria-current');
-    }
     dom.sectionDrawerNote.textContent = ui.note;
 
-    portalDefinitions.filter(portal => !portal.home).forEach((portal, index) => {
+    portalDefinitions.forEach((portal, index) => {
         const button = portal.drawerButton;
         if (!button) return;
         const story = constellationStories[portal.id];
@@ -177,7 +163,7 @@ function updateSectionDrawerCopy() {
 
 function buildSectionDrawer() {
     const fragment = document.createDocumentFragment();
-    portalDefinitions.filter(portal => !portal.home).forEach(portal => {
+    portalDefinitions.forEach(portal => {
         const button = document.createElement('button');
         button.className = 'section-index-item';
         button.type = 'button';
@@ -203,7 +189,6 @@ function buildSectionDrawer() {
         fragment.append(button);
     });
     dom.sectionDrawerList.replaceChildren(fragment);
-    dom.sectionDrawerHome.dataset.portalId = 'home';
     updateSectionDrawerCopy();
 }
 
@@ -372,7 +357,7 @@ function openPortalThroughIndex(
     arrivalHip = firstContentStarHip(portal),
     source = 'drawer'
 ) {
-    if (!portal || portal.home) return false;
+    if (!portal) return false;
     if (window.lifeStarMap) {
         window.lifeStarMap.openPortal(portal, source, arrivalHip);
         return true;
@@ -398,25 +383,6 @@ function openPortalThroughIndex(
     return true;
 }
 
-function openHomepageRouteFromIndex() {
-    const homePortal = portalDefinitions.find(portal => portal.home);
-    if (!homePortal) return false;
-    if (window.lifeStarMap) {
-        window.lifeStarMap.openPortal(homePortal, 'drawer', null);
-        return true;
-    }
-    if (dom.body.classList.contains('panel-open')) {
-        closePortalPanel(false, 'drawer');
-    }
-    state.activationSource = 'drawer';
-    state.activePortalOpenedThroughIndex = true;
-    state.portalReturnFocusTarget = dom.sectionDrawerToggle;
-    state.detailFov = camera.fov;
-    openPortalPanel(homePortal, false, null);
-    previewHomeRoute(homePortal, 11767);
-    return true;
-}
-
 function performDrawerPortalNavigation(portal, source = 'pointer') {
     if (!portal) return false;
     if (portalAvailableInSky(portal)) {
@@ -432,7 +398,7 @@ function performDrawerPortalNavigation(portal, source = 'pointer') {
 }
 
 function navigateFromSectionDrawer(portal, source = 'pointer') {
-    if (!portal || portal.home || !state.sectionDrawerOpen) return false;
+    if (!portal || !state.sectionDrawerOpen) return false;
     if (state.scene === 'detail' && state.activePortal === portal) {
         closeSectionDrawer({
             restoreControl: true,
@@ -443,12 +409,6 @@ function navigateFromSectionDrawer(portal, source = 'pointer') {
     }
     closeSectionDrawer({ restoreControl: false, focusToggle: false });
     return performDrawerPortalNavigation(portal, source);
-}
-
-function navigateHomeFromSectionDrawer(source = 'pointer') {
-    if (!state.sectionDrawerOpen) return false;
-    closeSectionDrawer({ restoreControl: false, focusToggle: false });
-    return openHomepageRouteFromIndex();
 }
 
 function trapSectionDrawerFocus(event) {

@@ -57,7 +57,7 @@ class LifeStarMap {
         const placements = {
             gallery: [-122, 48, 5], footprints: [-123, -64, 28], shelf: [102, 63, -8],
             thoughts: [54, -57, 24], friends: [-176, -4, -42], wine: [-20, 73, -20],
-            profile: [-24, -100, 16], home: [5, 8, -15]
+            profile: [-24, -100, 16]
         };
         portalDefinitions.forEach((portal, index) => {
             const directions = portal.equatorialPatternPoints || portal.patternPoints;
@@ -68,7 +68,7 @@ class LifeStarMap {
             const span = Math.max(bounds[0][1] - bounds[0][0], bounds[1][1] - bounds[1][0], 0.01);
             const placement = placements[portal.id];
             const center = [placement[0], placement[1] * 0.887 + placement[2] * 0.462, -placement[1] * 0.462 + placement[2] * 0.887];
-            const size = portal.home ? 27 : 35;
+            const size = 35;
             const points = flat.map((point, pointIndex) => {
                 const horizontal = (point[0] - (bounds[0][0] + bounds[0][1]) * 0.5) / span * size;
                 const vertical = (point[1] - (bounds[1][0] + bounds[1][1]) * 0.5) / span * size;
@@ -154,7 +154,12 @@ class LifeStarMap {
         });
     }
 
-    drawEntities() {
+    drawEntities(time = performance.now()) {
+        // Keep every moving label out of the viewport while the camera is
+        // being rotated. Repositioning names only after the view has settled
+        // prevents the label layout from chasing the stars during a gesture.
+        const labelsSettled = !this.currentView.moving
+            && time - (this.lastInputTime ?? -Infinity) >= 280;
         const languageIndex = Math.max(0, LANGUAGES.indexOf(state.currentLang));
         const occupied = [...(this.portalRects || [])];
         const stars = this.galaxyMix < 0.28 ? this.projectedPortalStars || [] : [];
@@ -162,7 +167,8 @@ class LifeStarMap {
             const key = `entity:${entity.id}`;
             const projected = this.project(entity.position, this.currentView, entity.level === 'galaxy');
             const levelVisible = entity.level === 'galaxy' ? this.galaxyMix > 0.72 : this.galaxyMix < 0.23;
-            const active = levelVisible && projected.visible && state.scene === 'roam' && !this.flight;
+            const active = levelVisible && projected.visible && state.scene === 'roam'
+                && !this.flight && labelsSettled;
             if (!active) {
                 entity.button.hidden = true;
                 entity.button.inert = true;
@@ -506,17 +512,11 @@ class LifeStarMap {
     }
 
     handleStarAction(portal, hip) {
-        if (portal.home) {
-            const action = homeStarTargets[hip];
-            if (action?.type === 'home') this.goHome();
-            else if (action?.portalId) this.openPortal(portalDefinitions.find(item => item.id === action.portalId));
-        } else {
-            selectPortalStar(portal, hip);
-            const measurement = window.HipparcosDistances?.byHip.get(hip);
-            if (measurement) {
-                const unit = state.currentLang === 'en' ? 'ly from Earth' : state.currentLang === 'zh-TW' ? '光年 · 距地球' : '光年 · 距地球';
-                dom.starReaderMeta.textContent += ` · ${(measurement.parsecs * 3.26156).toFixed(0)} ${unit}`;
-            }
+        selectPortalStar(portal, hip);
+        const measurement = window.HipparcosDistances?.byHip.get(hip);
+        if (measurement) {
+            const unit = state.currentLang === 'en' ? 'ly from Earth' : state.currentLang === 'zh-TW' ? '光年 · 距地球' : '光年 · 距地球';
+            dom.starReaderMeta.textContent += ` · ${(measurement.parsecs * 3.26156).toFixed(0)} ${unit}`;
         }
         return true;
     }
@@ -645,11 +645,11 @@ class LifeStarMap {
         }
         const skyCredit = document.getElementById('skyCredit');
         if (skyCredit) skyCredit.hidden = !this.renderer.skyImage || this.galaxyMix >= 1;
-        this.drawGroups(delta);
-        this.drawEntities();
+        this.drawGroups(delta, time);
+        this.drawEntities(time);
     }
 
-    drawGroups(delta) {
+    drawGroups(delta, time = performance.now()) {
         const context = overlayContext;
         context.setTransform(overlayDpr, 0, 0, overlayDpr, 0, 0);
         context.clearRect(0, 0, overlayWidth, overlayHeight);
@@ -707,10 +707,17 @@ class LifeStarMap {
             if (!selected) portal.starButtons.forEach(button => { button.hidden = true; button.inert = true; });
             const center = this.project(group.center);
             portal.screen = center;
-            const labelsActive = this.galaxyMix < 0.28 && state.scene === 'roam' && !this.flight;
+            // Hide labels while the camera is moving, then place them once
+            // against the settled view so they do not slide around during a
+            // rotation.
+            const labelsSettled = !this.currentView.moving
+                && time - (this.lastInputTime ?? -Infinity) >= 280;
+            const labelsActive = this.galaxyMix < 0.28 && state.scene === 'roam'
+                && !this.flight && labelsSettled;
             const labelRect = labelsActive ? this.placePortalLabel(group, center, points, labelRects) : null;
             if (!labelsActive) this.labelLayout.hide(`portal:${portal.id}`);
-            const visible = this.galaxyMix < 0.28 && state.scene === 'roam' && !this.flight && Boolean(labelRect);
+            const visible = this.galaxyMix < 0.28 && state.scene === 'roam'
+                && !this.flight && labelsSettled && Boolean(labelRect);
             portal.button.hidden = !visible;
             portal.button.inert = !visible;
             portal.buttonVisible = visible;
@@ -911,10 +918,7 @@ class LifeStarMap {
         });
         dom.sectionDrawerClose.addEventListener('click', () => closeSectionDrawer({ interactionSource: 'keyboard' }));
         dom.sectionDrawerScrim.addEventListener('click', () => closeSectionDrawer());
-        dom.sectionDrawerHome.addEventListener('click', event => navigateHomeFromSectionDrawer(event.detail === 0 ? 'keyboard' : 'pointer'));
         dom.panelClose.addEventListener('click', event => closePortalPanel(true, event.detail === 0 ? 'keyboard' : 'pointer'));
-        dom.homeRouteLaunch.addEventListener('click', () => this.goHome());
-        dom.homeRouteCancel.addEventListener('click', () => closePortalPanel(true));
         document.addEventListener('keydown', event => {
             if (this.solarDestination.open) return;
             if (dom.lightbox.classList.contains('active')) {

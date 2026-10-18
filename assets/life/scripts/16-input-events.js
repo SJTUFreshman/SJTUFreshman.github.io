@@ -167,7 +167,7 @@ dom.sectionDrawerClose.addEventListener('click', event => {
 dom.sectionDrawerScrim.addEventListener('click', () => {
     closeSectionDrawer({ interactionSource: 'pointer' });
 });
-dom.sectionDrawerHome.addEventListener('click', event => {
+dom.sectionDrawerHome?.addEventListener('click', event => {
     navigateHomeFromSectionDrawer(event.detail === 0 ? 'keyboard' : 'pointer');
 });
 portalDefinitions.forEach(portal => {
@@ -301,14 +301,14 @@ window.addEventListener('keyup', event => {
 dom.panelClose.addEventListener('click', event => {
     closePortalPanel(true, event.detail === 0 ? 'keyboard' : 'pointer');
 });
-dom.homeRouteLaunch.addEventListener('click', event => {
+dom.homeRouteLaunch?.addEventListener('click', event => {
     launchHomeRoute(
         state.portalReturnFocusTarget === dom.sectionDrawerToggle
             ? 'drawer'
             : (event.detail === 0 ? 'keyboard' : 'pointer')
     );
 });
-dom.homeRouteCancel.addEventListener('click', cancelHomeRoutePreview);
+dom.homeRouteCancel?.addEventListener('click', cancelHomeRoutePreview);
 window.addEventListener('storage', event => {
     if (event.key !== WEATHER_LOCATION_STORAGE_KEY) return;
     skyModel.location = readWeatherObserverLocation();

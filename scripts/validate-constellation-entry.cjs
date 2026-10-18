@@ -151,16 +151,21 @@ async function meanings(browser, route, mobile) {
     try {
         await load(page, route);
         const membership = await page.evaluate(() => ({
-            ids: portalDefinitions.filter(portal => !portal.home).map(portal => portal.id),
+            ids: portalDefinitions.map(portal => portal.id),
+            hasHomePortal: portalDefinitions.some(portal => portal.id === 'home' || portal.home),
+            hasUrsaMinorPattern: Boolean(constellationPatterns.ursaMinor),
             removed: Boolean(document.querySelector('#news, #publications, #projects, #notes, [data-portal-button="news"], [data-portal-button="publications"], [data-portal-button="projects"]')),
             targets: Object.values(homeStarTargets).filter(target => target.type === 'portal').map(target => target.portalId),
-            patterns: portalDefinitions.every(portal => constellationPatterns[portal.pattern].hips.every(hip => window.HipparcosSky.indexByHip.has(hip)))
+            patterns: portalDefinitions.every(portal => constellationPatterns[portal.pattern].hips.every(hip => window.HipparcosSky.indexByHip.has(hip))),
+            noHomeDom: !document.querySelector('[data-portal-button="home"], #sectionDrawerHome')
         }));
         const expected = ['gallery', 'footprints', 'shelf', 'thoughts', 'friends', 'profile', 'wine'];
-        check(!membership.removed && membership.patterns && JSON.stringify(membership.ids) === JSON.stringify(expected)
-            && JSON.stringify(membership.targets.sort()) === JSON.stringify(expected.slice().sort()),
-            `${label}: seven content sections use catalogue stars and Home routes reach exactly these sections`);
-        for (const id of [...expected, 'home']) {
+        check(!membership.removed && membership.patterns && membership.noHomeDom
+            && !membership.hasHomePortal && !membership.hasUrsaMinorPattern
+            && membership.targets.length === 0
+            && JSON.stringify(membership.ids) === JSON.stringify(expected),
+            `${label}: seven content sections use catalogue stars and the Home constellation is removed`);
+        for (const id of expected) {
             // The Home constellation has its own shared panel, while the solar marker opens the destination chooser.
             await page.evaluate(id => window.lifeStarMap.openPortal(portalDefinitions.find(portal => portal.id === id)), id);
             await page.waitForFunction(id => state.scene === 'detail' && state.activePortal?.id === id, id);

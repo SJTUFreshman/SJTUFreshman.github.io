@@ -121,14 +121,6 @@ const portalDefinitions = [
         fallbackPitch: 0.16,
         pattern: 'crater'
     },
-    {
-        id: 'home',
-        titleKey: 'title_home',
-        fallbackYaw: 3.02,
-        fallbackPitch: 0.04,
-        pattern: 'ursaMinor',
-        home: true
-    }
 ];
 
 const constellationPatterns = {
@@ -181,13 +173,6 @@ const constellationPatterns = {
         focusHip: 55282,
         fallbackPoints: [[-0.075,-0.025],[-0.043,-0.075],[-0.005,-0.018],[-0.02,0.015],[-0.005,0.06],[0.027,0.072],[0.08,-0.012],[0.05,-0.025]],
         edges: [[4,5],[4,3],[3,2],[2,7],[7,6],[6,5],[2,1],[1,0]]
-    },
-    ursaMinor: {
-        hips: [11767, 85822, 82080, 79822, 77055, 72607, 75097, 70692, 69112, 74605, 73199],
-        contentOrder: [11767, 85822, 82080, 79822, 77055, 72607, 75097, 70692, 69112, 74605, 73199],
-        focusHip: 11767,
-        fallbackPoints: [[0,0],[-0.02,-0.038],[-0.046,-0.06],[-0.067,-0.035],[-0.06,0.012],[-0.018,0.035],[0.012,0.006],[0.01,0.066],[0.038,0.09],[-0.065,0.085],[-0.09,0.12]],
-        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,3],[5,7],[7,8],[6,9],[9,10]]
     }
 };
 
@@ -283,19 +268,6 @@ const constellationStories = {
             'zh-TW': '巨爵座是天上的杯子；它的拉丁名 Crater 源自古希臘用來調和葡萄酒與水的酒器。把品酒日記放在這裡，是想讓這隻星空中的杯子，盛下值得記住的香氣、滋味與片刻。'
         }
     },
-    home: {
-        name: { en: 'Ursa Minor', 'zh-CN': '小熊座', 'zh-TW': '小熊座' },
-        epithet: {
-            en: 'The constellation of return',
-            'zh-CN': '归途的星座',
-            'zh-TW': '歸途的星座'
-        },
-        reason: {
-            en: 'Polaris remains close to the north celestial pole while the sky turns around it. Here it is Home; seven other real stars in Ursa Minor become direct routes into the visible constellations of this life.',
-            'zh-CN': '天空绕北天极旋转，而北极星近乎不动。在这里，它就是 Home；小熊座另外七颗真实恒星成为通往当前生活板块星座的航线。',
-            'zh-TW': '天空繞北天極旋轉，而北極星近乎不動。在這裡，它就是 Home；小熊座另外七顆真實恆星成為通往目前生活板塊星座的航線。'
-        }
-    }
 };
 
 const starProfiles = {
@@ -389,16 +361,8 @@ const starProfiles = {
     73199: { names: { en: 'RR Ursae Minoris', 'zh-CN': '小熊座 RR', 'zh-TW': '小熊座 RR' }, designation: 'RR Ursae Minoris' }
 };
 
-const homeStarTargets = {
-    11767: { type: 'home' },
-    85822: { type: 'portal', portalId: 'gallery' },
-    82080: { type: 'portal', portalId: 'shelf' },
-    79822: { type: 'portal', portalId: 'thoughts' },
-    77055: { type: 'portal', portalId: 'friends' },
-    72607: { type: 'portal', portalId: 'footprints' },
-    69112: { type: 'portal', portalId: 'profile' },
-    73199: { type: 'portal', portalId: 'wine' }
-};
+// Retained as an empty compatibility table for cached route helpers. The Home constellation is no longer part of Life navigation.
+const homeStarTargets = Object.freeze({});
 
 const starUiCopy = {
     en: {
@@ -408,8 +372,6 @@ const starUiCopy = {
         starNote: 'STAR NOTE',
         chooseMeta: count => `${count} real stars · choose one to continue`,
         choose: 'Move the cursor across the constellation and choose a star. Filled rings carry content; every other star still has its own story.',
-        homeMeta: count => `${count} real stars · Home + seven direct routes`,
-        homeChoose: 'Choose a star to preview its route. The view will trace the course first; navigation begins only after you confirm Launch.',
         routePreviewMeta: 'INTERSTELLAR ROUTE PREVIEW',
         departure: 'Departure',
         destination: 'Destination',
@@ -418,7 +380,6 @@ const starUiCopy = {
         cancel: 'Cancel route',
         empty: 'This star does not carry any content yet.',
         filled: count => `${count} ${count === 1 ? 'entry is' : 'entries are'} fixed to this star, following this section’s saved order.`,
-        home: 'Return to the homepage',
         route: target => `Fly to ${target}`
     },
     'zh-CN': {
@@ -428,8 +389,6 @@ const starUiCopy = {
         starNote: '恒星附注',
         chooseMeta: count => `${count} 颗真实恒星 · 请选择一颗继续`,
         choose: '把鼠标移到星座中的恒星并选择。带细环的星已有内容；其余恒星也仍有自己的介绍。',
-        homeMeta: count => `${count} 颗真实恒星 · Home 与七条直达航线`,
-        homeChoose: '选择一颗恒星预览航线。视角会先沿航线望向目的地；只有再次确认“启航”后才会真正跳转。',
         routePreviewMeta: '星际航线预览',
         departure: '启程星',
         destination: '目的地',
@@ -438,7 +397,6 @@ const starUiCopy = {
         cancel: '取消航线',
         empty: '这颗星上暂时还没有内容。',
         filled: count => `这颗星固定承载 ${count} 条内容，并遵循该板块保存的顺序。`,
-        home: '返回个人主页',
         route: target => `飞向${target}`
     },
     'zh-TW': {
@@ -448,8 +406,6 @@ const starUiCopy = {
         starNote: '恆星附註',
         chooseMeta: count => `${count} 顆真實恆星 · 請選擇一顆繼續`,
         choose: '把滑鼠移到星座中的恆星並選擇。帶細環的星已有內容；其餘恆星也仍有自己的介紹。',
-        homeMeta: count => `${count} 顆真實恆星 · Home 與七條直達航線`,
-        homeChoose: '選擇一顆恆星預覽航線。視角會先沿航線望向目的地；只有再次確認「啟航」後才會真正跳轉。',
         routePreviewMeta: '星際航線預覽',
         departure: '啟程星',
         destination: '目的地',
@@ -458,7 +414,6 @@ const starUiCopy = {
         cancel: '取消航線',
         empty: '這顆星上暫時還沒有內容。',
         filled: count => `這顆星固定承載 ${count} 條內容，並遵循該板塊儲存的順序。`,
-        home: '返回個人主頁',
         route: target => `飛向${target}`
     }
 };
@@ -474,8 +429,6 @@ const skyIndexUi = {
         near: 'Near horizon',
         below: 'Below horizon',
         veiled: 'Obscured by glare',
-        homeTitle: 'Homepage route',
-        homeMeta: 'Polaris course · confirm departure',
         note: 'Above-horizon constellations remain softly traced by day; sections below the horizon remain available here.',
         observer: (location, time) => `${location} · ${time}`,
         indexAccess: 'INDEX ACCESS',
@@ -492,8 +445,6 @@ const skyIndexUi = {
         near: '临近地平线',
         below: '地平线下',
         veiled: '隐没于眩光',
-        homeTitle: '主页航线',
-        homeMeta: '北极星航线 · 确认后启航',
         note: '白昼仍会柔和标出地平线以上的星座；地平线以下的板块也可由此索引进入。',
         observer: (location, time) => `${location} · ${time}`,
         indexAccess: '索引接入',
@@ -510,8 +461,6 @@ const skyIndexUi = {
         near: '鄰近地平線',
         below: '地平線下',
         veiled: '隱沒於眩光',
-        homeTitle: '主頁航線',
-        homeMeta: '北極星航線 · 確認後啟航',
         note: '白晝仍會柔和標出地平線以上的星座；地平線以下的板塊也可由此索引進入。',
         observer: (location, time) => `${location} · ${time}`,
         indexAccess: '索引接入',

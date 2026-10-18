@@ -1,6 +1,6 @@
 # Life 页面维护指南
 
-`life.html` 是一幅分层三维星图。右键拖动旋转、左键拖动平移、滚轮缩放；触控板双指滑动旋转、捏合缩放；触屏单指旋转，双指缩放和平移。指针始终自由，不需要 Pointer Lock。访客通过带连线的星座进入 Gallery、Footprints、Shelf、Thoughts、Friends、News、Publications、Projects、Meet Me Again 和 Home 等内容。
+`life.html` 是一幅分层三维星图。右键拖动旋转、左键拖动平移、滚轮缩放；触控板双指滑动旋转、捏合缩放；触屏单指旋转，双指缩放和平移。指针始终自由，不需要 Pointer Lock。访客通过带连线的星座进入 Gallery、Footprints、Shelf、Thoughts、Friends、Meet Me Again 和 Wine Diary 等内容；主页通过左上角 Runde Yang 或太阳系弹窗返回。
 
 星图的滚轮手势处理：浏览器的 Ctrl / Meta + wheel 捏合事件只缩放，连续像素滚动控制旋转，同一段滑动的加速和惯性保持旋转。浏览器不直接提供输入设备类型，因此按行、按页和较大的整数步进识别为普通鼠标滚轮；少数驱动或平滑滚轮可能无法准确区分，仍可用 Ctrl + 滚轮缩放。
 
@@ -141,7 +141,7 @@ git diff --check
 
 ### 星座与板块寓意
 
-Life 和太阳系观景页共用七个内容入口：光影（仙后座）、足迹（大熊座 / 北斗）、书影（天琴座）、随笔（天鹅座）、友链（双子座）、重新认识我（猎户座）、品酒日记（巨爵座）；Home 对应小熊座。News、Publications、Projects 仅保留在学术主页，不再进入 Life 的页面、索引、恒星绑定或 Home 航线。
+Life 和太阳系观景页共用七个内容入口：光影（仙后座）、足迹（大熊座 / 北斗）、书影（天琴座）、随笔（天鹅座）、友链（双子座）、重新认识我（猎户座）、品酒日记（巨爵座）。Home 星座板块已移除；主页通过左上角 Runde Yang、太阳系弹窗或全局转场访问。News、Publications、Projects 仅保留在学术主页，不再进入 Life 的页面、索引或恒星绑定。
 
 每个内容面板顶部的「星座寓意」独立于恒星附注，读取 `02-sky-config.js` 的 `constellationStories`，切换恒星时保留，并随界面语言更新。品酒日记当前仅显示空状态，没有虚构的品酒条目。巨爵座使用现有 Hipparcos 星表中的八颗真实恒星，杯形连线为本站自行编排；观景页保持真实天球位置。
 

@@ -110,6 +110,7 @@ const life = [
     ...lifeRuntimeScripts.map(resource => resource.source),
     ...lifeStylesheets.map(resource => resource.source)
 ].map(source => source.trimEnd()).join('\n\n');
+const homePortalPresent = /\bid:\s*['"]home['"]/.test(life);
 
 for (const [file, html] of [['index.html', index], ['life.html', lifeHtml]]) {
     for (const [scriptIndex, source] of inlineScripts(html).entries()) {
@@ -160,7 +161,10 @@ const htmlIds = new Set(
 const allHtmlIds = [...lifeHtml.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 const retiredOptionalIds = new Set([
     'entryGate', 'entryTrigger', 'entryFallback', 'entryTitle', 'entryHint', 'entryLocation',
-    'gazePrimary', 'gazeSecondary', 'gazeConstellation', 'gazeDescription'
+    'gazePrimary', 'gazeSecondary', 'gazeConstellation', 'gazeDescription',
+    'sectionDrawerHome', 'sectionDrawerHomeTitle', 'sectionDrawerHomeMeta',
+    'homeRoutePreview', 'homeRouteFromLabel', 'homeRouteFrom', 'homeRouteToLabel',
+    'homeRouteTo', 'homeRouteSummary', 'homeRouteLaunch', 'homeRouteCancel'
 ]);
 assert.equal(
     htmlIds.size,
@@ -189,8 +193,6 @@ for (const id of ['profile', 'wine', 'constellationMeaning', 'constellationMeani
 
 assert(!/homeRouteIndex|home-route-index|home-route-button/.test(life));
 for (const required of [
-    'previewHomeRoute',
-    'launchHomeRoute',
     'interstellarRouteFraming',
     'refreshAstronomicalSky',
     'drawMeteorShower',
@@ -239,11 +241,12 @@ for (const id of [
     'sectionDrawerToggle',
     'sectionDrawer',
     'sectionDrawerList',
-    'sectionDrawerHome',
     'sectionDrawerClose'
 ]) {
     assert(htmlIds.has(id), `The section drawer must expose #${id}`);
 }
+assert(!htmlIds.has('sectionDrawerHome'), 'The section drawer must not expose a Home constellation destination');
+assert(!htmlIds.has('homeRoutePreview'), 'The detail panel must not expose a Home route preview');
 const altRecovery = life.match(
     /function recoverMissingAltKeyup\(\) \{([\s\S]*?)\n\}/
 );
@@ -282,7 +285,7 @@ assert(
     /const SHORT_SKY_MAX_HEIGHT = 520;/.test(life) &&
     /const SHORT_SKY_MIN_ASPECT = 3 \/ 2;/.test(life) &&
     /@media \(max-height: 520px\) and \(min-aspect-ratio: 3\/2\)[\s\S]*?width: clamp\(180px, 34vw, 280px\)/.test(life) &&
-    /@media \(max-width: 1024px\), \(max-aspect-ratio: 3\/2\)[\s\S]*?body\.route-preview-active \.portal-panel/.test(life),
+    /@media \(max-width: 1024px\), \(max-aspect-ratio: 3\/2\)[\s\S]*?\.portal-panel/.test(life),
     'CSS and camera logic must share the compact sky-panel breakpoint'
 );
 assert(!/CelestialCloseupRenderer|SolarSystemMap|BakedCelestialViewer|assets\/celestial\//.test(life), 'The retired solar viewer and resources must stay removed');
@@ -1562,8 +1565,8 @@ const drawerListMarkup = sectionDrawerMarkup[0].match(
 assert(drawerListMarkup, 'The section drawer must expose a dedicated portal list');
 assert(
     !/sectionDrawerHome/.test(drawerListMarkup[1]) &&
-    /id="sectionDrawerHome"/.test(sectionDrawerMarkup[0]),
-    'Home must remain a visually and semantically separate drawer destination'
+    !/id="sectionDrawerHome"/.test(sectionDrawerMarkup[0]),
+    'Home must be removed from the section drawer'
 );
 assert(
     /id="sectionDrawerToggle"[^>]*aria-expanded="false"[^>]*aria-controls="sectionDrawer"/.test(
@@ -1583,14 +1586,6 @@ const sectionDrawerState = JSON.parse(vm.runInContext(`(() => {
     );
     const listedIds = listedButtons.map(button => button.dataset.portalId);
     const uniqueIds = new Set(listedIds).size;
-    const home = portalDefinitions.find(portal => portal.home);
-    const homeSeparated = (
-        dom.sectionDrawerHome.parentElement !== dom.sectionDrawerList &&
-        (
-            dom.sectionDrawerHome.dataset.portalId === home.id ||
-            dom.sectionDrawerHome.dataset.portal === home.id
-        )
-    );
 
     const saved = {
         scene: state.scene,
@@ -1633,7 +1628,6 @@ const sectionDrawerState = JSON.parse(vm.runInContext(`(() => {
         listedIds,
         uniqueIds,
         listedCount: listedButtons.length,
-        homeSeparated,
         accessibleOpen,
         accessibleClosed
     });
@@ -1645,7 +1639,6 @@ assert.deepEqual(
     sectionDrawerState.expectedContentIds,
     'The drawer must list all seven content portals once, in their authored order'
 );
-assert(sectionDrawerState.homeSeparated);
 assert(sectionDrawerState.accessibleOpen);
 assert(sectionDrawerState.accessibleClosed);
 
@@ -3030,15 +3023,16 @@ assert.equal(
     routeFramingState.cases,
     routeFramingState.viewportCount * routeFramingState.routeTargetCount
 );
-assert.equal(routeFramingState.routeTargetCount, 8);
+assert.equal(routeFramingState.routeTargetCount, 0);
+assert.equal(routeFramingState.cases, 0);
 assert(
     routeFramingState.maximumFov < 125,
     `Responsive route framing must stay below the visual-quality FOV limit: ` +
     JSON.stringify(routeFramingState.maximumFovCase)
 );
-assert(routeFramingState.minimumBasisDeterminant > 1 - 1e-10);
+assert(routeFramingState.routeTargetCount === 0 || routeFramingState.minimumBasisDeterminant > 1 - 1e-10);
 assert(
-    routeFramingState.maximumAngularError < 1e-8,
+    routeFramingState.routeTargetCount === 0 || routeFramingState.maximumAngularError < 1e-8,
     `Route projection angular error: ${routeFramingState.maximumAngularError}`
 );
 assert.deepEqual(
@@ -3048,6 +3042,7 @@ assert.deepEqual(
 );
 
 const routeOrientationContinuity = JSON.parse(vm.runInContext(`(() => {
+    if (!portalDefinitions.some(portal => portal.home)) return JSON.stringify({ angularChange: 0 });
     const savedWidth = window.innerWidth;
     const savedHeight = window.innerHeight;
     const home = portalDefinitions.find(portal => portal.home);
@@ -3341,6 +3336,7 @@ assert.deepEqual(panelState, {
 }, 'Portal panels must open interactively and return keyboard focus');
 
 const routeState = JSON.parse(vm.runInContext(`(() => {
+    if (!portalDefinitions.some(portal => portal.home)) return JSON.stringify({ removed: true });
     const home = portalDefinitions.find(portal => portal.home);
     const sun = { get current() { return skySun; }, set current(value) { skySun = value; } };
     const savedSunAltitude = sun.current?.altitude;
@@ -3411,14 +3407,15 @@ const routeState = JSON.parse(vm.runInContext(`(() => {
         launchedAfterConfirmation
     });
 })()`, runtimeContext));
-assert.deepEqual(routeState, {
+assert.deepEqual(routeState, homePortalPresent ? {
     previewCreated: true,
     previewCancelledCleanly: true,
     blockedUntilConfirmed: true,
     launchedAfterConfirmation: true
-}, 'Home routes must remain a preview-first, explicit-confirmation navigation');
+} : { removed: true }, 'Home routes are removed while the remaining route workflow stays preview-first');
 
 const belowHorizonHomeRouteState = JSON.parse(vm.runInContext(`(() => {
+    if (!portalDefinitions.some(portal => portal.home)) return JSON.stringify({ available: false });
     const home = portalDefinitions.find(portal => portal.home);
     const routeEntry = Object.entries(homeStarTargets).find(([, action]) => {
         if (action.type !== 'portal') return false;
@@ -3464,9 +3461,9 @@ const belowHorizonHomeRouteState = JSON.parse(vm.runInContext(`(() => {
         calls
     });
 })()`, runtimeContext));
-assert(belowHorizonHomeRouteState.available);
-assert(belowHorizonHomeRouteState.previewCleared);
-assert(
+if (homePortalPresent) assert(belowHorizonHomeRouteState.available);
+if (homePortalPresent) assert(belowHorizonHomeRouteState.previewCleared);
+if (homePortalPresent) assert(
     belowHorizonHomeRouteState.calls.some(call =>
         call.kind === 'panel' &&
         call.portal === belowHorizonHomeRouteState.targetPortal &&
@@ -3477,6 +3474,7 @@ assert(
 );
 
 const routeResizeState = JSON.parse(vm.runInContext(`(() => {
+    if (!portalDefinitions.some(portal => portal.home)) return JSON.stringify({ removed: true });
     const savedWidth = window.innerWidth;
     const savedHeight = window.innerHeight;
     const home = portalDefinitions.find(portal => portal.home);
@@ -3571,14 +3569,14 @@ const routeResizeState = JSON.parse(vm.runInContext(`(() => {
         settledResizeTransitions
     });
 })()`, runtimeContext));
-assert.deepEqual(routeResizeState, {
+assert.deepEqual(routeResizeState, homePortalPresent ? {
     continuedDestinationLeg: true,
     noRewind: true,
     revealContinuous: true,
     settledResizeDoesNotSnap: true,
     breakpointTargetUpdated: true,
     settledResizeTransitions: true
-}, 'Resizing a route preview must preserve phase and smoothly cross layout breakpoints');
+} : { removed: true }, 'Resizing a route preview remains covered when the route exists');
 
 const meteorState = JSON.parse(vm.runInContext(`(() => {
     const originalCrypto = window.crypto;
@@ -3655,7 +3653,7 @@ const patterns = evaluateLiteral(
     'constellationPatterns'
 );
 const homeTargets = evaluateLiteral(
-    /const homeStarTargets = (\{[\s\S]*?\n\});\n\nconst starUiCopy/,
+    /const homeStarTargets = (?:Object\.freeze\()?([\{][\s\S]*?[\}])\)?;\n\nconst starUiCopy/,
     'homeStarTargets'
 );
 function catalogDirection(hip) {
@@ -3683,7 +3681,6 @@ function contentHips(portalId) {
 
 const portalById = new Map(portals.map(portal => [portal.id, portal]));
 const homePortal = portalById.get('home');
-const homePattern = patterns[homePortal.pattern];
 let maximumRouteSeparation = 0;
 for (const [sourceHip, action] of Object.entries(homeTargets)) {
     if (action.type !== 'portal') continue;
