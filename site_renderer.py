@@ -9,6 +9,7 @@ import unicodedata
 from datetime import date as calendar_date
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent
 CONTENT_FILE = ROOT / "site_content.json"
@@ -42,6 +43,7 @@ CONSTELLATION_HIP_ORDER = {
     "friends": (36850, 37826, 32246, 35550, 30343, 31681),
     "profile": (26207, 27989, 24436, 25336, 27366, 26311, 26727, 25930),
     "wine": (56633, 55282, 53740, 55705, 54682, 55687, 57283, 58188),
+    "wishlist": (101958, 102532, 102281, 101769, 101421),
 }
 CONSTELLATION_HIPS = {
     stream: set(hips)
@@ -120,6 +122,7 @@ def validate_content(
         ("home.gallery", home.get("gallery", [])),
         ("life.profile.userboxes", life.get("profile", {}).get("userboxes", [])),
         ("life.wine.entries", life.get("wine", {}).get("entries", [])),
+        ("life.wishlist.entries", life.get("wishlist", {}).get("entries", [])),
         ("life.gallery", life.get("gallery", [])),
         ("life.shelf", life.get("shelf", [])),
         ("life.thoughts", life.get("thoughts", [])),
@@ -373,6 +376,7 @@ def star_entry_ids(content: dict[str, Any]) -> dict[str, list[str]]:
         ],
         "profile": [],
         "wine": [],
+        "wishlist": [],
     }
 
 
@@ -620,11 +624,23 @@ def shelf_text_values(content: dict[str, Any]) -> dict[str, Any]:
     return values
 
 
+def wishlist_text_values(content: dict[str, Any]) -> dict[str, Any]:
+    wishlist = content["life"].get("wishlist", {})
+    values = {f"wishlist_{key}": value for key, value in wishlist.get("copy", {}).items()}
+    for item in wishlist.get("entries", []):
+        for field in ("title", "description"):
+            values[f"wishlist_item_{item['id']}_{field}"] = item.get(field, {})
+    return values
+
+
 def render_life_i18n(content: dict[str, Any]) -> str:
     life = content["life"]
     home = content["home"]
     i18n = {lang: dict(life["labels"][lang]) for lang in LANGS}
     for key, value in wine_text_values(content).items():
+        for lang in LANGS:
+            i18n[lang][key] = lang_value(value, lang)
+    for key, value in wishlist_text_values(content).items():
         for lang in LANGS:
             i18n[lang][key] = lang_value(value, lang)
 
@@ -1061,6 +1077,52 @@ def render_life_wine(content: dict[str, Any]) -> str:
             </section>"""
 
 
+def render_life_wishlist(content: dict[str, Any]) -> str:
+    wishlist = content["life"]["wishlist"]
+    values = wishlist_text_values(content)
+
+    def text(key: str) -> str:
+        return f'<span data-key="{esc(key)}">{esc(lang_value(values[key], "en"))}</span>'
+
+    cards = []
+    for index, item in enumerate(wishlist.get("entries", [])):
+        prefix = f"wishlist_item_{item['id']}"
+        cards.append(f'''                    <article class="wishlist-item" data-portal-entry="wishlist-{esc(item['id'])}">
+                        <span class="wishlist-number" aria-hidden="true">{index + 1:02d}</span>
+                        <div><h3>{text(f"{prefix}_title")}</h3><p>{text(f"{prefix}_description")}</p>
+                            <button type="button" class="wishlist-button" data-copy-wishlist="{esc(item['id'])}">{text("wishlist_join")}</button>
+                        </div>
+                    </article>''')
+    listing = '\n'.join(cards) if cards else f'<p class="wishlist-empty">{text("wishlist_empty")}</p>'
+    email = f"{content['site']['email_user']}@{content['site']['email_domain']}"
+    subject = lang_value(values["wishlist_subject"], "en")
+    body = lang_value(values["wishlist_body"], "en")
+    draft = f"To: {email}\nSubject: {subject}\n\n{body}"
+    mailto = f"mailto:{email}?subject={quote(subject, safe='')}&body={quote(body, safe='')}"
+    return f'''            <section id="wishlist" class="portal-content" data-portal-content="wishlist" data-email="{esc(email)}" hidden>
+                <div class="wishlist-page">
+                    <p class="wishlist-intro">{text("wishlist_intro")}</p>
+                    <div class="wishlist-list">{listing}</div>
+                    <section class="wishlist-invitation" aria-labelledby="wishlistInviteTitle">
+                        <h3 id="wishlistInviteTitle">{text("wishlist_invite_title")}</h3>
+                        <p>{text("wishlist_invite_text")}</p>
+                        <p class="wishlist-recipient">{text("wishlist_recipient")} · <a href="mailto:{esc(email)}">{esc(email)}</a></p>
+                        <div class="wishlist-actions">
+                            <button type="button" class="wishlist-button wishlist-button-primary" data-copy-wishlist="">{text("wishlist_copy")}</button>
+                            <a class="wishlist-mail-link" id="wishlistMailLink" href="{esc(mailto)}">{text("wishlist_open_mail")} <span aria-hidden="true">↗</span></a>
+                        </div>
+                        <p id="wishlistMailStatus" class="wishlist-mail-status" role="status" aria-live="polite" aria-atomic="true"></p>
+                        <p id="wishlistMailHint" class="wishlist-mail-hint" hidden>{text("wishlist_mail_hint")}</p>
+                        <details class="wishlist-draft" id="wishlistDraft">
+                            <summary>{text("wishlist_preview")}</summary>
+                            <label class="sr-only" for="wishlistDraftText">{text("wishlist_draft_label")}</label>
+                            <textarea id="wishlistDraftText" rows="12" readonly spellcheck="false">{esc(draft)}</textarea>
+                        </details>
+                    </section>
+                </div>
+            </section>'''
+
+
 def render_life_profile(content: dict[str, Any]) -> str:
     hero = content["home"]["hero"]
     profile = content["life"]["profile"]
@@ -1177,6 +1239,7 @@ def render_life_artifacts(
     html_text = replace_region(html_text, "LIFE_FRIENDS", render_friends(content), r'<!-- Friends -->\s*<section id="friends".*?</section>')
     html_text = replace_region(html_text, "LIFE_PROFILE", render_life_profile(content), r'<section id="profile".*?</section>')
     html_text = replace_region(html_text, "LIFE_WINE", render_life_wine(content), r'<section id="wine".*?</section>')
+    html_text = replace_region(html_text, "LIFE_WISHLIST", render_life_wishlist(content), r'<section id="wishlist".*?</section>')
     content_data_text = replace_code_region(content_data_text, "LIFE_I18N", render_life_i18n(content), r'/\* ===== i18n ===== \*/\s*const i18n = \{.*?\};')
     content_data_text = replace_code_region(content_data_text, "LIFE_VISITED", render_visited(content), r'const visited = \[.*?\];')
     content_data_text = replace_code_region(

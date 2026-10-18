@@ -187,7 +187,7 @@ for (const id of ['news', 'publications', 'projects', 'notes']) {
     assert(!htmlIds.has(id), `Retired Life section ${id} must not be present`);
     assert(!lifeHtml.includes(`data-portal-button="${id}"`), `Retired Life route ${id} must not be present`);
 }
-for (const id of ['profile', 'wine', 'constellationMeaning', 'constellationMeaningTitle', 'constellationMeaningText']) {
+for (const id of ['profile', 'wine', 'wishlist', 'constellationMeaning', 'constellationMeaningTitle', 'constellationMeaningText']) {
     assert(htmlIds.has(id), `Life must include ${id}`);
 }
 
@@ -1632,12 +1632,12 @@ const sectionDrawerState = JSON.parse(vm.runInContext(`(() => {
         accessibleClosed
     });
 })()`, runtimeContext));
-assert.equal(sectionDrawerState.listedCount, 7);
-assert.equal(sectionDrawerState.uniqueIds, 7);
+assert.equal(sectionDrawerState.listedCount, 8);
+assert.equal(sectionDrawerState.uniqueIds, 8);
 assert.deepEqual(
     sectionDrawerState.listedIds,
     sectionDrawerState.expectedContentIds,
-    'The drawer must list all seven content portals once, in their authored order'
+    'The drawer must list all eight content portals once, in their authored order'
 );
 assert(sectionDrawerState.accessibleOpen);
 assert(sectionDrawerState.accessibleClosed);

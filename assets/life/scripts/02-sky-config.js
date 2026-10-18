@@ -120,9 +120,23 @@ const portalDefinitions = [
         fallbackPitch: 0.16,
         pattern: 'crater'
     },
+    {
+        id: 'wishlist',
+        titleKey: 'title_wishlist',
+        fallbackYaw: 2.65,
+        fallbackPitch: 0.38,
+        pattern: 'delphinus'
+    },
 ];
 
 const constellationPatterns = {
+    delphinus: {
+        hips: [101958, 102532, 102281, 101769, 101421],
+        contentOrder: [101958, 102532, 102281, 101769, 101421],
+        focusHip: 101958,
+        fallbackPoints: [[0.015,0.048],[-0.035,0.055],[-0.018,0.024],[0.025,0.011],[0.055,-0.075]],
+        edges: [[0,1],[1,2],[2,3],[3,0],[3,4]]
+    },
     cassiopeia: {
         hips: [4427, 746, 3179, 6686, 8886],
         contentOrder: [746, 3179, 4427, 6686, 8886],
@@ -176,6 +190,15 @@ const constellationPatterns = {
 };
 
 const constellationStories = {
+    wishlist: {
+        name: { en: 'Delphinus', 'zh-CN': '海豚座', 'zh-TW': '海豚座' },
+        epithet: { en: 'An invitation to go together', 'zh-CN': '结伴出发的小小邀请', 'zh-TW': '結伴出發的小小邀請' },
+        reason: {
+            en: 'Delphinus draws a small dolphin leaping through the sky. Its light, playful shape feels right for things I want to try: a little adventure, a new experience, and someone to share it with.',
+            'zh-CN': '海豚座用几颗星勾出跃起的小海豚。这里取它轻快、好奇的意象，放下那些想去玩的地方、想尝试的体验，也留一份结伴出发的邀请。',
+            'zh-TW': '海豚座用幾顆星勾出躍起的小海豚。這裡取它輕快、好奇的意象，放下那些想去玩的地方、想嘗試的體驗，也留一份結伴出發的邀請。'
+        }
+    },
     gallery: {
         name: { en: 'Cassiopeia', 'zh-CN': '仙后座', 'zh-TW': '仙后座' },
         epithet: {
@@ -270,6 +293,11 @@ const constellationStories = {
 };
 
 const starProfiles = {
+    101958: { names: { en: 'Sualocin', 'zh-CN': '海豚座 α', 'zh-TW': '海豚座 α' }, designation: 'α Delphini' },
+    101769: { names: { en: 'Rotanev', 'zh-CN': '海豚座 β', 'zh-TW': '海豚座 β' }, designation: 'β Delphini' },
+    102532: { names: { en: 'Gamma² Delphini', 'zh-CN': '海豚座 γ²', 'zh-TW': '海豚座 γ²' }, designation: 'γ² Delphini' },
+    102281: { names: { en: 'Delta Delphini', 'zh-CN': '海豚座 δ', 'zh-TW': '海豚座 δ' }, designation: 'δ Delphini' },
+    101421: { names: { en: 'Epsilon Delphini', 'zh-CN': '海豚座 ε', 'zh-TW': '海豚座 ε' }, designation: 'ε Delphini' },
     53740: { names: { en: 'α Crateris', 'zh-CN': '巨爵座 α', 'zh-TW': '巨爵座 α' }, designation: 'α Crateris' },
     54682: { names: { en: 'β Crateris', 'zh-CN': '巨爵座 β', 'zh-TW': '巨爵座 β' }, designation: 'β Crateris' },
     55705: { names: { en: 'γ Crateris', 'zh-CN': '巨爵座 γ', 'zh-TW': '巨爵座 γ' }, designation: 'γ Crateris' },

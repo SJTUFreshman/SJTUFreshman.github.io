@@ -293,7 +293,8 @@
         "galaxy_hint": "Follow the brighter stars through time",
         "title_profile": "Meet Me Again",
         "title_wine": "Wine Diary",
-        "wine_empty": "No tasting notes yet."
+        "wine_empty": "No tasting notes yet.",
+        "title_wishlist": "Wishlist"
       },
       "zh-CN": {
         "nav_gallery": "光影",
@@ -330,7 +331,8 @@
         "galaxy_hint": "循着亮星，沿时间漫游",
         "title_profile": "重新认识我",
         "title_wine": "品酒日记",
-        "wine_empty": "暂时还没有品酒记录。"
+        "wine_empty": "暂时还没有品酒记录。",
+        "title_wishlist": "Wishlist"
       },
       "zh-TW": {
         "nav_gallery": "光影",
@@ -367,7 +369,8 @@
         "galaxy_hint": "循著亮星，沿時間漫遊",
         "title_profile": "重新認識我",
         "title_wine": "品酒日記",
-        "wine_empty": "暫時還沒有品酒紀錄。"
+        "wine_empty": "暫時還沒有品酒紀錄。",
+        "title_wishlist": "Wishlist"
       }
     },
     "gallery": [
@@ -1162,13 +1165,13 @@
         "footprints-map": 54061
       },
       "shelf": {
-        "shelf-interstellar": 91262,
-        "shelf-deep-learning": 91262,
         "shelf-a-sun": 91262,
+        "shelf-interstellar": 91262,
         "shelf-boonie-bears": 91971,
         "shelf-band-of-brothers": 91971,
         "shelf-yes-prime-minister": 91971,
-        "shelf-friends": 92420
+        "shelf-friends": 92420,
+        "shelf-deep-learning": 91262
       },
       "thoughts": {
         "thought-2026-01-16": 100453,
@@ -1180,7 +1183,8 @@
         "friend-qiran-zhang": 36850
       },
       "profile": {},
-      "wine": {}
+      "wine": {},
+      "wishlist": {}
     },
     "thoughts": [
       {
@@ -1877,6 +1881,111 @@
         "en": "Image source",
         "zh-CN": "图源",
         "zh-TW": "圖源"
+      }
+    },
+    "wishlist": {
+      "entries": [],
+      "copy": {
+        "intro": {
+          "en": "Things I would love to try, places to play, and experiences to share.",
+          "zh-CN": "想去玩、想尝试，也想找人一起体验的事。",
+          "zh-TW": "想去玩、想嘗試，也想找人一起體驗的事。"
+        },
+        "empty": {
+          "en": "The list is still taking shape. Got an idea? Send me a note.",
+          "zh-CN": "清单还在慢慢酝酿。有好玩的想法，也欢迎写信告诉我。",
+          "zh-TW": "清單還在慢慢醞釀。有好玩的想法，也歡迎寫信告訴我。"
+        },
+        "invite_title": {
+          "en": "Better with company",
+          "zh-CN": "一起去吧",
+          "zh-TW": "一起去吧"
+        },
+        "invite_text": {
+          "en": "Copy a draft, add your idea and a time that works, then email me. Let’s make a plan.",
+          "zh-CN": "复制一封邮件，填上想做的事和方便的时间，发给我，我们一起商量。",
+          "zh-TW": "複製一封郵件，填上想做的事和方便的時間，寄給我，我們一起商量。"
+        },
+        "copy": {
+          "en": "Copy invitation email",
+          "zh-CN": "复制邀约邮件",
+          "zh-TW": "複製邀約郵件"
+        },
+        "join": {
+          "en": "I’d like to join",
+          "zh-CN": "这个我也想去",
+          "zh-TW": "這個我也想去"
+        },
+        "copying": {
+          "en": "Copying…",
+          "zh-CN": "正在复制…",
+          "zh-TW": "正在複製…"
+        },
+        "copied_button": {
+          "en": "Email copied",
+          "zh-CN": "邮件已复制",
+          "zh-TW": "郵件已複製"
+        },
+        "open_mail": {
+          "en": "Open in email app",
+          "zh-CN": "在邮箱中打开",
+          "zh-TW": "在郵箱中開啟"
+        },
+        "preview": {
+          "en": "Preview the email draft",
+          "zh-CN": "预览邮件草稿",
+          "zh-TW": "預覽郵件草稿"
+        },
+        "draft_label": {
+          "en": "Email draft · select the text to copy manually",
+          "zh-CN": "邮件草稿 · 可选择文字手动复制",
+          "zh-TW": "郵件草稿 · 可選取文字手動複製"
+        },
+        "recipient": {
+          "en": "To",
+          "zh-CN": "收件人",
+          "zh-TW": "收件人"
+        },
+        "subject_label": {
+          "en": "Subject",
+          "zh-CN": "主题",
+          "zh-TW": "主旨"
+        },
+        "copied": {
+          "en": "Copied. Open your email app, fill in the brackets and send it to {email}.",
+          "zh-CN": "已复制。打开邮箱，补充方括号里的内容后，发送至 {email}。",
+          "zh-TW": "已複製。開啟郵箱，補充方括號裡的內容後，寄至 {email}。"
+        },
+        "copy_failed": {
+          "en": "Automatic copying was unavailable. Select and copy the draft below, or open it in your email app.",
+          "zh-CN": "未能自动复制。可以手动选择下方草稿复制，或点击“在邮箱中打开”。",
+          "zh-TW": "未能自動複製。可以手動選取下方草稿複製，或點擊「在郵箱中開啟」。"
+        },
+        "mail_hint": {
+          "en": "No email app opened? Use the copied draft in your webmail and send it to the address above.",
+          "zh-CN": "若没有唤起邮箱，可以到常用的网页版邮箱新建邮件，粘贴草稿并发送到上面的地址。",
+          "zh-TW": "若沒有喚起郵箱，可以到常用的網頁版郵箱新增郵件，貼上草稿並寄到上面的地址。"
+        },
+        "subject": {
+          "en": "Wishlist · Let’s do something fun together",
+          "zh-CN": "Wishlist · 一起去做点有趣的事",
+          "zh-TW": "Wishlist · 一起去做點有趣的事"
+        },
+        "item_subject": {
+          "en": "Wishlist · Let’s try {activity} together",
+          "zh-CN": "Wishlist · 一起体验：{activity}",
+          "zh-TW": "Wishlist · 一起體驗：{activity}"
+        },
+        "body": {
+          "en": "Hi Runde,\n\nI found your Wishlist and would love to do something fun together.\n\nMy idea: [activity or suggestion]\nA time that works for me: [time]\nPlace: [location or to be decided]\nA little about me / a message: [anything you’d like to share]\n\nLet me know what you think!\n[Your name]",
+          "zh-CN": "润德你好，\n\n我看到了你的 Wishlist，想约你一起去做点有趣的事。\n\n想一起体验：[项目或想法]\n方便的时间：[时间]\n地点：[地点，也可以一起商量]\n自我介绍／想说的话：[随意写几句]\n\n有兴趣的话，回信一起聊聊吧！\n[你的称呼]",
+          "zh-TW": "潤德你好，\n\n我看到了你的 Wishlist，想約你一起去做點有趣的事。\n\n想一起體驗：[項目或想法]\n方便的時間：[時間]\n地點：[地點，也可以一起商量]\n自我介紹／想說的話：[隨意寫幾句]\n\n有興趣的話，回信一起聊聊吧！\n[你的稱呼]"
+        },
+        "item_body": {
+          "en": "Hi Runde,\n\nI saw “{activity}” on your Wishlist and would love to join you.\n\nA time that works for me: [time]\nPlace or plans: [a suggestion, or we can decide together]\nA little about me / a message: [anything you’d like to share]\n\nLet me know what you think!\n[Your name]",
+          "zh-CN": "润德你好，\n\n我在你的 Wishlist 里看到了“{activity}”，也很想和你一起体验。\n\n方便的时间：[时间]\n地点或安排：[我的想法，也可以一起商量]\n自我介绍／想说的话：[随意写几句]\n\n有兴趣的话，回信一起聊聊吧！\n[你的称呼]",
+          "zh-TW": "潤德你好，\n\n我在你的 Wishlist 裡看到了「{activity}」，也很想和你一起體驗。\n\n方便的時間：[時間]\n地點或安排：[我的想法，也可以一起商量]\n自我介紹／想說的話：[隨意寫幾句]\n\n有興趣的話，回信一起聊聊吧！\n[你的稱呼]"
+        }
       }
     }
   }

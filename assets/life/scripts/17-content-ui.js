@@ -230,20 +230,113 @@ const citationResetTimers = new WeakMap();
 
 async function writeClipboardText(value) {
     if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(value);
-        return;
+        try {
+            await navigator.clipboard.writeText(value);
+            return;
+        } catch (error) {
+            // Older browsers and restrictive permissions may still allow a
+            // copy triggered by the same explicit button press.
+        }
     }
+    const previousFocus = document.activeElement;
     const textarea = document.createElement('textarea');
     textarea.value = value;
     textarea.setAttribute('readonly', '');
     textarea.style.position = 'fixed';
     textarea.style.opacity = '0';
+    textarea.style.fontSize = '16px';
     document.body.append(textarea);
-    textarea.select();
-    const copied = document.execCommand('copy');
-    textarea.remove();
+    let copied = false;
+    try {
+        textarea.select();
+        textarea.setSelectionRange(0, value.length);
+        copied = document.execCommand('copy');
+    } finally {
+        textarea.remove();
+        if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
+    }
     if (!copied) throw new Error('Clipboard copy was unavailable');
 }
+
+const wishlistMailState = { item: '', status: '', pending: false };
+
+function wishlistEmailDraft(item = wishlistMailState.item) {
+    const section = document.getElementById('wishlist');
+    const copy = i18n[state.currentLang] || i18n.en;
+    const title = item ? copy['wishlist_item_' + item + '_title'] : '';
+    const interpolate = value => value.split('{activity}').join(title || '');
+    const subject = interpolate(copy[title ? 'wishlist_item_subject' : 'wishlist_subject']);
+    const body = interpolate(copy[title ? 'wishlist_item_body' : 'wishlist_body']);
+    const email = section.dataset.email;
+    return {
+        email,
+        text: copy.wishlist_recipient + ': ' + email + '\n' + copy.wishlist_subject_label + ': ' + subject + '\n\n' + body,
+        href: 'mailto:' + email + '?subject=' + encodeURIComponent(subject)
+            + '&body=' + encodeURIComponent(body.replace(/\r?\n/g, '\r\n'))
+    };
+}
+
+function updateWishlistEmail() {
+    const section = document.getElementById('wishlist');
+    if (!section) return;
+    const copy = i18n[state.currentLang] || i18n.en;
+    const draft = wishlistEmailDraft();
+    document.getElementById('wishlistDraftText').value = draft.text;
+    document.getElementById('wishlistMailLink').href = draft.href;
+    const message = copy['wishlist_' + wishlistMailState.status] || '';
+    document.getElementById('wishlistMailStatus').textContent = message.split('{email}').join(draft.email);
+    section.querySelectorAll('[data-copy-wishlist]').forEach(button => {
+        const active = button.dataset.copyWishlist === wishlistMailState.item;
+        let label = copy[button.dataset.copyWishlist ? 'wishlist_join' : 'wishlist_copy'];
+        if (active && wishlistMailState.status === 'copying') label = copy.wishlist_copying;
+        if (active && wishlistMailState.status === 'copied') label = copy.wishlist_copied_button;
+        button.querySelector('span').textContent = label;
+        button.setAttribute('aria-disabled', String(wishlistMailState.pending));
+        button.toggleAttribute('aria-busy', active && wishlistMailState.pending);
+    });
+}
+
+async function copyWishlistEmail(button) {
+    if (wishlistMailState.pending) return;
+    wishlistMailState.item = button.dataset.copyWishlist;
+    wishlistMailState.status = 'copying';
+    wishlistMailState.pending = true;
+    const language = state.currentLang;
+    const draft = wishlistEmailDraft();
+    updateWishlistEmail();
+    try {
+        await writeClipboardText(draft.text);
+        wishlistMailState.status = 'copied';
+    } catch (error) {
+        wishlistMailState.status = 'copy_failed';
+        document.getElementById('wishlistDraft').open = true;
+    } finally {
+        wishlistMailState.pending = false;
+        if (state.currentLang !== language) wishlistMailState.status = '';
+        updateWishlistEmail();
+    }
+    // A clipboard prompt can outlive the panel. Do not steal focus on return.
+    if (state.scene !== 'detail' || state.activePortal?.id !== 'wishlist') return;
+    if (wishlistMailState.status === 'copy_failed') {
+        const preview = document.getElementById('wishlistDraftText');
+        preview.focus({ preventScroll: true });
+        preview.select();
+        preview.scrollIntoView({ block: 'nearest' });
+    } else {
+        document.getElementById('wishlistMailStatus').scrollIntoView({ block: 'nearest' });
+    }
+}
+
+document.addEventListener('click', event => {
+    const button = event.target.closest('[data-copy-wishlist]');
+    if (button) {
+        event.preventDefault();
+        copyWishlistEmail(button);
+    }
+    if (event.target.closest('#wishlistMailLink')) {
+        document.getElementById('wishlistMailHint').hidden = false;
+    }
+});
 
 function updateCitationButtons() {
     const data = i18n[state.currentLang] || i18n.en || {};
@@ -380,6 +473,8 @@ function setLang(lang) {
     updateMapAccessibility();
     updateThoughtReader();
     updateCitationButtons();
+    if (!wishlistMailState.pending) wishlistMailState.status = '';
+    updateWishlistEmail();
     updateSectionDrawerCopy();
     updateActivePortalCopy();
     updateMapLanguage();
