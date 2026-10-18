@@ -46,7 +46,7 @@
 
 原 Notes 已由 `profile`（重新认识我 / Meet Me Again）替代，对应猎户座，以头、肩、腰带和双足构成的星光肖像介绍其他板块背后的人。点标题、任何一颗所属恒星或索引均进入同一份个人介绍，照片与个人简介取自 `home.hero`。页面沿用站点的圆角面板、淡蓝粉配色、中英文字体与圆形头像；仅用户框保留维基式的紧凑双栏内容形式，没有用户页命名空间、页签或百科页面外观。移动端可滚动查看。
 
-用户框由本人选择；当前 `life.profile.userboxes` 为空，只显示待选提示，不预置身份或偏好。选择后可用 Homepage Studio 的“生活 / 重新认识我 · 用户框”编辑，或者在 `site_content.json` 中逐项添加 `id`、左侧短符号 `mark`、`tone`（blue / green / amber / violet / neutral）、三语 `text`。文本按普通文字转义；多个用户框自动换列。修改后运行 `python site_renderer.py --life-only`，同时更新 Life 和观景页；新增中文字还需运行字体子集构建。
+用户框直接来自 `life.profile.userboxes`，不另加标题或说明段落。每项包含 `id`、左侧短符号 `mark`、`tone`（blue / green / amber / violet / neutral）和三语 `text`；文本按普通文字转义，多个用户框自动换列。可用 Homepage Studio 的“生活 / 重新认识我 · 用户框”编辑，或直接修改 `site_content.json`。修改后运行 `python site_renderer.py --life-only`，同时更新 Life 和观景页；新增中文字还需运行字体子集构建。
 
 ## CSS 分片
 

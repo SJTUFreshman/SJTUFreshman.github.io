@@ -51,19 +51,22 @@ async function labels(browser) {
                     const profile = document.querySelector('#profile'), body = document.querySelector('.portal-panel-body');
                     return { title: document.querySelector('#portalPanelTitle').textContent, noNotes: !document.querySelector('#notes, [data-portal-button="notes"]'),
                         fits: body.scrollWidth <= body.clientWidth + 1,
-                        pending: profile.querySelectorAll('.wiki-userbox-pending').length === 1 && !profile.querySelector('.wiki-userboxes'),
+                        userboxCount: profile.querySelectorAll('.wiki-userboxes > .wiki-userbox').length,
+                        noUserboxHeading: !profile.querySelector('#profile-box-heading, .profile-box-intro, .wiki-userbox-pending'),
                         shared: state.activePortal.patternHips.every(hip => starEntries(state.activePortal, hip).length === 1) };
                 });
                 const expectedTitle = { en: 'Meet Me Again', 'zh-CN': '重新认识我', 'zh-TW': '重新認識我' }[language];
-                check(profileState.title === expectedTitle && profileState.noNotes && profileState.fits && profileState.pending && profileState.shared,
-                    `${viewport.width}/${language}: the personal introduction replaces Notes, fits the panel and reserves userbox choices`, profileState);
+                check(profileState.title === expectedTitle && profileState.noNotes && profileState.fits
+                    && profileState.userboxCount === 29 && profileState.noUserboxHeading && profileState.shared,
+                    `${viewport.width}/${language}: the personal introduction shows the selected userboxes without extra copy`, profileState);
                 check(await page.evaluate(() => state.activePortal.pattern === 'orion'
                     && dom.constellationMeaningText.textContent === localized(constellationStories.profile.reason)),
                     `${viewport.width}/${language}: Profile uses Orion and shows its localized meaning`);
                 if (language === 'zh-CN') await page.screenshot({ path: path.join(output, `profile-meaning-${viewport.width}.png`) });
                 await page.locator('.profile-portrait img').evaluate(image => image.decode());
-                await page.locator('.wiki-userbox-pending').scrollIntoViewIfNeeded();
-                check(await page.locator('.wiki-userbox-pending').isVisible(), `${viewport.width}/${language}: userboxes remain accessible in the scrolling panel`);
+                await page.locator('.wiki-userboxes').scrollIntoViewIfNeeded();
+                check(await page.locator('.wiki-userboxes > .wiki-userbox').count() === 29,
+                    `${viewport.width}/${language}: all selected userboxes remain accessible in the scrolling panel`);
                 if (language === 'zh-CN') await page.screenshot({ path: path.join(output, `profile-${viewport.width}.png`) });
                 await page.locator('#portalClose').click();
                 await settle(page);

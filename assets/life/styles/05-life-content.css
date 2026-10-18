@@ -109,12 +109,6 @@
     border-top: 1px solid var(--rule);
 }
 
-.profile-box-intro {
-    margin: 0 0 14px;
-    color: var(--ink-soft);
-    font-size: 0.88rem;
-}
-
 .wiki-userboxes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 225px), 1fr));

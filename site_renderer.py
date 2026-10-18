@@ -948,10 +948,7 @@ def render_life_profile(content: dict[str, Any]) -> str:
             <span class="wiki-userbox-mark" aria-hidden="true">{esc(box.get('mark', ''))}</span>
             <span class="wiki-userbox-text" data-key="userbox_{esc(box['id'])}">{esc(lang_value(box.get('text', {}), 'en'))}</span>
         </li>""")
-    box_content = '<ul class="wiki-userboxes">' + "\n".join(boxes) + '</ul>' if boxes else (
-        '<div class="wiki-userbox wiki-userbox-pending"><span class="wiki-userbox-mark" aria-hidden="true">?</span>'
-        f'<div class="wiki-userbox-text">{label("pending")}</div></div>'
-    )
+    box_content = '<ul class="wiki-userboxes">' + "\n".join(boxes) + '</ul>' if boxes else ''
     return f"""            <section id="profile" class="portal-content personal-profile" data-portal-content="profile" hidden>
                 <article class="profile-page">
                     <header class="profile-intro">
@@ -969,9 +966,7 @@ def render_life_profile(content: dict[str, Any]) -> str:
                         <p data-key="life_about_bio">{esc(lang_value(hero['bio'], 'en'))}</p>
                         <p class="profile-location" data-key="life_about_location">{esc(lang_value(hero['location'], 'en'))}</p>
                     </div>
-                    <section id="profile-userboxes" class="profile-box-section" aria-labelledby="profile-box-heading">
-                        <h4 id="profile-box-heading">{label('userboxes')}</h4>
-                        <p class="profile-box-intro">{label('userboxes_intro')}</p>
+                    <section id="profile-userboxes" class="profile-box-section">
                         {box_content}
                     </section>
                     <footer class="profile-contact">

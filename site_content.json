@@ -788,28 +788,304 @@
           "zh-CN": "欢迎来到我的小小宇宙。",
           "zh-TW": "歡迎來到我的小小宇宙。"
         },
-        "userboxes": {
-          "en": "Userboxes",
-          "zh-CN": "用户框",
-          "zh-TW": "使用者框"
-        },
-        "userboxes_intro": {
-          "en": "Small boxes for the many sides of me.",
-          "zh-CN": "用一个个小方框，拼出我的不同侧面。",
-          "zh-TW": "用一個個小方框，拼出我的不同側面。"
-        },
-        "pending": {
-          "en": "Still choosing my userboxes.",
-          "zh-CN": "用户框还在挑选中。",
-          "zh-TW": "使用者框還在挑選中。"
-        },
         "contact": {
           "en": "Elsewhere",
           "zh-CN": "也可以在这里找到我",
           "zh-TW": "也可以在這裡找到我"
         }
       },
-      "userboxes": []
+      "userboxes": [
+        {
+          "id": "zh-professional",
+          "mark": "中",
+          "tone": "blue",
+          "text": {
+            "en": "This user can communicate in Chinese at a professional level.",
+            "zh-CN": "这个用户能以专业汉语交流。",
+            "zh-TW": "這位用戶能以專業漢語交流。"
+          }
+        },
+        {
+          "id": "zh-traditional",
+          "mark": "繁",
+          "tone": "violet",
+          "text": {
+            "en": "This user can communicate in Traditional Chinese at a professional level.",
+            "zh-CN": "这个用户能以专业繁体中文交流。",
+            "zh-TW": "這位用戶能以專業繁體中文交流。"
+          }
+        },
+        {
+          "id": "zh-simplified",
+          "mark": "简",
+          "tone": "blue",
+          "text": {
+            "en": "This user can communicate in Simplified Chinese at a professional level.",
+            "zh-CN": "这个用户能以专业简体中文交流。",
+            "zh-TW": "這位用戶能以專業簡體中文交流。"
+          }
+        },
+        {
+          "id": "han-characters",
+          "mark": "漢",
+          "tone": "amber",
+          "text": {
+            "en": "This user likes Han characters.",
+            "zh-CN": "这个用户喜欢汉字。",
+            "zh-TW": "這個用戶喜歡漢字。"
+          }
+        },
+        {
+          "id": "chinese-graphology",
+          "mark": "文字",
+          "tone": "violet",
+          "text": {
+            "en": "This user enjoys studying Chinese graphology.",
+            "zh-CN": "这个用户喜欢钻研汉文字学。",
+            "zh-TW": "這個用戶喜歡鑽研漢文字學。"
+          }
+        },
+        {
+          "id": "traditional-characters",
+          "mark": "古",
+          "tone": "amber",
+          "text": {
+            "en": "This user supports the revival of traditional character forms.",
+            "zh-CN": "这个用户支持恢复使用传统字形。",
+            "zh-TW": "這個用戶支持恢復使用傳統字形。"
+          }
+        },
+        {
+          "id": "horizontal-vertical-writing",
+          "mark": "横直",
+          "tone": "green",
+          "text": {
+            "en": "This user believes horizontal and vertical writing should coexist.",
+            "zh-CN": "这位用户认为横写与直写应共存共荣。",
+            "zh-TW": "這位用戶認為橫寫與直寫應共存共榮。"
+          }
+        },
+        {
+          "id": "spoken-written-separation",
+          "mark": "言文",
+          "tone": "violet",
+          "text": {
+            "en": "This user supports a distinction between spoken and written language.",
+            "zh-CN": "这位用户支持言文分离。",
+            "zh-TW": "這位用戶支持言文分離。"
+          }
+        },
+        {
+          "id": "alphabetic-transliteration",
+          "mark": "A音",
+          "tone": "blue",
+          "text": {
+            "en": "This user supports alphabetic transliteration.",
+            "zh-CN": "这位用户支持字母音译。",
+            "zh-TW": "這位用戶支持字母音譯。"
+          }
+        },
+        {
+          "id": "cursive-kaishu",
+          "mark": "草楷",
+          "tone": "amber",
+          "text": {
+            "en": "This user can write cursive script and read regular script.",
+            "zh-CN": "这个用户会写草书，也能识读楷书。",
+            "zh-TW": "這個用戶會寫草書，也能識讀楷書。"
+          }
+        },
+        {
+          "id": "font-design",
+          "mark": "Aa",
+          "tone": "violet",
+          "text": {
+            "en": "This user is interested in font design.",
+            "zh-CN": "这个用户对字体设计感兴趣。",
+            "zh-TW": "這個用戶對字體設計感興趣。"
+          }
+        },
+        {
+          "id": "linguistics",
+          "mark": "語",
+          "tone": "blue",
+          "text": {
+            "en": "This user is interested in linguistics.",
+            "zh-CN": "这个用户对语言学感兴趣。",
+            "zh-TW": "這個用戶對語言學感興趣。"
+          }
+        },
+        {
+          "id": "american-english",
+          "mark": "EN",
+          "tone": "green",
+          "text": {
+            "en": "This user uses American English.",
+            "zh-CN": "这个用户使用美式英语。",
+            "zh-TW": "這個用戶使用美式英語。"
+          }
+        },
+        {
+          "id": "no-swearing",
+          "mark": "✦",
+          "tone": "neutral",
+          "text": {
+            "en": "This user has no concept of swearing.",
+            "zh-CN": "这个用户没有脏话概念。",
+            "zh-TW": "這個用戶沒有髒話概念。"
+          }
+        },
+        {
+          "id": "single",
+          "mark": "♡",
+          "tone": "amber",
+          "text": {
+            "en": "This user is single.",
+            "zh-CN": "这个用户是单身狗。",
+            "zh-TW": "這個用戶是單身狗。"
+          }
+        },
+        {
+          "id": "behind-you",
+          "mark": "…",
+          "tone": "neutral",
+          "text": {
+            "en": "This user is behind you.",
+            "zh-CN": "这个用户在你后面。",
+            "zh-TW": "這個用戶在你後面。"
+          }
+        },
+        {
+          "id": "region-free",
+          "mark": "∞",
+          "tone": "blue",
+          "text": {
+            "en": "This user supports region-free media.",
+            "zh-CN": "这个用户支持跨区自由。",
+            "zh-TW": "這個用戶支持跨區自由。"
+          }
+        },
+        {
+          "id": "hate-pay-to-win",
+          "mark": "P2W",
+          "tone": "amber",
+          "text": {
+            "en": "This user hates pay-to-win games.",
+            "zh-CN": "这个用户讨厌付费取胜。",
+            "zh-TW": "這個用戶討厭付費取勝。"
+          }
+        },
+        {
+          "id": "chinese-history",
+          "mark": "史",
+          "tone": "violet",
+          "text": {
+            "en": "This user is interested in Chinese history.",
+            "zh-CN": "这个用户对中国历史感兴趣。",
+            "zh-TW": "這個用戶對中國歷史感興趣。"
+          }
+        },
+        {
+          "id": "godfather",
+          "mark": "🎬",
+          "tone": "neutral",
+          "text": {
+            "en": "This user likes the film The Godfather.",
+            "zh-CN": "这个用户喜欢电影《教父》。",
+            "zh-TW": "這個用戶喜歡電影《教父》。"
+          }
+        },
+        {
+          "id": "mood-for-love",
+          "mark": "花",
+          "tone": "violet",
+          "text": {
+            "en": "This user likes In the Mood for Love.",
+            "zh-CN": "这个用户喜欢电影《花样年华》。",
+            "zh-TW": "這個用戶喜歡電影《花樣年華》。"
+          }
+        },
+        {
+          "id": "writing",
+          "mark": "文",
+          "tone": "blue",
+          "text": {
+            "en": "This user likes writing.",
+            "zh-CN": "这个用户喜欢写作。",
+            "zh-TW": "這個用戶喜歡寫作。"
+          }
+        },
+        {
+          "id": "nature",
+          "mark": "葉",
+          "tone": "green",
+          "text": {
+            "en": "This user loves nature.",
+            "zh-CN": "这个用户喜欢大自然。",
+            "zh-TW": "這個用戶喜歡大自然。"
+          }
+        },
+        {
+          "id": "china",
+          "mark": "中華",
+          "tone": "neutral",
+          "text": {
+            "en": "This user is from the People's Republic of China.",
+            "zh-CN": "这个用户来自中华人民共和国。",
+            "zh-TW": "這個用戶來自中華人民共和國。"
+          }
+        },
+        {
+          "id": "stem",
+          "mark": "理工",
+          "tone": "blue",
+          "text": {
+            "en": "This user studies science and engineering.",
+            "zh-CN": "这个用户学习理工科。",
+            "zh-TW": "這個用戶學習理工科。"
+          }
+        },
+        {
+          "id": "sjtu",
+          "mark": "SJTU",
+          "tone": "violet",
+          "text": {
+            "en": "This user studies at Shanghai Jiao Tong University.",
+            "zh-CN": "这个用户就读于上海交通大学。",
+            "zh-TW": "這個用戶就讀於上海交通大學。"
+          }
+        },
+        {
+          "id": "piano",
+          "mark": "♫",
+          "tone": "amber",
+          "text": {
+            "en": "This user plays the piano.",
+            "zh-CN": "这个用户会弹钢琴。",
+            "zh-TW": "這個用戶會彈鋼琴。"
+          }
+        },
+        {
+          "id": "music",
+          "mark": "♪",
+          "tone": "green",
+          "text": {
+            "en": "This user likes music.",
+            "zh-CN": "这个用户喜欢音乐。",
+            "zh-TW": "這個用戶喜歡音樂。"
+          }
+        },
+        {
+          "id": "greek-mythology",
+          "mark": "Ω",
+          "tone": "violet",
+          "text": {
+            "en": "This user is interested in Greek mythology.",
+            "zh-CN": "这个用户对希腊神话感兴趣。",
+            "zh-TW": "這個用戶對希臘神話感興趣。"
+          }
+        }
+      ]
     }
   }
 }
