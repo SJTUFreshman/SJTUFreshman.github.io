@@ -2,6 +2,39 @@
     display: none;
 }
 
+.wine-entry {
+    min-width: 0;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    line-height: 1.85;
+    overflow-wrap: anywhere;
+}
+
+.wine-entry .portal-moment-header { margin-bottom: 14px; }
+.wine-entry .portal-moment-meta { color: var(--life-blue); }
+.wine-entry .portal-moment-header h3 { margin-top: 8px; font-size: 1.45rem; line-height: 1.45; }
+.wine-entry p { margin: 0; }
+.wine-entry .wine-serve { margin-top: 7px; font-size: 0.76rem; }
+.wine-entry .wine-intro { margin-bottom: 22px; }
+.wine-entry h4 { margin: 0 0 10px; color: var(--life-blue); font-size: 0.95rem; font-weight: 500; }
+.wine-recipe { padding: 18px; border: 1px solid var(--rule); border-radius: 12px; background: var(--life-blue-pale); }
+.wine-ingredients { margin: 0; }
+.wine-ingredients > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--rule); }
+.wine-ingredients dt { min-width: 0; }
+.wine-ingredients dd { margin: 0; color: var(--ink); font: 0.76rem / 2.2 var(--mono); white-space: nowrap; }
+.wine-entry .wine-recipe-note { margin-top: 12px; font-size: 0.79rem; }
+.wine-section { margin-top: 24px; }
+.wine-entry ol { margin: 0; padding-left: 1.5em; }
+.wine-entry li { padding-left: 0.25em; }
+.wine-entry li + li { margin-top: 10px; }
+.wine-entry li::marker { color: var(--life-blue); }
+.wine-adjustment { margin-top: 24px; padding: 15px 18px; border-left: 2px solid var(--life-pink); border-radius: 0 10px 10px 0; background: var(--life-pink-soft); font-size: 0.83rem; }
+.wine-adjustment h4 { color: var(--life-pink); }
+.wine-source { margin-top: 18px; font-size: 0.72rem; }
+.wine-source a { color: var(--life-blue); text-underline-offset: 3px; }
+.wine-source a:hover { color: var(--life-pink); }
+.wine-source a:focus-visible { outline: 2px solid var(--life-blue); outline-offset: 3px; }
+
 /* Site-styled personal profile; only the compact userboxes use the wiki format. */
 .personal-profile {
     container-type: inline-size;

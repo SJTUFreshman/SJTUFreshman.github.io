@@ -119,6 +119,7 @@ def validate_content(
         ("home.projects", home.get("projects", [])),
         ("home.gallery", home.get("gallery", [])),
         ("life.profile.userboxes", life.get("profile", {}).get("userboxes", [])),
+        ("life.wine.entries", life.get("wine", {}).get("entries", [])),
         ("life.gallery", life.get("gallery", [])),
         ("life.shelf", life.get("shelf", [])),
         ("life.thoughts", life.get("thoughts", [])),
@@ -587,10 +588,28 @@ def render_home_i18n(content: dict[str, Any]) -> str:
     return "/* ===== i18n Content ===== */\nconst i18n = " + json_js(i18n) + ";"
 
 
+def wine_text_values(content: dict[str, Any]) -> dict[str, Any]:
+    wine = content["life"].get("wine", {})
+    values = {f"wine_{key}": value for key, value in wine.get("copy", {}).items()}
+    for item in wine.get("entries", []):
+        prefix = f"wine_{item['id']}"
+        for key in ("title", "style", "serve", "intro", "recipe_note", "flavour", "adjustment"):
+            values[f"{prefix}_{key}"] = item[key]
+        for index, ingredient in enumerate(item["ingredients"]):
+            values[f"{prefix}_ingredient_{index}"] = ingredient["name"]
+        for key in ("method", "tasting"):
+            for index, value in enumerate(item[key]):
+                values[f"{prefix}_{key}_{index}"] = value
+    return values
+
+
 def render_life_i18n(content: dict[str, Any]) -> str:
     life = content["life"]
     home = content["home"]
     i18n = {lang: dict(life["labels"][lang]) for lang in LANGS}
+    for key, value in wine_text_values(content).items():
+        for lang in LANGS:
+            i18n[lang][key] = lang_value(value, lang)
 
     action_copy = {
         "en": {"life_action_email": "Email"},
@@ -923,9 +942,69 @@ def render_friends(content: dict[str, Any]) -> str:
 
 
 def render_life_wine(content: dict[str, Any]) -> str:
-    empty = content["life"]["labels"]["en"]["wine_empty"]
-    return f"""            <section id="wine" class="portal-content" data-portal-content="wine" hidden>
+    entries = content["life"].get("wine", {}).get("entries", [])
+    if not entries:
+        empty = content["life"]["labels"]["en"]["wine_empty"]
+        return f"""            <section id="wine" class="portal-content" data-portal-content="wine" hidden>
                 <p class="wine-empty" data-key="wine_empty">{esc(empty)}</p>
+            </section>"""
+
+    values = wine_text_values(content)
+
+    def text(key: str) -> str:
+        return f'<span data-key="{esc(key)}">{esc(lang_value(values[key], "en"))}</span>'
+
+    cards = []
+    for index, item in enumerate(entries):
+        entry_id = f"wine-{item['id']}"
+        prefix = f"wine_{item['id']}"
+        ingredients = "\n".join(
+            f'                            <div><dt>{text(f"{prefix}_ingredient_{number}")}</dt><dd>{esc(ingredient["amount"])}</dd></div>'
+            for number, ingredient in enumerate(item["ingredients"])
+        )
+        method = "\n".join(f'                            <li>{text(f"{prefix}_method_{number}")}</li>' for number in range(len(item["method"])))
+        tasting = "\n".join(f'                            <li>{text(f"{prefix}_tasting_{number}")}</li>' for number in range(len(item["tasting"])))
+        source = item["source"]
+        cards.append(f"""                <article class="portal-moment wine-entry" id="{esc(entry_id)}" data-portal-entry="{esc(entry_id)}" aria-labelledby="{esc(entry_id)}-title">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta"><span>{index + 1:02d}</span>{text(f"{prefix}_style")}</div>
+                        <h3 id="{esc(entry_id)}-title">{text(f"{prefix}_title")}</h3>
+                        <p class="wine-serve">{text(f"{prefix}_serve")}</p>
+                    </header>
+                    <p class="wine-intro">{text(f"{prefix}_intro")}</p>
+                    <section class="wine-recipe">
+                        <h4>{text("wine_recipe")}</h4>
+                        <dl class="wine-ingredients">
+{ingredients}
+                        </dl>
+                        <p class="wine-recipe-note">{text(f"{prefix}_recipe_note")}</p>
+                    </section>
+                    <section class="wine-section">
+                        <h4>{text("wine_method")}</h4>
+                        <ol>
+{method}
+                        </ol>
+                    </section>
+                    <section class="wine-section">
+                        <h4>{text("wine_flavour")}</h4>
+                        <p>{text(f"{prefix}_flavour")}</p>
+                    </section>
+                    <section class="wine-section">
+                        <h4>{text("wine_tasting")}</h4>
+                        <ol>
+{tasting}
+                        </ol>
+                    </section>
+                    <aside class="wine-adjustment">
+                        <h4>{text("wine_adjustment")}</h4>
+                        <p>{text(f"{prefix}_adjustment")}</p>
+                    </aside>
+                    <footer class="wine-source">{text("wine_source")} · <a href="{esc(source['href'])}" target="_blank" rel="noopener noreferrer">{esc(source['label'])}</a></footer>
+                </article>""")
+    return f"""            <section id="wine" class="portal-content" data-portal-content="wine" hidden>
+                <div class="portal-moments wine-diary">
+{chr(10).join(cards)}
+                </div>
             </section>"""
 
 

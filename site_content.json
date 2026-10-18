@@ -1115,6 +1115,246 @@
           "wiki_template": "greek-mythology"
         }
       ]
+    },
+    "wine": {
+      "copy": {
+        "recipe": {
+          "en": "In the glass",
+          "zh-CN": "一杯的配方",
+          "zh-TW": "一杯的配方"
+        },
+        "method": {
+          "en": "How to make it",
+          "zh-CN": "调制方法",
+          "zh-TW": "調製方法"
+        },
+        "flavour": {
+          "en": "Flavour & texture",
+          "zh-CN": "风味与口感",
+          "zh-TW": "風味與口感"
+        },
+        "tasting": {
+          "en": "How to taste it",
+          "zh-CN": "如何品鉴",
+          "zh-TW": "如何品鑑"
+        },
+        "adjustment": {
+          "en": "A small adjustment",
+          "zh-CN": "调制小记",
+          "zh-TW": "調製小記"
+        },
+        "source": {
+          "en": "Recipe reference",
+          "zh-CN": "配方参考",
+          "zh-TW": "配方參考"
+        }
+      },
+      "entries": [
+        {
+          "id": "orgasm",
+          "title": {
+            "en": "Orgasm",
+            "zh-CN": "高潮 · Orgasm",
+            "zh-TW": "高潮 · Orgasm"
+          },
+          "style": {
+            "en": "Coffee · Almond · Cream",
+            "zh-CN": "咖啡 · 杏仁 · 奶油",
+            "zh-TW": "咖啡 · 杏仁 · 奶油"
+          },
+          "serve": {
+            "en": "One serving · Rocks glass · Over ice",
+            "zh-CN": "一杯 · 岩石杯 · 加冰饮用",
+            "zh-TW": "一杯 · 岩石杯 · 加冰飲用"
+          },
+          "intro": {
+            "en": "A sweet, creamy cocktail with several recipes under the same name. This is the equal-parts version with coffee liqueur, amaretto and Irish cream, served over ice for slow sipping.",
+            "zh-CN": "一杯偏甜、柔滑的奶油系鸡尾酒。同名配方有多个版本，这里采用咖啡利口酒、杏仁利口酒与爱尔兰奶油利口酒等量的版本，加冰慢饮。",
+            "zh-TW": "一杯偏甜、柔滑的奶油系雞尾酒。同名配方有多個版本，這裡採用咖啡利口酒、杏仁利口酒與愛爾蘭奶油利口酒等量的版本，加冰慢飲。"
+          },
+          "ingredients": [
+            {
+              "amount": "25 ml",
+              "name": {
+                "en": "Coffee liqueur, such as Kahlúa",
+                "zh-CN": "咖啡利口酒，如 Kahlúa",
+                "zh-TW": "咖啡利口酒，如 Kahlúa"
+              }
+            },
+            {
+              "amount": "25 ml",
+              "name": {
+                "en": "Amaretto almond-flavoured liqueur",
+                "zh-CN": "Amaretto 杏仁风味利口酒",
+                "zh-TW": "Amaretto 杏仁風味利口酒"
+              }
+            },
+            {
+              "amount": "25 ml",
+              "name": {
+                "en": "Irish cream liqueur, such as Baileys",
+                "zh-CN": "爱尔兰奶油利口酒，如 Baileys",
+                "zh-TW": "愛爾蘭奶油利口酒，如 Baileys"
+              }
+            }
+          ],
+          "recipe_note": {
+            "en": "Equal parts, 1 : 1 : 1. Ice is additional; no extra syrup is needed.",
+            "zh-CN": "比例 1 : 1 : 1；另备冰块，不额外加糖浆。",
+            "zh-TW": "比例 1 : 1 : 1；另備冰塊，不額外加糖漿。"
+          },
+          "method": [
+            {
+              "en": "Chill a rocks glass and fill it with fresh ice. Measure the three liqueurs into a shaker.",
+              "zh-CN": "先将岩石杯冰镇，再放入新鲜冰块；用量酒器把三种利口酒倒入摇壶。",
+              "zh-TW": "先將岩石杯冰鎮，再放入新鮮冰塊；用量酒器把三種利口酒倒入搖壺。"
+            },
+            {
+              "en": "Add plenty of ice and shake for about 10 seconds, until the shaker feels cold and the ingredients are evenly mixed.",
+              "zh-CN": "摇壶加足冰，摇和约 10 秒，至壶壁明显冰凉、酒液混合均匀。",
+              "zh-TW": "搖壺加足冰，搖和約 10 秒，至壺壁明顯冰涼、酒液混合均勻。"
+            },
+            {
+              "en": "Strain over the fresh ice. Serve promptly; a thin layer of foam is normal, and no garnish is necessary.",
+              "zh-CN": "滤入装有新冰的杯中，趁冰凉时饮用；表面有一层细泡很正常，不装饰也可以。",
+              "zh-TW": "濾入裝有新冰的杯中，趁冰涼時飲用；表面有一層細泡很正常，不裝飾也可以。"
+            }
+          ],
+          "flavour": {
+            "en": "Coffee and roasted aromas meet the almond or marzipan character of amaretto. Irish cream rounds the texture and brings creamy vanilla notes; caramel or cocoa may also come to mind, depending on the brands. Expect sweetness first, with coffee bitterness and gentle alcohol warmth in the finish.",
+            "zh-CN": "咖啡与烘烤香先铺开，Amaretto 带来杏仁、杏仁糖般的气息，奶油利口酒让质地变得圆润，并添上香草奶香；依品牌不同，也可能联想到焦糖或可可。入口偏甜，尾段留意咖啡微苦与酒精的温热感。",
+            "zh-TW": "咖啡與烘烤香先鋪開，Amaretto 帶來杏仁、杏仁糖般的氣息，奶油利口酒讓質地變得圓潤，並添上香草奶香；依品牌不同，也可能聯想到焦糖或可可。入口偏甜，尾段留意咖啡微苦與酒精的溫熱感。"
+          },
+          "tasting": [
+            {
+              "en": "Look for an even pale-coffee colour and a smooth texture. Smell gently near the rim to separate coffee, almond and cream.",
+              "zh-CN": "先看奶咖色是否均匀、质地是否细腻；靠近杯口轻闻，试着分辨咖啡、杏仁与奶香。",
+              "zh-TW": "先看奶咖色是否均勻、質地是否細膩；靠近杯口輕聞，試著分辨咖啡、杏仁與奶香。"
+            },
+            {
+              "en": "Take a small sip and let it coat the mouth briefly. Notice whether sweetness overwhelms the coffee and whether the cream feels silky or heavy.",
+              "zh-CN": "小口啜饮，让酒液短暂停留，观察甜味有没有盖住咖啡，以及奶油口感是丝滑还是偏厚重。",
+              "zh-TW": "小口啜飲，讓酒液短暫停留，觀察甜味有沒有蓋住咖啡，以及奶油口感是絲滑還是偏厚重。"
+            },
+            {
+              "en": "Return after a little ice has melted. Compare body, sweetness and the length of the coffee finish; water between sips helps reset the palate.",
+              "zh-CN": "等冰稍化后再尝，比较酒体、甜感与咖啡余味的长度；两口之间喝一点清水，重新整理味觉。",
+              "zh-TW": "等冰稍化後再嚐，比較酒體、甜感與咖啡餘味的長度；兩口之間喝一點清水，重新整理味覺。"
+            }
+          ],
+          "adjustment": {
+            "en": "For a lighter texture, try an extra 10–15 ml of milk on a later attempt and record it as a variation. Avoid adding citrus juice to the cream mixture: it can curdle. Adding vodka produces a different variation, often called a Screaming Orgasm.",
+            "zh-CN": "若觉得太厚，下次可另加 10–15 ml 牛奶，并把改动记下来。不要用柠檬或青柠汁给奶油酒“解腻”，酸可能使其凝结。加伏特加通常属于另一种变体，常称 Screaming Orgasm。",
+            "zh-TW": "若覺得太厚，下次可另加 10–15 ml 牛奶，並把改動記下來。不要用檸檬或青檸汁給奶油酒「解膩」，酸可能使其凝結。加伏特加通常屬於另一種變體，常稱 Screaming Orgasm。"
+          },
+          "source": {
+            "label": "Orgasm — equal-parts variation",
+            "href": "https://en.wikipedia.org/wiki/Orgasm_(cocktail)"
+          }
+        },
+        {
+          "id": "margarita",
+          "title": {
+            "en": "Margarita",
+            "zh-CN": "玛格丽特 · Margarita",
+            "zh-TW": "瑪格麗特 · Margarita"
+          },
+          "style": {
+            "en": "Agave · Lime · Orange",
+            "zh-CN": "龙舌兰 · 青柠 · 橙香",
+            "zh-TW": "龍舌蘭 · 青檸 · 橙香"
+          },
+          "serve": {
+            "en": "One serving · Chilled cocktail glass · Served up",
+            "zh-CN": "一杯 · 冰镇鸡尾酒杯 · 杯中不加冰",
+            "zh-TW": "一杯 · 冰鎮雞尾酒杯 · 杯中不加冰"
+          },
+          "intro": {
+            "en": "Tequila, orange liqueur and fresh lime make a bright, brisk sour. This is the IBA recipe, shaken and served up; the optional half salt rim lets you taste the drink with and without salt.",
+            "zh-CN": "龙舌兰、橙味利口酒与鲜青柠构成一杯明亮利落的酸味鸡尾酒。这里采用 IBA 配方，摇和后滤入冰杯；可选的半圈盐边，正好用来比较有盐与无盐的入口。",
+            "zh-TW": "龍舌蘭、橙味利口酒與鮮青檸構成一杯明亮俐落的酸味雞尾酒。這裡採用 IBA 配方，搖和後濾入冰杯；可選的半圈鹽邊，正好用來比較有鹽與無鹽的入口。"
+          },
+          "ingredients": [
+            {
+              "amount": "50 ml",
+              "name": {
+                "en": "100% agave tequila; blanco works well",
+                "zh-CN": "100% 龙舌兰原料的特基拉，宜用白龙舌兰",
+                "zh-TW": "100% 龍舌蘭原料的特基拉，宜用白龍舌蘭"
+              }
+            },
+            {
+              "amount": "20 ml",
+              "name": {
+                "en": "Triple sec orange liqueur, such as Cointreau",
+                "zh-CN": "Triple Sec 橙味利口酒，如 Cointreau",
+                "zh-TW": "Triple Sec 橙味利口酒，如 Cointreau"
+              }
+            },
+            {
+              "amount": "15 ml",
+              "name": {
+                "en": "Freshly squeezed lime juice",
+                "zh-CN": "鲜榨青柠汁",
+                "zh-TW": "鮮榨青檸汁"
+              }
+            }
+          ],
+          "recipe_note": {
+            "en": "IBA ratio: 50 : 20 : 15. Ice for shaking; a half salt rim is optional. No syrup in this base recipe.",
+            "zh-CN": "IBA 比例 50 : 20 : 15；另备摇和用冰块，半圈盐边可选。基础配方不加糖浆。",
+            "zh-TW": "IBA 比例 50 : 20 : 15；另備搖和用冰塊，半圈鹽邊可選。基礎配方不加糖漿。"
+          },
+          "method": [
+            {
+              "en": "Chill a coupe or Margarita glass. If using salt, moisten half of the outer rim with lime and lightly dip it in fine salt, keeping salt out of the bowl.",
+              "zh-CN": "冰镇碟形杯或玛格丽特杯。需要盐边时，用青柠润湿半圈杯口外侧，薄薄沾盐，避免盐粒掉入杯中。",
+              "zh-TW": "冰鎮碟形杯或瑪格麗特杯。需要鹽邊時，用青檸潤濕半圈杯口外側，薄薄沾鹽，避免鹽粒掉入杯中。"
+            },
+            {
+              "en": "Juice the lime just before mixing. Measure all three ingredients into a shaker and fill with ice.",
+              "zh-CN": "临调前鲜榨青柠汁；三种材料按量倒入摇壶，加入足量冰块。",
+              "zh-TW": "臨調前鮮榨青檸汁；三種材料按量倒入搖壺，加入足量冰塊。"
+            },
+            {
+              "en": "Shake for about 10–15 seconds until thoroughly chilled, then strain into the prepared glass without ice. Fine-strain as well if you prefer fewer ice chips.",
+              "zh-CN": "摇和约 10–15 秒，充分冰镇并适度稀释，滤入备好的无冰杯中；想减少冰屑，可再经细滤网过滤。",
+              "zh-TW": "搖和約 10–15 秒，充分冰鎮並適度稀釋，濾入備好的無冰杯中；想減少冰屑，可再經細濾網過濾。"
+            }
+          ],
+          "flavour": {
+            "en": "Lime brings freshness and acidity; orange liqueur adds peel aroma and sweetness. Blanco tequila may contribute cooked agave, grassy or peppery notes, depending on the bottle. The texture is lighter than a cream cocktail, with a citrus-led finish. Salt changes the balance but should not dominate it.",
+            "zh-CN": "青柠提供清新酸度，橙味利口酒带来橙皮香与甜度；白龙舌兰依品牌可能呈现熟龙舌兰、青草或胡椒气息。酒体比奶油系轻盈，余味以柑橘香为主。盐边会改变酸甜与苦味的感受，但不应让整杯只剩咸味。",
+            "zh-TW": "青檸提供清新酸度，橙味利口酒帶來橙皮香與甜度；白龍舌蘭依品牌可能呈現熟龍舌蘭、青草或胡椒氣息。酒體比奶油系輕盈，餘味以柑橘香為主。鹽邊會改變酸甜與苦味的感受，但不應讓整杯只剩鹹味。"
+          },
+          "tasting": [
+            {
+              "en": "Smell before sipping: can you distinguish lime and orange peel from the tequila? Hold the stem to keep the drink cool.",
+              "zh-CN": "先闻香，分辨青柠、橙皮与龙舌兰；握杯梗，尽量少用手温加热酒液。",
+              "zh-TW": "先聞香，分辨青檸、橙皮與龍舌蘭；握杯梗，盡量少用手溫加熱酒液。"
+            },
+            {
+              "en": "Take the first small sip from the unsalted rim. Follow the opening acidity, the sweetness in the middle and the agave in the finish.",
+              "zh-CN": "第一口从无盐的一侧小口喝，依次感受入口的酸、中段的甜与尾段的龙舌兰，看看三者是否衔接。",
+              "zh-TW": "第一口從無鹽的一側小口喝，依次感受入口的酸、中段的甜與尾段的龍舌蘭，看看三者是否銜接。"
+            },
+            {
+              "en": "Try the salted side next and compare. As the drink warms slightly, revisit the aroma and finish; distinguish pleasant citrus bite from an overly sharp balance.",
+              "zh-CN": "再从有盐的一侧比较。稍回温后重闻、重尝，留意柑橘与龙舌兰是否更清楚，以及酸感是清爽还是过于尖锐。",
+              "zh-TW": "再從有鹽的一側比較。稍回溫後重聞、重嚐，留意柑橘與龍舌蘭是否更清楚，以及酸感是清爽還是過於尖銳。"
+            }
+          ],
+          "adjustment": {
+            "en": "Limes and orange liqueurs vary. Make the base recipe first, then change only one variable next time: a little more lime for a sharper drink, or 5 ml of 1:1 sugar syrup if it is too tart. These are personal adjustments, not the IBA formula. Note the tequila, liqueur, juice quantity and shaking time so you can repeat a balance you like.",
+            "zh-CN": "青柠酸度、橙酒甜度会变化。先做基础配方，下次只改一个变量：偏甜可略增青柠，过酸可试加 5 ml 的 1:1 糖浆；这些属于个人调整，并非 IBA 原方。记下酒款、果汁用量与摇和时间，比单写“好喝”更容易复现。",
+            "zh-TW": "青檸酸度、橙酒甜度會變化。先做基礎配方，下次只改一個變量：偏甜可略增青檸，過酸可試加 5 ml 的 1:1 糖漿；這些屬於個人調整，並非 IBA 原方。記下酒款、果汁用量與搖和時間，比單寫「好喝」更容易重現。"
+          },
+          "source": {
+            "label": "IBA · Margarita",
+            "href": "https://iba-world.com/iba-cocktail/margarita/"
+          }
+        }
+      ]
     }
   }
 }

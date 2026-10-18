@@ -279,9 +279,10 @@ async function startupChecks(browser) {
             'Retired academic sections have no Life content or navigation targets');
         await page.locator('#sectionDrawerList [data-portal-id="wine"]').click();
         await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'wine');
-        await page.locator('#wine .wine-empty').waitFor({ state: 'visible' });
+        await page.locator('#wine-orgasm').waitFor({ state: 'visible' });
+        await page.locator('#wine-margarita').waitFor({ state: 'visible' });
         check(projectRequests.length === 0,
-            'Wine Diary opens its empty state without downloading removed project illustrations', projectRequests);
+            'Wine Diary opens both cocktail entries without downloading removed project illustrations', projectRequests);
     } finally {
         releaseRuntime();
         await context.close();
@@ -884,8 +885,9 @@ async function contentChecks(browser) {
             await page.locator(`.lang-btn[data-lang="${language}"]`).click();
             check(await page.locator('#portalPanelTitle').textContent() === expected
                 && await page.locator('#constellationMeaningText').isVisible()
-                && await page.locator('#wine .wine-empty').isVisible(),
-                `${label}: Wine Diary shows its constellation meaning and empty state in ${language}`);
+                && await page.locator('#wine-orgasm').isVisible()
+                && await page.locator('#wine-margarita').isVisible(),
+                `${label}: Wine Diary shows its constellation meaning and both cocktails in ${language}`);
         }
         await screenshot(page, `wine-${label}`);
         await page.locator('#portalClose').click();

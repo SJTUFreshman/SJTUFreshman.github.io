@@ -44,7 +44,8 @@ async function completeSection(page, id, label) {
             visibleEntries: entries.filter(rendered).map(entry => entry.dataset.portalEntry),
             profile: id !== 'profile' || (rendered(content.querySelector('.profile-page'))
                 && [...content.querySelectorAll(`[data-userbox-language="${state.currentLang}"]`)].filter(rendered).length === 29),
-            wine: id !== 'wine' || (entries.length === 0 && rendered(content.querySelector('.wine-empty'))),
+            wine: id !== 'wine' || (entries.length === 2 && !content.querySelector('.wine-empty')
+                && ['wine-orgasm', 'wine-margarita'].every(entryId => entries.some(entry => entry.id === entryId && rendered(entry)))),
             onlySection: [...document.querySelectorAll('[data-portal-content]')].filter(rendered).length === 1,
             constellationTitle: dom.starReaderTitle.textContent === localized(constellationStories[id].name),
             noStarSelection: state.activeStarHip === null,
@@ -217,12 +218,13 @@ async function meanings(browser, route, mobile) {
                         aboveContent: document.getElementById('constellationMeaning').nextElementSibling?.matches('[data-portal-content]'),
                         fits: dom.panelBody.scrollWidth <= dom.panelBody.clientWidth + 1,
                         visible: rect.width > 0 && rect.top >= body.top - 1 && rect.top < body.bottom,
-                        emptyWine: portal.id !== 'wine' || (!portal.content.querySelector('[data-portal-entry]')
-                            && portal.content.querySelector('.wine-empty').textContent === i18n[state.currentLang].wine_empty)
+                        wineContent: portal.id !== 'wine' || (portal.content.querySelectorAll('.wine-entry').length === 2
+                            && [...portal.content.querySelectorAll('[data-key]')].every(element =>
+                                element.textContent === i18n[state.currentLang][element.dataset.key]))
                     };
                 });
                 check(meaning.title === meaning.expectedTitle && meaning.text === meaning.expected && meaning.text.length > 25
-                    && meaning.aboveContent && meaning.fits && meaning.visible && meaning.emptyWine,
+                    && meaning.aboveContent && meaning.fits && meaning.visible && meaning.wineContent,
                     `${label}/${id}/${language}: localized meaning is visible above content and fits the panel`);
                 const starResults = await page.evaluate(() => {
                     const portal = state.activePortal;
