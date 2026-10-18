@@ -338,6 +338,10 @@ function setLang(lang) {
         const key = element.dataset.key;
         if (data[key] !== undefined) element.textContent = data[key];
     });
+    document.querySelectorAll('[data-alt-key]').forEach(image => {
+        const alt = data[image.dataset.altKey];
+        if (alt !== undefined) image.alt = alt;
+    });
     document.querySelectorAll('[data-userbox-language]').forEach(element => {
         element.hidden = element.dataset.userboxLanguage !== state.currentLang;
     });

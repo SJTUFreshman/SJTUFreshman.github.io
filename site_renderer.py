@@ -603,6 +603,23 @@ def wine_text_values(content: dict[str, Any]) -> dict[str, Any]:
     return values
 
 
+def shelf_text_values(content: dict[str, Any]) -> dict[str, Any]:
+    life = content["life"]
+    values = {f"shelf_{key}": value for key, value in life.get("shelf_copy", {}).items()}
+    for index, item in enumerate(life["shelf"]):
+        key = key_for("shelf", item, index)
+        values[key] = item.get("comment", {})
+        if not item.get("image"):
+            continue
+        values[f"shelf_review_{key}"] = item.get("review", {})
+        values[f"shelf_image_caption_{key}"] = item.get("image_caption", {})
+        for group in ("reviews", "watch"):
+            for number, link in enumerate(item.get(group, [])):
+                for field in ("label", "note"):
+                    values[f"shelf_{group}_{key}_{number}_{field}"] = link.get(field, {})
+    return values
+
+
 def render_life_i18n(content: dict[str, Any]) -> str:
     life = content["life"]
     home = content["home"]
@@ -636,10 +653,9 @@ def render_life_i18n(content: dict[str, Any]) -> str:
         for lang in LANGS:
             i18n[lang][f"cap_{key}"] = lang_value(item.get("caption", {}), lang)
 
-    for index, item in enumerate(life["shelf"]):
-        key = key_for("shelf", item, index)
+    for key, value in shelf_text_values(content).items():
         for lang in LANGS:
-            i18n[lang][key] = lang_value(item.get("comment", {}), lang)
+            i18n[lang][key] = lang_value(value, lang)
 
     for index, item in enumerate(life["thoughts"]):
         key = key_for("thought", item, index)
@@ -822,11 +838,47 @@ def render_shelf_items(items: list[dict[str, Any]]) -> str:
     rows = []
     for index, item in enumerate(items):
         key = key_for("shelf", item, index)
-        rows.append(f"""            <div class="shelf-item">
-                <div class="shelf-icon"><i class="{esc(item.get("icon", "fas fa-book"))}"></i></div>
+        if not item.get("image"):
+            rows.append(f"""            <div class="shelf-item" data-shelf-item="{esc(key)}">
+                <div class="shelf-icon" aria-hidden="true">✦</div>
                 <div class="shelf-info">
                     <div class="shelf-title en-only">{esc(item.get("title", ""))}</div>
-                    <div class="shelf-comment" data-key="{esc(key)}">{lang_value(item.get("comment", {}), "en")}</div>
+                    <div class="shelf-comment" data-key="{esc(key)}">{esc(lang_value(item.get("comment", {}), "en"))}</div>
+                </div>
+            </div>""")
+            continue
+
+        def render_links(group: str) -> str:
+            links = []
+            for link_index, link in enumerate(item.get(group, [])):
+                prefix = f"shelf_{group}_{key}_{link_index}"
+                links.append(
+                    f'<li><a class="shelf-link" href="{esc(link["href"])}" target="_blank" rel="noopener noreferrer">'
+                    f'<span data-key="{esc(prefix)}_label">{esc(lang_value(link["label"], "en"))}</span> <span aria-hidden="true">↗</span></a>'
+                    f'<p class="shelf-link-note" data-key="{esc(prefix)}_note">{esc(lang_value(link.get("note", {}), "en"))}</p></li>'
+                )
+            return "".join(links)
+
+        caption_key = f"shelf_image_caption_{key}"
+        caption = lang_value(item.get("image_caption", {}), "en")
+        rows.append(f"""            <div class="shelf-item shelf-screen" data-shelf-item="{esc(key)}">
+                <figure class="shelf-figure">
+                    <button class="gallery-item shelf-still" type="button" aria-label="{esc(caption)}" onclick="openLightbox(this)">
+                        <img src="{esc(item['image'])}" width="{int(item['image_width'])}" height="{int(item['image_height'])}" alt="{esc(caption)}" data-alt-key="{esc(caption_key)}" loading="lazy" decoding="async">
+                        <span class="gallery-caption" data-key="{esc(caption_key)}">{esc(caption)}</span>
+                    </button>
+                    <figcaption class="shelf-image-credit"><span data-key="shelf_image_source">Image source</span> · <a href="{esc(item['image_source'])}" target="_blank" rel="noopener noreferrer">{esc(item['image_credit'])}</a></figcaption>
+                </figure>
+                <div class="shelf-info">
+                    <div class="shelf-comment" data-key="{esc(key)}">{esc(lang_value(item.get("comment", {}), "en"))}</div>
+                    <section class="shelf-subsection">
+                        <h4 data-key="shelf_review">A closer look</h4>
+                        <p data-key="shelf_review_{esc(key)}">{esc(lang_value(item.get("review", {}), "en"))}</p>
+                    </section>
+                    <div class="shelf-links-grid">
+                        <section><h4 data-key="shelf_reviews">Reviews &amp; essays</h4><ul>{render_links("reviews")}</ul></section>
+                        <section><h4 data-key="shelf_watch">Watch online</h4><ul>{render_links("watch")}</ul></section>
+                    </div>
                 </div>
             </div>""")
     return "\n".join(rows)
@@ -886,7 +938,8 @@ def render_portal_section(content: dict[str, Any], stream: str) -> str:
 {render_galaxy_detail(stream, moment["_items"])}
                 </article>""")
 
-    return f"""        <section id="{stream}" class="portal-content" data-portal-content="{stream}" hidden>
+    gallery_group = " data-gallery-group" if stream == "shelf" else ""
+    return f"""        <section id="{stream}" class="portal-content" data-portal-content="{stream}"{gallery_group} hidden>
             <div class="portal-moments">
 {chr(10).join(blocks)}
             </div>

@@ -444,6 +444,392 @@
     ],
     "shelf": [
       {
+        "id": "movie_a_sun",
+        "title": "A Sun",
+        "title_i18n": {
+          "en": "A Sun",
+          "zh-CN": "阳光普照",
+          "zh-TW": "陽光普照"
+        },
+        "comment": {
+          "en": "A family drama that moves from violence and silence toward a difficult kind of repair.",
+          "zh-CN": "从暴力与沉默出发，慢慢走向艰难而克制的修复。",
+          "zh-TW": "從暴力與沉默出發，慢慢走向艱難而克制的修復。"
+        },
+        "image": "images/shelf/a-sun.webp",
+        "image_alt": "A Sun (2019)",
+        "review": {
+          "en": "Chung Mong-hong lets sunlight and shade carry what the family cannot say aloud. The violence is only the doorway; the film keeps returning to responsibility, grief and the possibility of care.",
+          "zh-CN": "钟孟宏让阳光与阴影替这个家庭说出无法直面的事。暴力只是入口，影片真正反复凝视的是责任、哀伤，以及重新照料彼此的可能。",
+          "zh-TW": "鍾孟宏讓陽光與陰影替這個家庭說出無法直面的事。暴力只是入口，影片真正反覆凝視的是責任、哀傷，以及重新照料彼此的可能。"
+        },
+        "reviews": [
+          {
+            "label": {
+              "en": "Tony Rayns · A Sun: a Taipei family’s thunder and loss",
+              "zh-CN": "Tony Rayns ·《阳光普照》中的家庭与失落",
+              "zh-TW": "Tony Rayns ·《陽光普照》中的家庭與失落"
+            },
+            "href": "https://www.bfi.org.uk/sight-and-sound/reviews/sun-chung-mong-hong-taiwan-oscar-nominee-netflix",
+            "note": {
+              "en": "BFI · Sight and Sound · English · spoilers",
+              "zh-CN": "BFI《视与听》· 英文 · 含剧透",
+              "zh-TW": "BFI《視與聽》· 英文 · 含劇透"
+            }
+          },
+          {
+            "label": {
+              "en": "Peter Debruge · A Sun review",
+              "zh-CN": "Peter Debruge ·《阳光普照》影评",
+              "zh-TW": "Peter Debruge ·《陽光普照》影評"
+            },
+            "href": "https://variety.com/2019/film/reviews/a-sun-review-yang-guang-pu-zhao-1203394389/",
+            "note": {
+              "en": "Variety · English · spoilers",
+              "zh-CN": "Variety · 英文 · 含剧透",
+              "zh-TW": "Variety · 英文 · 含劇透"
+            }
+          }
+        ],
+        "watch": [
+          {
+            "label": {
+              "en": "Netflix · A Sun",
+              "zh-CN": "Netflix · 阳光普照",
+              "zh-TW": "Netflix · 陽光普照"
+            },
+            "href": "https://www.netflix.com/title/81168282",
+            "note": {
+              "en": "Subscription · availability varies by region",
+              "zh-CN": "需订阅 · 片库随地区变化",
+              "zh-TW": "需訂閱 · 片庫隨地區變化"
+            }
+          }
+        ],
+        "image_width": 1200,
+        "image_height": 630,
+        "image_caption": {
+          "en": "A Sun · sunlight and an embrace",
+          "zh-CN": "阳光普照 · 日光中的拥抱",
+          "zh-TW": "陽光普照 · 日光中的擁抱"
+        },
+        "image_credit": "BFI · Sight and Sound",
+        "image_source": "https://www.bfi.org.uk/sight-and-sound/reviews/sun-chung-mong-hong-taiwan-oscar-nominee-netflix"
+      },
+      {
+        "id": "movie_interstellar",
+        "title": "Interstellar",
+        "title_i18n": {
+          "en": "Interstellar",
+          "zh-CN": "星际穿越",
+          "zh-TW": "星際穿越"
+        },
+        "comment": {
+          "en": "A vast journey through time, gravity and the stubborn tenderness of home.",
+          "zh-CN": "穿越时间、引力与宇宙尺度的远行，最后仍回到家与牵挂。",
+          "zh-TW": "穿越時間、引力與宇宙尺度的遠行，最後仍回到家與牽掛。"
+        },
+        "image": "images/shelf/interstellar.webp",
+        "image_alt": "Interstellar (2014)",
+        "review": {
+          "en": "Time dilation turns distance into an emotional cost: a short journey for one person can consume years for another. The film is especially moving when its cosmic scale gives way to missed messages and a promise to return; its dense exposition also makes the balance between spectacle and character worth debating.",
+          "zh-CN": "时间膨胀把距离变成情感的代价：一个人的片刻，可能耗尽另一个人的许多年。宇宙奇观收束到错过的讯息与回家的承诺时，电影格外动人；密集的解释性对白，也让奇观与人物之间的平衡值得讨论。",
+          "zh-TW": "時間膨脹把距離變成情感的代價：一個人的片刻，可能耗盡另一個人的許多年。宇宙奇觀收束到錯過的訊息與回家的承諾時，電影格外動人；密集的解釋性對白，也讓奇觀與人物之間的平衡值得討論。"
+        },
+        "reviews": [
+          {
+            "label": {
+              "en": "Henry Barnes · McConaughey v the whole wide world",
+              "zh-CN": "Henry Barnes · 宇宙奇观与人物之间",
+              "zh-TW": "Henry Barnes · 宇宙奇觀與人物之間"
+            },
+            "href": "https://www.theguardian.com/film/2014/oct/27/interstellar-first-look-review-matthew-mcconoughey",
+            "note": {
+              "en": "The Guardian · English · a critical reading",
+              "zh-CN": "《卫报》· 英文 · 持保留意见的评论",
+              "zh-TW": "《衛報》· 英文 · 持保留意見的評論"
+            }
+          }
+        ],
+        "watch": [
+          {
+            "label": {
+              "en": "Netflix · Interstellar",
+              "zh-CN": "Netflix · 星际穿越",
+              "zh-TW": "Netflix · 星際穿越"
+            },
+            "href": "https://www.netflix.com/title/70305903",
+            "note": {
+              "en": "Subscription · availability varies by region",
+              "zh-CN": "需订阅 · 片库随地区变化",
+              "zh-TW": "需訂閱 · 片庫隨地區變化"
+            }
+          }
+        ],
+        "image_width": 1200,
+        "image_height": 720,
+        "image_caption": {
+          "en": "Interstellar · Cooper on an icy planet",
+          "zh-CN": "星际穿越 · 冰原上的库珀",
+          "zh-TW": "星際穿越 · 冰原上的庫珀"
+        },
+        "image_credit": "PR / The Guardian",
+        "image_source": "https://www.theguardian.com/film/2014/oct/27/interstellar-first-look-review-matthew-mcconoughey"
+      },
+      {
+        "id": "movie_boonie_bears",
+        "title": "Boonie Bears",
+        "title_i18n": {
+          "en": "Boonie Bears",
+          "zh-CN": "熊出没",
+          "zh-TW": "熊出沒"
+        },
+        "comment": {
+          "en": "A warm, kinetic corner of Chinese animation; start with Back to Earth for its big-screen sci-fi energy.",
+          "zh-CN": "中国动画里热闹又有温度的一角；可以从《重返地球》开始，感受它的科幻冒险劲头。",
+          "zh-TW": "中國動畫裡熱鬧又有溫度的一角；可以從《重返地球》開始，感受它的科幻冒險勁頭。"
+        },
+        "image": "images/shelf/boonie-bears.webp",
+        "image_alt": "Boonie Bears: Back to Earth",
+        "review": {
+          "en": "The woodland comedy opens out into a larger adventure in Back to Earth. Bramble’s wish to be taken seriously gives the spectacle an emotional centre; the busy blend of science-fiction references is enjoyable, although the story sometimes struggles to give each idea room. The still and review here refer to this 2022 film.",
+          "zh-CN": "《重返地球》把森林里的日常喜剧扩展成更大的冒险。熊二想被认真看待的愿望，让动作奇观有了情感落点；密集的科幻元素很热闹，但故事有时来不及让每个点子充分展开。此处的剧照和影评对应这部 2022 年电影。",
+          "zh-TW": "《重返地球》把森林裡的日常喜劇擴展成更大的冒險。熊二想被認真看待的願望，讓動作奇觀有了情感落點；密集的科幻元素很熱鬧，但故事有時來不及讓每個點子充分展開。此處的劇照和影評對應這部 2022 年電影。"
+        },
+        "reviews": [
+          {
+            "label": {
+              "en": "Phil Hoad · Back to Earth: messy but fun",
+              "zh-CN": "Phil Hoad ·《重返地球》：杂糅而有趣",
+              "zh-TW": "Phil Hoad ·《重返地球》：雜糅而有趣"
+            },
+            "href": "https://www.theguardian.com/film/2022/may/23/boonie-bears-back-to-earth-review-chinese-animated-blockbuster-is-messy-but-fun",
+            "note": {
+              "en": "The Guardian · English · film review",
+              "zh-CN": "《卫报》· 英文 · 电影评论",
+              "zh-TW": "《衛報》· 英文 · 電影評論"
+            }
+          }
+        ],
+        "watch": [
+          {
+            "label": {
+              "en": "Boonie Bears · official channel",
+              "zh-CN": "熊出没 · 官方频道",
+              "zh-TW": "熊出沒 · 官方頻道"
+            },
+            "href": "https://www.youtube.com/@BoonieBearsOfficial",
+            "note": {
+              "en": "YouTube · series episodes and clips · language varies by video",
+              "zh-CN": "YouTube · 系列剧集与片段 · 语言以视频为准",
+              "zh-TW": "YouTube · 系列劇集與片段 · 語言以影片為準"
+            }
+          }
+        ],
+        "image_width": 1200,
+        "image_height": 720,
+        "image_caption": {
+          "en": "Boonie Bears: Back to Earth (2022) · Bramble",
+          "zh-CN": "熊出没·重返地球（2022）· 熊二",
+          "zh-TW": "熊出沒·重返地球（2022）· 熊二"
+        },
+        "image_credit": "PR / The Guardian",
+        "image_source": "https://www.theguardian.com/film/2022/may/23/boonie-bears-back-to-earth-review-chinese-animated-blockbuster-is-messy-but-fun"
+      },
+      {
+        "id": "tv_band_of_brothers",
+        "title": "Band of Brothers",
+        "title_i18n": {
+          "en": "Band of Brothers",
+          "zh-CN": "兄弟连",
+          "zh-TW": "兄弟連"
+        },
+        "comment": {
+          "en": "A war series built from memory, discipline and the bonds that survive the battlefield.",
+          "zh-CN": "从记忆、纪律与战场上留下的关系出发，写一群人如何成为兄弟。",
+          "zh-TW": "從記憶、紀律與戰場上留下的關係出發，寫一群人如何成為兄弟。"
+        },
+        "image": "images/shelf/band-of-brothers.webp",
+        "image_alt": "Band of Brothers",
+        "review": {
+          "en": "Its scale is enormous, but the emotional unit is the company: names, routines, jokes and absences. The series earns its legend by staying close to the ordinary people inside the military history.",
+          "zh-CN": "它的规模很大，但情感单位始终是连队：名字、日常、玩笑与一个个缺席的人。它之所以成为传奇，是因为始终贴近军事史中那些普通的人。",
+          "zh-TW": "它的規模很大，但情感單位始終是連隊：名字、日常、玩笑與一個個缺席的人。它之所以成為傳奇，是因為始終貼近軍事史中那些普通的人。"
+        },
+        "reviews": [
+          {
+            "label": {
+              "en": "Matt Seaton · Too close for comfort",
+              "zh-CN": "Matt Seaton ·《兄弟连》的真实感从何而来",
+              "zh-TW": "Matt Seaton ·《兄弟連》的真實感從何而來"
+            },
+            "href": "https://www.theguardian.com/film/2001/sep/24/features.mattseaton",
+            "note": {
+              "en": "The Guardian · English · on-set reporting and commentary",
+              "zh-CN": "《卫报》· 英文 · 幕后报道与评论",
+              "zh-TW": "《衛報》· 英文 · 幕後報導與評論"
+            }
+          }
+        ],
+        "watch": [
+          {
+            "label": {
+              "en": "HBO Max · Band of Brothers",
+              "zh-CN": "HBO Max · 兄弟连",
+              "zh-TW": "HBO Max · 兄弟連"
+            },
+            "href": "https://www.hbomax.com/show/6a0a0227-f567-46ba-9a2d-04374c5f6193",
+            "note": {
+              "en": "Subscription · availability varies by region",
+              "zh-CN": "需订阅 · 片库随地区变化",
+              "zh-TW": "需訂閱 · 片庫隨地區變化"
+            }
+          }
+        ],
+        "image_width": 1200,
+        "image_height": 675,
+        "image_caption": {
+          "en": "Band of Brothers · Bastogne",
+          "zh-CN": "兄弟连 · 巴斯托涅",
+          "zh-TW": "兄弟連 · 巴斯托涅"
+        },
+        "image_credit": "HBO",
+        "image_source": "https://www.hbomax.com/show/6a0a0227-f567-46ba-9a2d-04374c5f6193"
+      },
+      {
+        "id": "tv_yes_prime_minister",
+        "title": "Yes, Prime Minister",
+        "title_i18n": {
+          "en": "Yes, Prime Minister",
+          "zh-CN": "是，首相",
+          "zh-TW": "是，首相"
+        },
+        "comment": {
+          "en": "Jim Hacker reaches Number 10; the contest over who really controls policy follows him inside.",
+          "zh-CN": "哈克走进唐宁街十号，关于“究竟谁决定政策”的较量也跟着他进了门。",
+          "zh-TW": "哈克走進唐寧街十號，關於「究竟誰決定政策」的較量也跟著他進了門。"
+        },
+        "image": "images/shelf/yes-prime-minister.webp",
+        "image_alt": "Yes, Prime Minister",
+        "review": {
+          "en": "Hacker, Humphrey and Bernard turn a roomful of polite conversation into a struggle over information, timing and responsibility. Listen for a changed definition, an apparently helpful qualification or a carefully delayed answer: the language itself does much of the comic work.",
+          "zh-CN": "哈克、汉弗莱与伯纳把一屋子的礼貌谈话，变成对信息、时机与责任的争夺。留意一次概念偷换、一句看似周到的补充，或一个被刻意拖延的回答：语言本身就在完成喜剧。",
+          "zh-TW": "哈克、漢弗萊與伯納把一屋子的禮貌談話，變成對資訊、時機與責任的爭奪。留意一次概念偷換、一句看似周到的補充，或一個被刻意拖延的回答：語言本身就在完成喜劇。"
+        },
+        "reviews": [
+          {
+            "label": {
+              "en": "John Gross · Revisiting Yes Minister",
+              "zh-CN": "John Gross · 重温《遵命大臣》",
+              "zh-TW": "John Gross · 重溫《遵命大臣》"
+            },
+            "href": "https://cn.nytimes.com/culture/20130107/c07minister/",
+            "note": {
+              "en": "The New York Times Chinese · companion reading on the predecessor’s book adaptation",
+              "zh-CN": "纽约时报中文网 · 前作《是，大臣》改编书的评论",
+              "zh-TW": "紐約時報中文網 · 前作《是，大臣》改編書的評論"
+            }
+          }
+        ],
+        "watch": [
+          {
+            "label": {
+              "en": "BBC iPlayer · Yes, Prime Minister",
+              "zh-CN": "BBC iPlayer · 是，首相",
+              "zh-TW": "BBC iPlayer · 是，首相"
+            },
+            "href": "https://www.bbc.co.uk/iplayer/episodes/b00m01hr/yes-prime-minister",
+            "note": {
+              "en": "1986 original · UK · BBC account and TV Licence required",
+              "zh-CN": "1986 年原版 · 英国地区 · 需 BBC 账号及电视许可证",
+              "zh-TW": "1986 年原版 · 英國地區 · 需 BBC 帳號及電視許可證"
+            }
+          }
+        ],
+        "image_width": 1200,
+        "image_height": 675,
+        "image_caption": {
+          "en": "Yes, Prime Minister · Humphrey, Hacker and Bernard",
+          "zh-CN": "是，首相 · 汉弗莱、哈克与伯纳",
+          "zh-TW": "是，首相 · 漢弗萊、哈克與伯納"
+        },
+        "image_credit": "BBC",
+        "image_source": "https://www.bbc.co.uk/programmes/b00m01hr"
+      },
+      {
+        "id": "tv_friends",
+        "title": "Friends",
+        "title_i18n": {
+          "en": "Friends",
+          "zh-CN": "老友记",
+          "zh-TW": "六人行"
+        },
+        "comment": {
+          "en": "A comfort sitcom about six people making a small, bright room out of a very large city.",
+          "zh-CN": "六个人在一座很大的城市里，把一间小小的屋子和咖啡馆过成明亮日常的情景喜剧。",
+          "zh-TW": "六個人在一座很大的城市裡，把一間小小的屋子和咖啡館過成明亮日常的情境喜劇。"
+        },
+        "image": "images/shelf/friends.webp",
+        "image_alt": "Friends",
+        "review": {
+          "en": "Its nostalgia is powerful because the show turns friendship into a place: the sofa, the coffee shop, the familiar entrance. It also deserves to be revisited with a clear eye for the exclusions and stereotypes that made that comfort possible.",
+          "zh-CN": "它的怀旧感之所以有力，是因为它把友谊变成了一个具体的地方：那张沙发、那间咖啡馆、那个熟悉的门口。重看时也应该看见它曾经排除的人，以及让这种舒适成立的刻板印象。",
+          "zh-TW": "它的懷舊感之所以有力，是因為它把友誼變成了一個具體的地方：那張沙發、那間咖啡館、那個熟悉的門口。重看時也應該看見它曾經排除的人，以及讓這種舒適成立的刻板印象。"
+        },
+        "reviews": [
+          {
+            "label": {
+              "en": "Barbara Ellen · Friends at 30",
+              "zh-CN": "Barbara Ellen ·《老友记》三十年",
+              "zh-TW": "Barbara Ellen ·《六人行》三十年"
+            },
+            "href": "https://www.theguardian.com/tv-and-radio/2024/sep/22/friends-at-30-sitcom-cultural-phenomenon",
+            "note": {
+              "en": "The Guardian · English · nostalgia and the show’s blind spots",
+              "zh-CN": "《卫报》· 英文 · 怀旧魅力与时代局限",
+              "zh-TW": "《衛報》· 英文 · 懷舊魅力與時代局限"
+            }
+          },
+          {
+            "label": {
+              "en": "Kate Lloyd · The inside story",
+              "zh-CN": "Kate Lloyd · 编剧与制作人谈幕后",
+              "zh-TW": "Kate Lloyd · 編劇與製作人談幕後"
+            },
+            "href": "https://www.theguardian.com/tv-and-radio/2024/sep/18/friends-at-30-inside-story-writers-producers-tell-all",
+            "note": {
+              "en": "The Guardian · English · cast chemistry and comic timing",
+              "zh-CN": "《卫报》· 英文 · 演员默契与喜剧节奏",
+              "zh-TW": "《衛報》· 英文 · 演員默契與喜劇節奏"
+            }
+          }
+        ],
+        "watch": [
+          {
+            "label": {
+              "en": "Netflix · Friends",
+              "zh-CN": "Netflix · 老友记",
+              "zh-TW": "Netflix · 六人行"
+            },
+            "href": "https://www.netflix.com/title/70153404",
+            "note": {
+              "en": "Subscription · availability varies by region",
+              "zh-CN": "需订阅 · 片库随地区变化",
+              "zh-TW": "需訂閱 · 片庫隨地區變化"
+            }
+          }
+        ],
+        "image_width": 1200,
+        "image_height": 782,
+        "image_caption": {
+          "en": "Friends · Gunther and Ross at Central Perk",
+          "zh-CN": "老友记 · 中央公园咖啡馆里的甘瑟与罗斯",
+          "zh-TW": "六人行 · 中央公園咖啡館裡的甘瑟與羅斯"
+        },
+        "image_credit": "NBC/NBCUniversal/Getty Images / The Guardian",
+        "image_source": "https://www.theguardian.com/tv-and-radio/2024/sep/18/friends-at-30-inside-story-writers-producers-tell-all"
+      },
+      {
         "id": "book_dl",
         "icon": "fas fa-book",
         "title": "Deep Learning — Ian Goodfellow",
@@ -451,16 +837,6 @@
           "en": "Mathematical foundation is excellent. Not just a tool book, but a mind map.",
           "zh-CN": "常读常新。数学基础部分写得极好，不仅是工具书，更是思维导图。",
           "zh-TW": "常讀常新。數學基礎部分寫得極好，不僅是工具書，更是思維導圖。"
-        }
-      },
-      {
-        "id": "movie_interstellar",
-        "icon": "fas fa-film",
-        "title": "Interstellar",
-        "comment": {
-          "en": "Love is the one thing that transcends time and space.",
-          "zh-CN": "爱是唯一可以穿越时间与空间的事物。",
-          "zh-TW": "愛是唯一可以穿越時間與空間的事物。"
         }
       }
     ],
@@ -568,54 +944,6 @@
         "prominence": 2
       },
       {
-        "id": "shelf-deep-learning",
-        "stream": "shelf",
-        "date": "",
-        "date_label": {
-          "en": "Recently",
-          "zh-CN": "近期",
-          "zh-TW": "近期"
-        },
-        "location": {
-          "en": "",
-          "zh-CN": "",
-          "zh-TW": ""
-        },
-        "summary": {
-          "en": "Deep Learning — Ian Goodfellow",
-          "zh-CN": "《深度学习》",
-          "zh-TW": "《深度學習》"
-        },
-        "item_ids": [
-          "book_dl"
-        ],
-        "prominence": 3
-      },
-      {
-        "id": "shelf-interstellar",
-        "stream": "shelf",
-        "date": "",
-        "date_label": {
-          "en": "Recently",
-          "zh-CN": "近期",
-          "zh-TW": "近期"
-        },
-        "location": {
-          "en": "",
-          "zh-CN": "",
-          "zh-TW": ""
-        },
-        "summary": {
-          "en": "Interstellar",
-          "zh-CN": "《星际穿越》",
-          "zh-TW": "《星際穿越》"
-        },
-        "item_ids": [
-          "movie_interstellar"
-        ],
-        "prominence": 2
-      },
-      {
         "id": "thought-2026-01-16",
         "stream": "thoughts",
         "date": "2026-01-16",
@@ -652,6 +980,174 @@
           "thought_0629"
         ],
         "prominence": 3
+      },
+      {
+        "id": "shelf-a-sun",
+        "stream": "shelf",
+        "date": "",
+        "date_label": {
+          "en": "2019 · Film",
+          "zh-CN": "2019 · 电影",
+          "zh-TW": "2019 · 電影"
+        },
+        "location": {
+          "en": "Chung Mong-hong",
+          "zh-CN": "钟孟宏",
+          "zh-TW": "鍾孟宏"
+        },
+        "summary": {
+          "en": "A Sun",
+          "zh-CN": "阳光普照",
+          "zh-TW": "陽光普照"
+        },
+        "item_ids": [
+          "movie_a_sun"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "shelf-interstellar",
+        "stream": "shelf",
+        "date": "",
+        "date_label": {
+          "en": "2014 · Film",
+          "zh-CN": "2014 · 电影",
+          "zh-TW": "2014 · 電影"
+        },
+        "location": {
+          "en": "Christopher Nolan",
+          "zh-CN": "克里斯托弗·诺兰",
+          "zh-TW": "克里斯多福·諾蘭"
+        },
+        "summary": {
+          "en": "Interstellar",
+          "zh-CN": "星际穿越",
+          "zh-TW": "星際穿越"
+        },
+        "item_ids": [
+          "movie_interstellar"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "shelf-boonie-bears",
+        "stream": "shelf",
+        "date": "",
+        "date_label": {
+          "en": "2012– · Animation series",
+          "zh-CN": "2012– · 动画系列",
+          "zh-TW": "2012– · 動畫系列"
+        },
+        "location": {
+          "en": "Fantawild Animation",
+          "zh-CN": "华强方特",
+          "zh-TW": "華強方特"
+        },
+        "summary": {
+          "en": "Boonie Bears",
+          "zh-CN": "熊出没",
+          "zh-TW": "熊出沒"
+        },
+        "item_ids": [
+          "movie_boonie_bears"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "shelf-band-of-brothers",
+        "stream": "shelf",
+        "date": "",
+        "date_label": {
+          "en": "2001 · Miniseries · 10 episodes",
+          "zh-CN": "2001 · 迷你剧 · 10 集",
+          "zh-TW": "2001 · 迷你劇 · 10 集"
+        },
+        "location": {
+          "en": "HBO",
+          "zh-CN": "HBO",
+          "zh-TW": "HBO"
+        },
+        "summary": {
+          "en": "Band of Brothers",
+          "zh-CN": "兄弟连",
+          "zh-TW": "兄弟連"
+        },
+        "item_ids": [
+          "tv_band_of_brothers"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "shelf-yes-prime-minister",
+        "stream": "shelf",
+        "date": "",
+        "date_label": {
+          "en": "1986–1988 · British sitcom",
+          "zh-CN": "1986–1988 · 英式情景喜剧",
+          "zh-TW": "1986–1988 · 英式情境喜劇"
+        },
+        "location": {
+          "en": "BBC",
+          "zh-CN": "BBC",
+          "zh-TW": "BBC"
+        },
+        "summary": {
+          "en": "Yes, Prime Minister",
+          "zh-CN": "是，首相",
+          "zh-TW": "是，首相"
+        },
+        "item_ids": [
+          "tv_yes_prime_minister"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "shelf-friends",
+        "stream": "shelf",
+        "date": "",
+        "date_label": {
+          "en": "1994–2004 · Sitcom · 10 seasons",
+          "zh-CN": "1994–2004 · 情景喜剧 · 10 季",
+          "zh-TW": "1994–2004 · 情境喜劇 · 10 季"
+        },
+        "location": {
+          "en": "David Crane · Marta Kauffman",
+          "zh-CN": "David Crane · Marta Kauffman",
+          "zh-TW": "David Crane · Marta Kauffman"
+        },
+        "summary": {
+          "en": "Friends",
+          "zh-CN": "老友记",
+          "zh-TW": "六人行"
+        },
+        "item_ids": [
+          "tv_friends"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "shelf-deep-learning",
+        "stream": "shelf",
+        "date": "",
+        "date_label": {
+          "en": "Recently",
+          "zh-CN": "近期",
+          "zh-TW": "近期"
+        },
+        "location": {
+          "en": "",
+          "zh-CN": "",
+          "zh-TW": ""
+        },
+        "summary": {
+          "en": "Deep Learning — Ian Goodfellow",
+          "zh-CN": "《深度学习》",
+          "zh-TW": "《深度學習》"
+        },
+        "item_ids": [
+          "book_dl"
+        ],
+        "prominence": 3
       }
     ],
     "star_bindings": {
@@ -666,8 +1162,13 @@
         "footprints-map": 54061
       },
       "shelf": {
+        "shelf-interstellar": 91262,
         "shelf-deep-learning": 91262,
-        "shelf-interstellar": 91262
+        "shelf-a-sun": 91262,
+        "shelf-boonie-bears": 91971,
+        "shelf-band-of-brothers": 91971,
+        "shelf-yes-prime-minister": 91971,
+        "shelf-friends": 92420
       },
       "thoughts": {
         "thought-2026-01-16": 100453,
@@ -1355,6 +1856,28 @@
           }
         }
       ]
+    },
+    "shelf_copy": {
+      "review": {
+        "en": "A closer look",
+        "zh-CN": "短评",
+        "zh-TW": "短評"
+      },
+      "reviews": {
+        "en": "Reviews & essays",
+        "zh-CN": "影评与延伸阅读",
+        "zh-TW": "影評與延伸閱讀"
+      },
+      "watch": {
+        "en": "Watch online",
+        "zh-CN": "在线观看",
+        "zh-TW": "線上觀看"
+      },
+      "image_source": {
+        "en": "Image source",
+        "zh-CN": "图源",
+        "zh-TW": "圖源"
+      }
     }
   }
 }
