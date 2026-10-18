@@ -299,6 +299,10 @@ body.lang-zh-TW .section-index-copy strong {
     font-family: var(--kai);
 }
 
+.section-index-item[data-portal-id="wishlist"] .section-index-copy strong {
+    font-family: var(--editorial);
+}
+
 .section-index-copy span {
     overflow: hidden;
     color: rgba(211,222,241,0.5);

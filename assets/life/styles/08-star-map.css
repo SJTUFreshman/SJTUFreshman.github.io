@@ -276,6 +276,11 @@ body:not(.lang-en) .map-portal-copy strong {
     letter-spacing: 0.12em;
 }
 
+.map-portal[data-portal-button="wishlist"] .map-portal-copy strong {
+    font-family: var(--editorial);
+    letter-spacing: normal;
+}
+
 .map-portal-copy > span {
     color: #8e9daf;
     font-family: var(--ui);

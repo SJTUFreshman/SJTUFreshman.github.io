@@ -74,6 +74,11 @@ body.lang-zh-TW .portal-panel-title {
     letter-spacing: 0.04em;
 }
 
+.portal-panel:has(#wishlist:not([hidden])) .portal-panel-title {
+    font-family: var(--editorial);
+    letter-spacing: -0.015em;
+}
+
 .portal-panel-names {
     margin-top: 5px;
     color: var(--ink-faint);
