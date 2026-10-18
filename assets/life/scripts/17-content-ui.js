@@ -298,8 +298,6 @@ function updateActivePortalCopy() {
                 updateStarButtonCopy(activePortal, hip)
             );
             renderHomeRoutePreviewCopy();
-        } else if (state.activeStarHip && !activePortal.home) {
-            selectPortalStar(activePortal, state.activeStarHip);
         } else {
             showConstellationOverview(activePortal);
         }

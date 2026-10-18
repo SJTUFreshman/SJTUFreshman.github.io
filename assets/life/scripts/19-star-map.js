@@ -512,12 +512,7 @@ class LifeStarMap {
     }
 
     handleStarAction(portal, hip) {
-        selectPortalStar(portal, hip);
-        const measurement = window.HipparcosDistances?.byHip.get(hip);
-        if (measurement) {
-            const unit = state.currentLang === 'en' ? 'ly from Earth' : state.currentLang === 'zh-TW' ? '光年 · 距地球' : '光年 · 距地球';
-            dom.starReaderMeta.textContent += ` · ${(measurement.parsecs * 3.26156).toFixed(0)} ${unit}`;
-        }
+        showConstellationOverview(portal);
         return true;
     }
 

@@ -357,16 +357,7 @@ function openPortalPanel(portal, panelOnLeft = false, preferredHip = null) {
     dom.status.textContent = 'DETAIL';
     dom.portalNav.inert = true;
     dom.starNav.inert = false;
-    const firstStarHip = portal.home
-        ? null
-        : (portal.patternHips.includes(preferredHip)
-            ? preferredHip
-            : firstContentStarHip(portal));
-    if (firstStarHip === null) {
-        showConstellationOverview(portal);
-    } else {
-        selectPortalStar(portal, firstStarHip);
-    }
+    showConstellationOverview(portal);
     updateThoughtReader();
     refreshPortalPanelRect();
     releaseViewForDetail();

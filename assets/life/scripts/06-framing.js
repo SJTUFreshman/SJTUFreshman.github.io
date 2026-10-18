@@ -459,12 +459,6 @@ function buildPortalGeometry() {
         portal.screen = null;
         const content = document.querySelector(`[data-portal-content="${portal.id}"]`);
         portal.content = content;
-        portal.entriesByHip = new Map(pattern.hips.map(hip => [hip, []]));
-        content?.querySelectorAll('[data-portal-entry]').forEach(entry => {
-            const hip = Number(entry.dataset.starHip);
-            if (portal.entriesByHip.has(hip)) portal.entriesByHip.get(hip).push(entry);
-        });
-
         portal.starButtons = new Map();
         portal.starButtonScreens = new Map();
         pattern.hips.forEach(hip => {

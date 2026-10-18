@@ -2249,6 +2249,13 @@ const indexedNavigationRuntimeState = JSON.parse(vm.runInContext(`(() => {
     }));
     const originalRequestAnimationFrame = globalThis.requestAnimationFrame;
     const originalConstellationFraming = constellationFraming;
+    // Atlas rendering needs a browser DOM; this navigation fixture checks that
+    // opening Footprints schedules it. The browser entry suite renders the maps.
+    const originalInitMaps = initMaps;
+    const originalResizeMaps = resizeMaps;
+    let mapInitializations = 0;
+    initMaps = () => { mapInitializations += 1; };
+    resizeMaps = () => {};
     globalThis.requestAnimationFrame = callback => {
         if (typeof callback === 'function') callback(performance.now());
         return -1;
@@ -2466,6 +2473,8 @@ const indexedNavigationRuntimeState = JSON.parse(vm.runInContext(`(() => {
 
     constellationFraming = originalConstellationFraming;
     globalThis.requestAnimationFrame = originalRequestAnimationFrame;
+    initMaps = originalInitMaps;
+    resizeMaps = originalResizeMaps;
     managedPortals.forEach((portal, index) => {
         const saved = savedPortals[index];
         portal.direction = saved.direction;
@@ -2501,7 +2510,8 @@ const indexedNavigationRuntimeState = JSON.parse(vm.runInContext(`(() => {
         daylightResize,
         visibleFlightReframed,
         drawerFlightEscapeFocus,
-        drawerPanelEscapeFocus
+        drawerPanelEscapeFocus,
+        mapInitializations
     });
 })()`, runtimeContext));
 assert.deepEqual(indexedNavigationRuntimeState, {
@@ -2517,7 +2527,8 @@ assert.deepEqual(indexedNavigationRuntimeState, {
     },
     visibleFlightReframed: true,
     drawerFlightEscapeFocus: true,
-    drawerPanelEscapeFocus: true
+    drawerPanelEscapeFocus: true,
+    mapInitializations: 1
 }, 'Indexed navigation must direct-open hidden views, fly to daylight-visible constellations, reframe visible flights, and restore Escape focus');
 
 vm.runInContext(`

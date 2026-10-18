@@ -19,54 +19,19 @@ function starCatalogValues(hip) {
     };
 }
 
+function portalContentEntries(portal) {
+    if (!portal.content) return [];
+    const entries = Array.from(portal.content.querySelectorAll('[data-portal-entry]'));
+    return entries.length ? entries : Array.from(portal.content.children);
+}
+
 function starEntries(portal, hip) {
-    // Shared sections are one document, reachable from every star in their constellation.
-    if (portal.sharedContent && portal.patternHips.includes(hip)) {
-        return Array.from(portal.content?.children || []);
-    }
-    return portal.entriesByHip?.get(hip) || [];
+    // Authored HIP bindings are metadata; every star opens the complete section.
+    return portal.patternHips.includes(hip) ? portalContentEntries(portal) : [];
 }
 
 function firstContentStarHip(portal) {
     return portal.contentOrder?.find(hip => starEntries(portal, hip).length > 0) ?? null;
-}
-
-function entryPreview(entry) {
-    if (!entry) return '';
-    if (entry.classList.contains('portal-moment')) {
-        const date = entry.querySelector('.portal-moment-meta span')?.textContent.trim() || '';
-        const location = entry.querySelector('.portal-moment-location')?.textContent.trim() || '';
-        const summary = entry.querySelector('h3')?.textContent.trim() || '';
-        return [[date, location].filter(Boolean).join(' · '), summary].filter(Boolean).join(' — ');
-    }
-    if (entry.classList.contains('friend-link')) return entry.textContent.trim();
-    if (entry.classList.contains('maps-list')) {
-        return document.getElementById('visitedCountriesSummary')?.textContent.trim() || '';
-    }
-    if (entry.classList.contains('about-card')) {
-        const name = entry.querySelector('h3')?.textContent.trim() || '';
-        const role = entry.querySelector('.about-role')?.textContent.trim() || '';
-        return [name, role].filter(Boolean).join(' · ');
-    }
-    if (entry.classList.contains('news-entry')) {
-        const date = entry.querySelector('.news-date, .archive-meta')?.textContent.trim() || '';
-        const title = entry.querySelector('.news-text, h3')?.textContent.trim() || '';
-        return [date, title].filter(Boolean).join(' · ');
-    }
-    if (entry.classList.contains('publication-entry')) {
-        const venue = entry.querySelector('.pub-venue, .archive-meta')?.textContent.trim() || '';
-        const title = entry.querySelector('.pub-title-text, h3')?.textContent.trim() || '';
-        return [venue, title].filter(Boolean).join(' · ');
-    }
-    if (entry.classList.contains('project-entry')) {
-        const title = entry.querySelector('.project-name, h3')?.textContent.trim() || '';
-        const description = entry.querySelector('.project-desc, .project-entry-copy p')?.textContent.trim() || '';
-        return [title, description].filter(Boolean).join(' · ');
-    }
-    if (entry.classList.contains('profile-page')) {
-        return entry.querySelector('.profile-welcome')?.textContent.trim() || '';
-    }
-    return entry.textContent.trim().replace(/\s+/g, ' ').slice(0, 110);
 }
 
 function homeDestinationCopy(hip) {
@@ -82,19 +47,18 @@ function homeDestinationCopy(hip) {
 function updateStarButtonCopy(portal, hip) {
     const button = portal.starButtons?.get(hip);
     if (!button) return;
-    const entries = starEntries(portal, hip);
     const ui = starUiCopy[state.currentLang] || starUiCopy.en;
     const name = starName(hip);
-    let preview = portal.home ? homeDestinationCopy(hip) : entryPreview(entries[0]);
-    if (!preview) preview = ui.empty;
-    if (entries.length > 1) preview = `${preview} · +${entries.length - 1}`;
+    const preview = portal.home
+        ? homeDestinationCopy(hip)
+        : ui.openSection(portalName(portal, state.currentLang));
     const nameNode = button.querySelector('.star-hit-copy > strong');
     const previewNode = button.querySelector('.star-hit-copy > span');
     if (nameNode) nameNode.textContent = name;
     if (previewNode) previewNode.textContent = preview;
     button.classList.toggle(
         'has-content',
-        portal.home ? Boolean(homeStarTargets[hip]) : entries.length > 0
+        portal.home ? Boolean(homeStarTargets[hip]) : Boolean(portal.content)
     );
     button.classList.toggle('is-selected', state.activeStarHip === hip);
     button.setAttribute('aria-label', `${name} · ${preview}`);
@@ -368,6 +332,7 @@ function launchHomeRoute(source = state.activationSource) {
 }
 
 function showConstellationOverview(portal) {
+    if (state.scene !== 'detail' || state.activePortal !== portal) return;
     const story = constellationStories[portal.id];
     const ui = starUiCopy[state.currentLang] || starUiCopy.en;
     state.activeStarHip = null;
@@ -378,16 +343,23 @@ function showConstellationOverview(portal) {
     dom.starReader.classList.remove('is-star-footnote', 'is-empty', 'is-route-preview');
     dom.starReaderKicker.textContent = ui.constellationNote;
     dom.starReaderTitle.textContent = localized(story.name);
-    dom.starReaderMeta.textContent = portal.home
-        ? ui.homeMeta(portal.patternHips.length)
-        : ui.chooseMeta(portal.patternHips.length);
+    dom.starReaderMeta.textContent = ui.constellationMeta(portal.patternHips.length);
     dom.starReaderDescription.textContent = '';
-    dom.starReaderStatus.textContent = portal.home ? ui.homeChoose : ui.choose;
+    dom.starReaderStatus.textContent = '';
     portal.starButtons.forEach((_button, hip) => updateStarButtonCopy(portal, hip));
-    portal.content?.querySelectorAll('[data-portal-entry]').forEach(entry => {
-        entry.hidden = true;
+    const entries = portalContentEntries(portal);
+    entries.forEach(entry => {
+        entry.hidden = false;
+        entry.classList.remove('is-first-visible');
     });
+    entries.find(entry => entry.classList.contains('portal-moment'))?.classList.add('is-first-visible');
     refreshPortalPanelRect();
+    if (portal.id === 'footprints') {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            initMaps();
+            resizeMaps();
+        }));
+    }
 }
 
 function starDescription(portal, hip) {
@@ -404,47 +376,8 @@ function starDescription(portal, hip) {
 }
 
 function selectPortalStar(portal, hip) {
-    if (state.scene !== 'detail' || state.activePortal !== portal) return;
-    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
-    const entries = starEntries(portal, hip);
-
-    state.activeStarHip = hip;
-    state.hoverStarHip = hip;
-    state.routePreview = null;
-    hideHomeRoutePreview();
-    dom.starReader.classList.remove('is-overview');
-    dom.starReader.classList.add('is-star-footnote');
-    dom.starReader.classList.remove('is-route-preview');
-    dom.starReader.classList.toggle('is-empty', entries.length === 0);
-    dom.starReaderKicker.textContent = ui.starNote;
-    dom.starReaderTitle.textContent = starName(hip);
-    dom.starReaderMeta.textContent = starDescription(portal, hip);
-    dom.starReaderDescription.textContent = '';
-    dom.starReaderStatus.textContent = entries.length ? ui.filled(entries.length) : ui.empty;
-    portal.starButtons.forEach((_button, starHip) => updateStarButtonCopy(portal, starHip));
-    const contentEntries = portal.content
-        ? Array.from(portal.content.querySelectorAll('[data-portal-entry]'))
-        : [];
-    contentEntries.forEach(entry => {
-        entry.hidden = Number(entry.dataset.starHip) !== hip;
-        entry.classList.remove('is-first-visible');
-    });
-    contentEntries.find(entry =>
-        !entry.hidden && entry.classList.contains('portal-moment')
-    )?.classList.add('is-first-visible');
-    refreshPortalPanelRect();
-    requestAnimationFrame(() => {
-        dom.panelBody.scrollTo({
-            top: 0,
-            behavior: REDUCED_MOTION ? 'auto' : 'smooth'
-        });
-    });
-    if (portal.id === 'footprints' && entries.length) {
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-            initMaps();
-            resizeMaps();
-        }));
-    }
+    // Keep older navigation callers compatible without restoring per-star filtering.
+    showConstellationOverview(portal);
 }
 
 function handlePortalStarAction(portal, hip) {
@@ -453,7 +386,7 @@ function handlePortalStarAction(portal, hip) {
         previewHomeRoute(portal, hip);
         return;
     }
-    selectPortalStar(portal, hip);
+    showConstellationOverview(portal);
 }
 
 function updatePortalButton(portal, projected) {

@@ -18,7 +18,9 @@ async function pointFor(page, id) {
     return page.evaluate(id => {
         const map = window.lifeStarMap, group = map.groups.get(id);
         const stars = group.points.map((position, index) => ({ ...map.project(position), hip: group.portal.patternHips[index] }));
-        return stars.find(point => point.visible && point.x > 30 && point.y > 120 && point.x < innerWidth - 30 && point.y < innerHeight - 120
+        // Prefer a star that used to have no bound entry, so this catches the old empty-panel path.
+        const bound = new Set(Array.from(group.portal.content.querySelectorAll('[data-portal-entry]'), entry => Number(entry.dataset.starHip)));
+        return stars.sort((a, b) => Number(bound.has(a.hip)) - Number(bound.has(b.hip))).find(point => point.visible && point.x > 30 && point.y > 120 && point.x < innerWidth - 30 && point.y < innerHeight - 120
             && document.elementFromPoint(point.x, point.y)?.closest('#galaxyWorld')
             && map.portalStarAt(point.x, point.y)?.portal.id === id);
     }, id);
@@ -28,6 +30,33 @@ async function load(page, route) {
     await page.goto(new URL(route, base).href, { waitUntil: 'domcontentloaded' });
     await settle(page);
     await page.evaluate(() => document.fonts.ready);
+}
+
+async function completeSection(page, id, label) {
+    const result = await page.evaluate(id => {
+        const portal = state.activePortal;
+        if (portal?.id !== id || state.scene !== 'detail') return { active: false };
+        const content = portal.content, entries = [...content.querySelectorAll('[data-portal-entry]')];
+        const rendered = element => !element.hidden && element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden';
+        return {
+            active: rendered(content),
+            entries: entries.map(entry => entry.dataset.portalEntry),
+            visibleEntries: entries.filter(rendered).map(entry => entry.dataset.portalEntry),
+            profile: id !== 'profile' || (rendered(content.querySelector('.profile-page'))
+                && [...content.querySelectorAll(`[data-userbox-language="${state.currentLang}"]`)].filter(rendered).length === 29),
+            wine: id !== 'wine' || (entries.length === 0 && rendered(content.querySelector('.wine-empty'))),
+            onlySection: [...document.querySelectorAll('[data-portal-content]')].filter(rendered).length === 1,
+            constellationTitle: dom.starReaderTitle.textContent === localized(constellationStories[id].name),
+            noStarSelection: state.activeStarHip === null,
+            starsOpenSection: [...portal.starButtons.values()].every(button =>
+                button.querySelector('.star-hit-copy > span').textContent === (starUiCopy[state.currentLang] || starUiCopy.en).openSection(portalName(portal, state.currentLang)))
+        };
+    }, id);
+    check(result.active && result.profile && result.wine && result.onlySection && result.constellationTitle
+        && result.noStarSelection && result.starsOpenSection
+        && JSON.stringify(result.entries) === JSON.stringify(result.visibleEntries),
+        `${label}: ${id} shows its complete content in saved order without selecting a star`);
+    return result.entries;
 }
 
 async function labels(browser) {
@@ -53,7 +82,7 @@ async function labels(browser) {
                         fits: body.scrollWidth <= body.clientWidth + 1,
                         userboxCount: profile.querySelectorAll('.wiki-userboxes > .wiki-userbox').length,
                         noUserboxHeading: !profile.querySelector('#profile-box-heading, .profile-box-intro, .wiki-userbox-pending'),
-                        shared: state.activePortal.patternHips.every(hip => starEntries(state.activePortal, hip).length === 1) };
+                        shared: state.activeStarHip === null && !profile.querySelector('.profile-page').hidden };
                 });
                 const expectedTitle = { en: 'Meet Me Again', 'zh-CN': '重新认识我', 'zh-TW': '重新認識我' }[language];
                 check(profileState.title === expectedTitle && profileState.noNotes && profileState.fits
@@ -100,8 +129,8 @@ async function entry(browser, route, mobile) {
             check(Boolean(point), `${label}: ${id} has a reachable visible star outside its text label`);
             if (mobile) await page.touchscreen.tap(point.x, point.y);
             else await page.mouse.click(point.x, point.y);
-            await page.waitForFunction(({ id, hip }) => state.scene === 'detail' && state.activePortal?.id === id && state.activeStarHip === hip, { id, hip: point.hip });
-            check(true, `${label}: clicking a ${id} star enters that constellation and selects the clicked star`);
+            await page.waitForFunction(id => state.scene === 'detail' && state.activePortal?.id === id, id);
+            await completeSection(page, id, `${label}: clicking a star`);
             await page.locator('#portalClose').click();
             await settle(page);
         }
@@ -141,6 +170,7 @@ async function entry(browser, route, mobile) {
             { text: 'Yuheng Wang', href: 'https://hendrick-wang.github.io/' },
             { text: 'Qiran Zhang', href: 'https://positionprivacy.github.io/' }
         ]), `${label}: Friends contains exactly the three requested websites and no old placeholders`);
+        await completeSection(page, 'friends', `${label}: section index`);
     } finally { await context.close(); }
 }
 
@@ -166,12 +196,18 @@ async function meanings(browser, route, mobile) {
             && JSON.stringify(membership.ids) === JSON.stringify(expected),
             `${label}: seven content sections use catalogue stars and the Home constellation is removed`);
         for (const id of expected) {
-            // The Home constellation has its own shared panel, while the solar marker opens the destination chooser.
-            await page.evaluate(id => window.lifeStarMap.openPortal(portalDefinitions.find(portal => portal.id === id)), id);
+            await page.locator('#sectionDrawerToggle').click();
+            await page.locator(`#sectionDrawerList [data-portal-id="${id}"]`).click();
             await page.waitForFunction(id => state.scene === 'detail' && state.activePortal?.id === id, id);
             await settle(page);
+            const expectedEntries = await completeSection(page, id, `${label}: section index`);
+            if (id === 'footprints') {
+                await page.waitForFunction(() => mapsReady && window.footprintsAtlas);
+                check(await page.locator('#chinaMap svg').count() > 0, `${label}: the footprints atlas initializes immediately on constellation entry`);
+            }
             for (const language of ['en', 'zh-CN', 'zh-TW']) {
                 await page.locator(`.lang-btn[data-lang="${language}"]`).click();
+                await completeSection(page, id, `${label}/${language}: language switch`);
                 const meaning = await page.evaluate(() => {
                     const portal = state.activePortal, story = constellationStories[portal.id], rect = dom.constellationMeaningText.getBoundingClientRect(), body = dom.panelBody.getBoundingClientRect();
                     return {
@@ -188,10 +224,25 @@ async function meanings(browser, route, mobile) {
                 check(meaning.title === meaning.expectedTitle && meaning.text === meaning.expected && meaning.text.length > 25
                     && meaning.aboveContent && meaning.fits && meaning.visible && meaning.emptyWine,
                     `${label}/${id}/${language}: localized meaning is visible above content and fits the panel`);
-                await page.evaluate(() => selectPortalStar(state.activePortal, state.activePortal.patternHips.at(-1)));
+                const starResults = await page.evaluate(() => {
+                    const portal = state.activePortal;
+                    return portal.patternHips.map(hip => {
+                        portal.starButtons.get(hip).click();
+                        return { hip, ids: [...portal.content.querySelectorAll('[data-portal-entry]')]
+                            .filter(entry => !entry.hidden).map(entry => entry.dataset.portalEntry) };
+                    });
+                });
+                check(starResults.every(result => JSON.stringify(result.ids) === JSON.stringify(expectedEntries)),
+                    `${label}/${id}/${language}: every star keeps the complete section visible`);
+                await completeSection(page, id, `${label}/${language}: after all star buttons`);
                 check(await page.locator('#constellationMeaningText').textContent() === meaning.expected,
-                    `${label}/${id}/${language}: selecting another star retains the constellation meaning`);
+                    `${label}/${id}/${language}: clicking another star retains the constellation meaning`);
                 if (id === 'wine' && language === 'zh-CN') await page.screenshot({ path: path.join(output, `wine-${route}-${mobile ? 'mobile' : 'desktop'}.png`) });
+                if (id === 'gallery' && language === 'zh-CN') {
+                    await page.locator('#gallery [data-portal-entry]').last().scrollIntoViewIfNeeded();
+                    await page.screenshot({ path: path.join(output, `gallery-all-${route}-${mobile ? 'mobile' : 'desktop'}.png`) });
+                    await page.evaluate(() => { dom.panelBody.scrollTop = 0; });
+                }
             }
             await page.locator('#portalClose').click();
             await settle(page);

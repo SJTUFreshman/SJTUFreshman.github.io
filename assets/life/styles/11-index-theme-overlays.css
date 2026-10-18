@@ -257,6 +257,10 @@
     border-top: 1px solid rgba(109, 142, 208, 0.2);
 }
 
+.star-reader.is-overview {
+    margin-top: 24px;
+}
+
 .star-reader.is-overview .star-reader-status,
 .star-reader.is-empty .star-reader-status {
     border-left-color: rgba(212, 116, 170, 0.44);
