@@ -1027,28 +1027,25 @@ def render_friends(content: dict[str, Any]) -> str:
             f'<span class="friend-name-dot" aria-hidden="true"></span><span>{name}</span><span aria-hidden="true">↗</span></a>'
         )
         cards = []
-        for index, photo in enumerate(friend.get("memories", [])):
+        for photo in friend.get("memories", []):
             if photo.get("image"):
                 caption_key = f"friend_memory_{photo['id']}"
                 caption = esc(lang_value(photo.get("caption", {}), "en"))
                 cards.append(
                     f'<button class="friend-memory gallery-item" type="button" aria-label="{caption}" onclick="openLightbox(this)">'
                     f'<img src="{esc(photo["image"])}" width="{esc(photo["width"])}" height="{esc(photo["height"])}" '
-                    f'alt="{caption}" data-alt-key="{esc(caption_key)}" loading="lazy" decoding="async">'
-                    f'<span class="gallery-caption" data-key="{esc(caption_key)}">{caption}</span></button>'
+                    f'alt="{caption}" data-alt-key="{esc(caption_key)}" loading="lazy" decoding="async"></button>'
                 )
             else:
                 cards.append(
                     '<figure class="friend-memory is-placeholder"><div class="friend-memory-placeholder">'
                     '<span class="friend-memory-mark" aria-hidden="true">✧</span>'
-                    f'<span data-key="friends_placeholder">{esc(lang_value(copy.get("placeholder", {}), "en"))}</span></div>'
-                    f'<figcaption class="friend-memory-caption">{name} · {index + 1:02d}</figcaption></figure>'
+                    f'<span data-key="friends_placeholder">{esc(lang_value(copy.get("placeholder", {}), "en"))}</span></div></figure>'
                 )
         templates.append(f'<template id="friend-photos-{friend_id}">' + "".join(cards) + '</template>')
     portrait_html = ""
     if people:
         portrait_html = f"""                <div class="friends-feature">
-                    <p class="friends-eyebrow" data-key="friends_eyebrow">{esc(lang_value(copy.get("eyebrow", {}), "en"))}</p>
                     <div class="friends-portrait">
                         <img src="{esc(portrait['image'])}" width="{esc(portrait['width'])}" height="{esc(portrait['height'])}" alt="{esc(lang_value(copy.get('alt', {}), 'en'))}" data-alt-key="friends_alt" loading="lazy" decoding="async">
                         <svg class="friends-outlines" viewBox="0 0 1000 970" aria-hidden="true">{''.join(outline_links)}</svg>

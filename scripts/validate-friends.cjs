@@ -95,10 +95,12 @@ async function checkLayout(page, label) {
                     });
                 });
                 await openFriends(page);
+                assert.equal(await page.locator('.friends-eyebrow').count(), 0);
                 await page.locator('.lang-btn[data-lang="zh-CN"]').click();
                 await page.screenshot({ path: path.join(output, scenario.name + '-portrait.png') });
                 await clickPerson(page, 'left');
                 assert.equal(await page.locator('#friendMemoryLayer .is-placeholder').count(), 3);
+                assert.equal(await page.locator('#friendMemoryLayer .gallery-caption, #friendMemoryLayer figcaption').count(), 0);
                 assert.equal((await page.evaluate(() => window.friendLinkEvents.at(-1))).prevented, true);
                 await clickPerson(page, 'left');
                 assert.deepEqual(await page.evaluate(() => window.friendLinkEvents.at(-1)), {
@@ -107,6 +109,7 @@ async function checkLayout(page, label) {
                 await clickPerson(page, 'right');
                 assert.equal((await page.evaluate(() => window.friendLinkEvents.at(-1))).prevented, true);
                 assert.equal(await page.locator('#friendMemoryLayer .is-placeholder').count(), 2);
+                assert.equal(await page.locator('#friendMemoryLayer .gallery-caption, #friendMemoryLayer figcaption').count(), 0);
                 assert.equal(await page.locator('#friendMemoryLayer .gallery-item').count(), 1);
                 await page.locator('#friendMemoryLayer img').evaluate(image => image.decode());
                 for (const language of ['en', 'zh-TW', 'zh-CN']) {
@@ -124,6 +127,7 @@ async function checkLayout(page, label) {
                 await page.screenshot({ path: path.join(output, scenario.name + '-photos.png') });
                 await page.locator('#friendMemoryLayer .gallery-item').click({ force: true });
                 await page.locator('#lightbox.active').waitFor();
+                assert.equal(await page.locator('#lightboxCaption').textContent(), '');
                 await page.keyboard.press('Escape');
                 assert(await page.locator('#friendMemoryLayer').isVisible());
                 await clickPerson(page, 'right');

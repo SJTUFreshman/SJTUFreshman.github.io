@@ -17,7 +17,7 @@ function updateFriendMemoryCopy() {
         image.alt = copy[image.dataset.altKey] || '';
     });
     friendMemoryLayer.querySelectorAll('.gallery-item').forEach(button => {
-        button.setAttribute('aria-label', button.querySelector('.gallery-caption').textContent);
+        button.setAttribute('aria-label', button.querySelector('img').alt);
     });
     document.querySelectorAll('[data-friend-trigger]').forEach(link => {
         link.setAttribute('aria-expanded', String(link.dataset.friendTrigger === friendMemoryState.activeId));
