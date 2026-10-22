@@ -116,6 +116,14 @@ Footprints 使用三张同光照的高清浮雕地图：中国、东亚为 6000 
 
 书影条目保存在 `life.shelf`，展示顺序由对应的 `life.moments` 决定。现有书籍保持紧凑文字形式；影视条目可增加 `image`、尺寸、三语图注、图源、短评，以及 `reviews` / `watch` 链接数组。链接的 `label` 与 `note` 均支持三语，后者说明文章类型、剧透或观看平台的订阅与地区条件。六张剧照保存在 `images/shelf/`，原始页面、图片地址和署名见其 `sources.json`；点击可用现有 lightbox 放大并在书影剧照间切换。原图比例保留，图片延迟加载，不嵌入第三方播放器。新增文字后重新生成字体子集，并同步更新两个页面的缓存版本。
 
+## Friends 合照与浮动照片
+
+`life.friend_portrait` 配置双人合照和三语提示，`life.friends` 中的 `portrait_side`、`portrait_outline` 定义人物左右位置与 SVG 轮廓。左侧 Yuheng 使用冷蓝微光，右侧 Qiran 使用暖色微光；点击人物或名字第一次展开照片，选中后再点同一人进入其 `href`。切换人物会替换照片，收起后重新从首次点击开始。原有 AAIL 链接仍保留。
+
+每个人的 `memories` 数组按展示顺序保存照片。仅有 `id` 的条目显示占位卡；补入 `image`、`width`、`height` 和三语 `caption` 即可替换。当前只有 `qiran-01` 使用真实照片。卡片支持轻微漂浮、照片放大、Esc 分层关闭、键盘操作和 reduced-motion；横屏时留在面板旁，竖屏时排列在面板上方。
+
+修改内容后运行 `python site_renderer.py --life-only`。在本地静态服务器运行时，可执行 `node scripts/validate-friends.cjs http://127.0.0.1:8793/`，检查两种星图页面、桌面与手机、首次展开／再次跳转、三语、占位卡、放大查看和焦点恢复。截图输出至 `.render-work/friends-qa/`。
+
 ## 修改与验证
 
 运行时改动放入职责最接近的 JS，样式改动放入对应 CSS。最小验证：

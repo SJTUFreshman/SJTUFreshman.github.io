@@ -643,6 +643,14 @@ def render_life_i18n(content: dict[str, Any]) -> str:
     for key, value in wishlist_text_values(content).items():
         for lang in LANGS:
             i18n[lang][key] = lang_value(value, lang)
+    for key, value in life.get("friend_portrait", {}).get("copy", {}).items():
+        for lang in LANGS:
+            i18n[lang][f"friends_{key}"] = lang_value(value, lang)
+    for friend in life.get("friends", []):
+        for photo in friend.get("memories", []):
+            if photo.get("image"):
+                for lang in LANGS:
+                    i18n[lang][f"friend_memory_{photo['id']}"] = lang_value(photo.get("caption", {}), lang)
 
     action_copy = {
         "en": {"life_action_email": "Email"},
@@ -996,14 +1004,74 @@ def render_thoughts(content: dict[str, Any]) -> str:
 
 
 def render_friends(content: dict[str, Any]) -> str:
+    portrait = content["life"].get("friend_portrait", {})
+    people = [item for item in content["life"]["friends"] if portrait and item.get("portrait_side")]
+    copy = portrait.get("copy", {})
+    outline_links = []
+    name_links = []
+    templates = []
+    for friend in people:
+        friend_id = esc(friend["id"])
+        name = esc(friend["label"])
+        side = esc(friend["portrait_side"])
+        href = esc(friend["href"])
+        outline_links.append(
+            f'<a href="{href}" class="friend-person friend-person--{side}" data-friend-trigger="{friend_id}" tabindex="-1">'
+            f'<path d="{esc(friend["portrait_outline"])}" vector-effect="non-scaling-stroke"/></a>'
+        )
+        name_links.append(
+            f'<a href="{href}" class="friend-name friend-name--{side}" data-friend-trigger="{friend_id}" '
+            f'data-friend-name="{name}" data-portal-entry="{friend_id}" '
+            f'data-star-hip="{esc(star_binding(content, "friends", friend["id"]))}" '
+            f'aria-describedby="friendInteractionHint" aria-expanded="false" aria-controls="friendMemoryLayer">'
+            f'<span class="friend-name-dot" aria-hidden="true"></span><span>{name}</span><span aria-hidden="true">↗</span></a>'
+        )
+        cards = []
+        for index, photo in enumerate(friend.get("memories", [])):
+            if photo.get("image"):
+                caption_key = f"friend_memory_{photo['id']}"
+                caption = esc(lang_value(photo.get("caption", {}), "en"))
+                cards.append(
+                    f'<button class="friend-memory gallery-item" type="button" aria-label="{caption}" onclick="openLightbox(this)">'
+                    f'<img src="{esc(photo["image"])}" width="{esc(photo["width"])}" height="{esc(photo["height"])}" '
+                    f'alt="{caption}" data-alt-key="{esc(caption_key)}" loading="lazy" decoding="async">'
+                    f'<span class="gallery-caption" data-key="{esc(caption_key)}">{caption}</span></button>'
+                )
+            else:
+                cards.append(
+                    '<figure class="friend-memory is-placeholder"><div class="friend-memory-placeholder">'
+                    '<span class="friend-memory-mark" aria-hidden="true">✧</span>'
+                    f'<span data-key="friends_placeholder">{esc(lang_value(copy.get("placeholder", {}), "en"))}</span></div>'
+                    f'<figcaption class="friend-memory-caption">{name} · {index + 1:02d}</figcaption></figure>'
+                )
+        templates.append(f'<template id="friend-photos-{friend_id}">' + "".join(cards) + '</template>')
+    portrait_html = ""
+    if people:
+        portrait_html = f"""                <div class="friends-feature">
+                    <p class="friends-eyebrow" data-key="friends_eyebrow">{esc(lang_value(copy.get("eyebrow", {}), "en"))}</p>
+                    <div class="friends-portrait">
+                        <img src="{esc(portrait['image'])}" width="{esc(portrait['width'])}" height="{esc(portrait['height'])}" alt="{esc(lang_value(copy.get('alt', {}), 'en'))}" data-alt-key="friends_alt" loading="lazy" decoding="async">
+                        <svg class="friends-outlines" viewBox="0 0 1000 970" aria-hidden="true">{''.join(outline_links)}</svg>
+                    </div>
+                    <div class="friend-names">{''.join(name_links)}</div>
+                    <p class="friends-hint" id="friendInteractionHint" aria-live="polite">{esc(lang_value(copy.get('hint', {}), 'en'))}</p>
+                </div>
+                {''.join(templates)}
+                <aside class="friend-memory-layer" id="friendMemoryLayer" aria-labelledby="friendMemoryTitle" hidden>
+                    <div class="friend-memory-heading"><h3 id="friendMemoryTitle"></h3><button class="friend-memory-close" type="button" aria-label="{esc(lang_value(copy.get('close', {}), 'en'))}">×</button></div>
+                    <div class="friend-memory-field" data-gallery-group></div>
+                    <p class="friend-memory-note" data-key="friends_photo_note">{esc(lang_value(copy.get('photo_note', {}), 'en'))}</p>
+                </aside>
+"""
     rows = "\n".join(
         f'                    <a href="{esc(item.get("href", "#"))}" class="friend-link" '
         f'data-portal-entry="{esc(item.get("id", ""))}" '
         f'data-star-hip="{esc(star_binding(content, "friends", str(item.get("id") or "")))}">'
         f'{esc(item.get("label", ""))}</a>'
-        for item in content["life"]["friends"]
+        for item in content["life"]["friends"] if item not in people
     )
     return """        <section id="friends" class="portal-content" data-portal-content="friends" hidden>
+""" + portrait_html + """
                 <div class="friends-list">
 """ + rows + """
                 </div>

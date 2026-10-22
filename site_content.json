@@ -1214,6 +1214,53 @@
         }
       }
     ],
+    "friend_portrait": {
+      "image": "images/friends/yuheng-qiran.webp",
+      "width": 1600,
+      "height": 1552,
+      "copy": {
+        "eyebrow": {
+          "en": "In good company",
+          "zh-CN": "友人同框",
+          "zh-TW": "友人同框"
+        },
+        "alt": {
+          "en": "Yuheng on the left and Qiran on the right",
+          "zh-CN": "左边是 Yuheng，右边是 Qiran",
+          "zh-TW": "左邊是 Yuheng，右邊是 Qiran"
+        },
+        "hint": {
+          "en": "Choose a person to reveal their photos. Choose them again to visit their homepage.",
+          "zh-CN": "点一下，照片浮现；再点一下，去他的主页。",
+          "zh-TW": "點一下，照片浮現；再點一下，去他的主頁。"
+        },
+        "active": {
+          "en": "Choose {name} again to visit their homepage.",
+          "zh-CN": "再点一下 {name}，前往他的主页。",
+          "zh-TW": "再點一下 {name}，前往他的主頁。"
+        },
+        "photos": {
+          "en": "{name}'s moments",
+          "zh-CN": "{name} 的照片",
+          "zh-TW": "{name} 的照片"
+        },
+        "close": {
+          "en": "Put photos away",
+          "zh-CN": "收起照片",
+          "zh-TW": "收起照片"
+        },
+        "placeholder": {
+          "en": "A photo to come",
+          "zh-CN": "照片待补",
+          "zh-TW": "照片待補"
+        },
+        "photo_note": {
+          "en": "More moments, soon.",
+          "zh-CN": "留给下一次相聚。",
+          "zh-TW": "留給下一次相聚。"
+        }
+      }
+    },
     "friends": [
       {
         "id": "friend-aail",
@@ -1223,12 +1270,46 @@
       {
         "id": "friend-yuheng-wang",
         "label": "Yuheng Wang",
-        "href": "https://hendrick-wang.github.io/"
+        "href": "https://hendrick-wang.github.io/",
+        "portrait_side": "left",
+        "portrait_outline": "M210 970 L209 867 Q200 841 191 813 L175 752 Q165 720 171 658 L180 551 L185 532 L173 523 Q180 450 201 382 Q210 366 257 350 L298 332 L299 309 Q279 291 278 265 Q271 247 282 243 L273 220 L269 199 Q281 171 307 161 Q353 140 380 161 Q402 178 403 206 L400 238 Q412 242 403 271 Q403 297 394 314 L399 332 L461 355 Q491 363 501 390 Q514 438 510 480 L502 534 L496 566 L498 689 L491 753 L481 810 L464 851 L454 866 L445 970 Z",
+        "memories": [
+          {
+            "id": "yuheng-01"
+          },
+          {
+            "id": "yuheng-02"
+          },
+          {
+            "id": "yuheng-03"
+          }
+        ]
       },
       {
         "id": "friend-qiran-zhang",
         "label": "Qiran Zhang",
-        "href": "https://positionprivacy.github.io/"
+        "href": "https://positionprivacy.github.io/",
+        "portrait_side": "right",
+        "portrait_outline": "M505 970 L505 844 Q490 817 490 788 L499 710 L507 573 L497 567 L503 488 Q506 419 522 379 Q540 357 592 344 L603 335 Q580 311 583 276 Q565 244 580 205 Q585 173 616 157 Q650 140 678 151 Q713 155 731 188 Q745 222 735 270 L727 307 L708 342 L766 362 Q796 370 810 406 Q823 458 832 568 L802 573 L802 703 L805 747 L797 803 L786 831 L779 970 Z",
+        "memories": [
+          {
+            "id": "qiran-01",
+            "image": "images/friends/qiran-01.webp",
+            "width": 1280,
+            "height": 960,
+            "caption": {
+              "en": "Qiran · 01",
+              "zh-CN": "祺然 · 01",
+              "zh-TW": "祺然 · 01"
+            }
+          },
+          {
+            "id": "qiran-02"
+          },
+          {
+            "id": "qiran-03"
+          }
+        ]
       }
     ],
     "footprints": {

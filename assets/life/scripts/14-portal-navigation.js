@@ -329,6 +329,7 @@ function releaseViewForDetail() {
 }
 
 function openPortalPanel(portal, panelOnLeft = false, preferredHip = null) {
+    if (portal.id !== 'friends') closeFriendMemories(false);
     window.clearTimeout(state.panelHideTimer);
     document.querySelectorAll('[data-portal-content]').forEach(content => {
         content.hidden = content.dataset.portalContent !== portal.id;
@@ -369,6 +370,7 @@ function closePortalPanel(
     interactionSource = state.activationSource
 ) {
     if (!dom.body.classList.contains('panel-open')) return;
+    closeFriendMemories(false);
     const closingPortal = state.activePortal;
     const indexedReturnFocusTarget = restoreFocus
         ? state.portalReturnFocusTarget

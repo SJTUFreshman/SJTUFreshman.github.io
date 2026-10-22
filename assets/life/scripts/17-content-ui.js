@@ -1,3 +1,106 @@
+const friendMemoryLayer = document.getElementById('friendMemoryLayer');
+const friendMemoryState = { activeId: null, trigger: null };
+
+function updateFriendMemoryCopy() {
+    if (!friendMemoryLayer) return;
+    const copy = i18n[state.currentLang] || i18n.en;
+    const selected = document.querySelector(`.friend-name[data-friend-trigger="${friendMemoryState.activeId}"]`);
+    const name = selected?.dataset.friendName || '';
+    const hint = friendMemoryState.activeId ? copy.friends_active.replace('{name}', name) : copy.friends_hint;
+    document.getElementById('friendInteractionHint').textContent = hint;
+    document.getElementById('friendMemoryTitle').textContent = copy.friends_photos.replace('{name}', name);
+    friendMemoryLayer.querySelector('.friend-memory-close').setAttribute('aria-label', copy.friends_close);
+    friendMemoryLayer.querySelectorAll('[data-key]').forEach(element => {
+        if (copy[element.dataset.key] !== undefined) element.textContent = copy[element.dataset.key];
+    });
+    friendMemoryLayer.querySelectorAll('[data-alt-key]').forEach(image => {
+        image.alt = copy[image.dataset.altKey] || '';
+    });
+    friendMemoryLayer.querySelectorAll('.gallery-item').forEach(button => {
+        button.setAttribute('aria-label', button.querySelector('.gallery-caption').textContent);
+    });
+    document.querySelectorAll('[data-friend-trigger]').forEach(link => {
+        link.setAttribute('aria-expanded', String(link.dataset.friendTrigger === friendMemoryState.activeId));
+    });
+}
+
+function positionFriendMemories() {
+    if (!friendMemoryLayer || friendMemoryLayer.hidden) return;
+    const panel = dom.panel.getBoundingClientRect();
+    const freeLeft = panel.left;
+    const freeRight = innerWidth - panel.right;
+    const besidePanel = Math.max(freeLeft, freeRight) >= 280;
+    const compact = !besidePanel || innerHeight < 560;
+    friendMemoryLayer.classList.toggle('is-compact', compact);
+    let left = 12;
+    let top = 86;
+    let width = innerWidth - 24;
+    let height = Math.min(178, innerHeight * .26);
+    if (besidePanel) {
+        width = Math.min(500, Math.max(freeLeft, freeRight) - 48);
+        left = freeLeft >= freeRight ? (freeLeft - width) / 2 : panel.right + (freeRight - width) / 2;
+        top = Math.max(86, panel.top + 8);
+        height = Math.min(660, innerHeight - top - 30);
+    }
+    friendMemoryLayer.style.setProperty('--friend-card-width', `${Math.min(140, Math.max(72, (height - 70) * 1.15))}px`);
+    Object.assign(friendMemoryLayer.style, { left: `${left}px`, top: `${top}px`, width: `${width}px`, height: `${height}px` });
+}
+
+function closeFriendMemories(restoreFocus = false) {
+    if (!friendMemoryState.activeId) return false;
+    const trigger = friendMemoryState.trigger;
+    friendMemoryState.activeId = null;
+    friendMemoryState.trigger = null;
+    friendMemoryLayer.hidden = true;
+    friendMemoryLayer.querySelector('.friend-memory-field').replaceChildren();
+    document.body.classList.remove('friend-memories-open');
+    document.querySelector('.friends-feature')?.removeAttribute('data-active-friend');
+    updateFriendMemoryCopy();
+    if (restoreFocus && trigger?.isConnected && trigger.getClientRects().length) trigger.focus({ preventScroll: true });
+    return true;
+}
+
+function showFriendMemories(link) {
+    const friendId = link.dataset.friendTrigger;
+    const template = document.getElementById(`friend-photos-${friendId}`);
+    if (!template || !friendMemoryLayer) return false;
+    friendMemoryState.activeId = friendId;
+    friendMemoryState.trigger = document.querySelector(`.friend-name[data-friend-trigger="${friendId}"]`);
+    friendMemoryLayer.querySelector('.friend-memory-field').replaceChildren(template.content.cloneNode(true));
+    document.querySelector('.friends-feature').dataset.activeFriend = friendId;
+    document.body.classList.add('friend-memories-open');
+    friendMemoryLayer.hidden = false;
+    updateFriendMemoryCopy();
+    positionFriendMemories();
+    return true;
+}
+
+if (friendMemoryLayer) {
+    document.body.append(friendMemoryLayer);
+    document.querySelectorAll('[data-friend-trigger]').forEach(link => {
+        link.addEventListener('click', event => {
+            if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+            if (friendMemoryState.activeId !== link.dataset.friendTrigger && showFriendMemories(link)) event.preventDefault();
+        });
+        link.addEventListener('keydown', event => {
+            if (event.key !== ' ') return;
+            event.preventDefault();
+            link.click();
+        });
+    });
+    friendMemoryLayer.querySelector('.friend-memory-close').addEventListener('click', () => closeFriendMemories(true));
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !state.modalOpen && closeFriendMemories(true)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, true);
+    new ResizeObserver(positionFriendMemories).observe(dom.panel);
+    dom.panel.addEventListener('transitionend', positionFriendMemories);
+    window.addEventListener('resize', positionFriendMemories, { passive: true });
+    window.addEventListener('pagehide', () => closeFriendMemories(false));
+}
+
 const thoughtReaderLabels = {
     en: {
         read: 'Read essay', mode: 'Thoughts', close: 'Back to stars', language: 'Essay language',
@@ -473,6 +576,7 @@ function setLang(lang) {
     updateMapAccessibility();
     updateThoughtReader();
     updateCitationButtons();
+    updateFriendMemoryCopy();
     if (!wishlistMailState.pending) wishlistMailState.status = '';
     updateWishlistEmail();
     updateSectionDrawerCopy();
