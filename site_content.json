@@ -459,8 +459,8 @@
           "zh-CN": "从暴力与沉默出发，慢慢走向艰难而克制的修复。",
           "zh-TW": "從暴力與沉默出發，慢慢走向艱難而克制的修復。"
         },
-        "image": "images/shelf/a-sun.webp",
-        "image_alt": "A Sun (2019)",
+        "image": "images/shelf/a-sun-classroom.webp",
+        "image_alt": "A Sun (2019) · A-Hao in the classroom",
         "review": {
           "en": "Chung Mong-hong lets sunlight and shade carry what the family cannot say aloud. The violence is only the doorway; the film keeps returning to responsibility, grief and the possibility of care.",
           "zh-CN": "钟孟宏让阳光与阴影替这个家庭说出无法直面的事。暴力只是入口，影片真正反复凝视的是责任、哀伤，以及重新照料彼此的可能。",
@@ -509,15 +509,15 @@
             }
           }
         ],
-        "image_width": 1200,
-        "image_height": 630,
+        "image_width": 1600,
+        "image_height": 1067,
         "image_caption": {
-          "en": "A Sun · sunlight and an embrace",
-          "zh-CN": "阳光普照 · 日光中的拥抱",
-          "zh-TW": "陽光普照 · 日光中的擁抱"
+          "en": "A Sun (2019) · A-Hao in the classroom",
+          "zh-CN": "阳光普照（2019）· 教室里的阿豪",
+          "zh-TW": "陽光普照（2019）· 教室裡的阿豪"
         },
-        "image_credit": "BFI · Sight and Sound",
-        "image_source": "https://www.bfi.org.uk/sight-and-sound/reviews/sun-chung-mong-hong-taiwan-oscar-nominee-netflix"
+        "image_credit": "Rotten Tomatoes",
+        "image_source": "https://www.rottentomatoes.com/m/a_sun_2019/pictures"
       },
       {
         "id": "movie_interstellar",
@@ -532,8 +532,8 @@
           "zh-CN": "穿越时间、引力与宇宙尺度的远行，最后仍回到家与牵挂。",
           "zh-TW": "穿越時間、引力與宇宙尺度的遠行，最後仍回到家與牽掛。"
         },
-        "image": "images/shelf/interstellar.webp",
-        "image_alt": "Interstellar (2014)",
+        "image": "images/shelf/interstellar-cooper-family.webp",
+        "image_alt": "Interstellar (2014) · Cooper, Tom and Murph at home",
         "review": {
           "en": "Time dilation turns distance into an emotional cost: a short journey for one person can consume years for another. The film is especially moving when its cosmic scale gives way to missed messages and a promise to return; its dense exposition also makes the balance between spectacle and character worth debating.",
           "zh-CN": "时间膨胀把距离变成情感的代价：一个人的片刻，可能耗尽另一个人的许多年。宇宙奇观收束到错过的讯息与回家的承诺时，电影格外动人；密集的解释性对白，也让奇观与人物之间的平衡值得讨论。",
@@ -569,75 +569,75 @@
             }
           }
         ],
-        "image_width": 1200,
-        "image_height": 720,
+        "image_width": 1600,
+        "image_height": 1067,
         "image_caption": {
-          "en": "Interstellar · Cooper on an icy planet",
-          "zh-CN": "星际穿越 · 冰原上的库珀",
-          "zh-TW": "星際穿越 · 冰原上的庫珀"
+          "en": "Interstellar (2014) · Cooper, Tom and Murph at home",
+          "zh-CN": "星际穿越（2014）· 家中的库珀、汤姆与墨菲",
+          "zh-TW": "星際穿越（2014）· 家中的庫珀、湯姆與墨菲"
         },
-        "image_credit": "PR / The Guardian",
-        "image_source": "https://www.theguardian.com/film/2014/oct/27/interstellar-first-look-review-matthew-mcconoughey"
+        "image_credit": "Rotten Tomatoes",
+        "image_source": "https://www.rottentomatoes.com/m/interstellar_2014/pictures"
       },
       {
         "id": "movie_boonie_bears",
-        "title": "Boonie Bears",
+        "title": "Boonie Bears · Season 1",
         "title_i18n": {
-          "en": "Boonie Bears",
-          "zh-CN": "熊出没",
-          "zh-TW": "熊出沒"
+          "en": "Boonie Bears · Season 1",
+          "zh-CN": "熊出没 · 第一季",
+          "zh-TW": "熊出沒 · 第一季"
         },
         "comment": {
-          "en": "A warm, kinetic corner of Chinese animation; start with Back to Earth for its big-screen sci-fi energy.",
-          "zh-CN": "中国动画里热闹又有温度的一角；可以从《重返地球》开始，感受它的科幻冒险劲头。",
-          "zh-TW": "中國動畫裡熱鬧又有溫度的一角；可以從《重返地球》開始，感受它的科幻冒險勁頭。"
+          "en": "Back to the forest in 2012: Briar and Bramble protect their home while Logger Vick arrives with a chainsaw and another scheme. A small, noisy comedy in every episode.",
+          "zh-CN": "回到 2012 年的森林：熊大、熊二守护家园，光头强带着电锯和新点子闯进来。一集一场小闹剧，满是熟悉的吵闹与笑声。",
+          "zh-TW": "回到 2012 年的森林：熊大、熊二守護家園，光頭強帶著電鋸和新點子闖進來。一集一場小鬧劇，滿是熟悉的吵鬧與笑聲。"
         },
-        "image": "images/shelf/boonie-bears.webp",
-        "image_alt": "Boonie Bears: Back to Earth",
+        "image": "images/shelf/boonie-bears-season-one.webp",
+        "image_alt": "Boonie Bears · Season 1 (2012) · Bramble in the forest",
         "review": {
-          "en": "The woodland comedy opens out into a larger adventure in Back to Earth. Bramble’s wish to be taken seriously gives the spectacle an emotional centre; the busy blend of science-fiction references is enjoyable, although the story sometimes struggles to give each idea room. The still and review here refer to this 2022 film.",
-          "zh-CN": "《重返地球》把森林里的日常喜剧扩展成更大的冒险。熊二想被认真看待的愿望，让动作奇观有了情感落点；密集的科幻元素很热闹，但故事有时来不及让每个点子充分展开。此处的剧照和影评对应这部 2022 年电影。",
-          "zh-TW": "《重返地球》把森林裡的日常喜劇擴展成更大的冒險。熊二想被認真看待的願望，讓動作奇觀有了情感落點；密集的科幻元素很熱鬧，但故事有時來不及讓每個點子充分展開。此處的劇照和影評對應這部 2022 年電影。"
+          "en": "The first season builds its comedy around three personalities: resourceful Briar, impulsive Bramble, and the endlessly frustrated Logger Vick. Logging, food and everyday mishaps become compact rounds of tricks and reversals. The early animation is simple, but the broad expressions, familiar voices and brisk slapstick give it a distinct rhythm; beneath the noise is the brothers’ attachment to their forest home.",
+          "zh-CN": "第一季的趣味来自三个性格鲜明的老对手：熊大的机灵、熊二的莽撞，以及光头强一次次落空的算盘。砍树、找吃的和日常小事，组成了短小又热闹的斗智故事。早期画面虽朴素，夸张的表情、熟悉的配音和你来我往的笑料却很有辨识度；吵吵闹闹背后，是熊兄弟对森林家园的守护。",
+          "zh-TW": "第一季的趣味來自三個性格鮮明的老對手：熊大的機靈、熊二的莽撞，以及光頭強一次次落空的算盤。砍樹、找吃的和日常小事，組成了短小又熱鬧的鬥智故事。早期畫面雖樸素，誇張的表情、熟悉的配音和你來我往的笑料卻很有辨識度；吵吵鬧鬧背後，是熊兄弟對森林家園的守護。"
         },
         "reviews": [
           {
             "label": {
-              "en": "Phil Hoad · Back to Earth: messy but fun",
-              "zh-CN": "Phil Hoad ·《重返地球》：杂糅而有趣",
-              "zh-TW": "Phil Hoad ·《重返地球》：雜糅而有趣"
+              "en": "Boonie Bears (2012) · Audience reviews",
+              "zh-CN": "《熊出没》（2012）· 观众剧评",
+              "zh-TW": "《熊出沒》（2012）· 觀眾劇評"
             },
-            "href": "https://www.theguardian.com/film/2022/may/23/boonie-bears-back-to-earth-review-chinese-animated-blockbuster-is-messy-but-fun",
+            "href": "https://movie.douban.com/subject/10467770/reviews",
             "note": {
-              "en": "The Guardian · English · film review",
-              "zh-CN": "《卫报》· 英文 · 电影评论",
-              "zh-TW": "《衛報》· 英文 · 電影評論"
+              "en": "Douban · Chinese · reviews of the first series",
+              "zh-CN": "豆瓣 · 中文 · 第一季长评",
+              "zh-TW": "豆瓣 · 中文 · 第一季長評"
             }
           }
         ],
         "watch": [
           {
             "label": {
-              "en": "Boonie Bears · official channel",
-              "zh-CN": "熊出没 · 官方频道",
-              "zh-TW": "熊出沒 · 官方頻道"
+              "en": "CCTV · Boonie Bears, Season 1",
+              "zh-CN": "央视网 ·《熊出没》第一季",
+              "zh-TW": "央視網 ·《熊出沒》第一季"
             },
-            "href": "https://www.youtube.com/@BoonieBearsOfficial",
+            "href": "https://tv.cctv.com/2013/03/22/VIDA1363933636853785.shtml",
             "note": {
-              "en": "YouTube · series episodes and clips · language varies by video",
-              "zh-CN": "YouTube · 系列剧集与片段 · 语言以视频为准",
-              "zh-TW": "YouTube · 系列劇集與片段 · 語言以影片為準"
+              "en": "CCTV · Mandarin · 2012 series episode list",
+              "zh-CN": "央视网 · 普通话 · 2012 年版剧集列表",
+              "zh-TW": "央視網 · 普通話 · 2012 年版劇集列表"
             }
           }
         ],
-        "image_width": 1200,
+        "image_width": 1280,
         "image_height": 720,
         "image_caption": {
-          "en": "Boonie Bears: Back to Earth (2022) · Bramble",
-          "zh-CN": "熊出没·重返地球（2022）· 熊二",
-          "zh-TW": "熊出沒·重返地球（2022）· 熊二"
+          "en": "Boonie Bears · Season 1 (2012) · Bramble in the forest",
+          "zh-CN": "熊出没 · 第一季（2012）· 森林里的熊二",
+          "zh-TW": "熊出沒 · 第一季（2012）· 森林裡的熊二"
         },
-        "image_credit": "PR / The Guardian",
-        "image_source": "https://www.theguardian.com/film/2022/may/23/boonie-bears-back-to-earth-review-chinese-animated-blockbuster-is-messy-but-fun"
+        "image_credit": "方特动漫 / 豆瓣 · Season 1",
+        "image_source": "https://movie.douban.com/photos/photo/2899548181/"
       },
       {
         "id": "tv_band_of_brothers",
@@ -652,8 +652,8 @@
           "zh-CN": "从记忆、纪律与战场上留下的关系出发，写一群人如何成为兄弟。",
           "zh-TW": "從記憶、紀律與戰場上留下的關係出發，寫一群人如何成為兄弟。"
         },
-        "image": "images/shelf/band-of-brothers.webp",
-        "image_alt": "Band of Brothers",
+        "image": "images/shelf/band-of-brothers-points.webp",
+        "image_alt": "Band of Brothers · Points (S01E10)",
         "review": {
           "en": "Its scale is enormous, but the emotional unit is the company: names, routines, jokes and absences. The series earns its legend by staying close to the ordinary people inside the military history.",
           "zh-CN": "它的规模很大，但情感单位始终是连队：名字、日常、玩笑与一个个缺席的人。它之所以成为传奇，是因为始终贴近军事史中那些普通的人。",
@@ -689,14 +689,14 @@
             }
           }
         ],
-        "image_width": 1200,
-        "image_height": 675,
+        "image_width": 1600,
+        "image_height": 900,
         "image_caption": {
-          "en": "Band of Brothers · Bastogne",
-          "zh-CN": "兄弟连 · 巴斯托涅",
-          "zh-TW": "兄弟連 · 巴斯托涅"
+          "en": "Band of Brothers · Points (S01E10)",
+          "zh-CN": "兄弟连 · Points（第 1 季第 10 集）",
+          "zh-TW": "兄弟連 · Points（第 1 季第 10 集）"
         },
-        "image_credit": "HBO",
+        "image_credit": "HBO Max · S01E10",
         "image_source": "https://www.hbomax.com/show/6a0a0227-f567-46ba-9a2d-04374c5f6193"
       },
       {
@@ -712,8 +712,8 @@
           "zh-CN": "哈克走进唐宁街十号，关于“究竟谁决定政策”的较量也跟着他进了门。",
           "zh-TW": "哈克走進唐寧街十號，關於「究竟誰決定政策」的較量也跟著他進了門。"
         },
-        "image": "images/shelf/yes-prime-minister.webp",
-        "image_alt": "Yes, Prime Minister",
+        "image": "images/shelf/yes-prime-minister-diplomatic-incident.webp",
+        "image_alt": "Yes, Prime Minister · A Diplomatic Incident (S02E03)",
         "review": {
           "en": "Hacker, Humphrey and Bernard turn a roomful of polite conversation into a struggle over information, timing and responsibility. Listen for a changed definition, an apparently helpful qualification or a carefully delayed answer: the language itself does much of the comic work.",
           "zh-CN": "哈克、汉弗莱与伯纳把一屋子的礼貌谈话，变成对信息、时机与责任的争夺。留意一次概念偷换、一句看似周到的补充，或一个被刻意拖延的回答：语言本身就在完成喜剧。",
@@ -749,15 +749,15 @@
             }
           }
         ],
-        "image_width": 1200,
-        "image_height": 675,
+        "image_width": 720,
+        "image_height": 540,
         "image_caption": {
-          "en": "Yes, Prime Minister · Humphrey, Hacker and Bernard",
-          "zh-CN": "是，首相 · 汉弗莱、哈克与伯纳",
-          "zh-TW": "是，首相 · 漢弗萊、哈克與伯納"
+          "en": "Yes, Prime Minister · A Diplomatic Incident (S02E03)",
+          "zh-CN": "是，首相 · 外交事件（第 2 季第 3 集）",
+          "zh-TW": "是，首相 · 外交事件（第 2 季第 3 集）"
         },
-        "image_credit": "BBC",
-        "image_source": "https://www.bbc.co.uk/programmes/b00m01hr"
+        "image_credit": "BBC / TVmaze · S02E03",
+        "image_source": "https://www.tvmaze.com/episodes/391796/yes-prime-minister-2x03-a-diplomatic-incident"
       },
       {
         "id": "tv_friends",
@@ -772,8 +772,8 @@
           "zh-CN": "六个人在一座很大的城市里，把一间小小的屋子和咖啡馆过成明亮日常的情景喜剧。",
           "zh-TW": "六個人在一座很大的城市裡，把一間小小的屋子和咖啡館過成明亮日常的情境喜劇。"
         },
-        "image": "images/shelf/friends.webp",
-        "image_alt": "Friends",
+        "image": "images/shelf/friends-pilot.webp",
+        "image_alt": "Friends · Rachel arrives at Central Perk (S01E01)",
         "review": {
           "en": "Its nostalgia is powerful because the show turns friendship into a place: the sofa, the coffee shop, the familiar entrance. It also deserves to be revisited with a clear eye for the exclusions and stereotypes that made that comfort possible.",
           "zh-CN": "它的怀旧感之所以有力，是因为它把友谊变成了一个具体的地方：那张沙发、那间咖啡馆、那个熟悉的门口。重看时也应该看见它曾经排除的人，以及让这种舒适成立的刻板印象。",
@@ -822,15 +822,15 @@
             }
           }
         ],
-        "image_width": 1200,
-        "image_height": 782,
+        "image_width": 1365,
+        "image_height": 769,
         "image_caption": {
-          "en": "Friends · Gunther and Ross at Central Perk",
-          "zh-CN": "老友记 · 中央公园咖啡馆里的甘瑟与罗斯",
-          "zh-TW": "六人行 · 中央公園咖啡館裡的甘瑟與羅斯"
+          "en": "Friends · Rachel arrives at Central Perk (S01E01)",
+          "zh-CN": "老友记 · 瑞秋走进 Central Perk（第 1 季第 1 集）",
+          "zh-TW": "六人行 · 瑞秋走進 Central Perk（第 1 季第 1 集）"
         },
-        "image_credit": "NBC/NBCUniversal/Getty Images / The Guardian",
-        "image_source": "https://www.theguardian.com/tv-and-radio/2024/sep/18/friends-at-30-inside-story-writers-producers-tell-all"
+        "image_credit": "Warner Bros. Television / TVmaze · S01E01",
+        "image_source": "https://www.tvmaze.com/episodes/40646/friends-1x01-the-one-where-monica-gets-a-roommate"
       },
       {
         "id": "book_dl",
@@ -1037,9 +1037,9 @@
         "stream": "shelf",
         "date": "",
         "date_label": {
-          "en": "2012– · Animation series",
-          "zh-CN": "2012– · 动画系列",
-          "zh-TW": "2012– · 動畫系列"
+          "en": "2012 · Animation · Season 1",
+          "zh-CN": "2012 · 动画 · 第一季",
+          "zh-TW": "2012 · 動畫 · 第一季"
         },
         "location": {
           "en": "Fantawild Animation",
@@ -1047,9 +1047,9 @@
           "zh-TW": "華強方特"
         },
         "summary": {
-          "en": "Boonie Bears",
-          "zh-CN": "熊出没",
-          "zh-TW": "熊出沒"
+          "en": "Boonie Bears · Season 1",
+          "zh-CN": "熊出没 · 第一季",
+          "zh-TW": "熊出沒 · 第一季"
         },
         "item_ids": [
           "movie_boonie_bears"
