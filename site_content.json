@@ -557,15 +557,15 @@
         "watch": [
           {
             "label": {
-              "en": "Netflix · Interstellar",
-              "zh-CN": "Netflix · 星际穿越",
-              "zh-TW": "Netflix · 星際穿越"
+              "en": "Interstellar",
+              "zh-CN": "星际穿越",
+              "zh-TW": "星際穿越"
             },
             "href": "https://www.4kvm.net/play/ch3uymf4i",
             "note": {
-              "en": "Subscription · availability varies by region",
-              "zh-CN": "需订阅 · 片库随地区变化",
-              "zh-TW": "需訂閱 · 片庫隨地區變化"
+              "en": "4kvm.net",
+              "zh-CN": "4kvm.net",
+              "zh-TW": "4kvm.net"
             }
           }
         ],
@@ -677,15 +677,15 @@
         "watch": [
           {
             "label": {
-              "en": "HBO Max · Band of Brothers",
-              "zh-CN": "HBO Max · 兄弟连",
-              "zh-TW": "HBO Max · 兄弟連"
+              "en": "Band of Brothers",
+              "zh-CN": "兄弟连",
+              "zh-TW": "兄弟連"
             },
             "href": "https://www.4kvm.net/play/ch164k4ka",
             "note": {
-              "en": "Subscription · availability varies by region",
-              "zh-CN": "需订阅 · 片库随地区变化",
-              "zh-TW": "需訂閱 · 片庫隨地區變化"
+              "en": "4kvm.net",
+              "zh-CN": "4kvm.net",
+              "zh-TW": "4kvm.net"
             }
           }
         ],
@@ -810,15 +810,15 @@
         "watch": [
           {
             "label": {
-              "en": "Netflix · Friends",
-              "zh-CN": "Netflix · 老友记",
-              "zh-TW": "Netflix · 六人行"
+              "en": "Friends",
+              "zh-CN": "老友记",
+              "zh-TW": "六人行"
             },
             "href": "https://www.4kvm.net/play/cgzr8vl05",
             "note": {
-              "en": "Subscription · availability varies by region",
-              "zh-CN": "需订阅 · 片库随地区变化",
-              "zh-TW": "需訂閱 · 片庫隨地區變化"
+              "en": "4kvm.net",
+              "zh-CN": "4kvm.net",
+              "zh-TW": "4kvm.net"
             }
           }
         ],
