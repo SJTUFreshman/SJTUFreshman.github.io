@@ -9,6 +9,9 @@ function updateFriendMemoryCopy() {
     const hint = friendMemoryState.activeId ? copy.friends_active.replace('{name}', name) : copy.friends_hint;
     document.getElementById('friendInteractionHint').textContent = hint;
     document.getElementById('friendMemoryTitle').textContent = copy.friends_photos.replace('{name}', name);
+    const homepage = document.getElementById('friendMemoryHomepage');
+    if (selected) homepage.href = selected.href;
+    else homepage.removeAttribute('href');
     friendMemoryLayer.querySelector('.friend-memory-close').setAttribute('aria-label', copy.friends_close);
     friendMemoryLayer.querySelectorAll('[data-key]').forEach(element => {
         if (copy[element.dataset.key] !== undefined) element.textContent = copy[element.dataset.key];
@@ -26,23 +29,13 @@ function updateFriendMemoryCopy() {
 
 function positionFriendMemories() {
     if (!friendMemoryLayer || friendMemoryLayer.hidden) return;
-    const panel = dom.panel.getBoundingClientRect();
-    const freeLeft = panel.left;
-    const freeRight = innerWidth - panel.right;
-    const besidePanel = Math.max(freeLeft, freeRight) >= 280;
-    const compact = !besidePanel || innerHeight < 560;
+    const compact = innerHeight < 560;
     friendMemoryLayer.classList.toggle('is-compact', compact);
-    let left = 12;
-    let top = 86;
-    let width = innerWidth - 24;
-    let height = Math.min(178, innerHeight * .26);
-    if (besidePanel) {
-        width = Math.min(500, Math.max(freeLeft, freeRight) - 48);
-        left = freeLeft >= freeRight ? (freeLeft - width) / 2 : panel.right + (freeRight - width) / 2;
-        top = Math.max(86, panel.top + 8);
-        height = Math.min(660, innerHeight - top - 30);
-    }
-    friendMemoryLayer.style.setProperty('--friend-card-width', `${Math.min(140, Math.max(72, (height - 70) * 1.15))}px`);
+    const width = Math.min(880, innerWidth - 48);
+    const left = (innerWidth - width) / 2;
+    const top = Math.max(100, Math.min(140, innerHeight * .13));
+    const height = Math.min(720, innerHeight - top - 38);
+    friendMemoryLayer.style.setProperty('--friend-card-width', `${Math.min(240, Math.max(72, (height - 90) * 1.15))}px`);
     Object.assign(friendMemoryLayer.style, { left: `${left}px`, top: `${top}px`, width: `${width}px`, height: `${height}px` });
 }
 
@@ -54,6 +47,8 @@ function closeFriendMemories(restoreFocus = false) {
     friendMemoryLayer.hidden = true;
     friendMemoryLayer.querySelector('.friend-memory-field').replaceChildren();
     document.body.classList.remove('friend-memories-open');
+    dom.panel.inert = false;
+    dom.panel.setAttribute('aria-hidden', 'false');
     document.querySelector('.friends-feature')?.removeAttribute('data-active-friend');
     updateFriendMemoryCopy();
     if (restoreFocus && trigger?.isConnected && trigger.getClientRects().length) trigger.focus({ preventScroll: true });
@@ -69,9 +64,12 @@ function showFriendMemories(link) {
     friendMemoryLayer.querySelector('.friend-memory-field').replaceChildren(template.content.cloneNode(true));
     document.querySelector('.friends-feature').dataset.activeFriend = friendId;
     document.body.classList.add('friend-memories-open');
+    dom.panel.inert = true;
+    dom.panel.setAttribute('aria-hidden', 'true');
     friendMemoryLayer.hidden = false;
     updateFriendMemoryCopy();
     positionFriendMemories();
+    friendMemoryLayer.querySelector('.friend-memory-close').focus({ preventScroll: true });
     return true;
 }
 
@@ -485,10 +483,8 @@ function updateActivePortalCopy() {
     if (state.activePortal && state.scene === 'detail') {
         const activePortal = state.activePortal;
         updateConstellationMeaning(activePortal);
-        dom.panelKicker.textContent =
-            (starUiCopy[state.currentLang] || starUiCopy.en).sectionKicker;
         dom.panelTitle.textContent = portalName(activePortal, state.currentLang);
-        dom.panelNames.textContent = LANGUAGES.map(lang => portalName(activePortal, lang)).join(' / ');
+        dom.panelNames.textContent = constellationName(activePortal);
         if (activePortal.home && state.routePreview) {
             activePortal.starButtons.forEach((_button, hip) =>
                 updateStarButtonCopy(activePortal, hip)
@@ -522,6 +518,7 @@ function setLang(lang) {
     state.currentLang = LANGUAGES.includes(lang) ? lang : 'en';
     localStorage.setItem('preferredLang', state.currentLang);
     document.documentElement.lang = state.currentLang;
+    window.SiteIdentity?.setLanguage(state.currentLang);
     LANGUAGES.forEach(value => dom.body.classList.remove(`lang-${value}`));
     dom.body.classList.add(`lang-${state.currentLang}`);
     const data = i18n[state.currentLang] || i18n.en || {};

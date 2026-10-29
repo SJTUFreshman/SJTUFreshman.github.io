@@ -8,7 +8,8 @@ function portalName(portal, lang) {
 }
 
 function localized(mapping, lang = state.currentLang) {
-    return mapping?.[lang] || mapping?.en || '';
+    const value = mapping?.[lang] || mapping?.en || '';
+    return lang.startsWith('zh') ? value.replace(/[ \u00a0]*·[ \u00a0]*/g, '·') : value;
 }
 
 function observerLocationLabel(lang = state.currentLang) {
@@ -102,13 +103,13 @@ function sectionIndexCopy() {
         },
         'zh-CN': {
             kicker: '星座索引',
-            observer: () => '个人星图 · 灵感源自真实星空',
+            observer: () => '个人星图·灵感源自真实星空',
             above: '探索',
             note: '选择一片星座，探索其中的恒星与故事。星间距离经过压缩，组成这片个人星图。'
         },
         'zh-TW': {
             kicker: '星座索引',
-            observer: () => '個人星圖 · 靈感源自真實星空',
+            observer: () => '個人星圖·靈感源自真實星空',
             above: '探索',
             note: '選擇一片星座，探索其中的恆星與故事。星間距離經過壓縮，組成這片個人星圖。'
         }

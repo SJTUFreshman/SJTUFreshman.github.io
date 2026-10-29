@@ -1,0 +1,99 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-pages-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - name: Check deployment credentials
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo '::error::Add the repository Actions secret CLOUDFLARE_API_TOKEN with Cloudflare Pages Edit access.'
+            exit 1
+          fi
+          if [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo '::error::Add the repository Actions variable CLOUDFLARE_ACCOUNT_ID.'
+            exit 1
+          fi
+
+      - name: Check out website sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitignore
+            /assets/
+            !/assets/celestial/
+            /documents/
+            /fonts/
+            /images/
+            /scripts/
+            /index.html
+            /life.html
+            /observatory.html
+            /pet-cache-worker.js
+            /me_at_dorm.jpg
+            /official_portray.png
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Test and prepare the public website
+        run: |
+          python scripts/prepare-cloudflare-pages-tests.py
+          python scripts/prepare-cloudflare-pages.py --output .render-work/cloudflare-pages/site
+
+      - name: Check the prepared website
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 --directory .render-work/cloudflare-pages/site > "$RUNNER_TEMP/pages-preview.log" 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          curl --fail --silent --retry 10 --retry-connrefused --retry-delay 1 --output /dev/null http://127.0.0.1:8765/life.html
+          node scripts/validate-life-http.cjs http://127.0.0.1:8765/life.html
+
+      - name: Install the publishing tool
+        run: npm install --prefix "$RUNNER_TEMP/cloudflare" --no-save --package-lock=false --no-audit --no-fund wrangler@4.149.0 undici@7.30.1
+
+      - name: Deploy to the existing Pages project
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: node "$RUNNER_TEMP/cloudflare/node_modules/wrangler/bin/wrangler.js" pages deploy .render-work/cloudflare-pages/site --project-name sjtufreshman --branch main --commit-hash "$GITHUB_SHA"
+
+      - name: Verify the published website
+        timeout-minutes: 5
+        run: |
+          for attempt in 1 2 3 4 5; do
+            if node scripts/validate-life-http.cjs https://sjtufreshman.pages.dev/life; then
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1

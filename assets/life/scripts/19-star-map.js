@@ -130,7 +130,6 @@ class LifeStarMap {
     buildEntities() {
         this.entities = [
             { id: 'solar', position: [-47, 10, 6], level: 'local', names: ['Solar System', '太阳系', '太陽系'] },
-            { id: 'm42', position: [-167, 25, 37], level: 'local', names: ['Orion Nebula', '猎户座大星云', '獵戶座大星雲'], subtitles: ['M42 · Stellar nursery', 'M42 · 恒星诞生地', 'M42 · 恆星誕生地'] },
             { id: 'region', position: [112, 2, 74], level: 'galaxy', names: ['Our neighbourhood', '我们的星域', '我們的星域'], subtitles: ['Explore the constellations', '进入生活星座', '進入生活星座'] },
             { id: 'm31', position: [-420, 50, -180], level: 'galaxy', names: ['Andromeda Galaxy', '仙女座星系', '仙女座星系'], subtitles: ['M31 · Beyond the Milky Way', 'M31 · 银河之外', 'M31 · 銀河之外'] }
         ];
@@ -138,7 +137,7 @@ class LifeStarMap {
         this.entities.forEach(entity => {
             const button = document.createElement('button');
             button.type = 'button';
-            button.className = 'map-entity';
+            button.className = entity.id === 'solar' ? 'map-entity map-solar' : 'map-entity';
             button.dataset.mapEntity = entity.id;
             button.innerHTML = entity.subtitles ? '<span></span><small></small>' : '<span></span>';
             button.addEventListener('click', () => {
@@ -167,11 +166,24 @@ class LifeStarMap {
             const key = `entity:${entity.id}`;
             const projected = this.project(entity.position, this.currentView, entity.level === 'galaxy');
             const levelVisible = entity.level === 'galaxy' ? this.galaxyMix > 0.72 : this.galaxyMix < 0.23;
-            const active = levelVisible && projected.visible && state.scene === 'roam'
-                && !this.flight && labelsSettled;
+            if (entity.id === 'solar' && levelVisible && projected.visible) {
+                drawStarGlow(overlayContext, projected.x, projected.y, 2.6, 0.9, true);
+            }
+            const visible = levelVisible && projected.visible && state.scene === 'roam' && !this.flight;
+            const solarLabel = entity.id === 'solar' ? entity.button.querySelector('span') : null;
+            if (solarLabel) {
+                entity.button.hidden = !visible;
+                entity.button.inert = !visible;
+                entity.button.style.transform = `translate3d(${projected.x}px,${projected.y}px,0) translate(-50%,-50%)`;
+                entity.button.setAttribute('aria-label', entity.names[languageIndex]);
+                solarLabel.hidden = true;
+            }
+            const active = visible && labelsSettled;
             if (!active) {
-                entity.button.hidden = true;
-                entity.button.inert = true;
+                if (!solarLabel) {
+                    entity.button.hidden = true;
+                    entity.button.inert = true;
+                }
                 this.labelLayout.hide(key);
                 continue;
             }
@@ -187,14 +199,23 @@ class LifeStarMap {
                 top: y - 28, bottom: y + 52 }));
             const rect = this.labelLayout.place(key, projected, candidates, occupied, stars,
                 { left: 12, right: window.innerWidth - 12, top: 106, bottom: window.innerHeight - 105 });
-            entity.button.hidden = !rect;
-            entity.button.inert = !rect;
+            if (!solarLabel) {
+                entity.button.hidden = !rect;
+                entity.button.inert = !rect;
+            }
             if (!rect) continue;
             occupied.push(rect);
             const labelX = (rect.left + rect.right) * 0.5, labelY = rect.top + 28;
-            entity.button.style.opacity = rect.opacity;
-            entity.button.style.width = `${labelWidth}px`;
-            entity.button.style.transform = `translate3d(${labelX}px,${labelY}px,0) translate(-50%,-35%)`;
+            if (solarLabel) {
+                solarLabel.hidden = false;
+                solarLabel.style.opacity = rect.opacity;
+                solarLabel.style.width = `${labelWidth}px`;
+                solarLabel.style.transform = `translate3d(${labelX - projected.x}px,${labelY - projected.y}px,0) translate(-50%,-35%)`;
+            } else {
+                entity.button.style.opacity = rect.opacity;
+                entity.button.style.width = `${labelWidth}px`;
+                entity.button.style.transform = `translate3d(${labelX}px,${labelY}px,0) translate(-50%,-35%)`;
+            }
             entity.button.querySelector('span').textContent = entity.names[languageIndex];
             const subtitle = entity.subtitles?.[languageIndex];
             if (subtitle) entity.button.querySelector('small').textContent = subtitle;
@@ -202,7 +223,7 @@ class LifeStarMap {
             const context = overlayContext;
             if (Math.abs(labelX - projected.x) > 2 || Math.abs(labelY - projected.y) > 2) {
                 context.beginPath();
-                context.moveTo(projected.x, projected.y - 12);
+                context.moveTo(projected.x, entity.id === 'solar' ? projected.y : projected.y - 12);
                 context.lineTo(labelX, labelY - 12);
                 context.strokeStyle = `rgba(162,180,203,${0.22 * rect.opacity})`;
                 context.lineWidth = 0.7;
@@ -221,8 +242,6 @@ class LifeStarMap {
                 context.fillStyle = glow;
                 context.fillRect(-50, -50, 100, 100);
                 context.restore();
-            } else if (entity.id === 'solar') {
-                drawStarGlow(context, projected.x, projected.y - 12, 2.6, 0.9, true);
             }
         }
         const galactic = this.galaxyMix > 0.65;

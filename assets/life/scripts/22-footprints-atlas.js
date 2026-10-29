@@ -4,8 +4,8 @@
     // 维护指南：tools/relief-atlas/ADDING-FOOTPRINTS.md；这里是显示层，不是到访/行程数据的编辑入口。
     // 新城市改 site_content.json 的 visited_china；新路线改 scripts/prepare-footprint-routes.py 再生成、打包。
     // 城市或路线重新打包后，同步修改此版本、life.html 中脚本的 atlas= 及全部 Life 资源的共享 v=。
-    const ATLAS_VERSION = '20261016-administrative';
-    const ATLAS_URL = `assets/maps/relief/atlas.json?v=${ATLAS_VERSION}`;
+    const ATLAS_VERSION = '20261028-progressive';
+    const ATLAS_URL = `assets/maps/relief/atlas-runtime.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
             id: 'china',
@@ -95,6 +95,24 @@
     let root = null;
     let currentLanguage = 'en';
     const instances = new Map();
+    const imageLoads = new Map();
+
+    function loadImage(url) {
+        if (!imageLoads.has(url)) {
+            const promise = new Promise((resolve, reject) => {
+                const image = new Image();
+                image.decoding = 'async';
+                image.onload = () => image.decode().then(() => resolve(image), reject);
+                image.onerror = () => reject(new Error(`Map image unavailable: ${url}`));
+                image.src = url;
+            }).catch(error => {
+                imageLoads.delete(url);
+                throw error;
+            });
+            imageLoads.set(url, promise);
+        }
+        return imageLoads.get(url);
+    }
 
     function currentCopy() {
         return copy[currentLanguage] || copy.en;
@@ -313,6 +331,11 @@
         const overviewRegions = Array.isArray(overview?.regions) ? overview.regions : [];
         const hasOverview = Boolean(overview && Array.isArray(overview.regions));
         const overviewColorSource = imageUrl(overview?.color_image);
+        const sources = {
+            terrain: [imageUrl(map.preview?.image) || source, source],
+            detail: [imageUrl(map.preview?.color_image) || colorSource, colorSource],
+            overview: [imageUrl(overview?.preview_color_image) || overviewColorSource, overviewColorSource]
+        };
         const regions = Array.isArray(map.regions) ? map.regions : [];
         const citySource = Array.isArray(map.cities)
             ? map.cities
@@ -345,7 +368,7 @@
         terrain.className = 'footprints-map-terrain';
         terrain.alt = '';
         terrain.draggable = false;
-        terrain.loading = 'lazy';
+        terrain.decoding = 'async';
         const status = document.createElement('div');
         status.className = 'footprints-map-status';
         status.setAttribute('role', 'status');
@@ -372,6 +395,9 @@
             terrain: 'loading', detail: 'loading',
             overview: hasOverview ? 'loading' : 'unavailable'
         };
+        const assetLevels = { terrain: 0, detail: 0, overview: 0 };
+        const pendingAssets = new Set();
+        const assetElements = { terrain };
         // 每种彩色图独立记录加载状态：粗图损坏时仍允许切回可用的明细图，不能锁死整张卡片。
         const updateAssetState = () => {
             const failed = assets.terrain === 'error' || assets[instance.view] === 'error';
@@ -382,6 +408,31 @@
             status.textContent = failed
                 ? (assets.terrain !== 'error' && instance.view === 'overview' ? currentCopy().overviewUnavailable : currentCopy().unavailable)
                 : (loading ? currentCopy().mapLoading : '');
+            const fullResolution = assetLevels.terrain === 2
+                && (!assetElements[instance.view] || assetLevels[instance.view] === 2);
+            box.dataset.mapResolution = fullResolution ? 'full' : 'preview';
+        };
+        const requestAsset = (kind, level) => {
+            const element = assetElements[kind];
+            if (!element) { assets[kind] = 'ready'; return; }
+            if (assetLevels[kind] >= level) return;
+            const url = sources[kind][level - 1];
+            const requestKey = `${kind}:${level}`;
+            if (pendingAssets.has(requestKey)) return;
+            pendingAssets.add(requestKey);
+            if (!assetLevels[kind]) assets[kind] = 'loading';
+            loadImage(url).then(() => {
+                if (!box.isConnected || assetLevels[kind] >= level || (level === 2 && !instance.viewer)) return;
+                if (kind === 'terrain') element.src = url;
+                else element.setAttribute('href', url);
+                assetLevels[kind] = level;
+                assets[kind] = 'ready';
+            }).catch(() => {
+                if (!assetLevels[kind]) assets[kind] = 'error';
+            }).finally(() => {
+                pendingAssets.delete(requestKey);
+                updateAssetState();
+            });
         };
         const instance = {
             definition, map, box, viewport, stage, svg, source, colorSource, width, height,
@@ -389,6 +440,15 @@
             view: hasOverview ? 'overview' : 'detail', viewButtons: new Set(),
             maxScale: definition.maxScale,
             scale: 1, panX: 0, panY: 0, activeCity: null, viewer: null,
+            visible: false,
+            loadAssets() {
+                if (!this.visible && !this.viewer) return;
+                for (const kind of ['terrain', this.view]) {
+                    requestAsset(kind, 1);
+                    if (this.viewer) requestAsset(kind, 2);
+                }
+                updateAssetState();
+            },
             updateTransform() {
                 const viewportWidth = viewport.clientWidth;
                 const viewportHeight = viewport.clientHeight;
@@ -460,6 +520,7 @@
                     layer.setAttribute('aria-hidden', String(!active));
                 });
                 this.updateViewButtons();
+                this.loadAssets();
                 updateAssetState();
             },
             openViewer() {
@@ -505,6 +566,7 @@
                     returnFocus?.focus?.({ preventScroll: true });
                 }, { once: true });
                 viewer.showModal();
+                this.loadAssets();
                 this.resetView();
                 viewport.focus({ preventScroll: true });
             },
@@ -592,7 +654,8 @@
             }));
         });
         if (visitedClip.childElementCount) {
-            fillGroup.append(svgElement('image', { href: colorSource, x: 0, y: 0, width, height, preserveAspectRatio: 'none', class: 'footprints-map-visited-image', 'clip-path': `url(#${visitedClipId})` }));
+            assetElements.detail = svgElement('image', { x: 0, y: 0, width, height, preserveAspectRatio: 'none', class: 'footprints-map-visited-image', 'clip-path': `url(#${visitedClipId})` });
+            fillGroup.append(assetElements.detail);
         }
 
         // overview.regions.visited 是粗图唯一的点亮依据。路过省份不算到访，路线只在明细图显示。
@@ -609,25 +672,9 @@
             appendRegionHit(overviewRegionGroup, region, path, centerOf(region, path), 'data-region-id', index);
         });
         if (overviewClip.childElementCount && overviewColorSource) {
-            overviewFillGroup.append(svgElement('image', { href: overviewColorSource, x: 0, y: 0, width, height, preserveAspectRatio: 'none', class: 'footprints-map-visited-image', 'clip-path': `url(#${overviewClipId})` }));
+            assetElements.overview = svgElement('image', { x: 0, y: 0, width, height, preserveAspectRatio: 'none', class: 'footprints-map-visited-image', 'clip-path': `url(#${overviewClipId})` });
+            overviewFillGroup.append(assetElements.overview);
         }
-
-        terrain.addEventListener('load', () => { assets.terrain = 'ready'; updateAssetState(); });
-        terrain.addEventListener('error', () => { assets.terrain = 'error'; updateAssetState(); });
-        terrain.src = source;
-        const preloadColor = (view, url) => {
-            if (!url) { assets[view] = 'error'; return; }
-            const image = new Image();
-            image.addEventListener('load', () => { assets[view] = 'ready'; updateAssetState(); });
-            image.addEventListener('error', () => {
-                assets[view] = 'error';
-                console.error(`Footprints ${definition.id} ${view} image unavailable: ${url}`);
-                updateAssetState();
-            });
-            image.src = url;
-        };
-        preloadColor('detail', colorSource);
-        if (hasOverview) preloadColor('overview', overviewColorSource);
 
         box.append(controlsFor(instance));
         const openButton = document.createElement('button');
@@ -646,6 +693,17 @@
         box.append(north);
         instance.setView(instance.view);
         instance.updateTransform();
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(entries => {
+                instance.visible = entries[0].isIntersecting;
+                instance.loadAssets();
+            }, { root: box.closest('.portal-panel-body'), rootMargin: '120px 0px' });
+            observer.observe(box);
+            instance.observer = observer;
+        } else {
+            instance.visible = true;
+            instance.loadAssets();
+        }
         let drag = null;
         let suppressClick = false;
         viewport.addEventListener('pointerdown', event => {
@@ -767,6 +825,7 @@
         if (!root) return false;
         const list = replaceLegacyMarkup(root);
         await loadAtlas();
+        instances.forEach(instance => instance.observer?.disconnect());
         instances.clear();
         MAP_DEFINITIONS.forEach(definition => {
             const data = mapData(definition);

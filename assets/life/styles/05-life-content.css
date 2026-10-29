@@ -337,6 +337,15 @@
     margin-right: 12px;
 }
 
+html:lang(zh) .portal-moment-meta {
+    column-gap: 0.25em;
+    letter-spacing: normal;
+}
+
+html:lang(zh) .portal-moment-location:not(:empty)::before {
+    margin-right: 0.25em;
+}
+
 .portal-moment h3 {
     margin: 5px 0 0;
     font-size: 1.18rem;
@@ -444,6 +453,9 @@
     text-transform: uppercase;
 }
 .shelf-subsection p { margin: 0; color: var(--ink-soft); font-size: 0.86rem; line-height: 1.75; }
+.shelf-quotation { margin: 0; }
+.shelf-quotation footer { margin-top: 8px; font: 0.72rem/1.6 var(--ui); }
+.shelf-quotation a { color: var(--life-blue); text-underline-offset: 3px; }
 .shelf-links-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 17px; }
 .shelf-links-grid > section { min-width: 0; }
 .shelf-links-grid ul { list-style: none; padding: 0; margin: 0; }
@@ -904,15 +916,6 @@
     }
 }
 
-.portal-panel:has(#friends:not([hidden])) #constellationMeaning {
-    display: none;
-}
-
-.portal-panel:has(#friends:not([hidden])) .portal-panel-names,
-.portal-panel:has(#friends:not([hidden])) .portal-panel-hint {
-    display: none;
-}
-
 .friends-feature {
     max-width: 480px;
     margin: 0 auto 22px;
@@ -1032,6 +1035,16 @@
 
 body.friend-memories-open .sky-credit { visibility: hidden; }
 
+.portal-panel:has(#friends:not([hidden])) {
+    transition-property: opacity, transform;
+}
+
+body.friend-memories-open.panel-open .portal-panel {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
 .friend-memory-heading {
     display: flex;
     align-items: center;
@@ -1045,6 +1058,18 @@ body.friend-memories-open .sky-credit { visibility: hidden; }
     margin: 0;
     font: 1.15rem var(--editorial);
     font-weight: 400;
+}
+
+.friend-memory-heading a {
+    color: inherit;
+    text-decoration: none;
+    pointer-events: auto;
+}
+
+.friend-memory-heading a:hover,
+.friend-memory-heading a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 .friend-memory-close {
@@ -1076,9 +1101,9 @@ body.friend-memories-open .sky-credit { visibility: hidden; }
     --memory-angle: -6deg;
     position: absolute;
     top: 2%;
-    left: 12%;
+    left: 8%;
     z-index: 3;
-    width: min(75%, 280px);
+    width: min(72%, 340px);
     height: auto;
     margin: 0;
     padding: 8px;
@@ -1099,7 +1124,7 @@ body.friend-memories-open .sky-credit { visibility: hidden; }
     top: 37%;
     left: auto;
     right: 2%;
-    width: min(61%, 230px);
+    width: min(61%, 290px);
     animation-delay: -2.3s;
 }
 
@@ -1108,7 +1133,7 @@ body.friend-memories-open .sky-credit { visibility: hidden; }
     z-index: 1;
     top: 60%;
     left: 2%;
-    width: min(57%, 215px);
+    width: min(57%, 270px);
     animation-delay: -4.1s;
 }
 
@@ -1140,7 +1165,6 @@ body.friend-memories-open .sky-credit { visibility: hidden; }
 .friend-memory:nth-child(2) .friend-memory-placeholder { background: radial-gradient(ellipse at 30% 20%, #eaded0, #d2c3b5); color: #695e54; }
 .friend-memory:nth-child(3) .friend-memory-placeholder { background: radial-gradient(ellipse at 30% 20%, #e0e3d9, #c4cbb9); color: #586251; }
 .friend-memory-mark { font-size: 1.6rem; line-height: 1; }
-.friend-memory-note { margin: 10px 8px 0; font: 0.65rem var(--ui); color: rgba(244,241,233,0.68); }
 
 .friend-memory-layer.is-compact .friend-memory-heading h3 { font-size: 0.9rem; }
 .friend-memory-layer.is-compact .friend-memory-field {
@@ -1161,7 +1185,6 @@ body.friend-memories-open .sky-credit { visibility: hidden; }
 }
 .friend-memory-layer.is-compact .friend-memory-placeholder { gap: 2px; font-size: 0.55rem; }
 .friend-memory-layer.is-compact .friend-memory-mark { font-size: 1.2rem; }
-.friend-memory-layer.is-compact .friend-memory-note { display: none; }
 
 @keyframes friend-memory-arrive {
     from { opacity: 0; transform: translateY(18px) scale(0.95); }
@@ -1194,9 +1217,6 @@ body.friend-memories-open .sky-credit { visibility: hidden; }
         max-height: calc(100dvh - 126px);
     }
 
-    body.friend-memories-open .portal-panel:has(#friends:not([hidden])) {
-        max-height: calc(100dvh - 280px);
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {

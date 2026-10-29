@@ -51,14 +51,6 @@ body.touch-mode.panel-open .portal-panel {
     border-bottom: 1px solid var(--rule);
 }
 
-.portal-panel-kicker {
-    color: var(--ink-faint);
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-}
-
 .portal-panel-title {
     margin: 2px 0 0;
     font-family: var(--editorial);
@@ -85,13 +77,6 @@ body.lang-zh-TW .portal-panel-title {
     font-family: var(--ui);
     font-size: 0.62rem;
     letter-spacing: 0.08em;
-}
-
-.portal-panel-hint {
-    margin-top: 12px;
-    color: var(--ink-soft);
-    font-family: var(--ui);
-    font-size: 0.68rem;
 }
 
 .portal-close {
@@ -149,9 +134,9 @@ body.lang-zh-TW .portal-panel-title {
 }
 
 .constellation-meaning {
-    margin: 0 0 24px;
-    padding: 0 0 20px;
-    border-bottom: 1px solid var(--rule);
+    margin: 30px 0 0;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--rule);
 }
 
 .constellation-meaning-kicker {

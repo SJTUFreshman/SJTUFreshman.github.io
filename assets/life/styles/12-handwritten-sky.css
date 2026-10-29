@@ -1,0 +1,35 @@
+.profile-handwriting { padding: 4px 0 0; }
+.handwriting-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 11px 19px;
+    border: 1px solid var(--rule);
+    border-radius: 28px;
+    color: var(--life-blue);
+    background: linear-gradient(125deg, var(--life-blue-pale), var(--life-pink-soft));
+    font: inherit;
+    font-size: 0.96rem;
+    line-height: 1.5;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+.handwriting-toggle > [aria-hidden] { font-size: 1.3rem; }
+.handwriting-toggle:hover,
+.handwriting-toggle[aria-pressed="true"] { border-color: var(--life-blue); box-shadow: 0 0 22px var(--life-blue-soft); }
+.handwriting-toggle:focus-visible { outline: 2px solid var(--life-blue); outline-offset: 4px; }
+#handwritingHint { margin: 12px 0 8px; color: var(--ink-soft); font-size: 0.81rem; }
+#handwritingStatus { margin: 8px 0; color: var(--life-blue); font-size: 0.8rem; }
+#handwritingStatus:empty { display: none; }
+.handwriting-sky { position: fixed; z-index: 15; inset: 0; overflow: hidden; pointer-events: none; user-select: none; }
+.handwriting-sky[hidden] { display: none; }
+.handwriting-phrase { position: absolute; display: block; object-fit: contain; opacity: 0.94; filter: drop-shadow(0 0 5px rgba(163,198,248,0.32)); }
+.wishlist-item .wishlist-progress { display: inline-block; margin: 0 0 9px; padding: 2px 9px; border: 1px solid var(--rule); border-radius: 12px; background: var(--life-blue-pale); color: var(--life-blue); font-size: 0.72rem; line-height: 1.8; }
+@media (max-aspect-ratio: 3/2), (max-width: 1024px) and (max-aspect-ratio: 16/9) {
+    body.handwriting-active .portal-panel:has(#profile:not([hidden])) { max-height: 50dvh; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .handwriting-toggle { transition: none; }
+}

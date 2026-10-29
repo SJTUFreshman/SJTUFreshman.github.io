@@ -60,24 +60,27 @@
             visibility: hidden !important;
         }
     </style>
-<script src="assets/stellar-transit.js?v=20261022-friends-portrait" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
-    <link rel="preload" href="fonts/edukai-site-subset.woff2?v=20261022-friends-portrait" as="font" type="font/woff2" crossorigin>
+<script src="assets/stellar-transit.js?v=20261029-life-cards" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
+    <link rel="preload" href="fonts/edukai-site-subset.woff2?v=20261029-life-cards" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-    <script src="assets/hipparcos-stars.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/hipparcos-distances.js?v=20261022-friends-portrait" defer></script>
-    <link rel="stylesheet" href="assets/life/styles/01-foundation-sky.css?v=20261022-friends-portrait">
-    <link rel="stylesheet" href="assets/life/styles/02-section-drawer.css?v=20261022-friends-portrait">
-    <link rel="stylesheet" href="assets/life/styles/03-sky-navigation.css?v=20261022-friends-portrait">
-    <link rel="stylesheet" href="assets/life/styles/04-detail-panels.css?v=20261022-friends-portrait">
-    <link rel="stylesheet" href="assets/life/styles/05-life-content.css?v=20261022-friends-portrait">
-    <link rel="stylesheet" href="assets/life/styles/06-homepage-parity.css?v=20261022-friends-portrait">
-    <link rel="stylesheet" href="assets/life/styles/07-overlays-responsive.css?v=20261022-friends-portrait&atlas=20261016-administrative">
-    <link rel="stylesheet" href="assets/life/styles/08-star-map.css?v=20261022-friends-portrait&galaxy=20261014-gaia-realism">
-    <link rel="stylesheet" href="assets/life/styles/10-deep-sky-map.css?v=20261022-friends-portrait">
-    <link rel="stylesheet" href="assets/life/styles/11-index-theme-overlays.css?v=20261022-friends-portrait">
+    <script src="assets/hipparcos-stars.js?v=20261029-life-cards" defer></script>
+    <script src="assets/hipparcos-distances.js?v=20261029-life-cards" defer></script>
+    <link rel="stylesheet" href="assets/life/styles/01-foundation-sky.css?v=20261029-life-cards&ui=20261029-handwriting">
+    <link rel="stylesheet" href="assets/life/styles/02-section-drawer.css?v=20261029-life-cards">
+    <link rel="stylesheet" href="assets/life/styles/03-sky-navigation.css?v=20261029-life-cards">
+    <link rel="stylesheet" href="assets/life/styles/04-detail-panels.css?v=20261029-life-cards">
+    <link rel="stylesheet" href="assets/life/styles/05-life-content.css?v=20261029-life-cards&ui=20261028-personal">
+    <link rel="stylesheet" href="assets/life/styles/06-homepage-parity.css?v=20261029-life-cards">
+    <link rel="stylesheet" href="assets/life/styles/07-overlays-responsive.css?v=20261029-life-cards&atlas=20261016-administrative">
+    <link rel="stylesheet" href="assets/life/styles/08-star-map.css?v=20261029-life-cards&galaxy=20261014-gaia-realism">
+    <link rel="stylesheet" href="assets/life/styles/10-deep-sky-map.css?v=20261029-life-cards">
+    <link rel="stylesheet" href="assets/life/styles/11-index-theme-overlays.css?v=20261029-life-cards">
+    <link rel="stylesheet" href="assets/life/styles/12-handwritten-sky.css?v=20261029-life-cards">
+    <link rel="stylesheet" href="assets/site-identity.css?v=20261029-life-cards">
+    <script src="assets/site-identity.js?v=20261029-life-cards" defer></script>
     <noscript>
         <style>
             html, body { height: auto; overflow: auto; background: var(--life-paper); color: var(--life-ink); }
@@ -181,18 +184,11 @@
 
     <aside class="portal-panel" id="portalPanel" aria-hidden="true" aria-labelledby="portalPanelTitle" inert>
         <header class="portal-panel-header">
-            <div class="portal-panel-kicker" id="portalPanelKicker">CONSTELLATION</div>
             <h2 class="portal-panel-title" id="portalPanelTitle" tabindex="-1">Gallery</h2>
-            <div class="portal-panel-names" id="portalPanelNames">Gallery / 光影 / 光影</div>
-            <div class="portal-panel-hint" data-key="panel_hint">Esc · end viewing</div>
+            <div class="portal-panel-names" id="portalPanelNames">Cassiopeia</div>
             <button class="portal-close" id="portalClose" type="button" aria-label="Return to the galaxy"></button>
         </header>
         <div class="portal-panel-body" id="portalPanelBody">
-            <section class="constellation-meaning" id="constellationMeaning" aria-labelledby="constellationMeaningTitle">
-                <div class="constellation-meaning-kicker" id="constellationMeaningKicker">Why this constellation</div>
-                <h3 id="constellationMeaningTitle"></h3>
-                <p id="constellationMeaningText"></p>
-            </section>
 <!-- SITEGEN:LIFE_GALLERY_START -->
         <section id="gallery" class="portal-content" data-portal-content="gallery" hidden>
             <div class="portal-moments">
@@ -300,6 +296,94 @@
                 </div>
                 </div>
                 </article>
+                <article class="portal-moment" data-moment="gallery-collected-moments" data-portal-entry="gallery-collected-moments" data-star-hip="8886">
+                    <header class="portal-moment-header">
+                        <div class="portal-moment-meta">
+                            <span data-key="moment_date_gallery-collected-moments">Undated</span>
+                            <span class="portal-moment-location" data-key="moment_location_gallery-collected-moments"></span>
+                        </div>
+                        <h3 data-key="moment_summary_gallery-collected-moments">A few moments along the way</h3>
+                    </header>
+                <div class="gallery-grid" data-gallery-group>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="City after dark"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/city-after-dark.webp" alt="City after dark" width="1706" height="1279" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-city-after-dark">City after dark</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Boats on quiet water"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/boats-on-the-water.webp" alt="Boats on quiet water" width="1706" height="1279" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-boats-on-the-water">Boats on quiet water</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="An afternoon by the river"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/afternoon-by-the-river.webp" alt="An afternoon by the river" width="1706" height="1279" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-afternoon-by-the-river">An afternoon by the river</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Flowers between the trees"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/flowers-between-the-trees.webp" alt="Flowers between the trees" width="1706" height="1279" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-flowers-between-the-trees">Flowers between the trees</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="A stop along the way"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/a-stop-along-the-way.webp" alt="A stop along the way" width="1706" height="1279" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-a-stop-along-the-way">A stop along the way</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="A red tram passing by"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/red-tram.webp" alt="A red tram passing by" width="1706" height="1279" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-red-tram">A red tram passing by</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Spring on the steps"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/spring-on-the-steps.webp" alt="Spring on the steps" width="1706" height="1279" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-spring-on-the-steps">Spring on the steps</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="The last light of the day"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/last-light.webp" alt="The last light of the day" width="1706" height="1279" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-last-light">The last light of the day</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="The way home"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/the-way-home.webp" alt="The way home" width="1706" height="1279" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-the-way-home">The way home</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="Under a blue sky"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/under-a-blue-sky.webp" alt="Under a blue sky" width="1706" height="1279" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-under-a-blue-sky">Under a blue sky</div>
+                </div>
+                <div class="gallery-item" role="button" tabindex="0"
+                    aria-label="A small toast"
+                    onclick="openLightbox(this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this)}">
+                    <img src="images/gallery/a-small-toast.webp" alt="A small toast" width="1279" height="1706" loading="lazy" decoding="async">
+                    <div class="gallery-caption" data-key="cap_photo-a-small-toast">A small toast</div>
+                </div>
+                </div>
+                </article>
             </div>
         </section>
 <!-- SITEGEN:LIFE_GALLERY_END -->
@@ -344,10 +428,12 @@
                     <figcaption class="shelf-image-credit"><span data-key="shelf_image_source">Image source</span> · <a href="https://www.rottentomatoes.com/m/a_sun_2019/pictures" target="_blank" rel="noopener noreferrer">Rotten Tomatoes</a></figcaption>
                 </figure>
                 <div class="shelf-info">
-                    <div class="shelf-comment" data-key="movie_a_sun">A family drama that moves from violence and silence toward a difficult kind of repair.</div>
                     <section class="shelf-subsection">
-                        <h4 data-key="shelf_review">A closer look</h4>
-                        <p data-key="shelf_review_movie_a_sun">Chung Mong-hong lets sunlight and shade carry what the family cannot say aloud. The violence is only the doorway; the film keeps returning to responsibility, grief and the possibility of care.</p>
+                        <h4 data-key="shelf_review">Review excerpt</h4>
+                        <blockquote class="shelf-quotation" cite="https://www.bfi.org.uk/sight-and-sound/reviews/sun-chung-mong-hong-taiwan-oscar-nominee-netflix">
+                            <p><q data-key="shelf_review_movie_a_sun">a narrative that gradually reveals itself to be more about healing than destruction.</q></p>
+                            <footer><a href="https://www.bfi.org.uk/sight-and-sound/reviews/sun-chung-mong-hong-taiwan-oscar-nominee-netflix" target="_blank" rel="noopener noreferrer" data-key="shelf_review_source_movie_a_sun">Tony Rayns · Sight and Sound</a></footer>
+                        </blockquote>
                     </section>
                     <div class="shelf-links-grid">
                         <section><h4 data-key="shelf_reviews">Reviews &amp; essays</h4><ul><li><a class="shelf-link" href="https://www.bfi.org.uk/sight-and-sound/reviews/sun-chung-mong-hong-taiwan-oscar-nominee-netflix" target="_blank" rel="noopener noreferrer"><span data-key="shelf_reviews_movie_a_sun_0_label">Tony Rayns · A Sun: a Taipei family’s thunder and loss</span> <span aria-hidden="true">↗</span></a><p class="shelf-link-note" data-key="shelf_reviews_movie_a_sun_0_note">BFI · Sight and Sound · English · spoilers</p></li><li><a class="shelf-link" href="https://variety.com/2019/film/reviews/a-sun-review-yang-guang-pu-zhao-1203394389/" target="_blank" rel="noopener noreferrer"><span data-key="shelf_reviews_movie_a_sun_1_label">Peter Debruge · A Sun review</span> <span aria-hidden="true">↗</span></a><p class="shelf-link-note" data-key="shelf_reviews_movie_a_sun_1_note">Variety · English · spoilers</p></li></ul></section>
@@ -375,10 +461,12 @@
                     <figcaption class="shelf-image-credit"><span data-key="shelf_image_source">Image source</span> · <a href="https://www.rottentomatoes.com/m/interstellar_2014/pictures" target="_blank" rel="noopener noreferrer">Rotten Tomatoes</a></figcaption>
                 </figure>
                 <div class="shelf-info">
-                    <div class="shelf-comment" data-key="movie_interstellar">A vast journey through time, gravity and the stubborn tenderness of home.</div>
                     <section class="shelf-subsection">
-                        <h4 data-key="shelf_review">A closer look</h4>
-                        <p data-key="shelf_review_movie_interstellar">Time dilation turns distance into an emotional cost: a short journey for one person can consume years for another. The film is especially moving when its cosmic scale gives way to missed messages and a promise to return; its dense exposition also makes the balance between spectacle and character worth debating.</p>
+                        <h4 data-key="shelf_review">Review excerpt</h4>
+                        <blockquote class="shelf-quotation" cite="https://www.theguardian.com/film/2014/oct/27/interstellar-first-look-review-matthew-mcconoughey">
+                            <p><q data-key="shelf_review_movie_interstellar">It’s a glorious spectacle, but a slight drama, with few characters and too-rare flashes of humour.</q></p>
+                            <footer><a href="https://www.theguardian.com/film/2014/oct/27/interstellar-first-look-review-matthew-mcconoughey" target="_blank" rel="noopener noreferrer" data-key="shelf_review_source_movie_interstellar">Henry Barnes · The Guardian</a></footer>
+                        </blockquote>
                     </section>
                     <div class="shelf-links-grid">
                         <section><h4 data-key="shelf_reviews">Reviews &amp; essays</h4><ul><li><a class="shelf-link" href="https://www.theguardian.com/film/2014/oct/27/interstellar-first-look-review-matthew-mcconoughey" target="_blank" rel="noopener noreferrer"><span data-key="shelf_reviews_movie_interstellar_0_label">Henry Barnes · McConaughey v the whole wide world</span> <span aria-hidden="true">↗</span></a><p class="shelf-link-note" data-key="shelf_reviews_movie_interstellar_0_note">The Guardian · English · a critical reading</p></li></ul></section>
@@ -406,10 +494,12 @@
                     <figcaption class="shelf-image-credit"><span data-key="shelf_image_source">Image source</span> · <a href="https://movie.douban.com/photos/photo/2899548181/" target="_blank" rel="noopener noreferrer">方特动漫 / 豆瓣 · Season 1</a></figcaption>
                 </figure>
                 <div class="shelf-info">
-                    <div class="shelf-comment" data-key="movie_boonie_bears">Back to the forest in 2012: Briar and Bramble protect their home while Logger Vick arrives with a chainsaw and another scheme. A small, noisy comedy in every episode.</div>
                     <section class="shelf-subsection">
-                        <h4 data-key="shelf_review">A closer look</h4>
-                        <p data-key="shelf_review_movie_boonie_bears">The first season builds its comedy around three personalities: resourceful Briar, impulsive Bramble, and the endlessly frustrated Logger Vick. Logging, food and everyday mishaps become compact rounds of tricks and reversals. The early animation is simple, but the broad expressions, familiar voices and brisk slapstick give it a distinct rhythm; beneath the noise is the brothers’ attachment to their forest home.</p>
+                        <h4 data-key="shelf_review">Review excerpt</h4>
+                        <blockquote class="shelf-quotation" cite="https://movie.douban.com/review/8341858/">
+                            <p><q data-key="shelf_review_movie_boonie_bears">Setting aside the occasionally implausible plot, this cartoon is actually quite entertaining.</q></p>
+                            <footer><a href="https://movie.douban.com/review/8341858/" target="_blank" rel="noopener noreferrer" data-key="shelf_review_source_movie_boonie_bears">Xiahua · Douban · translated from Chinese</a></footer>
+                        </blockquote>
                     </section>
                     <div class="shelf-links-grid">
                         <section><h4 data-key="shelf_reviews">Reviews &amp; essays</h4><ul><li><a class="shelf-link" href="https://movie.douban.com/subject/10467770/reviews" target="_blank" rel="noopener noreferrer"><span data-key="shelf_reviews_movie_boonie_bears_0_label">Boonie Bears (2012) · Audience reviews</span> <span aria-hidden="true">↗</span></a><p class="shelf-link-note" data-key="shelf_reviews_movie_boonie_bears_0_note">Douban · Chinese · reviews of the first series</p></li></ul></section>
@@ -437,10 +527,12 @@
                     <figcaption class="shelf-image-credit"><span data-key="shelf_image_source">Image source</span> · <a href="https://www.hbomax.com/show/6a0a0227-f567-46ba-9a2d-04374c5f6193" target="_blank" rel="noopener noreferrer">HBO Max · S01E10</a></figcaption>
                 </figure>
                 <div class="shelf-info">
-                    <div class="shelf-comment" data-key="tv_band_of_brothers">A war series built from memory, discipline and the bonds that survive the battlefield.</div>
                     <section class="shelf-subsection">
-                        <h4 data-key="shelf_review">A closer look</h4>
-                        <p data-key="shelf_review_tv_band_of_brothers">Its scale is enormous, but the emotional unit is the company: names, routines, jokes and absences. The series earns its legend by staying close to the ordinary people inside the military history.</p>
+                        <h4 data-key="shelf_review">Review excerpt</h4>
+                        <blockquote class="shelf-quotation" cite="https://www.rottentomatoes.com/tv/band_of_brothers/s01">
+                            <p><q data-key="shelf_review_tv_band_of_brothers">one of the most powerful and captivating portraits of men in war ever put on screen.</q></p>
+                            <footer><a href="https://www.rottentomatoes.com/tv/band_of_brothers/s01" target="_blank" rel="noopener noreferrer" data-key="shelf_review_source_tv_band_of_brothers">Sean Axmaker · Stream on Demand · via Rotten Tomatoes</a></footer>
+                        </blockquote>
                     </section>
                     <div class="shelf-links-grid">
                         <section><h4 data-key="shelf_reviews">Reviews &amp; essays</h4><ul><li><a class="shelf-link" href="https://www.theguardian.com/film/2001/sep/24/features.mattseaton" target="_blank" rel="noopener noreferrer"><span data-key="shelf_reviews_tv_band_of_brothers_0_label">Matt Seaton · Too close for comfort</span> <span aria-hidden="true">↗</span></a><p class="shelf-link-note" data-key="shelf_reviews_tv_band_of_brothers_0_note">The Guardian · English · on-set reporting and commentary</p></li></ul></section>
@@ -468,10 +560,12 @@
                     <figcaption class="shelf-image-credit"><span data-key="shelf_image_source">Image source</span> · <a href="https://www.tvmaze.com/episodes/391796/yes-prime-minister-2x03-a-diplomatic-incident" target="_blank" rel="noopener noreferrer">BBC / TVmaze · S02E03</a></figcaption>
                 </figure>
                 <div class="shelf-info">
-                    <div class="shelf-comment" data-key="tv_yes_prime_minister">Jim Hacker reaches Number 10; the contest over who really controls policy follows him inside.</div>
                     <section class="shelf-subsection">
-                        <h4 data-key="shelf_review">A closer look</h4>
-                        <p data-key="shelf_review_tv_yes_prime_minister">Hacker, Humphrey and Bernard turn a roomful of polite conversation into a struggle over information, timing and responsibility. Listen for a changed definition, an apparently helpful qualification or a carefully delayed answer: the language itself does much of the comic work.</p>
+                        <h4 data-key="shelf_review">Review excerpt</h4>
+                        <blockquote class="shelf-quotation" cite="https://www.rottentomatoes.com/tv/yes_prime_minister/s01">
+                            <p><q data-key="shelf_review_tv_yes_prime_minister">Although Yes, Prime Minister shows its age in its polite language, unchanged format, and laughter track, it still has teeth.</q></p>
+                            <footer><a href="https://www.rottentomatoes.com/tv/yes_prime_minister/s01" target="_blank" rel="noopener noreferrer" data-key="shelf_review_source_tv_yes_prime_minister">Mark Monahan · The Daily Telegraph · via Rotten Tomatoes</a></footer>
+                        </blockquote>
                     </section>
                     <div class="shelf-links-grid">
                         <section><h4 data-key="shelf_reviews">Reviews &amp; essays</h4><ul><li><a class="shelf-link" href="https://cn.nytimes.com/culture/20130107/c07minister/" target="_blank" rel="noopener noreferrer"><span data-key="shelf_reviews_tv_yes_prime_minister_0_label">John Gross · Revisiting Yes Minister</span> <span aria-hidden="true">↗</span></a><p class="shelf-link-note" data-key="shelf_reviews_tv_yes_prime_minister_0_note">The New York Times Chinese · companion reading on the predecessor’s book adaptation</p></li></ul></section>
@@ -499,10 +593,12 @@
                     <figcaption class="shelf-image-credit"><span data-key="shelf_image_source">Image source</span> · <a href="https://www.tvmaze.com/episodes/40646/friends-1x01-the-one-where-monica-gets-a-roommate" target="_blank" rel="noopener noreferrer">Warner Bros. Television / TVmaze · S01E01</a></figcaption>
                 </figure>
                 <div class="shelf-info">
-                    <div class="shelf-comment" data-key="tv_friends">A comfort sitcom about six people making a small, bright room out of a very large city.</div>
                     <section class="shelf-subsection">
-                        <h4 data-key="shelf_review">A closer look</h4>
-                        <p data-key="shelf_review_tv_friends">Its nostalgia is powerful because the show turns friendship into a place: the sofa, the coffee shop, the familiar entrance. It also deserves to be revisited with a clear eye for the exclusions and stereotypes that made that comfort possible.</p>
+                        <h4 data-key="shelf_review">Review excerpt</h4>
+                        <blockquote class="shelf-quotation" cite="https://www.theguardian.com/tv-and-radio/2024/sep/22/friends-at-30-sitcom-cultural-phenomenon">
+                            <p><q data-key="shelf_review_tv_friends">it’s one of those touchstone shows, before phones, before streamers, from yon olden days when good telly mattered</q></p>
+                            <footer><a href="https://www.theguardian.com/tv-and-radio/2024/sep/22/friends-at-30-sitcom-cultural-phenomenon" target="_blank" rel="noopener noreferrer" data-key="shelf_review_source_tv_friends">Barbara Ellen · The Observer</a></footer>
+                        </blockquote>
                     </section>
                     <div class="shelf-links-grid">
                         <section><h4 data-key="shelf_reviews">Reviews &amp; essays</h4><ul><li><a class="shelf-link" href="https://www.theguardian.com/tv-and-radio/2024/sep/22/friends-at-30-sitcom-cultural-phenomenon" target="_blank" rel="noopener noreferrer"><span data-key="shelf_reviews_tv_friends_0_label">Barbara Ellen · Friends at 30</span> <span aria-hidden="true">↗</span></a><p class="shelf-link-note" data-key="shelf_reviews_tv_friends_0_note">The Guardian · English · nostalgia and the show’s blind spots</p></li><li><a class="shelf-link" href="https://www.theguardian.com/tv-and-radio/2024/sep/18/friends-at-30-inside-story-writers-producers-tell-all" target="_blank" rel="noopener noreferrer"><span data-key="shelf_reviews_tv_friends_1_label">Kate Lloyd · The inside story</span> <span aria-hidden="true">↗</span></a><p class="shelf-link-note" data-key="shelf_reviews_tv_friends_1_note">The Guardian · English · cast chemistry and comic timing</p></li></ul></section>
@@ -590,16 +686,15 @@ I am profoundly moved.</div>
                 <div class="friends-feature">
                     <div class="friends-portrait">
                         <img src="images/friends/yuheng-qiran.webp" width="1600" height="1552" alt="Yuheng on the left and Qiran on the right" data-alt-key="friends_alt" loading="lazy" decoding="async">
-                        <svg class="friends-outlines" viewBox="0 0 1000 970" aria-hidden="true"><a href="https://hendrick-wang.github.io/" class="friend-person friend-person--left" data-friend-trigger="friend-yuheng-wang" tabindex="-1"><path d="M210 970 L209 867 Q200 841 191 813 L175 752 Q165 720 171 658 L180 551 L185 532 L173 523 Q180 450 201 382 Q210 366 257 350 L298 332 L299 309 Q279 291 278 265 Q271 247 282 243 L273 220 L269 199 Q281 171 307 161 Q353 140 380 161 Q402 178 403 206 L400 238 Q412 242 403 271 Q403 297 394 314 L399 332 L461 355 Q491 363 501 390 Q514 438 510 480 L502 534 L496 566 L498 689 L491 753 L481 810 L464 851 L454 866 L445 970 Z" vector-effect="non-scaling-stroke"/></a><a href="https://positionprivacy.github.io/" class="friend-person friend-person--right" data-friend-trigger="friend-qiran-zhang" tabindex="-1"><path d="M505 970 L505 844 Q490 817 490 788 L499 710 L507 573 L497 567 L503 488 Q506 419 522 379 Q540 357 592 344 L603 335 Q580 311 583 276 Q565 244 580 205 Q585 173 616 157 Q650 140 678 151 Q713 155 731 188 Q745 222 735 270 L727 307 L708 342 L766 362 Q796 370 810 406 Q823 458 832 568 L802 573 L802 703 L805 747 L797 803 L786 831 L779 970 Z" vector-effect="non-scaling-stroke"/></a></svg>
+                        <svg class="friends-outlines" viewBox="0 0 1000 970" aria-hidden="true"><a href="https://hendrick-wang.github.io/" class="friend-person friend-person--left" data-friend-trigger="friend-yuheng-wang" tabindex="-1"><path d="M213 970 L211 940 Q207 927 207 919 L205 917 L202 933 Q199 936 198 932 L202 915 L207 912 Q214 902 210 883 L210 866 Q205 857 201 843 Q195 828 190 812 Q185 800 183 780 L179 760 Q171 746 171 724 Q169 697 171 667 L172 622 Q174 585 178 561 L184 529 Q174 528 172 521 L177 506 Q184 471 186 444 L187 424 Q186 411 191 394 Q197 380 202 377 Q225 363 252 356 L284 345 Q296 340 303 332 L303 319 Q304 305 300 291 Q294 286 292 280 Q284 280 280 269 Q276 260 278 248 Q280 242 285 247 L283 242 Q276 226 272 210 Q269 200 269 196 Q278 179 294 167 Q315 151 338 151 Q358 149 376 158 Q393 168 400 184 Q406 194 405 204 L400 228 L400 238 Q405 233 406 243 Q409 253 405 263 L400 271 Q398 284 394 296 Q389 306 391 316 L394 328 Q396 333 405 333 L411 336 Q436 346 459 351 Q483 358 496 372 Q505 383 507 402 L510 439 Q507 461 508 482 L503 526 Q502 539 500 548 L495 566 Q501 568 506 570 Q512 570 513 573 L510 618 Q506 657 505 691 L501 735 Q500 748 495 760 L492 780 Q489 800 479 822 L470 844 Q464 859 454 867 Q449 875 448 870 L451 859 Q456 849 458 837 Q454 847 450 851 L451 871 Q456 885 455 907 L453 933 L455 970 Z" vector-effect="non-scaling-stroke"/></a><a href="https://positionprivacy.github.io/" class="friend-person friend-person--right" data-friend-trigger="friend-qiran-zhang" tabindex="-1"><path d="M502 970 L501 922 Q502 883 506 852 L507 841 Q502 829 499 817 Q493 808 490 797 Q489 789 492 772 L494 752 Q493 735 495 714 L499 663 L502 618 L505 573 Q499 572 497 569 L498 558 Q502 542 503 525 L505 497 Q507 470 507 445 L511 417 Q514 391 520 379 Q531 364 548 357 L581 347 L593 344 Q598 338 608 335 L617 332 Q612 326 608 319 Q603 308 602 296 Q599 284 593 276 Q583 264 580 247 Q576 232 579 213 L580 204 Q582 186 594 175 Q609 162 628 154 Q644 147 659 147 Q667 145 676 149 Q694 152 707 161 Q720 169 727 182 Q735 195 737 213 Q742 236 735 254 Q733 265 727 275 Q720 288 718 297 Q716 310 713 320 Q709 329 700 331 L700 336 Q700 342 710 345 Q715 345 718 350 L726 355 L761 366 Q780 371 794 384 Q806 397 812 418 Q819 439 821 462 L824 490 L827 522 L830 553 L833 572 Q820 576 805 574 L805 626 Q804 658 800 690 L797 719 L797 738 Q805 738 806 745 L806 757 Q804 764 800 768 L795 765 L795 781 Q793 797 788 811 Q785 821 779 825 L776 838 Q775 847 773 846 L776 873 L779 905 L780 970 Z" vector-effect="non-scaling-stroke"/></a></svg>
                     </div>
                     <div class="friend-names"><a href="https://hendrick-wang.github.io/" class="friend-name friend-name--left" data-friend-trigger="friend-yuheng-wang" data-friend-name="Yuheng Wang" data-portal-entry="friend-yuheng-wang" data-star-hip="36850" aria-describedby="friendInteractionHint" aria-expanded="false" aria-controls="friendMemoryLayer"><span class="friend-name-dot" aria-hidden="true"></span><span>Yuheng Wang</span><span aria-hidden="true">↗</span></a><a href="https://positionprivacy.github.io/" class="friend-name friend-name--right" data-friend-trigger="friend-qiran-zhang" data-friend-name="Qiran Zhang" data-portal-entry="friend-qiran-zhang" data-star-hip="36850" aria-describedby="friendInteractionHint" aria-expanded="false" aria-controls="friendMemoryLayer"><span class="friend-name-dot" aria-hidden="true"></span><span>Qiran Zhang</span><span aria-hidden="true">↗</span></a></div>
-                    <p class="friends-hint" id="friendInteractionHint" aria-live="polite">Choose a person to reveal their photos. Choose them again to visit their homepage.</p>
+                    <p class="friends-hint" id="friendInteractionHint" aria-live="polite">Choose a person to let their photos float among the stars.</p>
                 </div>
                 <template id="friend-photos-friend-yuheng-wang"><figure class="friend-memory is-placeholder"><div class="friend-memory-placeholder"><span class="friend-memory-mark" aria-hidden="true">✧</span><span data-key="friends_placeholder">A photo to come</span></div></figure><figure class="friend-memory is-placeholder"><div class="friend-memory-placeholder"><span class="friend-memory-mark" aria-hidden="true">✧</span><span data-key="friends_placeholder">A photo to come</span></div></figure><figure class="friend-memory is-placeholder"><div class="friend-memory-placeholder"><span class="friend-memory-mark" aria-hidden="true">✧</span><span data-key="friends_placeholder">A photo to come</span></div></figure></template><template id="friend-photos-friend-qiran-zhang"><button class="friend-memory gallery-item" type="button" aria-label="Qiran · 01" onclick="openLightbox(this)"><img src="images/friends/qiran-01.webp" width="1280" height="960" alt="Qiran · 01" data-alt-key="friend_memory_qiran-01" loading="lazy" decoding="async"></button><figure class="friend-memory is-placeholder"><div class="friend-memory-placeholder"><span class="friend-memory-mark" aria-hidden="true">✧</span><span data-key="friends_placeholder">A photo to come</span></div></figure><figure class="friend-memory is-placeholder"><div class="friend-memory-placeholder"><span class="friend-memory-mark" aria-hidden="true">✧</span><span data-key="friends_placeholder">A photo to come</span></div></figure></template>
                 <aside class="friend-memory-layer" id="friendMemoryLayer" aria-labelledby="friendMemoryTitle" hidden>
-                    <div class="friend-memory-heading"><h3 id="friendMemoryTitle"></h3><button class="friend-memory-close" type="button" aria-label="Put photos away">×</button></div>
+                    <div class="friend-memory-heading"><h3><a id="friendMemoryHomepage" target="_blank" rel="noopener noreferrer"><span id="friendMemoryTitle"></span> <span aria-hidden="true">↗</span></a></h3><button class="friend-memory-close" type="button" aria-label="Back to Friends">×</button></div>
                     <div class="friend-memory-field" data-gallery-group></div>
-                    <p class="friend-memory-note" data-key="friends_photo_note">More moments, soon.</p>
                 </aside>
 
                 <div class="friends-list">
@@ -611,20 +706,33 @@ I am profoundly moved.</div>
 <!-- SITEGEN:LIFE_PROFILE_START -->
             <section id="profile" class="portal-content personal-profile" data-portal-content="profile" hidden>
                 <article class="profile-page">
-                    <header class="profile-intro">
-                        <figure class="profile-portrait">
-                            <img src="me_at_dorm.jpg" alt="Runde Yang 楊潤德" loading="lazy" decoding="async" width="160" height="160">
-                        </figure>
-                        <div class="profile-heading">
-                            <h3 data-key="life_about_name">Runde Yang 楊潤德</h3>
-                            <p class="profile-handle">@SJTUFreshman</p>
-                            <p class="profile-role" data-key="life_about_title">Undergraduate·School of AI, Shanghai Jiao Tong University</p>
-                        </div>
-                    </header>
-                    <div class="profile-bio">
-                        <p class="profile-welcome"><span data-key="profile_welcome">Welcome to my little corner of the universe.</span></p>
-                        <p data-key="life_about_bio">Class of 2028. Currently focusing on Multi-Agent Systems. Always learning, always curious.</p>
-                        <p class="profile-location" data-key="life_about_location">Shanghai, China</p>
+                    <div class="profile-handwriting">
+                        <button type="button" class="handwriting-toggle" id="handwritingToggle" aria-pressed="false" aria-controls="handwritingSky" aria-describedby="handwritingHint">
+                            <span aria-hidden="true">✧</span> <span data-key="handwriting_show">A few things I’m proud of</span>
+                        </button>
+                        <p id="handwritingHint"><span data-key="handwriting_hint">A few handwritten thoughts, appearing among the stars.</span></p>
+                        <p id="handwritingStatus" role="status" aria-live="polite"></p>
+                        <template id="handwritingSources">
+<img data-handwriting-id="joy" data-handwriting-number="1" data-src="assets/life/handwriting/joy.png" alt="Original handwritten phrase 1" width="764" height="238" loading="lazy" decoding="async">
+<img data-handwriting-id="programming" data-handwriting-number="2" data-src="assets/life/handwriting/programming.png" alt="Original handwritten phrase 2" width="412" height="113" loading="lazy" decoding="async">
+<img data-handwriting-id="courage" data-handwriting-number="3" data-src="assets/life/handwriting/courage.png" alt="Original handwritten phrase 3" width="154" height="111" loading="lazy" decoding="async">
+<img data-handwriting-id="parents" data-handwriting-number="4" data-src="assets/life/handwriting/parents.png" alt="Original handwritten phrase 4" width="438" height="221" loading="lazy" decoding="async">
+<img data-handwriting-id="friends" data-handwriting-number="5" data-src="assets/life/handwriting/friends.png" alt="Original handwritten phrase 5" width="688" height="111" loading="lazy" decoding="async">
+<img data-handwriting-id="values" data-handwriting-number="6" data-src="assets/life/handwriting/values.png" alt="Original handwritten phrase 6" width="521" height="117" loading="lazy" decoding="async">
+<img data-handwriting-id="snow" data-handwriting-number="7" data-src="assets/life/handwriting/snow.png" alt="Original handwritten phrase 7" width="237" height="110" loading="lazy" decoding="async">
+<img data-handwriting-id="gentle" data-handwriting-number="8" data-src="assets/life/handwriting/gentle.png" alt="Original handwritten phrase 8" width="379" height="102" loading="lazy" decoding="async">
+<img data-handwriting-id="smile" data-handwriting-number="9" data-src="assets/life/handwriting/smile.png" alt="Original handwritten phrase 9" width="155" height="106" loading="lazy" decoding="async">
+<img data-handwriting-id="china" data-handwriting-number="10" data-src="assets/life/handwriting/china.png" alt="Original handwritten phrase 10" width="409" height="130" loading="lazy" decoding="async">
+<img data-handwriting-id="usa-visa" data-handwriting-number="11" data-src="assets/life/handwriting/usa-visa.png" alt="Original handwritten phrase 11" width="304" height="106" loading="lazy" decoding="async">
+<img data-handwriting-id="handwritten-14" data-handwriting-number="12" data-src="assets/life/handwriting/handwritten-14.png" alt="Original handwritten phrase 12" width="395" height="100" loading="lazy" decoding="async">
+<img data-handwriting-id="meteors" data-handwriting-number="13" data-src="assets/life/handwriting/meteors.png" alt="Original handwritten phrase 13" width="454" height="99" loading="lazy" decoding="async">
+<img data-handwriting-id="chinese-simplified" data-handwriting-number="14" data-src="assets/life/handwriting/chinese-simplified.png" alt="Original handwritten phrase 14" width="351" height="99" loading="lazy" decoding="async">
+<img data-handwriting-id="chinese-traditional" data-handwriting-number="15" data-src="assets/life/handwriting/chinese-traditional.png" alt="Original handwritten phrase 15" width="308" height="111" loading="lazy" decoding="async">
+<img data-handwriting-id="handwritten-18" data-handwriting-number="16" data-src="assets/life/handwriting/handwritten-18.png" alt="Original handwritten phrase 16" width="178" height="93" loading="lazy" decoding="async">
+<img data-handwriting-id="korean" data-handwriting-number="17" data-src="assets/life/handwriting/korean.png" alt="Original handwritten phrase 17" width="750" height="115" loading="lazy" decoding="async">
+<img data-handwriting-id="japanese" data-handwriting-number="18" data-src="assets/life/handwriting/japanese.png" alt="Original handwritten phrase 18" width="732" height="97" loading="lazy" decoding="async">
+<img data-handwriting-id="youth" data-handwriting-number="19" data-src="assets/life/handwriting/youth.png" alt="Original handwritten phrase 19" width="717" height="125" loading="lazy" decoding="async">
+                        </template>
                     </div>
                     <section id="profile-userboxes" class="profile-box-section">
                         <ul class="wiki-userboxes"><li class="wiki-userbox" data-userbox="zh-professional"><div class="wiki-userbox-variant" data-userbox-language="en"><div class="wikipediauserbox" data-source="https://zh.wikipedia.org/wiki/Template%3AUser_zh-5" lang="en" style="float:left;border:1px solid #CCCC00;margin:1px;width:238px"><table role="presentation" style="border-collapse:collapse;width:238px;margin-bottom:0;margin-top:0;background:#FFFF99"><tbody><tr><td style="border:0;width:45px;height:45px;background:#CCCC00;text-align:center;font-size:14pt;font-weight:bold;color:black;padding:0 1px 0 0;line-height:1.25em;vertical-align:middle"><a href="https://zh.wikipedia.org/wiki/%E6%B1%89%E8%AF%AD" rel="noopener noreferrer" target="_blank" title="汉语">zh</a><span class="mw-babel-box-level-5">-5</span></td><td style="border:0;text-align:left;font-size:9pt;padding:0 4px 0 4px;height:45px;line-height:1.25em;color:black;vertical-align:middle;font-feature-settings:'locl';-webkit-font-feature-settings:'locl'">This user can communicate in Chinese at a professional level.</td></tr></tbody></table></div></div>
@@ -715,11 +823,6 @@ I am profoundly moved.</div>
 <div class="wiki-userbox-variant" data-userbox-language="zh-CN" hidden><div class="wikipediauserbox" data-source="https://zh.wikipedia.org/wiki/Template%3AUser_Greek_mythology" lang="zh-Hans" style="float:left;border:1px solid #000000;margin:1px;width:238px"><table role="presentation" style="border-collapse:collapse;width:238px;margin-bottom:0;margin-top:0;background:#C0C0FF"><tbody><tr><td style="border:0;width:45px;height:45px;background:#FFFFFF;text-align:center;font-size:12pt;font-weight:bold;color:#000000;padding:0 1px 0 0;line-height:1.25em;vertical-align:middle"><span><a href="https://zh.wikipedia.org/wiki/File:TempleHephaistosAthens.jpg" rel="noopener noreferrer" target="_blank"><img alt="TempleHephaistosAthens" decoding="async" height="45" loading="lazy" src="assets/life/userboxes/d33e76e4b405.jpg" width="60"/></a></span></td><td style="border:0;text-align:left;font-size:10pt;padding:0 4px 0 4px;height:45px;line-height:1.25em;color:#000000;vertical-align:middle">这个用户喜欢<b><a href="https://zh.wikipedia.org/wiki/%E5%B8%8C%E8%87%98%E7%A5%9E%E8%A9%B1" rel="noopener noreferrer" target="_blank" title="希腊神话">希腊神话</a></b>。</td></tr></tbody></table></div></div>
 <div class="wiki-userbox-variant" data-userbox-language="zh-TW" hidden><div class="wikipediauserbox" data-source="https://zh.wikipedia.org/wiki/Template%3AUser_Greek_mythology" lang="zh-Hant" style="float:left;border:1px solid #000000;margin:1px;width:238px"><table role="presentation" style="border-collapse:collapse;width:238px;margin-bottom:0;margin-top:0;background:#C0C0FF"><tbody><tr><td style="border:0;width:45px;height:45px;background:#FFFFFF;text-align:center;font-size:12pt;font-weight:bold;color:#000000;padding:0 1px 0 0;line-height:1.25em;vertical-align:middle"><span><a href="https://zh.wikipedia.org/wiki/File:TempleHephaistosAthens.jpg" rel="noopener noreferrer" target="_blank"><img alt="TempleHephaistosAthens" decoding="async" height="45" loading="lazy" src="assets/life/userboxes/d33e76e4b405.jpg" width="60"/></a></span></td><td style="border:0;text-align:left;font-size:10pt;padding:0 4px 0 4px;height:45px;line-height:1.25em;color:#000000;vertical-align:middle">這個用戶喜歡<b><a href="https://zh.wikipedia.org/wiki/%E5%B8%8C%E8%87%98%E7%A5%9E%E8%A9%B1" rel="noopener noreferrer" target="_blank" title="希臘神話">希臘神話</a></b>。</td></tr></tbody></table></div></div></li></ul>
                     </section>
-                    <footer class="profile-contact">
-                        <h4><span data-key="profile_contact">Elsewhere</span></h4>
-                        <div class="profile-links"><a href="https://github.com/SJTUFreshman" target="_blank" rel="noopener noreferrer">GitHub</a>
-<a href="https://scholar.google.com/citations?user=uGjwKq0AAAAJ&amp;hl=zh-TW" target="_blank" rel="noopener noreferrer">Scholar</a><a href="mailto:yangrundemdj@gmail.com" data-key="life_action_email">Email</a></div>
-                    </footer>
                 </article>
             </section>
 <!-- SITEGEN:LIFE_PROFILE_END -->
@@ -819,7 +922,30 @@ I am profoundly moved.</div>
             <section id="wishlist" class="portal-content" data-portal-content="wishlist" data-email="yangrundemdj@gmail.com" hidden>
                 <div class="wishlist-page">
                     <p class="wishlist-intro"><span data-key="wishlist_intro">Things I would love to try, places to play, and experiences to share.</span></p>
-                    <div class="wishlist-list"><p class="wishlist-empty"><span data-key="wishlist_empty">The list is still taking shape. Got an idea? Send me a note.</span></p></div>
+                    <div class="wishlist-list">                    <article class="wishlist-item" data-portal-entry="wishlist-xiamen-kinmen">
+                        <span class="wishlist-number" aria-hidden="true">01</span>
+                        <div><p class="wishlist-progress"><span data-key="wishlist_item_xiamen-kinmen_status">Actively planning</span></p><h3><span data-key="wishlist_item_xiamen-kinmen_title">Xiamen, Kinmen and nearby places</span></h3><p><span data-key="wishlist_item_xiamen-kinmen_description">I’m actively planning a trip to explore Xiamen, Kinmen and the surrounding area.</span></p>
+                            <button type="button" class="wishlist-button" data-copy-wishlist="xiamen-kinmen"><span data-key="wishlist_join">I’d like to join</span></button>
+                        </div>
+                    </article>
+                    <article class="wishlist-item" data-portal-entry="wishlist-hawaii">
+                        <span class="wishlist-number" aria-hidden="true">02</span>
+                        <div><p class="wishlist-progress"><span data-key="wishlist_item_hawaii_status">Actively planning</span></p><h3><span data-key="wishlist_item_hawaii_title">Go to Hawaii</span></h3><p><span data-key="wishlist_item_hawaii_description">Hawaii is on the list, and I’m already actively planning the trip.</span></p>
+                            <button type="button" class="wishlist-button" data-copy-wishlist="hawaii"><span data-key="wishlist_join">I’d like to join</span></button>
+                        </div>
+                    </article>
+                    <article class="wishlist-item" data-portal-entry="wishlist-korea-december">
+                        <span class="wishlist-number" aria-hidden="true">03</span>
+                        <div><p class="wishlist-progress"><span data-key="wishlist_item_korea-december_status">Travel buddies found</span></p><h3><span data-key="wishlist_item_korea-december_title">South Korea in December</span></h3><p><span data-key="wishlist_item_korea-december_description">A December trip to South Korea. We’ve already got a group together!</span></p>
+                            <button type="button" class="wishlist-button" data-copy-wishlist="korea-december"><span data-key="wishlist_join">I’d like to join</span></button>
+                        </div>
+                    </article>
+                    <article class="wishlist-item" data-portal-entry="wishlist-weekends-by-the-water">
+                        <span class="wishlist-number" aria-hidden="true">04</span>
+                        <div><p class="wishlist-progress"><span data-key="wishlist_item_weekends-by-the-water_status">For life after starting work</span></p><h3><span data-key="wishlist_item_weekends-by-the-water_title">Good friends, one city, weekends by the water</span></h3><p><span data-key="wishlist_item_weekends-by-the-water_description">Once I’m working, I’d love to buy a pickup truck, a jet ski and a barbecue grill. A heartfelt invitation to my good friends: come live in the same city as me. On weekends, we’ll head to the nearby water, barbecue, eat watermelon, enjoy the view and take the jet ski out for a ride.</span></p>
+                            <button type="button" class="wishlist-button" data-copy-wishlist="weekends-by-the-water"><span data-key="wishlist_join">I’d like to join</span></button>
+                        </div>
+                    </article></div>
                     <section class="wishlist-invitation" aria-labelledby="wishlistInviteTitle">
                         <h3 id="wishlistInviteTitle"><span data-key="wishlist_invite_title">Better with company</span></h3>
                         <p><span data-key="wishlist_invite_text">Copy a draft, add your idea and a time that works, then email me. Let’s make a plan.</span></p>
@@ -852,12 +978,10 @@ Let me know what you think!
                 </div>
             </section>
 <!-- SITEGEN:LIFE_WISHLIST_END -->
-            <section class="star-reader is-overview" id="starReader" aria-live="polite">
-                <div class="star-reader-kicker" id="starReaderKicker">CONSTELLATION NOTE</div>
-                <h3 class="star-reader-title" id="starReaderTitle">Cassiopeia</h3>
-                <div class="star-reader-meta" id="starReaderMeta"></div>
-                <p class="star-reader-description" id="starReaderDescription"></p>
-                <p class="star-reader-status" id="starReaderStatus"></p>
+            <section class="constellation-meaning" id="constellationMeaning" aria-labelledby="constellationMeaningTitle">
+                <div class="constellation-meaning-kicker" id="constellationMeaningKicker">Why this constellation</div>
+                <h3 id="constellationMeaningTitle"></h3>
+                <p id="constellationMeaningText"></p>
             </section>
         </div>
     </aside>
@@ -907,27 +1031,28 @@ Let me know what you think!
         <span data-key="home_departing">Returning home</span>
     </div>
 
-    <script src="assets/vendor/astronomy-engine-2.1.19.min.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/01-content-data.js?v=20261022-friends-portrait&copy=20261010-relief-ui3" defer></script>
-    <script src="assets/life/scripts/02-sky-config.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/03-math-orientation.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/04-dom-state.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/05-astronomy.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/06-framing.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/07-galaxy-renderer.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/observatory/07-star-map-renderer.js?v=20261022-friends-portrait&stars=20261014-gentle-stars&motion=20261015-smooth" defer></script>
-    <script src="assets/life/scripts/09-label-layout.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/10-sky-overlay.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/11-section-index.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/12-detail-navigation.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/13-gaze-constellations.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/14-portal-navigation.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/15-render-lock.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/observatory/19-star-map.js?v=20261022-friends-portrait&input=20261010-trackpad&home=20261012-solar-home&stars=20261014-original-stars&motion=20261015-smooth" defer></script>
-    <script src="assets/life/scripts/21-deep-sky-map.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/16-input-events.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/17-content-ui.js?v=20261022-friends-portrait" defer></script>
-    <script src="assets/life/scripts/22-footprints-atlas.js?v=20261022-friends-portrait&atlas=20261016-administrative" defer></script>
-    <script src="assets/life/scripts/18-bootstrap.js?v=20261022-friends-portrait" defer></script>
+    <script src="assets/vendor/astronomy-engine-2.1.19.min.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/scripts/01-content-data.js?v=20261029-life-cards&copy=20261029-handwriting" defer></script>
+    <script src="assets/life/scripts/02-sky-config.js?v=20261029-life-cards&copy=20261028-no-star-note" defer></script>
+    <script src="assets/life/scripts/03-math-orientation.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/scripts/04-dom-state.js?v=20261029-life-cards&copy=20261028-no-star-note" defer></script>
+    <script src="assets/life/scripts/05-astronomy.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/scripts/06-framing.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/scripts/07-galaxy-renderer.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/observatory/07-star-map-renderer.js?v=20261029-life-cards&stars=20261014-gentle-stars&motion=20261015-smooth" defer></script>
+    <script src="assets/life/scripts/09-label-layout.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/scripts/10-sky-overlay.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/scripts/11-section-index.js?v=20261029-life-cards&ui=20261028-personal" defer></script>
+    <script src="assets/life/scripts/12-detail-navigation.js?v=20261029-life-cards&copy=20261028-no-star-note" defer></script>
+    <script src="assets/life/scripts/13-gaze-constellations.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/scripts/14-portal-navigation.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/scripts/15-render-lock.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/observatory/19-star-map.js?v=20261029-life-cards&input=20261010-trackpad&home=20261012-solar-home&stars=20261014-original-stars&motion=20261015-smooth&nav=20261028" defer></script>
+    <script src="assets/life/scripts/21-deep-sky-map.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/scripts/16-input-events.js?v=20261029-life-cards" defer></script>
+    <script src="assets/life/scripts/17-content-ui.js?v=20261029-life-cards&ui=20261028-personal" defer></script>
+    <script src="assets/life/scripts/22-footprints-atlas.js?v=20261029-life-cards&atlas=20261028-progressive" defer></script>
+    <script src="assets/life/scripts/23-handwritten-sky.js?v=20261029-life-cards&size=compact" defer></script>
+    <script src="assets/life/scripts/18-bootstrap.js?v=20261029-life-cards" defer></script>
 </body>
 </html>

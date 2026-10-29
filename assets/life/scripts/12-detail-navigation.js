@@ -1,9 +1,14 @@
 function updateConstellationMeaning(portal) {
     const story = constellationStories[portal.id];
     const ui = starUiCopy[state.currentLang] || starUiCopy.en;
+    const separator = state.currentLang === 'en' ? ' · ' : '·';
     dom.constellationMeaningKicker.textContent = ui.constellationMeaning;
-    dom.constellationMeaningTitle.textContent = `${localized(story.name)} · ${localized(story.epithet)}`;
+    dom.constellationMeaningTitle.textContent = `${localized(story.name)}${separator}${localized(story.epithet)}`;
     dom.constellationMeaningText.textContent = localized(story.reason);
+}
+
+function constellationName(portal) {
+    return localized(constellationStories[portal.id].name).split('·')[0].trim();
 }
 
 function starName(hip, lang = state.currentLang) {
@@ -17,6 +22,23 @@ function starCatalogValues(hip) {
         magnitude: window.HipparcosSky.magnitudes[index],
         colorIndex: window.HipparcosSky.colorIndices[index]
     };
+}
+
+function starDescription(portal, hip) {
+    const profile = starProfiles[hip] || {};
+    const { magnitude, colorIndex } = starCatalogValues(hip);
+    const labels = {
+        en: ['Apparent magnitude', 'Colour index B−V'],
+        'zh-CN': ['视星等', '色指数 B−V'],
+        'zh-TW': ['視星等', '色指數 B−V']
+    }[state.currentLang] || ['Apparent magnitude', 'Colour index B−V'];
+    return [
+        profile.designation,
+        `HIP ${hip}`,
+        constellationName(portal),
+        Number.isFinite(magnitude) ? `${labels[0]} ${magnitude.toFixed(2)}` : '',
+        Number.isFinite(colorIndex) ? `${labels[1]} ${colorIndex.toFixed(2)}` : ''
+    ].filter(Boolean).join(' · ');
 }
 
 function portalContentEntries(portal) {
@@ -47,11 +69,8 @@ function homeDestinationCopy(hip) {
 function updateStarButtonCopy(portal, hip) {
     const button = portal.starButtons?.get(hip);
     if (!button) return;
-    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
     const name = starName(hip);
-    const preview = portal.home
-        ? homeDestinationCopy(hip)
-        : ui.openSection(portalName(portal, state.currentLang));
+    const preview = starDescription(portal, hip);
     const nameNode = button.querySelector('.star-hit-copy > strong');
     const previewNode = button.querySelector('.star-hit-copy > span');
     if (nameNode) nameNode.textContent = name;
@@ -226,10 +245,6 @@ function renderHomeRoutePreviewCopy() {
         'aria-label',
         `${ui.launch} · ${dom.homeRouteFrom.textContent} → ${dom.homeRouteTo.textContent}`
     );
-    dom.starReaderKicker.textContent = ui.routePreviewMeta;
-    dom.starReaderTitle.textContent = starName(preview.sourceHip);
-    dom.starReaderMeta.textContent = starDescription(preview.sourcePortal, preview.sourceHip);
-    dom.starReaderStatus.textContent = ui.previewing(dom.homeRouteTo.textContent);
     dom.homeRoutePreview.hidden = false;
     dom.homeRoutePreview.toggleAttribute('aria-busy', !preview.settled);
     dom.homeRouteLaunch.disabled = !preview.settled;
@@ -279,11 +294,6 @@ function previewHomeRoute(portal, hip) {
     };
     state.activeStarHip = hip;
     state.hoverStarHip = hip;
-    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
-    dom.starReader.classList.remove('is-empty');
-    dom.starReader.classList.add('is-route-preview');
-    dom.starReaderKicker.textContent = ui.routePreviewMeta;
-    dom.starReaderStatus.textContent = ui.previewing(destination.label);
     renderHomeRoutePreviewCopy();
     portal.starButtons.forEach((_button, starHip) => updateStarButtonCopy(portal, starHip));
 }
@@ -333,19 +343,10 @@ function launchHomeRoute(source = state.activationSource) {
 
 function showConstellationOverview(portal) {
     if (state.scene !== 'detail' || state.activePortal !== portal) return;
-    const story = constellationStories[portal.id];
-    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
     state.activeStarHip = null;
     state.hoverStarHip = null;
     state.routePreview = null;
     hideHomeRoutePreview();
-    dom.starReader.classList.add('is-overview');
-    dom.starReader.classList.remove('is-star-footnote', 'is-empty', 'is-route-preview');
-    dom.starReaderKicker.textContent = ui.constellationNote;
-    dom.starReaderTitle.textContent = localized(story.name);
-    dom.starReaderMeta.textContent = ui.constellationMeta(portal.patternHips.length);
-    dom.starReaderDescription.textContent = '';
-    dom.starReaderStatus.textContent = '';
     portal.starButtons.forEach((_button, hip) => updateStarButtonCopy(portal, hip));
     const entries = portalContentEntries(portal);
     entries.forEach(entry => {
@@ -360,19 +361,6 @@ function showConstellationOverview(portal) {
             resizeMaps();
         }));
     }
-}
-
-function starDescription(portal, hip) {
-    const profile = starProfiles[hip] || {};
-    const story = constellationStories[portal.id];
-    const { magnitude, colorIndex } = starCatalogValues(hip);
-    return [
-        profile.designation,
-        `HIP ${hip}`,
-        localized(story.name),
-        Number.isFinite(magnitude) ? `V ${magnitude.toFixed(2)}` : '',
-        Number.isFinite(colorIndex) ? `B−V ${colorIndex.toFixed(2)}` : ''
-    ].filter(Boolean).join(' · ');
 }
 
 function selectPortalStar(portal, hip) {

@@ -213,7 +213,7 @@ const constellationStories = {
         }
     },
     footprints: {
-        name: { en: 'Ursa Major · Big Dipper', 'zh-CN': '大熊座 · 北斗', 'zh-TW': '大熊座 · 北斗' },
+        name: { en: 'Ursa Major · Big Dipper', 'zh-CN': '大熊座·北斗', 'zh-TW': '大熊座·北斗' },
         epithet: {
             en: 'The old instrument of direction',
             'zh-CN': '古老的辨向仪',
@@ -393,10 +393,7 @@ const homeStarTargets = Object.freeze({});
 
 const starUiCopy = {
     en: {
-        sectionKicker: 'LIFE ARCHIVE',
-        constellationNote: 'CONSTELLATION NOTE',
         constellationMeaning: 'Why this constellation',
-        constellationMeta: count => `${count} real stars`,
         choose: 'Choose any star to open the full constellation section.',
         openSection: name => `Open ${name}`,
         routePreviewMeta: 'INTERSTELLAR ROUTE PREVIEW',
@@ -409,10 +406,7 @@ const starUiCopy = {
         route: target => `Fly to ${target}`
     },
     'zh-CN': {
-        sectionKicker: '生活档案',
-        constellationNote: '星座附注',
         constellationMeaning: '星座寓意',
-        constellationMeta: count => `${count} 颗真实恒星`,
         choose: '点击任意恒星，查看该星座板块的全部内容。',
         openSection: name => `打开${name}`,
         routePreviewMeta: '星际航线预览',
@@ -425,10 +419,7 @@ const starUiCopy = {
         route: target => `飞向${target}`
     },
     'zh-TW': {
-        sectionKicker: '生活檔案',
-        constellationNote: '星座附註',
         constellationMeaning: '星座寓意',
-        constellationMeta: count => `${count} 顆真實恆星`,
         choose: '點擊任意恆星，查看該星座板塊的全部內容。',
         openSection: name => `開啟${name}`,
         routePreviewMeta: '星際航線預覽',

@@ -329,6 +329,7 @@ function releaseViewForDetail() {
 }
 
 function openPortalPanel(portal, panelOnLeft = false, preferredHip = null) {
+    if (portal.id === 'profile') panelOnLeft = false;
     if (portal.id !== 'friends') closeFriendMemories(false);
     window.clearTimeout(state.panelHideTimer);
     document.querySelectorAll('[data-portal-content]').forEach(content => {
@@ -338,10 +339,8 @@ function openPortalPanel(portal, panelOnLeft = false, preferredHip = null) {
     state.activeStarHip = null;
     state.hoverStarHip = null;
     const names = orderedPortalNames(portal);
-    const ui = starUiCopy[state.currentLang] || starUiCopy.en;
-    dom.panelKicker.textContent = ui.sectionKicker;
     dom.panelTitle.textContent = names[0];
-    dom.panelNames.textContent = LANGUAGES.map(lang => portalName(portal, lang)).join(' / ');
+    dom.panelNames.textContent = constellationName(portal);
     updateConstellationMeaning(portal);
     dom.panelBody.scrollTop = 0;
     dom.panel.inert = false;

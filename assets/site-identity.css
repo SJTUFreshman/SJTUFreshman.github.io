@@ -1,0 +1,36 @@
+[data-site-name] {
+    perspective: 700px;
+}
+
+button[data-site-name] {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-align: inherit;
+    cursor: pointer;
+}
+
+button[data-site-name]:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 5px;
+    border-radius: 2px;
+}
+
+[data-site-name-text] {
+    display: inline-block;
+    transform-origin: center;
+    backface-visibility: hidden;
+}
+
+[data-site-name-hint] {
+    margin: 4px 0 8px;
+    font-family: var(--font-en, var(--ui, sans-serif));
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    opacity: 0.65;
+}

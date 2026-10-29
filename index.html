@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Runde Yang (楊潤德) – Student at School of Artificial Intelligence, Shanghai Jiao Tong University.">
-    <meta name="keywords" content="Runde Yang, 楊潤德, SJTU, AI, Multi-Agent Systems">
+    <meta name="keywords" content="Runde Yang, 楊潤德, 杨润德, Andrew Allender, SJTU, AI, Multi-Agent Systems">
     <meta name="author" content="Runde Yang">
     <title>Runde Yang</title>
     <script>
@@ -62,11 +62,13 @@
     </style>
     <script src="assets/stellar-transit.js" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
 
-    <link rel="preload" href="fonts/edukai-site-subset.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/edukai-site-subset.woff2?v=20261028-personal" as="font" type="font/woff2" crossorigin>
     <!-- Font Awesome -->
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
     <link rel="stylesheet" href="assets/pet-summon.css">
+    <link rel="stylesheet" href="assets/site-identity.css?v=20261028-name-cycle">
+    <script src="assets/site-identity.js?v=20261028-name-cycle" defer></script>
 </head>
 <body class="lang-en">
 
@@ -76,7 +78,7 @@
         /* ========== Custom Font ========== */
         @font-face {
             font-family: 'EduKai';
-            src: url('fonts/edukai-site-subset.woff2') format('woff2');
+            src: url('fonts/edukai-site-subset.woff2?v=20261028-personal') format('woff2');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -1289,9 +1291,10 @@
 <!-- ===== Hero / About ===== -->
 <div class="container">
     <section class="hero" id="about">
-        <img src="me_at_dorm.jpg" alt="Runde Yang" class="hero-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
+        <img src="me_at_dorm.jpg" alt="Runde Yang" data-site-name-alt class="hero-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
         <div class="hero-info">
-            <h1 class="hero-name" id="heroName">Runde Yang <span style="font-weight:400;font-size:0.65em;color:var(--text-secondary);">楊潤德</span></h1>
+            <h1 class="hero-name" id="heroName"><button type="button" data-site-name data-site-name-hint-id="heroNameHint"><span data-site-name-text>Runde Yang</span></button></h1>
+            <p id="heroNameHint" data-site-name-hint hidden></p>
             <p class="hero-title" data-key="hero_title">Undergraduate<span class="hero-title-separator">·</span><a href="https://ai.sjtu.edu.cn/" target="_blank" rel="noopener noreferrer">School of AI</a>, <a href="https://en.sjtu.edu.cn/" target="_blank" rel="noopener noreferrer">Shanghai Jiao Tong University</a></p>
             <p class="hero-bio" data-key="hero_bio">Class of 2028. Currently focusing on Multi-Agent Systems. Always learning, always curious.</p>
             <div class="hero-links">
@@ -1378,8 +1381,8 @@
                     <div class="project-name en-only">AppCopilot</div>
                     <div class="project-desc" data-key="proj_appcopilot">A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.</div>
                     <div class="project-links">
-                        <button class="project-link" type="button" disabled aria-disabled="true"><i class="far fa-file-alt" aria-hidden="true"></i> Paper</button>
-                        <button class="project-link" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
+                        <a class="project-link" href="https://arxiv.org/abs/2509.02444"><i class="far fa-file-alt" aria-hidden="true"></i> Paper</a>
+                        <a class="project-link" href="https://github.com/OpenBMB/AppCopilot"><i class="fab fa-github" aria-hidden="true"></i> Code</a>
                     </div>
                 </div>
             </div>
@@ -1440,7 +1443,7 @@
 
 <!-- ===== Footer ===== -->
 <footer class="footer">
-    &copy; 2025–2026 Runde Yang. Built with care.
+    &copy; 2025–2026 <span data-site-name><span data-site-name-text>Runde Yang</span></span>. Built with care.
 </footer>
 
 <script src="assets/pet-summon.js"></script>
@@ -1452,29 +1455,39 @@ const i18n = {
         "nav_news": "News",
         "nav_pubs": "Selected Publications",
         "nav_projects": "Projects",
+        "nav_gallery": "Gallery",
         "title_news": "News",
         "title_pubs": "Selected Publications",
         "title_projects": "Projects",
+        "title_gallery": "Gallery",
         "weather_loc": "Shanghai",
-        "hero_name": "Runde Yang <span style=\"font-weight:400;font-size:0.65em;color:var(--text-secondary);\">楊潤德</span>",
+        "hero_name": "Runde Yang",
         "hero_title": "Undergraduate<span class=\"hero-title-separator\">·</span><a href=\"https://ai.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">School of AI</a>, <a href=\"https://en.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">Shanghai Jiao Tong University</a>",
         "hero_bio": "Class of 2028. Currently focusing on Multi-Agent Systems. Always learning, always curious.",
         "hero_location": "Shanghai, China",
         "life_card_title": "Beyond Research",
         "life_card_desc": "Footprints map, bookshelf, thoughts, and more.",
-        "life_card_cta": "Enter the night sky",
         "news_1": "25-26 Spring Finals finished.",
         "proj_appcopilot": "A multimodal multi-agent on-device assistant exploring tool-use, planning, and robust UI grounding.",
-        "proj_teachmaster": "A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos."
+        "proj_teachmaster": "A multi-agent framework using code as intermediate representation to generate pedagogically structured educational videos.",
+        "cap_meteor": "Orion Nebula, 2025",
+        "cap_nari": "Stargazing camp",
+        "cap_qiandaohu": "Qiandao Lake sunset",
+        "cap_road": "On the road to Qiandao Lake",
+        "cap_campus": "SJTU Campus in spring",
+        "cap_zijinshan": "Zijin Mountain, Nanjing",
+        "cap_cake": "Baking club strawberry cake"
     },
     "zh-CN": {
         "nav_about": "关于",
         "nav_news": "动态",
         "nav_pubs": "精选论文",
         "nav_projects": "项目",
+        "nav_gallery": "光影",
         "title_news": "动态",
         "title_pubs": "精选论文",
         "title_projects": "项目经历",
+        "title_gallery": "光影",
         "weather_loc": "上海",
         "hero_name": "杨润德",
         "hero_title": "<a href=\"https://www.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">上海交通大学</a><span class=\"hero-title-separator\">·</span><a href=\"https://ai.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">人工智能学院</a> <span class=\"hero-role\">本科生</span>",
@@ -1482,19 +1495,27 @@ const i18n = {
         "hero_location": "中国 上海",
         "life_card_title": "科研之外",
         "life_card_desc": "足迹地图、书影、随笔，以及更多。",
-        "life_card_cta": "进入星空",
         "news_1": "期末终验考完啦！",
         "proj_appcopilot": "一个多模态多智能体设备端助手，探索工具使用、规划和鲁棒的 UI 定位。",
-        "proj_teachmaster": "一个多智能体框架，使用代码作为中间语义表示，自动生成结构化的教育视频。"
+        "proj_teachmaster": "一个多智能体框架，使用代码作为中间语义表示，自动生成结构化的教育视频。",
+        "cap_meteor": "猎户座大星云，2025",
+        "cap_nari": "观星营地",
+        "cap_qiandaohu": "千岛湖日落",
+        "cap_road": "千岛湖路上",
+        "cap_campus": "美哉吾校",
+        "cap_zijinshan": "紫金山，南京",
+        "cap_cake": "烘焙社草莓蛋糕"
     },
     "zh-TW": {
         "nav_about": "關於",
         "nav_news": "動態",
         "nav_pubs": "精選論文",
         "nav_projects": "項目",
+        "nav_gallery": "光影",
         "title_news": "動態",
         "title_pubs": "精選論文",
         "title_projects": "項目經歷",
+        "title_gallery": "光影",
         "weather_loc": "上海",
         "hero_name": "楊潤德",
         "hero_title": "<a href=\"https://www.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">上海交通大學</a><span class=\"hero-title-separator\">·</span><a href=\"https://ai.sjtu.edu.cn/\" target=\"_blank\" rel=\"noopener noreferrer\">人工智能學院</a> <span class=\"hero-role\">本科生</span>",
@@ -1502,10 +1523,16 @@ const i18n = {
         "hero_location": "中國 上海",
         "life_card_title": "科研之外",
         "life_card_desc": "足跡地圖、書影、隨筆，以及更多。",
-        "life_card_cta": "進入星空",
         "news_1": "期末终于考完啦！",
         "proj_appcopilot": "一個多模態多智能體設備端助手，探索工具使用、規劃和魯棒的 UI 定位。",
-        "proj_teachmaster": "一個多智能體框架，使用代碼作為中間語義表示，自動生成結構化的教育視頻。"
+        "proj_teachmaster": "一個多智能體框架，使用代碼作為中間語義表示，自動生成結構化的教育視頻。",
+        "cap_meteor": "獵戶座大星雲，2025",
+        "cap_nari": "觀星營地",
+        "cap_qiandaohu": "千島湖日落",
+        "cap_road": "千島湖路上",
+        "cap_campus": "美哉吾校",
+        "cap_zijinshan": "紫金山，南京",
+        "cap_cake": "烘焙社草莓蛋糕"
     }
 };
 
@@ -1527,8 +1554,7 @@ function setLang(lang) {
         if (btn.textContent.trim() === labels[lang]) btn.classList.add('active');
     });
 
-    // Update hero name
-    document.getElementById('heroName').innerHTML = data.hero_name;
+    window.SiteIdentity?.setLanguage(lang);
 
     // Update all data-key elements
     document.querySelectorAll('[data-key]').forEach(el => {
