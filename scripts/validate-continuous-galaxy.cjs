@@ -103,49 +103,50 @@ async function desktop(browser) {
         check((await pose(page)).distance > 10000, 'Closing a card restores the galactic view it was opened from');
         await page.evaluate(() => { lifeStarMap.reset(); document.getElementById('galaxyWorld').focus(); });
         await settle(page);
-        const beforeMove = await pose(page);
+        check(await page.locator('.galactic-tools button').count() === 3
+            && await page.locator('[data-flight-action], [data-flight-key], .galactic-pad').count() === 0,
+        'The controls expose only zoom and reset, with no free-flight switch or directional pad');
+        const beforeKeys = await pose(page);
+        for (const key of ['w', 'a', 's', 'd', 'q', 'e']) {
+            await page.keyboard.down(key);
+            await page.waitForTimeout(120);
+            await page.keyboard.up(key);
+        }
+        await page.keyboard.down('Shift');
         await page.keyboard.down('w');
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(200);
         await page.keyboard.up('w');
-        await page.keyboard.press('Escape');
-        const moved = await pose(page);
-        const displacement = moved.position.map((value, axis) => value - beforeMove.position[axis]);
-        check(magnitude(displacement) > 15 && moved.distance === beforeMove.distance && moved.freeFlight,
-            'W moves the camera through space without changing zoom and enables free flight');
-        check(displacement.reduce((sum, value, axis) => sum + value * beforeMove.forward[axis], 0) / magnitude(displacement) > 0.999,
-            'Forward movement follows the camera orientation');
-        await page.evaluate(() => lifeStarMap.zoom(120));
-        await settle(page);
-        const freeZoom = await pose(page);
-        check(separation(freeZoom.position, moved.position) > 20 && freeZoom.distance === moved.distance,
-            'Free-flight zoom travels at the current spatial scale without changing a hidden orbit radius');
+        await page.keyboard.up('Shift');
+        check(separation((await pose(page)).position, beforeKeys.position) < 0.001,
+            'WASD, QE and Shift no longer translate or rotate the camera');
         const beforeLook = await pose(page);
-        await page.mouse.move(400, 300);
+        await page.mouse.move(1050, 300);
         await page.mouse.down({ button: 'right' });
-        await page.mouse.move(520, 345, { steps: 12 });
+        await page.mouse.move(1170, 345, { steps: 12 });
         await page.mouse.up({ button: 'right' });
         const looked = await pose(page);
-        check(separation(looked.position, beforeLook.position) < 0.001 && Math.abs(looked.yaw - beforeLook.yaw) > 0.1,
-            'Free-flight mouse look rotates at a fixed camera position');
-        await page.keyboard.down('d');
-        await page.waitForTimeout(220);
-        await page.evaluate(() => window.dispatchEvent(new Event('blur')));
-        const blurred = await pose(page);
-        await page.waitForTimeout(240);
-        check(separation((await pose(page)).position, blurred.position) < 0.001
-            && await page.evaluate(() => lifeStarMap.navigation.keys.size === 0), 'Losing focus stops movement immediately');
-        await page.keyboard.up('d');
-        for (const [key, basis, sign] of [['a', 'right', -1], ['d', 'right', 1], ['s', 'forward', -1], ['q', 'up', -1], ['e', 'up', 1]]) {
-            const before = await page.evaluate(basis => ({ position: lifeStarMap.view().position, axis: lifeStarMap.view()[basis] }), basis);
-            await page.keyboard.down(key);
-            await page.waitForTimeout(240);
-            await page.keyboard.up(key);
-            await page.keyboard.press('Escape');
+        check(separation(looked.center, beforeLook.center) < 0.001 && looked.distance === beforeLook.distance
+            && Math.abs(looked.yaw - beforeLook.yaw) > 0.1, 'Right dragging orbits around the existing viewpoint');
+        for (const button of ['left', 'middle']) {
+            const before = await pose(page);
+            await page.mouse.move(1050, 300);
+            await page.mouse.down({ button });
+            await page.mouse.move(1120, 330, { steps: 8 });
+            await page.mouse.up({ button });
             const after = await pose(page);
-            const shift = after.position.map((value, axis) => value - before.position[axis]);
-            check(magnitude(shift) > 4 && shift.reduce((sum, value, axis) => sum + value * before.axis[axis] * sign, 0) / magnitude(shift) > 0.999,
-                `${key.toUpperCase()} translates along the expected camera axis`);
+            check(separation(after.center, before.center) < 0.001 && after.distance === before.distance
+                && Math.abs(after.yaw - before.yaw) > 0.1, `${button} dragging rotates without panning the camera`);
         }
+        await page.keyboard.press('Shift+ArrowRight');
+        check(separation((await pose(page)).center, initial.center) < 0.001, 'Shift-arrow controls cannot pan the viewpoint');
+        const beforeZoom = await pose(page);
+        await page.keyboard.down('w');
+        await page.mouse.wheel(0, 120);
+        await settle(page);
+        await page.keyboard.up('w');
+        const zoomed = await pose(page);
+        check(zoomed.distance > beforeZoom.distance && separation(zoomed.center, initial.center) < 0.001,
+            'The wheel keeps zooming around the original centre even while W is held');
         await page.evaluate(() => {
             const input = document.createElement('input');
             input.id = 'galaxy-test-input';
@@ -159,28 +160,7 @@ async function desktop(browser) {
         await page.evaluate(() => { document.getElementById('galaxy-test-input').remove(); lifeStarMap.reset(); });
         await settle(page);
         const reset = await pose(page);
-        check(separation(reset.position, initial.position) < 0.001 && !reset.freeFlight, 'Initial view restores the exact starting camera and orbit controls');
-        const mixedInput = await page.evaluate(() => {
-            const map = lifeStarMap;
-            map.navigation.setMode(true);
-            for (let step = 0; step < 6; step++) map.zoom(120);
-            const before = map.view().position;
-            const pending = map.target.center.map((value, axis) => value - map.center[axis]);
-            document.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW', key: 'w', bubbles: true }));
-            map.navigation.tick(1 / 60, performance.now());
-            document.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyW', key: 'w', bubbles: true }));
-            map.navigation.clear();
-            return {
-                movement: Math.hypot(...map.view().position.map((value, axis) => value - before[axis])),
-                pendingBefore: pending,
-                pendingAfter: map.target.center.map((value, axis) => value - map.center[axis])
-            };
-        });
-        check(magnitude(mixedInput.pendingBefore) > 2000 && mixedInput.movement > 0 && mixedInput.movement < 10
-            && separation(mixedInput.pendingBefore, mixedInput.pendingAfter) < 0.001,
-            'WASD during a pending wheel movement preserves smooth travel without jumping to its destination');
-        await page.evaluate(() => lifeStarMap.reset());
-        await settle(page);
+        check(separation(reset.position, initial.position) < 0.001, 'Initial view restores the exact starting camera and orbit controls');
         const calibration = await page.evaluate(() => ({
             solar: GALACTIC_SPACE.toDisk(GALACTIC_SPACE.solar),
             restored: GALACTIC_SPACE.fromDisk(GALACTIC_SPACE.toDisk(GALACTIC_SPACE.solar))
@@ -234,21 +214,33 @@ async function mobile(browser) {
             await page.locator(`.lang-btn[data-lang="${language}"]`).tap();
             const bounds = await page.locator('.galactic-navigation').boundingBox();
             check(bounds.x >= 0 && bounds.x + bounds.width <= 390 && bounds.y + bounds.height <= 844,
-                `${language}: mobile camera controls fit the screen`);
+                `${language}: mobile view controls fit the screen`);
+            check(!/WASD|Q\s*\/\s*E|Free flight|自由飛行|自由飞行|平移/.test(await page.locator('.galactic-navigation, #mapInputHint').allTextContents().then(text => text.join(' '))),
+                `${language}: movement controls and instructions are removed`);
         }
-        await page.locator('[data-flight-action="mode"]').tap();
-        check(await page.locator('.galactic-pad').isVisible(), 'Touch devices can reveal directional flight controls');
         const initial = await pose(page);
-        const forwardButton = await page.locator('[data-flight-key="KeyW"]').boundingBox();
-        const touch = await context.newCDPSession(page);
-        await touch.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: forwardButton.x + forwardButton.width / 2, y: forwardButton.y + forwardButton.height / 2 }] });
-        await page.waitForTimeout(220);
-        await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-        check(separation((await pose(page)).position, initial.position) > 0, 'Touch forward movement translates the camera');
-        await page.screenshot({ path: path.join(output, 'mobile.png') });
-        await page.locator('[data-flight-action="reset"]').tap();
+        await page.locator('[data-map-action="out"]').tap();
         await settle(page);
-        check(!(await pose(page)).freeFlight, 'Reduced-motion reset returns to the mobile starting view');
+        check((await pose(page)).distance > initial.distance && separation((await pose(page)).center, initial.center) < 0.001,
+            'Touch zoom controls retain the original orbit centre');
+        await page.locator('[data-map-action="reset"]').tap();
+        await settle(page);
+        const touch = await context.newCDPSession(page);
+        await touch.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 300, y: 300, id: 1 }] });
+        await touch.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 330, y: 320, id: 1 }] });
+        await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        check(Math.abs((await pose(page)).yaw - initial.yaw) > 0.1 && separation((await pose(page)).center, initial.center) < 0.001,
+            'A single finger rotates around the original viewpoint');
+        await touch.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 140, y: 420, id: 1 }, { x: 240, y: 420, id: 2 }] });
+        await touch.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 120, y: 440, id: 1 }, { x: 280, y: 440, id: 2 }] });
+        await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        await settle(page);
+        check((await pose(page)).distance < initial.distance && separation((await pose(page)).center, initial.center) < 0.001,
+            'Two-finger pinch zooms without translating the viewpoint');
+        await page.locator('[data-map-action="reset"]').tap();
+        await settle(page);
+        check(separation((await pose(page)).position, initial.position) < 0.001, 'Reduced-motion reset returns to the original mobile view');
+        await page.screenshot({ path: path.join(output, 'mobile.png') });
         await page.evaluate(() => { lifeStarMap.target.distance = 32000; });
         await settle(page);
         check(await page.evaluate(() => lifeStarMap.renderer.dpr <= 2 && lifeStarMap.renderer.ready

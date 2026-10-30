@@ -1,4 +1,4 @@
-const STAR_MAP_LIMITS = Object.freeze({ minDistance: 2, maxDistance: 160000, panRadius: 2000000, pitch: Math.PI * 0.495 });
+const STAR_MAP_LIMITS = Object.freeze({ minDistance: 2, maxDistance: 160000, pitch: Math.PI * 0.495 });
 
 class LifeStarMap {
     constructor() {
@@ -306,31 +306,16 @@ class LifeStarMap {
         if (this.deepSky?.active) return this.deepSky.orbit(deltaX, deltaY);
         if (!this.canMove()) return;
         this.lastInputTime = performance.now();
-        const previous = this.view().position;
         this.target.yaw -= deltaX * 0.0042;
         this.target.pitch = clamp(this.target.pitch + deltaY * 0.0042, -STAR_MAP_LIMITS.pitch, STAR_MAP_LIMITS.pitch);
         this.yaw = this.target.yaw;
         this.pitch = this.target.pitch;
-        if (this.navigation?.freeFlight) {
-            const next = this.view().position;
-            this.center = this.center.map((value, axis) => value + previous[axis] - next[axis]);
-            this.target.center = this.center.slice();
-        }
     }
 
     zoom(delta) {
         if (this.deepSky?.active) return this.deepSky.zoom(delta);
         if (!this.canMove()) return;
         this.lastInputTime = performance.now();
-        if (this.navigation?.freeFlight) {
-            const view = this.view();
-            const position = this.target.center.map((value, axis) => value - view.forward[axis] * this.target.distance);
-            const range = Math.max(80, Math.hypot(...position.map((value, axis) => value - GALACTIC_SPACE.solar[axis])));
-            const travel = range * Math.expm1(clamp(delta, -180, 180) * 0.0026);
-            const next = this.target.center.map((value, axis) => value - view.forward[axis] * travel);
-            if (Math.hypot(...next) < STAR_MAP_LIMITS.panRadius) this.target.center = next;
-            return;
-        }
         const desired = this.target.distance * Math.exp(clamp(delta, -180, 180) * 0.0026);
         this.target.distance = clamp(desired, STAR_MAP_LIMITS.minDistance, STAR_MAP_LIMITS.maxDistance);
     }
@@ -352,17 +337,6 @@ class LifeStarMap {
         this.reset();
     }
 
-    pan(deltaX, deltaY) {
-        if (!this.canMove()) return;
-        this.lastInputTime = performance.now();
-        const view = this.currentView || this.view();
-        const scale = this.distance * 2 * Math.tan(view.fov * 0.5) / window.innerHeight;
-        const next = this.target.center.map((value, axis) => value - view.right[axis] * deltaX * scale + view.up[axis] * deltaY * scale);
-        const length = vectorLength(next);
-        this.target.center = length > STAR_MAP_LIMITS.panRadius ? next.map(value => value / length * STAR_MAP_LIMITS.panRadius) : next;
-        this.center = this.target.center.slice();
-    }
-
     canMove() {
         if (this.deepSky?.active) return false;
         return state.hasEntered && !state.modalOpen && !state.gateOpen && !state.sectionDrawerOpen && !this.flight && state.scene === 'roam';
@@ -380,13 +354,11 @@ class LifeStarMap {
     }
 
     snapshot() {
-        return { yaw: this.yaw, pitch: this.pitch, distance: this.distance, center: this.center.slice(), galaxy: this.galaxyMix,
-            freeFlight: this.navigation?.freeFlight || false };
+        return { yaw: this.yaw, pitch: this.pitch, distance: this.distance, center: this.center.slice(), galaxy: this.galaxyMix };
     }
 
     animateTo(destination, completion = null) {
         this.clearInput();
-        if (this.navigation) this.navigation.freeFlight = Boolean(destination.freeFlight);
         this.flight = { from: this.snapshot(), to: destination, fromGalaxy: this.galaxyMix, toGalaxy: destination.galaxy ?? 0,
             started: performance.now(), duration: REDUCED_MOTION ? 0 : 850, completion };
         this.target = { ...destination, center: destination.center.slice() };
@@ -600,7 +572,7 @@ class LifeStarMap {
             this.distance = lerp(this.distance, this.target.distance, response);
             this.center = this.center.map((value, axis) => lerp(value, this.target.center[axis], response));
         }
-        this.navigation?.tick(delta, time);
+        this.navigation?.update(time);
         this.galaxyMix = 1 - GALACTIC_SPACE.localVisibility(this.view().position);
         this.mapLevel = this.galaxyMix > 0.72 ? 'galaxy' : 'local';
         this.currentView = this.view();
@@ -751,7 +723,6 @@ class LifeStarMap {
     }
 
     clearInput() {
-        this.navigation?.clear();
         this.cancelPendingGalaxy();
         for (const pointerId of this.pointers.keys()) {
             if (dom.world.hasPointerCapture?.(pointerId)) dom.world.releasePointerCapture(pointerId);
@@ -851,14 +822,12 @@ class LifeStarMap {
             const pointers = Array.from(this.pointers.values());
             if (pointers.length >= 2) {
                 const [first, second] = pointers;
-                const gesture = { distance: Math.hypot(first.x - second.x, first.y - second.y), x: (first.x + second.x) * 0.5, y: (first.y + second.y) * 0.5 };
+                const gesture = { distance: Math.hypot(first.x - second.x, first.y - second.y) };
                 if (this.gesture) {
                     this.zoom(Math.log(Math.max(1, this.gesture.distance) / Math.max(1, gesture.distance)) / 0.0026);
-                    this.pan(gesture.x - this.gesture.x, gesture.y - this.gesture.y);
                 }
                 this.gesture = gesture;
-            } else if (pointer.type !== 'mouse' || pointer.button === 2 && !event.shiftKey) this.orbit(deltaX, deltaY);
-            else this.pan(deltaX, deltaY);
+            } else this.orbit(deltaX, deltaY);
         });
         const release = event => {
             const pointer = this.pointers.get(event.pointerId);
@@ -927,8 +896,7 @@ class LifeStarMap {
             const movements = { ArrowLeft: [-14, 0], ArrowRight: [14, 0], ArrowUp: [0, -14], ArrowDown: [0, 14] };
             if (movements[event.key]) {
                 event.preventDefault();
-                if (event.shiftKey) this.pan(...movements[event.key]);
-                else this.orbit(...movements[event.key]);
+                this.orbit(...movements[event.key]);
             } else if (event.key === '+' || event.key === '=') { event.preventDefault(); this.zoom(-65); }
             else if (event.key === '-') { event.preventDefault(); this.zoom(65); }
             else if (event.key.toLowerCase() === 'r' || event.key === 'Home') { event.preventDefault(); this.reset(); }
@@ -948,19 +916,13 @@ class LifeStarMap {
         this.navigation?.updateCopy();
         if (this.deepSky?.active) { this.deepSky.updateCopy(); return; }
         const copies = {
-            en: { orbit: 'Right drag / Two-finger slide · orbit', pan: 'Left drag · pan', zoom: 'Mouse wheel / Pinch · zoom', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'Constellation shapes and stellar colours follow Hipparcos; distances are composed for exploration. The surrounding arm stars and clouds are a 3D illustration; the distant panorama is a dimmed, aligned ESO/S. Brunier photograph. The galaxy adapts ESA’s 2025 Gaia-based artist impression, with neutralised diffuse colour, clearer dust structure and a dust-occluded volumetric bulge. This is a reconstruction of the Milky Way’s external appearance.', scale: 'NEAR / FAR' },
-            'zh-CN': { orbit: '右键拖动 / 触控板双指滑动 · 旋转', pan: '左键拖动 · 平移', zoom: '滚轮 / 双指捏合 · 缩放', touch: '单指旋转 / 双指缩放与平移', select: '选择一个星座', reset: '回到全景', home: '返回主页', closer: '拉近星图', farther: '拉远星图', overview: '局部星图', detail: '星座', flight: '正在靠近', note: '星座形状与恒星颜色参考 Hipparcos 星表，展示距离经过编排。周围旋臂的星群与云层为三维示意；最远景采用调暗、对齐后的 ESO/S. Brunier 银河实拍。银河外观改编自 ESA 2025 年基于 Gaia 观测的艺术重建；调整了弥散星光配色与尘埃层次，并加入受前景尘埃遮挡的体积核球。', scale: '近 / 远' },
-            'zh-TW': { orbit: '右鍵拖動 / 觸控板雙指滑動 · 旋轉', pan: '左鍵拖動 · 平移', zoom: '滾輪 / 雙指捏合 · 縮放', touch: '單指旋轉 / 雙指縮放與平移', select: '選擇一個星座', reset: '回到全景', home: '返回主頁', closer: '拉近星圖', farther: '拉遠星圖', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '星座形狀與恆星顏色參考 Hipparcos 星表，展示距離經過編排。周圍旋臂的星群與雲層為三維示意；最遠景採用調暗、對齊後的 ESO/S. Brunier 銀河實拍。銀河外觀改編自 ESA 2025 年基於 Gaia 觀測的藝術重建；調整了瀰漫星光配色與塵埃層次，並加入受前景塵埃遮擋的體積核球。', scale: '近 / 遠' }
+            en: { orbit: 'Drag / Two-finger slide · orbit', zoom: 'Wheel / Pinch · zoom   R · initial view', touch: 'Drag · orbit / Pinch · zoom', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'One continuous galactic space. The Sun is placed 8.178 kpc from the centre and 20.8 pc above the plane. Life constellations retain their composed navigation layout; they are not an astrometric 3D catalogue. The nearby Hipparcos stars retain their original display distances. The ESO/S. Brunier panorama is a local observer reference. The large-scale disk follows ESA/Gaia’s reconstruction; stellar populations and volume depths are modelled, not individually observed.' },
+            'zh-CN': { orbit: '拖动 / 触控板双指滑动 · 旋转', zoom: '滚轮 / 捏合 · 缩放   R · 初始视角', touch: '单指旋转 / 双指缩放', overview: '局部星图', detail: '星座', flight: '正在靠近', note: '同一空间内连续探索银河。太阳距银心 8.178 千秒差距、位于银盘上方 20.8 秒差距。生活星座保留原有的导航编排，附近 Hipparcos 恒星保留原展示距离，并非精确三维测绘。ESO/S. Brunier 实拍只用于附近观察者的星空参考。整体银盘依据 ESA/Gaia 重建，恒星群分布与体积厚度为模型，不代表每颗恒星均已实测。' },
+            'zh-TW': { orbit: '拖動 / 觸控板雙指滑動 · 旋轉', zoom: '滾輪 / 捏合 · 縮放   R · 初始視角', touch: '單指旋轉 / 雙指縮放', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '同一空間內連續探索銀河。太陽距銀心 8.178 千秒差距、位於銀盤上方 20.8 秒差距。生活星座保留原有的導航編排，附近 Hipparcos 恆星保留原展示距離，並非精確三維測繪。ESO/S. Brunier 實拍只用於附近觀察者的星空參考。整體銀盤依據 ESA/Gaia 重建，恆星群分布與體積厚度為模型，不代表每顆恆星均已實測。' }
         };
         const copy = copies[state.currentLang] || copies.en;
-        const flightCopy = {
-            en: { orbit: this.navigation?.freeFlight ? 'Right drag · look around' : 'Right drag · orbit', pan: 'WASD · move   Q / E · down / up   Shift · faster', zoom: 'Wheel · travel   R · initial view', note: 'One continuous galactic space. The Sun is placed 8.178 kpc from the centre and 20.8 pc above the plane. Life constellations retain their composed navigation layout; they are not an astrometric 3D catalogue. The nearby Hipparcos stars retain their original display distances. The ESO/S. Brunier panorama is a local observer reference. The large-scale disk follows ESA/Gaia’s reconstruction; stellar populations and volume depths are modelled, not individually observed.' },
-            'zh-CN': { orbit: this.navigation?.freeFlight ? '右键拖动 · 环顾' : '右键拖动 · 环绕', pan: 'WASD · 移动   Q / E · 下降 / 上升   Shift · 加速', zoom: '滚轮 · 远近   R · 初始视角', note: '同一空间内连续探索银河。太阳距银心 8.178 千秒差距、位于银盘上方 20.8 秒差距。生活星座保留原有的导航编排，附近 Hipparcos 恒星保留原展示距离，并非精确三维测绘。ESO/S. Brunier 实拍只用于附近观察者的星空参考。整体银盘依据 ESA/Gaia 重建，恒星群分布与体积厚度为模型，不代表每颗恒星均已实测。' },
-            'zh-TW': { orbit: this.navigation?.freeFlight ? '右鍵拖動 · 環顧' : '右鍵拖動 · 環繞', pan: 'WASD · 移動   Q / E · 下降 / 上升   Shift · 加速', zoom: '滾輪 · 遠近   R · 初始視角', note: '同一空間內連續探索銀河。太陽距銀心 8.178 千秒差距、位於銀盤上方 20.8 秒差距。生活星座保留原有的導航編排，附近 Hipparcos 恆星保留原展示距離，並非精確三維測繪。ESO/S. Brunier 實拍只用於附近觀察者的星空參考。整體銀盤依據 ESA/Gaia 重建，恆星群分布與體積厚度為模型，不代表每顆恆星均已實測。' }
-        };
-        Object.assign(copy, flightCopy[state.currentLang] || flightCopy.en);
         document.querySelectorAll('[data-map-copy]').forEach(element => { element.textContent = copy[element.dataset.mapCopy] || ''; });
-        document.getElementById('mapInputHint').textContent = COARSE_POINTER ? copy.touch : `${copy.orbit}     ${copy.pan}     ${copy.zoom}`;
+        document.getElementById('mapInputHint').textContent = COARSE_POINTER ? copy.touch : `${copy.orbit}     ${copy.zoom}`;
         const preparing = { en: 'Preparing galaxy', 'zh-CN': '正在准备银河', 'zh-TW': '正在準備銀河' };
         dom.status.textContent = this.pendingGalaxy ? preparing[state.currentLang] || preparing.en
             : state.scene === 'detail' ? `${copy.detail} / ${portalName(this.selected, state.currentLang)}` : state.scene === 'flying' ? copy.flight : copy.overview;

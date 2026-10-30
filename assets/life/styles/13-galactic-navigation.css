@@ -10,7 +10,7 @@
     font: 10px var(--ui);
 }
 
-.galactic-navigation[hidden], .galactic-pad[hidden] { display: none; }
+.galactic-navigation[hidden] { display: none; }
 .deep-sky-open .galactic-navigation { display: none; }
 
 .galactic-distance {
@@ -18,7 +18,7 @@
     text-shadow: 0 1px 10px #000;
 }
 
-.galactic-tools, .galactic-pad {
+.galactic-tools {
     display: flex;
     align-items: center;
     gap: 2px;
@@ -48,10 +48,7 @@
 }
 
 .galactic-navigation button:focus-visible { outline: 1px solid #b7cad1; }
-.galactic-navigation button[aria-pressed="true"] { color: #ecdfc7; background: #dbd3b510; }
 .galactic-tools button:nth-child(-n+2) { font-size: 18px; }
-.galactic-pad { display: grid; grid-template-columns: repeat(3, 44px); border-radius: 18px; }
-.galactic-pad button { min-height: 44px; }
 
 body:has(.galactic-navigation) .map-footer { max-width: calc(100vw - 375px); }
 
@@ -60,6 +57,4 @@ body:has(.galactic-navigation) .map-footer { max-width: calc(100vw - 375px); }
     .galactic-navigation { right: 18px; bottom: max(16px, env(safe-area-inset-bottom)); gap: 6px; }
     .galactic-distance { font-size: 9px; }
     .galactic-tools button { min-height: 40px; min-width: 40px; }
-    .galactic-pad { position: absolute; bottom: 98px; right: 0; }
-    body:has(.galactic-pad:not([hidden])) .map-footer { max-width: calc(100vw - 190px); }
 }
