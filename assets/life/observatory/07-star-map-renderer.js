@@ -346,6 +346,7 @@ class StarMapRenderer {
     createGalacticDisk() {
         const context = this.gl;
         const anisotropy = context.getExtension('EXT_texture_filter_anisotropic');
+        this.galacticTextureSizes = [];
         for (const name of ['galacticDisk', 'galacticDust']) {
             this[name] = context.createTexture();
             context.bindTexture(context.TEXTURE_2D, this[name]);
@@ -354,7 +355,7 @@ class StarMapRenderer {
             context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_S, context.CLAMP_TO_EDGE);
             context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_T, context.CLAMP_TO_EDGE);
             if (anisotropy) context.texParameterf(context.TEXTURE_2D, anisotropy.TEXTURE_MAX_ANISOTROPY_EXT,
-                Math.min(8, context.getParameter(anisotropy.MAX_TEXTURE_MAX_ANISOTROPY_EXT)));
+                Math.min(16, context.getParameter(anisotropy.MAX_TEXTURE_MAX_ANISOTROPY_EXT)));
             context.texImage2D(context.TEXTURE_2D, 0, context.RGBA, 1, 1, 0, context.RGBA, context.UNSIGNED_BYTE,
                 new Uint8Array([0, 0, 0, 0]));
             context.generateMipmap(context.TEXTURE_2D);
@@ -463,7 +464,7 @@ class StarMapRenderer {
     loadGalacticAssets() {
         if (this.galacticAssetsPromise) return this.galacticAssetsPromise;
         const load = async name => {
-            const response = await fetch(`assets/life/galaxy/${name}.webp?v=20261017-natural-galaxy`);
+            const response = await fetch(`assets/life/galaxy/${name}.webp?v=20261030-galaxy-detail`);
             if (!response.ok) throw new Error(`Cannot load ${name}: ${response.status}`);
             const blob = await response.blob();
             const source = URL.createObjectURL(blob);
@@ -526,13 +527,17 @@ class StarMapRenderer {
         const sources = [this.galacticImage, this.galacticDustImage];
         for (const [index, image] of sources.entries()) {
             if (!image || version !== this.contextVersion || !this.ready) continue;
-            const limit = this.maxTextureSize;
+            const compact = COARSE_POINTER || (navigator.deviceMemory && navigator.deviceMemory <= 4);
+            const limit = Math.min(this.maxTextureSize, compact ? 4096 : 8192);
+            const width = Math.min(2 ** Math.ceil(Math.log2(image.width)), limit);
+            const height = Math.min(2 ** Math.ceil(Math.log2(image.height)), limit);
             let upload = image;
             let bitmap = null;
             if (this.galacticBlobs?.[index] && typeof createImageBitmap === 'function') {
                 const options = { imageOrientation: 'flipY', premultiplyAlpha: 'none' };
-                if (image.width > limit || image.height > limit) {
-                    options.resizeWidth = options.resizeHeight = Math.min(2048, limit);
+                if (image.width !== width || image.height !== height) {
+                    options.resizeWidth = width;
+                    options.resizeHeight = height;
                     options.resizeQuality = 'high';
                 }
                 try {
@@ -545,9 +550,10 @@ class StarMapRenderer {
             try {
                 await new Promise(resolve => requestAnimationFrame(resolve));
                 if (version !== this.contextVersion || !this.ready) return;
-                if (!bitmap && (image.width > limit || image.height > limit)) {
+                if (!bitmap && (image.width !== width || image.height !== height)) {
                     upload = document.createElement('canvas');
-                    upload.width = upload.height = Math.min(2048, limit);
+                    upload.width = width;
+                    upload.height = height;
                     upload.getContext('2d').drawImage(image, 0, 0, upload.width, upload.height);
                 }
                 context.activeTexture(context.TEXTURE0);
@@ -557,6 +563,7 @@ class StarMapRenderer {
                 context.texImage2D(context.TEXTURE_2D, 0, context.RGBA, context.RGBA, context.UNSIGNED_BYTE, upload);
                 context.generateMipmap(context.TEXTURE_2D);
                 context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, false);
+                this.galacticTextureSizes[index] = [width, height];
             } finally {
                 bitmap?.close();
             }

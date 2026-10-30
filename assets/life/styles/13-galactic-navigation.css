@@ -1,0 +1,65 @@
+.galactic-navigation {
+    position: fixed;
+    right: max(28px, env(safe-area-inset-right));
+    bottom: max(24px, env(safe-area-inset-bottom));
+    z-index: 12;
+    display: grid;
+    justify-items: end;
+    gap: 10px;
+    color: #a6b4c5;
+    font: 10px var(--ui);
+}
+
+.galactic-navigation[hidden], .galactic-pad[hidden] { display: none; }
+.deep-sky-open .galactic-navigation { display: none; }
+
+.galactic-distance {
+    letter-spacing: 0.08em;
+    text-shadow: 0 1px 10px #000;
+}
+
+.galactic-tools, .galactic-pad {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid #a3b4c32b;
+    border-radius: 22px;
+    background: #080d1594;
+    backdrop-filter: blur(12px);
+}
+
+.galactic-navigation button {
+    min-width: 34px;
+    min-height: 34px;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 18px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.galactic-navigation button:hover, .galactic-navigation button:focus-visible {
+    color: #fff2d9;
+    background: #c6d5e314;
+}
+
+.galactic-navigation button:focus-visible { outline: 1px solid #b7cad1; }
+.galactic-navigation button[aria-pressed="true"] { color: #ecdfc7; background: #dbd3b510; }
+.galactic-tools button:nth-child(-n+2) { font-size: 18px; }
+.galactic-pad { display: grid; grid-template-columns: repeat(3, 44px); border-radius: 18px; }
+.galactic-pad button { min-height: 44px; }
+
+body:has(.galactic-navigation) .map-footer { max-width: calc(100vw - 375px); }
+
+@media (max-width: 900px) {
+    body:has(.galactic-navigation) .map-footer { bottom: 78px; max-width: calc(100vw - 48px); }
+    .galactic-navigation { right: 18px; bottom: max(16px, env(safe-area-inset-bottom)); gap: 6px; }
+    .galactic-distance { font-size: 9px; }
+    .galactic-tools button { min-height: 40px; min-width: 40px; }
+    .galactic-pad { position: absolute; bottom: 98px; right: 0; }
+    body:has(.galactic-pad:not([hidden])) .map-footer { max-width: calc(100vw - 190px); }
+}

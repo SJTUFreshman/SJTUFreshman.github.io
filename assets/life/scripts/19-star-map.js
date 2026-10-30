@@ -1,4 +1,4 @@
-const STAR_MAP_LIMITS = Object.freeze({ minDistance: 72, localMaxDistance: 610, maxDistance: 800, panRadius: 155, pitch: Math.PI * 0.475 });
+const STAR_MAP_LIMITS = Object.freeze({ minDistance: 2, maxDistance: 160000, panRadius: 2000000, pitch: Math.PI * 0.495 });
 
 class LifeStarMap {
     constructor() {
@@ -43,6 +43,8 @@ class LifeStarMap {
         );
         this.resize();
         this.bindInputs();
+        this.navigation = new GalacticNavigation(this);
+        this.renderer.prepareGalacticAssets();
         setGateState(false);
         this.enter();
         this.updateCopy();
@@ -129,9 +131,9 @@ class LifeStarMap {
 
     buildEntities() {
         this.entities = [
-            { id: 'solar', position: [-47, 10, 6], level: 'local', names: ['Solar System', '太阳系', '太陽系'] },
-            { id: 'region', position: [112, 2, 74], level: 'galaxy', names: ['Our neighbourhood', '我们的星域', '我們的星域'], subtitles: ['Explore the constellations', '进入生活星座', '進入生活星座'] },
-            { id: 'm31', position: [-420, 50, -180], level: 'galaxy', names: ['Andromeda Galaxy', '仙女座星系', '仙女座星系'], subtitles: ['M31 · Beyond the Milky Way', 'M31 · 银河之外', 'M31 · 銀河之外'] }
+            { id: 'solar', position: GALACTIC_SPACE.solar.slice(), level: 'all', names: ['Solar System', '太阳系', '太陽系'] },
+            { id: 'center', position: GALACTIC_SPACE.center.slice(), level: 'galaxy', names: ['Galactic centre', '银河中心', '銀河中心'], subtitles: ['Sagittarius A*', '人马座 A*', '人馬座 A*'] },
+            { id: 'm31', position: [611000, -283000, -369000], level: 'galaxy', names: ['Andromeda Galaxy', '仙女座星系', '仙女座星系'], subtitles: ['M31 · Beyond the Milky Way', 'M31 · 银河之外', 'M31 · 銀河之外'] }
         ];
         const navigation = document.getElementById('mapEntities');
         this.entities.forEach(entity => {
@@ -144,8 +146,9 @@ class LifeStarMap {
                 if (this.suppressClickUntil > performance.now()) return;
                 if (entity.id === 'solar') {
                     this.openSolarDestination();
-                } else if (entity.id === 'region') {
-                    this.showLocal();
+                } else if (entity.id === 'center') {
+                    this.target.center = entity.position.slice();
+                    this.target.distance = 26000;
                 } else this.openDeepSky(entity);
             });
             entity.button = button;
@@ -165,7 +168,7 @@ class LifeStarMap {
         for (const entity of this.entities) {
             const key = `entity:${entity.id}`;
             const projected = this.project(entity.position, this.currentView, entity.level === 'galaxy');
-            const levelVisible = entity.level === 'galaxy' ? this.galaxyMix > 0.72 : this.galaxyMix < 0.23;
+            const levelVisible = entity.level === 'all' || (entity.level === 'galaxy' ? this.galaxyMix > 0.72 : this.galaxyMix < 0.23);
             if (entity.id === 'solar' && levelVisible && projected.visible) {
                 drawStarGlow(overlayContext, projected.x, projected.y, 2.6, 0.9, true);
             }
@@ -285,13 +288,11 @@ class LifeStarMap {
         const forward = outward.map(value => -value);
         const right = normalize(cross(forward, [0, 1, 0]));
         const up = normalize(cross(right, forward));
-        const galaxyFov = 2 * Math.atan(Math.tan(26 * DEG) * Math.max(1, 1.35 * window.innerHeight / window.innerWidth));
         return { position: this.center.map((value, axis) => value + outward[axis] * this.distance),
-            right, up, forward, fov: lerp(this.fov, galaxyFov, this.galaxyMix), galaxy: this.galaxyMix };
+            right, up, forward, fov: this.fov, galaxy: this.galaxyMix };
     }
 
     project(position, view = this.currentView || this.view(), absolute = false) {
-        if (!absolute) position = position.map((value, axis) => lerp(value, [112, 2, 74][axis] + value * 0.09, this.galaxyMix));
         const relative = position.map((value, axis) => value - view.position[axis]);
         const depth = dot(relative, view.forward);
         const focal = window.innerHeight * 0.5 / Math.tan(view.fov * 0.5);
@@ -305,28 +306,33 @@ class LifeStarMap {
         if (this.deepSky?.active) return this.deepSky.orbit(deltaX, deltaY);
         if (!this.canMove()) return;
         this.lastInputTime = performance.now();
+        const previous = this.view().position;
         this.target.yaw -= deltaX * 0.0042;
         this.target.pitch = clamp(this.target.pitch + deltaY * 0.0042, -STAR_MAP_LIMITS.pitch, STAR_MAP_LIMITS.pitch);
         this.yaw = this.target.yaw;
         this.pitch = this.target.pitch;
+        if (this.navigation?.freeFlight) {
+            const next = this.view().position;
+            this.center = this.center.map((value, axis) => value + previous[axis] - next[axis]);
+            this.target.center = this.center.slice();
+        }
     }
 
     zoom(delta) {
         if (this.deepSky?.active) return this.deepSky.zoom(delta);
-        if (delta < 0) this.cancelPendingGalaxy();
         if (!this.canMove()) return;
         this.lastInputTime = performance.now();
-        if (this.mapLevel === 'galaxy') {
-            if (delta < -0.5) this.showLocal();
+        if (this.navigation?.freeFlight) {
+            const view = this.view();
+            const position = this.target.center.map((value, axis) => value - view.forward[axis] * this.target.distance);
+            const range = Math.max(80, Math.hypot(...position.map((value, axis) => value - GALACTIC_SPACE.solar[axis])));
+            const travel = range * Math.expm1(clamp(delta, -180, 180) * 0.0026);
+            const next = this.target.center.map((value, axis) => value - view.forward[axis] * travel);
+            if (Math.hypot(...next) < STAR_MAP_LIMITS.panRadius) this.target.center = next;
             return;
         }
         const desired = this.target.distance * Math.exp(clamp(delta, -180, 180) * 0.0026);
-        if (delta > 0 && desired > STAR_MAP_LIMITS.localMaxDistance * 0.85) this.renderer.loadGalacticAssets();
-        if (desired > STAR_MAP_LIMITS.localMaxDistance && delta > 0) {
-            this.showGalaxy();
-            return;
-        }
-        this.target.distance = clamp(desired, STAR_MAP_LIMITS.minDistance, STAR_MAP_LIMITS.localMaxDistance);
+        this.target.distance = clamp(desired, STAR_MAP_LIMITS.minDistance, STAR_MAP_LIMITS.maxDistance);
     }
 
     cancelPendingGalaxy() {
@@ -336,58 +342,14 @@ class LifeStarMap {
         return true;
     }
 
-    async showGalaxy() {
-        if (!this.canMove() || this.mapLevel === 'galaxy' || this.pendingGalaxy) return;
-        const request = {};
-        this.pendingGalaxy = request;
-        this.updateCopy();
-        try {
-            await this.renderer.loadGalacticAssets();
-            if (this.pendingGalaxy !== request) return;
-            if (!this.canMove() || this.mapLevel !== 'local') {
-                this.cancelPendingGalaxy();
-                return;
-            }
-            await this.renderer.prepareGalacticAssets();
-            if (this.pendingGalaxy !== request) return;
-            if (!this.canMove() || this.mapLevel !== 'local') {
-                this.cancelPendingGalaxy();
-                return;
-            }
-        } catch (error) {
-            if (this.pendingGalaxy === request) this.cancelPendingGalaxy();
-            console.warn('Galaxy preparation failed:', error);
-            return;
-        }
-        this.pendingGalaxy = null;
-        this.localReturnPose = this.snapshot();
-        this.localReturnPose.distance = Math.min(this.localReturnPose.distance, this.homePose().distance);
-        state.scene = 'flying';
-        this.levelTransition = true;
-        this.animateTo({ yaw: this.yaw, pitch: 0.7, distance: STAR_MAP_LIMITS.maxDistance, center: [0, 0, 0], galaxy: 1 }, () => {
-            this.mapLevel = 'galaxy';
-            this.levelTransition = false;
-            state.scene = 'roam';
-            this.lastInputTime = performance.now();
-            this.updateCopy();
-        });
-        this.flight.duration = REDUCED_MOTION ? 0 : 1250;
-        this.updateCopy();
+    showGalaxy() {
+        if (!this.canMove()) return;
+        this.target.distance = Math.max(this.target.distance, 48000);
+        this.lastInputTime = performance.now();
     }
 
     showLocal() {
-        if (this.cancelPendingGalaxy()) return;
-        if (this.flight || state.modalOpen) return;
-        state.scene = 'flying';
-        this.levelTransition = true;
-        this.animateTo(this.localReturnPose || this.homePose(), () => {
-            this.mapLevel = 'local';
-            this.levelTransition = false;
-            state.scene = 'roam';
-            this.updateCopy();
-        });
-        this.flight.duration = REDUCED_MOTION ? 0 : 1150;
-        this.updateCopy();
+        this.reset();
     }
 
     pan(deltaX, deltaY) {
@@ -403,7 +365,7 @@ class LifeStarMap {
 
     canMove() {
         if (this.deepSky?.active) return false;
-        return state.hasEntered && !state.modalOpen && !state.gateOpen && !this.flight && state.scene === 'roam';
+        return state.hasEntered && !state.modalOpen && !state.gateOpen && !state.sectionDrawerOpen && !this.flight && state.scene === 'roam';
     }
 
     isMapSurface(target) {
@@ -418,11 +380,13 @@ class LifeStarMap {
     }
 
     snapshot() {
-        return { yaw: this.yaw, pitch: this.pitch, distance: this.distance, center: this.center.slice(), galaxy: this.galaxyMix };
+        return { yaw: this.yaw, pitch: this.pitch, distance: this.distance, center: this.center.slice(), galaxy: this.galaxyMix,
+            freeFlight: this.navigation?.freeFlight || false };
     }
 
     animateTo(destination, completion = null) {
         this.clearInput();
+        if (this.navigation) this.navigation.freeFlight = Boolean(destination.freeFlight);
         this.flight = { from: this.snapshot(), to: destination, fromGalaxy: this.galaxyMix, toGalaxy: destination.galaxy ?? 0,
             started: performance.now(), duration: REDUCED_MOTION ? 0 : 850, completion };
         this.target = { ...destination, center: destination.center.slice() };
@@ -625,7 +589,6 @@ class LifeStarMap {
             this.pitch = lerp(flight.from.pitch, flight.to.pitch, amount);
             this.distance = lerp(flight.from.distance, flight.to.distance, amount);
             this.center = flight.from.center.map((value, axis) => lerp(value, flight.to.center[axis], amount));
-            this.galaxyMix = lerp(flight.fromGalaxy, flight.toGalaxy, smoothstep(0, 1, progress));
             if (progress >= 1) {
                 this.flight = null;
                 flight.completion?.();
@@ -637,14 +600,11 @@ class LifeStarMap {
             this.distance = lerp(this.distance, this.target.distance, response);
             this.center = this.center.map((value, axis) => lerp(value, this.target.center[axis], response));
         }
-        if (this.frozenGalaxyMix != null) this.galaxyMix = this.frozenGalaxyMix;
-        const automaticOrbit = !REDUCED_MOTION && this.galaxyMix > 0.96 && !this.flight && !this.pointers.size
-            && !state.modalOpen && time - (this.lastInputTime || 0) > 4500;
-        if (automaticOrbit) {
-            this.target.yaw += delta * 0.014;
-        }
+        this.navigation?.tick(delta, time);
+        this.galaxyMix = 1 - GALACTIC_SPACE.localVisibility(this.view().position);
+        this.mapLevel = this.galaxyMix > 0.72 ? 'galaxy' : 'local';
         this.currentView = this.view();
-        const poseUnsettled = (!automaticOrbit && Math.abs(this.yaw - this.target.yaw) > 0.0001)
+        const poseUnsettled = Math.abs(this.yaw - this.target.yaw) > 0.0001
             || Math.abs(this.pitch - this.target.pitch) > 0.0001
             || Math.abs(this.distance - this.target.distance) > 0.01
             || this.center.some((value, axis) => Math.abs(value - this.target.center[axis]) > 0.01);
@@ -652,13 +612,14 @@ class LifeStarMap {
             || time - (this.lastInputTime ?? -Infinity) < 150);
         const viewKey = [...this.currentView.position, this.yaw, this.pitch, this.galaxyMix].map(value => value.toFixed(4)).join(',')
             + this.renderer.ready + ':' + this.renderer.assetVersion + ':' + this.currentView.moving
-            + ':' + this.renderer.skyVersion + ':' + this.renderer.skyOpacity().toFixed(3);
+            + ':' + this.renderer.skyVersion + ':' + this.renderer.skyOpacity().toFixed(3)
+            + ':' + this.renderer.galacticOpacity().toFixed(3);
         if (viewKey !== this.rendererViewKey) {
             this.renderer.render(this.currentView);
             this.rendererViewKey = viewKey;
         }
         const skyCredit = document.getElementById('skyCredit');
-        if (skyCredit) skyCredit.hidden = !this.renderer.skyImage || this.galaxyMix >= 1;
+        if (skyCredit) skyCredit.hidden = !this.renderer.skyImage || GALACTIC_SPACE.photographicVisibility(this.currentView.position) <= 0;
         this.drawGroups(delta, time);
         this.drawEntities(time);
     }
@@ -669,7 +630,10 @@ class LifeStarMap {
         context.clearRect(0, 0, overlayWidth, overlayHeight);
         const labelRects = [];
         this.labelLayout.beginFrame(delta);
-        this.projectedPortalStars = Array.from(this.groups.values()).flatMap(group => group.points.map(point => this.project(point))).filter(point => point.visible);
+        const solarDistance = Math.hypot(...this.currentView.position.map((value, axis) => value - GALACTIC_SPACE.solar[axis]));
+        const annotationOpacity = 1 - smoothstep(700, 1900, solarDistance);
+        this.projectedPortalStars = annotationOpacity > 0.15
+            ? Array.from(this.groups.values()).flatMap(group => group.points.map(point => this.project(point))).filter(point => point.visible) : [];
         // Allocate collision priority once per viewport. Hover and changing screen
         // height must not make neighbouring labels exchange positions each frame.
         const ordered = this.labelOrder ||= Array.from(this.groups.values()).sort((left, right) =>
@@ -681,7 +645,7 @@ class LifeStarMap {
             group.emphasis = lerp(group.emphasis, emphasized ? 1 : 0, REDUCED_MOTION ? 1 : Math.min(1, delta * 10));
             const points = group.points.map(point => this.project(point));
             const dimmed = this.selected && !selected;
-            const opacity = (dimmed ? 0.09 : 0.34 + group.emphasis * 0.48) * (1 - this.galaxyMix);
+            const opacity = (dimmed ? 0.09 : 0.34 + group.emphasis * 0.48) * annotationOpacity;
             context.lineWidth = 0.7 + group.emphasis * 0.4;
             context.strokeStyle = `rgba(178,197,219,${opacity})`;
             context.beginPath();
@@ -700,7 +664,7 @@ class LifeStarMap {
                     return;
                 }
                 const active = selected && (hip === state.activeStarHip || hip === state.hoverStarHip);
-                const glow = (dimmed ? 0.15 : 0.65 + group.emphasis * 0.25) * (1 - this.galaxyMix);
+                const glow = (dimmed ? 0.15 : 0.65 + group.emphasis * 0.25) * annotationOpacity;
                 drawStarGlow(context, point.x, point.y, active ? 2.1 : 1.35, glow, false);
                 if (active) {
                     context.strokeStyle = 'rgba(226,219,197,.65)';
@@ -726,18 +690,18 @@ class LifeStarMap {
             // rotation.
             const labelsSettled = !this.currentView.moving
                 && time - (this.lastInputTime ?? -Infinity) >= 280;
-            const labelsActive = this.galaxyMix < 0.28 && state.scene === 'roam'
+            const labelsActive = annotationOpacity > 0.15 && state.scene === 'roam'
                 && !this.flight && labelsSettled;
             const labelRect = labelsActive ? this.placePortalLabel(group, center, points, labelRects) : null;
             if (!labelsActive) this.labelLayout.hide(`portal:${portal.id}`);
-            const visible = this.galaxyMix < 0.28 && state.scene === 'roam'
+            const visible = annotationOpacity > 0.15 && state.scene === 'roam'
                 && !this.flight && labelsSettled && Boolean(labelRect);
             portal.button.hidden = !visible;
             portal.button.inert = !visible;
             portal.buttonVisible = visible;
             if (visible) {
                 labelRects.push(labelRect);
-                portal.button.style.opacity = labelRect.opacity;
+                portal.button.style.opacity = labelRect.opacity * annotationOpacity;
                 portal.button.style.transform = `translate3d(${(labelRect.left + labelRect.right) * 0.5}px,${labelRect.top}px,0) translateX(-50%)`;
                 portal.button.classList.toggle('is-highlighted', emphasized);
             }
@@ -787,6 +751,7 @@ class LifeStarMap {
     }
 
     clearInput() {
+        this.navigation?.clear();
         this.cancelPendingGalaxy();
         for (const pointerId of this.pointers.keys()) {
             if (dom.world.hasPointerCapture?.(pointerId)) dom.world.releasePointerCapture(pointerId);
@@ -980,6 +945,7 @@ class LifeStarMap {
     updateCopy() {
         if (!this.initialized) return;
         this.updateSolarDestinationCopy();
+        this.navigation?.updateCopy();
         if (this.deepSky?.active) { this.deepSky.updateCopy(); return; }
         const copies = {
             en: { orbit: 'Right drag / Two-finger slide · orbit', pan: 'Left drag · pan', zoom: 'Mouse wheel / Pinch · zoom', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'Constellation shapes and stellar colours follow Hipparcos; distances are composed for exploration. The surrounding arm stars and clouds are a 3D illustration; the distant panorama is a dimmed, aligned ESO/S. Brunier photograph. The galaxy adapts ESA’s 2025 Gaia-based artist impression, with neutralised diffuse colour, clearer dust structure and a dust-occluded volumetric bulge. This is a reconstruction of the Milky Way’s external appearance.', scale: 'NEAR / FAR' },
@@ -987,6 +953,12 @@ class LifeStarMap {
             'zh-TW': { orbit: '右鍵拖動 / 觸控板雙指滑動 · 旋轉', pan: '左鍵拖動 · 平移', zoom: '滾輪 / 雙指捏合 · 縮放', touch: '單指旋轉 / 雙指縮放與平移', select: '選擇一個星座', reset: '回到全景', home: '返回主頁', closer: '拉近星圖', farther: '拉遠星圖', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '星座形狀與恆星顏色參考 Hipparcos 星表，展示距離經過編排。周圍旋臂的星群與雲層為三維示意；最遠景採用調暗、對齊後的 ESO/S. Brunier 銀河實拍。銀河外觀改編自 ESA 2025 年基於 Gaia 觀測的藝術重建；調整了瀰漫星光配色與塵埃層次，並加入受前景塵埃遮擋的體積核球。', scale: '近 / 遠' }
         };
         const copy = copies[state.currentLang] || copies.en;
+        const flightCopy = {
+            en: { orbit: this.navigation?.freeFlight ? 'Right drag · look around' : 'Right drag · orbit', pan: 'WASD · move   Q / E · down / up   Shift · faster', zoom: 'Wheel · travel   R · initial view', note: 'One continuous galactic space. The Sun is placed 8.178 kpc from the centre and 20.8 pc above the plane. Life constellations retain their composed navigation layout; they are not an astrometric 3D catalogue. The nearby Hipparcos stars retain their original display distances. The ESO/S. Brunier panorama is a local observer reference. The large-scale disk follows ESA/Gaia’s reconstruction; stellar populations and volume depths are modelled, not individually observed.' },
+            'zh-CN': { orbit: this.navigation?.freeFlight ? '右键拖动 · 环顾' : '右键拖动 · 环绕', pan: 'WASD · 移动   Q / E · 下降 / 上升   Shift · 加速', zoom: '滚轮 · 远近   R · 初始视角', note: '同一空间内连续探索银河。太阳距银心 8.178 千秒差距、位于银盘上方 20.8 秒差距。生活星座保留原有的导航编排，附近 Hipparcos 恒星保留原展示距离，并非精确三维测绘。ESO/S. Brunier 实拍只用于附近观察者的星空参考。整体银盘依据 ESA/Gaia 重建，恒星群分布与体积厚度为模型，不代表每颗恒星均已实测。' },
+            'zh-TW': { orbit: this.navigation?.freeFlight ? '右鍵拖動 · 環顧' : '右鍵拖動 · 環繞', pan: 'WASD · 移動   Q / E · 下降 / 上升   Shift · 加速', zoom: '滾輪 · 遠近   R · 初始視角', note: '同一空間內連續探索銀河。太陽距銀心 8.178 千秒差距、位於銀盤上方 20.8 秒差距。生活星座保留原有的導航編排，附近 Hipparcos 恆星保留原展示距離，並非精確三維測繪。ESO/S. Brunier 實拍只用於附近觀察者的星空參考。整體銀盤依據 ESA/Gaia 重建，恆星群分布與體積厚度為模型，不代表每顆恆星均已實測。' }
+        };
+        Object.assign(copy, flightCopy[state.currentLang] || flightCopy.en);
         document.querySelectorAll('[data-map-copy]').forEach(element => { element.textContent = copy[element.dataset.mapCopy] || ''; });
         document.getElementById('mapInputHint').textContent = COARSE_POINTER ? copy.touch : `${copy.orbit}     ${copy.pan}     ${copy.zoom}`;
         const preparing = { en: 'Preparing galaxy', 'zh-CN': '正在准备银河', 'zh-TW': '正在準備銀河' };
