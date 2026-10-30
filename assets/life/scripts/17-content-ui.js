@@ -1,16 +1,21 @@
 const friendMemoryLayer = document.getElementById('friendMemoryLayer');
-const friendMemoryState = { activeId: null, trigger: null };
+const friendMemoryState = { activeId: null, trigger: null, feature: null };
 
 function updateFriendMemoryCopy() {
     if (!friendMemoryLayer) return;
     const copy = i18n[state.currentLang] || i18n.en;
+    document.querySelectorAll('.friend-name[data-friend-name-key]').forEach(button => {
+        button.dataset.friendName = copy[button.dataset.friendNameKey] || button.dataset.friendName;
+    });
     const selected = document.querySelector(`.friend-name[data-friend-trigger="${friendMemoryState.activeId}"]`);
     const name = selected?.dataset.friendName || '';
     const hint = friendMemoryState.activeId ? copy.friends_active.replace('{name}', name) : copy.friends_hint;
-    document.getElementById('friendInteractionHint').textContent = hint;
+    document.querySelectorAll('#friendInteractionHint, [data-friend-hint]').forEach(element => {
+        element.textContent = hint;
+    });
     document.getElementById('friendMemoryTitle').textContent = copy.friends_photos.replace('{name}', name);
     const homepage = document.getElementById('friendMemoryHomepage');
-    if (selected) homepage.href = selected.href;
+    if (selected?.dataset.friendHomepage) homepage.href = selected.dataset.friendHomepage;
     else homepage.removeAttribute('href');
     friendMemoryLayer.querySelector('.friend-memory-close').setAttribute('aria-label', copy.friends_close);
     friendMemoryLayer.querySelectorAll('[data-key]').forEach(element => {
@@ -24,6 +29,7 @@ function updateFriendMemoryCopy() {
     });
     document.querySelectorAll('[data-friend-trigger]').forEach(link => {
         link.setAttribute('aria-expanded', String(link.dataset.friendTrigger === friendMemoryState.activeId));
+        link.classList.toggle('is-active', link.dataset.friendTrigger === friendMemoryState.activeId);
     });
 }
 
@@ -44,12 +50,13 @@ function closeFriendMemories(restoreFocus = false) {
     const trigger = friendMemoryState.trigger;
     friendMemoryState.activeId = null;
     friendMemoryState.trigger = null;
+    friendMemoryState.feature?.removeAttribute('data-active-friend');
+    friendMemoryState.feature = null;
     friendMemoryLayer.hidden = true;
     friendMemoryLayer.querySelector('.friend-memory-field').replaceChildren();
     document.body.classList.remove('friend-memories-open');
     dom.panel.inert = false;
     dom.panel.setAttribute('aria-hidden', 'false');
-    document.querySelector('.friends-feature')?.removeAttribute('data-active-friend');
     updateFriendMemoryCopy();
     if (restoreFocus && trigger?.isConnected && trigger.getClientRects().length) trigger.focus({ preventScroll: true });
     return true;
@@ -60,9 +67,11 @@ function showFriendMemories(link) {
     const template = document.getElementById(`friend-photos-${friendId}`);
     if (!template || !friendMemoryLayer) return false;
     friendMemoryState.activeId = friendId;
-    friendMemoryState.trigger = document.querySelector(`.friend-name[data-friend-trigger="${friendId}"]`);
+    friendMemoryState.feature?.removeAttribute('data-active-friend');
+    friendMemoryState.feature = link.closest('.friends-feature');
+    friendMemoryState.trigger = friendMemoryState.feature?.querySelector(`.friend-name[data-friend-trigger="${friendId}"]`) || link;
     friendMemoryLayer.querySelector('.friend-memory-field').replaceChildren(template.content.cloneNode(true));
-    document.querySelector('.friends-feature').dataset.activeFriend = friendId;
+    if (friendMemoryState.feature) friendMemoryState.feature.dataset.activeFriend = friendId;
     document.body.classList.add('friend-memories-open');
     dom.panel.inert = true;
     dom.panel.setAttribute('aria-hidden', 'true');
@@ -76,9 +85,18 @@ function showFriendMemories(link) {
 if (friendMemoryLayer) {
     document.body.append(friendMemoryLayer);
     document.querySelectorAll('[data-friend-trigger]').forEach(link => {
+        const highlight = active => {
+            link.closest('.friends-feature')?.querySelectorAll('.friend-person').forEach(person => {
+                if (person.dataset.friendTrigger === link.dataset.friendTrigger) person.classList.toggle('is-highlighted', active);
+            });
+        };
+        link.addEventListener('pointerenter', () => highlight(true));
+        link.addEventListener('pointerleave', () => highlight(false));
+        link.addEventListener('focus', () => highlight(true));
+        link.addEventListener('blur', () => highlight(false));
         link.addEventListener('click', event => {
-            if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
-            if (friendMemoryState.activeId !== link.dataset.friendTrigger && showFriendMemories(link)) event.preventDefault();
+            event.preventDefault();
+            if (friendMemoryState.activeId !== link.dataset.friendTrigger) showFriendMemories(link);
         });
         link.addEventListener('keydown', event => {
             if (event.key !== ' ') return;

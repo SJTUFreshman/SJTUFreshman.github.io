@@ -41,10 +41,16 @@ def natural_starlight(pixels):
 
 def build(source, output):
     image = Image.open(source).convert("RGB").resize((TEXTURE_SIZE, TEXTURE_SIZE), Image.Resampling.LANCZOS)
-    detail = np.asarray(image, dtype=np.float32) / 255
-    pixels = np.asarray(image.filter(ImageFilter.GaussianBlur(0.65)), dtype=np.float32) / 255
-    fine_light = (detail - pixels) @ LUMINANCE
-    pixels = natural_starlight(np.clip(pixels + fine_light[:, :, None] * 0.65, 0, 1))
+    pixels = natural_starlight(np.asarray(image, dtype=np.float32) / 255)
+    light = pixels @ LUMINANCE
+    light_image = Image.fromarray(np.round(light * 255).astype(np.uint8))
+    fine = np.asarray(light_image.filter(ImageFilter.GaussianBlur(1.1)), dtype=np.float32) / 255
+    medium = np.asarray(light_image.filter(ImageFilter.GaussianBlur(4)), dtype=np.float32) / 255
+    detail = (light - fine) * 0.65 + (light - medium) * 0.25
+    detail = np.sign(detail) * np.maximum(np.abs(detail) - 1 / 255, 0)
+    detail = np.clip(detail, -0.035, 0.035)
+    pixels *= np.clip(light + detail, 0, 1)[:, :, None] / np.maximum(light[:, :, None], 1 / 255)
+    pixels = np.clip(pixels, 0, 1)
     rows, columns = np.mgrid[:TEXTURE_SIZE, :TEXTURE_SIZE].astype(np.float32)
     horizontal = (columns / (TEXTURE_SIZE - 1) - 0.5) * 800
     vertical = (0.5 - rows / (TEXTURE_SIZE - 1)) * 800
@@ -70,7 +76,7 @@ def build(source, output):
     warmth *= np.clip(bulge[:, :, 0] / 0.01, 0, 1)
     structure = np.stack((dust, bulge[:, :, 0], warmth), axis=2)
     output.mkdir(parents=True, exist_ok=True)
-    image.save(output / "milky-way-starlight.webp", quality=98, method=6)
+    image.save(output / "milky-way-starlight.webp", lossless=True, method=6)
     structure_image = Image.fromarray(np.round(np.clip(structure, 0, 1) * 255).astype(np.uint8))
     structure_image.resize((DUST_SIZE, DUST_SIZE), Image.Resampling.LANCZOS).save(output / "milky-way-dust.webp", lossless=True, method=6)
     print("Source SHA-256:", hashlib.sha256(source.read_bytes()).hexdigest())

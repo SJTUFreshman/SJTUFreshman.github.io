@@ -223,8 +223,8 @@ class StarMapRenderer {
                                 }
                                 if (distanceToDisk > 0.0 && length(point.xz) < 440.0) {
                                     vec2 diskUv = point.xz / 800.0 + 0.5;
-                                    vec3 stars = texture2D(uGalacticDisk, diskUv).rgb;
-                                    vec3 structure = texture2D(uGalacticDust, diskUv).rgb;
+                                    vec3 stars = texture2D(uGalacticDisk, diskUv, -0.35).rgb;
+                                    vec3 structure = texture2D(uGalacticDust, diskUv, -0.35).rgb;
                                     vec3 bulge = structure.g * vec3(1.0, mix(0.60, 1.0, structure.b), structure.b);
                                     light = max(vec3(0.0), stellarRadiance(stars) - stellarRadiance(bulge))
                                         * surfaceWeight * uGalaxy * (1.0 - smoothstep(380.0, 430.0, length(point.xz)));
@@ -464,7 +464,7 @@ class StarMapRenderer {
     loadGalacticAssets() {
         if (this.galacticAssetsPromise) return this.galacticAssetsPromise;
         const load = async name => {
-            const response = await fetch(`assets/life/galaxy/${name}.webp?v=20261030-galaxy-detail`);
+            const response = await fetch(`assets/life/galaxy/${name}.webp?v=20261030-galaxy-lossless`);
             if (!response.ok) throw new Error(`Cannot load ${name}: ${response.status}`);
             const blob = await response.blob();
             const source = URL.createObjectURL(blob);

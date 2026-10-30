@@ -954,6 +954,7 @@ html:lang(zh) .portal-moment-location:not(:empty)::before {
 }
 
 .friend-person {
+    color: var(--friend-color, #bde7ef);
     cursor: pointer;
     pointer-events: all;
     outline: none;
@@ -966,12 +967,15 @@ html:lang(zh) .portal-moment-location:not(:empty)::before {
     fill: transparent;
     stroke: currentColor;
     stroke-width: 1.15px;
+    stroke-linejoin: round;
     stroke-opacity: 0.48;
     filter: drop-shadow(0 0 3px currentColor);
     transition: stroke-opacity 220ms ease, stroke-width 220ms ease, filter 220ms ease, fill 220ms ease;
 }
 
 .friend-person:hover path,
+.friend-person.is-highlighted path,
+.friend-person.is-active path,
 .friends-feature:has(.friend-name--left:focus-visible) .friend-person--left path,
 .friends-feature:has(.friend-name--right:focus-visible) .friend-person--right path,
 .friends-feature[data-active-friend="friend-yuheng-wang"] .friend-person--left path,
@@ -997,18 +1001,23 @@ html:lang(zh) .portal-moment-location:not(:empty)::before {
     gap: 8px;
     min-height: 56px;
     padding: 10px 8px;
+    border: 0;
+    background: transparent;
     color: var(--ink);
     font: 0.86rem var(--editorial);
     text-decoration: none;
+    cursor: pointer;
     transition: background 180ms ease;
 }
 
 .friend-name + .friend-name { border-left: 1px solid var(--rule); }
 .friend-name:hover, .friend-name[aria-expanded="true"] { background: rgba(120,139,147,0.11); }
 .friend-name:focus-visible { outline: 2px solid #698996; outline-offset: -3px; }
-.friend-name > span:last-child { color: var(--ink-faint); font-size: 0.7rem; }
 .friend-name-dot { width: 5px; height: 5px; flex: 0 0 auto; border-radius: 50%; background: #648994; }
 .friend-name--right .friend-name-dot { background: #a37b59; }
+.friends-feature--group .friend-name-dot { background: var(--friend-color); }
+.friends-feature--group .friend-name:nth-child(odd) { border-left: 0; }
+.friends-feature--group .friend-name:nth-child(n+3) { border-top: 1px solid var(--rule); }
 
 .friends-hint {
     min-height: 2.8em;
@@ -1071,6 +1080,8 @@ body.friend-memories-open.panel-open .portal-panel {
     text-decoration: underline;
     text-underline-offset: 4px;
 }
+
+#friendMemoryHomepage:not([href]) > [aria-hidden] { display: none; }
 
 .friend-memory-close {
     display: grid;
@@ -1149,6 +1160,7 @@ body.friend-memories-open.panel-open .portal-panel {
 }
 
 .friend-memory.gallery-item:hover img, .friend-memory.gallery-item:focus-visible img { transform: none; }
+.friend-memory.is-cutout img { object-fit: contain; }
 
 .friend-memory-placeholder {
     display: grid;

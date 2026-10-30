@@ -298,6 +298,11 @@ async function unavailableAssets(browser) {
 
 (async () => {
     fs.mkdirSync(output, { recursive: true });
+    for (const name of ['milky-way-starlight', 'milky-way-dust']) {
+        const asset = fs.readFileSync(path.resolve(__dirname, `../assets/life/galaxy/${name}.webp`));
+        check(asset.subarray(0, 4).toString() === 'RIFF' && asset.subarray(8, 16).toString() === 'WEBPVP8L'
+            && asset.length < 25 * 1024 * 1024, `${name} uses lossless WebP within the Pages asset size limit`);
+    }
     const browser = await chromium.launch({ headless: true, channel: 'chrome', args: ['--enable-unsafe-swiftshader'] });
     try {
         await desktop(browser);

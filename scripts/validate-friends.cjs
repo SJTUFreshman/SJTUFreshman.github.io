@@ -26,7 +26,7 @@ async function openFriends(page) {
     await page.locator('#sectionDrawerList [data-portal-id="friends"]').click();
     await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'friends'
         && !window.lifeStarMap.flight);
-    await page.locator('.friends-portrait img').evaluate(image => image.decode());
+    await page.locator('.friends-portrait img').first().evaluate(image => image.decode());
     await page.evaluate(() => document.fonts.ready);
 }
 
@@ -39,7 +39,7 @@ async function clickPerson(page, side) {
             dom.panelBody.scrollTop += target - (panel.top + panel.height * .5);
         }
     });
-    const portrait = await page.locator('.friends-portrait').boundingBox();
+    const portrait = await page.locator('.friends-portrait').first().boundingBox();
     const point = { horizontal: portrait.x + portrait.width * (side === 'left' ? .34 : .65), vertical: portrait.y + portrait.height * .42 };
     assert.equal(await page.evaluate(({ horizontal, vertical }) => document.elementFromPoint(horizontal, vertical)
         ?.closest('[data-friend-trigger]')?.dataset.friendTrigger, point),
@@ -49,8 +49,7 @@ async function clickPerson(page, side) {
 
 async function checkLayout(page, label) {
     const layout = await page.evaluate(() => {
-        const portrait = document.querySelector('.friends-portrait').getBoundingClientRect();
-        const close = document.querySelector('#portalClose').getBoundingClientRect();
+        const close = document.querySelector('.friend-memory-close').getBoundingClientRect();
         const overlaps = (first, second) => first.left < second.right && first.right > second.left
             && first.top < second.bottom && first.bottom > second.top;
         return {
@@ -58,14 +57,14 @@ async function checkLayout(page, label) {
             cards: Array.from(document.querySelectorAll('#friendMemoryLayer .friend-memory'), card => {
                 const bounds = card.getBoundingClientRect();
                 return { inside: bounds.left >= 0 && bounds.right <= innerWidth && bounds.top >= 0 && bounds.bottom <= innerHeight,
-                    coversPortrait: overlaps(bounds, portrait), coversClose: overlaps(bounds, close) };
+                    coversClose: overlaps(bounds, close) };
             })
         };
     });
     assert.equal(layout.overflow, false, label + ': no horizontal page overflow');
     for (const card of layout.cards) {
         assert(card.inside, label + ': every floating card stays in the viewport');
-        assert(!card.coversPortrait && !card.coversClose, label + ': cards leave people and the close control clickable');
+        assert(!card.coversClose, label + ': cards leave the close control clickable');
     }
 }
 
@@ -102,11 +101,14 @@ async function checkLayout(page, label) {
                 assert.equal(await page.locator('#friendMemoryLayer .is-placeholder').count(), 3);
                 assert.equal(await page.locator('#friendMemoryLayer .gallery-caption, #friendMemoryLayer figcaption').count(), 0);
                 assert.equal((await page.evaluate(() => window.friendLinkEvents.at(-1))).prevented, true);
-                await clickPerson(page, 'left');
+                assert.equal(await page.locator('#friendMemoryHomepage').getAttribute('href'), 'https://hendrick-wang.github.io/');
+                await page.locator('.friend-person--left').dispatchEvent('click', { detail: 2 });
                 assert.deepEqual(await page.evaluate(() => window.friendLinkEvents.at(-1)), {
-                    id: 'friend-yuheng-wang', prevented: false, href: 'https://hendrick-wang.github.io/'
+                    id: 'friend-yuheng-wang', prevented: true, href: null
                 });
+                await page.locator('.friend-memory-close').click();
                 await clickPerson(page, 'right');
+                assert.equal(await page.locator('#friendMemoryHomepage').getAttribute('href'), 'https://positionprivacy.github.io/');
                 assert.equal((await page.evaluate(() => window.friendLinkEvents.at(-1))).prevented, true);
                 assert.equal(await page.locator('#friendMemoryLayer .is-placeholder').count(), 2);
                 assert.equal(await page.locator('#friendMemoryLayer .gallery-caption, #friendMemoryLayer figcaption').count(), 0);
@@ -130,9 +132,9 @@ async function checkLayout(page, label) {
                 assert.equal(await page.locator('#lightboxCaption').textContent(), '');
                 await page.keyboard.press('Escape');
                 assert(await page.locator('#friendMemoryLayer').isVisible());
-                await clickPerson(page, 'right');
+                await page.locator('.friend-person--right').dispatchEvent('click', { detail: 2 });
                 assert.deepEqual(await page.evaluate(() => window.friendLinkEvents.at(-1)), {
-                    id: 'friend-qiran-zhang', prevented: false, href: 'https://positionprivacy.github.io/'
+                    id: 'friend-qiran-zhang', prevented: true, href: null
                 });
                 await page.keyboard.press('Escape');
                 assert(await page.locator('#friendMemoryLayer').isHidden());
@@ -147,9 +149,10 @@ async function checkLayout(page, label) {
                 await page.locator('.friend-name--right').focus();
                 await page.keyboard.press('Space');
                 assert(await page.locator('#friendMemoryLayer').isVisible());
+                await page.locator('.friend-memory-close').click();
                 await page.locator('#portalClose').click();
                 assert(await page.locator('#friendMemoryLayer').isHidden());
-                console.log('PASS ' + scenario.name + ': two-step links, portraits, placeholders, languages, lightbox, keyboard, cleanup and layout');
+                console.log('PASS ' + scenario.name + ': photos without repeated-click navigation, portraits, placeholders, languages, lightbox, keyboard, cleanup and layout');
             } finally {
                 await context.close();
             }
