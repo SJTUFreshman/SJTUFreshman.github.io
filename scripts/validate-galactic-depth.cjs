@@ -9,6 +9,8 @@ const output = path.resolve(__dirname, '../.render-work/galactic-depth');
 const reports = [];
 const errors = [];
 const scenarios = [
+    { name: 'grazing', distance: 4560, pitch: 0.05, yaw: 4.0 },
+    { name: 'grazing-below', distance: 4560, pitch: -0.05, yaw: 4.0 },
     { name: 'arm', distance: 6000, pitch: 0.48 },
     { name: 'outer', distance: 18000, pitch: 0.48 },
     { name: 'overview', distance: 43000, pitch: 0.48 },
@@ -23,7 +25,7 @@ async function inspect(page, scenario) {
         map.center = map.target.center = scenario.center || [0, 0, 0];
         map.distance = map.target.distance = scenario.distance;
         map.pitch = map.target.pitch = scenario.pitch;
-        map.yaw = map.target.yaw = 0;
+        map.yaw = map.target.yaw = scenario.yaw || 0;
         map.rendererViewKey = null;
         map.render(performance.now());
         const renderer = map.renderer;
@@ -35,8 +37,9 @@ async function inspect(page, scenario) {
             context.readPixels(0, 0, renderer.canvas.width, renderer.canvas.height, context.RGBA, context.UNSIGNED_BYTE, pixels);
             return pixels;
         };
-        const capture = (moving = false, yaw = 0) => {
-            map.yaw = yaw;
+        const capture = (moving = false, yaw = 0, pitch = 0) => {
+            map.yaw = (scenario.yaw || 0) + yaw;
+            map.pitch = scenario.pitch + pitch;
             renderer.render({ ...map.view(), moving });
             return read();
         };
@@ -65,6 +68,7 @@ async function inspect(page, scenario) {
             const resting = capture();
             const moving = capture(true);
             const tiny = capture(true, 0.00001);
+            const tilted = capture(true, 0, 0.00001);
             const turned = capture(true, 0.08);
             const returned = capture();
             renderer.galacticNoise = neutral;
@@ -73,14 +77,16 @@ async function inspect(page, scenario) {
             const started = performance.now();
             capture();
             return { stars: difference(full, withoutStars), motion: difference(resting, moving),
-                tiny: difference(resting, tiny), turned: difference(resting, turned), returned: difference(resting, returned),
+                tiny: difference(resting, tiny), tilted: difference(resting, tilted),
+                turned: difference(resting, turned), returned: difference(resting, returned),
                 clouds: difference(resting, withoutStructure), frameMilliseconds: performance.now() - started,
                 glError: context.getError() };
         } finally {
             renderer.stars = savedStars;
             renderer.galacticNoise = savedNoise;
             context.deleteTexture(neutral);
-            map.yaw = 0;
+            map.yaw = scenario.yaw || 0;
+            map.pitch = scenario.pitch;
             renderer.render(map.view());
         }
     }, scenario);
@@ -121,12 +127,12 @@ async function inspect(page, scenario) {
                 console.log(`PASS ${mode}: fixed stars populate all quadrants and both sides of the disk within the memory budget`);
                 const local = await inspect(page, { distance: mobile ? 600 : 430, pitch: mobile ? 0.55 : 0.48 });
                 if (!mobile) assert(local.stars.mean === 0 && local.clouds.mean === 0);
-                for (const scenario of scenarios.filter(item => !mobile || ['arm', 'overview', 'remote'].includes(item.name))) {
+                for (const scenario of scenarios.filter(item => !mobile || ['grazing', 'arm', 'overview', 'remote'].includes(item.name))) {
                     const report = await inspect(page, scenario);
                     assert(report.stars.resolved > 50, `${mode}/${scenario.name}: independent stellar points remain visible`);
                     assert(report.clouds.mean > 0.002, `${mode}/${scenario.name}: nonuniform 3D clouds contribute outside the solar region`);
                     assert(report.motion.mean === 0 && report.returned.mean === 0, `${mode}/${scenario.name}: motion state and return preserve the same cloud`);
-                    assert(report.tiny.mean < 0.4 && report.turned.mean > report.tiny.mean + 0.02,
+                    assert(report.tiny.mean < 0.4 && report.tilted.mean < 0.4 && report.turned.mean > report.tiny.mean + 0.02,
                         `${mode}/${scenario.name}: camera rotation changes depth smoothly`);
                     assert.equal(report.glError, 0);
                     assert(await page.evaluate(() => window.depthTestStars.every((value, index) => value === lifeStarMap.renderer.galacticStars[index])));

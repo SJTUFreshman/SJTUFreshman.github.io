@@ -257,6 +257,10 @@ async function limitedTextures(browser) {
             WebGLRenderingContext.prototype.getParameter = function(parameter) {
                 return parameter === this.MAX_TEXTURE_SIZE ? 2048 : getParameter.call(this, parameter);
             };
+            const getExtension = WebGLRenderingContext.prototype.getExtension;
+            WebGLRenderingContext.prototype.getExtension = function(name) {
+                return name === 'EXT_shader_texture_lod' ? null : getExtension.call(this, name);
+            };
             window.createImageBitmap = undefined;
         });
         const page = await context.newPage();
@@ -267,10 +271,10 @@ async function limitedTextures(browser) {
         await settle(page);
         check(await page.evaluate(() => {
             const renderer = lifeStarMap.renderer;
-            return renderer.ready && renderer.galacticTextureSizes.length === 2
+            return renderer.ready && !renderer.galacticExplicitLod && renderer.galacticTextureSizes.length === 2
                 && renderer.galacticTextureSizes.every(size => size.every(dimension => dimension === 2048))
                 && renderer.gl.getError() === renderer.gl.NO_ERROR;
-        }), 'A 2K GPU limit and missing ImageBitmap still render both textures through the Canvas upload path');
+        }), 'A 2K GPU limit, missing ImageBitmap and missing explicit texture LOD retain a working WebGL path');
     } finally { await context.close(); }
 }
 

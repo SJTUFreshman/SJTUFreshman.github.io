@@ -141,8 +141,20 @@ class StarMapRenderer {
         if (!this.gl) return;
         const context = this.gl;
         try {
+            this.galacticExplicitLod = Boolean(context.getExtension('EXT_shader_texture_lod'));
             const galacticMedium = `
                 uniform sampler2D uGalacticNoise;
+                uniform vec2 uGalacticTextureSize;
+                uniform float uPixelAngle;
+                vec3 galacticTexture(sampler2D source, vec2 uv, float size, float footprint, float pixelFootprint) {
+                    ${this.galacticExplicitLod
+                        ? 'return texture2DLodEXT(source, uv, max(0.0, log2(footprint * size / 800.0))).rgb;'
+                        : 'return texture2D(source, uv, max(0.0, log2(footprint / max(pixelFootprint, 800.0 / size)))).rgb;'}
+                }
+                float galacticInterval(float fraction, float entry, float exitDistance) {
+                    float nearWeight = 1.0 - smoothstep(40.0, 240.0, entry);
+                    return mix(entry, exitDistance, mix(fraction, fraction * fraction, nearWeight));
+                }
                 vec3 galacticNoise(vec3 point) {
                     vec3 cell = mod(point * vec3(0.5, 0.9, 0.5), 64.0);
                     float lower = floor(cell.z);
@@ -168,14 +180,19 @@ class StarMapRenderer {
                 void sampleGalacticMedium(vec3 point, vec3 interval, out vec3 emission, out float extinction) {
                     float radial = length(point.xz);
                     float boundary = 1.0 - smoothstep(375.0, 430.0, radial);
-                    vec2 diskUv = point.xz / 800.0 + 0.5;
-                    float densityLod = mix(1.6, -0.35, smoothstep(60.0, 600.0, length(point - uGalacticCamera)));
-                    vec3 stars = texture2D(uGalacticDisk, diskUv, densityLod).rgb;
-                    vec3 structure = texture2D(uGalacticDust, diskUv, densityLod).rgb;
+                    float range = length(point - uGalacticCamera);
+                    float resolved = 1.0 - smoothstep(80.0, 600.0, range);
+                    float pixelFootprint = max(0.001, range * uPixelAngle);
+                    float planarFootprint = max(pixelFootprint, length(interval.xz) * 0.60);
                     vec3 cloud = galacticNoise(point);
+                    vec2 diskUv = (point.xz + (cloud.gb - 0.5) * 2.4 * resolved) / 800.0 + 0.5;
+                    vec3 stars = galacticTexture(uGalacticDisk, diskUv, uGalacticTextureSize.x,
+                        max(planarFootprint, mix(0.08, 1.6, resolved)), pixelFootprint);
+                    vec3 structure = galacticTexture(uGalacticDust, diskUv, uGalacticTextureSize.y,
+                        max(planarFootprint, mix(0.08, 0.8, resolved)), pixelFootprint);
                     float footprint = length(interval * vec3(0.0625, 0.1125, 0.0625));
                     cloud = mix(cloud, vec3(0.5), smoothstep(vec3(0.6), vec3(1.8), footprint * vec3(1.0, 2.0, 4.0)));
-                    float clumps = smoothstep(0.30, 0.72, dot(cloud, vec3(0.58, 0.28, 0.14)));
+                    float clumps = smoothstep(0.30, 0.72, dot(cloud, vec3(0.42, 0.32, 0.26)));
                     float warp = sin(point.x * 0.008) * pow(radial / 480.0, 2.0) * 9.0;
                     float height = point.y - warp;
                     float verticalStep = abs(interval.y);
@@ -200,6 +217,7 @@ class StarMapRenderer {
                     gl_Position = vec4(aPosition, 0.0, 1.0);
                 }
             `, `
+                ${this.galacticExplicitLod ? '#extension GL_EXT_shader_texture_lod : enable' : ''}
                 precision highp float;
                 varying vec2 vUv;
                 uniform vec3 uCamera;
@@ -397,13 +415,14 @@ class StarMapRenderer {
                             float exitDistance = max(0.0, (-projected + sqrt(intersection)) / quadratic);
                             const int samples = ${COARSE_POINTER ? 80 : 128};
                             float sampleCount = mix(float(samples), 24.0, surfaceWeight);
-                            float stepSize = (exitDistance - entry) / sampleCount;
                             float transmission = 1.0;
                             vec3 light = vec3(0.0);
                             for (int sampleIndex = 0; sampleIndex < samples; sampleIndex++) {
                                 if (float(sampleIndex) >= sampleCount) break;
-                                float intervalSize = min(stepSize, exitDistance - entry - float(sampleIndex) * stepSize);
-                                vec3 point = uGalacticCamera + ray * (entry + float(sampleIndex) * stepSize + intervalSize * 0.5);
+                                float intervalStart = galacticInterval(float(sampleIndex) / sampleCount, entry, exitDistance);
+                                float intervalEnd = galacticInterval(min(1.0, float(sampleIndex + 1) / sampleCount), entry, exitDistance);
+                                float intervalSize = intervalEnd - intervalStart;
+                                vec3 point = uGalacticCamera + ray * (intervalStart + intervalSize * 0.5);
                                 float radial = length(point.xz);
                                 vec3 structure = texture2D(uGalacticDust, point.xz / 800.0 + 0.5).rgb;
                                 float bulgeThickness = 9.0 + 12.0 * exp(-radial * radial / 5200.0);
@@ -439,6 +458,7 @@ class StarMapRenderer {
                     gl_Position = vec4(aPosition, 0.0, 1.0);
                 }
             `, `
+                ${this.galacticExplicitLod ? '#extension GL_EXT_shader_texture_lod : enable' : ''}
                 precision highp float;
                 varying vec2 vUv;
                 uniform sampler2D uTexture;
@@ -496,10 +516,12 @@ class StarMapRenderer {
                                 float entry = max(0.0, (-projected - sqrt(intersection)) / quadratic);
                                 float exitDistance = max(0.0, (-projected + sqrt(intersection)) / quadratic);
                                 const int samples = ${COARSE_POINTER ? 12 : 20};
-                                float stepSize = (exitDistance - entry) / float(samples);
                                 float transmission = 1.0;
                                 for (int sampleIndex = 0; sampleIndex < samples; sampleIndex++) {
-                                    vec3 point = uGalacticCamera + ray * (entry + (float(sampleIndex) + 0.5) * stepSize);
+                                    float intervalStart = galacticInterval(float(sampleIndex) / float(samples), entry, exitDistance);
+                                    float intervalEnd = galacticInterval(float(sampleIndex + 1) / float(samples), entry, exitDistance);
+                                    float stepSize = intervalEnd - intervalStart;
+                                    vec3 point = uGalacticCamera + ray * (intervalStart + stepSize * 0.5);
                                     vec3 emission;
                                     float extinction;
                                     sampleGalacticMedium(point, ray * stepSize, emission, extinction);
@@ -1026,6 +1048,10 @@ class StarMapRenderer {
         context.uniform3fv(this.uniform(program, 'uForward'), view.forward);
         context.uniform1f(this.uniform(program, 'uAspect'), this.width / this.height);
         context.uniform1f(this.uniform(program, 'uTangent'), Math.tan(view.fov * 0.5));
+        context.uniform1f(this.uniform(program, 'uPixelAngle'), 2 * Math.tan(view.fov * 0.5)
+            / (program === this.cloudProgram ? this.cloudHeight : this.canvas.height));
+        context.uniform2f(this.uniform(program, 'uGalacticTextureSize'),
+            this.galacticTextureSizes[0]?.[0] || 1, this.galacticTextureSizes[1]?.[0] || 1);
         context.uniform1f(this.uniform(program, 'uGalaxy'), 0);
         context.uniform3fv(this.uniform(program, 'uGalacticCamera'), GALACTIC_SPACE.toDisk(view.position));
         const solarDistance = Math.hypot(...view.position.map((value, axis) => value - GALACTIC_SPACE.solar[axis]));
