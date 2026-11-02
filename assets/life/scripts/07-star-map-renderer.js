@@ -141,6 +141,57 @@ class StarMapRenderer {
         if (!this.gl) return;
         const context = this.gl;
         try {
+            const galacticMedium = `
+                uniform sampler2D uGalacticNoise;
+                vec3 galacticNoise(vec3 point) {
+                    vec3 cell = mod(point * vec3(0.5, 0.9, 0.5), 64.0);
+                    float lower = floor(cell.z);
+                    float upper = mod(lower + 1.0, 64.0);
+                    vec2 firstTile = vec2(mod(lower, 8.0), floor(lower / 8.0));
+                    vec2 secondTile = vec2(mod(upper, 8.0), floor(upper / 8.0));
+                    vec2 sampleUv = cell.xy + 1.5;
+                    return mix(texture2D(uGalacticNoise, (firstTile * 66.0 + sampleUv) / 528.0).rgb,
+                        texture2D(uGalacticNoise, (secondTile * 66.0 + sampleUv) / 528.0).rgb, fract(cell.z));
+                }
+                float galacticCdf(float value) {
+                    float scaled = abs(value) * 0.70710678;
+                    float factor = 1.0 / (1.0 + 0.3275911 * scaled);
+                    float tail = (((((1.061405429 * factor - 1.453152027) * factor) + 1.421413741)
+                        * factor - 0.284496736) * factor + 0.254829592) * factor * exp(-scaled * scaled);
+                    return 0.5 + sign(value) * (1.0 - tail) * 0.5;
+                }
+                float galacticProfile(float height, float thickness, float verticalStep) {
+                    if (verticalStep < thickness * 0.1) return exp(-0.5 * pow(height / thickness, 2.0)) / (2.5066 * thickness);
+                    return (galacticCdf((height + verticalStep * 0.5) / thickness)
+                        - galacticCdf((height - verticalStep * 0.5) / thickness)) / verticalStep;
+                }
+                void sampleGalacticMedium(vec3 point, vec3 interval, out vec3 emission, out float extinction) {
+                    float radial = length(point.xz);
+                    float boundary = 1.0 - smoothstep(375.0, 430.0, radial);
+                    vec2 diskUv = point.xz / 800.0 + 0.5;
+                    float densityLod = mix(1.6, -0.35, smoothstep(60.0, 600.0, length(point - uGalacticCamera)));
+                    vec3 stars = texture2D(uGalacticDisk, diskUv, densityLod).rgb;
+                    vec3 structure = texture2D(uGalacticDust, diskUv, densityLod).rgb;
+                    vec3 cloud = galacticNoise(point);
+                    float footprint = length(interval * vec3(0.0625, 0.1125, 0.0625));
+                    cloud = mix(cloud, vec3(0.5), smoothstep(vec3(0.6), vec3(1.8), footprint * vec3(1.0, 2.0, 4.0)));
+                    float clumps = smoothstep(0.30, 0.72, dot(cloud, vec3(0.58, 0.28, 0.14)));
+                    float warp = sin(point.x * 0.008) * pow(radial / 480.0, 2.0) * 9.0;
+                    float height = point.y - warp;
+                    float verticalStep = abs(interval.y);
+                    float young = galacticProfile(height, 3.2 + radial * 0.004, verticalStep);
+                    float older = galacticProfile(height, 7.0 + radial * 0.009, verticalStep);
+                    float dust = galacticProfile(height - (cloud.r - 0.5) * 3.5, 1.7, verticalStep);
+                    vec3 oldFraction = vec3(0.62, 0.56, 0.46);
+                    vec3 bulge = structure.g * vec3(1.0, mix(0.60, 1.0, structure.b), structure.b);
+                    vec3 diskLight = max(vec3(0.0), stellarRadiance(stars) - stellarRadiance(bulge));
+                    vec3 stellarDensity = (1.0 - oldFraction) * young * (0.15 + clumps * 2.25) + oldFraction * older;
+                    emission = diskLight * stellarDensity * boundary * 0.86;
+                    float diffuseDust = exp(-radial / 180.0);
+                    extinction = ((0.012 * diffuseDust + structure.r * 0.72) * dust * 2.8826
+                        * (0.22 + clumps * 1.90) + young * 0.025 * diffuseDust) * boundary;
+                }
+            `;
             this.cloudProgram = this.program(`
                 attribute vec2 aPosition;
                 varying vec2 vUv;
@@ -191,9 +242,7 @@ class StarMapRenderer {
                 vec3 bulgeLight(vec3 structure) {
                     return stellarRadiance(structure.g * vec3(1.0, mix(0.60, 1.0, structure.b), structure.b));
                 }
-                vec3 diskEmission(vec3 stars, vec3 structure) {
-                    return max(vec3(0.0), stellarRadiance(stars) - bulgeLight(structure));
-                }
+                ${galacticMedium}
                 void main() {
                     vec2 screen = (vUv * 2.0 - 1.0) * vec2(uAspect, 1.0) * uTangent;
                     vec3 ray = normalize(uForward + screen.x * uRight + screen.y * uUp);
@@ -343,44 +392,37 @@ class StarMapRenderer {
                         float quadratic = dot(direction, direction);
                         float projected = dot(origin, direction);
                         float intersection = projected * projected - quadratic * (dot(origin, origin) - 1.0);
-                        if (intersection > 0.0 && surfaceWeight < 1.0) {
+                        if (intersection > 0.0) {
                             float entry = max(0.0, (-projected - sqrt(intersection)) / quadratic);
                             float exitDistance = max(0.0, (-projected + sqrt(intersection)) / quadratic);
-                            float stepSize = (exitDistance - entry) / 128.0;
+                            const int samples = ${COARSE_POINTER ? 80 : 128};
+                            float sampleCount = mix(float(samples), 24.0, surfaceWeight);
+                            float stepSize = (exitDistance - entry) / sampleCount;
                             float transmission = 1.0;
                             vec3 light = vec3(0.0);
-                            for (int sampleIndex = 0; sampleIndex < 128; sampleIndex++) {
-                                vec3 point = uGalacticCamera + ray * (entry + (float(sampleIndex) + 0.5) * stepSize);
+                            for (int sampleIndex = 0; sampleIndex < samples; sampleIndex++) {
+                                if (float(sampleIndex) >= sampleCount) break;
+                                float intervalSize = min(stepSize, exitDistance - entry - float(sampleIndex) * stepSize);
+                                vec3 point = uGalacticCamera + ray * (entry + float(sampleIndex) * stepSize + intervalSize * 0.5);
                                 float radial = length(point.xz);
-                                vec2 diskUv = point.xz / 800.0 + 0.5;
-                                vec3 disk = texture2D(uGalacticDisk, diskUv).rgb;
-                                vec4 structure = texture2D(uGalacticDust, diskUv);
-                                float height = point.y - diskWarp(point.xz);
-                                float thickness = 1.6 + radial * 0.002;
-                                float oldThickness = 5.0 + radial * 0.0075;
+                                vec3 structure = texture2D(uGalacticDust, point.xz / 800.0 + 0.5).rgb;
                                 float bulgeThickness = 9.0 + 12.0 * exp(-radial * radial / 5200.0);
-                                float diskProfile = exp(-0.5 * pow(height / thickness, 2.0));
-                                float oldProfile = exp(-0.5 * pow(height / oldThickness, 2.0));
                                 float bulgeProfile = exp(-0.5 * pow(point.y / bulgeThickness, 2.0));
-                                float dustProfile = exp(-0.5 * pow(height / 0.85, 2.0));
-                                vec3 oldFraction = vec3(0.62, 0.56, 0.46);
-                                vec3 stellarProfile = (1.0 - oldFraction) * diskProfile / (2.5066 * thickness)
-                                    + oldFraction * oldProfile / (2.5066 * oldThickness);
-                                vec3 emission = (diskEmission(disk, structure.rgb) * stellarProfile
-                                    + bulgeLight(structure.rgb) * bulgeProfile / (2.5066 * bulgeThickness))
+                                vec3 emission;
+                                float extinction;
+                                sampleGalacticMedium(point, ray * intervalSize, emission, extinction);
+                                emission += bulgeLight(structure) * bulgeProfile / (2.5066 * bulgeThickness)
                                     * (1.0 - smoothstep(380.0, 430.0, radial));
-                                float diffuseDust = exp(-radial / 180.0);
-                                float extinction = (0.012 * diffuseDust + structure.r * 0.72) * dustProfile
-                                    + diskProfile * 0.003 * diffuseDust;
-                                float opticalDepth = extinction * stepSize;
+                                float opticalDepth = extinction * intervalSize;
                                 float absorption = exp(-opticalDepth);
-                                float integration = opticalDepth < 0.01 ? stepSize * (1.0 - opticalDepth * 0.5)
+                                float integration = opticalDepth < 0.01 ? intervalSize * (1.0 - opticalDepth * 0.5)
                                     : (1.0 - absorption) / extinction;
                                 light += emission * transmission * integration;
                                 transmission *= absorption;
                             }
                             color = color * mix(1.0, transmission, uGalacticStrength * (1.0 - surfaceWeight))
                                 + light * mix(0.30, 0.65, smoothstep(0.04, 0.32, abs(ray.y))) * uGalacticStrength * (1.0 - surfaceWeight);
+                            localTransmission *= mix(1.0, transmission, uGalacticStrength);
                         }
                     }
                     color = 1.0 - exp(-color * 1.45);
@@ -417,6 +459,7 @@ class StarMapRenderer {
                 vec3 stellarRadiance(vec3 disk) {
                     return -log(max(vec3(0.015), 1.0 - disk * 0.96)) / 1.45;
                 }
+                ${galacticMedium}
                 void main() {
                     vec4 volume = texture2D(uTexture, vUv);
                     vec3 background = volume.rgb;
@@ -443,22 +486,31 @@ class StarMapRenderer {
                     if (uGalacticStrength > 0.0) {
                         float surfaceWeight = smoothstep(0.12, 0.32, abs(ray.y));
                         if (surfaceWeight > 0.0) {
-                            float distanceToDisk = -uGalacticCamera.y / ray.y;
-                            vec3 point = uGalacticCamera + ray * distanceToDisk;
-                            if (distanceToDisk > 0.0 && length(point.xz) < 440.0) {
-                                for (int warpStep = 0; warpStep < 3; warpStep++) {
-                                    float warp = sin(point.x * 0.008) * pow(length(point.xz) / 480.0, 2.0) * 9.0;
-                                    distanceToDisk = (warp - uGalacticCamera.y) / ray.y;
-                                    point = uGalacticCamera + ray * distanceToDisk;
+                            vec3 extent = vec3(440.0, 40.0, 440.0);
+                            vec3 origin = uGalacticCamera / extent;
+                            vec3 direction = ray / extent;
+                            float quadratic = dot(direction, direction);
+                            float projected = dot(origin, direction);
+                            float intersection = projected * projected - quadratic * (dot(origin, origin) - 1.0);
+                            if (intersection > 0.0) {
+                                float entry = max(0.0, (-projected - sqrt(intersection)) / quadratic);
+                                float exitDistance = max(0.0, (-projected + sqrt(intersection)) / quadratic);
+                                const int samples = ${COARSE_POINTER ? 12 : 20};
+                                float stepSize = (exitDistance - entry) / float(samples);
+                                float transmission = 1.0;
+                                for (int sampleIndex = 0; sampleIndex < samples; sampleIndex++) {
+                                    vec3 point = uGalacticCamera + ray * (entry + (float(sampleIndex) + 0.5) * stepSize);
+                                    vec3 emission;
+                                    float extinction;
+                                    sampleGalacticMedium(point, ray * stepSize, emission, extinction);
+                                    float opticalDepth = extinction * stepSize;
+                                    float absorption = exp(-opticalDepth);
+                                    float integration = opticalDepth < 0.01 ? stepSize * (1.0 - opticalDepth * 0.5)
+                                        : (1.0 - absorption) / max(extinction, 0.00001);
+                                    light += emission * transmission * integration;
+                                    transmission *= absorption;
                                 }
-                                if (distanceToDisk > 0.0 && length(point.xz) < 440.0) {
-                                    vec2 diskUv = point.xz / 800.0 + 0.5;
-                                    vec3 stars = texture2D(uGalacticDisk, diskUv, -0.35).rgb;
-                                    vec3 structure = texture2D(uGalacticDust, diskUv, -0.35).rgb;
-                                    vec3 bulge = structure.g * vec3(1.0, mix(0.60, 1.0, structure.b), structure.b);
-                                    light = max(vec3(0.0), stellarRadiance(stars) - stellarRadiance(bulge))
-                                        * surfaceWeight * uGalacticStrength * volume.a * (1.0 - smoothstep(380.0, 430.0, length(point.xz)));
-                                }
+                                light *= surfaceWeight * uGalacticStrength;
                             }
                         }
                     }
@@ -503,7 +555,7 @@ class StarMapRenderer {
                     if (depth <= 1.0) gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
                     float distanceGain = mix(clamp(320.0 / max(depth, 30.0), 0.48, 2.4), 1.0, max(background, galaxy));
                     if (environment > 0.5) distanceGain = clamp(1500.0 / max(length(relative), 120.0), 0.0, 1.6);
-                    if (galacticStar > 0.5) distanceGain = clamp(2000.0 / max(length(relative), 120.0), 0.0, 1.6);
+                    if (galacticStar > 0.5) distanceGain = clamp(6000.0 / max(length(relative), 120.0), 0.0, 1.8);
                     vSize = max(3.0, aSize * uDpr * sqrt(distanceGain));
                     if (environment > 0.5) vSize = max(4.0 * uDpr, vSize);
                     gl_PointSize = min(36.0 * uDpr, vSize);
@@ -514,10 +566,13 @@ class StarMapRenderer {
                     vLight *= mix(1.0, 2.2, background * (1.0 - uGalaxy));
                     if (background > 0.5) vLight *= uSkyVisibility;
                     if (aBackground < 0.5) vLight *= 1.0 / (1.0 + pow(max(length(relative) - 600.0, 0.0) / 450.0, 2.0));
-                    if (environment > 0.5) vLight *= uEnvironmentStrength / (1.0 + pow(length(relative) / 6000.0, 2.0));
-                    if (galacticStar > 0.5) vLight *= uGalacticStrength * (1.0 - exp(-length(relative) / 10.0));
+                    if (environment > 0.5 && galacticStar < 0.5) vLight *= uEnvironmentStrength / (1.0 + pow(length(relative) / 6000.0, 2.0));
+                    if (galacticStar > 0.5) vLight *= uGalacticStrength / (1.0 + pow(length(relative) / 48000.0, 2.0))
+                        * (1.0 - exp(-length(relative) / 10.0));
                     vEnvironment = environment;
                     vEnvironmentPath = clamp(depth / 3000.0, 0.18, 1.0);
+                    if (galacticStar > 0.5) vEnvironmentPath = clamp(length(relative)
+                        / (length(uGalacticCamera) * 40.0 + 17600.0), 0.05, 1.0);
                     vPixelRatio = uDpr;
                 }
             `, `
@@ -576,6 +631,7 @@ class StarMapRenderer {
             this.starAttributes = [['aPosition', 3, 0], ['aColor', 3, 3], ['aLight', 1, 6], ['aSize', 1, 7], ['aBackground', 1, 8]]
                 .map(([name, size, offset]) => [this.attribute(this.starProgram, name), size, offset]);
             this.createGalacticDisk();
+            this.galacticNoise = this.createGalacticNoise();
             this.skyTexture = this.createSkyTexture();
             this.skyUploaded = false;
             this.ready = true;
@@ -643,33 +699,36 @@ class StarMapRenderer {
     buildGalacticStars() {
         if (!this.galacticStars) {
             const source = document.createElement('canvas');
-            source.width = source.height = 256;
+            source.width = source.height = 512;
             const sourceContext = source.getContext('2d', { willReadFrequently: true });
-            sourceContext.drawImage(this.galacticImage, 0, 0, 256, 256);
-            const pixels = sourceContext.getImageData(0, 0, 256, 256).data;
+            sourceContext.drawImage(this.galacticImage, 0, 0, 512, 512);
+            const pixels = sourceContext.getImageData(0, 0, 512, 512).data;
             let seed = 0x7a11c;
             const random = () => {
                 seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
                 return seed / 4294967296;
             };
             const values = [];
-            for (let attempt = 0; attempt < 900000 && values.length < 64000 * 9; attempt++) {
+            const compact = COARSE_POINTER || (navigator.deviceMemory && navigator.deviceMemory <= 4);
+            const population = compact ? 98304 : 196608;
+            for (let attempt = 0; attempt < population * 24 && values.length < population * 9; attempt++) {
                 const horizontal = random(), vertical = random();
-                const offset = (Math.floor(vertical * 256) * 256 + Math.floor(horizontal * 256)) * 4;
+                const offset = (Math.floor(vertical * 512) * 512 + Math.floor(horizontal * 512)) * 4;
                 const brightness = (pixels[offset] * 0.2126 + pixels[offset + 1] * 0.7152 + pixels[offset + 2] * 0.0722) / 255;
                 if (random() > brightness * 1.8) continue;
                 const diskX = (horizontal - 0.5) * 800, diskZ = (0.5 - vertical) * 800;
                 const radius = Math.hypot(diskX, diskZ);
+                if (radius > 425) continue;
                 const gaussian = Math.sqrt(-2 * Math.log(Math.max(0.0001, random()))) * Math.cos(random() * Math.PI * 2);
                 const older = random() < 0.52;
-                const thickness = (older ? 5 + radius * 0.0075 : 1.6 + radius * 0.002) + 14 * Math.exp(-radius * radius / 5200);
+                const thickness = (older ? 7 + radius * 0.009 : 3.2 + radius * 0.004) + 14 * Math.exp(-radius * radius / 5200);
                 const warp = Math.sin(diskX * 0.008) * Math.pow(radius / 480, 2) * 9;
                 const position = GALACTIC_SPACE.fromDisk([diskX, warp + gaussian * thickness, diskZ]);
                 const localDistance = Math.hypot(...position.map((value, axis) => value - GALACTIC_SPACE.solar[axis]));
                 if (random() > smoothstep(1600, 4200, localDistance)) continue;
                 const warmth = older ? 0.6 + random() * 0.4 : random() * 0.45;
                 values.push(...position, lerp(0.72, 1, warmth), lerp(0.84, 0.79, warmth), lerp(1, 0.61, warmth),
-                    0.12 + Math.pow(random(), 3) * 0.65, 3.5 + random() * 3, 4);
+                    0.04 + Math.pow(random(), 10) * 1.15, 3.5 + random() * 3, 4);
             }
             this.galacticStars = new Float32Array(values);
             this.stars = new Float32Array(this.localStars.length + this.environmentStars.length + values.length);
@@ -685,6 +744,54 @@ class StarMapRenderer {
 
     galacticOpacity() {
         return this.galacticLoadedAt == null ? 0 : REDUCED_MOTION ? 1 : smoothstep(0, 1, (performance.now() - this.galacticLoadedAt) / 900);
+    }
+
+    createGalacticNoise() {
+        if (!this.galacticNoiseData) {
+            const hash = (horizontal, vertical, depth, period) => {
+                let value = Math.imul(horizontal % period, 374761393) + Math.imul(vertical % period, 668265263)
+                    + Math.imul(depth % period, 2147483647);
+                value = Math.imul(value ^ value >>> 13, 1274126177);
+                return ((value ^ value >>> 16) >>> 0) / 4294967295;
+            };
+            const noise = (horizontal, vertical, depth, scale) => {
+                const position = [horizontal / scale, vertical / scale, depth / scale];
+                const cell = position.map(Math.floor);
+                const weight = position.map((value, axis) => {
+                    const local = value - cell[axis];
+                    return local * local * (3 - 2 * local);
+                });
+                const period = 64 / scale;
+                return lerp(lerp(lerp(hash(...cell, period), hash(cell[0] + 1, cell[1], cell[2], period), weight[0]),
+                    lerp(hash(cell[0], cell[1] + 1, cell[2], period), hash(cell[0] + 1, cell[1] + 1, cell[2], period), weight[0]), weight[1]),
+                lerp(lerp(hash(cell[0], cell[1], cell[2] + 1, period), hash(cell[0] + 1, cell[1], cell[2] + 1, period), weight[0]),
+                    lerp(hash(cell[0], cell[1] + 1, cell[2] + 1, period), hash(cell[0] + 1, cell[1] + 1, cell[2] + 1, period), weight[0]), weight[1]), weight[2]);
+            };
+            const pixels = new Uint8Array(528 * 528 * 4);
+            for (let depth = 0; depth < 64; depth++) {
+                for (let row = 0; row < 66; row++) {
+                    for (let column = 0; column < 66; column++) {
+                        const horizontal = (column + 63) % 64, vertical = (row + 63) % 64;
+                        const offset = ((Math.floor(depth / 8) * 66 + row) * 528 + depth % 8 * 66 + column) * 4;
+                        pixels[offset] = Math.round(noise(horizontal, vertical, depth, 8) * 255);
+                        pixels[offset + 1] = Math.round(noise(horizontal, vertical, depth, 4) * 255);
+                        pixels[offset + 2] = Math.round(noise(horizontal, vertical, depth, 2) * 255);
+                        pixels[offset + 3] = 255;
+                    }
+                }
+            }
+            this.galacticNoiseData = pixels;
+        }
+        const context = this.gl;
+        const texture = context.createTexture();
+        context.bindTexture(context.TEXTURE_2D, texture);
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_MIN_FILTER, context.LINEAR);
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_MAG_FILTER, context.LINEAR);
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_S, context.CLAMP_TO_EDGE);
+        context.texParameteri(context.TEXTURE_2D, context.TEXTURE_WRAP_T, context.CLAMP_TO_EDGE);
+        context.pixelStorei(context.UNPACK_FLIP_Y_WEBGL, false);
+        context.texImage2D(context.TEXTURE_2D, 0, context.RGBA, 528, 528, 0, context.RGBA, context.UNSIGNED_BYTE, this.galacticNoiseData);
+        return texture;
     }
 
     skyOpacity() {
@@ -967,6 +1074,9 @@ class StarMapRenderer {
         context.activeTexture(context.TEXTURE1);
         context.bindTexture(context.TEXTURE_2D, this.galacticDust);
         context.uniform1i(this.uniform(this.cloudProgram, 'uGalacticDust'), 1);
+        context.activeTexture(context.TEXTURE2);
+        context.bindTexture(context.TEXTURE_2D, this.galacticNoise);
+        context.uniform1i(this.uniform(this.cloudProgram, 'uGalacticNoise'), 2);
         this.drawQuad(this.cloudProgram);
         context.bindFramebuffer(context.FRAMEBUFFER, null);
         context.viewport(0, 0, this.canvas.width, this.canvas.height);
@@ -985,6 +1095,9 @@ class StarMapRenderer {
         context.bindTexture(context.TEXTURE_2D, this.skyTexture);
         context.uniform1i(this.uniform(this.copyProgram, 'uSky'), 3);
         context.uniform1f(this.uniform(this.copyProgram, 'uSkyOpacity'), this.skyUploaded ? this.skyOpacity() : 0);
+        context.activeTexture(context.TEXTURE4);
+        context.bindTexture(context.TEXTURE_2D, this.galacticNoise);
+        context.uniform1i(this.uniform(this.copyProgram, 'uGalacticNoise'), 4);
         this.drawQuad(this.copyProgram);
         context.enable(context.BLEND);
         context.blendFunc(context.ONE, context.ONE);
@@ -1000,7 +1113,9 @@ class StarMapRenderer {
             context.enableVertexAttribArray(location);
             context.vertexAttribPointer(location, size, context.FLOAT, false, 36, offset * 4);
         }
-        context.drawArrays(context.POINTS, 0, this.stars.length / 9);
+        const solarDistance = Math.hypot(...view.position.map((value, axis) => value - GALACTIC_SPACE.solar[axis]));
+        const starCount = solarDistance <= 600 ? Math.min(this.stars.length, this.localStars.length + this.environmentStars.length) : this.stars.length;
+        context.drawArrays(context.POINTS, 0, starCount / 9);
         for (const [location] of this.starAttributes) context.disableVertexAttribArray(location);
         context.disable(context.BLEND);
     }
@@ -1231,6 +1346,8 @@ class StarMapRenderer {
             context.fillRect(projected[0] - radius, projected[1] - radius, radius * 2, radius * 2);
         }
         context.globalAlpha = 1;
+        const solarDistance = Math.hypot(...view.position.map((value, axis) => value - GALACTIC_SPACE.solar[axis]));
+        const galacticStrength = this.galacticOpacity() * smoothstep(600, 4500, solarDistance);
         for (let offset = 0; offset < this.stars.length; offset += 18) {
             const kind = this.stars[offset + 8];
             if (kind === 2 && view.galaxy < 0.01) continue;
@@ -1243,8 +1360,10 @@ class StarMapRenderer {
             const range = Math.hypot(...relative);
             const visibility = kind === 1 ? GALACTIC_SPACE.photographicVisibility(view.position)
                 : kind === 0 ? 1 / (1 + Math.pow(Math.max(0, range - 600) / 450, 2))
+                : kind === 4 ? galacticStrength / (1 + Math.pow(range / 48000, 2)) * (1 - Math.exp(-range / 10))
                 : this.environmentStrength / (1 + Math.pow(range / 6000, 2));
-            const distanceGain = kind >= 3 ? clamp(1500 / Math.max(range, 120), 0, 1.6) : 1;
+            const distanceGain = kind === 4 ? clamp(6000 / Math.max(range, 120), 0, 1.8)
+                : kind === 3 ? clamp(1500 / Math.max(range, 120), 0, 1.6) : 1;
             const fieldGain = kind === 1 ? lerp(2.2, 1, galaxy) : Math.sqrt(distanceGain);
             const light = Math.min(1, this.stars[offset + 6] * 0.7 * 1.08 * fieldGain) * visibility;
             const color = [3, 4, 5].map(axis => Math.round(this.stars[offset + axis] * 255));
