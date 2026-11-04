@@ -1,0 +1,102 @@
+.news-list .news-item {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) auto;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    font-size: 0.94rem;
+    cursor: pointer;
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.news-list .news-item:hover {
+    border-color: #c9d5e9;
+    box-shadow: 0 4px 16px #6d8ed012;
+    transform: translateX(3px);
+}
+
+.news-list .news-date { color: #687995; }
+.news-list .news-text { color: var(--text); overflow-wrap: anywhere; }
+.news-read { display: flex; align-items: center; gap: 8px; color: #697b9a; font-size: 0.78rem; white-space: nowrap; }
+.news-read > :last-child { font-size: 1.15rem; }
+.news-item:focus-visible, .journal-close:focus-visible { outline: 2px solid #7e917c; outline-offset: 4px; }
+html.news-journal-open { overflow: hidden; }
+
+.news-journal {
+    width: min(940px, calc(100vw - 40px));
+    max-width: none;
+    max-height: calc(100vh - 48px);
+    max-height: calc(100dvh - 48px);
+    margin: auto;
+    padding: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    border: 1px solid #e1d7c5;
+    border-radius: 5px 14px 14px 5px;
+    background-color: #fffcf3;
+    background-image: radial-gradient(#a99b752b 0.7px, transparent 0.8px);
+    background-size: 20px 20px;
+    color: #514f45;
+    font: inherit;
+    box-shadow: 0 28px 100px #28302d38, inset 8px 0 12px #b7a48012;
+}
+
+.news-journal::backdrop { background: #303b465c; backdrop-filter: blur(5px); }
+.news-journal:focus-visible { outline: 2px solid #b9ad90; outline-offset: 2px; }
+.news-journal[open] { animation: journal-arrive 260ms ease-out; }
+.journal-toolbar { position: sticky; top: 0; z-index: 2; display: flex; justify-content: flex-end; padding: 14px 20px 0; pointer-events: none; }
+.journal-toolbar form { pointer-events: auto; }
+.journal-close { display: flex; align-items: center; gap: 14px; min-height: 44px; padding: 4px 12px; border: 1px solid #e2dacb; border-radius: 6px; background: #fffcf3f2; color: #666451; font: inherit; font-size: 0.85rem; cursor: pointer; }
+.journal-close > :last-child { font: 1.6rem var(--font-ui); line-height: 1; }
+.journal-close:hover { background: #eee9d9; }
+.journal-entry { --journal-accent: #6b816b; position: relative; padding: 10px 52px 30px 68px; }
+.journal-entry[data-journal-theme="halloween"] { --journal-accent: #b37550; }
+.journal-entry::before { content: ""; position: absolute; top: 0; bottom: 0; left: 35px; border-left: 1px solid #ce9d9057; }
+.journal-kicker { margin-bottom: 24px; color: #7d816f; font-size: 0.82rem; letter-spacing: 0.12em; }
+.journal-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 18px; }
+.journal-meta time { color: var(--journal-accent); font: 0.85rem var(--font-mono); letter-spacing: 0.05em; }
+.journal-demo { padding: 2px 9px; border: 1px dashed #bdb18c; border-radius: 3px; color: #7e745a; font-size: 0.75rem; transform: rotate(-2deg); }
+.journal-title { margin-top: 16px; font-size: clamp(1.6rem, 3.5vw, 2.15rem); font-weight: 400; line-height: 1.45; text-wrap: balance; overflow-wrap: anywhere; }
+.journal-underline { display: block; width: min(360px, 85%); height: 16px; margin-top: 5px; fill: none; stroke: var(--journal-accent); stroke-width: 2.5; stroke-linecap: round; opacity: 0.65; }
+.journal-spread { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: start; gap: 38px; margin-top: 34px; }
+.journal-writing { padding-top: 8px; }
+.journal-writing h3 { margin-bottom: 16px; color: var(--journal-accent); font-size: 1.1rem; font-weight: 400; }
+.journal-body { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 1rem; line-height: 2.1; background: repeating-linear-gradient(transparent 0 calc(2.1em - 1px), #a3ae9a26 calc(2.1em - 1px) 2.1em); }
+.journal-doodle { display: block; width: 175px; height: 72px; margin: 12px auto 0; fill: none; stroke: var(--journal-accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transform: rotate(-5deg); }
+.journal-photo { position: relative; min-width: 0; margin: 10px 0 0; padding: 12px 12px 0; border: 1px solid #e6dfd1; background: #fffef9; box-shadow: 2px 5px 12px #74664720; transform: rotate(3deg); }
+.journal-photo::before { content: ""; position: absolute; z-index: 1; top: -14px; left: calc(50% - 50px); width: 100px; height: 29px; border-left: 2px dotted #fffcf370; border-right: 2px dotted #fffcf370; background: repeating-linear-gradient(115deg, #b1bea7b3 0 7px, #c2cdb8b3 7px 14px); transform: rotate(-7deg); }
+[data-journal-theme="halloween"] .journal-photo::before { background: repeating-linear-gradient(115deg, #dbbc91bb 0 7px, #ead2aebb 7px 14px); }
+.journal-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: #e8eddf; }
+.journal-photo figcaption { padding: 13px 3px 15px; color: #817660; text-align: center; font-size: 0.83rem; line-height: 1.7; overflow-wrap: anywhere; }
+.journal-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 26px; padding-top: 16px; border-top: 1px dashed #c9c0a8; color: #7f826d; font-size: 0.85rem; }
+.journal-footer > :last-child { color: var(--journal-accent); font-size: 1.65rem; }
+
+@keyframes journal-arrive {
+    from { opacity: 0; transform: translateY(14px) rotate(-0.5deg); }
+    to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+@media (max-width: 640px) {
+    .news-list .news-item { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 12px 14px; }
+    .news-list .news-date { grid-area: 1 / 1; }
+    .news-text { grid-area: 2 / 1 / 3 / -1; }
+    .news-read { grid-area: 1 / 2; }
+    .news-journal { width: calc(100vw - 20px); max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); }
+    .journal-toolbar { padding: 10px 12px 0; }
+    .journal-entry { padding: 12px 26px 22px 36px; }
+    .journal-entry::before { left: 18px; }
+    .journal-kicker { margin-bottom: 20px; font-size: 0.75rem; }
+    .journal-title { font-size: 1.6rem; }
+    .journal-spread { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 20px; }
+    .journal-body { font-size: 0.96rem; }
+    .journal-doodle { width: 132px; height: 54px; margin: 8px 0 0 auto; }
+    .journal-photo { width: min(340px, 100%); justify-self: center; transform: rotate(2deg); }
+    .journal-footer { margin-top: 25px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .news-journal[open] { animation: none; }
+    .news-list .news-item { transition: none; }
+    .news-list .news-item:hover { transform: none; }
+}

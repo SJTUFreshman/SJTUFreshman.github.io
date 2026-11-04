@@ -9,38 +9,65 @@
       "en": {
         "nav_about": "About",
         "nav_news": "News",
-        "nav_pubs": "Selected Publications",
+        "nav_pubs": "Publications",
         "nav_projects": "Projects",
         "nav_gallery": "Gallery",
         "title_news": "News",
-        "title_pubs": "Selected Publications",
+        "title_pubs": "Publications",
         "title_projects": "Projects",
         "title_gallery": "Gallery",
-        "weather_loc": "Shanghai"
+        "weather_loc": "Shanghai",
+        "news_read": "Open journal",
+        "journal_close": "Close journal",
+        "journal_kicker": "A page from my journal",
+        "journal_demo": "Preview · a little space for later",
+        "journal_note": "A note to remember",
+        "journal_body": "Saving a page for this day.\nPhotos, little stories, and scribbles will find their way here.\n\nThis is a journal preview; the real memories are still to come.",
+        "journal_caption": "Photo placeholder · a memory goes here",
+        "journal_image_alt": "Hand-drawn illustration standing in for a future journal photo",
+        "journal_footer": "Little moments, kept on paper."
       },
       "zh-CN": {
         "nav_about": "关于",
         "nav_news": "动态",
-        "nav_pubs": "精选论文",
+        "nav_pubs": "发表论文",
         "nav_projects": "项目",
         "nav_gallery": "光影",
         "title_news": "动态",
-        "title_pubs": "精选论文",
+        "title_pubs": "发表论文",
         "title_projects": "项目经历",
         "title_gallery": "光影",
-        "weather_loc": "上海"
+        "weather_loc": "上海",
+        "news_read": "翻开手账",
+        "journal_close": "合上手账",
+        "journal_kicker": "日常手账 · 记下一点小事",
+        "journal_demo": "占位演示 · 留待慢慢填满",
+        "journal_note": "给这一天留个位置",
+        "journal_body": "先给这一天留一页。\n照片、当天的小事和随手画下的涂鸦，之后慢慢贴进来。\n\n这里是手账样式的占位演示，正式记录稍后补上。",
+        "journal_caption": "照片占位 · 以后把回忆贴在这里",
+        "journal_image_alt": "用于手账照片占位的手绘插画",
+        "journal_footer": "把小小的日常，收进纸页里。"
       },
       "zh-TW": {
         "nav_about": "關於",
         "nav_news": "動態",
-        "nav_pubs": "精選論文",
+        "nav_pubs": "發表論文",
         "nav_projects": "項目",
         "nav_gallery": "光影",
         "title_news": "動態",
-        "title_pubs": "精選論文",
+        "title_pubs": "發表論文",
         "title_projects": "項目經歷",
         "title_gallery": "光影",
-        "weather_loc": "上海"
+        "weather_loc": "上海",
+        "news_read": "翻開手帳",
+        "journal_close": "合上手帳",
+        "journal_kicker": "日常手帳 · 記下一點小事",
+        "journal_demo": "佔位示範 · 留待慢慢填滿",
+        "journal_note": "給這一天留個位置",
+        "journal_body": "先給這一天留一頁。\n照片、當天的小事和隨手畫下的塗鴉，之後慢慢貼進來。\n\n這裡是手帳樣式的佔位示範，正式記錄稍後補上。",
+        "journal_caption": "照片佔位 · 以後把回憶貼在這裡",
+        "journal_image_alt": "用於手帳照片佔位的手繪插畫",
+        "journal_footer": "把小小的日常，收進紙頁裡。"
       }
     },
     "hero": {
@@ -80,12 +107,29 @@
     },
     "news": [
       {
+        "id": "news_halloween_2026",
+        "date": "2026/10/30",
+        "text": {
+          "en": "Halloween party! 👻",
+          "zh-CN": "万圣节party！👻",
+          "zh-TW": "萬聖節party！👻"
+        },
+        "journal": {
+          "theme": "halloween",
+          "image": "assets/news-journal/halloween.svg"
+        }
+      },
+      {
         "id": "news_1",
         "date": "2026/6/29",
         "text": {
           "en": "25-26 Spring Finals finished.",
-          "zh-CN": "期末终验考完啦！",
-          "zh-TW": "期末终于考完啦！"
+          "zh-CN": "期末考试考完啦！",
+          "zh-TW": "期末考試考完啦！"
+        },
+        "journal": {
+          "theme": "summer",
+          "image": "assets/news-journal/summer.svg"
         }
       }
     ],
@@ -127,8 +171,16 @@
         "citation": ""
       },
       {
+        "id": "DevicesWorld_2026",
+        "title": "DevicesWorld: Benchmarking Cross-Device Agents in Heterogeneous Environments",
+        "authors_html": "Huatao Li, Xinwei Geng, Yuheng Wang, Yutong Li, <b>Runde Yang</b>, Hantao Chen, Shu Yao, Jingru Fan, Xuhui Ren, Yuanyuan Zhao, Fei Huang, Chen Qian",
+        "venue": "arXiv preprint arXiv:2607.13465",
+        "paper_url": "https://arxiv.org/abs/2607.13465",
+        "code_url": "https://github.com/AgenticOrgLab/DevicesWorld",
+        "citation": "@misc{li2026devicesworld,\n  title={DevicesWorld: Benchmarking Cross-Device Agents in Heterogeneous Environments},\n  author={Huatao Li and Xinwei Geng and Yuheng Wang and Yutong Li and Runde Yang and Hantao Chen and Shu Yao and Jingru Fan and Xuhui Ren and Yuanyuan Zhao and Fei Huang and Chen Qian},\n  year={2026},\n  eprint={2607.13465},\n  archivePrefix={arXiv},\n  primaryClass={cs.CL},\n  url={https://arxiv.org/abs/2607.13465}\n}"
+      },
+      {
         "id": "AppCopilot_2025",
-        "selected": false,
         "title": "AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent",
         "authors_html": "Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian",
         "venue": "arXiv preprint arXiv:2509.02444",

@@ -906,12 +906,13 @@ async function contentChecks(browser) {
                 === 'https://en.sjtu.edu.cn/', 'The English university link opens SJTU’s English website');
             const titles = await page.locator('#publications .pub-title-text').allTextContents();
             check(titles[0] === 'Collaborative Learning and Reasoning over Model Slices'
-                && titles.length === 4 && titles.every(title => !title.includes('AppCopilot')),
-            'Selected Publications leads with Model Slices and omits the AppCopilot publication');
+                && titles.length === 6 && titles.some(title => title.startsWith('AppCopilot:'))
+                && titles.some(title => title.startsWith('DevicesWorld:')),
+            'Publications leads with Model Slices and includes AppCopilot and DevicesWorld');
             check(await page.locator('#publications .pub-item').first().locator('a.pub-btn').getAttribute('href')
                 === 'https://arxiv.org/abs/2610.12927', 'The new paper links to its supplied arXiv page');
             check(await page.locator('a.pub-btn[href="#"], a.project-link[href="#"], a.pub-btn[href=""], a.project-link[href=""]').count() === 0
-                && await page.locator('.pub-btn:disabled, .project-link:disabled').count() === 7,
+                && await page.locator('.pub-btn:disabled').count() === 5,
             'All empty Paper and Code destinations are native disabled buttons');
             const paperButton = page.locator('#publications .pub-item').first().locator('a.pub-btn');
             await paperButton.focus();
@@ -921,17 +922,17 @@ async function contentChecks(browser) {
             const originalUrl = page.url();
             await page.locator('.pub-btn:disabled').first().click({ force: true });
             check(page.url() === originalUrl, 'Clicking an unavailable Code button does not jump or navigate');
-            for (const [language, label, expected] of [['en', 'EN', 'Selected Publications'], ['zh-CN', '简', '精选论文'], ['zh-TW', '繁', '精選論文']]) {
+            for (const [language, label, expected] of [['en', 'EN', 'Publications'], ['zh-CN', '简', '发表论文'], ['zh-TW', '繁', '發表論文']]) {
                 await page.getByRole('button', { name: label, exact: true }).click();
                 check(await page.locator('.hero-title a').filter({ hasText: /Shanghai Jiao Tong University|上海交通大[学學]/ }).getAttribute('href')
                     === (language === 'en' ? 'https://en.sjtu.edu.cn/' : 'https://www.sjtu.edu.cn/'),
                 `${language}: the university destination follows the selected language`);
                 check(await page.locator('[data-key="title_pubs"]').textContent() === expected
                     && await page.locator('[data-key="nav_pubs"]').textContent() === expected,
-                `${language}: the publication heading and navigation use the selected label`);
+                `${language}: the publication heading and navigation use the publications label`);
             }
             await page.locator('#publications').scrollIntoViewIfNeeded();
-            await screenshot(page, 'selected-publications');
+            await screenshot(page, 'publications');
         }
         await context.close();
     }

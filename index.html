@@ -69,6 +69,8 @@
     <link rel="stylesheet" href="assets/pet-summon.css">
     <link rel="stylesheet" href="assets/site-identity.css?v=20261028-name-cycle">
     <script src="assets/site-identity.js?v=20261028-name-cycle" defer></script>
+    <link rel="stylesheet" href="assets/news-journal.css?v=20261103">
+    <script src="assets/news-journal.js?v=20261103" defer></script>
 </head>
 <body class="lang-en">
 
@@ -1219,7 +1221,7 @@
         <div class="nav-links" id="navLinks">
             <a href="#about" class="nav-link" data-key="nav_about">About</a>
             <a href="#news" class="nav-link" data-key="nav_news">News</a>
-            <a href="#publications" class="nav-link" data-key="nav_pubs">Selected Publications</a>
+            <a href="#publications" class="nav-link" data-key="nav_pubs">Publications</a>
             <a href="#projects" class="nav-link" data-key="nav_projects">Projects</a>
             <div class="nav-lang">
                 <button class="lang-btn active" onclick="setLang('en')">EN</button>
@@ -1316,16 +1318,76 @@
     <section id="news" class="fade-in">
         <div class="section-title" data-key="title_news">News</div>
         <ul class="news-list" id="newsList">
-            <li class="news-item">
-                <span class="news-date">2026/6/29</span>
-                <span class="news-text" data-key="news_1">25-26 Spring Finals finished.</span>
+            <li>
+                <button class="news-item" type="button" data-news-entry="news_halloween_2026" aria-haspopup="dialog" aria-controls="newsJournal">
+                    <span class="news-date">2026/10/30</span>
+                    <span class="news-text" data-key="news_halloween_2026">Halloween party! 👻</span>
+                    <span class="news-read"><span data-key="news_read">Open journal</span><span aria-hidden="true">↗</span></span>
+                </button>
+            </li>
+            <li>
+                <button class="news-item" type="button" data-news-entry="news_1" aria-haspopup="dialog" aria-controls="newsJournal">
+                    <span class="news-date">2026/6/29</span>
+                    <span class="news-text" data-key="news_1">25-26 Spring Finals finished.</span>
+                    <span class="news-read"><span data-key="news_read">Open journal</span><span aria-hidden="true">↗</span></span>
+                </button>
             </li>
         </ul>
+        <template id="journal-news_halloween_2026">
+            <article class="journal-entry" data-journal-theme="halloween">
+                <header class="journal-heading">
+                    <p class="journal-kicker" data-key="journal_kicker">A page from my journal</p>
+                    <div class="journal-meta"><time>2026/10/30</time><span class="journal-demo" data-key="journal_demo">Preview · a little space for later</span></div>
+                    <h2 class="journal-title" data-key="news_halloween_2026">Halloween party! 👻</h2>
+                    <svg class="journal-underline" viewBox="0 0 400 16" aria-hidden="true"><path d="M3 9 Q100 1 198 8 T395 5 M18 14 Q163 6 312 12"/></svg>
+                </header>
+                <div class="journal-spread">
+                    <div class="journal-writing">
+                        <h3 data-key="journal_note">A note to remember</h3>
+                        <p class="journal-body" data-key="news_halloween_2026_journal_body">Saving a page for this day.
+Photos, little stories, and scribbles will find their way here.
+
+This is a journal preview; the real memories are still to come.</p>
+                        <svg class="journal-doodle" viewBox="0 0 220 90" aria-hidden="true"><path d="m17 37 7-17 6 18 18 3-15 10 3 19-13-12-17 7 7-17-12-12 16 1 M60 62 Q90 81 106 59 T158 53 M148 42 l13 9-12 10 M183 25 C171 8 154 25 184 46 C218 25 199 8 183 25"/></svg>
+                    </div>
+                    <figure class="journal-photo">
+                        <img src="assets/news-journal/halloween.svg" alt="Hand-drawn illustration standing in for a future journal photo" data-alt-key="news_halloween_2026_journal_image_alt" width="640" height="480" decoding="async">
+                        <figcaption data-key="news_halloween_2026_journal_caption">Photo placeholder · a memory goes here</figcaption>
+                    </figure>
+                </div>
+                <footer class="journal-footer"><span data-key="journal_footer">Little moments, kept on paper.</span><span aria-hidden="true">✳</span></footer>
+            </article>
+        </template>
+        <template id="journal-news_1">
+            <article class="journal-entry" data-journal-theme="summer">
+                <header class="journal-heading">
+                    <p class="journal-kicker" data-key="journal_kicker">A page from my journal</p>
+                    <div class="journal-meta"><time>2026/6/29</time><span class="journal-demo" data-key="journal_demo">Preview · a little space for later</span></div>
+                    <h2 class="journal-title" data-key="news_1">25-26 Spring Finals finished.</h2>
+                    <svg class="journal-underline" viewBox="0 0 400 16" aria-hidden="true"><path d="M3 9 Q100 1 198 8 T395 5 M18 14 Q163 6 312 12"/></svg>
+                </header>
+                <div class="journal-spread">
+                    <div class="journal-writing">
+                        <h3 data-key="journal_note">A note to remember</h3>
+                        <p class="journal-body" data-key="news_1_journal_body">Saving a page for this day.
+Photos, little stories, and scribbles will find their way here.
+
+This is a journal preview; the real memories are still to come.</p>
+                        <svg class="journal-doodle" viewBox="0 0 220 90" aria-hidden="true"><path d="m17 37 7-17 6 18 18 3-15 10 3 19-13-12-17 7 7-17-12-12 16 1 M60 62 Q90 81 106 59 T158 53 M148 42 l13 9-12 10 M183 25 C171 8 154 25 184 46 C218 25 199 8 183 25"/></svg>
+                    </div>
+                    <figure class="journal-photo">
+                        <img src="assets/news-journal/summer.svg" alt="Hand-drawn illustration standing in for a future journal photo" data-alt-key="news_1_journal_image_alt" width="640" height="480" decoding="async">
+                        <figcaption data-key="news_1_journal_caption">Photo placeholder · a memory goes here</figcaption>
+                    </figure>
+                </div>
+                <footer class="journal-footer"><span data-key="journal_footer">Little moments, kept on paper.</span><span aria-hidden="true">✳</span></footer>
+            </article>
+        </template>
     </section>
 
     <!-- ===== Publications ===== -->
     <section id="publications" class="fade-in">
-        <div class="section-title" data-key="title_pubs">Selected Publications</div>
+        <div class="section-title" data-key="title_pubs">Publications</div>
         <div class="pub-list">
             <div class="pub-item">
                 <div class="pub-title-text en-only">Collaborative Learning and Reasoning over Model Slices</div>
@@ -1334,7 +1396,7 @@
                 <div class="pub-actions">
                     <a class="pub-btn" href="https://arxiv.org/abs/2610.12927"><i class="far fa-file-pdf" aria-hidden="true"></i> Paper</a>
                     <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
-                    <button class="pub-btn" onclick="copyCitation(&quot;ModelSlices_2026&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
+                    <button class="pub-btn" type="button" onclick="copyCitation(&quot;ModelSlices_2026&quot;, this)"><i class="fas fa-quote-right"></i> Cite</button>
                 </div>
             </div>
             <div class="pub-item">
@@ -1344,7 +1406,7 @@
                 <div class="pub-actions">
                     <a class="pub-btn" href="https://arxiv.org/abs/2601.04204v1"><i class="far fa-file-pdf" aria-hidden="true"></i> Paper</a>
                     <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
-                    <button class="pub-btn" onclick="copyCitation(&quot;Generative_2025&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
+                    <button class="pub-btn" type="button" onclick="copyCitation(&quot;Generative_2025&quot;, this)"><i class="fas fa-quote-right"></i> Cite</button>
                 </div>
             </div>
             <div class="pub-item">
@@ -1354,7 +1416,7 @@
                 <div class="pub-actions">
                     <a class="pub-btn" href="https://arxiv.org/abs/2605.19382"><i class="far fa-file-pdf" aria-hidden="true"></i> Paper</a>
                     <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
-                    <button class="pub-btn" onclick="copyCitation(&quot;PRISM_2026&quot;)"><i class="fas fa-quote-right"></i> Cite</button>
+                    <button class="pub-btn" type="button" onclick="copyCitation(&quot;PRISM_2026&quot;, this)"><i class="fas fa-quote-right"></i> Cite</button>
                 </div>
             </div>
             <div class="pub-item">
@@ -1364,6 +1426,26 @@
                 <div class="pub-actions">
                     <a class="pub-btn" href="https://arxiv.org/abs/2602.05353"><i class="far fa-file-pdf" aria-hidden="true"></i> Paper</a>
                     <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title-text en-only">DevicesWorld: Benchmarking Cross-Device Agents in Heterogeneous Environments</div>
+                <div class="pub-authors en-only">Huatao Li, Xinwei Geng, Yuheng Wang, Yutong Li, <b>Runde Yang</b>, Hantao Chen, Shu Yao, Jingru Fan, Xuhui Ren, Yuanyuan Zhao, Fei Huang, Chen Qian</div>
+                <div class="pub-venue en-only">arXiv preprint arXiv:2607.13465</div>
+                <div class="pub-actions">
+                    <a class="pub-btn" href="https://arxiv.org/abs/2607.13465"><i class="far fa-file-pdf" aria-hidden="true"></i> Paper</a>
+                    <a class="pub-btn" href="https://github.com/AgenticOrgLab/DevicesWorld"><i class="fab fa-github" aria-hidden="true"></i> Code</a>
+                    <button class="pub-btn" type="button" onclick="copyCitation(&quot;DevicesWorld_2026&quot;, this)"><i class="fas fa-quote-right"></i> Cite</button>
+                </div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title-text en-only">AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent</div>
+                <div class="pub-authors en-only">Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian</div>
+                <div class="pub-venue en-only">arXiv preprint arXiv:2509.02444</div>
+                <div class="pub-actions">
+                    <a class="pub-btn" href="https://arxiv.org/abs/2509.02444"><i class="far fa-file-pdf" aria-hidden="true"></i> Paper</a>
+                    <button class="pub-btn" type="button" disabled aria-disabled="true"><i class="fab fa-github" aria-hidden="true"></i> Code</button>
+                    <button class="pub-btn" type="button" onclick="copyCitation(&quot;AppCopilot_2025&quot;, this)"><i class="fas fa-quote-right"></i> Cite</button>
                 </div>
             </div>
         </div>
@@ -1446,6 +1528,15 @@
     &copy; 2025–2026 <span data-site-name><span data-site-name-text>Runde Yang</span></span>. Built with care.
 </footer>
 
+<dialog class="news-journal" id="newsJournal" aria-labelledby="newsJournalTitle">
+    <div class="journal-toolbar">
+        <form method="dialog">
+            <button class="journal-close" type="submit" autofocus><span data-key="journal_close">Close journal</span><span aria-hidden="true">×</span></button>
+        </form>
+    </div>
+    <div id="newsJournalContent"></div>
+</dialog>
+
 <script src="assets/pet-summon.js"></script>
 <script>
 /* ===== i18n Content ===== */
@@ -1453,11 +1544,11 @@ const i18n = {
     "en": {
         "nav_about": "About",
         "nav_news": "News",
-        "nav_pubs": "Selected Publications",
+        "nav_pubs": "Publications",
         "nav_projects": "Projects",
         "nav_gallery": "Gallery",
         "title_news": "News",
-        "title_pubs": "Selected Publications",
+        "title_pubs": "Publications",
         "title_projects": "Projects",
         "title_gallery": "Gallery",
         "weather_loc": "Shanghai",
@@ -1476,16 +1567,32 @@ const i18n = {
         "cap_road": "On the road to Qiandao Lake",
         "cap_campus": "SJTU Campus in spring",
         "cap_zijinshan": "Zijin Mountain, Nanjing",
-        "cap_cake": "Baking club strawberry cake"
+        "cap_cake": "Baking club strawberry cake",
+        "news_read": "Open journal",
+        "journal_close": "Close journal",
+        "journal_kicker": "A page from my journal",
+        "journal_demo": "Preview · a little space for later",
+        "journal_note": "A note to remember",
+        "journal_body": "Saving a page for this day.\nPhotos, little stories, and scribbles will find their way here.\n\nThis is a journal preview; the real memories are still to come.",
+        "journal_caption": "Photo placeholder · a memory goes here",
+        "journal_image_alt": "Hand-drawn illustration standing in for a future journal photo",
+        "journal_footer": "Little moments, kept on paper.",
+        "news_halloween_2026": "Halloween party! 👻",
+        "news_halloween_2026_journal_body": "Saving a page for this day.\nPhotos, little stories, and scribbles will find their way here.\n\nThis is a journal preview; the real memories are still to come.",
+        "news_halloween_2026_journal_caption": "Photo placeholder · a memory goes here",
+        "news_halloween_2026_journal_image_alt": "Hand-drawn illustration standing in for a future journal photo",
+        "news_1_journal_body": "Saving a page for this day.\nPhotos, little stories, and scribbles will find their way here.\n\nThis is a journal preview; the real memories are still to come.",
+        "news_1_journal_caption": "Photo placeholder · a memory goes here",
+        "news_1_journal_image_alt": "Hand-drawn illustration standing in for a future journal photo"
     },
     "zh-CN": {
         "nav_about": "关于",
         "nav_news": "动态",
-        "nav_pubs": "精选论文",
+        "nav_pubs": "发表论文",
         "nav_projects": "项目",
         "nav_gallery": "光影",
         "title_news": "动态",
-        "title_pubs": "精选论文",
+        "title_pubs": "发表论文",
         "title_projects": "项目经历",
         "title_gallery": "光影",
         "weather_loc": "上海",
@@ -1495,7 +1602,7 @@ const i18n = {
         "hero_location": "中国 上海",
         "life_card_title": "科研之外",
         "life_card_desc": "足迹地图、书影、随笔，以及更多。",
-        "news_1": "期末终验考完啦！",
+        "news_1": "期末考试考完啦！",
         "proj_appcopilot": "一个多模态多智能体设备端助手，探索工具使用、规划和鲁棒的 UI 定位。",
         "proj_teachmaster": "一个多智能体框架，使用代码作为中间语义表示，自动生成结构化的教育视频。",
         "cap_meteor": "猎户座大星云，2025",
@@ -1504,16 +1611,32 @@ const i18n = {
         "cap_road": "千岛湖路上",
         "cap_campus": "美哉吾校",
         "cap_zijinshan": "紫金山，南京",
-        "cap_cake": "烘焙社草莓蛋糕"
+        "cap_cake": "烘焙社草莓蛋糕",
+        "news_read": "翻开手账",
+        "journal_close": "合上手账",
+        "journal_kicker": "日常手账 · 记下一点小事",
+        "journal_demo": "占位演示 · 留待慢慢填满",
+        "journal_note": "给这一天留个位置",
+        "journal_body": "先给这一天留一页。\n照片、当天的小事和随手画下的涂鸦，之后慢慢贴进来。\n\n这里是手账样式的占位演示，正式记录稍后补上。",
+        "journal_caption": "照片占位 · 以后把回忆贴在这里",
+        "journal_image_alt": "用于手账照片占位的手绘插画",
+        "journal_footer": "把小小的日常，收进纸页里。",
+        "news_halloween_2026": "万圣节party！👻",
+        "news_halloween_2026_journal_body": "先给这一天留一页。\n照片、当天的小事和随手画下的涂鸦，之后慢慢贴进来。\n\n这里是手账样式的占位演示，正式记录稍后补上。",
+        "news_halloween_2026_journal_caption": "照片占位 · 以后把回忆贴在这里",
+        "news_halloween_2026_journal_image_alt": "用于手账照片占位的手绘插画",
+        "news_1_journal_body": "先给这一天留一页。\n照片、当天的小事和随手画下的涂鸦，之后慢慢贴进来。\n\n这里是手账样式的占位演示，正式记录稍后补上。",
+        "news_1_journal_caption": "照片占位 · 以后把回忆贴在这里",
+        "news_1_journal_image_alt": "用于手账照片占位的手绘插画"
     },
     "zh-TW": {
         "nav_about": "關於",
         "nav_news": "動態",
-        "nav_pubs": "精選論文",
+        "nav_pubs": "發表論文",
         "nav_projects": "項目",
         "nav_gallery": "光影",
         "title_news": "動態",
-        "title_pubs": "精選論文",
+        "title_pubs": "發表論文",
         "title_projects": "項目經歷",
         "title_gallery": "光影",
         "weather_loc": "上海",
@@ -1523,7 +1646,7 @@ const i18n = {
         "hero_location": "中國 上海",
         "life_card_title": "科研之外",
         "life_card_desc": "足跡地圖、書影、隨筆，以及更多。",
-        "news_1": "期末终于考完啦！",
+        "news_1": "期末考試考完啦！",
         "proj_appcopilot": "一個多模態多智能體設備端助手，探索工具使用、規劃和魯棒的 UI 定位。",
         "proj_teachmaster": "一個多智能體框架，使用代碼作為中間語義表示，自動生成結構化的教育視頻。",
         "cap_meteor": "獵戶座大星雲，2025",
@@ -1532,7 +1655,23 @@ const i18n = {
         "cap_road": "千島湖路上",
         "cap_campus": "美哉吾校",
         "cap_zijinshan": "紫金山，南京",
-        "cap_cake": "烘焙社草莓蛋糕"
+        "cap_cake": "烘焙社草莓蛋糕",
+        "news_read": "翻開手帳",
+        "journal_close": "合上手帳",
+        "journal_kicker": "日常手帳 · 記下一點小事",
+        "journal_demo": "佔位示範 · 留待慢慢填滿",
+        "journal_note": "給這一天留個位置",
+        "journal_body": "先給這一天留一頁。\n照片、當天的小事和隨手畫下的塗鴉，之後慢慢貼進來。\n\n這裡是手帳樣式的佔位示範，正式記錄稍後補上。",
+        "journal_caption": "照片佔位 · 以後把回憶貼在這裡",
+        "journal_image_alt": "用於手帳照片佔位的手繪插畫",
+        "journal_footer": "把小小的日常，收進紙頁裡。",
+        "news_halloween_2026": "萬聖節party！👻",
+        "news_halloween_2026_journal_body": "先給這一天留一頁。\n照片、當天的小事和隨手畫下的塗鴉，之後慢慢貼進來。\n\n這裡是手帳樣式的佔位示範，正式記錄稍後補上。",
+        "news_halloween_2026_journal_caption": "照片佔位 · 以後把回憶貼在這裡",
+        "news_halloween_2026_journal_image_alt": "用於手帳照片佔位的手繪插畫",
+        "news_1_journal_body": "先給這一天留一頁。\n照片、當天的小事和隨手畫下的塗鴉，之後慢慢貼進來。\n\n這裡是手帳樣式的佔位示範，正式記錄稍後補上。",
+        "news_1_journal_caption": "照片佔位 · 以後把回憶貼在這裡",
+        "news_1_journal_image_alt": "用於手帳照片佔位的手繪插畫"
     }
 };
 
@@ -1566,6 +1705,7 @@ function setLang(lang) {
     // Update weather location
     const wLoc = document.getElementById('weatherLoc');
     if (wLoc) wLoc.textContent = data.weather_loc || 'Shanghai';
+    window.NewsJournal?.setLanguage(lang);
 }
 
 /* ===== Init Language ===== */
@@ -1726,18 +1866,26 @@ fetchWeather();
 const citations = {
     "ModelSlices_2026": "@misc{wang2026collaborativelearningslices,\n  title={Collaborative Learning and Reasoning over Model Slices},\n  author={Yuheng Wang and Runde Yang and Zhuohan Bao and Qiran Zhang and Huatao Li and Yiyang Zheng and Lin Wu and Jingru Fan and Shu Yao and Yihan Li and Zhi Li and Chen Qian},\n  year={2026},\n  eprint={2610.12927},\n  archivePrefix={arXiv},\n  url={https://arxiv.org/abs/2610.12927}\n}",
     "Generative_2025": "@misc{wang2025generativeteachingcode,\n  title={Generative Teaching via Code},\n  author={Yuheng Wang and Runde Yang and Lin Wu and Jie Zhang and Jingru Fan and Ruoyu Fu and Tianle Zhou and Huatao Li and Siheng Chen and Weinan E and Chen Qian},\n  year={2025},\n  eprint={2601.04204},\n  archivePrefix={arXiv},\n  primaryClass={cs.CY},\n  url={https://arxiv.org/abs/2601.04204}\n}",
-    "PRISM_2026": "@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,\n      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning}, \n      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},\n      year={2026},\n      eprint={2605.19382},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2605.19382}, \n}"
+    "PRISM_2026": "@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,\n      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning}, \n      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},\n      year={2026},\n      eprint={2605.19382},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2605.19382}, \n}",
+    "DevicesWorld_2026": "@misc{li2026devicesworld,\n  title={DevicesWorld: Benchmarking Cross-Device Agents in Heterogeneous Environments},\n  author={Huatao Li and Xinwei Geng and Yuheng Wang and Yutong Li and Runde Yang and Hantao Chen and Shu Yao and Jingru Fan and Xuhui Ren and Yuanyuan Zhao and Fei Huang and Chen Qian},\n  year={2026},\n  eprint={2607.13465},\n  archivePrefix={arXiv},\n  primaryClass={cs.CL},\n  url={https://arxiv.org/abs/2607.13465}\n}",
+    "AppCopilot_2025": "@misc{fan2025appcopilotgeneralaccuratelonghorizon,\n  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},\n  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},\n  year={2025},\n  eprint={2509.02444},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2509.02444}\n}"
 };
 
-function copyCitation(id) {
+async function copyCitation(id, button) {
     const bib = citations[id];
-    if (!bib) return;
-    navigator.clipboard.writeText(bib).then(() => {
-        const btn = event.target.closest('.pub-btn');
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check"></i> Copied';
-        setTimeout(() => { btn.innerHTML = orig; }, 1500);
-    });
+    if (!bib || !button) return;
+    const original = button.innerHTML;
+    button.disabled = true;
+    try {
+        await navigator.clipboard.writeText(bib);
+        button.innerHTML = '<i class="fas fa-check"></i> Copied';
+    } catch (error) {
+        button.textContent = 'Copy unavailable';
+    }
+    setTimeout(() => {
+        button.innerHTML = original;
+        button.disabled = false;
+    }, 1500);
 }
 
 /* ===== Mobile Nav Toggle ===== */

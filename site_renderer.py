@@ -578,6 +578,9 @@ def render_home_i18n(content: dict[str, Any]) -> str:
         key = key_for("news", item, index)
         for lang in LANGS:
             i18n[lang][key] = lang_value(item.get("text", {}), lang)
+            for field in ("body", "caption", "image_alt"):
+                value = lang_value(item.get("journal", {}).get(field, {}), lang)
+                i18n[lang][f"{key}_journal_{field}"] = esc(value or home["labels"][lang][f"journal_{field}"])
 
     for index, item in enumerate(home["projects"]):
         key = key_for("proj", item, index)
@@ -734,18 +737,54 @@ def render_home_hero(content: dict[str, Any]) -> str:
 
 def render_home_news(content: dict[str, Any]) -> str:
     rows = []
-    for index, item in enumerate(content["home"]["news"]):
+    templates = []
+    home = content["home"]
+    labels = home["labels"]["en"]
+    for index, item in enumerate(home["news"]):
         key = key_for("news", item, index)
-        rows.append(f"""            <li class="news-item">
-                <span class="news-date">{esc(item.get("date", ""))}</span>
-                <span class="news-text" data-key="{esc(key)}">{lang_value(item.get("text", {}), "en")}</span>
+        journal = item.get("journal", {})
+        theme = "halloween" if journal.get("theme") == "halloween" else "summer"
+        body = lang_value(journal.get("body", {}), "en") or labels["journal_body"]
+        caption = lang_value(journal.get("caption", {}), "en") or labels["journal_caption"]
+        image_alt = lang_value(journal.get("image_alt", {}), "en") or labels["journal_image_alt"]
+        image = journal.get("image") or f"assets/news-journal/{theme}.svg"
+        demo = f'<span class="journal-demo" data-key="journal_demo">{esc(labels["journal_demo"])}</span>' if journal.get("demo", True) else ""
+        rows.append(f"""            <li>
+                <button class="news-item" type="button" data-news-entry="{esc(key)}" aria-haspopup="dialog" aria-controls="newsJournal">
+                    <span class="news-date">{esc(item.get("date", ""))}</span>
+                    <span class="news-text" data-key="{esc(key)}">{lang_value(item.get("text", {}), "en")}</span>
+                    <span class="news-read"><span data-key="news_read">{esc(labels["news_read"])}</span><span aria-hidden="true">↗</span></span>
+                </button>
             </li>""")
+        templates.append(f"""        <template id="journal-{esc(key)}">
+            <article class="journal-entry" data-journal-theme="{theme}">
+                <header class="journal-heading">
+                    <p class="journal-kicker" data-key="journal_kicker">{esc(labels["journal_kicker"])}</p>
+                    <div class="journal-meta"><time>{esc(item.get("date", ""))}</time>{demo}</div>
+                    <h2 class="journal-title" data-key="{esc(key)}">{lang_value(item.get("text", {}), "en")}</h2>
+                    <svg class="journal-underline" viewBox="0 0 400 16" aria-hidden="true"><path d="M3 9 Q100 1 198 8 T395 5 M18 14 Q163 6 312 12"/></svg>
+                </header>
+                <div class="journal-spread">
+                    <div class="journal-writing">
+                        <h3 data-key="journal_note">{esc(labels["journal_note"])}</h3>
+                        <p class="journal-body" data-key="{esc(key)}_journal_body">{esc(body)}</p>
+                        <svg class="journal-doodle" viewBox="0 0 220 90" aria-hidden="true"><path d="m17 37 7-17 6 18 18 3-15 10 3 19-13-12-17 7 7-17-12-12 16 1 M60 62 Q90 81 106 59 T158 53 M148 42 l13 9-12 10 M183 25 C171 8 154 25 184 46 C218 25 199 8 183 25"/></svg>
+                    </div>
+                    <figure class="journal-photo">
+                        <img src="{esc(image)}" alt="{esc(image_alt)}" data-alt-key="{esc(key)}_journal_image_alt" width="640" height="480" decoding="async">
+                        <figcaption data-key="{esc(key)}_journal_caption">{esc(caption)}</figcaption>
+                    </figure>
+                </div>
+                <footer class="journal-footer"><span data-key="journal_footer">{esc(labels["journal_footer"])}</span><span aria-hidden="true">✳</span></footer>
+            </article>
+        </template>""")
     return """    <!-- ===== News ===== -->
     <section id="news" class="fade-in">
         <div class="section-title" data-key="title_news">News</div>
         <ul class="news-list" id="newsList">
 """ + "\n".join(rows) + """
         </ul>
+""" + "\n".join(templates) + """
     </section>"""
 
 
@@ -761,15 +800,13 @@ def render_resource_link(url: str | None, class_name: str, icon: str, label: str
 def render_publications(content: dict[str, Any]) -> str:
     rows = []
     for item in content["home"]["publications"]:
-        if item.get("selected") is False:
-            continue
         paper = render_resource_link(item.get("paper_url"), "pub-btn", "far fa-file-pdf", "Paper")
         code = render_resource_link(item.get("code_url"), "pub-btn", "fab fa-github", "Code")
         cite = item.get("id") or ""
         cite_button = ""
         if item.get("citation"):
             cite_arg = esc(json.dumps(cite, ensure_ascii=False))
-            cite_button = f'\n                    <button class="pub-btn" onclick="copyCitation({cite_arg})"><i class="fas fa-quote-right"></i> Cite</button>'
+            cite_button = f'\n                    <button class="pub-btn" type="button" onclick="copyCitation({cite_arg}, this)"><i class="fas fa-quote-right"></i> Cite</button>'
         rows.append(f"""            <div class="pub-item">
                 <div class="pub-title-text en-only">{item.get("title", "")}</div>
                 <div class="pub-authors en-only">{item.get("authors_html", "")}</div>
@@ -781,7 +818,7 @@ def render_publications(content: dict[str, Any]) -> str:
             </div>""")
     return """    <!-- ===== Publications ===== -->
     <section id="publications" class="fade-in">
-        <div class="section-title" data-key="title_pubs">Selected Publications</div>
+        <div class="section-title" data-key="title_pubs">Publications</div>
         <div class="pub-list">
 """ + "\n".join(rows) + """
         </div>
@@ -1331,9 +1368,31 @@ def render_citations(content: dict[str, Any]) -> str:
     citations = {
         item["id"]: item["citation"]
         for item in content["home"].get("publications", [])
-        if item.get("id") and item.get("citation") and item.get("selected") is not False
+        if item.get("id") and item.get("citation")
     }
     return "/* ===== Citations ===== */\nconst citations = " + json_js(citations) + ";"
+
+
+def render_home_updates(root: Path, content: dict[str, Any], write: bool) -> str:
+    path = root / "index.html"
+    text = path.read_text(encoding="utf-8")
+    text = replace_region(text, "HOME_NEWS", render_home_news(content), r'<!-- ===== News ===== -->\s*<section id="news".*?</section>')
+    text = replace_region(text, "HOME_PUBLICATIONS", render_publications(content), r'<!-- ===== Publications ===== -->\s*<section id="publications".*?</section>')
+    translations = json.loads(render_home_i18n(content).split("const i18n = ", 1)[1].removesuffix(";"))
+    current_translations = json.loads(re.search(r'const i18n = (\{.*?\});', text, re.S).group(1))
+    news_keys = {key_for("news", item, index) for index, item in enumerate(content["home"]["news"])}
+    label_keys = {"nav_pubs", "title_pubs", "news_read"}
+    for lang in LANGS:
+        for key, value in translations[lang].items():
+            if key in label_keys or key in news_keys or key.startswith("journal_") or "_journal_" in key:
+                current_translations[lang][key] = value
+    translation_script = "/* ===== i18n Content ===== */\nconst i18n = " + json_js(current_translations) + ";"
+    text = replace_code_region(text, "HOME_I18N", translation_script, r'/\* ===== i18n Content ===== \*/\s*const i18n = \{.*?\};')
+    text = replace_code_region(text, "HOME_CITATIONS", render_citations(content), r'/\* ===== Citations ===== \*/\s*const citations = \{.*?\};')
+    text = re.sub(r'(<a\b[^>]*data-key="nav_pubs"[^>]*>).*?(</a>)', lambda match: match[1] + esc(content["home"]["labels"]["en"]["nav_pubs"]) + match[2], text)
+    if write:
+        path.write_text(text, encoding="utf-8", newline="\n")
+    return text
 
 
 def render_home(root: Path, content: dict[str, Any], write: bool) -> str:
@@ -1495,13 +1554,26 @@ def main() -> int:
         action="store_true",
         help="Render in memory, verify generated artifacts are current, and do not write files.",
     )
-    parser.add_argument(
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument(
         "--life-only",
         action="store_true",
         help="Render only life.html, leaving index.html byte-for-byte untouched.",
     )
+    scope.add_argument(
+        "--home-updates-only",
+        action="store_true",
+        help="Render only homepage news, journals, publications, and their translations.",
+    )
     args = parser.parse_args()
-    if args.check and args.life_only:
+    if args.home_updates_only:
+        content = load_content(ROOT)
+        validate_content(content)
+        rendered = render_home_updates(ROOT, content, write=not args.check)
+        if args.check:
+            require_current_artifact(ROOT / "index.html", rendered, ROOT)
+        print("Homepage updates check passed" if args.check else "Rendered homepage updates")
+    elif args.check and args.life_only:
         check_life_render(ROOT)
         print("Life render check passed")
     elif args.check:
