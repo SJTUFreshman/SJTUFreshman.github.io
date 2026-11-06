@@ -4,7 +4,7 @@
     // 维护指南：tools/relief-atlas/ADDING-FOOTPRINTS.md；这里是显示层，不是到访/行程数据的编辑入口。
     // 新城市改 site_content.json 的 visited_china；新路线改 scripts/prepare-footprint-routes.py 再生成、打包。
     // 城市或路线重新打包后，同步修改此版本、life.html 中脚本的 atlas= 及全部 Life 资源的共享 v=。
-    const ATLAS_VERSION = '20261106-cultural-palettes';
+    const ATLAS_VERSION = '20261107-cultural-names';
     const ATLAS_URL = `assets/maps/relief/atlas-runtime.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
@@ -65,7 +65,6 @@
             currentView: 'Current view', switchTo: 'Switch to',
             overviewUnavailable: 'Regional map unavailable. You can still switch to the detailed map.',
             culturalUnavailable: 'Cultural map unavailable. You can still switch to another map view.',
-            culturalVisited: (visited, total) => 'Visited ' + visited + '/' + total + ' members',
             hint: 'Ctrl + scroll or pinch to zoom · drag to explore · double-click to zoom',
             keyboard: 'Arrow keys to pan, plus and minus to zoom, 0 to reset.'
         },
@@ -78,7 +77,6 @@
             currentView: '当前视图', switchTo: '切换为',
             overviewUnavailable: '地区地图加载失败，仍可切换至细分地图。',
             culturalUnavailable: '文化区地图加载失败，仍可切换至其他视图。',
-            culturalVisited: (visited, total) => '已到访成员 ' + visited + '/' + total,
             hint: 'Ctrl + 滚轮或双指缩放 · 拖动查看 · 双击放大',
             keyboard: '方向键平移，加减键缩放，0 重置。'
         },
@@ -91,7 +89,6 @@
             currentView: '目前視圖', switchTo: '切換為',
             overviewUnavailable: '地區地圖載入失敗，仍可切換至細分地圖。',
             culturalUnavailable: '文化區地圖載入失敗，仍可切換至其他視圖。',
-            culturalVisited: (visited, total) => '已到訪成員 ' + visited + '/' + total,
             hint: 'Ctrl + 滾輪或雙指縮放 · 拖動查看 · 雙擊放大',
             keyboard: '方向鍵平移，加減鍵縮放，0 重設。'
         }
@@ -377,30 +374,10 @@
             if (value && typeof value === 'object') return Object.values(value);
             return value;
         }).filter(Boolean).map(normaliseId));
-        const culturalMembers = region => region?.members || region?.member_regions || region?.member_cities
-            || region?.cities || region?.member_ids || [];
-        const culturalMemberIsVisited = member => {
-            const item = member && typeof member === 'object' ? member : { id: member, name: member };
-            const matched = regions.find(region => normaliseId(region.id) === normaliseId(item.id)
-                || normaliseId(region.name) === normaliseId(item.name));
-            return matchVisited(map, item, visitedIds) || matched?.visited === true;
-        };
-        const culturalVisitedCount = region => {
-            if (Array.isArray(region?.visited_members)) return region.visited_members.length;
-            if (Number.isFinite(Number(region?.visited_count))) return Number(region.visited_count);
-            const members = culturalMembers(region);
-            if (!Array.isArray(members) || !members.length) return Number(region?.visited_count || (region?.visited ? region?.member_count : 0) || 0);
-            return members.reduce((count, member) => count + (culturalMemberIsVisited(member) ? 1 : 0), 0);
-        };
-        const culturalTotalCount = region => {
-            const members = culturalMembers(region);
-            return members.length || Number(region?.member_count || region?.members_count || 0);
-        };
         const culturalIsVisited = region => region?.visited === true;
         const culturalLabel = region => {
             const title = localized(region?.title || region?.label || region?.name || region?.id);
-            const total = culturalTotalCount(region);
-            return total ? title + ' · ' + currentCopy().culturalVisited(culturalVisitedCount(region), total) : title;
+            return title;
         };
         const regionById = new Map(regions.flatMap(region => [
             [normaliseId(region.id), region], [normaliseId(region.name), region]

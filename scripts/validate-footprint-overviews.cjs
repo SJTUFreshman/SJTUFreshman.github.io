@@ -103,21 +103,25 @@ async function selectView(control, mode) {
 
 async function culturalChecks(box, metadata, label) {
     if (!metadata.cultural) return;
+    await box.evaluate(element => element.querySelector('[data-cultural-id]')?.classList.add('is-active'));
     const actual = await box.evaluate(element => ({
         clips: [...element.querySelectorAll('[data-clip-cultural]')].map(node => node.dataset.clipCultural).sort(),
         hits: [...element.querySelectorAll('[data-cultural-id]')].map(node => node.dataset.culturalId).sort(),
-        labels: [...element.querySelectorAll('[data-cultural-id]')].map(node => [node.dataset.culturalId, node.getAttribute('aria-label')])
+        labels: [...element.querySelectorAll('[data-cultural-id]')].map(node => [node.dataset.culturalId, node.getAttribute('aria-label')]),
+        strokes: [...element.querySelectorAll('[data-cultural-id] .footprints-city-hit')].map(node => getComputedStyle(node).stroke)
     }));
+    await box.evaluate(element => element.querySelector('[data-cultural-id]')?.classList.remove('is-active'));
     const regions = metadata.cultural.regions;
     assert.deepEqual(actual.clips, regions.filter(region => region.visited || region.visited_members?.length).map(region => String(region.id)).sort(),
         `${label}: cultural colour clips follow visited members`);
     assert.deepEqual(actual.hits, regions.map(region => String(region.id)).sort(), `${label}: every cultural region is selectable`);
     for (const region of regions) {
         const text = actual.labels.find(([identifier]) => identifier === String(region.id))[1];
-        const expectedCount = `${region.visited_members?.length || 0}/${region.members.length}`;
-        assert(text.includes(expectedCount), `${label}: ${region.id} reports its visited member count`);
+        assert(Object.values(region.label).includes(text), `${label}: ${region.id} shows only its established name`);
     }
-    check(true, `${label}: cultural view keeps member counts and visit clips`);
+    assert(actual.strokes.every(stroke => stroke === 'rgba(0, 0, 0, 0)' || stroke === 'transparent'),
+        `${label}: cultural regions do not expose internal boundary strokes`);
+    check(true, `${label}: cultural view keeps labels and visit clips without member counts or internal strokes`);
 }
 
 async function geometryChecks(box, metadata, label, fullResolution = false) {

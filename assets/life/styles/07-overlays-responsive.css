@@ -295,6 +295,13 @@
     stroke-width: 2.8;
 }
 
+.footprints-city[data-cultural-id] .footprints-city-hit,
+.footprints-city[data-cultural-id].is-active .footprints-city-hit,
+.footprints-city[data-cultural-id]:focus-visible .footprints-city-hit {
+    fill: transparent !important;
+    stroke: transparent !important;
+}
+
 .footprints-map-controls {
     position: absolute;
     right: 18px;
