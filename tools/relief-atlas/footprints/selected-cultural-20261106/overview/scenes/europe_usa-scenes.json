@@ -1,0 +1,19 @@
+{
+  "colour": {
+    "file": "europe_usa-colour.blend",
+    "sha256": "511e728c7138411324166e6a58cfe564897f587bb6dfb8c5ef59fb11622dd2c8",
+    "bytes": 50344042,
+    "vertices": 1564607,
+    "resolution": [
+      8000,
+      2827
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false,
+    "white_material_verified": false,
+    "postprocessing": "none",
+    "sea_material": "#dce8ea"
+  }
+}

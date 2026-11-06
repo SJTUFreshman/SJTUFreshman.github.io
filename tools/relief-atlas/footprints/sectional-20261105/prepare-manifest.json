@@ -1,0 +1,147 @@
+{
+  "status": "ready_to_render",
+  "postprocessing": "none",
+  "rendered": false,
+  "palettes": {
+    "celadon": [
+      "#7eaaa0",
+      "#99bab0",
+      "#6d9a90",
+      "#b1c8b9",
+      "#86aaa2",
+      "#a4bfaf",
+      "#799f96",
+      "#b9cebf"
+    ],
+    "blue": [
+      "#7e9eaf",
+      "#9cb7c4",
+      "#6e8da3",
+      "#b0c4cb",
+      "#8caab9",
+      "#a5bcc7",
+      "#819bac",
+      "#b6c8cf"
+    ],
+    "sand": [
+      "#d1bca0",
+      "#d9c9b3",
+      "#c5ab8e",
+      "#dfd2c0",
+      "#ccb79c",
+      "#e6dac7",
+      "#d4c3ad",
+      "#bfa587"
+    ]
+  },
+  "backgrounds": {
+    "china": "#e3ebed",
+    "east_asia": "#e4edf0",
+    "europe_usa": "#e5e9e9",
+    "singapore": "#e4edf0",
+    "hawaii": "#e4edf0"
+  },
+  "maps": {
+    "china": {
+      "detail_metadata": "tools/relief-atlas/footprints/sectional-20261105/detail/data/china.json",
+      "variants": [
+        "relief",
+        "colour"
+      ],
+      "arrays": {
+        "elevation.npy": {
+          "sha256": "171876994cdc91e7a229684ec0dbbf24b1e8202f77ddf06e217d537f3d9a50e2",
+          "source_sha256": "171876994cdc91e7a229684ec0dbbf24b1e8202f77ddf06e217d537f3d9a50e2",
+          "unchanged": true
+        },
+        "mask.npy": {
+          "sha256": "08fc29ac5cd4b548d4e1533a586581c57fbb0a02cd9394c842d2a9150a9adfb6",
+          "source_sha256": "08fc29ac5cd4b548d4e1533a586581c57fbb0a02cd9394c842d2a9150a9adfb6",
+          "unchanged": true
+        },
+        "region.npy": {
+          "sha256": "967797818e9fec2e5258f817b8d897bbe484fa73a00d4750cc6110127ab251fb",
+          "source_sha256": "70a28baefeea50bda69ee0f89ff47df54b0d3e94320aec6b0e8fbfb480e6e886",
+          "unchanged": false
+        },
+        "x.npy": {
+          "sha256": "740500470c1d34537b2590d5c186c98cb3f4f35e7b880a39744ba90468674ce3",
+          "source_sha256": "740500470c1d34537b2590d5c186c98cb3f4f35e7b880a39744ba90468674ce3",
+          "unchanged": true
+        },
+        "y.npy": {
+          "sha256": "93fdb30d294940c5234e93cfa9dddc30e31c7642fae20d937197c79efd79e8db",
+          "source_sha256": "93fdb30d294940c5234e93cfa9dddc30e31c7642fae20d937197c79efd79e8db",
+          "unchanged": true
+        }
+      }
+    },
+    "east_asia": {
+      "detail_metadata": "tools/relief-atlas/footprints/sectional-20261105/detail/data/east_asia.json",
+      "variants": [
+        "relief",
+        "colour"
+      ],
+      "arrays": {
+        "elevation.npy": {
+          "sha256": "417bd216659ef126e6a21bd76b7934e0008a8bfb1c631760df9a6f5a2056a7f7",
+          "source_sha256": "417bd216659ef126e6a21bd76b7934e0008a8bfb1c631760df9a6f5a2056a7f7",
+          "unchanged": true
+        },
+        "mask.npy": {
+          "sha256": "d7f098cc0f6e3a1caf331a3e8ffad50538917d0103444f25eab3ffc87c9b83af",
+          "source_sha256": "d7f098cc0f6e3a1caf331a3e8ffad50538917d0103444f25eab3ffc87c9b83af",
+          "unchanged": true
+        },
+        "x.npy": {
+          "sha256": "a5e56157a3aa55f1d5de3f5876ce40dbac6ecef3bc5dc0c7a36454d371739543",
+          "source_sha256": "a5e56157a3aa55f1d5de3f5876ce40dbac6ecef3bc5dc0c7a36454d371739543",
+          "unchanged": true
+        },
+        "y.npy": {
+          "sha256": "490cb90efe20d7640262142a8e4fcb3b915c4378088fedc812013626308a8508",
+          "source_sha256": "490cb90efe20d7640262142a8e4fcb3b915c4378088fedc812013626308a8508",
+          "unchanged": true
+        },
+        "region.npy": {
+          "sha256": "da040294bd77f7632664386baf3307aec080c2a52bc0ec9c71a12dc0acbf0216",
+          "source_sha256": "a2714c97e5f47fb341d6af0a23e4e5d60b3802dc3398245288cd266310ff6b60",
+          "unchanged": false
+        }
+      }
+    },
+    "europe_usa": {
+      "detail_metadata": "tools/relief-atlas/footprints/sectional-20261105/detail/data/europe_usa.json",
+      "variants": [
+        "relief"
+      ],
+      "arrays": {
+        "elevation.npy": {
+          "sha256": "f000d70082486c1fe1f61ef25d6df780a13ff3588d7b62e71c2f6645c8c29058",
+          "source_sha256": "f000d70082486c1fe1f61ef25d6df780a13ff3588d7b62e71c2f6645c8c29058",
+          "unchanged": true
+        },
+        "mask.npy": {
+          "sha256": "d9c6a2c17df7e1ec38e2a619e01cb08b2f789450a338bf6ffd64a89c4a7c00bc",
+          "source_sha256": "d9c6a2c17df7e1ec38e2a619e01cb08b2f789450a338bf6ffd64a89c4a7c00bc",
+          "unchanged": true
+        },
+        "x.npy": {
+          "sha256": "1d11a607f1c1928adee133c3d16768b606b52e3b3055f7df18895cdfdefb2612",
+          "source_sha256": "1d11a607f1c1928adee133c3d16768b606b52e3b3055f7df18895cdfdefb2612",
+          "unchanged": true
+        },
+        "y.npy": {
+          "sha256": "c46df151ba5856c13900cf9b69ff220675cb6937478356aa209182d4a31b44cc",
+          "source_sha256": "c46df151ba5856c13900cf9b69ff220675cb6937478356aa209182d4a31b44cc",
+          "unchanged": true
+        },
+        "region.npy": {
+          "sha256": "d7cac3e932bb601b6f4265c2c497302d5870234c44dd32cf73bbcb23ca0f1560",
+          "source_sha256": "d7cac3e932bb601b6f4265c2c497302d5870234c44dd32cf73bbcb23ca0f1560",
+          "unchanged": true
+        }
+      }
+    }
+  }
+}

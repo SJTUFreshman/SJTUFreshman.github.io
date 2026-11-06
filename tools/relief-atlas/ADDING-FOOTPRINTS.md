@@ -10,6 +10,7 @@
 | 日本／韩国文化区到访 | 同一处的 `visited_overseas_regions`（稳定区域 ID） |
 | 欧美等国家到访 | 同一处的 `visited_country_codes`（地图国家代码） |
 | 日本／韩国文化区划分 | `tools/relief-atlas/cultural-regions.json` |
+| 中国跨省文化区划分 | `tools/relief-atlas/china-cultural-regions.json` |
 | 铁路、自驾的途经顺序 | `scripts/prepare-footprint-routes.py` → `build_routes()` |
 | 铁路途经车站的坐标 | 同一脚本的 `RAIL_STATIONS` |
 | 省份颜料、海洋材质、走廊宽度 | `tools/relief-atlas/footprints-style.json` |
@@ -33,7 +34,13 @@ python scripts/build-footprint-atlas.py --package
 python scripts/validate-footprint-atlas.py
 ```
 
-打包器直接读取最新名单，同时更新中国和东亚中可见的城市及其所属省；地图范围以外的城市不会出现在该图上。拼错或不支持的城市全称会报错。已有地形和省份材质不变，原始工程不被改写。
+打包器直接读取最新名单，同时更新中国和东亚中可见的城市及其所属省，以及中国文化区的到访成员数；地图范围以外的城市不会出现在该图上。拼错或不支持的城市全称会报错。已有地形和省份材质不变，原始工程不被改写。
+
+中国地图新增「文化区」视图，与「省份」「城市与路线」并列。分区综合文化和方言，以现有地级市边界近似组合，并允许跨省。修改 `china-cultural-regions.json` 后运行 `python scripts/build-china-cultural-overview.py --prepare`；为新的 `cultural/` 图层烤制彩色 PNG，再经 `scripts/package-footprint-sectional.py --publish` 核验发布。新增到访城市不需要重新烤制。各图使用独立色系，因此相同省份在中国图和东亚图可以有不同颜料。
+
+首版共 50 个文化区，覆盖 367 个城市级单元及港澳台 3 个省级补充单元，每个单元恰好归属一区。南京与合肥、滁州等归江淮；徐州、宿迁、连云港与枣庄、临沂、济宁等归淮海；赤峰、通辽、兴安盟与东北大部合并；大连与胶东、鲁北归胶辽—渤海；甘孜、阿坝与西藏及青海部分地区归青藏；赣南、闽西、粤东客家跨省合并。这是综合文化、方言与旅行认知的展示分区，不是精确的语言学区划，混合方言城市仍以整个地级单元近似。
+
+配置中编辑 `groups[].members` 的行政代码和 `label` 名称；生成器会从真实边界重新推导名称、几何、到访与相邻色。普通 `--prepare` 读取并保留此配置，`--write-defaults` 仅用于明确重置为脚本内首版规则。
 
 城市点亮表示实际到访。经过一座城市只想显示旅程时，将它放进路线途经点即可，不要因此把它加入到访名单。
 
@@ -127,7 +134,7 @@ python scripts/validate-footprint-overviews.py
 
 这会更新概览的到访状态，无需再次跑 Blender。海外原详细图仍保持原始展示，不会把新增国家到访伪装成去过所有州／府县。以后需要海外细级城市、铁路或公路，仍需扩展 `build-footprint-atlas.py` 的 `regional_units()`、路由及陆地裁切，再准备相应细级材质；当前中国路线流程不覆盖海外。
 
-概览渲染归档在 `footprints/administrative-20261016/`，其中有 `data/`、原生 PNG、Blender 工程以及压缩的原始 Natural Earth GeoJSON。中国概览复用 `material-white-20261012` 的全省彩色渲染。不要重写这两个历史目录；更改分组或颜料后用 `--render-root NEW_RENDER_ROOT` 准备并渲染新归档，并同步代码中的默认 `ARCHIVE` 路径。新归档缺少几何源时，把已有归档的 `cache/*.geojson.gz` 复制进去即可离线重建。
+当前概览归档由 `footprints-style.json` 的 `overview_archive` 指定，为 `footprints/sectional-20261105/overview/`。其中有 `data/`、原生 PNG、Blender 工程以及压缩的原始 Natural Earth GeoJSON。中国概览复用同一工程 `detail/` 中的全省彩色渲染。旧 `administrative-20261016` 和 `material-white-20261012` 保留作历史快照；更改分组或颜料后用 `--render-root NEW_RENDER_ROOT` 准备并渲染新归档，再更新配色文件的两个归档路径。新归档缺少几何源时，把已有归档的 `cache/*.geojson.gz` 复制进去即可离线重建。
 
 ```powershell
 python scripts/build-footprint-overviews.py --prepare --render-root NEW_RENDER_ROOT
@@ -143,7 +150,7 @@ python scripts/build-footprint-overviews.py --package --render-root NEW_RENDER_R
 
 海洋材质可直接从配色文件读取；修改省份调色板、分辨率或采样数后，先执行 `python scripts/build-footprint-atlas.py --prepare --reuse-dem`，再把更新后的 `.render-work/footprints/data/` 放入新的渲染目录。这些参数也保存在准备好的地图元数据中，仅编辑配色文件后使用旧 `data/` 会沿用旧参数。
 
-- 未到访材质是 `#ffffff` 的非自发光漫反射。阳面、背光坡面与投影仍应有明暗；“纯白材质”不等于成图每个陆地像素都是白色。
+- 未到访材质是暖白 `#f4f1e9` 的非自发光漫反射。阳面、背光坡面与投影仍应有明暗；材质色不等于成图每个陆地像素的颜色。
 - 海色在 Blender 的海洋材质里调整。网页只把原始 PNG 编码为 WebP，不做亮度曲线、提亮阴影或二次换海色。
 - 白色版、彩色版必须保持相同的 DEM、相机和光照，否则彩色裁切会错位或出现阴影接缝。
 - 新渲染保存到独立目录，用 `--save-scene` 同时保存并重新打开核验 `.blend`。不要覆盖历史归档。

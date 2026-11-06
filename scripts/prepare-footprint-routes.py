@@ -71,7 +71,8 @@ RAIL_STATIONS = {
     "重庆": (106.5480, 29.5520),
 }
 
-PALETTE = json.loads((REFERENCE.parent / "footprints-style.json").read_text(encoding="utf-8"))["palette"]
+STYLE = json.loads((REFERENCE.parent / "footprints-style.json").read_text(encoding="utf-8"))
+PALETTE = STYLE["palette"]
 
 
 def point(name: str, longitude: float, latitude: float) -> dict[str, Any]:
@@ -535,7 +536,7 @@ def load_provinces(path: Path) -> tuple[list[dict[str, Any]], dict[int, str], di
             raise ValueError(f"Province {name!r} (adcode {adcode}) is missing from china.json region_names")
         palette_index = region_colours.get(region_id, (region_id - 1) % len(PALETTE))
         adcode_to_name[adcode] = name
-        adcode_to_colour[adcode] = PALETTE[palette_index]
+        adcode_to_colour[adcode] = STYLE.get("province_colors", {}).get(str(adcode), PALETTE[palette_index])
         geometry = shape(feature["geometry"])
         if not geometry.is_valid:
             geometry = make_valid(geometry)
@@ -628,7 +629,7 @@ def prepare(province_path: Path, output_path: Path, cache_path: Path, rail_path:
         ),
         "source": {
             "province_geojson": "assets/maps/china_100000_full.json",
-            "colour_source": "tools/relief-atlas/footprints-style.json palette; reference/render_atlas.py REGION_COLORS['china']",
+            "colour_source": "tools/relief-atlas/footprints-style.json province_colors; legacy fallback palette and reference/render_atlas.py REGION_COLORS['china']",
             "region_name_source": "tools/relief-atlas/reference/data/china.json region_names",
         },
         "routes": routes,

@@ -1,0 +1,381 @@
+PASS desktop china: defaults to the regional view
+PASS desktop china: cultural view keeps member counts and visit clips
+PASS desktop china: terrain dimensions match the published preview asset
+PASS desktop east-asia: defaults to the regional view
+PASS desktop east-asia: terrain dimensions match the published preview asset
+PASS desktop east-asia: both geographic insets load
+PASS desktop east-asia singapore: loads the preview terrain in native map coordinates
+PASS desktop east-asia singapore: frame stays inside the map and clear of map controls
+PASS desktop east-asia singapore: unvisited land retains the neutral terrain material
+PASS desktop east-asia hawaii: loads the preview terrain in native map coordinates
+PASS desktop east-asia hawaii: frame stays inside the map and clear of map controls
+PASS desktop east-asia hawaii: unvisited land retains the neutral terrain material
+PASS desktop east-asia: map and inset clip IDs remain unique
+PASS desktop euro-usa: defaults to the regional view
+PASS desktop euro-usa: terrain dimensions match the published preview asset
+PASS desktop en china: translated heading and switch describe the default view
+PASS desktop en china selector: view selector retains overview
+PASS desktop en china overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop en china: view switch enters cultural mode
+PASS desktop en china: changing views preserves zoom and position
+PASS desktop en china cultural: cultural view keeps member counts and visit clips
+PASS desktop en china: view switch enters detailed mode
+PASS desktop en china detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop en china large: cultural view keeps member counts and visit clips
+PASS desktop en china large: terrain dimensions match the published native asset
+PASS desktop en china: the large map inherits detailed mode
+PASS desktop en china large detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop en china: the large-map switch synchronizes both buttons
+PASS desktop en china large overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop en china: closing the large map retains the selected overview
+PASS desktop en east-asia: translated heading and switch describe the default view
+PASS desktop en east-asia overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop en east-asia: view switch enters detailed mode
+PASS desktop en east-asia: changing views preserves zoom and position
+PASS desktop en east-asia: view switch enters detailed mode
+PASS desktop en east-asia detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop en east-asia large: terrain dimensions match the published native asset
+PASS desktop en east-asia: the large map inherits detailed mode
+PASS desktop en east-asia large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop en east-asia: the large-map switch synchronizes both buttons
+PASS desktop en east-asia large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop en east-asia large: both geographic insets load
+PASS desktop en east-asia large singapore: loads the full terrain in native map coordinates
+PASS desktop en east-asia large singapore: frame stays inside the map and clear of map controls
+PASS desktop en east-asia large singapore: unvisited land retains the neutral terrain material
+PASS desktop en east-asia large hawaii: loads the full terrain in native map coordinates
+PASS desktop en east-asia large hawaii: frame stays inside the map and clear of map controls
+PASS desktop en east-asia large hawaii: unvisited land retains the neutral terrain material
+PASS desktop en east-asia large: map and inset clip IDs remain unique
+PASS desktop en east-asia: closing the large map retains the selected overview
+PASS desktop en euro-usa: translated heading and switch describe the default view
+PASS desktop en euro-usa overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop en euro-usa: view switch enters detailed mode
+PASS desktop en euro-usa: changing views preserves zoom and position
+PASS desktop en euro-usa: view switch enters detailed mode
+PASS desktop en euro-usa detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop en euro-usa large: terrain dimensions match the published native asset
+PASS desktop en euro-usa: the large map inherits detailed mode
+PASS desktop en euro-usa large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop en euro-usa: the large-map switch synchronizes both buttons
+PASS desktop en euro-usa large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop en euro-usa: closing the large map retains the selected overview
+PASS desktop zh-CN china: translated heading and switch describe the default view
+PASS desktop zh-CN china selector: view selector retains overview
+PASS desktop zh-CN china overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop zh-CN china: view switch enters cultural mode
+PASS desktop zh-CN china: changing views preserves zoom and position
+PASS desktop zh-CN china cultural: cultural view keeps member counts and visit clips
+PASS desktop zh-CN china: view switch enters detailed mode
+PASS desktop zh-CN china detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop zh-CN china large: cultural view keeps member counts and visit clips
+PASS desktop zh-CN china large: terrain dimensions match the published native asset
+PASS desktop zh-CN china: the large map inherits detailed mode
+PASS desktop zh-CN china large detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop zh-CN china: the large-map switch synchronizes both buttons
+PASS desktop zh-CN china large overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop zh-CN china: closing the large map retains the selected overview
+PASS desktop zh-CN east-asia: translated heading and switch describe the default view
+PASS desktop zh-CN east-asia overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-CN east-asia: view switch enters detailed mode
+PASS desktop zh-CN east-asia: changing views preserves zoom and position
+PASS desktop zh-CN east-asia: view switch enters detailed mode
+PASS desktop zh-CN east-asia detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-CN east-asia large: terrain dimensions match the published native asset
+PASS desktop zh-CN east-asia: the large map inherits detailed mode
+PASS desktop zh-CN east-asia large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-CN east-asia: the large-map switch synchronizes both buttons
+PASS desktop zh-CN east-asia large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-CN east-asia large: both geographic insets load
+PASS desktop zh-CN east-asia large singapore: loads the full terrain in native map coordinates
+PASS desktop zh-CN east-asia large singapore: frame stays inside the map and clear of map controls
+PASS desktop zh-CN east-asia large singapore: unvisited land retains the neutral terrain material
+PASS desktop zh-CN east-asia large hawaii: loads the full terrain in native map coordinates
+PASS desktop zh-CN east-asia large hawaii: frame stays inside the map and clear of map controls
+PASS desktop zh-CN east-asia large hawaii: unvisited land retains the neutral terrain material
+PASS desktop zh-CN east-asia large: map and inset clip IDs remain unique
+PASS desktop zh-CN east-asia: closing the large map retains the selected overview
+PASS desktop zh-CN euro-usa: translated heading and switch describe the default view
+PASS desktop zh-CN euro-usa overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-CN euro-usa: view switch enters detailed mode
+PASS desktop zh-CN euro-usa: changing views preserves zoom and position
+PASS desktop zh-CN euro-usa: view switch enters detailed mode
+PASS desktop zh-CN euro-usa detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-CN euro-usa large: terrain dimensions match the published native asset
+PASS desktop zh-CN euro-usa: the large map inherits detailed mode
+PASS desktop zh-CN euro-usa large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-CN euro-usa: the large-map switch synchronizes both buttons
+PASS desktop zh-CN euro-usa large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-CN euro-usa: closing the large map retains the selected overview
+PASS desktop zh-TW china: translated heading and switch describe the default view
+PASS desktop zh-TW china selector: view selector retains overview
+PASS desktop zh-TW china overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop zh-TW china: view switch enters cultural mode
+PASS desktop zh-TW china: changing views preserves zoom and position
+PASS desktop zh-TW china cultural: cultural view keeps member counts and visit clips
+PASS desktop zh-TW china: view switch enters detailed mode
+PASS desktop zh-TW china detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop zh-TW china large: cultural view keeps member counts and visit clips
+PASS desktop zh-TW china large: terrain dimensions match the published native asset
+PASS desktop zh-TW china: the large map inherits detailed mode
+PASS desktop zh-TW china large detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop zh-TW china: the large-map switch synchronizes both buttons
+PASS desktop zh-TW china large overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS desktop zh-TW china: closing the large map retains the selected overview
+PASS desktop zh-TW east-asia: translated heading and switch describe the default view
+PASS desktop zh-TW east-asia overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-TW east-asia: view switch enters detailed mode
+PASS desktop zh-TW east-asia: changing views preserves zoom and position
+PASS desktop zh-TW east-asia: view switch enters detailed mode
+PASS desktop zh-TW east-asia detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-TW east-asia large: terrain dimensions match the published native asset
+PASS desktop zh-TW east-asia: the large map inherits detailed mode
+PASS desktop zh-TW east-asia large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-TW east-asia: the large-map switch synchronizes both buttons
+PASS desktop zh-TW east-asia large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-TW east-asia large: both geographic insets load
+PASS desktop zh-TW east-asia large singapore: loads the full terrain in native map coordinates
+PASS desktop zh-TW east-asia large singapore: frame stays inside the map and clear of map controls
+PASS desktop zh-TW east-asia large singapore: unvisited land retains the neutral terrain material
+PASS desktop zh-TW east-asia large hawaii: loads the full terrain in native map coordinates
+PASS desktop zh-TW east-asia large hawaii: frame stays inside the map and clear of map controls
+PASS desktop zh-TW east-asia large hawaii: unvisited land retains the neutral terrain material
+PASS desktop zh-TW east-asia large: map and inset clip IDs remain unique
+PASS desktop zh-TW east-asia: closing the large map retains the selected overview
+PASS desktop zh-TW euro-usa: translated heading and switch describe the default view
+PASS desktop zh-TW euro-usa overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-TW euro-usa: view switch enters detailed mode
+PASS desktop zh-TW euro-usa: changing views preserves zoom and position
+PASS desktop zh-TW euro-usa: view switch enters detailed mode
+PASS desktop zh-TW euro-usa detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-TW euro-usa large: terrain dimensions match the published native asset
+PASS desktop zh-TW euro-usa: the large map inherits detailed mode
+PASS desktop zh-TW euro-usa large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-TW euro-usa: the large-map switch synchronizes both buttons
+PASS desktop zh-TW euro-usa large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS desktop zh-TW euro-usa: closing the large map retains the selected overview
+PASS desktop: no script or asset-loading errors ()
+PASS mobile china: defaults to the regional view
+PASS mobile china: cultural view keeps member counts and visit clips
+PASS mobile china: terrain dimensions match the published preview asset
+PASS mobile east-asia: defaults to the regional view
+PASS mobile east-asia: terrain dimensions match the published preview asset
+PASS mobile east-asia: both geographic insets load
+PASS mobile east-asia singapore: loads the preview terrain in native map coordinates
+PASS mobile east-asia singapore: frame stays inside the map and clear of map controls
+PASS mobile east-asia singapore: unvisited land retains the neutral terrain material
+PASS mobile east-asia hawaii: loads the preview terrain in native map coordinates
+PASS mobile east-asia hawaii: frame stays inside the map and clear of map controls
+PASS mobile east-asia hawaii: unvisited land retains the neutral terrain material
+PASS mobile east-asia: map and inset clip IDs remain unique
+PASS mobile euro-usa: defaults to the regional view
+PASS mobile euro-usa: terrain dimensions match the published preview asset
+PASS mobile en china: translated heading and switch describe the default view
+PASS mobile en china selector: view selector retains overview
+PASS mobile en china overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile en china: view switch enters cultural mode
+PASS mobile en china: changing views preserves zoom and position
+PASS mobile en china cultural: cultural view keeps member counts and visit clips
+PASS mobile en china: view switch enters detailed mode
+PASS mobile en china detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile en china large: cultural view keeps member counts and visit clips
+PASS mobile en china large: terrain dimensions match the published native asset
+PASS mobile en china: the large map inherits detailed mode
+PASS mobile en china large detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile en china: the large-map switch synchronizes both buttons
+PASS mobile en china large overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile en china: closing the large map retains the selected overview
+PASS mobile en east-asia: translated heading and switch describe the default view
+PASS mobile en east-asia overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile en east-asia: view switch enters detailed mode
+PASS mobile en east-asia: changing views preserves zoom and position
+PASS mobile en east-asia: view switch enters detailed mode
+PASS mobile en east-asia detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile en east-asia large: terrain dimensions match the published native asset
+PASS mobile en east-asia: the large map inherits detailed mode
+PASS mobile en east-asia large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile en east-asia: the large-map switch synchronizes both buttons
+PASS mobile en east-asia large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile en east-asia large: both geographic insets load
+PASS mobile en east-asia large singapore: loads the full terrain in native map coordinates
+PASS mobile en east-asia large singapore: frame stays inside the map and clear of map controls
+PASS mobile en east-asia large singapore: unvisited land retains the neutral terrain material
+PASS mobile en east-asia large hawaii: loads the full terrain in native map coordinates
+PASS mobile en east-asia large hawaii: frame stays inside the map and clear of map controls
+PASS mobile en east-asia large hawaii: unvisited land retains the neutral terrain material
+PASS mobile en east-asia large: map and inset clip IDs remain unique
+PASS mobile en east-asia: closing the large map retains the selected overview
+PASS mobile en euro-usa: translated heading and switch describe the default view
+PASS mobile en euro-usa overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile en euro-usa: view switch enters detailed mode
+PASS mobile en euro-usa: changing views preserves zoom and position
+PASS mobile en euro-usa: view switch enters detailed mode
+PASS mobile en euro-usa detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile en euro-usa large: terrain dimensions match the published native asset
+PASS mobile en euro-usa: the large map inherits detailed mode
+PASS mobile en euro-usa large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile en euro-usa: the large-map switch synchronizes both buttons
+PASS mobile en euro-usa large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile en euro-usa: closing the large map retains the selected overview
+PASS mobile zh-CN china: translated heading and switch describe the default view
+PASS mobile zh-CN china selector: view selector retains overview
+PASS mobile zh-CN china overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile zh-CN china: view switch enters cultural mode
+PASS mobile zh-CN china: changing views preserves zoom and position
+PASS mobile zh-CN china cultural: cultural view keeps member counts and visit clips
+PASS mobile zh-CN china: view switch enters detailed mode
+PASS mobile zh-CN china detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile zh-CN china large: cultural view keeps member counts and visit clips
+PASS mobile zh-CN china large: terrain dimensions match the published native asset
+PASS mobile zh-CN china: the large map inherits detailed mode
+PASS mobile zh-CN china large detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile zh-CN china: the large-map switch synchronizes both buttons
+PASS mobile zh-CN china large overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile zh-CN china: closing the large map retains the selected overview
+PASS mobile zh-CN east-asia: translated heading and switch describe the default view
+PASS mobile zh-CN east-asia overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-CN east-asia: view switch enters detailed mode
+PASS mobile zh-CN east-asia: changing views preserves zoom and position
+PASS mobile zh-CN east-asia: view switch enters detailed mode
+PASS mobile zh-CN east-asia detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-CN east-asia large: terrain dimensions match the published native asset
+PASS mobile zh-CN east-asia: the large map inherits detailed mode
+PASS mobile zh-CN east-asia large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-CN east-asia: the large-map switch synchronizes both buttons
+PASS mobile zh-CN east-asia large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-CN east-asia large: both geographic insets load
+PASS mobile zh-CN east-asia large singapore: loads the full terrain in native map coordinates
+PASS mobile zh-CN east-asia large singapore: frame stays inside the map and clear of map controls
+PASS mobile zh-CN east-asia large singapore: unvisited land retains the neutral terrain material
+PASS mobile zh-CN east-asia large hawaii: loads the full terrain in native map coordinates
+PASS mobile zh-CN east-asia large hawaii: frame stays inside the map and clear of map controls
+PASS mobile zh-CN east-asia large hawaii: unvisited land retains the neutral terrain material
+PASS mobile zh-CN east-asia large: map and inset clip IDs remain unique
+PASS mobile zh-CN east-asia: closing the large map retains the selected overview
+PASS mobile zh-CN euro-usa: translated heading and switch describe the default view
+PASS mobile zh-CN euro-usa overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-CN euro-usa: view switch enters detailed mode
+PASS mobile zh-CN euro-usa: changing views preserves zoom and position
+PASS mobile zh-CN euro-usa: view switch enters detailed mode
+PASS mobile zh-CN euro-usa detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-CN euro-usa large: terrain dimensions match the published native asset
+PASS mobile zh-CN euro-usa: the large map inherits detailed mode
+PASS mobile zh-CN euro-usa large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-CN euro-usa: the large-map switch synchronizes both buttons
+PASS mobile zh-CN euro-usa large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-CN euro-usa: closing the large map retains the selected overview
+PASS mobile zh-TW china: translated heading and switch describe the default view
+PASS mobile zh-TW china selector: view selector retains overview
+PASS mobile zh-TW china overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile zh-TW china: view switch enters cultural mode
+PASS mobile zh-TW china: changing views preserves zoom and position
+PASS mobile zh-TW china cultural: cultural view keeps member counts and visit clips
+PASS mobile zh-TW china: view switch enters detailed mode
+PASS mobile zh-TW china detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile zh-TW china large: cultural view keeps member counts and visit clips
+PASS mobile zh-TW china large: terrain dimensions match the published native asset
+PASS mobile zh-TW china: the large map inherits detailed mode
+PASS mobile zh-TW china large detail: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile zh-TW china: the large-map switch synchronizes both buttons
+PASS mobile zh-TW china large overview: zoom shortcut, pinch/wheel, and keyboard stop at 300%
+PASS mobile zh-TW china: closing the large map retains the selected overview
+PASS mobile zh-TW east-asia: translated heading and switch describe the default view
+PASS mobile zh-TW east-asia overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-TW east-asia: view switch enters detailed mode
+PASS mobile zh-TW east-asia: changing views preserves zoom and position
+PASS mobile zh-TW east-asia: view switch enters detailed mode
+PASS mobile zh-TW east-asia detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-TW east-asia large: terrain dimensions match the published native asset
+PASS mobile zh-TW east-asia: the large map inherits detailed mode
+PASS mobile zh-TW east-asia large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-TW east-asia: the large-map switch synchronizes both buttons
+PASS mobile zh-TW east-asia large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-TW east-asia large: both geographic insets load
+PASS mobile zh-TW east-asia large singapore: loads the full terrain in native map coordinates
+PASS mobile zh-TW east-asia large singapore: frame stays inside the map and clear of map controls
+PASS mobile zh-TW east-asia large singapore: unvisited land retains the neutral terrain material
+PASS mobile zh-TW east-asia large hawaii: loads the full terrain in native map coordinates
+PASS mobile zh-TW east-asia large hawaii: frame stays inside the map and clear of map controls
+PASS mobile zh-TW east-asia large hawaii: unvisited land retains the neutral terrain material
+PASS mobile zh-TW east-asia large: map and inset clip IDs remain unique
+PASS mobile zh-TW east-asia: closing the large map retains the selected overview
+PASS mobile zh-TW euro-usa: translated heading and switch describe the default view
+PASS mobile zh-TW euro-usa overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-TW euro-usa: view switch enters detailed mode
+PASS mobile zh-TW euro-usa: changing views preserves zoom and position
+PASS mobile zh-TW euro-usa: view switch enters detailed mode
+PASS mobile zh-TW euro-usa detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-TW euro-usa large: terrain dimensions match the published native asset
+PASS mobile zh-TW euro-usa: the large map inherits detailed mode
+PASS mobile zh-TW euro-usa large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-TW euro-usa: the large-map switch synchronizes both buttons
+PASS mobile zh-TW euro-usa large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile zh-TW euro-usa: closing the large map retains the selected overview
+PASS mobile: no script or asset-loading errors ()
+PASS mobile-320 east-asia: defaults to the regional view
+PASS mobile-320 east-asia: terrain dimensions match the published preview asset
+PASS mobile-320 east-asia: both geographic insets load
+PASS mobile-320 east-asia singapore: loads the preview terrain in native map coordinates
+PASS mobile-320 east-asia singapore: frame stays inside the map and clear of map controls
+PASS mobile-320 east-asia singapore: unvisited land retains the neutral terrain material
+PASS mobile-320 east-asia hawaii: loads the preview terrain in native map coordinates
+PASS mobile-320 east-asia hawaii: frame stays inside the map and clear of map controls
+PASS mobile-320 east-asia hawaii: unvisited land retains the neutral terrain material
+PASS mobile-320 east-asia: map and inset clip IDs remain unique
+PASS mobile-320 en east-asia: translated heading and switch describe the default view
+PASS mobile-320 en east-asia overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile-320 en east-asia: view switch enters detailed mode
+PASS mobile-320 en east-asia: changing views preserves zoom and position
+PASS mobile-320 en east-asia: view switch enters detailed mode
+PASS mobile-320 en east-asia detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile-320 en east-asia large: terrain dimensions match the published native asset
+PASS mobile-320 en east-asia: the large map inherits detailed mode
+PASS mobile-320 en east-asia large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile-320 en east-asia: the large-map switch synchronizes both buttons
+PASS mobile-320 en east-asia large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile-320 en east-asia large: both geographic insets load
+PASS mobile-320 en east-asia large singapore: loads the full terrain in native map coordinates
+PASS mobile-320 en east-asia large singapore: frame stays inside the map and clear of map controls
+PASS mobile-320 en east-asia large singapore: unvisited land retains the neutral terrain material
+PASS mobile-320 en east-asia large hawaii: loads the full terrain in native map coordinates
+PASS mobile-320 en east-asia large hawaii: frame stays inside the map and clear of map controls
+PASS mobile-320 en east-asia large hawaii: unvisited land retains the neutral terrain material
+PASS mobile-320 en east-asia large: map and inset clip IDs remain unique
+PASS mobile-320 en east-asia: closing the large map retains the selected overview
+PASS mobile-320: no script or asset-loading errors ()
+PASS mobile-375 east-asia: defaults to the regional view
+PASS mobile-375 east-asia: terrain dimensions match the published preview asset
+PASS mobile-375 east-asia: both geographic insets load
+PASS mobile-375 east-asia singapore: loads the preview terrain in native map coordinates
+PASS mobile-375 east-asia singapore: frame stays inside the map and clear of map controls
+PASS mobile-375 east-asia singapore: unvisited land retains the neutral terrain material
+PASS mobile-375 east-asia hawaii: loads the preview terrain in native map coordinates
+PASS mobile-375 east-asia hawaii: frame stays inside the map and clear of map controls
+PASS mobile-375 east-asia hawaii: unvisited land retains the neutral terrain material
+PASS mobile-375 east-asia: map and inset clip IDs remain unique
+PASS mobile-375 en east-asia: translated heading and switch describe the default view
+PASS mobile-375 en east-asia overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile-375 en east-asia: view switch enters detailed mode
+PASS mobile-375 en east-asia: changing views preserves zoom and position
+PASS mobile-375 en east-asia: view switch enters detailed mode
+PASS mobile-375 en east-asia detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile-375 en east-asia large: terrain dimensions match the published native asset
+PASS mobile-375 en east-asia: the large map inherits detailed mode
+PASS mobile-375 en east-asia large detail: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile-375 en east-asia: the large-map switch synchronizes both buttons
+PASS mobile-375 en east-asia large overview: zoom shortcut, pinch/wheel, and keyboard stop at 200%
+PASS mobile-375 en east-asia large: both geographic insets load
+PASS mobile-375 en east-asia large singapore: loads the full terrain in native map coordinates
+PASS mobile-375 en east-asia large singapore: frame stays inside the map and clear of map controls
+PASS mobile-375 en east-asia large singapore: unvisited land retains the neutral terrain material
+PASS mobile-375 en east-asia large hawaii: loads the full terrain in native map coordinates
+PASS mobile-375 en east-asia large hawaii: frame stays inside the map and clear of map controls
+PASS mobile-375 en east-asia large hawaii: unvisited land retains the neutral terrain material
+PASS mobile-375 en east-asia large: map and inset clip IDs remain unique
+PASS mobile-375 en east-asia: closing the large map retains the selected overview
+PASS mobile-375: no script or asset-loading errors ()
+{
+  "checks": 376,
+  "screenshots": "C:\\Users\\Administrator\\Desktop\\SJTUFreshman.github.io\\.render-work\\footprint-overviews",
+  "url": "http://127.0.0.1:49361/life.html"
+}

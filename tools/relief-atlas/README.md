@@ -38,7 +38,9 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 
 ## 三张网站地图
 
-当前生产目录为 `footprints/material-white-20261012/`，由 `footprints-style.json` 的 `render_archive` 指定。下表路径均相对于该生产目录；原版仍完整保存在 `footprints/data/`、`footprints/scenes/`、`footprints/renders/`。
+当前生产工程为 [`footprints/selected-cultural-20261106/`](footprints/selected-cultural-20261106/README.md)：`detail/` 保存三张主图与新加坡、夏威夷两个小窗；`overview/` 保存东亚文化区与欧美国家的彩色层；`cultural/` 保存中国跨省文化区。`footprints-style.json` 的 `render_archive`、`overview_archive`、`cultural_archive` 分别选择这三层。前一版分区配色工程保留在 `footprints/sectional-20261105/`。
+
+下表记录历史生产目录 `footprints/material-white-20261012/`。原版也完整保存在 `footprints/data/`、`footprints/scenes/`、`footprints/renders/`。
 
 | 内容 | 路径 |
 | --- | --- |
@@ -54,15 +56,17 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 
 | 地图 | 原生渲染宽度 | 投影及范围 | 设计 |
 | --- | --- | --- | --- |
-| 中国 | 6000 px | 原参考图 Albers 投影 | 亮白陆地、蓝灰海洋、矿物色省份 |
-| 东亚 | 6000 px | 等距圆柱，103–147° E / 18–47° N | 亮白陆地、蓝灰海洋、同一省份配色 |
-| 欧美 | 8000 px | 等距圆柱，128° W–40° E / 24–66° N | 亮白陆地、蓝灰海洋、连续大西洋视野 |
+| 中国 | 6000 px | 原参考图 Albers 投影 | 暖白陆地、青瓷省份 |
+| 东亚 | 6000 px | 等距圆柱，103–147° E / 18–47° N | 北境冰川：冷青省色、冰蓝海外文化区；右下新加坡与夏威夷小窗 |
+| 欧美 | 8000 px | 等距圆柱，128° W–40° E / 24–66° N | 水墨朱砂：暖白陆地、陶土国家色、连续大西洋视野 |
 
 统一用 Blender 4.5.3 / Cycles CUDA、192 采样原生重渲，未对旧成图放大插值。DEM 网格沿用已核验的高程采样：中国 2300×1926、东亚 2400×1908、欧美 3000×1061。图像分辨率与地形数据分辨率是两个独立指标；这三张是区域尺度浮雕图。
 
-`footprints-style.json` 集中定义 Blender 的省份颜料、纯白未到访材质、海洋材质、渲染宽度、采样数和线路显示宽度。海色与陆地材质都在 Cycles 中渲染，打包仅把原始 PNG 编码为 WebP，不做提亮曲线、压淡阴影或二次换海色。省份的配色分组沿用原中国工程，再使用网站专用的赭石、鼠尾草绿、陶土、灰蓝、砂岩与紫灰调色板。`render_archive` 指向本次独立保存的生产工程；历史 PNG、Blender 工程和 SHA-256 仍保留原始内容。
+`footprints-style.json` 集中定义 Blender 的分区颜料、暖白未到访材质、海洋材质、渲染宽度、采样数和线路显示宽度。`province_colors` 为中国青瓷省色，`map_province_colors` 允许东亚使用独立冷青省色，`map_palettes` 定义每张地图的区域色系；`unvisited_materials` 为每图留白材质。海色与陆地材质都在 Cycles 中渲染，打包仅把原始 PNG 编码为 WebP，不做提亮曲线、压淡阴影或二次换海色。历史 PNG、Blender 工程和 SHA-256 保留原始内容。
 
-所有未到访区域保留纯白漫反射材质和真实地形阴影。32° 西北日光与原四图一致。铁路与公路按真实路网生成投影缓冲多边形，分别显示为约 30 km、26 km 宽的地形走廊。这是为了区域地图可读性所作的宽度夸张，不是交通设施实际宽度，也不会把沿线整座城市标为到访。
+未到访区域分别使用中国 `#f4f1e9`、东亚与小窗 `#f1f3ee`、欧美 `#f7f3ea` 漫反射材质并保留真实地形阴影。32° 西北日光与原四图一致。铁路与公路按真实路网生成投影缓冲多边形，分别显示为约 30 km、26 km 宽的地形走廊。这是为了区域地图可读性所作的宽度夸张，不是交通设施实际宽度，也不会把沿线整座城市标为到访。
+
+中国文化区由 `china-cultural-regions.json` 配置，以现有地级市真实边界跨省组合，综合文化、方言和个人旅行认知。页面可在省份、文化区、城市路线三种粒度之间切换；文化区内到访任一城市即点亮该区，悬浮说明显示已到访成员数。这是地级尺度的可调整展示分组，不是精确方言边界。修改分组后运行 `scripts/build-china-cultural-overview.py --prepare`，仅重烤文化区层。
 
 白色底图和彩色底图由相同网格、相机和光照渲染。浏览器通过到访城市与走廊的联合裁切显露彩色地形，所以山脊、坡面和阴影都会延续到沿线；没有额外叠加彩色描边。省界处的色彩直接来自地形材质。城市边线和名称仅在已到访城市悬停、聚焦或点击时出现。
 

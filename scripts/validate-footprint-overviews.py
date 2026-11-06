@@ -123,12 +123,57 @@ def validate_country_colours(atlas, builder):
     assert all(region["unit"] == "country" and region["id"] == region["country"] for region in regions)
     assert {region["country"] for region in regions} == {region["country"] for region in detail}, "Country merging must retain the full original map coverage"
     palette = {region["id"]: region["color"] for region in regions}
-    assert len(set(palette.values())) == len(palette), "Every displayed country needs its own pigment"
+    if builder.STYLE.get("map_palettes"):
+        assert set(palette.values()) <= set(builder.STYLE["map_palettes"]["europe_usa"])
+    else:
+        assert len(set(palette.values())) == len(palette), "Every displayed country needs its own pigment"
     # Evaluate reversed order plus an added country ID: existing colours must be
     # determined by identity, never by a country's position in a palette list.
     reordered = {identifier: builder.stable_colour(identifier) for identifier in ["ZZZ", *reversed(palette)]}
     assert all(colour == reordered[identifier] for identifier, colour in palette.items())
-    return len(palette)
+    return {"countries": len(palette), "pigments": len(set(palette.values()))}
+
+
+def validate_sectional_colours(atlas, builder):
+    if not builder.STYLE.get("map_palettes"):
+        return
+    for identifier, metadata in atlas["maps"].items():
+        provinces = builder.STYLE.get("map_province_colors", {}).get(identifier, builder.STYLE["province_colors"])
+        for region in metadata["overview"]["regions"]:
+            expected = (provinces[str(region["province"])] if region.get("province")
+                        else builder.stable_colour(region["id"], identifier))
+            assert region["color"] == expected, (identifier, region["id"], "sectional pigment differs")
+
+
+def validate_china_cultural(atlas):
+    cultural = atlas["maps"]["china"].get("cultural")
+    if not cultural:
+        return {"groups": 0, "members": 0}
+    regions = cultural.get("regions", [])
+    configured = {region["id"]: region for region in read_json(ROOT / "tools/relief-atlas/china-cultural-regions.json")["groups"]}
+    assert {region["id"] for region in regions} == set(configured), "Cultural groups differ from the editable configuration"
+    china = atlas["maps"]["china"]
+    detail = {str(region["id"]): region for region in china["regions"]}
+    detail_provinces = {str(region["province"]) for region in china["regions"] if region.get("province")}
+    detail.update({str(region["id"]): region for region in china.get("overview", {}).get("regions", [])
+                   if str(region.get("province")) not in detail_provinces})
+    assert regions and len({str(region["id"]) for region in regions}) == len(regions)
+    assigned = []
+    for region in regions:
+        members = region.get("members", region.get("member_ids", []))
+        visited = region.get("visited_members", [])
+        assert set(map(str, members)) == set(map(str, configured[region["id"]]["members"])), "Rebake after changing cultural memberships"
+        assert region["label"] == configured[region["id"]]["label"]
+        assert members and len(members) == len(set(map(str, members))), (region["id"], "duplicate cultural members")
+        assert set(map(str, visited)) <= set(map(str, members)), (region["id"], "visited member not assigned")
+        assert all(str(member) in detail for member in members), (region["id"], "unknown cultural member")
+        expected = {member_id for member_id, item in detail.items() if item.get("visited")}
+        assert set(map(str, visited)) == expected.intersection(set(map(str, members))), (region["id"], "visit derivation differs")
+        assert bool(visited) == bool(region.get("visited")), (region["id"], "group visit differs")
+        assigned.extend(map(str, members))
+    assert len(assigned) == len(set(assigned)), "A city must belong to exactly one cultural group"
+    assert set(assigned) == set(detail), "Cultural groups must cover every China detail city"
+    return {"groups": len(regions), "members": len(assigned)}
 
 
 def validate_visit_updates(atlas, builder, provinces):
@@ -166,7 +211,9 @@ def validate_native(identifier, metadata):
     assert difference.mean() < 1.5 and np.percentile(difference, 95) <= 4, (identifier, "only WebP encoding, without tonal editing, is allowed")
     native_relief = sample_image(relief_root / "renders" / (identifier + "-relief.png"), dimensions)
     published_relief = sample_image(RELIEF / metadata["image"], dimensions)
-    neutral_land = (np.ptp(native_relief, axis=2) <= 2) & (native_relief.mean(axis=2) > 40)
+    with np.load(relief_root / "data" / f"{identifier}.npz") as grid:
+        land = Image.fromarray(grid["mask"].astype(np.uint8)).resize(dimensions, Image.Resampling.NEAREST)
+        neutral_land = np.asarray(land)[::8, ::8].astype(bool) & (native_relief.mean(axis=2) > 40)
     native_shades = native_relief[neutral_land].mean(axis=1)
     published_shades = published_relief[neutral_land].mean(axis=1)
     assert native_shades.size > 100 and published_shades.std() > 12 and np.ptp(published_shades) > 120, "White material must retain terrain shadows"
@@ -178,7 +225,9 @@ def validate_native(identifier, metadata):
     assert sea.any() and np.percentile(np.abs(published[sea] - background), 95) <= 2, "Overview sea must match the original relief"
     relief_report = read_json(relief_root / "scenes" / (identifier + "-scenes.json"))["relief"]
     colour_report = read_json(colour_root / "scenes" / (identifier + "-scenes.json"))["colour"]
-    assert relief_report["white_material_verified"] and metadata["unvisited_material"] == "#ffffff"
+    style = read_json(ROOT / "tools/relief-atlas/footprints-style.json")
+    unvisited = style.get("unvisited_materials", {}).get(identifier, style["unvisited_material"])
+    assert relief_report["white_material_verified"] and metadata["unvisited_material"] == unvisited
     for report in (relief_report, colour_report):
         assert report["reopened"] and report["pigments_verified"] and report["lighting_verified"]
         assert report["resolution"] == list(dimensions) and report["postprocessing"] == "none"
@@ -199,6 +248,38 @@ def validate_native(identifier, metadata):
             "white_shadow_contrast": round(float(contrast), 4)}
 
 
+def validate_cultural_native(atlas):
+    cultural = atlas["maps"]["china"].get("cultural")
+    if not cultural:
+        return None
+    archive = ROOT / cultural["color_source_archive"]
+    native_path = archive / "renders/china-colour.png"
+    assert digest(native_path) == cultural["outputs"][native_path.name]
+    dimensions = (atlas["maps"]["china"]["width"], atlas["maps"]["china"]["height"])
+    with Image.open(native_path) as image:
+        assert image.size == dimensions
+        native = np.asarray(image.convert("RGB"))[::8, ::8].astype(np.int16)
+    with Image.open(RELIEF / cultural["color_image"]) as image:
+        assert image.size == dimensions
+        published = np.asarray(image.convert("RGB"))[::8, ::8].astype(np.int16)
+    difference = np.abs(published - native)
+    assert difference.mean() < 1.5 and np.percentile(difference, 95) <= 4
+    report = read_json(archive / "renders/china-render.json")
+    assert report["postprocessing"] == "none" and report["outputs"][native_path.name] == digest(native_path)
+    scene_path = archive / "scenes/china-scenes.json"
+    if scene_path.exists():
+        scene = read_json(scene_path).get("colour", read_json(scene_path))
+        assert scene["reopened"] and scene["pigments_verified"] and scene["lighting_verified"]
+        assert scene["postprocessing"] == "none"
+        blend_path = archive / "scenes" / scene["file"]
+        assert digest(blend_path) == scene["sha256"]
+    preview = cultural.get("preview_color_image")
+    if preview:
+        with Image.open(RELIEF / preview) as image:
+            assert image.width <= 1600 and image.height > 0
+    return {"dimensions": dimensions, "colour_mean_error_255": round(float(difference.mean()), 4)}
+
+
 def main():
     atlas = read_json(RELIEF / "atlas.json")
     assert set(atlas["maps"]) == {"china", "east_asia", "europe_usa"}
@@ -209,11 +290,15 @@ def main():
         validate_regions(identifier, metadata, content, provinces)
     cultures = validate_cultures(atlas)
     builder = load_builder()
+    validate_sectional_colours(atlas, builder)
+    cultural = validate_china_cultural(atlas)
     countries = validate_country_colours(atlas, builder)
     validate_visit_updates(atlas, builder, provinces)
     native = {identifier: validate_native(identifier, metadata) for identifier, metadata in atlas["maps"].items()}
+    cultural_native = validate_cultural_native(atlas)
     print(json.dumps({"maps": 3, "visited_provinces": len(provinces), "culture_groups": cultures,
-                      "distinct_country_pigments": countries, "native_assets": native}, ensure_ascii=False, indent=2))
+                      "country_colours": countries, "cultural": cultural, "native_assets": native,
+                      "cultural_native": cultural_native}, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

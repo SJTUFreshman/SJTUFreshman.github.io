@@ -1,0 +1,29 @@
+{
+  "server": "paracloud-Zhongwei1",
+  "remote_archive": "/data/run01/scwb515/yangrunde/footprints-selected-cultural-20261106",
+  "engine": "Blender 4.5.3 / Cycles CUDA",
+  "gpu": "NVIDIA A800-SXM4-80GB",
+  "samples": 192,
+  "postprocessing": "none",
+  "jobs": [
+    {"id": 294277, "layers": ["detail", "overview"], "state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:13:06"},
+    {"id": 294278, "layers": ["singapore", "hawaii"], "state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:00:28"},
+    {"id": 294352, "layers": ["china-cultural"], "state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:02:08"}
+  ],
+  "palettes": {"china": "青瓷编辑", "east_asia": "北境冰川", "europe_usa": "水墨朱砂"},
+  "cultural_groups": 50,
+  "cultural_source_units": 370,
+  "visited_cultural_groups": 16,
+  "validation": {
+    "native_atlas": "passed; 38 cities, 6 rail journeys, 6 road journeys",
+    "overview_and_cultural": "passed; 50 groups, 370 members, native PNG/scene hashes and WebP fidelity",
+    "browser_checks": 376,
+    "browser_viewports": [1440, 390, 375, 320],
+    "languages": ["en", "zh-CN", "zh-TW"],
+    "visit_refresh": "passed; a temporary extra city updates cultural membership and preserves insets and previews",
+    "public_package": "passed; 4004 files within Cloudflare Pages limits",
+    "http_runtime": "passed; 41 versioned resources"
+  },
+  "native_checksums": "Each layer's renders/*-render.json and scenes/*-scenes.json",
+  "dem_verification": "prepare-manifest.json and cultural/prepare-manifest.json"
+}

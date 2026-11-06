@@ -1,0 +1,36 @@
+{
+  "relief": {
+    "file": "east_asia-relief.blend",
+    "sha256": "c3255c214316b3e97a2d9060aba5ea784d02b953eac8246243be4b3b188d8f81",
+    "bytes": 68880151,
+    "vertices": 2138781,
+    "resolution": [
+      6000,
+      4770
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false,
+    "white_material_verified": true,
+    "postprocessing": "none",
+    "sea_material": "#e4edf0"
+  },
+  "colour": {
+    "file": "east_asia-colour.blend",
+    "sha256": "8932ce1888231950bea694bddd54b946467de1e65deca6d7ef44e23b26fe379f",
+    "bytes": 68953529,
+    "vertices": 2138781,
+    "resolution": [
+      6000,
+      4770
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false,
+    "white_material_verified": false,
+    "postprocessing": "none",
+    "sea_material": "#e4edf0"
+  }
+}

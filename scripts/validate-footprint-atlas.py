@@ -27,6 +27,76 @@ def clip_geometry(path):
     return result
 
 
+def validate_insets(atlas, style):
+    insets = atlas["maps"]["east_asia"].get("insets", [])
+    if style.get("map_palettes"):
+        assert {inset["id"] for inset in insets} == {"singapore", "hawaii"}
+    frames = []
+    for inset in insets:
+        frame = inset["frame"]
+        assert frame["width"] > 0 and frame["height"] > 0
+        assert 0 <= frame["x"] < frame["x"] + frame["width"] <= atlas["maps"]["east_asia"]["width"]
+        assert 0 <= frame["y"] < frame["y"] + frame["height"] <= atlas["maps"]["east_asia"]["height"]
+        assert all(frame["x"] + frame["width"] <= previous["x"] or
+                   previous["x"] + previous["width"] <= frame["x"] or
+                   frame["y"] + frame["height"] <= previous["y"] or
+                   previous["y"] + previous["height"] <= frame["y"] for previous in frames)
+        frames.append(frame)
+        assert not any(region.get("visited") for region in inset.get("regions", []))
+        assert not inset.get("color_image"), "Unvisited inset terrain must remain uncoloured"
+        assert set(inset["title"]) == {"en", "zh-CN", "zh-TW"}
+        archive = ROOT / inset["source_archive"]
+        report = read_json(archive / "renders" / f"{inset['id']}-render.json")
+        assert report["native_render_size"] == [inset["width"], inset["height"]]
+        assert report["samples"] >= 192 and report["postprocessing"] == "none"
+        assert report["outputs"] == inset["outputs"]
+        native = archive / "renders" / f"{inset['id']}-relief.png"
+        with native.open("rb") as stream:
+            assert hashlib.file_digest(stream, "sha256").hexdigest() == inset["outputs"][native.name]
+        with Image.open(native) as image:
+            assert image.size == (inset["width"], inset["height"])
+            pixels = np.asarray(image.convert("RGB"))[::4, ::4].astype(np.int16)
+        with Image.open(ROOT / "assets/maps/relief" / inset["image"]) as image:
+            assert image.size == (inset["width"], inset["height"])
+            difference = np.abs(np.asarray(image.convert("RGB"))[::4, ::4].astype(np.int16) - pixels)
+            assert difference.mean() < 1.5 and np.percentile(difference, 95) <= 4
+        assert report["unvisited_material"] == style.get("unvisited_materials", {}).get(inset["id"], style["unvisited_material"])
+        assert report["sea_material"] == style["backgrounds"][inset["id"]]
+        scene = read_json(archive / "scenes" / f"{inset['id']}-scenes.json")["relief"]
+        assert scene["white_material_verified"] and scene["reopened"] and scene["postprocessing"] == "none"
+        with (archive / "scenes" / scene["file"]).open("rb") as stream:
+            assert hashlib.file_digest(stream, "sha256").hexdigest() == scene["sha256"]
+        with Image.open(ROOT / "assets/maps/relief" / inset["preview"]["image"]) as image:
+            assert image.size == (inset["preview"]["width"], inset["preview"]["height"])
+
+
+def validate_cultural_view(atlas):
+    cultural = atlas["maps"]["china"].get("cultural")
+    if not cultural:
+        return
+    china = atlas["maps"]["china"]
+    detail = {str(region["id"]): region for region in china["regions"]}
+    detail_provinces = {str(region["province"]) for region in china["regions"] if region.get("province")}
+    detail.update({str(region["id"]): region for region in china.get("overview", {}).get("regions", [])
+                   if str(region.get("province")) not in detail_provinces})
+    groups = cultural.get("regions", [])
+    members = []
+    for group in groups:
+        assigned = group.get("members", group.get("member_ids", []))
+        visited = group.get("visited_members", [])
+        assert assigned and len(assigned) == len(set(map(str, assigned)))
+        assert all(str(member) in detail for member in assigned)
+        expected = {member for member, region in detail.items() if region.get("visited")}
+        assert set(map(str, visited)) == expected.intersection(set(map(str, assigned)))
+        assert bool(visited) == bool(group.get("visited"))
+        members.extend(map(str, assigned))
+    assert len(members) == len(set(members)) and set(members) == set(detail)
+    if cultural.get("color_image"):
+        with Image.open(ROOT / "assets/maps/relief" / cultural["color_image"]) as image:
+            assert image.size == (atlas["maps"]["china"]["width"], atlas["maps"]["china"]["height"])
+    assert cultural.get("source_archive") and cultural.get("color_image")
+
+
 def main():
     atlas = read_json(ROOT / "assets/maps/relief/atlas.json")
     assert atlas["version"] == 3
@@ -45,17 +115,24 @@ def main():
     lighting = None
     style = read_json(ROOT / "tools/relief-atlas/footprints-style.json")
     production = ROOT / style["render_archive"]
+    validate_insets(atlas, style)
+    validate_cultural_view(atlas)
     render_statistics = {}
     for identifier, metadata in atlas["maps"].items():
+        map_colours = {int(province): colour for province, colour in
+                       style.get("map_province_colors", {}).get(identifier, style.get("province_colors", {})).items()}
+        map_colours = map_colours or colours
         assert metadata["continuous_extent"] and not metadata.get("panels")
-        assert metadata["unvisited_material"] == "#ffffff"
+        unvisited_material = style.get("unvisited_materials", {}).get(identifier, style["unvisited_material"])
+        assert metadata["unvisited_material"] == unvisited_material
         assert metadata["administrative_outlines"] is False
         assert metadata["route_display"] == "coloured_terrain_corridor"
         assert metadata["width"] >= 6000
         assert metadata["native_render_size"] == [metadata["width"], metadata["height"]]
         assert metadata["samples"] >= 192
         if identifier in {"china", "east_asia"}:
-            assert metadata["region_colors"] == {str(index): colour for index, colour in enumerate(metadata["palette"], start=1)}
+            assert metadata["region_colors"] and all(int(index) > 0 for index in metadata["region_colors"])
+            assert set(metadata["region_colors"].values()) == set(metadata["palette"])
         assert metadata["lighting"]["sun_elevation_degrees"] == 32
         assert abs(metadata["lighting"]["sun_azimuth_degrees_clockwise_from_north"] - 321.8427734) < 0.0001
         if lighting is not None:
@@ -87,7 +164,10 @@ def main():
             samples = original.convert("RGB").resize((160, 160), Image.Resampling.NEAREST)
             original_sea = np.array(max(samples.getcolors(25600), key=lambda item: item[0])[1])
         assert metadata["display_background"] == "#" + "".join(f"{channel:02x}" for channel in original_sea)
-        neutral_land = (np.ptp(original_pixels, axis=2) <= 2) & (original_pixels.mean(axis=2) > 40)
+        with np.load(production / "data" / f"{identifier}.npz") as grid:
+            land = Image.fromarray(grid["mask"].astype(np.uint8)).resize(
+                (metadata["width"], metadata["height"]), Image.Resampling.NEAREST)
+            neutral_land = np.asarray(land)[::8, ::8].astype(bool) & (original_pixels.mean(axis=2) > 40)
         flat_sea = np.max(np.abs(original_pixels - original_sea), axis=2) <= 1
         published = image_arrays[metadata["image"]][::8, ::8]
         white_pixels = published[neutral_land]
@@ -118,7 +198,7 @@ def main():
             assert 0 <= center_x <= metadata["width"] and 0 <= center_y <= metadata["height"]
             if region["visited"]:
                 assert region["name"] in expected_visited
-                assert region["color"] == colours[region["province"]]
+                assert region["color"] == map_colours[region["province"]]
         for route in metadata["routes"]:
             assert route["geometry_status"] == "network_routed"
             assert 20 <= route["corridor_width_km"] <= 32
@@ -128,11 +208,11 @@ def main():
             coverage = centerlines.intersection(corridor.buffer(1)).length / centerlines.length
             assert coverage > 0.97, (identifier, route["id"], coverage)
             for segment in route["segments"]:
-                assert segment["color"] == colours[segment["adcode"]]
+                assert segment["color"] == map_colours[segment["adcode"]]
                 assert all(-0.01 <= horizontal <= metadata["width"] + 0.01 and -0.01 <= vertical <= metadata["height"] + 0.01
                            for horizontal, vertical in segment["points"])
     china = atlas["maps"]["china"]
-    raster_path = ROOT / ".render-work/footprints/data/china.npz"
+    raster_path = production / "data/china.npz"
     if raster_path.exists():
         with np.load(raster_path) as raster:
             assert set(np.unique(raster["region"])) <= {0, *map(int, china["region_colors"])}
@@ -191,8 +271,7 @@ def main():
         reference = ROOT / "tools/relief-atlas/reference"
         assert (reference / "scenes" / (identifier + ".blend")).stat().st_size > 1000000
         assert (reference / "data" / (identifier + ".npz")).is_file()
-    archive = ROOT / "tools/relief-atlas/footprints"
-    render_reports = read_json(archive.parent / "footprints-render-report.json")
+    archive = production
     for identifier, metadata in atlas["maps"].items():
         source = read_json(archive / "data" / (identifier + ".json"))
         assert (source["width"], source["height"], source["palette"]) == (metadata["width"], metadata["height"], metadata["palette"])
@@ -206,7 +285,8 @@ def main():
             assert report["resolution"] == [metadata["width"], metadata["height"]]
             assert report["sha256"] == hashlib.sha256(scene_file.read_bytes()).hexdigest()
             assert 1000000 < scene_file.stat().st_size == report["bytes"] < 100*1024*1024
-        for filename, checksum in render_reports[identifier]["outputs"].items():
+        render_report = read_json(archive / "renders" / f"{identifier}-render.json")
+        for filename, checksum in render_report["outputs"].items():
             with (archive / "renders" / filename).open("rb") as source_file:
                 assert hashlib.file_digest(source_file, "sha256").hexdigest() == checksum
     for script in ("build-footprint-atlas.py", "prepare-footprint-routes.py", "render-footprint-atlas.py"):

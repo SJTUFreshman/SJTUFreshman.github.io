@@ -149,6 +149,8 @@ def projected_region(item, metadata):
 
 
 def prepare_map(identifier, config, source, provinces, colours, reuse_dem=False):
+    overrides = STYLE.get("map_province_colors", {}).get(identifier, {})
+    colours = {code: overrides.get(str(code), colour) for code, colour in colours.items()}
     if identifier == "china" or reuse_dem:
         data_root = WORK if reuse_dem else SOURCE
         with np.load(data_root / "data" / (identifier + ".npz")) as data:
@@ -183,19 +185,26 @@ def prepare_map(identifier, config, source, provinces, colours, reuse_dem=False)
                   "y": (max_y + (np.arange(shape_rows) + 0.5) * target_transform.e) / 1000}
         extent = [float(arrays["x"][0]), float(arrays["y"][-1]), float(arrays["x"][-1]), float(arrays["y"][0])]
     palette = list(dict.fromkeys(colours.values()))
+    province_ids = {item["adcode"]: index for index, item in enumerate(provinces, 1)}
+    region_colors = ({str(province_ids[item["adcode"]]): colours[item["adcode"]] for item in provinces}
+                     if STYLE.get("province_colors") else
+                     {str(index): colour for index, colour in enumerate(palette, 1)})
     transformer = Transformer.from_crs("EPSG:4326", projection, always_xy=True)
-    province_shapes = [(transform(transformer.transform, item["geometry"]), palette.index(colours[item["adcode"]])+1) for item in provinces]
+    province_shapes = [(transform(transformer.transform, item["geometry"]),
+                        province_ids[item["adcode"]] if STYLE.get("province_colors") else palette.index(colours[item["adcode"]])+1)
+                       for item in provinces]
     arrays["region"] = rasterize(province_shapes, out_shape=arrays["elevation"].shape,
-                                  transform=target_transform, fill=0, dtype="uint8") if identifier != "europe_usa" else np.zeros_like(arrays["mask"], dtype="uint8")
+                                  transform=target_transform, fill=0, dtype="uint16") if identifier != "europe_usa" else np.zeros_like(arrays["mask"], dtype="uint16")
     height = round(config["width"] * (extent[3]-extent[1]) / (extent[2]-extent[0]))
     metadata = {"id": identifier, "title": config["title"], "width": config["width"], "height": height,
                 "projection": projection, "extent_km": extent, "geographic_bounds": config.get("bounds", [73,18,135.2,53.7]),
                 "vertical_exaggeration": config["exaggeration"], "palette": palette, "background": STYLE["backgrounds"][identifier],
                 "samples": STYLE["samples"], "dem_shape": list(arrays["elevation"].shape),
-                "unvisited_material": "#ffffff", "image": identifier + "-relief.webp",
+                "unvisited_material": STYLE.get("unvisited_materials", {}).get(identifier, STYLE["unvisited_material"]),
+                "image": identifier + "-relief.webp",
                 "color_image": identifier + ("-colour.webp" if identifier != "europe_usa" else "-relief.webp"),
                 "continuous_extent": True}
-    metadata["region_colors"] = {str(index): colour for index, colour in enumerate(palette, start=1)}
+    metadata["region_colors"] = region_colors
     units = cities(colours) if identifier in {"china", "east_asia"} else []
     if identifier != "china":
         units += regional_units(identifier)
@@ -222,6 +231,8 @@ def route_data(metadata, journeys, provinces):
     pixel_transform = [width / ((east-west)*1000), 0, 0, -height / ((north-south)*1000),
                        -west*width/(east-west), north*height/(north-south)]
     output = []
+    province_colours = {region["province"]: region["color"] for region in metadata["regions"]
+                        if region.get("province") and region.get("color")}
     for journey in journeys:
         if journey.get("geometry_status") != "network_routed":
             raise ValueError("Refusing city-to-city schematic route: " + journey["id"])
@@ -236,7 +247,8 @@ def route_data(metadata, journeys, provinces):
                 if part.is_empty or part.geom_type != "LineString":
                     continue
                 simplified = part.simplify(0.10)
-                segments.append({"province": segment["province"], "adcode": segment["adcode"], "color": segment["color"],
+                segments.append({"province": segment["province"], "adcode": segment["adcode"],
+                                 "color": province_colours.get(segment["adcode"], segment["color"]),
                                  "points": [[round(horizontal, 2), round(vertical, 2)] for horizontal, vertical in simplified.coords]})
         if segments:
             corridor_width = STYLE["corridor_width_km"][journey["kind"]]
@@ -272,7 +284,6 @@ def package(identifiers, render_root):
             # 归档元数据是渲染时的快照；用最新名单重算 visited，不能沿用旧快照中的到访状态。
             if "province" in region:
                 region["visited"] = region["name"] in visited
-        metadata["region_colors"] = {str(index): colour for index, colour in enumerate(metadata["palette"], start=1)}
         render_report = read_json(render_root / "renders" / (identifier + "-render.json"))
         for variant in ("relief", "colour") if identifier != "europe_usa" else ("relief",):
             with Image.open(render_root / "renders" / f"{identifier}-{variant}.png") as image:
@@ -288,6 +299,9 @@ def package(identifiers, render_root):
         metadata["source_archive"] = render_root.resolve().relative_to(ROOT).as_posix()
         metadata["route_display"] = "coloured_terrain_corridor"
         metadata["routes"] = route_data(metadata, journeys, provinces) if identifier != "europe_usa" else []
+        for key in ("preview", "insets", "overview", "cultural"):
+            if key in maps.get(identifier, {}):
+                metadata[key] = maps[identifier][key]
         maps[identifier] = metadata
     write_json(OUTPUT / "atlas.json", {"version": 3, "maps": maps})
     # 概览是默认视图：新增城市后同步推导到访省，不能只更新细分图或丢掉已归档的文化区/国家层。

@@ -1,0 +1,21 @@
+{
+  "description": "Visual grouping for the East Asia overview. These are display regions, not administrative claims. Stable member keys are Natural Earth iso_3166_2 codes.",
+  "JPN": [
+    {"id":"JPN:hokkaido","label":{"en":"Hokkaido","zh-CN":"北海道","zh-TW":"北海道"},"members":["JP-01"]},
+    {"id":"JPN:tohoku","label":{"en":"Tohoku","zh-CN":"东北地方","zh-TW":"東北地方"},"members":["JP-02","JP-03","JP-04","JP-05","JP-06","JP-07"]},
+    {"id":"JPN:kanto","label":{"en":"Kanto","zh-CN":"关东地方","zh-TW":"關東地方"},"members":["JP-08","JP-09","JP-10","JP-11","JP-12","JP-13","JP-14"]},
+    {"id":"JPN:chubu","label":{"en":"Chubu","zh-CN":"中部地方","zh-TW":"中部地方"},"members":["JP-15","JP-16","JP-17","JP-18","JP-19","JP-20","JP-21","JP-22","JP-23"]},
+    {"id":"JPN:kansai","label":{"en":"Kansai","zh-CN":"近畿地方","zh-TW":"近畿地方"},"members":["JP-24","JP-25","JP-26","JP-27","JP-28","JP-29","JP-30"]},
+    {"id":"JPN:chugoku","label":{"en":"Chugoku","zh-CN":"中国地方","zh-TW":"中國地方"},"members":["JP-31","JP-32","JP-33","JP-34","JP-35"]},
+    {"id":"JPN:shikoku","label":{"en":"Shikoku","zh-CN":"四国地方","zh-TW":"四國地方"},"members":["JP-36","JP-37","JP-38","JP-39"]},
+    {"id":"JPN:kyushu-okinawa","label":{"en":"Kyushu and Okinawa","zh-CN":"九州与冲绳","zh-TW":"九州與沖繩"},"members":["JP-40","JP-41","JP-42","JP-43","JP-44","JP-45","JP-46","JP-47"]}
+  ],
+  "KOR": [
+    {"id":"KOR:capital","label":{"en":"Capital region","zh-CN":"首都圈","zh-TW":"首都圈"},"members":["KR-11","KR-28","KR-41"]},
+    {"id":"KOR:gwandong","label":{"en":"Gwandong","zh-CN":"关东","zh-TW":"關東"},"members":["KR-42"]},
+    {"id":"KOR:hoseo","label":{"en":"Hoseo","zh-CN":"湖西","zh-TW":"湖西"},"members":["KR-30","KR-43","KR-44","KR-50"]},
+    {"id":"KOR:honam","label":{"en":"Honam","zh-CN":"湖南","zh-TW":"湖南"},"members":["KR-29","KR-45","KR-46"]},
+    {"id":"KOR:yeongnam","label":{"en":"Yeongnam","zh-CN":"岭南","zh-TW":"嶺南"},"members":["KR-26","KR-27","KR-31","KR-47","KR-48"]},
+    {"id":"KOR:jeju","label":{"en":"Jeju","zh-CN":"济州","zh-TW":"濟州"},"members":["KR-49"]}
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "relief": {
+    "file": "china-relief.blend",
+    "sha256": "d35b7cf38a6c8348d2862566d8353dc6551c1eb81b970105fe085c009ad59c56",
+    "bytes": 69620159,
+    "vertices": 2156343,
+    "resolution": [
+      6000,
+      5024
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false,
+    "white_material_verified": true,
+    "postprocessing": "none",
+    "sea_material": "#e4edf0"
+  },
+  "colour": {
+    "file": "china-colour.blend",
+    "sha256": "dc30d15128274ff20ff5c4b84927436ff2d0ae5c770afc579e4661a61133aae5",
+    "bytes": 69685847,
+    "vertices": 2156343,
+    "resolution": [
+      6000,
+      5024
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false,
+    "white_material_verified": false,
+    "postprocessing": "none",
+    "sea_material": "#e4edf0"
+  }
+}

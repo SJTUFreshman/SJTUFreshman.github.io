@@ -36,6 +36,7 @@ def main():
     metadata = json.loads((arguments.root / "data" / (arguments.map + ".json")).read_text(encoding="utf-8"))
     style = json.loads(arguments.style.read_text(encoding="utf-8"))
     sea_colour = arguments.sea_colour or style["backgrounds"][arguments.map]
+    unvisited_colour = style.get("unvisited_materials", {}).get(arguments.map, style["unvisited_material"])
     data = np.load(arguments.root / "data" / (arguments.map + ".npz"))
     west, south, east, north = metadata["extent_km"]
     world_per_km = 24 / (north-south)
@@ -45,7 +46,7 @@ def main():
                            world_per_km, (west+east)/2, (south+north)/2)
     province_material = terrain.data.materials[0]
     # 白色来自真实的纯白漫反射材质；不要用自发光、抬高环境光或后期曲线消除地形阴影。
-    white_material = matte_material("Unvisited terrain / pure white", style["unvisited_material"])
+    white_material = matte_material("Unvisited terrain", unvisited_colour)
     white_material.node_tree.nodes.get("Principled BSDF").inputs["Emission Strength"].default_value = 0
     terrain.data.materials[0] = white_material
     bpy.ops.mesh.primitive_plane_add(size=200, location=(0, 0, 0))
@@ -89,7 +90,7 @@ def main():
     scene.view_settings.exposure = -0.4
     scene.view_settings.gamma = 1
     # 两个版本使用同一相机和光照；浏览器只裁切彩色版本，沿途山脊与阴影才能连续。
-    scene["unvisited_material"] = style["unvisited_material"]
+    scene["unvisited_material"] = unvisited_colour
     scene["sea_material"] = sea_colour
     scene["postprocessing"] = "none"
     renders = arguments.root / ("previews" if arguments.preview else "renders")
@@ -101,6 +102,7 @@ def main():
     for variant in variants:
         if variant == "colour":
             terrain.data.materials[0] = province_material
+            colors[:, :3] = linear_color(unvisited_colour)
             mask = data["mask"].astype(bool) & np.isfinite(data["elevation"])
             regions = data["region"][mask]
             for region_id, color in metadata.get("region_colors", {}).items():
@@ -140,7 +142,7 @@ def main():
             shader = restored_terrain.data.materials[0].node_tree.nodes.get("Principled BSDF")
             if variant == "relief":
                 assert not shader.inputs["Base Color"].is_linked
-                assert tuple(shader.inputs["Base Color"].default_value) == (1, 1, 1, 1)
+                assert np.allclose(tuple(shader.inputs["Base Color"].default_value), (*linear_color(unvisited_colour), 1), atol=0.000001)
                 assert shader.inputs["Emission Strength"].default_value == 0
                 assert shader.inputs["Roughness"].default_value > 0.9
             actual_colors = np.empty(vertex_count*4, dtype=np.float32)
@@ -162,7 +164,7 @@ def main():
         return
     report = {"lighting": lighting, "render_engine": "Blender 4.5.3 / Cycles CUDA", "samples": render_samples,
               "native_render_size": [metadata["width"], metadata["height"]],
-              "gpu_devices": gpu_devices, "unvisited_material": style["unvisited_material"], "administrative_outlines": False,
+              "gpu_devices": gpu_devices, "unvisited_material": unvisited_colour, "administrative_outlines": False,
               "sea_material": sea_colour, "postprocessing": "none",
               "outputs": {f"{arguments.map}-{variant}.png": hashlib.sha256((renders / f"{arguments.map}-{variant}.png").read_bytes()).hexdigest()
                           for variant in variants if (renders / f"{arguments.map}-{variant}.png").exists()}}

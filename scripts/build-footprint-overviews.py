@@ -25,8 +25,9 @@ from shapely.geometry import box, shape
 from shapely.ops import transform, unary_union
 
 ROOT = Path(__file__).resolve().parents[1]
-ARCHIVE = ROOT / "tools/relief-atlas/footprints/administrative-20261016"
 STYLE_PATH = ROOT / "tools/relief-atlas/footprints-style.json"
+STYLE = json.loads(STYLE_PATH.read_text(encoding="utf-8-sig"))
+ARCHIVE = ROOT / STYLE.get("overview_archive", "tools/relief-atlas/footprints/administrative-20261016")
 CONFIG_PATH = ROOT / "tools/relief-atlas/cultural-regions.json"
 OUTPUT = ROOT / "assets/maps/relief"
 MAPS = ("china", "east_asia", "europe_usa")
@@ -49,9 +50,16 @@ def load_builder():
     return module
 
 
-def stable_colour(identifier):
+def stable_colour(identifier, map_id="europe_usa"):
     """A stable muted pigment per ID; adding/reordering countries does not recolour old ones."""
     digest = hashlib.sha256(identifier.encode("ascii")).digest()
+    palette = STYLE.get("map_palettes", {}).get(map_id)
+    if palette:
+        index = (STYLE.get("country_palette_indices", {}).get(identifier)
+                 if map_id == "europe_usa" else None)
+        if index is None:
+            index = int.from_bytes(digest[:2], "big") % len(palette)
+        return palette[index]
     hue = int.from_bytes(digest[:4], "big") / 2**32
     lightness = 0.64 + digest[4] / 255 * 0.10
     saturation = 0.22 + digest[5] / 255 * 0.17
@@ -66,8 +74,12 @@ def geography(render_root):
         return json.loads(gzip.decompress(archived.read_bytes()))["features"]
     source = ROOT / ".render-work/footprints/cache" / NATURAL_EARTH_NAME
     if not source.exists():
-        raise FileNotFoundError(f"Missing Natural Earth source: {source}; restore the archived .geojson.gz first")
-    raw = source.read_bytes()
+        previous = ROOT / "tools/relief-atlas/footprints/administrative-20261016/cache" / (NATURAL_EARTH_NAME + ".gz")
+        if not previous.exists():
+            raise FileNotFoundError(f"Missing Natural Earth source: {source}; restore the archived .geojson.gz first")
+        raw = gzip.decompress(previous.read_bytes())
+    else:
+        raw = source.read_bytes()
     archived.parent.mkdir(parents=True, exist_ok=True)
     archived.write_bytes(gzip.compress(raw, mtime=0))
     return json.loads(raw)["features"]
@@ -88,7 +100,7 @@ def province_units(provinces, colours):
              "geometry": province["geometry"]} for province in provinces]
 
 
-def country_units(features, allowed=None):
+def country_units(features, allowed=None, map_id="europe_usa"):
     grouped = {}
     for feature in features:
         properties = feature["properties"]
@@ -97,7 +109,7 @@ def country_units(features, allowed=None):
             continue
         item = grouped.setdefault(country, {"id": country, "name": properties["admin"],
                                             "country": country, "unit": "country",
-                                            "color": stable_colour(country), "members": [], "parts": []})
+                                            "color": stable_colour(country, map_id), "members": [], "parts": []})
         item["members"].append(properties["adm1_code"])
         item["parts"].append(make_valid(shape(feature["geometry"])))
     for item in grouped.values():
@@ -117,7 +129,7 @@ def cultural_units(features):
             raise ValueError(f"{country}: cultural groups must cover each source prefecture/province exactly once")
         for group in config[country]:
             result.append({**group, "name": group["label"]["en"], "country": country, "unit": "cultural-region",
-                           "color": stable_colour(group["id"]),
+                           "color": stable_colour(group["id"], "east_asia"),
                            "geometry": unary_union([make_valid(shape(features_by_code[member]["geometry"]))
                                                     for member in group["members"]])})
     return result
@@ -164,10 +176,12 @@ def prepare(identifiers=None, render_root=ARCHIVE):
     cultures = cultural_units(features)
     for identifier in identifiers:
         metadata = read_json(source_root / "data" / (identifier + ".json"))
+        overrides = STYLE.get("map_province_colors", {}).get(identifier, {})
+        map_colours = {code: overrides.get(str(code), colour) for code, colour in colours.items()}
         if identifier == "china":
-            units = province_units(provinces, colours)
+            units = province_units(provinces, map_colours)
         elif identifier == "east_asia":
-            units = province_units(provinces, colours) + cultures + country_units(features, {"PRK", "RUS", "MNG", "VNM", "LAO", "PHL"})
+            units = province_units(provinces, map_colours) + cultures + country_units(features, {"PRK", "RUS", "MNG", "VNM", "LAO", "PHL"}, "east_asia")
         else:
             units = country_units(features)
         # The exact orthographic projection/extent comes from the archived detail render.
@@ -229,6 +243,9 @@ def package(identifiers=None, render_root=ARCHIVE, encode_images=True):
                     "relief_source_archive": metadata["relief_source_archive"], "visit_source": metadata["visit_source"],
                     "routes": [], "width": metadata["width"], "height": metadata["height"],
                     "projection": metadata["projection"], "extent_km": metadata["extent_km"]}
+        previous_preview = atlas["maps"][identifier].get("overview", {}).get("preview_color_image")
+        if previous_preview:
+            overview["preview_color_image"] = previous_preview
         if identifier == "china":
             overview["color_source_archive"] = metadata["relief_source_archive"]
             overview["outputs"] = read_json(ROOT / metadata["relief_source_archive"] / "renders/china-render.json")["outputs"]
@@ -250,7 +267,16 @@ def package(identifiers=None, render_root=ARCHIVE, encode_images=True):
             if not (OUTPUT / metadata["color_image"]).exists():
                 raise FileNotFoundError("Package overview images first: " + metadata["color_image"])
         atlas["maps"][identifier]["overview"] = overview
+    cultural = atlas["maps"].get("china", {}).get("cultural")
+    if cultural and "china" in identifiers:
+        culture_builder = builder.load_module(ROOT / "scripts/build-china-cultural-overview.py", "china_cultural")
+        visited_names = set(read_json(ROOT / "site_content.json")["life"]["footprints"]["visited_china"])
+        culture_builder.update_visited(cultural["regions"], visited_names)
     write_json(OUTPUT / "atlas.json", atlas)
+    if all(metadata.get("preview") and metadata["overview"].get("preview_color_image")
+           for metadata in atlas["maps"].values()):
+        runtime = builder.load_module(ROOT / "scripts/package-footprint-sectional.py", "footprint_runtime")
+        write_json(OUTPUT / "atlas-runtime.json", runtime.runtime_atlas(atlas))
     print("Packaged overview layers: " + ", ".join(identifiers), flush=True)
 
 
