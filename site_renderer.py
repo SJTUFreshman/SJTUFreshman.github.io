@@ -9,7 +9,7 @@ import unicodedata
 from datetime import date as calendar_date
 from pathlib import Path
 from typing import Any
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
 
 ROOT = Path(__file__).resolve().parent
 CONTENT_FILE = ROOT / "site_content.json"
@@ -114,6 +114,7 @@ def validate_content(
     errors: list[str] = []
     home = content.get("home", {})
     life = content.get("life", {})
+    errors.extend(validate_reading(content))
 
     collections = (
         ("home.news", home.get("news", [])),
@@ -123,6 +124,7 @@ def validate_content(
         ("life.profile.userboxes", life.get("profile", {}).get("userboxes", [])),
         ("life.wine.entries", life.get("wine", {}).get("entries", [])),
         ("life.wishlist.entries", life.get("wishlist", {}).get("entries", [])),
+        ("life.reading.collections", life.get("reading", {}).get("collections", [])),
         ("life.gallery", life.get("gallery", [])),
         ("life.shelf", life.get("shelf", [])),
         ("life.thoughts", life.get("thoughts", [])),
@@ -516,7 +518,18 @@ def moment_seed(moment_id: str) -> int:
 
 
 def load_content(root: Path = ROOT) -> dict[str, Any]:
-    return json.loads((root / "site_content.json").read_text(encoding="utf-8"))
+    content = json.loads((root / "site_content.json").read_text(encoding="utf-8"))
+    for collection in content.get("life", {}).get("reading", {}).get("collections", []):
+        if not collection.get("articles_file"):
+            continue
+        article_path = (root / collection["articles_file"]).resolve()
+        if not article_path.is_relative_to(root.resolve()) or article_path.suffix != ".json":
+            raise ValueError("拾文文章文件必须是站点目录内的 JSON 文件")
+        articles = json.loads(article_path.read_text(encoding="utf-8"))
+        if not isinstance(articles, list):
+            raise ValueError("拾文文章文件必须包含文章数组")
+        collection["articles"] = articles
+    return content
 
 
 def plain_html_text(value: Any) -> str:
@@ -640,6 +653,9 @@ def render_life_i18n(content: dict[str, Any]) -> str:
     life = content["life"]
     home = content["home"]
     i18n = {lang: dict(life["labels"][lang]) for lang in LANGS}
+    for key, value in reading_text_values(content).items():
+        for lang in LANGS:
+            i18n[lang][key] = lang_value(value, lang)
     for key, value in wine_text_values(content).items():
         for lang in LANGS:
             i18n[lang][key] = lang_value(value, lang)
@@ -1043,6 +1059,129 @@ def render_thoughts(content: dict[str, Any]) -> str:
     return render_portal_section(content, "thoughts")
 
 
+def validate_reading(content: dict[str, Any]) -> list[str]:
+    errors = []
+    for collection in content.get("life", {}).get("reading", {}).get("collections", []):
+        collection_id = str(collection.get("id", ""))
+        if not re.fullmatch(r"[a-z0-9][a-z0-9_-]*", collection_id):
+            errors.append("拾文来源 ID 只能使用小写字母、数字、连字符和下划线")
+        if not lang_value(collection.get("title", ""), "en").strip():
+            errors.append(f"拾文来源 {collection_id} 缺少名称")
+        seen = set()
+        for entry in [collection, *collection.get("articles", [])]:
+            try:
+                source = urlsplit(str(entry.get("source_url", "")))
+                valid = source.scheme == "https" and source.hostname and not source.username and not source.password
+            except ValueError:
+                valid = False
+            if not valid:
+                errors.append(f"拾文 {entry.get('id', '')} 必须保留 HTTPS 原文来源链接")
+        for article in collection.get("articles", []):
+            article_id = str(article.get("id", ""))
+            if not re.fullmatch(r"[a-z0-9][a-z0-9_-]*", article_id) or article_id in seen:
+                errors.append(f"拾文 {collection_id} 的文章 ID 无效或重复：{article_id}")
+            seen.add(article_id)
+            if not article.get("title") or not article.get("body"):
+                errors.append(f"拾文 {article_id} 缺少原文标题或完整正文")
+            if article.get("published"):
+                try:
+                    calendar_date.fromisoformat(article["published"])
+                except ValueError:
+                    errors.append(f"拾文 {article_id} 的发布日期必须是 YYYY-MM-DD")
+            for block in article.get("body", []):
+                if block.get("type") not in {"text", "heading", "quote", "image", "link"}:
+                    errors.append(f"拾文 {article_id} 含有尚不支持的正文类型：{block.get('type')}")
+                if block.get("type") == "link":
+                    try:
+                        target = urlsplit(str(block.get("url", "")))
+                        valid = target.scheme == "https" and target.hostname and not target.username and not target.password
+                    except ValueError:
+                        valid = False
+                    if not valid or not block.get("text"):
+                        errors.append(f"拾文 {article_id} 的正文链接必须包含文字及 HTTPS 地址")
+                if block.get("type") == "image":
+                    image = str(block.get("src", ""))
+                    image_path = (ROOT / image).resolve()
+                    if (not image.startswith("images/reading/")
+                            or not image_path.is_relative_to((ROOT / "images/reading").resolve())
+                            or image_path.suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp", ".gif", ".avif"}
+                            or not image_path.is_file()):
+                        errors.append(f"拾文 {article_id} 的图片须已保存到 images/reading/：{image}")
+                    if any(not isinstance(block.get(key), int) or block[key] <= 0 for key in ("width", "height")):
+                        errors.append(f"拾文 {article_id} 的图片缺少有效宽高：{image}")
+    return errors
+
+
+def reading_text_values(content: dict[str, Any]) -> dict[str, Any]:
+    reading = content["life"].get("reading", {})
+    values = {f"reading_{key}": value for key, value in reading.get("copy", {}).items()}
+    for collection in reading.get("collections", []):
+        values[f"reading_{collection['id']}_title"] = collection["title"]
+        values[f"reading_{collection['id']}_source"] = collection.get("source_label", collection["title"])
+    return values
+
+
+def render_reading_body(blocks: list[dict[str, Any]]) -> str:
+    parts = []
+    for block in blocks:
+        kind = block["type"]
+        if kind == "link":
+            parts.append(f'<p class="reading-media-link"><a href="{esc(block["url"])}" target="_blank" rel="noopener noreferrer">{esc(block["text"])} ↗</a></p>')
+        elif kind == "image":
+            caption = esc(block.get("caption", ""))
+            image = esc(block["src"])
+            parts.append(f'''<figure class="reading-image">
+                <a href="{image}" target="_blank" rel="noopener noreferrer"><img src="{image}" alt="{esc(block.get('alt') or block.get('caption', ''))}" width="{int(block['width'])}" height="{int(block['height'])}" loading="lazy" decoding="async"></a>
+                {f'<figcaption>{caption}</figcaption>' if caption else ''}
+            </figure>''')
+        else:
+            tag = {"text": "p", "heading": "h4", "quote": "blockquote"}[kind]
+            parts.append(f"<{tag}>{esc(block.get('text', ''))}</{tag}>")
+    return "\n".join(parts)
+
+
+def render_reading(content: dict[str, Any]) -> str:
+    reading = content["life"].get("reading", {})
+    values = reading_text_values(content)
+
+    def text(key: str) -> str:
+        return f'<span data-key="{esc(key)}">{esc(lang_value(values.get(key, {}), "en"))}</span>'
+
+    collections = []
+    for collection in reading.get("collections", []):
+        collection_id = f"reading-{collection['id']}"
+        title = text(f"reading_{collection['id']}_title")
+        badge = f'<span class="reading-badge">{text("reading_following")}</span>' if collection.get("following") else ""
+        source_label = text(f"reading_{collection['id']}_source")
+        source = f'<a href="{esc(collection["source_url"])}" target="_blank" rel="noopener noreferrer">{source_label}</a>'
+        articles = []
+        for article in collection.get("articles", []):
+            published = article.get("published", "")
+            date_markup = f'<time datetime="{esc(published)}">{esc(published)}</time>' if published else ""
+            articles.append(f'''<details class="reading-article" id="{esc(collection_id)}-{esc(article['id'])}">
+                <summary><span class="reading-article-title">{esc(article['title'])}</span><span class="reading-open">{date_markup} <span>{text('reading_read')} <span aria-hidden="true">↗</span></span></span></summary>
+                <div class="reading-article-meta">{esc(article.get('author', ''))}<span>{text('reading_source')} · {source}</span></div>
+                <div class="reading-body" lang="{esc(article.get('language', 'zh-CN'))}">{render_reading_body(article['body'])}</div>
+                <footer class="reading-credit"><p>{text('reading_source')} · {source}</p><a href="{esc(article['source_url'])}" target="_blank" rel="noopener noreferrer">{text('reading_original')} ↗</a><p>{text('reading_credit')}</p></footer>
+            </details>''')
+        pending = f'''<div class="reading-pending"><h4>{text('reading_pending')}</h4><p>{text('reading_pending_body')}</p></div>''' if not articles else ""
+        dates = sorted(article["published"] for article in collection.get("articles", []) if article.get("published"))
+        date_range = f' · {esc(dates[0])} — {esc(dates[-1])}' if dates else ""
+        overview = f'<p class="reading-overview">{len(articles)} {text("reading_collected")}{date_range}</p>' if articles else ""
+        edition = f'<p class="reading-edition">{text("reading_text_edition")}</p>' if collection.get("edition") == "text" else ""
+        collections.append(f'''<article class="reading-collection" data-portal-entry="{esc(collection_id)}" aria-labelledby="{esc(collection_id)}-title">
+                <header class="reading-collection-header">{badge}<h3 id="{esc(collection_id)}-title">{title}</h3></header>
+                <p class="reading-source">{text('reading_source')} · {source}</p>
+                {overview}{edition}
+                {pending}{''.join(articles)}
+                <a class="reading-original" href="{esc(collection['source_url'])}" target="_blank" rel="noopener noreferrer">{text('reading_original')} <span aria-hidden="true">↗</span></a>
+            </article>''')
+    return f'''        <section id="reading" class="portal-content reading-page" data-portal-content="reading" hidden>
+            <div class="reading-intro"><svg class="reading-crown" viewBox="0 0 180 80" aria-hidden="true"><path d="M12 14 30 43 58 62 90 69 122 62 150 43 168 14"/><g><circle cx="12" cy="14" r="3"/><circle cx="30" cy="43" r="3"/><circle cx="58" cy="62" r="4"/><circle cx="90" cy="69" r="3"/><circle cx="122" cy="62" r="3"/><circle cx="150" cy="43" r="3"/><circle cx="168" cy="14" r="3"/></g></svg><p>{text('reading_intro')}</p></div>
+            <div class="reading-collections">{''.join(collections)}</div>
+        </section>'''
+
+
 def friend_group_text_values(content: dict[str, Any]) -> dict[str, Any]:
     values = {}
     for group in content["life"].get("friend_groups", []):
@@ -1395,6 +1534,27 @@ def render_home_updates(root: Path, content: dict[str, Any], write: bool) -> str
     return text
 
 
+def render_reading_updates(root: Path, content: dict[str, Any], write: bool) -> dict[Path, str]:
+    artifacts = {}
+    for filename in ("life.html", "observatory.html"):
+        path = root / filename
+        artifacts[path] = replace_region(path.read_text(encoding="utf-8"), "LIFE_READING", render_reading(content), r'<section id="reading".*?</section>')
+    data_path = root / "assets/life/scripts/01-content-data.js"
+    data_text = data_path.read_text(encoding="utf-8")
+    current = json.loads(re.search(r'const i18n = (\{.*?\});', data_text, re.S).group(1))
+    for lang in LANGS:
+        current[lang] = {key: value for key, value in current[lang].items() if not key.startswith("reading_")}
+        for key in ("title_reading", "nav_reading"):
+            current[lang][key] = content["life"]["labels"][lang][key]
+        current[lang].update({key: lang_value(value, lang) for key, value in reading_text_values(content).items()})
+    script = "/* ===== i18n ===== */\nconst i18n = " + json_js(current) + ";"
+    artifacts[data_path] = replace_code_region(data_text, "LIFE_I18N", script, r'const i18n = \{.*?\};')
+    if write:
+        for path, rendered in artifacts.items():
+            path.write_text(rendered, encoding="utf-8", newline="\n")
+    return artifacts
+
+
 def render_home(root: Path, content: dict[str, Any], write: bool) -> str:
     path = root / "index.html"
     text = path.read_text(encoding="utf-8")
@@ -1426,6 +1586,7 @@ def render_life_artifacts(
     html_text = replace_region(html_text, "LIFE_FOOTPRINTS", render_footprints(content), r'<section id="footprints".*?</section>')
     html_text = replace_region(html_text, "LIFE_SHELF", render_shelf(content), r'<!-- Shelf -->\s*<section id="shelf".*?</section>')
     html_text = replace_region(html_text, "LIFE_THOUGHTS", render_thoughts(content), r'<!-- Thoughts -->\s*<section id="thoughts".*?</section>')
+    html_text = replace_region(html_text, "LIFE_READING", render_reading(content), r'<section id="reading".*?</section>')
     html_text = replace_region(html_text, "LIFE_FRIENDS", render_friends(content), r'<!-- Friends -->\s*<section id="friends".*?</section>')
     html_text = replace_region(html_text, "LIFE_PROFILE", render_life_profile(content), r'<section id="profile".*?</section>')
     html_text = replace_region(html_text, "LIFE_WINE", render_life_wine(content), r'<section id="wine".*?</section>')
@@ -1556,6 +1717,11 @@ def main() -> int:
     )
     scope = parser.add_mutually_exclusive_group()
     scope.add_argument(
+        "--reading-only",
+        action="store_true",
+        help="Render only the reading collections and their translations on both Life pages.",
+    )
+    scope.add_argument(
         "--life-only",
         action="store_true",
         help="Render only life.html, leaving index.html byte-for-byte untouched.",
@@ -1566,7 +1732,15 @@ def main() -> int:
         help="Render only homepage news, journals, publications, and their translations.",
     )
     args = parser.parse_args()
-    if args.home_updates_only:
+    if args.reading_only:
+        content = load_content(ROOT)
+        validate_content(content)
+        artifacts = render_reading_updates(ROOT, content, write=not args.check)
+        if args.check:
+            for path, rendered in artifacts.items():
+                require_current_artifact(path, rendered, ROOT)
+        print("Reading render check passed" if args.check else "Rendered reading collections")
+    elif args.home_updates_only:
         content = load_content(ROOT)
         validate_content(content)
         rendered = render_home_updates(ROOT, content, write=not args.check)

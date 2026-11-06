@@ -315,11 +315,13 @@
         "nav_map": "Footprints",
         "nav_shelf": "Shelf",
         "nav_thoughts": "Thoughts",
+        "nav_reading": "Reading",
         "nav_friends": "Friends",
         "title_gallery": "Gallery",
         "title_map": "Footprints",
         "title_shelf": "Shelf",
         "title_thoughts": "Thoughts",
+        "title_reading": "Reading",
         "title_friends": "Friends",
         "title_home": "Home",
         "chart_china": "China",
@@ -353,11 +355,13 @@
         "nav_map": "足迹",
         "nav_shelf": "书影",
         "nav_thoughts": "随笔",
+        "nav_reading": "拾文",
         "nav_friends": "友链",
         "title_gallery": "光影",
         "title_map": "足迹",
         "title_shelf": "书影",
         "title_thoughts": "随笔",
+        "title_reading": "拾文",
         "title_friends": "友链",
         "title_home": "主页",
         "chart_china": "中国",
@@ -391,11 +395,13 @@
         "nav_map": "足跡",
         "nav_shelf": "書影",
         "nav_thoughts": "隨筆",
+        "nav_reading": "拾文",
         "nav_friends": "友鏈",
         "title_gallery": "光影",
         "title_map": "足跡",
         "title_shelf": "書影",
         "title_thoughts": "隨筆",
+        "title_reading": "拾文",
         "title_friends": "友鏈",
         "title_home": "主頁",
         "chart_china": "中國",
@@ -1266,6 +1272,49 @@
         }
       }
     ],
+    "reading": {
+      "copy": {
+        "intro": {
+          "en": "Words I came across and wanted to keep. A place to return to good writing, and to remember where it came from.",
+          "zh-CN": "偶然读到，值得留下。把喜欢的文字收在这里，留待重读，也记住它们的来处。",
+          "zh-TW": "偶然讀到，值得留下。把喜歡的文字收在這裡，留待重讀，也記住它們的來處。"
+        },
+        "following": { "en": "Following", "zh-CN": "追更", "zh-TW": "追更" },
+        "source": { "en": "Source", "zh-CN": "来源", "zh-TW": "來源" },
+        "original": { "en": "Read the original", "zh-CN": "阅读原文", "zh-TW": "閱讀原文" },
+        "pending": { "en": "Awaiting collection", "zh-CN": "待收录", "zh-TW": "待收錄" },
+        "pending_body": {
+          "en": "The source link is saved. Articles and images have not been collected yet; the original is available via the link below.",
+          "zh-CN": "已保存来源链接，正文与配图尚未收录。可以先通过下方链接阅读原文。",
+          "zh-TW": "已儲存來源連結，正文與配圖尚未收錄。可以先透過下方連結閱讀原文。"
+        },
+        "read": { "en": "Open article", "zh-CN": "展开阅读", "zh-TW": "展開閱讀" },
+        "collected": { "en": "articles collected", "zh-CN": "篇已收录", "zh-TW": "篇已收錄" },
+        "text_edition": {
+          "en": "Text edition · Follow the original links for illustrations and music.",
+          "zh-CN": "文字版 · 配图与配乐保留原文入口。",
+          "zh-TW": "文字版 · 配圖與配樂保留原文入口。"
+        },
+        "credit": {
+          "en": "Writing and images belong to their credited authors and original publishers.",
+          "zh-CN": "文字与图片归原作者及原发布方所有。",
+          "zh-TW": "文字與圖片歸原作者及原發布方所有。"
+        }
+      },
+      "collections": [
+        {
+          "id": "wechat-xiduomei",
+          "title": { "en": "西多梅", "zh-CN": "西多梅", "zh-TW": "西多梅" },
+          "source_label": { "en": "WeChat Official Account · 西多梅", "zh-CN": "微信公众号「西多梅」", "zh-TW": "微信公眾號「西多梅」" },
+          "source_url": "https://mp.weixin.qq.com/s?__biz=MzYyMTkyNjU1Mg==&mid=2247483662&idx=1&sn=0cc71b986200514d019b757ae49a6a9d&chksm=feccf6e6a6bd56c6a2a534d9133923cd684401831b1d37fcabb45eea541594c60476f856c610&scene=126&sessionid=0#rd",
+          "following": true,
+          "edition": "text",
+          "archive_path": "wechat-archives/西多梅",
+          "articles_file": "wechat-archives/西多梅/articles.json",
+          "articles": []
+        }
+      ]
+    },
     "friend_portrait": {
       "image": "images/friends/yuheng-qiran.webp",
       "width": 1600,

@@ -116,6 +116,10 @@ Footprints 使用三张同光照的高清浮雕地图：中国、东亚为 6000 
 
 书影条目保存在 `life.shelf`，展示顺序由对应的 `life.moments` 决定。现有书籍保持紧凑文字形式；影视条目可增加 `image`、尺寸、三语图注、图源、短评，以及 `reviews` / `watch` 链接数组。链接的 `label` 与 `note` 均支持三语，后者说明文章类型、剧透或观看平台的订阅与地区条件。六张剧照保存在 `images/shelf/`，原始页面、图片地址和署名见其 `sources.json`；点击可用现有 lightbox 放大并在书影剧照间切换。原图比例保留，图片延迟加载，不嵌入第三方播放器。新增文字后重新生成字体子集，并同步更新两个页面的缓存版本。
 
+## 拾文 · 北冕座
+
+`reading` 独立收录读到的好文字，以北冕座作为入口。`life.reading.collections` 按来源保存追更状态、原文链接和文章；正文可保留段落、标题、引用、配图及图注，图片使用本站文件。内容为空时明确显示“待收录”。只更新本板块时运行 `python site_renderer.py --reading-only`。维护结构与当前来源状态见 [`../../docs/reading.md`](../../docs/reading.md)。
+
 ## Friends 合照与浮动照片
 
 `life.friend_portrait` 配置双人合照和三语提示，`life.friends` 中的 `portrait_side`、`portrait_outline` 定义人物左右位置与 SVG 轮廓。左侧 Yuheng 使用冷蓝微光，右侧 Qiran 使用暖色微光；点击人物或名字第一次展开照片，选中后再点同一人进入其 `href`。切换人物会替换照片，收起后重新从首次点击开始。原有 AAIL 链接仍保留。

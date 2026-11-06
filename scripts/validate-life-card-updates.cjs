@@ -12,6 +12,7 @@ const names = {
     footprints: ['Ursa Major', '大熊座', '大熊座'],
     shelf: ['Lyra', '天琴座', '天琴座'],
     thoughts: ['Cygnus', '天鹅座', '天鵝座'],
+    reading: ['Corona Borealis', '北冕座', '北冕座'],
     friends: ['Gemini', '双子座', '雙子座'],
     profile: ['Orion', '猎户座', '獵戶座'],
     wine: ['Crater', '巨爵座', '巨爵座'],

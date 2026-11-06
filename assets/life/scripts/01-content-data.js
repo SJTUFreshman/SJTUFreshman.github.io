@@ -277,7 +277,21 @@ const i18n = {
         "moment_summary_thought-2026-01-16": "Spes non confundit",
         "moment_date_thought-2026-06-29": "Jun 29, 2026",
         "moment_location_thought-2026-06-29": "",
-        "moment_summary_thought-2026-06-29": "Misericordiae Vultus"
+        "moment_summary_thought-2026-06-29": "Misericordiae Vultus",
+        "title_reading": "Reading",
+        "nav_reading": "Reading",
+        "reading_intro": "Words I came across and wanted to keep. A place to return to good writing, and to remember where it came from.",
+        "reading_following": "Following",
+        "reading_source": "Source",
+        "reading_original": "Read the original",
+        "reading_pending": "Awaiting collection",
+        "reading_pending_body": "The source link is saved. Articles and images have not been collected yet; the original is available via the link below.",
+        "reading_read": "Open article",
+        "reading_collected": "articles collected",
+        "reading_text_edition": "Text edition · Follow the original links for illustrations and music.",
+        "reading_credit": "Writing and images belong to their credited authors and original publishers.",
+        "reading_wechat-xiduomei_title": "西多梅",
+        "reading_wechat-xiduomei_source": "WeChat Official Account · 西多梅"
     },
     "zh-CN": {
         "nav_gallery": "光影",
@@ -555,7 +569,21 @@ const i18n = {
         "moment_summary_thought-2026-01-16": "望德不叫人蒙羞",
         "moment_date_thought-2026-06-29": "2026年6月29日",
         "moment_location_thought-2026-06-29": "",
-        "moment_summary_thought-2026-06-29": "慈悲面容"
+        "moment_summary_thought-2026-06-29": "慈悲面容",
+        "title_reading": "拾文",
+        "nav_reading": "拾文",
+        "reading_intro": "偶然读到，值得留下。把喜欢的文字收在这里，留待重读，也记住它们的来处。",
+        "reading_following": "追更",
+        "reading_source": "来源",
+        "reading_original": "阅读原文",
+        "reading_pending": "待收录",
+        "reading_pending_body": "已保存来源链接，正文与配图尚未收录。可以先通过下方链接阅读原文。",
+        "reading_read": "展开阅读",
+        "reading_collected": "篇已收录",
+        "reading_text_edition": "文字版 · 配图与配乐保留原文入口。",
+        "reading_credit": "文字与图片归原作者及原发布方所有。",
+        "reading_wechat-xiduomei_title": "西多梅",
+        "reading_wechat-xiduomei_source": "微信公众号「西多梅」"
     },
     "zh-TW": {
         "nav_gallery": "光影",
@@ -833,7 +861,21 @@ const i18n = {
         "moment_summary_thought-2026-01-16": "望德不叫人蒙羞",
         "moment_date_thought-2026-06-29": "2026年6月29日",
         "moment_location_thought-2026-06-29": "",
-        "moment_summary_thought-2026-06-29": "慈悲面容"
+        "moment_summary_thought-2026-06-29": "慈悲面容",
+        "title_reading": "拾文",
+        "nav_reading": "拾文",
+        "reading_intro": "偶然讀到，值得留下。把喜歡的文字收在這裡，留待重讀，也記住它們的來處。",
+        "reading_following": "追更",
+        "reading_source": "來源",
+        "reading_original": "閱讀原文",
+        "reading_pending": "待收錄",
+        "reading_pending_body": "已儲存來源連結，正文與配圖尚未收錄。可以先透過下方連結閱讀原文。",
+        "reading_read": "展開閱讀",
+        "reading_collected": "篇已收錄",
+        "reading_text_edition": "文字版 · 配圖與配樂保留原文入口。",
+        "reading_credit": "文字與圖片歸原作者及原發布方所有。",
+        "reading_wechat-xiduomei_title": "西多梅",
+        "reading_wechat-xiduomei_source": "微信公眾號「西多梅」"
     }
 };
 /* SITEGEN:LIFE_I18N_END */

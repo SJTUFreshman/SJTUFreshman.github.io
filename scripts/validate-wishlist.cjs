@@ -20,7 +20,7 @@ async function settle(page) {
 
 async function openFromDrawer(page) {
     await page.locator('#sectionDrawerToggle').click();
-    assert.equal(await page.locator('#sectionDrawerList [data-portal-id]').count(), 8);
+    assert.equal(await page.locator('#sectionDrawerList [data-portal-id]').count(), 9);
     await page.locator('#sectionDrawerList [data-portal-id="wishlist"]').click();
     await page.waitForFunction(() => state.scene === 'detail' && state.activePortal?.id === 'wishlist');
 }

@@ -100,6 +100,13 @@ const portalDefinitions = [
         pattern: 'cygnus'
     },
     {
+        id: 'reading',
+        titleKey: 'title_reading',
+        fallbackYaw: 1.85,
+        fallbackPitch: 0.35,
+        pattern: 'coronaBorealis'
+    },
+    {
         id: 'friends',
         titleKey: 'title_friends',
         fallbackYaw: -1.36,
@@ -130,6 +137,13 @@ const portalDefinitions = [
 ];
 
 const constellationPatterns = {
+    coronaBorealis: {
+        hips: [76127, 75695, 76267, 76952, 77512, 78159, 78493],
+        contentOrder: [76267, 75695, 76952, 77512, 78159, 78493, 76127],
+        focusHip: 76267,
+        fallbackPoints: [[-0.075,0.045],[-0.06,0.005],[-0.03,-0.035],[0,-0.045],[0.035,-0.03],[0.065,0],[0.08,0.04]],
+        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6]]
+    },
     delphinus: {
         hips: [101958, 102532, 102281, 101769, 101421],
         contentOrder: [101958, 102532, 102281, 101769, 101421],
@@ -190,6 +204,15 @@ const constellationPatterns = {
 };
 
 const constellationStories = {
+    reading: {
+        name: { en: 'Corona Borealis', 'zh-CN': '北冕座', 'zh-TW': '北冕座' },
+        epithet: { en: 'Words worth keeping', 'zh-CN': '拾字句，缀成冠', 'zh-TW': '拾字句，綴成冠' },
+        reason: {
+            en: 'Corona Borealis traces a small crown in the sky. Here, each piece of writing I want to return to becomes a jewel in that crown, keeping its author and its source close by.',
+            'zh-CN': '北冕座的星星连成一顶小小的冠冕。把读到的好文字一篇篇拾起，像珠玉一样缀在这里，留待重读，也记住每篇文字的作者与来处。',
+            'zh-TW': '北冕座的星星連成一頂小小的冠冕。把讀到的好文字一篇篇拾起，像珠玉一樣綴在這裡，留待重讀，也記住每篇文字的作者與來處。'
+        }
+    },
     wishlist: {
         name: { en: 'Delphinus', 'zh-CN': '海豚座', 'zh-TW': '海豚座' },
         epithet: { en: 'An invitation to go together', 'zh-CN': '结伴出发的小小邀请', 'zh-TW': '結伴出發的小小邀請' },

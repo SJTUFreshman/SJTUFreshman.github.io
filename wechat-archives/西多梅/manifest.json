@@ -1,0 +1,241 @@
+{
+  "status": "partial",
+  "reason": "repeated_page",
+  "body_collection_status": "success",
+  "error": "",
+  "generated_at": "2026-11-05T22:58:19+08:00",
+  "start_date": "2025-11-07",
+  "end_date": "2026-11-05",
+  "article_count": 31,
+  "remaining_body_count": 0,
+  "estimated_cost_yuan": 0.3,
+  "max_cost_yuan": 0.3,
+  "metadata_cost_yuan": 0.29,
+  "initial_article_cost_yuan": 0.16,
+  "with_metrics": false,
+  "with_comments": false,
+  "download_images": false,
+  "calls": [
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 454,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 453,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 452,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 451,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 450,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 449,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 448,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 447,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 446,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 445,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 444,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 443,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 442,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 441,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 440,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 439,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 438,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 437,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 436,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 435,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 434,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 433,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 432,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 431,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 430,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 429,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 428,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 427,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 426,
+      "success": true
+    },
+    {
+      "operation": "article-full",
+      "path": "/api/v3/articles/detail",
+      "price_yuan": 0.01,
+      "reported_balance": 425,
+      "success": true
+    }
+  ],
+  "failures": []
+}
