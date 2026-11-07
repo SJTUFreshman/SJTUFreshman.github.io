@@ -16,11 +16,13 @@ async function signalStellarDestinationReady() {
         if (!document.fonts || typeof document.fonts.load !== 'function') {
             throw new Error('Font Loading API unavailable');
         }
-        const faces = await document.fonts.load('400 1em "EduKai"', '中国大陆標楷字體');
+        const family = state.currentLang === 'zh-CN' ? 'Site WenKai' : 'EduKai';
+        const font = `400 1em "${family}"`;
+        const faces = await document.fonts.load(font, '中国大陆標楷字體');
         const loaded = faces.length > 0
             && faces.every(face => face.status === 'loaded')
-            && document.fonts.check('400 1em "EduKai"', '中国大陆標楷字體');
-        if (!loaded) throw new Error('EduKai did not finish loading');
+            && document.fonts.check(font, '中国大陆標楷字體');
+        if (!loaded) throw new Error(`${family} did not finish loading`);
     } catch (error) {
         console.warn('Life transition font readiness check failed:', error);
         window.StellarTransit?.setDestinationStatus(

@@ -62,7 +62,6 @@
     </style>
     <script src="assets/stellar-transit.js" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
 
-    <link rel="preload" href="fonts/edukai-site-subset.woff2?v=20261028-personal" as="font" type="font/woff2" crossorigin>
     <!-- Font Awesome -->
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -80,10 +79,20 @@
         /* ========== Custom Font ========== */
         @font-face {
             font-family: 'EduKai';
-            src: url('fonts/edukai-site-subset.woff2?v=20261028-personal') format('woff2');
+            src: url('fonts/edukai-site-subset.woff2?v=20261107-trilingual') format('woff2');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
+            unicode-range: U+2E80-9FFF, U+AC00-D7AF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-323AF;
+        }
+
+        @font-face {
+            font-family: 'Site WenKai';
+            src: url('fonts/wenkai-site-subset.woff2?v=20261107-trilingual') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+            unicode-range: U+2E80-9FFF, U+AC00-D7AF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-323AF;
         }
 
         @font-face {
@@ -137,8 +146,8 @@
             --shadow: 0 1px 3px rgba(88,103,157,0.04), 0 8px 24px rgba(190,132,166,0.045);
             --shadow-hover: 0 10px 30px rgba(98,119,183,0.12);
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --font-cn: 'EduKai', 'DFKai-SB', 'KaiTi', serif;
-            --font-en: 'Newsreader', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
+            --font-cn: 'Newsreader', 'EduKai', 'Site WenKai', 'DFKai-SB', 'KaiTi', serif;
+            --font-en: 'Newsreader', 'EduKai', 'Site WenKai', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
             --font-ui: 'IBM Plex Sans', 'Aptos', 'Segoe UI', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei UI', 'Microsoft JhengHei UI', sans-serif;
             --font-mono: 'IBM Plex Mono', 'SFMono-Regular', 'Cascadia Mono', 'Consolas', monospace;
             --max-width: 1040px;
@@ -146,6 +155,11 @@
             --section-label-width: 128px;
             --section-gap: 36px;
             --nav-height: 56px;
+        }
+
+        :root:lang(zh-CN) {
+            --font-cn: 'Newsreader', 'Site WenKai', 'EduKai', 'KaiTi', serif;
+            --font-en: 'Newsreader', 'Site WenKai', 'EduKai', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
         }
 
         /* ========== Reset & Base ========== */
@@ -1715,11 +1729,13 @@ async function waitForEduKai() {
     if (!document.fonts || typeof document.fonts.load !== 'function') {
         throw new Error('Font Loading API unavailable');
     }
-    const faces = await document.fonts.load('400 1em "EduKai"', '中国大陆標楷字體');
+    const family = currentLang === 'zh-CN' ? 'Site WenKai' : 'EduKai';
+    const font = `400 1em "${family}"`;
+    const faces = await document.fonts.load(font, '中国大陆標楷字體');
     const loaded = faces.length > 0
         && faces.every(face => face.status === 'loaded')
-        && document.fonts.check('400 1em "EduKai"', '中国大陆標楷字體');
-    if (!loaded) throw new Error('EduKai did not finish loading');
+        && document.fonts.check(font, '中国大陆標楷字體');
+    if (!loaded) throw new Error(`${family} did not finish loading`);
 }
 
 const CLUSTRMAPS_SRC = 'https://clustrmaps.com/globe.js?d=fX5iFnBQqkI4YOaCh2hYxnYfi2pj9aK8Fq4We1ChmH4';

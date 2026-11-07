@@ -118,7 +118,7 @@ Footprints 使用三张同光照的高清浮雕地图：中国、东亚为 6000 
 
 ## 拾文 · 北冕座
 
-`reading` 独立收录读到的好文字，以北冕座作为入口。`life.reading.collections` 按来源保存追更状态、原文链接和文章；正文可保留段落、标题、引用、配图及图注，图片使用本站文件。内容为空时明确显示“待收录”。只更新本板块时运行 `python site_renderer.py --reading-only`。维护结构与当前来源状态见 [`../../docs/reading.md`](../../docs/reading.md)。
+`reading` 独立收录读到的好文字，以北冕座作为入口。`life.reading.collections` 按来源保存追更状态、原文链接和文章；列表显示开篇摘录，点击后进入随笔同款纸张阅读窗口，支持阅读进度和繁体竖排。31 篇文章的标题、正文与图片说明均随繁简英语言切换，独立译文文件通过原文哈希校验；28 张配图集中保存在 `images/reading/xiduomei/`，并按原文位置显示。内容为空时明确显示“待收录”。只更新本板块时运行 `python site_renderer.py --reading-only`，随后运行 `python scripts/build-edukai-subset.py` 重建教育部楷体与文楷子集。维护结构与当前来源状态见 [`../../docs/reading.md`](../../docs/reading.md)，中英文混排见 [`../../docs/typography.md`](../../docs/typography.md)。
 
 ## Friends 合照与浮动照片
 

@@ -191,13 +191,19 @@ function advanceThoughtReader(direction) {
 
 function updateThoughtReader() {
     if (!thoughtReader) return;
-    const labels = thoughtReaderLabels[state.currentLang] || thoughtReaderLabels.en;
+    let labels = thoughtReaderLabels[state.currentLang] || thoughtReaderLabels.en;
     document.querySelectorAll('[data-thought-reader]').forEach(button => {
         button.textContent = labels.read;
     });
     if (!thoughtReaderTrigger) return;
-    const item = thoughtReaderTrigger.closest('.thought-item');
+    const isReading = thoughtReaderTrigger.matches('[data-reading-reader]');
+    const item = thoughtReaderTrigger.closest(isReading ? '.reading-article' : '.thought-item');
     const moment = thoughtReaderTrigger.closest('.portal-moment');
+    if (isReading) {
+        const copy = i18n[state.currentLang] || i18n.en;
+        labels = { ...labels, mode: copy.title_reading, close: copy.reading_reader_close, language: copy.reading_reader_language };
+    }
+    thoughtReader.classList.toggle('is-reading', isReading);
     let scrollArea = thoughtReader.querySelector('.thought-reader-scroll');
     const restoreScrollFocus = document.activeElement === scrollArea;
     const changesAxis = (thoughtReader.lang === 'zh-TW') !== (state.currentLang === 'zh-TW');
@@ -219,8 +225,9 @@ function updateThoughtReader() {
     const language = thoughtReader.querySelector('.thought-reader-language');
     language.setAttribute('aria-label', labels.language);
     language.value = state.currentLang;
-    thoughtReader.querySelector('#thoughtReaderTitle').textContent = moment.querySelector('h3').textContent;
-    const dateParts = item.querySelector('.thought-date').textContent.split(/(\d+)/).map(part => {
+    thoughtReader.querySelector('#thoughtReaderTitle').textContent = isReading
+        ? item.querySelector('.reading-article-title').textContent : moment.querySelector('h3').textContent;
+    const dateParts = item.querySelector(isReading ? '.reading-article-date' : '.thought-date').textContent.split(/(\d+)/).map(part => {
         if (!/^\d+$/.test(part)) return document.createTextNode(part);
         const numeral = document.createElement('span');
         if (part.length <= 2) numeral.className = 'thought-reader-numeral';
@@ -228,12 +235,15 @@ function updateThoughtReader() {
         return numeral;
     });
     thoughtReader.querySelector('.thought-reader-date').replaceChildren(...dateParts);
-    const paragraphs = item.querySelector('.thought-text').textContent.trim().split(/\n\s*\n/).map(text => {
-        const paragraph = document.createElement('p');
-        paragraph.textContent = text;
-        return paragraph;
-    });
-    thoughtReader.querySelector('.thought-reader-body').replaceChildren(...paragraphs);
+    const content = isReading
+        ? Array.from(item.querySelector('.reading-article-content').children, element => element.cloneNode(true))
+        : item.querySelector('.thought-text').textContent.trim().split(/\n\s*\n/).map(text => {
+            const paragraph = document.createElement('p');
+            paragraph.textContent = text;
+            return paragraph;
+        });
+    thoughtReader.querySelector('.thought-reader-body').replaceChildren(...content);
+    thoughtReader.querySelectorAll('.reading-image img').forEach(image => { image.loading = 'eager'; });
     resetThoughtReaderPosition();
     if (restoreScrollFocus) scrollArea.focus({ preventScroll: true });
 }
@@ -303,7 +313,7 @@ if (thoughtReader) {
         event.stopPropagation();
         const scrollArea = thoughtReader.querySelector('.thought-reader-scroll');
         if (event.key === 'Tab') {
-            const focusable = Array.from(thoughtReader.querySelectorAll('button, select, [tabindex="0"]'))
+            const focusable = Array.from(thoughtReader.querySelectorAll('a[href], button, select, [tabindex="0"]'))
                 .filter(element => !element.disabled && element.getClientRects().length);
             const first = focusable[0];
             const last = focusable[focusable.length - 1];
@@ -489,7 +499,7 @@ document.addEventListener('click', event => {
         return;
     }
 
-    const button = event.target.closest('[data-thought-reader]');
+    const button = event.target.closest('[data-thought-reader], [data-reading-reader]');
     if (!button) return;
     openThoughtReader(button);
 });
@@ -552,6 +562,9 @@ function setLang(lang) {
     document.querySelectorAll('[data-alt-key]').forEach(image => {
         const alt = data[image.dataset.altKey];
         if (alt !== undefined) image.alt = alt;
+    });
+    document.querySelectorAll('[data-reading-language]').forEach(element => {
+        element.lang = state.currentLang;
     });
     document.querySelectorAll('[data-userbox-language]').forEach(element => {
         element.hidden = element.dataset.userboxLanguage !== state.currentLang;

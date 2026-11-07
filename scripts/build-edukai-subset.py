@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the EduKai webfont subset used by the static site.
+"""Build the EduKai and companion WenKai webfont subsets used by the static site.
 
 The page sources are scanned as text instead of parsing only visible DOM text.
 That deliberately keeps characters contained in JavaScript/i18n strings, CSS
@@ -9,6 +9,7 @@ Life page also contributes its referenced first-party CSS and JavaScript files.
 Run from anywhere:
 
     python scripts/build-edukai-subset.py
+    python scripts/build-edukai-subset.py --check
 
 Additional generated pages can be included with one or more ``--page`` options.
 Passing ``--page`` replaces the default index.html/life.html/observatory.html list.
@@ -18,9 +19,13 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import os
+import re
+import subprocess
 import sys
 import tempfile
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -39,6 +44,10 @@ except ImportError as exc:  # pragma: no cover - only reached without build deps
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_FONT = REPO_ROOT / "fonts" / "edukai-5.0.woff2"
 DEFAULT_OUTPUT = REPO_ROOT / "fonts" / "edukai-site-subset.woff2"
+WENKAI_SOURCE = REPO_ROOT / ".render-work" / "LXGWWenKai-Regular.ttf"
+WENKAI_OUTPUT = REPO_ROOT / "fonts" / "wenkai-site-subset.woff2"
+WENKAI_URL = "https://github.com/lxgw/LxgwWenKai/releases/download/v1.530/LXGWWenKai-Regular.ttf"
+WENKAI_SHA256 = "2d73eea94ad808999d90c0000c239a84a33b09d4bc6ab6c5b8bbf1eda8a7fc8b"
 DEFAULT_PAGES = (REPO_ROOT / "index.html", REPO_ROOT / "life.html", REPO_ROOT / "observatory.html")
 
 LIFE_PAGE = REPO_ROOT / 'life.html'
@@ -50,6 +59,19 @@ LIFE_SOURCE_ROOTS = (
 
 # Space is needed even if a future page happens to contain no literal spaces.
 ALWAYS_KEEP = {0x20}
+
+
+def text_codepoints(text: str) -> set[int]:
+    decoded = unescape(text)
+    decoded = re.sub(r"\\u([0-9a-fA-F]{4})", lambda match: chr(int(match[1], 16)), decoded)
+    return {ord(char) for char in decoded if char not in "\r\n\t"}
+
+
+def is_cjk(codepoint: int) -> bool:
+    return any(start <= codepoint <= end for start, end in (
+        (0x2E80, 0x9FFF), (0xAC00, 0xD7AF), (0xF900, 0xFAFF),
+        (0xFE10, 0xFE1F), (0xFE30, 0xFE4F), (0xFF00, 0xFFEF), (0x20000, 0x323AF),
+    ))
 
 
 def resolve_path(value: str) -> Path:
@@ -145,7 +167,7 @@ def collect_codepoints(pages: list[Path]) -> set[int]:
         # CR/LF/TAB control layout but do not need font glyphs. Other Unicode
         # format and combining characters are retained when the font supports
         # them (for example variation selectors).
-        codepoints.update(ord(char) for char in text if char not in "\r\n\t")
+        codepoints.update(text_codepoints(text))
         for source in referenced_life_sources(page, text):
             if source in scanned_life_sources:
                 continue
@@ -160,9 +182,19 @@ def collect_codepoints(pages: list[Path]) -> set[int]:
                 raise SystemExit(
                     f'Referenced Life source is not valid UTF-8: {source}'
                 ) from exc
-            codepoints.update(
-                ord(char) for char in source_text if char not in '\r\n\t'
-            )
+            codepoints.update(text_codepoints(source_text))
+    if any(page.resolve() in {path.resolve() for path in DEFAULT_PAGES} for page in pages):
+        content = json.loads((REPO_ROOT / 'site_content.json').read_text(encoding='utf-8'))
+        codepoints.update(text_codepoints(json.dumps(content, ensure_ascii=False)))
+        for collection in content.get('life', {}).get('reading', {}).get('collections', []):
+            for field in ('articles_file', 'translations_file'):
+                if not collection.get(field):
+                    continue
+                source = (REPO_ROOT / collection[field]).resolve()
+                if not source.is_relative_to(REPO_ROOT.resolve()) or source.suffix != '.json':
+                    raise SystemExit(f'Invalid reading font source: {source}')
+                data = json.loads(source.read_text(encoding='utf-8'))
+                codepoints.update(text_codepoints(json.dumps(data, ensure_ascii=False)))
     return codepoints
 
 
@@ -189,6 +221,8 @@ def build_subset(
     output_font: Path,
     pages: list[Path],
     brotli_quality: int,
+    cjk_only: bool = False,
+    family_name: str | None = None,
 ) -> None:
     if not input_font.is_file():
         raise SystemExit(f"Source font does not exist: {input_font}")
@@ -196,10 +230,17 @@ def build_subset(
         raise SystemExit("Refusing to overwrite the source font; choose another --output.")
 
     requested = collect_codepoints(pages)
+    if cjk_only:
+        requested = {codepoint for codepoint in requested if is_cjk(codepoint)}
     source_size = input_font.stat().st_size
 
     print("Collecting source glyphs...", flush=True)
     source = TTFont(input_font, recalcTimestamp=False, lazy=False)
+    if family_name:
+        names = {1: family_name, 2: "Regular", 3: family_name + " Regular 1.530", 4: family_name + " Regular", 6: family_name.replace(" ", "") + "-Regular", 16: family_name, 17: "Regular"}
+        for record in source["name"].names:
+            if record.nameID in names:
+                record.string = names[record.nameID].encode(record.getEncoding())
     source_cmap = set((source.getBestCmap() or {}).keys())
     supported = requested & source_cmap
     missing = requested - source_cmap
@@ -283,7 +324,7 @@ def build_subset(
 
     output_size = output_font.stat().st_size
     reduction = 100 * (1 - output_size / source_size)
-    print("EduKai subset built successfully")
+    print(f"{output_font.name} built successfully")
     print("Pages:")
     for page in pages:
         try:
@@ -306,6 +347,9 @@ def build_subset(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Generate a WOFF2 EduKai subset from current static page sources."
+    )
+    parser.add_argument(
+        "--check", action="store_true", help="Check that the published subsets cover every current CJK character."
     )
     parser.add_argument(
         "--font",
@@ -344,13 +388,37 @@ def main() -> int:
         if args.pages
         else list(DEFAULT_PAGES)
     )
+    if args.check:
+        validate_coverage(pages)
+        return 0
     build_subset(
         resolve_path(args.font),
         resolve_path(args.output),
         pages,
         args.brotli_quality,
     )
+    if resolve_path(args.font) == DEFAULT_FONT and resolve_path(args.output) == DEFAULT_OUTPUT:
+        WENKAI_SOURCE.parent.mkdir(parents=True, exist_ok=True)
+        if not WENKAI_SOURCE.is_file():
+            subprocess.run(["curl.exe" if os.name == "nt" else "curl", "--fail", "--location", "--retry", "2", "--output", str(WENKAI_SOURCE), WENKAI_URL], check=True)
+        if sha256(WENKAI_SOURCE) != WENKAI_SHA256:
+            raise SystemExit("WenKai source checksum mismatch; remove the cached download and retry.")
+        build_subset(WENKAI_SOURCE, WENKAI_OUTPUT, pages, args.brotli_quality, cjk_only=True, family_name="Site WenKai")
+        validate_coverage(pages)
     return 0
+
+
+def validate_coverage(pages: list[Path]) -> None:
+    requested = {codepoint for codepoint in collect_codepoints(pages) if is_cjk(codepoint)}
+    coverage = set()
+    for path in (DEFAULT_OUTPUT, WENKAI_OUTPUT):
+        with TTFont(path) as font:
+            coverage.update(font.getBestCmap())
+    missing = requested - coverage
+    if missing:
+        preview = " ".join(f"{chr(value)} (U+{value:04X})" for value in sorted(missing))
+        raise SystemExit(f"Missing {len(missing)} CJK characters: {preview}")
+    print(f"CJK coverage passed: {len(requested):,} unique characters; no missing glyphs.")
 
 
 if __name__ == "__main__":

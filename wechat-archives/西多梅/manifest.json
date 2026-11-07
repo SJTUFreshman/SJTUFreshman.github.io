@@ -14,7 +14,11 @@
   "initial_article_cost_yuan": 0.16,
   "with_metrics": false,
   "with_comments": false,
-  "download_images": false,
+  "download_images": true,
+  "image_collection_status": "success",
+  "image_count": 28,
+  "image_cost_yuan": 0,
+  "images_collected_on": "2026-11-06",
   "calls": [
     {
       "operation": "article-full",

@@ -1,9 +1,19 @@
 @font-face {
     font-family: 'EduKai';
-    src: url('../../../fonts/edukai-site-subset.woff2?v=20261030-continuous-galaxy&reading=20261105-xiduomei&thought=20261105-dream-embers-r2') format('woff2');
+    src: url('../../../fonts/edukai-site-subset.woff2?v=20261107-trilingual') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
+    unicode-range: U+2E80-9FFF, U+AC00-D7AF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-323AF;
+}
+
+@font-face {
+    font-family: 'Site WenKai';
+    src: url('../../../fonts/wenkai-site-subset.woff2?v=20261107-trilingual') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+2E80-9FFF, U+AC00-D7AF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-323AF;
 }
 
 @font-face {
@@ -50,9 +60,14 @@
     --ink-faint: #96989c;
     --rule: rgba(38,40,44,0.13);
     --ui: 'IBM Plex Sans', 'Aptos', 'Segoe UI', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei UI', 'Microsoft JhengHei UI', sans-serif;
-    --editorial: 'Newsreader', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
-    --kai: 'EduKai', 'DFKai-SB', 'KaiTi', serif;
+    --editorial: 'Newsreader', 'EduKai', 'Site WenKai', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
+    --kai: 'Newsreader', 'EduKai', 'Site WenKai', 'DFKai-SB', 'KaiTi', serif;
     --mono: 'IBM Plex Mono', 'SFMono-Regular', 'Cascadia Mono', 'Consolas', monospace;
+}
+
+:root:lang(zh-CN) {
+    --kai: 'Newsreader', 'Site WenKai', 'EduKai', 'KaiTi', serif;
+    --editorial: 'Newsreader', 'Site WenKai', 'EduKai', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
 }
 
 *, *::before, *::after {

@@ -529,6 +529,15 @@ def load_content(root: Path = ROOT) -> dict[str, Any]:
         if not isinstance(articles, list):
             raise ValueError("拾文文章文件必须包含文章数组")
         collection["articles"] = articles
+        if collection.get("translations_file"):
+            translation_path = (root / collection["translations_file"]).resolve()
+            if not translation_path.is_relative_to(root.resolve()) or translation_path.suffix != ".json":
+                raise ValueError("拾文译文文件必须是站点目录内的 JSON 文件")
+            translations = json.loads(translation_path.read_text(encoding="utf-8"))
+            if not isinstance(translations, dict) or set(translations) != {article["id"] for article in articles}:
+                raise ValueError("拾文译文必须与原文文章 ID 一一对应")
+            for article in articles:
+                article["translations"] = translations[article["id"]]
     return content
 
 
@@ -1083,6 +1092,27 @@ def validate_reading(content: dict[str, Any]) -> list[str]:
             seen.add(article_id)
             if not article.get("title") or not article.get("body"):
                 errors.append(f"拾文 {article_id} 缺少原文标题或完整正文")
+            translations = article.get("translations")
+            if "translations" in article:
+                if not isinstance(translations, dict):
+                    errors.append(f"拾文 {article_id} 的译文格式无效")
+                    continue
+                if translations.get("source_sha256") != reading_source_digest(article):
+                    errors.append(f"拾文 {article_id} 原文已改变，请同步译文")
+                translated_blocks = translations.get("body", [])
+                if not isinstance(translated_blocks, list) or len(translated_blocks) != len(article.get("body", [])):
+                    errors.append(f"拾文 {article_id} 译文与原文段落不对应")
+                    translated_blocks = []
+                fields = [("title", translations.get("title"))]
+                for index, (block, translated) in enumerate(zip(article.get("body", []), translated_blocks)):
+                    expected_fields = {key for key in ("text", "alt", "caption") if key in block}
+                    if not isinstance(translated, dict) or set(translated) != expected_fields:
+                        errors.append(f"拾文 {article_id} 第 {index + 1} 段译文仅能包含对应的文字字段")
+                        continue
+                    fields.extend((f"{index + 1}.{key}", value) for key, value in translated.items())
+                for field, value in fields:
+                    if not isinstance(value, dict) or any(not isinstance(value.get(lang), str) or not value[lang].strip() for lang in LANGS):
+                        errors.append(f"拾文 {article_id} 的 {field} 缺少完整繁简英译文")
             if article.get("published"):
                 try:
                     calendar_date.fromisoformat(article["published"])
@@ -1112,31 +1142,67 @@ def validate_reading(content: dict[str, Any]) -> list[str]:
     return errors
 
 
+def reading_source_digest(article: dict[str, Any]) -> str:
+    source = {"title": article["title"], "body": article["body"]}
+    return hashlib.sha256(json.dumps(source, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
+
+
+def localized_reading_article(article: dict[str, Any]) -> dict[str, Any]:
+    translations = article.get("translations")
+    if not translations:
+        return article
+    return {
+        **article,
+        "title": translations["title"],
+        "body": [{**block, **translated} for block, translated in zip(article["body"], translations["body"])],
+    }
+
+
 def reading_text_values(content: dict[str, Any]) -> dict[str, Any]:
     reading = content["life"].get("reading", {})
     values = {f"reading_{key}": value for key, value in reading.get("copy", {}).items()}
     for collection in reading.get("collections", []):
         values[f"reading_{collection['id']}_title"] = collection["title"]
         values[f"reading_{collection['id']}_source"] = collection.get("source_label", collection["title"])
+        for original in collection.get("articles", []):
+            article = localized_reading_article(original)
+            prefix = f"reading_{collection['id']}_{article['id']}"
+            values[f"{prefix}_title"] = article["title"]
+            excerpt = next((block.get("text", "") for block in article["body"] if block["type"] in {"text", "quote"}), "")
+            values[f"{prefix}_excerpt"] = {}
+            for lang in LANGS:
+                localized = lang_value(excerpt, lang)
+                values[f"{prefix}_excerpt"][lang] = localized[:140].rstrip() + ("…" if len(localized) > 140 else "")
+            for index, block in enumerate(article["body"]):
+                for field in ("text", "alt", "caption"):
+                    if field in block:
+                        values[f"{prefix}_{index}_{field}"] = block[field]
     return values
 
 
-def render_reading_body(blocks: list[dict[str, Any]]) -> str:
+def render_reading_body(blocks: list[dict[str, Any]], prefix: str = "") -> str:
     parts = []
-    for block in blocks:
+    for index, block in enumerate(blocks):
+        def text(field: str) -> str:
+            value = esc(lang_value(block.get(field, ""), "en"))
+            return f'<span data-key="{esc(prefix)}_{index}_{field}">{value}</span>' if prefix else value
+
         kind = block["type"]
         if kind == "link":
-            parts.append(f'<p class="reading-media-link"><a href="{esc(block["url"])}" target="_blank" rel="noopener noreferrer">{esc(block["text"])} ↗</a></p>')
+            parts.append(f'<p class="reading-media-link"><a href="{esc(block["url"])}" target="_blank" rel="noopener noreferrer">{text("text")} ↗</a></p>')
         elif kind == "image":
-            caption = esc(block.get("caption", ""))
+            caption = text("caption") if block.get("caption") else ""
             image = esc(block["src"])
+            alt_field = "alt" if block.get("alt") else "caption"
+            alt_key = f' data-alt-key="{esc(prefix)}_{index}_{alt_field}"' if prefix and block.get(alt_field) else ""
+            alt = esc(lang_value(block.get(alt_field, ""), "en"))
+            caption_markup = f'\n                <figcaption>{caption}</figcaption>' if caption else ""
             parts.append(f'''<figure class="reading-image">
-                <a href="{image}" target="_blank" rel="noopener noreferrer"><img src="{image}" alt="{esc(block.get('alt') or block.get('caption', ''))}" width="{int(block['width'])}" height="{int(block['height'])}" loading="lazy" decoding="async"></a>
-                {f'<figcaption>{caption}</figcaption>' if caption else ''}
+                <a href="{image}" target="_blank" rel="noopener noreferrer"><img src="{image}" alt="{alt}"{alt_key} width="{int(block['width'])}" height="{int(block['height'])}" loading="lazy" decoding="async"></a>{caption_markup}
             </figure>''')
         else:
             tag = {"text": "p", "heading": "h4", "quote": "blockquote"}[kind]
-            parts.append(f"<{tag}>{esc(block.get('text', ''))}</{tag}>")
+            parts.append(f"<{tag}>{text('text')}</{tag}>")
     return "\n".join(parts)
 
 
@@ -1155,15 +1221,22 @@ def render_reading(content: dict[str, Any]) -> str:
         source_label = text(f"reading_{collection['id']}_source")
         source = f'<a href="{esc(collection["source_url"])}" target="_blank" rel="noopener noreferrer">{source_label}</a>'
         articles = []
-        for article in collection.get("articles", []):
+        for original in collection.get("articles", []):
+            article = localized_reading_article(original)
+            prefix = f"reading_{collection['id']}_{article['id']}"
+            language = 'lang="en" data-reading-language' if article.get("translations") else f'lang="{esc(article.get("language", "zh-CN"))}"'
             published = article.get("published", "")
             date_markup = f'<time datetime="{esc(published)}">{esc(published)}</time>' if published else ""
-            articles.append(f'''<details class="reading-article" id="{esc(collection_id)}-{esc(article['id'])}">
-                <summary><span class="reading-article-title">{esc(article['title'])}</span><span class="reading-open">{date_markup} <span>{text('reading_read')} <span aria-hidden="true">↗</span></span></span></summary>
-                <div class="reading-article-meta">{esc(article.get('author', ''))}<span>{text('reading_source')} · {source}</span></div>
-                <div class="reading-body" lang="{esc(article.get('language', 'zh-CN'))}">{render_reading_body(article['body'])}</div>
-                <footer class="reading-credit"><p>{text('reading_source')} · {source}</p><a href="{esc(article['source_url'])}" target="_blank" rel="noopener noreferrer">{text('reading_original')} ↗</a><p>{text('reading_credit')}</p></footer>
-            </details>''')
+            articles.append(f'''<article class="reading-article" id="{esc(collection_id)}-{esc(article['id'])}">
+                <h4><button class="reading-article-trigger" type="button" data-reading-reader aria-haspopup="dialog" aria-controls="thoughtReader"><span class="reading-article-title">{text(f'{prefix}_title')}</span><span class="reading-open">{text('reading_read')} <span aria-hidden="true">↗</span></span></button></h4>
+                <p class="reading-article-date">{date_markup}</p>
+                <p class="reading-excerpt" {language}>{text(f'{prefix}_excerpt')}</p>
+                <div class="reading-article-content" hidden>
+                    <div class="reading-article-meta">{esc(article.get('author', ''))}<span>{text('reading_source')} · {source}</span></div>
+                    <div class="reading-body" {language}>{render_reading_body(article['body'], prefix)}</div>
+                    <footer class="reading-credit"><p>{text('reading_source')} · {source}</p><a href="{esc(article['source_url'])}" target="_blank" rel="noopener noreferrer">{text('reading_original')} ↗</a><p>{text('reading_credit')}</p></footer>
+                </div>
+            </article>''')
         pending = f'''<div class="reading-pending"><h4>{text('reading_pending')}</h4><p>{text('reading_pending_body')}</p></div>''' if not articles else ""
         dates = sorted(article["published"] for article in collection.get("articles", []) if article.get("published"))
         date_range = f' · {esc(dates[0])} — {esc(dates[-1])}' if dates else ""
