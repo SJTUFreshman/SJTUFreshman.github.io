@@ -145,6 +145,33 @@ def validate_sectional_colours(atlas, builder):
             assert region["color"] == expected, (identifier, region["id"], "sectional pigment differs")
 
 
+def validate_cultural_policy(config):
+    owners = {str(member): group['id'] for group in config['groups'] for member in group['members']}
+    assert len(owners) == sum(len(group['members']) for group in config['groups']), "Cultural assignments must not overlap"
+    assert config.get('policy', {}).get('priority'), "Cultural grouping must state its criteria"
+    for group in config['groups']:
+        assert group.get('basis'), (group['id'], "missing cultural rationale")
+        assert not group['label']['zh-CN'].endswith('文化区'), (group['id'], "use the established short name")
+    shared_groups = {
+        'northeast': ['230100', '220100', '210100', '150500', '150700'],
+        'bohai': ['210200', '370600', '371600'],
+        'nanjing_anhui': ['320100', '321100', '340100', '341100'],
+        'wuyue': ['310000', '320500', '330100', '330200', '330300'],
+        'wuling': ['422800', '430800', '433100', '520600'],
+        'qinba': ['610700', '420300', '621200'],
+        'tibet': ['540100', '513200', '513300', '623000', '632200'],
+        'hakka': ['360700', '350800', '441300', '441400'],
+        'qinlian': ['450500', '450600', '450700'],
+    }
+    for name, members in shared_groups.items():
+        assert len({owners[member] for member in members}) == 1, (name, "cross-province cultural connection lost")
+    for first, second in [('341000', '340200'), ('350300', '350400'), ('441500', '441400'), ('450700', '450100')]:
+        assert owners[first] != owners[second], (first, second, "distinct cultural regions were conflated")
+    names = {group['id']: group['label']['zh-CN'] for group in config['groups']}
+    assert names[owners['230100']] == '满洲' and names[owners['540100']] == '西藏'
+    return {'groups': len(config['groups']), 'members': len(owners), 'cross_region_checks': len(shared_groups)}
+
+
 def validate_china_cultural(atlas):
     cultural = atlas["maps"]["china"].get("cultural")
     if not cultural:
@@ -153,7 +180,10 @@ def validate_china_cultural(atlas):
     cultural_builder = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(cultural_builder)
     regions = cultural.get("regions", [])
-    configured = {region["id"]: region for region in read_json(ROOT / "tools/relief-atlas/china-cultural-regions.json")["groups"]}
+    config = read_json(ROOT / "tools/relief-atlas/china-cultural-regions.json")
+    validate_cultural_policy(config)
+    assert cultural.get('classification_version') == config.get('version'), "Published cultural revision differs from its rules"
+    configured = {region["id"]: region for region in config["groups"]}
     assert {region["id"] for region in regions} == set(configured), "Cultural groups differ from the editable configuration"
     china = atlas["maps"]["china"]
     detail = {str(region["id"]): region for region in china["regions"]}

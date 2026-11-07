@@ -1,0 +1,7 @@
+numpy==2.3.1
+Pillow==11.3.0
+requests==2.32.4
+shapely==2.1.1
+pyproj==3.7.1
+rasterio==1.5.1
+geopandas==1.1.1

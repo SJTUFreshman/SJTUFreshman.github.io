@@ -122,6 +122,7 @@ def verify_inputs(archive, published):
                         f"{identifier}/{region['id']}: province pigment differs from selected palette")
     if (archive / "cultural/data/china.json").exists():
         verified["cultural"] = verify_render(archive / "cultural", "china", ("colour",), style)
+        verify_cultural_config(verified["cultural"][0])
     return style, verified
 
 
@@ -265,6 +266,45 @@ def stage_activation(archive, style, destination):
     ]
 
 
+def verify_cultural_config(metadata):
+    config = read_json(ROOT / "tools/relief-atlas/china-cultural-regions.json")
+    require(metadata.get("classification_version") == config.get("version"),
+            "Cultural classification version differs from the configuration; prepare and render the current grouping")
+    configured = {group["id"]: group for group in config["groups"]}
+    require({group["id"] for group in metadata["regions"]} == set(configured), "Cultural region IDs differ from the configuration")
+    for group in metadata["regions"]:
+        expected = configured[group["id"]]
+        require(set(group["members"]) == set(expected["members"]) and group["label"] == expected["label"],
+                f"{group['id']}: culture memberships or names differ from the rendered input")
+
+
+def verify_cultural(archive, published):
+    style = read_json(archive / "style.json")
+    metadata, report = verify_render(archive / "cultural", "china", ("colour",), style)
+    for key in GEOMETRY_KEYS:
+        require(metadata[key] == published["maps"]["china"][key], f"china: cultural {key} changed")
+    verify_cultural_config(metadata)
+    return style, report
+
+
+def stage_cultural(archive, published, output, destination):
+    shutil.copytree(output, destination, dirs_exist_ok=True)
+    spec = importlib.util.spec_from_file_location("china_cultural", ROOT / "scripts/build-china-cultural-overview.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    atlas = deepcopy(published)
+    atlas["maps"]["china"]["cultural"] = module.package_layer(archive, destination, atlas)
+    write_json(destination / "atlas.json", atlas)
+    write_runtime(atlas, destination)
+    activation = destination / "activation"
+    activation.mkdir()
+    style = read_json(ROOT / "tools/relief-atlas/footprints-style.json")
+    style["cultural_archive"] = archive_name(archive / "cultural")
+    style_path = activation / "footprints-style.json"
+    write_json(style_path, style)
+    return [(style_path, ROOT / "tools/relief-atlas/footprints-style.json")]
+
+
 def publish(staged, output, activation=()):
     backup = staged / "backup"
     backup.mkdir()
@@ -295,10 +335,23 @@ def main():
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--stage", type=Path, help="Encode into a separate new directory for review")
     parser.add_argument("--publish", action="store_true", help="Publish only after every native render and scene is verified")
+    parser.add_argument("--cultural-only", action="store_true", help="Replace only China's cultural layer over the current native base maps")
     arguments = parser.parse_args()
     try:
         require(not (arguments.stage and arguments.publish), "Choose --stage or --publish")
         published = read_json(arguments.output / "atlas.json")
+        if arguments.cultural_only:
+            verify_cultural(arguments.archive, published)
+            if arguments.stage:
+                require(not arguments.stage.exists(), f"Stage directory already exists: {arguments.stage}")
+                stage_cultural(arguments.archive, published, arguments.output, arguments.stage)
+            elif arguments.publish:
+                with tempfile.TemporaryDirectory(prefix=".cultural-stage-", dir=arguments.output.parent) as temporary:
+                    staged = Path(temporary)
+                    activation = stage_cultural(arguments.archive, published, arguments.output, staged)
+                    publish(staged, arguments.output, activation)
+            print(json.dumps({"verified": True, "published": arguments.publish, "maps": ["china"], "layer": "cultural"}))
+            return
         style, verified = verify_inputs(arguments.archive, published)
         if arguments.stage:
             require(not arguments.stage.exists(), f"Stage directory already exists: {arguments.stage}")

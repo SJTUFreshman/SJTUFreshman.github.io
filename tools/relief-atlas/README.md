@@ -38,7 +38,7 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 
 ## 三张网站地图
 
-当前生产工程为 [`footprints/selected-cultural-20261106/`](footprints/selected-cultural-20261106/README.md)：`detail/` 保存三张主图与新加坡、夏威夷两个小窗；`overview/` 保存东亚文化区与欧美国家的彩色层；`cultural/` 保存中国跨省文化区。`footprints-style.json` 的 `render_archive`、`overview_archive`、`cultural_archive` 分别选择这三层。前一版分区配色工程保留在 `footprints/sectional-20261105/`。
+当前三张主图、小窗与海外概览工程为 [`footprints/selected-cultural-20261106/`](footprints/selected-cultural-20261106/README.md)。中国文化区使用独立重划工程 [`footprints/culture-regions-20261107/`](footprints/culture-regions-20261107/README.md)，完整覆盖 370 个单元、共 47 区。`footprints-style.json` 的 `render_archive`、`overview_archive`、`cultural_archive` 分别选择这三层。前一版分区配色工程保留在 `footprints/sectional-20261105/`。
 
 下表记录历史生产目录 `footprints/material-white-20261012/`。原版也完整保存在 `footprints/data/`、`footprints/scenes/`、`footprints/renders/`。
 
@@ -66,7 +66,7 @@ python scripts/archive-relief-projects.py restore tools/relief-atlas/full-archiv
 
 未到访区域分别使用中国 `#f4f1e9`、东亚与小窗 `#f1f3ee`、欧美 `#f7f3ea` 漫反射材质并保留真实地形阴影。32° 西北日光与原四图一致。铁路与公路按真实路网生成投影缓冲多边形，分别显示为约 30 km、26 km 宽的地形走廊。这是为了区域地图可读性所作的宽度夸张，不是交通设施实际宽度，也不会把沿线整座城市标为到访。
 
-中国文化区由 `china-cultural-regions.json` 配置，以现有地级市真实边界跨省组合，采用燕赵、三晋、满洲、西藏、巴蜀等约定俗成的历史地名。页面可在省份、文化区、城市路线三种粒度之间切换；文化区之间保留细线边界，悬停或聚焦时突出该区外轮廓。同一文化区内的省市边界不显示，也不显示成员计数。`boundary_path` 单独合并轮廓、去掉内部细缝，原有到访裁切和烤制图片不变。这是地级尺度的可调整展示分组，不是精确方言边界。修改分组后运行 `scripts/build-china-cultural-overview.py --prepare`，仅重烤文化区层。
+中国文化区由 `china-cultural-regions.json` 配置，先综合方言、迁徙历史、民俗和地域认同决定归属，再采用满洲、西藏、吴越、晋绥、关陇等通行名称。每组的 `basis` 记录具体依据，`policy` 记录近似方式。页面可在省份、文化区、城市路线三种粒度之间切换；文化区之间保留细线边界，悬停或聚焦时突出该区外轮廓。同一文化区内的省市边界不显示，也不显示成员计数。`boundary_path` 合并轮廓、去掉内部细缝。这是地级尺度的可调整展示分组，不是精确方言边界；混合地区的细分限制见配置和新工程说明。重划只重烤文化彩色层，原 DEM、实际到访和其他地图保持不变。
 
 白色底图和彩色底图由相同网格、相机和光照渲染。浏览器通过到访城市与走廊的联合裁切显露彩色地形，所以山脊、坡面和阴影都会延续到沿线；没有额外叠加彩色描边。省界处的色彩直接来自地形材质。城市边线和名称仅在已到访城市悬停、聚焦或点击时出现。
 

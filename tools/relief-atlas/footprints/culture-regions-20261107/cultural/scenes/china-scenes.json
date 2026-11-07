@@ -1,0 +1,19 @@
+{
+  "colour": {
+    "file": "china-colour.blend",
+    "sha256": "585a65a738aabd87baf50f8d5488d19ea986eae84717c62ea179de7e624952c6",
+    "bytes": 69691247,
+    "vertices": 2156343,
+    "resolution": [
+      6000,
+      5024
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false,
+    "white_material_verified": false,
+    "postprocessing": "none",
+    "sea_material": "#e4edf0"
+  }
+}

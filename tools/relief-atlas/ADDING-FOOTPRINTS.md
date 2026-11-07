@@ -38,11 +38,24 @@ python scripts/validate-footprint-atlas.py
 
 打包也会自动更新静态小图：`atlas-preview.json` 是轻量索引，`*-card-*.webp` 是 960 像素预览，`*-runtime.json` 按地图保存完整几何。小图支持视图切换，不支持缩放；点击「查看大图」才下载该图的完整几何和高清图片，期间显示预览与加载动画。只调整小图生成方式时，运行 `python scripts/build-footprint-previews.py` 即可，无需重新烤制。不要只更新完整 atlas 而遗漏这些预览文件。
 
-中国地图新增「文化区」视图，与「省份」「城市与路线」并列。分区综合文化和方言，以现有地级市边界近似组合，并允许跨省。修改 `china-cultural-regions.json` 后运行 `python scripts/build-china-cultural-overview.py --prepare`；为新的 `cultural/` 图层烤制彩色 PNG，再经 `scripts/package-footprint-sectional.py --publish` 核验发布。新增到访城市不需要重新烤制。各图使用独立色系，因此相同省份在中国图和东亚图可以有不同颜料。
+中国地图的「文化区」视图与「省份」「城市与路线」并列。分区综合文化和方言，以现有地级市边界近似组合，并允许跨省。当前文化彩色层为 `footprints/culture-regions-20261107/cultural/`，主图和海外概览继续使用 `selected-cultural-20261106/`。新增到访城市不需要重新烤制。各图使用独立色系，因此相同省份在中国图和东亚图可以有不同颜料。
 
-首版共 50 个文化区，覆盖 367 个城市级单元及港澳台 3 个省级补充单元，每个单元恰好归属一区。名称采用已有历史或地理称谓，例如满洲、西藏、胶辽、江淮、淮海、客家、巴蜀、关中、河西等；南京与合肥、滁州等归江淮，徐州、宿迁、连云港与枣庄、临沂、济宁等归淮海，赤峰、通辽、兴安盟与东北大部归满洲，大连与胶东、鲁北归胶辽，甘孜、阿坝与西藏及青海部分地区归西藏，赣南、闽西、粤东客家跨省归客家。这是综合文化、方言与旅行认知的展示分区，不是精确的语言学区划，混合方言城市仍以整个地级单元近似。
+当前共 47 个分区，覆盖 367 个城市级单元及港澳台 3 个省级补充单元，每个单元恰好归属一区。先按文化联系组合，再取通行短名，不添加「文化区」后缀。南京、镇江与皖中部分地区归江淮；上海、苏锡常与浙江归吴越；蒙东与东北大部归满洲；大连与胶东、鲁北保留胶辽联系；晋绥体现山西与内蒙古中西部的走西口联系；西藏连接甘孜、阿坝及青海部分地区。徽州与皖江、莆仙与闽中、海陆丰与客家、钦廉与壮乡分别处理。各组 `basis` 明确选择依据及混合地区的近似，完整改动见 [重划工程说明](footprints/culture-regions-20261107/README.md)。这是文化联系的编辑性展示，不是精确语言学或民族分布图。
 
-配置中编辑 `groups[].members` 的行政代码和 `label` 名称；生成器会从真实边界重新推导名称、几何、到访与相邻色。普通 `--prepare` 读取并保留此配置，`--write-defaults` 仅用于明确重置为脚本内首版规则。
+配置中编辑 `groups[].members` 的行政代码、`label` 名称及 `basis` 依据，并更新 `version`；生成器会从真实边界重新推导名称、几何、到访与相邻色。普通 `--prepare` 读取并保留此配置，`--write-defaults` 仅用于明确重置为脚本内规则。每次重划使用新的归档目录，避免覆盖历史原生工程：
+
+```powershell
+python scripts/build-china-cultural-overview.py --prepare --archive NEW_ARCHIVE --source-archive tools/relief-atlas/footprints/selected-cultural-20261106
+```
+
+将新目录的 `cultural/data/`、渲染脚本和配色输入上传至独立服务器目录，用 `render-footprint-sectional.slurm cultural` 烤制并保存工程。下载该层的 `renders/`、`scenes/` 和日志后，单独核验发布：
+
+```powershell
+python scripts/package-footprint-sectional.py --archive NEW_ARCHIVE --cultural-only --publish
+python scripts/validate-footprint-overviews.py
+```
+
+此入口只替换中国文化层并刷新静态小图；不会重烤或替换其余图层。旧整套工程的发布会因文化版本不一致而被拒绝，防止回退已重划的分区。
 
 城市点亮表示实际到访。经过一座城市只想显示旅程时，将它放进路线途经点即可，不要因此把它加入到访名单。
 
