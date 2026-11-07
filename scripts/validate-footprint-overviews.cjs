@@ -23,6 +23,7 @@ const labels = {
 let pageUrl = new URL('life.html', process.argv[2] === '--serve' ? 'http://127.0.0.1/' : process.argv[2] || 'http://127.0.0.1:8765/').href;
 let server;
 let checks = 0;
+let previews;
 
 function check(condition, message) {
     assert(condition, message);
@@ -71,8 +72,8 @@ async function waitForMap(box, fullResolution = false) {
 async function viewState(box, mode) {
     return box.evaluate((element, expected) => ({
         mode: element.dataset.mapView,
-        shown: getComputedStyle(element.querySelector(`[data-atlas-view="${expected}"]`)).display !== 'none',
-        hidden: getComputedStyle(element.querySelector(`[data-atlas-view="${expected === 'overview' ? 'detail' : 'overview'}"]`)).display === 'none',
+        shown: element.classList.contains('is-map-preview') || getComputedStyle(element.querySelector(`[data-atlas-view="${expected}"]`)).display !== 'none',
+        hidden: element.classList.contains('is-map-preview') || getComputedStyle(element.querySelector(`[data-atlas-view="${expected === 'overview' ? 'detail' : 'overview'}"]`)).display === 'none',
         terrain: element.querySelector('.footprints-map-terrain').src
     }), mode);
 }
@@ -103,6 +104,11 @@ async function selectView(control, mode) {
 
 async function culturalChecks(box, metadata, label) {
     if (!metadata.cultural) return;
+    if (await box.evaluate(element => element.classList.contains('is-map-preview'))) {
+        check((await box.locator('.footprints-map-terrain').getAttribute('src')).includes('-card-cultural.webp'),
+            `${label}: the cultural card loads its composed preview`);
+        return;
+    }
     await box.evaluate(element => element.querySelector('[data-cultural-id]')?.classList.add('is-active'));
     const actual = await box.evaluate(element => ({
         clips: [...element.querySelectorAll('[data-clip-cultural]')].map(node => node.dataset.clipCultural).sort(),
@@ -135,6 +141,20 @@ async function culturalChecks(box, metadata, label) {
 }
 
 async function geometryChecks(box, metadata, label, fullResolution = false) {
+    if (!fullResolution) {
+        const actual = await box.evaluate(element => ({
+            id: element.id, source: element.querySelector('.footprints-map-terrain').src,
+            width: element.querySelector('.footprints-map-terrain').naturalWidth,
+            height: element.querySelector('.footprints-map-terrain').naturalHeight,
+            mode: element.dataset.mapView, svg: element.querySelectorAll('svg').length
+        }));
+        const definition = maps.find(item => actual.id === `${item.id}Map`);
+        const expected = previews.maps[definition.key].views[actual.mode];
+        check(new URL(actual.source).pathname.endsWith('/' + expected.image) && actual.width === expected.width
+            && actual.height === expected.height && actual.width <= 960 && !actual.svg,
+            `${label}: static card uses only a lightweight composed preview`);
+        return;
+    }
     const actual = await box.evaluate(element => ({
         provinces: [...element.querySelectorAll('[data-clip-region]')].map(node => node.dataset.clipRegion).sort(),
         cities: [...element.querySelectorAll('[data-clip-city]')].map(node => node.dataset.clipCity).sort(),
@@ -157,6 +177,12 @@ async function geometryChecks(box, metadata, label, fullResolution = false) {
 async function insetChecks(page, box, metadata, label, fullResolution = false) {
     const insets = Array.isArray(metadata.insets) ? metadata.insets : [];
     if (!insets.length) return;
+    if (!fullResolution) {
+        const titles = await box.locator('.footprints-preview-inset-title').allTextContents();
+        check(titles.length === insets.length && insets.every(inset => Object.values(inset.title).some(title => titles.includes(title))),
+            `${label}: preview keeps both inset titles in the selected language`);
+        return;
+    }
     await page.waitForFunction(({ id, count, full }) => {
         const element = document.getElementById(id);
         const groups = [...element.querySelectorAll('.footprints-map-inset')];
@@ -209,6 +235,20 @@ async function insetChecks(page, box, metadata, label, fullResolution = false) {
 
 async function capChecks(page, box, maximum, label) {
     const viewport = box.locator('.footprints-map-viewport');
+    if (await box.evaluate(element => element.classList.contains('is-map-preview'))) {
+        const unchanged = await viewport.evaluate(element => {
+            const stage = element.querySelector('.footprints-map-stage');
+            const before = stage.getAttribute('style');
+            const wheel = new WheelEvent('wheel', { deltaY: -5000, ctrlKey: true, bubbles: true, cancelable: true });
+            element.dispatchEvent(wheel);
+            element.dispatchEvent(new MouseEvent('dblclick', { bubbles: true, cancelable: true }));
+            element.dispatchEvent(new KeyboardEvent('keydown', { key: '+', bubbles: true, cancelable: true }));
+            return !wheel.defaultPrevented && before === stage.getAttribute('style');
+        });
+        check(unchanged && await box.locator('.footprints-map-controls').count() === 0,
+            `${label}: cards have no zoom controls and do not intercept scrolling or zoom gestures`);
+        return;
+    }
     const readout = box.locator('.footprints-map-zoom');
     await box.locator('[data-map-action="maximum"]').click();
     for (let index = 0; index < 4; index++) {
@@ -226,6 +266,8 @@ async function deviceChecks(browser, name, options, atlas, insetsOnly = false) {
     const selectedMaps = insetsOnly ? maps.filter(definition => atlas.maps[definition.key].insets?.length) : maps;
     try {
         const page = await context.newPage();
+        const requested = [];
+        page.on('request', request => { if (request.url().includes('/maps/relief/')) requested.push(request.url()); });
         page.on('pageerror', error => errors.push(error.message));
         page.on('response', response => {
             const url = new URL(response.url());
@@ -249,6 +291,7 @@ async function deviceChecks(browser, name, options, atlas, insetsOnly = false) {
             await geometryChecks(box, atlas.maps[definition.key], `${name} ${definition.id}`);
             await insetChecks(page, box, atlas.maps[definition.key], `${name} ${definition.id}`);
         }
+        check(requested.every(url => /atlas-preview\.json|\-card\-/.test(url)), `${name}: entering footprints downloads no detailed geometry or full-size terrain`);
         // Language switching uses the actual site controls, including while the
         // footprints panel is open, so both the labels and retained mode matter.
         for (const language of insetsOnly ? ['en'] : ['en', 'zh-CN', 'zh-TW']) {
@@ -271,7 +314,6 @@ async function deviceChecks(browser, name, options, atlas, insetsOnly = false) {
                     await controlState(toggle, 'overview', { overview: expected.overview, cultural: expected.cultural, detail: expected.detail }, `${prefix} selector`);
                 }
                 await capChecks(page, box, definition.cap, `${prefix} overview`);
-                await box.locator('.footprints-map-viewport').press('ArrowRight');
                 const before = await box.locator('.footprints-map-stage').getAttribute('style');
                 await selectView(toggle, cultural ? 'cultural' : 'detail');
                 await waitForMap(box);
@@ -289,31 +331,143 @@ async function deviceChecks(browser, name, options, atlas, insetsOnly = false) {
                 await capChecks(page, box, definition.cap, `${prefix} detail`);
                 await card.locator('.footprints-map-open').click();
                 const viewer = page.locator('.footprints-map-viewer[open]');
+                const largeBox = viewer.locator('.footprints-map-box');
                 const modalToggle = viewer.locator(cultural ? '[data-map-action="select-view"]' : '[data-map-action="toggle-view"]');
-                await waitForMap(box, true);
-                await geometryChecks(box, atlas.maps[definition.key], `${prefix} large`, true);
+                await waitForMap(largeBox, true);
+                await geometryChecks(largeBox, atlas.maps[definition.key], `${prefix} large`, true);
                 check(await viewer.locator('[data-atlas-title]').textContent() === title
                     && (cultural ? await modalToggle.inputValue() === 'detail' : await modalToggle.textContent() === overviewLabel
                         && await modalToggle.getAttribute('aria-pressed') === 'true'), `${prefix}: the large map inherits detailed mode`);
-                await capChecks(page, box, definition.cap, `${prefix} large detail`);
+                await capChecks(page, largeBox, definition.cap, `${prefix} large detail`);
+                if (cultural) {
+                    await selectView(modalToggle, 'cultural');
+                    await waitForMap(largeBox, true);
+                    await culturalChecks(largeBox, metadata, `${prefix} large cultural`);
+                }
                 await selectView(modalToggle, 'overview');
-                await waitForMap(box, true);
-                const overview = await viewState(box, 'overview');
+                await waitForMap(largeBox, true);
+                const overview = await viewState(largeBox, 'overview');
                 check(overview.mode === 'overview' && overview.shown && overview.hidden
-                    && (cultural ? await toggle.inputValue() === 'overview' && await modalToggle.inputValue() === 'overview'
-                        : await toggle.getAttribute('aria-pressed') === 'false' && await modalToggle.getAttribute('aria-pressed') === 'false'), `${prefix}: the large-map switch synchronizes both buttons`);
-                await capChecks(page, box, definition.cap, `${prefix} large overview`);
-                await box.locator('[data-map-action="reset"]').click();
-                await insetChecks(page, box, atlas.maps[definition.key], `${prefix} large`, true);
+                    && (cultural ? await modalToggle.inputValue() === 'overview' : await modalToggle.getAttribute('aria-pressed') === 'false'), `${prefix}: the large-map switch enters overview`);
+                await capChecks(page, largeBox, definition.cap, `${prefix} large overview`);
+                await largeBox.locator('[data-map-action="reset"]').click();
+                await insetChecks(page, largeBox, atlas.maps[definition.key], `${prefix} large`, true);
                 if (language === 'zh-CN') await page.screenshot({ path: path.join(output, `${name}-${definition.id}.png`) });
                 await viewer.locator('.footprints-viewer-close').click();
                 await viewer.waitFor({ state: 'detached' });
-                check(await box.getAttribute('data-map-view') === 'overview' && await box.locator('.footprints-map-zoom').textContent() === '100%',
+                await waitForMap(box);
+                check(await box.getAttribute('data-map-view') === 'overview' && await box.getAttribute('data-map-resolution') === 'preview',
                     `${prefix}: closing the large map retains the selected overview`);
             }
         }
         check(errors.length === 0, `${name}: no script or asset-loading errors (${errors.join('; ')})`);
     } finally { await context.close(); }
+}
+
+async function loadingChecks(browser, mobile = false) {
+    const context = await browser.newContext({ viewport: { width: mobile ? 320 : 1440, height: mobile ? 844 : 960 },
+        ...(mobile ? { isMobile: true, hasTouch: true } : {}), reducedMotion: 'no-preference' });
+    const releases = {};
+    const gates = Object.fromEntries(['manifest', 'cards', 'detail', 'detailRetry', 'terrain'].map(key => [key, new Promise(resolve => { releases[key] = resolve; })]));
+    const screenshotPrefix = mobile ? 'mobile-' : '';
+    let failTerrain = true;
+    let failDetail = true;
+    try {
+        const page = await context.newPage();
+        const requested = [];
+        page.on('request', request => { if (request.url().includes('/maps/relief/')) requested.push(request.url()); });
+        await page.route('**/maps/relief/atlas-preview.json*', async route => { await gates.manifest; await route.continue(); });
+        await page.route('**/maps/relief/*-card-*.webp*', async route => { await gates.cards; await route.continue(); });
+        await page.route('**/maps/relief/china-runtime.json*', async route => {
+            if (failDetail) {
+                await gates.detail;
+                failDetail = false;
+                await route.fulfill({ status: 503, body: 'Temporary test failure' });
+            } else {
+                await gates.detailRetry;
+                await route.continue();
+            }
+        });
+        await page.route('**/maps/relief/china-relief.webp*', async route => {
+            await gates.terrain;
+            if (failTerrain) { failTerrain = false; await route.fulfill({ status: 503, body: 'Temporary test failure' }); }
+            else await route.continue();
+        });
+        await page.goto(pageUrl, { waitUntil: 'domcontentloaded' });
+        await settle(page);
+        await page.locator('#sectionDrawerToggle').click();
+        await page.locator('#sectionDrawerList [data-portal-id="footprints"]').click();
+        const card = page.locator('[data-atlas-card="china"]');
+        const box = card.locator('.footprints-map-box');
+        await box.locator('.footprints-map-status.is-loading').waitFor();
+        check(await box.getAttribute('aria-busy') === 'true' && await box.locator('.footprints-map-status').evaluate(element =>
+            getComputedStyle(element, '::before').animationName === 'footprints-map-loading'),
+            'slow connection: animated status appears before the preview manifest arrives');
+        releases.manifest();
+        await page.waitForFunction(() => document.querySelector('#chinaMap')?.classList.contains('is-map-preview'));
+        await settle(page);
+        await page.locator('.lang-btn[data-lang="zh-CN"]').click();
+        await card.scrollIntoViewIfNeeded();
+        await card.screenshot({ path: path.join(output, screenshotPrefix + 'preview-loading.png') });
+        check(await box.locator('.footprints-map-status').textContent() === '正在加载地图',
+            'slow connection: preview loading text follows the selected language');
+        const selector = card.locator('select');
+        await selector.selectOption('cultural');
+        await selector.selectOption('detail');
+        await selector.selectOption('overview');
+        releases.cards();
+        await waitForMap(box);
+        check((await box.locator('.footprints-map-terrain').getAttribute('src')).includes('-card-overview.webp'),
+            'slow connection: rapid view changes cannot replace the selected preview with a stale response');
+        await card.screenshot({ path: path.join(output, screenshotPrefix + 'static-preview.png') });
+        check(requested.every(url => /atlas-preview\.json|\-card\-/.test(url)),
+            'slow connection: previews need no detailed geometry or native image');
+        await card.locator('.footprints-map-open').click();
+        let viewer = page.locator('.footprints-map-viewer[open]');
+        let largeBox = viewer.locator('.footprints-map-box');
+        await largeBox.locator('.footprints-map-status.is-loading').waitFor();
+        check((await largeBox.locator('.footprints-map-poster').getAttribute('src')).includes('-card-overview.webp')
+            && await largeBox.locator('.footprints-map-status').textContent() === '正在加载高清地图',
+            'slow connection: large viewer keeps the preview behind its loading indicator');
+        await viewer.screenshot({ path: path.join(output, screenshotPrefix + 'large-map-loading.png') });
+        releases.detail();
+        await largeBox.locator('.footprints-map-retry').waitFor({ state: 'visible' });
+        check(await largeBox.locator('.footprints-map-retry').textContent() === '重新加载',
+            'failed detailed metadata offers a labelled retry button');
+        await largeBox.locator('.footprints-map-retry').click();
+        await largeBox.locator('.footprints-map-status.is-loading').waitFor();
+        const detailFinished = page.waitForEvent('requestfinished', request => request.url().includes('china-runtime.json'));
+        await viewer.locator('.footprints-viewer-close').click();
+        releases.detailRetry();
+        await detailFinished;
+        check(await page.locator('.footprints-map-viewer').count() === 0
+            && !requested.some(url => /\/china-(relief|colour)\.webp/.test(url)),
+            'slow connection: closing during metadata loading prevents a late viewer or terrain request');
+        await card.locator('.footprints-map-open').click();
+        viewer = page.locator('.footprints-map-viewer[open]');
+        largeBox = viewer.locator('.footprints-map-box');
+        await largeBox.locator('.footprints-map-svg').waitFor();
+        check(await largeBox.getAttribute('aria-busy') === 'true', 'slow connection: loading stays visible until native terrain arrives');
+        await page.emulateMedia({ reducedMotion: 'reduce' });
+        check(await largeBox.locator('.footprints-map-status').evaluate(element => getComputedStyle(element, '::before').animationName === 'none'),
+            'loading indicator respects reduced motion');
+        releases.terrain();
+        await largeBox.locator('.footprints-map-retry').waitFor({ state: 'visible' });
+        check(await largeBox.locator('.footprints-map-retry').textContent() === '重新加载'
+            && await largeBox.locator('.footprints-map-poster').isVisible(), 'failed native load keeps the preview and offers retry');
+        await largeBox.locator('.footprints-map-retry').click();
+        await waitForMap(largeBox, true);
+        check(await largeBox.locator('.footprints-map-poster').count() === 0
+            && !await largeBox.locator('.footprints-map-status').isVisible(), 'successful retry replaces the preview with full native quality');
+        check(!requested.some(url => /\/(east_asia|europe_usa)-runtime\.json/.test(url)), 'large maps fetch only their own detailed geometry');
+        await viewer.locator('.footprints-viewer-close').click();
+        await waitForMap(box);
+        check((await box.locator('.footprints-map-terrain').getAttribute('src')).includes('-card-overview.webp')
+            && !await box.locator('.footprints-map-controls').count(), 'closing the viewer restores the static lightweight card');
+    } finally {
+        Object.values(releases).forEach(release => release());
+        await context.close();
+    }
 }
 
 async function main() {
@@ -322,11 +476,14 @@ async function main() {
     const response = await fetch(new URL('assets/maps/relief/atlas.json', pageUrl));
     assert(response.ok, 'The atlas must be available');
     const atlas = await response.json();
+    previews = await (await fetch(new URL('assets/maps/relief/atlas-preview.json', pageUrl))).json();
     for (const definition of maps) assert(atlas.maps[definition.key].overview, `${definition.key}: missing overview data; package the atlas before running this check`);
     const browser = await chromium.launch({ headless: true,
         ...(process.env.CHROME_EXECUTABLE_PATH ? { executablePath: process.env.CHROME_EXECUTABLE_PATH } : { channel: 'chrome' }),
         args: ['--enable-unsafe-swiftshader'] });
     try {
+        await loadingChecks(browser, process.argv.includes('--mobile-loading'));
+        if (process.argv.includes('--loading-only')) return;
         await deviceChecks(browser, 'desktop', { viewport: { width: 1440, height: 960 } }, atlas);
         await deviceChecks(browser, 'mobile', { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }, atlas);
         if (maps.some(definition => atlas.maps[definition.key].insets?.length)) {

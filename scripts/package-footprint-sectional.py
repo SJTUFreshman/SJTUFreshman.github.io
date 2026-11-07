@@ -157,6 +157,15 @@ def runtime_atlas(atlas):
     return result
 
 
+def write_runtime(atlas, destination):
+    runtime = runtime_atlas(atlas)
+    write_json(destination / "atlas-runtime.json", runtime)
+    spec = importlib.util.spec_from_file_location("footprint_previews", ROOT / "scripts/build-footprint-previews.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.package(runtime, destination)
+
+
 def stage_atlas(archive, published, verified, destination):
     atlas = deepcopy(published)
     for identifier in MAPS:
@@ -226,7 +235,7 @@ def stage_atlas(archive, published, verified, destination):
         spec.loader.exec_module(module)
         atlas["maps"]["china"]["cultural"] = module.package_layer(archive, destination, atlas)
     write_json(destination / "atlas.json", atlas)
-    write_json(destination / "atlas-runtime.json", runtime_atlas(atlas))
+    write_runtime(atlas, destination)
     return atlas
 
 

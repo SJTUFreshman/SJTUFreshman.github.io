@@ -288,6 +288,29 @@ def validate_cultural_native(atlas):
     return {"dimensions": dimensions, "colour_mean_error_255": round(float(difference.mean()), 4)}
 
 
+def validate_card_previews():
+    manifest_path = RELIEF / "atlas-preview.json"
+    manifest = read_json(manifest_path)
+    runtime = read_json(RELIEF / "atlas-runtime.json")
+    assert manifest_path.stat().st_size < 5000, "Preview index must not contain detailed geometry"
+    assert set(manifest["maps"]) == set(runtime["maps"])
+    default_bytes = manifest_path.stat().st_size
+    for identifier, metadata in manifest["maps"].items():
+        detailed = read_json(RELIEF / metadata["data_file"])
+        assert detailed == runtime["maps"][identifier], (identifier, "on-demand geometry differs from the original atlas")
+        expected_views = {"overview", "detail", "cultural"} if detailed.get("cultural") else {"overview", "detail"}
+        assert set(metadata["views"]) == expected_views
+        for view, preview in metadata["views"].items():
+            filename = RELIEF / preview["image"]
+            with Image.open(filename) as image:
+                assert image.size == (preview["width"], preview["height"])
+                assert image.width <= 960 and abs(image.height / image.width - detailed["height"] / detailed["width"]) < 0.002
+            assert filename.stat().st_size < 150000, (identifier, view, "preview exceeds transfer budget")
+        default_bytes += (RELIEF / metadata["views"]["overview"]["image"]).stat().st_size
+    assert default_bytes < 250000, "Initial map cards should remain lightweight"
+    return {"index_bytes": manifest_path.stat().st_size, "default_cards_and_index_bytes": default_bytes}
+
+
 def main():
     atlas = read_json(RELIEF / "atlas.json")
     assert set(atlas["maps"]) == {"china", "east_asia", "europe_usa"}
@@ -306,7 +329,7 @@ def main():
     cultural_native = validate_cultural_native(atlas)
     print(json.dumps({"maps": 3, "visited_provinces": len(provinces), "culture_groups": cultures,
                       "country_colours": countries, "cultural": cultural, "native_assets": native,
-                      "cultural_native": cultural_native}, ensure_ascii=False, indent=2))
+                      "cultural_native": cultural_native, "card_previews": validate_card_previews()}, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

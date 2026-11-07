@@ -4,8 +4,8 @@
     // 维护指南：tools/relief-atlas/ADDING-FOOTPRINTS.md；这里是显示层，不是到访/行程数据的编辑入口。
     // 新城市改 site_content.json 的 visited_china；新路线改 scripts/prepare-footprint-routes.py 再生成、打包。
     // 城市或路线重新打包后，同步修改此版本、life.html 中脚本的 atlas= 及全部 Life 资源的共享 v=。
-    const ATLAS_VERSION = '20261107-cultural-boundaries';
-    const ATLAS_URL = `assets/maps/relief/atlas-runtime.json?v=${ATLAS_VERSION}`;
+    const ATLAS_VERSION = '20261107-lazy-maps';
+    const ATLAS_URL = `assets/maps/relief/atlas-preview.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
             id: 'china',
@@ -59,7 +59,7 @@
         en: {
             zoomIn: 'Zoom in', zoomOut: 'Zoom out', reset: 'Reset map',
             expand: 'View large map', close: 'Close large map', maximum: 'Maximum zoom',
-            unavailable: 'Map unavailable', mapLoading: 'Loading map',
+            unavailable: 'Map unavailable', mapLoading: 'Loading map', fullLoading: 'Loading high-resolution map',
             retry: 'Retry', controls: 'Map controls', route: 'Footprint route',
             rail: 'Rail journey', road: 'Road journey',
             currentView: 'Current view', switchTo: 'Switch to',
@@ -71,7 +71,7 @@
         'zh-CN': {
             zoomIn: '放大地图', zoomOut: '缩小地图', reset: '重置地图',
             expand: '查看大图', close: '关闭大图', maximum: '最大缩放',
-            unavailable: '地图暂不可用', mapLoading: '正在加载地图',
+            unavailable: '地图暂不可用', mapLoading: '正在加载地图', fullLoading: '正在加载高清地图',
             retry: '重新加载', controls: '地图控制', route: '足迹线路',
             rail: '铁路旅程', road: '自驾旅程',
             currentView: '当前视图', switchTo: '切换为',
@@ -83,7 +83,7 @@
         'zh-TW': {
             zoomIn: '放大地圖', zoomOut: '縮小地圖', reset: '重置地圖',
             expand: '查看大圖', close: '關閉大圖', maximum: '最大縮放',
-            unavailable: '地圖暫不可用', mapLoading: '正在載入地圖',
+            unavailable: '地圖暫不可用', mapLoading: '正在載入地圖', fullLoading: '正在載入高清地圖',
             retry: '重新載入', controls: '地圖控制', route: '足跡路線',
             rail: '鐵路旅程', road: '自駕旅程',
             currentView: '目前視圖', switchTo: '切換為',
@@ -101,6 +101,7 @@
     let mapInstanceSerial = 0;
     const instances = new Map();
     const imageLoads = new Map();
+    const detailLoads = new Map();
 
     function loadImage(url) {
         if (!imageLoads.has(url)) {
@@ -199,6 +200,25 @@
         return `${source}?v=${ATLAS_VERSION}`;
     }
 
+    function loadingStatus(key = 'mapLoading') {
+        const status = document.createElement('div');
+        status.className = 'footprints-map-status is-visible is-loading';
+        status.setAttribute('role', 'status');
+        status.dataset.atlasCopy = key;
+        status.textContent = currentCopy()[key];
+        return status;
+    }
+
+    function setStatus(box, status, loading, failed, full = false) {
+        box.classList.toggle('is-map-loading', loading);
+        box.classList.toggle('is-map-error', failed);
+        box.setAttribute('aria-busy', String(loading));
+        status.classList.toggle('is-visible', loading || failed);
+        status.classList.toggle('is-loading', loading);
+        status.dataset.atlasCopy = failed ? 'unavailable' : full ? 'fullLoading' : 'mapLoading';
+        status.textContent = currentCopy()[status.dataset.atlasCopy];
+    }
+
     function replaceLegacyMarkup(target) {
         const list = target.matches('.maps-list') ? target : target.querySelector('.maps-list') || target;
         list.classList.add('footprints-atlas-list');
@@ -217,7 +237,11 @@
             heading.append(number, title);
             const mapBox = document.createElement('div');
             mapBox.id = `${definition.id}Map`;
-            mapBox.className = 'map-box footprints-map-box';
+            mapBox.className = 'map-box footprints-map-box footprints-map-shell is-map-loading';
+            mapBox.style.aspectRatio = definition.id === 'euro-usa' ? '8000 / 2827' : definition.id === 'china' ? '6000 / 5024' : '6000 / 4770';
+            mapBox.setAttribute('aria-busy', 'true');
+            mapBox.append(loadingStatus());
+            title.textContent = localized(definition.title);
             card.append(heading, mapBox);
             const attribution = document.createElement('div');
             attribution.className = 'footprints-map-attribution';
@@ -250,8 +274,7 @@
             ['zoom-out', '−', labels.zoomOut],
             ['zoom-in', '+', labels.zoomIn],
             ['reset', '↺', labels.reset],
-            ['maximum', `${instance.maxScale * 100}%`, labels.maximum],
-            ['expand', labels.expand, labels.expand]
+            ['maximum', `${instance.maxScale * 100}%`, labels.maximum]
         ].forEach(([action, text, label]) => {
             const button = document.createElement('button');
             button.type = 'button';
@@ -267,7 +290,6 @@
                 if (action === 'zoom-out') instance.zoomBy(1 / 1.4);
                 if (action === 'reset') instance.resetView();
                 if (action === 'maximum') instance.zoomTo(instance.maxScale);
-                if (action === 'expand') instance.openViewer();
             });
             controls.append(button);
         });
@@ -308,6 +330,227 @@
         return button;
     }
 
+    function updateViewButtons(instance) {
+        const { definition, box, svg, viewport } = instance;
+        const currentIndex = Math.max(0, instance.viewOrder.indexOf(instance.view));
+        const nextView = instance.viewOrder[(currentIndex + 1) % instance.viewOrder.length];
+        const label = localized(definition.views[nextView]);
+        const currentLabel = localized(definition.views[instance.view]);
+        const mapLabel = `${localized(definition.title)} · ${currentLabel}`;
+        box.setAttribute('aria-label', mapLabel);
+        svg?.setAttribute('aria-label', mapLabel);
+        viewport.setAttribute('aria-label', instance.viewer ? `${mapLabel}. ${currentCopy().keyboard}` : mapLabel);
+        instance.viewButtons.forEach(button => {
+            if (button.tagName === 'SELECT') {
+                button.replaceChildren(...instance.viewOrder.map(view => {
+                    const option = document.createElement('option');
+                    option.value = view;
+                    option.textContent = localized(definition.views[view]);
+                    option.selected = view === instance.view;
+                    return option;
+                }));
+                button.setAttribute('aria-label', localized(definition.title) + ': ' + currentLabel);
+                button.title = button.getAttribute('aria-label');
+            } else {
+                button.textContent = label;
+                button.setAttribute('aria-label', `${currentCopy().switchTo}: ${label}. ${currentCopy().currentView}: ${currentLabel}`);
+                button.setAttribute('aria-pressed', String(instance.view === 'detail'));
+                button.title = button.getAttribute('aria-label');
+            }
+            button.hidden = instance.viewOrder.length < 2;
+        });
+    }
+
+    function loadDetailedMap(map) {
+        const url = imageUrl(map.data_file);
+        if (!detailLoads.has(url)) {
+            detailLoads.set(url, fetch(url, { credentials: 'same-origin' }).then(response => {
+                if (!response.ok) throw new Error(`Map HTTP ${response.status}`);
+                return response.json();
+            }).catch(error => { detailLoads.delete(url); throw error; }));
+        }
+        return detailLoads.get(url);
+    }
+
+    function createPreviewInstance(definition, map, box) {
+        box.replaceChildren();
+        box.classList.add('is-map-preview');
+        box.style.aspectRatio = `${map.width} / ${map.height}`;
+        box.style.backgroundColor = map.display_background;
+        box.dataset.mapResolution = 'preview';
+        box.setAttribute('role', 'region');
+        const viewport = document.createElement('div');
+        viewport.className = 'footprints-map-viewport';
+        const stage = document.createElement('div');
+        stage.className = 'footprints-map-stage';
+        const image = document.createElement('img');
+        image.className = 'footprints-map-terrain';
+        image.alt = '';
+        image.draggable = false;
+        const status = loadingStatus();
+        const retry = document.createElement('button');
+        retry.className = 'footprints-map-retry';
+        retry.type = 'button';
+        retry.hidden = true;
+        stage.append(image);
+        const insetTitles = (map.insets || []).map(inset => {
+            const title = document.createElement('span');
+            title.className = 'footprints-preview-inset-title';
+            title.style.left = `${(inset.frame.x + 28) / map.width * 100}%`;
+            title.style.top = `${(inset.frame.y + 80) / map.height * 100}%`;
+            stage.append(title);
+            return { inset, title };
+        });
+        viewport.append(stage);
+        box.append(viewport, status, retry);
+        const openButton = document.createElement('button');
+        openButton.type = 'button';
+        openButton.className = 'footprints-map-open';
+        openButton.setAttribute('aria-haspopup', 'dialog');
+        const instance = {
+            definition, map, box, viewport, stage,
+            view: Object.keys(map.views)[0], viewOrder: Object.keys(map.views), viewButtons: new Set(),
+            visible: false, viewer: null, detailed: null, pending: null,
+            updateViewButtons() { updateViewButtons(this); },
+            setView(view) {
+                if (!this.viewOrder.includes(view)) return;
+                this.view = view;
+                box.dataset.mapView = view;
+                this.updateViewButtons();
+                this.loadAssets();
+            },
+            loadAssets() {
+                if (!this.visible) return;
+                const url = imageUrl(map.views[this.view].image);
+                if (image.getAttribute('src') === url) {
+                    this.pending = null;
+                    retry.hidden = true;
+                    setStatus(box, status, false, false);
+                    return;
+                }
+                if (this.pending === url) return;
+                this.pending = url;
+                retry.hidden = true;
+                setStatus(box, status, true, false);
+                loadImage(url).then(() => {
+                    if (this.pending !== url || !box.isConnected) return;
+                    image.src = url;
+                    setStatus(box, status, false, false);
+                }).catch(() => {
+                    if (this.pending !== url || !box.isConnected) return;
+                    setStatus(box, status, false, true);
+                    retry.hidden = false;
+                }).finally(() => { if (this.pending === url) this.pending = null; });
+            },
+            updateTransform() {
+                const fit = Math.min(viewport.clientWidth / map.width, viewport.clientHeight / map.height);
+                stage.style.width = `${map.width * fit}px`;
+                stage.style.height = `${map.height * fit}px`;
+                stage.style.transform = 'translate(-50%, -50%)';
+                stage.style.setProperty('--footprints-inset-title-size', `${Math.max(7, 70 * fit)}px`);
+                this.detailed?.updateTransform();
+            },
+            openViewer() {
+                if (this.viewer) return;
+                const returnFocus = document.activeElement;
+                const viewer = document.createElement('dialog');
+                viewer.className = 'footprints-map-viewer';
+                viewer.setAttribute('aria-labelledby', `footprints-viewer-title-${definition.id}`);
+                const header = document.createElement('div');
+                header.className = 'footprints-viewer-header';
+                const title = document.createElement('h2');
+                title.id = `footprints-viewer-title-${definition.id}`;
+                title.dataset.atlasTitle = definition.id;
+                title.textContent = localized(definition.title);
+                const close = document.createElement('button');
+                close.type = 'button';
+                close.className = 'footprints-viewer-close';
+                close.textContent = '×';
+                close.setAttribute('aria-label', currentCopy().close);
+                close.addEventListener('click', () => viewer.close());
+                header.append(title, close);
+                const fullBox = document.createElement('div');
+                fullBox.id = `${definition.id}LargeMap`;
+                fullBox.className = 'footprints-map-box footprints-map-shell';
+                fullBox.style.backgroundColor = map.display_background;
+                const poster = image.cloneNode();
+                poster.className = 'footprints-map-poster';
+                const loading = loadingStatus('fullLoading');
+                fullBox.append(poster, loading);
+                const hint = document.createElement('p');
+                hint.className = 'footprints-map-hint';
+                hint.dataset.atlasCopy = 'hint';
+                hint.textContent = currentCopy().hint;
+                viewer.append(header, fullBox, hint);
+                viewer.addEventListener('keydown', event => event.stopPropagation());
+                viewer.addEventListener('close', () => {
+                    if (this.detailed) {
+                        this.setView(this.detailed.view);
+                        this.detailed.viewer = null;
+                        this.detailed = null;
+                    }
+                    viewer.remove();
+                    this.viewer = null;
+                    returnFocus?.focus?.({ preventScroll: true });
+                }, { once: true });
+                document.body.append(viewer);
+                this.viewer = viewer;
+                viewer.showModal();
+                const start = async () => {
+                    fullBox.querySelector('.footprints-map-retry')?.remove();
+                    setStatus(fullBox, loading, true, false, true);
+                    try {
+                        const data = await loadDetailedMap(map);
+                        if (!viewer.open) return;
+                        this.detailed = createMapInstance(definition, data, fullBox, viewer, this.view, poster);
+                        header.insertBefore(viewToggleFor(this.detailed), close);
+                        this.detailed.updateTransform();
+                        this.detailed.viewport.focus({ preventScroll: true });
+                    } catch {
+                        if (!viewer.open) return;
+                        setStatus(fullBox, loading, false, true, true);
+                        const retryDetail = retry.cloneNode();
+                        retryDetail.hidden = false;
+                        retryDetail.textContent = currentCopy().retry;
+                        retryDetail.dataset.atlasCopy = 'retry';
+                        retryDetail.addEventListener('click', start);
+                        fullBox.append(retryDetail);
+                    }
+                };
+                start();
+            },
+            updateLanguage() {
+                this.updateViewButtons();
+                openButton.textContent = `↗ ${currentCopy().expand}`;
+                openButton.setAttribute('aria-label', currentCopy().expand);
+                retry.textContent = currentCopy().retry;
+                insetTitles.forEach(({ inset, title }) => { title.textContent = localized(inset.title); });
+                this.viewer?.querySelector('.footprints-viewer-close').setAttribute('aria-label', currentCopy().close);
+                this.detailed?.updateLanguage();
+            }
+        };
+        retry.addEventListener('click', () => instance.loadAssets());
+        openButton.addEventListener('click', () => instance.openViewer());
+        const actions = document.createElement('div');
+        actions.className = 'footprints-map-title-actions';
+        actions.append(viewToggleFor(instance), openButton);
+        box.closest('.footprints-map-card').querySelector('.map-card-title').append(actions);
+        instance.setView(instance.view);
+        instance.updateLanguage();
+        instance.updateTransform();
+        if ('IntersectionObserver' in window) {
+            instance.observer = new IntersectionObserver(entries => {
+                instance.visible = entries[0].isIntersecting;
+                instance.loadAssets();
+            }, { root: box.closest('.portal-panel-body'), rootMargin: '120px 0px' });
+            instance.observer.observe(box);
+        } else {
+            instance.visible = true;
+            instance.loadAssets();
+        }
+        return instance;
+    }
+
     function matchVisited(map, item, byId) {
         if (item?.visited === false) return false;
         if (item?.visited === true || item?.active === true) return true;
@@ -339,7 +582,7 @@
         return regions.find(region => candidates.includes(normaliseId(region.id)) || candidates.includes(normaliseId(region.name))) || null;
     }
 
-    function createMapInstance(definition, map, box) {
+    function createMapInstance(definition, map, box, viewer, initialView, poster) {
         const instanceId = `${definition.id}-${++mapInstanceSerial}`;
         const width = Number(map.width || map.projection?.width || 1000);
         const height = Number(map.height || map.projection?.height || 650);
@@ -400,10 +643,7 @@
         terrain.alt = '';
         terrain.draggable = false;
         terrain.decoding = 'async';
-        const status = document.createElement('div');
-        status.className = 'footprints-map-status';
-        status.setAttribute('role', 'status');
-        status.textContent = currentCopy().mapLoading;
+        const status = loadingStatus('fullLoading');
         const svg = svgElement('svg', {
             class: 'footprints-map-svg', viewBox: `0 0 ${width} ${height}`,
             preserveAspectRatio: 'none', focusable: 'false', role: 'group',
@@ -426,7 +666,11 @@
         svg.append(defs, detailLayer, overviewLayer, culturalLayer, insetLayer);
         stage.append(terrain, svg);
         viewport.append(stage);
-        box.append(viewport, status);
+        const retry = document.createElement('button');
+        retry.className = 'footprints-map-retry';
+        retry.type = 'button';
+        retry.hidden = true;
+        box.append(viewport, poster, status, retry);
         const assets = {
             terrain: 'loading', detail: 'loading',
             overview: hasOverview ? 'loading' : 'unavailable',
@@ -438,18 +682,16 @@
         const insetRecords = [];
         // 每种彩色图独立记录加载状态：粗图损坏时仍允许切回可用的明细图，不能锁死整张卡片。
         const updateAssetState = () => {
-            const failed = assets.terrain === 'error' || assets[instance.view] === 'error';
-            const loading = !failed && (assets.terrain === 'loading' || assets[instance.view] === 'loading');
-            box.classList.toggle('is-map-error', failed);
-            box.classList.toggle('is-map-loading', loading);
-            status.classList.toggle('is-visible', failed || loading);
-            status.textContent = failed
-                ? (assets.terrain !== 'error' && instance.view === 'overview' ? currentCopy().overviewUnavailable
-                    : (assets.terrain !== 'error' && instance.view === 'cultural' ? currentCopy().culturalUnavailable : currentCopy().unavailable))
-                : (loading ? currentCopy().mapLoading : '');
+            const failed = assets.terrain === 'error' || assets[instance.view] === 'error'
+                || insetRecords.some(record => record.failed);
+            const loading = !failed && (assets.terrain === 'loading' || assets[instance.view] === 'loading'
+                || insetRecords.some(record => record.pending.size > 0));
+            setStatus(box, status, loading, failed, true);
+            retry.hidden = !failed;
             const fullResolution = assetLevels.terrain === 2
                 && (!assetElements[instance.view] || assetLevels[instance.view] === 2);
             box.dataset.mapResolution = fullResolution ? 'full' : 'preview';
+            if (fullResolution) poster.remove();
         };
         const requestAsset = (kind, level) => {
             const element = assetElements[kind];
@@ -459,7 +701,7 @@
             const requestKey = `${kind}:${level}`;
             if (pendingAssets.has(requestKey)) return;
             pendingAssets.add(requestKey);
-            if (!assetLevels[kind]) assets[kind] = 'loading';
+            assets[kind] = 'loading';
             loadImage(url).then(() => {
                 if (!box.isConnected || assetLevels[kind] >= level || (level === 2 && !instance.viewer)) return;
                 if (kind === 'terrain') element.src = url;
@@ -467,7 +709,7 @@
                 assetLevels[kind] = level;
                 assets[kind] = 'ready';
             }).catch(() => {
-                if (!assetLevels[kind]) assets[kind] = 'error';
+                assets[kind] = 'error';
             }).finally(() => {
                 pendingAssets.delete(requestKey);
                 updateAssetState();
@@ -476,17 +718,15 @@
         const instance = {
             definition, map, box, viewport, stage, svg, source, colorSource, width, height,
             cities, regions, regionById, visitedIds,
-            view: viewOrder[0], viewOrder, viewButtons: new Set(),
+            view: viewOrder.includes(initialView) ? initialView : viewOrder[0], viewOrder, viewButtons: new Set(),
             maxScale: definition.maxScale,
-            scale: 1, panX: 0, panY: 0, activeCity: null, viewer: null,
-            visible: false,
+            scale: 1, panX: 0, panY: 0, activeCity: null, viewer,
             loadAssets() {
-                if (!this.visible && !this.viewer) return;
+                if (!this.viewer) return;
                 for (const kind of ['terrain', this.view]) {
-                    requestAsset(kind, 1);
-                    if (this.viewer) requestAsset(kind, 2);
+                    requestAsset(kind, 2);
                 }
-                this.loadInsets(this.viewer ? 2 : 1);
+                this.loadInsets(2);
                 updateAssetState();
             },
             updateTransform() {
@@ -532,36 +772,7 @@
             resetView() {
                 this.scale = 1; this.panX = 0; this.panY = 0; this.updateTransform();
             },
-            updateViewButtons() {
-                const currentIndex = Math.max(0, this.viewOrder.indexOf(this.view));
-                const nextView = this.viewOrder[(currentIndex + 1) % this.viewOrder.length];
-                const label = localized(definition.views[nextView]);
-                const currentLabel = localized(definition.views[this.view]);
-                const mapLabel = `${localized(definition.title)} · ${currentLabel}`;
-                box.setAttribute('aria-label', mapLabel);
-                svg.setAttribute('aria-label', mapLabel);
-                viewport.setAttribute('aria-label', `${mapLabel}. ${currentCopy().keyboard}`);
-                this.viewButtons.forEach(button => {
-                    if (button.tagName === 'SELECT') {
-                        button.replaceChildren(...this.viewOrder.map(view => {
-                            const option = document.createElement('option');
-                            option.value = view;
-                            option.textContent = localized(definition.views[view]);
-                            option.selected = view === this.view;
-                            return option;
-                        }));
-                        button.setAttribute('aria-label', localized(definition.title) + ': ' + currentLabel);
-                        button.title = button.getAttribute('aria-label');
-                        button.hidden = this.viewOrder.length < 2;
-                        return;
-                    }
-                    button.textContent = label;
-                    button.setAttribute('aria-label', `${currentCopy().switchTo}: ${label}. ${currentCopy().currentView}: ${currentLabel}`);
-                    button.setAttribute('aria-pressed', String(this.view === 'detail'));
-                    button.title = button.getAttribute('aria-label');
-                    button.hidden = this.viewOrder.length < 2;
-                });
-            },
+            updateViewButtons() { updateViewButtons(this); },
             setView(view) {
                 if (!this.viewOrder.includes(view)) return;
                 this.view = view;
@@ -577,53 +788,6 @@
                 this.loadAssets();
                 updateAssetState();
             },
-            openViewer() {
-                if (this.viewer) return;
-                const returnFocus = document.activeElement;
-                const placeholder = document.createElement('div');
-                placeholder.style.height = `${box.getBoundingClientRect().height}px`;
-                box.before(placeholder);
-                const viewer = document.createElement('dialog');
-                viewer.className = 'footprints-map-viewer';
-                viewer.setAttribute('aria-labelledby', `footprints-viewer-title-${definition.id}`);
-                const header = document.createElement('div');
-                header.className = 'footprints-viewer-header';
-                const title = document.createElement('h2');
-                title.id = `footprints-viewer-title-${definition.id}`;
-                title.dataset.atlasTitle = definition.id;
-                title.textContent = localized(definition.title);
-                const close = document.createElement('button');
-                close.type = 'button';
-                close.className = 'footprints-viewer-close';
-                close.textContent = '×';
-                close.setAttribute('aria-label', currentCopy().close);
-                close.addEventListener('click', () => viewer.close());
-                const viewToggle = viewToggleFor(this);
-                header.append(title, viewToggle, close);
-                const hint = document.createElement('p');
-                hint.className = 'footprints-map-hint';
-                hint.dataset.atlasCopy = 'hint';
-                hint.textContent = currentCopy().hint;
-                viewer.append(header, box, hint);
-                viewer.addEventListener('keydown', event => {
-                    event.stopPropagation();
-                    if (event.key === 'Escape') { event.preventDefault(); viewer.close(); }
-                });
-                document.body.append(viewer);
-                this.viewer = viewer;
-                viewer.addEventListener('close', () => {
-                    placeholder.replaceWith(box);
-                    this.viewer = null;
-                    this.viewButtons.delete(viewToggle);
-                    viewer.remove();
-                    this.resetView();
-                    returnFocus?.focus?.({ preventScroll: true });
-                }, { once: true });
-                viewer.showModal();
-                this.loadAssets();
-                this.resetView();
-                viewport.focus({ preventScroll: true });
-            },
             setActive(city, force = false) {
                 if (this.activeCity === city && !force) return;
                 this.activeCity = city || null;
@@ -632,6 +796,7 @@
             },
             updateLanguage() {
                 const labels = currentCopy();
+                retry.textContent = labels.retry;
                 updateAssetState();
                 this.updateViewButtons();
                 this.updateInsetsLanguage();
@@ -723,7 +888,7 @@
             }
             const record = {
                 inset, group, title, terrainImage, colourImage, terrainSources, colourSources,
-                terrainLevel: 0, colourLevel: 0, pending: new Set(),
+                terrainLevel: 0, colourLevel: 0, pending: new Set(), failed: false,
                 load(level) {
                     const requests = [[terrainImage, terrainSources, 'terrainLevel'], [colourImage, colourSources, 'colourLevel']];
                     requests.forEach(([element, sources, key]) => {
@@ -732,16 +897,18 @@
                         const requestKey = `${key}:${level}`;
                         if (record.pending.has(requestKey)) return;
                         record.pending.add(requestKey);
+                        record.failed = false;
                         loadImage(url).then(() => {
                             if (!box.isConnected || record[key] >= level) return;
                             element.setAttribute('href', url);
                             record[key] = level;
                             group.classList.remove('is-unavailable');
                         }).catch(() => {
+                            record.failed = true;
                             if (!record[key] && ((key === 'terrainLevel' && !colourSources.length) || (key === 'colourLevel' && !terrainSources.length))) {
                                 group.classList.add('is-unavailable');
                             }
-                        }).finally(() => record.pending.delete(requestKey));
+                        }).finally(() => { record.pending.delete(requestKey); updateAssetState(); });
                     });
                 },
                 updateLanguage() { title.textContent = localized(inset.title || inset.name || inset.id); }
@@ -851,16 +1018,8 @@
             culturalFillGroup.append(assetElements.cultural);
         }
 
+        retry.addEventListener('click', () => instance.loadAssets());
         box.append(controlsFor(instance));
-        const openButton = document.createElement('button');
-        openButton.type = 'button';
-        openButton.className = 'footprints-map-open';
-        openButton.setAttribute('aria-haspopup', 'dialog');
-        openButton.addEventListener('click', () => instance.openViewer());
-        const titleActions = document.createElement('div');
-        titleActions.className = 'footprints-map-title-actions';
-        titleActions.append(viewToggleFor(instance), openButton);
-        box.closest('.footprints-map-card').querySelector('.map-card-title').append(titleActions);
         const north = document.createElement('div');
         north.className = 'footprints-map-north';
         north.setAttribute('aria-hidden', 'true');
@@ -868,17 +1027,7 @@
         box.append(north);
         instance.setView(instance.view);
         instance.updateTransform();
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver(entries => {
-                instance.visible = entries[0].isIntersecting;
-                instance.loadAssets();
-            }, { root: box.closest('.portal-panel-body'), rootMargin: '120px 0px' });
-            observer.observe(box);
-            instance.observer = observer;
-        } else {
-            instance.visible = true;
-            instance.loadAssets();
-        }
+        instance.loadAssets();
         let drag = null;
         let suppressClick = false;
         viewport.addEventListener('pointerdown', event => {
@@ -1005,7 +1154,7 @@
         MAP_DEFINITIONS.forEach(definition => {
             const data = mapData(definition);
             const box = list.querySelector(`[data-atlas-card="${definition.id}"] .map-box`);
-            if (data && box) instances.set(definition.id, createMapInstance(definition, data, box));
+            if (data && box) instances.set(definition.id, createPreviewInstance(definition, data, box));
         });
         updateLanguage(currentLanguage);
         return instances.size > 0;
@@ -1030,7 +1179,9 @@
         const message = currentCopy().unavailable;
         document.querySelectorAll('.footprints-map-box').forEach(box => {
             box.replaceChildren();
+            box.classList.remove('is-map-loading');
             box.classList.add('is-map-error');
+            box.setAttribute('aria-busy', 'false');
             const notice = document.createElement('div');
             notice.className = 'footprints-map-error';
             notice.textContent = message;

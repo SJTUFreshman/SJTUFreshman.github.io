@@ -277,7 +277,7 @@ def package(identifiers=None, render_root=ARCHIVE, encode_images=True):
     if all(metadata.get("preview") and metadata["overview"].get("preview_color_image")
            for metadata in atlas["maps"].values()):
         runtime = builder.load_module(ROOT / "scripts/package-footprint-sectional.py", "footprint_runtime")
-        write_json(OUTPUT / "atlas-runtime.json", runtime.runtime_atlas(atlas))
+        runtime.write_runtime(atlas, OUTPUT)
     print("Packaged overview layers: " + ", ".join(identifiers), flush=True)
 
 
