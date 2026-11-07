@@ -112,6 +112,19 @@ def update_visited(regions, visited_names):
         region['visited_members'] = visited
 
 
+def update_boundaries(regions):
+    from shapely.geometry import Polygon
+    from shapely.ops import unary_union
+    for region in regions:
+        geometry = polygon_geometry(region['path'])
+        polygons = [geometry] if geometry.geom_type == 'Polygon' else list(geometry.geoms)
+        exterior = unary_union([Polygon(polygon.exterior) for polygon in polygons if polygon.geom_type == 'Polygon'])
+        exterior = exterior.buffer(0.3, join_style=2).buffer(-0.3, join_style=2)
+        polygons = [exterior] if exterior.geom_type == 'Polygon' else list(exterior.geoms)
+        region['boundary_path'] = ''.join(geometry_path(Polygon(polygon.exterior))
+                                         for polygon in polygons if polygon.geom_type == 'Polygon')
+
+
 def source_units(archive):
     units = deepcopy(read_json(archive / 'detail/data/china.json')['regions'])
     units = [unit for unit in units if unit.get('province')]
@@ -259,6 +272,7 @@ def package_layer(archive, destination, atlas):
         image.save(destination / metadata['preview_color_image'], quality=86, method=6)
     regions = deepcopy(metadata['regions'])
     update_visited(regions, set(read_json(ROOT / 'site_content.json')['life']['footprints']['visited_china']))
+    update_boundaries(regions)
     return {'unit': 'cultural-region', 'regions': regions, 'color_image': metadata['color_image'],
             'preview_color_image': metadata['preview_color_image'], 'source_archive': cultural.relative_to(ROOT).as_posix(),
             'color_source_archive': cultural.relative_to(ROOT).as_posix(), 'relief_source_archive': atlas['maps']['china']['source_archive'],

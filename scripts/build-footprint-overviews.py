@@ -272,6 +272,7 @@ def package(identifiers=None, render_root=ARCHIVE, encode_images=True):
         culture_builder = builder.load_module(ROOT / "scripts/build-china-cultural-overview.py", "china_cultural")
         visited_names = set(read_json(ROOT / "site_content.json")["life"]["footprints"]["visited_china"])
         culture_builder.update_visited(cultural["regions"], visited_names)
+        culture_builder.update_boundaries(cultural["regions"])
     write_json(OUTPUT / "atlas.json", atlas)
     if all(metadata.get("preview") and metadata["overview"].get("preview_color_image")
            for metadata in atlas["maps"].values()):

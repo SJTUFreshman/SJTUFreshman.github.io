@@ -4,7 +4,7 @@
     // 维护指南：tools/relief-atlas/ADDING-FOOTPRINTS.md；这里是显示层，不是到访/行程数据的编辑入口。
     // 新城市改 site_content.json 的 visited_china；新路线改 scripts/prepare-footprint-routes.py 再生成、打包。
     // 城市或路线重新打包后，同步修改此版本、life.html 中脚本的 atlas= 及全部 Life 资源的共享 v=。
-    const ATLAS_VERSION = '20261107-cultural-names';
+    const ATLAS_VERSION = '20261107-cultural-boundaries';
     const ATLAS_URL = `assets/maps/relief/atlas-runtime.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
@@ -766,6 +766,10 @@
             group._footprintsCity = { data: item, element: group };
             const displayName = attribute === 'data-cultural-id' ? culturalLabel(item) : nameOf(item);
             group.append(svgElement('path', { d: path, class: 'footprints-city-hit', fill: 'transparent', stroke: 'transparent', 'vector-effect': 'non-scaling-stroke' }));
+            if (attribute === 'data-cultural-id' && item.boundary_path) {
+                group.append(svgElement('path', { d: item.boundary_path, class: 'footprints-cultural-boundary',
+                    'vector-effect': 'non-scaling-stroke' }));
+            }
             const label = svgElement('text', { x: center[0], y: center[1] - 9, class: 'footprints-city-label-text', 'text-anchor': 'middle' });
             label.textContent = displayName;
             group.append(label);

@@ -149,6 +149,9 @@ def validate_china_cultural(atlas):
     cultural = atlas["maps"]["china"].get("cultural")
     if not cultural:
         return {"groups": 0, "members": 0}
+    spec = importlib.util.spec_from_file_location("china_cultural", ROOT / "scripts/build-china-cultural-overview.py")
+    cultural_builder = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cultural_builder)
     regions = cultural.get("regions", [])
     configured = {region["id"]: region for region in read_json(ROOT / "tools/relief-atlas/china-cultural-regions.json")["groups"]}
     assert {region["id"] for region in regions} == set(configured), "Cultural groups differ from the editable configuration"
@@ -170,6 +173,11 @@ def validate_china_cultural(atlas):
         expected = {member_id for member_id, item in detail.items() if item.get("visited")}
         assert set(map(str, visited)) == expected.intersection(set(map(str, members))), (region["id"], "visit derivation differs")
         assert bool(visited) == bool(region.get("visited")), (region["id"], "group visit differs")
+        assert region.get("boundary_path"), (region["id"], "missing cultural outline")
+        boundary = cultural_builder.polygon_geometry(region["boundary_path"])
+        assert boundary.geom_type in {"Polygon", "MultiPolygon"}, (region["id"], "invalid cultural outline")
+        polygons = [boundary] if boundary.geom_type == "Polygon" else list(boundary.geoms)
+        assert all(not polygon.interiors for polygon in polygons), (region["id"], "cultural outline contains internal seams")
         assigned.extend(map(str, members))
     assert len(assigned) == len(set(assigned)), "A city must belong to exactly one cultural group"
     assert set(assigned) == set(detail), "Cultural groups must cover every China detail city"

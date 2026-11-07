@@ -108,7 +108,12 @@ async function culturalChecks(box, metadata, label) {
         clips: [...element.querySelectorAll('[data-clip-cultural]')].map(node => node.dataset.clipCultural).sort(),
         hits: [...element.querySelectorAll('[data-cultural-id]')].map(node => node.dataset.culturalId).sort(),
         labels: [...element.querySelectorAll('[data-cultural-id]')].map(node => [node.dataset.culturalId, node.getAttribute('aria-label')]),
-        strokes: [...element.querySelectorAll('[data-cultural-id] .footprints-city-hit')].map(node => getComputedStyle(node).stroke)
+        strokes: [...element.querySelectorAll('[data-cultural-id] .footprints-city-hit')].map(node => getComputedStyle(node).stroke),
+        boundaries: [...element.querySelectorAll('[data-cultural-id]')].map(node => {
+            const boundary = node.querySelector('.footprints-cultural-boundary');
+            return [node.dataset.culturalId, boundary?.getAttribute('d'), boundary && getComputedStyle(boundary).stroke,
+                boundary && getComputedStyle(boundary).fill];
+        })
     }));
     await box.evaluate(element => element.querySelector('[data-cultural-id]')?.classList.remove('is-active'));
     const regions = metadata.cultural.regions;
@@ -118,10 +123,15 @@ async function culturalChecks(box, metadata, label) {
     for (const region of regions) {
         const text = actual.labels.find(([identifier]) => identifier === String(region.id))[1];
         assert(Object.values(region.label).includes(text), `${label}: ${region.id} shows only its established name`);
+        const boundary = actual.boundaries.find(([identifier]) => identifier === String(region.id));
+        assert(region.boundary_path && boundary[1] === region.boundary_path,
+            `${label}: ${region.id} draws its dissolved cultural boundary`);
+        assert(boundary[2] && !['none', 'transparent', 'rgba(0, 0, 0, 0)'].includes(boundary[2]) && boundary[3] === 'none',
+            `${label}: ${region.id} boundary stays visible without covering terrain`);
     }
     assert(actual.strokes.every(stroke => stroke === 'rgba(0, 0, 0, 0)' || stroke === 'transparent'),
         `${label}: cultural regions do not expose internal boundary strokes`);
-    check(true, `${label}: cultural view keeps labels and visit clips without member counts or internal strokes`);
+    check(true, `${label}: cultural view shows outer boundaries without member counts or internal city strokes`);
 }
 
 async function geometryChecks(box, metadata, label, fullResolution = false) {

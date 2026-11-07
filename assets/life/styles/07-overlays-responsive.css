@@ -298,8 +298,22 @@
 .footprints-city[data-cultural-id] .footprints-city-hit,
 .footprints-city[data-cultural-id].is-active .footprints-city-hit,
 .footprints-city[data-cultural-id]:focus-visible .footprints-city-hit {
-    fill: transparent !important;
-    stroke: transparent !important;
+    fill: transparent;
+    stroke: transparent;
+}
+
+.footprints-cultural-boundary {
+    fill: none;
+    stroke: rgba(52, 80, 75, 0.48);
+    stroke-width: 0.7;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+
+.footprints-city.is-active .footprints-cultural-boundary,
+.footprints-city:focus-visible .footprints-cultural-boundary {
+    stroke: rgba(39, 49, 56, 0.84);
+    stroke-width: 1.4;
 }
 
 .footprints-map-controls {
