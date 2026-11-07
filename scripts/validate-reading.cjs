@@ -6,7 +6,8 @@ const path = require('node:path');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE_PATH || 'playwright');
 const root = path.join(__dirname, '..');
 const output = path.join(root, '.render-work/reading');
-const collections = JSON.parse(fs.readFileSync(path.join(root, 'site_content.json'), 'utf8')).life.reading.collections;
+const lifeContent = JSON.parse(fs.readFileSync(path.join(root, 'site_content.json'), 'utf8')).life;
+const collections = lifeContent.reading.collections;
 for (const collection of collections) {
     if (collection.articles_file) collection.articles = JSON.parse(fs.readFileSync(path.join(root, collection.articles_file), 'utf8'));
 }
@@ -34,7 +35,7 @@ async function checkPage(browser, base, route, mobile) {
     try {
         await page.goto(`${base}/${route}`, { waitUntil: 'domcontentloaded' });
         await page.waitForFunction(() => window.lifeStarMap?.lastFrame > 0 && !window.lifeStarMap.flight);
-        assert.equal(await page.locator('#thoughts .thought-item').count(), 2);
+        assert.equal(await page.locator('#thoughts .thought-item').count(), lifeContent.thoughts.length);
         await page.locator('#sectionDrawerToggle').click();
         assert.equal(await page.locator('#sectionDrawerList [data-portal-id]').count(), 9);
         await page.locator('#sectionDrawerList [data-portal-id="reading"]').click();
@@ -74,7 +75,7 @@ async function checkPage(browser, base, route, mobile) {
         await page.locator('#sectionDrawerList [data-portal-id="thoughts"]').click();
         await page.waitForFunction(() => state.activePortal?.id === 'thoughts' && !window.lifeStarMap.flight);
         assert(await page.locator('#reading').isHidden());
-        assert.equal(await page.locator('#thoughts [data-thought-reader]').count(), 2);
+        assert.equal(await page.locator('#thoughts [data-thought-reader]').count(), lifeContent.thoughts.length);
         console.log(`PASS ${label}: independent section, three languages, article sources, body text, layout and return navigation`);
     } finally {
         await context.close();
