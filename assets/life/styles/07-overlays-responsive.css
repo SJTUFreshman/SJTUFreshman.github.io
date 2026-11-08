@@ -330,16 +330,16 @@
 
 .footprints-cultural-boundary {
     fill: none;
-    stroke: rgba(52, 80, 75, 0.48);
-    stroke-width: 0.7;
+    stroke: rgba(57, 76, 74, 0.22);
+    stroke-width: 0.5;
     stroke-linejoin: round;
     pointer-events: none;
 }
 
 .footprints-city.is-active .footprints-cultural-boundary,
 .footprints-city:focus-visible .footprints-cultural-boundary {
-    stroke: rgba(39, 49, 56, 0.84);
-    stroke-width: 1.4;
+    stroke: rgba(39, 49, 56, 0.55);
+    stroke-width: 1;
 }
 
 .footprints-map-controls {

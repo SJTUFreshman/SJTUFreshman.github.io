@@ -102,7 +102,7 @@ def package(runtime, destination):
                 drawing = ImageDraw.Draw(image, "RGBA")
                 for region in layer["regions"]:
                     for points in path_rings(region["boundary_path"], scale):
-                        drawing.line(points, fill=(52, 80, 75, 122), width=SUPERSAMPLE, joint="curve")
+                        drawing.line(points, fill=(57, 76, 74, 56), width=max(1, round(0.5 * SUPERSAMPLE)), joint="curve")
             paint_insets(image, metadata, destination, scale)
             filename = identifier + "-card-" + view + ".webp"
             image.resize((width, height), Image.Resampling.LANCZOS).save(destination / filename, quality=78, method=6)

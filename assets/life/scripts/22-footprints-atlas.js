@@ -4,7 +4,7 @@
     // 维护指南：tools/relief-atlas/ADDING-FOOTPRINTS.md；这里是显示层，不是到访/行程数据的编辑入口。
     // 新城市改 site_content.json 的 visited_china；新路线改 scripts/prepare-footprint-routes.py 再生成、打包。
     // 城市或路线重新打包后，同步修改此版本、life.html 中脚本的 atlas= 及全部 Life 资源的共享 v=。
-    const ATLAS_VERSION = '20261107-culture-regions';
+    const ATLAS_VERSION = '20261108-atlas-borders';
     const ATLAS_URL = `assets/maps/relief/atlas-preview.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
