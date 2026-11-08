@@ -78,13 +78,14 @@ async function verifyReader(page, article, language, label) {
 }
 
 async function verifyFonts(page, selector, language) {
-    await page.locator(selector).first().evaluate((element, language) => {
+    await page.locator(selector).first().evaluate(element => {
         const probe = document.createElement('span');
         probe.id = 'font-probe';
         probe.style.cssText = 'position:fixed;inset:100px auto auto 100px;writing-mode:horizontal-tb';
         for (const [script, value] of [
             ['latin', 'Livehouse AI SJTU 2026'],
-            ['han', language === 'zh-CN' ? '中国大陆这过为会来无着时没个爱发写长说对点开' : '夢餘燼學顏體']
+            ['han', '中文山水中國夢餘燼學顏體'],
+            ['fallback', '过这为会来无着时没个爱发写长说对点开']
         ]) {
             const span = document.createElement('span');
             span.id = `font-probe-${script}`;
@@ -92,14 +93,14 @@ async function verifyFonts(page, selector, language) {
             probe.append(span);
         }
         element.append(probe);
-    }, language);
+    });
     await page.evaluate(() => document.fonts.ready);
     const session = await page.context().newCDPSession(page);
     try {
         await session.send('DOM.enable');
         await session.send('CSS.enable');
         const { root: documentNode } = await session.send('DOM.getDocument');
-        for (const [script, family] of [['latin', 'Newsreader'], ['han', language === 'zh-CN' ? 'Site WenKai' : 'TW-MOE-Std-Kai']]) {
+        for (const [script, family] of [['latin', 'Newsreader'], ['han', 'TW-MOE-Std-Kai'], ['fallback', 'Site WenKai']]) {
             const { nodeId } = await session.send('DOM.querySelector', {nodeId: documentNode.nodeId, selector: `#font-probe-${script}`});
             const { fonts } = await session.send('CSS.getPlatformFontsForNode', {nodeId});
             assert(fonts.length > 0, `${language}/${script}: rendered glyphs exist`);

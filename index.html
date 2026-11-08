@@ -157,11 +157,6 @@
             --nav-height: 56px;
         }
 
-        :root:lang(zh-CN) {
-            --font-cn: 'Newsreader', 'Site WenKai', 'EduKai', 'KaiTi', serif;
-            --font-en: 'Newsreader', 'Site WenKai', 'EduKai', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
-        }
-
         /* ========== Reset & Base ========== */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1729,7 +1724,7 @@ async function waitForEduKai() {
     if (!document.fonts || typeof document.fonts.load !== 'function') {
         throw new Error('Font Loading API unavailable');
     }
-    const family = currentLang === 'zh-CN' ? 'Site WenKai' : 'EduKai';
+    const family = 'EduKai';
     const font = `400 1em "${family}"`;
     const faces = await document.fonts.load(font, '中国大陆標楷字體');
     const loaded = faces.length > 0

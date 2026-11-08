@@ -2,7 +2,7 @@
 
 首页、Life 和观景页共用 Newsreader 西文正文、IBM Plex Sans 界面字和 IBM Plex Mono 等宽字。拉丁字母和数字不随中文界面改用楷体。中文字体声明限定 CJK Unicode 范围，正文栈优先使用 Newsreader，避免中文字体中的 ASCII 字形截获英文。
 
-繁体正文优先使用 EduKai（台湾教育部标准楷体），缺字回退到 Site WenKai。原 EduKai 字库并不包含许多常用简体字，因此简体正文统一优先使用 Site WenKai，避免一段文字内频繁切换字形。Site WenKai 是 LXGW WenKai Regular v1.530 的改名网页子集，许可保存在 `fonts/OFL-WenKai.txt`。
+简体与繁体正文都优先使用原有 EduKai（台湾教育部标准楷体），不能因界面语言改变中文主字体。只有原始 EduKai 字库确实不包含的字符才回退到 Site WenKai；已有标楷字形继续使用标楷体。Site WenKai 是 LXGW WenKai Regular v1.530 的改名网页子集，许可保存在 `fonts/OFL-WenKai.txt`。
 
 ## 重建
 
@@ -17,6 +17,6 @@ python scripts/build-edukai-subset.py --check
 
 构建扫描三张页面、Life/观景页引用的本地脚本与样式、`site_content.json`，以及拾文原文和译文 JSON。HTML 实体与 Unicode 转义均先解码。保留字体布局信息和竖排替代字形，验证生成文件后原子替换。`--check` 在当前文本有任何 CJK 字符不被两个发布子集覆盖时失败；添加内容后应先生成页面，再重建字体。
 
-更新字体时同时更换首页和 `assets/life/styles/01-foundation-sky.css` 中字体 URL 的缓存版本，以及 Life/观景页引用样式的版本。字体按实际文字和语言加载，避免预加载错误语言的整个中文子集。
+更新字体时同时更换首页和 `assets/life/styles/01-foundation-sky.css` 中字体 URL 的缓存版本，以及 Life/观景页引用样式的版本。字体按实际文字加载，首屏过渡统一等待标楷体。
 
 `node scripts/validate-reading.cjs` 在 Chrome 中检查首页和两个阅读页的简繁英字体，使用 CDP 的实际渲染字形信息验证 Newsreader、Site WenKai 与 TW-MOE-Std-Kai，而不是仅检查 CSS 字体栈。

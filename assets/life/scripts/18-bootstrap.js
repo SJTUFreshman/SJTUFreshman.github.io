@@ -16,7 +16,7 @@ async function signalStellarDestinationReady() {
         if (!document.fonts || typeof document.fonts.load !== 'function') {
             throw new Error('Font Loading API unavailable');
         }
-        const family = state.currentLang === 'zh-CN' ? 'Site WenKai' : 'EduKai';
+        const family = 'EduKai';
         const font = `400 1em "${family}"`;
         const faces = await document.fonts.load(font, '中国大陆標楷字體');
         const loaded = faces.length > 0
