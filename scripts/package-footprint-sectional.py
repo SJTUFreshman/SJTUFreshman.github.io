@@ -112,6 +112,8 @@ def verify_inputs(archive, published):
         detail = verified["detail"][identifier][0]
         for key in GEOMETRY_KEYS:
             require(overview[key] == detail[key], f"{identifier}: overview {key} differs")
+    if published["maps"]["east_asia"]["overview"].get("classification_version"):
+        verify_cultural_config(verified["overview"]["east_asia"][0], partial=True)
     china_overview = read_json(archive / "overview/data/china.json")
     verified["overview"]["china"] = (china_overview, verified["detail"]["china"][1])
     for identifier in ("china", "east_asia"):
@@ -266,13 +268,16 @@ def stage_activation(archive, style, destination):
     ]
 
 
-def verify_cultural_config(metadata):
+def verify_cultural_config(metadata, partial=False):
     config = read_json(ROOT / "tools/relief-atlas/china-cultural-regions.json")
     require(metadata.get("classification_version") == config.get("version"),
             "Cultural classification version differs from the configuration; prepare and render the current grouping")
     configured = {group["id"]: group for group in config["groups"]}
-    require({group["id"] for group in metadata["regions"]} == set(configured), "Cultural region IDs differ from the configuration")
-    for group in metadata["regions"]:
+    groups = [group for group in metadata["regions"] if group.get("country") == "CHN"]
+    identifiers = {group["id"] for group in groups}
+    require(bool(identifiers) and (identifiers <= set(configured) if partial else identifiers == set(configured)),
+            "Cultural region IDs differ from the configuration")
+    for group in groups:
         expected = configured[group["id"]]
         require(set(group["members"]) == set(expected["members"]) and group["label"] == expected["label"],
                 f"{group['id']}: culture memberships or names differ from the rendered input")
@@ -300,6 +305,41 @@ def stage_cultural(archive, published, output, destination):
     activation.mkdir()
     style = read_json(ROOT / "tools/relief-atlas/footprints-style.json")
     style["cultural_archive"] = archive_name(archive / "cultural")
+    style_path = activation / "footprints-style.json"
+    write_json(style_path, style)
+    return [(style_path, ROOT / "tools/relief-atlas/footprints-style.json")]
+
+
+def verify_east_asia_overview(archive, published):
+    import numpy as np
+    style = read_json(archive / "style.json")
+    metadata, report = verify_render(archive / "overview", "east_asia", ("colour",), style)
+    current = published["maps"]["east_asia"]
+    for key in GEOMETRY_KEYS:
+        require(metadata[key] == current[key], f"east_asia: overview {key} changed")
+    verify_cultural_config(metadata, partial=True)
+    require(all(region["unit"] == "cultural-region" for region in metadata["regions"]
+                if region["country"] in {"CHN", "JPN", "KOR"}), "East Asia must use cultural regions across China, Japan and Korea")
+    source = ROOT / current["source_archive"] / "data/east_asia.npz"
+    with np.load(source) as previous, np.load(archive / "overview/data/east_asia.npz") as updated:
+        require(set(previous.files) == set(updated.files), "East Asia DEM array names changed")
+        for key in previous.files:
+            if key != "region":
+                require(np.array_equal(previous[key], updated[key], equal_nan=True), f"east_asia: {key} changed")
+    return report
+
+
+def stage_east_asia_overview(archive, published, output, destination):
+    shutil.copytree(output, destination, dirs_exist_ok=True)
+    spec = importlib.util.spec_from_file_location("footprint_overviews", ROOT / "scripts/build-footprint-overviews.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.OUTPUT = destination
+    module.package(["east_asia"], archive / "overview")
+    activation = destination / "activation"
+    activation.mkdir()
+    style = read_json(ROOT / "tools/relief-atlas/footprints-style.json")
+    style.setdefault("map_overview_archives", {})["east_asia"] = archive_name(archive / "overview")
     style_path = activation / "footprints-style.json"
     write_json(style_path, style)
     return [(style_path, ROOT / "tools/relief-atlas/footprints-style.json")]
@@ -336,10 +376,24 @@ def main():
     parser.add_argument("--stage", type=Path, help="Encode into a separate new directory for review")
     parser.add_argument("--publish", action="store_true", help="Publish only after every native render and scene is verified")
     parser.add_argument("--cultural-only", action="store_true", help="Replace only China's cultural layer over the current native base maps")
+    parser.add_argument("--east-asia-overview-only", action="store_true", help="Replace only East Asia's cultural overview over the current native base map")
     arguments = parser.parse_args()
     try:
         require(not (arguments.stage and arguments.publish), "Choose --stage or --publish")
+        require(not (arguments.cultural_only and arguments.east_asia_overview_only), "Choose only one map layer")
         published = read_json(arguments.output / "atlas.json")
+        if arguments.east_asia_overview_only:
+            verify_east_asia_overview(arguments.archive, published)
+            if arguments.stage:
+                require(not arguments.stage.exists(), f"Stage directory already exists: {arguments.stage}")
+                stage_east_asia_overview(arguments.archive, published, arguments.output, arguments.stage)
+            elif arguments.publish:
+                with tempfile.TemporaryDirectory(prefix=".east-asia-stage-", dir=arguments.output.parent) as temporary:
+                    staged = Path(temporary)
+                    activation = stage_east_asia_overview(arguments.archive, published, arguments.output, staged)
+                    publish(staged, arguments.output, activation)
+            print(json.dumps({"verified": True, "published": arguments.publish, "maps": ["east_asia"], "layer": "overview"}))
+            return
         if arguments.cultural_only:
             verify_cultural(arguments.archive, published)
             if arguments.stage:

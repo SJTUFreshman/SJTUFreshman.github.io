@@ -20,7 +20,8 @@ from PIL import Image
 from pyproj import Transformer
 from rasterio.features import rasterize
 from rasterio.transform import from_bounds
-from shapely import make_valid
+from shapely import make_valid, points, STRtree
+from shapely.affinity import affine_transform
 from shapely.geometry import box, shape
 from shapely.ops import transform, unary_union
 
@@ -48,6 +49,39 @@ def load_builder():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def overview_root(identifier, render_root=None):
+    return Path(render_root) if render_root is not None else ROOT / STYLE.get("map_overview_archives", {}).get(identifier, str(ARCHIVE))
+
+
+def china_cultural_units(builder):
+    cultural = builder.load_module(ROOT / "scripts/build-china-cultural-overview.py", "china_cultural")
+    publisher = builder.load_module(ROOT / "scripts/package-footprint-sectional.py", "footprint_publisher")
+    metadata = read_json(ROOT / STYLE["cultural_archive"] / "data/china.json")
+    publisher.verify_cultural_config(metadata)
+    projection = Transformer.from_crs(metadata["projection"], "EPSG:4326", always_xy=True)
+    west, south, east, north = metadata["extent_km"]
+    pixels_to_metres = [(east - west) * 1000 / metadata["width"], 0, 0,
+                        -(north - south) * 1000 / metadata["height"], west * 1000, north * 1000]
+    source_palette = STYLE["map_palettes"]["china"]
+    palette = list(dict.fromkeys(STYLE["map_province_colors"]["east_asia"].values()))
+    raw_geometries = {region["id"]: cultural.polygon_geometry(region["path"]) for region in metadata["regions"]}
+    cultural.update_boundaries(metadata["regions"])
+    units = []
+    for region in metadata["regions"]:
+        geometry = cultural.polygon_geometry(region["boundary_path"])
+        neighbours = [other for identifier, other in raw_geometries.items()
+                      if identifier != region["id"] and geometry.intersects(other)]
+        if neighbours:
+            geometry = geometry.difference(unary_union(neighbours))
+        geometry = affine_transform(geometry, pixels_to_metres)
+        item = {key: value for key, value in region.items()
+                if key not in ("path", "boundary_path", "center", "raster_id", "visited", "visited_members")}
+        item["geometry"] = make_valid(transform(projection.transform, geometry))
+        item["color"] = palette[source_palette.index(region["color"])]
+        units.append(item)
+    return units, metadata["classification_version"]
 
 
 def stable_colour(identifier, map_id="europe_usa"):
@@ -91,7 +125,7 @@ def visit_sets(builder, colours):
     provinces = {city["province"] for city in builder.cities(colours) if city["visited"]}
     regions = set(footprints.get("visited_overseas_regions", []))
     countries = set(footprints.get("visited_country_codes", []))
-    return provinces, regions, countries
+    return provinces, regions, countries, set(footprints["visited_china"])
 
 
 def province_units(provinces, colours):
@@ -136,10 +170,15 @@ def cultural_units(features):
 
 
 def update_visited(regions, visits):
-    provinces, overseas_regions, countries = visits
+    provinces, overseas_regions, countries, visited_names = visits
     for region in regions:
         if region["unit"] == "province":
             region["visited"] = region["province"] in provinces
+        elif region["country"] == "CHN" and region["unit"] == "cultural-region":
+            members = [identifier for identifier, name in zip(region["members"], region["member_names"])
+                       if name in visited_names]
+            region["visited"] = bool(members)
+            region["visited_members"] = members
         elif region["unit"] == "cultural-region":
             region["visited"] = region["id"] in overseas_regions
         else:
@@ -148,14 +187,14 @@ def update_visited(regions, visits):
 
 def validate_visits(render_root, visits):
     # Typos should fail explicitly, rather than silently showing a white map.
-    _, overseas_regions, countries = visits
+    _, overseas_regions, countries, _ = visits
     known_regions, known_countries = set(), set()
     for identifier in MAPS:
-        path = render_root / "data" / (identifier + ".json")
+        path = overview_root(identifier, render_root) / "data" / (identifier + ".json")
         if path.exists():
             for region in read_json(path)["regions"]:
                 known_countries.add(region["country"])
-                if region["unit"] == "cultural-region":
+                if region["unit"] == "cultural-region" and region["country"] != "CHN":
                     known_regions.add(region["id"])
     if overseas_regions - known_regions:
         raise ValueError("Unknown visited cultural-region IDs: " + ", ".join(sorted(overseas_regions - known_regions)))
@@ -174,6 +213,7 @@ def prepare(identifiers=None, render_root=ARCHIVE):
     features = geography(render_root)
     source_root = ROOT / read_json(STYLE_PATH)["render_archive"]
     cultures = cultural_units(features)
+    china_cultures, classification = china_cultural_units(builder) if "east_asia" in identifiers else ([], None)
     for identifier in identifiers:
         metadata = read_json(source_root / "data" / (identifier + ".json"))
         overrides = STYLE.get("map_province_colors", {}).get(identifier, {})
@@ -181,7 +221,7 @@ def prepare(identifiers=None, render_root=ARCHIVE):
         if identifier == "china":
             units = province_units(provinces, map_colours)
         elif identifier == "east_asia":
-            units = province_units(provinces, map_colours) + cultures + country_units(features, {"PRK", "RUS", "MNG", "VNM", "LAO", "PHL"}, "east_asia")
+            units = china_cultures + cultures + country_units(features, {"PRK", "RUS", "MNG", "VNM", "LAO", "PHL"}, "east_asia")
         else:
             units = country_units(features)
         # The exact orthographic projection/extent comes from the archived detail render.
@@ -190,12 +230,17 @@ def prepare(identifiers=None, render_root=ARCHIVE):
         units = [unit for unit in units if unit["geometry"].intersects(bounds)]
         metadata["regions"] = [projected for unit in units if (projected := builder.projected_region(unit, metadata))]
         update_visited(metadata["regions"], visits)
+        if identifier == "east_asia":
+            cultural = builder.load_module(ROOT / "scripts/build-china-cultural-overview.py", "china_cultural")
+            cultural.update_boundaries([region for region in metadata["regions"] if region["unit"] == "cultural-region"])
+            metadata["classification_version"] = classification
+            metadata["cultural_source_archive"] = STYLE["cultural_archive"]
         metadata["overview_unit"] = {"china": "province", "east_asia": "cultural-region", "europe_usa": "country"}[identifier]
         metadata["color_image"] = "china-colour.webp" if identifier == "china" else identifier + "-overview-colour.webp"
         metadata["source_archive"] = render_root.resolve().relative_to(ROOT).as_posix()
         metadata["relief_source_archive"] = source_root.resolve().relative_to(ROOT).as_posix()
         metadata["background"] = read_json(STYLE_PATH)["backgrounds"][identifier]
-        metadata["visit_source"] = "visited_china -> province; visited_overseas_regions -> cultural-region; visited_country_codes -> country"
+        metadata["visit_source"] = "visited_china -> province / member prefecture -> cultural-region; visited_overseas_regions -> cultural-region; visited_country_codes -> country"
         # China reuses its already rendered provincial pigments. No new China raster/scene is needed.
         if identifier != "china":
             with np.load(source_root / "data" / (identifier + ".npz")) as source:
@@ -215,6 +260,22 @@ def prepare(identifiers=None, render_root=ARCHIVE):
                       for unit in visible_units]
             arrays["region"] = rasterize(shapes, out_shape=arrays["elevation"].shape,
                                           transform=target_transform, fill=0, dtype="uint16")
+            if identifier == "east_asia":
+                previous_metadata = read_json(ARCHIVE / "data/east_asia.json")
+                with np.load(ARCHIVE / "data/east_asia.npz") as previous:
+                    previous_regions = previous["region"]
+                chinese_ids = [region["raster_id"] for region in previous_metadata["regions"] if region["country"] == "CHN"]
+                chinese_land = np.isin(previous_regions, chinese_ids) & arrays["mask"].astype(bool)
+                chinese_units = [unit for unit in visible_units if unit["country"] == "CHN"]
+                current_ids = [raster_ids[unit["id"]] for unit in chinese_units]
+                missing_rows, missing_columns = np.where(chinese_land & ~np.isin(arrays["region"], current_ids))
+                geometries = [transform(projection.transform, unit["geometry"]) for unit in chinese_units]
+                nearest = STRtree(geometries).nearest(points(arrays["x"][missing_columns] * 1000, arrays["y"][missing_rows] * 1000))
+                arrays["region"][missing_rows, missing_columns] = np.asarray(current_ids, dtype="uint16")[nearest]
+                for region in previous_metadata["regions"]:
+                    if region["country"] != "CHN" and region["id"] in raster_ids:
+                        arrays["region"][previous_regions == region["raster_id"]] = raster_ids[region["id"]]
+                metadata["filled_source_seam_cells"] = len(missing_rows)
             metadata["region_colors"] = {str(raster_ids[unit["id"]]): unit["color"] for unit in visible_units}
             metadata["palette"] = list(dict.fromkeys(metadata["region_colors"].values()))
             for region in metadata["regions"]:
@@ -226,7 +287,7 @@ def prepare(identifiers=None, render_root=ARCHIVE):
     validate_visits(render_root, visits)
 
 
-def package(identifiers=None, render_root=ARCHIVE, encode_images=True):
+def package(identifiers=None, render_root=None, encode_images=True):
     identifiers = identifiers or MAPS
     builder = load_builder()
     routes = builder.load_module(ROOT / "scripts/prepare-footprint-routes.py", "footprint_routes")
@@ -235,7 +296,11 @@ def package(identifiers=None, render_root=ARCHIVE, encode_images=True):
     validate_visits(render_root, visits)
     atlas = read_json(OUTPUT / "atlas.json")
     for identifier in identifiers:
-        metadata = read_json(render_root / "data" / (identifier + ".json"))
+        source_root = overview_root(identifier, render_root)
+        metadata = read_json(source_root / "data" / (identifier + ".json"))
+        if identifier == "east_asia":
+            publisher = builder.load_module(ROOT / "scripts/package-footprint-sectional.py", "footprint_publisher")
+            publisher.verify_cultural_config(metadata, partial=True)
         regions = metadata["regions"]
         update_visited(regions, visits)
         overview = {"unit": metadata["overview_unit"], "regions": regions,
@@ -243,6 +308,9 @@ def package(identifiers=None, render_root=ARCHIVE, encode_images=True):
                     "relief_source_archive": metadata["relief_source_archive"], "visit_source": metadata["visit_source"],
                     "routes": [], "width": metadata["width"], "height": metadata["height"],
                     "projection": metadata["projection"], "extent_km": metadata["extent_km"]}
+        for key in ("classification_version", "cultural_source_archive"):
+            if key in metadata:
+                overview[key] = metadata[key]
         previous_preview = atlas["maps"][identifier].get("overview", {}).get("preview_color_image")
         if previous_preview:
             overview["preview_color_image"] = previous_preview
@@ -250,12 +318,12 @@ def package(identifiers=None, render_root=ARCHIVE, encode_images=True):
             overview["color_source_archive"] = metadata["relief_source_archive"]
             overview["outputs"] = read_json(ROOT / metadata["relief_source_archive"] / "renders/china-render.json")["outputs"]
         else:
-            render_report = read_json(render_root / "renders" / (identifier + "-render.json"))
+            render_report = read_json(source_root / "renders" / (identifier + "-render.json"))
             overview["outputs"] = render_report["outputs"]
             overview["color_source_archive"] = metadata["source_archive"]
             overview["postprocessing"] = render_report["postprocessing"]
             overview["sea_material"] = render_report["sea_material"]
-            native = render_root / "renders" / (identifier + "-colour.png")
+            native = source_root / "renders" / (identifier + "-colour.png")
             if hashlib.sha256(native.read_bytes()).hexdigest() != render_report["outputs"][native.name]:
                 raise ValueError(f"Native render hash mismatch: {native}")
             if encode_images:
@@ -264,6 +332,10 @@ def package(identifiers=None, render_root=ARCHIVE, encode_images=True):
                         raise ValueError(f"Native render size mismatch: {native}")
                     # Encoding only: all pigments, light, shadows and sea are native Blender output.
                     image.convert("RGB").save(OUTPUT / metadata["color_image"], quality=95, method=6)
+                    image.thumbnail((1600, round(1600 * metadata["height"] / metadata["width"])), Image.Resampling.LANCZOS)
+                    preview_name = Path(metadata["color_image"]).stem + "-preview.webp"
+                    image.convert("RGB").save(OUTPUT / preview_name, quality=86, method=6)
+                    overview["preview_color_image"] = preview_name
             if not (OUTPUT / metadata["color_image"]).exists():
                 raise FileNotFoundError("Package overview images first: " + metadata["color_image"])
         atlas["maps"][identifier]["overview"] = overview
@@ -286,10 +358,10 @@ def main():
     parser.add_argument("--prepare", action="store_true")
     parser.add_argument("--package", action="store_true")
     parser.add_argument("--maps", nargs="+", choices=MAPS, default=list(MAPS))
-    parser.add_argument("--render-root", type=Path, default=ARCHIVE)
+    parser.add_argument("--render-root", type=Path)
     arguments = parser.parse_args()
     if arguments.prepare:
-        prepare(arguments.maps, arguments.render_root)
+        prepare(arguments.maps, arguments.render_root or ARCHIVE)
     if arguments.package:
         package(arguments.maps, arguments.render_root)
     if not arguments.prepare and not arguments.package:

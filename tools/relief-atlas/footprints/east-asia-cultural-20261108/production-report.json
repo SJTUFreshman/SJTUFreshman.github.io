@@ -1,0 +1,71 @@
+{
+  "maps": 3,
+  "visited_provinces": 19,
+  "culture_groups": {
+    "JPN": {
+      "groups": 8,
+      "source_units": 47
+    },
+    "KOR": {
+      "groups": 6,
+      "source_units": 17
+    }
+  },
+  "country_colours": {
+    "countries": 77,
+    "pigments": 8
+  },
+  "cultural": {
+    "groups": 47,
+    "members": 370
+  },
+  "east_asia_china": {
+    "groups": 43,
+    "classification_version": "2026-11-07-culture-first"
+  },
+  "native_assets": {
+    "china": {
+      "dimensions": [
+        6000,
+        5024
+      ],
+      "colour_mean_error_255": 0.8948,
+      "white_shadow_contrast": 0.9997
+    },
+    "east_asia": {
+      "dimensions": [
+        6000,
+        4770
+      ],
+      "colour_mean_error_255": 0.9954,
+      "white_shadow_contrast": 1.0003
+    },
+    "europe_usa": {
+      "dimensions": [
+        8000,
+        2827
+      ],
+      "colour_mean_error_255": 0.8759,
+      "white_shadow_contrast": 1.0002
+    }
+  },
+  "cultural_native": {
+    "dimensions": [
+      6000,
+      5024
+    ],
+    "colour_mean_error_255": 0.8861
+  },
+  "card_previews": {
+    "index_bytes": 1201,
+    "default_cards_and_index_bytes": 193785
+  },
+  "render_job": "304091",
+  "render_state": "COMPLETED",
+  "render_exit_code": "0:0",
+  "render_elapsed": "00:01:59",
+  "browser_checks": 382,
+  "daily_repackaging_verified": true,
+  "default_china_view": "cultural",
+  "download_sha256": "b3b0fa644281e42745511eece4cf9d94c1c4a8f3dd248d00a120f492e55c3742"
+}

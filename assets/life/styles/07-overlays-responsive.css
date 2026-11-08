@@ -321,9 +321,9 @@
     stroke-width: 2.8;
 }
 
-.footprints-city[data-cultural-id] .footprints-city-hit,
-.footprints-city[data-cultural-id].is-active .footprints-city-hit,
-.footprints-city[data-cultural-id]:focus-visible .footprints-city-hit {
+.footprints-city.has-region-boundary .footprints-city-hit,
+.footprints-city.has-region-boundary.is-active .footprints-city-hit,
+.footprints-city.has-region-boundary:focus-visible .footprints-city-hit {
     fill: transparent;
     stroke: transparent;
 }

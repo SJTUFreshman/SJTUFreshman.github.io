@@ -1,0 +1,15 @@
+{
+  "dem_arrays_unchanged": {
+    "elevation": true,
+    "mask": true,
+    "x": true,
+    "y": true
+  },
+  "regions": 63,
+  "chinese_regions": 43,
+  "visited_regions": 15,
+  "classification_version": "2026-11-07-culture-first",
+  "input_sha256": "db0aa30d57d1101fc66ea949ef3f1ffa095f43cd55f3aa3ce0506fba4482ae71",
+  "filled_source_seam_cells": 34731,
+  "unassigned_land_cells": 1412
+}

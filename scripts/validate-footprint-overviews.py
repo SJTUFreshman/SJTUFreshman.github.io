@@ -74,12 +74,14 @@ def validate_regions(identifier, metadata, content, provinces):
         assert values[1::2].min() >= -0.02 and values[1::2].max() <= metadata["height"] + 0.02
         if region["unit"] == "province":
             expected = region["province"] in provinces
+        elif region["unit"] == "cultural-region" and region["country"] == "CHN":
+            expected = bool(set(region["member_names"]) & set(content["visited_china"]))
         elif region["unit"] == "cultural-region":
             expected = region["id"] in cultural_regions
         else:
             expected = region["country"] in countries
         assert region["visited"] == expected, (identifier, region["id"], "lighting must follow actual visits only")
-    if identifier in {"china", "east_asia"}:
+    if identifier == "china":
         provincial = [region for region in regions if region["unit"] == "province"]
         province_source = read_json(ROOT / "assets/maps/china_100000_full.json")["features"]
         bounds = box(*metadata["geographic_bounds"])
@@ -91,7 +93,7 @@ def validate_regions(identifier, metadata, content, provinces):
         transit = {segment["adcode"] for route in metadata["routes"] for segment in route["segments"]}
         assert not any(region["visited"] for region in provincial if region["province"] in transit - provinces), "Passing through a province must not mark a visit"
     if not countries and not cultural_regions:
-        assert not any(region["visited"] for region in regions if region["unit"] != "province"), "No overseas visits means no overseas coloured terrain"
+        assert not any(region["visited"] for region in regions if region["country"] != "CHN"), "No overseas visits means no overseas coloured terrain"
 
 
 def validate_cultures(atlas):
@@ -117,6 +119,36 @@ def validate_cultures(atlas):
     return counts
 
 
+def validate_east_asia_china(atlas, builder):
+    metadata = atlas["maps"]["east_asia"]
+    overview = metadata["overview"]
+    units, classification = builder.china_cultural_units(builder.load_builder())
+    projector = builder.load_builder()
+    expected = {region["id"]: region for unit in units
+                if (region := projector.projected_region(unit, metadata))}
+    actual = {region["id"]: region for region in overview["regions"] if region["country"] == "CHN"}
+    china = {region["id"]: region for region in atlas["maps"]["china"]["cultural"]["regions"]}
+    assert overview["classification_version"] == classification
+    assert set(actual) == set(expected), "East Asia must cover every visible Chinese cultural region"
+    for identifier, region in actual.items():
+        assert region["unit"] == "cultural-region" and region.get("boundary_path")
+        for key in ("members", "label", "visited", "visited_members"):
+            assert region[key] == china[identifier][key], (identifier, key, "Chinese cultural maps disagree")
+        assert region["path"] == expected[identifier]["path"], (identifier, "Chinese cultural projection differs")
+    previous_root = builder.ARCHIVE
+    previous_regions = read_json(previous_root / "data/east_asia.json")["regions"]
+    source_metadata = read_json(ROOT / overview["source_archive"] / "data/east_asia.json")
+    raster_ids = {region["id"]: region["raster_id"] for region in source_metadata["regions"]}
+    with np.load(previous_root / "data/east_asia.npz") as previous, np.load(ROOT / overview["source_archive"] / "data/east_asia.npz") as updated:
+        chinese_ids = [region["raster_id"] for region in previous_regions if region["country"] == "CHN"]
+        chinese_land = np.isin(previous["region"], chinese_ids) & updated["mask"].astype(bool)
+        assert np.all(np.isin(updated["region"][chinese_land], [raster_ids[identifier] for identifier in actual])), "Chinese land must not expose unassigned administrative seams"
+        for region in previous_regions:
+            if region["country"] != "CHN":
+                assert np.all(updated["region"][previous["region"] == region["raster_id"]] == raster_ids[region["id"]]), "Overseas material coverage must stay intact"
+    return {"groups": len(actual), "classification_version": classification}
+
+
 def validate_country_colours(atlas, builder):
     detail = atlas["maps"]["europe_usa"]["regions"]
     regions = atlas["maps"]["europe_usa"]["overview"]["regions"]
@@ -137,10 +169,12 @@ def validate_country_colours(atlas, builder):
 def validate_sectional_colours(atlas, builder):
     if not builder.STYLE.get("map_palettes"):
         return
+    china_colours = {region["id"]: region["color"] for region in builder.china_cultural_units(builder.load_builder())[0]}
     for identifier, metadata in atlas["maps"].items():
         provinces = builder.STYLE.get("map_province_colors", {}).get(identifier, builder.STYLE["province_colors"])
         for region in metadata["overview"]["regions"]:
-            expected = (provinces[str(region["province"])] if region.get("province")
+            expected = (china_colours[region["id"]] if identifier == "east_asia" and region["country"] == "CHN" else
+                        provinces[str(region["province"])] if region.get("province")
                         else builder.stable_colour(region["id"], identifier))
             assert region["color"] == expected, (identifier, region["id"], "sectional pigment differs")
 
@@ -219,14 +253,17 @@ def validate_visit_updates(atlas, builder, provinces):
     regions = deepcopy([region for metadata in atlas["maps"].values() for region in metadata["overview"]["regions"]])
     provincial_codes = {region["province"] for region in regions if region["unit"] == "province"}
     province = min(provincial_codes - provinces or provincial_codes)
-    culture = next(region["id"] for region in regions if region["unit"] == "cultural-region")
+    culture = next(region["id"] for region in regions if region["unit"] == "cultural-region" and region["country"] != "CHN")
+    chinese = next(region for region in regions if region["unit"] == "cultural-region" and region["country"] == "CHN")
+    city = chinese["member_names"][0]
     country = next(region["country"] for region in regions if region["unit"] == "country" and region["country"] == "FRA")
-    builder.update_visited(regions, ({province}, {culture}, {country}))
+    builder.update_visited(regions, ({province}, {culture}, {country}, {city}))
     for region in regions:
         expected = (region.get("province") == province if region["unit"] == "province" else
+                    city in region["member_names"] if region["unit"] == "cultural-region" and region["country"] == "CHN" else
                     region["id"] == culture if region["unit"] == "cultural-region" else region["country"] == country)
         assert region["visited"] == expected, (region["id"], "adding one visit must not light adjacent regions")
-    builder.update_visited(regions, (set(), set(), set()))
+    builder.update_visited(regions, (set(), set(), set(), set()))
     assert not any(region["visited"] for region in regions), "Removing visits must restore every region to white"
 
 
@@ -336,7 +373,8 @@ def validate_card_previews():
                 assert image.size == (preview["width"], preview["height"])
                 assert image.width <= 960 and abs(image.height / image.width - detailed["height"] / detailed["width"]) < 0.002
             assert filename.stat().st_size < 150000, (identifier, view, "preview exceeds transfer budget")
-        default_bytes += (RELIEF / metadata["views"]["overview"]["image"]).stat().st_size
+        default_view = "cultural" if identifier == "china" else "overview"
+        default_bytes += (RELIEF / metadata["views"][default_view]["image"]).stat().st_size
     assert default_bytes < 250000, "Initial map cards should remain lightweight"
     return {"index_bytes": manifest_path.stat().st_size, "default_cards_and_index_bytes": default_bytes}
 
@@ -351,6 +389,7 @@ def main():
         validate_regions(identifier, metadata, content, provinces)
     cultures = validate_cultures(atlas)
     builder = load_builder()
+    east_asia_china = validate_east_asia_china(atlas, builder)
     validate_sectional_colours(atlas, builder)
     cultural = validate_china_cultural(atlas)
     countries = validate_country_colours(atlas, builder)
@@ -358,7 +397,7 @@ def main():
     native = {identifier: validate_native(identifier, metadata) for identifier, metadata in atlas["maps"].items()}
     cultural_native = validate_cultural_native(atlas)
     print(json.dumps({"maps": 3, "visited_provinces": len(provinces), "culture_groups": cultures,
-                      "country_colours": countries, "cultural": cultural, "native_assets": native,
+                      "country_colours": countries, "cultural": cultural, "east_asia_china": east_asia_china, "native_assets": native,
                       "cultural_native": cultural_native, "card_previews": validate_card_previews()}, ensure_ascii=False, indent=2))
 
 

@@ -1,12 +1,12 @@
 # 后续怎样添加城市和路线
 
-日常新增中国城市、铁路或自驾足迹，只需要更新名单或行程，再重新打包。三张图默认按省／文化区／国家显示，按钮可切回原来的城市与路线详情。白色底图与彩色地形已经对齐，浏览器按实际到访地区、城市和沿途走廊显露彩色地形，无需每次重跑 Blender。
+日常新增中国城市、铁路或自驾足迹，只需要更新名单或行程，再重新打包。中国和东亚默认按文化区显示，欧美按国家显示；中国仍可切换按省查看，各图保留原来的城市与路线详情。白色底图与彩色地形已经对齐，浏览器按实际到访地区、城市和沿途走廊显露彩色地形，无需每次重跑 Blender。
 
 ## 先找对编辑入口
 
 | 想改什么 | 编辑位置 |
 | --- | --- |
-| 新到访的中国城市（自动点亮其所属省） | `site_content.json` → `life.footprints.visited_china` |
+| 新到访的中国城市（自动点亮其所属文化区及省份视图） | `site_content.json` → `life.footprints.visited_china` |
 | 日本／韩国文化区到访 | 同一处的 `visited_overseas_regions`（稳定区域 ID） |
 | 欧美等国家到访 | 同一处的 `visited_country_codes`（地图国家代码） |
 | 日本／韩国文化区划分 | `tools/relief-atlas/cultural-regions.json` |
@@ -34,11 +34,11 @@ python scripts/build-footprint-atlas.py --package
 python scripts/validate-footprint-atlas.py
 ```
 
-打包器直接读取最新名单，同时更新中国和东亚中可见的城市及其所属省，以及中国文化区的到访色彩；地图范围以外的城市不会出现在该图上。拼错或不支持的城市全称会报错。已有地形和省份材质不变，原始工程不被改写。
+打包器直接读取最新名单，同时更新中国和东亚中可见的城市，以及两图共享的文化区到访色彩和中国的省份视图。文化区按完整成员名单推导到访，东亚只显示其地图范围内的部分。拼错或不支持的城市全称会报错。已有地形和材质不变，原始工程不被改写。
 
 打包也会自动更新静态小图：`atlas-preview.json` 是轻量索引，`*-card-*.webp` 是 960 像素预览，`*-runtime.json` 按地图保存完整几何。小图支持视图切换，不支持缩放；点击「查看大图」才下载该图的完整几何和高清图片，期间显示预览与加载动画。只调整小图生成方式时，运行 `python scripts/build-footprint-previews.py` 即可，无需重新烤制。不要只更新完整 atlas 而遗漏这些预览文件。
 
-中国地图的「文化区」视图与「省份」「城市与路线」并列。分区综合文化和方言，以现有地级市边界近似组合，并允许跨省。当前文化彩色层为 `footprints/culture-regions-20261107/cultural/`，主图和海外概览继续使用 `selected-cultural-20261106/`。新增到访城市不需要重新烤制。各图使用独立色系，因此相同省份在中国图和东亚图可以有不同颜料。
+中国地图默认打开「文化区」，与「省份」「城市与路线」并列。分区综合文化和方言，以现有地级市边界近似组合，并允许跨省。当前中国文化彩色层为 `footprints/culture-regions-20261107/cultural/`；东亚文化概览为 `footprints/east-asia-cultural-20261108/overview/`，由配色文件的 `map_overview_archives.east_asia` 指定。主图和欧美概览继续使用 `selected-cultural-20261106/`。新增到访城市不需要重新烤制。各图使用独立色系，相同文化区在中国图用青瓷、东亚图用冰川色。
 
 文化区区际边界使用低对比度的灰绿色细线，区内省市边界继续隐藏。小图描边由 `scripts/build-footprint-previews.py` 合成，大图描边由 `assets/life/styles/07-overlays-responsive.css` 控制；修改时同步两处并重建静态小图，无需重新烤制地形。
 
@@ -58,6 +58,15 @@ python scripts/validate-footprint-overviews.py
 ```
 
 此入口只替换中国文化层并刷新静态小图；不会重烤或替换其余图层。旧整套工程的发布会因文化版本不一致而被拒绝，防止回退已重划的分区。
+
+中国分区重新烤制并发布后，同步准备东亚概览。它从中国文化层反投影出同一组边界，再投影到原东亚 DEM；完整成员、短名和到访规则保持一致，日韩分组沿用既有配置。先用下列命令准备新的独立目录，再在服务器执行 `render-footprint-sectional.slurm east-asia-cultural`：
+
+```powershell
+python scripts/build-footprint-overviews.py --prepare --maps east_asia --render-root NEW_ARCHIVE/overview
+python scripts/package-footprint-sectional.py --archive NEW_ARCHIVE --east-asia-overview-only --publish
+```
+
+第二条命令需在下载原生 PNG、场景和核验报告后执行；它只替换东亚概览并刷新预览、运行时数据和工程指针。日常打包会读取每张图的当前工程，分区版本不一致时会拒绝发布，避免回退到按省着色。
 
 城市点亮表示实际到访。经过一座城市只想显示旅程时，将它放进路线途经点即可，不要因此把它加入到访名单。
 
@@ -131,7 +140,7 @@ python scripts/validate-footprint-atlas.py
 三个地图各有独立切换按钮；概览与详细视图共用同一白色地形，`atlas.json` 的 `maps.*.overview` 保存概览单元，原有 `regions` 和 `routes` 仍保存详细城市／旅程。
 
 - 中国概览按照省级行政区显示。到访省份只从 `visited_china` 中实际到访城市的 `province` 推导，不能用铁路、公路经过的省份来推导；不需要再维护一份到访省名单。
-- 东亚中的中国部分用同一省名单；日本用八大地方（九州和冲绳合并），韩国用首都圈、关东、湖西、湖南、岭南、济州六个文化区。文化分组仅用于展示，具体成员见 `cultural-regions.json` 的 `members`，键为 Natural Earth 的 `iso_3166_2`。朝鲜及周边国家各自作为一个单元。
+- 东亚中的中国部分与中国文化图共享分组和到访记录，在当前范围内显示 43 区；日本用八大地方（九州和冲绳合并），韩国用首都圈、关东、湖西、湖南、岭南、济州六个文化区。中国成员见 `china-cultural-regions.json`；日韩成员见 `cultural-regions.json` 的 `members`，键为 Natural Earth 的 `iso_3166_2`。朝鲜及周边国家各自作为一个单元。
 - 欧美按国家／地区聚合。原始 Natural Earth `adm0_a3` 是稳定代码，通常为 ISO 3166-1 alpha-3，例如 `FRA`、`DEU`、`USA`；它也有 `ALD`、`CYN` 等独立地区扩展码，严格使用实际元数据里的 ID。一个国家整体使用同一个原生 Blender 颜料颜色。
 - 未到访的省、文化区、国家保持原来的白色材质，不能为了展示配色而虚构到访。当前海外到访数组均为空。
 
@@ -151,7 +160,7 @@ python scripts/validate-footprint-overviews.py
 
 这会更新概览的到访状态，无需再次跑 Blender。海外原详细图仍保持原始展示，不会把新增国家到访伪装成去过所有州／府县。以后需要海外细级城市、铁路或公路，仍需扩展 `build-footprint-atlas.py` 的 `regional_units()`、路由及陆地裁切，再准备相应细级材质；当前中国路线流程不覆盖海外。
 
-当前概览归档由 `footprints-style.json` 的 `overview_archive` 指定，为 `footprints/sectional-20261105/overview/`。其中有 `data/`、原生 PNG、Blender 工程以及压缩的原始 Natural Earth GeoJSON。中国概览复用同一工程 `detail/` 中的全省彩色渲染。旧 `administrative-20261016` 和 `material-white-20261012` 保留作历史快照；更改分组或颜料后用 `--render-root NEW_RENDER_ROOT` 准备并渲染新归档，再更新配色文件的两个归档路径。新归档缺少几何源时，把已有归档的 `cache/*.geojson.gz` 复制进去即可离线重建。
+当前默认概览归档由 `footprints-style.json` 的 `overview_archive` 指定，为 `footprints/selected-cultural-20261106/overview/`；`map_overview_archives` 可为单张地图指定更新的工程。其中有 `data/`、原生 PNG、Blender 工程以及压缩的原始 Natural Earth GeoJSON。中国省份视图复用同一工程 `detail/` 中的全省彩色渲染。旧工程保留作历史快照；更改分组或颜料后用 `--render-root NEW_RENDER_ROOT` 准备并渲染新归档，再通过对应发布入口更新工程指针。新归档缺少几何源时，把已有归档的 `cache/*.geojson.gz` 复制进去即可离线重建。
 
 ```powershell
 python scripts/build-footprint-overviews.py --prepare --render-root NEW_RENDER_ROOT

@@ -4,11 +4,12 @@
     // 维护指南：tools/relief-atlas/ADDING-FOOTPRINTS.md；这里是显示层，不是到访/行程数据的编辑入口。
     // 新城市改 site_content.json 的 visited_china；新路线改 scripts/prepare-footprint-routes.py 再生成、打包。
     // 城市或路线重新打包后，同步修改此版本、life.html 中脚本的 atlas= 及全部 Life 资源的共享 v=。
-    const ATLAS_VERSION = '20261108-atlas-borders';
+    const ATLAS_VERSION = '20261108-east-asia-cultural';
     const ATLAS_URL = `assets/maps/relief/atlas-preview.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
             id: 'china',
+            defaultView: 'cultural',
             maxScale: 3,
             keys: ['china'],
             title: { en: 'China', 'zh-CN': '中国', 'zh-TW': '中國' },
@@ -409,7 +410,8 @@
         openButton.setAttribute('aria-haspopup', 'dialog');
         const instance = {
             definition, map, box, viewport, stage,
-            view: Object.keys(map.views)[0], viewOrder: Object.keys(map.views), viewButtons: new Set(),
+            view: map.views[definition.defaultView] ? definition.defaultView : Object.keys(map.views)[0],
+            viewOrder: Object.keys(map.views), viewButtons: new Set(),
             visible: false, viewer: null, detailed: null, pending: null,
             updateViewButtons() { updateViewButtons(this); },
             setView(view) {
@@ -718,7 +720,8 @@
         const instance = {
             definition, map, box, viewport, stage, svg, source, colorSource, width, height,
             cities, regions, regionById, visitedIds,
-            view: viewOrder.includes(initialView) ? initialView : viewOrder[0], viewOrder, viewButtons: new Set(),
+            view: viewOrder.includes(initialView) ? initialView : viewOrder.includes(definition.defaultView) ? definition.defaultView : viewOrder[0],
+            viewOrder, viewButtons: new Set(),
             maxScale: definition.maxScale,
             scale: 1, panX: 0, panY: 0, activeCity: null, viewer,
             loadAssets() {
@@ -927,13 +930,13 @@
 
         function appendRegionHit(target, item, path, center, attribute, index) {
             const group = svgElement('g', {
-                class: 'footprints-city', tabindex: 0, role: 'button',
+                class: item.boundary_path ? 'footprints-city has-region-boundary' : 'footprints-city', tabindex: 0, role: 'button',
                 [attribute]: item.id || nameOf(item) || `region-${index}`
             });
             group._footprintsCity = { data: item, element: group };
             const displayName = attribute === 'data-cultural-id' ? culturalLabel(item) : nameOf(item);
             group.append(svgElement('path', { d: path, class: 'footprints-city-hit', fill: 'transparent', stroke: 'transparent', 'vector-effect': 'non-scaling-stroke' }));
-            if (attribute === 'data-cultural-id' && item.boundary_path) {
+            if (item.boundary_path) {
                 group.append(svgElement('path', { d: item.boundary_path, class: 'footprints-cultural-boundary',
                     'vector-effect': 'non-scaling-stroke' }));
             }

@@ -167,6 +167,22 @@ async function geometryChecks(box, metadata, label, fullResolution = false) {
     assert.deepEqual(actual.cities, metadata.regions.filter(region => region.visited).map(region => String(region.id)).sort(), `${label}: detail keeps the original visited cities`);
     assert.deepEqual(actual.routes, metadata.routes.filter(route => route.corridor_path).map(route => String(route.id)).sort(), `${label}: detail keeps every original terrain corridor`);
     await culturalChecks(box, metadata, label);
+    const chineseCultures = metadata.overview.regions.filter(region => region.country === 'CHN' && region.unit === 'cultural-region');
+    if (chineseCultures.length) {
+        const actualCultures = await box.locator('[data-region-id^="CHN:"]').evaluateAll(elements => elements.map(element => ({
+            id: element.dataset.regionId, label: element.getAttribute('aria-label'),
+            boundary: element.querySelector('.footprints-cultural-boundary')?.getAttribute('d'),
+            hitStroke: getComputedStyle(element.querySelector('.footprints-city-hit')).stroke
+        })));
+        assert.deepEqual(actualCultures.map(region => region.id).sort(), chineseCultures.map(region => region.id).sort());
+        for (const region of chineseCultures) {
+            const actualRegion = actualCultures.find(item => item.id === region.id);
+            assert(Object.values(region.label).includes(actualRegion.label));
+            assert.equal(actualRegion.boundary, region.boundary_path);
+            assert(['transparent', 'rgba(0, 0, 0, 0)'].includes(actualRegion.hitStroke));
+        }
+        check(true, `${label}: East Asia displays Chinese cultural names and outer boundaries without province seams`);
+    }
     const preview = metadata.preview;
     const previewLoaded = preview?.image && new URL(actual.source, pageUrl).pathname.endsWith('/' + preview.image);
     const expected = !fullResolution && previewLoaded ? preview : metadata;
@@ -286,12 +302,28 @@ async function deviceChecks(browser, name, options, atlas, insetsOnly = false) {
             const box = page.locator(`#${definition.id}Map`);
             await box.scrollIntoViewIfNeeded();
             await waitForMap(box);
-            const initial = await viewState(box, 'overview');
-            check(initial.mode === 'overview' && initial.shown && initial.hidden, `${name} ${definition.id}: defaults to the regional view`);
+            const defaultView = definition.id === 'china' ? 'cultural' : 'overview';
+            const initial = await viewState(box, defaultView);
+            check(initial.mode === defaultView && initial.shown && initial.hidden, `${name} ${definition.id}: defaults to ${defaultView}`);
             await geometryChecks(box, atlas.maps[definition.key], `${name} ${definition.id}`);
             await insetChecks(page, box, atlas.maps[definition.key], `${name} ${definition.id}`);
         }
         check(requested.every(url => /atlas-preview\.json|\-card\-/.test(url)), `${name}: entering footprints downloads no detailed geometry or full-size terrain`);
+        if (!insetsOnly) {
+            const chinaCard = page.locator('[data-atlas-card="china"]');
+            await chinaCard.scrollIntoViewIfNeeded();
+            await chinaCard.screenshot({ path: path.join(output, `${name}-china-default-cultural.png`) });
+            await chinaCard.locator('.footprints-map-open').click();
+            const viewer = page.locator('.footprints-map-viewer[open]');
+            const largeBox = viewer.locator('.footprints-map-box');
+            await waitForMap(largeBox, true);
+            check(await largeBox.getAttribute('data-map-view') === 'cultural', `${name}: the large China map inherits the default cultural view`);
+            await culturalChecks(largeBox, atlas.maps.china, `${name} default cultural`);
+            await viewer.locator('.footprints-viewer-close').click();
+            await viewer.waitFor({ state: 'detached' });
+            await selectView(chinaCard.locator('[data-map-action="select-view"]'), 'overview');
+            await waitForMap(page.locator('#chinaMap'));
+        }
         // Language switching uses the actual site controls, including while the
         // footprints panel is open, so both the labels and retained mode matter.
         for (const language of insetsOnly ? ['en'] : ['en', 'zh-CN', 'zh-TW']) {
@@ -412,6 +444,7 @@ async function loadingChecks(browser, mobile = false) {
         check(await box.locator('.footprints-map-status').textContent() === '正在加载地图',
             'slow connection: preview loading text follows the selected language');
         const selector = card.locator('select');
+        check(await selector.inputValue() === 'cultural', 'slow connection: China defaults to cultural before the preview arrives');
         await selector.selectOption('cultural');
         await selector.selectOption('detail');
         await selector.selectOption('overview');

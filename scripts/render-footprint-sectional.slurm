@@ -23,6 +23,8 @@ if [ "${1:-main}" = insets ]; then
     render_map detail hawaii relief
 elif [ "${1:-main}" = cultural ]; then
     render_map cultural china colour
+elif [ "${1:-main}" = east-asia-cultural ]; then
+    render_map overview east_asia colour
 else
     render_map detail china relief colour
     render_map detail east_asia relief colour

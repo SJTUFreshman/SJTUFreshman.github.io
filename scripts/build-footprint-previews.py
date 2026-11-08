@@ -98,9 +98,11 @@ def package(runtime, destination):
             image = base.copy()
             paint_visits(image, destination, layer.get("color_image"), layer["regions"], scale,
                          metadata.get("routes", []) if view == "detail" else [], cultural=view == "cultural")
-            if view == "cultural":
+            if view != "detail":
                 drawing = ImageDraw.Draw(image, "RGBA")
                 for region in layer["regions"]:
+                    if not region.get("boundary_path"):
+                        continue
                     for points in path_rings(region["boundary_path"], scale):
                         drawing.line(points, fill=(57, 76, 74, 56), width=max(1, round(0.5 * SUPERSAMPLE)), joint="curve")
             paint_insets(image, metadata, destination, scale)
