@@ -52,6 +52,10 @@ async function run() {
                 permissions: ['clipboard-read', 'clipboard-write']
             });
             const page = await context.newPage();
+            const photoRequests = [];
+            page.on('request', request => {
+                if (request.url().includes('/news-journal/halloween/')) photoRequests.push(request.url());
+            });
             page.on('pageerror', error => errors.push(label + ': ' + error.message));
             page.on('response', response => {
                 if (response.url().startsWith(baseUrl) && response.status() >= 400 && !response.url().endsWith('/favicon.ico')) {
@@ -65,16 +69,30 @@ async function run() {
             await page.route('https://cdnjs.cloudflare.com/**', route => route.fulfill({ contentType: 'text/css', body: '' }));
             await page.goto(baseUrl + '/index.html', { waitUntil: 'networkidle' });
             await page.evaluate(() => document.fonts.ready);
+            assert.equal(photoRequests.length, 0, 'Journal photos do not load before opening the album');
             assert.equal(await page.locator('#publications .pub-item').count(), 6);
             assert.deepEqual(await page.locator('#publications .pub-title-text').allTextContents(), content.home.publications.map(paper => paper.title));
             const devices = page.locator('.pub-item').filter({ hasText: 'DevicesWorld:' });
             assert.equal(await devices.locator('a').first().getAttribute('href'), 'https://arxiv.org/abs/2607.13465');
             assert.equal(await devices.locator('a').nth(1).getAttribute('href'), 'https://github.com/AgenticOrgLab/DevicesWorld');
             assert.equal(await devices.locator('.pub-authors b').textContent(), 'Runde Yang');
+            for (const [title, codeUrl] of [
+                ['AppCopilot:', 'https://github.com/OpenBMB/AppCopilot'],
+                ['PRISM:', 'https://github.com/positionprivacy/PRISM']
+            ]) {
+                const codeLink = page.locator('.pub-item').filter({ hasText: title }).getByRole('link', { name: 'Code', exact: true });
+                assert.equal(await codeLink.getAttribute('href'), codeUrl);
+                assert(await codeLink.isEnabled(), title + ' has an active code link');
+            }
+            const appcopilotProject = page.locator('.project-card').filter({ hasText: 'AppCopilot' });
+            const appcopilotConfig = content.home.projects.find(project => project.id === 'appcopilot');
+            assert.equal(await appcopilotProject.getByRole('link', { name: 'Code', exact: true }).getAttribute('href'), appcopilotConfig.code_url);
+            assert.equal(await appcopilotProject.getByRole('link', { name: 'Paper', exact: true }).getAttribute('href'), appcopilotConfig.paper_url);
             if (label === 'desktop') {
-                for (const title of ['DevicesWorld:', 'AppCopilot:']) {
+                for (const title of ['DevicesWorld:', 'AppCopilot:', 'PRISM:', 'AgentXRay:']) {
                     await page.locator('.pub-item').filter({ hasText: title }).getByRole('button', { name: 'Cite' }).click();
-                    assert((await page.evaluate(() => navigator.clipboard.readText())).includes(title));
+                    const copiedCitation = await page.evaluate(() => navigator.clipboard.readText());
+                    assert.equal(copiedCitation.replace(/\r\n/g, '\n'), content.home.publications.find(paper => paper.title.startsWith(title)).citation);
                     assert(await page.locator('.pub-item').filter({ hasText: title }).getByRole('button', { name: 'Copied' }).isDisabled());
                 }
             }
@@ -90,15 +108,34 @@ async function run() {
                     const dialog = page.getByRole('dialog');
                     await page.waitForFunction(() => document.getElementById('newsJournal').open);
                     assert.equal(await dialog.locator('h2').textContent(), entry.text[language]);
-                    assert.equal(await dialog.locator('time').textContent(), entry.date);
-                    assert.equal(await dialog.locator('.journal-body').textContent(), content.home.labels[language].journal_body);
-                    assert.equal(await dialog.locator('img').getAttribute('alt'), content.home.labels[language].journal_image_alt);
-                    await page.waitForFunction(() => {
-                        const picture = document.querySelector('#newsJournal img');
-                        return picture.complete && picture.naturalWidth > 0;
-                    });
-                    assert(await dialog.locator('.journal-demo').isVisible());
-                    assert(await dialog.locator('.journal-doodle').isVisible());
+                    if (entry.journal.photos) {
+                        assert.equal(await dialog.getAttribute('data-journal-layout'), 'photos');
+                        assert.equal(await dialog.locator('img').count(), entry.journal.photos.length);
+                        assert.equal(await dialog.locator('.journal-heading, .journal-body, .journal-demo, figcaption, .journal-footer, time').count(), 0);
+                        assert.equal((await dialog.locator('.journal-entry').textContent()).trim(), entry.text[language]);
+                        assert(await dialog.locator('h2').evaluate(element => getComputedStyle(element).clipPath === 'inset(50%)'), 'Album title is accessible but visually hidden');
+                        assert(await dialog.locator('.journal-close > [data-key]').evaluate(element => getComputedStyle(element).clipPath === 'inset(50%)'), 'Close control has no visible text');
+                        for (const [photoIndex, photo] of entry.journal.photos.entries()) {
+                            const picture = dialog.locator('img').nth(photoIndex);
+                            assert.equal(await picture.getAttribute('src'), photo.src);
+                            assert.equal(await picture.getAttribute('alt'), photo.alt[language]);
+                            assert.equal(await dialog.locator('.journal-print').nth(photoIndex).getAttribute('href'), photo.src);
+                            await picture.scrollIntoViewIfNeeded();
+                            await picture.evaluate(element => element.decode());
+                            assert(await picture.evaluate(element => {
+                                const styles = getComputedStyle(element);
+                                return element.naturalWidth > 0 && Math.abs(parseFloat(styles.width) / parseFloat(styles.height) - element.naturalWidth / element.naturalHeight) < 0.01;
+                            }), 'Photos retain their full proportions');
+                        }
+                    } else {
+                        assert.equal(await dialog.getAttribute('data-journal-layout'), 'note');
+                        assert.equal(await dialog.locator('time').textContent(), entry.date);
+                        assert.equal(await dialog.locator('.journal-body').textContent(), content.home.labels[language].journal_body);
+                        assert.equal(await dialog.locator('img').getAttribute('alt'), content.home.labels[language].journal_image_alt);
+                        await dialog.locator('img').evaluate(element => element.decode());
+                        assert(await dialog.locator('.journal-demo').isVisible());
+                        assert(await dialog.locator('.journal-doodle').isVisible());
+                    }
                     assert(await page.evaluate(() => document.documentElement.classList.contains('news-journal-open')));
                     await page.keyboard.press('Tab');
                     await page.keyboard.press('Tab');
@@ -110,6 +147,13 @@ async function run() {
                     assert(dimensions.scrollWidth <= dimensions.width + 1, label + ': no horizontal journal overflow');
                     assert(dimensions.left >= 0 && dimensions.right <= width + 1, label + ': journal stays inside the viewport');
                     if (language === 'zh-CN') {
+                        await dialog.evaluate(element => element.querySelector(':focus')?.blur());
+                        if (entry.journal.photos) {
+                            await dialog.locator('.journal-print').nth(3).scrollIntoViewIfNeeded();
+                            await page.screenshot({ path: path.join(output, label + '-' + entry.id + '-middle.png'), animations: 'disabled' });
+                            await dialog.locator('img').last().scrollIntoViewIfNeeded();
+                            await page.screenshot({ path: path.join(output, label + '-' + entry.id + '-end.png'), animations: 'disabled' });
+                        }
                         await dialog.evaluate(element => element.scrollTop = 0);
                         await page.screenshot({ path: path.join(output, label + '-' + entry.id + '.png'), animations: 'disabled' });
                     }
@@ -129,14 +173,14 @@ async function run() {
             await first.focus();
             await page.keyboard.press('Space');
             await page.waitForFunction(() => document.getElementById('newsJournal').open);
-            await page.locator('.journal-body').click();
-            assert(await page.locator('#newsJournal').evaluate(element => element.open), 'Clicking the journal text keeps it open');
+            await page.locator('.journal-album').click({ position: { x: 14, y: 14 } });
+            assert(await page.locator('#newsJournal').evaluate(element => element.open), 'Clicking the album paper keeps it open');
             await page.mouse.click(2, 2);
             await verifyClosed(page, first);
             if (label !== 'desktop') {
                 await first.click();
-                await page.locator('.journal-footer').scrollIntoViewIfNeeded();
-                assert(await page.locator('.journal-footer').isVisible(), 'Mobile readers can reach the end');
+                await page.locator('.journal-print').last().scrollIntoViewIfNeeded();
+                assert(await page.locator('.journal-print').last().isVisible(), 'Mobile readers can reach the last photo');
                 assert(await page.locator('.journal-close').evaluate(element => {
                     const bounds = element.getBoundingClientRect();
                     return bounds.top >= 0 && bounds.bottom <= window.innerHeight;

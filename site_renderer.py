@@ -598,10 +598,15 @@ def render_home_i18n(content: dict[str, Any]) -> str:
 
     for index, item in enumerate(home["news"]):
         key = key_for("news", item, index)
+        journal = item.get("journal", {})
         for lang in LANGS:
             i18n[lang][key] = lang_value(item.get("text", {}), lang)
+            if journal.get("photos"):
+                for photo_index, photo in enumerate(journal["photos"]):
+                    i18n[lang][f"{key}_journal_photo_{photo_index}_alt"] = esc(lang_value(photo.get("alt", {}), lang))
+                continue
             for field in ("body", "caption", "image_alt"):
-                value = lang_value(item.get("journal", {}).get(field, {}), lang)
+                value = lang_value(journal.get(field, {}), lang)
                 i18n[lang][f"{key}_journal_{field}"] = esc(value or home["labels"][lang][f"journal_{field}"])
 
     for index, item in enumerate(home["projects"]):
@@ -781,6 +786,24 @@ def render_home_news(content: dict[str, Any]) -> str:
                     <span class="news-read"><span data-key="news_read">{esc(labels["news_read"])}</span><span aria-hidden="true">↗</span></span>
                 </button>
             </li>""")
+        if journal.get("photos"):
+            photos = []
+            for photo_index, photo in enumerate(journal["photos"]):
+                loading = "eager" if photo_index < 3 else "lazy"
+                photos.append(f"""                    <a class="journal-print" href="{esc(photo["src"])}" target="_blank" rel="noopener noreferrer">
+                        <img src="{esc(photo["src"])}" alt="{esc(lang_value(photo.get("alt", {}), "en"))}" data-alt-key="{esc(key)}_journal_photo_{photo_index}_alt" width="{int(photo["width"])}" height="{int(photo["height"])}" loading="{loading}" decoding="async">
+                    </a>""")
+            photos_markup = "\n".join(photos)
+            templates.append(f"""        <template id="journal-{esc(key)}">
+            <article class="journal-entry journal-album" data-journal-theme="{theme}" data-journal-layout="photos">
+                <h2 class="journal-title journal-sr-only" data-key="{esc(key)}">{lang_value(item.get("text", {}), "en")}</h2>
+                <svg class="journal-sticker" viewBox="0 0 100 100" aria-hidden="true"><path class="journal-ghost" d="M27 77V45a24 24 0 0 1 48 0v32l-12-7-12 9-12-9Z"/><ellipse cx="43" cy="45" rx="3" ry="5"/><ellipse cx="60" cy="45" rx="3" ry="5"/><path class="journal-spark" d="m13 18 2 6 6 2-6 2-2 6-2-6-6-2 6-2Zm70 43 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"/></svg>
+                <div class="journal-gallery">
+{photos_markup}
+                </div>
+            </article>
+        </template>""")
+            continue
         templates.append(f"""        <template id="journal-{esc(key)}">
             <article class="journal-entry" data-journal-theme="{theme}">
                 <header class="journal-heading">

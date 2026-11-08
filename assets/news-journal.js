@@ -29,6 +29,7 @@
         opener = trigger;
         content.replaceChildren(template.content.cloneNode(true));
         content.querySelector('.journal-title').id = 'newsJournalTitle';
+        dialog.dataset.journalLayout = content.querySelector('.journal-entry').dataset.journalLayout || 'note';
         setLanguage(document.documentElement.lang);
         document.documentElement.classList.add('news-journal-open');
         dialog.showModal();
@@ -58,6 +59,7 @@
     dialog.addEventListener('close', () => {
         document.documentElement.classList.remove('news-journal-open');
         content.replaceChildren();
+        delete dialog.dataset.journalLayout;
         opener?.focus({ preventScroll: true });
         opener = null;
         pointerStartedOutside = false;

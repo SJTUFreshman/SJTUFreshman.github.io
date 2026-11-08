@@ -116,7 +116,88 @@
         },
         "journal": {
           "theme": "halloween",
-          "image": "assets/news-journal/halloween.svg"
+          "photos": [
+            {
+              "src": "assets/news-journal/halloween/photo-04.webp",
+              "width": 1500,
+              "height": 2000,
+              "alt": {
+                "en": "A group selfie at the Halloween party, with a witch hat and Halloween headbands",
+                "zh-CN": "万圣节派对上的集体自拍，大家戴着巫师帽和万圣节发箍",
+                "zh-TW": "萬聖節派對上的集體自拍，大家戴著巫師帽和萬聖節髮箍"
+              }
+            },
+            {
+              "src": "assets/news-journal/halloween/photo-01.webp",
+              "width": 2000,
+              "height": 1500,
+              "alt": {
+                "en": "A friend wearing a skull headband and posing with two peace signs",
+                "zh-CN": "戴着骷髅发箍的朋友对镜头比耶",
+                "zh-TW": "戴著骷髏髮箍的朋友對鏡頭比耶"
+              }
+            },
+            {
+              "src": "assets/news-journal/halloween/photo-02.webp",
+              "width": 2000,
+              "height": 1500,
+              "alt": {
+                "en": "Friends at the party, with an orange witch hat",
+                "zh-CN": "派对上的朋友与橙色巫师帽",
+                "zh-TW": "派對上的朋友與橙色巫師帽"
+              }
+            },
+            {
+              "src": "assets/news-journal/halloween/photo-03.webp",
+              "width": 1500,
+              "height": 2000,
+              "alt": {
+                "en": "Another group selfie, with a white ghost costume beside the table",
+                "zh-CN": "餐桌旁的另一张集体自拍，一旁是白色幽灵装扮",
+                "zh-TW": "餐桌旁的另一張集體自拍，一旁是白色幽靈裝扮"
+              }
+            },
+            {
+              "src": "assets/news-journal/halloween/photo-08.webp",
+              "width": 1500,
+              "height": 2000,
+              "alt": {
+                "en": "Everyone raising their drinks together above the party table",
+                "zh-CN": "大家围着餐桌一起举杯",
+                "zh-TW": "大家圍著餐桌一起舉杯"
+              }
+            },
+            {
+              "src": "assets/news-journal/halloween/photo-05.webp",
+              "width": 1500,
+              "height": 2000,
+              "alt": {
+                "en": "A little jack-o'-lantern decoration on a bottle on the table",
+                "zh-CN": "餐桌上瓶子顶端的小南瓜装饰",
+                "zh-TW": "餐桌上瓶子頂端的小南瓜裝飾"
+              }
+            },
+            {
+              "src": "assets/news-journal/halloween/photo-06.webp",
+              "width": 2000,
+              "height": 1500,
+              "alt": {
+                "en": "Pumpkin decorations tucked into the plants by the window",
+                "zh-CN": "窗边绿植里的南瓜装饰",
+                "zh-TW": "窗邊綠植裡的南瓜裝飾"
+              }
+            },
+            {
+              "src": "assets/news-journal/halloween/photo-07.webp",
+              "width": 2000,
+              "height": 1500,
+              "alt": {
+                "en": "A friend in a witch hat beside the projected party video",
+                "zh-CN": "戴着巫师帽的朋友与派对上的投影画面",
+                "zh-TW": "戴著巫師帽的朋友與派對上的投影畫面"
+              }
+            }
+          ]
         }
       },
       {
@@ -158,7 +239,7 @@
         "authors_html": "Qiran Zhang, Yuheng Wang, <b>Runde Yang</b>, Lin Wu, Jingru Fan, Shu Yao, Jie Zhang, Tianle Zhou, Huatao Li, Ruijie Shi, Yihan Li, Chen Qian",
         "venue": "NeurIPS 2026",
         "paper_url": "https://arxiv.org/abs/2605.19382",
-        "code_url": "#",
+        "code_url": "https://github.com/positionprivacy/PRISM",
         "citation": "@misc{zhang2026prismbenchmarkprogrammaticspatialtemporal,\n      title={PRISM: A Benchmark for Programmatic Spatial-Temporal Reasoning}, \n      author={Qiran Zhang and Yuheng Wang and Runde Yang and Lin Wu and Jingru Fan and Shu Yao and Jie Zhang and Tianle Zhou and Huatao Li and Ruijie Shi and Yihan Li and Chen Qian},\n      year={2026},\n      eprint={2605.19382},\n      archivePrefix={arXiv},\n      primaryClass={cs.AI},\n      url={https://arxiv.org/abs/2605.19382}, \n}"
       },
       {
@@ -168,7 +249,7 @@
         "venue": "ICML 2026",
         "paper_url": "https://arxiv.org/abs/2602.05353",
         "code_url": "#",
-        "citation": ""
+        "citation": "@misc{shi2026agentxraywhiteboxingagenticsystems,\n  title={AgentXRay: White-Boxing Agentic Systems via Workflow Reconstruction},\n  author={Ruijie Shi and Houbin Zhang and Yuecheng Han and Yuheng Wang and Jingru Fan and Runde Yang and Yufan Dang and Huatao Li and Dewen Liu and Yuan Cheng and Chen Qian},\n  year={2026},\n  eprint={2602.05353},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2602.05353}\n}"
       },
       {
         "id": "DevicesWorld_2026",
@@ -185,7 +266,7 @@
         "authors_html": "Jingru Fan, Yufan Dang, Jingyao Wu, Huatao Li, <b>Runde Yang</b>, Xiyuan Yang, Yuheng Wang, Chen Qian",
         "venue": "arXiv preprint arXiv:2509.02444",
         "paper_url": "https://arxiv.org/abs/2509.02444",
-        "code_url": "",
+        "code_url": "https://github.com/OpenBMB/AppCopilot",
         "citation": "@misc{fan2025appcopilotgeneralaccuratelonghorizon,\n  title={AppCopilot: Toward General, Accurate, Long-Horizon, and Efficient Mobile Agent},\n  author={Jingru Fan and Yufan Dang and Jingyao Wu and Huatao Li and Runde Yang and Xiyuan Yang and Yuheng Wang and Chen Qian},\n  year={2025},\n  eprint={2509.02444},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2509.02444}\n}"
       }
     ],
@@ -200,8 +281,8 @@
           "zh-CN": "一个多模态多智能体设备端助手，探索工具使用、规划和鲁棒的 UI 定位。",
           "zh-TW": "一個多模態多智能體設備端助手，探索工具使用、規劃和魯棒的 UI 定位。"
         },
-        "paper_url": "#",
-        "code_url": "#"
+        "paper_url": "https://arxiv.org/abs/2509.02444",
+        "code_url": "https://github.com/OpenBMB/AppCopilot"
       },
       {
         "id": "teachmaster",
