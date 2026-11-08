@@ -26,6 +26,8 @@ class PreparePagesTests(unittest.TestCase):
         self.write('images/千島湖.jpg', b'photo')
         self.write('documents/证书.pdf', b'certificate')
         self.write('assets/mochi/frames/idle/idle-00.png', b'pet frame')
+        self.write('assets/music/zhang-qiran/song.m4a', b'audio track')
+        self.write('assets/music/shell.html', b'music shell')
         self.write('assets/mochi/build.py', b'private build source')
         self.write('assets/.env', b'PRIVATE=value')
         self.write('assets/celestial/hosted/manifest.json', b'old manifest')
@@ -51,7 +53,8 @@ class PreparePagesTests(unittest.TestCase):
     def test_public_website_preserves_assets_and_excludes_retired_atlas_and_sources(self):
         report = self.prepare()
         for relative in [*PAGES.ROOT_FILES, 'images/千島湖.jpg', 'documents/证书.pdf',
-                         'assets/mochi/frames/idle/idle-00.png', '404.html', '_headers']:
+                         'assets/mochi/frames/idle/idle-00.png', 'assets/music/zhang-qiran/song.m4a',
+                         'assets/music/shell.html', '404.html', '_headers']:
             self.assertTrue((self.output / relative).is_file(), relative)
         for relative in ['assets/.env', 'assets/mochi/build.py', 'assets/untracked.png',
                          'assets/celestial', 'assets/mochi/package.json',

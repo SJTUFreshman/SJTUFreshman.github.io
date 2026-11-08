@@ -420,6 +420,7 @@
             ) return false;
             navigation.committed = true;
             writePayload(options.to, options.mode === 'home' ? 'home' : 'cool');
+            if (window.SiteMusicNavigation?.(new URL(options.href, window.location.href).href)) return true;
             if (Number.isInteger(options.historyDelta) && options.historyDelta !== 0) {
                 const hrefBeforeNavigation = window.location.href;
                 window.history.go(options.historyDelta);

@@ -16,6 +16,16 @@
     </script>
     <script>
     (function () {
+        if (window !== window.top || !/^https?:$/.test(location.protocol) || /\.github\.io$/i.test(location.hostname)) return;
+        const route = new URL(location.href);
+        if (route.searchParams.get('music') === 'off') return;
+        const shell = new URL('assets/music/shell.html', route);
+        shell.searchParams.set('route', route.pathname + route.search + route.hash);
+        location.replace(shell.href);
+    })();
+    </script>
+    <script>
+    (function () {
         try {
             const storageKey = 'runde:route-transition:v1';
             const raw = sessionStorage.getItem(storageKey);
@@ -59,7 +69,8 @@
             visibility: hidden !important;
         }
     </style>
-<script src="assets/stellar-transit.js?v=20261108-east-asia-cultural" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
+<script src="assets/stellar-transit.js?v=20261108-east-asia-cultural&music=20261108-music" defer onerror="document.documentElement.classList.remove('stellar-arrival-pending')"></script>
+    <script src="assets/music/page-bridge.js?v=20261108-east-asia-cultural" defer></script>
     <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="robots" content="noindex">
+    <title>Runde Yang</title>
+    <link rel="stylesheet" href="player.css?v=20261109-home-style">
+    <script src="shell.js?v=20261108-music" defer></script>
+    <script src="player.js?v=20261108-cassette" defer></script>
+</head>
+<body>
+    <iframe id="sitePage" title="Runde Yang · Website" allow="autoplay; fullscreen; clipboard-write" allowfullscreen></iframe>
+    <p id="pageRecovery" hidden>页面暂未载入。<a id="pageRetry" href="../../index.html?music=off">重新打开页面</a></p>
+    <aside id="siteMusic" lang="zh-CN" aria-label="音乐播放器">
+        <svg class="music-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <defs>
+                <symbol id="music-icon-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z" fill="currentColor" stroke="none"/></symbol>
+                <symbol id="music-icon-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="4"/></symbol>
+                <symbol id="music-icon-previous" viewBox="0 0 24 24"><path d="M6 5v14"/><path d="m19 5-10 7 10 7Z" fill="currentColor" stroke="none"/></symbol>
+                <symbol id="music-icon-next" viewBox="0 0 24 24"><path d="M18 5v14"/><path d="m5 5 10 7-10 7Z" fill="currentColor" stroke="none"/></symbol>
+                <symbol id="music-icon-repeat" viewBox="0 0 24 24"><path d="m16 3 4 4-4 4M20 7H7a4 4 0 0 0-4 4m5 10-4-4 4-4m-4 4h13a4 4 0 0 0 4-4"/></symbol>
+                <symbol id="music-icon-shuffle" viewBox="0 0 24 24"><path d="M3 5h2c5 0 9 14 14 14h2m-4-4 4 4-4 3M3 19h2c2 0 4-3 6-6m3-6c2-2 3-2 5-2h2m-4-3 4 3-4 4"/></symbol>
+                <symbol id="music-icon-volume" viewBox="0 0 24 24"><path d="M11 4 6 8H3v8h3l5 4Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+                <symbol id="music-icon-muted" viewBox="0 0 24 24"><path d="M11 4 6 8H3v8h3l5 4Zm5 5 6 6m0-6-6 6"/></symbol>
+                <symbol id="music-icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+                <symbol id="music-icon-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+                <symbol id="music-icon-arrow" viewBox="0 0 24 24"><path d="M6 18 18 6M7 6h11v11"/></symbol>
+                <symbol id="music-icon-note" viewBox="0 0 24 24"><path d="M9 18V6l11-3v12M9 10l11-3"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="15" rx="3" ry="2.5"/></symbol>
+            </defs>
+        </svg>
+        <section class="music-panel" id="musicPanel" aria-label="随身听" hidden>
+            <header class="music-heading">
+                <div><span class="music-eyebrow">MUSIC</span><h2>随身听</h2></div>
+                <button type="button" class="music-icon" id="musicClose" aria-label="收起播放器"><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-close"/></svg></button>
+            </header>
+            <div class="music-now">
+                <div class="music-now-label"><span id="musicArtist">张祺然</span><span class="music-playback-status" id="musicPlaybackStatus">等待播放</span></div>
+                <h3 id="musicTitle">加载歌单…</h3>
+                <p id="musicNote">让音乐陪你逛一会儿</p>
+            </div>
+            <div class="music-progress">
+                <label class="music-sr-only" for="musicSeek">播放进度</label>
+                <input id="musicSeek" type="range" min="0" max="100" value="0" step="0.1" disabled>
+                <div class="music-timing"><span id="musicTime">0:00</span><a id="musicSource" target="_blank" rel="noopener noreferrer" hidden>原视频<svg class="music-glyph" aria-hidden="true"><use href="#music-icon-arrow"/></svg></a><span id="musicDuration">0:00</span></div>
+            </div>
+            <div class="music-controls">
+                <button type="button" class="music-icon music-mode" id="musicMode" aria-label="播放模式：列表循环" title="列表循环"><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-repeat"/></svg></button>
+                <div class="music-transport">
+                    <button type="button" class="music-icon" id="musicPrevious" aria-label="上一首" title="上一首"><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-previous"/></svg></button>
+                    <button type="button" class="music-play" id="musicPlay" aria-label="播放" disabled><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-play"/></svg></button>
+                    <button type="button" class="music-icon" id="musicNext" aria-label="下一首" title="下一首"><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-next"/></svg></button>
+                </div>
+                <button type="button" class="music-icon" id="musicMute" aria-label="静音" title="静音"><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-volume"/></svg></button>
+            </div>
+            <div class="music-volume-row"><label for="musicVolume">音量</label><input id="musicVolume" type="range" min="0" max="1" step="0.01" value="0.7"><span id="musicVolumeValue">70%</span></div>
+            <p class="music-status" id="musicStatus" role="status" hidden></p>
+            <div class="music-library-heading"><label for="musicSinger">歌单</label><select id="musicSinger" aria-label="选择歌手"></select><span id="musicCount"></span></div>
+            <div class="music-search"><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-search"/></svg><label class="music-sr-only" for="musicSearch">搜索曲目</label><input id="musicSearch" type="search" placeholder="找一首此刻想听的歌" autocomplete="off"></div>
+            <ol class="music-tracks" id="musicTracks" aria-label="曲目列表"></ol>
+            <p class="music-empty" id="musicEmpty" hidden>没有找到这首歌，换个词试试。</p>
+            <footer class="music-footer">一把吉他，一些想唱的歌。</footer>
+        </section>
+        <div class="music-dock">
+            <button type="button" class="music-toggle" id="musicToggle" aria-controls="musicPanel" aria-expanded="false" aria-label="打开音乐播放器">
+                <span class="music-mark" aria-hidden="true"><svg class="music-glyph"><use href="#music-icon-note"/></svg></span>
+                <span class="music-dock-copy"><span class="music-dock-label">随身听<span class="music-levels" aria-hidden="true"><span></span><span></span><span></span></span></span><span class="music-dock-track"><span id="musicDockTitle">加载歌单…</span><span id="musicDockArtist">张祺然</span></span></span>
+            </button>
+            <button type="button" class="music-quick-play" id="musicQuickPlay" aria-label="播放" disabled><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-play"/></svg></button>
+        </div>
+        <audio id="siteAudio" preload="none"></audio>
+    </aside>
+    <noscript><p>请启用 JavaScript，或<a href="../../index.html?music=off">直接访问主页</a>。</p></noscript>
+</body>
+</html>

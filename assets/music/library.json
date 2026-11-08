@@ -1,0 +1,427 @@
+{
+  "version": 1,
+  "artists": [
+    {
+      "id": "zhang-qiran",
+      "name": "张祺然"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "zhang-qiran-BV1hY456cErB",
+      "artistId": "zhang-qiran",
+      "title": "天使",
+      "originalArtist": "陈绮贞",
+      "date": "2026-11-07",
+      "duration": 165.916,
+      "src": "assets/music/zhang-qiran/BV1hY456cErB.m4a",
+      "source": "https://www.bilibili.com/video/BV1hY456cErB/",
+      "sourceTitle": "天使  cover  陈绮贞"
+    },
+    {
+      "id": "zhang-qiran-BV1y2so6eEHv",
+      "artistId": "zhang-qiran",
+      "title": "蓝旗袍",
+      "originalArtist": "范晓萱",
+      "date": "2026-10-29",
+      "duration": 84.125,
+      "src": "assets/music/zhang-qiran/BV1y2so6eEHv.m4a",
+      "source": "https://www.bilibili.com/video/BV1y2so6eEHv/",
+      "sourceTitle": "蓝旗袍 cover 范晓萱"
+    },
+    {
+      "id": "zhang-qiran-BV186pZ66EHG",
+      "artistId": "zhang-qiran",
+      "title": "☔️♥️",
+      "note": "吉他弹唱 · 保留原视频标题",
+      "date": "2026-10-12",
+      "duration": 91.102,
+      "src": "assets/music/zhang-qiran/BV186pZ66EHG.m4a",
+      "source": "https://www.bilibili.com/video/BV186pZ66EHG/",
+      "sourceTitle": "☔️♥️"
+    },
+    {
+      "id": "zhang-qiran-BV1RKHj6fEEv",
+      "artistId": "zhang-qiran",
+      "title": "我们俩",
+      "note": "海边合唱 · with Adonis哈哈哈",
+      "date": "2026-10-04",
+      "duration": 182.485,
+      "src": "assets/music/zhang-qiran/BV1RKHj6fEEv.m4a",
+      "source": "https://www.bilibili.com/video/BV1RKHj6fEEv/",
+      "sourceTitle": "和 @Adonis哈哈哈 在海边唱了《我们俩》！"
+    },
+    {
+      "id": "zhang-qiran-BV1UzaL6CEXi",
+      "artistId": "zhang-qiran",
+      "title": "此视频用于展示新发型",
+      "note": "吉他弹唱 · 保留原视频标题",
+      "date": "2026-09-28",
+      "duration": 180.74,
+      "src": "assets/music/zhang-qiran/BV1UzaL6CEXi.m4a",
+      "source": "https://www.bilibili.com/video/BV1UzaL6CEXi/",
+      "sourceTitle": "此视频用于展示新发型"
+    },
+    {
+      "id": "zhang-qiran-BV1Kph66BE5J",
+      "artistId": "zhang-qiran",
+      "title": "蟈氰盥",
+      "date": "2026-09-21",
+      "duration": 85.958,
+      "src": "assets/music/zhang-qiran/BV1Kph66BE5J.m4a",
+      "source": "https://www.bilibili.com/video/BV1Kph66BE5J/",
+      "sourceTitle": "《蟈氰盥》"
+    },
+    {
+      "id": "zhang-qiran-BV1UFYd6xErR",
+      "artistId": "zhang-qiran",
+      "title": "空中飞人",
+      "originalArtist": "窦靖童",
+      "date": "2026-09-12",
+      "duration": 254.421,
+      "src": "assets/music/zhang-qiran/BV1UFYd6xErR.m4a",
+      "source": "https://www.bilibili.com/video/BV1UFYd6xErR/",
+      "sourceTitle": "空中飞人 cover 窦靖童"
+    },
+    {
+      "id": "zhang-qiran-BV1cdGA61E8f",
+      "artistId": "zhang-qiran",
+      "title": "心酸",
+      "originalArtist": "林宥嘉",
+      "date": "2026-07-31",
+      "duration": 194.901,
+      "src": "assets/music/zhang-qiran/BV1cdGA61E8f.m4a",
+      "source": "https://www.bilibili.com/video/BV1cdGA61E8f/",
+      "sourceTitle": "《心酸》 cover 林宥嘉"
+    },
+    {
+      "id": "zhang-qiran-BV1sR7L6YEPe",
+      "artistId": "zhang-qiran",
+      "title": "我亲爱的偏执狂",
+      "originalArtist": "陈绮贞",
+      "date": "2026-06-26",
+      "duration": 159.881,
+      "src": "assets/music/zhang-qiran/BV1sR7L6YEPe.m4a",
+      "source": "https://www.bilibili.com/video/BV1sR7L6YEPe/",
+      "sourceTitle": "《我亲爱的偏执狂》 cover  陈绮贞"
+    },
+    {
+      "id": "zhang-qiran-BV1q87K6ZEy7",
+      "artistId": "zhang-qiran",
+      "title": "这是我的地方",
+      "originalArtist": "柯泯薰",
+      "date": "2026-06-22",
+      "duration": 136.604,
+      "src": "assets/music/zhang-qiran/BV1q87K6ZEy7.m4a",
+      "source": "https://www.bilibili.com/video/BV1q87K6ZEy7/",
+      "sourceTitle": "《这是我的地方》 cover  柯泯薰"
+    },
+    {
+      "id": "zhang-qiran-BV131j36FENY",
+      "artistId": "zhang-qiran",
+      "title": "巷口",
+      "originalArtist": "安溥",
+      "date": "2026-06-16",
+      "duration": 206.621,
+      "src": "assets/music/zhang-qiran/BV131j36FENY.m4a",
+      "source": "https://www.bilibili.com/video/BV131j36FENY/",
+      "sourceTitle": "《巷口》 cover 安溥"
+    },
+    {
+      "id": "zhang-qiran-BV1LHJG6LEq6",
+      "artistId": "zhang-qiran",
+      "title": "自己",
+      "originalArtist": "许钧",
+      "date": "2026-06-15",
+      "duration": 191.552,
+      "src": "assets/music/zhang-qiran/BV1LHJG6LEq6.m4a",
+      "source": "https://www.bilibili.com/video/BV1LHJG6LEq6/",
+      "sourceTitle": "《自己》 cover  许钧"
+    },
+    {
+      "id": "zhang-qiran-BV1oeovBKEcD",
+      "artistId": "zhang-qiran",
+      "title": "如果每天都可以 happy happy 谁想要 sad",
+      "originalArtist": "陈娴静",
+      "date": "2026-04-26",
+      "duration": 201.973,
+      "src": "assets/music/zhang-qiran/BV1oeovBKEcD.m4a",
+      "source": "https://www.bilibili.com/video/BV1oeovBKEcD/",
+      "sourceTitle": "如果每天都可以happyhappy谁想要sad  cover 陈娴静"
+    },
+    {
+      "id": "zhang-qiran-BV1v4dmBvECi",
+      "artistId": "zhang-qiran",
+      "title": "在意与默契",
+      "originalArtist": "DSPS",
+      "date": "2026-04-21",
+      "duration": 229.853,
+      "src": "assets/music/zhang-qiran/BV1v4dmBvECi.m4a",
+      "source": "https://www.bilibili.com/video/BV1v4dmBvECi/",
+      "sourceTitle": "《在意与默契》  DSPS"
+    },
+    {
+      "id": "zhang-qiran-BV1fEQnBHECs",
+      "artistId": "zhang-qiran",
+      "title": "思念",
+      "date": "2026-04-15",
+      "duration": 145.024,
+      "src": "assets/music/zhang-qiran/BV1fEQnBHECs.m4a",
+      "source": "https://www.bilibili.com/video/BV1fEQnBHECs/",
+      "sourceTitle": "《思念》"
+    },
+    {
+      "id": "zhang-qiran-BV17CDiB4E39",
+      "artistId": "zhang-qiran",
+      "title": "艳火",
+      "originalArtist": "安溥",
+      "date": "2026-04-07",
+      "duration": 176.947,
+      "src": "assets/music/zhang-qiran/BV17CDiB4E39.m4a",
+      "source": "https://www.bilibili.com/video/BV17CDiB4E39/",
+      "sourceTitle": "《艳火》  cover  安溥"
+    },
+    {
+      "id": "zhang-qiran-BV1twXSBSEV1",
+      "artistId": "zhang-qiran",
+      "title": "毕竟",
+      "originalArtist": "安溥",
+      "date": "2026-03-29",
+      "duration": 165.404,
+      "src": "assets/music/zhang-qiran/BV1twXSBSEV1.m4a",
+      "source": "https://www.bilibili.com/video/BV1twXSBSEV1/",
+      "sourceTitle": "《毕竟》  cover  安溥"
+    },
+    {
+      "id": "zhang-qiran-BV1ZSQZBRE5g",
+      "artistId": "zhang-qiran",
+      "title": "欲望把眼前的地板铺满",
+      "originalArtist": "安溥",
+      "date": "2026-03-23",
+      "duration": 117.272,
+      "src": "assets/music/zhang-qiran/BV1ZSQZBRE5g.m4a",
+      "source": "https://www.bilibili.com/video/BV1ZSQZBRE5g/",
+      "sourceTitle": "《欲望把眼前的地板铺满》  cover 安溥"
+    },
+    {
+      "id": "zhang-qiran-BV1NgwuzsEcT",
+      "artistId": "zhang-qiran",
+      "title": "关于我爱你",
+      "originalArtist": "安溥",
+      "date": "2026-03-15",
+      "duration": 240.412,
+      "src": "assets/music/zhang-qiran/BV1NgwuzsEcT.m4a",
+      "source": "https://www.bilibili.com/video/BV1NgwuzsEcT/",
+      "sourceTitle": "《关于我爱你》  cover 安溥"
+    },
+    {
+      "id": "zhang-qiran-BV1XDZsBqEs6",
+      "artistId": "zhang-qiran",
+      "title": "新年快乐",
+      "date": "2026-02-15",
+      "duration": 81.882,
+      "src": "assets/music/zhang-qiran/BV1XDZsBqEs6.m4a",
+      "source": "https://www.bilibili.com/video/BV1XDZsBqEs6/",
+      "sourceTitle": "《新年快乐》！！！！！！"
+    },
+    {
+      "id": "zhang-qiran-BV1ap69BBEKE",
+      "artistId": "zhang-qiran",
+      "title": "Who Knows",
+      "originalArtist": "Daniel Caesar",
+      "date": "2026-01-11",
+      "duration": 226.474,
+      "src": "assets/music/zhang-qiran/BV1ap69BBEKE.m4a",
+      "source": "https://www.bilibili.com/video/BV1ap69BBEKE/",
+      "sourceTitle": "Who Knows    —— cover Daniel Caesar"
+    },
+    {
+      "id": "zhang-qiran-BV1pZqaBWEGX",
+      "artistId": "zhang-qiran",
+      "title": "几分之几",
+      "originalArtist": "卢广仲",
+      "date": "2025-12-16",
+      "duration": 250.688,
+      "src": "assets/music/zhang-qiran/BV1pZqaBWEGX.m4a",
+      "source": "https://www.bilibili.com/video/BV1pZqaBWEGX/",
+      "sourceTitle": "《几分之几》 cover 卢广仲"
+    },
+    {
+      "id": "zhang-qiran-BV1yNmqBhEwF",
+      "artistId": "zhang-qiran",
+      "title": "刻在我心底的名字",
+      "originalArtist": "卢广仲",
+      "date": "2025-12-14",
+      "duration": 123.995,
+      "src": "assets/music/zhang-qiran/BV1yNmqBhEwF.m4a",
+      "source": "https://www.bilibili.com/video/BV1yNmqBhEwF/",
+      "sourceTitle": "《刻在我心底的名字》 cover 卢广仲"
+    },
+    {
+      "id": "zhang-qiran-BV1Wu14BcEZk",
+      "artistId": "zhang-qiran",
+      "title": "我想你要走了",
+      "originalArtist": "安溥",
+      "date": "2025-11-05",
+      "duration": 167.471,
+      "src": "assets/music/zhang-qiran/BV1Wu14BcEZk.m4a",
+      "source": "https://www.bilibili.com/video/BV1Wu14BcEZk/",
+      "sourceTitle": "《我想你要走了》———cover 安溥"
+    },
+    {
+      "id": "zhang-qiran-BV1Y8pUziEdY",
+      "artistId": "zhang-qiran",
+      "title": "遥远的天空底下",
+      "originalArtist": "李健",
+      "date": "2025-09-16",
+      "duration": 81.026,
+      "src": "assets/music/zhang-qiran/BV1Y8pUziEdY.m4a",
+      "source": "https://www.bilibili.com/video/BV1Y8pUziEdY/",
+      "sourceTitle": "《遥远的天空底下》 ——cover 李健"
+    },
+    {
+      "id": "zhang-qiran-BV1XTHDzKEUF",
+      "artistId": "zhang-qiran",
+      "title": "交大 2025 军训晚会",
+      "note": "乐队现场 · 完整片段",
+      "date": "2025-09-10",
+      "duration": 983.181,
+      "src": "assets/music/zhang-qiran/BV1XTHDzKEUF.m4a",
+      "source": "https://www.bilibili.com/video/BV1XTHDzKEUF/",
+      "sourceTitle": "在交大2025军训晚会做了乐队主唱！！！"
+    },
+    {
+      "id": "zhang-qiran-BV1FLaBzzEg3",
+      "artistId": "zhang-qiran",
+      "title": "鼓楼",
+      "originalArtist": "赵雷",
+      "note": "with 奇幻的华能电厂维保",
+      "date": "2025-09-06",
+      "duration": 242.891,
+      "src": "assets/music/zhang-qiran/BV1FLaBzzEg3.m4a",
+      "source": "https://www.bilibili.com/video/BV1FLaBzzEg3/",
+      "sourceTitle": "《鼓楼》cover 赵雷 with@奇幻的华能电厂维保！"
+    },
+    {
+      "id": "zhang-qiran-BV18DaAzZEkv",
+      "artistId": "zhang-qiran",
+      "title": "Wui229",
+      "originalArtist": "陳嫺靜",
+      "date": "2025-09-02",
+      "duration": 154.906,
+      "src": "assets/music/zhang-qiran/BV18DaAzZEkv.m4a",
+      "source": "https://www.bilibili.com/video/BV18DaAzZEkv/",
+      "sourceTitle": "Wui229 ——cover 陳嫺靜"
+    },
+    {
+      "id": "zhang-qiran-BV1Fw4dzCEr1",
+      "artistId": "zhang-qiran",
+      "title": "小情歌",
+      "originalArtist": "苏打绿",
+      "date": "2025-08-05",
+      "duration": 117.846,
+      "src": "assets/music/zhang-qiran/BV1Fw4dzCEr1.m4a",
+      "source": "https://www.bilibili.com/video/BV1Fw4dzCEr1/",
+      "sourceTitle": "《小情歌》——cover 苏打绿"
+    },
+    {
+      "id": "zhang-qiran-BV1mYgnz2Epk",
+      "artistId": "zhang-qiran",
+      "title": "等妳拥有勇气",
+      "originalArtist": "柯泯薰",
+      "date": "2025-07-22",
+      "duration": 335.873,
+      "src": "assets/music/zhang-qiran/BV1mYgnz2Epk.m4a",
+      "source": "https://www.bilibili.com/video/BV1mYgnz2Epk/",
+      "sourceTitle": "《等妳拥有勇气》 ——cover 柯泯薰"
+    },
+    {
+      "id": "zhang-qiran-BV1GPK6zeEA4",
+      "artistId": "zhang-qiran",
+      "title": "羽毛剑",
+      "originalArtist": "秦凡淇",
+      "date": "2025-06-27",
+      "duration": 169.754,
+      "src": "assets/music/zhang-qiran/BV1GPK6zeEA4.m4a",
+      "source": "https://www.bilibili.com/video/BV1GPK6zeEA4/",
+      "sourceTitle": "《羽毛剑》——cover 秦凡淇"
+    },
+    {
+      "id": "zhang-qiran-BV1h9NmzJEVT",
+      "artistId": "zhang-qiran",
+      "title": "流星雨",
+      "note": "交大 VOS 毕业晚会 · 合唱",
+      "date": "2025-06-21",
+      "duration": 270.535,
+      "src": "assets/music/zhang-qiran/BV1h9NmzJEVT.m4a",
+      "source": "https://www.bilibili.com/video/BV1h9NmzJEVT/",
+      "sourceTitle": "在交大VOS毕业晚会一起唱了《流星雨》！！！"
+    },
+    {
+      "id": "zhang-qiran-BV1pGZSYwECH",
+      "artistId": "zhang-qiran",
+      "title": "马马嘟嘟骑",
+      "originalArtist": "斯斯与帆",
+      "date": "2025-04-03",
+      "duration": 131.121,
+      "src": "assets/music/zhang-qiran/BV1pGZSYwECH.m4a",
+      "source": "https://www.bilibili.com/video/BV1pGZSYwECH/",
+      "sourceTitle": "马马嘟嘟骑 ——cover 斯斯与帆"
+    },
+    {
+      "id": "zhang-qiran-BV1csZgYSEKq",
+      "artistId": "zhang-qiran",
+      "title": "怪天气",
+      "note": "交大歌手大赛 · 复赛",
+      "date": "2025-03-27",
+      "duration": 104.745,
+      "src": "assets/music/zhang-qiran/BV1csZgYSEKq.m4a",
+      "source": "https://www.bilibili.com/video/BV1csZgYSEKq/",
+      "sourceTitle": "在交大歌手大赛复赛唱了《怪天气》！！"
+    },
+    {
+      "id": "zhang-qiran-BV1X6ZgYBE6Z",
+      "artistId": "zhang-qiran",
+      "title": "克卜勒",
+      "note": "交大歌手大赛 · 复赛",
+      "date": "2025-03-27",
+      "duration": 134.815,
+      "src": "assets/music/zhang-qiran/BV1X6ZgYBE6Z.m4a",
+      "source": "https://www.bilibili.com/video/BV1X6ZgYBE6Z/",
+      "sourceTitle": "在交大歌手大赛复赛唱了《克卜勒》！！"
+    },
+    {
+      "id": "zhang-qiran-BV1C3CfYQE5L",
+      "artistId": "zhang-qiran",
+      "title": "夜空中最亮的星",
+      "originalArtist": "逃跑计划",
+      "date": "2024-10-19",
+      "duration": 188.314,
+      "src": "assets/music/zhang-qiran/BV1C3CfYQE5L.m4a",
+      "source": "https://www.bilibili.com/video/BV1C3CfYQE5L/",
+      "sourceTitle": "夜空中最亮的星—cover 逃跑计划"
+    },
+    {
+      "id": "zhang-qiran-BV1er421H7v8",
+      "artistId": "zhang-qiran",
+      "title": "新造的人",
+      "originalArtist": "郑宜农",
+      "date": "2024-03-12",
+      "duration": 170.475,
+      "src": "assets/music/zhang-qiran/BV1er421H7v8.m4a",
+      "source": "https://www.bilibili.com/video/BV1er421H7v8/",
+      "sourceTitle": "《新造的人》-cover 郑宜农"
+    },
+    {
+      "id": "zhang-qiran-BV1eR4y1U7eY",
+      "artistId": "zhang-qiran",
+      "title": "我记得",
+      "originalArtist": "赵雷",
+      "date": "2022-12-31",
+      "duration": 295.445,
+      "src": "assets/music/zhang-qiran/BV1eR4y1U7eY.m4a",
+      "source": "https://www.bilibili.com/video/BV1eR4y1U7eY/",
+      "sourceTitle": "《我记得》 cover赵雷"
+    }
+  ]
+}
