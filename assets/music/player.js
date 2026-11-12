@@ -334,6 +334,7 @@
         audio.src = new URL(track.src, root).href;
         element('Artist').textContent = artistName(track);
         element('Title').textContent = track.title;
+        element('Title').classList.toggle('music-title-long', track.title.length > 18);
         element('Note').textContent = [track.originalArtist ? `cover ${track.originalArtist}` : '', track.note].filter(Boolean).join(' · ') || track.date;
         element('DockTitle').textContent = track.title;
         element('DockArtist').textContent = artistName(track);

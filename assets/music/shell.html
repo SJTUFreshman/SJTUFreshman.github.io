@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="robots" content="noindex">
     <title>Runde Yang</title>
-    <link rel="stylesheet" href="player.css?v=20261112-drag">
+    <link rel="stylesheet" href="player.css?v=20261112-polish">
     <script src="shell.js?v=20261108-music" defer></script>
-    <script src="player.js?v=20261112-drag" defer></script>
+    <script src="player.js?v=20261112-polish" defer></script>
 </head>
 <body>
     <iframe id="sitePage" title="Runde Yang · Website" allow="autoplay; fullscreen; clipboard-write" allowfullscreen></iframe>
@@ -32,13 +32,13 @@
         </svg>
         <section class="music-panel" id="musicPanel" aria-label="随身听" hidden>
             <header class="music-heading">
-                <div><span class="music-eyebrow">MUSIC</span><h2>随身听</h2></div>
+                <div><h2>随身听</h2><span class="music-eyebrow">MUSIC</span></div>
                 <button type="button" class="music-icon" id="musicClose" aria-label="收起播放器"><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-close"/></svg></button>
             </header>
             <div class="music-now">
                 <div class="music-now-label"><span id="musicArtist">张祺然</span><span class="music-playback-status" id="musicPlaybackStatus">等待播放</span></div>
-                <h3 id="musicTitle">加载歌单…</h3>
-                <p id="musicNote">让音乐陪你逛一会儿</p>
+                <div class="music-now-copy"><h3 id="musicTitle">加载歌单…</h3><p id="musicNote">让音乐陪你逛一会儿</p></div>
+                <div class="music-record" aria-hidden="true"><span></span></div>
             </div>
             <div class="music-progress">
                 <label class="music-sr-only" for="musicSeek">播放进度</label>
