@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the EduKai and companion WenKai webfont subsets used by the static site.
+"""Build the EduKai, WenKai and Lanmi webfont subsets used by the static site.
 
 The page sources are scanned as text instead of parsing only visible DOM text.
 That deliberately keeps characters contained in JavaScript/i18n strings, CSS
@@ -32,6 +32,7 @@ from urllib.parse import unquote, urlsplit
 
 try:
     from fontTools import subset
+    from fontTools.pens.boundsPen import BoundsPen
     from fontTools.ttLib import TTFont
     from fontTools.ttLib import woff2 as fonttools_woff2
 except ImportError as exc:  # pragma: no cover - only reached without build deps
@@ -48,6 +49,10 @@ WENKAI_SOURCE = REPO_ROOT / ".render-work" / "LXGWWenKai-Regular.ttf"
 WENKAI_OUTPUT = REPO_ROOT / "fonts" / "wenkai-site-subset.woff2"
 WENKAI_URL = "https://github.com/lxgw/LxgwWenKai/releases/download/v1.530/LXGWWenKai-Regular.ttf"
 WENKAI_SHA256 = "2d73eea94ad808999d90c0000c239a84a33b09d4bc6ab6c5b8bbf1eda8a7fc8b"
+LANMI_SOURCE = REPO_ROOT / ".render-work" / "LANMI_yujian2_jianfan.ttf"
+LANMI_OUTPUT = REPO_ROOT / "fonts" / "lanmi-site-subset.woff2"
+LANMI_URL = "https://down-99.zhaozi.org/download/9/9/994564c835872e6704691738983a393a?filename=LANMI_yujian2_jianfan.ttf"
+LANMI_SHA256 = "9d179a554aa3604dd8064c36b4dd40ebecec1109e9cd4eb5862c4932b74410dc"
 DEFAULT_PAGES = (REPO_ROOT / "index.html", REPO_ROOT / "life.html", REPO_ROOT / "observatory.html")
 
 LIFE_PAGE = REPO_ROOT / 'life.html'
@@ -77,6 +82,19 @@ def is_cjk(codepoint: int) -> bool:
 def resolve_path(value: str) -> Path:
     path = Path(value)
     return path if path.is_absolute() else REPO_ROOT / path
+
+
+def blank_cjk_codepoints(font: TTFont, codepoints: set[int]) -> set[int]:
+    glyphs = font.getGlyphSet()
+    blank = set()
+    for codepoint, name in (font.getBestCmap() or {}).items():
+        if codepoint not in codepoints or not is_cjk(codepoint) or chr(codepoint).isspace():
+            continue
+        pen = BoundsPen(glyphs)
+        glyphs[name].draw(pen)
+        if pen.bounds is None:
+            blank.add(codepoint)
+    return blank
 
 
 class LifeSourceReferenceParser(HTMLParser):
@@ -223,13 +241,14 @@ def build_subset(
     brotli_quality: int,
     cjk_only: bool = False,
     family_name: str | None = None,
+    codepoints: set[int] | None = None,
 ) -> None:
     if not input_font.is_file():
         raise SystemExit(f"Source font does not exist: {input_font}")
     if input_font.resolve() == output_font.resolve():
         raise SystemExit("Refusing to overwrite the source font; choose another --output.")
 
-    requested = collect_codepoints(pages)
+    requested = collect_codepoints(pages) if codepoints is None else set(codepoints)
     if cjk_only:
         requested = {codepoint for codepoint in requested if is_cjk(codepoint)}
     source_size = input_font.stat().st_size
@@ -241,7 +260,7 @@ def build_subset(
         for record in source["name"].names:
             if record.nameID in names:
                 record.string = names[record.nameID].encode(record.getEncoding())
-    source_cmap = set((source.getBestCmap() or {}).keys())
+    source_cmap = set((source.getBestCmap() or {}).keys()) - blank_cjk_codepoints(source, requested)
     supported = requested & source_cmap
     missing = requested - source_cmap
     original_glyph_count = len(source.getGlyphOrder())
@@ -346,10 +365,13 @@ def build_subset(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate a WOFF2 EduKai subset from current static page sources."
+        description="Generate the site's EduKai, WenKai and Lanmi WOFF2 subsets, or subset a supplied font."
     )
     parser.add_argument(
         "--check", action="store_true", help="Check that the published subsets cover every current CJK character."
+    )
+    parser.add_argument(
+        "--home", action="store_true", help="Build or check only the homepage fonts and inline unicode ranges."
     )
     parser.add_argument(
         "--font",
@@ -383,6 +405,9 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    if args.home:
+        build_home_subsets(args.brotli_quality, check_only=args.check)
+        return 0
     pages = (
         [resolve_path(value) for value in args.pages]
         if args.pages
@@ -390,6 +415,8 @@ def main() -> int:
     )
     if args.check:
         validate_coverage(pages)
+        if not args.pages:
+            build_home_subsets(args.brotli_quality, check_only=True)
         return 0
     build_subset(
         resolve_path(args.font),
@@ -404,21 +431,133 @@ def main() -> int:
         if sha256(WENKAI_SOURCE) != WENKAI_SHA256:
             raise SystemExit("WenKai source checksum mismatch; remove the cached download and retry.")
         build_subset(WENKAI_SOURCE, WENKAI_OUTPUT, pages, args.brotli_quality, cjk_only=True, family_name="Site WenKai")
+        if not LANMI_SOURCE.is_file():
+            subprocess.run(["curl.exe" if os.name == "nt" else "curl", "--fail", "--location", "--retry", "2", "--output", str(LANMI_SOURCE), LANMI_URL], check=True)
+        if sha256(LANMI_SOURCE) != LANMI_SHA256:
+            raise SystemExit("Lanmi source checksum mismatch; supply the documented LANMI_yujian2_jianfan.ttf version.")
+        build_subset(LANMI_SOURCE, LANMI_OUTPUT, pages, args.brotli_quality, cjk_only=True)
         validate_coverage(pages)
+        if not args.pages:
+            build_home_subsets(args.brotli_quality)
     return 0
+
+
+def collect_home_codepoints() -> set[int]:
+    page = REPO_ROOT / "index.html"
+    text = page.read_text(encoding="utf-8")
+    requested = text_codepoints(text)
+    parser = LifeSourceReferenceParser()
+    parser.feed(text)
+    parser.close()
+    sources = {REPO_ROOT / "assets/pet-summon.js"}
+    for reference, suffix in parser.references:
+        parsed = urlsplit(reference)
+        if parsed.scheme or parsed.netloc or not parsed.path:
+            continue
+        source = (REPO_ROOT / unquote(parsed.path).lstrip("/\\")).resolve()
+        if source.is_relative_to(REPO_ROOT.resolve()) and source.suffix == suffix:
+            sources.add(source)
+    for source in sources:
+        requested.update(text_codepoints(source.read_text(encoding="utf-8")))
+    return {codepoint for codepoint in requested if is_cjk(codepoint)}
+
+
+def font_unicode_range(codepoints: set[int]) -> str:
+    ranges = []
+    for codepoint in sorted(codepoints):
+        if ranges and codepoint == ranges[-1][1] + 1:
+            ranges[-1][1] = codepoint
+        else:
+            ranges.append([codepoint, codepoint])
+    return ", ".join(
+        f"U+{start:X}" if start == end else f"U+{start:X}-{end:X}"
+        for start, end in ranges
+    )
+
+
+def home_font_face(family: str, output: Path, codepoints: set[int]) -> str:
+    adjustment = "            size-adjust: 120%;\n" if family == "Lanmi Kai" else ""
+    return (
+        "        @font-face {\n"
+        f"            font-family: '{family}';\n"
+        f"            src: url('fonts/{output.name}?v={sha256(output)[:12]}') format('woff2');\n"
+        f"{adjustment}"
+        "            font-weight: 400;\n"
+        "            font-style: normal;\n"
+        "            font-display: swap;\n"
+        f"            unicode-range: {font_unicode_range(codepoints)};\n"
+        "        }"
+    )
+
+
+def build_home_subsets(brotli_quality: int, check_only: bool = False) -> None:
+    requested = collect_home_codepoints()
+    page = REPO_ROOT / "index.html"
+    document = page.read_text(encoding="utf-8")
+    faces = (
+        ("EduKai", DEFAULT_FONT, REPO_ROOT / "fonts/edukai-home-subset.woff2"),
+        ("Lanmi Kai", LANMI_SOURCE, REPO_ROOT / "fonts/lanmi-home-subset.woff2"),
+        ("Site WenKai", WENKAI_SOURCE, REPO_ROOT / "fonts/wenkai-home-subset.woff2"),
+    )
+    coverage = {}
+    for family, source, output in faces:
+        if not check_only:
+            if source in (LANMI_SOURCE, WENKAI_SOURCE):
+                expected, url = (LANMI_SHA256, LANMI_URL) if source == LANMI_SOURCE else (WENKAI_SHA256, WENKAI_URL)
+                source.parent.mkdir(parents=True, exist_ok=True)
+                if not source.is_file():
+                    subprocess.run(["curl.exe" if os.name == "nt" else "curl", "--fail", "--location", "--retry", "2", "--output", str(source), url], check=True)
+                if sha256(source) != expected:
+                    raise SystemExit(f"Source checksum mismatch: {source}")
+            needed = requested
+            if family == "Site WenKai":
+                needed = requested - (coverage["EduKai"] & coverage["Lanmi Kai"])
+            build_subset(source, output, [page], brotli_quality, cjk_only=True,
+                         family_name=family if family == "Site WenKai" else None, codepoints=needed)
+        with TTFont(output) as font:
+            coverage[family] = set(font.getBestCmap())
+            if blank_cjk_codepoints(font, coverage[family]):
+                raise SystemExit(f"{output.name} has blank CJK mappings.")
+        if coverage[family] - requested:
+            raise SystemExit(f"{output.name} contains characters outside the homepage; rebuild with --home.")
+        face = home_font_face(family, output, coverage[family])
+        pattern = r"        @font-face \{\s+font-family: '" + re.escape(family) + r"';[^}]+\}"
+        matches = list(re.finditer(pattern, document))
+        if len(matches) != 1:
+            raise SystemExit(f"Expected one homepage declaration for {family}.")
+        if check_only and matches[0].group() != face:
+            raise SystemExit(f"Homepage {family} declaration is stale; rebuild with --home.")
+        document = re.sub(pattern, lambda match: face, document)
+    for family in ("EduKai", "Lanmi Kai"):
+        missing = requested - (coverage[family] | coverage["Site WenKai"])
+        if missing:
+            preview = " ".join(f"{chr(value)} (U+{value:04X})" for value in sorted(missing))
+            raise SystemExit(f"Homepage {family}: missing characters: {preview}")
+    if not check_only:
+        page.write_text(document, encoding="utf-8")
+    total = sum(output.stat().st_size for _, _, output in faces)
+    print(f"Homepage coverage passed: {len(requested)} CJK characters; {format_bytes(total)} across three fonts.")
 
 
 def validate_coverage(pages: list[Path]) -> None:
     requested = {codepoint for codepoint in collect_codepoints(pages) if is_cjk(codepoint)}
-    coverage = set()
-    for path in (DEFAULT_OUTPUT, WENKAI_OUTPUT):
+    with TTFont(WENKAI_OUTPUT) as font:
+        blank = blank_cjk_codepoints(font, requested)
+        if blank:
+            raise SystemExit(f"WenKai contains {len(blank)} blank CJK mappings; rebuild the font subsets.")
+        fallback = set(font.getBestCmap())
+    for label, path in (("Body", DEFAULT_OUTPUT), ("UI", LANMI_OUTPUT)):
         with TTFont(path) as font:
-            coverage.update(font.getBestCmap())
-    missing = requested - coverage
-    if missing:
-        preview = " ".join(f"{chr(value)} (U+{value:04X})" for value in sorted(missing))
-        raise SystemExit(f"Missing {len(missing)} CJK characters: {preview}")
-    print(f"CJK coverage passed: {len(requested):,} unique characters; no missing glyphs.")
+            blank = blank_cjk_codepoints(font, requested)
+            if blank:
+                preview = " ".join(f"U+{value:04X}" for value in sorted(blank))
+                raise SystemExit(f"{label}: blank CJK mappings block font fallback: {preview}; rebuild the subsets.")
+            coverage = set(font.getBestCmap()) | fallback
+        missing = requested - coverage
+        if missing:
+            preview = " ".join(f"{chr(value)} (U+{value:04X})" for value in sorted(missing))
+            raise SystemExit(f"{label}: missing {len(missing)} CJK characters: {preview}")
+        print(f"{label} CJK coverage passed: {len(requested):,} unique characters; no missing glyphs.")
 
 
 if __name__ == "__main__":

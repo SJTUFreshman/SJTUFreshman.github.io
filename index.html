@@ -84,26 +84,45 @@
 </head>
 <body class="lang-en">
 
-<noscript><style>.fade-in{opacity:1!important;transform:none!important}</style></noscript>
+<noscript><style>.fade-in{opacity:1!important;transform:none!important}img[data-deferred-src]{display:none!important}</style></noscript>
 
     <style>
         /* ========== Custom Font ========== */
         @font-face {
-            font-family: 'EduKai';
-            src: url('fonts/edukai-site-subset.woff2?v=20261107-trilingual') format('woff2');
-            font-weight: normal;
+            font-family: 'Lanmi Kai';
+            src: url('fonts/lanmi-home-subset.woff2?v=b9f3c793658a') format('woff2');
+            size-adjust: 120%;
+            font-weight: 400;
             font-style: normal;
             font-display: swap;
-            unicode-range: U+2E80-9FFF, U+AC00-D7AF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-323AF;
+            unicode-range: U+3001-3002, U+4E00, U+4E07, U+4E0A-4E0B, U+4E0E, U+4E2A, U+4E2D, U+4E3A-4E3B, U+4E3E, U+4E49, U+4E4B, U+4E60, U+4E66, U+4E8B, U+4E8E, U+4E91, U+4EA4, U+4EAC, U+4EBA, U+4ECD-4ECE, U+4EE3, U+4EE5, U+4F4D, U+4F53, U+4F5C, U+4F7F, U+4F86, U+4FDD, U+500B, U+5099, U+5148-5149, U+5173, U+5177, U+51B0, U+51C7, U+5212, U+5236, U+524D, U+5283, U+52A8-52A9, U+52D5, U+5316, U+5340, U+5343, U+5357, U+5360, U+5386, U+53CA-53CB, U+53D1, U+53E6, U+5408, U+540D-540E, U+543E, U+548C, U+54C9, U+5566, U+56DE, U+56F4, U+56FD-56FE, U+570B, U+570D, U+5716, U+5723, U+5728, U+5730, U+584A, U+5857, U+586B, U+5907, U+5916, U+591A, U+5927, U+5929, U+5934, U+59D3, U+5B50, U+5B57, U+5B66, U+5B78, U+5B83, U+5B8C, U+5B9A, U+5BB6, U+5BF9, U+5C0D, U+5C0F, U+5C40, U+5C71, U+5C9B, U+5CF6, U+5DE5, U+5DEB, U+5E08, U+5E2B, U+5E33, U+5E38, U+5E3D, U+5E7D, U+5EA7, U+5F00, U+5F0F, U+5F20, U+5F35, U+5F53, U+5F55, U+5F71, U+5F85, U+5F8C, U+5F9E, U+5FB7, U+5FC6, U+6001, U+614B, U+6162, U+61B6, U+6210, U+6216, U+6234, U+6237, U+624B, U+626E, U+628A, U+6295, U+62CD, U+6301, U+6392, U+63A2, U+63D2, U+6536, U+6559, U+6587, U+65BC, U+65C1, U+65E5, U+661F, U+662F, U+6674, U+667A, U+66B4, U+66F4, U+66F8, U+670B, U+6717, U+671F, U+672B-672C, U+6765, U+6768, U+676F, U+6784, U+67B6, U+6821, U+6837, U+6846, U+684C, U+68D2, U+690D, U+694A, U+69CB, U+6A21, U+6A23, U+6A59, U+6B63, U+6B77, U+6BD4, U+6BDB, U+6D3E, U+6D77, U+6D82, U+6DA6, U+6E56, U+6EE1, U+6EFF, U+6F14, U+6F64, U+7075, U+70B9, U+70D8, U+7119, U+7167, U+71DF, U+7247, U+730E, U+7375, U+7406, U+74DC, U+74F6, U+751F, U+7528, U+753B, U+7559, U+756B, U+7576, U+767C-767D, U+7684, U+76EE, U+76F8, U+7740, U+7801, U+7814, U+78BA, U+78BC, U+793A, U+793E, U+79D1, U+7A0D, U+7A97, U+7AEF, U+7B14, U+7B46, U+7B80, U+7B8D, U+7BC0, U+7BC4, U+7C92, U+7CD5, U+7CFB, U+7D14, U+7D19-7D1A, U+7D22, U+7D2B, U+7D50, U+7D66, U+7D71, U+7D93, U+7E41, U+7E6A, U+7E8C, U+7EA7, U+7EB8, U+7ECF, U+7ED3, U+7ED8-7ED9, U+7EDF, U+7EED, U+7EFF, U+7F6E, U+7F8E, U+7FA9, U+7FD2, U+7FFB, U+8003, U+8036, U+8056, U+80B2, U+80FD, U+81EA, U+8207, U+8209, U+8272, U+8282, U+82F1, U+8349, U+8393, U+8425, U+842C, U+843D, U+8457, U+86CB, U+8865, U+8868, U+88C5, U+88DC-88DD, U+8981, U+898F, U+8996, U+89C0, U+89C2, U+89C4, U+89C6, U+8A08, U+8A18, U+8A2D, U+8A66, U+8A9E, U+8AD6, U+8B6F, U+8BB0, U+8BBA, U+8BBE, U+8BD5, U+8BED, U+8CBC, U+8D26, U+8D34, U+8D77, U+8DB3, U+8DEF, U+8F49, U+8F6C, U+8FB9, U+8FD9, U+8FDB, U+8FF9, U+9019-901A, U+9032, U+908A, U+90E8, U+91CC, U+91D1, U+93E1, U+955C, U+958B, U+9593, U+95DC, U+95F4, U+9634-9635, U+9662-9664, U+9670, U+968F, U+96A8, U+96C6, U+96E8, U+96EA, U+96F2, U+96F7, U+96F9, U+96FE, U+9727, U+9748, U+9762, U+9801-9802, U+9805, U+982D, U+983B, U+9875-9876, U+9879, U+9891, U+98FE, U+9910, U+9970, U+9AB7, U+9AC5, U+9ACF, U+9AD4, U+9B6F, U+9C81, U+9D09, U+9E26, U+9EDE, U+FF01, U+FF0C;
+        }
+
+        @font-face {
+            font-family: 'EduKai';
+            src: url('fonts/edukai-home-subset.woff2?v=ca742a330a85') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+            unicode-range: U+3001-3002, U+4E00, U+4E07, U+4E0A-4E0B, U+4E0E, U+4E2D, U+4E3B, U+4E4B, U+4E8B, U+4E8E, U+4E91, U+4EA4, U+4EAC, U+4EBA, U+4ECD, U+4EE3, U+4EE5, U+4F4D, U+4F53-4F54, U+4F5C, U+4F7F, U+4F86, U+4FDD, U+500B, U+5099, U+5148-5149, U+5177, U+51B0, U+5212, U+5236, U+524D, U+5283, U+52A9, U+52D5, U+5316, U+5340, U+5343, U+5357, U+5360, U+53CA-53CB, U+53E6, U+5408, U+540D-540E, U+543E, U+548C, U+54C9, U+5566, U+56DE, U+570B, U+570D, U+5716, U+5723, U+5728, U+5730, U+584A, U+5857, U+586B, U+5916, U+591A, U+5927, U+5929, U+59D3, U+5B50, U+5B57, U+5B78, U+5B83, U+5B8C, U+5B9A, U+5BB6, U+5C0D, U+5C0F, U+5C40, U+5C71, U+5CF6, U+5DE5, U+5DEB, U+5E2B, U+5E33, U+5E38, U+5E3D, U+5E7D, U+5EA7, U+5F0F, U+5F35, U+5F37, U+5F71, U+5F85, U+5F8C, U+5F9E, U+5FB7, U+614B, U+6162, U+61B6, U+6210, U+6216, U+6234, U+6236, U+624B, U+626E, U+628A, U+6295, U+62CD, U+6301, U+6392, U+63A2, U+63D2, U+6536, U+6559, U+6587, U+65BC, U+65C1, U+65E5, U+661F, U+662F, U+6674, U+667A, U+66B4, U+66F4, U+66F8, U+670B, U+6717, U+671F, U+672B-672C, U+676F, U+6784, U+67B6, U+6821, U+6846, U+684C, U+68D2, U+690D, U+694A, U+69CB, U+6A21, U+6A23, U+6A59, U+6B63, U+6B77, U+6BD4, U+6BDB, U+6D3E, U+6D77, U+6D82, U+6E56, U+6EFF, U+6F14, U+6F64, U+70BA, U+70D8, U+7119, U+7167, U+71DF, U+7247, U+7375, U+7406, U+74DC, U+74F6, U+751F, U+7528, U+7559, U+756B, U+7576, U+767C-767D, U+7684, U+76EE, U+76F8, U+7814, U+78BA, U+78BC, U+793A, U+793E, U+79D1, U+7A0D, U+7A97, U+7AEF, U+7B46, U+7B8D, U+7BC0, U+7BC4, U+7C92, U+7CD5, U+7CFB, U+7D14, U+7D19-7D1A, U+7D22, U+7D2B, U+7D50, U+7D66, U+7D71, U+7D93, U+7DA0, U+7E41, U+7E6A, U+7E8C, U+7F6E, U+7F8E, U+7FA9, U+7FD2, U+7FFB, U+8003, U+8036, U+8056, U+80B2, U+80FD, U+81EA, U+8207, U+8209, U+8272, U+82F1, U+8349, U+8393, U+842C, U+843D, U+8457, U+86CB, U+8868, U+88DC-88DD, U+88E1, U+8981, U+898F, U+8996, U+89C0, U+8A08, U+8A18, U+8A2D, U+8A66, U+8A9E, U+8AD6, U+8B6F, U+8CBC, U+8D77, U+8DB3, U+8DE1, U+8DEF, U+8F49, U+9019-901A, U+9032, U+908A, U+90E8, U+91CC, U+91D1, U+9304, U+93E1, U+958B, U+9593, U+95DC, U+9662-9664, U+9670, U+96A8, U+96C6, U+96E8, U+96EA, U+96F2, U+96F7, U+96F9, U+9727, U+9748, U+9762, U+9801-9802, U+9805, U+982D, U+983B, U+98FE, U+9910, U+9AB7, U+9ACF, U+9AD4, U+9AEE, U+9B6F, U+9D09, U+9EDE, U+FF01, U+FF0C;
+        }
+
+        @font-face {
+            font-family: 'Site KaiTi';
+            src: url('fonts/kaiti-home-subset.woff2?v=cf8ce6b15fc5') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+            unicode-range: U+4E2A, U+4E3A, U+4E3E, U+4E49, U+4E60, U+4E66, U+4ECE, U+5173, U+51C7, U+52A8, U+5386, U+53D1, U+56F4, U+56FD-56FE, U+5907, U+5934, U+5B66, U+5BF9, U+5C9B, U+5E08, U+5F00, U+5F20, U+5F53, U+5F55, U+5FC6, U+6001, U+6237, U+6765, U+6768, U+6837, U+6DA6, U+6EE1, U+7075, U+70B9, U+730E, U+753B, U+7740, U+7801, U+7B14, U+7B80, U+7EA7, U+7EB8, U+7ECF, U+7ED3, U+7ED8-7ED9, U+7EDF, U+7EED, U+7EFF, U+8282, U+8425, U+8865, U+88C5, U+89C2, U+89C4, U+89C6, U+8BB0, U+8BBA, U+8BBE, U+8BD5, U+8BED, U+8D26, U+8D34, U+8F6C, U+8FB9, U+8FD9, U+8FDB, U+8FF9, U+955C, U+95F4, U+9634-9635, U+968F, U+96FE, U+9875-9876, U+9879, U+9891, U+9970, U+9AC5, U+9C81, U+9E26;
         }
 
         @font-face {
             font-family: 'Site WenKai';
-            src: url('fonts/wenkai-site-subset.woff2?v=20261107-trilingual') format('woff2');
+            src: url('fonts/wenkai-home-subset.woff2?v=b9d4683087e5') format('woff2');
             font-weight: 400;
             font-style: normal;
             font-display: swap;
-            unicode-range: U+2E80-9FFF, U+AC00-D7AF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-323AF;
+            unicode-range: U+4E2A, U+4E3A, U+4E3E, U+4E49, U+4E60, U+4E66, U+4ECE, U+4F54, U+5173, U+51C7, U+52A8, U+5386, U+53D1, U+56F4, U+56FD-56FE, U+5907, U+5934, U+5B66, U+5BF9, U+5C9B, U+5E08, U+5F00, U+5F20, U+5F37, U+5F53, U+5F55, U+5FC6, U+6001, U+6236-6237, U+6765, U+6768, U+6837, U+6DA6, U+6EE1, U+7075, U+70B9-70BA, U+730E, U+753B, U+7740, U+7801, U+7B14, U+7B80, U+7DA0, U+7EA7, U+7EB8, U+7ECF, U+7ED3, U+7ED8-7ED9, U+7EDF, U+7EED, U+7EFF, U+8282, U+8425, U+8865, U+88C5, U+88E1, U+89C2, U+89C4, U+89C6, U+8BB0, U+8BBA, U+8BBE, U+8BD5, U+8BED, U+8D26, U+8D34, U+8DE1, U+8F6C, U+8FB9, U+8FD9, U+8FDB, U+8FF9, U+9304, U+955C, U+95F4, U+9634-9635, U+968F, U+96FE, U+9875-9876, U+9879, U+9891, U+9970, U+9AC5, U+9AEE, U+9C81, U+9E26;
         }
 
         @font-face {
@@ -157,10 +176,10 @@
             --shadow: 0 1px 3px rgba(88,103,157,0.04), 0 8px 24px rgba(190,132,166,0.045);
             --shadow-hover: 0 10px 30px rgba(98,119,183,0.12);
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --font-cn: 'Newsreader', 'EduKai', 'Site WenKai', 'DFKai-SB', 'KaiTi', serif;
-            --font-en: 'Newsreader', 'EduKai', 'Site WenKai', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
-            --font-ui: 'IBM Plex Sans', 'Aptos', 'Segoe UI', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei UI', 'Microsoft JhengHei UI', sans-serif;
-            --font-mono: 'IBM Plex Mono', 'SFMono-Regular', 'Cascadia Mono', 'Consolas', monospace;
+            --font-cn: 'Newsreader', 'EduKai', 'DFKai-SB', 'KaiTi', 'Site KaiTi', 'Site WenKai', serif;
+            --font-en: 'Newsreader', 'EduKai', 'DFKai-SB', 'KaiTi', 'Site KaiTi', 'Site WenKai', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
+            --font-ui: 'IBM Plex Sans', 'Lanmi Kai', 'Site WenKai', 'Aptos', 'Segoe UI', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei UI', 'Microsoft JhengHei UI', sans-serif;
+            --font-mono: 'IBM Plex Mono', 'Lanmi Kai', 'Site WenKai', 'SFMono-Regular', 'Cascadia Mono', 'Consolas', monospace;
             --max-width: 1040px;
             --page-gutter: clamp(20px, 4vw, 40px);
             --section-label-width: 128px;
@@ -1233,6 +1252,8 @@
         ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #bbb; }
     </style>
+    <link rel="stylesheet" href="assets/lanmi-ui.css?v=20261108-font-roles">
+    <link rel="stylesheet" href="assets/site-typography.css?v=20261108-font-roles">
 <!-- ===== Navigation ===== -->
 <nav class="nav">
     <div class="nav-inner">
@@ -1244,9 +1265,9 @@
             <a href="#publications" class="nav-link" data-key="nav_pubs">Publications</a>
             <a href="#projects" class="nav-link" data-key="nav_projects">Projects</a>
             <div class="nav-lang">
-                <button class="lang-btn active" onclick="setLang('en')">EN</button>
-                <button class="lang-btn" onclick="setLang('zh-CN')">简</button>
-                <button class="lang-btn" onclick="setLang('zh-TW')">繁</button>
+                <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="zh-CN" onclick="setLang('zh-CN')">简</button>
+                <button class="lang-btn" data-lang="zh-TW" onclick="setLang('zh-TW')">繁</button>
             </div>
         </div>
 
@@ -1313,7 +1334,7 @@
 <!-- ===== Hero / About ===== -->
 <div class="container">
     <section class="hero" id="about">
-        <img src="me_at_dorm.jpg" alt="Runde Yang" data-site-name-alt class="hero-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
+        <img src="me_at_dorm.jpg" alt="Runde Yang" data-site-name-alt class="hero-avatar" width="174" height="218" fetchpriority="high" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
         <div class="hero-info">
             <h1 class="hero-name" id="heroName"><button type="button" data-site-name data-site-name-hint-id="heroNameHint"><span data-site-name-text>Runde Yang</span></button></h1>
             <p id="heroNameHint" data-site-name-hint hidden></p>
@@ -1485,7 +1506,8 @@ This is a journal preview; the real memories are still to come.</p>
         <div class="project-grid">
             <div class="project-card">
                 <div class="project-img-wrap">
-                    <img src="images/AppCopilot.png" alt="AppCopilot">
+                    <img data-deferred-src="images/AppCopilot.png" alt="AppCopilot" width="2104" height="1772" loading="lazy" decoding="async" fetchpriority="low">
+                    <noscript><img src="images/AppCopilot.png" alt="AppCopilot" width="2104" height="1772" loading="lazy" decoding="async"></noscript>
                 </div>
                 <div class="project-body">
                     <div class="project-name en-only">AppCopilot</div>
@@ -1498,7 +1520,8 @@ This is a journal preview; the real memories are still to come.</p>
             </div>
             <div class="project-card">
                 <div class="project-img-wrap">
-                    <img src="images/TeachMaster.png" alt="TeachMaster">
+                    <img data-deferred-src="images/TeachMaster.png" alt="TeachMaster" width="4778" height="3922" loading="lazy" decoding="async" fetchpriority="low">
+                    <noscript><img src="images/TeachMaster.png" alt="TeachMaster" width="4778" height="3922" loading="lazy" decoding="async"></noscript>
                 </div>
                 <div class="project-body">
                     <div class="project-name en-only">TeachMaster</div>
@@ -1517,10 +1540,14 @@ This is a journal preview; the real memories are still to come.</p>
         <a class="life-card" id="lifePortalLink" href="life.html"
            aria-labelledby="lifePortalTitle lifePortalDesc">
             <div class="life-card-bg">
-                <img src="images/card-thumbs/qiandaohu-card.jpg" alt="">
-                <img src="images/card-thumbs/sjtu-campus-card.jpg" alt="">
-                <img src="images/card-thumbs/meteor-card.jpg" alt="">
-                <img src="images/card-thumbs/zijinshan-card.jpg" alt="">
+                <img data-deferred-src="images/card-thumbs/qiandaohu-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async" fetchpriority="low">
+                <noscript><img src="images/card-thumbs/qiandaohu-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async"></noscript>
+                <img data-deferred-src="images/card-thumbs/sjtu-campus-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async" fetchpriority="low">
+                <noscript><img src="images/card-thumbs/sjtu-campus-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async"></noscript>
+                <img data-deferred-src="images/card-thumbs/meteor-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async" fetchpriority="low">
+                <noscript><img src="images/card-thumbs/meteor-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async"></noscript>
+                <img data-deferred-src="images/card-thumbs/zijinshan-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async" fetchpriority="low">
+                <noscript><img src="images/card-thumbs/zijinshan-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async"></noscript>
             </div>
             <div class="life-card-overlay"></div>
             <div class="life-card-content">
@@ -1536,7 +1563,8 @@ This is a journal preview; the real memories are still to come.</p>
                 <span class="life-card-orbit"></span>
                 <span class="life-card-bearing"></span>
                 <span class="life-card-core">
-                    <img src="images/card-thumbs/meteor-card.jpg" alt="">
+                    <img data-deferred-src="images/card-thumbs/meteor-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async" fetchpriority="low">
+                    <noscript><img src="images/card-thumbs/meteor-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async"></noscript>
                 </span>
             </div>
             <span class="life-card-star one" aria-hidden="true"></span>
@@ -1565,7 +1593,6 @@ This is a journal preview; the real memories are still to come.</p>
     <div id="newsJournalContent"></div>
 </dialog>
 
-<script src="assets/pet-summon.js"></script>
 <script>
 /* ===== i18n Content ===== */
 const i18n = {
@@ -1754,19 +1781,6 @@ function setLang(lang) {
 /* ===== Init Language ===== */
 setLang(currentLang);
 
-async function waitForEduKai() {
-    if (!document.fonts || typeof document.fonts.load !== 'function') {
-        throw new Error('Font Loading API unavailable');
-    }
-    const family = 'EduKai';
-    const font = `400 1em "${family}"`;
-    const faces = await document.fonts.load(font, '中国大陆標楷字體');
-    const loaded = faces.length > 0
-        && faces.every(face => face.status === 'loaded')
-        && document.fonts.check(font, '中国大陆標楷字體');
-    if (!loaded) throw new Error(`${family} did not finish loading`);
-}
-
 const CLUSTRMAPS_SRC = 'https://clustrmaps.com/globe.js?d=fX5iFnBQqkI4YOaCh2hYxnYfi2pj9aK8Fq4We1ChmH4';
 
 function loadClustrMaps() {
@@ -1790,14 +1804,74 @@ function loadClustrMaps() {
 }
 
 function scheduleClustrMaps() {
-    window.setTimeout(() => {
+    const host = document.querySelector('.visitor-section');
+    if (!host) return;
+    const schedule = () => {
         if ('requestIdleCallback' in window) {
             window.requestIdleCallback(loadClustrMaps, { timeout: 2000 });
         } else {
             window.setTimeout(loadClustrMaps, 0);
         }
-    }, 1100);
+    };
+    if (!('IntersectionObserver' in window)) {
+        window.setTimeout(schedule, 2000);
+        return;
+    }
+    const observer = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        observer.disconnect();
+        schedule();
+    }, { rootMargin: '300px 0px' });
+    observer.observe(host);
 }
+
+(function () {
+    const images = document.querySelectorAll('img[data-deferred-src]');
+    const load = image => {
+        image.src = image.dataset.deferredSrc;
+        delete image.dataset.deferredSrc;
+    };
+    if (!('IntersectionObserver' in window)) {
+        images.forEach(load);
+        return;
+    }
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            load(entry.target);
+            observer.unobserve(entry.target);
+        });
+    }, { rootMargin: '300px 0px' });
+    images.forEach(image => observer.observe(image));
+})();
+
+(function () {
+    const button = document.getElementById('summonBtn');
+    let loading = false;
+    const activate = event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        if (loading) return;
+        loading = true;
+        button.setAttribute('aria-busy', 'true');
+        const script = document.createElement('script');
+        script.src = 'assets/pet-summon.js';
+        script.async = true;
+        script.onload = () => {
+            button.removeEventListener('click', activate, true);
+            button.removeAttribute('aria-busy');
+            button.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, detail: event.detail }));
+        };
+        script.onerror = () => {
+            loading = false;
+            button.removeAttribute('aria-busy');
+            script.remove();
+            console.warn('Companion controls could not load. Click again to retry.');
+        };
+        document.head.appendChild(script);
+    };
+    button?.addEventListener('click', activate, true);
+})();
 
 /* ===== Email Obfuscation ===== */
 (function() {
@@ -1983,36 +2057,15 @@ lifePortalLink?.addEventListener('click', event => {
 setLang(currentLang);
 
 function markHomepageDestinationReady() {
-    if (window.StellarTransit?.markDestinationReady) {
-        window.StellarTransit.markDestinationReady('index');
-    } else {
-        window.dispatchEvent(new CustomEvent('stellar:destination-ready', {
-            detail: { page: 'index' }
-        }));
-    }
+    window.StellarTransit?.markDestinationReady('index');
 }
 
-function signalHomepageReady() {
-    waitForEduKai()
-        .catch(error => {
-            window.StellarTransit?.setDestinationStatus(
-                'BiauKai typeface unavailable. Using fallback typeface',
-                'TYPEFACE FALLBACK ACTIVE'
-            );
-            console.error('Homepage typeface preload failed:', error);
-        })
-        .finally(() => {
-            markHomepageDestinationReady();
-            scheduleClustrMaps();
-        });
-}
-
-// 首屏 DOM 初始化完成后只等待 EduKai；不再等待 window.load。
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', signalHomepageReady, { once: true });
+if (window.StellarTransit) {
+    markHomepageDestinationReady();
 } else {
-    signalHomepageReady();
+    window.addEventListener('stellar:runtime-ready', markHomepageDestinationReady, { once: true });
 }
+scheduleClustrMaps();
 
 </script>
 

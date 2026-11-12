@@ -1,35 +1,4 @@
 const DEEP_SKY_OBSERVATIONS = Object.freeze({
-    m31: {
-        image: 'assets/deep-sky/m31-galex.webp',
-        catalogue: 'MESSIER 31 · NGC 224',
-        source: 'https://images.nasa.gov/details/PIA04921',
-        reference: 'https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-31/',
-        credit: 'NASA / JPL / California Institute of Technology',
-        en: {
-            title: 'Andromeda', category: 'A galaxy beyond our own',
-            description: 'A vast spiral of stars, gas and dust, seen across the space between galaxies. Andromeda and the Milky Way belong to the Local Group.',
-            distance: '≈ 2.5 million light-years', type: 'Spiral galaxy', location: 'Andromeda constellation',
-            instrument: 'GALEX · ultraviolet',
-            observation: 'A mosaic of telescope observations. Ultraviolet light reveals young, hot stars along the spiral arms; the displayed colors represent ultraviolet bands.',
-            alt: 'GALEX ultraviolet mosaic of the Andromeda galaxy, with its tilted disk and bright spiral arms.'
-        },
-        'zh-CN': {
-            title: '仙女座星系', category: '银河系之外的星系',
-            description: '跨越星系之间的深空，一座由恒星、气体和尘埃组成的巨大旋涡映入眼帘。仙女座星系与银河系同属本星系群。',
-            distance: '约 250 万光年', type: '旋涡星系', location: '仙女座方向',
-            instrument: 'GALEX · 紫外波段',
-            observation: '由望远镜观测拼接而成。紫外光显现出旋臂上年轻、炽热的恒星；图像颜色对应不同的紫外波段。',
-            alt: 'GALEX 拍摄的仙女座星系紫外拼接图，呈现倾斜的星系盘与明亮旋臂。'
-        },
-        'zh-TW': {
-            title: '仙女座星系', category: '銀河系之外的星系',
-            description: '跨越星系之間的深空，一座由恆星、氣體和塵埃組成的巨大旋渦映入眼簾。仙女座星系與銀河系同屬本星系群。',
-            distance: '約 250 萬光年', type: '旋渦星系', location: '仙女座方向',
-            instrument: 'GALEX · 紫外波段',
-            observation: '由望遠鏡觀測拼接而成。紫外光顯現出旋臂上年輕、熾熱的恆星；影像顏色對應不同的紫外波段。',
-            alt: 'GALEX 拍攝的仙女座星系紫外拼接圖，呈現傾斜的星系盤與明亮旋臂。'
-        }
-    },
     m42: {
         image: 'assets/deep-sky/m42-hubble-spitzer.webp',
         catalogue: 'MESSIER 42 · NGC 1976',
@@ -169,7 +138,7 @@ class DeepSkyMap {
     }
 
     enter(identifier) {
-        const aliases = { andromeda: 'm31', orion: 'm42', 'orion-nebula': 'm42', M31: 'm31', M42: 'm42' };
+        const aliases = { orion: 'm42', 'orion-nebula': 'm42', M42: 'm42' };
         const id = aliases[identifier] || identifier;
         if (!DEEP_SKY_OBSERVATIONS[id]) return false;
         this.initialize();

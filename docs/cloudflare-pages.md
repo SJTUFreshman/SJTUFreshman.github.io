@@ -6,6 +6,33 @@ This is a Direct Upload project. `.github/workflows/cloudflare-pages.yml` uses
 GitHub Actions to publish pushes to `main` to the existing `sjtufreshman` project.
 The workflow can also be started manually from the Actions tab on `main`.
 
+## Release reconciliation, November 11, 2026
+
+The November 9 music deployment (`54214377`) used commit `f0d6361`, which did
+not contain the separately published typography, homepage loading and map
+cleanup changes. It restored the old prose stack with WenKai before DFKai-SB
+and KaiTi. A new deployment must combine the reviewed changes; rebuilding
+from that commit alone repeats the regression.
+
+The reconciled bundle is
+`.render-work/cloudflare-pages/font-music-reconciliation-20261111`, with a
+sibling `-report.json` containing all file hashes. It combines the reviewed
+`prose-kaiti-20261108` release with the committed music player, audio files,
+page redirects and transition integration. The preparation script is
+`.render-work/prepare-font-music-reconciliation.py`. The current checkout
+contains this combined website, including new typography styles and font
+subsets that are not yet tracked in Git. Do not stage an older HEAD version
+of a page to isolate a feature, then deploy it over this release. Review
+and include the already published website changes in any future Git release.
+
+For the isolated bundle, run the browser suites against its preview URL and
+set `SITE_PUBLIC_ROOT` to the absolute bundle directory for the music and
+HTTP checks. The reading, typography and news suites use `?music=off` to
+inspect page content directly; the music suite separately checks navigation
+and playback inside the shell. The font audit at
+`.render-work/verify-font-reconciliation.cjs` checks the actual rendered name
+inside that shell and compares published resource hashes.
+
 ## Automatic deployment
 
 Configure these repository settings under **Settings > Secrets and variables > Actions**:

@@ -116,8 +116,7 @@ class LifeStarMap {
             .map(value => value * 1000);
         this.entities = [
             { id: 'm42', position: m42Position, level: 'local', names: ['Orion Nebula', '猎户座大星云', '獵戶座大星雲'], subtitles: ['M42 · Stellar nursery', 'M42 · 恒星诞生地', 'M42 · 恆星誕生地'] },
-            { id: 'region', position: [112, 2, 74], level: 'galaxy', names: ['Our neighbourhood', '我们的星域', '我們的星域'], subtitles: ['Explore the constellations', '进入生活星座', '進入生活星座'] },
-            { id: 'm31', position: [-420, 50, -180], level: 'galaxy', names: ['Andromeda Galaxy', '仙女座星系', '仙女座星系'], subtitles: ['M31 · Beyond the Milky Way', 'M31 · 银河之外', 'M31 · 銀河之外'] }
+            { id: 'region', position: [112, 2, 74], level: 'galaxy', names: ['Our neighbourhood', '我们的星域', '我們的星域'], subtitles: ['Explore the constellations', '进入生活星座', '進入生活星座'] }
         ];
         const navigation = document.getElementById('mapEntities');
         this.entities.forEach(entity => {
@@ -170,7 +169,7 @@ class LifeStarMap {
             const candidates = positions.map(([x, y]) => ({ left: x - labelWidth * 0.5, right: x + labelWidth * 0.5,
                 top: y - 28, bottom: y + 52 }));
             const rect = this.labelLayout.place(key, projected, candidates, occupied, stars,
-                { left: 12, right: window.innerWidth - 12, top: 106, bottom: window.innerHeight - 105 });
+                this.labelLayout.viewportBounds());
             entity.button.hidden = !rect;
             entity.button.inert = !rect;
             if (!rect) continue;
@@ -191,20 +190,6 @@ class LifeStarMap {
                 context.strokeStyle = `rgba(162,180,203,${0.22 * rect.opacity})`;
                 context.lineWidth = 0.7;
                 context.stroke();
-            }
-            if (entity.id === 'm31') {
-                context.save();
-                context.translate(projected.x, projected.y - 28);
-                context.rotate(-0.45);
-                context.scale(1, 0.32);
-                const glow = context.createRadialGradient(0, 0, 1, 0, 0, 48);
-                glow.addColorStop(0, 'rgba(249,225,178,.82)');
-                glow.addColorStop(0.13, 'rgba(214,200,177,.36)');
-                glow.addColorStop(0.45, 'rgba(160,175,202,.13)');
-                glow.addColorStop(1, 'rgba(91,108,139,0)');
-                context.fillStyle = glow;
-                context.fillRect(-50, -50, 100, 100);
-                context.restore();
             }
         }
         const galactic = this.galaxyMix > 0.65;
@@ -682,7 +667,7 @@ class LifeStarMap {
         // Include offscreen stars on the front hemisphere: clipping individual
         // vertices out of the bounds made the label anchor jump at screen edges.
         const front = points.filter(point => point.depth > 8 && Number.isFinite(point.x) && Number.isFinite(point.y));
-        const width = window.innerWidth < 760 ? 112 : 154, height = 44;
+        const { width, height } = this.labelLayout.measure(group.portal.button, key);
         const top = Math.min(...front.map(point => point.y));
         const bottom = Math.max(...front.map(point => point.y));
         const left = Math.min(...front.map(point => point.x));
@@ -695,7 +680,7 @@ class LifeStarMap {
             .map(([labelX, labelY]) => ({ left: labelX - width * 0.5, right: labelX + width * 0.5,
                 top: labelY, bottom: labelY + height }));
         return this.labelLayout.place(key, center, candidates, occupied, this.projectedPortalStars,
-            { left: 12, right: overlayWidth - 12, top: 110, bottom: overlayHeight - (window.innerWidth < 760 ? 110 : 60) });
+            this.labelLayout.viewportBounds());
     }
 
     portalStarAt(x, y, touch = false) {

@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const root = path.resolve(__dirname, '..');
+const root = process.env.SITE_PUBLIC_ROOT ? path.resolve(process.env.SITE_PUBLIC_ROOT) : path.resolve(__dirname, '..');
 const normalize = value => value.replace(/\r\n?/g, '\n');
 
 async function main() {
@@ -14,7 +14,9 @@ async function main() {
   const references = [...html.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="([^"]+)"[^>]*>/g)].map(match => match[1]).filter(reference => reference.startsWith('assets/') && /\.(?:js|css)(?:\?|$)/.test(reference));
   const versions = references.map(reference => new URL(reference, page).searchParams.get('v'));
   assert(versions.length >= 26 && versions.every(Boolean), 'HTTP HTML must version every local runtime resource');
-  assert.equal(new Set(versions).size, 1, 'HTTP HTML must use a single release version');
+  const runtimeVersions = references.filter(reference => !/^assets\/(?:lanmi-ui|site-typography)\.css/.test(reference))
+    .map(reference => new URL(reference, page).searchParams.get('v'));
+  assert.equal(new Set(runtimeVersions).size, 1, 'Life runtime files must use one release version; shared typography has independent versions');
   const downloaded = new Map();
   for (const reference of references) {
     const url = new URL(reference, page);
@@ -34,6 +36,6 @@ async function main() {
   assert.equal(typeof context.skyHasHorizon, 'function', 'HTTP-delivered math must export skyHasHorizon before astronomy calls it');
   assert.equal(context.naturalStarVisibilityAtDirection([0,-1,0]), 0, 'HTTP-delivered astronomy must resolve the math helper');
   assert.equal(context.naturalStarVisibilityAtDirection([0,-1,0]), 0, 'HTTP-delivered astronomy must retain the local horizon');
-  console.log(`Life HTTP validation passed (${references.length} versioned resources; ${versions[0]}; served bytes, syntax and cross-script helper linkage).`);
+  console.log(`Life HTTP validation passed (${references.length} versioned resources; served bytes, syntax and cross-script helper linkage).`);
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });

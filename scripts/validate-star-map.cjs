@@ -544,16 +544,8 @@ async function desktopChecks(browser) {
     'The galaxy overview collapses local constellations and the Solar System into the local region');
     await screenshot(page, 'galaxy-overview');
 
-    await page.locator('[data-map-entity="m31"]').click();
-    await page.locator('#deepSkyView').waitFor({ state: 'visible' });
-    check(/Andromeda/i.test(await page.locator('#deepSkyTitle').textContent())
-        && (await page.locator('.deep-sky-description').textContent()).length > 80,
-    'Selecting M31 approaches the external galaxy and opens its description');
-    await page.waitForFunction(() => document.querySelector('.deep-sky-image')?.naturalWidth > 0);
-    await screenshot(page, 'andromeda-detail');
-    await page.keyboard.press('Escape');
-    await settle(page);
-    samePose(await pose(page), far, 'Closing an external galaxy restores the galaxy overview');
+    check(await page.locator('[data-map-entity="m31"], [data-map-entity="center"]').count() === 0,
+        'Removed destinations do not appear in the galaxy overview');
     const galaxyPoint = await emptyPoint(page);
     await page.mouse.move(galaxyPoint.x, galaxyPoint.y);
     await page.mouse.wheel(0, -100);

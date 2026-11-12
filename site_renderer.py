@@ -745,7 +745,7 @@ def render_home_hero(content: dict[str, Any]) -> str:
         )
     link_html = "\n".join(links)
     return f"""    <section class="hero" id="about">
-        <img src="{esc(hero.get("avatar", ""))}" alt="Runde Yang" class="hero-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
+        <img src="{esc(hero.get("avatar", ""))}" alt="Runde Yang" class="hero-avatar" fetchpriority="high" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="hero-avatar-placeholder" style="display:none;">R</div>
         <div class="hero-info">
             <h1 class="hero-name" id="heroName">{lang_value(hero.get("name_html", {}), "en")}</h1>
             <p class="hero-title" data-key="hero_title">{lang_value(hero.get("title", {}), "en")}</p>
@@ -879,7 +879,8 @@ def render_projects(content: dict[str, Any]) -> str:
         key = f"proj_{key_for('project', item, index)}"
         cards.append(f"""            <div class="project-card">
                 <div class="project-img-wrap">
-                    <img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", item.get("name", "")))}">
+                    <img data-deferred-src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", item.get("name", "")))}" loading="lazy" decoding="async" fetchpriority="low">
+                    <noscript><img src="{esc(item.get("image", ""))}" alt="{esc(item.get("alt", item.get("name", "")))}" loading="lazy" decoding="async"></noscript>
                 </div>
                 <div class="project-body">
                     <div class="project-name en-only">{esc(item.get("name", ""))}</div>
@@ -917,7 +918,8 @@ def render_home_gallery(content: dict[str, Any]) -> str:
     home = content["home"]
     life_card = home["life_card"]
     bg_imgs = "\n".join(
-        f'                <img src="{esc(src)}" alt="">'
+        f'                <img data-deferred-src="{esc(src)}" alt="" loading="lazy" decoding="async" fetchpriority="low">'
+        f'<noscript><img src="{esc(src)}" alt="" loading="lazy" decoding="async"></noscript>'
         for src in life_card.get("images", [])
     )
     return """    <!-- ===== Gallery ===== -->

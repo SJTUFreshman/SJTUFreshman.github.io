@@ -1,0 +1,401 @@
+:root {
+    --font-display: 'Newsreader', 'Lanmi Kai', 'Site WenKai', Georgia, serif;
+    --type-body: 1.125rem;
+    --type-small: 1rem;
+    --type-caption: 0.875rem;
+    --type-meta: 0.8125rem;
+    --type-ui: 0.9375rem;
+    --type-heading: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
+    --type-title: clamp(1.75rem, 1.4rem + 1vw, 2.125rem);
+    --type-leading: 1.75;
+    --type-tracking: 0;
+    --type-measure: 65ch;
+    --space-copy: 0.875em;
+    --space-section: clamp(24px, 2.5vw, 36px);
+    --sky-label-top: 110px;
+    --sky-label-bottom: 110px;
+}
+
+html:lang(zh) {
+    --type-body: 1.1875rem;
+    --type-small: 1.0625rem;
+    --type-caption: 0.9375rem;
+    --type-meta: 0.875rem;
+    --type-ui: 1.0625rem;
+    --type-leading: 1.85;
+    --type-tracking: 0.015em;
+    --type-measure: 34em;
+}
+
+body {
+    font-kerning: normal;
+    letter-spacing: var(--type-tracking);
+}
+
+html:lang(zh) :is(.section-title, .life-card-title, .portal-panel-title,
+    .section-drawer-title, .section-index-copy strong, .map-portal-copy strong,
+    .deep-sky-card h1, .solar-destination-choice) {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+}
+
+html:lang(zh) :is(.news-read, .project-link, .reading-open, .reading-original,
+    .reading-badge, .wishlist-button, .wishlist-mail-link, .friend-link,
+    .profile-links, .journal-close) {
+    font-family: var(--font-ui, var(--ui));
+    font-weight: 400;
+    letter-spacing: var(--lanmi-tracking);
+}
+
+html[lang] :is(.hero-bio, .news-text, .project-desc, .about-bio, .profile-bio,
+    .thought-text, .shelf-comment, .shelf-subsection p, .reading-page,
+    .reading-excerpt, .wishlist-page, .wine-entry, .constellation-meaning p) {
+    font-size: var(--type-body);
+    line-height: var(--type-leading);
+    letter-spacing: var(--type-tracking);
+    overflow-wrap: break-word;
+}
+
+html[lang] :is(.hero-title, .hero-links, .profile-role, .profile-location,
+    .about-role, .about-links, .shelf-link, .reading-pending p,
+    .wine-adjustment, .wine-recipe-note, .wine-serve) {
+    font-size: var(--type-small);
+    line-height: 1.7;
+    letter-spacing: var(--type-tracking);
+}
+
+html[lang] :is(.weather-pill, .weather-loc, .weather-desc, .news-read,
+    .shelf-image-credit, .shelf-link-note, .wine-source, .wishlist-recipient,
+    .wishlist-mail-hint, .wishlist-mail-status, .wishlist-progress,
+    .constellation-meaning-kicker, .star-reader-description, .star-reader-status),
+html[lang] .reading-page :is(.reading-source, .reading-overview,
+    .reading-edition, .reading-article-date, .reading-article-meta, .reading-credit,
+    .reading-image figcaption) {
+    font-size: var(--type-caption);
+    line-height: 1.65;
+    letter-spacing: 0;
+    overflow-wrap: break-word;
+}
+
+html[lang] :is(.portal-moment-meta, .thought-date, .profile-handle,
+    .wine-ingredients dd, .star-reader-meta, .star-reader-kicker) {
+    font-size: var(--type-meta);
+    line-height: 1.65;
+    letter-spacing: 0.015em;
+    font-variant-numeric: tabular-nums;
+}
+
+html[lang] :is(.nav-link, .pub-btn, .project-link, .reading-open,
+    .reading-original, .reading-badge, .wishlist-button, .wishlist-mail-link,
+    .thought-toggle, .profile-links, .home-route-launch, .home-route-cancel, .footer),
+html[lang] .wishlist-draft summary {
+    font-size: var(--type-ui);
+    line-height: 1.5;
+}
+
+html[lang] :is(.portal-moment h3, .shelf-title, .reading-collection-header h3,
+    .reading-article-title, .wishlist-item h3, .wishlist-invitation h3,
+    .personal-profile h4, .about-copy h3) {
+    font-size: var(--type-heading);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: var(--type-tracking);
+    overflow-wrap: break-word;
+}
+
+html:lang(zh) :is(.hero-name, .portal-moment h3, .shelf-title,
+    .reading-collection-header h3, .reading-article-title, .profile-heading h3,
+    .personal-profile h4, .about-copy h3, .journal-title,
+    .wishlist-item h3, .wishlist-invitation h3) {
+    font-weight: 400;
+}
+
+html[lang] :is(.constellation-meaning h3, .wine-entry h4, .reading-pending h4,
+    .shelf-subsection h4, .shelf-links-grid h4) {
+    font-size: var(--type-small);
+    line-height: 1.55;
+    letter-spacing: 0.025em;
+    margin-bottom: 10px;
+}
+
+html[lang] :is(.portal-panel-title, .profile-heading h3) {
+    font-size: var(--type-title);
+    line-height: 1.3;
+    letter-spacing: var(--type-tracking);
+}
+
+html[lang] .hero-name {
+    font-size: clamp(2rem, 1.7rem + 0.8vw, 2.375rem);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+}
+html:lang(zh) .hero-name { letter-spacing: 0.025em; }
+html[lang] .hero-title { margin-bottom: 18px; text-wrap: balance; }
+html[lang] .hero-title a { white-space: normal; }
+html[lang] .hero-bio { max-width: var(--type-measure); margin-bottom: 22px; }
+html[lang] .hero-links { gap: 10px 22px; }
+html[lang] .hero-link { overflow-wrap: anywhere; }
+html[lang] .nav-link { padding-block: 10px; }
+html[lang] .section-title { font-size: 0.875rem; line-height: 1.5; letter-spacing: 0.09em; }
+html:lang(zh) .section-title { font-size: 1.125rem; letter-spacing: 0.015em; }
+html[lang] .news-list .news-item { gap: 8px 20px; padding: 16px 18px; }
+html[lang] .news-date { font-size: 0.8125rem; line-height: 1.5; letter-spacing: 0; }
+html[lang] .news-read { line-height: 1.5; }
+html[lang] .pub-list { gap: 16px; }
+html[lang] .pub-item { padding: 22px 24px; row-gap: 10px; }
+html[lang] .pub-title-text { font-size: 1.1875rem; line-height: 1.45; letter-spacing: 0; font-weight: 600; }
+html[lang] .pub-authors { font-size: 0.9375rem; line-height: 1.65; letter-spacing: 0; }
+html[lang] .pub-venue { font-size: 0.9375rem; line-height: 1.55; letter-spacing: 0; }
+html[lang] .pub-actions { gap: 8px; }
+html[lang] .pub-btn { font-size: 0.8125rem; min-height: 34px; padding: 5px 11px; }
+html[lang] .project-body { padding: 22px; }
+html[lang] .project-name { font-size: 1.1875rem; line-height: 1.45; margin-bottom: 10px; }
+html[lang] .project-desc { margin-bottom: 16px; }
+html[lang] .project-link { min-height: 36px; padding: 6px 12px; }
+html[lang] .life-card { min-height: 270px; height: auto; }
+html[lang] .life-card-content { min-height: 270px; height: auto; }
+html[lang] .life-card-title { font-size: clamp(1.625rem, 1.3rem + 1vw, 2rem); line-height: 1.3; letter-spacing: 0.015em; }
+html[lang] .life-card-desc { font-size: var(--type-small); line-height: 1.7; }
+html[lang] .life-card-cta { font-size: var(--type-ui); line-height: 1.5; }
+html[lang] .footer { font-size: var(--type-caption); line-height: 1.7; }
+
+html[lang] .portal-panel-header { padding-block: 22px 18px; }
+html[lang] .portal-panel-body { padding-block: 24px 32px; }
+html[lang] .portal-panel-names { font-size: var(--type-small); line-height: 1.6; letter-spacing: 0; color: var(--ink-soft); }
+html[lang] .portal-moments { gap: var(--space-section); }
+html[lang] .portal-moment + .portal-moment { padding-top: var(--space-section); }
+html[lang] .portal-moment-header { margin-bottom: 20px; }
+html[lang] .portal-moment h3 { margin-top: 8px; }
+html[lang] .portal-moment-location:not(:empty)::before { margin-right: 0.5em; }
+html[lang] .portal-moment-meta { column-gap: 0.5em; }
+html[lang] :is(.thoughts-list, .reading-page, .wishlist-page, .wine-entry) {
+    max-inline-size: var(--type-measure);
+    margin-inline: auto;
+}
+html[lang] :is(.constellation-meaning p, .shelf-subsection p, .shelf-comment, .profile-bio, .about-bio) { max-inline-size: var(--type-measure); }
+html[lang] .shelf-subsection { margin-top: 22px; }
+html[lang] .shelf-links-grid { gap: 20px 24px; margin-top: 24px; }
+html[lang] .shelf-image-credit { margin-top: 10px; }
+html[lang] .shelf-quotation footer { font-size: var(--type-caption); line-height: 1.65; }
+html[lang] .shelf-link-note { margin-top: 6px; }
+html[lang] .thought-date { margin-bottom: 10px; }
+html[lang] .thought-toggle { margin-top: 14px; }
+html[lang] .reading-collections { gap: 28px; }
+html[lang] .reading-article { padding-block: 24px; }
+html[lang] .reading-article-trigger { gap: 8px 16px; padding-bottom: 10px; }
+html[lang] .reading-article-date { margin-bottom: 10px; }
+html[lang] .reading-source { margin-top: 16px; }
+html[lang] .reading-overview { margin-block: 8px 18px; }
+html[lang] .reading-page .reading-body { font-size: var(--type-body); line-height: var(--type-leading); }
+html[lang] .reading-page .reading-body .reading-media-link { font-size: var(--type-caption); }
+html[lang] .reading-intro p { max-width: var(--type-measure); }
+html[lang] .wishlist-intro { font-size: var(--type-body); }
+html[lang] .wishlist-invitation p { margin-bottom: var(--space-copy); }
+html[lang] .wishlist-invitation :is(.wishlist-mail-hint, .wishlist-mail-status) { font-size: var(--type-caption); }
+html[lang] .wishlist-invitation .wishlist-recipient { font-size: var(--type-caption); }
+html[lang] .wine-entry .portal-moment-header h3 { font-size: var(--type-heading); }
+html[lang] .wine-entry :is(.wine-serve, .wine-recipe-note) { font-size: var(--type-caption); line-height: 1.7; }
+html[lang] .wine-section { margin-top: 28px; }
+html[lang] .wine-entry li + li { margin-top: 12px; }
+html[lang] .profile-bio p { margin-bottom: var(--space-copy); }
+html[lang] .profile-bio .profile-welcome { font-size: var(--type-body); }
+html[lang] .friend-name { font-size: var(--type-small); line-height: 1.5; }
+html[lang] #friends .friend-link { font-size: var(--type-ui); line-height: 1.65; }
+html[lang] .friends-hint { font-size: var(--type-caption); line-height: 1.65; }
+html[lang] .friend-memory-heading h3 { font-size: var(--type-heading); line-height: 1.4; }
+html[lang] .friend-memory-layer.is-compact .friend-memory-heading h3 { font-size: var(--type-small); }
+html[lang] :is(.gallery-caption, .lightbox-caption) { font-size: var(--type-caption); line-height: 1.6; letter-spacing: 0; }
+html[lang] .constellation-meaning { margin-top: 32px; padding-top: 24px; }
+html[lang] .star-reader-title { font-size: var(--type-small); line-height: 1.5; }
+html[lang] :is(#handwritingHint, #handwritingStatus) { font-size: var(--type-caption); line-height: 1.7; }
+html[lang] .handwriting-toggle { font-size: var(--type-small); }
+
+html[lang] .section-drawer-title { font-size: 1.75rem; line-height: 1.4; }
+html[lang] .section-index-copy strong { font-size: 1.25rem; line-height: 1.4; font-weight: 400; }
+html[lang] .section-index-copy span { font-size: var(--type-caption); line-height: 1.5; }
+html[lang] :is(.section-drawer-observer, .section-drawer-note) { font-size: var(--type-caption); line-height: 1.7; }
+html[lang] :is(.section-drawer-kicker, .section-index-number, .section-index-visibility) { font-size: 0.625rem; line-height: 1.5; letter-spacing: 0.04em; }
+html[lang] :is(.section-drawer-kicker, .section-index-visibility) { font-size: 0.6875rem; }
+html:lang(zh) :is(.section-drawer-kicker, .section-index-visibility) { font-size: 0.8125rem; letter-spacing: 0; }
+html[lang] .section-index-item { min-height: 76px; }
+html[lang] .section-index-copy { gap: 4px; }
+html[lang] .section-index-copy strong,
+html[lang] .section-index-copy span { white-space: normal; text-overflow: clip; }
+html[lang] :is(.section-index-copy span, .section-drawer-observer, .section-drawer-note) { color: #b7c4d6; }
+html[lang] :is(.control-legend, .entry-hint, .entry-fallback, .gaze-instruction,
+    .gaze-secondary, .map-footer, .map-portal-copy > span, .map-entity small,
+    .galactic-navigation, .galactic-distance, .star-hit-copy span) {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+}
+html:lang(zh) :is(.control-legend, .entry-hint, .entry-fallback, .gaze-instruction,
+    .gaze-secondary, .map-footer, .map-portal-copy > span, .map-entity small,
+    .galactic-navigation, .galactic-distance) { font-size: 1rem; letter-spacing: var(--lanmi-tracking); }
+html[lang] .star-hit-copy strong { font-size: var(--type-ui); line-height: 1.55; }
+html[lang] .map-entity { font-size: var(--type-ui); line-height: 1.5; }
+html[lang] .map-about p { max-height: min(55dvh, 380px); overflow: auto; }
+html[lang] .map-about p { font-size: var(--type-small); line-height: 1.85; }
+html[lang] .map-about summary { width: 34px; height: 34px; font-size: 18px; }
+html[lang] .observatory-return { font-size: var(--type-ui); }
+html[lang] .transition-veil span { font-size: var(--type-ui); line-height: 1.6; letter-spacing: var(--lanmi-tracking); }
+html[lang] .solar-destination-choice { font-size: clamp(1rem, 2.25vw, 1.85rem); line-height: 1.4; white-space: normal; text-align: center; text-wrap: balance; }
+html:lang(zh) .solar-destination-choice { letter-spacing: 0.06em; }
+html[lang] .life-mark strong { font-size: 1.5rem; letter-spacing: 0.01em; }
+html[lang] .life-mark span { font-size: 0.75rem; letter-spacing: 0.06em; }
+html[lang] .scene-status { font-size: 0.875rem; letter-spacing: 0.055em; line-height: 1.5; }
+html:lang(zh) .scene-status { font-size: 1.125rem; letter-spacing: var(--lanmi-tracking); line-height: 1.6; }
+html[lang] .sky-credit { top: 72px; font-size: 0.75rem; line-height: 1.5; }
+html[lang] .star-map .portal-hit.map-portal {
+    width: max-content;
+    max-width: 210px;
+    height: auto;
+    min-height: 64px;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px;
+}
+html[lang] .map-portal-copy { gap: 2px; min-width: 0; }
+html[lang] .map-portal-copy strong { font-size: 1.5rem; line-height: 1.35; white-space: nowrap; }
+html[lang] .map-portal-copy > span { font-size: 1rem; line-height: 1.6; color: #bac7da; }
+html:lang(zh) .map-portal-copy > span { font-size: 1.0625rem; letter-spacing: var(--lanmi-tracking); }
+html[lang] .map-portal-number { padding-top: 8px; font-size: 0.75rem; line-height: 1.5; color: #9eafc5; }
+html[lang] .star-map .lang-btn { min-width: 38px; min-height: 38px; height: auto; font-size: 15px; line-height: 1.5; }
+html[lang] .star-map .lang-btn[data-lang^="zh"] { font-size: 18px; }
+html[lang] .star-map .map-entity { font-size: 18px; }
+html[lang] .galactic-tools button { min-height: 44px; min-width: 44px; padding-inline: 12px; }
+html[lang] .galactic-navigation { gap: 12px; }
+html[lang] .map-footer { color: #c0cbda; align-items: flex-end; gap: 12px; }
+html[lang] body:has(.galactic-navigation) .map-footer { max-width: calc(100vw - 420px); }
+html[lang] :is(.map-card-title, .footprints-map-open, .footprints-map-view-toggle,
+    .footprints-map-control-expand, .footprints-map-status, .footprints-map-retry) { font-size: var(--type-ui); line-height: 1.5; }
+html[lang] .footprints-map-card h3 { font-size: var(--type-heading); line-height: 1.35; }
+html[lang] .footprints-map-attribution { font-size: 0.6875rem; line-height: 1.55; }
+html[lang] .footprints-map-hint { font-size: var(--type-caption); line-height: 1.6; }
+html[lang] .footprints-map-zoom { font-size: 0.75rem; }
+html[lang] .footprints-map-control-maximum { font-size: 0.75rem; }
+html[lang] .footprints-viewer-header h2 { font-size: 1.25rem; line-height: 1.4; }
+html[lang] .footprints-map-title-actions { flex-wrap: wrap; }
+html:lang(en) .footprints-preview-inset-title { font-size: max(11px, var(--footprints-inset-title-size, 11px)); line-height: 1.35; }
+
+html[lang] .deep-sky-card { justify-content: safe center; }
+html[lang] .deep-sky-card h1 { font-size: clamp(2rem, 1.5rem + 2vw, 3.25rem); line-height: 1.25; letter-spacing: -0.02em; }
+html:lang(zh) .deep-sky-card h1 { letter-spacing: 0.025em; }
+html[lang] .deep-sky-description { font-family: var(--editorial); font-size: var(--type-body); line-height: var(--type-leading); letter-spacing: var(--type-tracking); }
+html[lang] .deep-sky-observation { font-family: var(--editorial); }
+html[lang] :is(.deep-sky-category, .deep-sky-image-status, .deep-sky-facts dt, .deep-sky-close) { font-size: var(--type-ui); line-height: 1.6; }
+html[lang] .deep-sky-facts dd { font-size: 1rem; line-height: 1.6; }
+html[lang] .deep-sky-observation { font-size: var(--type-small); line-height: 1.75; }
+html[lang] :is(.deep-sky-image-caption, .deep-sky-image-hint, .deep-sky-source-links a) { font-size: var(--type-caption); line-height: 1.5; }
+html[lang] :is(.deep-sky-catalogue, .deep-sky-source-kicker, .deep-sky-credit, .deep-sky-observatory) { font-size: 0.75rem; line-height: 1.6; letter-spacing: 0.025em; }
+html:lang(zh) :is(.deep-sky-source-kicker, .deep-sky-observatory) { font-size: 0.8125rem; }
+html[lang] .deep-sky-close > span:nth-child(2) { max-width: none; font-size: inherit; }
+html[lang] .deep-sky-languages button { min-width: 34px; font-size: 0.875rem; }
+html[lang] .deep-sky-languages button[data-deep-language^="zh"] { font-size: 0.9375rem; }
+html[lang] .deep-sky-image-tools button[data-deep-zoom="reset"] { font-size: 0.75rem; }
+
+.thought-reader :is(.thought-reader-language, .thought-reader-close, .thought-reader-pagination button) { font-size: 14px; line-height: 1.5; }
+.thought-reader .thought-reader-mode { font-size: 21px; line-height: 1.4; letter-spacing: 0.06em; }
+.thought-reader:lang(en) .thought-reader-mode { letter-spacing: 0; }
+.thought-reader .thought-reader-article { max-width: 760px; }
+.thought-reader .thought-reader-body { font-size: 24px; line-height: 1.95; letter-spacing: 0.02em; }
+.thought-reader:lang(en) .thought-reader-body { font-size: 22px; line-height: 1.75; letter-spacing: 0; }
+.thought-reader:lang(zh-TW) .thought-reader-body { line-height: 2.15; letter-spacing: 0.06em; }
+.thought-reader .thought-reader-article header { margin-bottom: 30px; }
+.thought-reader:lang(zh-TW) .thought-reader-article header { margin-bottom: 0; }
+.thought-reader h2 { font-size: clamp(28px, 2.6vw, 36px); line-height: 1.4; }
+.thought-reader:lang(zh-TW) h2 { font-size: clamp(28px, 2.6vw, 36px); letter-spacing: 0.08em; }
+.thought-reader .thought-reader-date { margin-bottom: 14px; letter-spacing: 0.035em; }
+.thought-reader:lang(zh-TW) .thought-reader-date { margin-bottom: 0; }
+.thought-reader .thought-reader-hint { font-size: 13px; line-height: 1.6; letter-spacing: 0; }
+.thought-reader .thought-reader-progress { font-size: 12px; }
+.thought-reader .reading-body { font: inherit; letter-spacing: inherit; }
+.thought-reader :is(.reading-article-meta, .reading-credit, .reading-media-link, .reading-image figcaption) { font-size: 14px; line-height: 1.75; }
+
+html[lang] .journal-title { font-size: var(--type-title); line-height: 1.35; }
+html[lang] .journal-writing h3 { font-size: var(--type-heading); line-height: 1.4; }
+html[lang] .journal-body {
+    --journal-leading: 1.9em;
+    font-size: var(--type-body);
+    line-height: var(--journal-leading);
+    letter-spacing: var(--type-tracking);
+    background: repeating-linear-gradient(transparent 0 calc(var(--journal-leading) - 1px), #a3ae9a26 calc(var(--journal-leading) - 1px) var(--journal-leading));
+}
+html[lang] :is(.journal-kicker, .journal-footer, .journal-photo figcaption) { font-size: var(--type-caption); line-height: 1.65; letter-spacing: 0.025em; }
+html[lang] .journal-close { font-size: var(--type-ui); line-height: 1.5; }
+html[lang] .pet-bubble { font-size: 13px; line-height: 1.4; max-width: min(250px, calc(100vw - 32px)); white-space: normal; }
+html[lang] .pet-menu-item { font-size: 14px; line-height: 1.4; }
+html[lang] .pet-launch-label { font-size: 13px; letter-spacing: 0; }
+html[lang] .summon-menu :is(.summon-option-name, .summon-menu-title) { line-height: 1.4; }
+html[lang] .summon-option-name { font-size: 14px; }
+html[lang] .summon-option-note { font-size: 12px; line-height: 1.5; }
+
+@media (max-width: 900px) {
+    :root { --sky-label-bottom: 190px; }
+    html[lang] .deep-sky-topbar { flex-wrap: wrap; height: auto; min-height: 68px; gap: 4px 12px; }
+    html[lang] .deep-sky-observatory { flex-basis: 100%; max-width: none; }
+    html[lang] .deep-sky-languages { margin-right: auto; }
+    html[lang] .deep-sky-image-viewport { bottom: 94px; }
+    html[lang] .deep-sky-figure figcaption { left: 20px; right: 20px; bottom: 12px; padding-right: 0; }
+    html[lang] .deep-sky-image-tools { right: 16px; bottom: 68px; }
+    html[lang] .shelf-links-grid { grid-template-columns: minmax(0, 1fr); }
+    html[lang] body:has(.galactic-navigation) .map-footer { bottom: 130px; max-width: calc(100vw - 36px); }
+    html[lang] .map-footer { left: 18px; right: 18px; }
+}
+
+@media (max-width: 760px) {
+    :root {
+        --sky-label-top: 146px;
+        --sky-label-bottom: 190px;
+    }
+    html[lang] .star-map .life-mark { top: 16px; left: 18px; }
+    html[lang] .life-mark strong { font-size: 1.3125rem; }
+    html[lang] .life-mark span { font-size: 0.6875rem; }
+    html[lang] .star-map .language-switch { top: 16px; right: 14px; }
+    html[lang] .star-map .scene-status { top: 91px; }
+    html[lang] .sky-credit { top: 122px; }
+    html[lang] .star-map .section-drawer-toggle { top: 100px; }
+    html[lang] .map-portal-copy strong { font-size: 1.25rem; }
+    html[lang] .map-portal-copy > span,
+    html:lang(zh) .map-portal-copy > span { font-size: 1rem; }
+    html[lang] .map-portal-number { padding-top: 6px; }
+    html[lang] .star-map .portal-hit.map-portal { max-width: 180px; min-height: 60px; }
+}
+
+@media (max-width: 640px) {
+    :root { --type-body: 1.0625rem; }
+    html:lang(zh) { --type-body: 1.125rem; }
+    html[lang] .hero { padding-block: 40px 32px; }
+    html[lang] .hero-links { gap: 8px 16px; }
+    html[lang] .pub-item { padding: 18px; }
+    html[lang] .pub-title-text { font-size: 1.125rem; }
+    html[lang] .news-list .news-item { gap: 6px 12px; padding: 14px; }
+    html[lang] .life-card-content { width: calc(100% - 46px); padding: 26px 22px; }
+    html[lang] .life-card-title { max-width: none; }
+    html[lang] .portal-panel-header { padding-block: 16px 14px; }
+    html[lang] .portal-panel-body { padding: 20px 20px 28px; }
+    html[lang] .reading-collection { padding: 18px; }
+    html[lang] .reading-intro { flex-direction: column; gap: 10px; }
+    html[lang] .reading-crown { flex-basis: auto; width: 48px; margin-top: 0; }
+    html[lang] .reading-article-trigger { flex-wrap: wrap; }
+    html[lang] .section-index-item { min-height: 76px; }
+    html[lang] .footprints-viewer-header { flex-wrap: wrap; }
+    html[lang] .footprints-viewer-header .footprints-map-view-toggle { order: 1; flex: 1 1 100%; max-width: none; min-width: 0; min-height: 44px; }
+    .thought-reader .thought-reader-toolbar { flex-wrap: wrap; }
+    .thought-reader .thought-reader-mode { font-size: 19px; }
+    .thought-reader .thought-reader-body,
+    .thought-reader:lang(en) .thought-reader-body { font-size: 22px; }
+    .thought-reader:lang(zh-TW) .thought-reader-body { line-height: 2.05; }
+    .thought-reader .thought-reader-footer { flex-wrap: wrap; gap: 8px 12px; }
+}
+
+@media (max-width: 420px) {
+    html[lang] .portal-panel-title { font-size: 1.625rem; }
+    html[lang] .portal-panel-body { padding-inline: 16px; }
+    html[lang] .scene-status { max-width: calc(100vw - 32px); white-space: normal; text-align: center; }
+    html[lang] .section-index-item { gap: 8px; }
+    html[lang] .section-index-visibility { min-width: 44px; }
+    .thought-reader .thought-reader-controls { width: 100%; justify-content: space-between; }
+}

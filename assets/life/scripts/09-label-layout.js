@@ -4,6 +4,8 @@ class StarMapLabelLayout {
     constructor() {
         this.entries = new Map();
         this.delta = 0;
+        this.clear();
+        document.fonts.addEventListener('loadingdone', () => this.clear());
     }
 
     beginFrame(delta) {
@@ -12,6 +14,30 @@ class StarMapLabelLayout {
 
     clear() {
         this.entries.clear();
+        this.sizes = new WeakMap();
+        const style = getComputedStyle(document.documentElement);
+        this.insets = {
+            top: parseFloat(style.getPropertyValue('--sky-label-top')) || 110,
+            bottom: parseFloat(style.getPropertyValue('--sky-label-bottom')) || 110
+        };
+    }
+
+    viewportBounds() {
+        return { left: 12, right: window.innerWidth - 12,
+            top: this.insets.top, bottom: window.innerHeight - this.insets.bottom };
+    }
+
+    measure(element, key) {
+        const cached = this.sizes.get(element);
+        const text = element.textContent;
+        if (cached?.text === text) return cached;
+        this.hide(key);
+        const hidden = element.hidden;
+        element.hidden = false;
+        const size = { width: element.offsetWidth, height: element.offsetHeight, text };
+        element.hidden = hidden;
+        this.sizes.set(element, size);
+        return size;
     }
 
     hide(key) {

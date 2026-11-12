@@ -131,9 +131,7 @@ class LifeStarMap {
 
     buildEntities() {
         this.entities = [
-            { id: 'solar', position: GALACTIC_SPACE.solar.slice(), level: 'all', names: ['Solar System', '太阳系', '太陽系'] },
-            { id: 'center', position: GALACTIC_SPACE.center.slice(), level: 'galaxy', names: ['Galactic centre', '银河中心', '銀河中心'], subtitles: ['Sagittarius A*', '人马座 A*', '人馬座 A*'] },
-            { id: 'm31', position: [611000, -283000, -369000], level: 'galaxy', names: ['Andromeda Galaxy', '仙女座星系', '仙女座星系'], subtitles: ['M31 · Beyond the Milky Way', 'M31 · 银河之外', 'M31 · 銀河之外'] }
+            { id: 'solar', position: GALACTIC_SPACE.solar.slice(), level: 'all', names: ['Solar System', '太阳系', '太陽系'] }
         ];
         const navigation = document.getElementById('mapEntities');
         this.entities.forEach(entity => {
@@ -144,12 +142,7 @@ class LifeStarMap {
             button.innerHTML = entity.subtitles ? '<span></span><small></small>' : '<span></span>';
             button.addEventListener('click', () => {
                 if (this.suppressClickUntil > performance.now()) return;
-                if (entity.id === 'solar') {
-                    this.openSolarDestination();
-                } else if (entity.id === 'center') {
-                    this.target.center = entity.position.slice();
-                    this.target.distance = 26000;
-                } else this.openDeepSky(entity);
+                this.openSolarDestination();
             });
             entity.button = button;
             navigation.append(button);
@@ -201,7 +194,7 @@ class LifeStarMap {
             const candidates = positions.map(([x, y]) => ({ left: x - labelWidth * 0.5, right: x + labelWidth * 0.5,
                 top: y - 28, bottom: y + 52 }));
             const rect = this.labelLayout.place(key, projected, candidates, occupied, stars,
-                { left: 12, right: window.innerWidth - 12, top: 106, bottom: window.innerHeight - 105 });
+                this.labelLayout.viewportBounds());
             if (!solarLabel) {
                 entity.button.hidden = !rect;
                 entity.button.inert = !rect;
@@ -231,20 +224,6 @@ class LifeStarMap {
                 context.strokeStyle = `rgba(162,180,203,${0.22 * rect.opacity})`;
                 context.lineWidth = 0.7;
                 context.stroke();
-            }
-            if (entity.id === 'm31') {
-                context.save();
-                context.translate(projected.x, projected.y - 28);
-                context.rotate(-0.45);
-                context.scale(1, 0.32);
-                const glow = context.createRadialGradient(0, 0, 1, 0, 0, 48);
-                glow.addColorStop(0, 'rgba(249,225,178,.82)');
-                glow.addColorStop(0.13, 'rgba(214,200,177,.36)');
-                glow.addColorStop(0.45, 'rgba(160,175,202,.13)');
-                glow.addColorStop(1, 'rgba(91,108,139,0)');
-                context.fillStyle = glow;
-                context.fillRect(-50, -50, 100, 100);
-                context.restore();
             }
         }
         const galactic = this.galaxyMix > 0.65;
@@ -690,7 +669,7 @@ class LifeStarMap {
         // Include offscreen stars on the front hemisphere: clipping individual
         // vertices out of the bounds made the label anchor jump at screen edges.
         const front = points.filter(point => point.depth > 8 && Number.isFinite(point.x) && Number.isFinite(point.y));
-        const width = window.innerWidth < 760 ? 112 : 154, height = 44;
+        const { width, height } = this.labelLayout.measure(group.portal.button, key);
         const top = Math.min(...front.map(point => point.y));
         const bottom = Math.max(...front.map(point => point.y));
         const left = Math.min(...front.map(point => point.x));
@@ -702,8 +681,11 @@ class LifeStarMap {
             [x, bottom + 16 + height + 10], [x, top - height * 2 - 26]]
             .map(([labelX, labelY]) => ({ left: labelX - width * 0.5, right: labelX + width * 0.5,
                 top: labelY, bottom: labelY + height }));
-        return this.labelLayout.place(key, center, candidates, occupied, this.projectedPortalStars,
-            { left: 12, right: overlayWidth - 12, top: 110, bottom: overlayHeight - (window.innerWidth < 760 ? 110 : 60) });
+        const solar = this.project(GALACTIC_SPACE.solar, this.currentView);
+        const reserved = solar.visible ? [...occupied, { left: solar.x - 24, right: solar.x + 24,
+            top: solar.y - 24, bottom: solar.y + 24 }] : occupied;
+        return this.labelLayout.place(key, center, candidates, reserved, this.projectedPortalStars,
+            this.labelLayout.viewportBounds());
     }
 
     portalStarAt(x, y, touch = false) {

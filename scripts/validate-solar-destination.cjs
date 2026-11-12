@@ -55,6 +55,11 @@ async function scenario(browser, { name, viewport, mobile = false, reduced = fal
         await page.goto(new URL('life.html', base).href, { waitUntil: 'domcontentloaded' });
         await ready(page);
         const marker = page.locator('[data-map-entity="solar"]');
+        check(await page.locator('[data-map-entity="m31"], [data-map-entity="center"]').count() === 0,
+            `${name}: removed map destinations are absent`);
+        check(await page.evaluate(() => Object.keys(DEEP_SKY_OBSERVATIONS).join(',') === 'm42'
+            && ['m31', 'M31', 'andromeda'].every(identifier => !window.lifeStarMap.deepSky.enter(identifier))),
+            `${name}: retired content and aliases cannot open`);
         check(!requests.some(url => url.includes('/observatory/')), `${name}: the 3D page does not load the observer runtime`);
         for (const language of ['en', 'zh-CN', 'zh-TW']) {
             await activate(page.locator(`.lang-btn[data-lang="${language}"]`));
@@ -101,6 +106,9 @@ async function scenario(browser, { name, viewport, mobile = false, reduced = fal
             && state.currentLang === 'zh-CN'), `${name}: the left half opens the restored observer sky and keeps the language`);
         check(await page.locator('#skyCredit').isVisible() && await page.locator('#observatoryReturn').isVisible(),
             `${name}: the observer page exposes the photograph credit and return link`);
+        check(await page.locator('[data-map-entity="m31"], [data-map-entity="center"]').count() === 0
+            && await page.locator('[data-map-entity="m42"]').count() === 1,
+            `${name}: the observer retains Orion without the removed destinations`);
         await page.screenshot({ path: path.join(output, `${name}-observatory.png`) });
         await page.goBack({ waitUntil: 'domcontentloaded' });
         await ready(page);

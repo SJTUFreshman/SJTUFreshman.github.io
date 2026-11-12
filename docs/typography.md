@@ -2,7 +2,47 @@
 
 首页、Life 和观景页共用 Newsreader 西文正文、IBM Plex Sans 界面字和 IBM Plex Mono 等宽字。拉丁字母和数字不随中文界面改用楷体。中文字体声明限定 CJK Unicode 范围，正文栈优先使用 Newsreader，避免中文字体中的 ASCII 字形截获英文。
 
-简体与繁体正文都优先使用原有 EduKai（台湾教育部标准楷体），不能因界面语言改变中文主字体。只有原始 EduKai 字库确实不包含的字符才回退到 Site WenKai；已有标楷字形继续使用标楷体。Site WenKai 是 LXGW WenKai Regular v1.530 的改名网页子集，许可保存在 `fonts/OFL-WenKai.txt`。
+中文界面统一使用兰米标准楷体简繁（CSS 名称 `Lanmi Kai`，PostScript 名称 `LANMI_yujian2_jianfan`），用于首页 `--font-ui`、Life/观景页 `--ui` 和用户框的中文默认字体。包括足迹地图里的“文化区”选择器；它原先在 Windows 上回退到 `Microsoft YaHei UI`。兰米缺少的个别字（例如“線”“裡”）回退到 `Site WenKai`，英文界面继续使用 IBM Plex Sans。字体来源、版本和校验值见 `fonts/LANMI-SOURCE.md`。
+
+等宽栈 `--mono` / `--font-mono` 同样在 IBM Plex Mono 后加入兰米与 Site WenKai，避免“局部星图”“太阳系位置观景”等中文状态文字回退到微软雅黑或正黑体。英文和数字继续使用 IBM Plex Mono；中文场景状态采用 18px、行高 1.6、字距 -0.045em。
+
+简体与繁体的正文、姓名和文章均按 `EduKai → DFKai-SB → KaiTi → Site KaiTi → Site WenKai` 逐字回退。Site KaiTi 是由用户授权使用的 Windows KaiTi 源字体制作的网页子集，仅收录 EduKai 缺失、网站实际使用的字。设备没有系统楷体时仍可加载该子集；DFKai-SB 本机没有源文件，仍使用系统字体。Site WenKai 是 LXGW WenKai Regular v1.530 的改名网页子集，许可保存在 `fonts/OFL-WenKai.txt`。
+
+KaiTi 子集使用 `python scripts/build-kaiti-subset.py --font <已授权的simkai.ttf路径>` 重建，并自动更新首页及 Life/观景页的字形范围和缓存版本。更新网站文字后，应先重建 EduKai 等原有子集，再重建 KaiTi 子集。原始 KaiTi 字体不包含在仓库中。
+
+当前 `edukai-5.0.woff2` 保留“体”“云”等简体字形，并不代表完整覆盖简体字集；“国”“学”“书”等字在原字库中没有映射，“恒”的映射没有笔画。构建和浏览器验证均保留可用简体字的原标楷字形，仅逐字补缺；不会因为界面选择简体就将整段正文切换为文楷。
+
+中文字体按阅读用途分工：兰米用于导航、星图栏目名、栏目面板与目录标题、首页分区标题和深空标题，突出个人风格；标楷用于个人姓名、文章与作品标题、正文、手账和深空介绍，保持连续阅读的节奏。`--font-display` 连接 Newsreader 西文标题与兰米中文标题；功能按钮使用界面栈。中文标题保持 400 字重，避免模拟加粗损伤笔画。文楷只补主字体缺字。
+
+## 兰米界面尺度
+
+兰米常用汉字的实际字面高度约为 0.69 em，原标楷约为 0.81 em。两处 `@font-face` 使用 `size-adjust: 120%` 补偿中文视觉大小；西文和数字仍按原来的字体尺寸显示。
+
+三个页面共用 `assets/lanmi-ui.css`，中文导航、地图选择器和阅读器按钮为 17px，次要标签为 15px，基础辅助标签为 14px；最终页面层级由 `assets/site-typography.css` 细分。一般中文界面字距为 -0.045em，抵消兰米字面两侧较宽的留白；展示标题采用 -0.025em，部分独立标题轻微疏排。用户框正文以 14px、行高 1.6 适配，徽记保留各自尺度。手机端的地图操作和阅读器工具栏允许分行，避免压缩字号。
+
+星图栏目名为桌面 24px、手机 20px，中文星座说明为 17px / 16px，底部操作提示为 16px，场景状态为 18px。目录标题为 28px、栏目名为 20px。星图布局按字体加载后的实际文字宽高避让，切换语言、字体加载完成和调整窗口后重新测量；上下预留标题与操作区，并避让太阳点击标记。
+
+页面语言决定常规界面尺度；阅读器按自身 `lang` 决定简、繁、英的排版。语言切换中的“简”“繁”始终单独适配。调整后核对 1440px、390px、320px 视口，检查菜单、地图大图、阅读器横排与竖排、深空信息和用户框的实际可见文字边界。
+
+## 全站字号与间距
+
+首页、Life 和观景页在兰米适配之后加载 `assets/site-typography.css`，统一标题、正文、说明文字、操作和辅助信息的层级。字体角色保持一致，字号按用途和语言分配：
+
+| 用途 | 英文 | 中文 |
+| --- | --- | --- |
+| 普通正文 | 18px / 1.75，手机端 17px | 19px / 1.85，手机端 18px |
+| 次要正文与链接 | 16px / 1.7 | 17px / 1.7 |
+| 来源、说明与页脚 | 14px / 1.65–1.7 | 15px / 1.65–1.7 |
+| 日期等辅助信息 | 13px | 14px |
+| 常规操作 | 15px | 17px |
+| 内容小标题 | 20–24px / 1.4 | 20–24px / 1.4 |
+| 面板标题 | 28–34px / 1.3 | 28–34px，窄屏 26px |
+
+正文默认中文微疏排 `0.015em`，英文使用自然字距；兰米界面仍采用自身的字距补偿。长段落限制在约 `65ch`（英文）或 `34em`（中文），内容间距随视口在 24–36px 内变化。首页论文标题为桌面 19px、手机 18px，作者与刊物为 15px。卡片内边距、段落间距和标题间距与字号共同调整，避免只放大文字。
+
+长文阅读器单独管理尺度：中文桌面 24px、手机 22px，横排行高 1.95；英文 22px / 1.75；繁体竖排列距为桌面 2.15、手机 2.05，字距 `0.06em`。拾文的 `.reading-body` 继承阅读器正文尺度，不能被列表页或外层页面语言覆盖。手账横线间距与正文行高共用变量。
+
+手机端拾文简介改为整行，目录、地图和阅读器工具栏允许自然换行；深空图片说明与缩放工具分别预留空间。校验应包含简繁英三种语言、1440px/390px/320px 视口，以及页面语言和阅读器语言不一致的情形。
 
 ## 重建
 
@@ -13,10 +53,18 @@ python scripts/build-edukai-subset.py
 python scripts/build-edukai-subset.py --check
 ```
 
-默认构建 `fonts/edukai-site-subset.woff2` 和 `fonts/wenkai-site-subset.woff2`。EduKai 原始字库保存在仓库；WenKai 原始 TTF 首次由固定版本地址下载至忽略目录 `.render-work/`，必须通过脚本中固定的 SHA-256 校验。无需将 24.73 MiB 的完整 TTF 发布到网站。
+默认构建 `fonts/edukai-site-subset.woff2`、`fonts/wenkai-site-subset.woff2` 和 `fonts/lanmi-site-subset.woff2`，供 Life 和观景页使用；同时生成首页专用的三个 `*-home-subset.woff2`。EduKai 原始字库保存在仓库；WenKai 与兰米原始 TTF 首次下载至忽略目录 `.render-work/`，必须通过脚本中固定的 SHA-256 校验。网页只引用子集，无需发布完整 TTF。
 
-构建扫描三张页面、Life/观景页引用的本地脚本与样式、`site_content.json`，以及拾文原文和译文 JSON。HTML 实体与 Unicode 转义均先解码。保留字体布局信息和竖排替代字形，验证生成文件后原子替换。`--check` 在当前文本有任何 CJK 字符不被两个发布子集覆盖时失败；添加内容后应先生成页面，再重建字体。
+构建扫描三张页面、Life/观景页引用的本地脚本与样式、`site_content.json`，以及拾文原文和译文 JSON。HTML 实体与 Unicode 转义均先解码。保留字体布局信息和竖排替代字形，验证生成文件后原子替换。原字库中有编码却无轮廓的汉字（例如标楷“恒”）不进入子集，使浏览器继续尝试 DFKai-SB 和文楷；合法空格仍保留。`--check` 验证空白字形和正文（EduKai + WenKai）、界面（兰米 + WenKai）的 CJK 覆盖，保证设备没有 DFKai-SB 时仍有完整网页字库后备；添加内容后应先生成页面，再重建字体。
 
-更新字体时同时更换首页和 `assets/life/styles/01-foundation-sky.css` 中字体 URL 的缓存版本，以及 Life/观景页引用样式的版本。字体按实际文字加载，首屏过渡统一等待标楷体。
+首页子集只扫描 `index.html`（包括三种语言、手账模板）、它引用的本地脚本与样式，以及按需加载的宠物控制脚本，不引入全站阅读文章。标楷和兰米各自保留首页需要且原字体确实支持的字；文楷只收录至少一种主字体缺少的字。生成过程更新首页内联 `@font-face` 的精确 `unicode-range` 和内容哈希版本，使浏览器立即识别需回退的字，不必先下载主字体再发现缺字。字体仍使用 `font-display: swap`，并保留兰米的 `size-adjust`。
 
-`node scripts/validate-reading.cjs` 在 Chrome 中检查首页和两个阅读页的简繁英字体，使用 CDP 的实际渲染字形信息验证 Newsreader、Site WenKai 与 TW-MOE-Std-Kai，而不是仅检查 CSS 字体栈。
+只改首页内容时运行 `python scripts/build-edukai-subset.py --home`，再用 `--home --check` 检查覆盖、空白字形、范围及版本。全站字体更新时仍需更换 `assets/life/styles/01-foundation-sky.css` 中字体 URL 和 Life/观景页样式引用的缓存版本。
+
+首页在 DOM 初始化和转场运行时就绪后立即发送目的地就绪信号；字体下载、失败与换字不再阻挡到达动画。项目图和 Life 卡片图接近视口 300px 时才开始加载，并保留禁用 JavaScript 时的图片后备。宠物控制脚本在首次点击时加载，载入后延续该次鼠标或键盘操作；访客地球在接近页尾时才调度加载。
+
+`node scripts/validate-reading.cjs` 在 Chrome 中检查首页和两个阅读页的简繁英字体，验证正文回退顺序以及 CDP 返回的实际渲染字形。西文使用 Newsreader，EduKai 已有字形使用 TW-MOE-Std-Kai，缺字允许本机 DFKai-SB、KaiTi 和 Site WenKai。
+
+`node scripts/validate-ui-fonts.cjs` 检查三个页面在 1440px、390px、320px 视口下的实际字体分工、缺字回退、界面溢出，以及语言切换和窗口变化后星图文字的测量、避让范围。场景状态验证“局部星图”与观景页标签实际使用兰米、英文使用 IBM Plex Mono；首页和深空验证兰米标题、标楷正文。它和 `validate-reading.cjs` 都可追加站点 URL 检查隔离发布包或线上版本。
+
+`node scripts/validate-home-loading.cjs [站点URL]` 检查字体挂起或失败时的转场、运行时晚到、首屏资源请求、滚动后的图片加载和宠物首次键盘操作。字体校验脚本可在 URL 后追加 `--home`，只验证首页；首页探针使用本页实际字符，不为其他页面的测试文本扩大首页字库。`validate-home-news.cjs` 同样接受站点 URL，验证手账三种语言和图片展开。

@@ -7,8 +7,9 @@ const path = require('node:path');
 const { spawn } = require('node:child_process');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE_PATH || 'playwright');
 
-const root = path.resolve(__dirname, '..');
-const output = path.join(root, '.render-work/music');
+const repository = path.resolve(__dirname, '..');
+const root = process.env.SITE_PUBLIC_ROOT ? path.resolve(process.env.SITE_PUBLIC_ROOT) : repository;
+const output = path.join(repository, '.render-work/music');
 const library = JSON.parse(fs.readFileSync(path.join(root, 'assets/music/library.json'), 'utf8'));
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.m4a': 'audio/mp4', '.woff2': 'font/woff2', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
 const errors = [];
@@ -178,11 +179,11 @@ async function run() {
     await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
     const base = `http://127.0.0.1:${server.address().port}`;
     await new Promise((resolve, reject) => {
-        const validation = spawn(process.execPath, ['scripts/validate-life-http.cjs', `${base}/life.html`], { cwd: root, stdio: 'inherit', windowsHide: true });
+        const validation = spawn(process.execPath, ['scripts/validate-life-http.cjs', `${base}/life.html`], { cwd: repository, stdio: 'inherit', windowsHide: true });
         validation.once('error', reject);
         validation.once('exit', code => code === 0 ? resolve() : reject(new Error('Life HTTP validation failed')));
     });
-    const browser = await chromium.launch({ headless: true, ...(process.env.CHROME_EXECUTABLE_PATH ? { executablePath: process.env.CHROME_EXECUTABLE_PATH } : { channel: 'chrome' }) });
+    const browser = await chromium.launch({ headless: true, args: ['--enable-unsafe-swiftshader'], ...(process.env.CHROME_EXECUTABLE_PATH ? { executablePath: process.env.CHROME_EXECUTABLE_PATH } : { channel: 'chrome' }) });
     try {
         for (const [label, width, height, route, prefix] of [
             ['desktop', 1440, 1000, 'index.html', ''],

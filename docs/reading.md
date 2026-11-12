@@ -29,7 +29,7 @@
 
 2026-11-06：补齐 28 张正文配图，保存在 `images/reading/xiduomei/`，当前为图文版。原始地址、尺寸和文件校验值保存在归档目录的 `images.json`。图片通过已保存地址免费下载，无新增次幂费用；`python scripts/localize-reading-images.py`（依赖 Pillow）可复用已下载图片并更新归档。页面和整理后的 Markdown 已按要求清除“图源网络，侵删”类注记，保留具体图源和 AI 生成说明。
 
-添加图文或译文后运行生成器，执行 `python scripts/build-edukai-subset.py` 重建两个字体子集并更新相关资源版本。验证命令：
+添加图文或译文后运行生成器，执行 `python scripts/build-edukai-subset.py` 重建正文和界面字体子集并更新相关资源版本。验证命令：
 
 ```powershell
 python site_renderer.py --check --reading-only

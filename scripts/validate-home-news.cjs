@@ -36,8 +36,9 @@ async function verifyClosed(page, trigger) {
 
 async function run() {
     fs.mkdirSync(output, { recursive: true });
-    await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
-    const baseUrl = 'http://127.0.0.1:' + server.address().port;
+    const remoteBase = process.argv[2] ? new URL(process.argv[2]).origin : null;
+    if (!remoteBase) await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+    const baseUrl = remoteBase || 'http://127.0.0.1:' + server.address().port;
     const browser = await chromium.launch({
         headless: true,
         ...(process.env.CHROME_EXECUTABLE_PATH ? { executablePath: process.env.CHROME_EXECUTABLE_PATH } : { channel: 'chrome' })
@@ -67,7 +68,7 @@ async function run() {
             }));
             await page.route('https://clustrmaps.com/**', route => route.fulfill({ contentType: 'application/javascript', body: '' }));
             await page.route('https://cdnjs.cloudflare.com/**', route => route.fulfill({ contentType: 'text/css', body: '' }));
-            await page.goto(baseUrl + '/index.html', { waitUntil: 'networkidle' });
+            await page.goto(baseUrl + '/index.html?music=off', { waitUntil: 'networkidle' });
             await page.evaluate(() => document.fonts.ready);
             assert.equal(photoRequests.length, 0, 'Journal photos do not load before opening the album');
             assert.equal(await page.locator('#publications .pub-item').count(), 6);
@@ -199,7 +200,7 @@ async function run() {
         assert.deepEqual(errors, [], 'No page errors or failed local assets');
     } finally {
         await browser.close();
-        await new Promise(resolve => server.close(resolve));
+        if (server.listening) await new Promise(resolve => server.close(resolve));
     }
 }
 

@@ -1,0 +1,180 @@
+:root {
+    --lanmi-label-size: 1.0625rem;
+    --lanmi-small-size: 0.9375rem;
+    --lanmi-caption-size: 0.875rem;
+    --lanmi-tracking: -0.045em;
+}
+
+.lang-btn[data-lang^="zh"],
+.deep-sky-languages button[data-deep-language^="zh"] {
+    min-width: 34px;
+    min-height: 32px;
+    height: auto;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+}
+
+html:lang(zh) :is(.nav-link, .section-title, .footer, .life-card-cta) {
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: var(--lanmi-tracking);
+}
+
+html:lang(zh) .nav-link { font-size: var(--lanmi-label-size); }
+html:lang(zh) .section-title { font-size: 1.125rem; letter-spacing: 0.015em; }
+html:lang(zh) .footer { font-size: var(--lanmi-small-size); }
+html:lang(zh) .life-card-cta { font-size: var(--lanmi-label-size); letter-spacing: 0.015em; }
+
+html:lang(zh) :where(
+    .control-legend, .entry-hint, .entry-fallback, .gaze-secondary, .gaze-instruction,
+    .section-drawer-observer, .section-index-copy span, .section-drawer-note,
+    .star-hit-copy strong, .portal-panel-names, .map-portal-copy > span,
+    .map-footer, .map-entity, .observatory-return, .galactic-navigation,
+    .map-card-title, .footprints-map-open, .footprints-map-view-toggle,
+    .footprints-map-control-expand, .footprints-map-hint, .footprints-map-status,
+    .footprints-map-retry, .map-placeholder, .thought-toggle, .profile-links,
+    .home-route-launch, .home-route-cancel, .friends-hint, .friend-memory-placeholder,
+    .friend-link, .shelf-quotation footer, .wishlist-draft textarea,
+    .deep-sky-close, .deep-sky-image-status, .deep-sky-image-caption,
+    .deep-sky-image-hint, .deep-sky-category, .deep-sky-description,
+    .deep-sky-facts, .deep-sky-observation, .deep-sky-source-links a
+) {
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: var(--lanmi-tracking);
+}
+
+html:lang(zh) :is(
+    .control-legend, .entry-hint, .entry-fallback, .gaze-secondary, .gaze-instruction,
+    .section-drawer-observer, .section-drawer-note, .map-portal-copy > span,
+    .map-footer, .galactic-navigation, .footprints-map-hint,
+    .deep-sky-image-caption, .deep-sky-image-hint
+) {
+    font-size: var(--lanmi-caption-size);
+}
+
+html:lang(zh) :is(
+    .section-index-copy span, .portal-panel-names, .map-entity,
+    .footprints-map-retry, .footprints-map-status, .map-placeholder,
+    .home-route-cancel, .deep-sky-category, .deep-sky-image-status,
+    .deep-sky-source-links a, .friends-hint, .friend-memory-placeholder, .shelf-quotation footer
+) {
+    font-size: var(--lanmi-small-size);
+}
+
+html:lang(zh) :is(
+    .star-hit-copy strong, .thought-toggle, .profile-links, .home-route-launch,
+    .footprints-map-open, .footprints-map-view-toggle, .footprints-map-control-expand,
+    .deep-sky-close, .deep-sky-facts dd, .observatory-return
+) {
+    font-size: var(--lanmi-label-size);
+}
+
+html:lang(zh) .map-card-title { font-size: 1.0625rem; }
+html:lang(zh) .map-about { font-size: var(--lanmi-small-size); line-height: 1.85; }
+html:lang(zh) .galactic-distance { font-size: var(--lanmi-caption-size); letter-spacing: 0; }
+html:lang(zh) .section-index-copy span { line-height: 1.6; }
+html:lang(zh) .section-drawer-note { line-height: 1.85; }
+html:lang(zh) .portal-panel-names { margin-top: 7px; }
+html:lang(zh) #friends .friend-link { font-size: var(--lanmi-label-size); line-height: 1.65; }
+html:lang(zh) .wishlist-draft textarea { font-size: 17px; line-height: 1.85; }
+html:lang(zh) .map-entity small { font-size: var(--lanmi-caption-size); letter-spacing: 0; }
+
+html:lang(zh) .footprints-map-title-actions { flex-wrap: wrap; }
+html:lang(zh) .footprints-map-view-select { min-width: 150px; }
+html:lang(zh) :is(.footprints-map-open, .footprints-map-view-toggle) { padding-block: 7px; }
+html:lang(zh) .footprints-map-control-expand { padding-inline: 12px; }
+html:lang(zh) .footprints-map-status { line-height: 1.8; }
+html:lang(zh) .footprints-preview-inset-title {
+    font-size: max(13px, var(--footprints-inset-title-size, 13px));
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.06em;
+}
+html:lang(zh) .footprints-map-inset-title { font-size: 84px; font-weight: 400; letter-spacing: -0.06em; }
+html:lang(zh) .footprints-city-label-text {
+    font-size: calc(var(--footprints-label-size, 15px) * 1.25);
+    font-weight: 400;
+    letter-spacing: -0.045em;
+}
+
+.thought-reader:lang(zh) {
+    font-size: var(--lanmi-label-size);
+    letter-spacing: var(--lanmi-tracking);
+}
+
+.thought-reader:lang(zh) :is(.thought-reader-language, .thought-reader-close, .thought-reader-pagination button) {
+    font-size: var(--lanmi-label-size);
+    line-height: 1.65;
+    letter-spacing: var(--lanmi-tracking);
+}
+
+.thought-reader:lang(en) .thought-reader-language { font-size: 14px; }
+.thought-reader:lang(zh) .thought-reader-hint { font-size: var(--lanmi-small-size); letter-spacing: var(--lanmi-tracking); }
+.thought-reader:lang(zh) :is(.reading-article-meta, .reading-credit, .reading-media-link, .reading-image figcaption) {
+    font-size: 15px;
+    line-height: 1.85;
+    letter-spacing: var(--lanmi-tracking);
+}
+
+html:lang(zh) .deep-sky-description { font-size: 18px; line-height: 1.9; }
+html:lang(zh) .deep-sky-facts dt { font-size: var(--lanmi-small-size); }
+html:lang(zh) .deep-sky-observation { font-size: 15px; line-height: 1.85; }
+html:lang(zh) .deep-sky-card { justify-content: safe center; }
+html:lang(zh) .deep-sky-close > span:nth-child(2) { max-width: none; font-size: inherit; }
+
+.wiki-userbox [data-userbox-language^="zh"] td {
+    line-height: 1.5 !important;
+    letter-spacing: -0.05em;
+}
+
+.wiki-userbox [data-userbox-language^="zh"] td[style*="font-size:7pt"] {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+}
+
+.wiki-userbox [data-userbox-language^="zh"] td:not([style*="width:"]),
+html:lang(zh) .wiki-userbox-text {
+    padding: 6px !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    letter-spacing: -0.05em;
+}
+
+.wiki-userbox [data-userbox-language^="zh"] td:not([style*="width:"]) :is(
+    [style*="font-size:8pt"], [style*="font-size:9pt"], [style*="font-size:9.5pt"]
+) {
+    font-size: inherit !important;
+}
+
+@media (max-width: 640px) {
+    html:lang(zh) .deep-sky-figure figcaption { padding-right: 120px; }
+    html:lang(zh) .deep-sky-image-viewport { bottom: 90px; }
+    html:lang(zh) .deep-sky-image-tools { bottom: 26px; }
+    html:lang(zh) .deep-sky-image-caption,
+    html:lang(zh) .deep-sky-image-hint { line-height: 1.5; }
+    html:lang(zh) .deep-sky-topbar { flex-wrap: wrap; height: auto; min-height: 68px; gap: 4px 12px; }
+    html:lang(zh) .deep-sky-observatory { flex-basis: 100%; max-width: none; }
+    html:lang(zh) .deep-sky-languages { margin-right: auto; }
+    html:lang(zh) .footprints-viewer-header { flex-wrap: wrap; }
+    html:lang(zh) .footprints-viewer-header .footprints-map-view-toggle {
+        order: 1;
+        flex: 1 1 100%;
+        max-width: none;
+        min-width: 0;
+        min-height: 44px;
+    }
+    html:lang(zh) .footprints-map-title-actions { justify-content: flex-start; gap: 8px; }
+    html:lang(zh) .footprints-map-view-select { min-width: 0; flex: 1 1 144px; }
+    html:lang(zh) .footprints-map-open { flex: 0 0 auto; }
+    .thought-reader:lang(zh) .thought-reader-toolbar { flex-wrap: wrap; }
+    .thought-reader:lang(zh) .thought-reader-footer { flex-wrap: wrap; gap: 8px 12px; }
+    .thought-reader:lang(zh) .thought-reader-pagination { flex-shrink: 0; }
+}
+
+@media (max-width: 420px) {
+    .thought-reader:lang(zh) .thought-reader-controls { width: 100%; justify-content: space-between; }
+    .thought-reader:lang(zh) .thought-reader-pagination button { padding-inline: 8px; }
+}

@@ -1,6 +1,7 @@
 @font-face {
-    font-family: 'EduKai';
-    src: url('../../../fonts/edukai-site-subset.woff2?v=20261107-trilingual') format('woff2');
+    font-family: 'Lanmi Kai';
+    src: url('../../../fonts/lanmi-site-subset.woff2?v=20261108-lanmi-ui') format('woff2');
+    size-adjust: 120%;
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -8,8 +9,26 @@
 }
 
 @font-face {
+    font-family: 'EduKai';
+    src: url('../../../fonts/edukai-site-subset.woff2?v=20261108-font-roles') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+2E80-9FFF, U+AC00-D7AF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-323AF;
+}
+
+@font-face {
+    font-family: 'Site KaiTi';
+    src: url('../../../fonts/kaiti-site-subset.woff2?v=e29df26245e6') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+3048, U+304D, U+3090, U+4E13, U+4E1A, U+4E1C-4E1D, U+4E22, U+4E24-4E25, U+4E27, U+4E2A, U+4E34, U+4E3A, U+4E3D-4E3E, U+4E49, U+4E4C, U+4E50, U+4E60-4E61, U+4E66, U+4E70-4E71, U+4E89, U+4E9A, U+4EA7, U+4EB2, U+4EC5, U+4ECE, U+4EEA, U+4EEC, U+4F17, U+4F1A, U+4F1E-4F20, U+4F24, U+4F26, U+4F2A, U+4FA7, U+4FA9, U+4FAC, U+50A8, U+50DE, U+5151, U+5170, U+5173-5174, U+517B, U+517D, U+5185, U+5199, U+519B-519C, U+51B2-51B3, U+51B5, U+51BB, U+51C0, U+51C7, U+51C9, U+51CF, U+51D1, U+51ED, U+51EF, U+51FB, U+5219, U+521B, U+5220, U+522B, U+5242, U+5251, U+5267, U+529D-529E, U+52A8, U+52B1, U+52BF, U+5300, U+533A, U+534E-534F, U+5355, U+5367, U+536B, U+5374, U+5385-5386, U+5389, U+538B-538C, U+53A2, U+53A6, U+53C2, U+53CC, U+53D1, U+53D8-53D9, U+53F6-53F7, U+53F9, U+5417, U+542F, U+5434, U+5458, U+548F, U+54CD, U+54D1, U+54D7, U+5524, U+5553, U+556E, U+5578, U+56A3, U+56E2, U+56ED, U+56F4, U+56FD-56FE, U+5706, U+573A, U+5757, U+575A, U+5760, U+5899, U+58EE, U+58F0, U+58F6, U+5904, U+5907, U+591F, U+5934, U+5939-593A, U+5965, U+5986, U+59F9, U+5A75, U+5B59, U+5B66, U+5B9D-5B9E, U+5BA0-5BA1, U+5BAB, U+5BBD, U+5BF9, U+5BFB-5BFC, U+5C06, U+5C18, U+5C1D, U+5C34, U+5C3D, U+5C42, U+5C5E, U+5C61, U+5C81-5C82, U+5C96, U+5C9A-5C9B, U+5CEF, U+5E08, U+5E1C, U+5E26-5E27, U+5E2E, U+5E86, U+5E93-5E94, U+5E99, U+5E9E-5E9F, U+5F00, U+5F03, U+5F20, U+5F25, U+5F2F, U+5F39-5F3A, U+5F52-5F53, U+5F55, U+5F7B, U+5F84, U+5FC6, U+5FE7, U+6001, U+6005, U+603B, U+604B, U+6052, U+6076, U+607B-607C, U+60A6, U+60AC, U+60AF, U+60E7, U+60EB, U+60ED-60EF, U+6124, U+620F, U+6218, U+6237, U+6267, U+6269, U+626B-626C, U+629A-629B, U+62A2, U+62A4-62A5, U+62C5, U+62DF, U+62E5, U+62E9, U+631A, U+631F, U+6323-6325, U+635F, U+6361-6362, U+6401, U+6405, U+643A, U+6444, U+6446-6447, U+644A, U+6491, U+654C, U+655B, U+6570, U+658B, U+65A9, U+65AD, U+65E0, U+65E7, U+65F6, U+6619, U+663C, U+663E, U+6653, U+6655, U+6682, U+672F, U+6740, U+6742-6743, U+6761, U+6765, U+6768, U+67A2, U+67E0, U+6807, U+6811, U+6837, U+6860, U+68A6, U+68C0, U+697C, U+6A2A, U+6B22, U+6B24, U+6B27, U+6B8B, U+6BC1, U+6BD5, U+6C22, U+6C47, U+6C49, U+6C64, U+6C9F, U+6CA1, U+6CA4, U+6CA6-6CA7, U+6CEA, U+6CFB, U+6CFD, U+6D45-6D47, U+6D4A-6D4B, U+6D4E-6D4F, U+6D51, U+6D53-6D54, U+6DA6, U+6DA9, U+6E0A, U+6E0D, U+6E10, U+6E17, U+6E29, U+6E7E-6E7F, U+6E83, U+6EDA, U+6EDE, U+6EE1, U+6EE4, U+6EE8-6EE9, U+706D, U+706F, U+7075, U+70B9, U+70BC, U+70C1-70C2, U+70DB, U+70DF, U+70E6-70E7, U+70EC-70ED, U+7231-7232, U+7237, U+7240, U+7275, U+72B6, U+72B9, U+72EC-72ED, U+72F1, U+730E, U+732B, U+7391, U+739B, U+73AF-73B0, U+7410, U+743C, U+7535, U+753B, U+7574, U+7597, U+76B1, U+76D0-76D1, U+76D6, U+76D8, U+7740-7741, U+77EB, U+7801, U+7840, U+7855, U+793C, U+7984, U+79EF-79F0, U+7A33, U+7A77, U+7A83, U+7AA5, U+7ADD-7ADE, U+7B03, U+7B14, U+7B3A, U+7B3C, U+7B79, U+7B80, U+7BEE, U+7C7B, U+7D27, U+7E6E, U+7EA0, U+7EA2, U+7EA4, U+7EA6-7EA7, U+7EAA, U+7EAF, U+7EB1, U+7EB3, U+7EB5, U+7EB8-7EB9, U+7EBD, U+7EBF, U+7EC3-7EC4, U+7EC6-7EC8, U+7ECA, U+7ECD, U+7ECF, U+7ED2-7ED3, U+7ED5, U+7ED8-7ED9, U+7EDB-7EDD, U+7EDF, U+7EE7, U+7EE9-7EEA, U+7EED-7EEE, U+7EF3-7EF5, U+7EFB-7EFC, U+7EFF-7F00, U+7F04-7F05, U+7F13, U+7F16, U+7F18, U+7F1D, U+7F20, U+7F29, U+7F30-7F31, U+7F34, U+7F57, U+7F5A, U+7F62, U+7F81, U+7FA3, U+7FD8, U+804C, U+8054, U+806A, U+80A0, U+80C0, U+80C6, U+8109, U+810F, U+8111, U+811A, U+8131, U+8138, U+817B, U+817E, U+8270, U+8273, U+827A, U+8282, U+829C, U+82A6, U+82CF, U+830E, U+8346, U+8363, U+836B, U+836F, U+83B1, U+83B7, U+8425, U+84DD, U+8651, U+865A, U+867D, U+86EE, U+8749, U+8846, U+8854, U+8865, U+886C, U+88AD, U+88C5, U+88CF, U+89C1-89C2, U+89C4, U+89C6, U+89C8-89C9, U+89DE, U+8A89, U+8BA1-8BA2, U+8BA4, U+8BA8-8BA9, U+8BAF-8BB0, U+8BB2, U+8BB6, U+8BB8, U+8BBA, U+8BBD-8BBF, U+8BC1, U+8BC4, U+8BC6, U+8BC9, U+8BCD, U+8BD1, U+8BD5, U+8BD7, U+8BDA, U+8BDD-8BDE, U+8BE2, U+8BE5-8BE6, U+8BEC-8BED, U+8BEF, U+8BF1, U+8BF4-8BF5, U+8BF7-8BF8, U+8BFA-8BFB, U+8BFE, U+8C01, U+8C03, U+8C05, U+8C08, U+8C0A-8C0B, U+8C0F, U+8C13, U+8C22-8C24, U+8C28, U+8C2C, U+8C34, U+8D1D-8D1F, U+8D23, U+8D25-8D26, U+8D28-8D2F, U+8D31, U+8D34-8D35, U+8D39, U+8D3E, U+8D44, U+8D4B-8D4C, U+8D4E-8D50, U+8D56, U+8D5A, U+8D60, U+8D8B, U+8DC3, U+8DF5, U+8E2F, U+8EAF, U+8F66, U+8F68-8F69, U+8F6C, U+8F6E-8F70, U+8F74, U+8F7B, U+8F7D, U+8F7F, U+8F83, U+8F88-8F89, U+8F91, U+8F93, U+8F9A, U+8F9E, U+8FA9, U+8FB9, U+8FBE, U+8FC7, U+8FD0, U+8FD8-8FD9, U+8FDB-8FDF, U+8FF9, U+9009, U+9012, U+903B, U+9057, U+9065, U+90AE, U+90BB, U+915D, U+917F, U+91CA, U+9274, U+9489, U+949D, U+949F, U+94A2, U+94B1, U+94BB, U+94C1, U+94C3-94C5, U+94D7, U+94DC, U+94F6, U+94FA, U+94FE, U+9501, U+9508, U+950B, U+9510, U+9519, U+9521, U+9526, U+952E-952F, U+953B, U+9547, U+955C, U+957F, U+95B2, U+95E8, U+95EA, U+95ED-95EF, U+95F2, U+95F4-95F5, U+95F7, U+95F9, U+95FB, U+9601, U+9605, U+9614, U+9616, U+9619, U+961F, U+9633-9636, U+9645-9646, U+9648, U+9668-9669, U+968F-9690, U+96BE, U+96F3, U+96FE, U+972D, U+9759, U+97E9, U+97F5, U+9875-9877, U+9879-987B, U+987E-987F, U+9884, U+9886-9888, U+9891, U+9893, U+9897-9898, U+989C-989D, U+98A0, U+98A4, U+98CE-98CF, U+98D6, U+98D8, U+98DE, U+9965, U+996D-996E, U+9970-9971, U+997F, U+9986, U+9A6C, U+9A70, U+9A73, U+9A76, U+9A79, U+9A7E, U+9A84, U+9A8C, U+9A8F, U+9A91, U+9A97, U+9AA4, U+9AC5, U+9B13, U+9B49, U+9C7C, U+9C81, U+9C9C, U+9E1F, U+9E21, U+9E23, U+9E26, U+9E37, U+9E3F, U+9E44-9E45, U+9E49, U+9E66, U+9E70, U+9EAA, U+9EC4, U+9F50-9F51, U+9F7F, U+9F99;
+}
+
+@font-face {
     font-family: 'Site WenKai';
-    src: url('../../../fonts/wenkai-site-subset.woff2?v=20261107-trilingual') format('woff2');
+    src: url('../../../fonts/wenkai-site-subset.woff2?v=20261108-lanmi-ui') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -59,10 +78,10 @@
     --ink-soft: #67696d;
     --ink-faint: #96989c;
     --rule: rgba(38,40,44,0.13);
-    --ui: 'IBM Plex Sans', 'Aptos', 'Segoe UI', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei UI', 'Microsoft JhengHei UI', sans-serif;
-    --editorial: 'Newsreader', 'EduKai', 'Site WenKai', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
-    --kai: 'Newsreader', 'EduKai', 'Site WenKai', 'DFKai-SB', 'KaiTi', serif;
-    --mono: 'IBM Plex Mono', 'SFMono-Regular', 'Cascadia Mono', 'Consolas', monospace;
+    --ui: 'IBM Plex Sans', 'Lanmi Kai', 'Site WenKai', 'Aptos', 'Segoe UI', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei UI', 'Microsoft JhengHei UI', sans-serif;
+    --editorial: 'Newsreader', 'EduKai', 'DFKai-SB', 'KaiTi', 'Site KaiTi', 'Site WenKai', 'Iowan Old Style', 'Baskerville', 'Georgia', serif;
+    --kai: 'Newsreader', 'EduKai', 'DFKai-SB', 'KaiTi', 'Site KaiTi', 'Site WenKai', serif;
+    --mono: 'IBM Plex Mono', 'Lanmi Kai', 'Site WenKai', 'SFMono-Regular', 'Cascadia Mono', 'Consolas', monospace;
 }
 
 *, *::before, *::after {

@@ -78,14 +78,20 @@ async function verifyReader(page, article, language, label) {
 }
 
 async function verifyFonts(page, selector, language) {
-    await page.locator(selector).first().evaluate(element => {
+    const homepage = selector === 'body';
+    const stack = await page.locator(selector).first().evaluate(element => getComputedStyle(element).fontFamily
+        .split(',').map(family => family.trim().replace(/["']/g, '')));
+    const primary = stack.indexOf('EduKai');
+    assert.deepEqual(stack.slice(primary, primary + 5), ['EduKai', 'DFKai-SB', 'KaiTi', 'Site KaiTi', 'Site WenKai'],
+        `${language}: ${stack.join(' → ')}`);
+    await page.locator(selector).first().evaluate((element, homepage) => {
         const probe = document.createElement('span');
         probe.id = 'font-probe';
         probe.style.cssText = 'position:fixed;inset:100px auto auto 100px;writing-mode:horizontal-tb';
         for (const [script, value] of [
             ['latin', 'Livehouse AI SJTU 2026'],
-            ['han', '中文山水中國夢餘燼學顏體'],
-            ['fallback', '过这为会来无着时没个爱发写长说对点开']
+            ['han', homepage ? '中文人工智能上海交通大云' : '中文山水中國夢餘燼學顏體体云恆'],
+            ['fallback', homepage ? '国学为这开' : '过这为会来无着时没个爱发写长说对点开えきゐ恒裏']
         ]) {
             const span = document.createElement('span');
             span.id = `font-probe-${script}`;
@@ -93,8 +99,19 @@ async function verifyFonts(page, selector, language) {
             probe.append(span);
         }
         element.append(probe);
-    });
+    }, homepage);
     await page.evaluate(() => document.fonts.ready);
+    if (homepage) {
+        await page.evaluate(async () => {
+            const probe = document.createElement('span');
+            probe.id = 'font-probe-web-kaiti';
+            probe.style.cssText = "position:fixed;font-family:EduKai,'Site KaiTi','Site WenKai',serif";
+            probe.textContent = '杨润德';
+            document.body.append(probe);
+            await document.fonts.load('16px "Site KaiTi"', '杨润');
+            await document.fonts.ready;
+        });
+    }
     const session = await page.context().newCDPSession(page);
     try {
         await session.send('DOM.enable');
@@ -104,9 +121,18 @@ async function verifyFonts(page, selector, language) {
             const { nodeId } = await session.send('DOM.querySelector', {nodeId: documentNode.nodeId, selector: `#font-probe-${script}`});
             const { fonts } = await session.send('CSS.getPlatformFontsForNode', {nodeId});
             assert(fonts.length > 0, `${language}/${script}: rendered glyphs exist`);
-            assert(fonts.every(font => font.isCustomFont && font.familyName.includes(family)), `${language}/${script}: ${JSON.stringify(fonts)}`);
+            assert(fonts.every(font => (font.isCustomFont && font.familyName.includes(family))
+                || (script === 'fallback' && /DFKai|標楷體|KaiTi|楷体/.test(font.familyName + ' ' + font.postScriptName))),
+            `${language}/${script}: ${JSON.stringify(fonts)}`);
+        }
+        if (homepage) {
+            const { nodeId } = await session.send('DOM.querySelector', { nodeId: documentNode.nodeId, selector: '#font-probe-web-kaiti' });
+            const { fonts } = await session.send('CSS.getPlatformFontsForNode', { nodeId });
+            assert(fonts.some(font => font.isCustomFont && font.familyName === 'Site KaiTi' && font.glyphCount === 2), JSON.stringify(fonts));
+            assert(fonts.some(font => font.isCustomFont && font.familyName === 'TW-MOE-Std-Kai' && font.glyphCount === 1), JSON.stringify(fonts));
         }
     } finally {
+        if (homepage) await page.locator('#font-probe-web-kaiti').evaluate(element => element.remove());
         await page.locator('#font-probe').evaluate(element => element.remove());
         await session.detach();
     }
@@ -123,7 +149,7 @@ async function checkPage(browser, base, route, mobile) {
     });
     const label = `${route.replace('.html', '')}-${mobile ? 'mobile' : 'desktop'}`;
     try {
-        await page.goto(`${base}/${route}`, { waitUntil: 'domcontentloaded' });
+        await page.goto(`${base}/${route}?music=off`, { waitUntil: 'domcontentloaded' });
         await page.waitForFunction(() => window.lifeStarMap?.lastFrame > 0 && !window.lifeStarMap.flight);
         assert.equal(await page.locator('#thoughts .thought-item').count(), lifeContent.thoughts.length);
         await page.locator('#sectionDrawerToggle').click();
@@ -229,27 +255,28 @@ async function checkPage(browser, base, route, mobile) {
 
 (async () => {
     fs.mkdirSync(output, { recursive: true });
-    await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+    const remoteBase = process.argv[2] ? new URL(process.argv[2]).origin : null;
+    if (!remoteBase) await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
     let browser;
     try {
         browser = await chromium.launch({ headless: true, channel: 'chrome', args: ['--enable-unsafe-swiftshader'] });
-        const base = `http://127.0.0.1:${server.address().port}`;
+        const base = remoteBase || `http://127.0.0.1:${server.address().port}`;
         const homepage = await browser.newPage();
         await homepage.route('**/*', request => new URL(request.request().url()).origin === base ? request.continue() : request.fulfill({status: 200, body: ''}));
-        await homepage.goto(`${base}/index.html`, {waitUntil: 'domcontentloaded'});
+        await homepage.goto(`${base}/index.html?music=off`, {waitUntil: 'domcontentloaded'});
         for (const language of ['zh-CN', 'zh-TW', 'en']) {
             await homepage.evaluate(language => setLang(language), language);
             await verifyFonts(homepage, 'body', language);
         }
         await homepage.close();
         console.log('PASS homepage: actual CJK fonts and Latin Newsreader glyphs in all languages');
-        for (const route of ['life.html', 'observatory.html']) {
+        for (const route of process.argv.includes('--home') ? [] : ['life.html', 'observatory.html']) {
             for (const mobile of [false, true]) await checkPage(browser, base, route, mobile);
         }
         assert.deepEqual(errors, []);
         console.log('Reading browser validation passed.');
     } finally {
         if (browser) await browser.close();
-        await new Promise(resolve => server.close(resolve));
+        if (server.listening) await new Promise(resolve => server.close(resolve));
     }
 })().catch(error => { console.error(error); console.error(errors); process.exitCode = 1; });
