@@ -5,6 +5,7 @@
     const root = window.SiteMusicHost.root;
     const audio = document.getElementById('siteAudio');
     const player = document.getElementById('siteMusic');
+    const dock = player.querySelector('.music-dock');
     const element = name => document.getElementById(`music${name}`);
     const panel = element('Panel');
     const toggle = element('Toggle');
@@ -16,6 +17,7 @@
     const playButtons = [element('Play'), element('QuickPlay')];
     const modes = ['all', 'one', 'shuffle'];
     const modeLabels = { all: '列表循环', one: '单曲循环', shuffle: '随机播放' };
+    const positionKey = 'runde:music:position:v1';
     let library = { artists: [], tracks: [] };
     let current = null;
     let mode = 'all';
@@ -25,6 +27,9 @@
     let seeking = false;
     let previousTracks = [];
     let saved = null;
+    let preferredPosition = savedPosition();
+    let dragState = null;
+    let suppressClick = false;
 
     try {
         saved = JSON.parse(sessionStorage.getItem(storageKey));
@@ -84,6 +89,123 @@
         } catch (error) {
             return;
         }
+    }
+
+    function savedPosition() {
+        try {
+            const value = JSON.parse(localStorage.getItem(positionKey));
+            return value && Number.isFinite(value.left) && Number.isFinite(value.top) ? value : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function viewportBounds() {
+        const viewport = window.visualViewport;
+        const styles = getComputedStyle(player);
+        const inset = edge => Math.max(12, parseFloat(styles.getPropertyValue(`--music-safe-${edge}`)) || 0);
+        return {
+            left: (viewport?.offsetLeft || 0) + inset('left'),
+            top: (viewport?.offsetTop || 0) + inset('top'),
+            right: (viewport?.offsetLeft || 0) + (viewport?.width || window.innerWidth) - inset('right'),
+            bottom: (viewport?.offsetTop || 0) + (viewport?.height || window.innerHeight) - inset('bottom')
+        };
+    }
+
+    function clamp(value, minimum, maximum) {
+        return Math.max(minimum, Math.min(value, Math.max(minimum, maximum)));
+    }
+
+    function setPosition(left, top) {
+        const bounds = dock.getBoundingClientRect();
+        const viewport = viewportBounds();
+        const position = {
+            left: clamp(left, viewport.left, viewport.right - bounds.width),
+            top: clamp(top, viewport.top, viewport.bottom - bounds.height)
+        };
+        player.style.left = `${position.left}px`;
+        player.style.top = `${position.top}px`;
+        player.style.right = 'auto';
+        updatePanelPlacement();
+    }
+
+    function rememberPosition() {
+        const bounds = dock.getBoundingClientRect();
+        preferredPosition = { left: bounds.left, top: bounds.top };
+        try { localStorage.setItem(positionKey, JSON.stringify(preferredPosition)); } catch (error) { /* Storage may be disabled. */ }
+    }
+
+    function resetPosition() {
+        preferredPosition = null;
+        try { localStorage.removeItem(positionKey); } catch (error) { /* Storage may be disabled. */ }
+        layoutPlayer();
+    }
+
+    function updatePanelPlacement() {
+        if (panel.hidden) return;
+        const dockBounds = dock.getBoundingClientRect();
+        const viewport = viewportBounds();
+        const gap = 12;
+        const below = viewport.bottom - dockBounds.bottom - gap;
+        const above = dockBounds.top - viewport.top - gap;
+        const opensUp = above > below;
+        player.dataset.panelPlacement = opensUp ? 'up' : 'down';
+        panel.style.maxHeight = `${Math.max(0, opensUp ? above : below)}px`;
+        panel.style.maxWidth = `${Math.max(0, viewport.right - viewport.left)}px`;
+        const panelWidth = panel.offsetWidth;
+        const alignLeft = dockBounds.left + dockBounds.width / 2 < (viewport.left + viewport.right) / 2;
+        const left = clamp(alignLeft ? dockBounds.left : dockBounds.right - panelWidth, viewport.left, viewport.right - panelWidth);
+        panel.style.left = `${left - dockBounds.left}px`;
+        panel.style.right = 'auto';
+        player.dataset.panelAlign = alignLeft ? 'left' : 'right';
+    }
+
+    function layoutPlayer() {
+        if (dragState) {
+            const bounds = dock.getBoundingClientRect();
+            setPosition(bounds.left, bounds.top);
+        } else if (preferredPosition) {
+            setPosition(preferredPosition.left, preferredPosition.top);
+        } else {
+            // Start from the responsive default, including after a keyboard closes.
+            ['left', 'top', 'right'].forEach(property => player.style.removeProperty(property));
+            const bounds = dock.getBoundingClientRect();
+            setPosition(bounds.left, bounds.top);
+        }
+    }
+
+    function startDrag(event) {
+        if (!event.isPrimary || event.button !== 0 || dragState) return;
+        const control = event.target.closest('button, input, select, a');
+        if (control && control !== toggle && control !== element('Drag')) return;
+        const bounds = dock.getBoundingClientRect();
+        const capture = control || event.currentTarget;
+        dragState = { pointerId: event.pointerId, capture, startX: event.clientX, startY: event.clientY, left: bounds.left, top: bounds.top, moved: false };
+        // Capture on the original button so a tap still reaches its click handler.
+        capture.setPointerCapture(event.pointerId);
+    }
+
+    function moveDrag(event) {
+        if (!dragState || event.pointerId !== dragState.pointerId) return;
+        const deltaX = event.clientX - dragState.startX;
+        const deltaY = event.clientY - dragState.startY;
+        if (!dragState.moved && Math.hypot(deltaX, deltaY) < 6) return;
+        if (!dragState.moved) {
+            dragState.moved = true;
+            player.dataset.dragging = 'true';
+        }
+        event.preventDefault();
+        setPosition(dragState.left + deltaX, dragState.top + deltaY);
+    }
+
+    function endDrag(event) {
+        if (!dragState || (event.pointerId !== undefined && event.pointerId !== dragState.pointerId)) return;
+        const finished = dragState;
+        dragState = null;
+        if (finished.moved) rememberPosition();
+        suppressClick = finished.moved && event.type === 'pointerup';
+        player.dataset.dragging = 'false';
+        if (finished.capture.hasPointerCapture(finished.pointerId)) finished.capture.releasePointerCapture(finished.pointerId);
     }
 
     function updatePosition() {
@@ -269,9 +391,42 @@
         player.dataset.open = String(open);
         toggle.setAttribute('aria-expanded', String(open));
         toggle.setAttribute('aria-label', open ? '收起音乐播放器' : '打开音乐播放器');
+        updatePanelPlacement();
         if (open) element('Close').focus({ preventScroll: true });
         else if (restoreFocus) toggle.focus({ preventScroll: true });
     }
+
+    dock.addEventListener('pointerdown', startDrag);
+    player.querySelector('.music-heading > div').addEventListener('pointerdown', startDrag);
+    player.addEventListener('pointermove', moveDrag);
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(name => player.addEventListener(name, endDrag));
+    window.addEventListener('blur', endDrag);
+    document.addEventListener('pointerdown', () => { suppressClick = false; }, true);
+    ['click', 'dblclick'].forEach(name => player.addEventListener(name, event => {
+        if (!suppressClick || event.detail === 0) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+    }, true));
+    element('Drag').addEventListener('dblclick', resetPosition);
+    element('Drag').addEventListener('keydown', event => {
+        const directions = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+        if (event.key === 'Home') {
+            event.preventDefault();
+            resetPosition();
+        } else if (directions[event.key]) {
+            event.preventDefault();
+            const bounds = dock.getBoundingClientRect();
+            const [x, y] = directions[event.key];
+            const step = event.shiftKey ? 40 : 10;
+            setPosition(bounds.left + x * step, bounds.top + y * step);
+            rememberPosition();
+        }
+    });
+    window.addEventListener('resize', layoutPlayer);
+    window.visualViewport?.addEventListener('resize', layoutPlayer);
+    window.visualViewport?.addEventListener('scroll', layoutPlayer);
+    new ResizeObserver(layoutPlayer).observe(dock);
+    layoutPlayer();
 
     toggle.addEventListener('click', () => setOpen(panel.hidden));
     element('Close').addEventListener('click', () => setOpen(false, true));
