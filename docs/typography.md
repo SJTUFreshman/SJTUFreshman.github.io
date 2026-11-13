@@ -4,6 +4,8 @@
 
 中文界面统一使用兰米标准楷体简繁（CSS 名称 `Lanmi Kai`，PostScript 名称 `LANMI_yujian2_jianfan`），用于首页 `--font-ui`、Life/观景页 `--ui` 和用户框的中文默认字体。包括足迹地图里的“文化区”选择器；它原先在 Windows 上回退到 `Microsoft YaHei UI`。兰米缺少的个别字（例如“線”“裡”）回退到 `Site WenKai`，英文界面继续使用 IBM Plex Sans。字体来源、版本和校验值见 `fonts/LANMI-SOURCE.md`。
 
+界面文案中已确认的缺字采用兰米现有字形，避免一段标签混用兰米与文楷：例如 `戶→户`、`跡→迹`、`滾→滚`、`恆→恒`、`閱→閲`、`線→线`、`錄→录`、`複製→复制`、`啟→啓`、`橫→横`。因此繁体星座名显示为“獵户座”。这项用字约定同步到 Life/观景页脚本、内容数据、用户框模板及音乐选曲配置；文章原文不做全局繁简转换。新增界面文字应核对实际使用的兰米子集，而不只检查文楷后备是否覆盖。
+
 等宽栈 `--mono` / `--font-mono` 同样在 IBM Plex Mono 后加入兰米与 Site WenKai，避免“局部星图”“太阳系位置观景”等中文状态文字回退到微软雅黑或正黑体。英文和数字继续使用 IBM Plex Mono；中文场景状态采用 18px、行高 1.6、字距 -0.045em。
 
 简体与繁体的正文、姓名和文章均按 `EduKai → DFKai-SB → KaiTi → Site KaiTi → Site WenKai` 逐字回退。Site KaiTi 是由用户授权使用的 Windows KaiTi 源字体制作的网页子集，仅收录 EduKai 缺失、网站实际使用的字。设备没有系统楷体时仍可加载该子集；DFKai-SB 本机没有源文件，仍使用系统字体。Site WenKai 是 LXGW WenKai Regular v1.530 的改名网页子集，许可保存在 `fonts/OFL-WenKai.txt`。

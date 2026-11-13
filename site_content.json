@@ -473,13 +473,13 @@
       },
       "zh-TW": {
         "nav_gallery": "光影",
-        "nav_map": "足跡",
+        "nav_map": "足迹",
         "nav_shelf": "書影",
         "nav_thoughts": "隨筆",
         "nav_reading": "拾文",
         "nav_friends": "友鏈",
         "title_gallery": "光影",
-        "title_map": "足跡",
+        "title_map": "足迹",
         "title_shelf": "書影",
         "title_thoughts": "隨筆",
         "title_reading": "拾文",
@@ -505,10 +505,10 @@
         "panel_close": "返回星河",
         "home_departing": "正在返回主頁",
         "galaxy_back": "返回星河",
-        "galaxy_hint": "循著亮星，沿時間漫遊",
+        "galaxy_hint": "循著亮星，沿時間漫游",
         "title_profile": "重新認識我",
         "title_wine": "品酒日記",
-        "wine_empty": "暫時還沒有品酒紀錄。",
+        "wine_empty": "暫時還没有品酒紀录。",
         "title_wishlist": "Wishlist"
       }
     },
@@ -1202,7 +1202,7 @@
         "location": {
           "en": "Fantawild Animation",
           "zh-CN": "华强方特",
-          "zh-TW": "華強方特"
+          "zh-TW": "華强方特"
         },
         "summary": {
           "en": "Boonie Bears · Season 1",
@@ -1406,22 +1406,22 @@
         "original": {
           "en": "Read the original",
           "zh-CN": "阅读原文",
-          "zh-TW": "閱讀原文"
+          "zh-TW": "閲讀原文"
         },
         "pending": {
           "en": "Awaiting collection",
           "zh-CN": "待收录",
-          "zh-TW": "待收錄"
+          "zh-TW": "待收录"
         },
         "pending_body": {
           "en": "The source link is saved. Articles and images have not been collected yet; the original is available via the link below.",
           "zh-CN": "已保存来源链接，正文与配图尚未收录。可以先通过下方链接阅读原文。",
-          "zh-TW": "已儲存來源連結，正文與配圖尚未收錄。可以先透過下方連結閱讀原文。"
+          "zh-TW": "已儲存來源連結，正文與配圖尚未收录。可以先透過下方連結閲讀原文。"
         },
         "read": {
           "en": "Read article",
           "zh-CN": "阅读全文",
-          "zh-TW": "閱讀全文"
+          "zh-TW": "閲讀全文"
         },
         "reader_close": {
           "en": "Back to Reading",
@@ -1431,12 +1431,12 @@
         "reader_language": {
           "en": "Reading language",
           "zh-CN": "阅读语言",
-          "zh-TW": "閱讀語言"
+          "zh-TW": "閲讀語言"
         },
         "collected": {
           "en": "articles collected",
           "zh-CN": "篇已收录",
-          "zh-TW": "篇已收錄"
+          "zh-TW": "篇已收录"
         },
         "text_edition": {
           "en": "Text edition · Follow the original links for illustrations and music.",
@@ -1738,7 +1738,7 @@
           "text": {
             "en": "This user can communicate in Chinese at a professional level.",
             "zh-CN": "这个用户能以专业汉语交流。",
-            "zh-TW": "這位用戶能以專業漢語交流。"
+            "zh-TW": "這位用户能以專業漢語交流。"
           },
           "wiki_template": "zh-professional"
         },
@@ -1749,7 +1749,7 @@
           "text": {
             "en": "This user can communicate in Traditional Chinese at a professional level.",
             "zh-CN": "这个用户能以专业繁体中文交流。",
-            "zh-TW": "這位用戶能以專業繁體中文交流。"
+            "zh-TW": "這位用户能以專業繁體中文交流。"
           },
           "wiki_template": "zh-traditional"
         },
@@ -1760,7 +1760,7 @@
           "text": {
             "en": "This user can communicate in Simplified Chinese at a professional level.",
             "zh-CN": "这个用户能以专业简体中文交流。",
-            "zh-TW": "這位用戶能以專業簡體中文交流。"
+            "zh-TW": "這位用户能以專業簡體中文交流。"
           },
           "wiki_template": "zh-simplified"
         },
@@ -1771,7 +1771,7 @@
           "text": {
             "en": "This user likes Han characters.",
             "zh-CN": "这个用户喜欢汉字。",
-            "zh-TW": "這個用戶喜歡漢字。"
+            "zh-TW": "這個用户喜歡漢字。"
           },
           "wiki_template": "han-characters"
         },
@@ -1782,7 +1782,7 @@
           "text": {
             "en": "This user enjoys studying Chinese graphology.",
             "zh-CN": "这个用户喜欢钻研汉文字学。",
-            "zh-TW": "這個用戶喜歡鑽研漢文字學。"
+            "zh-TW": "這個用户喜歡鑽研漢文字學。"
           },
           "wiki_template": "chinese-graphology"
         },
@@ -1793,7 +1793,7 @@
           "text": {
             "en": "This user supports the revival of traditional character forms.",
             "zh-CN": "这个用户支持恢复使用传统字形。",
-            "zh-TW": "這個用戶支持恢復使用傳統字形。"
+            "zh-TW": "這個用户支持恢復使用傳統字形。"
           },
           "wiki_template": "traditional-characters"
         },
@@ -1804,7 +1804,7 @@
           "text": {
             "en": "This user believes horizontal and vertical writing should coexist.",
             "zh-CN": "这位用户认为横写与直写应共存共荣。",
-            "zh-TW": "這位用戶認為橫寫與直寫應共存共榮。"
+            "zh-TW": "這位用户認爲横寫與直寫應共存共榮。"
           },
           "wiki_template": "horizontal-vertical-writing"
         },
@@ -1815,7 +1815,7 @@
           "text": {
             "en": "This user supports a distinction between spoken and written language.",
             "zh-CN": "这位用户支持言文分离。",
-            "zh-TW": "這位用戶支持言文分離。"
+            "zh-TW": "這位用户支持言文分離。"
           },
           "wiki_template": "spoken-written-separation"
         },
@@ -1826,7 +1826,7 @@
           "text": {
             "en": "This user supports alphabetic transliteration.",
             "zh-CN": "这位用户支持字母音译。",
-            "zh-TW": "這位用戶支持字母音譯。"
+            "zh-TW": "這位用户支持字母音譯。"
           },
           "wiki_template": "alphabetic-transliteration"
         },
@@ -1837,7 +1837,7 @@
           "text": {
             "en": "This user can write cursive script and read regular script.",
             "zh-CN": "这个用户会写草书，也能识读楷书。",
-            "zh-TW": "這個用戶會寫草書，也能識讀楷書。"
+            "zh-TW": "這個用户會寫草書，也能識讀楷書。"
           },
           "wiki_template": "cursive-kaishu"
         },
@@ -1848,7 +1848,7 @@
           "text": {
             "en": "This user is interested in font design.",
             "zh-CN": "这个用户对字体设计感兴趣。",
-            "zh-TW": "這個用戶對字體設計感興趣。"
+            "zh-TW": "這個用户對字體設計感興趣。"
           },
           "wiki_template": "font-design"
         },
@@ -1859,7 +1859,7 @@
           "text": {
             "en": "This user is interested in linguistics.",
             "zh-CN": "这个用户对语言学感兴趣。",
-            "zh-TW": "這個用戶對語言學感興趣。"
+            "zh-TW": "這個用户對語言學感興趣。"
           },
           "wiki_template": "linguistics"
         },
@@ -1870,7 +1870,7 @@
           "text": {
             "en": "This user uses American English.",
             "zh-CN": "这个用户使用美式英语。",
-            "zh-TW": "這個用戶使用美式英語。"
+            "zh-TW": "這個用户使用美式英語。"
           },
           "wiki_template": "american-english"
         },
@@ -1881,7 +1881,7 @@
           "text": {
             "en": "This user has no concept of swearing.",
             "zh-CN": "这个用户没有脏话概念。",
-            "zh-TW": "這個用戶沒有髒話概念。"
+            "zh-TW": "這個用户没有髒話概念。"
           },
           "wiki_template": "no-swearing"
         },
@@ -1892,7 +1892,7 @@
           "text": {
             "en": "This user is single.",
             "zh-CN": "这个用户是单身狗。",
-            "zh-TW": "這個用戶是單身狗。"
+            "zh-TW": "這個用户是單身狗。"
           },
           "wiki_template": "single"
         },
@@ -1903,7 +1903,7 @@
           "text": {
             "en": "This user is behind you.",
             "zh-CN": "这个用户在你后面。",
-            "zh-TW": "這個用戶在你後面。"
+            "zh-TW": "這個用户在你後面。"
           },
           "wiki_template": "behind-you"
         },
@@ -1914,7 +1914,7 @@
           "text": {
             "en": "This user supports region-free media.",
             "zh-CN": "这个用户支持跨区自由。",
-            "zh-TW": "這個用戶支持跨區自由。"
+            "zh-TW": "這個用户支持跨區自由。"
           },
           "wiki_template": "region-free"
         },
@@ -1925,7 +1925,7 @@
           "text": {
             "en": "This user hates pay-to-win games.",
             "zh-CN": "这个用户讨厌付费取胜。",
-            "zh-TW": "這個用戶討厭付費取勝。"
+            "zh-TW": "這個用户討厭付費取勝。"
           },
           "wiki_template": "hate-pay-to-win"
         },
@@ -1936,7 +1936,7 @@
           "text": {
             "en": "This user is interested in Chinese history.",
             "zh-CN": "这个用户对中国历史感兴趣。",
-            "zh-TW": "這個用戶對中國歷史感興趣。"
+            "zh-TW": "這個用户對中國歷史感興趣。"
           },
           "wiki_template": "chinese-history"
         },
@@ -1947,7 +1947,7 @@
           "text": {
             "en": "This user likes the film The Godfather.",
             "zh-CN": "这个用户喜欢电影《教父》。",
-            "zh-TW": "這個用戶喜歡電影《教父》。"
+            "zh-TW": "這個用户喜歡電影《教父》。"
           },
           "wiki_template": "godfather"
         },
@@ -1958,7 +1958,7 @@
           "text": {
             "en": "This user likes In the Mood for Love.",
             "zh-CN": "这个用户喜欢电影《花样年华》。",
-            "zh-TW": "這個用戶喜歡電影《花樣年華》。"
+            "zh-TW": "這個用户喜歡電影《花樣年華》。"
           },
           "wiki_template": "mood-for-love"
         },
@@ -1969,7 +1969,7 @@
           "text": {
             "en": "This user likes writing.",
             "zh-CN": "这个用户喜欢写作。",
-            "zh-TW": "這個用戶喜歡寫作。"
+            "zh-TW": "這個用户喜歡寫作。"
           },
           "wiki_template": "writing"
         },
@@ -1980,7 +1980,7 @@
           "text": {
             "en": "This user loves nature.",
             "zh-CN": "这个用户喜欢大自然。",
-            "zh-TW": "這個用戶喜歡大自然。"
+            "zh-TW": "這個用户喜歡大自然。"
           },
           "wiki_template": "nature"
         },
@@ -1991,7 +1991,7 @@
           "text": {
             "en": "This user is from the People's Republic of China.",
             "zh-CN": "这个用户来自中华人民共和国。",
-            "zh-TW": "這個用戶來自中華人民共和國。"
+            "zh-TW": "這個用户來自中華人民共和國。"
           },
           "wiki_template": "china"
         },
@@ -2002,7 +2002,7 @@
           "text": {
             "en": "This user studies science and engineering.",
             "zh-CN": "这个用户学习理工科。",
-            "zh-TW": "這個用戶學習理工科。"
+            "zh-TW": "這個用户學習理工科。"
           },
           "wiki_template": "stem"
         },
@@ -2013,7 +2013,7 @@
           "text": {
             "en": "This user studies at Shanghai Jiao Tong University.",
             "zh-CN": "这个用户就读于上海交通大学。",
-            "zh-TW": "這個用戶就讀於上海交通大學。"
+            "zh-TW": "這個用户就讀於上海交通大學。"
           },
           "wiki_template": "sjtu"
         },
@@ -2024,7 +2024,7 @@
           "text": {
             "en": "This user plays the piano.",
             "zh-CN": "这个用户会弹钢琴。",
-            "zh-TW": "這個用戶會彈鋼琴。"
+            "zh-TW": "這個用户會彈鋼琴。"
           },
           "wiki_template": "piano"
         },
@@ -2035,7 +2035,7 @@
           "text": {
             "en": "This user likes music.",
             "zh-CN": "这个用户喜欢音乐。",
-            "zh-TW": "這個用戶喜歡音樂。"
+            "zh-TW": "這個用户喜歡音樂。"
           },
           "wiki_template": "music"
         },
@@ -2046,7 +2046,7 @@
           "text": {
             "en": "This user is interested in Greek mythology.",
             "zh-CN": "这个用户对希腊神话感兴趣。",
-            "zh-TW": "這個用戶對希臘神話感興趣。"
+            "zh-TW": "這個用户對希臘神話感興趣。"
           },
           "wiki_template": "greek-mythology"
         }
@@ -2062,7 +2062,7 @@
         "method": {
           "en": "How to make it",
           "zh-CN": "调制方法",
-          "zh-TW": "調製方法"
+          "zh-TW": "調制方法"
         },
         "flavour": {
           "en": "Flavour & texture",
@@ -2077,7 +2077,7 @@
         "adjustment": {
           "en": "A small adjustment",
           "zh-CN": "调制小记",
-          "zh-TW": "調製小記"
+          "zh-TW": "調制小記"
         },
         "source": {
           "en": "Recipe reference",
@@ -2301,12 +2301,12 @@
       "reviews": {
         "en": "Reviews & essays",
         "zh-CN": "影评与延伸阅读",
-        "zh-TW": "影評與延伸閱讀"
+        "zh-TW": "影評與延伸閲讀"
       },
       "watch": {
         "en": "Watch online",
         "zh-CN": "在线观看",
-        "zh-TW": "線上觀看"
+        "zh-TW": "线上觀看"
       },
       "image_source": {
         "en": "Image source",
@@ -2335,12 +2335,12 @@
         "invite_text": {
           "en": "Copy a draft, add your idea and a time that works, then email me. Let’s make a plan.",
           "zh-CN": "复制一封邮件，填上想做的事和方便的时间，发给我，我们一起商量。",
-          "zh-TW": "複製一封郵件，填上想做的事和方便的時間，寄給我，我們一起商量。"
+          "zh-TW": "复制一封郵件，填上想做的事和方便的時間，寄給我，我們一起商量。"
         },
         "copy": {
           "en": "Copy invitation email",
           "zh-CN": "复制邀约邮件",
-          "zh-TW": "複製邀約郵件"
+          "zh-TW": "复制邀約郵件"
         },
         "join": {
           "en": "I’d like to join",
@@ -2350,17 +2350,17 @@
         "copying": {
           "en": "Copying…",
           "zh-CN": "正在复制…",
-          "zh-TW": "正在複製…"
+          "zh-TW": "正在复制…"
         },
         "copied_button": {
           "en": "Email copied",
           "zh-CN": "邮件已复制",
-          "zh-TW": "郵件已複製"
+          "zh-TW": "郵件已复制"
         },
         "open_mail": {
           "en": "Open in email app",
           "zh-CN": "在邮箱中打开",
-          "zh-TW": "在郵箱中開啟"
+          "zh-TW": "在郵箱中開啓"
         },
         "preview": {
           "en": "Preview the email draft",
@@ -2370,7 +2370,7 @@
         "draft_label": {
           "en": "Email draft · select the text to copy manually",
           "zh-CN": "邮件草稿 · 可选择文字手动复制",
-          "zh-TW": "郵件草稿 · 可選取文字手動複製"
+          "zh-TW": "郵件草稿 · 可選取文字手動复制"
         },
         "recipient": {
           "en": "To",
@@ -2385,17 +2385,17 @@
         "copied": {
           "en": "Copied. Open your email app, fill in the brackets and send it to {email}.",
           "zh-CN": "已复制。打开邮箱，补充方括号里的内容后，发送至 {email}。",
-          "zh-TW": "已複製。開啟郵箱，補充方括號裡的內容後，寄至 {email}。"
+          "zh-TW": "已复制。開啓郵箱，補充方括號裡的内容後，寄至 {email}。"
         },
         "copy_failed": {
           "en": "Automatic copying was unavailable. Select and copy the draft below, or open it in your email app.",
           "zh-CN": "未能自动复制。可以手动选择下方草稿复制，或点击“在邮箱中打开”。",
-          "zh-TW": "未能自動複製。可以手動選取下方草稿複製，或點擊「在郵箱中開啟」。"
+          "zh-TW": "未能自動复制。可以手動選取下方草稿复制，或點擊「在郵箱中開啓」。"
         },
         "mail_hint": {
           "en": "No email app opened? Use the copied draft in your webmail and send it to the address above.",
           "zh-CN": "若没有唤起邮箱，可以到常用的网页版邮箱新建邮件，粘贴草稿并发送到上面的地址。",
-          "zh-TW": "若沒有喚起郵箱，可以到常用的網頁版郵箱新增郵件，貼上草稿並寄到上面的地址。"
+          "zh-TW": "若没有喚起郵箱，可以到常用的網頁版郵箱新增郵件，貼上草稿并寄到上面的地址。"
         },
         "subject": {
           "en": "Wishlist · Let’s do something fun together",
@@ -2410,12 +2410,12 @@
         "body": {
           "en": "Hi Runde,\n\nI found your Wishlist and would love to do something fun together.\n\nMy idea: [activity or suggestion]\nA time that works for me: [time]\nPlace: [location or to be decided]\nA little about me / a message: [anything you’d like to share]\n\nLet me know what you think!\n[Your name]",
           "zh-CN": "润德你好，\n\n我看到了你的 Wishlist，想约你一起去做点有趣的事。\n\n想一起体验：[项目或想法]\n方便的时间：[时间]\n地点：[地点，也可以一起商量]\n自我介绍／想说的话：[随意写几句]\n\n有兴趣的话，回信一起聊聊吧！\n[你的称呼]",
-          "zh-TW": "潤德你好，\n\n我看到了你的 Wishlist，想約你一起去做點有趣的事。\n\n想一起體驗：[項目或想法]\n方便的時間：[時間]\n地點：[地點，也可以一起商量]\n自我介紹／想說的話：[隨意寫幾句]\n\n有興趣的話，回信一起聊聊吧！\n[你的稱呼]"
+          "zh-TW": "潤德你好，\n\n我看到了你的 Wishlist，想約你一起去做點有趣的事。\n\n想一起體驗：[項目或想法]\n方便的時間：[時間]\n地點：[地點，也可以一起商量]\n自我介紹／想说的話：[隨意寫幾句]\n\n有興趣的話，回信一起聊聊吧！\n[你的稱呼]"
         },
         "item_body": {
           "en": "Hi Runde,\n\nI saw “{activity}” on your Wishlist and would love to join you.\n\nA time that works for me: [time]\nPlace or plans: [a suggestion, or we can decide together]\nA little about me / a message: [anything you’d like to share]\n\nLet me know what you think!\n[Your name]",
           "zh-CN": "润德你好，\n\n我在你的 Wishlist 里看到了“{activity}”，也很想和你一起体验。\n\n方便的时间：[时间]\n地点或安排：[我的想法，也可以一起商量]\n自我介绍／想说的话：[随意写几句]\n\n有兴趣的话，回信一起聊聊吧！\n[你的称呼]",
-          "zh-TW": "潤德你好，\n\n我在你的 Wishlist 裡看到了「{activity}」，也很想和你一起體驗。\n\n方便的時間：[時間]\n地點或安排：[我的想法，也可以一起商量]\n自我介紹／想說的話：[隨意寫幾句]\n\n有興趣的話，回信一起聊聊吧！\n[你的稱呼]"
+          "zh-TW": "潤德你好，\n\n我在你的 Wishlist 裡看到了「{activity}」，也很想和你一起體驗。\n\n方便的時間：[時間]\n地點或安排：[我的想法，也可以一起商量]\n自我介紹／想说的話：[隨意寫幾句]\n\n有興趣的話，回信一起聊聊吧！\n[你的稱呼]"
         }
       }
     }

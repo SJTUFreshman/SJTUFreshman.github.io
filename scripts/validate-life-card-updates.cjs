@@ -14,7 +14,7 @@ const names = {
     thoughts: ['Cygnus', '天鹅座', '天鵝座'],
     reading: ['Corona Borealis', '北冕座', '北冕座'],
     friends: ['Gemini', '双子座', '雙子座'],
-    profile: ['Orion', '猎户座', '獵戶座'],
+    profile: ['Orion', '猎户座', '獵户座'],
     wine: ['Crater', '巨爵座', '巨爵座'],
     wishlist: ['Delphinus', '海豚座', '海豚座']
 };

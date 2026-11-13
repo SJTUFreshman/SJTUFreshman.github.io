@@ -127,8 +127,8 @@ const thoughtReaderLabels = {
         hint: '向下阅读', progress: '阅读进度', navigation: '阅读导航'
     },
     'zh-TW': {
-        read: '閱讀全文', mode: '隨筆', close: '返回星圖', language: '隨筆語言',
-        hint: '由右至左閱讀', progress: '閱讀進度', navigation: '閱讀導覽'
+        read: '閲讀全文', mode: '隨筆', close: '返回星圖', language: '隨筆語言',
+        hint: '由右至左閲讀', progress: '閲讀進度', navigation: '閲讀導覽'
     }
 };
 

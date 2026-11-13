@@ -22,12 +22,12 @@ const DEEP_SKY_OBSERVATIONS = Object.freeze({
             alt: '哈勃与斯皮策合成的猎户座大星云观测图，呈现发光气体、尘埃与年轻恒星。'
         },
         'zh-TW': {
-            title: '獵戶座大星雲', category: '銀河系內的恆星搖籃',
-            description: '在我們自己的銀河系裡，新生恆星照亮了獵戶座腰帶下方的氣體與塵埃。這是一片正在孕育恆星的星雲，是銀河系的一小部分。',
-            distance: '約 1,500 光年', type: '發射星雲 · H II 游離氫區', location: '獵戶座方向',
+            title: '獵户座大星雲', category: '銀河系内的恒星搖籃',
+            description: '在我們自己的銀河系裡，新生恒星照亮了獵户座腰帶下方的氣體與塵埃。這是一片正在孕育恒星的星雲，是銀河系的一小部分。',
+            distance: '約 1,500 光年', type: '發射星雲 · H II 游離氫區', location: '獵户座方向',
             instrument: '哈勃 + 史匹哲 · 可見光 / 紅外',
-            observation: '由可見光與紅外波段的望遠鏡觀測合成。映射後的顏色呈現發光氣體、溫暖塵埃與藏在雲中的恆星。',
-            alt: '哈勃與史匹哲合成的獵戶座大星雲觀測圖，呈現發光氣體、塵埃與年輕恆星。'
+            observation: '由可見光與紅外波段的望遠鏡觀測合成。映射後的颜色呈現發光氣體、溫暖塵埃與藏在雲中的恒星。',
+            alt: '哈勃與史匹哲合成的獵户座大星雲觀測圖，呈現發光氣體、塵埃與年輕恒星。'
         }
     }
 });
@@ -195,7 +195,7 @@ class DeepSkyMap {
         const labels = ({
             en: { observatory: 'DEEP SKY / OBSERVATIONS', close: 'Return to star map', distance: 'Distance from Earth', type: 'Object type', location: 'In our sky', source: 'THE OBSERVATION', image: 'NASA image ↗', reference: 'Object reference ↗', hint: 'Right-drag to pan · scroll to zoom', touch: 'Drag to pan · pinch to zoom', loading: 'Receiving the observation…', error: 'Image unavailable. The original observation is linked alongside.', out: 'Zoom out', reset: 'Reset image', in: 'Zoom in' },
             'zh-CN': { observatory: '深空 / 观测', close: '返回星图', distance: '距地球', type: '天体类型', location: '天空方位', source: '这幅观测图', image: 'NASA 原图 ↗', reference: '天体资料 ↗', hint: '右键拖动平移 · 滚轮缩放', touch: '拖动平移 · 双指缩放', loading: '正在载入观测图…', error: '图像暂时无法加载，可通过旁侧链接查看原始观测。', out: '缩小图像', reset: '复位图像', in: '放大图像' },
-            'zh-TW': { observatory: '深空 / 觀測', close: '返回星圖', distance: '距地球', type: '天體類型', location: '天空方位', source: '這幅觀測圖', image: 'NASA 原圖 ↗', reference: '天體資料 ↗', hint: '右鍵拖曳平移 · 滾輪縮放', touch: '拖曳平移 · 雙指縮放', loading: '正在載入觀測圖…', error: '影像暫時無法載入，可透過旁側連結查看原始觀測。', out: '縮小影像', reset: '復位影像', in: '放大影像' }
+            'zh-TW': { observatory: '深空 / 觀測', close: '返回星圖', distance: '距地球', type: '天體類型', location: '天空方位', source: '這幅觀測圖', image: 'NASA 原圖 ↗', reference: '天體資料 ↗', hint: '右鍵拖曳平移 · 滚輪縮放', touch: '拖曳平移 · 雙指縮放', loading: '正在載入觀測圖…', error: '影像暫時無法載入，可透過旁側連結查看原始觀測。', out: '縮小影像', reset: '復位影像', in: '放大影像' }
         })[language] || null;
         if (!labels) return;
         const set = (selector, value) => { this.element.querySelector(selector).textContent = value; };

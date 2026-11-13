@@ -245,7 +245,7 @@ const constellationStories = {
         reason: {
             en: 'Dubhe and Merak point onward to Polaris. For generations the Dipper has turned travel into direction, so every place reached belongs naturally along this celestial route.',
             'zh-CN': '天枢与天璇把视线引向北极星。北斗长久以来把远行变成方向，因此每一处抵达，都适合留在这条天上的路径上。',
-            'zh-TW': '天樞與天璇把視線引向北極星。北斗長久以來把遠行變成方向，因此每一處抵達，都適合留在這條天上的路徑上。'
+            'zh-TW': '天樞與天璇把視线引向北極星。北斗長久以來把遠行變成方向，因此每一處抵達，都適合留在這條天上的路徑上。'
         }
     },
     shelf: {
@@ -253,12 +253,12 @@ const constellationStories = {
         epithet: {
             en: 'Works that continue to resonate',
             'zh-CN': '仍在回响的作品',
-            'zh-TW': '仍在迴響的作品'
+            'zh-TW': '仍在回響的作品'
         },
         reason: {
             en: 'Lyra turns separate stars into the strings of one instrument. Books, films, music and art gather here not as a list, but as works that keep resonating after they end.',
             'zh-CN': '天琴座把分散的星连成同一件乐器。书、电影、音乐与艺术在这里不是清单，而是结束之后仍会回响的作品。',
-            'zh-TW': '天琴座把分散的星連成同一件樂器。書、電影、音樂與藝術在這裡不是清單，而是結束之後仍會迴響的作品。'
+            'zh-TW': '天琴座把分散的星連成同一件樂器。書、電影、音樂與藝術在這裡不是清單，而是結束之後仍會回響的作品。'
         }
     },
     thoughts: {
@@ -266,12 +266,12 @@ const constellationStories = {
         epithet: {
             en: 'A timeline with branching wings',
             'zh-CN': '带着双翼的时间线',
-            'zh-TW': '帶著雙翼的時間線'
+            'zh-TW': '帶著雙翼的時間线'
         },
         reason: {
             en: 'Cygnus stretches along the Milky Way: its long axis reads as time, while its wings open like a thought dividing into new directions. Each diary entry becomes one stop in that inward flight.',
             'zh-CN': '天鹅座沿银河伸展：长轴像时间，双翼则像一段思绪向不同方向分岔。每篇日记，都是这次向内飞行的一站。',
-            'zh-TW': '天鵝座沿銀河伸展：長軸像時間，雙翼則像一段思緒向不同方向分岔。每篇日記，都是這次向內飛行的一站。'
+            'zh-TW': '天鵝座沿銀河伸展：長軸像時間，雙翼則像一段思緒向不同方向分岔。每篇日記，都是這次向内飛行的一站。'
         }
     },
     friends: {
@@ -279,16 +279,16 @@ const constellationStories = {
         epithet: {
             en: 'Two lights keeping pace',
             'zh-CN': '并肩前行的两束光',
-            'zh-TW': '並肩前行的兩束光'
+            'zh-TW': '并肩前行的兩束光'
         },
         reason: {
             en: 'Castor and Pollux make companionship visible: distinct lights travelling side by side. Gemini therefore holds the people and communities whose paths meet this one.',
             'zh-CN': '北河二与北河三让陪伴变得可见：两束不同的光并肩前行。双子座因此收纳那些与这条人生轨迹相遇的人和群体。',
-            'zh-TW': '北河二與北河三讓陪伴變得可見：兩束不同的光並肩前行。雙子座因此收納那些與這條人生軌跡相遇的人和群體。'
+            'zh-TW': '北河二與北河三讓陪伴變得可見：兩束不同的光并肩前行。雙子座因此收納那些與這條人生軌迹相遇的人和群體。'
         }
     },
     profile: {
-        name: { en: 'Orion', 'zh-CN': '猎户座', 'zh-TW': '獵戶座' },
+        name: { en: 'Orion', 'zh-CN': '猎户座', 'zh-TW': '獵户座' },
         epithet: {
             en: 'A portrait drawn in starlight',
             'zh-CN': '由星光勾出的肖像',
@@ -297,7 +297,7 @@ const constellationStories = {
         reason: {
             en: 'Orion’s head, shoulders, belt and feet sketch a human figure in the night sky. Here that starlit portrait introduces the person behind the other constellations: a photograph, a few words and, in time, a collection of userboxes.',
             'zh-CN': '猎户座的头、双肩、腰带与双足，在夜空中勾出一个人的轮廓。这幅星光肖像适合介绍其余星座背后的那个人：一张照片、几段自述，以及慢慢添上的用户框。',
-            'zh-TW': '獵戶座的頭、雙肩、腰帶與雙足，在夜空中勾出一個人的輪廓。這幅星光肖像適合介紹其餘星座背後的那個人：一張照片、幾段自述，以及慢慢添上的使用者框。'
+            'zh-TW': '獵户座的頭、雙肩、腰帶與雙足，在夜空中勾出一個人的輪廓。這幅星光肖像適合介紹其餘星座背後的那個人：一張照片、幾段自述，以及慢慢添上的使用者框。'
         }
     },
     wine: {
@@ -357,7 +357,7 @@ const starProfiles = {
     35550: { names: { en: 'Wasat', 'zh-CN': 'Wasat · 双子座 δ', 'zh-TW': 'Wasat · 雙子座 δ' }, designation: 'δ Geminorum' },
     30343: { names: { en: 'Tejat', 'zh-CN': 'Tejat · 双子座 μ', 'zh-TW': 'Tejat · 雙子座 μ' }, designation: 'μ Geminorum' },
     31681: { names: { en: 'Alhena', 'zh-CN': 'Alhena · 双子座 γ', 'zh-TW': 'Alhena · 雙子座 γ' }, designation: 'γ Geminorum' },
-    26207: { names: { en: 'Meissa', 'zh-CN': 'Meissa · 猎户座 λ', 'zh-TW': 'Meissa · 獵戶座 λ' }, designation: 'λ Orionis' },
+    26207: { names: { en: 'Meissa', 'zh-CN': 'Meissa · 猎户座 λ', 'zh-TW': 'Meissa · 獵户座 λ' }, designation: 'λ Orionis' },
     27989: { names: { en: 'Betelgeuse', 'zh-CN': '参宿四', 'zh-TW': '參宿四' }, designation: 'α Orionis' },
     25336: { names: { en: 'Bellatrix', 'zh-CN': '参宿五', 'zh-TW': '參宿五' }, designation: 'γ Orionis' },
     26727: { names: { en: 'Alnitak', 'zh-CN': '参宿一', 'zh-TW': '參宿一' }, designation: 'ζ Orionis' },
@@ -443,14 +443,14 @@ const starUiCopy = {
     },
     'zh-TW': {
         constellationMeaning: '星座寓意',
-        choose: '點擊任意恆星，查看該星座板塊的全部內容。',
-        openSection: name => `開啟${name}`,
-        routePreviewMeta: '星際航線預覽',
-        departure: '啟程星',
+        choose: '點擊任意恒星，查看該星座板塊的全部内容。',
+        openSection: name => `開啓${name}`,
+        routePreviewMeta: '星際航线預覽',
+        departure: '啓程星',
         destination: '目的地',
-        previewing: target => `已繪製前往${target}的航線。請先在星空中確認航向，準備好後再啟航。`,
-        launch: '啟航',
-        cancel: '取消航線',
+        previewing: target => `已繪制前往${target}的航线。請先在星空中確認航向，準備好後再啓航。`,
+        launch: '啓航',
+        cancel: '取消航线',
         empty: '暫無可用目的地。',
         route: target => `飛向${target}`
     }
@@ -493,16 +493,16 @@ const skyIndexUi = {
         kicker: '即時星空索引',
         title: '生活星座',
         listLabel: '生活板塊',
-        open: '開啟生活板塊索引',
+        open: '開啓生活板塊索引',
         close: '關閉生活板塊索引',
-        above: '地平線上',
-        near: '鄰近地平線',
-        below: '地平線下',
-        veiled: '隱沒於眩光',
-        note: '白晝仍會柔和標出地平線以上的星座；地平線以下的板塊也可由此索引進入。',
+        above: '地平线上',
+        near: '鄰近地平线',
+        below: '地平线下',
+        veiled: '隱没於眩光',
+        note: '白晝仍會柔和標出地平线以上的星座；地平线以下的板塊也可由此索引進入。',
         observer: (location, time) => `${location} · ${time}`,
         indexAccess: '索引接入',
-        directAnnouncement: (name, status) => `${name}目前狀態：${status}。已透過生活索引開啟，即時天空視角保持不變。`,
+        directAnnouncement: (name, status) => `${name}目前狀態：${status}。已透過生活索引開啓，即時天空視角保持不變。`,
         compass: ['北', '東', '南', '西']
     }
 };

@@ -111,7 +111,7 @@ function sectionIndexCopy() {
             kicker: '星座索引',
             observer: () => '個人星圖·靈感源自真實星空',
             above: '探索',
-            note: '選擇一片星座，探索其中的恆星與故事。星間距離經過壓縮，組成這片個人星圖。'
+            note: '選擇一片星座，探索其中的恒星與故事。星間距離經過壓縮，組成這片個人星圖。'
         }
     };
     return { ...ui, ...(mapCopy[state.currentLang] || mapCopy.en) };

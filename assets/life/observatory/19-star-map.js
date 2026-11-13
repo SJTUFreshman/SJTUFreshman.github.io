@@ -115,7 +115,7 @@ class LifeStarMap {
         const m42Position = this.galacticDirection([Math.sin(m42Ra) * Math.cos(m42Dec), Math.sin(m42Dec), Math.cos(m42Ra) * Math.cos(m42Dec)])
             .map(value => value * 1000);
         this.entities = [
-            { id: 'm42', position: m42Position, level: 'local', names: ['Orion Nebula', '猎户座大星云', '獵戶座大星雲'], subtitles: ['M42 · Stellar nursery', 'M42 · 恒星诞生地', 'M42 · 恆星誕生地'] },
+            { id: 'm42', position: m42Position, level: 'local', names: ['Orion Nebula', '猎户座大星云', '獵户座大星雲'], subtitles: ['M42 · Stellar nursery', 'M42 · 恒星诞生地', 'M42 · 恒星誕生地'] },
             { id: 'region', position: [112, 2, 74], level: 'galaxy', names: ['Our neighbourhood', '我们的星域', '我們的星域'], subtitles: ['Explore the constellations', '进入生活星座', '進入生活星座'] }
         ];
         const navigation = document.getElementById('mapEntities');
@@ -901,7 +901,7 @@ class LifeStarMap {
         const copies = {
             en: { orbit: 'Right drag / Two-finger slide · orbit', pan: 'Left drag · pan', zoom: 'Mouse wheel / Pinch · zoom', touch: 'Drag · orbit / Pinch · approach', select: 'Choose a constellation', reset: 'Reset view', home: 'Return home', closer: 'Move closer', farther: 'Move farther', overview: 'LOCAL STAR MAP', detail: 'CONSTELLATION', flight: 'APPROACHING', note: 'The local sky follows Hipparcos directions and stellar colours, surrounded by ESO/S. Brunier’s photographic Milky Way panorama, reprojected and exposure-adjusted. The external galaxy adapts ESA’s 2025 Gaia-based artist impression, with an illustrative volumetric bulge and dust.', scale: 'NEAR / FAR' },
             'zh-CN': { orbit: '右键拖动 / 触控板双指滑动 · 旋转', pan: '左键拖动 · 平移', zoom: '滚轮 / 双指捏合 · 缩放', touch: '单指旋转 / 双指缩放与平移', select: '选择一个星座', reset: '回到全景', home: '返回主页', closer: '拉近星图', farther: '拉远星图', overview: '局部星图', detail: '星座', flight: '正在靠近', note: '局部星空按 Hipparcos 星表方向与恒星颜色绘制，背景采用 ESO/S. Brunier 的真实银河全天摄影，经过重投影与曝光调整。银河外观改编自 ESA 2025 年基于 Gaia 观测的艺术重建，核球和尘埃厚度为示意。', scale: '近 / 远' },
-            'zh-TW': { orbit: '右鍵拖動 / 觸控板雙指滑動 · 旋轉', pan: '左鍵拖動 · 平移', zoom: '滾輪 / 雙指捏合 · 縮放', touch: '單指旋轉 / 雙指縮放與平移', select: '選擇一個星座', reset: '回到全景', home: '返回主頁', closer: '拉近星圖', farther: '拉遠星圖', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '局部星空按 Hipparcos 星表方向與恆星顏色繪製，背景採用 ESO/S. Brunier 的真實銀河全天攝影，經過重投影與曝光調整。銀河外觀改編自 ESA 2025 年基於 Gaia 觀測的藝術重建，核球和塵埃厚度為示意。', scale: '近 / 遠' }
+            'zh-TW': { orbit: '右鍵拖動 / 觸控板雙指滑動 · 旋轉', pan: '左鍵拖動 · 平移', zoom: '滚輪 / 雙指捏合 · 縮放', touch: '單指旋轉 / 雙指縮放與平移', select: '選擇一個星座', reset: '回到全景', home: '返回主頁', closer: '拉近星圖', farther: '拉遠星圖', overview: '局部星圖', detail: '星座', flight: '正在靠近', note: '局部星空按 Hipparcos 星表方向與恒星颜色繪制，背景采用 ESO/S. Brunier 的真實銀河全天攝影，經過重投影與曝光調整。銀河外觀改編自 ESA 2025 年基於 Gaia 觀測的藝術重建，核球和塵埃厚度爲示意。', scale: '近 / 遠' }
         };
         const copy = copies[state.currentLang] || copies.en;
         copy.overview = observatoryCopy[0];
