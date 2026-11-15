@@ -325,12 +325,6 @@ html[lang] .journal-body {
 }
 html[lang] :is(.journal-kicker, .journal-footer, .journal-photo figcaption) { font-size: var(--type-caption); line-height: 1.65; letter-spacing: 0.025em; }
 html[lang] .journal-close { font-size: var(--type-ui); line-height: 1.5; }
-html[lang] .pet-bubble { font-size: 13px; line-height: 1.4; max-width: min(250px, calc(100vw - 32px)); white-space: normal; }
-html[lang] .pet-menu-item { font-size: 14px; line-height: 1.4; }
-html[lang] .pet-launch-label { font-size: 13px; letter-spacing: 0; }
-html[lang] .summon-menu :is(.summon-option-name, .summon-menu-title) { line-height: 1.4; }
-html[lang] .summon-option-name { font-size: 14px; }
-html[lang] .summon-option-note { font-size: 12px; line-height: 1.5; }
 
 @media (max-width: 900px) {
     :root { --sky-label-bottom: 190px; }

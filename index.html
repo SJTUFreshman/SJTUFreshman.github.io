@@ -76,7 +76,7 @@
     <!-- Font Awesome -->
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="assets/pet-summon.css">
+    <link rel="stylesheet" href="assets/pet-summon.css?v=20261115-original-type">
     <link rel="stylesheet" href="assets/site-identity.css?v=20261028-name-cycle">
     <script src="assets/site-identity.js?v=20261028-name-cycle" defer></script>
     <link rel="stylesheet" href="assets/news-journal.css?v=20261114-pearl-album">
@@ -495,6 +495,22 @@
         .weather-temp { font-weight: 600; color: var(--text); font-family: var(--font-en); }
         .weather-desc { color: var(--text-muted); }
         .weather-loc { color: var(--text-muted); font-size: 0.78rem; }
+        .weather-pill { flex-wrap: wrap; max-width: 100%; }
+        .weather-retry {
+            display: inline-grid;
+            place-items: center;
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border: 0;
+            border-radius: 4px;
+            background: transparent;
+            color: var(--accent);
+            font: inherit;
+            cursor: pointer;
+        }
+        .weather-retry:hover { background: var(--accent-blue-soft); }
+        .weather-retry[hidden] { display: none; }
 
         /* ========== News Section ========== */
         .news-list {
@@ -1253,8 +1269,9 @@
         ::-webkit-scrollbar-thumb:hover { background: #bbb; }
     </style>
     <link rel="stylesheet" href="assets/lanmi-ui.css?v=20261108-font-roles">
-    <link rel="stylesheet" href="assets/site-typography.css?v=20261108-font-roles">
-    <link rel="stylesheet" href="assets/home-typography.css?v=20261115-type-only">
+    <link rel="stylesheet" href="assets/site-typography.css?v=20261115-original-companion-type">
+    <link rel="stylesheet" href="assets/home-typography.css?v=20261115-restored-name-companion">
+    <link rel="stylesheet" href="assets/home-refinement.css?v=20261115-selected-release">
 <!-- ===== Navigation ===== -->
 <nav class="nav">
     <div class="nav-inner">
@@ -1317,8 +1334,8 @@
                 </div>
             </div>
 
-            <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
-                <i class="fas fa-bars"></i>
+            <button class="nav-toggle" type="button" onclick="toggleNav()" aria-label="Menu" aria-controls="navLinks" aria-expanded="false">
+                <span class="nav-toggle-icon" aria-hidden="true"></span>
             </button>
         </div>
 
@@ -1347,11 +1364,12 @@
                 <a href="https://scholar.google.com/citations?user=uGjwKq0AAAAJ&amp;hl=zh-TW" target="_blank" class="hero-link"><i class="fas fa-graduation-cap"></i> Scholar</a>
                 <span class="hero-link"><i class="fas fa-map-marker-alt"></i> <span data-key="hero_location">Shanghai, China</span></span>
             </div>
-            <div class="weather-pill" id="weatherWidget" style="display:none;">
-                <span class="weather-icon" id="weatherIcon"></span>
+            <div class="weather-pill" id="weatherWidget" role="status" aria-live="polite" aria-busy="true">
+                <span class="weather-icon" id="weatherIcon" aria-hidden="true">🌡️</span>
                 <span class="weather-temp" id="weatherTemp"></span>
-                <span class="weather-desc" id="weatherDesc"></span>
+                <span class="weather-desc" id="weatherDesc">Loading weather…</span>
                 <span class="weather-loc" id="weatherLoc">Shanghai</span>
+                <button class="weather-retry" id="weatherRetry" type="button" aria-label="Retry weather" title="Retry weather" hidden>↻</button>
             </div>
         </div>
     </section>
@@ -1939,7 +1957,38 @@ function shareWeatherObserver() {
     }
 }
 
-async function fetchWeather() {
+let weatherState = 'loading';
+let weatherPending = false;
+let weatherRetryTimer;
+const WEATHER_LABELS = {
+    en: { loading: 'Loading weather…', error: 'Weather unavailable', retry: 'Retry weather' },
+    'zh-CN': { loading: '天气加载中…', error: '天气暂不可用', retry: '重新获取天气' },
+    'zh-TW': { loading: '天氣載入中…', error: '天氣暫不可用', retry: '重新取得天氣' }
+};
+
+function renderWeather() {
+    const labels = WEATHER_LABELS[currentLang] || WEATHER_LABELS.en;
+    const ready = weatherState === 'ready';
+    const retry = document.getElementById('weatherRetry');
+    document.getElementById('weatherWidget').setAttribute('aria-busy', String(weatherState === 'loading'));
+    document.getElementById('weatherIcon').textContent = ready ? window._weatherInfo[0] : '🌡️';
+    document.getElementById('weatherTemp').textContent = ready ? window._weatherTemp + '°C' : '';
+    document.getElementById('weatherDesc').textContent = ready
+        ? window._weatherInfo[{ en: 1, 'zh-CN': 2, 'zh-TW': 3 }[currentLang] || 1]
+        : labels[weatherState];
+    retry.hidden = weatherState !== 'error';
+    retry.setAttribute('aria-label', labels.retry);
+    retry.title = labels.retry;
+}
+
+async function fetchWeather(retryOnFailure = true) {
+    if (weatherPending) return;
+    clearTimeout(weatherRetryTimer);
+    weatherPending = true;
+    weatherState = 'loading';
+    renderWeather();
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
     try {
         shareWeatherObserver();
         const weatherUrl = new URL('https://api.open-meteo.com/v1/forecast');
@@ -1949,24 +1998,28 @@ async function fetchWeather() {
             current: 'temperature_2m,weather_code',
             timezone: WEATHER_OBSERVER.timezone
         });
-        const res = await fetch(weatherUrl);
+        const res = await fetch(weatherUrl, { signal: controller.signal });
+        if (!res.ok) throw new Error('Weather HTTP ' + res.status);
         const data = await res.json();
+        if (!Number.isFinite(data.current?.temperature_2m) || !Number.isFinite(data.current?.weather_code)) {
+            throw new Error('Weather response is incomplete');
+        }
         const temp = Math.round(data.current.temperature_2m);
         const code = data.current.weather_code;
         const info = WMO_CODES[code] || ['🌡️', 'N/A', 'N/A', 'N/A'];
 
-        document.getElementById('weatherIcon').textContent = info[0];
-        document.getElementById('weatherTemp').textContent = temp + '°C';
-
-        const langIdx = { 'en': 1, 'zh-CN': 2, 'zh-TW': 3 };
-        document.getElementById('weatherDesc').textContent = info[langIdx[currentLang] || 1];
-        document.getElementById('weatherWidget').style.display = 'inline-flex';
-
         // Store for language switching
         window._weatherInfo = info;
         window._weatherTemp = temp;
+        weatherState = 'ready';
     } catch (e) {
+        weatherState = 'error';
         console.warn('Weather fetch failed:', e);
+        if (retryOnFailure) weatherRetryTimer = setTimeout(() => fetchWeather(false), 2000);
+    } finally {
+        clearTimeout(timeout);
+        weatherPending = false;
+        renderWeather();
     }
 }
 
@@ -1974,12 +2027,11 @@ async function fetchWeather() {
 const origSetLang = setLang;
 setLang = function(lang) {
     origSetLang(lang);
-    if (window._weatherInfo) {
-        const langIdx = { 'en': 1, 'zh-CN': 2, 'zh-TW': 3 };
-        document.getElementById('weatherDesc').textContent = window._weatherInfo[langIdx[lang] || 1];
-    }
+    renderWeather();
 };
 
+document.getElementById('weatherRetry').addEventListener('click', () => fetchWeather(false));
+window.addEventListener('online', () => { if (weatherState === 'error') fetchWeather(false); });
 fetchWeather();
 
 /* ===== Citations ===== */
@@ -2011,14 +2063,24 @@ async function copyCitation(id, button) {
 
 /* ===== Mobile Nav Toggle ===== */
 function toggleNav() {
-    document.getElementById('navLinks').classList.toggle('open');
+    const open = document.getElementById('navLinks').classList.toggle('open');
+    document.querySelector('.nav-toggle').setAttribute('aria-expanded', String(open));
 }
 
 // Close mobile nav on link click
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         document.getElementById('navLinks').classList.remove('open');
+        document.querySelector('.nav-toggle').setAttribute('aria-expanded', 'false');
     });
+});
+
+document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape' || !document.getElementById('navLinks').classList.contains('open')) return;
+    document.getElementById('navLinks').classList.remove('open');
+    const toggle = document.querySelector('.nav-toggle');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.focus();
 });
 
 /* ===== Scroll Fade-in Animation ===== */

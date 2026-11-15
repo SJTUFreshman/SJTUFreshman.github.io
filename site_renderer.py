@@ -755,11 +755,12 @@ def render_home_hero(content: dict[str, Any]) -> str:
 {link_html}
                 <span class="hero-link"><i class="fas fa-map-marker-alt"></i> <span data-key="hero_location">{lang_value(hero.get("location", {}), "en")}</span></span>
             </div>
-            <div class="weather-pill" id="weatherWidget" style="display:none;">
-                <span class="weather-icon" id="weatherIcon"></span>
+            <div class="weather-pill" id="weatherWidget" role="status" aria-live="polite" aria-busy="true">
+                <span class="weather-icon" id="weatherIcon" aria-hidden="true">🌡️</span>
                 <span class="weather-temp" id="weatherTemp"></span>
-                <span class="weather-desc" id="weatherDesc"></span>
+                <span class="weather-desc" id="weatherDesc">Loading weather…</span>
                 <span class="weather-loc" id="weatherLoc">Shanghai</span>
+                <button class="weather-retry" id="weatherRetry" type="button" aria-label="Retry weather" title="Retry weather" hidden>↻</button>
             </div>
         </div>
     </section>"""

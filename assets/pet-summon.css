@@ -1,3 +1,20 @@
+.pet-summon-control,
+.pet-summon-sequence {
+    /* Keep the companion's original UI font stack independent of site typography. */
+    --font-ui: "IBM Plex Sans", "Aptos", "Segoe UI", "PingFang SC", "PingFang TC", "Microsoft YaHei UI", "Microsoft JhengHei UI", sans-serif;
+}
+
+.pet-summon-control,
+.pet-summon-sequence,
+.pet-wrapper,
+.pet-menu,
+.snack-tray {
+    /* Restore the inherited type settings used before the site-wide redesign. */
+    font-kerning: auto;
+    text-rendering: auto;
+    letter-spacing: 0.01rem;
+}
+
 .nav-actions {
     display: flex;
     align-items: center;

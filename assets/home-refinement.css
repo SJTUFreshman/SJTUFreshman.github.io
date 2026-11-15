@@ -1,0 +1,94 @@
+/* Selected homepage refinements, keeping
+   the original palette, language controls, portraits and content cards. */
+:root { --nav-height: 64px; }
+:where(a, button, summary, input, textarea):focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+button, a { -webkit-tap-highlight-color: #526fa61a; }
+button { touch-action: manipulation; }
+
+.nav {
+    background: #fdfcfcef;
+    border-bottom-color: #dde3edb3;
+    box-shadow: 0 4px 24px #35456703;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+html[lang] .nav-link { position: relative; padding: 9px 10px; border-radius: 5px; transition: color 180ms ease, background 180ms ease; }
+.nav-link::after {
+    content: ''; position: absolute; inset: auto 10px 4px; height: 1px;
+    background: var(--accent-pink); transform: scaleX(0); transform-origin: left; transition: transform 180ms ease;
+}
+.nav-link:hover::after, .nav-link:focus-visible::after { transform: scaleX(1); }
+.nav-link:not([href="#news"]):hover, .nav-link[href="#news"]:hover { color: var(--text); background: #eef2f780; }
+.nav-toggle { width: 40px; height: 40px; border-radius: 8px; }
+.nav-toggle:hover { background: var(--accent-blue-soft); }
+.nav-toggle-icon { position: relative; display: block; width: 18px; height: 1px; margin: auto; background: currentColor; }
+.nav-toggle-icon::before, .nav-toggle-icon::after { content: ''; position: absolute; left: 0; width: 18px; height: 1px; background: currentColor; transition: transform 180ms ease; }
+.nav-toggle-icon::before { transform: translateY(-6px); }
+.nav-toggle-icon::after { transform: translateY(6px); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon { background: transparent; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::before { transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::after { transform: rotate(-45deg); }
+
+.hero { padding-block: 76px 46px; }
+html[lang] .hero-name { margin-bottom: 15px; }
+html[lang] .hero-title { margin-bottom: 20px; }
+html[lang] .hero-bio { margin-bottom: 24px; }
+html[lang] .hero-links { gap: 10px 22px; }
+.hero-link { gap: 8px; }
+.hero-link i { color: #7e92b5; }
+.hero-link:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+
+#news, #publications, #projects { padding-block: 34px; }
+#news { padding-top: 26px; }
+#publications, #projects { border-top: 1px solid var(--border-light); }
+html[lang] .section-title { margin-top: 19px; gap: 14px; }
+.section-title::after { background: linear-gradient(90deg, #d8c1d0, #d8c1d000); }
+#life-portal { padding-top: 36px; }
+.life-card { border-radius: 12px; }
+.life-card::after { border-radius: 6px; }
+html[lang] .life-card-content { padding: 36px 40px; }
+html[lang] .life-card-title { margin-bottom: 14px; }
+html[lang] .life-card-desc { color: #cad1e2; }
+html[lang] .footer { color: #68758a; padding-block: 28px 36px; }
+
+/* The menu is refined independently of the original companion launch button. */
+.summon-menu {
+    --pet-ink: #52617d; --pet-paper: #faf8fc;
+    --pet-cyan: #91b5cc; --pet-violet: #a397cc; --pet-coral: #d49ab6; --pet-gold: #d9c398;
+    border: 1px solid #d6ddea; border-radius: 12px;
+    background: linear-gradient(135deg, #fdfcfe, #f5f5fa);
+    box-shadow: 0 16px 40px #3c4c7024, 0 2px 6px #3c4c7008; padding: 16px; gap: 8px;
+}
+.summon-menu::before { border-width: 1px; border-color: #d6ddea; background: #fdfcfe; top: -9px; }
+.summon-menu-heading { padding: 2px 4px 9px; }
+.summon-menu-kicker { color: #7c7894; }
+.summon-menu-title { margin-top: 5px; }
+.summon-option { border: 1px solid #e2e5ee; border-radius: 7px; padding: 9px; }
+.summon-option:hover { transform: none; border-color: #bccbe2; box-shadow: 0 3px 8px #52617d08; }
+.pet-summon-btn::before { pointer-events: none; }
+
+@media (max-width: 900px) {
+    html[lang] .section-title { margin: 0 0 20px; }
+    .section-title::after { max-width: 72px; }
+    .hero { padding-block: 54px 36px; }
+    #news, #publications, #projects { padding-block: 30px; }
+    .nav-inner { gap: 8px; }
+    html[lang] .nav-link { padding-inline: 8px; }
+}
+@media (max-width: 768px) {
+    .nav-links.open { background: #fdfcfcf7; padding: 16px 24px 20px; box-shadow: 0 16px 28px #3545670d; gap: 4px; }
+    .nav-links.open .nav-link { width: 100%; text-align: center; padding: 10px 18px; min-height: 44px; }
+}
+@media (max-width: 600px) {
+    :root { --nav-height: 60px; }
+    .hero { gap: 26px; padding-block: 40px 30px; }
+    html[lang] .hero-name { margin-bottom: 14px; }
+    html[lang] .hero-title { margin-bottom: 18px; }
+    html[lang] .hero-bio { margin-bottom: 22px; }
+    html[lang] .hero-links { gap: 10px 18px; }
+    html[lang] .life-card-content { padding: 28px 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
