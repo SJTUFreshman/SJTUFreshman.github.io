@@ -1,0 +1,69 @@
+/* Approved homepage refinements: typography and text measure only.
+   Loaded after the shared bilingual type scale. */
+body { text-rendering: optimizeLegibility; }
+
+.nav-brand { font-size: 1.125rem; letter-spacing: 0.015em; }
+html[lang] .nav-link { font-size: 0.8125rem; font-weight: 400; }
+html:lang(zh) .nav-link { font-size: 1rem; }
+.lang-btn { font-size: 0.75rem; font-weight: 400; }
+.lang-btn.active { font-weight: 500; }
+
+html[lang] .hero-name {
+    font-size: clamp(2.25rem, 1.85rem + 1.15vw, 2.875rem);
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+}
+html:lang(zh) .hero-name { letter-spacing: 0.035em; }
+html[lang] .hero-title { line-height: 1.65; }
+html[lang] .hero-bio { max-width: 52ch; line-height: 1.85; }
+html[lang] .hero-links { font-size: 0.9375rem; }
+.hero-link i { font-size: 0.8125rem; }
+
+html[lang] .section-title {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+}
+html:lang(zh) .section-title {
+    font-size: 1.0625rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+}
+html[lang] .news-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: -0.015em;
+}
+html[lang] .news-read { font-family: var(--font-ui); font-size: 0.8125rem; }
+html:lang(zh) .news-read { font-size: 0.9375rem; }
+
+html[lang] .pub-title-text { font-size: 1.25rem; font-weight: 500; line-height: 1.45; text-wrap: pretty; }
+html[lang] .pub-authors { line-height: 1.75; }
+html[lang] .pub-venue { font-size: 0.9375rem; }
+html[lang] :is(.pub-btn, .project-link) {
+    font-family: var(--font-ui);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+html:lang(zh) .project-link { font-size: 0.9375rem; }
+.pub-btn i, .project-link i { font-size: 0.75rem; }
+html[lang] .project-name { font-size: 1.3125rem; font-weight: 500; line-height: 1.35; }
+html[lang] .project-desc { line-height: 1.8; }
+html[lang] .life-card-title { font-weight: 400; letter-spacing: 0.01em; }
+html[lang] .life-card-cta { font-size: 0.875rem; }
+html:lang(zh) .life-card-cta { font-size: 1rem; }
+html[lang] .footer { font-size: 0.75rem; letter-spacing: 0.025em; }
+html:lang(zh) .footer { font-size: 0.9375rem; }
+
+.pet-launch-label { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.025em; }
+.summon-menu-kicker { font-size: 0.625rem; font-weight: 500; }
+.summon-menu-title { font-family: var(--font-en); font-size: 1.25rem; font-weight: 400; }
+
+@media (max-width: 600px) {
+    html[lang] .hero-name { font-size: 2.25rem; }
+    html[lang] .pub-title-text { font-size: 1.1875rem; }
+    html[lang] .life-card-title { font-size: 1.75rem; }
+    .footer { text-wrap: balance; }
+}
