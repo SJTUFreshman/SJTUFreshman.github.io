@@ -20,6 +20,7 @@ def main():
     parser.add_argument("--sea-colour", help="Override the Blender sea material for a colour study")
     parser.add_argument("--save-scene", action="store_true")
     parser.add_argument("--scene-only", action="store_true", help="Save and reopen production scenes without repeating the render")
+    parser.add_argument("--device", choices=("CUDA", "OPTIX", "ONEAPI", "HIP", "CPU"), default="CUDA", help="Cycles compute backend; materials, light, samples and camera stay identical")
     parser.add_argument("--variants", nargs="+", choices=("relief", "colour"),
                         help="Render selected material layers; overview projects only need colour over the existing white base")
     arguments = parser.parse_args(sys.argv[sys.argv.index("--") + 1:])
@@ -69,16 +70,21 @@ def main():
     scene.cycles.diffuse_bounces = 3
     scene.cycles.glossy_bounces = 1
     preferences = bpy.context.preferences.addons["cycles"].preferences
-    preferences.compute_device_type = "CUDA"
-    preferences.get_devices()
     gpu_devices = []
-    for device in preferences.devices:
-        device.use = device.type == "CUDA"
-        if device.use:
-            gpu_devices.append(device.name)
-    if not gpu_devices:
-        raise RuntimeError("CUDA GPU required")
-    scene.cycles.device = "GPU"
+    if arguments.device == "CPU":
+        scene.cycles.device = "CPU"
+        render_devices = ["CPU / " + str(bpy.app.build_platform.decode())]
+    else:
+        preferences.compute_device_type = arguments.device
+        preferences.get_devices()
+        for device in preferences.devices:
+            device.use = device.type == arguments.device
+            if device.use:
+                gpu_devices.append(device.name)
+        if not gpu_devices:
+            raise RuntimeError(arguments.device + " GPU unavailable; choose an installed backend explicitly")
+        scene.cycles.device = "GPU"
+        render_devices = gpu_devices
     scene.render.resolution_x = metadata["width"]
     scene.render.resolution_y = metadata["height"]
     scene.render.resolution_percentage = 20 if arguments.preview else 100
@@ -136,7 +142,7 @@ def main():
             assert (restored_scene.render.resolution_x, restored_scene.render.resolution_y) == (metadata["width"], metadata["height"])
             assert restored_scene.cycles.samples == metadata["samples"]
             assert json.loads(restored_scene["lighting"]) == lighting
-            assert restored_scene.render.filepath == f"//../renders/{arguments.map}-{variant}.png"
+            assert restored_scene.render.filepath.replace('\\', '/') == f"//../renders/{arguments.map}-{variant}.png"
             assert restored_scene["postprocessing"] == "none" and not restored_scene.use_nodes
             assert restored_scene["sea_material"] == sea_colour
             shader = restored_terrain.data.materials[0].node_tree.nodes.get("Principled BSDF")
@@ -162,9 +168,10 @@ def main():
     if arguments.preview:
         print("PREVIEW COMPLETE", arguments.map, sea_colour, flush=True)
         return
-    report = {"lighting": lighting, "render_engine": "Blender 4.5.3 / Cycles CUDA", "samples": render_samples,
+    report = {"lighting": lighting, "render_engine": "Blender " + bpy.app.version_string + " / Cycles " + arguments.device, "samples": render_samples,
               "native_render_size": [metadata["width"], metadata["height"]],
-              "gpu_devices": gpu_devices, "unvisited_material": unvisited_colour, "administrative_outlines": False,
+              "gpu_devices": gpu_devices, "compute_device_type": arguments.device, "render_devices": render_devices,
+              "unvisited_material": unvisited_colour, "administrative_outlines": False,
               "sea_material": sea_colour, "postprocessing": "none",
               "outputs": {f"{arguments.map}-{variant}.png": hashlib.sha256((renders / f"{arguments.map}-{variant}.png").read_bytes()).hexdigest()
                           for variant in variants if (renders / f"{arguments.map}-{variant}.png").exists()}}

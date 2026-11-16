@@ -4,7 +4,7 @@
     // 维护指南：tools/relief-atlas/ADDING-FOOTPRINTS.md；这里是显示层，不是到访/行程数据的编辑入口。
     // 新城市改 site_content.json 的 visited_china；新路线改 scripts/prepare-footprint-routes.py 再生成、打包。
     // 城市或路线重新打包后，同步修改此版本、life.html 中脚本的 atlas= 及全部 Life 资源的共享 v=。
-    const ATLAS_VERSION = '20261108-east-asia-cultural';
+    const ATLAS_VERSION = '20261116-east-asia-aligned';
     const ATLAS_URL = `assets/maps/relief/atlas-preview.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
@@ -103,13 +103,124 @@
     const instances = new Map();
     const imageLoads = new Map();
     const detailLoads = new Map();
+    const hitLoads = new Map();
+
+    function isRestricted(item) { return item.restricted || item.id === 'PRK'; }
+    function canExplore(item) { return !isRestricted(item) && (item.visited === true || /^(?:CHN:|\d{6}$)/.test(String(item.id))); }
+
+    function openRegion(definition, item, view, trigger) {
+        if (!canExplore(item)) return;
+        window.footprintsRegions?.open({ map: definition.id, region: item, view, language: currentLanguage, trigger });
+    }
+
+    function restrictionLabel() {
+        return { en: 'No entry · personal travel map', 'zh-CN': '禁止进入 · 个人旅行地图', 'zh-TW': '禁止進入 · 個人旅行地圖' }[currentLanguage] || 'No entry';
+    }
+
+    function hatchPattern(svg, id) {
+        const defs = svgElement('defs');
+        const pattern = svgElement('pattern', { id, width: 9, height: 9, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(35)' });
+        pattern.append(svgElement('rect', { width: 9, height: 9, fill: '#a93c3625' }), svgElement('line', { x1: 0, y1: 0, x2: 0, y2: 9, stroke: '#b14b46', 'stroke-width': 3 }));
+        defs.append(pattern);
+        svg.append(defs);
+    }
+
+    function mainMapClip(defs, map, id) {
+        if (!map.insets?.length) return null;
+        // Insets have their own geography. Hide mainland outlines and hit areas
+        // underneath their frames, including Japan's small Pacific islands.
+        const clipId = `footprints-${id}-mainland`;
+        const clip = svgElement('clipPath', { id: clipId, clipPathUnits: 'userSpaceOnUse' });
+        const rectangle = (x, y, w, h) => `M${x},${y}h${w}v${h}h${-w}Z`;
+        const path = rectangle(0, 0, map.width, map.height) + map.insets.map(({ frame }) =>
+            rectangle(frame.x, frame.y, frame.width, frame.height)).join('');
+        clip.append(svgElement('path', { d: path, 'clip-rule': 'evenodd' }));
+        defs.append(clip);
+        return `url(#${clipId})`;
+    }
+
+    function terrainMask(defs, id, width, height) {
+        // Paint each visited area independently. Browser clipPath unions can
+        // drop entire neighbours when complex coastlines touch after rounding.
+        const mask = svgElement('mask', { id, x: 0, y: 0, width, height,
+            maskUnits: 'userSpaceOnUse', maskContentUnits: 'userSpaceOnUse', 'mask-type': 'alpha', fill: 'white' });
+        defs.append(mask);
+        return mask;
+    }
+
+    function tooltipFor(box) {
+        const tip = document.createElement('div');
+        tip.className = 'footprints-region-tip';
+        tip.setAttribute('role', 'status');
+        box.append(tip);
+        return (item) => {
+            tip.hidden = !item;
+            tip.textContent = item ? `${nameOf(item)}${isRestricted(item) ? ' · ' + restrictionLabel() : ''}` : '';
+            tip.classList.toggle('is-restricted', Boolean(item && isRestricted(item)));
+        };
+    }
+
+    function attachPreviewHits(instance) {
+        if (!instance.map.hit_file || instance.hitPending || instance.hitSvg) return;
+        const url = imageUrl(instance.map.hit_file);
+        if (!hitLoads.has(url)) hitLoads.set(url, fetch(url).then(response => {
+            if (!response.ok) throw new Error('Map boundaries unavailable');
+            return response.json();
+        }).catch(error => { hitLoads.delete(url); throw error; }));
+        instance.hitPending = true;
+        hitLoads.get(url).then(data => {
+            if (!instance.box.isConnected) return;
+            const svg = svgElement('svg', { class: 'footprints-map-svg footprints-preview-hits', viewBox: `0 0 ${instance.map.width} ${instance.map.height}` });
+            const hatchId = `preview-hatch-${instance.definition.id}`;
+            hatchPattern(svg, hatchId);
+            const mainlandClip = mainMapClip(svg.querySelector('defs'), instance.map, `preview-${instance.definition.id}`);
+            const tip = tooltipFor(instance.box);
+            Object.entries(data.views).forEach(([view, items]) => {
+                const layer = svgElement('g', { 'data-hit-view': view });
+                if (mainlandClip) layer.setAttribute('clip-path', mainlandClip);
+                items.forEach(item => {
+                    const hit = svgElement('path', { d: item.boundary_path || item.path, class: 'footprints-preview-hit', tabindex: 0,
+                        role: 'button', 'data-region-id': item.id, 'vector-effect': 'non-scaling-stroke', 'fill-rule': 'evenodd' });
+                    hit._region = item;
+                    hit.setAttribute('aria-disabled', String(!canExplore(item)));
+                    if (canExplore(item)) hit.setAttribute('aria-haspopup', 'dialog');
+                    if (isRestricted(item)) {
+                        hit.classList.add('is-restricted');
+                        // Pattern coordinates follow the map; scale keeps hatching visible at card size.
+                        hit.style.setProperty('--restricted-fill', `url(#${hatchId})`);
+                    }
+                    hit.addEventListener('pointerenter', () => tip(item));
+                    hit.addEventListener('pointerleave', () => { if (document.activeElement !== hit) tip(null); });
+                    hit.addEventListener('focus', () => tip(item));
+                    hit.addEventListener('blur', () => tip(null));
+                    hit.addEventListener('click', event => { event.stopPropagation(); tip(item); openRegion(instance.definition, item, view, hit); });
+                    hit.addEventListener('keydown', event => {
+                        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); event.stopPropagation(); openRegion(instance.definition, item, view, hit); }
+                    });
+                    layer.append(hit);
+                });
+                svg.append(layer);
+            });
+            instance.hitSvg = svg;
+            instance.updateHitView = () => {
+                tip(null);
+                svg.querySelectorAll('[data-hit-view]').forEach(layer => { layer.style.display = layer.dataset.hitView === instance.view ? '' : 'none'; });
+            };
+            instance.updateHitLanguage = () => svg.querySelectorAll('[data-region-id]').forEach(hit => hit.setAttribute('aria-label', `${nameOf(hit._region)}${isRestricted(hit._region) ? ' · ' + restrictionLabel() : ''}`));
+            instance.stage.append(svg);
+            instance.updateHitView();
+            instance.updateHitLanguage();
+            instance.updateTransform();
+        }).catch(() => { instance.box.dataset.hitError = 'true'; }).finally(() => { instance.hitPending = false; });
+    }
 
     function loadImage(url) {
         if (!imageLoads.has(url)) {
             const promise = new Promise((resolve, reject) => {
                 const image = new Image();
                 image.decoding = 'async';
-                image.onload = () => image.decode().then(() => resolve(image), reject);
+                // Cache readiness, not a detached decoded 6000px Image for the lifetime of the page.
+                image.onload = () => image.decode().then(() => resolve(), reject);
                 image.onerror = () => reject(new Error(`Map image unavailable: ${url}`));
                 image.src = url;
             }).catch(error => {
@@ -419,10 +530,12 @@
                 this.view = view;
                 box.dataset.mapView = view;
                 this.updateViewButtons();
+                this.updateHitView?.();
                 this.loadAssets();
             },
             loadAssets() {
                 if (!this.visible) return;
+                attachPreviewHits(this);
                 const url = imageUrl(map.views[this.view].image);
                 if (image.getAttribute('src') === url) {
                     this.pending = null;
@@ -450,6 +563,7 @@
                 stage.style.height = `${map.height * fit}px`;
                 stage.style.transform = 'translate(-50%, -50%)';
                 stage.style.setProperty('--footprints-inset-title-size', `${Math.max(7, 70 * fit)}px`);
+                this.hitSvg?.querySelector('pattern')?.setAttribute('patternTransform', `scale(${1 / Math.max(fit, 0.01)}) rotate(35)`);
                 this.detailed?.updateTransform();
             },
             openViewer() {
@@ -527,6 +641,7 @@
                 openButton.setAttribute('aria-label', currentCopy().expand);
                 retry.textContent = currentCopy().retry;
                 insetTitles.forEach(({ inset, title }) => { title.textContent = localized(inset.title); });
+                this.updateHitLanguage?.();
                 this.viewer?.querySelector('.footprints-viewer-close').setAttribute('aria-label', currentCopy().close);
                 this.detailed?.updateLanguage();
             }
@@ -655,6 +770,8 @@
         const detailLayer = svgElement('g', { 'data-atlas-view': 'detail' });
         const overviewLayer = svgElement('g', { 'data-atlas-view': 'overview' });
         const culturalLayer = svgElement('g', { 'data-atlas-view': 'cultural' });
+        const mainlandClip = mainMapClip(defs, map, instanceId);
+        if (mainlandClip) [detailLayer, overviewLayer, culturalLayer].forEach(layer => layer.setAttribute('clip-path', mainlandClip));
         const insetLayer = svgElement('g', { class: 'footprints-map-insets', 'aria-hidden': 'true' });
         const fillGroup = svgElement('g', { class: 'footprints-map-visited-terrain' });
         const cityGroup = svgElement('g', { class: 'footprints-map-cities' });
@@ -693,7 +810,7 @@
             const fullResolution = assetLevels.terrain === 2
                 && (!assetElements[instance.view] || assetLevels[instance.view] === 2);
             box.dataset.mapResolution = fullResolution ? 'full' : 'preview';
-            if (fullResolution) poster.remove();
+            if (assetLevels.terrain >= 1 && (!assetElements[instance.view] || assetLevels[instance.view] >= 1)) poster.remove();
         };
         const requestAsset = (kind, level) => {
             const element = assetElements[kind];
@@ -703,7 +820,7 @@
             const requestKey = `${kind}:${level}`;
             if (pendingAssets.has(requestKey)) return;
             pendingAssets.add(requestKey);
-            assets[kind] = 'loading';
+            if (!assetLevels[kind]) assets[kind] = 'loading';
             loadImage(url).then(() => {
                 if (!box.isConnected || assetLevels[kind] >= level || (level === 2 && !instance.viewer)) return;
                 if (kind === 'terrain') element.src = url;
@@ -711,7 +828,7 @@
                 assetLevels[kind] = level;
                 assets[kind] = 'ready';
             }).catch(() => {
-                assets[kind] = 'error';
+                if (!assetLevels[kind]) assets[kind] = 'error';
             }).finally(() => {
                 pendingAssets.delete(requestKey);
                 updateAssetState();
@@ -726,10 +843,11 @@
             scale: 1, panX: 0, panY: 0, activeCity: null, viewer,
             loadAssets() {
                 if (!this.viewer) return;
+                const level = this.scale > 1.15 ? 2 : 1;
                 for (const kind of ['terrain', this.view]) {
-                    requestAsset(kind, 2);
+                    requestAsset(kind, level);
                 }
-                this.loadInsets(2);
+                this.loadInsets(level);
                 updateAssetState();
             },
             updateTransform() {
@@ -743,6 +861,7 @@
                 this.scale = Math.max(1, Math.min(this.maxScale, this.scale));
                 svg.style.setProperty('--footprints-label-size', `${12 / (fitScale * this.scale)}px`);
                 svg.style.setProperty('--footprints-label-outline', `${3 / (fitScale * this.scale)}px`);
+                svg.querySelector('pattern')?.setAttribute('patternTransform', `scale(${1 / (fitScale * this.scale)}) rotate(35)`);
                 const maxPanX = Math.max(0, (fitWidth * this.scale - viewportWidth) / 2);
                 const maxPanY = Math.max(0, (fitHeight * this.scale - viewportHeight) / 2);
                 this.panX = Math.min(maxPanX, Math.max(-maxPanX, this.panX));
@@ -768,6 +887,7 @@
                 this.scale = scale;
                 if (this.scale === 1) { this.panX = 0; this.panY = 0; }
                 this.updateTransform();
+                this.loadAssets();
             },
             zoomBy(factor, clientX, clientY) {
                 this.zoomTo(this.scale * factor, clientX, clientY);
@@ -796,6 +916,7 @@
                 this.activeCity = city || null;
                 svg.querySelectorAll('.footprints-city.is-active').forEach(element => element.classList.remove('is-active'));
                 if (city) city.element?.classList.add('is-active');
+                this.showRegionTip?.(city?.data);
             },
             updateLanguage() {
                 const labels = currentCopy();
@@ -827,6 +948,10 @@
                 });
             }
         };
+
+        instance.showRegionTip = tooltipFor(box);
+        const hatchId = `hatch-${instanceId}`;
+        hatchPattern(svg, hatchId);
 
         function createInsetRecord(inset, index) {
             const frame = inset?.frame || inset?.placement;
@@ -934,6 +1059,12 @@
                 [attribute]: item.id || nameOf(item) || `region-${index}`
             });
             group._footprintsCity = { data: item, element: group };
+            group.setAttribute('aria-disabled', String(!canExplore(item)));
+            if (canExplore(item)) group.setAttribute('aria-haspopup', 'dialog');
+            if (isRestricted(item)) {
+                group.classList.add('is-restricted');
+                group.style.setProperty('--restricted-fill', `url(#${hatchId})`);
+            }
             const displayName = attribute === 'data-cultural-id' ? culturalLabel(item) : nameOf(item);
             group.append(svgElement('path', { d: path, class: 'footprints-city-hit', fill: 'transparent', stroke: 'transparent', 'vector-effect': 'non-scaling-stroke' }));
             if (item.boundary_path) {
@@ -950,18 +1081,17 @@
             group.addEventListener('pointerleave', () => { if (document.activeElement !== group) instance.setActive(null); });
             group.addEventListener('focus', () => instance.setActive(group._footprintsCity));
             group.addEventListener('blur', () => instance.setActive(null));
-            group.addEventListener('click', event => { event.stopPropagation(); instance.setActive(group._footprintsCity, true); });
+            group.addEventListener('click', event => { event.stopPropagation(); instance.setActive(group._footprintsCity, true); openRegion(definition, item, instance.view, group); });
             group.addEventListener('keydown', event => {
-                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); instance.setActive(group._footprintsCity, true); }
+                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); instance.setActive(group._footprintsCity, true); openRegion(definition, item, instance.view, group); }
             });
             target.append(group);
         }
 
         // 城市与沿途走廊共用一个裁切：显露 Blender 的彩色地形，不覆盖色块或绘制路线描边。
         // 到访名单与行程请修改生成脚本的输入，具体步骤见 tools/relief-atlas/ADDING-FOOTPRINTS.md。
-        const visitedClipId = `footprints-${definition.id}-visited`;
-        const visitedClip = svgElement('clipPath', { id: visitedClipId, clipPathUnits: 'userSpaceOnUse' });
-        defs.append(visitedClip);
+        const visitedClipId = `footprints-${instanceId}-visited`;
+        const visitedClip = terrainMask(defs, visitedClipId, width, height);
 
         cities.forEach((city, index) => {
             const region = regionFor(city, regions) || regionById.get(normaliseId(city?.id)) || regionById.get(normaliseId(city?.name));
@@ -969,55 +1099,57 @@
             const visitedCity = matchVisited(map, city, visitedIds) || Boolean(city.visited);
             if (!visitedCity || !path) return;
             const center = centerOf(city, path || geometryPath(region?.geometry));
-            visitedClip.append(svgElement('path', { d: path, 'clip-rule': 'evenodd', 'data-clip-city': city.id }));
+            visitedClip.append(svgElement('path', { d: path, 'fill-rule': 'evenodd', 'data-clip-city': city.id }));
             appendRegionHit(cityGroup, city, path, center, 'data-city-id', index);
+        });
+        overviewRegions.filter(isRestricted).forEach((region, index) => {
+            const path = geometryPath(region.boundary_path || region.path);
+            if (path) appendRegionHit(cityGroup, region, path, centerOf(region, path), 'data-region-id', index);
         });
 
         (map.routes || []).forEach(route => {
             // corridor_path 由真实路网按公里宽度缓冲并裁到陆地；缺失时应重建数据，不能补一条彩色描边。
             if (!route.corridor_path) return;
             visitedClip.append(svgElement('path', {
-                d: route.corridor_path, 'clip-rule': 'evenodd',
+                d: route.corridor_path, 'fill-rule': 'evenodd',
                 'data-route-id': route.id, 'data-corridor-width-km': route.corridor_width_km
             }));
         });
         if (visitedClip.childElementCount) {
-            assetElements.detail = svgElement('image', { x: 0, y: 0, width, height, preserveAspectRatio: 'none', class: 'footprints-map-visited-image', 'clip-path': `url(#${visitedClipId})` });
+            assetElements.detail = svgElement('image', { x: 0, y: 0, width, height, preserveAspectRatio: 'none', class: 'footprints-map-visited-image', mask: `url(#${visitedClipId})` });
             fillGroup.append(assetElements.detail);
         }
 
         // overview.regions.visited 是粗图唯一的点亮依据。路过省份不算到访，路线只在明细图显示。
         // 彩色材质必须由生成器按省／文化区／国家烤制，特别是欧美同一国家保持一种颜色。
-        const overviewClipId = `footprints-${definition.id}-overview-visited`;
-        const overviewClip = svgElement('clipPath', { id: overviewClipId, clipPathUnits: 'userSpaceOnUse' });
-        defs.append(overviewClip);
+        const overviewClipId = `footprints-${instanceId}-overview-visited`;
+        const overviewClip = terrainMask(defs, overviewClipId, width, height);
         overviewRegions.forEach((region, index) => {
-            const path = geometryPath(region.geometry || region.path || region.d);
+            const path = geometryPath(region.geometry || region.boundary_path || region.path || region.d);
             if (!path) return;
             if (region.visited === true) {
-                overviewClip.append(svgElement('path', { d: path, 'clip-rule': 'evenodd', 'data-clip-region': region.id }));
+                overviewClip.append(svgElement('path', { d: path, 'fill-rule': 'evenodd', 'data-clip-region': region.id }));
             }
             appendRegionHit(overviewRegionGroup, region, path, centerOf(region, path), 'data-region-id', index);
         });
         if (overviewClip.childElementCount && overviewColorSource) {
-            assetElements.overview = svgElement('image', { x: 0, y: 0, width, height, preserveAspectRatio: 'none', class: 'footprints-map-visited-image', 'clip-path': `url(#${overviewClipId})` });
+            assetElements.overview = svgElement('image', { x: 0, y: 0, width, height, preserveAspectRatio: 'none', class: 'footprints-map-visited-image', mask: `url(#${overviewClipId})` });
             overviewFillGroup.append(assetElements.overview);
         }
 
         const culturalClipId = 'footprints-' + instanceId + '-cultural-visited';
-        const culturalClip = svgElement('clipPath', { id: culturalClipId, clipPathUnits: 'userSpaceOnUse' });
-        defs.append(culturalClip);
+        const culturalClip = terrainMask(defs, culturalClipId, width, height);
         culturalRegions.forEach((region, index) => {
-            const path = geometryPath(region.geometry || region.path || region.d);
+            const path = geometryPath(region.geometry || region.boundary_path || region.path || region.d);
             if (!path) return;
             if (culturalIsVisited(region)) {
-                culturalClip.append(svgElement('path', { d: path, 'clip-rule': 'evenodd', 'data-clip-cultural': region.id }));
+                culturalClip.append(svgElement('path', { d: path, 'fill-rule': 'evenodd', 'data-clip-cultural': region.id }));
             }
             appendRegionHit(culturalRegionGroup, region, path, centerOf(region, path), 'data-cultural-id', index);
         });
         if (culturalClip.childElementCount && culturalColorSource) {
             assetElements.cultural = svgElement('image', { x: 0, y: 0, width, height, preserveAspectRatio: 'none',
-                class: 'footprints-map-visited-image', 'clip-path': 'url(#' + culturalClipId + ')' });
+                class: 'footprints-map-visited-image', mask: 'url(#' + culturalClipId + ')' });
             culturalFillGroup.append(assetElements.cultural);
         }
 
@@ -1165,6 +1297,7 @@
 
     function updateLanguage(language) {
         currentLanguage = language || currentLanguage || 'en';
+        window.footprintsRegions?.updateLanguage(currentLanguage);
         instances.forEach(instance => instance.updateLanguage());
         document.querySelectorAll('[data-atlas-title]').forEach(title => {
             const definition = mapDefinition(title.dataset.atlasTitle);

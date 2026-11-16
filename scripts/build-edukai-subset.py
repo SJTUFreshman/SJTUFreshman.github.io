@@ -5,6 +5,8 @@ The page sources are scanned as text instead of parsing only visible DOM text.
 That deliberately keeps characters contained in JavaScript/i18n strings, CSS
 generated content, and templates that become visible at runtime. The default
 Life page also contributes its referenced first-party CSS and JavaScript files.
+Lazy-loaded map JSON contributes its localized labels and regional descriptions;
+those strings are not present in the HTML or JavaScript bundles.
 
 Run from anywhere:
 
@@ -60,6 +62,10 @@ LIFE_SOURCE_ROOTS = (
     (REPO_ROOT / 'assets' / 'life' / 'styles').resolve(),
     (REPO_ROOT / 'assets' / 'life' / 'scripts').resolve(),
     (REPO_ROOT / 'assets' / 'life' / 'observatory').resolve(),
+)
+LIFE_DATA_ROOTS = (
+    REPO_ROOT / 'assets' / 'maps' / 'relief',
+    REPO_ROOT / 'assets' / 'maps' / 'regions',
 )
 
 # Space is needed even if a future page happens to contain no literal spaces.
@@ -201,6 +207,13 @@ def collect_codepoints(pages: list[Path]) -> set[int]:
                     f'Referenced Life source is not valid UTF-8: {source}'
                 ) from exc
             codepoints.update(text_codepoints(source_text))
+    if any(page.resolve() in {LIFE_PAGE.resolve(), (REPO_ROOT / 'observatory.html').resolve()} for page in pages):
+        # Maps are fetched lazily, so the HTML reference parser cannot see
+        # their names. Scan shipped data, not the much larger render archive.
+        for data_root in LIFE_DATA_ROOTS:
+            for source in sorted(data_root.rglob('*.json')):
+                data = json.loads(source.read_text(encoding='utf-8'))
+                codepoints.update(text_codepoints(json.dumps(data, ensure_ascii=False)))
     if any(page.resolve() in {path.resolve() for path in DEFAULT_PAGES} for page in pages):
         content = json.loads((REPO_ROOT / 'site_content.json').read_text(encoding='utf-8'))
         codepoints.update(text_codepoints(json.dumps(content, ensure_ascii=False)))
@@ -436,10 +449,23 @@ def main() -> int:
         if sha256(LANMI_SOURCE) != LANMI_SHA256:
             raise SystemExit("Lanmi source checksum mismatch; supply the documented LANMI_yujian2_jianfan.ttf version.")
         build_subset(LANMI_SOURCE, LANMI_OUTPUT, pages, args.brotli_quality, cjk_only=True)
+        update_site_font_versions()
         validate_coverage(pages)
         if not args.pages:
             build_home_subsets(args.brotli_quality)
     return 0
+
+
+def update_site_font_versions() -> None:
+    """Invalidate cached fonts whenever a newly added map name adds glyphs."""
+    path = REPO_ROOT / 'assets/life/styles/01-foundation-sky.css'
+    text = path.read_text(encoding='utf-8')
+    for output in (DEFAULT_OUTPUT, WENKAI_OUTPUT, LANMI_OUTPUT):
+        pattern = r'(' + re.escape(output.name) + r'\?v=)[^\x27\")\s]+'
+        text, count = re.subn(pattern, lambda match: match[1] + sha256(output)[:12], text)
+        if count != 1:
+            raise SystemExit(f'Expected one site font URL for {output.name}; found {count}.')
+    path.write_text(text, encoding='utf-8')
 
 
 def collect_home_codepoints() -> set[int]:

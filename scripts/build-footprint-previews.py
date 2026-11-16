@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 
 from PIL import Image, ImageChops, ImageDraw
+from footprint_web_geometry import hit_manifest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,7 +45,8 @@ def resized_image(directory, filename, size):
 
 def paint_visits(image, directory, colour, regions, scale, routes=(), cultural=False):
     path_key = "boundary_path" if cultural else "path"
-    paths = [region[path_key] for region in regions if region.get("visited") and region.get(path_key)]
+    paths = [region.get(path_key) or region.get("boundary_path") for region in regions
+             if region.get("visited") and (region.get(path_key) or region.get("boundary_path"))]
     paths.extend(route["corridor_path"] for route in routes if route.get("corridor_path"))
     if not paths or not colour:
         return
@@ -86,9 +88,11 @@ def package(runtime, destination):
         scale = size[0] / metadata["width"]
         data_file = identifier + "-runtime.json"
         write_json(destination / data_file, metadata)
+        hit_file = identifier + "-hits.json"
+        write_json(destination / hit_file, hit_manifest(metadata))
         entry = {"width": metadata["width"], "height": metadata["height"],
                  "display_background": metadata.get("display_background", metadata.get("background")),
-                 "data_file": data_file, "views": {},
+                 "data_file": data_file, "hit_file": hit_file, "views": {},
                  "insets": [{"id": inset["id"], "title": inset["title"], "frame": inset["frame"]}
                             for inset in metadata.get("insets", [])]}
         views = ["overview", "cultural", "detail"] if metadata.get("cultural") else ["overview", "detail"]

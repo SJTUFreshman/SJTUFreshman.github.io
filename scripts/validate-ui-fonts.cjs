@@ -32,6 +32,12 @@ async function verifyGlyphs(page, selector, label, latinFamily = 'IBM Plex Sans'
             span.textContent = text;
             container.append(span);
         }
+        if (!homepage) {
+            const span = document.createElement('span');
+            span.id = 'ui-font-map';
+            span.textContent = '新加坡閩南贛皖黔晉滇遼陝';
+            container.append(span);
+        }
         document.body.append(container);
     }, label.startsWith('index-'));
     await page.evaluate(() => document.fonts.ready);
@@ -46,6 +52,13 @@ async function verifyGlyphs(page, selector, label, latinFamily = 'IBM Plex Sans'
             assert(fonts.length > 0, `${label}/${script}: glyphs render`);
             assert(fonts.every(font => (script === 'latin' && latinFamily === 'Arial' || font.isCustomFont)
                 && (font.postScriptName.includes(expected) || font.familyName.includes(expected))), `${label}/${script}: ${JSON.stringify(fonts)}`);
+        }
+        const { nodeId: mapNode } = await session.send('DOM.querySelector', { nodeId: documentNode.nodeId, selector: '#ui-font-map' });
+        if (mapNode) {
+            const { fonts } = await session.send('CSS.getPlatformFontsForNode', { nodeId: mapNode });
+            assert(fonts.length && fonts.every(font => font.isCustomFont && ['LANMI_yujian2_jianfan', 'Site WenKai']
+                .some(name => font.postScriptName.includes(name) || font.familyName.includes(name))),
+            `${label}/map: map labels must use the bundled fonts, including formerly omitted atlas JSON characters: ${JSON.stringify(fonts)}`);
         }
     } finally {
         await page.locator('#ui-font-probe').evaluate(element => element.remove());

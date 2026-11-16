@@ -143,9 +143,29 @@ def validate_east_asia_china(atlas, builder):
         chinese_ids = [region["raster_id"] for region in previous_regions if region["country"] == "CHN"]
         chinese_land = np.isin(previous["region"], chinese_ids) & updated["mask"].astype(bool)
         assert np.all(np.isin(updated["region"][chinese_land], [raster_ids[identifier] for identifier in actual])), "Chinese land must not expose unassigned administrative seams"
-        for region in previous_regions:
-            if region["country"] != "CHN":
-                assert np.all(updated["region"][previous["region"] == region["raster_id"]] == raster_ids[region["id"]]), "Overseas material coverage must stay intact"
+        # The previous overseas material grid carried the old EQC displacement;
+        # compare against real source geography in the corrected raster CRS.
+        from pyproj import Transformer
+        from rasterio.warp import transform as raster_transform
+        from rasterio.features import rasterize
+        from rasterio.transform import from_bounds
+        from shapely.ops import transform
+        assert '+R=6378137' in metadata['projection'], 'EQC sphere must be explicit'
+        projection=Transformer.from_crs('EPSG:4326',metadata['projection'],always_xy=True)
+        for longitude,latitude in [(103,18),(120,30),(140,40),(147,47)]:
+            x,y=projection.transform(longitude,latitude)
+            rx,ry=raster_transform('EPSG:4326',metadata['projection'],[longitude],[latitude])
+            assert abs(x-rx[0])<.001 and abs(y-ry[0])<.001, 'Raster/vector EQC drift'
+        features=builder.geography(ROOT / overview['source_archive'])
+        units=builder.cultural_units(features)+builder.country_units(features,{'PRK','RUS','MNG','VNM','LAO','PHL'},'east_asia')
+        units=[unit for unit in units if unit['id'] in raster_ids]
+        geographic_clip=box(*metadata['geographic_bounds'])
+        shapes=[(transform(projection.transform,unit['geometry'].intersection(geographic_clip)),raster_ids[unit['id']]) for unit in units]
+        dx=float(updated['x'][1]-updated['x'][0])*1000
+        dy=float(updated['y'][0]-updated['y'][1])*1000
+        grid=from_bounds(updated['x'][0]*1000-dx/2,updated['y'][-1]*1000-dy/2,updated['x'][-1]*1000+dx/2,updated['y'][0]*1000+dy/2,len(updated['x']),len(updated['y']))
+        expected=rasterize(shapes,out_shape=updated['region'].shape,transform=grid,fill=0,dtype='uint16')
+        assert np.array_equal(updated['region'][expected>0],expected[expected>0]), 'Overseas pigments must follow aligned source boundaries'
     return {"groups": len(actual), "classification_version": classification}
 
 

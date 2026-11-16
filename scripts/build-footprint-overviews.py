@@ -60,7 +60,7 @@ def china_cultural_units(builder):
     publisher = builder.load_module(ROOT / "scripts/package-footprint-sectional.py", "footprint_publisher")
     metadata = read_json(ROOT / STYLE["cultural_archive"] / "data/china.json")
     publisher.verify_cultural_config(metadata)
-    projection = Transformer.from_crs(metadata["projection"], "EPSG:4326", always_xy=True)
+    projection = Transformer.from_crs(builder.raster_aligned_crs(metadata["projection"]), "EPSG:4326", always_xy=True)
     west, south, east, north = metadata["extent_km"]
     pixels_to_metres = [(east - west) * 1000 / metadata["width"], 0, 0,
                         -(north - south) * 1000 / metadata["height"], west * 1000, north * 1000]
@@ -216,6 +216,7 @@ def prepare(identifiers=None, render_root=ARCHIVE):
     china_cultures, classification = china_cultural_units(builder) if "east_asia" in identifiers else ([], None)
     for identifier in identifiers:
         metadata = read_json(source_root / "data" / (identifier + ".json"))
+        metadata["projection"] = builder.raster_aligned_crs(metadata["projection"])
         overrides = STYLE.get("map_province_colors", {}).get(identifier, {})
         map_colours = {code: overrides.get(str(code), colour) for code, colour in colours.items()}
         if identifier == "china":
@@ -272,9 +273,17 @@ def prepare(identifiers=None, render_root=ARCHIVE):
                 geometries = [transform(projection.transform, unit["geometry"]) for unit in chinese_units]
                 nearest = STRtree(geometries).nearest(points(arrays["x"][missing_columns] * 1000, arrays["y"][missing_rows] * 1000))
                 arrays["region"][missing_rows, missing_columns] = np.asarray(current_ids, dtype="uint16")[nearest]
-                for region in previous_metadata["regions"]:
-                    if region["country"] != "CHN" and region["id"] in raster_ids:
-                        arrays["region"][previous_regions == region["raster_id"]] = raster_ids[region["id"]]
+                # Reproject overseas materials too. Copying their old raster
+                # IDs preserved the very EQC offset being corrected. Fill only
+                # source-land seams, assigning the nearest newly projected unit.
+                known_ids=[region["raster_id"] for region in previous_metadata["regions"]
+                           if region["country"] != "CHN" and region["id"] in raster_ids]
+                rows,columns=np.where(np.isin(previous_regions,known_ids) & arrays["mask"].astype(bool) & (arrays["region"]==0))
+                geometries=[transform(projection.transform,unit["geometry"]) for unit in visible_units]
+                nearest=STRtree(geometries).nearest(points(arrays["x"][columns]*1000,arrays["y"][rows]*1000))
+                values=np.asarray([raster_ids[unit["id"]] for unit in visible_units],dtype="uint16")
+                arrays["region"][rows,columns]=values[nearest]
+                metadata["filled_overseas_seam_cells"]=len(rows)
                 metadata["filled_source_seam_cells"] = len(missing_rows)
             metadata["region_colors"] = {str(raster_ids[unit["id"]]): unit["color"] for unit in visible_units}
             metadata["palette"] = list(dict.fromkeys(metadata["region_colors"].values()))
@@ -339,6 +348,7 @@ def package(identifiers=None, render_root=None, encode_images=True):
             if not (OUTPUT / metadata["color_image"]).exists():
                 raise FileNotFoundError("Package overview images first: " + metadata["color_image"])
         atlas["maps"][identifier]["overview"] = overview
+        atlas["maps"][identifier]["projection"] = builder.raster_aligned_crs(atlas["maps"][identifier]["projection"])
     cultural = atlas["maps"].get("china", {}).get("cultural")
     if cultural and "china" in identifiers:
         culture_builder = builder.load_module(ROOT / "scripts/build-china-cultural-overview.py", "china_cultural")

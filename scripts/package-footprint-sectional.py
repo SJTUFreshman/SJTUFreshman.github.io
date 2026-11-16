@@ -57,7 +57,7 @@ def verify_render(render_root, identifier, variants, style):
     require(report["native_render_size"] == dimensions, f"{identifier}: render dimensions differ")
     require(report.get("samples", 0) >= 192, f"{identifier}: production requires at least 192 samples")
     require(report.get("postprocessing") == "none", f"{identifier}: native render required")
-    require(report.get("gpu_devices"), f"{identifier}: GPU provenance missing")
+    require(report.get("gpu_devices") or (report.get("compute_device_type") == "CPU" and report.get("render_devices")), f"{identifier}: render device provenance missing")
     require(report["sea_material"] == style["backgrounds"][identifier], f"{identifier}: sea material differs")
     unvisited = style.get("unvisited_materials", {}).get(identifier, style["unvisited_material"])
     require(report["unvisited_material"] == unvisited, f"{identifier}: land material differs")
@@ -145,6 +145,7 @@ def encode(source, target, preview_width=1600):
 
 
 def runtime_atlas(atlas):
+    from footprint_web_geometry import compact_map
     result = {"version": atlas["version"], "maps": {}}
     keys = ("id", "width", "height", "image", "color_image", "background", "display_background", "preview", "insets")
     for identifier, metadata in atlas["maps"].items():
@@ -156,7 +157,7 @@ def runtime_atlas(atlas):
         item["overview"] = {key: deepcopy(overview[key]) for key in ("color_image", "preview_color_image", "regions")}
         if metadata.get("cultural"):
             item["cultural"] = deepcopy(metadata["cultural"])
-        result["maps"][identifier] = item
+        result["maps"][identifier] = compact_map(item)
     return result
 
 
@@ -316,7 +317,13 @@ def verify_east_asia_overview(archive, published):
     metadata, report = verify_render(archive / "overview", "east_asia", ("colour",), style)
     current = published["maps"]["east_asia"]
     for key in GEOMETRY_KEYS:
-        require(metadata[key] == current[key], f"east_asia: overview {key} changed")
+        if key == "projection":
+            spec = importlib.util.spec_from_file_location("footprint_crs", ROOT / "scripts/build-footprint-atlas.py")
+            builder = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(builder)
+            require(builder.raster_aligned_crs(metadata[key]) == builder.raster_aligned_crs(current[key]), "east_asia: overview raster CRS changed")
+        else:
+            require(metadata[key] == current[key], f"east_asia: overview {key} changed")
     verify_cultural_config(metadata, partial=True)
     require(all(region["unit"] == "cultural-region" for region in metadata["regions"]
                 if region["country"] in {"CHN", "JPN", "KOR"}), "East Asia must use cultural regions across China, Japan and Korea")

@@ -1,0 +1,548 @@
+[
+  {
+    "id": "CHN:yanzhao",
+    "centroid_delta_sourcepx": [
+      0.059,
+      0.123
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -1.595,
+      -0.68
+    ],
+    "iou": 0.99854,
+    "hausdorff_sourcepx": 227.472
+  },
+  {
+    "id": "CHN:jin",
+    "centroid_delta_sourcepx": [
+      0.009,
+      -0.077
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.343,
+      0.412
+    ],
+    "iou": 0.999408,
+    "hausdorff_sourcepx": 209.625
+  },
+  {
+    "id": "CHN:dongbei-mongdong",
+    "centroid_delta_sourcepx": [
+      -0.001,
+      -0.024
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.899,
+      -1.54
+    ],
+    "iou": 0.999491,
+    "hausdorff_sourcepx": 505.974
+  },
+  {
+    "id": "CHN:mongolian-steppe",
+    "centroid_delta_sourcepx": [
+      0.059,
+      -0.126
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.645,
+      0.897
+    ],
+    "iou": 0.999672,
+    "hausdorff_sourcepx": 2.446
+  },
+  {
+    "id": "CHN:liaodong",
+    "centroid_delta_sourcepx": [
+      0.113,
+      0.019
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -5.318,
+      3.092
+    ],
+    "iou": 0.999452,
+    "hausdorff_sourcepx": 21.975
+  },
+  {
+    "id": "CHN:wuyue",
+    "centroid_delta_sourcepx": [
+      0.025,
+      -0.02
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -9.405,
+      2.173
+    ],
+    "iou": 0.999611,
+    "hausdorff_sourcepx": 147.133
+  },
+  {
+    "id": "CHN:jianghuai",
+    "centroid_delta_sourcepx": [
+      0.006,
+      -0.009
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -9.224,
+      0.891
+    ],
+    "iou": 0.999664,
+    "hausdorff_sourcepx": 126.24
+  },
+  {
+    "id": "CHN:huaihai",
+    "centroid_delta_sourcepx": [
+      0.007,
+      0.011
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.63,
+      0.171
+    ],
+    "iou": 0.999732,
+    "hausdorff_sourcepx": 171.437
+  },
+  {
+    "id": "CHN:huizhou",
+    "centroid_delta_sourcepx": [
+      -0.008,
+      -0.005
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.021,
+      0.007
+    ],
+    "iou": 0.999642,
+    "hausdorff_sourcepx": 0.388
+  },
+  {
+    "id": "CHN:wanjiang",
+    "centroid_delta_sourcepx": [
+      -0.022,
+      0.006
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.041,
+      0.028
+    ],
+    "iou": 0.999597,
+    "hausdorff_sourcepx": 5.485
+  },
+  {
+    "id": "CHN:min-north",
+    "centroid_delta_sourcepx": [
+      0.003,
+      0.007
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.094,
+      -0.041
+    ],
+    "iou": 0.999698,
+    "hausdorff_sourcepx": 0.674
+  },
+  {
+    "id": "CHN:min-central",
+    "centroid_delta_sourcepx": [
+      0.009,
+      0.003
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.137,
+      0.115
+    ],
+    "iou": 0.999727,
+    "hausdorff_sourcepx": 1.372
+  },
+  {
+    "id": "CHN:puxian",
+    "centroid_delta_sourcepx": [
+      -0.006,
+      0.002
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -2.671,
+      -2.109
+    ],
+    "iou": 0.999523,
+    "hausdorff_sourcepx": 0.241
+  },
+  {
+    "id": "CHN:min-south",
+    "centroid_delta_sourcepx": [
+      0.007,
+      0.003
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -1.129,
+      -6.442
+    ],
+    "iou": 0.999602,
+    "hausdorff_sourcepx": 57.151
+  },
+  {
+    "id": "CHN:min-east",
+    "centroid_delta_sourcepx": [
+      -0.003,
+      0.012
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -4.276,
+      -3.1
+    ],
+    "iou": 0.999533,
+    "hausdorff_sourcepx": 1.279
+  },
+  {
+    "id": "CHN:gan",
+    "centroid_delta_sourcepx": [
+      -0.008,
+      0.003
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.029,
+      -0.044
+    ],
+    "iou": 0.999796,
+    "hausdorff_sourcepx": 104.725
+  },
+  {
+    "id": "CHN:qilu",
+    "centroid_delta_sourcepx": [
+      0.02,
+      0.007
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.112,
+      0.094
+    ],
+    "iou": 0.999538,
+    "hausdorff_sourcepx": 4.038
+  },
+  {
+    "id": "CHN:zhongyuan",
+    "centroid_delta_sourcepx": [
+      0.052,
+      0.062
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.035,
+      0.022
+    ],
+    "iou": 0.999524,
+    "hausdorff_sourcepx": 146.664
+  },
+  {
+    "id": "CHN:jingchu",
+    "centroid_delta_sourcepx": [
+      -0.026,
+      -0.017
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.009,
+      0.071
+    ],
+    "iou": 0.999626,
+    "hausdorff_sourcepx": 133.611
+  },
+  {
+    "id": "CHN:huxiang",
+    "centroid_delta_sourcepx": [
+      -0.011,
+      0.011
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.012,
+      0.105
+    ],
+    "iou": 0.999769,
+    "hausdorff_sourcepx": 181.989
+  },
+  {
+    "id": "CHN:xiangxi",
+    "centroid_delta_sourcepx": [
+      0.012,
+      0.044
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.021,
+      -0.079
+    ],
+    "iou": 0.999486,
+    "hausdorff_sourcepx": 95.017
+  },
+  {
+    "id": "CHN:guangfu",
+    "centroid_delta_sourcepx": [
+      3.173,
+      1.701
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -2.047,
+      -2.368
+    ],
+    "iou": 0.989227,
+    "hausdorff_sourcepx": 141.171
+  },
+  {
+    "id": "CHN:hakka",
+    "centroid_delta_sourcepx": [
+      0.006,
+      0.004
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.037,
+      -0.485
+    ],
+    "iou": 0.99984,
+    "hausdorff_sourcepx": 195.052
+  },
+  {
+    "id": "CHN:chaoshan",
+    "centroid_delta_sourcepx": [
+      -0.01,
+      0.012
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -3.63,
+      -1.176
+    ],
+    "iou": 0.99961,
+    "hausdorff_sourcepx": 1.109
+  },
+  {
+    "id": "CHN:hailufeng",
+    "centroid_delta_sourcepx": [
+      0.008,
+      0.012
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -7.9,
+      -23.935
+    ],
+    "iou": 0.999383,
+    "hausdorff_sourcepx": 0.254
+  },
+  {
+    "id": "CHN:gaoliang",
+    "centroid_delta_sourcepx": [
+      -0.003,
+      0.01
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -2.099,
+      -2.277
+    ],
+    "iou": 0.999555,
+    "hausdorff_sourcepx": 2.383
+  },
+  {
+    "id": "CHN:qiong",
+    "centroid_delta_sourcepx": [
+      0.006,
+      0.002
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -3.376,
+      -0.023
+    ],
+    "iou": 0.999629,
+    "hausdorff_sourcepx": 59.679
+  },
+  {
+    "id": "CHN:guiliu",
+    "centroid_delta_sourcepx": [
+      -0.008,
+      0.016
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.029,
+      -0.038
+    ],
+    "iou": 0.999788,
+    "hausdorff_sourcepx": 0.432
+  },
+  {
+    "id": "CHN:zhuang",
+    "centroid_delta_sourcepx": [
+      0.095,
+      0.025
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.056,
+      -0.17
+    ],
+    "iou": 0.999508,
+    "hausdorff_sourcepx": 3.517
+  },
+  {
+    "id": "CHN:qinlian",
+    "centroid_delta_sourcepx": [
+      -0.007,
+      0.001
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.458,
+      -4.239
+    ],
+    "iou": 0.999812,
+    "hausdorff_sourcepx": 0.245
+  },
+  {
+    "id": "CHN:bashu",
+    "centroid_delta_sourcepx": [
+      0.005,
+      -0.046
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.351,
+      0.149
+    ],
+    "iou": 0.999158,
+    "hausdorff_sourcepx": 276.506
+  },
+  {
+    "id": "CHN:panxi",
+    "centroid_delta_sourcepx": [
+      0.001,
+      -0.101
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.847,
+      1.255
+    ],
+    "iou": 0.999083,
+    "hausdorff_sourcepx": 1.474
+  },
+  {
+    "id": "CHN:qian",
+    "centroid_delta_sourcepx": [
+      0.122,
+      0.047
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.004,
+      0.04
+    ],
+    "iou": 0.999194,
+    "hausdorff_sourcepx": 4.396
+  },
+  {
+    "id": "CHN:dian",
+    "centroid_delta_sourcepx": [
+      -0.08,
+      0.041
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.724,
+      0.291
+    ],
+    "iou": 0.99887,
+    "hausdorff_sourcepx": 7.589
+  },
+  {
+    "id": "CHN:dian-south",
+    "centroid_delta_sourcepx": [
+      -0.108,
+      0.036
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.479,
+      -0.557
+    ],
+    "iou": 0.999283,
+    "hausdorff_sourcepx": 2.315
+  },
+  {
+    "id": "CHN:qingzang",
+    "centroid_delta_sourcepx": [
+      -0.003,
+      -0.009
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.778,
+      0.106
+    ],
+    "iou": 0.99982,
+    "hausdorff_sourcepx": 80.444
+  },
+  {
+    "id": "CHN:guanzhong",
+    "centroid_delta_sourcepx": [
+      0.003,
+      0.04
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.246,
+      -0.072
+    ],
+    "iou": 0.999357,
+    "hausdorff_sourcepx": 175.982
+  },
+  {
+    "id": "CHN:shanbei",
+    "centroid_delta_sourcepx": [
+      0.014,
+      0.21
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.028,
+      0.003
+    ],
+    "iou": 0.998699,
+    "hausdorff_sourcepx": 2.876
+  },
+  {
+    "id": "CHN:shannan",
+    "centroid_delta_sourcepx": [
+      0.067,
+      -0.007
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.108,
+      0.045
+    ],
+    "iou": 0.999324,
+    "hausdorff_sourcepx": 164.628
+  },
+  {
+    "id": "CHN:hexi",
+    "centroid_delta_sourcepx": [
+      -0.021,
+      0.048
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.622,
+      0.341
+    ],
+    "iou": 0.999183,
+    "hausdorff_sourcepx": 0.667
+  },
+  {
+    "id": "CHN:hehuang",
+    "centroid_delta_sourcepx": [
+      0.006,
+      0.013
+    ],
+    "raster_centroid_delta_sourcepx": [
+      -0.68,
+      -0.278
+    ],
+    "iou": 0.999746,
+    "hausdorff_sourcepx": 0.669
+  },
+  {
+    "id": "CHN:ningxia",
+    "centroid_delta_sourcepx": [
+      0.004,
+      0.137
+    ],
+    "raster_centroid_delta_sourcepx": [
+      0.063,
+      0.115
+    ],
+    "iou": 0.997398,
+    "hausdorff_sourcepx": 3.531
+  }
+]

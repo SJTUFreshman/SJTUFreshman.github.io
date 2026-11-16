@@ -107,6 +107,14 @@ CSS 必须按 `life.html` 中的顺序加载。后面的文件会覆盖前面的
 
 Footprints 使用三张同光照的高清浮雕地图：中国、东亚为 6000 px 宽，跨大西洋的欧美连续地图为 8000 px 宽。未到访陆地使用 Blender 原生纯白、零自发光的哑光材质，海洋使用统一的灰蓝材质；发布时仅编码 WebP，不提亮成图或压淡地形阴影。到访城市与真实路网沿线的窄幅地形走廊显露省份材质和山脊阴影；不会将沿线整座城市点亮。到访城市的名称和轮廓在悬停或键盘聚焦时出现。中国最多放大至适配尺寸的 300%，东亚和欧美最多 200%，内嵌地图和大图查看器的全部输入方式共用该上限。百分比按钮直达最大缩放，支持双指缩放、拖动与 Esc 关闭。地图来源、重建流程和行程推定范围见 [`../maps/relief/README.md`](../maps/relief/README.md)，原始 Blender 工程与全部制作脚本见 [`../../tools/relief-atlas/README.md`](../../tools/relief-atlas/README.md)，新增城市与路线的步骤见 [`../../tools/relief-atlas/ADDING-FOOTPRINTS.md`](../../tools/relief-atlas/ADDING-FOOTPRINTS.md)。`22-footprints-atlas.js` 在 `17-content-ui.js` 后、`18-bootstrap.js` 前加载。
 
+地图小图使用 960 px 预览加轻量 SVG 边界，支持鼠标悬停、键盘聚焦和区域点击。大图先使用 1600 px 图层，放大后才下载原生高清图；小图不单独缩放。北韩采用红色斜线表示本人的禁入区域，保留地名和边界反馈。
+
+`23-region-explorer.js` 在地图运行时后加载，配套 `12-region-explorer.css` 提供独立地区图志。119 个地区使用统一暖白材质与真实高程独立重算光影，照片引线对应地理坐标，文化区内部可悬停查看当地照片与三语百科。跨境范围与国界、台湾实控离岛、福建共享岛屿，以及来源许可和重建流程见 [`../maps/regions/README.md`](../maps/regions/README.md)。照片为有署名的地区参考图，不作为本人到访某个景点的证据；悬停时到访状态取所选地区的明确记录。
+
+文化区首页使用独立撰写的文化简介和代表图片，`textKind: editorial-cultural` 的资料来源与行政单元的百科摘编分别标识。鼠标移出分区或照片后恢复整区介绍；触屏点选保留详情，点地图空白处恢复整区。页面展示名将“中华民国／中華民國／Republic of China／ROC”映射为“中华台北／中華臺北／Chinese Taipei”，不改写来源链接、地理 ID 或 People's Republic of China。
+
+专项检查使用 `node scripts/validate-region-explorer.cjs`（需要 Playwright），覆盖桌面/手机的小图交互、高清渐进加载、区域内容、跨境成员、图片失败重试与双层弹窗焦点；`python scripts/validate-footprint-web-payloads.py` 检查体积、几何误差与访问记录。字体子集构建也会扫描异步地图与地区 JSON。
+
 `site_content.json` 是可编辑内容的来源。`site_renderer.py` 的 Life 渲染流程只维护两个产物：
 
 - `life.html`：更新 `SITEGEN:LIFE_*` HTML 区域。
@@ -124,9 +132,9 @@ Footprints 使用三张同光照的高清浮雕地图：中国、东亚为 6000 
 
 `life.friend_portrait` 配置双人合照和三语提示，`life.friends` 中的 `portrait_side`、`portrait_outline` 定义人物左右位置与 SVG 轮廓。左侧 Yuheng 使用冷蓝微光，右侧 Qiran 使用暖色微光；点击人物或名字第一次展开照片，选中后再点同一人进入其 `href`。切换人物会替换照片，收起后重新从首次点击开始。原有 AAIL 链接仍保留。
 
-每个人的 `memories` 数组按展示顺序保存照片。仅有 `id` 的条目显示占位卡；补入 `image`、`width`、`height` 和三语 `caption` 即可替换。当前只有 `qiran-01` 使用真实照片，`caption` 仅用于无障碍描述，不显示姓名编号。首次点击人物或名字后，照片在星空中漂浮展开；再点同一人物进入其主页。照片位于好友信息面板旁，窄屏时收拢在面板上方。关闭按钮或 Esc 收起照片。支持照片放大、键盘操作和 reduced-motion。
+每个人的 `memories` 数组按展示顺序保存照片。仅有 `id` 的条目显示占位卡；补入 `image`、`width`、`height` 和三语 `caption` 即可替换。双人合照中的 `qiran-01` 使用真实照片，另有八人合照的独立人物抠图；`caption` 仅用于无障碍描述，不显示姓名编号。首次点击人物或名字后展开照片；再点同一人物进入其主页。桌面照片位于好友信息面板旁，窄屏时收拢为该人物名字下方的照片条，原人物与名字保持可操作。没有主页的条目重复点击仍保留照片。关闭按钮或 Esc 收起照片，收起后重新从首次点击开始。Enter、空格和触屏同样采用这两步操作，支持照片放大与 reduced-motion。
 
-修改内容后运行 `python site_renderer.py --life-only`。在本地静态服务器运行时，可执行 `node scripts/validate-friends.cjs http://127.0.0.1:8793/`，检查两种星图页面、桌面与手机、首次展开／再次跳转、三语、占位卡、放大查看和焦点恢复。截图输出至 `.render-work/friends-qa/`。
+修改内容后运行 `python site_renderer.py --life-only`。执行 `node scripts/validate-friends.cjs` 会自动启动并关闭临时静态服务器，也可传入已有服务器地址。检查两种星图页面、桌面与手机、十个人物的首次展开／再次跳转、三语、占位卡、放大查看和焦点恢复；主页导航由测试本地拦截，不会请求好友网站。`validate-friend-group.cjs` 保留八人合照的单独验证入口。截图输出至 `.render-work/friends-interactions/`。
 
 ## 修改与验证
 

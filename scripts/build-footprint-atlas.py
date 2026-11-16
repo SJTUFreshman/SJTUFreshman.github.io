@@ -44,6 +44,20 @@ def load_module(path, name):
     return module
 
 
+def raster_aligned_crs(projection):
+    """Pin the sphere used by the archived EQC DEMs and Blender coordinates.
+
+    PROJ 9.8 added ellipsoidal EQC: +datum=WGS84 now moves vectors south by
+    13–25 km compared with the original spherical rasters. An explicit radius
+    keeps inverse/forward vector projection and GDAL raster warping identical.
+    Other projections (including China's AEA) retain their original ellipsoid.
+    """
+    if '+proj=eqc' not in projection:
+        return projection
+    tokens=[token for token in projection.split() if not token.startswith(('+datum=','+ellps=','+R='))]
+    return ' '.join(tokens+['+R=6378137'])
+
+
 def read_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -120,7 +134,7 @@ def regional_units(identifier):
 
 
 def projected_region(item, metadata):
-    projection = Transformer.from_crs("EPSG:4326", metadata["projection"], always_xy=True)
+    projection = Transformer.from_crs("EPSG:4326", raster_aligned_crs(metadata["projection"]), always_xy=True)
     west, south, east, north = metadata["extent_km"]
     width, height = metadata["width"], metadata["height"]
 
@@ -155,7 +169,7 @@ def prepare_map(identifier, config, source, provinces, colours, reuse_dem=False)
         data_root = WORK if reuse_dem else SOURCE
         with np.load(data_root / "data" / (identifier + ".npz")) as data:
             arrays = {key: data[key] for key in data.files}
-        projection = read_json(data_root / "data" / (identifier + ".json"))["projection"]
+        projection = raster_aligned_crs(read_json(data_root / "data" / (identifier + ".json"))["projection"])
         extent = [float(arrays["x"][0]), float(arrays["y"][-1]), float(arrays["x"][-1]), float(arrays["y"][0])]
         shape_rows, shape_columns = arrays["elevation"].shape
         spacing_x = float(arrays["x"][1] - arrays["x"][0]) * 1000
@@ -164,7 +178,7 @@ def prepare_map(identifier, config, source, provinces, colours, reuse_dem=False)
                                        extent[2]*1000+spacing_x/2, extent[3]*1000+spacing_y/2, shape_columns, shape_rows)
     else:
         bounds = config["bounds"]
-        projection = f"+proj=eqc +lat_ts={config['latitude']} +lat_0=0 +lon_0={(bounds[0]+bounds[2])/2} +datum=WGS84 +units=m +no_defs"
+        projection = f"+proj=eqc +lat_ts={config['latitude']} +lat_0=0 +lon_0={(bounds[0]+bounds[2])/2} +R=6378137 +units=m +no_defs"
         transformer = Transformer.from_crs("EPSG:4326", projection, always_xy=True)
         min_x, min_y = transformer.transform(bounds[0], bounds[1])
         max_x, max_y = transformer.transform(bounds[2], bounds[3])
@@ -224,7 +238,7 @@ def route_data(metadata, journeys, provinces):
     # EPSG:4326 -> 当前地图投影（米）-> 原生图片像素；不能在经纬度/像素空间直接 buffer 公里宽度。
     # 中国与东亚各自投影和裁切；segments 记录中心线来源，corridor_path 才是网页显色区域。
     # 输入是 prepare-footprint-routes.py 生成的真实路网；此处只投影和裁切，不连接途经点画直线。
-    projection = Transformer.from_crs("EPSG:4326", metadata["projection"], always_xy=True)
+    projection = Transformer.from_crs("EPSG:4326", raster_aligned_crs(metadata["projection"]), always_xy=True)
     west, south, east, north = metadata["extent_km"]
     width, height = metadata["width"], metadata["height"]
     land = unary_union([transform(projection.transform, province["geometry"]) for province in provinces])
@@ -275,6 +289,7 @@ def package(identifiers, render_root):
     OUTPUT.mkdir(parents=True, exist_ok=True)
     for identifier in identifiers:
         metadata = read_json(render_root / "data" / (identifier + ".json"))
+        metadata["projection"] = raster_aligned_crs(metadata["projection"])
         metadata["title"] = CONFIGS[identifier]["title"]
         if identifier == "china":
             unknown = visited - {region["name"] for region in metadata["regions"]}

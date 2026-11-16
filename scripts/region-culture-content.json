@@ -1,0 +1,460 @@
+{
+  "CHN:yanzhao": {
+    "photoArticle": "Forbidden City",
+    "chinese": "燕赵的文化层次，可以从都城礼制与北方生活的相遇读起。北京故宫的院落、轴线与宫殿，将明清时期的礼仪秩序凝结为建筑；它是理解这一地区历史的一扇窗口，并非整个燕赵文化的全部。",
+    "english": "Yanzhao brings northern regional life into conversation with the culture of the capital. The Forbidden City's courtyards, axes and halls embody Ming and Qing ceremonial order: one architectural lens on the region's varied histories.",
+    "sources": [
+      "https://whc.unesco.org/en/list/439/"
+    ]
+  },
+  "CHN:jin": {
+    "photoArticle": "Pingyao",
+    "chinese": "晋绥文化的一条鲜明线索是商路与城镇。平遥保存的街巷、商铺、民居与票号，把日常生活、宗族经营和跨地域商业联系放在同一座城中，呈现晋商文化的空间记忆。",
+    "english": "Trade and town life offer a distinctive route into Jin–Sui culture. Pingyao's streets, homes, shops and banking houses preserve the relationship between everyday urban life and the long-distance commercial networks associated with Shanxi merchants.",
+    "sources": [
+      "https://whc.unesco.org/en/list/812/"
+    ]
+  },
+  "CHN:dongbei-mongdong": {
+    "photoArticle": "Mukden Palace",
+    "chinese": "满洲文化并非单一面貌。沈阳故宫将满族及北方族群的建筑传统与宫廷制度并置，记录清王朝形成时期的文化交流；从宫殿的布局与生活空间，可以观察地域传统如何进入都城文化。",
+    "english": "Manchuria contains overlapping cultural histories. Shenyang's imperial palace combines Manchu and other northern building traditions with court institutions, revealing exchanges that accompanied the formation of the Qing dynasty.",
+    "sources": [
+      "https://whc.unesco.org/en/list/439/"
+    ]
+  },
+  "CHN:mongolian-steppe": {
+    "photoArticle": "Orkhon Valley",
+    "chinese": "蒙古草原的文化记忆与迁徙、牧养和声音相连。鄂尔浑河谷保存游牧社会与历史城址交织的景观，马头琴则把马、草原和人生经验带入音乐。图瓦等相邻地区也保有各自独特的语言与传统。",
+    "english": "Pastoral movement and music shape important strands of Mongolian steppe culture. The Orkhon Valley links nomadic landscapes with historic settlements, while the morin khuur carries stories of horses and human life. Neighbouring Tuva retains distinct languages and traditions.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1081/",
+      "https://ich.unesco.org/en/RL/traditional-music-of-the-morin-khuur-00068"
+    ]
+  },
+  "CHN:liaodong": {
+    "photoArticle": "Penglai Pavilion",
+    "chinese": "胶辽之间的海路与人口往来，也留下民间艺术的联系。胶州秧歌的地方记述将其演变与闯关东途中的歌舞相连：迁徙不仅搬运生活，也让曲调、身段与节庆习惯不断重新组合。",
+    "english": "Migration across the Jiaodong–Liaodong seaways also carried performing traditions. Local records connect the development of Jiaozhou yangge with song and dance along migration routes into the northeast, showing how movement reshapes community celebrations.",
+    "sources": [
+      "https://shandong-chorography.org/database/c2/section/7/article/637/"
+    ]
+  },
+  "CHN:wuyue": {
+    "photoArticle": "Humble Administrator's Garden",
+    "chinese": "吴越文化可以在园林与戏曲之间细读。苏州园林将山水意境收进咫尺庭院，昆曲则把文学、声腔与身段组织成精细的舞台艺术；两者共同展现江南审美中对节奏、留白与日常情致的经营。",
+    "english": "Gardens and theatre offer two intimate views of Wu–Yue culture. Suzhou gardens compose miniature landscapes, while Kunqu brings literature, melody and gesture together on stage. Both invite attention to pacing, framing and the textures of everyday experience.",
+    "sources": [
+      "https://whc.unesco.org/en/list/813/",
+      "https://ich.unesco.org/en/RL/kun-qu-opera-00004"
+    ]
+  },
+  "CHN:jianghuai": {
+    "photoArticle": "Slender West Lake",
+    "chinese": "江淮文化的一条主线是水路交会。大运河将漕运、贸易和人员流动带入沿线城镇，扬州的园林与水岸生活可作为观察窗口：这里的地方文化形成于南北往来，而不是封闭的边界之内。",
+    "english": "Waterborne exchange is a useful thread through Jianghuai culture. The Grand Canal brought transport, commerce and travellers into its towns; Yangzhou's gardens and waterside spaces offer a local perspective on a region shaped by north–south connections.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1443/"
+    ]
+  },
+  "CHN:huaihai": {
+    "photoArticle": "Xuzhou Museum",
+    "chinese": "淮海的文化阅读可以从汉代遗存入手。徐州周边的墓葬、画像石与出土器物，将汉人的礼仪、生活想象和工艺呈现在眼前；博物馆中的这些细节，串联起当地社会保存与传递历史记忆的方式。",
+    "english": "Han-period remains offer a cultural route into Huaihai. Tombs, carved stones and excavated objects around Xuzhou preserve ritual practices, imagined worlds and skilled workmanship, making local historical memory visible through material details.",
+    "sources": [
+      "https://www.xzsk.org.cn/news_detail?id=1680",
+      "https://www.xzmuseum.com/"
+    ],
+    "photoFile": "Terracotta Cavalry, Aquatic Terracotta Warrior Museum, Han Tomb of Liu Wu, King of Chu (10083170034).jpg",
+    "photoSubject": {
+      "zh-CN": "徐州汉兵马俑",
+      "en": "Han terracotta figures, Xuzhou"
+    }
+  },
+  "CHN:huizhou": {
+    "photoArticle": "Hongcun",
+    "chinese": "徽州文化写在聚落的细部里。西递、宏村的街巷、宗族民居、雕饰与水系，把家族生活、营造技艺和山水环境联结起来；白墙黛瓦只是外观，其背后是长期积累的共同生活方式。",
+    "english": "Huizhou culture is legible in the details of its settlements. Xidi and Hongcun connect lanes, clan residences, carved ornament and carefully managed water, revealing social life and building knowledge beneath their familiar white walls and dark roofs.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1002/"
+    ]
+  },
+  "CHN:wanjiang": {
+    "photoArticle": "Zhenfeng Pagoda",
+    "chinese": "皖江文化有鲜活的舞台声音。黄梅戏吸收民歌、采茶戏和地方小戏，以贴近日常语言的唱念讲述人情世事；它在安庆一带的发展，也呈现长江沿线艺术相互流动、不断融合的过程。",
+    "english": "Huangmei opera gives Wanjiang culture a vivid theatrical voice. Drawing on folk songs, tea-picking plays and local performance, it tells human stories in accessible speech and melody. Its development around Anqing reflects artistic exchange along the Yangtze.",
+    "sources": [
+      "https://www.ihchina.cn/project_details/23673"
+    ]
+  },
+  "CHN:min-north": {
+    "photoArticle": "Mount Wuyi",
+    "chinese": "闽北的文化山水，既有茶乡，也有讲学传统。武夷山的书院遗迹与宗教建筑记录理学传播的历史；山林、水路与人文空间相互穿插，让这片山地成为生活、信仰和求知共同塑造的景观。",
+    "english": "Northern Min's mountains hold intellectual as well as ecological histories. Wuyi's academy remains and religious buildings recall the spread of Neo-Confucian thought, making its landscape a setting shaped by learning, belief and daily life.",
+    "sources": [
+      "https://whc.unesco.org/en/list/911/"
+    ],
+    "photoFile": "Wuyi palace.jpg",
+    "photoSubject": {
+      "zh-CN": "武夷宫",
+      "en": "Wuyi Palace"
+    }
+  },
+  "CHN:min-central": {
+    "photoArticle": "Taining County",
+    "chinese": "闽中文化可从泰宁梅林戏听起。外来的徽调沿交流路线进入山区，与当地语言、民间曲调及道教音乐结合，形成有地方辨识度的戏曲；这样的吸收与转化，是理解闽中山地文化的重要线索。",
+    "english": "Taining's Meilin opera opens a window onto central Min culture. Imported theatrical forms blended with local speech, folk melodies and Daoist music, illustrating how mountain communities made travelling traditions their own.",
+    "sources": [
+      "https://www.ihchina.cn/Article/Index/detail?id=13216"
+    ],
+    "photoFile": "Shangshu Alley (20170118172812).jpg",
+    "photoSubject": {
+      "zh-CN": "泰宁尚书巷",
+      "en": "Shangshu Alley, Taining"
+    }
+  },
+  "CHN:puxian": {
+    "photoArticle": "Mazu Temple of Meizhou",
+    "chinese": "莆仙文化与海洋信仰联系紧密。源于湄洲的妈祖信俗，通过祭典、庙宇和航海记忆连接沿海聚落及海外社群；它既是一套仪式，也是一种维系乡土情感与跨海认同的公共生活。",
+    "english": "Maritime belief is a central strand of Puxian culture. Mazu traditions rooted in Meizhou connect coastal settlements and overseas communities through temples, ceremonies and memories of seafaring, sustaining shared ties across the sea.",
+    "sources": [
+      "https://ich.unesco.org/en/decisions/4.COM/13.18",
+      "https://www.fj.gov.cn/english/cultureandtravel/cultureandarts/202501/t20250106_6619084.htm"
+    ],
+    "photoFile": "祈年期间的湄洲妈祖祖庙1.jpg",
+    "photoSubject": {
+      "zh-CN": "湄洲妈祖祖庙新春祈年大典",
+      "en": "New Year ceremony at the Mazu ancestral temple, Meizhou"
+    }
+  },
+  "CHN:min-south": {
+    "photoArticle": "Kaiyuan Temple (Quanzhou)",
+    "chinese": "闽南文化有面向海洋的开放性，也有细腻的地方声音。南音以器乐与歌唱保存社群共同的听觉记忆，随闽南人的迁徙传播海外；泉州的寺庙与港城遗产，则留下不同信仰相遇的空间。",
+    "english": "Southern Min culture combines maritime connections with intimate local traditions. Nanyin singing and instrumental music sustain shared memories among Minnan communities and their diaspora; Quanzhou's religious monuments also reveal encounters across a historic port city.",
+    "sources": [
+      "https://ich.unesco.org/en/RL/nanyin-00199",
+      "https://whc.unesco.org/en/list/1561/"
+    ]
+  },
+  "CHN:min-east": {
+    "photoArticle": "Sanfang Qixiang",
+    "chinese": "闽都文化可以循着福州话的声腔进入。闽剧以地方语言说唱，将多种戏曲资源转化为自身的舞台风格；三坊七巷等街区的生活空间，与戏台上的人物故事共同构成城市文化的不同侧面。",
+    "english": "Mindong's cultural world can be approached through the sound of Fuzhou speech. Min opera adapts diverse theatrical resources into a local stage language; historic neighbourhoods such as Sanfang Qixiang provide another setting for the city's social memory.",
+    "sources": [
+      "https://www.ihchina.cn/project_details/13243.html"
+    ]
+  },
+  "CHN:gan": {
+    "photoArticle": "Jingdezhen Imperial Kiln Museum",
+    "chinese": "赣鄱文化的一条代表性线索是制瓷。景德镇的成型、绘饰与烧造技艺，把泥土、火候和审美连接起来；长期的手工业分工与器物传播，使瓷都成为地方知识走向广阔世界的窗口。",
+    "english": "Porcelain offers a distinctive perspective on Gan–Poyang culture. Jingdezhen's forming, decoration and firing skills unite material knowledge with aesthetic invention, while specialised workshops and circulating wares connect local expertise to a wider world.",
+    "sources": [
+      "https://www.unesco.org/en/creative-cities/jingdezhen?hub=80094"
+    ],
+    "photoFile": "01-Jingdezhen Imperial Kiln Museum.jpg",
+    "photoSubject": {
+      "zh-CN": "景德镇御窑博物馆",
+      "en": "Jingdezhen Imperial Kiln Museum"
+    }
+  },
+  "CHN:qilu": {
+    "photoArticle": "Temple of Confucius, Qufu",
+    "chinese": "齐鲁文化的重要脉络是儒家礼学与教育传统。曲阜的孔庙、孔府和孔林，把祭祀、家族传承与历史记忆凝聚为相互关联的文化空间，留下儒家思想长期影响社会生活的具体见证。",
+    "english": "Confucian ritual and learning form an important strand of Qilu culture. Qufu's Temple, Mansion and Cemetery of Confucius connect commemoration, family continuity and education in a shared cultural landscape, preserving a tangible history of Confucian influence on social life.",
+    "sources": [
+      "https://whc.unesco.org/en/list/704/"
+    ]
+  },
+  "CHN:zhongyuan": {
+    "photoArticle": "Longmen Grottoes",
+    "chinese": "中原文化叠加着都城、宗教与艺术的历史。洛阳龙门石窟保存北魏至唐代佛教造像的变化，从人物姿态、衣纹到题记，都能读到信仰、审美与社会交流留下的痕迹。",
+    "english": "Central Plains culture holds layered histories of capitals, religion and art. Longmen's Buddhist carvings trace changing styles from the Northern Wei through the Tang, allowing gesture, drapery and inscriptions to reveal exchanges between belief and society.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1003/"
+    ]
+  },
+  "CHN:jingchu": {
+    "photoArticle": "Yellow Crane Tower",
+    "chinese": "荆楚文化中的诗歌记忆与水上节俗相互呼应。端午在长江中游的不同社区形成各具特色的仪式、竞渡与纪念传统；与屈原相关的叙事，使文学人物持续参与地方社会的公共生活。",
+    "english": "Poetic memory and waterborne celebration meet in Jingchu culture. Communities along the middle Yangtze maintain varied Dragon Boat Festival rituals and races; narratives associated with Qu Yuan keep a literary figure present in communal life.",
+    "sources": [
+      "https://ich.unesco.org/en/RL/dragon-boat-festival-00225"
+    ]
+  },
+  "CHN:huxiang": {
+    "photoArticle": "Yuelu Academy",
+    "chinese": "湖湘文化的一条重要线索是书院与求实精神。岳麓书院延续讲学、讨论和人才培养的传统，其所强调的经世致用，把知识与社会实践联系起来，也为理解地方思想史提供了具体场所。",
+    "english": "Academies and practical learning are important threads of Huxiang culture. Yuelu Academy's teaching and debate connect scholarship with social responsibility, providing a tangible setting for the region's intellectual history.",
+    "sources": [
+      "https://ylsy.hnu.edu.cn/sygk/syjj.htm"
+    ]
+  },
+  "CHN:xiangxi": {
+    "photoArticle": "Laosicheng",
+    "chinese": "武陵文化包含不同族群与山地社会的历史。老司城等土司遗址保存地方治理、宗教活动和聚落组织的痕迹，提示我们同时看见区域间的制度联系，以及各社区持续保有的习俗与生活方式。",
+    "english": "Wuling's cultural history includes diverse communities and mountain societies. Tusi sites such as Laosicheng preserve traces of local government, ritual and settlement, revealing connections across regions alongside distinctive community traditions.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1474/"
+    ],
+    "photoFile": "Fenghuang aka Phoenix Town.jpg",
+    "photoSubject": {
+      "zh-CN": "凤凰古城沱江边的木构建筑",
+      "en": "Timber buildings beside the Tuojiang, Fenghuang"
+    }
+  },
+  "CHN:guangfu": {
+    "photoArticle": "Chen Clan Ancestral Hall",
+    "chinese": "广府文化的舞台艺术以粤剧为鲜明代表。唱腔、念白、表演与武技共同推进故事，并随粤语社群的迁徙传播；祠堂建筑中的木雕、砖雕和陶塑，则呈现另一种与地方生活密切相连的工艺语言。",
+    "english": "Cantonese opera is a vivid expression of Guangfu culture, combining singing, speech, acting and martial movement across Cantonese-speaking communities. Ancestral halls offer a complementary view through the region's architectural decoration and craft traditions.",
+    "sources": [
+      "https://ich.unesco.org/en/RL/cantonese-opera-00203"
+    ]
+  },
+  "CHN:hakka": {
+    "photoArticle": "Fujian tulou",
+    "chinese": "客家文化的一条可见线索是聚族生活与共同营造。部分福建土楼所体现的围合居住、共享空间和乡土建造经验，回应了群体生活的需求；土楼也有其他闽地社群使用，不能把一种建筑等同于全部客家文化。",
+    "english": "Collective dwelling offers one perspective on Hakka culture. Some Fujian tulou illustrate shared domestic space and vernacular construction adapted to community life. Other local communities also built and inhabited tulou; this architecture is one strand, not a complete definition of Hakka identity.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1113/"
+    ]
+  },
+  "CHN:chaoshan": {
+    "photoArticle": "Guangji Bridge",
+    "chinese": "潮汕文化有自己的语言节奏与舞台审美。潮剧通过细腻的唱腔、身段和角色表演讲述故事，既服务本地节庆与日常娱乐，也维系迁居各地的潮人社群；潮州古城可作为这套生活文化的空间入口。",
+    "english": "Chaoshan culture has a distinctive theatrical voice. Chaozhou opera uses melody, gesture and expressive roles to tell stories, linking local celebration with communities farther afield. Chaozhou's historic urban spaces provide one setting for these living traditions.",
+    "sources": [
+      "https://www.ihchina.cn/project_details/13143.html"
+    ]
+  },
+  "CHN:hailufeng": {
+    "photoArticle": "Red Palace and Red Square",
+    "chinese": "海陆丰文化可从白字戏的声音进入。它在海丰、陆丰及周边以地方语言表演，吸收不同剧种的音乐和舞台经验；戏班、节庆与观众之间的长期互动，使戏曲成为地方社会共同保存的生活记忆。",
+    "english": "Baizi opera offers an entry into Hailufeng culture. Performed in local speech around Haifeng and Lufeng, it combines varied musical and theatrical influences. Troupes, celebrations and audiences keep this shared cultural memory active.",
+    "sources": [
+      "https://www.ihchina.cn/project_details/13333/"
+    ]
+  },
+  "CHN:gaoliang": {
+    "photoArticle": "Temple of Madam Xian",
+    "chinese": "高凉文化中的节庆、信仰与表演彼此交织。高州木偶戏将雕刻、服饰、唱腔和操偶技巧汇于一台，常见于地方节庆活动；冼夫人相关的祭祀与故事，也为当地社群提供共同的历史记忆。",
+    "english": "Festivity, belief and performance intersect in Gaoliang culture. Gaozhou puppet theatre combines carving, costume, music and manipulation in community celebrations, while traditions associated with Lady Xian maintain a shared historical memory.",
+    "sources": [
+      "https://www.qb.gd.gov.cn/jrqx/content/post_163451.html",
+      "https://ipr.mofcom.gov.cn/article/gnxw/fwzwhyc/202402/1984144.html"
+    ],
+    "photoFile": "Xian Fu Ren statue.jpg",
+    "photoSubject": {
+      "zh-CN": "高州冼太庙前的冼夫人像",
+      "en": "Lady Xian statue at her temple in Gaozhou"
+    }
+  },
+  "CHN:qiong": {
+    "photoArticle": "Leizhou",
+    "chinese": "雷琼并非一种整齐划一的文化。雷剧以雷州话唱念，把地方曲调转化为舞台叙事，是半岛文化的一条鲜明线索；把它与海峡两岸其他语言、信仰和艺术并看，更能理解这一海陆交会地区的多样性。",
+    "english": "Leiqiong is culturally diverse rather than uniform. Leizhou opera turns local speech and melody into theatrical narrative, providing one distinctive strand within a wider region of intersecting mainland and island traditions.",
+    "sources": [
+      "https://www.ihchina.cn/Article/Index/detail?id=13564"
+    ],
+    "photoFile": "Leizhou Leizu Ci 2014.02.27 15-29-36.jpg",
+    "photoSubject": {
+      "zh-CN": "雷州雷祖祠",
+      "en": "Leizu Temple, Leizhou"
+    }
+  },
+  "CHN:guiliu": {
+    "photoArticle": "Jingjiang Princes' Palace",
+    "chinese": "桂柳文化可以从桂剧的舞台语言读起。它在桂林、柳州等地传播，将唱腔、文学叙事与地方审美相结合；城镇之间的演出往来，使戏曲成为联系不同社区的一种文化媒介。",
+    "english": "Gui opera offers a route into Guiliu culture. Circulating through Guilin, Liuzhou and surrounding communities, it joins vocal art, storytelling and local aesthetics, with performances creating cultural connections between towns.",
+    "sources": [
+      "https://www.ihchina.cn/project_details/13228.html"
+    ]
+  },
+  "CHN:zhuang": {
+    "photoArticle": "Zuojiang Huashan Rock Art",
+    "chinese": "壮乡文化有深厚的图像与仪式记忆。左江花山岩画在临江崖壁上描绘人物、器物与集体活动，保存骆越社会及铜鼓文化的重要线索；它让山川、信仰与共同体的关系变得可见。",
+    "english": "Zhuang cultural landscapes carry deep visual and ritual memories. The Zuojiang Huashan cliff paintings depict people, objects and collective activity, preserving evidence of Luoyue society and bronze-drum traditions beside the river.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1508/"
+    ]
+  },
+  "CHN:qinlian": {
+    "photoArticle": "Beihai Old Street",
+    "chinese": "钦廉文化的一条细致线索是坭兴陶。地方陶土经成型、刻饰与烧制成为器物，窑火带出的色泽保留材料与手工的痕迹；沿海城镇的老街与作坊，让工艺继续参与日常生活。",
+    "english": "Nixing pottery offers a material perspective on Qinlian culture. Local clay is shaped, carved and fired into wares whose colours register the kiln's effects. Coastal streets and workshops provide a setting for this continuing craft.",
+    "sources": [
+      "https://zhuanti.mct.gov.cn/xcss2024_xcyfw/guangxi/detail/7513.html",
+      "https://lzhbwg.mofcom.gov.cn/edi_ecms_web_front/thb/detail/93fe739c1a66482687505bb0966522e5"
+    ],
+    "photoFile": "北海市 百年老街 - panoramio.jpg",
+    "photoSubject": {
+      "zh-CN": "北海老街",
+      "en": "Beihai Old Street"
+    }
+  },
+  "CHN:bashu": {
+    "photoArticle": "Dujiangyan",
+    "chinese": "巴蜀文化也写在治水与山林之中。都江堰把长期维护的水利知识融入农业生活，青城山则保存道教修行与营造传统；两者展现人与环境之间既务实又富于精神意味的联系。",
+    "english": "Ba–Shu culture is also expressed through water and mountains. Dujiangyan embeds sustained engineering knowledge in agricultural life, while Mount Qingcheng preserves Daoist traditions. Together they reveal practical and spiritual relationships with the landscape.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1001/"
+    ]
+  },
+  "CHN:panxi": {
+    "photoArticle": "Xichang",
+    "chinese": "攀西的彝族文化可从年节与火把节观察。祭祖、饮食、服饰、歌舞和集体活动，使节庆成为代际传承的重要场合；凉山彝族年呈现的家庭与社区联系，是理解这里文化生活的一条线索。",
+    "english": "Yi festivals provide one perspective on Panxi culture. Ancestor remembrance, food, clothing, music and communal gatherings make celebration a setting for transmission between generations, especially in the family and community ties expressed during the Liangshan Yi New Year.",
+    "sources": [
+      "https://www.ihchina.cn/news_1_details/21904.html",
+      "https://www.ihchina.cn/news_1_details/9901.html"
+    ],
+    "photoFile": "Xichang Yi People Museum.JPG",
+    "photoSubject": {
+      "zh-CN": "西昌凉山彝族奴隶社会博物馆",
+      "en": "Liangshan Yi museum, Xichang"
+    }
+  },
+  "CHN:qian": {
+    "photoArticle": "Zhaoxing",
+    "chinese": "黔地文化由许多不同社群共同构成。侗族大歌以彼此呼应的多声部歌唱保存语言、故事和生活经验；鼓楼与村寨中的集体歌唱，是理解黔东南文化的一扇窗口，并不能替代苗族等其他社群的独特传统。",
+    "english": "Qian contains many distinct cultural communities. Dong grand song preserves language, stories and experience through interweaving vocal parts. Communal singing in villages offers one view of southeastern Guizhou, alongside the different traditions of Miao and other peoples.",
+    "sources": [
+      "https://www.unesco.org/archives/multimedia/document-3469",
+      "https://en.chinaculture.org/focus/2006-11/20/content_361530_4.htm"
+    ],
+    "photoFile": "Zhaoxing1.JPG",
+    "photoSubject": {
+      "zh-CN": "肇兴侗寨",
+      "en": "Zhaoxing Dong village"
+    }
+  },
+  "CHN:dian": {
+    "photoArticle": "Stone Forest",
+    "chinese": "滇中文化的一条鲜明线索是撒尼彝族的口头与织绣艺术。《阿诗玛》在讲唱中传递人物故事与集体记忆，撒尼刺绣则把审美和手艺织入日常服饰；石林是理解这些传统所处生活环境的入口。",
+    "english": "Sani Yi oral and textile arts offer a distinctive perspective on central Yunnan. Ashima carries narrative and collective memory through performance, while embroidery places skill and aesthetic knowledge in everyday clothing. Shilin provides a landscape setting for these traditions.",
+    "sources": [
+      "https://www.ihchina.cn/news_1_details/11122.html",
+      "https://www.ihchina.cn/project_details/14189/"
+    ]
+  },
+  "CHN:dian-south": {
+    "photoArticle": "Jingmai Mountain",
+    "chinese": "滇南的文化山林，可以从景迈山古茶林理解。布朗族、傣族等社群将林下种茶、村落布局与祭祀习俗联系起来，使茶不仅是产品，也成为人与森林长期相处的知识和生活秩序。",
+    "english": "Jingmai's old tea forests reveal a cultural landscape of southern Yunnan. Blang, Dai and other communities connect understory tea cultivation with settlement and ritual, making tea part of a sustained relationship between people and forest.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1665/"
+    ],
+    "photoFile": "Old Tea Forest of the Jingmai Mountain.jpg",
+    "photoSubject": {
+      "zh-CN": "景迈山古茶林入口",
+      "en": "Entrance to the old tea forest of Jingmai Mountain"
+    }
+  },
+  "CHN:dian-west": {
+    "photoArticle": "Three Pagodas",
+    "chinese": "滇西文化的一条鲜明线索是白族的待客礼俗。三道茶以不同滋味组织饮茶过程，将茶与交往、祝愿和人生体验联系起来；它在家庭及节庆中延续，使日常待客也成为传递地方文化的场合。",
+    "english": "Bai hospitality offers a distinctive perspective on western Yunnan. The Three-Course Tea tradition organises a shared encounter through contrasting flavours, connecting tea with social ties, good wishes and reflections on life in family and festive settings.",
+    "sources": [
+      "https://www.ihchina.cn/Article/Index/detail?id=15248"
+    ]
+  },
+  "CHN:qingzang": {
+    "photoArticle": "Potala Palace",
+    "chinese": "西藏文化中的寺院艺术、藏戏与跨山地交流相互联系。藏戏将歌舞、叙事和信仰经验结合起来；喜马拉雅沿线的尼泊尔、不丹、拉达克等地，通过商路与宗教往来建立联系，也发展出各具特色的语言、艺术和生活传统。",
+    "english": "Monastic arts, opera and exchanges across mountain routes intertwine in Tibetan culture. Tibetan opera joins narrative, song, dance and religious experience. Himalayan communities in Nepal, Bhutan and Ladakh have connections through trade and religious exchange, alongside distinctive languages, arts and ways of life.",
+    "sources": [
+      "https://ich.unesco.org/en/RL/tibetan-opera-00208",
+      "https://hplahaulspiti.nic.in/history/"
+    ]
+  },
+  "CHN:guanzhong": {
+    "photoArticle": "Giant Wild Goose Pagoda",
+    "chinese": "关陇文化保存了帝国都城与远距离交流的多重印记。秦始皇陵的空间秩序与陶俑塑造展现秦代的制度和工艺；西安的佛塔等遗存又提示，后来的城市文化持续吸收着外来的思想与艺术。",
+    "english": "Guan–Long carries layered memories of imperial capitals and distant exchange. The First Qin Emperor's mausoleum reveals institutional order and skilled craftsmanship, while Xi'an's Buddhist monuments point to later encounters with travelling ideas and artistic traditions.",
+    "sources": [
+      "https://whc.unesco.org/en/list/441/",
+      "https://whc.unesco.org/en/list/1442/"
+    ]
+  },
+  "CHN:shanbei": {
+    "photoArticle": "Yaodong",
+    "chinese": "陕北文化的声音来自黄土高原的日常经验。山歌、劳动歌曲和小调以地方语言表达赶路、劳作与情感；窑洞聚落的生活环境与口耳相传的歌声相互映照，保存具体而有温度的地方记忆。",
+    "english": "Northern Shaanxi's songs grow from everyday experience on the Loess Plateau. Work songs, mountain songs and short tunes voice travel, labour and feeling in local speech; cave-dwelling settlements provide one setting for these orally transmitted memories.",
+    "sources": [
+      "https://www.ihchina.cn/project_details/12602/"
+    ],
+    "photoFile": "黄土窑洞式建筑典范-姜氏庄园 - panoramio.jpg",
+    "photoSubject": {
+      "zh-CN": "米脂姜氏庄园的窑洞建筑",
+      "en": "Jiang family manor cave dwellings, Mizhi"
+    }
+  },
+  "CHN:shannan": {
+    "photoArticle": "Wudang Mountains",
+    "chinese": "秦巴文化在山路与信仰空间中呈现多种层次。武当山的宫观把道教修行、建筑技艺和山势组织在一起，形成顺应地形的文化景观；这只是秦岭以南众多地方传统中的一条线索。",
+    "english": "Qin–Ba culture includes varied histories of mountain routes and sacred places. Wudang's temples combine Daoist practice, architecture and terrain in a carefully composed cultural landscape: one strand among the region's many local traditions.",
+    "sources": [
+      "https://whc.unesco.org/en/list/705/"
+    ]
+  },
+  "CHN:hexi": {
+    "photoArticle": "Mogao Caves",
+    "chinese": "河西文化的鲜明特点是交通与艺术的汇流。敦煌莫高窟的壁画、雕塑和建筑，在漫长时间里吸收不同地区的宗教与艺术语言；石窟让丝路交流从抽象路线变成可以观看的细节。",
+    "english": "Exchange is a defining cultural thread of Hexi. Mogao's murals, sculpture and architecture absorbed religious and artistic languages from different regions over many centuries, making Silk Road connections visible in material detail.",
+    "sources": [
+      "https://whc.unesco.org/en/list/440/"
+    ]
+  },
+  "CHN:hehuang": {
+    "photoArticle": "Kumbum Monastery",
+    "chinese": "河湟文化在多种语言、信仰和生活方式的相遇中形成。花儿由不同族群共享，在野外歌唱与花儿会中传播；这种跨社群的音乐实践，和寺院、城镇等景观一起，呈现区域文化的多样联系。",
+    "english": "Hehuang culture emerges through encounters among languages, beliefs and ways of life. Hua'er songs are shared across communities and transmitted in outdoor singing gatherings, revealing cultural connections alongside the region's varied sacred and urban landscapes.",
+    "sources": [
+      "https://www.ihchina.cn/huaer.html"
+    ]
+  },
+  "CHN:ningxia": {
+    "photoArticle": "Western Xia mausoleums",
+    "chinese": "宁夏文化有多重历史层次，西夏陵是其中鲜明的一页。陵园的布局、建筑遗存与随葬制度保存党项人建立的西夏王朝的记忆，也展示不同文化传统在同一制度与工艺体系中的交汇。",
+    "english": "Ningxia's cultural history has many layers; the Xixia tombs preserve one distinctive chapter. Their layouts, surviving architecture and burial practices record the Tangut dynasty and the meeting of different traditions within its institutions and craftsmanship.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1736/"
+    ]
+  },
+  "CHN:xinjiang-north": {
+    "photoArticle": "Kanas Lake",
+    "chinese": "北疆文化包含草原与山地社群的多种传统。哈萨克冬不拉音乐以器乐叙事传递故事和生活经验，口传与聚会是重要的延续方式；图瓦等其他社群又保有不同的语言、音乐与聚落记忆。",
+    "english": "Northern Xinjiang includes diverse pastoral and mountain communities. Kazakh dombra music carries stories and experience through instrumental performance and oral transmission, while Tuvan and other communities maintain distinct languages, music and settlement histories.",
+    "sources": [
+      "https://ich.unesco.org/en/RL/kazakh-traditional-art-of-dombra-kuy-00996"
+    ],
+    "photoFile": "Hemu Village in the snow.jpg",
+    "photoSubject": {
+      "zh-CN": "雪中的禾木村",
+      "en": "Hemu village in the snow"
+    }
+  },
+  "CHN:xinjiang-east": {
+    "photoArticle": "Jiaohe Ruins",
+    "chinese": "东疆文化可从绿洲城址与丝路交通读起。交河等遗址记录聚落、宗教和商旅活动的组织方式；穿越干旱地带的路线不断带来技术、艺术与信仰的交换，使绿洲成为文化相遇的节点。",
+    "english": "Eastern Xinjiang's oasis sites reveal cultures shaped by Silk Road movement. Ruins such as Jiaohe preserve patterns of settlement, religion and travel; routes across dry landscapes carried technologies, artistic forms and beliefs between communities.",
+    "sources": [
+      "https://whc.unesco.org/en/list/1442/"
+    ]
+  },
+  "CHN:xinjiang-south": {
+    "photoArticle": "Id Kah Mosque",
+    "chinese": "南疆文化的重要线索之一是维吾尔木卡姆。歌唱、器乐、诗歌和舞蹈共同构成丰富的表演传统，在不同地方形成各自的风格；绿洲聚落与公共空间，是这些艺术及其社区记忆长期生长的场所。",
+    "english": "Uyghur Muqam offers an important perspective on southern Xinjiang. Singing, instruments, poetry and dance combine in rich performance traditions with distinct local forms, rooted in the social spaces and memories of oasis communities.",
+    "sources": [
+      "https://ich.unesco.org/en/RL/uyghur-muqam-of-xinjiang-00109"
+    ]
+  },
+  "CHN:taiwan": {
+    "photoArticle": "Longshan Temple (Taipei)",
+    "chinese": "台湾文化由原住民族传统、不同移民经验与持续的在地转化共同构成。庙宇、祭典和海洋信仰记录聚落的形成与跨海联系；它们是多元文化的一部分，不能概括岛上所有语言、族群与生活经验。",
+    "english": "Taiwan's cultures include Indigenous traditions, varied migration histories and continuing local adaptation. Temples, festivals and maritime beliefs record settlement and connections across the sea, forming one part of a diverse cultural life rather than defining every community.",
+    "sources": [
+      "https://the.nmth.gov.tw/nmth/zh-TW/Theme/Detail/97d37aa9-41a4-4cc1-a1b0-caacc4d9c89c"
+    ]
+  }
+}

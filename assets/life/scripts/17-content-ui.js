@@ -1,5 +1,10 @@
 const friendMemoryLayer = document.getElementById('friendMemoryLayer');
 const friendMemoryState = { activeId: null, trigger: null, feature: null };
+const friendInteractionLabels = {
+    en: { hint: 'Choose a person to see their photos. Choose them again to visit their homepage.', again: 'Choose {name} again to visit their homepage.' },
+    'zh-CN': { hint: '点一次人物看照片，再点同一人物访问主页。', again: '再点一次 {name}，即可访问主页。' },
+    'zh-TW': { hint: '點一次人物看照片，再點同一人物造訪主頁。', again: '再點一次 {name}，即可造訪主頁。' }
+};
 
 function updateFriendMemoryCopy() {
     if (!friendMemoryLayer) return;
@@ -9,7 +14,10 @@ function updateFriendMemoryCopy() {
     });
     const selected = document.querySelector(`.friend-name[data-friend-trigger="${friendMemoryState.activeId}"]`);
     const name = selected?.dataset.friendName || '';
-    const hint = friendMemoryState.activeId ? copy.friends_active.replace('{name}', name) : copy.friends_hint;
+    const interaction = friendInteractionLabels[state.currentLang] || friendInteractionLabels.en;
+    const hint = friendMemoryState.activeId
+        ? copy.friends_active.replace('{name}', name) + (selected?.dataset.friendHomepage ? ' ' + interaction.again.replace('{name}', name) : '')
+        : interaction.hint;
     document.querySelectorAll('#friendInteractionHint, [data-friend-hint]').forEach(element => {
         element.textContent = hint;
     });
@@ -35,11 +43,24 @@ function updateFriendMemoryCopy() {
 
 function positionFriendMemories() {
     if (!friendMemoryLayer || friendMemoryLayer.hidden) return;
-    const compact = innerHeight < 560;
-    friendMemoryLayer.classList.toggle('is-compact', compact);
-    const width = Math.min(880, innerWidth - 48);
-    const left = (innerWidth - width) / 2;
-    const top = Math.max(100, Math.min(140, innerHeight * .13));
+    const panel = dom.panel.getBoundingClientRect();
+    const leftSpace = panel.left - 48;
+    const rightSpace = innerWidth - panel.right - 48;
+    const inline = innerWidth <= 1024 || innerHeight < 560 || Math.max(leftSpace, rightSpace) < 320;
+    friendMemoryLayer.classList.toggle('is-inline', inline);
+    friendMemoryLayer.classList.remove('is-compact');
+    // Keep the selected person available for the second activation. On phones
+    // the photos become a short strip in the same scrollable Friends card.
+    const parent = inline ? friendMemoryState.feature : document.body;
+    if (parent && friendMemoryLayer.parentElement !== parent) parent.append(friendMemoryLayer);
+    if (inline) {
+        Object.assign(friendMemoryLayer.style, { left: '', top: '', width: '', height: '' });
+        return;
+    }
+    const available = Math.max(leftSpace, rightSpace);
+    const width = Math.min(760, available);
+    const left = leftSpace >= rightSpace ? 24 + (leftSpace - width) / 2 : panel.right + 24 + (rightSpace - width) / 2;
+    const top = Math.max(96, Math.min(140, innerHeight * .13));
     const height = Math.min(720, innerHeight - top - 38);
     friendMemoryLayer.style.setProperty('--friend-card-width', `${Math.min(240, Math.max(72, (height - 90) * 1.15))}px`);
     Object.assign(friendMemoryLayer.style, { left: `${left}px`, top: `${top}px`, width: `${width}px`, height: `${height}px` });
@@ -55,8 +76,6 @@ function closeFriendMemories(restoreFocus = false) {
     friendMemoryLayer.hidden = true;
     friendMemoryLayer.querySelector('.friend-memory-field').replaceChildren();
     document.body.classList.remove('friend-memories-open');
-    dom.panel.inert = false;
-    dom.panel.setAttribute('aria-hidden', 'false');
     updateFriendMemoryCopy();
     if (restoreFocus && trigger?.isConnected && trigger.getClientRects().length) trigger.focus({ preventScroll: true });
     return true;
@@ -73,17 +92,28 @@ function showFriendMemories(link) {
     friendMemoryLayer.querySelector('.friend-memory-field').replaceChildren(template.content.cloneNode(true));
     if (friendMemoryState.feature) friendMemoryState.feature.dataset.activeFriend = friendId;
     document.body.classList.add('friend-memories-open');
-    dom.panel.inert = true;
-    dom.panel.setAttribute('aria-hidden', 'true');
     friendMemoryLayer.hidden = false;
     updateFriendMemoryCopy();
     positionFriendMemories();
-    friendMemoryLayer.querySelector('.friend-memory-close').focus({ preventScroll: true });
+    friendMemoryState.trigger?.focus({ preventScroll: true });
+    if (friendMemoryLayer.classList.contains('is-inline')) {
+        requestAnimationFrame(() => {
+            if (!friendMemoryLayer.hidden && friendMemoryState.activeId === friendId) friendMemoryLayer.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+        });
+    }
     return true;
 }
 
 if (friendMemoryLayer) {
     document.body.append(friendMemoryLayer);
+    document.querySelectorAll('.friends-feature').forEach((feature, index) => {
+        const hint = feature.querySelector('.friends-hint');
+        if (hint && !hint.id) hint.id = `friendInteractionHint-${index}`;
+        feature.querySelectorAll('.friend-name').forEach(button => {
+            button.setAttribute('aria-controls', friendMemoryLayer.id);
+            if (hint) button.setAttribute('aria-describedby', hint.id);
+        });
+    });
     document.querySelectorAll('[data-friend-trigger]').forEach(link => {
         const highlight = active => {
             link.closest('.friends-feature')?.querySelectorAll('.friend-person').forEach(person => {
@@ -96,10 +126,16 @@ if (friendMemoryLayer) {
         link.addEventListener('blur', () => highlight(false));
         link.addEventListener('click', event => {
             event.preventDefault();
-            if (friendMemoryState.activeId !== link.dataset.friendTrigger) showFriendMemories(link);
+            event.stopPropagation();
+            if (friendMemoryState.activeId !== link.dataset.friendTrigger) {
+                showFriendMemories(link);
+            } else {
+                const homepage = document.getElementById('friendMemoryHomepage');
+                if (homepage.hasAttribute('href')) homepage.click();
+            }
         });
         link.addEventListener('keydown', event => {
-            if (event.key !== ' ') return;
+            if (event.key !== ' ' && !(event.key === 'Enter' && !link.matches('button, a[href]'))) return;
             event.preventDefault();
             link.click();
         });

@@ -1,0 +1,14 @@
+{
+  "generated": "2026-11-16",
+  "source": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/data/east_asia.npz",
+  "source_sha256": "5f4a727e39a02a4e63e0a139ae1c6395addbfc716940a4528148e3393c3a15ce",
+  "output_sha256": "477a4dcaebd0c49f38ad1bc5be1f3166f092d823bbb40a7bc168a8207ee2b508",
+  "unchanged": {
+    "elevation": true,
+    "mask": true,
+    "x": true,
+    "y": true
+  },
+  "crs": "+proj=eqc +lat_ts=34 +lat_0=0 +lon_0=125.0 +units=m +no_defs +R=6378137",
+  "old_archives_preserved": true
+}

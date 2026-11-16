@@ -1,0 +1,14 @@
+{
+  "id": "S2B_49PHM_20250909_0_L2A",
+  "datetime": "2025-09-09T02:55:02.526000Z",
+  "source": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/P/HM/2025/9/S2B_49PHM_20250909_0_L2A/TCI.tif",
+  "license": "Copernicus Sentinel Data Legal Notice",
+  "license_url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+  "credit": "Contains modified Copernicus Sentinel data (2025), processed by ESA / Element 84",
+  "bbox": [
+    114.35,
+    10.36,
+    114.38,
+    10.39
+  ]
+}

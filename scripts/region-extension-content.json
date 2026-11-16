@@ -1,0 +1,168 @@
+{
+  "version": "20261116-himalayan-extensions",
+  "entries": {
+    "BTN": {
+      "label": {
+        "en": "Bhutan",
+        "zh-CN": "不丹",
+        "zh-TW": "不丹"
+      },
+      "description": {
+        "en": "Bhutan’s dzongs, monasteries and villages occupy Himalayan valleys. Buddhist traditions and local history meet in fortress-monasteries, carved timber, murals and festivals. Dzongs combine religious and administrative roles, while house forms and everyday traditions vary across the country.",
+        "zh-CN": "不丹的宗堡、寺院和村落沿喜马拉雅山地的河谷展开。佛教传统与本地历史共同塑造了宗堡、木雕、壁画和节庆，宗堡兼具宗教与行政功能；不同地区也保留各自的民居形制与生活传统。",
+        "zh-TW": "不丹的宗堡、寺院和村落沿喜馬拉雅山地的河谷展開。佛教傳統與本地歷史共同塑造了宗堡、木雕、壁畫和節慶，宗堡兼具宗教與行政功能；不同地區也保留各自的民居形制與生活傳統。"
+      },
+      "source": "https://bhutan.travel/experiences-culture",
+      "textSources": [
+        "https://bhutan.travel/experiences-culture"
+      ],
+      "textLicense": "Original editorial description; factual references linked. Source articles retain their own rights.",
+      "kind": "extension",
+      "lngLat": [
+        90.435,
+        27.417
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Bhutan",
+      "coordinateRole": "regional-reference",
+      "photo": {
+        "src": "assets/maps/regions/photos/himalaya-c929e92170f91482.webp",
+        "credit": "Original: Nina R from Africa Derivative work: UnpetitproleX · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Paro_Taktsang,_Bhutan_(edited).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": {
+          "en": "Paro Taktsang monastery above the Paro valley, Bhutan.",
+          "zh-CN": "不丹帕罗河谷上方的虎穴寺。",
+          "zh-TW": "不丹帕羅河谷上方的虎穴寺。"
+        },
+        "place": "Paro Taktsang",
+        "originalFile": "Paro Taktsang, Bhutan (edited).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "textKind": "editorial-cultural"
+    },
+    "IND:LahaulSpiti": {
+      "label": {
+        "en": "Lahaul and Spiti",
+        "zh-CN": "拉豪尔与斯皮提",
+        "zh-TW": "拉豪爾與斯皮提"
+      },
+      "description": {
+        "en": "Lahaul and Spiti are two Himalayan valleys linked by Kunzum Pass and now joined in one district. Kardang and Dhankar were their earlier centres. Spiti had long ties of rule with Ladakh, while Lahaul changed hands between Ladakh and Kullu, leaving distinct but interconnected histories.",
+        "zh-CN": "拉豪尔与斯皮提是昆祖姆山口两侧的两个高山河谷，今天合为一个行政区。卡尔当与丹卡分别是两地旧时的重要中心。斯皮提曾长期隶属拉达克，拉豪尔则在拉达克与库鲁势力之间数度易手，两地拥有彼此相连又各具特点的历史。",
+        "zh-TW": "拉豪爾與斯皮提是昆祖姆山口兩側的兩個高山河谷，今天合爲一個行政區。卡爾當與丹卡分別是兩地舊時的重要中心。斯皮提曾長期隸屬拉達克，拉豪爾則在拉達克與庫魯勢力之間數度易手，兩地擁有彼此相連又各具特點的歷史。"
+      },
+      "source": "https://hplahaulspiti.nic.in/about-district/",
+      "textSources": [
+        "https://hplahaulspiti.nic.in/about-district/",
+        "https://hplahaulspiti.nic.in/history/"
+      ],
+      "textLicense": "Original editorial description; factual references linked. Source articles retain their own rights.",
+      "kind": "extension",
+      "lngLat": [
+        77.6,
+        32.5
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Lahaul_and_Spiti_district",
+      "coordinateRole": "regional-reference",
+      "photo": {
+        "src": "assets/maps/regions/photos/himalaya-e30cee8dcccef5e7.webp",
+        "credit": "Timothy A. Gonsalves · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Kardhang_Biling_Bhaga_Dhauladhar_Oct22_A7C_04645.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Kardang and Biling beside the Bhaga River, seen from Shashur Gompa in Lahaul.",
+          "zh-CN": "从拉豪尔沙舒尔寺眺望巴加河及卡尔当、比林村落。",
+          "zh-TW": "從拉豪爾沙舒爾寺眺望巴加河及卡爾當、比林村落。"
+        },
+        "place": "Lahaul and Spiti district",
+        "originalFile": "Kardhang Biling Bhaga Dhauladhar Oct22 A7C 04645.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "textKind": "editorial-cultural"
+    },
+    "poi:BTN:1": {
+      "label": {
+        "en": "Paro Taktsang · Tiger’s Nest",
+        "zh-CN": "虎穴寺",
+        "zh-TW": "虎穴寺"
+      },
+      "description": {
+        "en": "Paro Taktsang occupies a cliff above the Paro valley. The monastery surrounds meditation caves associated with Guru Padmasambhava in Buddhist tradition. Its complex was first built in 1692; white walls and gilded roofs rise against the rock at this important Bhutanese pilgrimage site.",
+        "zh-CN": "虎穴寺建在帕罗河谷上方的陡壁，寺院围绕与莲花生大师传说相连的修行洞窟展开。建筑群始建于1692年，白墙与金顶依山层叠，是不丹重要的朝圣地。",
+        "zh-TW": "虎穴寺建在帕羅河谷上方的陡壁，寺院圍繞與蓮花生大師傳說相連的修行洞窟展開。建築羣始建於1692年，白牆與金頂依山層疊，是不丹重要的朝聖地。"
+      },
+      "source": "https://dcdd.moha.gov.bt/collection/paro-taktshang/",
+      "textSources": [
+        "https://dcdd.moha.gov.bt/collection/paro-taktshang/"
+      ],
+      "textLicense": "Original editorial description; factual references linked. Source articles retain their own rights.",
+      "kind": "landmark",
+      "lngLat": [
+        89.36348889,
+        27.49191111
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Paro_Taktsang",
+      "coordinateRole": "landmark-anchor",
+      "photo": {
+        "src": "assets/maps/regions/photos/himalaya-c929e92170f91482.webp",
+        "credit": "Original: Nina R from Africa Derivative work: UnpetitproleX · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Paro_Taktsang,_Bhutan_(edited).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": {
+          "en": "Paro Taktsang monastery above the Paro valley, Bhutan.",
+          "zh-CN": "不丹帕罗河谷上方的虎穴寺。",
+          "zh-TW": "不丹帕羅河谷上方的虎穴寺。"
+        },
+        "place": "Paro Taktsang",
+        "originalFile": "Paro Taktsang, Bhutan (edited).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "parentCity": "BTN",
+      "textKind": "editorial-cultural"
+    },
+    "poi:IND:LahaulSpiti:1": {
+      "label": {
+        "en": "Key Monastery",
+        "zh-CN": "基寺",
+        "zh-TW": "基寺"
+      },
+      "description": {
+        "en": "Key Monastery rises on a hill near Kaza in the Spiti valley. Its compact buildings connect through narrow passages and stairways. It remains a centre of monastic learning, with murals, thangkas and manuscripts, while its summer Cham performances bring ritual music and masked dance into the courtyards.",
+        "zh-CN": "基寺位于斯皮提河谷卡扎附近的山丘上，密集的建筑由狭窄通道与阶梯连接。这里仍是僧侣学习的场所，保存着壁画、唐卡和经籍；夏季的羌姆仪式将宗教音乐与面具舞带入寺院。",
+        "zh-TW": "基寺位於斯皮提河谷卡扎附近的山丘上，密集的建築由狹窄通道與階梯連接。這裏仍是僧侶學習的場所，保存着壁畫、唐卡和經籍；夏季的羌姆儀式將宗教音樂與面具舞帶入寺院。"
+      },
+      "source": "https://hplahaulspiti.nic.in/tourist-place/key-monastery/",
+      "textSources": [
+        "https://hplahaulspiti.nic.in/tourist-place/key-monastery/"
+      ],
+      "textLicense": "Original editorial description; factual references linked. Source articles retain their own rights.",
+      "kind": "landmark",
+      "lngLat": [
+        78.01194444,
+        32.29777778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Key_Monastery",
+      "coordinateRole": "landmark-anchor",
+      "photo": {
+        "src": "assets/maps/regions/photos/himalaya-30e2b8af169b4b43.webp",
+        "credit": "Pranav perspective · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1000_Year_loop.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Key Monastery above the Spiti valley at sunset.",
+          "zh-CN": "夕阳下俯瞰斯皮提河谷的基寺。",
+          "zh-TW": "夕陽下俯瞰斯皮提河谷的基寺。"
+        },
+        "place": "Key Monastery",
+        "originalFile": "1000 Year loop.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "parentCity": "IND:LahaulSpiti",
+      "textKind": "editorial-cultural"
+    }
+  }
+}

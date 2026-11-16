@@ -1,0 +1,31 @@
+{
+  "lighting": {
+    "sun_elevation_degrees": 32,
+    "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+    "sun_energy": 3.664663076400757,
+    "sun_angular_diameter_degrees": 3.0,
+    "world_strength": 0.45,
+    "horizontal_illuminance_matched_to_previous": true
+  },
+  "render_engine": "Blender 4.5.3 LTS / Cycles ONEAPI",
+  "samples": 192,
+  "native_render_size": [
+    6000,
+    4770
+  ],
+  "gpu_devices": [
+    "Intel(R) Arc(TM) 140T GPU (16GB)"
+  ],
+  "render_devices": [
+    "Intel(R) Arc(TM) 140T GPU (16GB)"
+  ],
+  "compute_device_type": "ONEAPI",
+  "unvisited_material": "#f1f3ee",
+  "administrative_outlines": false,
+  "sea_material": "#ddeaf1",
+  "postprocessing": "none",
+  "outputs": {
+    "east_asia-colour.png": "970eff72f9d68ab8c11fded6b4ef74d4524551d58a7e09cce8c82179be935672"
+  },
+  "verification_note": "Existing completed native render and original saved scene verified; Windows relative-path separators normalized. No rerender or scene resave."
+}

@@ -36,7 +36,7 @@ python scripts/validate-footprint-atlas.py
 
 打包器直接读取最新名单，同时更新中国和东亚中可见的城市，以及两图共享的文化区到访色彩和中国的省份视图。文化区按完整成员名单推导到访，东亚只显示其地图范围内的部分。拼错或不支持的城市全称会报错。已有地形和材质不变，原始工程不被改写。
 
-打包也会自动更新静态小图：`atlas-preview.json` 是轻量索引，`*-card-*.webp` 是 960 像素预览，`*-runtime.json` 按地图保存完整几何。小图支持视图切换，不支持缩放；点击「查看大图」才下载该图的完整几何和高清图片，期间显示预览与加载动画。只调整小图生成方式时，运行 `python scripts/build-footprint-previews.py` 即可，无需重新烤制。不要只更新完整 atlas 而遗漏这些预览文件。
+打包也会自动更新小图：`atlas-preview.json` 是轻量索引，`*-card-*.webp` 是 960 像素预览，`*-hits.json` 是小图悬停与点击轮廓，`*-runtime.json` 按地图保存亚像素精度的显示几何。文化区只保存 `boundary_path`，读取时用 `path || boundary_path`。小图支持视图切换和区域选择；点击「查看大图」先下载该图的显示几何和 1600 像素中图，放大时才请求原始高清图片。只调整小图生成方式时，运行 `python scripts/build-footprint-previews.py` 即可（需要 Pillow、Shapely），无需重新烤制。不要只更新完整 atlas 而遗漏这些预览及命中文件。原始几何、文化区成员和来源仍完整保存在 `atlas.json`；运行 `python scripts/validate-footprint-web-payloads.py` 检查显示误差、岛屿保留和体积预算。
 
 中国地图默认打开「文化区」，与「省份」「城市与路线」并列。分区综合文化和方言，以现有地级市边界近似组合，并允许跨省。当前中国文化彩色层为 `footprints/culture-regions-20261107/cultural/`；东亚文化概览为 `footprints/east-asia-cultural-20261108/overview/`，由配色文件的 `map_overview_archives.east_asia` 指定。主图和欧美概览继续使用 `selected-cultural-20261106/`。新增到访城市不需要重新烤制。各图使用独立色系，相同文化区在中国图用青瓷、东亚图用冰川色。
 
