@@ -1,0 +1,253 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "320100": {
+      "label": {
+        "en": "Nanjing",
+        "zh-CN": "南京市",
+        "zh-TW": "南京市"
+      },
+      "description": {
+        "en": "Nanjing is the capital of Jiangsu province in China. The city, which is located in the southwestern corner of the province, has 11 districts, an administrative area of 6,600 square kilometres , and as of 2021 a population of 9,423,400.",
+        "zh-CN": "南京市，简称「宁」，别称金陵、建业、建康、江宁，是中华人民共和国江苏省省会、副省级市，华东地区重要的中心城市，长三角核心城市，综合性交通和通信枢纽城市，以及科教中心城市之一，中国人民解放军东部战区司令部驻地。全市下辖11个区，总面积6582.31平方公里，地处江苏省西南部，是长江下游和长三角城市群重要产业城市，长江三角洲经济圈中心重要的经济城市，江苏省的政治、经济、金融、科教、文化、信息中心、交通枢纽，先进制造业基地，南京都市圈重要核心城市。",
+        "zh-TW": "南京市，簡稱「寧」，別稱金陵、建業、建康、江寧，是中華人民共和國江蘇省省會、副省級市，華東地區重要的中心城市，長三角核心城市，綜合性交通和通信樞紐城市，以及科教中心城市之一，中國人民解放軍東部戰區司令部駐地。全市下轄11個區，總面積6582.31平方公里，地處江蘇省西南部，是長江下游和長三角城市羣重要產業城市，長江三角洲經濟圈中心重要的經濟城市，江蘇省的政治、經濟、金融、科教、文化、信息中心、交通樞紐，先進製造業基地，南京都市圈重要核心城市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Nanjing"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        118.77888889,
+        32.06083333
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/205048e066764b19.webp",
+        "credit": "CL4-LCLC · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Xuanwuhu.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​玄武湖、荷花、遠山，自己拍攝",
+        "place": "玄武湖",
+        "originalFile": "Xuanwuhu.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:320100:69a6b179",
+      "urbanFocus": {
+        "label": {
+          "en": "Nanjing",
+          "zh-CN": "南京市",
+          "zh-TW": "南京市"
+        },
+        "lngLat": [
+          118.77888888888889,
+          32.060833333333335
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Nanjing.",
+          "zh-CN": "以南京市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以南京市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q16666#P625",
+        "source": "https://www.wikidata.org/wiki/Q16666",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q16666#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 2.4
+        }
+      }
+    },
+    "poi:320100:1": {
+      "label": {
+        "en": "Purple Mountain (Nanjing)",
+        "zh-CN": "紫金山",
+        "zh-TW": "紫金山"
+      },
+      "description": {
+        "en": "Purple Mountain or Zijin Shan is located on the eastern side of Nanjing in Jiangsu province, China.",
+        "zh-CN": "紫金山，又名蒋山、钟山、神烈山，是一处位于中国江苏省南京市东部的山陵。其东西向长度约7公里，南北向长度约3公里，面积约20平方公里。",
+        "zh-TW": "紫金山，又名蔣山、鍾山、神烈山，是一處位於中國江蘇省南京市東部的山陵。其東西向長度約7公里，南北向長度約3公里，面積約20平方公里。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%B4%AB%E9%87%91%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%B4%AB%E9%87%91%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Purple_Mountain_(Nanjing)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        118.845,
+        32.0702
+      ],
+      "parentCity": "320100",
+      "photo": {
+        "src": "assets/maps/regions/photos/69a0dd9dac4ca200.webp",
+        "credit": "Farm · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:PurpleMountain01.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "en:Purple Mountain, zh:紫金山",
+        "place": "紫金山",
+        "originalFile": "PurpleMountain01.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:320100:2": {
+      "label": {
+        "en": "Sun Yat-sen Mausoleum",
+        "zh-CN": "中山陵",
+        "zh-TW": "中山陵"
+      },
+      "description": {
+        "en": "The Sun Yat-sen Mausoleum is situated at the foot of the second peak of Purple Mountain in Nanjing, Jiangsu, China. Construction of the tomb started in January 1926, shortly after Sun Yat-sen's death, and was finished in spring of 1929.",
+        "zh-CN": "中山陵，是中华台北国父暨中国国民党总理孙中山的陵墓，位于中国大陆江苏省南京市玄武区孝陵卫街道紫金山南麓，东邻灵谷寺、西毗明孝陵。孙中山于1925年3月在北平市逝世后，国民政府和中国国民党遵照他的遗愿，在南京为其修建陵墓。",
+        "zh-TW": "中山陵，是中華臺北國父暨中國國民黨總理孫中山的陵墓，位於中國大陸江蘇省南京市玄武區孝陵衛街道紫金山南麓，東鄰靈谷寺、西毗明孝陵。孫中山於1925年3月在北平市逝世後，國民政府和中國國民黨遵照他的遺願，在南京爲其修建陵墓。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%B1%B1%E9%99%B5",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%B1%B1%E9%99%B5",
+        "https://en.wikipedia.org/wiki/Sun_Yat-sen_Mausoleum"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        118.8483,
+        32.0643
+      ],
+      "parentCity": "320100",
+      "photo": {
+        "src": "assets/maps/regions/photos/1f14699d660dc133.webp",
+        "credit": "Jiong Sheng from London, United Kingdom · CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hall_of_Sun_Yat-sen_Mausoleum.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "alt": "The main hall of Sun Yat-sen Mausoleum",
+        "place": "中山陵",
+        "originalFile": "Hall_of_Sun_Yat-sen_Mausoleum.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:320100:d9aec037": {
+      "label": {
+        "en": "Nanjing Fuzimiao",
+        "zh-CN": "南京夫子庙",
+        "zh-TW": "南京夫子廟"
+      },
+      "description": {
+        "en": "Nanjing Fuzimiao or Fuzimiao , is a Confucius Temple and former site of imperial examination hall located in southern Nanjing City on banks of the Qinhuai River.",
+        "zh-CN": "南京夫子庙，常简称夫子庙，是一座位于中华人民共和国江苏省南京市秦淮区秦淮河北岸贡院街的孔庙。「夫子」是孔子弟子对孔子的尊称。",
+        "zh-TW": "南京夫子廟，常簡稱夫子廟，是一座位於中華人民共和國江蘇省南京市秦淮區秦淮河北岸貢院街的孔廟。「夫子」是孔子弟子對孔子的尊稱。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E5%A4%AB%E5%AD%90%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E5%A4%AB%E5%AD%90%E5%BA%99",
+        "https://en.wikipedia.org/wiki/Nanjing_Fuzimiao"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        118.783786,
+        32.022579
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Nanjing_Fuzimiao",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/63d257a80898482a.webp",
+        "credit": "Kinden Kuo from Taipei, Taiwan · CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:LingXingMen_of_Nanjing_Confucian_Temple.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "alt": "南京夫子廟棂星门",
+        "place": "南京夫子庙",
+        "originalFile": "LingXingMen_of_Nanjing_Confucian_Temple.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:320100:9aa5b886": {
+      "label": {
+        "en": "Purple Mountain (Nanjing)",
+        "zh-CN": "紫金山",
+        "zh-TW": "紫金山"
+      },
+      "description": {
+        "en": "Purple Mountain or Zijin Shan is located on the eastern side of Nanjing in Jiangsu province, China.",
+        "zh-CN": "紫金山，又名蒋山、钟山、神烈山，是一处位于中国江苏省南京市东部的山陵。其东西向长度约7公里，南北向长度约3公里，面积约20平方公里。",
+        "zh-TW": "紫金山，又名蔣山、鍾山、神烈山，是一處位於中國江蘇省南京市東部的山陵。其東西向長度約7公里，南北向長度約3公里，面積約20平方公里。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%B4%AB%E9%87%91%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%B4%AB%E9%87%91%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Purple_Mountain_(Nanjing)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        118.845,
+        32.0702
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Purple_Mountain_(Nanjing)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/69a0dd9dac4ca200.webp",
+        "credit": "Farm · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:PurpleMountain01.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "en:Purple Mountain, zh:紫金山",
+        "place": "紫金山",
+        "originalFile": "PurpleMountain01.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:320100:69a6b179": {
+      "label": {
+        "en": "Xuanwu Lake",
+        "zh-CN": "玄武湖",
+        "zh-TW": "玄武湖"
+      },
+      "description": {
+        "en": "Xuanwu Lake is located in Xuanwu District in the central-northeast part of Nanjing, Jiangsu. It is near the Nanjing Railway Station and Jiming Temple.",
+        "zh-CN": "玄武湖位于江苏省南京市玄武区，六朝前称桑泊，曾经是中国最大的皇家园林湖泊，当代仅存的江南皇家园林。与杭州西湖、嘉兴南湖并称“江南三大名湖”。",
+        "zh-TW": "玄武湖位於江蘇省南京市玄武區，六朝前稱桑泊，曾經是中國最大的皇家園林湖泊，當代僅存的江南皇家園林。與杭州西湖、嘉興南湖並稱“江南三大名湖”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%8E%84%E6%AD%A6%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%8E%84%E6%AD%A6%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Xuanwu_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        118.79833333,
+        32.07305556
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Xuanwu_Lake",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/205048e066764b19.webp",
+        "credit": "CL4-LCLC · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Xuanwuhu.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​玄武湖、荷花、遠山，自己拍攝",
+        "place": "玄武湖",
+        "originalFile": "Xuanwuhu.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

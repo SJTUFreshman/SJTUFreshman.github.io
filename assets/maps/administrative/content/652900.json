@@ -1,0 +1,189 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "652900": {
+      "label": {
+        "en": "Aksu Prefecture",
+        "zh-CN": "阿克苏地区",
+        "zh-TW": "阿克蘇地區"
+      },
+      "description": {
+        "en": "Aksu Prefecture is located in west-central Xinjiang, China. It has an area of 131,161 km2 and 2.714 million inhabitants at the 2020 census whom 715,319 lived in the built-up area made up of Aksu urban district.",
+        "zh-CN": "阿克苏地区是中华人民共和国新疆维吾尔自治区下辖的地区，位于新疆中西部。区境北界伊犁州，东接巴音郭楞州，南邻和田地区，西毗喀什地区、克孜勒苏州，西北抵吉尔吉斯斯坦、哈萨克斯坦，中部将阿拉尔市包围。",
+        "zh-TW": "阿克蘇地區是中華人民共和國新疆維吾爾自治區下轄的地區，位於新疆中西部。區境北界伊犁州，東接巴音郭楞州，南鄰和田地區，西毗喀什地區、克孜勒蘇州，西北抵吉爾吉斯斯坦、哈薩克斯坦，中部將阿拉爾市包圍。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%98%BF%E5%85%8B%E8%8B%8F%E5%9C%B0%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%98%BF%E5%85%8B%E8%8B%8F%E5%9C%B0%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Aksu_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        80.29,
+        41.18
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/03675e2d8fdc7802.webp",
+        "credit": "HaziiDozen · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2026%E5%B9%B410%E6%9C%88%E7%9A%84%E5%85%8B%E5%AD%9C%E5%B0%94%E5%8D%83%E4%BD%9B%E6%B4%9E_Kizil_Cave-Temple_Complex_in_October_2026.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​2026年10月的克孜尔千佛洞",
+        "place": "克孜尔千佛洞",
+        "originalFile": "2026年10月的克孜尔千佛洞_Kizil_Cave-Temple_Complex_in_October_2026.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:652900:9df23fbc",
+      "urbanFocus": {
+        "label": {
+          "en": "Aksu Prefecture",
+          "zh-CN": "阿克苏地区",
+          "zh-TW": "阿克蘇地區"
+        },
+        "lngLat": [
+          80.27195,
+          41.16968
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Aksu Prefecture.",
+          "zh-CN": "以阿克苏地区的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以阿克蘇地區的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q421638#P625",
+        "source": "https://www.wikidata.org/wiki/Q421638",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q421638#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.59
+        }
+      }
+    },
+    "poi:admin:652900:f35800f2": {
+      "label": {
+        "en": "Subashi Temple",
+        "zh-CN": "苏巴什佛寺遗址",
+        "zh-TW": "蘇巴什佛寺遺址"
+      },
+      "description": {
+        "en": "Subashi Temple is a ruined Buddhist temple near Kucha in the Taklamakan Desert, on the ancient Silk Road, in Xinjiang, Western China.",
+        "zh-CN": "苏巴什佛寺遗址，又称昭怙厘大寺、雀离大寺、雀厘大清静寺，位于新疆库车县城东北却勒塔格山南麓，1996年11月20日，苏巴什佛寺遗址被中华人民共和国国务院公布为第四批全国重点文物保护单位。",
+        "zh-TW": "蘇巴什佛寺遺址，又稱昭怙釐大寺、雀離大寺、雀釐大清靜寺，位於新疆庫車縣城東北卻勒塔格山南麓，1996年11月20日，蘇巴什佛寺遺址被中華人民共和國國務院公佈爲第四批全國重點文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8B%8F%E5%B7%B4%E4%BB%80%E4%BD%9B%E5%AF%BA%E9%81%97%E5%9D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8B%8F%E5%B7%B4%E4%BB%80%E4%BD%9B%E5%AF%BA%E9%81%97%E5%9D%80",
+        "https://en.wikipedia.org/wiki/Subashi_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        83.04694444,
+        41.85583333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Subashi_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "652900",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2c5b11d82952c6fe.webp",
+        "credit": "HaziiDozen · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%8B%8F%E5%B7%B4%E4%BB%80%E4%BD%9B%E5%AF%BA%E9%81%97%E5%9D%80%E8%A5%BF%E5%AF%BA%E4%B8%AD%E9%83%A8%E4%BD%9B%E5%A1%94_the_pagoda_on_the_center_of_the_west_temple,_Subash_buddhist_ruins.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "the pagoda on the center of the west temple, Subash buddhist ruins",
+        "place": "苏巴什佛寺遗址",
+        "originalFile": "苏巴什佛寺遗址西寺中部佛塔_the_pagoda_on_the_center_of_the_west_temple,_Subash_buddhist_ruins.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:652900:9df23fbc": {
+      "label": {
+        "en": "Kizil Caves",
+        "zh-CN": "克孜尔千佛洞",
+        "zh-TW": "克孜爾千佛洞"
+      },
+      "description": {
+        "en": "The Kizil Caves are a set of Buddhist rock-cut caves located near Kizil Township in Baicheng County, Aksu Prefecture, Xinjiang, China.",
+        "zh-CN": "克孜尔千佛洞，又称克孜尔石窟或赫色尔石窟，中国佛教石窟，1961年公布的第一批全国重点文物保护单位之一，位于新疆拜城县克孜尔镇东南7千米明屋塔格山的悬崖上，南面是渭干河河谷。现存编号石窟共有236窟，大部分塑像都已被毁，还有81窟存有精美壁画，为古代龟兹国的文化遗存。",
+        "zh-TW": "克孜爾千佛洞，又稱克孜爾石窟或赫色爾石窟，中國佛教石窟，1961年公佈的第一批全國重點文物保護單位之一，位於新疆拜城縣克孜爾鎮東南7千米明屋塔格山的懸崖上，南面是渭幹河河谷。現存編號石窟共有236窟，大部分塑像都已被毀，還有81窟存有精美壁畫，爲古代龜茲國的文化遺存。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%85%8B%E5%AD%9C%E5%B0%94%E5%8D%83%E4%BD%9B%E6%B4%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%85%8B%E5%AD%9C%E5%B0%94%E5%8D%83%E4%BD%9B%E6%B4%9E",
+        "https://en.wikipedia.org/wiki/Kizil_Caves"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        82.50472222,
+        41.78444444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Kizil_Caves",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "652900",
+      "photo": {
+        "src": "assets/maps/administrative/photos/03675e2d8fdc7802.webp",
+        "credit": "HaziiDozen · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2026%E5%B9%B410%E6%9C%88%E7%9A%84%E5%85%8B%E5%AD%9C%E5%B0%94%E5%8D%83%E4%BD%9B%E6%B4%9E_Kizil_Cave-Temple_Complex_in_October_2026.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​2026年10月的克孜尔千佛洞",
+        "place": "克孜尔千佛洞",
+        "originalFile": "2026年10月的克孜尔千佛洞_Kizil_Cave-Temple_Complex_in_October_2026.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:652900:photo-146778318": {
+      "label": {
+        "en": "Century Square in Aksu City",
+        "zh-CN": "阿克苏地区城区景观",
+        "zh-TW": "阿克蘇地區城區景觀"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Aksu Prefecture, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现阿克苏地区城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現阿克蘇地區城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:20240322_Century_Square_in_Aksu_City.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:20240322_Century_Square_in_Aksu_City.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/81d686dd85bcfb02.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20240322_Century_Square_in_Aksu_City.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Century Square in Aksu City",
+        "place": "20240322 Century Square in Aksu City.jpg",
+        "originalFile": "20240322 Century Square in Aksu City.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            80.267717,
+            41.172828
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:20240322_Century_Square_in_Aksu_City.jpg"
+        }
+      },
+      "lngLat": [
+        80.267717,
+        41.172828
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:20240322_Century_Square_in_Aksu_City.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "652900"
+    }
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "460400": {
+      "label": {
+        "en": "Danzhou",
+        "zh-CN": "儋州市",
+        "zh-TW": "儋州市"
+      },
+      "description": {
+        "en": "Danzhou is a prefecture-level city in the northwest of the Chinese island province of Hainan. The administrative seat and urban center of Danzhou is Nada Town.",
+        "zh-CN": "儋州市，简称儋，是中华人民共和国海南省下辖的地级市，位于海南省西北部。市境东接临高县、澄迈县，南邻琼中黎族苗族自治县、白沙黎族自治县，西界昌江县，北临北部湾。",
+        "zh-TW": "儋州市，簡稱儋，是中華人民共和國海南省下轄的地級市，位於海南省西北部。市境東接臨高縣、澄邁縣，南鄰瓊中黎族苗族自治縣、白沙黎族自治縣，西界昌江縣，北臨北部灣。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%84%8B%E5%B7%9E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%84%8B%E5%B7%9E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Danzhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        109.5808,
+        19.5209
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/90ba49166e5081a6.webp",
+        "credit": "N509FZ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Entrance_of_Dongpo_Academy,_Danzhou_(20230327163531).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Su Shi was relegated to Danzhou in 1097.",
+        "place": "东坡书院",
+        "originalFile": "Entrance_of_Dongpo_Academy,_Danzhou_(20230327163531).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:460400:b267c0fd",
+      "urbanFocus": {
+        "label": {
+          "en": "Danzhou",
+          "zh-CN": "儋州市",
+          "zh-TW": "儋州市"
+        },
+        "lngLat": [
+          109.58333333333,
+          19.5
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Danzhou.",
+          "zh-CN": "以儋州市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以儋州市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q1015132#P625",
+        "source": "https://www.wikidata.org/wiki/Q1015132",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q1015132#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 2.06
+        }
+      }
+    },
+    "poi:admin:460400:b267c0fd": {
+      "label": {
+        "en": "Dongpo Academy",
+        "zh-CN": "东坡书院",
+        "zh-TW": "東坡書院"
+      },
+      "description": {
+        "en": "The Dongpo Academy or Dongpo Shuyuan , was an academy located in Hainan, China. It was originally built in 1098 in memory of the Song dynasty literary figure, Su Dongpo, who was exiled here.",
+        "zh-CN": "东坡书院位于中国海南省儋州市中和镇东郊，为苏轼故居遗址。明清时期改建。",
+        "zh-TW": "東坡書院位於中國海南省儋州市中和鎮東郊，爲蘇軾故居遺址。明清時期改建。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%9C%E5%9D%A1%E4%B9%A6%E9%99%A2",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%9C%E5%9D%A1%E4%B9%A6%E9%99%A2",
+        "https://en.wikipedia.org/wiki/Dongpo_Academy"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        109.353397,
+        19.742746
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Dongpo_Academy",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "460400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/90ba49166e5081a6.webp",
+        "credit": "N509FZ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Entrance_of_Dongpo_Academy,_Danzhou_(20230327163531).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Su Shi was relegated to Danzhou in 1097.",
+        "place": "东坡书院",
+        "originalFile": "Entrance_of_Dongpo_Academy,_Danzhou_(20230327163531).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:460400:photo-57001993": {
+      "label": {
+        "en": "Danzhou landscape view",
+        "zh-CN": "巡道工出品 photo by Xundaogong (7)",
+        "zh-TW": "巡道工出品 photo by Xundaogong (7)"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Danzhou, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现儋州市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現儋州市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%B7%A1%E9%81%93%E5%B7%A5%E5%87%BA%E5%93%81_photo_by_Xundaogong_-_panoramio_(7).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%B7%A1%E9%81%93%E5%B7%A5%E5%87%BA%E5%93%81_photo_by_Xundaogong_-_panoramio_(7).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7ffb5c0c74ac6d66.webp",
+        "credit": "xue siyang (df45086) · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%B7%A1%E9%81%93%E5%B7%A5%E5%87%BA%E5%93%81_photo_by_Xundaogong_-_panoramio_(7).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "巡道工出品 photo by Xundaogong",
+        "place": "巡道工出品 photo by Xundaogong - panoramio (7).jpg",
+        "originalFile": "巡道工出品 photo by Xundaogong - panoramio (7).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            109.586424,
+            19.520964
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%B7%A1%E9%81%93%E5%B7%A5%E5%87%BA%E5%93%81_photo_by_Xundaogong_-_panoramio_(7).jpg"
+        }
+      },
+      "lngLat": [
+        109.586424,
+        19.520964
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%B7%A1%E9%81%93%E5%B7%A5%E5%87%BA%E5%93%81_photo_by_Xundaogong_-_panoramio_(7).jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "460400"
+    }
+  }
+}

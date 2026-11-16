@@ -1,0 +1,127 @@
+{
+  "source": "/data/run01/scwb515/yangrunde/footprints-east-asia-cultural-20261108",
+  "directories": [
+    "__pycache__",
+    "logs",
+    "overview",
+    "overview/data",
+    "overview/renders",
+    "overview/scenes"
+  ],
+  "files": [
+    {
+      "path": "__pycache__/render_atlas.cpython-311.pyc",
+      "bytes": 22235,
+      "sha256": "3bad5cb2a92573523426480890224b692d2a5e3177da76f8b668ca72f2fbe6e7",
+      "mtime_ns": 1794120141805529644,
+      "mode": 33204
+    },
+    {
+      "path": "logs/render-304018.out",
+      "bytes": 20505,
+      "sha256": "2f6741a7358bbc1c8bf2c1293690162b06bd8ba0992815e98f1d9ced2128fd71",
+      "mtime_ns": 1794120246454154902,
+      "mode": 33204
+    },
+    {
+      "path": "logs/render-304091.out",
+      "bytes": 20505,
+      "sha256": "42935e274bede453c7b021dff4eda963c14c37ca2886b05f981bed1f51bf8ca7",
+      "mtime_ns": 1794121199714009766,
+      "mode": 33204
+    },
+    {
+      "path": "overview/data/east_asia.json",
+      "bytes": 1868915,
+      "sha256": "aafcac9db1af76dfd592932ac619d2f915c91015d2e9c568ddab26eea6497be7",
+      "mtime_ns": 1794120934217586000,
+      "mode": 33204
+    },
+    {
+      "path": "overview/data/east_asia.npz",
+      "bytes": 16773551,
+      "sha256": "db0aa30d57d1101fc66ea949ef3f1ffa095f43cd55f3aa3ce0506fba4482ae71",
+      "mtime_ns": 1794120934211752400,
+      "mode": 33204
+    },
+    {
+      "path": "overview/renders/east_asia-colour.png",
+      "bytes": 24203123,
+      "sha256": "da9e8ae14ddd6f33d23ca4ae11d5729120da6dc02f1218950036d5f6cb1ff845",
+      "mtime_ns": 1794121199069996535,
+      "mode": 33204
+    },
+    {
+      "path": "overview/renders/east_asia-render.json",
+      "bytes": 698,
+      "sha256": "ed92a4b976d881831ffe9c7ec1c3c6ffa2fc26d8b9056347d83b9dead0305203",
+      "mtime_ns": 1794121199646008368,
+      "mode": 33204
+    },
+    {
+      "path": "overview/scenes/east_asia-colour.blend",
+      "bytes": 68955377,
+      "sha256": "047a8f82cc5c28a668cb652a3b3a034d4a71cd68b6ca8620c316542a6dc589fb",
+      "mtime_ns": 1794121088179579284,
+      "mode": 33204
+    },
+    {
+      "path": "overview/scenes/east_asia-scenes.json",
+      "bytes": 452,
+      "sha256": "1a9fdea691a2b1ecbf40df67f2850ed3ed5b1047ed9387c74c0e382573267fff",
+      "mtime_ns": 1794121199614007711,
+      "mode": 33204
+    },
+    {
+      "path": "render-footprint-atlas.py",
+      "bytes": 10851,
+      "sha256": "119ec5dbc8f0caeda0ceaaf2ca3c68ba905fbd6d985b33f27694cd019f495381",
+      "mtime_ns": 1793935783189520400,
+      "mode": 33204
+    },
+    {
+      "path": "render-footprint-sectional.slurm",
+      "bytes": 1247,
+      "sha256": "406f461737cc0516c0e6c5fe440add8e41d3b5475f296126ebb7333c188310ec",
+      "mtime_ns": 1794119494810060300,
+      "mode": 33204
+    },
+    {
+      "path": "render_atlas.py",
+      "bytes": 12456,
+      "sha256": "b2958e4c0207ff99b7b09bf3dc93ca9e5e0785f504670ca2455fe200757989be",
+      "mtime_ns": 1793260788466698200,
+      "mode": 33204
+    },
+    {
+      "path": "results-final.tar.gz",
+      "bytes": 90496035,
+      "sha256": "b3b0fa644281e42745511eece4cf9d94c1c4a8f3dd248d00a120f492e55c3742",
+      "mtime_ns": 1794121256003260790,
+      "mode": 33204
+    },
+    {
+      "path": "results.tar.gz",
+      "bytes": 90602813,
+      "sha256": "2523b8f052e27c93681142c3b9e55b89edd8632161a5b896d1cef9b435dc01e8",
+      "mtime_ns": 1794120270011403450,
+      "mode": 33204
+    },
+    {
+      "path": "style.json",
+      "bytes": 3488,
+      "sha256": "b24add9f6ebdbb09a28eec15dad7ab971346a7944083887b867eab3c52f02c3f",
+      "mtime_ns": 1794019005996372000,
+      "mode": 33204
+    },
+    {
+      "path": "upload.tar.gz",
+      "bytes": 17247383,
+      "sha256": "692fc7aae7bb65ba6479b1dedd2ef5c637d7ac9b526418d4be98058859eb06d0",
+      "mtime_ns": 1794121077978933488,
+      "mode": 33204
+    }
+  ],
+  "host": "paracloud-Zhongwei1",
+  "excluded_files": []
+}

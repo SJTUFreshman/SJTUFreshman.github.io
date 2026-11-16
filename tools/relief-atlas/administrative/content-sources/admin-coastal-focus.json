@@ -1,0 +1,65 @@
+{
+  "441500": {
+    "lngLat": [
+      115.3705112076923,
+      22.790246838461538
+    ],
+    "kind": "city-centre",
+    "label": {
+      "en": "Shanwei urban core",
+      "zh-CN": "汕尾主城区",
+      "zh-TW": "汕尾主城區"
+    },
+    "extentKm": 24,
+    "coordinateSource": "https://www.openstreetmap.org/way/573917854",
+    "source": "https://www.shanwei.gov.cn/attachment/0/57/57140/1008970.pdf",
+    "definition": {
+      "en": "The Shanwei urban core around its municipal government and the Pinqing Lake waterfront, shown in a 24 km landscape window.",
+      "zh-CN": "以汕尾市政府所在的城区为中心，展示品清湖沿岸主城及周边24公里地形。",
+      "zh-TW": "以汕尾市政府所在的城區為中心，展示品清湖沿岸主城及周邊24公里地形。"
+    },
+    "verification": "OSM named government office way 573917854, centre of its building nodes; official planning document confirms Chengqu is the municipal seat. Original way retained in admin-shanwei-osm.json."
+  },
+  "TWN:Wuqiu": {
+    "lngLat": [
+      119.4520405,
+      24.9923118
+    ],
+    "kind": "island-detail",
+    "label": {
+      "en": "Daqiu settlement & lighthouse",
+      "zh-CN": "大坵聚落与灯塔",
+      "zh-TW": "大坵聚落與燈塔"
+    },
+    "extentKm": 3,
+    "coordinateSource": "https://www.wikidata.org/wiki/Q15918057",
+    "source": "https://zh.wikipedia.org/wiki/烏坵燈塔",
+    "definition": {
+      "en": "An island close-up centred on Wuqiu Lighthouse on Daqiu, including the settlement and nearby coast; this is not an urban district.",
+      "zh-CN": "以大坵岛上的乌坵灯塔为焦点，近看聚落与周边海岸；这里采用岛屿近景，并非城市建成区。",
+      "zh-TW": "以大坵島上的烏坵燈塔為焦點，近看聚落與周邊海岸；這裡採用島嶼近景，並非城市建成區。"
+    },
+    "verification": "Point independently falls within the original NLSC land polygon (zero distance to polygon)."
+  },
+  "TWN:Taiping": {
+    "lngLat": [
+      114.3663888889,
+      10.3772222222
+    ],
+    "kind": "island-detail",
+    "label": {
+      "en": "Taiping Island close-up",
+      "zh-CN": "太平岛近景",
+      "zh-TW": "太平島近景"
+    },
+    "extentKm": 2,
+    "coordinateSource": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/9158",
+    "source": "https://www.cga.gov.tw/GipOpen/wSite/ct?ctNode=8739&mp=999&xItem=156731",
+    "definition": {
+      "en": "A close-up of Taiping Island and its facilities, centred on the island location reported by the environmental authority; there is no conventional urban core.",
+      "zh-CN": "以环境主管机关公开的岛上位置为焦点，近看太平岛及其设施；这里没有通常意义上的主城区。",
+      "zh-TW": "以環境主管機關公開的島上位置為焦點，近看太平島及其設施；這裡沒有通常意義上的主城區。"
+    },
+    "verification": "Government environmental release publishes 10°22′38″N / 114°21′59″E; converted exactly to decimal degrees. Point lies within NLSC land polygon (zero distance)."
+  }
+}

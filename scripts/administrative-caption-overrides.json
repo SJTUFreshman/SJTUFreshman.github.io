@@ -1,0 +1,38 @@
+{
+  "poi:admin:371700:photo-91936030": {
+    "label": {
+      "en": "Peony at Baihua Garden, Heze",
+      "zh-CN": "菏泽百花园牡丹",
+      "zh-TW": "菏澤百花園牡丹"
+    },
+    "description": {
+      "en": "A Shengdanlou tree peony at Baihua Garden in Heze, photographed close up to show its layered petals.",
+      "zh-CN": "菏泽百花园的牡丹品种盛丹楼。照片近距离展示了花瓣的色彩与层次。",
+      "zh-TW": "菏澤百花園的牡丹品種盛丹樓。照片近距離展示了花瓣的色彩與層次。"
+    }
+  },
+  "poi:admin:410300:photo-91935989": {
+    "label": {
+      "en": "Peony at Wangcheng Park, Luoyang",
+      "zh-CN": "洛阳王城公园牡丹",
+      "zh-TW": "洛陽王城公園牡丹"
+    },
+    "description": {
+      "en": "A tree peony of the cultivar Three Thousand Pretty Girls at Wangcheng Park in Luoyang.",
+      "zh-CN": "洛阳王城公园的牡丹品种粉黛三千。园中的花卉展现了当地牡丹观赏文化的一面。",
+      "zh-TW": "洛陽王城公園的牡丹品種粉黛三千。園中的花卉展現了當地牡丹觀賞文化的一面。"
+    }
+  },
+  "poi:admin:433100:photo-54795269": {
+    "label": {
+      "en": "Inside Qianzhou Confucian Temple",
+      "zh-CN": "干州古城文庙殿内",
+      "zh-TW": "乾州古城文廟殿內"
+    },
+    "description": {
+      "en": "The interior of the Confucian Temple in Qianzhou Ancient Town, showing its altar space and traditional decoration.",
+      "zh-CN": "干州古城文庙殿内的实景，画面呈现供奉空间与传统装饰。",
+      "zh-TW": "乾州古城文廟殿內的實景，畫面呈現供奉空間與傳統裝飾。"
+    }
+  }
+}

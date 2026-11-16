@@ -1,0 +1,104 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "530800": {
+      "label": {
+        "en": "Pu'er City",
+        "zh-CN": "普洱市",
+        "zh-TW": "普洱市"
+      },
+      "description": {
+        "en": "Pu'er is a prefecture-level city in southern Yunnan Province, China. Pu'er City governs 9 counties, 1 district, 103 townships , and a total population of 2.65 million.",
+        "zh-CN": "普洱市，旧称思茅，是中华人民共和国云南省下辖的地级市，位于云南省南部。市境东邻红河州、玉溪市，北界楚雄州、大理州，西连临沧市，西南与缅甸毗邻，南面与西双版纳州和老挝、越南两国接壤。",
+        "zh-TW": "普洱市，舊稱思茅，是中華人民共和國雲南省下轄的地級市，位於雲南省南部。市境東鄰紅河州、玉溪市，北界楚雄州、大理州，西連臨滄市，西南與緬甸毗鄰，南面與西雙版納州和老撾、越南兩國接壤。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%99%AE%E6%B4%B1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%99%AE%E6%B4%B1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Pu%27er_City"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        100.9771,
+        22.7868
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/ecb1edf57950b2bc.webp",
+        "credit": "瑞丽江的河水 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%80%9D%E8%8C%85%E6%96%87%E5%BA%99_-_2024-10-06.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​思茅文庙正面",
+        "place": "思茅文庙",
+        "originalFile": "思茅文庙_-_2024-10-06.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:530800:821363c5",
+      "urbanFocus": {
+        "label": {
+          "en": "Pu'er City",
+          "zh-CN": "普洱市",
+          "zh-TW": "普洱市"
+        },
+        "lngLat": [
+          100.96981,
+          22.78028
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Pu'er City.",
+          "zh-CN": "以普洱市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以普洱市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q496765#P625",
+        "source": "https://www.wikidata.org/wiki/Q496765",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q496765#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.42
+        }
+      }
+    },
+    "poi:admin:530800:821363c5": {
+      "label": {
+        "en": "Simao Confucian Temple",
+        "zh-CN": "思茅文庙",
+        "zh-TW": "思茅文廟"
+      },
+      "description": {
+        "en": "Simao's Confucian temple stands within the old campus of Simao No. 1 Middle School in Pu'er. Founded in 1814, it moved to its present site in 1840 and was rebuilt in 1881.",
+        "zh-CN": "思茅文庙，即普洱府思茅厅文庙，位于云南省普洱市思茅区思茅街道思茅一中老校区内。清嘉庆十九年始建，道光二十年迁至今址，光绪七年重修。",
+        "zh-TW": "思茅文廟，即普洱府思茅廳文廟，位於雲南省普洱市思茅區思茅街道思茅一中老校區內。清嘉慶十九年始建，道光二十年遷至今址，光緒七年重修。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%80%9D%E8%8C%85%E6%96%87%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%80%9D%E8%8C%85%E6%96%87%E5%BA%99"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        100.97758,
+        22.78978
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%80%9D%E8%8C%85%E6%96%87%E5%BA%99",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "530800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ecb1edf57950b2bc.webp",
+        "credit": "瑞丽江的河水 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%80%9D%E8%8C%85%E6%96%87%E5%BA%99_-_2024-10-06.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​思茅文庙正面",
+        "place": "思茅文庙",
+        "originalFile": "思茅文庙_-_2024-10-06.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "220200": {
+      "label": {
+        "en": "Jilin City",
+        "zh-CN": "吉林市",
+        "zh-TW": "吉林市"
+      },
+      "description": {
+        "en": "Jilin City is the second-largest city and former capital of Jilin province in northeast China. As of the 2020 census, 3,623,713 people resided within its administrative area of 27,166.37 square kilometres and 1,895,865 in its built-up area consisting of four urban districts.",
+        "zh-CN": "吉林市，满语名为吉林乌拉，别称“北国江城”，是中华人民共和国吉林省下辖的地级市，国务院批准的较大的市，为吉林省第二大城市，原吉林省省会，位于吉林省中部偏东。市境西界长春市，西南邻四平市、辽源市，南接通化市、白山市，东达延边州，北抵黑龙江省哈尔滨市。",
+        "zh-TW": "吉林市，滿語名爲吉林烏拉，別稱“北國江城”，是中華人民共和國吉林省下轄的地級市，國務院批准的較大的市，爲吉林省第二大城市，原吉林省省會，位於吉林省中部偏東。市境西界長春市，西南鄰四平市、遼源市，南接通化市、白山市，東達延邊州，北抵黑龍江省哈爾濱市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%90%89%E6%9E%97%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%90%89%E6%9E%97%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Jilin_City"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        126.5497,
+        43.8381
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/7607d79ed5c7f5ed.webp",
+        "credit": "H2v5o68z · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Sacred_Heart_Cathedral,_Jilin_City_9.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​Sacred Heart Cathedral, Jilin City",
+        "place": "吉林耶稣圣心堂",
+        "originalFile": "Sacred_Heart_Cathedral,_Jilin_City_9.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:220200:ccc21300",
+      "urbanFocus": {
+        "label": {
+          "en": "Jilin City",
+          "zh-CN": "吉林市",
+          "zh-TW": "吉林市"
+        },
+        "lngLat": [
+          126.56157,
+          43.8461
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Jilin City.",
+          "zh-CN": "以吉林市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以吉林市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q92277#P625",
+        "source": "https://www.wikidata.org/wiki/Q92277",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q92277#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.74
+        }
+      }
+    },
+    "poi:admin:220200:f3f7e1e1": {
+      "label": {
+        "en": "Beishan Park",
+        "zh-CN": "吉林市北山风景区",
+        "zh-TW": "吉林市北山風景區"
+      },
+      "description": {
+        "en": "Beishan Park, also known as Jilin Beishan Scenic Area or Jilin Beishan Park, is an urban park and scenic spot located in Chuanying District, Jilin City, Jilin Province, China. The park was founded in 1924, and is a national 4A-level tourist attraction.",
+        "zh-CN": "吉林市北山风景区，或称吉林市北山公园，是位于中国吉林省吉林市船营区的一处城市公园和风景区，始建于1924年，是国家4A级旅游景区。",
+        "zh-TW": "吉林市北山風景區，或稱吉林市北山公園，是位於中國吉林省吉林市船營區的一處城市公園和風景區，始建於1924年，是國家4A級旅遊景區。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%90%89%E6%9E%97%E5%B8%82%E5%8C%97%E5%B1%B1%E9%A3%8E%E6%99%AF%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%90%89%E6%9E%97%E5%B8%82%E5%8C%97%E5%B1%B1%E9%A3%8E%E6%99%AF%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Beishan_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        126.52640833,
+        43.83880833
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Beishan_Park",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "220200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/62411369e745db98.webp",
+        "credit": "BoyuZhang1998 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gate_of_Beishan_Park_(20190205121643).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​北山风景区正门",
+        "place": "吉林市北山风景区",
+        "originalFile": "Gate_of_Beishan_Park_(20190205121643).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:220200:1cbe2f61": {
+      "label": {
+        "en": "Songhua Lake",
+        "zh-CN": "松花湖",
+        "zh-TW": "松花湖"
+      },
+      "description": {
+        "en": "Songhua Lake, also known as Fengman Reservoir, lies on the Second Songhua River in Jilin City. The artificial lake was formed during construction of the Fengman hydropower project beginning in 1937 and is the largest lake in Jilin Province.",
+        "zh-CN": "松花湖即丰满水库，位于吉林省吉林市境内的第二松花江上，是吉林省最大的湖泊。是1937年拦截松花江水，建设丰满水电站形成的人工湖。",
+        "zh-TW": "松花湖即豐滿水庫，位於吉林省吉林市境內的第二松花江上，是吉林省最大的湖泊。是1937年攔截松花江水，建設豐滿水電站形成的人工湖。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%BE%E8%8A%B1%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%BE%E8%8A%B1%E6%B9%96"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        126.8625,
+        43.6551
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%9D%BE%E8%8A%B1%E6%B9%96",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "220200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/d3db7dd65e1042c5.webp",
+        "credit": "Shizhao · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:SV100353.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "​雨中的松花湖，位于吉林省吉林市。",
+        "place": "松花湖",
+        "originalFile": "SV100353.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:220200:ccc21300": {
+      "label": {
+        "en": "Sacred Heart Church, Jilin",
+        "zh-CN": "吉林耶稣圣心堂",
+        "zh-TW": "吉林耶穌聖心堂"
+      },
+      "description": {
+        "en": "Sacred Heart Church stands near the northern end of Jilin Bridge in Chuanying District. Completed in 1926 in the Gothic style, it was formerly the cathedral of the Diocese of Jilin and is now a nationally protected heritage site.",
+        "zh-CN": "吉林耶稣圣心堂位于中华人民共和国吉林省吉林市船营区大东街道松江中路3号，吉林大桥北端附近，为吉林教区的前主教座堂、中国第七批全国重点文物保护单位。该教堂建成于1926年，为哥特式建筑。",
+        "zh-TW": "吉林耶穌聖心堂位於中華人民共和國吉林省吉林市船營區大東街道松江中路3號，吉林大橋北端附近，爲吉林教區的前主教座堂、中國第七批全國重點文物保護單位。該教堂建成於1926年，爲哥特式建築。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%90%89%E6%9E%97%E8%80%B6%E7%A8%A3%E5%9C%A3%E5%BF%83%E5%A0%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%90%89%E6%9E%97%E8%80%B6%E7%A8%A3%E5%9C%A3%E5%BF%83%E5%A0%82"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        126.55838889,
+        43.83698056
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%90%89%E6%9E%97%E8%80%B6%E7%A8%A3%E5%9C%A3%E5%BF%83%E5%A0%82",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "220200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7607d79ed5c7f5ed.webp",
+        "credit": "H2v5o68z · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Sacred_Heart_Cathedral,_Jilin_City_9.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​Sacred Heart Cathedral, Jilin City",
+        "place": "吉林耶稣圣心堂",
+        "originalFile": "Sacred_Heart_Cathedral,_Jilin_City_9.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "632300": {
+      "label": {
+        "en": "Huangnan Tibetan Autonomous Prefecture",
+        "zh-CN": "黄南藏族自治州",
+        "zh-TW": "黃南藏族自治州"
+      },
+      "description": {
+        "en": "Huangnan Tibetan Autonomous Prefecture is an autonomous prefecture of eastern Qinghai, northwest China, bordering Gansu to the east. The prefecture has an area of 17,921 km2 and its seat is in Tongren County.",
+        "zh-CN": "黄南藏族自治州，简称黄南州，是中华人民共和国青海省下辖的自治州，位于青海省东部。州境北邻海东市，西界海南州、果洛州，南、东接甘肃省甘南州。",
+        "zh-TW": "黃南藏族自治州，簡稱黃南州，是中華人民共和國青海省下轄的自治州，位於青海省東部。州境北鄰海東市，西界海南州、果洛州，南、東接甘肅省甘南州。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%8D%97%E8%97%8F%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%8D%97%E8%97%8F%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+        "https://en.wikipedia.org/wiki/Huangnan_Tibetan_Autonomous_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        102.0154,
+        35.5193
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/fe609fe1d557239f.webp",
+        "credit": "Ken Marshall from Taipei, Taiwan · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Longwu_Monastery_1.jpeg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": {
+          "en": "Rongwo Monastery courtyard in a dated archival photograph.",
+          "zh-CN": "隆务寺庭院有明确拍摄年份的实景照片。",
+          "zh-TW": "隆務寺庭院有明確拍攝年份的實景照片。"
+        },
+        "place": {
+          "en": "Rongwo Monastery courtyard",
+          "zh-CN": "隆务寺庭院",
+          "zh-TW": "隆務寺庭院"
+        },
+        "originalFile": "Longwu Monastery 1.jpeg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:632300:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Huangnan Tibetan Autonomous Prefecture",
+          "zh-CN": "黄南藏族自治州",
+          "zh-TW": "黃南藏族自治州"
+        },
+        "lngLat": [
+          102.01663,
+          35.51935
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Huangnan Tibetan Autonomous Prefecture.",
+          "zh-CN": "以黄南藏族自治州的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以黃南藏族自治州的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q130023#P625",
+        "source": "https://www.wikidata.org/wiki/Q130023",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q130023#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.35
+        }
+      }
+    },
+    "poi:admin:632300:urban": {
+      "id": "poi:admin:632300:urban",
+      "label": {
+        "en": "Rongwo Monastery courtyard",
+        "zh-CN": "隆务寺庭院",
+        "zh-TW": "隆務寺庭院"
+      },
+      "description": {
+        "en": "Rongwo Monastery stands in Tongren and is an important Gelug Buddhist monastery in the Amdo region. Its origins reach back to 1301. This geographically tagged photograph from July 2012 shows a monastery courtyard, golden roof and the surrounding mountain slopes, connecting the architecture with its valley setting.",
+        "zh-CN": "隆务寺位于同仁，是安多地区重要的藏传佛教格鲁派寺院，历史可追溯至1301年。这张带原始地理标签的2012年7月实拍展示庭院、金色屋顶与周围山坡，让寺院建筑和所在河谷的地形关系同时呈现。",
+        "zh-TW": "隆務寺位於同仁，是安多地區重要的藏傳佛教格魯派寺院，歷史可追溯至1301年。這張帶原始地理標籤的2012年7月實拍展示庭院、金色屋頂與周圍山坡，讓寺院建築和所在河谷的地形關係同時呈現。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/隆务寺",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/隆务寺",
+        "https://commons.wikimedia.org/wiki/File:Longwu_Monastery_1.jpeg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fe609fe1d557239f.webp",
+        "credit": "Ken Marshall from Taipei, Taiwan · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Longwu_Monastery_1.jpeg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": {
+          "en": "Rongwo Monastery courtyard in a dated archival photograph.",
+          "zh-CN": "隆务寺庭院有明确拍摄年份的实景照片。",
+          "zh-TW": "隆務寺庭院有明確拍攝年份的實景照片。"
+        },
+        "place": {
+          "en": "Rongwo Monastery courtyard",
+          "zh-CN": "隆务寺庭院",
+          "zh-TW": "隆務寺庭院"
+        },
+        "originalFile": "Longwu Monastery 1.jpeg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        102.007655,
+        35.508375
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Longwu_Monastery_1.jpeg",
+      "coordinateDerivation": "Original Commons geographic photo tag (WGS84).",
+      "parentCity": "632300",
+      "kind": "landmark"
+    }
+  }
+}

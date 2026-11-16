@@ -1,0 +1,189 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "510600": {
+      "label": {
+        "en": "Deyang",
+        "zh-CN": "德阳市",
+        "zh-TW": "德陽市"
+      },
+      "description": {
+        "en": "Deyang is a prefecture-level city of Sichuan province, China. Deyang is a largely industrial city, with companies such as China National Erzhong Group and Dongfang Electric having major operations there.",
+        "zh-CN": "德阳市是中华人民共和国四川省下辖的地级市，位于四川省中部。市境西南邻成都市，东南达资阳市、遂宁市，东北临绵阳市，西北界阿坝州。",
+        "zh-TW": "德陽市是中華人民共和國四川省下轄的地級市，位於四川省中部。市境西南鄰成都市，東南達資陽市、遂寧市，東北臨綿陽市，西北界阿壩州。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%BE%B7%E9%98%B3%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%BE%B7%E9%98%B3%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Deyang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        104.398,
+        31.127
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/fc49541e2e59a5b2.webp",
+        "credit": "Nekitarc · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BA%9E%E7%BB%9F%E7%A5%A0%E5%A2%93%E7%85%A7%E7%89%87.JPG",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Pang Tong memorial hall and tomb",
+        "place": "庞统祠墓",
+        "originalFile": "庞统祠墓照片.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:510600:bf750cb5",
+      "urbanFocus": {
+        "label": {
+          "en": "Deyang",
+          "zh-CN": "德阳市",
+          "zh-TW": "德陽市"
+        },
+        "lngLat": [
+          104.39499,
+          31.12892
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Deyang.",
+          "zh-CN": "以德阳市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以德陽市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q425996#P625",
+        "source": "https://www.wikidata.org/wiki/Q425996",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q425996#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.36
+        }
+      }
+    },
+    "poi:admin:510600:09ef95c5": {
+      "label": {
+        "en": "Sanxingdui",
+        "zh-CN": "三星堆遗址",
+        "zh-TW": "三星堆遺址"
+      },
+      "description": {
+        "en": "Sanxingdui is an archaeological site and a major Bronze Age culture in modern Guanghan, Sichuan, China.",
+        "zh-CN": "三星堆遗址位于中国四川省广汉市城西三星堆镇的鸭子河畔，属青铜时代文化遗址。由于其古域内有起伏相连的三个黄土堆而得名，有“三星伴月”之美名。",
+        "zh-TW": "三星堆遺址位於中國四川省廣漢市城西三星堆鎮的鴨子河畔，屬青銅時代文化遺址。由於其古域內有起伏相連的三個黃土堆而得名，有“三星伴月”之美名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%89%E6%98%9F%E5%A0%86%E9%81%97%E5%9D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%89%E6%98%9F%E5%A0%86%E9%81%97%E5%9D%80",
+        "https://en.wikipedia.org/wiki/Sanxingdui"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        104.2,
+        30.993
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Sanxingdui",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c4f0557fbe99ecdd.webp",
+        "credit": "Bairuilong · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Sanxingdui_Bronsmask.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Bronsmask från Sanxingdui. Utställd på Kinas nationalmuseum i Peking",
+        "place": "三星堆遗址",
+        "originalFile": "Sanxingdui_Bronsmask.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:510600:bf750cb5": {
+      "label": {
+        "en": "Pang Tong Shrine and Tomb",
+        "zh-CN": "庞统祠墓",
+        "zh-TW": "龐統祠墓"
+      },
+      "description": {
+        "en": "The Pang Tong Shrine and Tomb, also known as the Dragon and Phoenix Shrine and the Valley of the Fallen Phoenix, is a shrine and tomb located in Baimaguan Town , Luojiang County, Deyang City, Sichuan Province, China. The shrine and tomb was constructed for Pang Tong , an adviser to Liu Bei, the founding emperor of the state of Shu Han in the Three Kingdoms period.",
+        "zh-CN": "庞统祠墓，又名龙凤祠。在四川省德阳市罗江区白马关镇，祠墓为东汉建安十九年庞统中流矢卒后，蜀汉昭烈帝刘备所建。",
+        "zh-TW": "龐統祠墓，又名龍鳳祠。在四川省德陽市羅江區白馬關鎮，祠墓爲東漢建安十九年龐統中流矢卒後，蜀漢昭烈帝劉備所建。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%BA%9E%E7%BB%9F%E7%A5%A0%E5%A2%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%BA%9E%E7%BB%9F%E7%A5%A0%E5%A2%93",
+        "https://en.wikipedia.org/wiki/Pang_Tong_Shrine_and_Tomb"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        104.46838889,
+        31.29008333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Pang_Tong_Shrine_and_Tomb",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fc49541e2e59a5b2.webp",
+        "credit": "Nekitarc · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BA%9E%E7%BB%9F%E7%A5%A0%E5%A2%93%E7%85%A7%E7%89%87.JPG",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Pang Tong memorial hall and tomb",
+        "place": "庞统祠墓",
+        "originalFile": "庞统祠墓照片.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:510600:photo-49377085": {
+      "label": {
+        "en": "Deyang landscape view",
+        "zh-CN": "德阳彩虹桥",
+        "zh-TW": "德陽彩虹橋"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Deyang, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现德阳市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現德陽市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%BE%B7%E9%98%B3%E5%BD%A9%E8%99%B9%E6%A1%A5_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%BE%B7%E9%98%B3%E5%BD%A9%E8%99%B9%E6%A1%A5_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/eff44b45e5884ddd.webp",
+        "credit": "jian zou · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BE%B7%E9%98%B3%E5%BD%A9%E8%99%B9%E6%A1%A5_-_panoramio.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "德阳彩虹桥",
+        "place": "德阳彩虹桥 - panoramio.jpg",
+        "originalFile": "德阳彩虹桥 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.395523,
+            31.12864
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%BE%B7%E9%98%B3%E5%BD%A9%E8%99%B9%E6%A1%A5_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        104.395523,
+        31.12864
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%BE%B7%E9%98%B3%E5%BD%A9%E8%99%B9%E6%A1%A5_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "510600"
+    }
+  }
+}

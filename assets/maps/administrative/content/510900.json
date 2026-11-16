@@ -1,0 +1,142 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "510900": {
+      "label": {
+        "en": "Suining",
+        "zh-CN": "遂宁市",
+        "zh-TW": "遂寧市"
+      },
+      "description": {
+        "en": "Suining is a prefecture-level city of eastern Sichuan province in Southwest China. According to the 2020 census, Suining had a population of 2,814,196, with 1,612,641 living in built up areas.",
+        "zh-CN": "遂宁市是中华人民共和国四川省下辖的地级市，位于四川省东部。市境东临广安市、南充市，北界绵阳市，西接德阳市，南邻资阳市、重庆市。",
+        "zh-TW": "遂寧市是中華人民共和國四川省下轄的地級市，位於四川省東部。市境東臨廣安市、南充市，北界綿陽市，西接德陽市，南鄰資陽市、重慶市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%81%82%E5%AE%81%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%81%82%E5%AE%81%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Suining"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        105.593,
+        30.533
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/02ff336cb908cb7a.webp",
+        "credit": "Anheizhe · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%81%A5%E5%9D%A4%E5%9F%8E7945.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​健坤城。。",
+        "place": "船山区",
+        "originalFile": "健坤城7945.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:510900:618792b4",
+      "urbanFocus": {
+        "label": {
+          "en": "Suining",
+          "zh-CN": "遂宁市",
+          "zh-TW": "遂寧市"
+        },
+        "lngLat": [
+          105.57373,
+          30.50984
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Suining.",
+          "zh-CN": "以遂宁市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以遂寧市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q426644#P625",
+        "source": "https://www.wikidata.org/wiki/Q426644",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q426644#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.45
+        }
+      }
+    },
+    "poi:admin:510900:618792b4": {
+      "label": {
+        "en": "Chuanshan, Suining",
+        "zh-CN": "船山区",
+        "zh-TW": "船山區"
+      },
+      "description": {
+        "en": "Chuanshan is a district of Suining, Sichuan Province, China. The district is the government seat of Suining city and also its main urban area.",
+        "zh-CN": "船山区是中国四川省遂宁市所辖的一个市辖区。总面积618平方公里，2002年人口67万人。",
+        "zh-TW": "船山區是中國四川省遂寧市所轄的一個市轄區。總面積618平方公里，2002年人口67萬人。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%88%B9%E5%B1%B1%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%88%B9%E5%B1%B1%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Chuanshan,_Suining"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        105.553,
+        30.504
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Chuanshan,_Suining",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510900",
+      "photo": {
+        "src": "assets/maps/administrative/photos/02ff336cb908cb7a.webp",
+        "credit": "Anheizhe · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%81%A5%E5%9D%A4%E5%9F%8E7945.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​健坤城。。",
+        "place": "船山区",
+        "originalFile": "健坤城7945.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:510900:2be40ba3": {
+      "label": {
+        "en": "Baofan Temple, Pengxi",
+        "zh-CN": "宝梵寺 (蓬溪县)",
+        "zh-TW": "寶梵寺 (蓬溪縣)"
+      },
+      "description": {
+        "en": "Baofan Temple stands in Baofan Village in Pengxi County, Suining. Its surviving historic fabric dates to the Ming and Qing periods and is protected at provincial level.",
+        "zh-CN": "宝梵寺位于四川省遂宁市蓬溪县宝梵镇宝梵村，文物遗址年代判定为明至清。1956年8月16日公布为四川省第一批历史及革命文物保护单位。",
+        "zh-TW": "寶梵寺位於四川省遂寧市蓬溪縣寶梵鎮寶梵村，文物遺址年代判定為明至清。1956年8月16日公佈為四川省第一批歷史及革命文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%9D%E6%A2%B5%E5%AF%BA_(%E8%93%AC%E6%BA%AA%E5%8E%BF)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%9D%E6%A2%B5%E5%AF%BA_(%E8%93%AC%E6%BA%AA%E5%8E%BF)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        105.64666944,
+        30.72493889
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%AE%9D%E6%A2%B5%E5%AF%BA_(%E8%93%AC%E6%BA%AA%E5%8E%BF)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510900",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b4f54548e7b775aa.webp",
+        "credit": "Nekitarc · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9D%E6%A2%B5%E5%AF%BA%E7%85%A7%E7%89%87.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Baofan temple in Pengxi County, Sichuan",
+        "place": "宝梵寺 (蓬溪县)",
+        "originalFile": "宝梵寺照片.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

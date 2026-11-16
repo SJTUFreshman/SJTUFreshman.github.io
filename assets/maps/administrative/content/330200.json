@@ -1,0 +1,179 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "330200": {
+      "label": {
+        "en": "Ningbo",
+        "zh-CN": "宁波市",
+        "zh-TW": "寧波市"
+      },
+      "description": {
+        "en": "Ningbo is a sub-provincial city in the northeast of Zhejiang, People's Republic of China. It comprises six urban districts, two satellite county-level cities, and two rural counties, including several islands in Hangzhou Bay and the East China Sea.",
+        "zh-CN": "宁波市是中华人民共和国东南沿海重要的港口城市、浙江第二大城市、长江三角洲南翼经济中心和国家历史文化名城。宁波市位于浙江省东部，长江三角洲南翼，北临杭州湾，西接绍兴，南靠台州，东北与舟山隔海相望，全市陆地面积9365.58平方公里。",
+        "zh-TW": "寧波市是中華人民共和國東南沿海重要的港口城市、浙江第二大城市、長江三角洲南翼經濟中心和國家歷史文化名城。寧波市位於浙江省東部，長江三角洲南翼，北臨杭州灣，西接紹興，南靠台州，東北與舟山隔海相望，全市陸地面積9365.58平方公里。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%81%E6%B3%A2%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%81%E6%B3%A2%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Ningbo"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        121.6245,
+        29.8603
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/f2b87d277c6b9977.webp",
+        "credit": "Siyuwj · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tianfeng_Pagoda,_2017-01-30,_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​宁波天封塔",
+        "place": "天封塔",
+        "originalFile": "Tianfeng_Pagoda,_2017-01-30,_03.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:330200:dc3f9633",
+      "urbanFocus": {
+        "label": {
+          "en": "Ningbo",
+          "zh-CN": "宁波市",
+          "zh-TW": "寧波市"
+        },
+        "lngLat": [
+          121.54916666667,
+          29.875
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Ningbo.",
+          "zh-CN": "以宁波市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以寧波市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q42780#P625",
+        "source": "https://www.wikidata.org/wiki/Q42780",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q42780#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.74
+        }
+      }
+    },
+    "poi:admin:330200:dc3f9633": {
+      "label": {
+        "en": "Tianfeng Pagoda",
+        "zh-CN": "天封塔",
+        "zh-TW": "天封塔"
+      },
+      "description": {
+        "en": "Tianfeng Pagoda stands on Dashani Street in Ningbo’s Haishu District and is a landmark of the old city. Its origins lie in the Wu Zhou period, while the present structure was reconstructed in 1984.",
+        "zh-CN": "天封塔是中国浙江省宁波市的一座佛塔，位于海曙区大沙泥街，始建于武周，是宁波旧城的标志性建筑物。目前建筑重修于1984年，1961年5月公布为宁波市文物保护单位。",
+        "zh-TW": "天封塔是中國浙江省寧波市的一座佛塔，位於海曙區大沙泥街，始建於武周，是寧波舊城的標誌性建築物。目前建築重修於1984年，1961年5月公佈爲寧波市文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%B0%81%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%B0%81%E5%A1%94"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.55080278,
+        29.86591667
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%B0%81%E5%A1%94",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "330200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f2b87d277c6b9977.webp",
+        "credit": "Siyuwj · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tianfeng_Pagoda,_2017-01-30,_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​宁波天封塔",
+        "place": "天封塔",
+        "originalFile": "Tianfeng_Pagoda,_2017-01-30,_03.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:330200:20de51bc": {
+      "label": {
+        "en": "Dongqian Lake",
+        "zh-CN": "东钱湖",
+        "zh-TW": "東錢湖"
+      },
+      "description": {
+        "en": "Dongqian Lake is a large freshwater lake in Yinzhou District, Ningbo in Zhejiang, China. It has a surface area of 20 square kilometres .",
+        "zh-CN": "东钱湖，亦称东湖、万金湖，是中华人民共和国浙江省宁波市境内的一个湖泊。东钱湖位于鄞州区东钱湖镇境内，南北长8.5公里，东西宽4.5公里，水域面积19.14平方公里，是浙江省最大的天然湖泊，也是宁波市区饮水和灌溉的主要水源。",
+        "zh-TW": "東錢湖，亦稱東湖、萬金湖，是中華人民共和國浙江省寧波市境內的一個湖泊。東錢湖位於鄞州區東錢湖鎮境內，南北長8.5公里，東西寬4.5公里，水域面積19.14平方公里，是浙江省最大的天然湖泊，也是寧波市區飲水和灌溉的主要水源。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%9C%E9%92%B1%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%9C%E9%92%B1%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Dongqian_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.667,
+        29.7667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Dongqian_Lake",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "330200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/08f6227b38316140.webp",
+        "credit": "Yumeto · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20240730_Dongqian_Hu.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Dongqian Lake",
+        "place": "东钱湖",
+        "originalFile": "20240730_Dongqian_Hu.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:330200:e56be360": {
+      "label": {
+        "en": "Xuedou Mountain",
+        "zh-CN": "雪窦山",
+        "zh-TW": "雪竇山"
+      },
+      "description": {
+        "en": "Xuedou Mountain rises to about eight hundred metres near Xikou in Ningbo’s Fenghua District. Its scenic places include Xuedou Temple, Qianzhang Rock, Sanyin Pools, Xufu Rock and Miaogao Terrace.",
+        "zh-CN": "雪窦山，海拔约800米，位于中国浙江省宁波市奉化区溪口镇，为四明山脉支脉的最高峰。山中景点包括雪窦寺、御书亭、千丈岩、三隐潭、徐凫岩及妙高台等。",
+        "zh-TW": "雪竇山，海拔約800米，位於中國浙江省寧波市奉化區溪口鎮，為四明山脈支脈的最高峯。山中景點包括雪竇寺、御書亭、千丈巖、三隱潭、徐鳧巖及妙高臺等。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9B%AA%E7%AB%87%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9B%AA%E7%AB%87%E5%B1%B1"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.22638889,
+        29.63194444
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%9B%AA%E7%AB%87%E5%B1%B1",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "330200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/d022362724b74c0e.webp",
+        "credit": "Brookqi · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Zhejiang_Xuedoushan_Qianzhangyan.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​中国浙江雪窦山千丈岩",
+        "place": "雪竇山",
+        "originalFile": "Zhejiang_Xuedoushan_Qianzhangyan.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

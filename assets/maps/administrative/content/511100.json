@@ -1,0 +1,142 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "511100": {
+      "label": {
+        "en": "Leshan",
+        "zh-CN": "乐山市",
+        "zh-TW": "樂山市"
+      },
+      "description": {
+        "en": "Leshan, formerly known as Jiading and Jiazhou, is a prefecture-level city located at the confluence of the Dadu, Min and Qingyi rivers in Sichuan province, China. By the end of 2024, the registered population of the city is 3.45 million.",
+        "zh-CN": "乐山市，古称嘉州、嘉定，是中华人民共和国四川省下辖的地级市，位于四川省中南部。市境东界自贡市、宜宾市，南接凉山州，西邻雅安市，北连眉山市。",
+        "zh-TW": "樂山市，古稱嘉州、嘉定，是中華人民共和國四川省下轄的地級市，位於四川省中南部。市境東界自貢市、宜賓市，南接涼山州，西鄰雅安市，北連眉山市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B9%90%E5%B1%B1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B9%90%E5%B1%B1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Leshan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        103.766,
+        29.552
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/69dc42a5ff305107.webp",
+        "credit": "Ariel Steiner · CC BY-SA 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Leshan_Buddha_Statue_View.JPG",
+        "license": "CC BY-SA 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+        "alt": "A full view of the Giant Buddha Statue of Leshan, Sichuan, China",
+        "place": "乐山大佛",
+        "originalFile": "Leshan_Buddha_Statue_View.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:511100:36088d43",
+      "urbanFocus": {
+        "label": {
+          "en": "Leshan",
+          "zh-CN": "乐山市",
+          "zh-TW": "樂山市"
+        },
+        "lngLat": [
+          103.75755,
+          29.5854
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Leshan.",
+          "zh-CN": "以乐山市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以樂山市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q426868#P625",
+        "source": "https://www.wikidata.org/wiki/Q426868",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q426868#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.52
+        }
+      }
+    },
+    "poi:admin:511100:36088d43": {
+      "label": {
+        "en": "Leshan Giant Buddha",
+        "zh-CN": "乐山大佛",
+        "zh-TW": "樂山大佛"
+      },
+      "description": {
+        "en": "The Leshan Giant Buddha is a 71-meter tall stone statue, built between 712 and 804 AD . It is carved out of a cliff face of Cretaceous red bed sandstones that lies at the confluence of the Min River and Dadu River in the southern part of Sichuan Province in China, near the city of Leshan.",
+        "zh-CN": "乐山大佛，全名嘉州凌云寺大弥勒石像，别称凌云大佛，位于中华人民共和国四川省乐山市市中区的岷江、青衣江、大渡河三江交汇之处，是世界上高度最高的石佛像。乐山大佛开凿于唐代开元元年，完成于贞元十九年，先后历经3位负责人，历时约九十年。",
+        "zh-TW": "樂山大佛，全名嘉州凌雲寺大彌勒石像，別稱凌雲大佛，位於中華人民共和國四川省樂山市市中區的岷江、青衣江、大渡河三江交匯之處，是世界上高度最高的石佛像。樂山大佛開鑿於唐代開元元年，完成於貞元十九年，先後歷經3位負責人，歷時約九十年。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B9%90%E5%B1%B1%E5%A4%A7%E4%BD%9B",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B9%90%E5%B1%B1%E5%A4%A7%E4%BD%9B",
+        "https://en.wikipedia.org/wiki/Leshan_Giant_Buddha"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        103.77333333,
+        29.54472222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Leshan_Giant_Buddha",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "511100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/69dc42a5ff305107.webp",
+        "credit": "Ariel Steiner · CC BY-SA 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Leshan_Buddha_Statue_View.JPG",
+        "license": "CC BY-SA 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+        "alt": "A full view of the Giant Buddha Statue of Leshan, Sichuan, China",
+        "place": "乐山大佛",
+        "originalFile": "Leshan_Buddha_Statue_View.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:511100:7869f911": {
+      "label": {
+        "en": "Mahao Cliff Tombs",
+        "zh-CN": "麻浩崖墓",
+        "zh-TW": "麻浩崖墓"
+      },
+      "description": {
+        "en": "These rock-cut tombs lie at Mahao in Leshan's Shizhong District. The archaeological site has been protected as a Sichuan provincial monument since the 1950s.",
+        "zh-CN": "麻浩崖墓位于中国四川省乐山市市中区九峰镇明月村麻浩，1956年8月16日公布为四川省第一批历史及革命文物保护单位。1980年7月7日重新公布为四川省第一批文物保护单位。",
+        "zh-TW": "麻浩崖墓位於中國四川省樂山市市中區九峯鎮明月村麻浩，1956年8月16日公佈為四川省第一批歷史及革命文物保護單位。1980年7月7日重新公佈為四川省第一批文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BA%BB%E6%B5%A9%E5%B4%96%E5%A2%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BA%BB%E6%B5%A9%E5%B4%96%E5%A2%93"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        103.77166667,
+        29.54166667
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%BA%BB%E6%B5%A9%E5%B4%96%E5%A2%93",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "511100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/1abf74609a5bd914.webp",
+        "credit": "Zhangzhugang · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Leshan_Mahao_Yamu_2014.04.25_10-31-03.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "乐山麻浩崖墓",
+        "place": "麻浩崖墓",
+        "originalFile": "Leshan_Mahao_Yamu_2014.04.25_10-31-03.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

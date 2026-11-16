@@ -1,0 +1,253 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "110000": {
+      "label": {
+        "en": "Beijing",
+        "zh-CN": "北京市",
+        "zh-TW": "北京市"
+      },
+      "description": {
+        "en": "Beijing, previously romanized as Peking, is the capital city of China. With more than 21.8 million residents, it is the world's most populous national capital city, as well as China's second-largest city by urban area, after Shanghai.",
+        "zh-CN": "北京市，简称“京”，旧称“北平”，是中华人民共和国的首都及直辖市，也是中国的政治、文化、科技、教育、军事和国际交往中心。北京是一座全球城市，也是世界人口第三多的城市和人口最多的首都。",
+        "zh-TW": "北京市，簡稱“京”，舊稱“北平”，是中華人民共和國的首都及直轄市，也是中國的政治、文化、科技、教育、軍事和國際交往中心。北京是一座全球城市，也是世界人口第三多的城市和人口最多的首都。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8C%97%E4%BA%AC%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8C%97%E4%BA%AC%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Beijing"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        116.3975,
+        39.90666667
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/add8f4dbce8313df.webp",
+        "credit": "张瑜 · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Tiananmen_beijing_Panorama.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Tiananmen_beijing_Panorama.jpg#Licensing",
+        "alt": "The Tiananmen in Beijing.Photoed on 60th National day 2009.",
+        "place": "天安门",
+        "originalFile": "Tiananmen_beijing_Panorama.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:110000:66f6bc0e",
+      "urbanFocus": {
+        "label": {
+          "en": "Beijing",
+          "zh-CN": "北京市",
+          "zh-TW": "北京市"
+        },
+        "lngLat": [
+          116.407526,
+          39.90403
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 48 km landscape window centred on Beijing.",
+          "zh-CN": "以北京市的地理坐标为中心，展示周边约48公里宽的城区与地形。",
+          "zh-TW": "以北京市的地理座標爲中心，展示周邊約48公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q956#P625",
+        "source": "https://www.wikidata.org/wiki/Q956",
+        "extentKm": 48,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q956#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.22
+        }
+      }
+    },
+    "poi:110000:1": {
+      "label": {
+        "en": "Forbidden City",
+        "zh-CN": "故宫",
+        "zh-TW": "故宮"
+      },
+      "description": {
+        "en": "The Forbidden City is the imperial palace complex in the center of the Imperial City in Beijing, China. It was the residence of twenty-four Ming and Qing dynasty Emperors and was the center of political power in China from 1420 to 1924.",
+        "zh-CN": "故宫，又称紫禁城，是中国明清两朝二十四位皇帝的皇宫。故宫始建于明成祖永乐四年，以南京故宫为蓝本营建，永乐十八年落成。",
+        "zh-TW": "故宮，又稱紫禁城，是中國明清兩朝二十四位皇帝的皇宮。故宮始建於明成祖永樂四年，以南京故宮爲藍本營建，永樂十八年落成。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%95%85%E5%AE%AB",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%95%85%E5%AE%AB",
+        "https://en.wikipedia.org/wiki/Forbidden_City"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        116.39083333,
+        39.91583333
+      ],
+      "parentCity": "110000",
+      "photo": {
+        "src": "assets/maps/regions/photos/7e0b78ce623e82eb.webp",
+        "credit": "Han Zheng · CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%99%AF%E5%B1%B1%E5%85%AC%E5%9B%AD_(19687188164).jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "alt": "景山公园",
+        "place": "故宫",
+        "originalFile": "景山公园_(19687188164).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:110000:2": {
+      "label": {
+        "en": "Temple of Heaven",
+        "zh-CN": "天坛",
+        "zh-TW": "天壇"
+      },
+      "description": {
+        "en": "The Temple of Heaven is a complex of imperial religious Confucian buildings situated in the southeastern part of central Beijing. The complex was visited by the Emperors of the Ming and then later restored by the Qing dynasties for annual ceremonies of prayer to Heaven for a good harvest and other seasonal rites.",
+        "zh-CN": "天坛，位于北京市东城区，是明清两朝皇帝祭天、祈谷和祈雨的场所。天坛始建于明成祖永乐十八年，原名“天地坛”，明嘉靖九年在北京北郊另建祭祀地神的地坛，并改名为“天坛”。",
+        "zh-TW": "天壇，位於北京市東城區，是明清兩朝皇帝祭天、祈穀和祈雨的場所。天壇始建於明成祖永樂十八年，原名“天地壇”，明嘉靖九年在北京北郊另建祭祀地神的地壇，並改名爲“天壇”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%9D%9B",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%9D%9B",
+        "https://en.wikipedia.org/wiki/Temple_of_Heaven"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        116.4066,
+        39.8822
+      ],
+      "parentCity": "110000",
+      "photo": {
+        "src": "assets/maps/regions/photos/1495388294619072.webp",
+        "credit": "Shujianyang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Temple_of_Heaven_20160323_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Temple of Heaven - Hall of Prayer for Good Harvests",
+        "place": "天坛",
+        "originalFile": "Temple_of_Heaven_20160323_01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:110000:66f6bc0e": {
+      "label": {
+        "en": "Tiananmen",
+        "zh-CN": "天安门",
+        "zh-TW": "天安門"
+      },
+      "description": {
+        "en": "The Tiananmen , also Tian'anmen, is the entrance gate of the Forbidden City imperial palace complex and Imperial City in the center of Beijing, China. It is widely used as a national symbol.",
+        "zh-CN": "天安门坐落在中华人民共和国北京市中心，紫禁城的南端，与天安门广场以及人民英雄纪念碑、毛主席纪念堂、人民大会堂、中国国家博物馆隔长安街相望，是明清两代北京皇城的正门。设计者为明代的御用建筑匠师蒯祥。",
+        "zh-TW": "天安門坐落在中華人民共和國北京市中心，紫禁城的南端，與天安門廣場以及人民英雄紀念碑、毛主席紀念堂、人民大會堂、中國國家博物館隔長安街相望，是明清兩代北京皇城的正門。設計者為明代的御用建築匠師蒯祥。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%AE%89%E9%97%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%AE%89%E9%97%A8",
+        "https://en.wikipedia.org/wiki/Tiananmen"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        116.39108333,
+        39.90733333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Tiananmen",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "110000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/add8f4dbce8313df.webp",
+        "credit": "张瑜 · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Tiananmen_beijing_Panorama.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Tiananmen_beijing_Panorama.jpg#Licensing",
+        "alt": "The Tiananmen in Beijing.Photoed on 60th National day 2009.",
+        "place": "天安门",
+        "originalFile": "Tiananmen_beijing_Panorama.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:110000:c9917b93": {
+      "label": {
+        "en": "Great Wall of China",
+        "zh-CN": "长城",
+        "zh-TW": "長城"
+      },
+      "description": {
+        "en": "The Great Wall of China is a series of fortifications in China. They were built across the historical northern borders of ancient Chinese states and Imperial China as protection against various nomadic groups from the Eurasian Steppe.",
+        "zh-CN": "长城是在中国大陆华北一带历朝修筑的大规模军用隔离墙的统称，旨在抵御来自欧亚草原的游牧民族入侵。长城并非单一结构，而是分成多节矗立于险要之处，并设有多个关口，实际上亦是帝国边境经济贸易的重要一环，东西段与前后关卡加总起来可绵延上万华里，因此又称作万里长城。",
+        "zh-TW": "長城是在中國大陸華北一帶歷朝修築的大規模軍用隔離牆的統稱，旨在抵禦來自歐亞草原的遊牧民族入侵。長城並非單一結構，而是分成多節矗立於險要之處，並設有多個關口，實際上亦是帝國邊境經濟貿易的重要一環，東西段與前後關卡加總起來可綿延上萬華裏，因此又稱作萬里長城。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%9F%8E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%9F%8E",
+        "https://en.wikipedia.org/wiki/Great_Wall_of_China"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        116.56444444,
+        40.43138889
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Great_Wall_of_China",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "110000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e740b4955e4feaad.webp",
+        "credit": "Severin.stalder · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "The Great Wall of China at Jinshanling",
+        "place": "长城",
+        "originalFile": "The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:110000:9621668f": {
+      "label": {
+        "en": "Ming tombs",
+        "zh-CN": "明十三陵",
+        "zh-TW": "明十三陵"
+      },
+      "description": {
+        "en": "The Ming tombs are a collection of mausoleums built by the emperors of the Ming dynasty of China. The tomb of the first Ming ruler, the Hongwu Emperor , is located near his capital Nanjing.",
+        "zh-CN": "明十三陵，坐落于中华人民共和国北京市昌平区十三陵镇的天寿山下40平方公里的小盆地，距离北京市中心约50公里，是明朝皇帝的墓葬建筑群。自永乐七年五月起用，直到安葬崇祯帝后结束，历时230多年，共葬有13位皇帝，23位皇后、2位太子、30余名妃嫔、1位太监，是全球保存最完整的皇陵墓葬群之一。",
+        "zh-TW": "明十三陵，坐落於中華人民共和國北京市昌平區十三陵鎮的天壽山下40平方公里的小盆地，距離北京市中心約50公里，是明朝皇帝的墓葬建築羣。自永樂七年五月起用，直到安葬崇禎帝後結束，歷時230多年，共葬有13位皇帝，23位皇后、2位太子、30餘名妃嬪、1位太監，是全球保存最完整的皇陵墓葬羣之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%98%8E%E5%8D%81%E4%B8%89%E9%99%B5",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%98%8E%E5%8D%81%E4%B8%89%E9%99%B5",
+        "https://en.wikipedia.org/wiki/Ming_tombs"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        116.23194444,
+        40.30333333
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%98%8E%E5%8D%81%E4%B8%89%E9%99%B5",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "110000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/8e03bb9b812bf114.webp",
+        "credit": "Charlie fong · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Thirteen_tombs_entance_dagong_gate201909.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Dagong gate (red, in the middle) and Spirit way of the Ming tombs (behind the gate).",
+        "place": "明十三陵",
+        "originalFile": "Thirteen_tombs_entance_dagong_gate201909.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

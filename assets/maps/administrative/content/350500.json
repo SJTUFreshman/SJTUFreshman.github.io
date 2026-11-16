@@ -1,0 +1,141 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "350500": {
+      "label": {
+        "en": "Quanzhou",
+        "zh-CN": "泉州市",
+        "zh-TW": "泉州市"
+      },
+      "description": {
+        "en": "Quanzhou is a prefecture-level port city on the north bank of the Jin River, beside the Taiwan Strait in southern Fujian, People's Republic of China. It is Fujian's most populous metropolitan region, with an area of 11,245 square kilometers and a population of 8,782,285 as of the 2020 census.",
+        "zh-CN": "泉州市，简称泉、鲤，泉州府城又称刺桐、温陵、清源，是中华人民共和国福建省下辖的地级市，位于福建省中南部沿海。地处闽东南沿海丘陵平原区，地势西北高，东南低，西北部为戴云山。",
+        "zh-TW": "泉州市，簡稱泉、鯉，泉州府城又稱刺桐、溫陵、清源，是中華人民共和國福建省下轄的地級市，位於福建省中南部沿海。地處閩東南沿海丘陵平原區，地勢西北高，東南低，西北部爲戴雲山。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B3%89%E5%B7%9E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B3%89%E5%B7%9E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Quanzhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        118.6757,
+        24.8744
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/44433f29ac28b1bf.webp",
+        "credit": "猫猫的日记本 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Quanzhou_Confucian_Temple_018_2019-10.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​泉州府文庙，大成殿。",
+        "place": "泉州府文庙",
+        "originalFile": "Quanzhou_Confucian_Temple_018_2019-10.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:350500:28499f33",
+      "urbanFocus": {
+        "label": {
+          "en": "Quanzhou",
+          "zh-CN": "泉州市",
+          "zh-TW": "泉州市"
+        },
+        "lngLat": [
+          118.58583,
+          24.91389
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Quanzhou.",
+          "zh-CN": "以泉州市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以泉州市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q68695#P625",
+        "source": "https://www.wikidata.org/wiki/Q68695",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q68695#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.67
+        }
+      }
+    },
+    "poi:admin:350500:28499f33": {
+      "label": {
+        "en": "Quanzhou Prefectural Confucian Temple",
+        "zh-CN": "泉州府文庙",
+        "zh-TW": "泉州府文廟"
+      },
+      "description": {
+        "en": "Quanzhou’s Confucian temple originated in the Tang period and moved to its present site during the Northern Song. In 2021 it became one of the twenty-two component sites of the UNESCO World Heritage property celebrating Song–Yuan Quanzhou’s maritime trade.",
+        "zh-CN": "泉州府文庙位于中国福建省泉州市鲤城区海滨街道涂门街，始建于唐代，北宋太平兴国年间迁至今址，南宋绍兴七年重建，历代多次重修。2021年作为泉州：宋元中国的世界海洋商贸中心的22个遗产点之一列入世界遗产名录。",
+        "zh-TW": "泉州府文廟位於中國福建省泉州市鯉城區海濱街道塗門街，始建於唐代，北宋太平興國年間遷至今址，南宋紹興七年重建，歷代多次重修。2021年作爲泉州：宋元中國的世界海洋商貿中心的22個遺產點之一列入世界遺產名錄。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B3%89%E5%B7%9E%E5%BA%9C%E6%96%87%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B3%89%E5%B7%9E%E5%BA%9C%E6%96%87%E5%BA%99"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        118.58555556,
+        24.90888889
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%B3%89%E5%B7%9E%E5%BA%9C%E6%96%87%E5%BA%99",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "350500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/44433f29ac28b1bf.webp",
+        "credit": "猫猫的日记本 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Quanzhou_Confucian_Temple_018_2019-10.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​泉州府文庙，大成殿。",
+        "place": "泉州府文庙",
+        "originalFile": "Quanzhou_Confucian_Temple_018_2019-10.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:350500:728812a1": {
+      "label": {
+        "en": "Chendai Ding Clan Ancestral Hall",
+        "zh-CN": "陈埭丁氏宗祠",
+        "zh-TW": "陳埭丁氏宗祠"
+      },
+      "description": {
+        "en": "The Ding clan ancestral hall stands in Andou Village, Chendai, in Jinjiang. The lineage traces its ancestry to Arab forebears who settled here in the early Ming period; the hall is a nationally protected heritage site.",
+        "zh-CN": "陈埭丁氏宗祠位于中国福建省晋江市陈埭镇岸兜村，2006年被列为第六批全国重点文物保护单位。 丁氏远祖为阿拉伯人，明初定居此地。",
+        "zh-TW": "陳埭丁氏宗祠位於中國福建省晉江市陳埭鎮岸兜村，2006年被列爲第六批全國重點文物保護單位。 丁氏遠祖爲阿拉伯人，明初定居此地。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%99%88%E5%9F%AD%E4%B8%81%E6%B0%8F%E5%AE%97%E7%A5%A0",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%99%88%E5%9F%AD%E4%B8%81%E6%B0%8F%E5%AE%97%E7%A5%A0"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        118.60555556,
+        24.82666667
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%99%88%E5%9F%AD%E4%B8%81%E6%B0%8F%E5%AE%97%E7%A5%A0",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "350500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2474b0bc1d5dacb3.webp",
+        "credit": "Allervous · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ancestral_shrine_of_Ding_Family.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Ancestral shrine of Ding Family, Zayton",
+        "place": "陈埭丁氏宗祠",
+        "originalFile": "Ancestral_shrine_of_Ding_Family.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

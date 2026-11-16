@@ -1,0 +1,101 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "340500": {
+      "label": {
+        "en": "Ma'anshan",
+        "zh-CN": "马鞍山市",
+        "zh-TW": "馬鞍山市"
+      },
+      "description": {
+        "en": "Ma'anshan , also colloquially written as Maanshan, is a prefecture-level city in the eastern part of Anhui province in Eastern China. Its aliases include Taiping, Steel City, and Poetry City.",
+        "zh-CN": "马鞍山市是中华人民共和国安徽省下辖的地级市，位于安徽省东部，长江沿岸。市境西北达滁州市，西邻合肥市，南接芜湖市、宣城市，东北接江苏省南京市。",
+        "zh-TW": "馬鞍山市是中華人民共和國安徽省下轄的地級市，位於安徽省東部，長江沿岸。市境西北達滁州市，西鄰合肥市，南接蕪湖市、宣城市，東北接江蘇省南京市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A9%AC%E9%9E%8D%E5%B1%B1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A9%AC%E9%9E%8D%E5%B1%B1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Ma%27anshan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        118.507,
+        31.669
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/cbc0898474ab7ecf.webp",
+        "credit": "Qa003qa003 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ma%27anshan_20150813_135744.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​马鞍山市内",
+        "place": "雨山区",
+        "originalFile": "Ma'anshan_20150813_135744.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:340500:28f0aef1",
+      "urbanFocus": {
+        "label": {
+          "en": "Ma'anshan",
+          "zh-CN": "马鞍山市",
+          "zh-TW": "馬鞍山市"
+        },
+        "lngLat": [
+          118.5048377,
+          31.6866105
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on the principal urban area of Maanshan, on the eastern bank of the Yangtze River.",
+          "zh-CN": "以长江东岸的马鞍山主城区为中心，展示约24公里宽的城区与地形。",
+          "zh-TW": "以長江東岸的馬鞍山主城區爲中心，展示約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.openstreetmap.org/node/244081289",
+        "source": "https://www.openstreetmap.org/node/244081289",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.openstreetmap.org/relation/3260816"
+      }
+    },
+    "poi:admin:340500:28f0aef1": {
+      "label": {
+        "en": "Yushan, Ma'anshan",
+        "zh-CN": "雨山区",
+        "zh-TW": "雨山區"
+      },
+      "description": {
+        "en": "Yushan is a district and the seat of the city of Ma'anshan, Anhui Province, China.",
+        "zh-CN": "雨山区是中国安徽省马鞍山市下辖的市辖区。区域总面积为130平方公里，总人口约36万人。",
+        "zh-TW": "雨山區是中國安徽省馬鞍山市下轄的市轄區。區域總面積爲130平方公里，總人口約36萬人。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9B%A8%E5%B1%B1%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9B%A8%E5%B1%B1%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Yushan,_Ma%27anshan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        118.49138889,
+        31.67861111
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Yushan,_Ma%27anshan",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "340500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/cbc0898474ab7ecf.webp",
+        "credit": "Qa003qa003 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ma%27anshan_20150813_135744.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​马鞍山市内",
+        "place": "雨山区",
+        "originalFile": "Ma'anshan_20150813_135744.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

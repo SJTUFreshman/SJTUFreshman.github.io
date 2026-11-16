@@ -1,0 +1,181 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "340800": {
+      "label": {
+        "en": "Anqing",
+        "zh-CN": "安庆市",
+        "zh-TW": "安慶市"
+      },
+      "description": {
+        "en": "Anqing is a prefecture-level city in the southwest of Anhui province, People's Republic of China. Its population was 4,165,284 as of the 2020 census, with 728,501 living in the built-up area made up of three urban districts.",
+        "zh-CN": "安庆市，又名宜城，是中华人民共和国安徽省下辖的地级市，位于安徽省西南部，长江下游北岸。市境东南临池州市，东接铜陵市，北接合肥市、六安市，西邻湖北省黄冈市，南隔长江与江西省九江市相望。",
+        "zh-TW": "安慶市，又名宜城，是中華人民共和國安徽省下轄的地級市，位於安徽省西南部，長江下游北岸。市境東南臨池州市，東接銅陵市，北接合肥市、六安市，西鄰湖北省黃岡市，南隔長江與江西省九江市相望。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%89%E5%BA%86%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%89%E5%BA%86%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Anqing"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        117.1153,
+        30.5318
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/34658a7c1b543522.webp",
+        "credit": "Zeus1234 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Zhenfeng_Pagoda_5.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "The Zhenfeng Pagoda in Anqing, Anhui, China.",
+        "place": "迎江寺",
+        "originalFile": "Zhenfeng_Pagoda_5.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:340800:44abff1b",
+      "urbanFocus": {
+        "label": {
+          "en": "Anqing",
+          "zh-CN": "安庆市",
+          "zh-TW": "安慶市"
+        },
+        "lngLat": [
+          117.03333333333,
+          30.5
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Anqing.",
+          "zh-CN": "以安庆市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以安慶市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q360374#P625",
+        "source": "https://www.wikidata.org/wiki/Q360374",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q360374#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.39
+        }
+      }
+    },
+    "poi:admin:340800:44abff1b": {
+      "label": {
+        "en": "Yingjiang Temple",
+        "zh-CN": "迎江寺",
+        "zh-TW": "迎江寺"
+      },
+      "description": {
+        "en": "Yingfeng Temple is a Buddhist temple located in Yingjiang District of Anqing, Anhui, China.",
+        "zh-CN": "迎江寺，又称护国永昌禅寺、敕建迎江禅寺，位于安徽省安庆市沿江东路。禅宗佛寺、汉族地区佛教全国重点寺院。",
+        "zh-TW": "迎江寺，又稱護國永昌禪寺、敕建迎江禪寺，位於安徽省安慶市沿江東路。禪宗佛寺、漢族地區佛教全國重點寺院。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%BF%8E%E6%B1%9F%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%BF%8E%E6%B1%9F%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Yingjiang_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        117.061085,
+        30.506549
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Yingjiang_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "340800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/34658a7c1b543522.webp",
+        "credit": "Zeus1234 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Zhenfeng_Pagoda_5.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "The Zhenfeng Pagoda in Anqing, Anhui, China.",
+        "place": "迎江寺",
+        "originalFile": "Zhenfeng_Pagoda_5.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:340800:ff7076cb": {
+      "label": {
+        "en": "Mount Tianzhu",
+        "zh-CN": "天柱山",
+        "zh-TW": "天柱山"
+      },
+      "description": {
+        "en": "Tianzhu Mountain or Mount Tianzhu is a mountain in Anhui, China.",
+        "zh-CN": "天柱山，又名皖山、皖公山、万岁山、万山、潜山，是位于安徽省安庆市潜山市的山脉，因主峰如柱倚天而得名。主要山体在潜山市市区西北约9公里，主峰天柱峰海拔1489.8m。",
+        "zh-TW": "天柱山，又名皖山、皖公山、萬歲山、萬山、潛山，是位於安徽省安慶市潛山市的山脈，因主峯如柱倚天而得名。主要山體在潛山市市區西北約9公里，主峯天柱峯海拔1489.8m。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E6%9F%B1%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A9%E6%9F%B1%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Mount_Tianzhu"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        116.1875,
+        31.06166667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Mount_Tianzhu",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "340800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/609d94bb0c6fc144.webp",
+        "credit": "N509FZ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tianzhu_Peak_(20170116142019).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "The pole to the sky, finally reached.",
+        "place": "天柱山",
+        "originalFile": "Tianzhu_Peak_(20170116142019).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:340800:3a55058f": {
+      "label": {
+        "en": "Huating Lake",
+        "zh-CN": "花亭湖",
+        "zh-TW": "花亭湖"
+      },
+      "description": {
+        "en": "Huating Lake , also known as the Hualiangting Reservoir , is a large scale reservoir in Taihu County, Anqing City, Anhui Province, China. The reservoir is used for the purposes of flood control, hydro-electric power generation, agricultural irrigation, transport and tourism.",
+        "zh-CN": "花亭湖即花凉亭水库，位于中国安徽省安庆市太湖县，是以防洪、灌溉为主，结合发电、供水、养殖、航运、旅游等功能的大型水库。花亭湖是国家重点风景名胜区、国家4A级旅游景区、国家水利风景区、全国农业旅游示范点、全省农家乐旅游示范点。",
+        "zh-TW": "花亭湖即花涼亭水庫，位於中國安徽省安慶市太湖縣，是以防洪、灌溉爲主，結合發電、供水、養殖、航運、旅遊等功能的大型水庫。花亭湖是國家重點風景名勝區、國家4A級旅遊景區、國家水利風景區、全國農業旅遊示範點、全省農家樂旅遊示範點。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8A%B1%E4%BA%AD%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8A%B1%E4%BA%AD%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Huating_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        116.2475,
+        30.46722222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Huating_Lake",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "340800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2cabb6ab33837455.webp",
+        "credit": "章彦博 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%87%AA%E5%B7%B1%E6%8B%8D%E7%9A%84%E8%8A%B1%E4%BA%AD%E6%B9%96.jpeg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​花亭湖",
+        "place": "花亭湖",
+        "originalFile": "自己拍的花亭湖.jpeg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

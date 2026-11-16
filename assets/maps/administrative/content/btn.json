@@ -1,0 +1,143 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "BTN": {
+      "label": {
+        "en": "Bhutan",
+        "zh-CN": "不丹",
+        "zh-TW": "不丹"
+      },
+      "description": {
+        "en": "Bhutan’s dzongs, monasteries and villages occupy Himalayan valleys. Buddhist traditions and local history meet in fortress-monasteries, carved timber, murals and festivals. Dzongs combine religious and administrative roles, while house forms and everyday traditions vary across the country.",
+        "zh-CN": "不丹的宗堡、寺院和村落沿喜马拉雅山地的河谷展开。佛教传统与本地历史共同塑造了宗堡、木雕、壁画和节庆，宗堡兼具宗教与行政功能；不同地区也保留各自的民居形制与生活传统。",
+        "zh-TW": "不丹的宗堡、寺院和村落沿喜馬拉雅山地的河谷展開。佛教傳統與本地歷史共同塑造了宗堡、木雕、壁畫和節慶，宗堡兼具宗教與行政功能；不同地區也保留各自的民居形制與生活傳統。"
+      },
+      "source": "https://bhutan.travel/experiences-culture",
+      "textSources": [
+        "https://bhutan.travel/experiences-culture"
+      ],
+      "textLicense": "Original editorial description; factual references linked. Source articles retain their own rights.",
+      "kind": "extension",
+      "lngLat": [
+        90.435,
+        27.417
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Bhutan",
+      "coordinateRole": "regional-reference",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2d62f1357f1f7424.webp",
+        "credit": "Bernard Gagnon · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tashichho_Dzong,_Bhutan_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Tashichho Dzong, Thimphu, Bhutan",
+        "place": "Tashichho Dzong",
+        "originalFile": "Tashichho_Dzong,_Bhutan_02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "textKind": "editorial-cultural",
+      "photoReference": "poi:admin:BTN:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Thimphu",
+          "zh-CN": "廷布",
+          "zh-TW": "廷布"
+        },
+        "lngLat": [
+          89.63367,
+          27.47135
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Thimphu.",
+          "zh-CN": "以廷布为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以廷布爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q9270",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q9270#P625",
+        "selectionSource": "https://bhutan.travel/experiences-culture"
+      }
+    },
+    "poi:BTN:1": {
+      "label": {
+        "en": "Paro Taktsang · Tiger’s Nest",
+        "zh-CN": "虎穴寺",
+        "zh-TW": "虎穴寺"
+      },
+      "description": {
+        "en": "Paro Taktsang occupies a cliff above the Paro valley. The monastery surrounds meditation caves associated with Guru Padmasambhava in Buddhist tradition. Its complex was first built in 1692; white walls and gilded roofs rise against the rock at this important Bhutanese pilgrimage site.",
+        "zh-CN": "虎穴寺建在帕罗河谷上方的陡壁，寺院围绕与莲花生大师传说相连的修行洞窟展开。建筑群始建于1692年，白墙与金顶依山层叠，是不丹重要的朝圣地。",
+        "zh-TW": "虎穴寺建在帕羅河谷上方的陡壁，寺院圍繞與蓮花生大師傳說相連的修行洞窟展開。建築羣始建於1692年，白牆與金頂依山層疊，是不丹重要的朝聖地。"
+      },
+      "source": "https://dcdd.moha.gov.bt/collection/paro-taktshang/",
+      "textSources": [
+        "https://dcdd.moha.gov.bt/collection/paro-taktshang/"
+      ],
+      "textLicense": "Original editorial description; factual references linked. Source articles retain their own rights.",
+      "kind": "landmark",
+      "lngLat": [
+        89.36348889,
+        27.49191111
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Paro_Taktsang",
+      "coordinateRole": "landmark-anchor",
+      "photo": {
+        "src": "assets/maps/regions/photos/himalaya-c929e92170f91482.webp",
+        "credit": "Original: Nina R from Africa Derivative work: UnpetitproleX · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Paro_Taktsang,_Bhutan_(edited).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": {
+          "en": "Paro Taktsang monastery above the Paro valley, Bhutan.",
+          "zh-CN": "不丹帕罗河谷上方的虎穴寺。",
+          "zh-TW": "不丹帕羅河谷上方的虎穴寺。"
+        },
+        "place": "Paro Taktsang",
+        "originalFile": "Paro Taktsang, Bhutan (edited).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "parentCity": "BTN",
+      "textKind": "editorial-cultural"
+    },
+    "poi:admin:BTN:urban": {
+      "id": "poi:admin:BTN:urban",
+      "label": {
+        "en": "Tashichho Dzong",
+        "zh-CN": "札西秋宗",
+        "zh-TW": "札西秋宗"
+      },
+      "description": {
+        "en": "Tashichho Dzong is a Buddhist monastery and fortress on the northern edge of the city of Thimphu in Bhutan, on the western bank of the Wang Chu. It has traditionally been the seat of the Druk Desi , the head of Bhutan's civil government, an office which has been combined with the kingship since the creation of the monarchy in 1907, and summer capital of the country.",
+        "zh-CN": "札西秋宗或译札什曲宗，是集政、教、法于一身的藏传佛教僧院兼城堡建筑，位于不丹廷布的北部边缘，旺河的西岸。为历年宗教领袖竹第悉的驻地，这里和自1907年创立的不丹国王办公室结合，为夏天的首都。",
+        "zh-TW": "札西秋宗或譯札什曲宗，是集政、教、法於一身的藏傳佛教僧院兼城堡建築，位於不丹廷布的北部邊緣，旺河的西岸。為歷年宗教領袖竹第悉的駐地，這裡和自1907年創立的不丹國王辦公室結合，為夏天的首都。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9C%AD%E8%A5%BF%E7%A7%8B%E5%AE%97",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9C%AD%E8%A5%BF%E7%A7%8B%E5%AE%97",
+        "https://en.wikipedia.org/wiki/Tashichho_Dzong"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2d62f1357f1f7424.webp",
+        "credit": "Bernard Gagnon · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tashichho_Dzong,_Bhutan_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Tashichho Dzong, Thimphu, Bhutan",
+        "place": "Tashichho Dzong",
+        "originalFile": "Tashichho_Dzong,_Bhutan_02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        89.635,
+        27.48944444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Tashichho_Dzong",
+      "kind": "landmark",
+      "parentCity": "BTN"
+    }
+  }
+}

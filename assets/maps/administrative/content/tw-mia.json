@@ -1,0 +1,214 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-MIA": {
+      "label": {
+        "en": "Miaoli County",
+        "zh-CN": "苗栗县",
+        "zh-TW": "苗栗縣"
+      },
+      "description": {
+        "en": "Miaoli is a county in western Taiwan, bordered by Hsinchu County and Hsinchu City to the north, Taichung to the south, and the Taiwan Strait to the west. Miaoli is classified as central Taiwan by the National Development Council and northern Taiwan by the Taiwan Central Weather Bureau.",
+        "zh-CN": "苗栗县是中华台北台湾省的县，位于台湾中部，东倚雪山山脉，西滨台湾海峡。县治位于苗栗市，苗栗县内辖有2市、5镇、11乡，共有18个乡镇市，头份市为县内最大城市。",
+        "zh-TW": "苗栗縣是中華臺北臺灣省的縣，位於臺灣中部，東倚雪山山脈，西濱臺灣海峽。縣治位於苗栗市，苗栗縣內轄有2市、5鎮、11鄉，共有18個鄉鎮市，頭份市為縣內最大城市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8B%97%E6%A0%97%E7%B8%A3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8B%97%E6%A0%97%E7%B8%A3",
+        "https://en.wikipedia.org/wiki/Miaoli_County"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        120.82582778,
+        24.56341389
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/b7e6c63c83931297.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%8B%97%E6%A0%97%E6%96%87%E6%98%8C%E7%A5%A0.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​苗栗文昌祠",
+        "place": "Miaoli Wenchang Temple",
+        "originalFile": "苗栗文昌祠.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-MIA:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Miaoli",
+          "zh-CN": "苗栗市",
+          "zh-TW": "苗栗市"
+        },
+        "lngLat": [
+          120.82,
+          24.57
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Miaoli.",
+          "zh-CN": "以苗栗市为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以苗栗市爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q701651",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q701651#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E8%8B%97%E6%A0%97%E7%B8%A3"
+      }
+    },
+    "poi:admin:TW-MIA:e7fef02a": {
+      "label": {
+        "en": "Maolishan Park",
+        "zh-CN": "猫貍山公园",
+        "zh-TW": "貓貍山公園"
+      },
+      "description": {
+        "en": "This wooded hill park is a major green space in Miaoli City. Its grounds include memorials, historic monuments, a shrine and recreational facilities.",
+        "zh-CN": "猫貍山公园，原称福星山公园、将军山公园，位于台湾苗栗县苗栗市大同里、新英里，面积为80,571平方公尺，是一座天然、非人造的都会森林公园，也是苗栗市主要都会公园的核心，管理机关为苗栗市公所。公园内包含了罗福星纪念碑、丘沧海纪念碑、苗栗县童子军营地、三级古迹的赖氏节孝坊、由日治时期神社改建而成的苗栗县忠烈祠、苗栗市老人文康中心、苗栗隧道、净觉院、停车场、篮球场、烤肉区、公用厕所等设施及景点，是一个苗栗市著名的观光景点。",
+        "zh-TW": "貓貍山公園，原稱福星山公園、將軍山公園，位於臺灣苗栗縣苗栗市大同裏、新英里，面積為80,571平方公尺，是一座天然、非人造的都會森林公園，也是苗栗市主要都會公園的核心，管理機關為苗栗市公所。公園內包含了羅福星紀念碑、丘滄海紀念碑、苗栗縣童子軍營地、三級古蹟的賴氏節孝坊、由日治時期神社改建而成的苗栗縣忠烈祠、苗栗市老人文康中心、苗栗隧道、淨覺院、停車場、籃球場、烤肉區、公用廁所等設施及景點，是一個苗栗市著名的觀光景點。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%B2%93%E8%B2%8D%E5%B1%B1%E5%85%AC%E5%9C%92",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%B2%93%E8%B2%8D%E5%B1%B1%E5%85%AC%E5%9C%92"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.810535,
+        24.555679
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%B2%93%E8%B2%8D%E5%B1%B1%E5%85%AC%E5%9C%92",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-MIA",
+      "photo": {
+        "src": "assets/maps/administrative/photos/bfaa238a92cf43c4.webp",
+        "credit": "Foxy Who \\(^∀^)/ · CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%B2%93%E7%8B%B8%E5%B1%B1%E5%85%AC%E5%9C%92_Maolishan_Park.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "alt": "​苗栗市貓狸山公園入口處。",
+        "place": "貓貍山公園",
+        "originalFile": "貓狸山公園_Maolishan_Park.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-MIA:8ff5d8bd": {
+      "label": {
+        "en": "Longteng Bridge",
+        "zh-CN": "鱼藤坪断桥",
+        "zh-TW": "魚藤坪斷橋"
+      },
+      "description": {
+        "en": "The Longteng Bridge , officially known as the Yutengping Bridge , is a former bridge in Longteng Village, Sanyi Township, Miaoli County, Taiwan.",
+        "zh-CN": "鱼藤坪断桥，又名龙腾断桥，原名鱼藤坪桥，是一座位于台湾苗栗县三义乡龙腾村的桥梁，为纵贯线铁路全线开通前一年兴建完成，该结构为砖造、钢钣梁及桁架梁混合型式之桥梁，被视为1900年代台湾在工程技术的代表性结构物之一，其中中央铁桥部分被称为「内社川第二铁桥」。 1999年921大地震后，行政院文化建设委员会于2000年将鱼藤坪断桥指定为震灾纪念物，苗栗县政府于2003年依文化资产保存法公告指定为县定古迹。",
+        "zh-TW": "魚藤坪斷橋，又名龍騰斷橋，原名魚藤坪橋，是一座位於臺灣苗栗縣三義鄉龍騰村的橋樑，為縱貫線鐵路全線開通前一年興建完成，該結構為磚造、鋼鈑梁及桁架樑混合型式之橋樑，被視為1900年代臺灣在工程技術的代表性結構物之一，其中中央鐵橋部分被稱為「內社川第二鐵橋」。 1999年921大地震後，行政院文化建設委員會於2000年將魚藤坪斷橋指定為震災紀念物，苗栗縣政府於2003年依文化資產保存法公告指定為縣定古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%AD%9A%E8%97%A4%E5%9D%AA%E6%96%B7%E6%A9%8B",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%AD%9A%E8%97%A4%E5%9D%AA%E6%96%B7%E6%A9%8B",
+        "https://en.wikipedia.org/wiki/Longteng_Bridge"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.77383333,
+        24.35844444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Longteng_Bridge",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-MIA",
+      "photo": {
+        "src": "assets/maps/administrative/photos/76dcdd6de5ac6f9b.webp",
+        "credit": "Mk2010 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yutengping_Bridge_(Longteng_Bridge)_Sanyi,_Miaoli_County,_(Taiwan).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "This is a photo of a monument in Taiwan identified by the ID",
+        "place": "魚藤坪斷橋",
+        "originalFile": "Yutengping_Bridge_(Longteng_Bridge)_Sanyi,_Miaoli_County,_(Taiwan).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-MIA:c9e6dba4": {
+      "label": {
+        "en": "Huoyan Mountain",
+        "zh-CN": "火炎山 (苗栗县)",
+        "zh-TW": "火炎山 (苗栗縣)"
+      },
+      "description": {
+        "en": "Huoyan Mountain is a mountain located at the border of Sanyi and Yuanli Townships in Miaoli County, Taiwan.",
+        "zh-CN": "火炎山，位于台湾苗栗县三义乡、苑里镇交界，主峰海拔596公尺，北峰海拔614公尺，为台湾小百岳之一。",
+        "zh-TW": "火炎山，位於臺灣苗栗縣三義鄉、苑裡鎮交界，主峯海拔596公尺，北峯海拔614公尺，為臺灣小百嶽之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%81%AB%E7%82%8E%E5%B1%B1_(%E8%8B%97%E6%A0%97%E7%B8%A3)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%81%AB%E7%82%8E%E5%B1%B1_(%E8%8B%97%E6%A0%97%E7%B8%A3)",
+        "https://en.wikipedia.org/wiki/Huoyan_Mountain"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.729,
+        24.3676
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Huoyan_Mountain",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-MIA",
+      "photo": {
+        "src": "assets/maps/administrative/photos/6284246464b1427e.webp",
+        "credit": "Jamiechiou · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:17750Huoyan_Mountain_Chiu_Tai_Wei_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​山峰上岩層裸露，容易受豪雨沖刷，當夕陽西照，由遠處觀之，像火焰燃燒一般，命名火炎山。不同時間紀錄會呈現不同沖刷痕跡。",
+        "place": "火炎山 (苗栗縣)",
+        "originalFile": "17750Huoyan_Mountain_Chiu_Tai_Wei_01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-MIA:urban": {
+      "id": "poi:admin:TW-MIA:urban",
+      "label": {
+        "en": "Miaoli Wenchang Temple",
+        "zh-CN": "苗栗文昌祠",
+        "zh-TW": "苗栗文昌祠"
+      },
+      "description": {
+        "en": "Miaoli Wenchang Temple , formerly known as Yingcai Academy , is a temple in Miaoli City, Miaoli County, Taiwan. The temple is dedicated to Wenchang Dijun, the deity of culture and literature.",
+        "zh-CN": "苗栗文昌祠是位于台湾苗栗县苗栗市的文昌庙，兴建于清光绪八年，完工于光绪十一年。在苗栗县刚创设未建县衙时，首任知县林桂芬曾暂借此处办公，并为英才书院、台湾日治时期创立的诗社——栗社的活动场地。",
+        "zh-TW": "苗栗文昌祠是位於臺灣苗栗縣苗栗市的文昌廟，興建於清光緒八年，完工於光緒十一年。在苗栗縣剛創設未建縣衙時，首任知縣林桂芬曾暫藉此處辦公，並為英才書院、臺灣日治時期創立的詩社——慄社的活動場地。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8B%97%E6%A0%97%E6%96%87%E6%98%8C%E7%A5%A0",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8B%97%E6%A0%97%E6%96%87%E6%98%8C%E7%A5%A0",
+        "https://en.wikipedia.org/wiki/Miaoli_Wenchang_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b7e6c63c83931297.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%8B%97%E6%A0%97%E6%96%87%E6%98%8C%E7%A5%A0.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​苗栗文昌祠",
+        "place": "Miaoli Wenchang Temple",
+        "originalFile": "苗栗文昌祠.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.8181,
+        24.5539
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Miaoli_Wenchang_Temple",
+      "kind": "landmark",
+      "parentCity": "TW-MIA"
+    }
+  }
+}

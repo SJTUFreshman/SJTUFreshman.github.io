@@ -1,0 +1,252 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "230100": {
+      "label": {
+        "en": "Harbin",
+        "zh-CN": "哈尔滨市",
+        "zh-TW": "哈爾濱市"
+      },
+      "description": {
+        "en": "Harbin or Hā'ěrbīn is the capital and largest city of Heilongjiang, China, and the second largest urban population and the largest metropolitan population in Northeast China. Harbin has direct jurisdiction over nine metropolitan districts, two county-level cities, and seven counties.",
+        "zh-CN": "哈尔滨市，位于东北平原北部，中华人民共和国黑龙江省省会，副省级市，东北地区重要的区域中心城市。哈尔滨是中国东北北部的政治、经济、文化和对外开放中心，也是中国省会城市中辖区面积最大、辖区户籍人口第三多的特大城市，其中市辖区面积10,198平方公里。",
+        "zh-TW": "哈爾濱市，位於東北平原北部，中華人民共和國黑龍江省省會，副省級市，東北地區重要的區域中心城市。哈爾濱是中國東北北部的政治、經濟、文化和對外開放中心，也是中國省會城市中轄區面積最大、轄區戶籍人口第三多的特大城市，其中市轄區面積10,198平方公里。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%93%88%E5%B0%94%E6%BB%A8%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%93%88%E5%B0%94%E6%BB%A8%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Harbin"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        126.6409,
+        45.7576
+      ],
+      "photo": {
+        "src": "assets/maps/regions/photos/f783bb7fe8a4863a.webp",
+        "credit": "N509FZ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:West_facade_of_St._Sophia_Cathedral,_Harbin_(20230721150450).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Entrance on the west side.",
+        "place": "圣索菲亚教堂 (哈尔滨)",
+        "originalFile": "West_facade_of_St._Sophia_Cathedral,_Harbin_(20230721150450).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:230100:1",
+      "urbanFocus": {
+        "label": {
+          "en": "Harbin",
+          "zh-CN": "哈尔滨市",
+          "zh-TW": "哈爾濱市"
+        },
+        "lngLat": [
+          126.63333333333,
+          45.75
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Harbin.",
+          "zh-CN": "以哈尔滨市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以哈爾濱市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q42956#P625",
+        "source": "https://www.wikidata.org/wiki/Q42956",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q42956#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.05
+        }
+      }
+    },
+    "poi:230100:1": {
+      "label": {
+        "en": "Saint Sophia Cathedral, Harbin",
+        "zh-CN": "圣索菲亚教堂 (哈尔滨)",
+        "zh-TW": "聖索菲亞教堂 (哈爾濱)"
+      },
+      "description": {
+        "en": "The Cathedral of the Holy Wisdom of God or Saint Sophia Cathedral in Harbin is a former Russian Orthodox church located in the central district of Daoli, Harbin, Heilongjiang, China.",
+        "zh-CN": "圣索菲亚教堂位于中国黑龙江省哈尔滨市道里区兆麟街道，近中央大街，是远东地区最大的东正教教堂。教堂现已辟为哈尔滨建筑艺术馆，不再行使宗教功能。",
+        "zh-TW": "聖索菲亞教堂位於中國黑龍江省哈爾濱市道里區兆麟街道，近中央大街，是遠東地區最大的東正教教堂。教堂現已闢爲哈爾濱建築藝術館，不再行使宗教功能。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9C%A3%E7%B4%A2%E8%8F%B2%E4%BA%9A%E6%95%99%E5%A0%82_(%E5%93%88%E5%B0%94%E6%BB%A8)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9C%A3%E7%B4%A2%E8%8F%B2%E4%BA%9A%E6%95%99%E5%A0%82_(%E5%93%88%E5%B0%94%E6%BB%A8)",
+        "https://en.wikipedia.org/wiki/Saint_Sophia_Cathedral,_Harbin"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        126.62152223,
+        45.76809445
+      ],
+      "parentCity": "230100",
+      "photo": {
+        "src": "assets/maps/regions/photos/f783bb7fe8a4863a.webp",
+        "credit": "N509FZ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:West_facade_of_St._Sophia_Cathedral,_Harbin_(20230721150450).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Entrance on the west side.",
+        "place": "圣索菲亚教堂 (哈尔滨)",
+        "originalFile": "West_facade_of_St._Sophia_Cathedral,_Harbin_(20230721150450).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:230100:2": {
+      "label": {
+        "en": "Harbin Grand Theatre",
+        "zh-CN": "哈尔滨大剧院",
+        "zh-TW": "哈爾濱大劇院"
+      },
+      "description": {
+        "en": "The Harbin Grand Theatre or Harbin Opera House is a multi-venue performing arts centre in Harbin, Heilongjiang Province, China. Measuring 850,349 square feet, the theatre is designed by well-known Chinese architect agency MAD led by Ma Yansong.",
+        "zh-CN": "哈尔滨大剧院坐落于中国黑龙江省哈尔滨市松北区，是依照北国风光来设计的哈尔滨地标性建筑，占地面积7.2万平方米，建筑面积7.9万平方米，净高63.48米，总投资人民币12.79亿元。大剧院先由驱动传媒运营，驱动传媒也曾经营天津大剧院。",
+        "zh-TW": "哈爾濱大劇院坐落於中國黑龍江省哈爾濱市松北區，是依照北國風光來設計的哈爾濱地標性建築，佔地面積7.2萬平方米，建築面積7.9萬平方米，淨高63.48米，總投資人民幣12.79億元。大劇院先由驅動傳媒運營，驅動傳媒也曾經營天津大劇院。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%93%88%E7%88%BE%E6%BF%B1%E5%A4%A7%E5%8A%87%E9%99%A2",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%93%88%E7%88%BE%E6%BF%B1%E5%A4%A7%E5%8A%87%E9%99%A2",
+        "https://en.wikipedia.org/wiki/Harbin_Grand_Theatre"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        126.57865,
+        45.8071
+      ],
+      "parentCity": "230100",
+      "photo": {
+        "src": "assets/maps/regions/photos/971aa3343885742f.webp",
+        "credit": "Jeremy Thompson from Los Angeles, California · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Harbin_Grand_Theatre_Pano_201609.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Harbin Grand Theatre",
+        "place": "哈爾濱大劇院",
+        "originalFile": "Harbin Grand Theatre Pano 201609.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:230100:064fd948": {
+      "label": {
+        "en": "Zhaolin Park",
+        "zh-CN": "兆麟公园",
+        "zh-TW": "兆麟公園"
+      },
+      "description": {
+        "en": "Zhaolin Park stands at the northern end of Zhaolin Street in Harbin’s Daoli District. It was the city’s first park and covers more than 75,000 square metres.",
+        "zh-CN": "兆麟公园是位于中华人民共和国黑龙江省哈尔滨市道里区兆麟街北端的一座市属公园，亦为哈尔滨市第一座公园。公园占地逾7.5万平方米。",
+        "zh-TW": "兆麟公園是位於中華人民共和國黑龍江省哈爾濱市道里區兆麟街北端的一座市屬公園，亦為哈爾濱市第一座公園。公園佔地逾7.5萬平方米。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%85%86%E9%BA%9F%E5%85%AC%E5%9B%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%85%86%E9%BA%9F%E5%85%AC%E5%9B%AD"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        126.61719194,
+        45.77535806
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%85%86%E9%BA%9F%E5%85%AC%E5%9B%AD",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "230100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/86b467ad75056920.webp",
+        "credit": "EditQ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Zhaolin_Park_10.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​Zhaolin Park",
+        "place": "兆麟公园",
+        "originalFile": "Zhaolin_Park_10.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:230100:e2a99db4": {
+      "label": {
+        "en": "Saint Sophia Cathedral, Harbin",
+        "zh-CN": "圣索菲亚教堂 (哈尔滨)",
+        "zh-TW": "聖索菲亞教堂 (哈爾濱)"
+      },
+      "description": {
+        "en": "The Cathedral of the Holy Wisdom of God or Saint Sophia Cathedral in Harbin is a former Russian Orthodox church located in the central district of Daoli, Harbin, Heilongjiang, China.",
+        "zh-CN": "圣索菲亚教堂位于中国黑龙江省哈尔滨市道里区兆麟街道，近中央大街，是远东地区最大的东正教教堂。教堂现已辟为哈尔滨建筑艺术馆，不再行使宗教功能。",
+        "zh-TW": "聖索菲亞教堂位於中國黑龍江省哈爾濱市道里區兆麟街道，近中央大街，是遠東地區最大的東正教教堂。教堂現已闢爲哈爾濱建築藝術館，不再行使宗教功能。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9C%A3%E7%B4%A2%E8%8F%B2%E4%BA%9A%E6%95%99%E5%A0%82_(%E5%93%88%E5%B0%94%E6%BB%A8)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9C%A3%E7%B4%A2%E8%8F%B2%E4%BA%9A%E6%95%99%E5%A0%82_(%E5%93%88%E5%B0%94%E6%BB%A8)",
+        "https://en.wikipedia.org/wiki/Saint_Sophia_Cathedral,_Harbin"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        126.62152223,
+        45.76809445
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Saint_Sophia_Cathedral,_Harbin",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "230100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f783bb7fe8a4863a.webp",
+        "credit": "N509FZ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:West_facade_of_St._Sophia_Cathedral,_Harbin_(20230721150450).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Entrance on the west side.",
+        "place": "圣索菲亚教堂 (哈尔滨)",
+        "originalFile": "West_facade_of_St._Sophia_Cathedral,_Harbin_(20230721150450).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:230100:68f85fcc": {
+      "label": {
+        "en": "Dragon Tower",
+        "zh-CN": "龙塔",
+        "zh-TW": "龍塔"
+      },
+      "description": {
+        "en": "Dragon Tower, also known as Long Ta or Heilongjiang Tower , is a 336 m tall multi-purpose Chinese steel lattice television and observation tower. The Long Ta is used for television broadcasting; telecommunication, transmitting FM-/TV-broadcasting throughout the province of Heilongjiang; for observation, providing a view of the surrounding areas of city.",
+        "zh-CN": "龙塔，又称“黑龙江省广播电视塔”，坐落于中华人民共和国黑龙江省哈尔滨市南岗区长江路178号，为一座全钢结构的广播电视塔。龙塔于2000年建成开放，塔高336米，时为亚洲第一、世界第二高的钢结构塔。",
+        "zh-TW": "龍塔，又稱“黑龍江省廣播電視塔”，坐落於中華人民共和國黑龍江省哈爾濱市南崗區長江路178號，爲一座全鋼結構的廣播電視塔。龍塔於2000年建成開放，塔高336米，時爲亞洲第一、世界第二高的鋼結構塔。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BE%99%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BE%99%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Dragon_Tower"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        126.67444444,
+        45.74598611
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Dragon_Tower",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "230100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a472db12258f37ca.webp",
+        "credit": "JacobLyu · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Longta_Tower_20251028.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​晚霞中的龙塔",
+        "place": "龙塔",
+        "originalFile": "Longta_Tower_20251028.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

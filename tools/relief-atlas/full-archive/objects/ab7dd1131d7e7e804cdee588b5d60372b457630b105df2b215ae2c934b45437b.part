@@ -1,0 +1,27 @@
+{
+  "lighting": {
+    "sun_elevation_degrees": 32,
+    "sun_azimuth_degrees_clockwise_from_north": 321.84277341263095,
+    "sun_energy": 3.664663076400757,
+    "sun_angular_diameter_degrees": 3.0,
+    "world_strength": 0.45,
+    "horizontal_illuminance_matched_to_previous": true
+  },
+  "render_engine": "Blender 4.5.3 / Cycles CUDA",
+  "samples": 192,
+  "native_render_size": [
+    6000,
+    5024
+  ],
+  "gpu_devices": [
+    "NVIDIA A800-SXM4-80GB"
+  ],
+  "unvisited_material": "#f4f1e9",
+  "administrative_outlines": false,
+  "sea_material": "#e4edf0",
+  "postprocessing": "none",
+  "outputs": {
+    "china-relief.png": "415c7d65f36cfa9e6d188ab81a4862eec65eab853166fda15ffdbdc40243c918",
+    "china-colour.png": "54e350153a6643de91a29ffe16eba4c5bae835276b6e79dfd967e52e31d3ec59"
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "350900": {
+      "label": {
+        "en": "Ningde",
+        "zh-CN": "宁德市",
+        "zh-TW": "寧德市"
+      },
+      "description": {
+        "en": "Ningde, previously romanized as Ningteh and Ning-Taik, is a city located along the northeastern coast of Fujian, China. It borders the provincial capital of Fuzhou City to the south, Wenzhou Prefecture of Zhejiang to the north, and Nanping to the west.",
+        "zh-CN": "宁德市是中华人民共和国福建省下辖的地级市，位于福建省东北沿海地区。国家园林城市，市境南临福州市，西接南平市，北界浙江省丽水市、温州市，东滨东海，东南方为连江县马祖列岛，沿海有三都澳、福宁湾等港湾，并有多个岛屿。",
+        "zh-TW": "寧德市是中華人民共和國福建省下轄的地級市，位於福建省東北沿海地區。國家園林城市，市境南臨福州市，西接南平市，北界浙江省麗水市、溫州市，東濱東海，東南方為連江縣馬祖列島，沿海有三都澳、福寧灣等港灣，並有多個島嶼。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%81%E5%BE%B7%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%81%E5%BE%B7%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Ningde"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        119.5477,
+        26.6662
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/31d17f41f1c0fa6e.webp",
+        "credit": "FradonStar · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%94%A1%E5%A8%81%E6%95%85%E5%B1%85_07.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "​蔡威故居，位于福建省宁德市蕉城区",
+        "place": "蕉城蔡氏民居及家庙",
+        "originalFile": "蔡威故居_07.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:350900:6e2f2690",
+      "urbanFocus": {
+        "label": {
+          "en": "Ningde",
+          "zh-CN": "宁德市",
+          "zh-TW": "寧德市"
+        },
+        "lngLat": [
+          119.52277777778,
+          26.661666666667
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Ningde.",
+          "zh-CN": "以宁德市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以寧德市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q68919#P625",
+        "source": "https://www.wikidata.org/wiki/Q68919",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q68919#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.51
+        }
+      }
+    },
+    "poi:admin:350900:6e2f2690": {
+      "label": {
+        "en": "Cai family residence and ancestral temple",
+        "zh-CN": "蕉城蔡氏民居及家庙",
+        "zh-TW": "蕉城蔡氏民居及家廟"
+      },
+      "description": {
+        "en": "The Cai family residence and temple in Ningde’s Jiaocheng District date from the Qing Daoguang reign and are associated with the revolutionary Cai Wei. Their surviving halls, carved timbers, gateways and courtyard features preserve the setting of a substantial lineage home.",
+        "zh-CN": "蕉城蔡氏民居及家庙，位于中国福建省宁德市蕉城区蕉北街道前林路，是宁德一蔡姓氏族的住宅，因中国共产党烈士蔡威而较为著名。建筑建于道光年间，整体占地面积1190平方米，正堂面阔六间，进深四间，梁木雕琢内容丰富多彩；家庙现存宗祠大门、文武门、池塘拱桥、仪门、回廊等。",
+        "zh-TW": "蕉城蔡氏民居及家廟，位於中國福建省寧德市蕉城區蕉北街道前林路，是寧德一蔡姓氏族的住宅，因中國共產黨烈士蔡威而較爲著名。建築建於道光年間，整體佔地面積1190平方米，正堂面闊六間，進深四間，梁木雕琢內容豐富多彩；家廟現存宗祠大門、文武門、池塘拱橋、儀門、迴廊等。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%95%89%E5%9F%8E%E8%94%A1%E6%B0%8F%E6%B0%91%E5%B1%85%E5%8F%8A%E5%AE%B6%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%95%89%E5%9F%8E%E8%94%A1%E6%B0%8F%E6%B0%91%E5%B1%85%E5%8F%8A%E5%AE%B6%E5%BA%99"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.52333056,
+        26.66611111
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%95%89%E5%9F%8E%E8%94%A1%E6%B0%8F%E6%B0%91%E5%B1%85%E5%8F%8A%E5%AE%B6%E5%BA%99",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "350900",
+      "photo": {
+        "src": "assets/maps/administrative/photos/31d17f41f1c0fa6e.webp",
+        "credit": "FradonStar · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%94%A1%E5%A8%81%E6%95%85%E5%B1%85_07.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "​蔡威故居，位于福建省宁德市蕉城区",
+        "place": "蕉城蔡氏民居及家庙",
+        "originalFile": "蔡威故居_07.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:350900:58018b9c": {
+      "label": {
+        "en": "Mount Taimu",
+        "zh-CN": "太姥山",
+        "zh-TW": "太姥山"
+      },
+      "description": {
+        "en": "Mount Taimu is a mountain in Ningde, Fujian, China. It is located 46km south of the county-level city of Fuding, 150km away from Wenzhou in the north, and 250km away from Fuzhou in the south.",
+        "zh-CN": "太姥山位于中国福建省福鼎市境内，北距温州市150公里，南至福州市250公里，背山面海，是闽越、百越地区古老神祇太姥娘娘的道场，素以“山海大观”著称。它北望雁荡山，西眺武夷山，三者成鼎足之势。",
+        "zh-TW": "太姥山位於中國福建省福鼎市境內，北距溫州市150公里，南至福州市250公里，背山面海，是閩越、百越地區古老神祇太姥娘娘的道場，素以“山海大觀”著稱。它北望雁蕩山，西眺武夷山，三者成鼎足之勢。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%A7%A5%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%A7%A5%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Mount_Taimu"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.1641974,
+        27.1342045
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Mount_Taimu",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "350900",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4d9a791ca3ef40de.webp",
+        "credit": "颐园居 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Mount_Taimu,_Fuding_20230827.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​福建太姥山风景名胜区，也是世界地质公园。",
+        "place": "太姥山",
+        "originalFile": "Mount_Taimu,_Fuding_20230827.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:350900:4ce56414": {
+      "label": {
+        "en": "Pingnan Confucian Temple",
+        "zh-CN": "双溪文庙",
+        "zh-TW": "雙溪文廟"
+      },
+      "description": {
+        "en": "Pingnan’s Confucian temple in Shuangxi was founded during the Qing Qianlong reign as the county’s temple and school. Although much of the original complex was lost, the surviving Dacheng Hall and Chongsheng Shrine preserve one of Ningde’s most complete Confucian temple groups.",
+        "zh-CN": "双溪文庙，又称屏南文庙、学宫，位于中国福建省宁德市屏南县双溪镇镇区西北，是清代福建福州府屏南县的县学文庙，始建于清朝乾隆年间，历朝历代多次修缮。文庙最初为一个建筑群，包括了大成殿、明伦堂、崇圣祠、名宦祠、乡贤祠等完善的文庙结构，中华人民共和国发动大跃进之后仅存大成殿和崇圣祠等建筑，但双溪文庙仍是宁德市境内唯二存留至今的文庙，且是保存最为完善的文庙建筑。",
+        "zh-TW": "雙溪文廟，又稱屏南文廟、學宮，位於中國福建省寧德市屏南縣雙溪鎮鎮區西北，是清代福建福州府屏南縣的縣學文廟，始建於清朝乾隆年間，歷朝歷代多次修繕。文廟最初爲一個建築羣，包括了大成殿、明倫堂、崇聖祠、名宦祠、鄉賢祠等完善的文廟結構，中華人民共和國發動大躍進之後僅存大成殿和崇聖祠等建築，但雙溪文廟仍是寧德市境內唯二存留至今的文廟，且是保存最爲完善的文廟建築。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8F%8C%E6%BA%AA%E6%96%87%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8F%8C%E6%BA%AA%E6%96%87%E5%BA%99"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.04166667,
+        27.02277778
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%8F%8C%E6%BA%AA%E6%96%87%E5%BA%99",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "350900",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5f7c6f1acc3cd3bc.webp",
+        "credit": "Zhangzhugang · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pingnan_Confucian_Temple_2014.08.03_07-41-02.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "屏南文庙—— 大成殿",
+        "place": "双溪文庙",
+        "originalFile": "Pingnan_Confucian_Temple_2014.08.03_07-41-02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

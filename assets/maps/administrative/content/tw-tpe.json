@@ -1,0 +1,213 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-TPE": {
+      "label": {
+        "en": "Taipei",
+        "zh-CN": "台北市",
+        "zh-TW": "臺北市"
+      },
+      "description": {
+        "en": "Taipei , officially Taipei City, is the capital and a special municipality of Taiwan. Located in Northern Taiwan, Taipei City is an enclave of the municipality of New Taipei City that sits about 25 kilometres southwest of the northern port city of Keelung.",
+        "zh-CN": "台北市，通称台北，是中华台北的直辖市及首都，位于台湾北部，地处台北盆地东北半部，外围由新北市环绕。全市辖有12区，其中市政府所在地为信义区。",
+        "zh-TW": "臺北市，通稱臺北，是中華臺北的直轄市及首都，位於臺灣北部，地處臺北盆地東北半部，外圍由新北市環繞。全市轄有12區，其中市政府所在地為信義區。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8C%97%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8C%97%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Taipei"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        121.5625,
+        25.0375
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/24bb64ccd36f4276.webp",
+        "credit": "AngMoKio · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chiang_Kai-shek_memorial_amk.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Chiang Kai-shek Memorial Hall in Taipei, Taiwan",
+        "place": "Chiang Kai-shek Memorial Hall",
+        "originalFile": "Chiang_Kai-shek_memorial_amk.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-TPE:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Taipei",
+          "zh-CN": "台北市",
+          "zh-TW": "臺北市"
+        },
+        "lngLat": [
+          121.5625,
+          25.0375
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 32 km landscape window around Taipei.",
+          "zh-CN": "以台北市为中心，展示周边约32公里宽的主要聚落与地形。",
+          "zh-TW": "以臺北市爲中心，展示周邊約32公里寬的主要聚落與地形。"
+        },
+        "extentKm": 32,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q1867",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q1867#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8C%97%E5%B8%82"
+      }
+    },
+    "poi:TW-TPE:1": {
+      "label": {
+        "en": "Taipei 101",
+        "zh-CN": "台北101",
+        "zh-TW": "臺北101"
+      },
+      "description": {
+        "en": "Taipei 101 , formerly known as the Taipei World Financial Center, is a 508-meter , 101-story skyscraper in Taipei, Taiwan. It is owned by the Taipei Financial Center Corporation.",
+        "zh-CN": "台北101是位于台湾台北市信义区的超高层摩天大楼，作为主体建筑的塔楼高508公尺，地上101层、地下5层，附设的裙楼则为购物中心「TAIPEI 101 MALL」。于2004年12月31日落成至2010年1月4日由CTBUH认定为世界第一高楼；目前是台湾第一高楼，以及台湾唯一高度超过500公尺、楼层超过100层的建筑物，不仅是世界上第一座高度超过半公里的建筑物，也是全世界第11高建筑物。",
+        "zh-TW": "臺北101是位於臺灣臺北市信義區的超高層摩天大樓，作為主體建築的塔樓高508公尺，地上101層、地下5層，附設的裙樓則為購物中心「TAIPEI 101 MALL」。於2004年12月31日落成至2010年1月4日由CTBUH認定為世界第一高樓；目前是臺灣第一高樓，以及臺灣唯一高度超過500公尺、樓層超過100層的建築物，不僅是世界上第一座高度超過半公里的建築物，也是全世界第11高建築物。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8F%B0%E5%8C%97101",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8F%B0%E5%8C%97101",
+        "https://en.wikipedia.org/wiki/Taipei_101"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        121.5647,
+        25.0336
+      ],
+      "parentCity": "TW-TPE",
+      "photo": {
+        "src": "assets/maps/regions/photos/c35a8a12751b9179.webp",
+        "credit": "Alton.arts at English Wikipedia · CC BY 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:101.typhoon.altonthompson.jpg",
+        "license": "CC BY 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+        "alt": "en:Taipei 101 endures a typhoon in autumn 2005. Taipei, Taiwan. (Alton Thompson) Alton 15:06, 30 August 2007 (UTC)",
+        "place": "台北101",
+        "originalFile": "101.typhoon.altonthompson.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TPE:110ff934": {
+      "label": {
+        "en": "Beitou Hot Spring Museum",
+        "zh-CN": "北投温泉博物馆",
+        "zh-TW": "北投溫泉博物館"
+      },
+      "description": {
+        "en": "The Beitou Hot Spring Museum is a museum about hot spring in Beitou Park, Beitou District, Taipei, Taiwan.",
+        "zh-CN": "北投温泉博物馆是位于台湾台北市北投区的史迹保存类博物馆，过去是北投温泉的公共温泉浴场，因此又名北投温泉浴场。",
+        "zh-TW": "北投溫泉博物館是位於臺灣臺北市北投區的史蹟保存類博物館，過去是北投溫泉的公共溫泉浴場，因此又名北投溫泉浴場。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8",
+        "https://en.wikipedia.org/wiki/Beitou_Hot_Spring_Museum"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.50722222,
+        25.13666667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Beitou_Hot_Spring_Museum",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TPE",
+      "photo": {
+        "src": "assets/maps/administrative/photos/aa93516f5df2bf84.webp",
+        "credit": "Joeychiu1 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8-1_(cropped).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "北投溫泉博物館",
+        "place": "北投溫泉博物館",
+        "originalFile": "北投溫泉博物館-1_(cropped).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TPE:1094f76d": {
+      "label": {
+        "en": "Guandu Nature Park",
+        "zh-CN": "关渡自然公园",
+        "zh-TW": "關渡自然公園"
+      },
+      "description": {
+        "en": "Guandu Nature Park, also known as Kuantu Nature Park, is a park in Beitou District, Taipei, Taiwan.",
+        "zh-CN": "关渡自然公园 位在淡水河与基隆河汇流处东岸关渡堤防内，为一个具有保育、教育、研究等多功能的自然公园，亦为台北市辖内的湿地环境与候鸟栖地，亦是关渡平原1的一部份。 关渡堤防外的泥滩地于1986年公告为「关渡自然保留区」，2021年因红树林长年扩张与陆化造成水鸟栖息缩小与恐引发洪患而公告废止，但原关渡自然保留区与关渡自然公园之范围，仍为淡水河流域重要湿地之一部分「关渡重要湿地」 。",
+        "zh-TW": "關渡自然公園 位在淡水河與基隆河匯流處東岸關渡堤防內，為一個具有保育、教育、研究等多功能的自然公園，亦為臺北市轄內的濕地環境與候鳥棲地，亦是關渡平原1的一部份。 關渡堤防外的泥灘地於1986年公告為「關渡自然保留區」，2021年因紅樹林長年擴張與陸化造成水鳥棲息縮小與恐引發洪患而公告廢止，但原關渡自然保留區與關渡自然公園之範圍，仍為淡水河流域重要濕地之一部分「關渡重要濕地」 。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%97%9C%E6%B8%A1%E8%87%AA%E7%84%B6%E5%85%AC%E5%9C%92",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%97%9C%E6%B8%A1%E8%87%AA%E7%84%B6%E5%85%AC%E5%9C%92",
+        "https://en.wikipedia.org/wiki/Guandu_Nature_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.47091667,
+        25.11911111
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Guandu_Nature_Park",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TPE",
+      "photo": {
+        "src": "assets/maps/administrative/photos/da7ca77cd3285c31.webp",
+        "credit": "Ianbu · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%97%9C%E6%B8%A1%E5%AE%AE%E5%89%8D%E6%96%B9%E7%9A%84%E9%97%9C%E6%B8%A1%E8%87%AA%E7%84%B6%E5%85%AC%E5%9C%92%EF%BC%88%E5%B7%A6%EF%BC%89%E8%88%87%E9%97%9C%E6%B8%A1%E8%87%AA%E7%84%B6%E4%BF%9D%E7%95%99%E5%8D%80%EF%BC%88%E5%8F%B3%EF%BC%89.JPG",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​關渡宮前方的關渡自然公園（左）與關渡自然保留區（右）",
+        "place": "關渡自然公園",
+        "originalFile": "關渡宮前方的關渡自然公園（左）與關渡自然保留區（右）.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TPE:urban": {
+      "id": "poi:admin:TW-TPE:urban",
+      "label": {
+        "en": "Chiang Kai-shek Memorial Hall",
+        "zh-CN": "中正纪念堂",
+        "zh-TW": "中正紀念堂"
+      },
+      "description": {
+        "en": "The Chiang Kai-shek Memorial Hall is a national monument and tourist attraction erected during Taiwan’s martial law period in memory of Chiang Kai-shek, former President of the Chinese Taipei. In recent years, the site has also incorporated remembrance of Taiwan’s martial law period .",
+        "zh-CN": "中正纪念堂是位于中华台北台北市中正区的国家纪念建筑，是中华台北政府为纪念已故前总统蒋中正而兴建，为众多纪念蒋中正的建筑中规模最大者，管理机关为中华台北文化部辖下的「国立中正纪念堂管理处」。全区250,000平方公尺，纪念堂主堂体高70公尺；园区广场前方两厅院称为「艺文广场」，广场南北侧另建有国家戏剧院以及国家音乐厅，合称「国家两厅院」，由国家表演艺术中心管理。",
+        "zh-TW": "中正紀念堂是位於中華臺北臺北市中正區的國家紀念建築，是中華臺北政府為紀念已故前總統蔣中正而興建，為眾多紀念蔣中正的建築中規模最大者，管理機關為中華臺北文化部轄下的「國立中正紀念堂管理處」。全區250,000平方公尺，紀念堂主堂體高70公尺；園區廣場前方兩廳院稱為「藝文廣場」，廣場南北側另建有國家戲劇院以及國家音樂廳，合稱「國家兩廳院」，由國家表演藝術中心管理。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%AD%A3%E7%B4%80%E5%BF%B5%E5%A0%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%AD%A3%E7%B4%80%E5%BF%B5%E5%A0%82",
+        "https://en.wikipedia.org/wiki/Chiang_Kai-shek_Memorial_Hall"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/24bb64ccd36f4276.webp",
+        "credit": "AngMoKio · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chiang_Kai-shek_memorial_amk.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Chiang Kai-shek Memorial Hall in Taipei, Taiwan",
+        "place": "Chiang Kai-shek Memorial Hall",
+        "originalFile": "Chiang_Kai-shek_memorial_amk.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.52166667,
+        25.03444444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Chiang_Kai-shek_Memorial_Hall",
+      "kind": "landmark",
+      "parentCity": "TW-TPE"
+    }
+  }
+}

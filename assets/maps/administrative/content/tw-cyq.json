@@ -1,0 +1,175 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-CYQ": {
+      "label": {
+        "en": "Chiayi County",
+        "zh-CN": "嘉义县",
+        "zh-TW": "嘉義縣"
+      },
+      "description": {
+        "en": "Chiayi is a county in Taiwan. Located in southwestern Taiwan surrounding but not including Chiayi City, it is the sixth largest county in the island of Taiwan.",
+        "zh-CN": "嘉义县是中华台北台湾省的县，位于台湾南部。东与南投县、高雄市相接，西濒台湾海峡，南以八掌溪临台南市，北隔北港溪、石龟溪接云林县，境内并环绕嘉义市全境，北回归线通过县境南部。",
+        "zh-TW": "嘉義縣是中華臺北臺灣省的縣，位於臺灣南部。東與南投縣、高雄市相接，西瀕臺灣海峽，南以八掌溪臨臺南市，北隔北港溪、石龜溪接雲林縣，境內並環繞嘉義市全境，北迴歸線通過縣境南部。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E7%B8%A3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E7%B8%A3",
+        "https://en.wikipedia.org/wiki/Chiayi_County"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        120.641875,
+        23.49620556
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/cfa184a9fa3279c2.webp",
+        "credit": "B2322858 · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Southern_Branch_of_the_National_Palace_Museum_main_building_and_zhimei_bridge.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Southern_Branch_of_the_National_Palace_Museum_main_building_and_zhimei_bridge.jpg#Licensing",
+        "alt": "​國立故宮博物院南部院區主體與至美橋",
+        "place": "Southern Branch of the National Palace Museum",
+        "originalFile": "Southern_Branch_of_the_National_Palace_Museum_main_building_and_zhimei_bridge.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-CYQ:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Taibao",
+          "zh-CN": "太保市",
+          "zh-TW": "太保市"
+        },
+        "lngLat": [
+          120.33333333333333,
+          23.483333333333334
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Taibao.",
+          "zh-CN": "以太保市为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以太保市爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q701634",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q701634#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E7%B8%A3"
+      }
+    },
+    "poi:admin:TW-CYQ:27a99ffe": {
+      "label": {
+        "en": "Bantianyan Ziyun Temple",
+        "zh-CN": "半天岩紫云寺",
+        "zh-TW": "半天巖紫雲寺"
+      },
+      "description": {
+        "en": "Ziyun Temple is a Buddhist temple in Fanlu Township, Chiayi County. Its protected historic complex has two main halls, connecting galleries and side wings.",
+        "zh-CN": "半天岩紫云寺，或称半天岩紫云寺，是台湾嘉义县番路乡的佛寺，为嘉义县文化资产、县定古迹，建筑采五开间二进二廊带左右护龙、座西北朝东南。",
+        "zh-TW": "半天巖紫雲寺，或稱半天巖紫雲寺，是臺灣嘉義縣番路鄉的佛寺，為嘉義縣文化資產、縣定古蹟，建築採五開間二進二廊帶左右護龍、座西北朝東南。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%8A%E5%A4%A9%E5%B2%A9%E7%B4%AB%E9%9B%B2%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%8A%E5%A4%A9%E5%B2%A9%E7%B4%AB%E9%9B%B2%E5%AF%BA"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.595365,
+        23.462149
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%8D%8A%E5%A4%A9%E5%B2%A9%E7%B4%AB%E9%9B%B2%E5%AF%BA",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-CYQ",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b9b4e41027964981.webp",
+        "credit": "Outlookxp · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%8D%8A%E5%A4%A9%E5%B2%A9%E7%B4%AB%E9%9B%B2%E5%AF%BA.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​臺灣嘉義縣番路鄉半天岩紫雲寺",
+        "place": "半天岩紫雲寺",
+        "originalFile": "半天岩紫雲寺.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-CYQ:0912d55a": {
+      "label": {
+        "en": "Minxiong Dashiye Temple",
+        "zh-CN": "大士爷庙",
+        "zh-TW": "大士爺廟"
+      },
+      "description": {
+        "en": "This temple in Minxiong Township is dedicated to Dashiye. It is protected as a Chiayi County historic monument.",
+        "zh-CN": "大士爷庙，是位于台湾嘉义县民雄乡中乐村的庙宇，主祀大士爷，为嘉义县县定古迹。",
+        "zh-TW": "大士爺廟，是位於臺灣嘉義縣民雄鄉中樂村的廟宇，主祀大士爺，為嘉義縣縣定古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%A3%AB%E7%88%BA%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%A3%AB%E7%88%BA%E5%BB%9F"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.429513,
+        23.556021
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%A3%AB%E7%88%BA%E5%BB%9F",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-CYQ",
+      "photo": {
+        "src": "assets/maps/administrative/photos/df5f7dee061929a4.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E5%A3%AB%E7%88%BA%E5%BB%9F%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​大士爺廟正面照",
+        "place": "大士爺廟",
+        "originalFile": "大士爺廟正面照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-CYQ:urban": {
+      "id": "poi:admin:TW-CYQ:urban",
+      "label": {
+        "en": "Southern Branch of the National Palace Museum",
+        "zh-CN": "国立故宫博物院南部院区",
+        "zh-TW": "國立故宮博物院南部院區"
+      },
+      "description": {
+        "en": "The Southern Branch of the National Palace Museum is a museum in Taibao City, Chiayi County, Taiwan.",
+        "zh-CN": "国立故宫博物院南部院区，简称故宫南院，俗称嘉义故宫，为国立故宫博物院辖下两座主院区之一，坐落在台湾嘉义县太保市，邻近高铁嘉义站和蒜头糖厂。场馆由「国立故宫博物院南院处」负责管理与营运，以搜藏、研究、教育、展示亚洲艺术品与相关文物为定位，院区户外另设有人工湖和游憩设施。",
+        "zh-TW": "國立故宮博物院南部院區，簡稱故宮南院，俗稱嘉義故宮，為國立故宮博物院轄下兩座主院區之一，坐落在臺灣嘉義縣太保市，鄰近高鐵嘉義站和蒜頭糖廠。場館由「國立故宮博物院南院處」負責管理與營運，以蒐藏、研究、教育、展示亞洲藝術品與相關文物為定位，院區戶外另設有人工湖和遊憩設施。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9C%8B%E7%AB%8B%E6%95%85%E5%AE%AE%E5%8D%9A%E7%89%A9%E9%99%A2%E5%8D%97%E9%83%A8%E9%99%A2%E5%8D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9C%8B%E7%AB%8B%E6%95%85%E5%AE%AE%E5%8D%9A%E7%89%A9%E9%99%A2%E5%8D%97%E9%83%A8%E9%99%A2%E5%8D%80",
+        "https://en.wikipedia.org/wiki/Southern_Branch_of_the_National_Palace_Museum"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/cfa184a9fa3279c2.webp",
+        "credit": "B2322858 · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Southern_Branch_of_the_National_Palace_Museum_main_building_and_zhimei_bridge.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Southern_Branch_of_the_National_Palace_Museum_main_building_and_zhimei_bridge.jpg#Licensing",
+        "alt": "​國立故宮博物院南部院區主體與至美橋",
+        "place": "Southern Branch of the National Palace Museum",
+        "originalFile": "Southern_Branch_of_the_National_Palace_Museum_main_building_and_zhimei_bridge.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.29227778,
+        23.47355556
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Southern_Branch_of_the_National_Palace_Museum",
+      "kind": "landmark",
+      "parentCity": "TW-CYQ"
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "512000": {
+      "label": {
+        "en": "Ziyang",
+        "zh-CN": "资阳市",
+        "zh-TW": "資陽市"
+      },
+      "description": {
+        "en": "Ziyang is a prefecture-level city in eastern Sichuan province, China. It is bordered by the provincial capital of Chengdu to the northwest, Deyang to the north, Suining to the northeast, Chongqing municipality to the east, and Neijiang to the west.",
+        "zh-CN": "资阳市是中华人民共和国四川省下辖的地级市，位于四川省中部偏东。市境东接重庆市，南邻内江市，西界成都市、眉山市，北连德阳市、遂宁市。",
+        "zh-TW": "資陽市是中華人民共和國四川省下轄的地級市，位於四川省中部偏東。市境東接重慶市，南鄰內江市，西界成都市、眉山市，北連德陽市、遂寧市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%B5%84%E9%98%B3%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%B5%84%E9%98%B3%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Ziyang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        104.627,
+        30.129
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/076fd607fbebd75f.webp",
+        "credit": "Nihongarden · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ziyang_station.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Ziyang railway station in a dated archival photograph.",
+          "zh-CN": "资阳站有明确拍摄年份的实景照片。",
+          "zh-TW": "資陽站有明確拍攝年份的實景照片。"
+        },
+        "place": {
+          "en": "Ziyang railway station",
+          "zh-CN": "资阳站",
+          "zh-TW": "資陽站"
+        },
+        "originalFile": "Ziyang station.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:512000:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Ziyang",
+          "zh-CN": "资阳市",
+          "zh-TW": "資陽市"
+        },
+        "lngLat": [
+          104.63974,
+          30.12562
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Ziyang.",
+          "zh-CN": "以资阳市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以資陽市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q207030#P625",
+        "source": "https://www.wikidata.org/wiki/Q207030",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q207030#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.43
+        }
+      }
+    },
+    "poi:admin:512000:urban": {
+      "id": "poi:admin:512000:urban",
+      "label": {
+        "en": "Ziyang railway station",
+        "zh-CN": "资阳站",
+        "zh-TW": "資陽站"
+      },
+      "description": {
+        "en": "Ziyang railway station opened in 1952 on the Chengdu–Chongqing Railway. This photograph records the station building and forecourt in August 2007, preserving an earlier chapter of the city’s rail history. The station later ceased passenger services while retaining freight operations.",
+        "zh-CN": "资阳站位于成渝铁路线上，于1952年开通。这张2007年8月的照片记录了站房和站前广场，保存着城市铁路历史的一段面貌。车站后来停止办理客运业务，保留货运功能；照片明确作为历史实景展示。",
+        "zh-TW": "資陽站位於成渝鐵路線上，於1952年開通。這張2007年8月的照片記錄了站房和站前廣場，保存着城市鐵路歷史的一段面貌。車站後來停止辦理客運業務，保留貨運功能；照片明確作爲歷史實景展示。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/资阳站",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/资阳站",
+        "https://commons.wikimedia.org/wiki/File:Ziyang_station.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/076fd607fbebd75f.webp",
+        "credit": "Nihongarden · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ziyang_station.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Ziyang railway station in a dated archival photograph.",
+          "zh-CN": "资阳站有明确拍摄年份的实景照片。",
+          "zh-TW": "資陽站有明確拍攝年份的實景照片。"
+        },
+        "place": {
+          "en": "Ziyang railway station",
+          "zh-CN": "资阳站",
+          "zh-TW": "資陽站"
+        },
+        "originalFile": "Ziyang station.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        104.6499139,
+        30.1274167
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q8072896#P625",
+      "coordinateDerivation": "Published WGS84 coordinate of the photographed railway station.",
+      "parentCity": "512000",
+      "kind": "landmark"
+    }
+  }
+}

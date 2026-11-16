@@ -1,0 +1,214 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-CYI": {
+      "label": {
+        "en": "Chiayi",
+        "zh-CN": "嘉义市",
+        "zh-TW": "嘉義市"
+      },
+      "description": {
+        "en": "Chiayi , officially known as Chiayi City, is a city located in Chianan Plain in southwestern Taiwan, surrounded by Chiayi County with a population of 263,188 inhabitants as of January 2023. The Hoanya people inhabited present-day Chiayi under its historical name of Tirosen prior to the arrival of Han Chinese in Taiwan and was ruled by the Dutch and the Kingdom of Tungning under various names.",
+        "zh-CN": "嘉义市是中华台北台湾省的市，位于台湾南部，地处嘉南平原心脏地带，北回归线以北，为嘉义都会区的中心都市。全境除东部属丘陵地带外，其余均为平原，地势由东向西缓降。",
+        "zh-TW": "嘉義市是中華臺北臺灣省的市，位於臺灣南部，地處嘉南平原心臟地帶，北迴歸線以北，為嘉義都會區的中心都市。全境除東部屬丘陵地帶外，其餘均為平原，地勢由東向西緩降。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Chiayi"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        120.44972222,
+        23.48
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/3e92502b11fa2eb1.webp",
+        "credit": "Cpc3711 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%AA%9C%E6%84%8F%E6%A3%AE%E6%B4%BB%E6%9D%91--%E5%BC%B5%E5%88%A9%E8%81%B0jpg.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​檜意森活村園區總面積約3.4公頃，以1914年（大正3年）搭建的林業日式宿舍為重點，主要有28棟日式檜木歷史建築、1棟市立古蹟、全台唯二的都鐸式建築、及新建的一心二葉館為主體建築",
+        "place": "Hinoki Village",
+        "originalFile": "檜意森活村--張利聰jpg.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-CYI:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Chiayi",
+          "zh-CN": "嘉义市",
+          "zh-TW": "嘉義市"
+        },
+        "lngLat": [
+          120.44972222222,
+          23.48
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Chiayi.",
+          "zh-CN": "以嘉义市为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以嘉義市爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q249995",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q249995#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E5%B8%82"
+      }
+    },
+    "poi:admin:TW-CYI:d1203f38": {
+      "label": {
+        "en": "Chiayi West Gate Presbyterian Church",
+        "zh-CN": "嘉义西门长老教会礼拜堂",
+        "zh-TW": "嘉義西門長老教會禮拜堂"
+      },
+      "description": {
+        "en": "This historic chapel in western Chiayi was originally used by Japanese Christians. After the Second World War it became part of the Presbyterian Church in Taiwan, and it was designated a city monument in 2005.",
+        "zh-CN": "嘉义西门长老教会礼拜堂位于台湾嘉义市西区，2005年信徒决议命名为黄武东纪念礼拜堂。该建物原是日本基督徒聚会用的礼拜堂，二次大战后由台湾基督长老教会接收，隶属于嘉义中会东区，目前为西门教会的礼拜堂，并在2005年3月8日以「嘉义西门长老教会礼拜堂」的名称公告为嘉义市市定古迹。",
+        "zh-TW": "嘉義西門長老教會禮拜堂位於臺灣嘉義市西區，2005年信徒決議命名為黃武東紀念禮拜堂。該建物原是日本基督徒聚會用的禮拜堂，二次大戰後由臺灣基督長老教會接收，隸屬於嘉義中會東區，目前為西門教會的禮拜堂，並在2005年3月8日以「嘉義西門長老教會禮拜堂」的名稱公告為嘉義市市定古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E8%A5%BF%E9%96%80%E9%95%B7%E8%80%81%E6%95%99%E6%9C%83%E7%A6%AE%E6%8B%9C%E5%A0%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E8%A5%BF%E9%96%80%E9%95%B7%E8%80%81%E6%95%99%E6%9C%83%E7%A6%AE%E6%8B%9C%E5%A0%82"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.44748056,
+        23.47311111
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E8%A5%BF%E9%96%80%E9%95%B7%E8%80%81%E6%95%99%E6%9C%83%E7%A6%AE%E6%8B%9C%E5%A0%82",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-CYI",
+      "photo": {
+        "src": "assets/maps/administrative/photos/6606a4b497fc7d4a.webp",
+        "credit": "Mrmarkertw · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2022%E5%B9%B4%E7%9A%84%E5%98%89%E7%BE%A9%E8%A5%BF%E9%96%80%E9%95%B7%E8%80%81%E6%95%99%E6%9C%83%E7%A6%AE%E6%8B%9C%E5%A0%82.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​嘉義西門長老教會禮拜堂，位於台灣嘉義市西區，原是日本基督徒聚會用的禮拜堂，二次大戰後由台灣基督長老教會接收，目前為西門教會的禮拜堂。",
+        "place": "嘉義西門長老教會禮拜堂",
+        "originalFile": "2022年的嘉義西門長老教會禮拜堂.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-CYI:c3f14f05": {
+      "label": {
+        "en": "Chiayi Park",
+        "zh-CN": "嘉义公园",
+        "zh-TW": "嘉義公園"
+      },
+      "description": {
+        "en": "Chiayi Park is a park at East District, Chiayi City, Taiwan.",
+        "zh-CN": "嘉义公园，前称中山公园，是一座位于台湾嘉义市东区的公园，位于中山路与启明路口，与紧邻的嘉义市立棒球场、嘉义植物园及2015年新辟的都会森林公园共同组成嘉义都会森林公园。风景雅致，为一著名之休闲胜地，嘉义BRT公车捷运系统并在此设有嘉义公园站。",
+        "zh-TW": "嘉義公園，前稱中山公園，是一座位於臺灣嘉義市東區的公園，位於中山路與啟明路口，與緊鄰的嘉義市立棒球場、嘉義植物園及2015年新闢的都會森林公園共同組成嘉義都會森林公園。風景雅緻，為一著名之休閒勝地，嘉義BRT公車捷運系統並在此設有嘉義公園站。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E5%85%AC%E5%9C%92",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%98%89%E7%BE%A9%E5%85%AC%E5%9C%92",
+        "https://en.wikipedia.org/wiki/Chiayi_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.46361111,
+        23.48277778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Chiayi_Park",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-CYI",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a2c2e0fb2310b2c1.webp",
+        "credit": "Mearchan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chiayi_Park.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​嘉義公園東側與嘉義樹木園毗連，嘉義樹木園名列台灣外來三大熱帶樹木園之首。",
+        "place": "嘉義公園",
+        "originalFile": "Chiayi_Park.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-CYI:cf3c4994": {
+      "label": {
+        "en": "Sun-Shooting Tower",
+        "zh-CN": "射日塔",
+        "zh-TW": "射日塔"
+      },
+      "description": {
+        "en": "The Sun-Shooting Tower or Chiayi Tower is a tower built inside Chiayi Park, East District, Chiayi City, Taiwan.",
+        "zh-CN": "射日塔 ，位于台湾嘉义市嘉义公园内，为一座高62公尺的塔式建筑，共12层，由国立成功大学建筑系教授林宪德与卓建光建筑师事务所共同规划设计，有「嘉义市的新地标」之称。原址为建于日治时代的嘉义神社，神社本殿于二战后改为嘉义市忠烈祠，于1994年4月24日受祝融之灾全毁。",
+        "zh-TW": "射日塔 ，位於臺灣嘉義市嘉義公園內，為一座高62公尺的塔式建築，共12層，由國立成功大學建築系教授林憲德與卓建光建築師事務所共同規劃設計，有「嘉義市的新地標」之稱。原址為建於日治時代的嘉義神社，神社本殿於二戰後改為嘉義市忠烈祠，於1994年4月24日受祝融之災全毀。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B0%84%E6%97%A5%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B0%84%E6%97%A5%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Sun-Shooting_Tower"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.46944444,
+        23.48111111
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Sun-Shooting_Tower",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-CYI",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4bc6342dc24365dd.webp",
+        "credit": "\"User:Cloudcolors\" · CC BY 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:TW_Chiayi_sun-shooting_tower_20051008.jpg",
+        "license": "CC BY 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+        "alt": "射日塔",
+        "place": "射日塔",
+        "originalFile": "TW_Chiayi_sun-shooting_tower_20051008.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-CYI:urban": {
+      "id": "poi:admin:TW-CYI:urban",
+      "label": {
+        "en": "Hinoki Village",
+        "zh-CN": "桧意森活村",
+        "zh-TW": "檜意森活村"
+      },
+      "description": {
+        "en": "The Hinoki Village or Cypress Forest Life Village is a culture village in East District, Chiayi City, Taiwan.",
+        "zh-CN": "桧意森活村位于台湾嘉义市东区，是台湾第一座以森林为主题的文创园区，园区内以日治时代的桧町，现共和路与林森东路间的29栋历史建筑「嘉义市共和路与北门街林管处国有宿眷舍」以及市定古迹「嘉义营林俱乐部」构成。占地约3.4公顷，并在忠孝路与林森东路路口设有「农业精品馆」。",
+        "zh-TW": "檜意森活村位於臺灣嘉義市東區，是臺灣第一座以森林為主題的文創園區，園區內以日治時代的檜町，現共和路與林森東路間的29棟歷史建築「嘉義市共和路與北門街林管處國有宿眷舍」以及市定古蹟「嘉義營林俱樂部」構成。佔地約3.4公頃，並在忠孝路與林森東路路口設有「農業精品館」。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%AA%9C%E6%84%8F%E6%A3%AE%E6%B4%BB%E6%9D%91",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%AA%9C%E6%84%8F%E6%A3%AE%E6%B4%BB%E6%9D%91",
+        "https://en.wikipedia.org/wiki/Hinoki_Village"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3e92502b11fa2eb1.webp",
+        "credit": "Cpc3711 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%AA%9C%E6%84%8F%E6%A3%AE%E6%B4%BB%E6%9D%91--%E5%BC%B5%E5%88%A9%E8%81%B0jpg.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​檜意森活村園區總面積約3.4公頃，以1914年（大正3年）搭建的林業日式宿舍為重點，主要有28棟日式檜木歷史建築、1棟市立古蹟、全台唯二的都鐸式建築、及新建的一心二葉館為主體建築",
+        "place": "Hinoki Village",
+        "originalFile": "檜意森活村--張利聰jpg.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.45411111,
+        23.48619444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Hinoki_Village",
+      "kind": "landmark",
+      "parentCity": "TW-CYI"
+    }
+  }
+}

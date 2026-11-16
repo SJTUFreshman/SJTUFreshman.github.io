@@ -1,0 +1,137 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-LIE": {
+      "label": {
+        "en": "Matsu Islands",
+        "zh-CN": "马祖列岛",
+        "zh-TW": "馬祖列島"
+      },
+      "description": {
+        "en": "The Matsu Islands are an archipelago of 36 islands and islets in the East China Sea. They are situated alongside the southeastern coast of mainland China.",
+        "zh-CN": "马祖列岛是隶属中华台北福建省连江县的群岛，位于台湾海峡正北方，面临闽江口、连江口和罗源湾，距中国大陆最近点约9.25公里。主要由南竿岛、北竿岛、高登岛、亮岛、东莒岛、西莒岛、东引岛、西引岛及附属小岛共计36个岛屿、礁屿组成，面积29.6平方公里，居民人口13,000多人。",
+        "zh-TW": "馬祖列島是隸屬中華臺北福建省連江縣的羣島，位於臺灣海峽正北方，面臨閩江口、連江口和羅源灣，距中國大陸最近點約9.25公里。主要由南竿島、北竿島、高登島、亮島、東莒島、西莒島、東引島、西引島及附屬小島共計36個島嶼、礁嶼組成，面積29.6平方公里，居民人口13,000多人。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%88%97%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%88%97%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Matsu_Islands"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        119.92722222,
+        26.15111111
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/df3d49c6f4f247f8.webp",
+        "credit": "Prince Roy · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Mazu_Tomb.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Alleged tomb of Mazu (Lin Moniang) in the Mazu Temple in Matsu Village, Nangan, Matsu",
+        "place": "馬祖境天后宮",
+        "originalFile": "Mazu Tomb.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-LIE:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Nangan, Lienchiang",
+          "zh-CN": "南竿乡",
+          "zh-TW": "南竿鄉"
+        },
+        "lngLat": [
+          119.94316388889,
+          26.1598
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 8 km landscape window around Nangan, Lienchiang.",
+          "zh-CN": "以南竿乡为中心，展示周边约8公里宽的主要聚落与地形。",
+          "zh-TW": "以南竿鄉爲中心，展示周邊約8公里寬的主要聚落與地形。"
+        },
+        "extentKm": 8,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q702125",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q702125#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%88%97%E5%B3%B6"
+      }
+    },
+    "poi:TW-LIE:1": {
+      "label": {
+        "en": "Qinbi Village",
+        "zh-CN": "芹壁村",
+        "zh-TW": "芹壁村"
+      },
+      "description": {
+        "en": "Qinbi Village. Explore the local landscape and follow the linked encyclopedia entry for further reading.",
+        "zh-CN": "芹壁村，旧名镜港，又称镜澳，是位于中华台北福建省连江县北竿乡的村落。另村庄也有步道，可直达上村。",
+        "zh-TW": "芹壁村，舊名鏡港，又稱鏡澳，是位於中華臺北福建省連江縣北竿鄉的村落。另村莊也有步道，可直達上村。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8A%B9%E5%A3%81%E6%9D%91",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8A%B9%E5%A3%81%E6%9D%91"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        119.98142,
+        26.22283
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q18658268",
+      "parentCity": "TW-LIE",
+      "photo": {
+        "src": "assets/maps/regions/photos/c692abb172c282be.webp",
+        "credit": "張雅倫 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%8A%B9%E5%A3%81%E8%81%9A%E8%90%BD.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "This is a photo of a monument in Taiwan identified by the ID",
+        "place": "芹壁村",
+        "originalFile": "芹壁聚落.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-LIE:urban": {
+      "id": "poi:admin:TW-LIE:urban",
+      "label": {
+        "en": "Matsu Tianhou Temple",
+        "zh-CN": "马祖境天后宫",
+        "zh-TW": "馬祖境天后宮"
+      },
+      "description": {
+        "en": "Matsu Tianhou Temple faces the sea beside Matsu Harbour in Nangan. Its main hall contains the Mazu tomb shrine, an important focus of local religious tradition.",
+        "zh-CN": "马祖境天后宫，又称马港天后宫、南竿妈祖庙，是位于中华台北福建省连江县南竿乡的妈祖庙，在马祖港旁面向大海，是马祖地区重要的信仰中心，信仰者众、香火鼎盛。正殿有「妈祖灵穴」，当地普遍相信为妈祖墓穴所在。",
+        "zh-TW": "馬祖境天后宮，又稱馬港天后宮、南竿媽祖廟，是位於中華臺北福建省連江縣南竿鄉的媽祖廟，在馬祖港旁面向大海，是馬祖地區重要的信仰中心，信仰者眾、香火鼎盛。正殿有「媽祖靈穴」，當地普遍相信爲媽祖墓穴所在。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%A2%83%E5%A4%A9%E5%90%8E%E5%AE%AE",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%A2%83%E5%A4%A9%E5%90%8E%E5%AE%AE",
+        "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%A2%83%E5%A4%A9%E5%90%8E%E5%AE%AE"
+      ],
+      "textLicense": "CC BY-SA 4.0; translated and shortened excerpt",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/df3d49c6f4f247f8.webp",
+        "credit": "Prince Roy · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Mazu_Tomb.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Alleged tomb of Mazu (Lin Moniang) in the Mazu Temple in Matsu Village, Nangan, Matsu",
+        "place": "馬祖境天后宮",
+        "originalFile": "Mazu Tomb.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        119.918268,
+        26.158375
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%A2%83%E5%A4%A9%E5%90%8E%E5%AE%AE",
+      "kind": "landmark",
+      "parentCity": "TW-LIE"
+    }
+  }
+}

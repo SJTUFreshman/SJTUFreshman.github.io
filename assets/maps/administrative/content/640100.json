@@ -1,0 +1,251 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "640100": {
+      "label": {
+        "en": "Yinchuan",
+        "zh-CN": "银川市",
+        "zh-TW": "銀川市"
+      },
+      "description": {
+        "en": "Yinchuan is a prefecture‑level city and the capital of the Ningxia Hui Autonomous Region in northwest China.",
+        "zh-CN": "银川市，简称银，是中华人民共和国宁夏回族自治区首府，位于宁夏北部，“塞上江南”宁夏平原的中央，西倚贺兰山，东靠鄂尔多斯高原。黄河由南向北流贯中部，境内湖泊湿地众多，又被称为“塞上湖城”。",
+        "zh-TW": "銀川市，簡稱銀，是中華人民共和國寧夏回族自治區首府，位於寧夏北部，“塞上江南”寧夏平原的中央，西倚賀蘭山，東靠鄂爾多斯高原。黃河由南向北流貫中部，境內湖泊溼地衆多，又被稱爲“塞上湖城”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%93%B6%E5%B7%9D%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%93%B6%E5%B7%9D%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Yinchuan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        106.225,
+        38.485
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/6da22bb52656a03f.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20260810_Yinchuan_Bell_and_Drum_Tower.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Yinchuan Bell and Drum Tower",
+        "place": "银川钟鼓楼",
+        "originalFile": "20260810_Yinchuan_Bell_and_Drum_Tower.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:640100:06c3ec21",
+      "urbanFocus": {
+        "label": {
+          "en": "Yinchuan",
+          "zh-CN": "银川市",
+          "zh-TW": "銀川市"
+        },
+        "lngLat": [
+          106.225,
+          38.485
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Yinchuan.",
+          "zh-CN": "以银川市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以銀川市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q211243#P625",
+        "source": "https://www.wikidata.org/wiki/Q211243",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q211243#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 5.08
+        }
+      }
+    },
+    "poi:640100:1": {
+      "label": {
+        "en": "Western Xia mausoleums",
+        "zh-CN": "西夏王陵",
+        "zh-TW": "西夏王陵"
+      },
+      "description": {
+        "en": "The Western Xia mausoleums include nine imperial mausoleums and about 250 tombs of imperial relatives and officials of the Western Xia dynasty. The burial complex occupies an area of some 50 km2 at the foot of the Helan Mountains some 40 km westward from the capital city of the Western Xia, Xingqing, what is modern-day Yinchuan, now capital of the Ningxia Hui Autonomous Region in northwestern China.",
+        "zh-CN": "西夏陵位于中华人民共和国宁夏回族自治区银川市西夏区，是对贺兰山东麓西夏帝王陵园遗址的统称，面积约为50平方公里。该陵园遗址是中国现存规模最大、地面遗迹保存最完整的帝王陵园之一，被誉为「东方金字塔」。",
+        "zh-TW": "西夏陵位於中華人民共和國寧夏回族自治區銀川市西夏區，是對賀蘭山東麓西夏帝王陵園遺址的統稱，面積約爲50平方公里。該陵園遺址是中國現存規模最大、地面遺蹟保存最完整的帝王陵園之一，被譽爲「東方金字塔」。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%A5%BF%E5%A4%8F%E9%99%B5",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%A5%BF%E5%A4%8F%E9%99%B5",
+        "https://en.wikipedia.org/wiki/Western_Xia_mausoleums"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        105.98722222,
+        38.435
+      ],
+      "parentCity": "640100",
+      "photo": {
+        "src": "assets/maps/regions/photos/f219d54cb5a6df52.webp",
+        "credit": "BabelStone · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:XiXia_Tomb_3_F.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Western Xia imperial tombs, Tomb No. 3, Yinchuan, Ningxia, China.",
+        "place": "西夏陵",
+        "originalFile": "XiXia_Tomb_3_F.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:640100:2": {
+      "label": {
+        "en": "Haibao Pagoda Temple",
+        "zh-CN": "海宝塔",
+        "zh-TW": "海寶塔"
+      },
+      "description": {
+        "en": "The Haibao Pagoda Temple is a Buddhist temple located in Xingqing District of Yinchuan, Ningxia, China. Because of earthquakes, the modern temple was founded in the 18th century in the period of the Qianlong Emperor during the mid-Qing dynasty .",
+        "zh-CN": "海宝塔，旧称黑宝塔、赫宝塔，位于中华人民共和国宁夏回族自治区银川市，因地处银川市北而被俗称为“北塔”，与承天寺塔相并称。银川文物部门勘探海宝塔后，推断海宝塔建于北朝到隋唐年间。",
+        "zh-TW": "海寶塔，舊稱黑寶塔、赫寶塔，位於中華人民共和國寧夏回族自治區銀川市，因地處銀川市北而被俗稱爲“北塔”，與承天寺塔相併稱。銀川文物部門勘探海寶塔後，推斷海寶塔建於北朝到隋唐年間。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B5%B7%E5%AE%9D%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B5%B7%E5%AE%9D%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Haibao_Pagoda_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        106.287335,
+        38.498178
+      ],
+      "parentCity": "640100",
+      "photo": {
+        "src": "assets/maps/regions/photos/74bac3fd1679c623.webp",
+        "credit": "霧島聖 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%B5%B7%E5%AE%9D%E5%A1%94.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "海宝塔全景照",
+        "place": "海宝塔",
+        "originalFile": "海宝塔.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:640100:5a3feced": {
+      "label": {
+        "en": "Nanguan Mosque",
+        "zh-CN": "南关清真大寺 (银川)",
+        "zh-TW": "南關清真大寺 (銀川)"
+      },
+      "description": {
+        "en": "Nanguan Mosque is an important religious centre in Yinchuan's old town. Founded in the late Ming period, its present buildings were reconstructed in 1981.",
+        "zh-CN": "南关清真大寺是位于中国宁夏回族自治区银川市兴庆区的清真寺，是银川老城区的重要清真寺、银川回族的宗教活动中心场所，也是主要的旅游景点。始建于明末，现今建筑重建于1981年。",
+        "zh-TW": "南關清真大寺是位於中國寧夏回族自治區銀川市興慶區的清真寺，是銀川老城區的重要清真寺、銀川回族的宗教活動中心場所，也是主要的旅遊景點。始建於明末，現今建築重建於1981年。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%97%E5%85%B3%E6%B8%85%E7%9C%9F%E5%A4%A7%E5%AF%BA_(%E9%93%B6%E5%B7%9D)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%97%E5%85%B3%E6%B8%85%E7%9C%9F%E5%A4%A7%E5%AF%BA_(%E9%93%B6%E5%B7%9D)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        106.276903,
+        38.455892
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%8D%97%E5%85%B3%E6%B8%85%E7%9C%9F%E5%A4%A7%E5%AF%BA_(%E9%93%B6%E5%B7%9D)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "640100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f0b2faf1dbe23e22.webp",
+        "credit": "HMGiovanniV · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Nanguan_Great_Mosque,_Xingqing,_Yinchuan_in_January_2020.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​宁夏银川南关清真大寺，2020年1月",
+        "place": "南关清真大寺 (银川)",
+        "originalFile": "Nanguan_Great_Mosque,_Xingqing,_Yinchuan_in_January_2020.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:640100:3c01e372": {
+      "label": {
+        "en": "Rock Paintings of Helan Mountains",
+        "zh-CN": "贺兰山岩画",
+        "zh-TW": "賀蘭山岩畫"
+      },
+      "description": {
+        "en": "Rock Paintings of Helan Mountains , also known as Helanshan Rock Art, are images carved into the rocks of Helan Mountains, Ningxia. Helanshan Rock Art is representative of rock paintings in northern China, with rich and concentrated subject matter.",
+        "zh-CN": "贺兰山岩画，是对分布在中华人民共和国宁夏回族自治区贺兰山中的一系列岩画的总称。这些岩画的分布范围北至石嘴山市，南至中卫市，题材以人面像和游牧生活为主，其中还有部分西夏文。",
+        "zh-TW": "賀蘭山岩畫，是對分佈在中華人民共和國寧夏回族自治區賀蘭山中的一系列巖畫的總稱。這些巖畫的分佈範圍北至石嘴山市，南至中衛市，題材以人面像和遊牧生活爲主，其中還有部分西夏文。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%B4%BA%E5%85%B0%E5%B1%B1%E5%B2%A9%E7%94%BB",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%B4%BA%E5%85%B0%E5%B1%B1%E5%B2%A9%E7%94%BB",
+        "https://en.wikipedia.org/wiki/Rock_Paintings_of_Helan_Mountains"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        106.02172,
+        38.74372
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%B4%BA%E5%85%B0%E5%B1%B1%E5%B2%A9%E7%94%BB",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "640100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/332adb7717263c43.webp",
+        "credit": "Phlins Chen · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Helan_Mountain%E2%80%99s_rock_paintings.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​Helan Mountain’s rock paintings in 2025",
+        "place": "贺兰山岩画",
+        "originalFile": "Helan_Mountain’s_rock_paintings.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:640100:06c3ec21": {
+      "label": {
+        "en": "Yinchuan Bell and Drum Tower",
+        "zh-CN": "银川钟鼓楼",
+        "zh-TW": "銀川鐘鼓樓"
+      },
+      "description": {
+        "en": "This historic tower stands in Yinchuan's Xingqing District. It is protected as a cultural monument of the Ningxia Hui Autonomous Region.",
+        "zh-CN": "银川钟鼓楼，位于宁夏回族自治区银川市兴庆区，是中华人民共和国宁夏回族自治区文物保护单位之一。 1988年，授予宁夏回族自治区文物保护单位，是一座古建筑及历史纪念建筑物。",
+        "zh-TW": "銀川鐘鼓樓，位於寧夏回族自治區銀川市興慶區，是中華人民共和國寧夏回族自治區文物保護單位之一。 1988年，授予寧夏回族自治區文物保護單位，是一座古建築及歷史紀念建築物。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%93%B6%E5%B7%9D%E9%92%9F%E9%BC%93%E6%A5%BC",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%93%B6%E5%B7%9D%E9%92%9F%E9%BC%93%E6%A5%BC"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        106.27676111,
+        38.46478056
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%93%B6%E5%B7%9D%E9%92%9F%E9%BC%93%E6%A5%BC",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "640100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/6da22bb52656a03f.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20260810_Yinchuan_Bell_and_Drum_Tower.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Yinchuan Bell and Drum Tower",
+        "place": "银川钟鼓楼",
+        "originalFile": "20260810_Yinchuan_Bell_and_Drum_Tower.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-NAN": {
+      "label": {
+        "en": "Nantou County",
+        "zh-CN": "南投县",
+        "zh-TW": "南投縣"
+      },
+      "description": {
+        "en": "Nantou is the second largest county of Taiwan by area. Located in the central part of the island, and containing its geographic center, it is the only landlocked county in Taiwan.",
+        "zh-CN": "南投县是中华台北台湾省的县，位处台湾中部，台湾本岛的正中央，为唯一的内陆县市。北隔乌溪、八仙山及白姑大山与台中市相毗，西临彰化、云林两县，东邻花莲县，南隔清水溪及玉山与云林、嘉义、高雄三县市相接。",
+        "zh-TW": "南投縣是中華臺北臺灣省的縣，位處臺灣中部，臺灣本島的正中央，為唯一的內陸縣市。北隔烏溪、八仙山及白姑大山與臺中市相毗，西臨彰化、雲林兩縣，東鄰花蓮縣，南隔清水溪及玉山與雲林、嘉義、高雄三縣市相接。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%97%E6%8A%95%E7%B8%A3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%97%E6%8A%95%E7%B8%A3",
+        "https://en.wikipedia.org/wiki/Nantou_County"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        120.69,
+        23.9025
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/38e890f3ea43d94d.webp",
+        "credit": "Fcuk1203 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%87%BA%E7%81%A3%E7%9C%81%E6%94%BF%E5%BA%9C%E5%A4%A7%E6%A8%93.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​臺灣省政府大樓",
+        "place": "Zhongxing New Village",
+        "originalFile": "臺灣省政府大樓.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-NAN:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Nantou City",
+          "zh-CN": "南投市",
+          "zh-TW": "南投市"
+        },
+        "lngLat": [
+          120.68333333,
+          23.91666667
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Nantou City.",
+          "zh-CN": "以南投市为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以南投市爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q715171",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q715171#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E5%8D%97%E6%8A%95%E7%B8%A3"
+      }
+    },
+    "poi:TW-NAN:1": {
+      "label": {
+        "en": "Sun Moon Lake",
+        "zh-CN": "日月潭",
+        "zh-TW": "日月潭"
+      },
+      "description": {
+        "en": "Sun Moon Lake is a lake in Yuchi Township, Nantou County, Taiwan. It is the largest body of water in Taiwan.",
+        "zh-CN": "日月潭，是一个位在台湾南投县鱼池乡日月村的半天然淡水湖泊兼水力发电用水库；该潭是台湾本岛面积第二大的湖泊及第一大半天然湖泊兼发电用水库。该潭平均水面海拔约736公尺，常态面积约7.93平方公里，最大水深达27公尺。",
+        "zh-TW": "日月潭，是一個位在臺灣南投縣魚池鄉日月村的半天然淡水湖泊兼水力發電用水庫；該潭是臺灣本島面積第二大的湖泊及第一大半天然湖泊兼發電用水庫。該潭平均水面海拔約736公尺，常態面積約7.93平方公里，最大水深達27公尺。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%97%A5%E6%9C%88%E6%BD%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%97%A5%E6%9C%88%E6%BD%AD",
+        "https://en.wikipedia.org/wiki/Sun_Moon_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        120.91666667,
+        23.86666667
+      ],
+      "parentCity": "TW-NAN",
+      "photo": {
+        "src": "assets/maps/regions/photos/f94a1942f7aaeaf1.webp",
+        "credit": "Webbyj · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Sun-Moon-Lake-Taiwan.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Sun Moon Lake in Taiwan.",
+        "place": "Sun Moon Lake",
+        "originalFile": "Sun-Moon-Lake-Taiwan.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-NAN:de681812": {
+      "label": {
+        "en": "Yushan National Park",
+        "zh-CN": "玉山国家公园",
+        "zh-TW": "玉山國家公園"
+      },
+      "description": {
+        "en": "Yushan National Park is one of the nine national parks in Taiwan and was named after the summit Yushan, the highest peak of the park. The park covers a total area of 103,121 hectares that includes large sections of the Central Mountain Range.",
+        "zh-CN": "玉山国家公园是中华台北第二座国家公园，前身为日治时期成立之新高阿里山国立公园。1985年4月6日公告计划，1985年4月10日成立管理处，总面积103,121.4公顷，涵盖台湾本岛行政区域包括南投县、嘉义县、高雄市、以及花莲县，为台湾陆域面积最大之国家公园。",
+        "zh-TW": "玉山國家公園是中華臺北第二座國家公園，前身為日治時期成立之新高阿里山國立公園。1985年4月6日公告計畫，1985年4月10日成立管理處，總面積103,121.4公頃，涵蓋臺灣本島行政區域包括南投縣、嘉義縣、高雄市、以及花蓮縣，為臺灣陸域面積最大之國家公園。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%8E%89%E5%B1%B1%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%8E%89%E5%B1%B1%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92",
+        "https://en.wikipedia.org/wiki/Yushan_National_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.95726667,
+        23.47
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Yushan_National_Park",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-NAN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ab532a3018dd3b67.webp",
+        "credit": "邱文強 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:DSC04198%E9%9B%84%E5%81%89%E7%9A%84%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​下雪時的玉山主峰",
+        "place": "玉山國家公園",
+        "originalFile": "DSC04198雄偉的玉山主峰.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-NAN:2d89d427": {
+      "label": {
+        "en": "Chelungpu Fault Preservation Park",
+        "zh-CN": "国立自然科学博物馆车笼埔断层保存园区",
+        "zh-TW": "國立自然科學博物館車籠埔斷層保存園區"
+      },
+      "description": {
+        "en": "The Chelungpu Fault Preservation Park is a park in Zhushan Township, Nantou County, Taiwan established to commemorate the 21 September 1999 earthquake. It is the subordinate park to the National Museum of Natural Science.",
+        "zh-CN": "国立自然科学博物馆车笼埔断层保存园区是位于台湾南投县竹山镇的一座由国立自然科学博物馆营运的地震断层研究保存园区，全区座落九二一地震遗迹之上，沿车笼埔断层而建。2013年1月30日对外开放，5月1日正式开幕。",
+        "zh-TW": "國立自然科學博物館車籠埔斷層保存園區是位於臺灣南投縣竹山鎮的一座由國立自然科學博物館營運的地震斷層研究保存園區，全區座落九二一地震遺跡之上，沿車籠埔斷層而建。2013年1月30日對外開放，5月1日正式開幕。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9C%8B%E7%AB%8B%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%B8%E5%8D%9A%E7%89%A9%E9%A4%A8%E8%BB%8A%E7%B1%A0%E5%9F%94%E6%96%B7%E5%B1%A4%E4%BF%9D%E5%AD%98%E5%9C%92%E5%8D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9C%8B%E7%AB%8B%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%B8%E5%8D%9A%E7%89%A9%E9%A4%A8%E8%BB%8A%E7%B1%A0%E5%9F%94%E6%96%B7%E5%B1%A4%E4%BF%9D%E5%AD%98%E5%9C%92%E5%8D%80",
+        "https://en.wikipedia.org/wiki/Chelungpu_Fault_Preservation_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.71061111,
+        23.79472222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Chelungpu_Fault_Preservation_Park",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-NAN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ee5d06e777ae0cb3.webp",
+        "credit": "SSR2000 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chelungpu_Fault_Preservation_Education_Park,_NMSN.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​國立自然科學博物館車籠埔斷層保存園區",
+        "place": "國立自然科學博物館車籠埔斷層保存園區",
+        "originalFile": "Chelungpu_Fault_Preservation_Education_Park,_NMSN.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-NAN:urban": {
+      "id": "poi:admin:TW-NAN:urban",
+      "label": {
+        "en": "Zhongxing New Village",
+        "zh-CN": "中兴新村",
+        "zh-TW": "中興新村"
+      },
+      "description": {
+        "en": "Zhongxing New Village, sometimes rendered as Chunghsing New Village is an urban village located in Nantou City, Nantou County, Taiwan and was the seat of government of Taiwan Province until the abolition of the Taiwan Provincial Government in 2018. The term zhōngxīng is from a Chinese legend Shao Kang Resurgence , referring to the restoration of the Xia dynasty by king Shao Kang, an allusion to the Chinese Taipei government taking back mainland China.",
+        "zh-CN": "中兴新村是位于台湾南投县南投市北部的新市镇，是台湾战后第二个新市镇，为过去中华台北台湾省政府驻地所在，面积约7.07平方公里。为中台湾观光休闲游乐据点，旅游服务业为重要产业。",
+        "zh-TW": "中興新村是位於臺灣南投縣南投市北部的新市鎮，是臺灣戰後第二個新市鎮，為過去中華臺北臺灣省政府駐地所在，面積約7.07平方公里。為中臺灣觀光休閒遊樂據點，旅遊服務業為重要產業。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%88%88%E6%96%B0%E6%9D%91",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%88%88%E6%96%B0%E6%9D%91",
+        "https://en.wikipedia.org/wiki/Zhongxing_New_Village"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/38e890f3ea43d94d.webp",
+        "credit": "Fcuk1203 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%87%BA%E7%81%A3%E7%9C%81%E6%94%BF%E5%BA%9C%E5%A4%A7%E6%A8%93.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​臺灣省政府大樓",
+        "place": "Zhongxing New Village",
+        "originalFile": "臺灣省政府大樓.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.68694444,
+        23.95888889
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Zhongxing_New_Village",
+      "kind": "landmark",
+      "parentCity": "TW-NAN"
+    }
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-YUN": {
+      "label": {
+        "en": "Yunlin County",
+        "zh-CN": "云林县",
+        "zh-TW": "雲林縣"
+      },
+      "description": {
+        "en": "Yunlin is a county in western Taiwan. Yunlin County borders the Taiwan Strait to the west, Nantou County to the east, Changhua County to the north at the Zhuoshui River, and Chiayi County to the south at the Beigang River.",
+        "zh-CN": "云林县是中华台北台湾省的县，位于台湾中部，西边滨临台湾海峡，东边以斗六丘陵与南投县相隔，南边以北港溪、石龟溪与嘉义县相邻，北边以浊水溪与彰化县相邻，外有外伞顶洲。县治及最大城市为斗六市，因行政区划变更而成为台湾本岛唯一不存在同名「市」的县份，云林县内辖有1市5镇14乡，共有20个乡镇市。",
+        "zh-TW": "雲林縣是中華臺北臺灣省的縣，位於臺灣中部，西邊濱臨臺灣海峽，東邊以斗六丘陵與南投縣相隔，南邊以北港溪、石龜溪與嘉義縣相鄰，北邊以濁水溪與彰化縣相鄰，外有外傘頂洲。縣治及最大城市為斗六市，因行政區劃變更而成為臺灣本島唯一不存在同名「市」的縣份，雲林縣內轄有1市5鎮14鄉，共有20個鄉鎮市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9B%B2%E6%9E%97%E7%B8%A3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9B%B2%E6%9E%97%E7%B8%A3",
+        "https://en.wikipedia.org/wiki/Yunlin_County"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        120.47607,
+        23.70489
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/797142bc4c5e2fef.webp",
+        "credit": "戴翊峰 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%A1%8C%E5%95%9F%E7%B4%80%E5%BF%B5%E9%A4%A8_11.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "This is a photo of a monument in Taiwan identified by the ID",
+        "place": "House of Citizen-Memorial Hall of Attendance",
+        "originalFile": "行啟紀念館_11.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-YUN:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Douliu",
+          "zh-CN": "斗六市",
+          "zh-TW": "斗六市"
+        },
+        "lngLat": [
+          120.54388888888889,
+          23.7075
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Douliu.",
+          "zh-CN": "以斗六市为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以斗六市爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q669566",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q669566#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E9%9B%B2%E6%9E%97%E7%B8%A3"
+      }
+    },
+    "poi:admin:TW-YUN:a9496d16": {
+      "label": {
+        "en": "Douliu Zhenyi Temple",
+        "zh-CN": "斗六真一寺",
+        "zh-TW": "斗六真一寺"
+      },
+      "description": {
+        "en": "Formerly called Zhenyi Hall, this temple combines the Longhua and Xiantian traditions of Chinese vegetarian religion. It is Douliu's oldest surviving temple and a protected Yunlin County monument.",
+        "zh-CN": "斗六真一寺，原称真一堂，是位于台湾云林县斗六市的一座寺庙，为斋教中龙华教与先天教两教派融合之祭祀场域，亦是斗六市现存最古老寺庙。目前已指定为云林县县定古迹。",
+        "zh-TW": "斗六真一寺，原稱真一堂，是位於臺灣雲林縣斗六市的一座寺廟，為齋教中龍華教與先天教兩教派融合之祭祀場域，亦是斗六市現存最古老寺廟。目前已指定為雲林縣縣定古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%97%E5%85%AD%E7%9C%9F%E4%B8%80%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%97%E5%85%AD%E7%9C%9F%E4%B8%80%E5%AF%BA"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.54729831,
+        23.7123435
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%96%97%E5%85%AD%E7%9C%9F%E4%B8%80%E5%AF%BA",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-YUN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ca61fdc4f1d330cb.webp",
+        "credit": "地下高雄 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%97%E5%85%AD%E7%9C%9F%E4%B8%80%E5%AF%BA%E6%AD%A3%E9%9D%A2.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​保護棚架下的斗六真一寺",
+        "place": "斗六真一寺",
+        "originalFile": "斗六真一寺正面.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-YUN:00ee30a6": {
+      "label": {
+        "en": "Jhen Wen Academy",
+        "zh-CN": "西螺振文书院",
+        "zh-TW": "西螺振文書院"
+      },
+      "description": {
+        "en": "The Jhen Wen Academy is a former tutorial academy in Xiluo Township, Yunlin County, Taiwan.",
+        "zh-CN": "振文书院，是位于台湾云林县西螺镇广福里的书院、文昌庙，为云林县古迹。",
+        "zh-TW": "振文書院，是位於臺灣雲林縣西螺鎮廣福裏的書院、文昌廟，為雲林縣古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%A5%BF%E8%9E%BA%E6%8C%AF%E6%96%87%E6%9B%B8%E9%99%A2",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%A5%BF%E8%9E%BA%E6%8C%AF%E6%96%87%E6%9B%B8%E9%99%A2",
+        "https://en.wikipedia.org/wiki/Jhen_Wen_Academy"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.46441667,
+        23.79441667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Jhen_Wen_Academy",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-YUN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/01b5841894ad878e.webp",
+        "credit": "Outlookxp · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E8%9E%BA%E6%8C%AF%E6%96%87%E6%9B%B8%E9%99%A2%E7%A9%BA%E7%85%A7.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "​西螺振文書院空照",
+        "place": "西螺振文書院",
+        "originalFile": "西螺振文書院空照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-YUN:943ceeed": {
+      "label": {
+        "en": "Beigang Yimin Temple",
+        "zh-CN": "北港义民庙",
+        "zh-TW": "北港義民廟"
+      },
+      "description": {
+        "en": "This temple in Beigang commemorates people who died during the Lin Shuangwen and Dai Chaochun uprisings. It is protected as a Yunlin County monument.",
+        "zh-CN": "北港义民庙，是位于台湾云林县北港镇义民里的义民庙，祭祀因林爽文事件与戴潮春事件身亡的民众，列县定古迹。",
+        "zh-TW": "北港義民廟，是位於臺灣雲林縣北港鎮義民裏的義民廟，祭祀因林爽文事件與戴潮春事件身亡的民眾，列縣定古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8C%97%E6%B8%AF%E7%BE%A9%E6%B0%91%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8C%97%E6%B8%AF%E7%BE%A9%E6%B0%91%E5%BB%9F"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.302774,
+        23.567793
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%8C%97%E6%B8%AF%E7%BE%A9%E6%B0%91%E5%BB%9F",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-YUN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/67ecb6f12977d0c9.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%8C%97%E6%B8%AF%E7%BE%A9%E6%B0%91%E5%BB%9F%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​北港義民廟正面照",
+        "place": "北港義民廟",
+        "originalFile": "北港義民廟正面照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-YUN:urban": {
+      "id": "poi:admin:TW-YUN:urban",
+      "label": {
+        "en": "House of Citizen-Memorial Hall of Attendance",
+        "zh-CN": "斗六行启记念馆",
+        "zh-TW": "斗六行啟記念館"
+      },
+      "description": {
+        "en": "The House of Citizen-Memorial Hall of Attendance is a hall in Douliu City, Yunlin County, Taiwan.",
+        "zh-CN": "斗六行启记念馆，是位于云林县斗六市的一座云林县文化资产，约建于1927年，是为纪念1923年裕仁太子访台而建的记念馆。",
+        "zh-TW": "斗六行啟記念館，是位於雲林縣斗六市的一座雲林縣文化資產，約建於1927年，是為紀念1923年裕仁太子訪臺而建的記念館。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%97%E5%85%AD%E8%A1%8C%E5%95%9F%E8%A8%98%E5%BF%B5%E9%A4%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%97%E5%85%AD%E8%A1%8C%E5%95%9F%E8%A8%98%E5%BF%B5%E9%A4%A8",
+        "https://en.wikipedia.org/wiki/House_of_Citizen-Memorial_Hall_of_Attendance"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/797142bc4c5e2fef.webp",
+        "credit": "戴翊峰 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%A1%8C%E5%95%9F%E7%B4%80%E5%BF%B5%E9%A4%A8_11.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "This is a photo of a monument in Taiwan identified by the ID",
+        "place": "House of Citizen-Memorial Hall of Attendance",
+        "originalFile": "行啟紀念館_11.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.54166667,
+        23.70572222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/House_of_Citizen-Memorial_Hall_of_Attendance",
+      "kind": "landmark",
+      "parentCity": "TW-YUN"
+    }
+  }
+}

@@ -1,0 +1,982 @@
+{
+  "poi:admin:130200:b086d072": {
+    "label_en": "South Lake, Tangshan",
+    "description_en": "Tangshan South Lake is a central ecological park in Lunan District and was a venue for the 2016 International Horticultural Exposition. Its landscape includes a series of smaller lakes on both sides of the Jinshan railway."
+  },
+  "poi:admin:130400:4b93e470": {
+    "label_en": "Lüxian Temple",
+    "description_en": "Lüxian Temple in Huangliangmeng, Handan, is dedicated chiefly to the Daoist immortal Lü Dongbin and is associated with the legendary dream of Lu Sheng. Founded during the Northern Song and enlarged over later centuries, its halls preserve sculptures and murals connected with the story."
+  },
+  "poi:admin:130400:4b42e494": {
+    "label_en": "Jingniang Lake",
+    "description_en": "Also known as Koushang Reservoir, Jingniang Lake lies at the eastern foot of the Taihang Mountains in Wu’an. The reservoir serves power generation, flood control and water supply; its name recalls the local story of Zhao Kuangyin escorting Jingniang home."
+  },
+  "poi:admin:130700:a988ad8e": {
+    "label_en": "Yunquan Temple",
+    "description_en": "Yunquan Temple stands on Ci’er Mountain in Zhangjiakou. Its surviving historic buildings date from the Ming and Qing periods, and the complex is protected as a provincial cultural heritage site."
+  },
+  "poi:admin:130700:905f9721": {
+    "label_en": "Nihewan archaeological sites",
+    "description_en": "The Nihewan sites occupy the Sanggan River basin in eastern Yangyuan County, Zhangjiakou. More than eighty early human sites have been identified across this extensive Paleolithic landscape since the 1970s."
+  },
+  "poi:admin:130700:cb115c5b": {
+    "label_en": "Qingyuan Tower",
+    "description_en": "Qingyuan Tower belongs to the historic setting of Xuanhua, a city whose origins reach back to the Tang period and whose present scale developed under the Ming. Xuanhua served repeatedly as a regional administrative centre and was one of the Ming dynasty’s northern frontier garrisons."
+  },
+  "poi:admin:130900:e5b81572": {
+    "label_en": "Cangzhou Museum",
+    "description_en": "Cangzhou Museum is a comprehensive museum of local history in Yunhe District, Cangzhou. The institution also carries the name of the city’s science and technology museum."
+  },
+  "poi:admin:131100:9c1192ca": {
+    "label_en": "Anji Bridge, Hengshui",
+    "description_en": "Anji Bridge, also called Hengshui Stone Bridge or the Old Bridge, crosses the Fuyang River in Hengshui. The stone bridge was completed in the thirty-first year of the Qianlong reign, following an earlier local tradition of wooden bridge building."
+  },
+  "poi:admin:131100:f9ec2084": {
+    "label_en": "Baoyun Pagoda",
+    "description_en": "Baoyun Pagoda stands in Taocheng District, Hengshui. It was designated a provincial heritage site in 1982 and a nationally protected cultural heritage site in 2006."
+  },
+  "poi:admin:131100:4b3ebb60": {
+    "label_en": "Hengshui Lake",
+    "description_en": "Hengshui Lake, also known as Qianqingwa, lies southwest of central Hengshui. The lake and its wetlands are protected for their natural habitats and birdlife."
+  },
+  "poi:admin:140100:9a6880fa": {
+    "label_en": "Taiyuan Prefectural Confucian Temple",
+    "description_en": "Taiyuan’s prefectural Confucian temple originated during the Jin dynasty and was rebuilt at a new site after a flood in the Guangxu period. The protected complex now houses the Shanxi Folk Museum."
+  },
+  "poi:admin:140200:7a9f237e": {
+    "label_en": "Four Archways, Datong",
+    "description_en": "Datong’s Four Archways form a connected group at the centre of the old city. The monument was built in the Ming Hongwu period when General Xu Da rebuilt the city, commemorating military strength and achievement."
+  },
+  "poi:admin:140200:80de41bd": {
+    "label_en": "Datong Bell Tower",
+    "description_en": "Datong Bell Tower stands in the middle of Qingyuan Street in the western old city. Built in the fifth year of the Ming Hongwu reign, it lies near the Great Mosque, Chunyang Palace and Huayan Temple."
+  },
+  "poi:admin:140400:18437170": {
+    "label_en": "Lu’an Prefectural City God Temple",
+    "description_en": "The Lu’an Prefectural City God Temple stands in Luzhou District, Changzhi. It is a nationally protected complex and one of southeastern Shanxi’s most complete and distinguished surviving city god temples."
+  },
+  "poi:admin:140400:d12fe311": {
+    "label_en": "Faxing Temple, Zhangzi",
+    "description_en": "Faxing Temple stands on Cuiyun Mountain in Zhangzi County; it was moved from Cilin Mountain after mining subsidence threatened its buildings. The temple originated during the Later Liang period and received its present name under the Northern Song."
+  },
+  "poi:admin:140400:b3f1a7b6": {
+    "label_en": "Chongqing Temple",
+    "description_en": "Chongqing Temple occupies a slope of Ziyun Mountain near Ju Village in Zhangzi County. Mountains enclose it on three sides, with the Taoqing River to the south; the temple is a nationally protected heritage site."
+  },
+  "poi:admin:140600:185846dd": {
+    "label_en": "Chongfu Temple, Shuozhou",
+    "description_en": "Chongfu Temple is a Pure Land Buddhist temple on East Street in central Shuozhou. Also known as Linya Temple or Chongfu Chan Temple, it is protected as a national cultural heritage site."
+  },
+  "poi:admin:150400:f1ad65cc": {
+    "label_en": "Dahushi Reservoir",
+    "description_en": "Dahushi Reservoir lies on the middle reaches of the Heili River in southwestern Ningcheng County, Inner Mongolia. Construction began in 1976 and the reservoir project was completed in 1983."
+  },
+  "poi:admin:150400:9e7f666e": {
+    "label_en": "Ar Horqin Banner Museum",
+    "description_en": "Ar Horqin Banner Museum is a history museum on Tianyuan Street in the banner’s new urban district, within Chifeng. Established in 1987, it previously operated as the banner’s cultural relics administration office."
+  },
+  "poi:admin:150700:8aa2dd76": {
+    "label_en": "Gaxian Cave",
+    "description_en": "Gaxian Cave lies in a granite cliff in the northern Greater Khingan Mountains, within Oroqen Autonomous Banner. In the Northern Wei period, Emperor Taiwu identified it as the ancestral place of the Tuoba branch of the Xianbei."
+  },
+  "poi:admin:210100:3ecb178d": {
+    "label_en": "Xinle archaeological site",
+    "description_en": "The Xinle site in Shenyang’s Huanggu District preserves a Neolithic settlement associated with the Xinle culture. It became a nationally protected cultural heritage site in 2001."
+  },
+  "poi:admin:210400:8f683956": {
+    "label_en": "Dahuofang Reservoir",
+    "description_en": "Dahuofang Reservoir lies east of central Fushun. Also known historically as Zhangdang Reservoir and Jingyue Lake, it is an important drinking-water source for both Fushun and Shenyang."
+  },
+  "poi:admin:210500:0bb4fb30": {
+    "label_en": "Huanren Reservoir",
+    "description_en": "Huanren Reservoir, also called Huanlong Lake, occupies the middle Hun River in Huanren Manchu Autonomous County. Built chiefly for electricity generation with an additional flood-control role, the project was completed in 1972 after an interruption in construction."
+  },
+  "poi:admin:210500:81ba5789": {
+    "label_en": "Huilongshan Hydropower Station",
+    "description_en": "Huilongshan Hydropower Station lies near Huilongshan Village in Huanren Manchu Autonomous County. It is the second station in the lower Hun River cascade and was built between 1969 and 1974."
+  },
+  "poi:admin:210700:a94c0c3b": {
+    "label_en": "Guangji Temple historic complex",
+    "description_en": "The Guangji Temple complex in Jinzhou’s Guta District includes the temple and its pagoda, Tianhou Palace and Zhaozhong Shrine. The group was designated a nationally protected cultural heritage site in 2001."
+  },
+  "poi:admin:211000:b80483e8": {
+    "label_en": "Liaoyang Museum",
+    "description_en": "Liaoyang Museum is a comprehensive museum in Baita District, established in 1985 from an earlier local cultural relics exhibition institution. Its collections include more than six thousand cultural objects."
+  },
+  "poi:admin:211100:4aedd5a5": {
+    "label_en": "Tianzhuangtai war memorial site",
+    "description_en": "This memorial site in Dawa District, Panjin, commemorates Qing soldiers killed in the First Sino-Japanese War and is locally known as the Qing soldiers’ graves. Archaeological investigation helped define its protection area, and it became a national heritage site in 2013."
+  },
+  "poi:admin:211300:0932605b": {
+    "label_en": "Chaoyang South Pagoda",
+    "description_en": "Chaoyang South Pagoda is a surviving Liao-dynasty monument at the northern end of Murong Street in Chaoyang. It is protected as a national cultural heritage site."
+  },
+  "poi:admin:220100:583e58c2": {
+    "label_en": "South Lake, Changchun",
+    "description_en": "South Lake lies in Changchun’s Chaoyang District and forms the principal landscape of South Lake Park. The park is the largest within the city’s urban area."
+  },
+  "poi:admin:220200:1cbe2f61": {
+    "label_en": "Songhua Lake",
+    "description_en": "Songhua Lake, also known as Fengman Reservoir, lies on the Second Songhua River in Jilin City. The artificial lake was formed during construction of the Fengman hydropower project beginning in 1937 and is the largest lake in Jilin Province."
+  },
+  "poi:admin:220200:ccc21300": {
+    "label_en": "Sacred Heart Church, Jilin",
+    "description_en": "Sacred Heart Church stands near the northern end of Jilin Bridge in Chuanying District. Completed in 1926 in the Gothic style, it was formerly the cathedral of the Diocese of Jilin and is now a nationally protected heritage site."
+  },
+  "poi:admin:220500:50eca269": {
+    "label_en": "Yang Jingyu Memorial Cemetery",
+    "description_en": "This cemetery in Tonghua commemorates Yang Jingyu, a commander of the Northeast Anti-Japanese United Army who died during the resistance against Japan. Built in 1957, the site combines the cemetery with a museum devoted to the army."
+  },
+  "poi:admin:220500:90e53678": {
+    "label_en": "Donggou ancient tombs",
+    "description_en": "The Donggou tombs occupy foothills, valleys and plains near the Tonggou River in Ji’an. This extensive concentration of Goguryeo-period burials is among China’s earliest nationally protected cultural heritage sites."
+  },
+  "poi:admin:222400:0e918806": {
+    "label_en": "Liudingshan ancient tombs",
+    "description_en": "The ancient tombs at Liuding Mountain in Dunhua date to the Balhae kingdom. They form a historic burial site within Jilin Province."
+  },
+  "poi:admin:222400:fb91e6fd": {
+    "label_en": "Balhae Central Capital ruins",
+    "description_en": "These ruins preserve Zhongjing Xiande Prefecture, an important capital of the Balhae kingdom. The site lies near Gucheng Village in Xicheng Town, Helong, within Yanbian Korean Autonomous Prefecture."
+  },
+  "poi:admin:230100:064fd948": {
+    "label_en": "Zhaolin Park",
+    "description_en": "Zhaolin Park stands at the northern end of Zhaolin Street in Harbin’s Daoli District. It was the city’s first park and covers more than 75,000 square metres."
+  },
+  "poi:admin:230600:7357283b": {
+    "label_en": "Daqing Museum",
+    "description_en": "Daqing Museum is a comprehensive municipal museum on Wenyuan Street in Daqing’s high-technology development zone. It is designated as a national first-grade museum."
+  },
+  "poi:admin:230600:96602348": {
+    "label_en": "Wang Jinxi Memorial Museum",
+    "description_en": "The Wang Jinxi Memorial Museum in Daqing’s Ranghulu District commemorates the oil worker known as ‘Iron Man’ Wang Jinxi. The museum recalls his role in the development of the Daqing oilfield."
+  },
+  "poi:admin:230800:a2bf4e1e": {
+    "label_en": "Jiamusi Riverside Park",
+    "description_en": "Jiamusi Riverside Park follows the city’s Songhua River embankment. Work on the park began alongside construction of a permanent flood embankment in 1958, and the park was completed the following year."
+  },
+  "poi:admin:210200:33f7825d": {
+    "label_en": "Lüshun Naval Harbour Park",
+    "description_en": "Lüshun Naval Harbour Park occupies the northern shore of the harbour in Dalian’s Lüshunkou District. Completed in 1985, the compact park is marked by a lion statue at its main entrance."
+  },
+  "poi:admin:210200:6f68a65d": {
+    "label_en": "Wanzhong Tomb",
+    "description_en": "Wanzhong Tomb in Lüshunkou is a collective grave for victims of the Port Arthur massacre. First established in 1895, it was rebuilt the following year with a new memorial stele and a hall for commemorative rites."
+  },
+  "poi:admin:370200:8fbea555": {
+    "label_en": "Qingdao Museum",
+    "description_en": "Qingdao Museum in Laoshan District brings together history, art and local cultural collections. Its present museum building, between the Grand Theatre and the International Convention Centre, opened fully in 2001."
+  },
+  "poi:admin:370200:8a5543a7": {
+    "label_en": "Sanlihe archaeological site",
+    "description_en": "The Sanlihe site lies beside the Sanli River in Jiaozhou, within Qingdao. Covering roughly fifty thousand square metres, it was designated a nationally protected cultural heritage site in 2006."
+  },
+  "poi:admin:370200:5614bde7": {
+    "label_en": "Dongyueshi archaeological site",
+    "description_en": "The Dongyueshi site occupies a terrace near Dongyueshi Village in Pingdu, on the northeastern side of Ziyang Reservoir. Its setting lies between the Daze mountains and the Jiaolai Plain, with hills and reservoir waters around it."
+  },
+  "poi:admin:370700:b20660ad": {
+    "label_en": "Guo Weiqu Memorial Gallery",
+    "description_en": "The Guo Weiqu Art Museum stands on Dongfeng West Street in Weicheng District, Weifang. It commemorates the Chinese painter and art historian Guo Weiqu."
+  },
+  "poi:admin:310000:17b4a090": {
+    "label_en": "Shanghai Lu Xun Memorial Hall",
+    "description_en": "The Shanghai Lu Xun Memorial Hall is a museum devoted to the writer Lu Xun inside Lu Xun Park in Hongkou District. Opened in January 1951, it was the first memorial museum dedicated to an individual established in the People’s Republic of China."
+  },
+  "poi:admin:320200:a238a65b": {
+    "label_en": "Li Lake",
+    "description_en": "Li Lake is a gourd-shaped inner bay of Lake Tai in Wuxi’s Binhu District, connected to the larger lake through Changguang Creek. Baojie Bridge divides its waters into eastern and western sections."
+  },
+  "poi:admin:320200:8b9a1b27": {
+    "label_en": "Huishan Ancient Town",
+    "description_en": "Huishan Ancient Town lies at the northeastern foot of Huishan in Wuxi and is distinguished by its historic ancestral halls. The area developed over many centuries into a group of 118 lineage shrines, beside well-known sites including Jichang Garden and Huishan Temple."
+  },
+  "poi:admin:330200:dc3f9633": {
+    "label_en": "Tianfeng Pagoda",
+    "description_en": "Tianfeng Pagoda stands on Dashani Street in Ningbo’s Haishu District and is a landmark of the old city. Its origins lie in the Wu Zhou period, while the present structure was reconstructed in 1984."
+  },
+  "poi:admin:330200:e56be360": {
+    "label_en": "Xuedou Mountain",
+    "description_en": "Xuedou Mountain rises to about eight hundred metres near Xikou in Ningbo’s Fenghua District. Its scenic places include Xuedou Temple, Qianzhang Rock, Sanyin Pools, Xufu Rock and Miaogao Terrace."
+  },
+  "poi:admin:330300:bb3e0f7f": {
+    "label_en": "Dongtou Island",
+    "description_en": "Dongtou Island is the principal island of the Dongtou archipelago, east of the Ou River estuary and within Wenzhou. The surrounding scenic area is known for coastal recreation, rocky island landscapes and fishing-community traditions."
+  },
+  "poi:admin:330500:be074468": {
+    "label_en": "Feiying Pagoda",
+    "description_en": "Feiying Pagoda stands on Taxia Street in Huzhou. It originated in the late Tang dynasty, initially as a stone reliquary pagoda."
+  },
+  "poi:admin:330600:12164028": {
+    "label_en": "Mausoleum of Yu the Great",
+    "description_en": "This commemorative mausoleum honours Yu the Great, traditionally regarded as the founder of the Xia dynasty. It stands at the foot of Kuaiji Mountain, southeast of Shaoxing, with its principal axis facing west."
+  },
+  "poi:admin:330700:cba1f35e": {
+    "label_en": "Bayong Tower",
+    "description_en": "Bayong Tower rises on a tall stone platform facing the Wu River in Jinhua. Originally called Xuanchang Tower, it was founded during the Southern Qi period by Shen Yue, then governor of Dongyang."
+  },
+  "poi:admin:330700:ca73ae48": {
+    "label_en": "Jinhua Prefectural City God Temple",
+    "description_en": "Jinhua’s prefectural City God Temple preserves buildings from the late Qing period in the city’s Wucheng District. Its finely worked ceilings, brick carvings and coffered ceiling are notable features of the protected complex."
+  },
+  "poi:admin:330700:79a5807c": {
+    "label_en": "Duohu Subdistrict",
+    "description_en": "Duohu is a subdistrict in Jindong District, on the southeastern outskirts of central Jinhua. It is the seat of the Jindong district government."
+  },
+  "poi:admin:330800:15db53be": {
+    "label_en": "Southern Confucius Family Temple",
+    "description_en": "This temple in Quzhou was built by the southern branch of Confucius’s descendants, in distinction to the northern lineage at Qufu. Located on Xinqiao Street, it is a nationally protected cultural heritage site."
+  },
+  "poi:admin:330800:fc63f445": {
+    "label_en": "Huzhen Relic Pagoda",
+    "description_en": "The relic pagoda in Huzhen, Longyou County, originated in the Northern Song period and underwent major repairs during the Ming and Qing. It is a seven-storey, six-sided solid brick pagoda designed to resemble a timber pavilion."
+  },
+  "poi:admin:331000:d9143f28": {
+    "label_en": "Qi Jiguang Shrine, Taizhou",
+    "description_en": "The Qi Jiguang Shrine shares its historic identity with the Haimen Garrison City God Temple. It stands at the southwestern foot of Dongshan in the old town of Taizhou’s Jiaojiang District."
+  },
+  "poi:admin:331000:fe8c9292": {
+    "label_en": "Daxi Dong’ou ancient city site",
+    "description_en": "The Daxi Dong’ou site in Wenling preserves an ancient city dating from the late Warring States to the early Western Han period. Archaeological investigations included surveys, coring and trial excavations conducted in 2002, 2006 and 2008."
+  },
+  "poi:admin:331100:47bcea00": {
+    "label_en": "Rulong Bridge",
+    "description_en": "Rulong Bridge is a timber-arch covered bridge in Yueshan Village, Qingyuan County. Its original construction date is unknown, but an inscription records rebuilding in the fifth year of the Ming Tianqi reign, making it an exceptionally early securely dated example of its type."
+  },
+  "poi:admin:331100:a1e10ed0": {
+    "label_en": "Tankeng Reservoir",
+    "description_en": "Tankeng Reservoir extends across Qingtian and Jingning counties, with its dam at Beishan in Qingtian. Built principally for power generation and flood control, it began filling in 2008 and generating electricity in 2009."
+  },
+  "poi:admin:320800:bc780d1d": {
+    "label_en": "Wentong Pagoda",
+    "description_en": "Wentong Pagoda stands in Shaohu Park at the northwestern corner of Huai’an’s old city, beside the canal. Originally called Zunsheng Pagoda, it was founded during the Tang dynasty and rises through thirteen storeys."
+  },
+  "poi:admin:321000:f281e159": {
+    "label_en": "Choe Chiwon Memorial Hall",
+    "description_en": "This memorial hall in Yangzhou commemorates the Silla scholar Choe Chiwon, who once served as an official in the city. Its first phase opened in October 2007."
+  },
+  "poi:admin:321100:34a5786a": {
+    "label_en": "Dinghui Temple, Zhenjiang",
+    "description_en": "Dinghui Temple occupies Jiaoshan, an island in the Yangtze River northeast of central Zhenjiang. It is one of the nationally designated major Buddhist temples in Han Chinese regions."
+  },
+  "poi:admin:340100:2d82f7d7": {
+    "label_en": "Former residence of Li Hongzhang",
+    "description_en": "Li Hongzhang’s former residence stands on Huaihe Road in central Hefei. The surviving portion of the late Qing statesman’s family home displays the characteristic architecture of the Jianghuai region."
+  },
+  "poi:admin:341100:b7081fdd": {
+    "label_en": "Ming Imperial Mausoleum, Fengyang",
+    "description_en": "The Ming Imperial Mausoleum south of Fengyang was built by Zhu Yuanzhang for his parents. Its imperial mausoleum stele is an important historical source for the founding emperor’s family background."
+  },
+  "poi:admin:341500:68d14997": {
+    "label_en": "Meishan Reservoir",
+    "description_en": "Meishan Reservoir occupies the upper Shi River in Jinzhai County and serves flood control, irrigation and electricity generation. It is a major part of the Huai River water-management system and a principal source for the Pishihang irrigation network."
+  },
+  "poi:admin:341500:cc873250": {
+    "label_en": "Xianghongdian Reservoir",
+    "description_en": "Xianghongdian Reservoir in Jinzhai County is a major project for flood control, irrigation and power generation in the Huai River basin. The reservoir comprises upper and lower sections."
+  },
+  "poi:admin:320300:f18d2f16": {
+    "label_en": "Hubushan historic buildings",
+    "description_en": "The Hubushan historic building group lies around Hubu Hill in Xuzhou’s Yunlong District. It was designated a nationally protected cultural heritage site in 2006."
+  },
+  "poi:admin:340300:62aaf3f1": {
+    "label_en": "Tomb of Tang He",
+    "description_en": "The tomb of Tang He lies at the southern foot of Cao Mountain on the eastern side of Bengbu. Archaeological excavation in 1973 identified it as the burial of the early Ming statesman."
+  },
+  "poi:admin:340300:94416325": {
+    "label_en": "Moon Rising over the Lake heritage park",
+    "description_en": "This historic-residence exhibition park occupies the southwestern shore of Longzi Lake in Bengbu. Construction began in 2012, and completed sections began opening in 2023."
+  },
+  "poi:admin:370800:e6a2ae18": {
+    "label_en": "Weishan Lake",
+    "description_en": "Weishan Lake lies along the Shandong–Jiangsu border and is administered by Weishan County. The connected Weishan lake system extends for about 120 kilometres from north to south and forms northern China’s largest freshwater lake area."
+  },
+  "poi:admin:340200:8bae565b": {
+    "label_en": "Jing Lake, Wuhu",
+    "description_en": "Jing Lake is a small, roughly circular lake in central Wuhu with a long history as a scenic place. The surrounding Jinghu District takes its name from the lake."
+  },
+  "poi:admin:340500:5fb5bfa4": {
+    "label_en": "Tomb of Zhu Ran",
+    "description_en": "Zhu Ran’s tomb was discovered in Ma’anshan in 1984 and identified through inscribed wooden documents found during excavation. The burial of this high-ranking Eastern Wu commander is now within the Zhu Ran cultural park and family cemetery museum."
+  },
+  "poi:admin:340700:1d651634": {
+    "label_en": "Baidang Lake",
+    "description_en": "Baidang Lake lies in Zongyang County near the northern bank of the Yangtze River. It formed in a low-lying depression left behind as the river shifted away from an earlier channel."
+  },
+  "poi:admin:350700:f36181ed": {
+    "label_en": "Jiufeng Mountains, Fujian",
+    "description_en": "The Jiufeng range runs northeast to southwest across northern Fujian and connects with the Donggong Mountains. Its hills are composed mainly of rhyolite and granite, with an average elevation of around eight hundred metres."
+  },
+  "poi:admin:350400:029ba3c6": {
+    "label_en": "Taining Global Geopark",
+    "description_en": "Taining Geopark lies on the southeastern side of the middle Wuyi mountain range, mainly within Taining County. Expanded from the earlier Dajin Lake national geopark, it joined the global geopark network in 2005."
+  },
+  "poi:admin:350300:371e3b95": {
+    "label_en": "Ancient Watchtower, Putian",
+    "description_en": "Putian’s ancient watchtower is a well-preserved traditional drum-tower building in the city centre. Regarded locally as a symbol of historic Xinghua Prefecture, it is protected as a provincial cultural heritage site."
+  },
+  "poi:admin:350200:dc8d1a58": {
+    "label_en": "Xiamen Museum",
+    "description_en": "Xiamen Museum explores the city’s history, culture and regional character through its exhibitions and affiliated heritage sites. Founded in 1983 in Gulangyu’s Bagua Building, it moved to its present location in Siming District in 2006."
+  },
+  "poi:admin:350500:28499f33": {
+    "label_en": "Quanzhou Prefectural Confucian Temple",
+    "description_en": "Quanzhou’s Confucian temple originated in the Tang period and moved to its present site during the Northern Song. In 2021 it became one of the twenty-two component sites of the UNESCO World Heritage property celebrating Song–Yuan Quanzhou’s maritime trade."
+  },
+  "poi:admin:350500:728812a1": {
+    "label_en": "Chendai Ding Clan Ancestral Hall",
+    "description_en": "The Ding clan ancestral hall stands in Andou Village, Chendai, in Jinjiang. The lineage traces its ancestry to Arab forebears who settled here in the early Ming period; the hall is a nationally protected heritage site."
+  },
+  "poi:admin:350500:636a717f": {
+    "label_en": "Tomb of Zheng Chenggong",
+    "description_en": "Zheng Chenggong’s family tomb stands in Shuitou, Nan’an, and holds his remains together with those of family members including Zheng Jing and Zheng Zhilong. Zheng Chenggong was originally buried in the Tainan area after his death in Taiwan."
+  },
+  "poi:admin:350600:bf875057": {
+    "label_en": "Zhangzhou Prefectural Confucian Temple",
+    "description_en": "The Zhangzhou prefectural Confucian temple stands in Xiangcheng District. Founded in the Southern Song and rebuilt during the Ming Chenghua reign, it became a nationally protected heritage site in 2001."
+  },
+  "poi:admin:350600:b26e29d4": {
+    "label_en": "Zhangzhou Lin Clan Ancestral Hall",
+    "description_en": "This ancestral hall in Zhangzhou was jointly built by Lin lineages from seven counties and is also known as Bigan Temple, honouring their revered ancestor. Its surviving square hall and eastern corridor are Ming-period buildings."
+  },
+  "poi:admin:350600:6b9d486c": {
+    "label_en": "Jiangdong Bridge",
+    "description_en": "Jiangdong Bridge, also called Hudu or Tongji Bridge, crosses the lower northern branch of the Jiulong River in Zhangzhou’s Longwen District. It was designated a nationally protected cultural heritage site in 2001."
+  },
+  "poi:admin:350100:328d46b6": {
+    "label_en": "Gu Mountain",
+    "description_en": "Gu Mountain rises in Fuzhou’s Jin’an District, between the Min River, Guling and the Fuzhou Plain. Its highest summit, Dading Peak, reaches just over 919 metres."
+  },
+  "poi:admin:350100:e9d2da79": {
+    "label_en": "Qishan National Forest Park",
+    "description_en": "Qishan lies south of the Min River in Minhou County and extends through the Nanyu and Shangjie areas. The range’s highest peak reaches 775 metres, and its wooded landscape forms Qishan National Forest Park."
+  },
+  "poi:admin:350900:6e2f2690": {
+    "label_en": "Cai family residence and ancestral temple",
+    "description_en": "The Cai family residence and temple in Ningde’s Jiaocheng District date from the Qing Daoguang reign and are associated with the revolutionary Cai Wei. Their surviving halls, carved timbers, gateways and courtyard features preserve the setting of a substantial lineage home."
+  },
+  "poi:admin:350900:4ce56414": {
+    "label_en": "Pingnan Confucian Temple",
+    "description_en": "Pingnan’s Confucian temple in Shuangxi was founded during the Qing Qianlong reign as the county’s temple and school. Although much of the original complex was lost, the surviving Dacheng Hall and Chongsheng Shrine preserve one of Ningde’s most complete Confucian temple groups."
+  },
+  "poi:admin:360100:c64818d4": {
+    "label_en": "Bada Shanren Memorial Museum",
+    "description_en": "This museum commemorates the late Ming and early Qing painter Bada Shanren at the former Qingyunpu Daoist monastery in Nanchang. The artist once lived in seclusion here, amid a setting with the character of a Jiangnan garden."
+  },
+  "poi:admin:360100:5ef8d5c2": {
+    "label_en": "Shengjin Pagoda",
+    "description_en": "Shengjin Pagoda stands outside the former Jinxian Gate of Nanchang’s old city. Founded in the Tang and rebuilt in the Qing, it is an octagonal, seven-storey brick pagoda in the pavilion style."
+  },
+  "poi:admin:360100:f044302c": {
+    "label_en": "Xinghua Tower, Nanchang",
+    "description_en": "Xinghua Tower stands beside the northern shore of South Lake in central Nanchang. The white building follows the vernacular style of Jiangxi, with origins traced to the Tang and associations with several noted historical residents."
+  },
+  "poi:admin:360200:ee2db14c": {
+    "label_en": "Red Pagoda, Fuliang",
+    "description_en": "Fuliang’s Red Pagoda, formally Dasheng Pagoda, stands south of the historic county offices. Built during the Northern Song and repaired in the Ming, the brick pagoda has six sides and nine storeys."
+  },
+  "poi:admin:360200:a1ed44ff": {
+    "label_en": "Xianghu Town",
+    "description_en": "Xianghu is a town within Fuliang County, administered by Jingdezhen in Jiangxi Province. It is one of the county’s township-level administrative units."
+  },
+  "poi:admin:360800:46b00ed5": {
+    "label_en": "Bailuzhou Academy",
+    "description_en": "Bailuzhou Academy stands in Ji’an’s Jizhou District. The historic academy was designated a nationally protected cultural heritage site in 2013."
+  },
+  "poi:admin:360800:96ca0d04": {
+    "label_en": "Bailu Lake",
+    "description_en": "Bailu Lake, also known as Nanche Reservoir, lies near Qiaotou in Taihe County at the foot of the Jinggang Mountains. Irrigation is its principal purpose, alongside power generation, flood control, aquaculture and tourism."
+  },
+  "poi:admin:361100:17e7d96f": {
+    "label_en": "Xinjiang Academy",
+    "description_en": "Xinjiang Academy occupies the southern bank of the Xin River in Shangrao and is counted among Jiangxi’s four great historic academies. It was founded during the Qing Kangxi reign under the original name Qujiang Academy."
+  },
+  "poi:admin:361100:af21902c": {
+    "label_en": "Ling Mountain, Shangrao",
+    "description_en": "Ling Mountain, also called Lingying Mountain, lies north of Shangrao as a branch of the Huaiyu range. It is known for its many distinctive peaks, with the main summit reaching 1,496 metres."
+  },
+  "poi:admin:370100:c9ffd77a": {
+    "label_en": "Longshan Subdistrict, Jinan",
+    "description_en": "Longshan is a subdistrict of Zhangqiu District in Jinan. The celebrated archaeological remains associated with the Longshan culture were discovered here."
+  },
+  "poi:admin:370300:343af2ea": {
+    "label_en": "Former residence of Pu Songling",
+    "description_en": "Pu Songling’s former home stands in Pujiazhuang, Zibo, and forms part of a memorial complex including nearby residences, Liu Spring and his cemetery. The museum presents the Qing novelist’s life and the influence of his writings."
+  },
+  "poi:admin:370900:13edd864": {
+    "label_en": "Dawenkou archaeological site",
+    "description_en": "The Dawenkou site lies beside the Dawen River in Tai’an and preserves a substantial Neolithic settlement and burial landscape. First discovered in 1959, it has been explored through several major excavations revealing a history spanning more than 2,500 years."
+  },
+  "poi:admin:371500:d3a67e0a": {
+    "label_en": "Guangyue Tower",
+    "description_en": "Guangyue Tower stands at the centre of Liaocheng’s historic walled city. Founded during the Ming Hongwu reign as a lookout and defensive structure, it underwent repeated repairs during later centuries."
+  },
+  "poi:admin:341200:c2dc9cd0": {
+    "label_en": "Yingzhou West Lake",
+    "description_en": "Yingzhou West Lake lies northwest of central Fuyang beside the Xinquan River, near the ancient meeting place of several waterways. The lake is protected for its scenic and wetland environment."
+  },
+  "poi:admin:341600:c6d842a0": {
+    "label_en": "Huaxilou theatre complex",
+    "description_en": "Huaxilou in Bozhou originated as a Guandi temple and a guild hall for merchants from Shanxi and Shaanxi. The medicinal-trade merchants established the Qing-period hall as a shared place of support and association."
+  },
+  "poi:admin:341600:e3580910": {
+    "label_en": "Xuege Pagoda",
+    "description_en": "Xuege Pagoda, formerly Wenfeng Pagoda, stands in Bozhou’s Qiaocheng District. Built across the late Qianlong and Jiaqing reigns, the octagonal seven-storey brick structure imitates timber pavilion architecture."
+  },
+  "poi:admin:371700:52f9afa9": {
+    "label_en": "Yongfeng Pagoda",
+    "description_en": "Yongfeng Pagoda, also known as Fan Pagoda, stands near the southeastern corner of Juye’s county town. It was designated a Shandong provincial cultural heritage site in 2006."
+  },
+  "poi:admin:410100:0056a010": {
+    "label_en": "Zhengzhou Yellow River Scenic Area",
+    "description_en": "This scenic area lies at Guying in Zhengzhou’s Huiji District. Its landscape is framed by the Yellow River to the north and Yue Mountain to the south."
+  },
+  "poi:admin:410200:87db282b": {
+    "label_en": "Shanxi–Shaanxi–Gansu Guild Hall",
+    "description_en": "The Shanxi–Shaanxi–Gansu Guild Hall stands on Xufu Street in Kaifeng. Built during the Qing Qianlong reign, it is noted for elaborate wood, stone and brick carving."
+  },
+  "poi:admin:410400:ccc81928": {
+    "label_en": "Tombs of the Three Su",
+    "description_en": "The Three Su tombs lie at the foot of Little Emei Mountain in Jia County. The memorial burial site is associated with the Northern Song writers Su Xun, Su Shi and Su Zhe."
+  },
+  "poi:admin:410500:8db217c5": {
+    "label_en": "National Museum of Chinese Writing",
+    "description_en": "The National Museum of Chinese Writing in Anyang is devoted to writing and its material heritage. Its work combines the preservation of related objects, public exhibitions and scholarly research."
+  },
+  "poi:admin:410600:6242e42a": {
+    "label_en": "Yunmeng Mountain, Henan",
+    "description_en": "Yunmeng Mountain, also known as Qingyan Mountain, lies west of Qi County at the eastern foot of the Taihang Mountains. It is a scenic mountain area within Hebi."
+  },
+  "poi:admin:410700:da8fb4d3": {
+    "label_en": "Xinxiang Museum",
+    "description_en": "Xinxiang Museum is a comprehensive museum of local history. It is housed within the Pingyuan Museum complex on Renmin East Road in Xinxiang’s Hongqi District."
+  },
+  "poi:admin:410700:029e42c5": {
+    "label_en": "Tomb of Prince Lujian",
+    "description_en": "The tomb of Prince Lujian, Zhu Yiliu, and his consort Zhao lies at the southern foot of Phoenix Mountain in Xinxiang. It is an extensive and exceptionally well-preserved Ming princely burial complex."
+  },
+  "poi:admin:410700:c40e21ca": {
+    "label_en": "Bigan Temple",
+    "description_en": "Bigan Temple northwest of Weihui honours the Shang royal figure Bigan. A temple was established here during the Northern Wei, while the surviving buildings reflect reconstruction in the Ming and Qing periods."
+  },
+  "poi:admin:410800:50c7e6f0": {
+    "label_en": "Tomb of Han Yu",
+    "description_en": "Han Yu’s tomb occupies a hillside near Hanzhuang Village in Mengzhou. Established during the Tang dynasty, the site has a history of around twelve centuries and also houses an institute devoted to Han Yu studies."
+  },
+  "poi:admin:410900:9687e68d": {
+    "label_en": "Qicheng archaeological site",
+    "description_en": "The Qicheng site lies near Qicheng Village in Puyang’s Hualong District, west of Jingkai Avenue. It was included among Henan’s first provincial cultural heritage sites in 1961."
+  },
+  "poi:admin:411000:075ae764": {
+    "label_en": "Wenfeng Pagoda, Xuchang",
+    "description_en": "Xuchang’s Wenfeng Pagoda is also known as Wenming Pagoda or Wenming Temple Pagoda. The Ming-period monument was designated a nationally protected cultural heritage site in 2006."
+  },
+  "poi:admin:411000:3b1de2ce": {
+    "label_en": "Yuzhou Jun Official Kiln Site Museum",
+    "description_en": "The Yuzhou Jun Official Kiln Site Museum stands on Junguan Kiln Road in Yuzhou. It was China’s first museum devoted specifically to Jun porcelain."
+  },
+  "poi:admin:411000:c8e2cdb0": {
+    "label_en": "Chunqiu Tower, Xuchang",
+    "description_en": "Chunqiu Tower stands on Wenmiaoqian Street in Xuchang’s Weidu District, beside the city’s Confucian temple. The two architectural sites received joint provincial heritage protection in 2000."
+  },
+  "poi:admin:411100:80fc63c2": {
+    "label_en": "Sha and Li River Scenic Area",
+    "description_en": "This linear landscape follows the Sha and Li rivers through Luohe, centred on their confluence. Developed alongside urban flood-control works, it combines riverside ecology with cultural and recreational spaces."
+  },
+  "poi:admin:411100:1bccb99b": {
+    "label_en": "Xiaoshang Bridge",
+    "description_en": "Xiaoshang Bridge is a stone arch bridge near Shangqiao Village in Linying County. Also popularly called the Sui Arch Bridge, it became a nationally protected cultural heritage site in 2001."
+  },
+  "poi:admin:411300:e7265da8": {
+    "label_en": "Shrine of the Medical Sage",
+    "description_en": "This shrine and garden complex in Nanyang commemorates the Eastern Han physician Zhang Zhongjing. Rebuilt after destruction during the Cultural Revolution, the present site is a nationally protected cultural heritage place."
+  },
+  "poi:admin:411300:2b36d29b": {
+    "label_en": "Nanyang Wuhou Shrine",
+    "description_en": "Nanyang’s Wuhou Shrine stands on Wolong Hill and commemorates Zhuge Liang’s association with farming in the Nanyang region. It is one of the surviving temple complexes dedicated to the Three Kingdoms strategist."
+  },
+  "poi:admin:411300:275cc869": {
+    "label_en": "Sheqi Shanxi–Shaanxi Guild Hall",
+    "description_en": "The Shanxi–Shaanxi Guild Hall stands in Shedian Town, Sheqi County. Wealthy merchants from the two provinces funded its construction over the period from the Qing Qianlong reign to the Guangxu reign."
+  },
+  "poi:admin:411400:593e96cc": {
+    "label_en": "Shangqiu Ancient City",
+    "description_en": "Also known as Guide Prefectural City, this historic quarter preserves a Ming–Qing urban core surrounded by water. Its square walls and rounded outer moat sit among overlapping remains of earlier cities."
+  },
+  "poi:admin:411400:583ffca0": {
+    "label_en": "Guide City Walls",
+    "description_en": "These walls surround the historic city in Shangqiu's Suiyang District. They were rebuilt north of the previous city after a Ming-period flood destroyed the older fortifications."
+  },
+  "poi:admin:411600:e8c41591": {
+    "label_en": "Zhoukou Guandi Temple",
+    "description_en": "This protected temple stands in Zhoukou, a historic river-transport hub at the meeting of the Sha, Ying and Jialu rivers. It is dedicated to Guan Yu."
+  },
+  "poi:admin:411600:8a8de056": {
+    "label_en": "Pingliangtai Ancient City Site",
+    "description_en": "This late Neolithic Longshan-culture settlement in Huaiyang is among China's earliest archaeologically confirmed walled towns. Excavations uncovered an extensive prehistoric drainage system made from ceramic pipes."
+  },
+  "poi:admin:411600:4ed92929": {
+    "label_en": "Taihao Mausoleum and Temple",
+    "description_en": "This Huaiyang complex commemorates Taihao Fuxi. Its documented history reaches back to the Tang and Song periods, while the surviving architectural layout largely reflects Ming and Qing rebuilding."
+  },
+  "poi:admin:420500:86b0f6fb": {
+    "label_en": "Sanyou Cave",
+    "description_en": "Sanyou Cave and its cliff inscriptions lie beside the Yangtze, northwest of Yichang at the entrance to Xiling Gorge. The site is protected as a national cultural monument."
+  },
+  "poi:admin:420800:08fb69e2": {
+    "label_en": "Ming Xianling Mausoleum",
+    "description_en": "Xianling is the joint tomb of the Jiajing Emperor's parents and the largest individual Ming imperial mausoleum. Its distinctive layout reflects the imperial succession and ritual controversy surrounding their posthumous status."
+  },
+  "poi:admin:420800:727a605d": {
+    "label_en": "Zhanghe Reservoir",
+    "description_en": "Located between Jingmen's Dongbao District and Dangyang, Zhanghe Reservoir supplies irrigation and urban water. It also serves flood control, hydropower, navigation and recreation."
+  },
+  "poi:admin:421000:736c2fe2": {
+    "label_en": "Jingzhou Museum",
+    "description_en": "This regional museum on Jingzhong Road presents the history and cultural heritage of Jingzhou. It was designated a national first-grade museum in 2008."
+  },
+  "poi:admin:421000:fcb6b103": {
+    "label_en": "Wanshou Pagoda",
+    "description_en": "This Ming-period brick pagoda stands on Guanyinji beside the Jingjiang levee in Shashi. Construction began in 1548 as a prayer for the emperor's longevity."
+  },
+  "poi:admin:430200:8d296d32": {
+    "label_en": "Yandi Mausoleum, Hunan",
+    "description_en": "This memorial mausoleum to the legendary Yandi stands at Luyuan in Yanling County, Zhuzhou. It is one of several sites associated with Yandi and is nationally protected."
+  },
+  "poi:admin:430300:28e921a0": {
+    "label_en": "Baishi Park",
+    "description_en": "Baishi Park is a public urban park in Xiangtan's Yuhu District. Its grounds include Baima Lake."
+  },
+  "poi:admin:430400:7289dcb1": {
+    "label_en": "Shigu Academy",
+    "description_en": "Shigu Academy stands on Shigu Hill in northern Hengyang, near the meeting of the Zheng, Xiang and Lei rivers. Founded in the Tang period, it became a celebrated centre of classical scholarship."
+  },
+  "poi:admin:430400:ab7d0a9d": {
+    "label_en": "Zhuhui Pagoda",
+    "description_en": "One of historic Hengzhou's three notable pagodas, Zhuhui Pagoda stands on Baiting Hill in Chashan'ao. Hengyang's Zhuhui District takes its name from the tower."
+  },
+  "poi:admin:430500:c24da56d": {
+    "label_en": "Shaoyang North Pagoda",
+    "description_en": "The North Pagoda stands on the northern bank near the meeting of the Zi and Shao rivers in Shaoyang. It faces the East Pagoda and the Tingwaiting pavilion across the water."
+  },
+  "poi:admin:430600:6409a041": {
+    "label_en": "Qu Yuan Temple",
+    "description_en": "This temple commemorates the poet and statesman Qu Yuan beside the Miluo River, at the foot of Yusi Hill. Its surviving buildings date to rebuilding during the Qing Qianlong reign."
+  },
+  "poi:admin:430900:caf8e454": {
+    "label_en": "Fenglin Bridge, Yiyang",
+    "description_en": "This stone pedestrian bridge crosses the Lanxi River in Yiyang's Heshan District. Built during the Qing period, it is protected as a provincial cultural monument."
+  },
+  "poi:admin:431000:7b4e03d5": {
+    "label_en": "Tomb of Emperor Yi",
+    "description_en": "This tomb in Chenzhou's Beihu District commemorates Xiong Xin, Emperor Yi of Chu. He was associated with the anti-Qin forces at the end of the Qin dynasty."
+  },
+  "poi:admin:431200:d2ec005c": {
+    "label_en": "Furong Tower, Qianyang",
+    "description_en": "Furong Tower is a classical garden complex in the old town of Qianyang, now Qiancheng in Hongjiang. Built to commemorate the poet Wang Changling, it overlooks the river beside wooded slopes."
+  },
+  "poi:admin:440700:a97f36de": {
+    "label_en": "Chen Baisha Ancestral Hall",
+    "description_en": "This Ming-period courtyard hall in Jiangmen commemorates the philosopher Chen Baisha. The historic complex now houses his memorial museum."
+  },
+  "poi:admin:440700:4baf4813": {
+    "label_en": "Kaiping Diaolou and Villages",
+    "description_en": "Kaiping's countryside is known for its fortified diaolou towers and surrounding villages. Four groups of these buildings and settlements were inscribed on the World Heritage List in 2007."
+  },
+  "poi:admin:440700:160528ef": {
+    "label_en": "Kaiping Diaolou",
+    "description_en": "These fortified towers are a defining feature of the rural landscape around Kaiping. Several tower-and-village groups form the Kaiping Diaolou and Villages World Heritage property."
+  },
+  "poi:admin:441200:31fc2b55": {
+    "label_en": "Zhaoqing Ancient City Walls",
+    "description_en": "Much of Zhaoqing's historic rectangular city wall survives in Duanzhou District. Its circuit includes four gates, defensive platforms and Piyun Tower at the northwestern corner."
+  },
+  "poi:admin:441200:8a84d653": {
+    "label_en": "Yuecheng Dragon Mother Temple",
+    "description_en": "This temple at the meeting of the Yuecheng and Xi rivers in Deqing honours the Dragon Mother. The complex is protected as a national cultural monument."
+  },
+  "poi:admin:441200:1a3d6b1b": {
+    "label_en": "Yuejiang Tower, Zhaoqing",
+    "description_en": "Yuejiang Tower stands on the northern bank of the Xi River in Zhaoqing. It now houses a memorial at the former headquarters of Ye Ting's Independent Regiment."
+  },
+  "poi:admin:441800:96f4890a": {
+    "label_en": "Feilaixia Water-Control Complex",
+    "description_en": "This major water-control project lies on the Bei River northeast of Qingyuan. Flood protection is its main role, alongside hydropower, navigation and water supply."
+  },
+  "poi:admin:441900:7274ea09": {
+    "label_en": "Jin'aozhou Pagoda",
+    "description_en": "This historic brick pagoda stands at Jin'aozhou in Dongguan's Wanjiang area. Its tiered pavilion form reflects the pagoda architecture of the Ming and Qing periods."
+  },
+  "poi:admin:442000:38c3d6a0": {
+    "label_en": "Yandunshan Pagoda",
+    "description_en": "Yandunshan Pagoda stands in Zhongshan Park in the Shiqi area of Zhongshan. It was founded in 1608 during the Ming Wanli reign."
+  },
+  "poi:admin:442000:e805e62c": {
+    "label_en": "Museum of Sun Yat-sen's Former Residence",
+    "description_en": "Established in 1956, this museum preserves Sun Yat-sen's former home in Cuiheng Village, Zhongshan. It forms the centre of the wider historic site associated with his birthplace."
+  },
+  "poi:admin:445300:19eb0067": {
+    "label_en": "Tianlu Mountains",
+    "description_en": "The Tianlu range extends across several counties and cities in central-western Guangdong. Its main summit reaches 1,254 metres on the boundary between Xinxing and Kaiping."
+  },
+  "poi:admin:450400:d0df195b": {
+    "label_en": "Sun Yat-sen Memorial Hall, Wuzhou",
+    "description_en": "This memorial hall stands in Zhongshan Park in Wuzhou's Wanxiu District. The building was completed in October 1930."
+  },
+  "poi:admin:820000:a9c47aa9": {
+    "label_en": "St Augustine's Church, Macau",
+    "description_en": "St Augustine's Church stands on Largo de Santo Agostinho in Macau, with its present form dating to an 1874 rebuilding. It is associated with the annual two-day procession of Our Lord of the Passion."
+  },
+  "poi:admin:360700:49f75a3b": {
+    "label_en": "Ganzhou Confucian Temple",
+    "description_en": "This Confucian temple on Houde Road in Ganzhou formerly housed the county school of Gan County. The site has a history of nearly a millennium and is protected at provincial level."
+  },
+  "poi:admin:360700:78cb04f6": {
+    "label_en": "Ganzhou City Walls",
+    "description_en": "Ganzhou's surviving fortifications were built mainly during the Song and Ming periods. They preserve an extensive stretch of Song-period city walls and are nationally protected."
+  },
+  "poi:admin:360700:9832bf20": {
+    "label_en": "Ciyun Pagoda, Ganzhou",
+    "description_en": "Ciyun Pagoda stands beside Ganzhou's Confucian temple on Houde Road. Founded in 1023 within the former Ciyun Temple, it is also known as the Relic Pagoda."
+  },
+  "poi:admin:441300:7d90b2eb": {
+    "label_en": "Nankun Mountain National Forest Park",
+    "description_en": "This forest park occupies the Nankun Mountains in southwestern Longmen County, Huizhou. Its wooded uplands are often described as an oasis near the Tropic of Cancer."
+  },
+  "poi:admin:441400:5e0dc049": {
+    "label_en": "Huang Zunxian's Former Residence",
+    "description_en": "This riverside complex in eastern Meizhou preserves the scholar Huang Zunxian's Renjinglu study and Rongludi residence. Together with the neighbouring Enyuandi building, it forms his memorial museum."
+  },
+  "poi:admin:441400:53561728": {
+    "label_en": "Thousand Buddha Pagoda, Meizhou",
+    "description_en": "This historic iron pagoda is preserved inside a stone pagoda at Qianfota Temple in Meizhou. Local records trace its foundation to the Southern Han kingdom, more than a thousand years ago."
+  },
+  "poi:admin:441400:61ba400b": {
+    "label_en": "Wuzhishi Scenic Area",
+    "description_en": "Wuzhishi lies near the Guangdong–Fujian–Jiangxi border in Pingyuan County, Meizhou. The area combines distinctive red sandstone Danxia formations with forest and clear springs."
+  },
+  "poi:admin:441600:722c6c41": {
+    "label_en": "Zhengxiang Pagoda",
+    "description_en": "Zhengxiang Pagoda is a Song-period brick pagoda in Tuocheng, Longchuan County. Its pavilion-style structure is protected as a Guangdong provincial cultural monument."
+  },
+  "poi:admin:440500:a91e157e": {
+    "label_en": "Wenguang Pagoda, Chaoyang",
+    "description_en": "Wenguang Pagoda stands in the historic centre of Chaoyang, Shantou. Founded in 1131 during the Song period, it is a prominent local landmark and a nationally protected monument."
+  },
+  "poi:admin:445100:5296680f": {
+    "label_en": "Guangji Gate Tower",
+    "description_en": "Also known as the East Gate Tower, Guangji Gate faces Guangji Bridge on the eastern side of Chaozhou's old town. Its lower floors house displays about the bridge's history."
+  },
+  "poi:admin:445100:0c78a3b4": {
+    "label_en": "Bijia Mountain Chaozhou Kiln Site",
+    "description_en": "These kiln remains lie at the foot of Bijia Mountain across the river from Chaozhou's old town. The area was a major centre of Chaozhou ceramic production during the Song period and ceased firing by the Yuan period."
+  },
+  "poi:admin:445200:80fec6ad": {
+    "label_en": "Jieyang West Lake",
+    "description_en": "Also called Rongjiang West Lake Park, this urban park lies in Jieyang's Rongcheng District. Work on its artificial lake began in 1958."
+  },
+  "poi:admin:440900:4c3739c9": {
+    "label_en": "Maoming Open-Pit Mine Ecological Park",
+    "description_en": "This park occupies the former oil-shale open-pit mine on the northwestern edge of central Maoming. The restored mining landscape opened to the public in 2016."
+  },
+  "poi:admin:440900:25c68149": {
+    "label_en": "Gaozhou Reservoir",
+    "description_en": "Also known as Jade Lake, Gaozhou Reservoir was built between 1958 and 1960 in northeastern Gaozhou. Two connected reservoir basins support irrigation, flood control, urban water supply and hydropower."
+  },
+  "poi:admin:440900:fc8f38fd": {
+    "label_en": "Baoguang Pagoda",
+    "description_en": "Built in 1576 beside the Jian River in Gaozhou, Baoguang Pagoda is an octagonal, nine-storey brick tower. At 65.8 metres tall, it is a prominent landmark among Gaozhou's historic pagodas."
+  },
+  "poi:admin:441700:24a31026": {
+    "label_en": "Hailing Island",
+    "description_en": "Hailing Island lies off Yangjiang's coast, with smaller islands around its elongated main island. Beaches, mangroves and the fishing harbour at Zhapo shape its coastal landscape."
+  },
+  "poi:admin:440800:ff084f0a": {
+    "label_en": "Huguangyan",
+    "description_en": "Huguangyan is a well-preserved volcanic crater lake on the Leizhou Peninsula near Zhanjiang. Its lake and surrounding cliffs form a core area of the Leiqiong Global Geopark."
+  },
+  "poi:admin:440800:51e7da96": {
+    "label_en": "Cunjinqiao Park",
+    "description_en": "This established public park lies on the western side of Zhanjiang's Chikan District. Named after nearby Cunjin Bridge, it combines landscaped grounds with a substantial area of water."
+  },
+  "poi:admin:460100:c464833f": {
+    "label_en": "Tomb of Hai Rui",
+    "description_en": "This tomb in Haikou commemorates Hai Rui, the Ming official celebrated for his integrity. Originally completed in 1589, it was restored after destruction during the Cultural Revolution."
+  },
+  "poi:admin:469005:73ae29e4": {
+    "label_en": "Longlou",
+    "description_en": "Longlou lies on the eastern coast of Wenchang and includes Tonggu Mountain and Cape Tonggu, Hainan Island's easternmost point. The Wenchang Space Launch Site is located within the town."
+  },
+  "poi:admin:450200:4f6631a6": {
+    "label_en": "Liyuzui Archaeological Site",
+    "description_en": "This Neolithic shell-midden site lies in Longtan Park in Liuzhou. Archaeologists identified accumulations of snail shells and pottery fragments here in 1980."
+  },
+  "poi:admin:450200:66ac5546": {
+    "label_en": "Bailian Cave Archaeological Site",
+    "description_en": "Bailian Cave is a nationally protected prehistoric site in Liuzhou's Yufeng District. Museums at the site present early human remains and cave science."
+  },
+  "poi:admin:450200:15b6f11e": {
+    "label_en": "Bailian Cave Prehistoric Site Museum",
+    "description_en": "This museum presents the archaeological heritage of Bailian Cave in Liuzhou. The nationally protected cave site is also home to exhibits on cave science."
+  },
+  "poi:admin:450100:2043d7be": {
+    "label_en": "Qingxiu Mountain",
+    "description_en": "Qingxiu Mountain is a group of wooded hills beside the Yong River in Nanning. Its scenic area includes a chain of ridges such as Qingshan, Fenghuang and Fengyi."
+  },
+  "poi:admin:450700:5925761c": {
+    "label_en": "Feng Zicai's Former Residence",
+    "description_en": "Built in 1875 near Qinzhou, this residence served as the retirement home of Qing general Feng Zicai. It was also his headquarters while reorganising troops for the war against French forces."
+  },
+  "poi:admin:500000:ee43b8f6": {
+    "label_en": "Guanyinqiao, Chongqing",
+    "description_en": "Guanyinqiao is an urban subdistrict of Chongqing. The surrounding neighbourhood forms part of the city's built-up northern urban area."
+  },
+  "poi:admin:510100:8a7dd84e": {
+    "label_en": "Wangjiang Tower",
+    "description_en": "Wangjiang Tower stands in Wangjianglou Park in Chengdu and was built in 1893. The timber tower rises almost 28 metres beneath an octagonal glazed-tile roof."
+  },
+  "poi:admin:510300:ce74649d": {
+    "label_en": "Dashanpu",
+    "description_en": "Dashanpu is a town in the Da'an District of Zigong, Sichuan. It lies within the administrative area surrounding the city."
+  },
+  "poi:admin:510800:650bb53a": {
+    "label_en": "Chaotian Gorge Ancient Plank Road",
+    "description_en": "The remains of this historic route follow the eastern side of Chaotian Gorge in Guangyuan. Surviving stone paving, bridges and roadside structures recall a route used from antiquity until the Qing period."
+  },
+  "poi:admin:510900:2be40ba3": {
+    "label_en": "Baofan Temple, Pengxi",
+    "description_en": "Baofan Temple stands in Baofan Village in Pengxi County, Suining. Its surviving historic fabric dates to the Ming and Qing periods and is protected at provincial level."
+  },
+  "poi:admin:511100:7869f911": {
+    "label_en": "Mahao Cliff Tombs",
+    "description_en": "These rock-cut tombs lie at Mahao in Leshan's Shizhong District. The archaeological site has been protected as a Sichuan provincial monument since the 1950s."
+  },
+  "poi:admin:511300:b6e673ab": {
+    "label_en": "Yujishan Cliff Sculptures",
+    "description_en": "These Tang-period rock carvings are located at Yujishan in Nanbu County, Sichuan. They are protected as a provincial cultural monument."
+  },
+  "poi:admin:511400:583d9e5a": {
+    "label_en": "Three Su Memorial Temple",
+    "description_en": "This garden and museum in Meishan honours the writers Su Xun, Su Shi and Su Zhe. Their former family home became a memorial temple during the early Yuan period."
+  },
+  "poi:admin:511600:5495c1c1": {
+    "label_en": "Guang'an White Pagoda",
+    "description_en": "The White Pagoda stands in Guang'an District, Sichuan. The historic tower dates to the Song period and is protected as a provincial monument."
+  },
+  "poi:admin:510400:ba14ff82": {
+    "label_en": "Panzhihua Third Front Construction Museum",
+    "description_en": "This museum in Panzhihua explores China's Third Front construction programme. Its subject connects the city's development with the industrial history of inland China."
+  },
+  "poi:admin:510400:430c0af2": {
+    "label_en": "Bingcaogang Bridge",
+    "description_en": "Bingcaogang Bridge crosses the Jinsha River in Panzhihua. The road bridge connects the northern Nongnongping area with Bingcaogang on the southern bank."
+  },
+  "poi:admin:513400:1f5c0b50": {
+    "label_en": "Muli Monastery",
+    "description_en": "This Gelug Tibetan Buddhist monastery stands in Wachang, Muli County. The original monastery was completed in 1660 and was later destroyed during the Cultural Revolution."
+  },
+  "poi:admin:520100:46adb1d3": {
+    "label_en": "Guizhou Museum of Ethnic Cultures",
+    "description_en": "This museum is located in the Guizhou Palace of Ethnic Culture on Jiandao Street in Guiyang. It focuses on the province's ethnic and cultural heritage."
+  },
+  "poi:admin:520100:ff8e1eb1": {
+    "label_en": "Guizhou Provincial Museum",
+    "description_en": "Guizhou Provincial Museum occupies a large site in Guiyang's Guanshanhu District. It is a comprehensive museum devoted to the province's history and heritage."
+  },
+  "poi:admin:520100:6fe8c273": {
+    "label_en": "Guizhou Geological Museum",
+    "description_en": "This museum and geological archive stands in Guiyang's Guanshanhu District. The museum opened in 2021, developing from a provincial geological records institution established in 2008."
+  },
+  "poi:admin:520400:dac9e442": {
+    "label_en": "Anshun Martial Temple",
+    "description_en": "This historic temple in central Anshun honours Guan Yu and Yue Fei. The site has origins in the early Ming period and is protected as a national cultural monument."
+  },
+  "poi:admin:530100:086c9165": {
+    "label_en": "Yuantong Hill and Kunming Zoo",
+    "description_en": "Yuantong Hill is a wooded urban park near Yuantong Temple in Kunming. The hill accommodates Kunming Zoo as well as historic sites, including Tang Jiyao's tomb."
+  },
+  "poi:admin:532300:3818044c": {
+    "label_en": "Chuxiong Confucian Temple",
+    "description_en": "This temple in Chuxiong originated as a county Confucian temple during the Ming period. The prefectural temple was moved nearby during the Jiajing reign."
+  },
+  "poi:admin:532300:e184d182": {
+    "label_en": "Dayao White Pagoda",
+    "description_en": "The White Pagoda stands on Baofa Hill in Dayao County and traces its foundation to the Nanzhao period. Its unusual form combines an octagonal base, a narrow waist and a broad rounded upper section."
+  },
+  "poi:admin:530800:821363c5": {
+    "label_en": "Simao Confucian Temple",
+    "description_en": "Simao's Confucian temple stands within the old campus of Simao No. 1 Middle School in Pu'er. Founded in 1814, it moved to its present site in 1840 and was rebuilt in 1881."
+  },
+  "poi:admin:532500:857ba00e": {
+    "label_en": "South Lake, Mengzi",
+    "description_en": "South Lake lies in the centre of Mengzi and is surrounded by Nanhu Park. The lake has also been known as Caohu, Panchi and Xuehai."
+  },
+  "poi:admin:532600:1b378a53": {
+    "label_en": "Puzhehei Lake",
+    "description_en": "Puzhehei is a freshwater lake formed within the karst plateau landscape of Qiubei County, Wenshan. Its Yi-language name means a place abundant in fish and shrimp."
+  },
+  "poi:admin:532800:c10808ea": {
+    "label_en": "Xishuangbanna General Buddhist Temple",
+    "description_en": "This temple stands on Baji Road in Jinghong. It occupies a leading position in Xishuangbanna's Theravada Buddhist tradition."
+  },
+  "poi:admin:532800:da42b4fc": {
+    "label_en": "Manfeilong Pagodas",
+    "description_en": "This group of Theravada Buddhist stupas stands in Manfeilong Village near Menglong, Jinghong. Dai historical records trace its origins to the twelfth century, with repeated rebuilding over time."
+  },
+  "poi:admin:532800:68aba073": {
+    "label_en": "Manduan Buddhist Temple",
+    "description_en": "Manduan is a Theravada Buddhist temple in Man'en Village, Mengzhe, in Menghai County. Its main buildings face east."
+  },
+  "poi:admin:530500:72c3e395": {
+    "label_en": "Tengchong National Memorial Cemetery",
+    "description_en": "This cemetery commemorates Chinese Expeditionary Force soldiers killed in the 1944 Battle of Tengchong. It lies beside the Dieshui River near the northern foot of Laifeng Mountain."
+  },
+  "poi:admin:533100:c2558b69": {
+    "label_en": "Yunyan Pagoda",
+    "description_en": "Also known as Mengding Pagoda, this Dai Buddhist stupa stands on Yunyan Hill in Yingjiang County, Dehong. It is protected as a national cultural monument."
+  },
+  "poi:admin:533100:9e1a25d2": {
+    "label_en": "Denghannong Buddhist Temple",
+    "description_en": "This Theravada temple stands in Dadenghan Village near Ruili. Its Dai name refers to the temple of the great golden pool."
+  },
+  "poi:admin:632500:c46cf613": {
+    "label_en": "Longyangxia Reservoir",
+    "description_en": "Longyangxia Reservoir occupies a stretch of the Yellow River between Gonghe and Guinan counties in Qinghai. The associated dam supports hydropower, flood control, irrigation and other uses."
+  },
+  "poi:admin:632700:29fa62c4": {
+    "label_en": "Hoh Xil Mountains",
+    "description_en": "The Hoh Xil Mountains extend east–west across the Tibetan Plateau, spanning parts of Qinghai and Tibet. This southern branch of the Kunlun range stretches for roughly 500 kilometres at high elevations."
+  },
+  "poi:admin:620500:658c3073": {
+    "label_en": "Fuxi Temple, Tianshui",
+    "description_en": "Tianshui's Fuxi Temple was founded in 1347. Major Ming-period expansions shaped its present layout, followed by substantial restoration during the Qing period."
+  },
+  "poi:admin:610700:106ab358": {
+    "label_en": "Hanzhong East Pagoda",
+    "description_en": "This historic pagoda stands in Hanzhong's Hantai District. Inscribed iron lions discovered during repairs indicate that the tower existed by 1198, during the Southern Song period."
+  },
+  "poi:admin:610700:4dda63ed": {
+    "label_en": "Shimen Reservoir, Hanzhong",
+    "description_en": "Shimen Reservoir lies on the Bao River in Hanzhong's Hantai District. The reservoir was built in 1978."
+  },
+  "poi:admin:610700:7abad72c": {
+    "label_en": "Tomb of Zhuge Liang",
+    "description_en": "Also called Wuhou Tomb, this nationally protected site lies at the foot of Mount Dingjun in Mian County, Hanzhong. It commemorates the statesman and strategist Zhuge Liang."
+  },
+  "poi:admin:620600:1329fb00": {
+    "label_en": "Leitai Tomb, Wuwei",
+    "description_en": "This tomb at Leitai in Wuwei dates to the late Eastern Han or early Wei–Jin period. It is protected as a national cultural monument."
+  },
+  "poi:admin:620600:6f41e2d7": {
+    "label_en": "Hongyashan Reservoir",
+    "description_en": "Hongyashan Reservoir occupies a desert depression in Minqin County, Wuwei. Completed in 1964, it is a major water-storage feature within the surrounding arid landscape."
+  },
+  "poi:admin:630100:5f03de43": {
+    "label_en": "Beichan Temple, Xining",
+    "description_en": "Also known as Beishan Temple or Tulou Temple, this historic religious site occupies the northern hills of Xining. It originated as a Buddhist temple and is among Qinghai's early religious sites."
+  },
+  "poi:admin:640100:5a3feced": {
+    "label_en": "Nanguan Mosque",
+    "description_en": "Nanguan Mosque is an important religious centre in Yinchuan's old town. Founded in the late Ming period, its present buildings were reconstructed in 1981."
+  },
+  "poi:admin:640100:06c3ec21": {
+    "label_en": "Yinchuan Bell and Drum Tower",
+    "description_en": "This historic tower stands in Yinchuan's Xingqing District. It is protected as a cultural monument of the Ningxia Hui Autonomous Region."
+  },
+  "poi:admin:640500:8ab55801": {
+    "label_en": "Zhongwei Gaomiao Temple",
+    "description_en": "Gaomiao in Zhongwei combines Confucian, Buddhist and Daoist traditions in one temple complex. Its present form developed through Ming expansion and repeated Qing-period reconstruction."
+  },
+  "poi:admin:650100:06f37ed5": {
+    "label_en": "Ürümqi City Museum",
+    "description_en": "Ürümqi City Museum presents the city's local history. It is located on Fengqi Street in Shuimogou District."
+  },
+  "poi:admin:650100:9d749bcb": {
+    "label_en": "Khan Tengri Mosque",
+    "description_en": "This mosque stands on Jiefang South Road in Ürümqi's Tianshan District. It takes its name from the peak Khan Tengri."
+  },
+  "poi:admin:650200:391822cf": {
+    "label_en": "Karamay Museum",
+    "description_en": "Established in 1983, this museum developed from exhibitions devoted to the history of the Karamay oilfield. It stands on Junggar Road in Karamay District."
+  },
+  "poi:admin:TW-ILA:17a5e7bd": {
+    "label_en": "Sijie Fude Temple",
+    "description_en": "This Earth God temple stands in Wujie Township, Yilan County. It is known for its large statue of Tudigong and its distinctive local religious celebrations."
+  },
+  "poi:admin:TW-ILA:3342cd8a": {
+    "label_en": "Jiaoxi Xietian Temple",
+    "description_en": "Jiaoxi Xietian Temple is dedicated to Guan Yu. It serves as a religious centre for several villages around Jiaoxi in Yilan County."
+  },
+  "poi:admin:TW-YUN:a9496d16": {
+    "label_en": "Douliu Zhenyi Temple",
+    "description_en": "Formerly called Zhenyi Hall, this temple combines the Longhua and Xiantian traditions of Chinese vegetarian religion. It is Douliu's oldest surviving temple and a protected Yunlin County monument."
+  },
+  "poi:admin:TW-YUN:943ceeed": {
+    "label_en": "Beigang Yimin Temple",
+    "description_en": "This temple in Beigang commemorates people who died during the Lin Shuangwen and Dai Chaochun uprisings. It is protected as a Yunlin County monument."
+  },
+  "poi:admin:TW-NWT:a1453da0": {
+    "label_en": "Tamsui Historical Museum",
+    "description_en": "This museum links several historic sites across Tamsui, including Fort San Domingo and Hobe Fort. Established in 2005, it conserves local historic buildings and supports research and public education."
+  },
+  "poi:admin:TW-TXG:4da976ad": {
+    "label_en": "Lake Pavilion, Taichung Park",
+    "description_en": "This pavilion stands on an island in Taichung Park's Sun Moon Lake. Built in 1908 to commemorate completion of the north–south railway, it became a widely recognised symbol of Taichung."
+  },
+  "poi:admin:TW-TNN:b4420d60": {
+    "label_en": "Tainan Park",
+    "description_en": "Opened in 1917, Tainan Park is one of the city's oldest and largest public parks. Its early grounds also served as an experimental tropical forest."
+  },
+  "poi:admin:TW-TAO:3c228770": {
+    "label_en": "Shoushanyan Guanyin Temple",
+    "description_en": "This Guanyin temple stands in Lingding, in Taoyuan's Guishan District. The historic complex is protected as a municipal monument."
+  },
+  "poi:admin:TW-TAO:63eb12db": {
+    "label_en": "Daxi Puji Temple",
+    "description_en": "Founded in 1902, Puji Temple stands beside Daxi Old Street in Taoyuan. It honours the Three Benefactor Lords alongside other deities."
+  },
+  "poi:admin:TW-MIA:e7fef02a": {
+    "label_en": "Maolishan Park",
+    "description_en": "This wooded hill park is a major green space in Miaoli City. Its grounds include memorials, historic monuments, a shrine and recreational facilities."
+  },
+  "poi:admin:TW-CYI:d1203f38": {
+    "label_en": "Chiayi West Gate Presbyterian Church",
+    "description_en": "This historic chapel in western Chiayi was originally used by Japanese Christians. After the Second World War it became part of the Presbyterian Church in Taiwan, and it was designated a city monument in 2005."
+  },
+  "poi:admin:TW-CYQ:27a99ffe": {
+    "label_en": "Bantianyan Ziyun Temple",
+    "description_en": "Ziyun Temple is a Buddhist temple in Fanlu Township, Chiayi County. Its protected historic complex has two main halls, connecting galleries and side wings."
+  },
+  "poi:admin:TW-CYQ:0912d55a": {
+    "label_en": "Minxiong Dashiye Temple",
+    "description_en": "This temple in Minxiong Township is dedicated to Dashiye. It is protected as a Chiayi County historic monument."
+  },
+  "poi:admin:TW-KHH:a24bdde9": {
+    "label_en": "Qiaotou Sugar Refinery",
+    "description_en": "Founded in 1902, Qiaotou was Taiwan's first modern mechanised sugar refinery. Its surviving factory buildings and offices form a protected industrial heritage site in Kaohsiung."
+  },
+  "poi:admin:TW-HUA:ff71c389": {
+    "label_en": "Yuli Cihui Temple",
+    "description_en": "This temple in Yuli, Hualien County, is dedicated to the Golden Mother. It was established in 1958 as a branch of Baohuashan Cihui Temple in Luye."
+  },
+  "poi:admin:TW-HSZ:98d5c642": {
+    "label_en": "Tomb of Zheng Yongxi",
+    "description_en": "Zheng Yongxi's tomb stands in eastern Hsinchu beside the military cemetery. Relocated here in 1869, the elaborate official's tomb is a nationally designated monument."
+  },
+  "poi:admin:TW-HSZ:bceea864": {
+    "label_en": "Hsinchu Guandi Temple",
+    "description_en": "This temple in Hsinchu's East District is dedicated to Guan Yu. Its altars also honour Guan Ping, Zhou Cang and a number of scholarly and martial deities."
+  },
+  "poi:admin:TW-HSQ:90a4ded3": {
+    "label_en": "Lianhua Temple, Zhubei",
+    "description_en": "Lianhua Temple stands on Litou Hill in Zhubei and is dedicated to Guanyin. This protected county monument serves a traditional worship community spanning neighbouring villages in Zhubei and Xinpu."
+  },
+  "poi:admin:TW-HSQ:796430a3": {
+    "label_en": "Zhang Family Ancestral Temple, Xinpu",
+    "description_en": "This ancestral hall in Xinpu was built for the Zhang clan. The historic building is protected as a Hsinchu County monument."
+  },
+  "poi:admin:TW-HSQ:27635a32": {
+    "label_en": "Former Dahukou Public School",
+    "description_en": "This historic site preserves the remains of the former Dahukou Public School in Hukou Township. It is registered as a historic building in Hsinchu County."
+  }
+}

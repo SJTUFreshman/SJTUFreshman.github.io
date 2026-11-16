@@ -1,0 +1,184 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "211400": {
+      "label": {
+        "en": "Huludao",
+        "zh-CN": "葫芦岛市",
+        "zh-TW": "葫蘆島市"
+      },
+      "description": {
+        "en": "Huludao , formerly known as Jinxi until 1994, is a coastal prefecture-level city in southwestern Liaoning province, People's Republic of China. Its name literally means \"Gourd Island\", referring to the fiddle-shaped contour of the peninsula , which resembles a bottle gourd, at the city's Longgang District.",
+        "zh-CN": "葫芦岛市是中华人民共和国辽宁省下辖的地级市，原名锦西市，位于辽宁省西南部。市境东北接锦州市，北临朝阳市，西界河北省秦皇岛市，南滨辽东湾。",
+        "zh-TW": "葫蘆島市是中華人民共和國遼寧省下轄的地級市，原名錦西市，位於遼寧省西南部。市境東北接錦州市，北臨朝陽市，西界河北省秦皇島市，南濱遼東灣。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%91%AB%E8%8A%A6%E5%B2%9B%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%91%AB%E8%8A%A6%E5%B2%9B%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Huludao"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        120.837,
+        40.711
+      ],
+      "photo": {
+        "src": "assets/maps/regions/photos/d810760622b5c2b2.webp",
+        "credit": "Matthew Summerton · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Xingcheng,_Huludao,_Liaoning,_China_-_panoramio_-_Matthew_Summerton_(7).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Xingcheng, Huludao, Liaoning, China",
+        "place": "Xingcheng",
+        "originalFile": "Xingcheng,_Huludao,_Liaoning,_China_-_panoramio_-_Matthew_Summerton_(7).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:211400:1",
+      "urbanFocus": {
+        "label": {
+          "en": "Huludao",
+          "zh-CN": "葫芦岛市",
+          "zh-TW": "葫蘆島市"
+        },
+        "lngLat": [
+          120.83777777778,
+          40.709444444444
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Huludao.",
+          "zh-CN": "以葫芦岛市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以葫蘆島市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q75379#P625",
+        "source": "https://www.wikidata.org/wiki/Q75379",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q75379#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 5.37
+        }
+      }
+    },
+    "poi:211400:1": {
+      "label": {
+        "en": "Xingcheng",
+        "zh-CN": "兴城市",
+        "zh-TW": "興城市"
+      },
+      "description": {
+        "en": "Xingcheng , former name Ningyuan , is a county-level city under the administration of Huludao, in southwest Liaoning province, China, with a population of approximately 220,000 urban inhabitants, and is located on the Liaodong Bay, i.e. the northern coast of the Bohai Sea.",
+        "zh-CN": "兴城市是中国辽宁省葫芦岛市的一个县级市，位于辽东湾西岸，居“辽西走廊”中部。东南部濒临渤海，东北倚热河丘陵，毗邻葫芦岛市龙港区、连山区，西南隔六股河与绥中县相望，西北同建昌县接壤。",
+        "zh-TW": "興城市是中國遼寧省葫蘆島市的一個縣級市，位於遼東灣西岸，居“遼西走廊”中部。東南部瀕臨渤海，東北倚熱河丘陵，毗鄰葫蘆島市龍港區、連山區，西南隔六股河與綏中縣相望，西北同建昌縣接壤。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%85%B4%E5%9F%8E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%85%B4%E5%9F%8E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Xingcheng"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        120.73333333,
+        40.61666667
+      ],
+      "parentCity": "211400",
+      "photo": {
+        "src": "assets/maps/regions/photos/d810760622b5c2b2.webp",
+        "credit": "Matthew Summerton · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Xingcheng,_Huludao,_Liaoning,_China_-_panoramio_-_Matthew_Summerton_(7).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Xingcheng, Huludao, Liaoning, China",
+        "place": "Xingcheng",
+        "originalFile": "Xingcheng,_Huludao,_Liaoning,_China_-_panoramio_-_Matthew_Summerton_(7).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:211400:2": {
+      "label": {
+        "en": "Jiumenkou",
+        "zh-CN": "九门口",
+        "zh-TW": "九門口"
+      },
+      "description": {
+        "en": "Jiumenkou. Explore the local landscape and follow the linked encyclopedia entry for further reading.",
+        "zh-CN": "九门口位于中华人民共和国辽宁省绥中县和河北省秦皇岛市海港区交界处的河道上，1996年被列为第四批全国重点文物保护单位。 九门口所处的河道为季节性河流，枯水期流量少乃至断流，因此需修建城墙以防敌军在枯水期由此进入。",
+        "zh-TW": "九門口位於中華人民共和國遼寧省綏中縣和河北省秦皇島市海港區交界處的河道上，1996年被列爲第四批全國重點文物保護單位。 九門口所處的河道爲季節性河流，枯水期流量少乃至斷流，因此需修建城牆以防敵軍在枯水期由此進入。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B9%9D%E9%97%A8%E5%8F%A3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B9%9D%E9%97%A8%E5%8F%A3"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        119.74416667,
+        40.1175
+      ],
+      "parentCity": "211400",
+      "photo": {
+        "src": "assets/maps/regions/photos/0d1f4aba5f7a7532.webp",
+        "credit": "Johannes Böckh · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Great_Wall_of_China_at_Jiumenkou_10.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Great Wall of China at Jiumenkou",
+        "place": "九门口",
+        "originalFile": "Great_Wall_of_China_at_Jiumenkou_10.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:211400:photo-43429177": {
+      "label": {
+        "en": "Huludao landscape view",
+        "zh-CN": "莲花广场",
+        "zh-TW": "蓮花廣場"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Huludao, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现葫芦岛市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現葫蘆島市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E8%8E%B2%E8%8A%B1%E5%B9%BF%E5%9C%BA_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E8%8E%B2%E8%8A%B1%E5%B9%BF%E5%9C%BA_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/628e4da0feb81727.webp",
+        "credit": "白云悠悠 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%8E%B2%E8%8A%B1%E5%B9%BF%E5%9C%BA_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "莲花广场",
+        "place": "莲花广场 - panoramio.jpg",
+        "originalFile": "莲花广场 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            120.842206,
+            40.727356
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E8%8E%B2%E8%8A%B1%E5%B9%BF%E5%9C%BA_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        120.842206,
+        40.727356
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E8%8E%B2%E8%8A%B1%E5%B9%BF%E5%9C%BA_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "211400"
+    }
+  }
+}

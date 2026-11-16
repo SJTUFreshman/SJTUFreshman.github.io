@@ -1,0 +1,150 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "371700": {
+      "label": {
+        "en": "Heze",
+        "zh-CN": "菏泽市",
+        "zh-TW": "菏澤市"
+      },
+      "description": {
+        "en": "Heze is the westernmost prefecture-level city in Shandong province, China. The Peony Capital of China, formerly known as Caozhou, the city borders Jining to the east, and the provinces of Henan and Anhui to the west and south respectively.",
+        "zh-CN": "菏泽市，简称菏，古称曹州，中国牡丹之都，是中华人民共和国山东省下辖的地级市，位于山东省西南部。市境东界济宁市，东南接江苏省徐州市、安徽省宿州市，南、西、北分别与河南省商丘市、开封市、新乡市、濮阳市毗邻。",
+        "zh-TW": "菏澤市，簡稱菏，古稱曹州，中國牡丹之都，是中華人民共和國山東省下轄的地級市，位於山東省西南部。市境東界濟寧市，東南接江蘇省徐州市、安徽省宿州市，南、西、北分別與河南省商丘市、開封市、新鄉市、濮陽市毗鄰。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8F%8F%E6%B3%BD%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8F%8F%E6%B3%BD%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Heze"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        115.4796,
+        35.2343
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/5356b8246807d58b.webp",
+        "credit": "S.Z. · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yongfeng_Ta,_Juye.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​展示的是拍摄于23.6.22的永丰塔，修建于宋朝的佛塔，目前维护欠佳，停止参观。",
+        "place": "永丰塔 (山东)",
+        "originalFile": "Yongfeng_Ta,_Juye.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:371700:52f9afa9",
+      "urbanFocus": {
+        "label": {
+          "en": "Heze",
+          "zh-CN": "菏泽市",
+          "zh-TW": "菏澤市"
+        },
+        "lngLat": [
+          115.43333333333,
+          35.233333333333
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Heze.",
+          "zh-CN": "以菏泽市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以菏澤市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q332753#P625",
+        "source": "https://www.wikidata.org/wiki/Q332753",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q332753#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 3.59
+        }
+      }
+    },
+    "poi:admin:371700:52f9afa9": {
+      "label": {
+        "en": "Yongfeng Pagoda",
+        "zh-CN": "永丰塔 (山东)",
+        "zh-TW": "永豐塔 (山東)"
+      },
+      "description": {
+        "en": "Yongfeng Pagoda, also known as Fan Pagoda, stands near the southeastern corner of Juye’s county town. It was designated a Shandong provincial cultural heritage site in 2006.",
+        "zh-CN": "永丰塔，又称梵塔，位于山东省巨野县县城东南角，汽车站附近。2006年公布为山东省文物保护单位。",
+        "zh-TW": "永豐塔，又稱梵塔，位於山東省鉅野縣縣城東南角，汽車站附近。2006年公佈爲山東省文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B0%B8%E4%B8%B0%E5%A1%94_(%E5%B1%B1%E4%B8%9C)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B0%B8%E4%B8%B0%E5%A1%94_(%E5%B1%B1%E4%B8%9C)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        116.08991,
+        35.39297
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%B0%B8%E4%B8%B0%E5%A1%94_(%E5%B1%B1%E4%B8%9C)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "371700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5356b8246807d58b.webp",
+        "credit": "S.Z. · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yongfeng_Ta,_Juye.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​展示的是拍摄于23.6.22的永丰塔，修建于宋朝的佛塔，目前维护欠佳，停止参观。",
+        "place": "永丰塔 (山东)",
+        "originalFile": "Yongfeng_Ta,_Juye.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:371700:photo-91936030": {
+      "label": {
+        "en": "Peony at Baihua Garden, Heze",
+        "zh-CN": "菏泽百花园牡丹",
+        "zh-TW": "菏澤百花園牡丹"
+      },
+      "description": {
+        "en": "A Shengdanlou tree peony at Baihua Garden in Heze, photographed close up to show its layered petals.",
+        "zh-CN": "菏泽百花园的牡丹品种盛丹楼。照片近距离展示了花瓣的色彩与层次。",
+        "zh-TW": "菏澤百花園的牡丹品種盛丹樓。照片近距離展示了花瓣的色彩與層次。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%89%A1%E4%B8%B9-%E7%9B%9B%E4%B8%B9%E6%A8%93_Paeonia_suffruticosa_-%E8%8F%8F%E6%BE%A4%E7%99%BE%E8%8A%B1%E5%9C%92_Heze,_China-_(12496212563).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E7%89%A1%E4%B8%B9-%E7%9B%9B%E4%B8%B9%E6%A8%93_Paeonia_suffruticosa_-%E8%8F%8F%E6%BE%A4%E7%99%BE%E8%8A%B1%E5%9C%92_Heze,_China-_(12496212563).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/307dfaaf2f1d4808.webp",
+        "credit": "阿橋 HQ · CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%89%A1%E4%B8%B9-%E7%9B%9B%E4%B8%B9%E6%A8%93_Paeonia_suffruticosa_-%E8%8F%8F%E6%BE%A4%E7%99%BE%E8%8A%B1%E5%9C%92_Heze,_China-_(12496212563).jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "alt": "牡丹-盛丹樓 Paeonia suffruticosa [菏澤百花園 Heze, China]",
+        "place": "牡丹-盛丹樓 Paeonia suffruticosa -菏澤百花園 Heze, China- (12496212563).jpg",
+        "originalFile": "牡丹-盛丹樓 Paeonia suffruticosa -菏澤百花園 Heze, China- (12496212563).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            115.482049,
+            35.273744
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E7%89%A1%E4%B8%B9-%E7%9B%9B%E4%B8%B9%E6%A8%93_Paeonia_suffruticosa_-%E8%8F%8F%E6%BE%A4%E7%99%BE%E8%8A%B1%E5%9C%92_Heze,_China-_(12496212563).jpg"
+        }
+      },
+      "lngLat": [
+        115.482049,
+        35.273744
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E7%89%A1%E4%B8%B9-%E7%9B%9B%E4%B8%B9%E6%A8%93_Paeonia_suffruticosa_-%E8%8F%8F%E6%BE%A4%E7%99%BE%E8%8A%B1%E5%9C%92_Heze,_China-_(12496212563).jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "371700"
+    }
+  }
+}

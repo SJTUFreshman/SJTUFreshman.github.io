@@ -1,0 +1,222 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "632500": {
+      "label": {
+        "en": "Hainan Tibetan Autonomous Prefecture",
+        "zh-CN": "海南藏族自治州",
+        "zh-TW": "海南藏族自治州"
+      },
+      "description": {
+        "en": "Hainan Tibetan Autonomous Prefecture, formerly known as Tsolho Tibetan Autonomous Prefecture , is an autonomous prefecture of Northeastern Qinghai Province in Western China. The prefecture has an area of 45,895 square kilometres and its seat is located in Gonghe County.",
+        "zh-CN": "海南藏族自治州，简称海南州，是中华人民共和国青海省下辖的自治州。州境东北抵西宁市、海东市，东邻黄南州，南接果洛州，西连海西州。",
+        "zh-TW": "海南藏族自治州，簡稱海南州，是中華人民共和國青海省下轄的自治州。州境東北抵西寧市、海東市，東鄰黃南州，南接果洛州，西連海西州。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B5%B7%E5%8D%97%E8%97%8F%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B5%B7%E5%8D%97%E8%97%8F%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+        "https://en.wikipedia.org/wiki/Hainan_Tibetan_Autonomous_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        100.62,
+        36.29
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/530cefed3c485c11.webp",
+        "credit": "USGS/NASA Landsat · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Longyangxia_oli_2017005_lrg.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Longyangxia_oli_2017005_lrg.jpg#Licensing",
+        "alt": "Satellite picture of the Longyangxia Dam in China",
+        "place": "龙羊峡水库",
+        "originalFile": "Longyangxia_oli_2017005_lrg.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:632500:c46cf613",
+      "urbanFocus": {
+        "label": {
+          "en": "Hainan Tibetan Autonomous Prefecture",
+          "zh-CN": "海南藏族自治州",
+          "zh-TW": "海南藏族自治州"
+        },
+        "lngLat": [
+          100.621389,
+          36.274167
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Hainan Tibetan Autonomous Prefecture.",
+          "zh-CN": "以海南藏族自治州的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以海南藏族自治州的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q1012428#P625",
+        "source": "https://www.wikidata.org/wiki/Q1012428",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q1012428#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.71
+        }
+      }
+    },
+    "poi:632500:1": {
+      "label": {
+        "en": "Qinghai Lake",
+        "zh-CN": "青海湖",
+        "zh-TW": "青海湖"
+      },
+      "description": {
+        "en": "Qinghai Lake is the largest lake in China. Located in the Qinghai Province, to which it gave its name, Qinghai Lake is classified as an alkaline endorheic salt lake.",
+        "zh-CN": "青海湖，又称库库诺尔，在两语内意思均为“蓝湖”、“青湖”。古称西海、鲜水、鲜海、卑禾羌海等。",
+        "zh-TW": "青海湖，又稱庫庫諾爾，在兩語內意思均爲“藍湖”、“青湖”。古稱西海、鮮水、鮮海、卑禾羌海等。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9D%92%E6%B5%B7%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9D%92%E6%B5%B7%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Qinghai_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        100.13333333,
+        37
+      ],
+      "parentCity": "632500",
+      "photo": {
+        "src": "assets/maps/regions/photos/de943021db53902d.webp",
+        "credit": "NASA · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Qinghai_lake.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Qinghai_lake.jpg#Licensing",
+        "alt": "Qinghai Lake, China - also, originally known as Koko Nor in Mongolian and Tso Ngonpo in Tibetan - November 1994",
+        "place": "青海湖",
+        "originalFile": "Qinghai_lake.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:632500:2": {
+      "label": {
+        "en": "Longyangxia Dam",
+        "zh-CN": "龙羊峡水电站",
+        "zh-TW": "龍羊峽水電站"
+      },
+      "description": {
+        "en": "The Longyangxia Dam is a concrete arch-gravity dam at the entrance of the Longyangxia canyon on the Yellow River in Gonghe County, Qinghai Province, China. The dam is 178 metres tall and was built for the purposes of hydroelectric power generation, irrigation, ice control and flood control.",
+        "zh-CN": "龙羊峡水库位于中华人民共和国青海省共和县与贵南县交界的黄河干流上，是中国库容量第二大的水库，仅次于三峡水库。龙羊峡水电站除发电外，还具有防洪、防凌、灌溉、养殖、旅游等效益。",
+        "zh-TW": "龍羊峽水庫位於中華人民共和國青海省共和縣與貴南縣交界的黃河干流上，是中國庫容量第二大的水庫，僅次於三峽水庫。龍羊峽水電站除發電外，還具有防洪、防凌、灌溉、養殖、旅遊等效益。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BE%99%E7%BE%8A%E5%B3%A1%E6%B0%B4%E5%BA%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BE%99%E7%BE%8A%E5%B3%A1%E6%B0%B4%E5%BA%93",
+        "https://en.wikipedia.org/wiki/Longyangxia_Dam"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        100.91833333,
+        36.12222222
+      ],
+      "parentCity": "632500",
+      "photo": {
+        "src": "assets/maps/regions/photos/530cefed3c485c11.webp",
+        "credit": "USGS/NASA Landsat · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Longyangxia_oli_2017005_lrg.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Longyangxia_oli_2017005_lrg.jpg#Licensing",
+        "alt": "Satellite picture of the Longyangxia Dam in China",
+        "place": "龙羊峡水库",
+        "originalFile": "Longyangxia_oli_2017005_lrg.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:632500:c46cf613": {
+      "label": {
+        "en": "Longyangxia Reservoir",
+        "zh-CN": "龙羊峡水库",
+        "zh-TW": "龍羊峽水庫"
+      },
+      "description": {
+        "en": "Longyangxia Reservoir occupies a stretch of the Yellow River between Gonghe and Guinan counties in Qinghai. The associated dam supports hydropower, flood control, irrigation and other uses.",
+        "zh-CN": "龙羊峡水库位于中华人民共和国青海省共和县与贵南县交界的黄河干流上，是中国库容量第二大的水库，仅次于三峡水库。龙羊峡水电站除发电外，还具有防洪、防凌、灌溉、养殖、旅游等效益。",
+        "zh-TW": "龍羊峽水庫位於中華人民共和國青海省共和縣與貴南縣交界的黃河干流上，是中國庫容量第二大的水庫，僅次於三峽水庫。龍羊峽水電站除發電外，還具有防洪、防凌、灌溉、養殖、旅遊等效益。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BE%99%E7%BE%8A%E5%B3%A1%E6%B0%B4%E5%BA%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BE%99%E7%BE%8A%E5%B3%A1%E6%B0%B4%E5%BA%93"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        100.91805556,
+        36.12222222
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%BE%99%E7%BE%8A%E5%B3%A1%E6%B0%B4%E5%BA%93",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "632500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/530cefed3c485c11.webp",
+        "credit": "USGS/NASA Landsat · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Longyangxia_oli_2017005_lrg.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Longyangxia_oli_2017005_lrg.jpg#Licensing",
+        "alt": "Satellite picture of the Longyangxia Dam in China",
+        "place": "龙羊峡水库",
+        "originalFile": "Longyangxia_oli_2017005_lrg.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:632500:photo-73563280": {
+      "label": {
+        "en": "Hainan Tibetan Autonomous Prefecture landscape view",
+        "zh-CN": "G6远看共和县城02",
+        "zh-TW": "G6遠看共和縣城02"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Hainan Tibetan Autonomous Prefecture, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现海南藏族自治州城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現海南藏族自治州城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:G6%E8%BF%9C%E7%9C%8B%E5%85%B1%E5%92%8C%E5%8E%BF%E5%9F%8E02.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:G6%E8%BF%9C%E7%9C%8B%E5%85%B1%E5%92%8C%E5%8E%BF%E5%9F%8E02.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/d2fdc46b0ee5703d.webp",
+        "credit": "西安兵马俑 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:G6%E8%BF%9C%E7%9C%8B%E5%85%B1%E5%92%8C%E5%8E%BF%E5%9F%8E02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​G6共和县境内景色",
+        "place": "G6远看共和县城02.jpg",
+        "originalFile": "G6远看共和县城02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            100.621832,
+            36.310398
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:G6%E8%BF%9C%E7%9C%8B%E5%85%B1%E5%92%8C%E5%8E%BF%E5%9F%8E02.jpg"
+        }
+      },
+      "lngLat": [
+        100.621832,
+        36.310398
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:G6%E8%BF%9C%E7%9C%8B%E5%85%B1%E5%92%8C%E5%8E%BF%E5%9F%8E02.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "632500"
+    }
+  }
+}

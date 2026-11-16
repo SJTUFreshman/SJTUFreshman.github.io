@@ -1,0 +1,151 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "150600": {
+      "label": {
+        "en": "Ordos City",
+        "zh-CN": "鄂尔多斯市",
+        "zh-TW": "鄂爾多斯市"
+      },
+      "description": {
+        "en": "Ordos, also known as Ih Ju, is one of twelve major subdivisions of Inner Mongolia, China. It lies within the Ordos Plateau of the Yellow River.",
+        "zh-CN": "鄂尔多斯市是中华人民共和国内蒙古自治区下辖的地级市，位于内蒙古自治区西南部，前身为伊克昭盟。市境东临呼和浩特市、山西省忻州市，南邻陕西省榆林市、宁夏吴忠市，西界阿拉善盟、乌海市、宁夏石嘴山市、银川市，北接包头市、巴彦淖尔市。",
+        "zh-TW": "鄂爾多斯市是中華人民共和國內蒙古自治區下轄的地級市，位於內蒙古自治區西南部，前身爲伊克昭盟。市境東臨呼和浩特市、山西省忻州市，南鄰陝西省榆林市、寧夏吳忠市，西界阿拉善盟、烏海市、寧夏石嘴山市、銀川市，北接包頭市、巴彥淖爾市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%84%82%E5%B0%94%E5%A4%9A%E6%96%AF%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%84%82%E5%B0%94%E5%A4%9A%E6%96%AF%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Ordos_City"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        109.785,
+        39.604
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/0cd17824849d444c.webp",
+        "credit": "ScareCriterion12 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%88%90%E5%90%89%E6%80%9D%E6%B1%97%E9%99%B52021.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Mausoleum of Genghis Khan, Ejin Horo Banner, Ordos, Inner Mongolia",
+        "place": "成吉思汗陵",
+        "originalFile": "成吉思汗陵2021.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:150600:01dfde20",
+      "urbanFocus": {
+        "label": {
+          "en": "Ordos City",
+          "zh-CN": "鄂尔多斯市",
+          "zh-TW": "鄂爾多斯市"
+        },
+        "lngLat": [
+          109.9975,
+          39.815
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Ordos City.",
+          "zh-CN": "以鄂尔多斯市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以鄂爾多斯市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q570937#P625",
+        "source": "https://www.wikidata.org/wiki/Q570937",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q570937#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.66
+        }
+      }
+    },
+    "poi:admin:150600:01dfde20": {
+      "label": {
+        "en": "Mausoleum of Genghis Khan",
+        "zh-CN": "成吉思汗陵",
+        "zh-TW": "成吉思汗陵"
+      },
+      "description": {
+        "en": "The Mausoleum of Genghis Khan is a mausoleum dedicated to Genghis Khan, where he is worshipped as ancestor, dynastic founder, and deity. The mausoleum is better called the Lord's Enclosure (i.e.",
+        "zh-CN": "成吉思汗陵位于中国内蒙古自治区鄂尔多斯市伊金霍洛旗札萨克镇甘德尔敖包的伊金霍洛草原上，属窟野河上游。成吉思汗祭祀之所「八白室」清朝初年迁至伊金霍洛，抗日战争期间迁至甘肃，后于1949年迁至青海塔尔寺。",
+        "zh-TW": "成吉思汗陵位於中國內蒙古自治區鄂爾多斯市伊金霍洛旗札薩克鎮甘德爾敖包的伊金霍洛草原上，屬窟野河上游。成吉思汗祭祀之所「八白室」清朝初年遷至伊金霍洛，抗日戰爭期間遷至甘肅，後於1949年遷至青海塔爾寺。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%88%90%E5%90%89%E6%80%9D%E6%B1%97%E9%99%B5",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%88%90%E5%90%89%E6%80%9D%E6%B1%97%E9%99%B5",
+        "https://en.wikipedia.org/wiki/Mausoleum_of_Genghis_Khan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        109.77944444,
+        39.37111111
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Mausoleum_of_Genghis_Khan",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "150600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0cd17824849d444c.webp",
+        "credit": "ScareCriterion12 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%88%90%E5%90%89%E6%80%9D%E6%B1%97%E9%99%B52021.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Mausoleum of Genghis Khan, Ejin Horo Banner, Ordos, Inner Mongolia",
+        "place": "成吉思汗陵",
+        "originalFile": "成吉思汗陵2021.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:150600:photo-56712984": {
+      "label": {
+        "en": "Ordos City landscape view",
+        "zh-CN": "鄂尔多斯市东胜区依金霍洛街 yi jin huo luo jie",
+        "zh-TW": "鄂爾多斯市東勝區依金霍洛街 yi jin huo luo jie"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Ordos City, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现鄂尔多斯市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現鄂爾多斯市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%84%82%E5%B0%94%E5%A4%9A%E6%96%AF%E5%B8%82%E4%B8%9C%E8%83%9C%E5%8C%BA%E4%BE%9D%E9%87%91%E9%9C%8D%E6%B4%9B%E8%A1%97_yi_jin_huo_luo_jie_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E9%84%82%E5%B0%94%E5%A4%9A%E6%96%AF%E5%B8%82%E4%B8%9C%E8%83%9C%E5%8C%BA%E4%BE%9D%E9%87%91%E9%9C%8D%E6%B4%9B%E8%A1%97_yi_jin_huo_luo_jie_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/cb86ca7c22efeb6f.webp",
+        "credit": "wanghongliu · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%84%82%E5%B0%94%E5%A4%9A%E6%96%AF%E5%B8%82%E4%B8%9C%E8%83%9C%E5%8C%BA%E4%BE%9D%E9%87%91%E9%9C%8D%E6%B4%9B%E8%A1%97_yi_jin_huo_luo_jie_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "鄂尔多斯市东胜区依金霍洛街 yi jin huo luo jie",
+        "place": "鄂尔多斯市东胜区依金霍洛街 yi jin huo luo jie - panoramio.jpg",
+        "originalFile": "鄂尔多斯市东胜区依金霍洛街 yi jin huo luo jie - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            109.99805,
+            39.815815
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E9%84%82%E5%B0%94%E5%A4%9A%E6%96%AF%E5%B8%82%E4%B8%9C%E8%83%9C%E5%8C%BA%E4%BE%9D%E9%87%91%E9%9C%8D%E6%B4%9B%E8%A1%97_yi_jin_huo_luo_jie_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        109.99805,
+        39.815815
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E9%84%82%E5%B0%94%E5%A4%9A%E6%96%AF%E5%B8%82%E4%B8%9C%E8%83%9C%E5%8C%BA%E4%BE%9D%E9%87%91%E9%9C%8D%E6%B4%9B%E8%A1%97_yi_jin_huo_luo_jie_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "150600"
+    }
+  }
+}

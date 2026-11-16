@@ -1,0 +1,142 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "510300": {
+      "label": {
+        "en": "Zigong",
+        "zh-CN": "自贡市",
+        "zh-TW": "自貢市"
+      },
+      "description": {
+        "en": "Zigong , formed by the merger of the two former towns of Ziliujing and Gongjing , is a prefecture-level city in Sichuan, Southwestern China.",
+        "zh-CN": "自贡市，别称“盐都”、“灯城”，简称“自”、“井”，是中华人民共和国四川省中部偏南的地级市。市境东临泸州市，南接宜宾市，西邻乐山市，北接内江市。",
+        "zh-TW": "自貢市，別稱“鹽都”、“燈城”，簡稱“自”、“井”，是中華人民共和國四川省中部偏南的地級市。市境東臨瀘州市，南接宜賓市，西鄰樂山市，北接內江市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%87%AA%E8%B4%A1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%87%AA%E8%B4%A1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Zigong"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        104.779,
+        29.339
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/66be3e7f6434d642.webp",
+        "credit": "N509FZ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Former_residence_of_Jiang_Zhujun_(20250116152520).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "The hometown of Jiang Jie is right here in Zigong!",
+        "place": "大山铺镇",
+        "originalFile": "Former_residence_of_Jiang_Zhujun_(20250116152520).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:510300:ce74649d",
+      "urbanFocus": {
+        "label": {
+          "en": "Zigong",
+          "zh-CN": "自贡市",
+          "zh-TW": "自貢市"
+        },
+        "lngLat": [
+          104.764514,
+          29.349842
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Zigong.",
+          "zh-CN": "以自贡市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以自貢市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q29015#P625",
+        "source": "https://www.wikidata.org/wiki/Q29015",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q29015#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.93
+        }
+      }
+    },
+    "poi:admin:510300:126828b6": {
+      "label": {
+        "en": "Zigong Dinosaur Museum",
+        "zh-CN": "自贡恐龙博物馆",
+        "zh-TW": "自貢恐龍博物館"
+      },
+      "description": {
+        "en": "The Zigong Dinosaur Museum is located near the city of Zigong, Sichuan, China, in the township of Dashanpu.",
+        "zh-CN": "四川自贡恐龙博物馆位于中华人民共和国四川省自贡市大安区大山铺镇268号，是一座遗址类博物馆，也是中国第一所现代化的专业性恐龙博物馆，包括了3个纲、11个目、15个科的属种。位于四川省自贡市东北郊的大山铺镇238号。",
+        "zh-TW": "四川自貢恐龍博物館位於中華人民共和國四川省自貢市大安區大山鋪鎮268號，是一座遺址類博物館，也是中國第一所現代化的專業性恐龍博物館，包括了3個綱、11個目、15個科的屬種。位於四川省自貢市東北郊的大山鋪鎮238號。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%87%AA%E8%B2%A2%E6%81%90%E9%BE%8D%E5%8D%9A%E7%89%A9%E9%A4%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%87%AA%E8%B2%A2%E6%81%90%E9%BE%8D%E5%8D%9A%E7%89%A9%E9%A4%A8",
+        "https://en.wikipedia.org/wiki/Zigong_Dinosaur_Museum"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        104.82611111,
+        29.39888889
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Zigong_Dinosaur_Museum",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/d3ee3e31e542b5dd.webp",
+        "credit": "WhisperToMe · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:ZigongDinoMuseum1.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "Zigong Dinosaur Museum",
+        "place": "自貢恐龍博物館",
+        "originalFile": "ZigongDinoMuseum1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:510300:ce74649d": {
+      "label": {
+        "en": "Dashanpu",
+        "zh-CN": "大山铺镇",
+        "zh-TW": "大山鋪鎮"
+      },
+      "description": {
+        "en": "Dashanpu is a town in the Da'an District of Zigong, Sichuan. It lies within the administrative area surrounding the city.",
+        "zh-CN": "大山铺镇，是中华人民共和国四川省自贡市大安区下辖的一个乡镇级行政单位。",
+        "zh-TW": "大山鋪鎮，是中華人民共和國四川省自貢市大安區下轄的一個鄉鎮級行政單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%B1%B1%E9%93%BA%E9%95%87",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%B1%B1%E9%93%BA%E9%95%87"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        104.82187,
+        29.39387
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%B1%B1%E9%93%BA%E9%95%87",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/66be3e7f6434d642.webp",
+        "credit": "N509FZ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Former_residence_of_Jiang_Zhujun_(20250116152520).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "The hometown of Jiang Jie is right here in Zigong!",
+        "place": "大山铺镇",
+        "originalFile": "Former_residence_of_Jiang_Zhujun_(20250116152520).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

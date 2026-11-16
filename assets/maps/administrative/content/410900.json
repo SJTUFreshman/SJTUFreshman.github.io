@@ -1,0 +1,104 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "410900": {
+      "label": {
+        "en": "Puyang",
+        "zh-CN": "濮阳市",
+        "zh-TW": "濮陽市"
+      },
+      "description": {
+        "en": "Puyang is a prefecture-level city in northeastern Henan province, People's Republic of China. Located on the northern shore of the Yellow River, it borders Anyang in the west, Xinxiang in the southwest, and the provinces of Shandong and Hebei in the east and north respectively.",
+        "zh-CN": "濮阳市，简称濮，古称濮州、澶州、开州等，是中华人民共和国河南省下辖的地级市，位于河南省东北部。市境西接安阳市，西南毗新乡市，东南隔黄河与山东省菏泽、济宁、泰安三市相望，东北与山东省聊城市相连，北与河北省邯郸市接壤。",
+        "zh-TW": "濮陽市，簡稱濮，古稱濮州、澶州、開州等，是中華人民共和國河南省下轄的地級市，位於河南省東北部。市境西接安陽市，西南毗新鄉市，東南隔黃河與山東省菏澤、濟寧、泰安三市相望，東北與山東省聊城市相連，北與河北省邯鄲市接壤。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%BF%AE%E9%98%B3%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%BF%AE%E9%98%B3%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Puyang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        115.0292,
+        35.7627
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/22eeda5717e2558e.webp",
+        "credit": "Vitsuha · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%88%9A%E5%9F%8E_%E7%9F%B3%E7%A2%91.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​戚城 石碑",
+        "place": "戚城遗址",
+        "originalFile": "戚城_石碑.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:410900:9687e68d",
+      "urbanFocus": {
+        "label": {
+          "en": "Puyang",
+          "zh-CN": "濮阳市",
+          "zh-TW": "濮陽市"
+        },
+        "lngLat": [
+          115.02996,
+          35.76392
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Puyang.",
+          "zh-CN": "以濮阳市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以濮陽市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q404484#P625",
+        "source": "https://www.wikidata.org/wiki/Q404484",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q404484#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.13
+        }
+      }
+    },
+    "poi:admin:410900:9687e68d": {
+      "label": {
+        "en": "Qicheng archaeological site",
+        "zh-CN": "戚城遗址",
+        "zh-TW": "戚城遺址"
+      },
+      "description": {
+        "en": "The Qicheng site lies near Qicheng Village in Puyang’s Hualong District, west of Jingkai Avenue. It was included among Henan’s first provincial cultural heritage sites in 1961.",
+        "zh-CN": "戚城遗址位于河南省濮阳市华龙区戚城村，地处京开大道西侧，北临古城路。 1961年，列入第一批河南省文物保护单位。",
+        "zh-TW": "戚城遺址位於河南省濮陽市華龍區戚城村，地處京開大道西側，北臨古城路。 1961年，列入第一批河南省文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%88%9A%E5%9F%8E%E9%81%97%E5%9D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%88%9A%E5%9F%8E%E9%81%97%E5%9D%80"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        115.03028,
+        35.75221
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%88%9A%E5%9F%8E%E9%81%97%E5%9D%80",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "410900",
+      "photo": {
+        "src": "assets/maps/administrative/photos/22eeda5717e2558e.webp",
+        "credit": "Vitsuha · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%88%9A%E5%9F%8E_%E7%9F%B3%E7%A2%91.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​戚城 石碑",
+        "place": "戚城遗址",
+        "originalFile": "戚城_石碑.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

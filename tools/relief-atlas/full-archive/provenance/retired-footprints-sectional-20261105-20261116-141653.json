@@ -1,0 +1,418 @@
+{
+  "source": "/data/run01/scwb515/yangrunde/footprints-sectional-20261105",
+  "directories": [
+    "__pycache__",
+    "detail",
+    "detail/data",
+    "detail/renders",
+    "detail/scenes",
+    "logs",
+    "overview",
+    "overview/data",
+    "overview/renders",
+    "overview/scenes"
+  ],
+  "files": [
+    {
+      "path": "__pycache__/render_atlas.cpython-311.pyc",
+      "bytes": 22226,
+      "sha256": "a94652ba9adb1a035a181ba61c5babc955095d5daf3e9cdf8fdfc96d034993e6",
+      "mtime_ns": 1793887755898943608,
+      "mode": 33204
+    },
+    {
+      "path": "detail/data/china.json",
+      "bytes": 2314097,
+      "sha256": "ac49fb3ff57c2f894baf11d8424c48b4fb1912f6641505cb30f58aa550984aa9",
+      "mtime_ns": 1793887504000000000,
+      "mode": 33204
+    },
+    {
+      "path": "detail/data/china.npz",
+      "bytes": 7895299,
+      "sha256": "f7edae13adceedc29db0adbaa1eb9ea081e9b5d26e5100276d0f2f24c79b4050",
+      "mtime_ns": 1793887506000000000,
+      "mode": 33204
+    },
+    {
+      "path": "detail/data/east_asia.json",
+      "bytes": 2188296,
+      "sha256": "77f9771dfb4b50c6b0ed149c0e222e52d3b32a329d39abbca742bde4414b4b6f",
+      "mtime_ns": 1793887506000000000,
+      "mode": 33204
+    },
+    {
+      "path": "detail/data/east_asia.npz",
+      "bytes": 16769174,
+      "sha256": "f2e1016c52c63cef3c011a8dd17b71d462024be317820b0f12606e0a9ede2a78",
+      "mtime_ns": 1793887507000000000,
+      "mode": 33204
+    },
+    {
+      "path": "detail/data/europe_usa.json",
+      "bytes": 1659363,
+      "sha256": "f446e135a576d3c3e0e3908f42668613a778a3246ae940cc2f8c901248bcea5b",
+      "mtime_ns": 1793887508000000000,
+      "mode": 33204
+    },
+    {
+      "path": "detail/data/europe_usa.npz",
+      "bytes": 11774834,
+      "sha256": "563d4ea3a782ff0d1e9bba9b55fe530876809d3abf3b0be74cab461716d2d745",
+      "mtime_ns": 1793887509000000000,
+      "mode": 33204
+    },
+    {
+      "path": "detail/data/hawaii.json",
+      "bytes": 8554,
+      "sha256": "0d910102b6ce1d914c682b1b02b44ae27ba03084b854a76aa87179346b8a785b",
+      "mtime_ns": 1793887825181998554,
+      "mode": 33204
+    },
+    {
+      "path": "detail/data/hawaii.npz",
+      "bytes": 186944,
+      "sha256": "8424151cc5ed493565dd499f60070d038d80ec11e903e78bc9486a83416c765e",
+      "mtime_ns": 1793887825701995120,
+      "mode": 33204
+    },
+    {
+      "path": "detail/data/singapore.json",
+      "bytes": 4494,
+      "sha256": "83b3cab89bd1cae5b865d8cc1f1a4de3e2259620857079a499b173217b0e4f17",
+      "mtime_ns": 1793888024488682472,
+      "mode": 33204
+    },
+    {
+      "path": "detail/data/singapore.npz",
+      "bytes": 1406637,
+      "sha256": "a7d4473a4279d1576752f5e3fb900282cb423b9abe3017b313e42ecba877b797",
+      "mtime_ns": 1793888025376676608,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/china-colour.png",
+      "bytes": 28126000,
+      "sha256": "3076ef1b21787f36229b08b7b8ab8f9cb212f5a9800c503c59d4c052290c4e03",
+      "mtime_ns": 1793888002431758798,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/china-relief.png",
+      "bytes": 28547966,
+      "sha256": "63e7f84e3bc4f44ee79772d709f85368542134bde68579b3d419171aa8360b0d",
+      "mtime_ns": 1793887886397458977,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/china-render.json",
+      "bytes": 786,
+      "sha256": "486e2aed007b524872cd0178422f7783a992c91c0aee5062eb553050576ff658",
+      "mtime_ns": 1793888003447779388,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/east_asia-colour.png",
+      "bytes": 26637400,
+      "sha256": "5fcaa86c0bd3a672320d1cea4d4899dbe8a9872d41bf9642f705649572a4f44c",
+      "mtime_ns": 1793888241508710233,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/east_asia-relief.png",
+      "bytes": 27178085,
+      "sha256": "9a0dbc6814ffcf6d3a707f5cd843c99b549b2e6983a370d476681294ed3819fb",
+      "mtime_ns": 1793888127690283596,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/east_asia-render.json",
+      "bytes": 794,
+      "sha256": "a8f3c0a418da2748b8457536c5ef7b5ad0e7f18e921f643db9bd247b515c5055",
+      "mtime_ns": 1793888242936740560,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/europe_usa-relief.png",
+      "bytes": 19961674,
+      "sha256": "e5045f4efee2d93032ee0d5172c5dec4ed336d72dceb3d21d068a0094f78867b",
+      "mtime_ns": 1793888339046766321,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/europe_usa-render.json",
+      "bytes": 699,
+      "sha256": "a080546c136a1e772f7b089bd2cb552f6029a660f06ee93feb0065d6a200ff36",
+      "mtime_ns": 1793888339446774695,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/hawaii-relief.png",
+      "bytes": 829280,
+      "sha256": "0e8a5ee8927a8be37d6d92d68f438f4e19d1de7708648f2fd4546e0937182e20",
+      "mtime_ns": 1793888050108742370,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/hawaii-render.json",
+      "bytes": 694,
+      "sha256": "3ce41589cedd6c8c1030e2a7dd7c9775dd5d8a0f2eb479e67bb89f69e3b58f6d",
+      "mtime_ns": 1793888050276746025,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/singapore-relief.png",
+      "bytes": 1198163,
+      "sha256": "d21bba6fad86e9dd52d3251e2fd074f276b8cee42c2f7cea1ae25d0f27a824fd",
+      "mtime_ns": 1793888039368508730,
+      "mode": 33204
+    },
+    {
+      "path": "detail/renders/singapore-render.json",
+      "bytes": 697,
+      "sha256": "4913a083e7d224f1392f31bb4670bfb9d7fbfbdf6c91ad09e345c55280d2a31f",
+      "mtime_ns": 1793888039504511689,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/china-colour.blend",
+      "bytes": 69685779,
+      "sha256": "d14dd832b062033bb64a0d06d369d708cc84d6a29d0b6e8ca04d0a0d9e61e4f4",
+      "mtime_ns": 1793887886877468309,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/china-relief.blend",
+      "bytes": 69620240,
+      "sha256": "c6bab77c02c15ed1847d649a302731059baa410ddf7e7abd2e8afbfe822a08b7",
+      "mtime_ns": 1793887764659113225,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/china-scenes.json",
+      "bytes": 892,
+      "sha256": "cf19d7d21c5d6fe09f0faea9a313e57b521318a556fc3fbc6a1cc5903b65ccb2",
+      "mtime_ns": 1793888003375777930,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/east_asia-colour.blend",
+      "bytes": 68953529,
+      "sha256": "8932ce1888231950bea694bddd54b946467de1e65deca6d7ef44e23b26fe379f",
+      "mtime_ns": 1793888128262294907,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/east_asia-relief.blend",
+      "bytes": 68880151,
+      "sha256": "c3255c214316b3e97a2d9060aba5ea784d02b953eac8246243be4b3b188d8f81",
+      "mtime_ns": 1793888008315878047,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/east_asia-scenes.json",
+      "bytes": 900,
+      "sha256": "8c334875cc015c0d0dd71dfbba1048386470b8e867cf7de69a57e050a326b65f",
+      "mtime_ns": 1793888242744736483,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/europe_usa-relief.blend",
+      "bytes": 50304191,
+      "sha256": "300560972cb3ef4c811dfc236099ac8e303bd9cc3cee24ec749a74b9875d4665",
+      "mtime_ns": 1793888246828823218,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/europe_usa-scenes.json",
+      "bytes": 452,
+      "sha256": "e61b19067bb10aa01f74dc3d7facc78d4eeabca82aa4247ea805f52c379a63a9",
+      "mtime_ns": 1793888339422774192,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/hawaii-relief.blend",
+      "bytes": 1248033,
+      "sha256": "653c75abde9ddc7d413360ef7aac33288af544829102034a77dbd6008d47036e",
+      "mtime_ns": 1793888040580535096,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/hawaii-scenes.json",
+      "bytes": 444,
+      "sha256": "0d6032dfe8ecec6f250984002ec9e4a44a987c1aa9089f46b11c6626fc14673b",
+      "mtime_ns": 1793888050272745938,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/singapore-relief.blend",
+      "bytes": 12221937,
+      "sha256": "5f7234994481cf3993774ca953af3253428bfac9e57f7c4a766d73f342ca4e00",
+      "mtime_ns": 1793888030616318450,
+      "mode": 33204
+    },
+    {
+      "path": "detail/scenes/singapore-scenes.json",
+      "bytes": 449,
+      "sha256": "371dcf1746d7942339907e04fdd49d0dacb5f430fbf8b190b631c82ab27daff5",
+      "mtime_ns": 1793888039504511689,
+      "mode": 33204
+    },
+    {
+      "path": "input.tar.gz",
+      "bytes": 68020297,
+      "sha256": "643734fe2ad713e7a1cd49a55c79eafb3b62a1c52b10f8e6ec32aa74a81eab40",
+      "mtime_ns": 1793887687178909830,
+      "mode": 33204
+    },
+    {
+      "path": "logs/render-292075.out",
+      "bytes": 138549,
+      "sha256": "e66fc8c53574667b0537651ef2adf3b2280f12b86d58aa475caf12210ada015b",
+      "mtime_ns": 1793888579823512032,
+      "mode": 33204
+    },
+    {
+      "path": "logs/render-292079.out",
+      "bytes": 13524,
+      "sha256": "e1008bcb0d85e3ec94a5fcd11f7f787929be3398a0968d6796fb81d83f57f9b9",
+      "mtime_ns": 1793887842947900078,
+      "mode": 33204
+    },
+    {
+      "path": "logs/render-292089.out",
+      "bytes": 13524,
+      "sha256": "df80b08dc8b6a68eac77f619b288a231adc09ef2a1c461d150e420793a390c30",
+      "mtime_ns": 1793888050332747244,
+      "mode": 33204
+    },
+    {
+      "path": "overview/data/china.json",
+      "bytes": 384027,
+      "sha256": "83208c7c3fbc498b8fe544293ed27023cd3465ed283060dc7f3eeb97a0e48f3d",
+      "mtime_ns": 1793887504000000000,
+      "mode": 33204
+    },
+    {
+      "path": "overview/data/east_asia.json",
+      "bytes": 511039,
+      "sha256": "fc3f3eac9a59532757f8bc6478e14d5acb145347f46db99d222ad3a7d59695a5",
+      "mtime_ns": 1793887504000000000,
+      "mode": 33204
+    },
+    {
+      "path": "overview/data/east_asia.npz",
+      "bytes": 16769174,
+      "sha256": "6a3f4f37d2c47aa8f221fd47f3ae1253c4ee1fda9bfb4bc11578380ea2fa7f5a",
+      "mtime_ns": 1793887508000000000,
+      "mode": 33204
+    },
+    {
+      "path": "overview/data/europe_usa.json",
+      "bytes": 1335262,
+      "sha256": "867461683ee91bef86415513ebeeb636b8e54ce35d2c585318f1209786d499e2",
+      "mtime_ns": 1793887504000000000,
+      "mode": 33204
+    },
+    {
+      "path": "overview/data/europe_usa.npz",
+      "bytes": 11833311,
+      "sha256": "330cf6480ee9827eb72941dc0b075b7f8801bb8e587ddf7f90059ee7332df918",
+      "mtime_ns": 1793887510000000000,
+      "mode": 33204
+    },
+    {
+      "path": "overview/renders/east_asia-colour.png",
+      "bytes": 26637406,
+      "sha256": "66e1ec6a9abf2a16cef8964dc30427cd7388ddf7f7a67dcc81a8b32adabe4bea",
+      "mtime_ns": 1793888470801420084,
+      "mode": 33204
+    },
+    {
+      "path": "overview/renders/east_asia-render.json",
+      "bytes": 698,
+      "sha256": "bbf2446fee522d29640bebb79f83dbdd4acd12178e4203c7a43f93955b43672a",
+      "mtime_ns": 1793888471309429933,
+      "mode": 33204
+    },
+    {
+      "path": "overview/renders/europe_usa-colour.png",
+      "bytes": 19922776,
+      "sha256": "dd738923fc19480aa483791ef50860f38d18856daf1dd4da25e3b04edec70340",
+      "mtime_ns": 1793888579059497029,
+      "mode": 33204
+    },
+    {
+      "path": "overview/renders/europe_usa-render.json",
+      "bytes": 699,
+      "sha256": "1018eec3775ec1c434a977c6a848caf8782da7641286dde34071e094297b22ca",
+      "mtime_ns": 1793888579751510619,
+      "mode": 33204
+    },
+    {
+      "path": "overview/scenes/east_asia-colour.blend",
+      "bytes": 68953256,
+      "sha256": "3c1c948bad2d864372639f8aa695dbc7c0e33f17038ac5842c2a177728306fbb",
+      "mtime_ns": 1793888347558944512,
+      "mode": 33204
+    },
+    {
+      "path": "overview/scenes/east_asia-scenes.json",
+      "bytes": 452,
+      "sha256": "02150a882834bf5e6d115519c7eafb4a4bdf4c96f69c27c401397f3ba18c2024",
+      "mtime_ns": 1793888471225428304,
+      "mode": 33204
+    },
+    {
+      "path": "overview/scenes/europe_usa-colour.blend",
+      "bytes": 50343904,
+      "sha256": "52769928e9fd8c287839b47c40db41890e3793af7b5c07b332e9f9ddb0c04083",
+      "mtime_ns": 1793888476265526012,
+      "mode": 33204
+    },
+    {
+      "path": "overview/scenes/europe_usa-scenes.json",
+      "bytes": 453,
+      "sha256": "c850286e365fbe23b20c5edfb2285ed662ad41b9dbd3a9595dab25ae690a4fb9",
+      "mtime_ns": 1793888579723510069,
+      "mode": 33204
+    },
+    {
+      "path": "prepare-manifest.json",
+      "bytes": 5155,
+      "sha256": "c3b6b7e484db308c82dbdcbfe52badbed1a3a8ef27226436116c1df9b59f64f8",
+      "mtime_ns": 1793887510000000000,
+      "mode": 33204
+    },
+    {
+      "path": "render-footprint-atlas.py",
+      "bytes": 10739,
+      "sha256": "e149433e5ae5dd5b8b9aa6f32352b157c44c0ce0db4329b2bcf5e063981d78a6",
+      "mtime_ns": 1793887696709231769,
+      "mode": 33204
+    },
+    {
+      "path": "render-footprint-sectional.slurm",
+      "bytes": 1081,
+      "sha256": "8bf6a562b3b6bb3f3a1e01321ef0f77a06525875d3e2431ccfe8393f003f4eb9",
+      "mtime_ns": 1793887697197229121,
+      "mode": 33204
+    },
+    {
+      "path": "render_atlas.py",
+      "bytes": 12456,
+      "sha256": "b2958e4c0207ff99b7b09bf3dc93ca9e5e0785f504670ca2455fe200757989be",
+      "mtime_ns": 1793887697709226344,
+      "mode": 33204
+    },
+    {
+      "path": "style.json",
+      "bytes": 2459,
+      "sha256": "e651c3ea531e4f02d6113b8e319f8ed66b3c421976957f94415df1b8ce8aeeb7",
+      "mtime_ns": 1793887750164941335,
+      "mode": 33204
+    }
+  ],
+  "host": "paracloud-Zhongwei1",
+  "excluded_files": []
+}

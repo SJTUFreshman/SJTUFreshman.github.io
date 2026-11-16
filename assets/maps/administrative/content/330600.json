@@ -1,0 +1,215 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "330600": {
+      "label": {
+        "en": "Shaoxing",
+        "zh-CN": "绍兴市",
+        "zh-TW": "紹興市"
+      },
+      "description": {
+        "en": "Shaoxing is a prefecture-level city on the southern shore of Hangzhou Bay in northeastern Zhejiang province, China. Located on the south bank of the Qiantang River estuary, it borders Ningbo to the east, Taizhou to the southeast, Jinhua to the southwest, and Hangzhou to the west.",
+        "zh-CN": "绍兴市，简称越，古称越州、会稽、山阴，是中华人民共和国浙江省下辖的地级市，地处华东地区，浙江省中北部，位于浙江省杭州湾南岸。市境西北临杭州市，北隔钱塘江与嘉兴市相望，东邻宁波市，西南接金华市，东南接台州市。",
+        "zh-TW": "紹興市，簡稱越，古稱越州、會稽、山陰，是中華人民共和國浙江省下轄的地級市，地處華東地區，浙江省中北部，位於浙江省杭州灣南岸。市境西北臨杭州市，北隔錢塘江與嘉興市相望，東鄰寧波市，西南接金華市，東南接台州市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%BB%8D%E5%85%B4%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%BB%8D%E5%85%B4%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Shaoxing"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        120.5833,
+        30.0511
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/2434ba63ae643d93.webp",
+        "credit": "猫猫的日记本 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bazi_Bridge_View_from_South_2012-07.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​绍兴宋代桥梁八字桥，自南侧看。",
+        "place": "Bazi Bridge",
+        "originalFile": "Bazi_Bridge_View_from_South_2012-07.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:330600:c72d7227",
+      "urbanFocus": {
+        "label": {
+          "en": "Shaoxing",
+          "zh-CN": "绍兴市",
+          "zh-TW": "紹興市"
+        },
+        "lngLat": [
+          120.58333333333,
+          30
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Shaoxing.",
+          "zh-CN": "以绍兴市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以紹興市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q42666#P625",
+        "source": "https://www.wikidata.org/wiki/Q42666",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q42666#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.34
+        }
+      }
+    },
+    "poi:330600:2": {
+      "label": {
+        "en": "Orchid Pavilion",
+        "zh-CN": "兰亭",
+        "zh-TW": "蘭亭"
+      },
+      "description": {
+        "en": "Orchid Pavilion. Explore the local landscape and follow the linked encyclopedia entry for further reading.",
+        "zh-CN": "兰亭古迹是位于中华人民共和国浙江绍兴的一个文化古迹和旅游胜地，位于绍兴城区西南13公里的兰渚山麓，是东晋著名书法家、会稽内史王羲之的园林住所，是一座晋代园林。东晋永和九年三月初三，王羲之与谢安、王献之等40多位名士在此举办修禊集会，王羲之“微醉之中，振笔直遂”，写下了著名的“天下第一行书”《兰亭集序》。",
+        "zh-TW": "蘭亭古蹟是位於中華人民共和國浙江紹興的一個文化古蹟和旅遊勝地，位於紹興城區西南13公里的蘭渚山麓，是東晉著名書法家、會稽內史王羲之的園林住所，是一座晉代園林。東晉永和九年三月初三，王羲之與謝安、王獻之等40多位名士在此舉辦修禊集會，王羲之“微醉之中，振筆直遂”，寫下了著名的“天下第一行書”《蘭亭集序》。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%85%B0%E4%BA%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%85%B0%E4%BA%AD"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        120.49601,
+        29.92901
+      ],
+      "parentCity": "330600",
+      "photo": {
+        "src": "assets/maps/regions/photos/9f40fd2ac2639678.webp",
+        "credit": "Yumeto · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20240130_Lanting.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Lanting",
+        "place": "兰亭",
+        "originalFile": "20240130_Lanting.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:330600:12164028": {
+      "label": {
+        "en": "Mausoleum of Yu the Great",
+        "zh-CN": "大禹陵",
+        "zh-TW": "大禹陵"
+      },
+      "description": {
+        "en": "This commemorative mausoleum honours Yu the Great, traditionally regarded as the founder of the Xia dynasty. It stands at the foot of Kuaiji Mountain, southeast of Shaoxing, with its principal axis facing west.",
+        "zh-CN": "大禹陵，是夏朝开国国君大禹的纪念陵墓，位于浙江省绍兴市东南8公里禹陵乡禹陵村，大禹墓在会稽山下，坐东朝西。",
+        "zh-TW": "大禹陵，是夏朝開國國君大禹的紀念陵墓，位於浙江省紹興市東南8公里禹陵鄉禹陵村，大禹墓在會稽山下，坐東朝西。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E7%A6%B9%E9%99%B5",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E7%A6%B9%E9%99%B5"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.60944444,
+        29.96666667
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E7%A6%B9%E9%99%B5",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "330600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/76faeefbca20b162.webp",
+        "credit": "Gisling · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yu_the_Great_mausoleum_stele_in_Shaoxing,_Zhejiang,_China.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Dayu Mausoleum, Shaoxing",
+        "place": "大禹陵",
+        "originalFile": "Yu_the_Great_mausoleum_stele_in_Shaoxing,_Zhejiang,_China.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:330600:c72d7227": {
+      "label": {
+        "en": "Bazi Bridge",
+        "zh-CN": "八字桥 (绍兴)",
+        "zh-TW": "八字橋 (紹興)"
+      },
+      "description": {
+        "en": "The Bazi Bridge is a stone arch bridge in Shaoxing, Zhejiang, China. The bridge is named for its shape like the Chinese character \"八\" .",
+        "zh-CN": "八字桥位于中国浙江省绍兴市越城区府山街道八字桥直街东端。此桥因状如八字而得名。",
+        "zh-TW": "八字橋位於中國浙江省紹興市越城區府山街道八字橋直街東端。此橋因狀如八字而得名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%85%AB%E5%AD%97%E6%A9%8B_(%E7%B4%B9%E8%88%88)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%85%AB%E5%AD%97%E6%A9%8B_(%E7%B4%B9%E8%88%88)",
+        "https://en.wikipedia.org/wiki/Bazi_Bridge"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.58777222,
+        30.00224722
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Bazi_Bridge",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "330600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2434ba63ae643d93.webp",
+        "credit": "猫猫的日记本 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bazi_Bridge_View_from_South_2012-07.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​绍兴宋代桥梁八字桥，自南侧看。",
+        "place": "Bazi Bridge",
+        "originalFile": "Bazi_Bridge_View_from_South_2012-07.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:330600:43000f9b": {
+      "label": {
+        "en": "Dafo Temple (Xinchang)",
+        "zh-CN": "大佛寺 (新昌)",
+        "zh-TW": "大佛寺 (新昌)"
+      },
+      "description": {
+        "en": "The Dafo Temple is a famous Buddhist temple in Zhejiang and has a long history of more than 1600 years. This Temple is the symbol of the Xinchang County and it attracts tens of thousands of visitors every year.",
+        "zh-CN": "新昌大佛寺，位于浙江省绍兴市新昌县石城山，汉族地区佛教全国重点寺院之一。",
+        "zh-TW": "新昌大佛寺，位於浙江省紹興市新昌縣石城山，漢族地區佛教全國重點寺院之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E4%BD%9B%E5%AF%BA_(%E6%96%B0%E6%98%8C)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E4%BD%9B%E5%AF%BA_(%E6%96%B0%E6%98%8C)",
+        "https://en.wikipedia.org/wiki/Dafo_Temple_(Xinchang)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.8846,
+        29.496
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Dafo_Temple_(Xinchang)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "330600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5ea554de86340d06.webp",
+        "credit": "黑揍红 · CC BY 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%B0%E6%98%8C%E5%A4%A7%E4%BD%9B%E5%AF%BA,_2019-12-07_3.jpg",
+        "license": "CC BY 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+        "alt": "​遂昌新昌大佛寺",
+        "place": "Dafo Temple (Xinchang)",
+        "originalFile": "新昌大佛寺,_2019-12-07_3.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

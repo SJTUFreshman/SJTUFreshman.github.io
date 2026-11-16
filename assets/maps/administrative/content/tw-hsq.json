@@ -1,0 +1,212 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-HSQ": {
+      "label": {
+        "en": "Hsinchu County",
+        "zh-CN": "新竹县",
+        "zh-TW": "新竹縣"
+      },
+      "description": {
+        "en": "Hsinchu is a county in north-western Taiwan. The population of the county is mainly Hakka; with a Taiwanese aboriginal minority in the southeastern part of the county.",
+        "zh-CN": "新竹县是中华台北台湾省的县，位于台湾西北部，为台湾客家大县，北临桃园市，南接苗栗县，东南以雪山山脉与宜兰县、台中市相连，西部面向台湾海峡，西与新竹市交界。全县总面积约1,427平方公里，除凤山溪、头前溪中下游冲积平原外，其余大多为丘陵、台地及山地。",
+        "zh-TW": "新竹縣是中華臺北臺灣省的縣，位於臺灣西北部，為臺灣客家大縣，北臨桃園市，南接苗栗縣，東南以雪山山脈與宜蘭縣、臺中市相連，西部面向臺灣海峽，西與新竹市交界。全縣總面積約1,427平方公里，除鳳山溪、頭前溪中下游沖積平原外，其餘大多為丘陵、臺地及山地。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E7%B8%A3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E7%B8%A3",
+        "https://en.wikipedia.org/wiki/Hsinchu_County"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        121.01472222,
+        24.83333333
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/0f35b69011fab23c.webp",
+        "credit": "Cookai1205 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%B0%E7%93%A6%E5%B1%8B_%E6%9E%97%E7%A4%BD%E5%9B%BA%E5%AE%B6_2023-07-10.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​新瓦屋客家文化保存區，林礽固家",
+        "place": "新瓦屋客家文化保存區",
+        "originalFile": "新瓦屋 林礽固家 2023-07-10.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-HSQ:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Zhubei",
+          "zh-CN": "竹北市",
+          "zh-TW": "竹北市"
+        },
+        "lngLat": [
+          121,
+          24.83333
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Zhubei.",
+          "zh-CN": "以竹北市为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以竹北市爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q29624",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q29624#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E7%B8%A3"
+      }
+    },
+    "poi:admin:TW-HSQ:90a4ded3": {
+      "label": {
+        "en": "Lianhua Temple, Zhubei",
+        "zh-CN": "竹北莲华寺",
+        "zh-TW": "竹北蓮華寺"
+      },
+      "description": {
+        "en": "Lianhua Temple stands on Litou Hill in Zhubei and is dedicated to Guanyin. This protected county monument serves a traditional worship community spanning neighbouring villages in Zhubei and Xinpu.",
+        "zh-CN": "竹北犁头山莲华寺，是位于台湾新竹县竹北市十兴里的观音寺，被列为县定古迹，轮祀圈包含新埔镇的文山里，及竹北市的鹿场、东平、中兴、隘口、东海、十兴等7里。",
+        "zh-TW": "竹北犁頭山蓮華寺，是位於臺灣新竹縣竹北市十興裏的觀音寺，被列為縣定古蹟，輪祀圈包含新埔鎮的文山裏，及竹北市的鹿場、東平、中興、隘口、東海、十興等7裏。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%AB%B9%E5%8C%97%E8%93%AE%E8%8F%AF%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%AB%B9%E5%8C%97%E8%93%AE%E8%8F%AF%E5%AF%BA"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.036271,
+        24.827117
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E7%AB%B9%E5%8C%97%E8%93%AE%E8%8F%AF%E5%AF%BA",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-HSQ",
+      "photo": {
+        "src": "assets/maps/administrative/photos/6f1c0b5d9e6d3627.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%AB%B9%E5%8C%97%E8%93%AE%E8%8F%AF%E5%AF%BA%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​竹北蓮華寺正面照",
+        "place": "竹北蓮華寺",
+        "originalFile": "竹北蓮華寺正面照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-HSQ:796430a3": {
+      "label": {
+        "en": "Zhang Family Ancestral Temple, Xinpu",
+        "zh-CN": "新埔张氏家庙",
+        "zh-TW": "新埔張氏家廟"
+      },
+      "description": {
+        "en": "This ancestral hall in Xinpu was built for the Zhang clan. The historic building is protected as a Hsinchu County monument.",
+        "zh-CN": "新埔张氏家庙，俗称张家祠，是位于台湾新竹县新埔镇的一处祠堂，该建筑为张氏宗族的祠堂，目前已指定为新竹县县定古迹。",
+        "zh-TW": "新埔張氏家廟，俗稱張家祠，是位於臺灣新竹縣新埔鎮的一處祠堂，該建築為張氏宗族的祠堂，目前已指定為新竹縣縣定古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%9F%94%E5%BC%B5%E6%B0%8F%E5%AE%B6%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%9F%94%E5%BC%B5%E6%B0%8F%E5%AE%B6%E5%BB%9F"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.07102778,
+        24.82722222
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%9F%94%E5%BC%B5%E6%B0%8F%E5%AE%B6%E5%BB%9F",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-HSQ",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3327aeaea4c4fd69.webp",
+        "credit": "Rick888chen · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%B0%E5%9F%94%E5%BC%B5%E6%B0%8F%E5%AE%B6%E5%BB%9F%E5%A4%96%E8%A7%80.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​新竹縣新埔鎮張氏家廟，俗稱張家祠，由張雲龍於1868年(同治7年)所創建，為新竹縣定古蹟。現做為兒童故事屋。",
+        "place": "新埔張氏家廟",
+        "originalFile": "新埔張氏家廟外觀.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-HSQ:27635a32": {
+      "label": {
+        "en": "Former Dahukou Public School",
+        "zh-CN": "大湖口公学校",
+        "zh-TW": "大湖口公學校"
+      },
+      "description": {
+        "en": "This historic site preserves the remains of the former Dahukou Public School in Hukou Township. It is registered as a historic building in Hsinchu County.",
+        "zh-CN": "大湖口公学校，是一座曾经存在于台湾新竹县湖口乡的公学校。现其遗址已登录新竹县历史建筑。",
+        "zh-TW": "大湖口公學校，是一座曾經存在於臺灣新竹縣湖口鄉的公學校。現其遺址已登錄新竹縣歷史建築。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%B9%96%E5%8F%A3%E5%85%AC%E5%AD%B8%E6%A0%A1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%B9%96%E5%8F%A3%E5%85%AC%E5%AD%B8%E6%A0%A1"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.01969,
+        24.893
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%B9%96%E5%8F%A3%E5%85%AC%E5%AD%B8%E6%A0%A1",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-HSQ",
+      "photo": {
+        "src": "assets/maps/administrative/photos/66d553877ab1e760.webp",
+        "credit": "M940504 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E6%B9%96%E5%8F%A3%E5%85%AC%E5%AD%B8%E6%A0%A1%E9%81%BA%E8%B7%A1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​位於台灣新竹縣的大湖口公學校遺跡",
+        "place": "大湖口公學校",
+        "originalFile": "大湖口公學校遺跡.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-HSQ:urban": {
+      "id": "poi:admin:TW-HSQ:urban",
+      "label": {
+        "en": "Hsinwawu Hakka Culture Conservation Area",
+        "zh-CN": "新瓦屋客家文化保存区",
+        "zh-TW": "新瓦屋客家文化保存區"
+      },
+      "description": {
+        "en": "Hsinwawu is a historic Hakka settlement of the Lin family in Zhubei. Its traditional houses became a Hakka cultural conservation area in 2005.",
+        "zh-CN": "新瓦屋是位于台湾新竹县竹北市六家中兴里文兴路的林姓饶平客家聚落，建于清朝嘉庆年间。2005年设立新瓦屋客家文化保存区，成为台湾第一个客家文化保存区，现由新竹县政府文化局管理。",
+        "zh-TW": "新瓦屋是位於臺灣新竹縣竹北市六家中興裏文興路的林姓饒平客家聚落，建於清朝嘉慶年間。2005年設立新瓦屋客家文化保存區，成為臺灣第一個客家文化保存區，現由新竹縣政府文化局管理。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%93%A6%E5%B1%8B%E5%AE%A2%E5%AE%B6%E6%96%87%E5%8C%96%E4%BF%9D%E5%AD%98%E5%8D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%93%A6%E5%B1%8B%E5%AE%A2%E5%AE%B6%E6%96%87%E5%8C%96%E4%BF%9D%E5%AD%98%E5%8D%80",
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%93%A6%E5%B1%8B%E5%AE%A2%E5%AE%B6%E6%96%87%E5%8C%96%E4%BF%9D%E5%AD%98%E5%8D%80"
+      ],
+      "textLicense": "CC BY-SA 4.0; translated and shortened excerpt",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0f35b69011fab23c.webp",
+        "credit": "Cookai1205 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%B0%E7%93%A6%E5%B1%8B_%E6%9E%97%E7%A4%BD%E5%9B%BA%E5%AE%B6_2023-07-10.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​新瓦屋客家文化保存區，林礽固家",
+        "place": "新瓦屋客家文化保存區",
+        "originalFile": "新瓦屋 林礽固家 2023-07-10.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.0271,
+        24.8115
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q120499232",
+      "kind": "landmark",
+      "parentCity": "TW-HSQ"
+    }
+  }
+}

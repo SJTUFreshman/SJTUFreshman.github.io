@@ -1,0 +1,151 @@
+前置操作
+- 点击链接 https://cloud.paratera.com/ 下载客户端, 使用大家邮箱中获取的并行®账号密码登录。
+- 进去客户端后在控制台找到SSH直连管理，添加密码，然后在界面下部能看到超算SSH信息，这是针对账号提供的几组不同的 SSH 登录方式，适配不同的网络环境，可以优先尝试序号2，复制完整命令进行ssh密码登录。
+[Image]
+一、基础登录：登录节点操作
+1. 登录集群登录节点
+登录节点主机名：In01（已联网）
+注：仅可在此节点做查看、编辑、编译代码、编写脚本等操作，不要用来运行计算任务。
+2. 存储目录说明
+登录进来即在家目录，但存储较小读写性能也一般，所有计算相关操作必须在~/run目录执行，具体如下：
+目录
+配额
+读写性能
+/data/home/scwb310(家目录)
+1GB
+一般
+~/run
+50GB
+优秀
+3. 存储配额/已用容量查询命令
+# 查看指定目录配额
+getfattr -n ceph.quota.max_bytes 目录路径 # 示例：getfattr -n ceph.quota.max_bytes ~/run
+# 查看指定目录已用容量
+getfattr -n ceph.dir.rbytes 目录路径     # 示例：getfattr -n ceph.dir.rbytes ~/run
+
+[Image]
+注：超出配额联系群里的客户经理扩容，所有软件安装、数据存放均在~/run目录执行。
+二、环境准备：软件加载/自定义安装（任务提交计算前的步骤）
+集群内置module工具管理软件环境，同时支持自定义安装未内置软件，优先使用内置环境，无对应软件时再自定义安装。
+（一）内置软件环境：module工具加载
+1. module工具常用命令
+命令
+功能
+示例
+module avail
+查看集群所有可用软件
+module avail
+module avail 软件名
+查看指定软件的可用版本
+module avail cuda
+module load 软件/版本
+加载指定软件环境
+module load cuda/12.8
+module show 软件/版本
+查看软件安装/库路径
+module show miniforge3/25.11.0-1
+module list
+查看当前已加载的软件
+module list
+module unload 软件/版本
+卸载指定软件环境
+module unload cuda/12.8
+[Image]
+（二）自定义环境：Miniforge3创建Python虚拟环境
+集群内置miniforge3/25.11.0-1，可快速创建虚拟环境。
+完整示例操作命令
+# 1. 进入~/run目录
+cd ~/run
+# 2. 加载miniforge3内置环境
+module load miniforge3/25.11.0-1
+# 3. 创建虚拟环境
+conda create --name py37 python=3.7
+# 4. 查看已创建的所有conda环境
+conda env list
+# 5. 激活虚拟环境
+source activate py37
+# 6. 激活后安装第三方包
+pip3 install XXX
+# 7. 查看当前环境已安装包
+pip3 list
+# 8. 退出当前conda环境
+conda deactivate
+（三）自定义软件安装：集群无内置软件时操作
+如需安装module avail未查询到的软件，步骤如下：
+- 上传软件安装包。
+- cd到对应目录下，进行软件、 工具、 库等安装部署和搭建算例运行所需环境。
+提示：安装遇到问题可在微信服务群@客服协助。
+三、资源申请：计算节点任务提交（正式运行计算作业）
+禁止在登录节点运行计算任务，需通过sbatch（批处理，推荐）/salloc（调试用）申请GPU计算节点资源，计算节点命名规则d1n42xxxx，无网络，仅运行计算任务。
+（一）队列说明：GPU资源队列选择
+集群的GPU共享队列名通过sinfo命令确认：
+[Image]
+（二）推荐方式：sbatch批处理提交作业（正式运行，后台执行）
+特点
+- 终端断开后作业仍在后台运行，任务完成后自动停止计费；
+- 支持脚本配置参数，资源利用更规范，优先使用此方式。
+步骤1：编写作业运行脚本（以gpu_h200队列为例，命名为run.sh，存于~/run）
+脚本为bash格式，第一行指定解释器，通过#SBATCH配置资源参数，所有路径使用~/run内的相对/绝对路径，提供2类常用示例：
+示例：Python程序运行脚本run.sh
+#!/bin/bash
+#SBATCH --gpus=1        # 申请1块GPU卡，自动分配12CPU核+252GB内存
+#SBATCH -p gpu_h200    # 指定队列：gpu_h200
+
+# 加载 miniforge 并正确初始化 conda
+module load miniforge3/25.11.0-1
+source /data/apps/miniforge3/25.11.0-1/etc/profile.d/conda.sh
+conda activate /data/home/scwb310/run/conda_envs/XXX
+
+# 进入作业运行目录
+cd /data/home/scwb310/run
+
+# 运行 Python 程序
+python test.py
+步骤2：提交作业
+sbatch -p gpu_h200 --gpus=1 /data/home/scwb310/run/run.sh
+提交成功后会返回作业ID，用于后续查看/取消作业。
+（三）调试方式：salloc申请资源（最好仅用于测试，正式运行还是用“（二）推荐方式”）
+核心特点
+- 申请后直接登录计算节点，实时调试程序；
+- 终端断开则任务中断，任务完成后需手动取消，否则持续计费，仅用于程序验证，正式运行用sbatch。
+操作命令
+# 申请GPU资源，指定队列和卡数
+salloc -p gpu_a800 -N 1 --gres=gpu:4 --qos=gpugpu
+# 申请成功后，终端会返回计算节点名（示例：d1n42a13g01），登录该节点
+ssh 计算节点名 # 示例：ssh d1n42a13g01
+# 进入环境
+module load miniforge3/25.11.0-1
+source activate XXX
+python train.py
+nvidia-smi # 查看GPU利用率
+# 调试完成后，必须手动取消作业（否则持续计费）
+scancel 作业ID # 作业ID通过parajobs命令查询
+四、作业管理：查看/取消作业
+1. 查看作业状态
+parajobs
+输出字段
+字段
+说明
+JOBID
+作业ID，唯一标识，用于取消作业
+PARTITION
+作业运行的队列名
+STATE
+作业状态：R(运行中，计费)/PD(排队)/CD(完成)/F(失败)/CG(正在退出)
+NODELIST
+运行中的作业显示计算节点名，排队中的作业显示排队原因
+TRES_ALLOC
+分配的资源（CPU/内存/GPU）
+GPU利用率
+显示每块GPU的利用率、显存使用情况，0%表示未正常调用GPU
+2. 取消作业（运行中/排队中均可取消）
+scancel 作业ID # 示例：scancel 6（取消作业ID为6的作业）
+注：salloc调试完成后、作业运行异常时，必须及时取消作业，避免无效计费。
+五、注意事项
+1. 登录节点（In01）仅做编辑/编译/脚本编写，计算节点仅运行计算任务；
+2. 所有计算相关操作（软件安装、数据存放、作业运行）均在~/run目录执行，避免家目录配额超限；
+3. 仅R(运行中)状态计费，salloc调试后必须手动取消作业，sbatch作业完成后自动停止；
+4. 软件安装、脚本编写、资源申请遇到问题，直接在微信服务群@客服协助。
+5. 本文档只叙述了正常执行过程和一些注意事项，例如跨节点任务执行等详细命令介绍见下方PDF。
+
+This content is only supported in a Feishu Docs

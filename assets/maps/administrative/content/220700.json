@@ -1,0 +1,151 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "220700": {
+      "label": {
+        "en": "Songyuan",
+        "zh-CN": "松原市",
+        "zh-TW": "松原市"
+      },
+      "description": {
+        "en": "Songyuan is a prefecture-level city in west-central Jilin province, China.",
+        "zh-CN": "松原市，旧称伯都讷、新城、扶余，是中华人民共和国吉林省下辖的地级市，位于吉林省北部，市人民政府驻宁江区。松原市东邻长春市，南接四平市，西南方为内蒙古自治区通辽市，西北临白城市，北抵黑龙江省大庆市，东北邻黑龙江省哈尔滨市。",
+        "zh-TW": "松原市，舊稱伯都訥、新城、扶余，是中華人民共和國吉林省下轄的地級市，位於吉林省北部，市人民政府駐寧江區。松原市東鄰長春市，南接四平市，西南方爲內蒙古自治區通遼市，西北臨白城市，北抵黑龍江省大慶市，東北鄰黑龍江省哈爾濱市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%BE%E5%8E%9F%E5%B8%82_(%E5%90%89%E6%9E%97%E7%9C%81)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%BE%E5%8E%9F%E5%B8%82_(%E5%90%89%E6%9E%97%E7%9C%81)",
+        "https://en.wikipedia.org/wiki/Songyuan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        124.8253,
+        45.1419
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/ef5536caf74b1e48.webp",
+        "credit": "纳瓦拉的亨利 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chagan_Lake_-_2025.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​查干湖，摄于2025年",
+        "place": "查干湖",
+        "originalFile": "Chagan_Lake_-_2025.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:220700:61d4576c",
+      "urbanFocus": {
+        "label": {
+          "en": "Songyuan",
+          "zh-CN": "松原市",
+          "zh-TW": "松原市"
+        },
+        "lngLat": [
+          124.808,
+          45.1388
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Songyuan.",
+          "zh-CN": "以松原市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以松原市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q92364#P625",
+        "source": "https://www.wikidata.org/wiki/Q92364",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q92364#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 2.6
+        }
+      }
+    },
+    "poi:admin:220700:61d4576c": {
+      "label": {
+        "en": "Chagan Lake (China)",
+        "zh-CN": "查干湖",
+        "zh-TW": "查干湖"
+      },
+      "description": {
+        "en": "Chagan Lake is a lake in Jilin, China. The name \"Chagan\" is from Mongolian , meaning white / pure lake).",
+        "zh-CN": "查干湖，旧名“查干泡”，当地又称作「圣水湖」。位于中国吉林省松原市前郭尔罗斯蒙古族自治县西北部，霍林河末端。",
+        "zh-TW": "查干湖，舊名“查干泡”，當地又稱作「聖水湖」。位於中國吉林省松原市前郭爾羅斯蒙古族自治縣西北部，霍林河末端。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9F%A5%E5%B9%B2%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9F%A5%E5%B9%B2%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Chagan_Lake_(China)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        124.28,
+        45.25
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Chagan_Lake_(China)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "220700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ef5536caf74b1e48.webp",
+        "credit": "纳瓦拉的亨利 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chagan_Lake_-_2025.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​查干湖，摄于2025年",
+        "place": "查干湖",
+        "originalFile": "Chagan_Lake_-_2025.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:220700:photo-136477970": {
+      "label": {
+        "en": "Songyuan landscape view",
+        "zh-CN": "松原镜湖公园湖景 20230513",
+        "zh-TW": "松原鏡湖公園湖景 20230513"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Songyuan, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现松原市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現松原市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9D%BE%E5%8E%9F%E9%95%9C%E6%B9%96%E5%85%AC%E5%9B%AD%E6%B9%96%E6%99%AF_20230513.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E6%9D%BE%E5%8E%9F%E9%95%9C%E6%B9%96%E5%85%AC%E5%9B%AD%E6%B9%96%E6%99%AF_20230513.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/d3a80233349d1646.webp",
+        "credit": "ZSYYYYYY · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%9D%BE%E5%8E%9F%E9%95%9C%E6%B9%96%E5%85%AC%E5%9B%AD%E6%B9%96%E6%99%AF_20230513.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "Songyuan jinghu park",
+        "place": "松原镜湖公园湖景 20230513.jpg",
+        "originalFile": "松原镜湖公园湖景 20230513.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            124.801788,
+            45.127686
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E6%9D%BE%E5%8E%9F%E9%95%9C%E6%B9%96%E5%85%AC%E5%9B%AD%E6%B9%96%E6%99%AF_20230513.jpg"
+        }
+      },
+      "lngLat": [
+        124.801788,
+        45.127686
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E6%9D%BE%E5%8E%9F%E9%95%9C%E6%B9%96%E5%85%AC%E5%9B%AD%E6%B9%96%E6%99%AF_20230513.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "220700"
+    }
+  }
+}

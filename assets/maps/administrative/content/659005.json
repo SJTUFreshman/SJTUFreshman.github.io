@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "659005": {
+      "label": {
+        "en": "Beitun, Xinjiang",
+        "zh-CN": "北屯市",
+        "zh-TW": "北屯市"
+      },
+      "description": {
+        "en": "Beitun is a city in the north of Xinjiang, China. Administratively, it is a county-level city under the direct administration of the regional government, though it is geographically located in Altay Prefecture.",
+        "zh-CN": "北屯市是中华人民共和国新疆维吾尔自治区下辖的县级市，与新疆生产建设兵团第十师实行“师市合一”，位于阿勒泰地区境内阿勒泰市和福海县之间，面积911平方公里，人口约10.5万人，市人民政府驻北屯镇团结路300号。",
+        "zh-TW": "北屯市是中華人民共和國新疆維吾爾自治區下轄的縣級市，與新疆生產建設兵團第十師實行“師市合一”，位於阿勒泰地區境內阿勒泰市和福海縣之間，面積911平方公里，人口約10.5萬人，市人民政府駐北屯鎮團結路300號。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8C%97%E5%B1%AF%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8C%97%E5%B1%AF%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Beitun,_Xinjiang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        87.81805556,
+        47.35833333
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/3cf3a8b85bbd7069.webp",
+        "credit": "余华峰 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2011%E5%B9%B42%E6%9C%885%E6%97%A5%E5%8C%97%E5%B1%AF%E8%A1%97%E6%99%AF_%E4%BD%99%E5%8D%8E%E5%B3%B0_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "2011年2月5日北屯街景 余华峰",
+        "place": "2011年2月5日北屯街景 余华峰 - panoramio.jpg",
+        "originalFile": "2011年2月5日北屯街景 余华峰 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            87.823291,
+            47.351879
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:2011%E5%B9%B42%E6%9C%885%E6%97%A5%E5%8C%97%E5%B1%AF%E8%A1%97%E6%99%AF_%E4%BD%99%E5%8D%8E%E5%B3%B0_-_panoramio.jpg"
+        }
+      },
+      "photoReference": "poi:admin:659005:photo-53013523",
+      "urbanFocus": {
+        "label": {
+          "en": "Beitun",
+          "zh-CN": "北屯市",
+          "zh-TW": "北屯市"
+        },
+        "lngLat": [
+          87.818055555556,
+          47.358333333333
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Beitun.",
+          "zh-CN": "以北屯市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以北屯市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q814946#P625",
+        "source": "https://www.wikidata.org/wiki/Q814946",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q814946#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.77
+        }
+      }
+    },
+    "poi:admin:659005:photo-53013523": {
+      "label": {
+        "en": "Beitun, Xinjiang landscape view",
+        "zh-CN": "2011年2月5日北屯街景 余华峰",
+        "zh-TW": "2011年2月5日北屯街景 餘華峯"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Beitun, Xinjiang, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现北屯市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現北屯市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:2011%E5%B9%B42%E6%9C%885%E6%97%A5%E5%8C%97%E5%B1%AF%E8%A1%97%E6%99%AF_%E4%BD%99%E5%8D%8E%E5%B3%B0_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:2011%E5%B9%B42%E6%9C%885%E6%97%A5%E5%8C%97%E5%B1%AF%E8%A1%97%E6%99%AF_%E4%BD%99%E5%8D%8E%E5%B3%B0_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3cf3a8b85bbd7069.webp",
+        "credit": "余华峰 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2011%E5%B9%B42%E6%9C%885%E6%97%A5%E5%8C%97%E5%B1%AF%E8%A1%97%E6%99%AF_%E4%BD%99%E5%8D%8E%E5%B3%B0_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "2011年2月5日北屯街景 余华峰",
+        "place": "2011年2月5日北屯街景 余华峰 - panoramio.jpg",
+        "originalFile": "2011年2月5日北屯街景 余华峰 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            87.823291,
+            47.351879
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:2011%E5%B9%B42%E6%9C%885%E6%97%A5%E5%8C%97%E5%B1%AF%E8%A1%97%E6%99%AF_%E4%BD%99%E5%8D%8E%E5%B3%B0_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        87.823291,
+        47.351879
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:2011%E5%B9%B42%E6%9C%885%E6%97%A5%E5%8C%97%E5%B1%AF%E8%A1%97%E6%99%AF_%E4%BD%99%E5%8D%8E%E5%B3%B0_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "659005"
+    }
+  }
+}

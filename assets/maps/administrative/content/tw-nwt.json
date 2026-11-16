@@ -1,0 +1,175 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-NWT": {
+      "label": {
+        "en": "New Taipei City",
+        "zh-CN": "新北市",
+        "zh-TW": "新北市"
+      },
+      "description": {
+        "en": "New Taipei City. Explore the local landscape and follow the linked encyclopedia entry for further reading.",
+        "zh-CN": "新北市，通称新北，是中华台北的直辖市，位于台湾北部，于2010年由原台北县改制而来，全境环绕台北市，东北则三面环绕基隆市，东南邻宜兰县，西南邻桃园市。其所辖石门区富贵角地处台湾本岛最北端，贡寮区三貂角地处台湾本岛最东端。",
+        "zh-TW": "新北市，通稱新北，是中華臺北的直轄市，位於臺灣北部，於2010年由原臺北縣改制而來，全境環繞臺北市，東北則三面環繞基隆市，東南鄰宜蘭縣，西南鄰桃園市。其所轄石門區富貴角地處臺灣本島最北端，貢寮區三貂角地處臺灣本島最東端。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%8C%97%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%8C%97%E5%B8%82"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        121.44583333,
+        25.01111111
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/8467f67865e7209f.webp",
+        "credit": "Original uploader was Alltonight at zh.wikipedia · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lin_Family_Mansion_and_Garden_2006-6-28_11-16-18_0048.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "​臺灣臺北縣板橋市林本源園邸一景。",
+        "place": "Lin Family Mansion and Garden",
+        "originalFile": "Lin_Family_Mansion_and_Garden_2006-6-28_11-16-18_0048.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-NWT:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Banqiao District",
+          "zh-CN": "板桥区",
+          "zh-TW": "板橋區"
+        },
+        "lngLat": [
+          121.44583333,
+          25.01111111
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 24 km landscape window around Banqiao District.",
+          "zh-CN": "以板桥区为中心，展示周边约24公里宽的主要聚落与地形。",
+          "zh-TW": "以板橋區爲中心，展示周邊約24公里寬的主要聚落與地形。"
+        },
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q570090",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q570090#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%8C%97%E5%B8%82"
+      }
+    },
+    "poi:admin:TW-NWT:308e21a0": {
+      "label": {
+        "en": "New Taipei City Gold Museum",
+        "zh-CN": "新北市立黄金博物馆",
+        "zh-TW": "新北市立黃金博物館"
+      },
+      "description": {
+        "en": "The New Taipei City Gold Museum , formerly known as the Gold Ecological Park, is a museum of the gold mining industry in Ruifang District, New Taipei, Taiwan.",
+        "zh-CN": "新北市立黄金博物馆是位于台湾新北市瑞芳区金瓜石的生态博物馆，保存与展示金瓜石周围地区采矿产业生态。金瓜石盛产金矿与铜矿，日治时期曾享有亚洲第一金属矿山的美名。",
+        "zh-TW": "新北市立黃金博物館是位於臺灣新北市瑞芳區金瓜石的生態博物館，保存與展示金瓜石周圍地區採礦產業生態。金瓜石盛產金礦與銅礦，日治時期曾享有亞洲第一金屬礦山的美名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%8C%97%E5%B8%82%E7%AB%8B%E9%BB%83%E9%87%91%E5%8D%9A%E7%89%A9%E9%A4%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%8C%97%E5%B8%82%E7%AB%8B%E9%BB%83%E9%87%91%E5%8D%9A%E7%89%A9%E9%A4%A8",
+        "https://en.wikipedia.org/wiki/New_Taipei_City_Gold_Museum"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.85722222,
+        25.10972222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/New_Taipei_City_Gold_Museum",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-NWT",
+      "photo": {
+        "src": "assets/maps/administrative/photos/12e7ef91f10ae645.webp",
+        "credit": "丘崈 · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%87%91%E7%93%9C%E7%9F%B3220%E5%85%AC%E6%96%A4%E9%87%91%E7%A3%9A.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​金瓜石220公金金磚",
+        "place": "新北市立黃金博物館",
+        "originalFile": "金瓜石220公斤金磚.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-NWT:a1453da0": {
+      "label": {
+        "en": "Tamsui Historical Museum",
+        "zh-CN": "新北市立淡水古迹博物馆",
+        "zh-TW": "新北市立淡水古蹟博物館"
+      },
+      "description": {
+        "en": "This museum links several historic sites across Tamsui, including Fort San Domingo and Hobe Fort. Established in 2005, it conserves local historic buildings and supports research and public education.",
+        "zh-CN": "新北市立淡水古迹博物馆，位于台湾新北淡水区，是由红毛城、沪尾炮台等多处历史建筑组成的“集群式博物馆”，2005年7月1日由台北县政府文化局所属任务编组「淡水古迹园区」成立，是台湾首座以地方古迹资料保存及维护为特色的博物馆，该博物馆的主要目标以维护淡水33座历史建筑，使其具有学术研究、典藏及教育价值为发展。",
+        "zh-TW": "新北市立淡水古蹟博物館，位於臺灣新北淡水區，是由紅毛城、滬尾炮臺等多處歷史建築組成的“集羣式博物館”，2005年7月1日由臺北縣政府文化局所屬任務編組「淡水古蹟園區」成立，是臺灣首座以地方古蹟資料保存及維護為特色的博物館，該博物館的主要目標以維護淡水33座歷史建築，使其具有學術研究、典藏及教育價值為發展。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%8C%97%E5%B8%82%E7%AB%8B%E6%B7%A1%E6%B0%B4%E5%8F%A4%E8%B9%9F%E5%8D%9A%E7%89%A9%E9%A4%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%8C%97%E5%B8%82%E7%AB%8B%E6%B7%A1%E6%B0%B4%E5%8F%A4%E8%B9%9F%E5%8D%9A%E7%89%A9%E9%A4%A8"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.4292,
+        25.1786
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%8C%97%E5%B8%82%E7%AB%8B%E6%B7%A1%E6%B0%B4%E5%8F%A4%E8%B9%9F%E5%8D%9A%E7%89%A9%E9%A4%A8",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-NWT",
+      "photo": {
+        "src": "assets/maps/administrative/photos/34fd23ba5bf8f40a.webp",
+        "credit": "Sdfery · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%B4%85%E6%AF%9B%E5%9F%8E%E4%B9%8B%E7%BE%8E.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​紅毛城主堡外觀，前英國領事官邸在主堡東側。",
+        "place": "新北市立淡水古蹟博物館",
+        "originalFile": "紅毛城之美.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-NWT:urban": {
+      "id": "poi:admin:TW-NWT:urban",
+      "label": {
+        "en": "Lin Family Mansion and Garden",
+        "zh-CN": "林本源园邸",
+        "zh-TW": "林本源園邸"
+      },
+      "description": {
+        "en": "The Lin Ben Yuan Family Mansion and Garden in Banqiao District, New Taipei City, Taiwan was a residence built by the Lin Ben Yuan Family. It is Taiwan's most complete surviving example of traditional Chinese garden architecture.",
+        "zh-CN": "林本源园邸位于新北市板桥区，为板桥林本源家族兴建的宅邸与园林，仿苏州留园设计，是目前台湾仅存最完整的园林建筑。该居可追溯至1847年，当时为林本源家族北上屯租的租馆，后经林国华、林国芳两兄弟扩建，成为林本源家族之居所。",
+        "zh-TW": "林本源園邸位於新北市板橋區，為板橋林本源家族興建的宅邸與園林，仿蘇州留園設計，是目前臺灣僅存最完整的園林建築。該居可追溯至1847年，當時為林本源家族北上屯租的租館，後經林國華、林國芳兩兄弟擴建，成為林本源家族之居所。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9E%97%E6%9C%AC%E6%BA%90%E5%9C%92%E9%82%B8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9E%97%E6%9C%AC%E6%BA%90%E5%9C%92%E9%82%B8",
+        "https://en.wikipedia.org/wiki/Lin_Family_Mansion_and_Garden"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/8467f67865e7209f.webp",
+        "credit": "Original uploader was Alltonight at zh.wikipedia · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lin_Family_Mansion_and_Garden_2006-6-28_11-16-18_0048.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "​臺灣臺北縣板橋市林本源園邸一景。",
+        "place": "Lin Family Mansion and Garden",
+        "originalFile": "Lin_Family_Mansion_and_Garden_2006-6-28_11-16-18_0048.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.45555556,
+        25.01027778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Lin_Family_Mansion_and_Garden",
+      "kind": "landmark",
+      "parentCity": "TW-NWT"
+    }
+  }
+}

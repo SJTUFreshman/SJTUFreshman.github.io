@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "511500": {
+      "label": {
+        "en": "Yibin",
+        "zh-CN": "宜宾市",
+        "zh-TW": "宜賓市"
+      },
+      "description": {
+        "en": "Yibin is a prefecture-level city in the southeastern part of Sichuan province, China, located at the junction of the Min and Yangtze Rivers. Its population was 4,588,804 inhabitants, according to the 2020 census, of whom 2,158,312 lived in the built-up area comprising three urban districts.",
+        "zh-CN": "宜宾市，古称义宾、戎州、叙州，是中华人民共和国四川省下辖的地级市，位于四川省中南部，是全省第三大城市。市境东界泸州市，北临自贡市，西接乐山市、凉山州，南邻云南省昭通市。",
+        "zh-TW": "宜賓市，古稱義賓、戎州、敘州，是中華人民共和國四川省下轄的地級市，位於四川省中南部，是全省第三大城市。市境東界瀘州市，北臨自貢市，西接樂山市、涼山州，南鄰雲南省昭通市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%9C%E5%AE%BE%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%9C%E5%AE%BE%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Yibin"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        104.643,
+        28.752
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/fac89f7cf2027e49.webp",
+        "credit": "Lzylove · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9C%E5%AE%BE%E5%B8%82%E4%B8%87%E8%BE%BE%E5%B9%BF%E5%9C%BA.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "宜宾市万达广场",
+        "place": "宜宾市万达广场.jpg",
+        "originalFile": "宜宾市万达广场.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.64715076702,
+            28.7535502426
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9C%E5%AE%BE%E5%B8%82%E4%B8%87%E8%BE%BE%E5%B9%BF%E5%9C%BA.jpg"
+        }
+      },
+      "photoReference": "poi:admin:511500:photo-164490992",
+      "urbanFocus": {
+        "label": {
+          "en": "Yibin",
+          "zh-CN": "宜宾市",
+          "zh-TW": "宜賓市"
+        },
+        "lngLat": [
+          104.63997,
+          28.75961
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Yibin.",
+          "zh-CN": "以宜宾市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以宜賓市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q427265#P625",
+        "source": "https://www.wikidata.org/wiki/Q427265",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q427265#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.89
+        }
+      }
+    },
+    "poi:admin:511500:photo-164490992": {
+      "label": {
+        "en": "Yibin landscape view",
+        "zh-CN": "宜宾市万达广场",
+        "zh-TW": "宜賓市萬達廣場"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Yibin, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现宜宾市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現宜賓市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9C%E5%AE%BE%E5%B8%82%E4%B8%87%E8%BE%BE%E5%B9%BF%E5%9C%BA.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%AE%9C%E5%AE%BE%E5%B8%82%E4%B8%87%E8%BE%BE%E5%B9%BF%E5%9C%BA.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fac89f7cf2027e49.webp",
+        "credit": "Lzylove · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9C%E5%AE%BE%E5%B8%82%E4%B8%87%E8%BE%BE%E5%B9%BF%E5%9C%BA.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "宜宾市万达广场",
+        "place": "宜宾市万达广场.jpg",
+        "originalFile": "宜宾市万达广场.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.64715076702,
+            28.7535502426
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9C%E5%AE%BE%E5%B8%82%E4%B8%87%E8%BE%BE%E5%B9%BF%E5%9C%BA.jpg"
+        }
+      },
+      "lngLat": [
+        104.64715076702,
+        28.7535502426
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%AE%9C%E5%AE%BE%E5%B8%82%E4%B8%87%E8%BE%BE%E5%B9%BF%E5%9C%BA.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "511500"
+    }
+  }
+}

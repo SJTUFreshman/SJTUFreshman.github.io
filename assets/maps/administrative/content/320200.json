@@ -1,0 +1,253 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "320200": {
+      "label": {
+        "en": "Wuxi",
+        "zh-CN": "无锡市",
+        "zh-TW": "無錫市"
+      },
+      "description": {
+        "en": "Wuxi is a city in southern Jiangsu, China. As of 2024, it had a population of 7,495,000.",
+        "zh-CN": "无锡市，简称锡，古称梁溪、金匮，是位于中华人民共和国江苏省南部的一个地级市，地处江南长江三角洲、太湖之滨，下辖梁溪、滨湖、新吴、惠山、锡山五个市辖区以及江阴市、宜兴市两座百强县级市。从地理上看，无锡居苏南以及苏锡常都市圈正中心点；北遏长江，南控太湖，东距上海128.2公里，南与浙江省交界，交通枢纽优势明显且军事战略价值极高。",
+        "zh-TW": "無錫市，簡稱錫，古稱梁溪、金匱，是位於中華人民共和國江蘇省南部的一個地級市，地處江南長江三角洲、太湖之濱，下轄梁溪、濱湖、新吳、惠山、錫山五個市轄區以及江陰市、宜興市兩座百強縣級市。從地理上看，無錫居蘇南以及蘇錫常都市圈正中心點；北遏長江，南控太湖，東距上海128.2公里，南與浙江省交界，交通樞紐優勢明顯且軍事戰略價值極高。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%97%A0%E9%94%A1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%97%A0%E9%94%A1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Wuxi"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        120.283333,
+        31.566667
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/22a70686339237df.webp",
+        "credit": "zcfofdu · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Librairie_avant-garde_in_Wuxi_Huishan_2.JPG",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​先鋒書店無錫店",
+        "place": "惠山镇祠堂",
+        "originalFile": "Librairie_avant-garde_in_Wuxi_Huishan_2.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "coordinateSource": "https://www.wikidata.org/wiki/Q42651",
+      "coordinateRole": "city-anchor",
+      "photoReference": "poi:admin:320200:8b9a1b27",
+      "urbanFocus": {
+        "label": {
+          "en": "Wuxi",
+          "zh-CN": "无锡市",
+          "zh-TW": "無錫市"
+        },
+        "lngLat": [
+          120.283333,
+          31.566667
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Wuxi.",
+          "zh-CN": "以无锡市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以無錫市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q42651#P625",
+        "source": "https://www.wikidata.org/wiki/Q42651",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q42651#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.96
+        }
+      }
+    },
+    "poi:320200:1": {
+      "label": {
+        "en": "Taihu",
+        "zh-CN": "太湖",
+        "zh-TW": "太湖"
+      },
+      "description": {
+        "en": "Taihu , also known as Lake Tai or Lake Taihu, is a lake in the Yangtze Delta and the third largest freshwater lake in China. The lake is in Jiangsu province and a significant part of its southern shore forms its border with Zhejiang.",
+        "zh-CN": "太湖是中国五大淡水湖之一，水域面积排行第三，位于江苏省南部和浙江省北部交界处，而在行政区划上几乎完全属于江苏省，是江、浙两省的界湖，大部分水域位于苏州市，有“包孕吴越”之称。湖泊周边的主要城市，江苏省境内的是苏州、无锡、常州。",
+        "zh-TW": "太湖是中國五大淡水湖之一，水域面積排行第三，位於江蘇省南部和浙江省北部交界處，而在行政區劃上幾乎完全屬於江蘇省，是江、浙兩省的界湖，大部分水域位於蘇州市，有“包孕吳越”之稱。湖泊周邊的主要城市，江蘇省境內的是蘇州、無錫、常州。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%AA%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Taihu"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        120.13333333,
+        31.23333333
+      ],
+      "parentCity": "320200",
+      "photo": {
+        "src": "assets/maps/regions/photos/0621777a07977070.webp",
+        "credit": "The original uploader was Dallashan at Chinese Wikipedia. · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Taihu_Lake_Suzhou.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Taken by mywife and all rights have given up.",
+        "place": "太湖",
+        "originalFile": "Taihu_Lake_Suzhou.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:320200:2": {
+      "label": {
+        "en": "Grand Buddha at Ling Shan",
+        "zh-CN": "灵山大佛",
+        "zh-TW": "靈山大佛"
+      },
+      "description": {
+        "en": "The Grand Buddha is located on the north shore of Lake Tai, near Wuxi, Jiangsu, within the Lingshan Scenic Area. It is one of the largest Buddha statues in China and also in the world.",
+        "zh-CN": "灵山大佛，位于江苏省无锡市滨湖区，位于太湖之北滨。 灵山大佛，高88米，用青铜700余吨，由南京晨光集团吴显林负责设计、雕塑。",
+        "zh-TW": "靈山大佛，位於江蘇省無錫市濱湖區，位於太湖之北濱。 靈山大佛，高88米，用青銅700餘噸，由南京晨光集團吳顯林負責設計、雕塑。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%81%B5%E5%B1%B1%E5%A4%A7%E4%BD%9B",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%81%B5%E5%B1%B1%E5%A4%A7%E4%BD%9B",
+        "https://en.wikipedia.org/wiki/Grand_Buddha_at_Ling_Shan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        120.09138889,
+        31.43194444
+      ],
+      "parentCity": "320200",
+      "photo": {
+        "src": "assets/maps/regions/photos/502c43ccb7803873.webp",
+        "credit": "Phoebus~commonswiki · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:LinShanDaFo.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "灵山大佛",
+        "place": "灵山大佛",
+        "originalFile": "LinShanDaFo.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:320200:a238a65b": {
+      "label": {
+        "en": "Li Lake",
+        "zh-CN": "蠡湖",
+        "zh-TW": "蠡湖"
+      },
+      "description": {
+        "en": "Li Lake is a gourd-shaped inner bay of Lake Tai in Wuxi’s Binhu District, connected to the larger lake through Changguang Creek. Baojie Bridge divides its waters into eastern and western sections.",
+        "zh-CN": "蠡湖又名五里湖、漆湖或小五湖，是中国江苏省无锡市滨湖区的湖泊，形如葫芦，是太湖伸入无锡的一个内湖，水域面积8.6平方公里，东南经十里长广溪联通太湖。 蠡湖以中部横卧湖面长300多米的宝界桥为界，分为东蠡湖和西蠡湖。",
+        "zh-TW": "蠡湖又名五里湖、漆湖或小五湖，是中國江蘇省無錫市濱湖區的湖泊，形如葫蘆，是太湖伸入無錫的一個內湖，水域面積8.6平方公里，東南經十里長廣溪聯通太湖。 蠡湖以中部橫臥湖面長300多米的寶界橋爲界，分爲東蠡湖和西蠡湖。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%A0%A1%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%A0%A1%E6%B9%96"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.23388889,
+        31.52611111
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%A0%A1%E6%B9%96",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/54145e87c05914a8.webp",
+        "credit": "Synyan · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Sunset_at_taihu_wuxi.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "Sunset at Taihu, Wuxi",
+        "place": "蠡湖",
+        "originalFile": "Sunset_at_taihu_wuxi.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:320200:fc72a395": {
+      "label": {
+        "en": "Grand Buddha at Ling Shan",
+        "zh-CN": "灵山大佛",
+        "zh-TW": "靈山大佛"
+      },
+      "description": {
+        "en": "The Grand Buddha is located on the north shore of Lake Tai, near Wuxi, Jiangsu, within the Lingshan Scenic Area. It is one of the largest Buddha statues in China and also in the world.",
+        "zh-CN": "灵山大佛，位于江苏省无锡市滨湖区，位于太湖之北滨。 灵山大佛，高88米，用青铜700余吨，由南京晨光集团吴显林负责设计、雕塑。",
+        "zh-TW": "靈山大佛，位於江蘇省無錫市濱湖區，位於太湖之北濱。 靈山大佛，高88米，用青銅700餘噸，由南京晨光集團吳顯林負責設計、雕塑。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%81%B5%E5%B1%B1%E5%A4%A7%E4%BD%9B",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%81%B5%E5%B1%B1%E5%A4%A7%E4%BD%9B",
+        "https://en.wikipedia.org/wiki/Grand_Buddha_at_Ling_Shan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.09138889,
+        31.43194444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Grand_Buddha_at_Ling_Shan",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/502c43ccb7803873.webp",
+        "credit": "Phoebus~commonswiki · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:LinShanDaFo.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "灵山大佛",
+        "place": "灵山大佛",
+        "originalFile": "LinShanDaFo.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:320200:8b9a1b27": {
+      "label": {
+        "en": "Huishan Ancient Town",
+        "zh-CN": "惠山镇祠堂",
+        "zh-TW": "惠山鎮祠堂"
+      },
+      "description": {
+        "en": "Huishan Ancient Town lies at the northeastern foot of Huishan in Wuxi and is distinguished by its historic ancestral halls. The area developed over many centuries into a group of 118 lineage shrines, beside well-known sites including Jichang Garden and Huishan Temple.",
+        "zh-CN": "惠山镇祠堂，又称惠山古镇、“惠山老街”。位于江苏省无锡市梁溪区惠山东北麓，与天下第二泉、寄畅园、惠山寺等诸多无锡著名人文景区相接，是一处以大片古祠堂群组成的历史遗迹，其由唐代为纪念春申君所设的大王庙发展至民国，形成了118座供祭各家姓氏先祖的古祠堂。",
+        "zh-TW": "惠山鎮祠堂，又稱惠山古鎮、“惠山老街”。位於江蘇省無錫市梁溪區惠山東北麓，與天下第二泉、寄暢園、惠山寺等諸多無錫著名人文景區相接，是一處以大片古祠堂羣組成的歷史遺蹟，其由唐代爲紀念春申君所設的大王廟發展至民國，形成了118座供祭各家姓氏先祖的古祠堂。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%83%A0%E5%B1%B1%E9%95%87%E7%A5%A0%E5%A0%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%83%A0%E5%B1%B1%E9%95%87%E7%A5%A0%E5%A0%82"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.26799,
+        31.58302
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%83%A0%E5%B1%B1%E9%95%87%E7%A5%A0%E5%A0%82",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/22a70686339237df.webp",
+        "credit": "zcfofdu · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Librairie_avant-garde_in_Wuxi_Huishan_2.JPG",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​先鋒書店無錫店",
+        "place": "惠山镇祠堂",
+        "originalFile": "Librairie_avant-garde_in_Wuxi_Huishan_2.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

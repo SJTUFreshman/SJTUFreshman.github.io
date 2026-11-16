@@ -1,0 +1,295 @@
+{
+  "source": "/data/run01/scwb515/yangrunde/footprints-material-white-20261012",
+  "directories": [
+    "__pycache__",
+    "data",
+    "logs",
+    "previews",
+    "renders",
+    "scenes"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2015,
+      "sha256": "b1858719b219fc80dbf00dce68815abd0242ac9b0ff664ee55024a8d84a4c2bc",
+      "mtime_ns": 1791814555210812777,
+      "mode": 33204
+    },
+    {
+      "path": "__pycache__/render_atlas.cpython-311.pyc",
+      "bytes": 22231,
+      "sha256": "134216b2231b9059e85c5c176f43ce6a2247e59e99efd0282cfc749b33872887",
+      "mtime_ns": 1791813520897900221,
+      "mode": 33204
+    },
+    {
+      "path": "data/china.json",
+      "bytes": 2275180,
+      "sha256": "f78b39b828649cf70e498689d2a994ea9b72cc76a84b0026680f36b8e7e83aa2",
+      "mtime_ns": 1791812728290565823,
+      "mode": 33204
+    },
+    {
+      "path": "data/china.npz",
+      "bytes": 7889003,
+      "sha256": "2a102e43b9f68faa232cbe3e27ee5117f18b58c7873f4c6c31bb36384f71a0a2",
+      "mtime_ns": 1791812728310565694,
+      "mode": 33204
+    },
+    {
+      "path": "data/east_asia.json",
+      "bytes": 2147601,
+      "sha256": "269083502499f3ce1856773ecb2d6630a9581862f6a263bea16fcddf838dd1f5",
+      "mtime_ns": 1791812728318565641,
+      "mode": 33204
+    },
+    {
+      "path": "data/east_asia.npz",
+      "bytes": 16742450,
+      "sha256": "82775e793d4c2e9d24240d65c65ca7ee8d545cdd5654c80c496142929e40cca8",
+      "mtime_ns": 1791812728346565461,
+      "mode": 33204
+    },
+    {
+      "path": "data/europe_usa.json",
+      "bytes": 1636648,
+      "sha256": "28524ea2f1a9e0889fcc04fe0c5042095bbaa3cd5f34023b2e5cce860fa74f97",
+      "mtime_ns": 1791812728358565383,
+      "mode": 33204
+    },
+    {
+      "path": "data/europe_usa.npz",
+      "bytes": 11774934,
+      "sha256": "b25ee0a502aaf7921d0b7c9c2984230bec00917252fe60310a67ee61c54f1e58",
+      "mtime_ns": 1791812728382565227,
+      "mode": 33204
+    },
+    {
+      "path": "footprints-style.json",
+      "bytes": 513,
+      "sha256": "e22defeb3d39722ae612d5c91a2477c5c528d85849e7c7f72158c5ca0cae0628",
+      "mtime_ns": 1791813843455034441,
+      "mode": 33204
+    },
+    {
+      "path": "install-blender.sh",
+      "bytes": 668,
+      "sha256": "6b40f558c572e525bd3cafdbadc654da3cddea40503899dc46c7303d6e93906e",
+      "mtime_ns": 1791813394274272665,
+      "mode": 33204
+    },
+    {
+      "path": "logs/render-213567.out",
+      "bytes": 99354,
+      "sha256": "857a6b047425a14784cc93b1f7741487d33d057f58c255e6bcf962297d300cb5",
+      "mtime_ns": 1791814398043704675,
+      "mode": 33204
+    },
+    {
+      "path": "logs/sea-study-213531.out",
+      "bytes": 161,
+      "sha256": "5d6765f6a9ee55463e961e5ac7d4e73fffbfafc8dd9e5b35ee359efe679804d0",
+      "mtime_ns": 1791812733094646765,
+      "mode": 33204
+    },
+    {
+      "path": "logs/sea-study-213557.out",
+      "bytes": 35436,
+      "sha256": "7fa4b3526a84ab19702dc5580f57ccd45db9cd0159118a47686213f928c2f9c4",
+      "mtime_ns": 1791813559930421566,
+      "mode": 33204
+    },
+    {
+      "path": "logs/slurm-material-white-completed.txt",
+      "bytes": 901,
+      "sha256": "5630a5968d852868669ff115edc17f394fb286281c6940cbd1d85c5c50a63800",
+      "mtime_ns": 1791814503595358058,
+      "mode": 33204
+    },
+    {
+      "path": "preview-seas.slurm",
+      "bytes": 548,
+      "sha256": "5ae2146572b18b428e45e2da242763720634fd52ec33c6a98eaf481c85e13a67",
+      "mtime_ns": 1791813095114894748,
+      "mode": 33204
+    },
+    {
+      "path": "previews/china-colour-7595a6.png",
+      "bytes": 1564116,
+      "sha256": "68f19984523ae25ff41e629be13349d10aa45fa6f934ff52c43bd7cfd6f8bf29",
+      "mtime_ns": 1791813534626068810,
+      "mode": 33204
+    },
+    {
+      "path": "previews/china-colour-8ca6b5.png",
+      "bytes": 1603173,
+      "sha256": "d7d17c184b42ddc7f364fe3baf521b77c116b39de8128e6679f6720aabc191ba",
+      "mtime_ns": 1791813547586248309,
+      "mode": 33204
+    },
+    {
+      "path": "previews/china-colour-9eb5c0.png",
+      "bytes": 1555718,
+      "sha256": "fd4e188326779fb09d57cfa82756364744cb507eb8b790eb96eb8cb88bdd0568",
+      "mtime_ns": 1791813559874420780,
+      "mode": 33204
+    },
+    {
+      "path": "previews/china-relief-7595a6.png",
+      "bytes": 1441834,
+      "sha256": "1dc9d6211908c38eca0f27dff5a916acb9d6dfcfa1b3987f99a9051205d2036d",
+      "mtime_ns": 1791813529682008094,
+      "mode": 33204
+    },
+    {
+      "path": "previews/china-relief-8ca6b5.png",
+      "bytes": 1461688,
+      "sha256": "54d181aa0750e72ef44077ccfce54f71b4cf7439e33609d94f553b3f002e197b",
+      "mtime_ns": 1791813542610178467,
+      "mode": 33204
+    },
+    {
+      "path": "previews/china-relief-9eb5c0.png",
+      "bytes": 1397918,
+      "sha256": "da43b47e5f1fd4188590cb32dc611460008b7f5a0652341dabbbd59e876ee46f",
+      "mtime_ns": 1791813554910351107,
+      "mode": 33204
+    },
+    {
+      "path": "render-footprint-atlas.py",
+      "bytes": 9950,
+      "sha256": "ae983e8393e7bdf11d5509a4ecd3c643102978376fcf6f55ae9d05404b215018",
+      "mtime_ns": 1791813841419045790,
+      "mode": 33204
+    },
+    {
+      "path": "render-footprint-atlas.slurm",
+      "bytes": 1020,
+      "sha256": "dc884f2a5469608bbbbd3e1086eed2d703d58dd27b9f9804633b2b35dd6c24c0",
+      "mtime_ns": 1791813842335040685,
+      "mode": 33204
+    },
+    {
+      "path": "render_atlas.py",
+      "bytes": 12226,
+      "sha256": "f7fc291fde8ec112443d46b277d76dc4b16764f88b73b106a8b898f216982e6a",
+      "mtime_ns": 1791812730562551122,
+      "mode": 33204
+    },
+    {
+      "path": "renders/china-colour.png",
+      "bytes": 29326625,
+      "sha256": "b8dc7a2c374e52a10fd69ec38d3c0f74d9898bd76a832a00b6728238281808a4",
+      "mtime_ns": 1791814099545001548,
+      "mode": 33204
+    },
+    {
+      "path": "renders/china-relief.png",
+      "bytes": 26121668,
+      "sha256": "19bc0b7ac67a06015897cb51e6d4b551100581ab7ac104a718ab19293741ae0c",
+      "mtime_ns": 1791813986750369076,
+      "mode": 33204
+    },
+    {
+      "path": "renders/china-render.json",
+      "bytes": 786,
+      "sha256": "9e90cb19cc64e591c9971c26049c058791eca1ccabc12b4da4e4ef7bcad4b9cb",
+      "mtime_ns": 1791814100417021642,
+      "mode": 33204
+    },
+    {
+      "path": "renders/east_asia-colour.png",
+      "bytes": 27188822,
+      "sha256": "5cde4fe1f30ff32c25eb36f732f3a5d24af8644df7bc9c700dee888a63e455b4",
+      "mtime_ns": 1791814312513803469,
+      "mode": 33204
+    },
+    {
+      "path": "renders/east_asia-relief.png",
+      "bytes": 25063973,
+      "sha256": "f9bc26cfbaeb3a21b23003e3d9d2ea4e689bee17ae8c01bcf3123b2260fe8082",
+      "mtime_ns": 1791814207647475744,
+      "mode": 33204
+    },
+    {
+      "path": "renders/east_asia-render.json",
+      "bytes": 794,
+      "sha256": "d488e76c8895c9c651b217f01af921afadb61ef37a77dad919845465579881d2",
+      "mtime_ns": 1791814314169840986,
+      "mode": 33204
+    },
+    {
+      "path": "renders/europe_usa-relief.png",
+      "bytes": 18691957,
+      "sha256": "c88d1e3e4f55ce86ae75c9f5f4fd20fdb0524db3eb4fef038abef81bdbaae9ef",
+      "mtime_ns": 1791814397587695889,
+      "mode": 33204
+    },
+    {
+      "path": "renders/europe_usa-render.json",
+      "bytes": 699,
+      "sha256": "05e9324ebcc9298b94ed22dc9097fa7706a824e6ddbadb1dec12d72cdfb03e8a",
+      "mtime_ns": 1791814397983703520,
+      "mode": 33204
+    },
+    {
+      "path": "scenes/china-colour.blend",
+      "bytes": 69683762,
+      "sha256": "78e830ece1c0b4643d110ff1b9ab78c0faaacb359a3e7ac8cf8e60499a18d75b",
+      "mtime_ns": 1791813987066376269,
+      "mode": 33204
+    },
+    {
+      "path": "scenes/china-relief.blend",
+      "bytes": 69620053,
+      "sha256": "f3649a1099648a872700d710e8d064c9a3273c61a4aaef45c78b5239538566cc",
+      "mtime_ns": 1791813871011718783,
+      "mode": 33204
+    },
+    {
+      "path": "scenes/china-scenes.json",
+      "bytes": 892,
+      "sha256": "9b0a62648f61a500dae5428908b597569106e55634a417f104431e3f1789d7ba",
+      "mtime_ns": 1791814100353020167,
+      "mode": 33204
+    },
+    {
+      "path": "scenes/east_asia-colour.blend",
+      "bytes": 68942958,
+      "sha256": "2f2e9c866b8834d6d911439071501173a36cb0ea96e184976e6b1f82978edafe",
+      "mtime_ns": 1791814208339490185,
+      "mode": 33204
+    },
+    {
+      "path": "scenes/east_asia-relief.blend",
+      "bytes": 68880162,
+      "sha256": "0bf05d64865c426959e4c9626f9e9b2e391661b85b2cab811077fc8efb9050ec",
+      "mtime_ns": 1791814103853100818,
+      "mode": 33204
+    },
+    {
+      "path": "scenes/east_asia-scenes.json",
+      "bytes": 900,
+      "sha256": "759e252eab00fc07e02d4676bfb7fd2610ad9477d064c47b1f2971c789f879c6",
+      "mtime_ns": 1791814314085839083,
+      "mode": 33204
+    },
+    {
+      "path": "scenes/europe_usa-relief.blend",
+      "bytes": 50304092,
+      "sha256": "5e1ff9c18f93082aa7ba8a64fd8e599fa4de274bcb50584ed5db7e75a47b6ad5",
+      "mtime_ns": 1791814317373913574,
+      "mode": 33204
+    },
+    {
+      "path": "scenes/europe_usa-scenes.json",
+      "bytes": 452,
+      "sha256": "8222aef7e63270f623b65f3ca6ec3a0c7b3019cfd94cbca39cee1146ae3c93a1",
+      "mtime_ns": 1791814397955702979,
+      "mode": 33204
+    }
+  ],
+  "host": "paracloud-Zhongwei1",
+  "excluded_files": []
+}

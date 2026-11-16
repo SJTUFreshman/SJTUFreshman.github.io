@@ -1,0 +1,163 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "IND:LahaulSpiti": {
+      "label": {
+        "en": "Lahaul and Spiti",
+        "zh-CN": "拉豪尔与斯皮提",
+        "zh-TW": "拉豪爾與斯皮提"
+      },
+      "description": {
+        "en": "Lahaul and Spiti are two Himalayan valleys linked by Kunzum Pass and now joined in one district. Kardang and Dhankar were their earlier centres. Spiti had long ties of rule with Ladakh, while Lahaul changed hands between Ladakh and Kullu, leaving distinct but interconnected histories.",
+        "zh-CN": "拉豪尔与斯皮提是昆祖姆山口两侧的两个高山河谷，今天合为一个行政区。卡尔当与丹卡分别是两地旧时的重要中心。斯皮提曾长期隶属拉达克，拉豪尔则在拉达克与库鲁势力之间数度易手，两地拥有彼此相连又各具特点的历史。",
+        "zh-TW": "拉豪爾與斯皮提是昆祖姆山口兩側的兩個高山河谷，今天合爲一個行政區。卡爾當與丹卡分別是兩地舊時的重要中心。斯皮提曾長期隸屬拉達克，拉豪爾則在拉達克與庫魯勢力之間數度易手，兩地擁有彼此相連又各具特點的歷史。"
+      },
+      "source": "https://hplahaulspiti.nic.in/about-district/",
+      "textSources": [
+        "https://hplahaulspiti.nic.in/about-district/",
+        "https://hplahaulspiti.nic.in/history/"
+      ],
+      "textLicense": "Original editorial description; factual references linked. Source articles retain their own rights.",
+      "kind": "extension",
+      "lngLat": [
+        77.6,
+        32.5
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Lahaul_and_Spiti_district",
+      "coordinateRole": "regional-reference",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0b569a67a587acc9.webp",
+        "credit": "Clintonpeter · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shashur_monastery.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "The Dharma wheel and deer at Shashur Monastery, with the Lahaul mountains behind, photographed in 2017.",
+          "zh-CN": "2017年拍摄的沙舒尔寺法轮、双鹿与远处拉豪尔山景。",
+          "zh-TW": "2017年拍攝的沙舒爾寺法輪、雙鹿與遠處拉豪爾山景。"
+        },
+        "place": {
+          "en": "Shashur Monastery",
+          "zh-CN": "沙舒尔寺",
+          "zh-TW": "沙舒爾寺"
+        },
+        "originalFile": "Shashur monastery.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "textKind": "editorial-cultural",
+      "photoReference": "poi:admin:IND:LahaulSpiti:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Keylong",
+          "zh-CN": "凯隆",
+          "zh-TW": "凱隆"
+        },
+        "lngLat": [
+          77.03166666666667,
+          32.57083333333333
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 12 km landscape window around Keylong.",
+          "zh-CN": "以凯隆为中心，展示周边约12公里宽的主要聚落与地形。",
+          "zh-TW": "以凱隆爲中心，展示周邊約12公里寬的主要聚落與地形。"
+        },
+        "extentKm": 12,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q932399",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q932399#P625",
+        "selectionSource": "https://hplahaulspiti.nic.in/about-district/"
+      }
+    },
+    "poi:IND:LahaulSpiti:1": {
+      "label": {
+        "en": "Key Monastery",
+        "zh-CN": "基寺",
+        "zh-TW": "基寺"
+      },
+      "description": {
+        "en": "Key Monastery rises on a hill near Kaza in the Spiti valley. Its compact buildings connect through narrow passages and stairways. It remains a centre of monastic learning, with murals, thangkas and manuscripts, while its summer Cham performances bring ritual music and masked dance into the courtyards.",
+        "zh-CN": "基寺位于斯皮提河谷卡扎附近的山丘上，密集的建筑由狭窄通道与阶梯连接。这里仍是僧侣学习的场所，保存着壁画、唐卡和经籍；夏季的羌姆仪式将宗教音乐与面具舞带入寺院。",
+        "zh-TW": "基寺位於斯皮提河谷卡扎附近的山丘上，密集的建築由狹窄通道與階梯連接。這裏仍是僧侶學習的場所，保存着壁畫、唐卡和經籍；夏季的羌姆儀式將宗教音樂與面具舞帶入寺院。"
+      },
+      "source": "https://hplahaulspiti.nic.in/tourist-place/key-monastery/",
+      "textSources": [
+        "https://hplahaulspiti.nic.in/tourist-place/key-monastery/"
+      ],
+      "textLicense": "Original editorial description; factual references linked. Source articles retain their own rights.",
+      "kind": "landmark",
+      "lngLat": [
+        78.01194444,
+        32.29777778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Key_Monastery",
+      "coordinateRole": "landmark-anchor",
+      "photo": {
+        "src": "assets/maps/regions/photos/himalaya-30e2b8af169b4b43.webp",
+        "credit": "Pranav perspective · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1000_Year_loop.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Key Monastery above the Spiti valley at sunset.",
+          "zh-CN": "夕阳下俯瞰斯皮提河谷的基寺。",
+          "zh-TW": "夕陽下俯瞰斯皮提河谷的基寺。"
+        },
+        "place": "Key Monastery",
+        "originalFile": "1000 Year loop.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "parentCity": "IND:LahaulSpiti",
+      "textKind": "editorial-cultural"
+    },
+    "poi:admin:IND:LahaulSpiti:urban": {
+      "id": "poi:admin:IND:LahaulSpiti:urban",
+      "label": {
+        "en": "Shashur Monastery",
+        "zh-CN": "沙舒尔寺",
+        "zh-TW": "沙舒爾寺"
+      },
+      "description": {
+        "en": "Shashur is a Drukpa Buddhist monastery on the hillside above Keylong in the Lahaul valley. Its name refers to the blue pines around the monastery. The halls preserve large thangka paintings and murals, and the summer ceremonial dances are an important local festival. The monastery and its forested slope form a close landscape counterpart to the town and the Bhaga valley below.",
+        "zh-CN": "沙舒尔寺位于拉豪尔河谷凯隆镇上方的山坡，是竹巴噶举派寺院，寺名与周围的蓝松有关。殿堂保存有大型唐卡和壁画，夏季举行的仪式舞蹈是当地重要的节庆活动。寺院、山坡林木与下方的凯隆聚落及巴嘎河谷共同构成近城景观。",
+        "zh-TW": "沙舒爾寺位於拉豪爾河谷凱隆鎮上方的山坡，是竹巴噶舉派寺院，寺名與周圍的藍松有關。殿堂保存有大型唐卡和壁畫，夏季舉行的儀式舞蹈是當地重要的節慶活動。寺院、山坡林木與下方的凱隆聚落及巴嘎河谷共同構成近城景觀。"
+      },
+      "source": "https://hplahaulspiti.nic.in/monasteries-in-lahaul/",
+      "textSources": [
+        "https://hplahaulspiti.nic.in/monasteries-in-lahaul/",
+        "https://hplahaulspiti.nic.in/fairs-festivals/",
+        "https://en.wikipedia.org/wiki/Shashur_Monastery"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0b569a67a587acc9.webp",
+        "credit": "Clintonpeter · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shashur_monastery.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "The Dharma wheel and deer at Shashur Monastery, with the Lahaul mountains behind, photographed in 2017.",
+          "zh-CN": "2017年拍摄的沙舒尔寺法轮、双鹿与远处拉豪尔山景。",
+          "zh-TW": "2017年拍攝的沙舒爾寺法輪、雙鹿與遠處拉豪爾山景。"
+        },
+        "place": {
+          "en": "Shashur Monastery",
+          "zh-CN": "沙舒尔寺",
+          "zh-TW": "沙舒爾寺"
+        },
+        "originalFile": "Shashur monastery.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        77.02557105,
+        32.5792741
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/441781191",
+      "coordinateVerification": "https://api.openstreetmap.org/api/0.6/way/441781191/full.json",
+      "coordinateDerivation": "Arithmetic centroid of the documented OpenStreetMap building/monument footprint nodes (WGS84).",
+      "kind": "landmark",
+      "parentCity": "IND:LahaulSpiti"
+    }
+  }
+}

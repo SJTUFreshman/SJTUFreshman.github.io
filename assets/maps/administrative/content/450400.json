@@ -1,0 +1,104 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "450400": {
+      "label": {
+        "en": "Wuzhou",
+        "zh-CN": "梧州市",
+        "zh-TW": "梧州市"
+      },
+      "description": {
+        "en": "Wuzhou is a prefecture-level city in the east of Guangxi, China. By the end of 2024, the city's resident population is 2,827,700, including 1,623,900 urban residents, and the urbanization rate of the resident population is 57.43%.",
+        "zh-CN": "梧州市，简称梧，古称苍梧，是中华人民共和国广西壮族自治区下辖的地级市，位于广西东部。市境北界贺州市、桂林市，西邻来宾市、贵港市、玉林市，南连广东省茂名市，东临广东省肇庆市、云浮市。",
+        "zh-TW": "梧州市，簡稱梧，古稱蒼梧，是中華人民共和國廣西壯族自治區下轄的地級市，位於廣西東部。市境北界賀州市、桂林市，西鄰來賓市、貴港市、玉林市，南連廣東省茂名市，東臨廣東省肇慶市、雲浮市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%A2%A7%E5%B7%9E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%A2%A7%E5%B7%9E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Wuzhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        111.279,
+        23.4767
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/21edaebc3d57212d.webp",
+        "credit": "南海暖风 · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%B1%B1%E7%BA%AA%E5%BF%B5%E5%A0%82%EF%BC%88%E6%A2%A7%E5%B7%9E%EF%BC%89.JPG",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%B1%B1%E7%BA%AA%E5%BF%B5%E5%A0%82%EF%BC%88%E6%A2%A7%E5%B7%9E%EF%BC%89.JPG#Licensing",
+        "alt": "​梧州中山纪念堂，位于梧州万秀区中山公园",
+        "place": "中山纪念堂 (梧州)",
+        "originalFile": "中山纪念堂（梧州）.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:450400:d0df195b",
+      "urbanFocus": {
+        "label": {
+          "en": "Wuzhou",
+          "zh-CN": "梧州市",
+          "zh-TW": "梧州市"
+        },
+        "lngLat": [
+          111.316667,
+          23.483333
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Wuzhou.",
+          "zh-CN": "以梧州市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以梧州市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q571652#P625",
+        "source": "https://www.wikidata.org/wiki/Q571652",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q571652#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 2.17
+        }
+      }
+    },
+    "poi:admin:450400:d0df195b": {
+      "label": {
+        "en": "Sun Yat-sen Memorial Hall, Wuzhou",
+        "zh-CN": "中山纪念堂 (梧州)",
+        "zh-TW": "中山紀念堂 (梧州)"
+      },
+      "description": {
+        "en": "This memorial hall stands in Zhongshan Park in Wuzhou's Wanxiu District. The building was completed in October 1930.",
+        "zh-CN": "梧州中山纪念堂位于中华人民共和国梧州市万秀区上三里18号中山公园内，完建于1930年10月。",
+        "zh-TW": "梧州中山紀念堂位於中華人民共和國梧州市萬秀區上三里18號中山公園內，完建於1930年10月。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%B1%B1%E7%BA%AA%E5%BF%B5%E5%A0%82_(%E6%A2%A7%E5%B7%9E)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%B1%B1%E7%BA%AA%E5%BF%B5%E5%A0%82_(%E6%A2%A7%E5%B7%9E)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        111.31391,
+        23.47962
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%B1%B1%E7%BA%AA%E5%BF%B5%E5%A0%82_(%E6%A2%A7%E5%B7%9E)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "450400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/21edaebc3d57212d.webp",
+        "credit": "南海暖风 · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%B1%B1%E7%BA%AA%E5%BF%B5%E5%A0%82%EF%BC%88%E6%A2%A7%E5%B7%9E%EF%BC%89.JPG",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%B1%B1%E7%BA%AA%E5%BF%B5%E5%A0%82%EF%BC%88%E6%A2%A7%E5%B7%9E%EF%BC%89.JPG#Licensing",
+        "alt": "​梧州中山纪念堂，位于梧州万秀区中山公园",
+        "place": "中山纪念堂 (梧州)",
+        "originalFile": "中山纪念堂（梧州）.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

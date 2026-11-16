@@ -9,7 +9,7 @@ from pathlib import Path, PurePosixPath
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_ROOTS = {'assets', 'documents', 'fonts', 'images'}
 ROOT_FILES = {'index.html', 'life.html', 'observatory.html', 'pet-cache-worker.js', 'me_at_dorm.jpg', 'official_portray.png'}
-STATIC_SUFFIXES = {'.html', '.css', '.js', '.json', '.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg',
+STATIC_SUFFIXES = {'.html', '.css', '.js', '.mjs', '.atm', '.json', '.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg',
                    '.ico', '.woff', '.woff2', '.ttf', '.otf', '.pdf', '.md', '.txt', '.m4a'}
 MAX_FILES = 20000
 MAX_BYTES = 25 * 1024 * 1024

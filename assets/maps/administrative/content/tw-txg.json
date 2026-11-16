@@ -1,0 +1,214 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-TXG": {
+      "label": {
+        "en": "Taichung",
+        "zh-CN": "台中市",
+        "zh-TW": "臺中市"
+      },
+      "description": {
+        "en": "Taichung , officially Taichung City, is a special municipality in central Taiwan. Taichung is Taiwan's second-largest city, with more than 2.86 million residents, making it the largest city in Central Taiwan.",
+        "zh-CN": "台中市，通称台中，为中华台北的六个直辖市之一，也是中台湾唯一的直辖市。周边与六个县相邻，北邻苗栗县、新竹县，南邻彰化县、南投县，东隔中央山脉与花莲县相邻，东北以中央山脉和雪山山脉毗邻宜兰县，西临台湾海峡。",
+        "zh-TW": "臺中市，通稱臺中，為中華臺北的六個直轄市之一，也是中臺灣唯一的直轄市。周邊與六個縣相鄰，北鄰苗栗縣、新竹縣，南鄰彰化縣、南投縣，東隔中央山脈與花蓮縣相鄰，東北以中央山脈和雪山山脈毗鄰宜蘭縣，西臨臺灣海峽。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%87%BA%E4%B8%AD%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%87%BA%E4%B8%AD%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Taichung"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        120.67944444,
+        24.14388889
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/e0c87ef500550626.webp",
+        "credit": "Wpcpey · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:National_Taichung_Theater_aerial_view_2019.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "National Taichung Theater",
+        "place": "National Taichung Theater",
+        "originalFile": "National_Taichung_Theater_aerial_view_2019.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-TXG:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Taichung",
+          "zh-CN": "台中市",
+          "zh-TW": "臺中市"
+        },
+        "lngLat": [
+          120.67944444444444,
+          24.14388888888889
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 32 km landscape window around Taichung.",
+          "zh-CN": "以台中市为中心，展示周边约32公里宽的主要聚落与地形。",
+          "zh-TW": "以臺中市爲中心，展示周邊約32公里寬的主要聚落與地形。"
+        },
+        "extentKm": 32,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q245023",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q245023#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E8%87%BA%E4%B8%AD%E5%B8%82"
+      }
+    },
+    "poi:admin:TW-TXG:e2208d65": {
+      "label": {
+        "en": "Taichung Park",
+        "zh-CN": "台中公园",
+        "zh-TW": "臺中公園"
+      },
+      "description": {
+        "en": "The Taichung Park is an urban park in North District, Taichung, Taiwan. It is the oldest park in Taichung.",
+        "zh-CN": "台中公园是一座位于台湾台中市北区的公园，位于自由路、双十路、精武路交接路口，该公园于日治时期所创立，是台中市历史最悠久的公园，园区占地约32,889坪。 当前，该公园内的湖心亭为台中市的重要象征。",
+        "zh-TW": "臺中公園是一座位於臺灣臺中市北區的公園，位於自由路、雙十路、精武路交接路口，該公園於日治時期所創立，是臺中市歷史最悠久的公園，園區佔地約32,889坪。 當前，該公園內的湖心亭為臺中市的重要象徵。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%87%BA%E4%B8%AD%E5%85%AC%E5%9C%92",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%87%BA%E4%B8%AD%E5%85%AC%E5%9C%92",
+        "https://en.wikipedia.org/wiki/Taichung_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.68333333,
+        24.145
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Taichung_Park",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TXG",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0ea74cc829b6f4f8.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%B9%96%E5%BF%83%E4%BA%AD%E9%81%A0%E6%99%AF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​湖心亭遠景",
+        "place": "臺中公園",
+        "originalFile": "湖心亭遠景.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TXG:4da976ad": {
+      "label": {
+        "en": "Lake Pavilion, Taichung Park",
+        "zh-CN": "湖心亭 (台中市)",
+        "zh-TW": "湖心亭 (臺中市)"
+      },
+      "description": {
+        "en": "This pavilion stands on an island in Taichung Park's Sun Moon Lake. Built in 1908 to commemorate completion of the north–south railway, it became a widely recognised symbol of Taichung.",
+        "zh-CN": "湖心亭，曾名中正亭，是位于台湾台中市北区台中公园日月湖湖中岛上的亭楼，为1908年为纪念纵贯线全线通车兴建，今列台中市市定古迹，被视作台中意象的代表，如门牌、公车票、台中市政府府徽、市旗等。",
+        "zh-TW": "湖心亭，曾名中正亭，是位於臺灣臺中市北區臺中公園日月湖湖中島上的亭樓，為1908年為紀念縱貫線全線通車興建，今列臺中市市定古蹟，被視作臺中意象的代表，如門牌、公車票、臺中市政府府徽、市旗等。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B9%96%E5%BF%83%E4%BA%AD_(%E8%87%BA%E4%B8%AD%E5%B8%82)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B9%96%E5%BF%83%E4%BA%AD_(%E8%87%BA%E4%B8%AD%E5%B8%82)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.684147,
+        24.143612
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%B9%96%E5%BF%83%E4%BA%AD_(%E8%87%BA%E4%B8%AD%E5%B8%82)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TXG",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c765e58d3846c3b6.webp",
+        "credit": "Outlookxp · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2024%E5%B9%B4%E5%8F%B0%E4%B8%AD%E5%85%AC%E5%9C%92%E6%B9%96%E5%BF%83%E4%BA%AD%E8%88%87%E5%88%92%E8%88%B9%E9%81%8A%E5%AE%A2.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "​臺中公園湖心亭與划船遊客",
+        "place": "湖心亭 (臺中市)",
+        "originalFile": "2024年台中公園湖心亭與划船遊客.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TXG:c6660507": {
+      "label": {
+        "en": "Luce Memorial Chapel",
+        "zh-CN": "路思义教堂",
+        "zh-TW": "路思義教堂"
+      },
+      "description": {
+        "en": "The Luce Memorial Chapel is a Christian chapel on the campus of Tunghai University in Xitun District, Taichung, Taiwan. It was designed by architects I. M. Pei and Chi-kuan Chen.",
+        "zh-CN": "路思义教堂是位于台湾台中市东海大学的基督新教礼拜堂，为著名台湾建筑师陈其宽与美国华裔建筑师贝聿铭之作。始建于1962年11月1日，并于1963年11月2日落成。",
+        "zh-TW": "路思義教堂是位於臺灣臺中市東海大學的基督新教禮拜堂，為著名臺灣建築師陳其寬與美國華裔建築師貝聿銘之作。始建於1962年11月1日，並於1963年11月2日落成。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%B7%AF%E6%80%9D%E7%BE%A9%E6%95%99%E5%A0%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%B7%AF%E6%80%9D%E7%BE%A9%E6%95%99%E5%A0%82",
+        "https://en.wikipedia.org/wiki/Luce_Memorial_Chapel"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.600518,
+        24.1787924
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Luce_Memorial_Chapel",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TXG",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2b01fdea2862140e.webp",
+        "credit": "Yakult6067 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%B7%AF%E6%80%9D%E7%BE%A9%E7%9A%84%E7%90%86%E5%BF%B5.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "The Luce Chapel",
+        "place": "路思義教堂",
+        "originalFile": "路思義的理念.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TXG:urban": {
+      "id": "poi:admin:TW-TXG:urban",
+      "label": {
+        "en": "National Taichung Theater",
+        "zh-CN": "台中国家歌剧院",
+        "zh-TW": "臺中國家歌劇院"
+      },
+      "description": {
+        "en": "The National Taichung Theater is an opera house in the Taichung's 7th Redevelopment Zone in the Xitun District of Taichung, Taiwan. The estimated area of the structure is 57,685 square meters .",
+        "zh-CN": "台中国家歌剧院是位于台湾台中市西屯区七期重划区里的大型公有展演空间，为日本建筑师伊东豊雄设计，占地57,685平方公尺。歌剧院内拥有大剧院、中剧院、小剧场以及一个小型户外剧场，另有餐饮空间与空中花园。",
+        "zh-TW": "臺中國家歌劇院是位於臺灣臺中市西屯區七期重劃區裡的大型公有展演空間，為日本建築師伊東豊雄設計，佔地57,685平方公尺。歌劇院內擁有大劇院、中劇院、小劇場以及一個小型戶外劇場，另有餐飲空間與空中花園。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%87%BA%E4%B8%AD%E5%9C%8B%E5%AE%B6%E6%AD%8C%E5%8A%87%E9%99%A2",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%87%BA%E4%B8%AD%E5%9C%8B%E5%AE%B6%E6%AD%8C%E5%8A%87%E9%99%A2",
+        "https://en.wikipedia.org/wiki/National_Taichung_Theater"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e0c87ef500550626.webp",
+        "credit": "Wpcpey · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:National_Taichung_Theater_aerial_view_2019.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "National Taichung Theater",
+        "place": "National Taichung Theater",
+        "originalFile": "National_Taichung_Theater_aerial_view_2019.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.64055556,
+        24.16277778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/National_Taichung_Theater",
+      "kind": "landmark",
+      "parentCity": "TW-TXG"
+    }
+  }
+}

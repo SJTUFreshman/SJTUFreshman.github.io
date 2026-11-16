@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "433100": {
+      "label": {
+        "en": "Xiangxi Tujia and Miao Autonomous Prefecture",
+        "zh-CN": "湘西土家族苗族自治州",
+        "zh-TW": "湘西土家族苗族自治州"
+      },
+      "description": {
+        "en": "Xiangxi Tujia and Miao Autonomous Prefecture is an autonomous prefecture of the People's Republic of China. It is located in northwestern Hunan province.",
+        "zh-CN": "湘西土家族苗族自治州，简称湘西州，是中华人民共和国湖南省下辖的自治州，位于湖南省西北部。州境东北达张家界市，东南邻怀化市，西南界贵州省铜仁市，西毗重庆市，西北接湖北省恩施州。",
+        "zh-TW": "湘西土家族苗族自治州，簡稱湘西州，是中華人民共和國湖南省下轄的自治州，位於湖南省西北部。州境東北達張家界市，東南鄰懷化市，西南界貴州省銅仁市，西毗重慶市，西北接湖北省恩施州。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B9%98%E8%A5%BF%E5%9C%9F%E5%AE%B6%E6%97%8F%E8%8B%97%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B9%98%E8%A5%BF%E5%9C%9F%E5%AE%B6%E6%97%8F%E8%8B%97%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+        "https://en.wikipedia.org/wiki/Xiangxi_Tujia_and_Miao_Autonomous_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        109.74,
+        28.31
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/18b666860c25b882.webp",
+        "credit": "Raki_Man · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Confucius_Temple-_Qianzhou_Ancient_Town_-_panoramio.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "Confucius Temple- Qianzhou Ancient Town",
+        "place": "Confucius Temple- Qianzhou Ancient Town - panoramio.jpg",
+        "originalFile": "Confucius Temple- Qianzhou Ancient Town - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            109.692732,
+            28.257803
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Confucius_Temple-_Qianzhou_Ancient_Town_-_panoramio.jpg"
+        }
+      },
+      "photoReference": "poi:admin:433100:photo-54795269",
+      "urbanFocus": {
+        "label": {
+          "en": "Xiangxi Tujia and Miao Autonomous Prefecture",
+          "zh-CN": "湘西土家族苗族自治州",
+          "zh-TW": "湘西土家族苗族自治州"
+        },
+        "lngLat": [
+          109.73666,
+          28.31248
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Xiangxi Tujia and Miao Autonomous Prefecture.",
+          "zh-CN": "以湘西土家族苗族自治州的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以湘西土家族苗族自治州的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q763069#P625",
+        "source": "https://www.wikidata.org/wiki/Q763069",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q763069#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.36
+        }
+      }
+    },
+    "poi:admin:433100:photo-54795269": {
+      "label": {
+        "en": "Inside Qianzhou Confucian Temple",
+        "zh-CN": "干州古城文庙殿内",
+        "zh-TW": "乾州古城文廟殿內"
+      },
+      "description": {
+        "en": "The interior of the Confucian Temple in Qianzhou Ancient Town, showing its altar space and traditional decoration.",
+        "zh-CN": "干州古城文庙殿内的实景，画面呈现供奉空间与传统装饰。",
+        "zh-TW": "乾州古城文廟殿內的實景，畫面呈現供奉空間與傳統裝飾。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Confucius_Temple-_Qianzhou_Ancient_Town_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Confucius_Temple-_Qianzhou_Ancient_Town_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/18b666860c25b882.webp",
+        "credit": "Raki_Man · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Confucius_Temple-_Qianzhou_Ancient_Town_-_panoramio.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "Confucius Temple- Qianzhou Ancient Town",
+        "place": "Confucius Temple- Qianzhou Ancient Town - panoramio.jpg",
+        "originalFile": "Confucius Temple- Qianzhou Ancient Town - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            109.692732,
+            28.257803
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Confucius_Temple-_Qianzhou_Ancient_Town_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        109.692732,
+        28.257803
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Confucius_Temple-_Qianzhou_Ancient_Town_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "433100"
+    }
+  }
+}

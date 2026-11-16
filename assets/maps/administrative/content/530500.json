@@ -1,0 +1,188 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "530500": {
+      "label": {
+        "en": "Baoshan, Yunnan",
+        "zh-CN": "保山市",
+        "zh-TW": "保山市"
+      },
+      "description": {
+        "en": "Baoshan , historically also Yongchang , is a prefecture-level city in western Yunnan Province, People's Republic of China. Baoshan is the second-biggest metropolitan area in western Yunnan after Dali.",
+        "zh-CN": "保山市，古称永昌，是中华人民共和国云南省下辖的地级市，位于云南省西部。市境北接怒江州，东北临大理州，东南界临沧市，西邻德宏州，西北与南面一小段边界与缅甸接壤。",
+        "zh-TW": "保山市，古稱永昌，是中華人民共和國雲南省下轄的地級市，位於雲南省西部。市境北接怒江州，東北臨大理州，東南界臨滄市，西鄰德宏州，西北與南面一小段邊界與緬甸接壤。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%BF%9D%E5%B1%B1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%BF%9D%E5%B1%B1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Baoshan,_Yunnan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        99.161,
+        25.112
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/981d2b9b00da852c.webp",
+        "credit": "瑞丽江的河水 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%9A%87%E5%86%A0%E5%B1%B1_-_2024-06-01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​福贡县匹河乡怒江西岸皇冠山，属高黎贡山",
+        "place": "高黎贡山",
+        "originalFile": "皇冠山_-_2024-06-01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:530500:ff0745d2",
+      "urbanFocus": {
+        "label": {
+          "en": "Baoshan",
+          "zh-CN": "保山市",
+          "zh-TW": "保山市"
+        },
+        "lngLat": [
+          99.16905,
+          25.12105
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Baoshan.",
+          "zh-CN": "以保山市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以保山市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q496576#P625",
+        "source": "https://www.wikidata.org/wiki/Q496576",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q496576#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.05
+        }
+      }
+    },
+    "poi:admin:530500:72c3e395": {
+      "label": {
+        "en": "Tengchong National Memorial Cemetery",
+        "zh-CN": "国殇墓园",
+        "zh-TW": "國殤墓園"
+      },
+      "description": {
+        "en": "This cemetery commemorates Chinese Expeditionary Force soldiers killed in the 1944 Battle of Tengchong. It lies beside the Dieshui River near the northern foot of Laifeng Mountain.",
+        "zh-CN": "国殇墓园，位于中华人民共和国云南省保山市腾冲市西南一公里处的叠水河畔、来凤山北麓的小团坡，是为了纪念抗日战争时期中国远征军第二十集团军在1944年腾冲战役中阵亡将士而修建的墓园。“国殇”之名由时任云贵监察使李根源拟定，取自楚辞中的“国殇”篇名。",
+        "zh-TW": "國殤墓園，位於中華人民共和國雲南省保山市騰衝市西南一公里處的疊水河畔、來鳳山北麓的小團坡，是爲了紀念抗日戰爭時期中國遠征軍第二十集團軍在1944年騰衝戰役中陣亡將士而修建的墓園。“國殤”之名由時任雲貴監察使李根源擬定，取自楚辭中的“國殤”篇名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9B%BD%E6%AE%87%E5%A2%93%E5%9B%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9B%BD%E6%AE%87%E5%A2%93%E5%9B%AD"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        98.48116111,
+        25.02951111
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%9B%BD%E6%AE%87%E5%A2%93%E5%9B%AD",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "530500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a606a9ec61e5dada.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20140129_Graveyard_of_the_National_Heroes_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Graveyard of the National Heroes in Tengchong, Yunnan",
+        "place": "国殇墓园",
+        "originalFile": "20140129_Graveyard_of_the_National_Heroes_01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:530500:ff0745d2": {
+      "label": {
+        "en": "Gaoligong Mountains",
+        "zh-CN": "高黎贡山",
+        "zh-TW": "高黎貢山"
+      },
+      "description": {
+        "en": "The Gaoligong Mountains are a mountainous sub-range of the southern Hengduan Mountain Range, located in the western Yunnan highlands and straddling the border of southwestern China and northern Myanmar . It is described as a \"global biodiversity hotspot\" and one of the \"biologically richest places on Earth.",
+        "zh-CN": "高黎贡山是位于中国和缅甸边境的一座山脉。该山脉南北走向，北起青藏高原南缘，南至云南德宏北部，全长500公里，是怒江和伊洛瓦底江的分水岭，主峰为贡山独龙族怒族自治县境内的楚鹿腊卡峰，该峰又被当地人称为仰目嘎娃嘎普峰或仰目谷陇，也被当地民间唤之为嘎娃嘎普峰，海拔5128米。",
+        "zh-TW": "高黎貢山是位於中國和緬甸邊境的一座山脈。該山脈南北走向，北起青藏高原南緣，南至雲南德宏北部，全長500公里，是怒江和伊洛瓦底江的分水嶺，主峯爲貢山獨龍族怒族自治縣境內的楚鹿臘卡峯，該峯又被當地人稱爲仰目嘎娃嘎普峯或仰目谷隴，也被當地民間喚之爲嘎娃嘎普峯，海拔5128米。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%AB%98%E9%BB%8E%E8%B4%A1%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%AB%98%E9%BB%8E%E8%B4%A1%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Gaoligong_Mountains"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        98.7,
+        25.08333333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Gaoligong_Mountains",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "530500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/981d2b9b00da852c.webp",
+        "credit": "瑞丽江的河水 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%9A%87%E5%86%A0%E5%B1%B1_-_2024-06-01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​福贡县匹河乡怒江西岸皇冠山，属高黎贡山",
+        "place": "高黎贡山",
+        "originalFile": "皇冠山_-_2024-06-01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:530500:photo-144028063": {
+      "label": {
+        "en": "Baoshan, Yunnan landscape view",
+        "zh-CN": "保山双林寺 - 正门 - 2023-07-25 02",
+        "zh-TW": "保山雙林寺 - 正門 - 2023-07-25 02"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Baoshan, Yunnan, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现保山市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現保山市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E4%BF%9D%E5%B1%B1%E5%8F%8C%E6%9E%97%E5%AF%BA_-_%E6%AD%A3%E9%97%A8_-_2023-07-25_02.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E4%BF%9D%E5%B1%B1%E5%8F%8C%E6%9E%97%E5%AF%BA_-_%E6%AD%A3%E9%97%A8_-_2023-07-25_02.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3f332ecaa5893898.webp",
+        "credit": "瑞丽江的河水 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%BF%9D%E5%B1%B1%E5%8F%8C%E6%9E%97%E5%AF%BA_-_%E6%AD%A3%E9%97%A8_-_2023-07-25_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​保山双林寺正门",
+        "place": "保山双林寺 - 正门 - 2023-07-25 02.jpg",
+        "originalFile": "保山双林寺 - 正门 - 2023-07-25 02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            99.173272,
+            25.124236
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E4%BF%9D%E5%B1%B1%E5%8F%8C%E6%9E%97%E5%AF%BA_-_%E6%AD%A3%E9%97%A8_-_2023-07-25_02.jpg"
+        }
+      },
+      "lngLat": [
+        99.173272,
+        25.124236
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E4%BF%9D%E5%B1%B1%E5%8F%8C%E6%9E%97%E5%AF%BA_-_%E6%AD%A3%E9%97%A8_-_2023-07-25_02.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "530500"
+    }
+  }
+}

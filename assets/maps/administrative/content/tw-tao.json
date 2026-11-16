@@ -1,0 +1,213 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-TAO": {
+      "label": {
+        "en": "Taoyuan, Taiwan",
+        "zh-CN": "桃园市",
+        "zh-TW": "桃園市"
+      },
+      "description": {
+        "en": "Taoyuan is a special municipality located in northwestern Taiwan, neighboring New Taipei City to the north-east, Yilan County to the south-east, and Hsinchu County to the south-west. Taoyuan District is the seat of the municipal government and which, along with Zhongli District, forms a large metropolitan area.",
+        "zh-CN": "桃园市，通称桃园，简称「桃」，是中华台北的直辖市，由桃园县升格而来，位于台湾西北部，西面台湾海峡，东临宜兰县，北接新北市，南与新竹为界。面积约1,220平方公里，设籍人口约230万人，位居台湾各县市第5位；内政部统计处于2024年发表的「行政区电信信令人口统计资料」，则实居人口为2,582,724人，位居第四位；全市划为13区，市政府所在地为桃园区，桃园区与中坜区并列为两大发展核心，称为北桃园、南桃园。",
+        "zh-TW": "桃園市，通稱桃園，簡稱「桃」，是中華臺北的直轄市，由桃園縣升格而來，位於臺灣西北部，西面臺灣海峽，東臨宜蘭縣，北接新北市，南與新竹為界。面積約1,220平方公里，設籍人口約230萬人，位居臺灣各縣市第5位；內政部統計處於2024年發表的「行政區電信信令人口統計資料」，則實居人口為2,582,724人，位居第四位；全市劃為13區，市政府所在地為桃園區，桃園區與中壢區並列為兩大發展核心，稱為北桃園、南桃園。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%A1%83%E5%9C%92%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%A1%83%E5%9C%92%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Taoyuan,_Taiwan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        121.31432778,
+        24.99127778
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/c9a99bda1faf04d3.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%A1%83%E5%9C%92%E5%AD%94%E5%AD%90%E5%BB%9F%E5%A4%A7%E6%88%90%E6%AE%BF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​桃園孔子廟大成殿",
+        "place": "Taoyuan Confucian Temple",
+        "originalFile": "桃園孔子廟大成殿.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-TAO:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Taoyuan District",
+          "zh-CN": "桃园区",
+          "zh-TW": "桃園區"
+        },
+        "lngLat": [
+          121.31111111111,
+          24.988888888889
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 24 km landscape window around Taoyuan District.",
+          "zh-CN": "以桃园区为中心，展示周边约24公里宽的主要聚落与地形。",
+          "zh-TW": "以桃園區爲中心，展示周邊約24公里寬的主要聚落與地形。"
+        },
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q715975",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q715975#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E6%A1%83%E5%9C%92%E5%B8%82"
+      }
+    },
+    "poi:admin:TW-TAO:3c228770": {
+      "label": {
+        "en": "Shoushanyan Guanyin Temple",
+        "zh-CN": "寿山岩观音寺",
+        "zh-TW": "壽山岩觀音寺"
+      },
+      "description": {
+        "en": "This Guanyin temple stands in Lingding, in Taoyuan's Guishan District. The historic complex is protected as a municipal monument.",
+        "zh-CN": "寿山岩观音寺，俗称岭顶观音妈庙，承皇帝赐寺名，是位于台湾桃园市龟山区岭顶里的观音寺，为桃园市定古迹。",
+        "zh-TW": "壽山巖觀音寺，俗稱嶺頂觀音媽廟，承皇帝賜寺名，是位於臺灣桃園市龜山區嶺頂裏的觀音寺，為桃園市定古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A3%BD%E5%B1%B1%E5%B7%96%E8%A7%80%E9%9F%B3%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A3%BD%E5%B1%B1%E5%B7%96%E8%A7%80%E9%9F%B3%E5%AF%BA"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.366077,
+        25.003538
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%A3%BD%E5%B1%B1%E5%B7%96%E8%A7%80%E9%9F%B3%E5%AF%BA",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TAO",
+      "photo": {
+        "src": "assets/maps/administrative/photos/24f790f2def6feab.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%A3%BD%E5%B1%B1%E5%B7%96%E8%A7%80%E9%9F%B3%E5%AF%BA%E6%AD%A3%E9%9D%A2%E9%81%A0%E7%85%A7.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​壽山巖觀音寺正面遠照",
+        "place": "壽山巖觀音寺",
+        "originalFile": "壽山巖觀音寺正面遠照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TAO:63eb12db": {
+      "label": {
+        "en": "Daxi Puji Temple",
+        "zh-CN": "大溪普济堂",
+        "zh-TW": "大溪普濟堂"
+      },
+      "description": {
+        "en": "Founded in 1902, Puji Temple stands beside Daxi Old Street in Taoyuan. It honours the Three Benefactor Lords alongside other deities.",
+        "zh-CN": "大溪普济堂，是位于台湾桃园市大溪区福仁里大溪老街的百年庙宇，创立于明治三十五年壬寅之岁，主祀三圣恩主，配祀文昌帝君、延平郡王。",
+        "zh-TW": "大溪普濟堂，是位於臺灣桃園市大溪區福仁裏大溪老街的百年廟宇，創立於明治三十五年壬寅之歲，主祀三聖恩主，配祀文昌帝君、延平郡王。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%BA%AA%E6%99%AE%E6%BF%9F%E5%A0%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%BA%AA%E6%99%AE%E6%BF%9F%E5%A0%82"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.286646,
+        24.886042
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%BA%AA%E6%99%AE%E6%BF%9F%E5%A0%82",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TAO",
+      "photo": {
+        "src": "assets/maps/administrative/photos/00e3fa758b30dae2.webp",
+        "credit": "Taiwankengo · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2021_Daxi_Puji_Temple_b.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​2021 Daxi Puji Temple 桃園大溪普濟堂",
+        "place": "大溪普濟堂",
+        "originalFile": "2021_Daxi_Puji_Temple_b.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TAO:2d1e3873": {
+      "label": {
+        "en": "Baishajia Lighthouse",
+        "zh-CN": "白沙岬灯塔",
+        "zh-TW": "白沙岬燈塔"
+      },
+      "description": {
+        "en": "The Baishajia Lighthouse or Paisha Chia Lighthouse is a lighthouse in Guanyin District, Taoyuan City, Taiwan.",
+        "zh-CN": "白沙岬灯塔是一座位于台湾桃园市观音区观音里新坡下的灯塔。于明治三十一年开始兴建，历时三年完工，三十四年1月启用发光。",
+        "zh-TW": "白沙岬燈塔是一座位於臺灣桃園市觀音區觀音裏新坡下的燈塔。於明治三十一年開始興建，歷時三年完工，三十四年1月啟用發光。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%99%BD%E6%B2%99%E5%B2%AC%E7%87%88%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%99%BD%E6%B2%99%E5%B2%AC%E7%87%88%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Baishajia_Lighthouse"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.07622222,
+        25.04133333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Baishajia_Lighthouse",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TAO",
+      "photo": {
+        "src": "assets/maps/administrative/photos/8b594ba89e6eb8bb.webp",
+        "credit": "寺人孟子 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E6%B2%99%E5%B2%AC%E7%87%88%E5%A1%94%E5%85%A5%E5%8F%A3.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​白沙岬燈塔入口,桃園市觀音區觀音地區觀音里",
+        "place": "白沙岬燈塔",
+        "originalFile": "白沙岬燈塔入口.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TAO:urban": {
+      "id": "poi:admin:TW-TAO:urban",
+      "label": {
+        "en": "Taoyuan Confucian Temple",
+        "zh-CN": "桃园孔子庙",
+        "zh-TW": "桃園孔子廟"
+      },
+      "description": {
+        "en": "The Taoyuan Confucian Temple is a Confucian temple in Taoyuan District, Taoyuan City, Taiwan.",
+        "zh-CN": "桃园孔子庙，是位于台湾桃园市桃园区三元里的孔庙，原借居于桃园文昌庙，至1989年在虎头山公园落成，为台湾十三座官设孔庙中最晚建立的，有著道教祭祀色彩，庙内设孔子像，每年办理释奠典礼活动及祈福活动。",
+        "zh-TW": "桃園孔子廟，是位於臺灣桃園市桃園區三元里的孔廟，原借居於桃園文昌廟，至1989年在虎頭山公園落成，為臺灣十三座官設孔廟中最晚建立的，有著道教祭祀色彩，廟內設孔子像，每年辦理釋奠典禮活動及祈福活動。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%A1%83%E5%9C%92%E5%AD%94%E5%AD%90%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%A1%83%E5%9C%92%E5%AD%94%E5%AD%90%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Taoyuan_Confucian_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c9a99bda1faf04d3.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%A1%83%E5%9C%92%E5%AD%94%E5%AD%90%E5%BB%9F%E5%A4%A7%E6%88%90%E6%AE%BF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​桃園孔子廟大成殿",
+        "place": "Taoyuan Confucian Temple",
+        "originalFile": "桃園孔子廟大成殿.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.32766667,
+        25.00116667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Taoyuan_Confucian_Temple",
+      "kind": "landmark",
+      "parentCity": "TW-TAO"
+    }
+  }
+}

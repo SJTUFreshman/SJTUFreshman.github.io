@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "623000": {
+      "label": {
+        "en": "Gannan Tibetan Autonomous Prefecture",
+        "zh-CN": "甘南藏族自治州",
+        "zh-TW": "甘南藏族自治州"
+      },
+      "description": {
+        "en": "Gannan Tibetan Autonomous Prefecture is an autonomous prefecture in southern Gansu Province, China, bordering Linxia to the north, Dingxi to the northeast, Longnan to the east and Aba to the south. It includes Xiahe and the Labrang Monastery, Luqu, Maqu and other mostly Tibetan towns and villages.",
+        "zh-CN": "甘南藏族自治州，简称甘南州，是中华人民共和国甘肃省下辖的自治州，位于甘肃省南部，甘青川三省交界，传统上属于安多藏区。州境东南邻陇南市，东接定西市，北通临夏州与青海省海东市，西界青海省黄南州、果洛州，南毗四川省阿坝州。",
+        "zh-TW": "甘南藏族自治州，簡稱甘南州，是中華人民共和國甘肅省下轄的自治州，位於甘肅省南部，甘青川三省交界，傳統上屬於安多藏區。州境東南鄰隴南市，東接定西市，北通臨夏州與青海省海東市，西界青海省黃南州、果洛州，南毗四川省阿壩州。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%94%98%E5%8D%97%E8%97%8F%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%94%98%E5%8D%97%E8%97%8F%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+        "https://en.wikipedia.org/wiki/Gannan_Tibetan_Autonomous_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        102.91,
+        34.98
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/3d492c1bee52b506.webp",
+        "credit": "Randy Rambo · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:ShangBaLa_Hotel,_Postal_Code,_747000_-_panoramio.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "ShangBaLa Hotel, Postal Code: 747000",
+        "place": "ShangBaLa Hotel, Postal Code, 747000 - panoramio.jpg",
+        "originalFile": "ShangBaLa Hotel, Postal Code, 747000 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            102.90929,
+            34.996069
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:ShangBaLa_Hotel,_Postal_Code,_747000_-_panoramio.jpg"
+        }
+      },
+      "photoReference": "poi:admin:623000:photo-54504448",
+      "urbanFocus": {
+        "label": {
+          "en": "Gannan Tibetan Autonomous Prefecture",
+          "zh-CN": "甘南藏族自治州",
+          "zh-TW": "甘南藏族自治州"
+        },
+        "lngLat": [
+          102.90975,
+          34.98449
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Gannan Tibetan Autonomous Prefecture.",
+          "zh-CN": "以甘南藏族自治州的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以甘南藏族自治州的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q1012462#P625",
+        "source": "https://www.wikidata.org/wiki/Q1012462",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q1012462#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.24
+        }
+      }
+    },
+    "poi:admin:623000:photo-54504448": {
+      "label": {
+        "en": "ShangBaLa Hotel, Postal Code, 747000",
+        "zh-CN": "甘南藏族自治州城区景观",
+        "zh-TW": "甘南藏族自治州城區景觀"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Gannan Tibetan Autonomous Prefecture, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现甘南藏族自治州城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現甘南藏族自治州城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:ShangBaLa_Hotel,_Postal_Code,_747000_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:ShangBaLa_Hotel,_Postal_Code,_747000_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3d492c1bee52b506.webp",
+        "credit": "Randy Rambo · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:ShangBaLa_Hotel,_Postal_Code,_747000_-_panoramio.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "ShangBaLa Hotel, Postal Code: 747000",
+        "place": "ShangBaLa Hotel, Postal Code, 747000 - panoramio.jpg",
+        "originalFile": "ShangBaLa Hotel, Postal Code, 747000 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            102.90929,
+            34.996069
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:ShangBaLa_Hotel,_Postal_Code,_747000_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        102.90929,
+        34.996069
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:ShangBaLa_Hotel,_Postal_Code,_747000_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "623000"
+    }
+  }
+}

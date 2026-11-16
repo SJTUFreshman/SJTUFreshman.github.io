@@ -1,0 +1,189 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "640300": {
+      "label": {
+        "en": "Wuzhong, Ningxia",
+        "zh-CN": "吴忠市",
+        "zh-TW": "吳忠市"
+      },
+      "description": {
+        "en": "Wuzhong is a prefecture-level city in the Ningxia autonomous region of the People's Republic of China. It was known as Yinnan Prefecture before it was upgraded to a prefecture-level city in 1998.",
+        "zh-CN": "吴忠市是中华人民共和国宁夏回族自治区下辖的地级市，位于宁夏中部，黄河东岸。市境东邻陕西省榆林市，南接甘肃省庆阳市，西界中卫市，西北临内蒙古自治区阿拉善盟，北连银川市。",
+        "zh-TW": "吳忠市是中華人民共和國寧夏回族自治區下轄的地級市，位於寧夏中部，黃河東岸。市境東鄰陝西省榆林市，南接甘肅省慶陽市，西界中衛市，西北臨內蒙古自治區阿拉善盟，北連銀川市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%90%B4%E5%BF%A0%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%90%B4%E5%BF%A0%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Wuzhong,_Ningxia"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        106.1986,
+        37.9978
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/858275373de954cb.webp",
+        "credit": "Li Meng · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%9D%92%E9%93%9C%E5%B3%A1%E5%A4%A7%E5%9D%9D-2008_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​青铜峡大坝-2008",
+        "place": "青铜峡市",
+        "originalFile": "青铜峡大坝-2008_-_panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:640300:5f9d3dda",
+      "urbanFocus": {
+        "label": {
+          "en": "Wuzhong",
+          "zh-CN": "吴忠市",
+          "zh-TW": "吳忠市"
+        },
+        "lngLat": [
+          106.19189,
+          37.98742
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Wuzhong.",
+          "zh-CN": "以吴忠市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以吳忠市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q604517#P625",
+        "source": "https://www.wikidata.org/wiki/Q604517",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q604517#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.67
+        }
+      }
+    },
+    "poi:admin:640300:5f9d3dda": {
+      "label": {
+        "en": "Qingtongxia",
+        "zh-CN": "青铜峡市",
+        "zh-TW": "青銅峽市"
+      },
+      "description": {
+        "en": "Qingtongxia is a city in north-central Ningxia, China.",
+        "zh-CN": "青铜峡市位于中华人民共和国宁夏回族自治区北部，是吴忠市代管的一个县级市。1967年建青铜峡水库。",
+        "zh-TW": "青銅峽市位於中華人民共和國寧夏回族自治區北部，是吳忠市代管的一個縣級市。1967年建青銅峽水庫。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9D%92%E9%93%9C%E5%B3%A1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9D%92%E9%93%9C%E5%B3%A1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Qingtongxia"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        105.99083333,
+        37.885
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Qingtongxia",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "640300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/858275373de954cb.webp",
+        "credit": "Li Meng · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%9D%92%E9%93%9C%E5%B3%A1%E5%A4%A7%E5%9D%9D-2008_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​青铜峡大坝-2008",
+        "place": "青铜峡市",
+        "originalFile": "青铜峡大坝-2008_-_panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:640300:7c16391c": {
+      "label": {
+        "en": "One Hundred and Eight Stupas",
+        "zh-CN": "一百零八塔",
+        "zh-TW": "一百零八塔"
+      },
+      "description": {
+        "en": "The One Hundred and Eight Stupas is an array of one hundred and eight Buddhist stupas on a hillside on the west bank of the Yellow River at Qingtongxia in Ningxia, China. The stupas were originally constructed during the Western Xia, but have been renovated and rebuilt several times over the centuries.",
+        "zh-CN": "一百零八塔，位于中华人民共和国宁夏回族自治区吴忠市青铜峡市的黄河岸边，因有108座喇嘛砖塔而得名，是中国规模最大的喇嘛塔群。该建筑群的建造时间未知，仅可知在明代之前建造完成，塔中曾出土西夏时期的文物。",
+        "zh-TW": "一百零八塔，位於中華人民共和國寧夏回族自治區吳忠市青銅峽市的黃河岸邊，因有108座喇嘛磚塔而得名，是中國規模最大的喇嘛塔羣。該建築羣的建造時間未知，僅可知在明代之前建造完成，塔中曾出土西夏時期的文物。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%80%E7%99%BE%E9%9B%B6%E5%85%AB%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%80%E7%99%BE%E9%9B%B6%E5%85%AB%E5%A1%94",
+        "https://en.wikipedia.org/wiki/One_Hundred_and_Eight_Stupas"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        105.97861111,
+        37.87416667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/One_Hundred_and_Eight_Stupas",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "640300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/97c5df1f80762598.webp",
+        "credit": "Smwy09 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%80%E7%99%BE%E9%9B%B6%E5%85%AB%E5%A1%94.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "108 Buddhist stupas at Qingtongxia, Ningxia autonomous region, China.",
+        "place": "一百零八塔",
+        "originalFile": "一百零八塔.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:640300:photo-53859861": {
+      "label": {
+        "en": "Litong, Wuzhong, Ningxia, China (5)",
+        "zh-CN": "吴忠市城区景观",
+        "zh-TW": "吳忠市城區景觀"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Wuzhong, Ningxia, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现吴忠市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現吳忠市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Litong,_Wuzhong,_Ningxia,_China_-_panoramio_(5).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Litong,_Wuzhong,_Ningxia,_China_-_panoramio_(5).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c3cbc03b90483edc.webp",
+        "credit": "Matthew Summerton · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Litong,_Wuzhong,_Ningxia,_China_-_panoramio_(5).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Litong, Wuzhong, Ningxia, China",
+        "place": "Litong, Wuzhong, Ningxia, China - panoramio (5).jpg",
+        "originalFile": "Litong, Wuzhong, Ningxia, China - panoramio (5).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            106.201333333,
+            37.9741666667
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Litong,_Wuzhong,_Ningxia,_China_-_panoramio_(5).jpg"
+        }
+      },
+      "lngLat": [
+        106.201333333,
+        37.9741666667
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Litong,_Wuzhong,_Ningxia,_China_-_panoramio_(5).jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "640300"
+    }
+  }
+}

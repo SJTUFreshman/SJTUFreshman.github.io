@@ -1,0 +1,526 @@
+{
+  "version": "0.6",
+  "generator": "openstreetmap-cgimap 2.1.1 (1829671 spike-07.openstreetmap.org)",
+  "copyright": "OpenStreetMap and contributors",
+  "attribution": "http://www.openstreetmap.org/copyright",
+  "license": "http://opendatacommons.org/licenses/odbl/1-0/",
+  "elements": [
+    {
+      "type": "node",
+      "id": 4445341622,
+      "lat": 32.5892228,
+      "lon": 117.0137519,
+      "timestamp": "2016-10-13T09:17:24Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341623,
+      "lat": 32.5892293,
+      "lon": 117.012266,
+      "timestamp": "2016-10-13T09:17:24Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341624,
+      "lat": 32.5892434,
+      "lon": 117.0139265,
+      "timestamp": "2016-10-13T09:17:24Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341625,
+      "lat": 32.5892442,
+      "lon": 117.013752,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341626,
+      "lat": 32.5892507,
+      "lon": 117.0122661,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341627,
+      "lat": 32.5892514,
+      "lon": 117.0121027,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341628,
+      "lat": 32.5893394,
+      "lon": 117.0130922,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341629,
+      "lat": 32.5893401,
+      "lon": 117.0129353,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341630,
+      "lat": 32.5893416,
+      "lon": 117.013732,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341631,
+      "lat": 32.5893436,
+      "lon": 117.0128305,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341632,
+      "lat": 32.589344,
+      "lon": 117.0131974,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341633,
+      "lat": 32.5893459,
+      "lon": 117.0122916,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341634,
+      "lat": 32.5893645,
+      "lon": 117.0128306,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341635,
+      "lat": 32.5893648,
+      "lon": 117.0127517,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341636,
+      "lat": 32.5893682,
+      "lon": 117.0132721,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341637,
+      "lat": 32.5893685,
+      "lon": 117.0131976,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341638,
+      "lat": 32.5893692,
+      "lon": 117.0121034,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341639,
+      "lat": 32.5893694,
+      "lon": 117.0120586,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341640,
+      "lat": 32.589371,
+      "lon": 117.0139546,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341641,
+      "lat": 32.5893711,
+      "lon": 117.0139273,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341642,
+      "lat": 32.5895286,
+      "lon": 117.0132731,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341643,
+      "lat": 32.5895289,
+      "lon": 117.0132055,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341644,
+      "lat": 32.5895313,
+      "lon": 117.0121044,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341645,
+      "lat": 32.5895315,
+      "lon": 117.0120596,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341646,
+      "lat": 32.5895331,
+      "lon": 117.0139556,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341647,
+      "lat": 32.5895332,
+      "lon": 117.0139283,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341648,
+      "lat": 32.589534,
+      "lon": 117.0128308,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341649,
+      "lat": 32.5895343,
+      "lon": 117.0127528,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341650,
+      "lat": 32.589552,
+      "lon": 117.0137333,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341651,
+      "lat": 32.589554,
+      "lon": 117.012831,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341652,
+      "lat": 32.5895544,
+      "lon": 117.0132056,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341653,
+      "lat": 32.5895563,
+      "lon": 117.0122929,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341654,
+      "lat": 32.5895579,
+      "lon": 117.0130936,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341655,
+      "lat": 32.5895586,
+      "lon": 117.0129367,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341656,
+      "lat": 32.58965,
+      "lon": 117.013929,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "node",
+      "id": 4445341657,
+      "lat": 32.589658,
+      "lon": 117.0121052,
+      "timestamp": "2016-10-13T09:17:25Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290
+    },
+    {
+      "type": "way",
+      "id": 447386948,
+      "timestamp": "2016-10-13T09:17:33Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290,
+      "nodes": [
+        4445341638,
+        4445341639,
+        4445341645,
+        4445341644,
+        4445341657,
+        4445341656,
+        4445341647,
+        4445341646,
+        4445341640,
+        4445341641,
+        4445341624,
+        4445341625,
+        4445341622,
+        4445341623,
+        4445341626,
+        4445341627,
+        4445341638
+      ]
+    },
+    {
+      "type": "way",
+      "id": 447386950,
+      "timestamp": "2016-10-13T09:17:33Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290,
+      "nodes": [
+        4445341655,
+        4445341654,
+        4445341628,
+        4445341629,
+        4445341655
+      ]
+    },
+    {
+      "type": "way",
+      "id": 447386964,
+      "timestamp": "2016-10-13T09:17:34Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290,
+      "nodes": [
+        4445341653,
+        4445341651,
+        4445341648,
+        4445341649,
+        4445341635,
+        4445341634,
+        4445341631,
+        4445341633,
+        4445341653
+      ]
+    },
+    {
+      "type": "way",
+      "id": 447386965,
+      "timestamp": "2016-10-13T09:17:34Z",
+      "version": 1,
+      "changeset": 42853488,
+      "user": "ff5722",
+      "uid": 3450290,
+      "nodes": [
+        4445341652,
+        4445341650,
+        4445341630,
+        4445341632,
+        4445341637,
+        4445341636,
+        4445341642,
+        4445341643,
+        4445341652
+      ]
+    },
+    {
+      "type": "relation",
+      "id": 6643901,
+      "timestamp": "2024-02-04T15:56:22Z",
+      "version": 2,
+      "changeset": 147059506,
+      "user": "MoeCaa",
+      "uid": 18763528,
+      "members": [
+        {
+          "type": "way",
+          "ref": 447386965,
+          "role": "inner"
+        },
+        {
+          "type": "way",
+          "ref": 447386950,
+          "role": "inner"
+        },
+        {
+          "type": "way",
+          "ref": 447386964,
+          "role": "inner"
+        },
+        {
+          "type": "way",
+          "ref": 447386948,
+          "role": "outer"
+        }
+      ],
+      "tags": {
+        "building": "yes",
+        "name": "淮南市政务中心A座",
+        "office": "government",
+        "type": "multipolygon"
+      }
+    }
+  ]
+}

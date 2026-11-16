@@ -1,0 +1,180 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "420500": {
+      "label": {
+        "en": "Yichang",
+        "zh-CN": "宜昌市",
+        "zh-TW": "宜昌市"
+      },
+      "description": {
+        "en": "Yichang , alternatively romanized as Ichang, is a prefecture-level city located in western Hubei province, China. Yichang had a population of 3.92 million people at the 2022 census, making it the third most populous city in Hubei.",
+        "zh-CN": "宜昌市，简称宜或峡，中华人民共和国湖北省下辖地级市，位于湖北省西南部，市境东南接荆州市，东北临荆门市，北毗襄阳市、神农架林区，西界恩施州，南抵湖南省常德市。地处鄂西山地，江汉平原西缘，西北为大巴山，西部为巫山，南部为武陵山。",
+        "zh-TW": "宜昌市，簡稱宜或峽，中華人民共和國湖北省下轄地級市，位於湖北省西南部，市境東南接荊州市，東北臨荊門市，北毗襄陽市、神農架林區，西界恩施州，南抵湖南省常德市。地處鄂西山地，江漢平原西緣，西北爲大巴山，西部爲巫山，南部爲武陵山。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%9C%E6%98%8C%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%9C%E6%98%8C%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Yichang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        111.287,
+        30.692
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/b04a20aade9b4820.webp",
+        "credit": "Gisling · CC BY 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Sanyoudong2.jpg",
+        "license": "CC BY 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+        "alt": "Sanyou Cave in Yichang古石天洞(宜昌市三游洞摩崖)",
+        "place": "三游洞摩崖",
+        "originalFile": "Sanyoudong2.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:420500:86b0f6fb",
+      "urbanFocus": {
+        "label": {
+          "en": "Yichang",
+          "zh-CN": "宜昌市",
+          "zh-TW": "宜昌市"
+        },
+        "lngLat": [
+          111.280278,
+          30.708333
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Yichang.",
+          "zh-CN": "以宜昌市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以宜昌市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q71266#P625",
+        "source": "https://www.wikidata.org/wiki/Q71266",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q71266#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.19
+        }
+      }
+    },
+    "poi:admin:420500:86b0f6fb": {
+      "label": {
+        "en": "Sanyou Cave",
+        "zh-CN": "三游洞摩崖",
+        "zh-TW": "三遊洞摩崖"
+      },
+      "description": {
+        "en": "Sanyou Cave and its cliff inscriptions lie beside the Yangtze, northwest of Yichang at the entrance to Xiling Gorge. The site is protected as a national cultural monument.",
+        "zh-CN": "三游洞摩崖，简称三游洞，位于中华人民共和国湖北省宜昌市西北7公里的长江边的山崖上，位于西陵峡峡口处。现为全国重点文物保护单位。",
+        "zh-TW": "三遊洞摩崖，簡稱三遊洞，位於中華人民共和國湖北省宜昌市西北7公里的長江邊的山崖上，位於西陵峽峽口處。現爲全國重點文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%89%E6%B8%B8%E6%B4%9E%E6%91%A9%E5%B4%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%89%E6%B8%B8%E6%B4%9E%E6%91%A9%E5%B4%96"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        111.26052,
+        30.76728
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E4%B8%89%E6%B8%B8%E6%B4%9E%E6%91%A9%E5%B4%96",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "420500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b04a20aade9b4820.webp",
+        "credit": "Gisling · CC BY 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Sanyoudong2.jpg",
+        "license": "CC BY 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+        "alt": "Sanyou Cave in Yichang古石天洞(宜昌市三游洞摩崖)",
+        "place": "三游洞摩崖",
+        "originalFile": "Sanyoudong2.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:420500:2230943a": {
+      "label": {
+        "en": "Three Gorges Dam",
+        "zh-CN": "长江三峡水利枢纽工程",
+        "zh-TW": "長江三峽水利樞紐工程"
+      },
+      "description": {
+        "en": "The Three Gorges Dam, officially known as Yangtze River Three Gorges Water Conservancy Project is a hydroelectric gravity dam that spans the Yangtze River near Sandouping in Yiling District, Yichang, Hubei province, central China, downstream of the Three Gorges. It is also the world's largest power station by installed capacity ; it generates 95±20 TWh of electricity per year on average, depending on the amount of precipitation in the river basin.",
+        "zh-CN": "长江三峡水利枢纽工程，简称三峡工程或三峡大坝，是中华人民共和国长江上游段建设的大型水利工程项目。分布在重庆市到湖北省宜昌市的长江干流上，大坝位于长江三峡西陵峡内的宜昌市夷陵区三斗坪，并和其下游38公里的葛洲坝水电站形成梯级调度电站。",
+        "zh-TW": "長江三峽水利樞紐工程，簡稱三峽工程或三峽大壩，是中華人民共和國長江上游段建設的大型水利工程項目。分佈在重慶市到湖北省宜昌市的長江干流上，大壩位於長江三峽西陵峽內的宜昌市夷陵區三鬥坪，並和其下游38公里的葛洲壩水電站形成梯級調度電站。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%95%BF%E6%B1%9F%E4%B8%89%E5%B3%A1%E6%B0%B4%E5%88%A9%E6%9E%A2%E7%BA%BD%E5%B7%A5%E7%A8%8B",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%95%BF%E6%B1%9F%E4%B8%89%E5%B3%A1%E6%B0%B4%E5%88%A9%E6%9E%A2%E7%BA%BD%E5%B7%A5%E7%A8%8B",
+        "https://en.wikipedia.org/wiki/Three_Gorges_Dam"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        111.00971944,
+        30.82833056
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%95%BF%E6%B1%9F%E4%B8%89%E5%B3%A1%E6%B0%B4%E5%88%A9%E6%9E%A2%E7%BA%BD%E5%B7%A5%E7%A8%8B",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "420500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0877f7fe6d1aeabd.webp",
+        "credit": "Source file: Le Grand Portage Derivative work: Rehman · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:ThreeGorgesDam-China2009.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "The Three Gorges Dam on the Yangtze River, China.",
+        "place": "长江三峡水利枢纽工程",
+        "originalFile": "ThreeGorgesDam-China2009.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:420500:742f9ebf": {
+      "label": {
+        "en": "Yuquan Temple (Dangyang)",
+        "zh-CN": "玉泉寺 (当阳市)",
+        "zh-TW": "玉泉寺 (當陽市)"
+      },
+      "description": {
+        "en": "Yuquan Temple is a Buddhist temple in Dangyang, Hubei, China, first built in 593 during the Sui dynasty. Zhiyi sponsored the construction, and the name Yuquan was given by prince Yang Guang .",
+        "zh-CN": "当阳玉泉寺，位于湖北省宜昌市当阳市境内的玉泉山，为全国重点文物保护单位、汉族地区佛教全国重点寺院、国家森林公园和国家4A级旅游景区。 南北朝大通二年，梁武帝敕建覆船山寺。",
+        "zh-TW": "當陽玉泉寺，位於湖北省宜昌市當陽市境內的玉泉山，爲全國重點文物保護單位、漢族地區佛教全國重點寺院、國家森林公園和國家4A級旅遊景區。 南北朝大通二年，梁武帝敕建覆船山寺。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%8E%89%E6%B3%89%E5%AF%BA_(%E5%BD%93%E9%98%B3%E5%B8%82)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%8E%89%E6%B3%89%E5%AF%BA_(%E5%BD%93%E9%98%B3%E5%B8%82)",
+        "https://en.wikipedia.org/wiki/Yuquan_Temple_(Dangyang)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        111.684,
+        30.785
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Yuquan_Temple_(Dangyang)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "420500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/8ce637e27f248884.webp",
+        "credit": "Fxqf · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yuquan_Temple_(Dangyang)_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​当阳玉泉寺",
+        "place": "玉泉寺 (当阳市)",
+        "originalFile": "Yuquan_Temple_(Dangyang)_02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "530700": {
+      "label": {
+        "en": "Lijiang",
+        "zh-CN": "丽江市",
+        "zh-TW": "麗江市"
+      },
+      "description": {
+        "en": "Lijiang , formerly romanized as Likiang, is a prefecture-level city in the northwest of Yunnan Province, China. It has an area of 21,219 square kilometres and had a population of 1,253,878 at the 2020 census whom 288,787 lived in the built-up area made of Gucheng District.",
+        "zh-CN": "丽江市是中华人民共和国云南省下辖的地级市，位于云南省西北部。市境西北接迪庆州，西连怒江州，西南界大理州，东南临楚雄州，东邻四川省攀枝花市，东北通四川省凉山州。",
+        "zh-TW": "麗江市是中華人民共和國雲南省下轄的地級市，位於雲南省西北部。市境西北接迪慶州，西連怒江州，西南界大理州，東南臨楚雄州，東鄰四川省攀枝花市，東北通四川省涼山州。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%BD%E6%B1%9F%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%BD%E6%B1%9F%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Lijiang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        100.2259,
+        26.8552
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/cc2e86b0fd3eedef.webp",
+        "credit": "chensiyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1_lijiang_old_town_2012a.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "lijiang old town yunnan china 2012 unesco world heritage site",
+        "place": "丽江古城",
+        "originalFile": "1_lijiang_old_town_2012a.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:530700:60448701",
+      "urbanFocus": {
+        "label": {
+          "en": "Lijiang",
+          "zh-CN": "丽江市",
+          "zh-TW": "麗江市"
+        },
+        "lngLat": [
+          100.22083333333,
+          26.880833333333
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Lijiang.",
+          "zh-CN": "以丽江市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以麗江市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q205914#P625",
+        "source": "https://www.wikidata.org/wiki/Q205914",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q205914#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.55
+        }
+      }
+    },
+    "poi:admin:530700:60448701": {
+      "label": {
+        "en": "Old Town of Lijiang",
+        "zh-CN": "丽江古城",
+        "zh-TW": "麗江古城"
+      },
+      "description": {
+        "en": "Dayan , commonly called the Old Town of Lijiang is the historical center of Lijiang City, in Yunnan, China. It is a UNESCO World Heritage Site.",
+        "zh-CN": "丽江古城，位于中华人民共和国云南省丽江市古城区，1997年12月4日被联合国教科文组织列为世界文化遗产，并于2007年获亚太区文物古迹保护奖。",
+        "zh-TW": "麗江古城，位於中華人民共和國雲南省麗江市古城區，1997年12月4日被聯合國教科文組織列為世界文化遺產，並於2007年獲亞太區文物古蹟保護獎。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%BD%E6%B1%9F%E5%8F%A4%E5%9F%8E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%BD%E6%B1%9F%E5%8F%A4%E5%9F%8E",
+        "https://en.wikipedia.org/wiki/Old_Town_of_Lijiang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        100.23333333,
+        26.86666667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Old_Town_of_Lijiang",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "530700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/cc2e86b0fd3eedef.webp",
+        "credit": "chensiyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1_lijiang_old_town_2012a.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "lijiang old town yunnan china 2012 unesco world heritage site",
+        "place": "丽江古城",
+        "originalFile": "1_lijiang_old_town_2012a.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:530700:67f9e75d": {
+      "label": {
+        "en": "Jade Dragon Snow Mountain",
+        "zh-CN": "玉龙雪山",
+        "zh-TW": "玉龍雪山"
+      },
+      "description": {
+        "en": "Jade Dragon Snow Mountain is a mountain massif or small mountain range in Yulong Naxi Autonomous County, Lijiang, in Yunnan province, China. Its highest peak is named Shanzidou or Shan-Tzu-tou and it is 5,596 m above sea level.",
+        "zh-CN": "玉龙雪山是云南省丽江市玉龙纳西族自治县的一个南北向山脉，位于横断山脉的沙鲁里山南段，海拔5596m。雪山山腰云腾雾绕，远望像一条银白色的巨龙，因此得名。",
+        "zh-TW": "玉龍雪山是雲南省麗江市玉龍納西族自治縣的一個南北向山脈，位於橫斷山脈的沙魯裏山南段，海拔5596m。雪山山腰雲騰霧繞，遠望像一條銀白色的巨龍，因此得名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%8E%89%E9%BE%99%E9%9B%AA%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%8E%89%E9%BE%99%E9%9B%AA%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Jade_Dragon_Snow_Mountain"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        100.175,
+        27.09833333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Jade_Dragon_Snow_Mountain",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "530700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fc98abe7cfce25fd.webp",
+        "credit": "Munford · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yulong_mount.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Yunlong Mount(5596m)，near Lijiang, Yunnan, China",
+        "place": "玉龙雪山",
+        "originalFile": "Yulong_mount.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:530700:645d6642": {
+      "label": {
+        "en": "Gucheng, Lijiang",
+        "zh-CN": "古城区",
+        "zh-TW": "古城區"
+      },
+      "description": {
+        "en": "Gucheng District is a county-level district located in Lijiang City Prefecture, Yunnan, China.",
+        "zh-CN": "古城区是中华人民共和国云南省丽江市下属的市辖区，也是丽江市人民政府所在地。全区面积1262平方千米，2020年总人口28.88万人，区人民政府驻西安街道。",
+        "zh-TW": "古城區是中華人民共和國雲南省麗江市下屬的市轄區，也是麗江市人民政府所在地。全區面積1262平方千米，2020年總人口28.88萬人，區人民政府駐西安街道。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8F%A4%E5%9F%8E%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8F%A4%E5%9F%8E%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Gucheng,_Lijiang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        100.31611111,
+        26.8475
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Gucheng,_Lijiang",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "530700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/cc2e86b0fd3eedef.webp",
+        "credit": "chensiyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1_lijiang_old_town_2012a.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "lijiang old town yunnan china 2012 unesco world heritage site",
+        "place": "古城区",
+        "originalFile": "1_lijiang_old_town_2012a.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

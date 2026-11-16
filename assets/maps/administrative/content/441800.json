@@ -1,0 +1,188 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "441800": {
+      "label": {
+        "en": "Qingyuan",
+        "zh-CN": "清远市",
+        "zh-TW": "清遠市"
+      },
+      "description": {
+        "en": "Qingyuan, formerly romanized as Tsingyun, is a prefecture-level city in northern Guangdong province, China, on the banks of the Bei or North River. During the 2020 census, its total population was 3,969,473, out of whom 1,738,424 lived in the built-up area made of urbanized Qingcheng and Qingxin districts.",
+        "zh-CN": "清远市，简称清，别称凤城，是中华人民共和国广东省下辖的地级市，位于广东省中部偏北。市境东邻韶关市，东南接广州市，南界佛山市，西连肇庆市、广西壮族自治区贺州市，北临湖南省永州市、郴州市。",
+        "zh-TW": "清遠市，簡稱清，別稱鳳城，是中華人民共和國廣東省下轄的地級市，位於廣東省中部偏北。市境東鄰韶關市，東南接廣州市，南界佛山市，西連肇慶市、廣西壯族自治區賀州市，北臨湖南省永州市、郴州市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B8%85%E8%BF%9C%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B8%85%E8%BF%9C%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Qingyuan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        113.056,
+        23.682
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/a0baafdb03ceae66.webp",
+        "credit": "Ricky Chow · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Feilai_Temple.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Feilai Temple, Qingyuan, Guangdong, China",
+        "place": "飞来寺 (清远市)",
+        "originalFile": "Feilai_Temple.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:441800:fd8e68e1",
+      "urbanFocus": {
+        "label": {
+          "en": "Qingyuan",
+          "zh-CN": "清远市",
+          "zh-TW": "清遠市"
+        },
+        "lngLat": [
+          113.05075,
+          23.68425
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Qingyuan.",
+          "zh-CN": "以清远市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以清遠市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q59213#P625",
+        "source": "https://www.wikidata.org/wiki/Q59213",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q59213#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.1
+        }
+      }
+    },
+    "poi:admin:441800:fd8e68e1": {
+      "label": {
+        "en": "Feilai Temple (Qingyuan)",
+        "zh-CN": "飞来寺 (清远市)",
+        "zh-TW": "飛來寺 (清遠市)"
+      },
+      "description": {
+        "en": "Feilai Temple is a Buddhist temple located on the bank of Bei River, in Qingyuan, Guangdong, China. Feilai Temple was originally built in 520, but because of natural disasters has been rebuilt numerous times since then.",
+        "zh-CN": "飞来寺，是广东清远市的一处著名古庙，位于广东省清远市城北23公里的飞来峡风景区，也是两广地区的知名旅游景点。",
+        "zh-TW": "飛來寺，是廣東清遠市的一處著名古廟，位於廣東省清遠市城北23公里的飛來峽風景區，也是兩廣地區的知名旅遊景點。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A3%9E%E6%9D%A5%E5%AF%BA_(%E6%B8%85%E8%BF%9C%E5%B8%82)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A3%9E%E6%9D%A5%E5%AF%BA_(%E6%B8%85%E8%BF%9C%E5%B8%82)",
+        "https://en.wikipedia.org/wiki/Feilai_Temple_(Qingyuan)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.17277778,
+        23.70833333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Feilai_Temple_(Qingyuan)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "441800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a0baafdb03ceae66.webp",
+        "credit": "Ricky Chow · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Feilai_Temple.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Feilai Temple, Qingyuan, Guangdong, China",
+        "place": "飞来寺 (清远市)",
+        "originalFile": "Feilai_Temple.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:441800:96f4890a": {
+      "label": {
+        "en": "Feilaixia Water-Control Complex",
+        "zh-CN": "飞来峡水利枢纽",
+        "zh-TW": "飛來峽水利樞紐"
+      },
+      "description": {
+        "en": "This major water-control project lies on the Bei River northeast of Qingyuan. Flood protection is its main role, alongside hydropower, navigation and water supply.",
+        "zh-CN": "飞来峡水利枢纽位于中国广东省清远市东北约40公里的北江河段上，是广东省目前最大的综合性水利枢纽工程。它主要以防洪为主，同时兼有发电、航运、供水和改善生态环境等作用，是北江流域综合治理的关键工程。",
+        "zh-TW": "飛來峽水利樞紐位於中國廣東省清遠市東北約40公里的北江河段上，是廣東省目前最大的綜合性水利樞紐工程。它主要以防洪爲主，同時兼有發電、航運、供水和改善生態環境等作用，是北江流域綜合治理的關鍵工程。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A3%9E%E6%9D%A5%E5%B3%A1%E6%B0%B4%E5%88%A9%E6%9E%A2%E7%BA%BD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A3%9E%E6%9D%A5%E5%B3%A1%E6%B0%B4%E5%88%A9%E6%9E%A2%E7%BA%BD"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.25638889,
+        23.8025
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%A3%9E%E6%9D%A5%E5%B3%A1%E6%B0%B4%E5%88%A9%E6%9E%A2%E7%BA%BD",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "441800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ff5cabc69ba2817e.webp",
+        "credit": "MNXANL · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:201609_Feilaixia_Dam.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "201609 Feilaixia Dam",
+        "place": "飞来峡水利枢纽",
+        "originalFile": "201609_Feilaixia_Dam.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:441800:urban-reviewed": {
+      "label": {
+        "en": "Qingyuan riverside skyline",
+        "zh-CN": "清远滨水天际线",
+        "zh-TW": "清遠濱水天際線"
+      },
+      "description": {
+        "en": "The riverside skyline of Qingyuan, showing open water, urban buildings and vegetation along the riverbank.",
+        "zh-CN": "清远城区的滨水天际线，水面、楼群与河岸绿地共同构成城市景观。",
+        "zh-TW": "清遠城區的濱水天際線，水面、樓羣與河岸綠地共同構成城市景觀。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%BF%9C%E5%B8%82%E5%8C%BA%E5%A4%A9%E9%99%85%E7%BA%BF.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%BF%9C%E5%B8%82%E5%8C%BA%E5%A4%A9%E9%99%85%E7%BA%BF.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption based on the linked photograph.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/6d0090bcf2de613c.webp",
+        "credit": "Wen Liangjun · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%BF%9C%E5%B8%82%E5%8C%BA%E5%A4%A9%E9%99%85%E7%BA%BF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​摄于凤城大桥",
+        "place": "清远市区天际线.jpg",
+        "originalFile": "清远市区天际线.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            113.055572,
+            23.68625
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%BF%9C%E5%B8%82%E5%8C%BA%E5%A4%A9%E9%99%85%E7%BA%BF.jpg"
+        }
+      },
+      "lngLat": [
+        113.055572,
+        23.68625
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%BF%9C%E5%B8%82%E5%8C%BA%E5%A4%A9%E9%99%85%E7%BA%BF.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph GeoData; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "441800"
+    }
+  }
+}

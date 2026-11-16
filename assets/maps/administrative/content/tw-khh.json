@@ -1,0 +1,362 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-KHH": {
+      "label": {
+        "en": "Kaohsiung",
+        "zh-CN": "高雄市",
+        "zh-TW": "高雄市"
+      },
+      "description": {
+        "en": "Kaohsiung, officially Kaohsiung City, is a special municipality located in southern Taiwan. With a population of approximately 2.7 million people, it is Taiwan's third most populous city and the largest city in southern Taiwan.",
+        "zh-CN": "高雄市，通称高雄，是中华台北直辖市，地处台湾岛西南部。辖域面积达2,952平方公里，是台湾面积最大的市。",
+        "zh-TW": "高雄市，通稱高雄，是中華臺北直轄市，地處臺灣島西南部。轄域面積達2,952平方公里，是臺灣面積最大的市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%AB%98%E9%9B%84%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%AB%98%E9%9B%84%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Kaohsiung"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        120.2975,
+        22.615
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/e60d3b963c5f6d6a.webp",
+        "credit": "Bernard Gagnon · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Dragon_and_Tiger_Pagodas_02.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Dragon and Tiger Pagodas, Kaohsiung, Taiwan",
+        "place": "Dragon and Tiger Pagodas",
+        "originalFile": "Dragon_and_Tiger_Pagodas_02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-KHH:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Lingya District",
+          "zh-CN": "苓雅区",
+          "zh-TW": "苓雅區"
+        },
+        "lngLat": [
+          120.317,
+          22.6236
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 32 km landscape window around Lingya District.",
+          "zh-CN": "以苓雅区为中心，展示周边约32公里宽的主要聚落与地形。",
+          "zh-TW": "以苓雅區爲中心，展示周邊約32公里寬的主要聚落與地形。"
+        },
+        "extentKm": 32,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q708103",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q708103#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E9%AB%98%E9%9B%84%E5%B8%82"
+      }
+    },
+    "TWN:Dongsha": {
+      "label": {
+        "en": "Pratas Island",
+        "zh-CN": "东沙岛",
+        "zh-TW": "東沙島"
+      },
+      "description": {
+        "en": "Pratas Island, also known as the Tungsha Islands or the Dongsha Islands , is a coral island situated in the northern part of the South China Sea administered as part of Cijin District, Kaohsiung, Taiwan.",
+        "zh-CN": "东沙岛是南海上东沙群岛的主岛，面积1.8平方公里，是南海数百个岛礁中最大的岛屿之一。由中华台北管辖。",
+        "zh-TW": "東沙島是南海上東沙羣島的主島，面積1.8平方公里，是南海數百個島礁中最大的島嶼之一。由中華臺北管轄。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Pratas_Island"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        116.7275,
+        20.70222222
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/7520c9b738fb8e92.webp",
+        "credit": "ISS Crew Earth Observations experiment and the Image Science & Analysis Laboratory, NASA - Johnson Space Center · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Pratas_Island_ISS004-10210.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Pratas_Island_ISS004-10210.jpg#Licensing",
+        "alt": "Dongsha (Pratas) Island seen from space on April 21, 2002, taken by crew of Expedition 4 on International Space Station from orbit.",
+        "place": "Pratas Island",
+        "originalFile": "Pratas_Island_ISS004-10210.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TWN:Dongsha:urban"
+    },
+    "TWN:Taiping": {
+      "label": {
+        "en": "Taiping Island",
+        "zh-CN": "太平岛",
+        "zh-TW": "太平島"
+      },
+      "description": {
+        "en": "Taiping Island, also known as Itu Aba, and various other names, is the largest of the naturally occurring Spratly Islands in the South China Sea. The island is elliptical in shape being 1.4 kilometres in length and 0.4 kilometres in width, with an area of 46 hectares .",
+        "zh-CN": "太平岛，位于南海南沙群岛北部中央郑和群礁西北角，位居南海西侧航道的东边，面积0.51平方公里，是南沙群岛中最大的天然岛屿。东距中滩0.8海浬、中洲礁3.1海浬、敦谦沙洲7.1海浬，西南距南薰礁16海浬。",
+        "zh-TW": "太平島，位於南海南沙羣島北部中央鄭和羣礁西北角，位居南海西側航道的東邊，面積0.51平方公里，是南沙羣島中最大的天然島嶼。東距中灘0.8海浬、中洲礁3.1海浬、敦謙沙洲7.1海浬，西南距南薰礁16海浬。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Taiping_Island"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        114.36583333,
+        10.37694444
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/adf299bfa2ff2ba1.webp",
+        "credit": "NASA · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Itu_Aba_Island.png",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Itu_Aba_Island.png#Licensing",
+        "alt": "Itu Aba Island",
+        "place": "Taiping Island",
+        "originalFile": "Itu_Aba_Island.png",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TWN:Taiping:urban"
+    },
+    "poi:admin:TW-KHH:1ba0539e": {
+      "label": {
+        "en": "Fongyi Tutorial Academy",
+        "zh-CN": "凤仪书院",
+        "zh-TW": "鳳儀書院"
+      },
+      "description": {
+        "en": "The Fongyi Tutorial Academy is a former tutorial academy during the Qing Dynasty rule of Taiwan in Fengshan District, Kaohsiung, Taiwan. It is the largest preserved Confucian academy in Taiwan.",
+        "zh-CN": "凤仪书院位于台湾高雄市凤山区，紧邻凤山城隍庙，是台湾现存规模最大的书院。于民国七十四年11月13日公告为三级古迹，现为高雄市市定古迹。",
+        "zh-TW": "鳳儀書院位於臺灣高雄市鳳山區，緊鄰鳳山城隍廟，是臺灣現存規模最大的書院。於民國七十四年11月13日公告為三級古蹟，現為高雄市市定古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%B3%B3%E5%84%80%E6%9B%B8%E9%99%A2",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%B3%B3%E5%84%80%E6%9B%B8%E9%99%A2",
+        "https://en.wikipedia.org/wiki/Fongyi_Tutorial_Academy"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.35927778,
+        22.62716667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Fongyi_Tutorial_Academy",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-KHH",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5fc96b253e3c8a78.webp",
+        "credit": "WU PEI HSUAN · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%B3%B3%E5%84%80%E6%9B%B8%E9%99%A2-1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​位於鳳山的鳳儀書院興建於1814年，於民國74年列為三級古蹟。當年有屋舍37間，院內原祀文昌、奎昌、倉聖神位，並有桌椅，是古時生員求學歲試的場所，建築細節十分講究，也是現存全台規模最大書院。",
+        "place": "鳳儀書院",
+        "originalFile": "鳳儀書院-1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-KHH:a24bdde9": {
+      "label": {
+        "en": "Qiaotou Sugar Refinery",
+        "zh-CN": "桥头糖厂",
+        "zh-TW": "橋頭糖廠"
+      },
+      "description": {
+        "en": "Founded in 1902, Qiaotou was Taiwan's first modern mechanised sugar refinery. Its surviving factory buildings and offices form a protected industrial heritage site in Kaohsiung.",
+        "zh-CN": "桥头糖厂，是一座位于台湾高雄市桥头区的一座现代机械化的制糖工厂及设施群，于1902年成立，原设施隶属于台湾制糖株式会社。是台湾的第一座新式现代化制糖厂，也是标示台湾进入现代工业化时代高速发展的代表性设施群，归于园区所保存之工业遗产、办公厅舍及相关历史性意义，该园区现则指定为高雄市市定古迹及文化景观。",
+        "zh-TW": "橋頭糖廠，是一座位於臺灣高雄市橋頭區的一座現代機械化的製糖工廠及設施羣，於1902年成立，原設施隸屬於臺灣製糖株式會社。是臺灣的第一座新式現代化製糖廠，也是標示臺灣進入現代工業化時代高速發展的代表性設施羣，歸於園區所保存之工業遺產、辦公廳舍及相關歷史性意義，該園區現則指定為高雄市市定古蹟及文化景觀。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%A9%8B%E9%A0%AD%E7%B3%96%E5%BB%A0",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%A9%8B%E9%A0%AD%E7%B3%96%E5%BB%A0"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.31416667,
+        22.75777778
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%A9%8B%E9%A0%AD%E7%B3%96%E5%BB%A0",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-KHH",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3e27efc788de2dc5.webp",
+        "credit": "Suicasmo · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ciaotou_Sugar_Factory_20150130-1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​台灣糖業公司橋頭糖廠大煙囪，上方圓形圖案為台灣糖業公司商標。",
+        "place": "橋頭糖廠",
+        "originalFile": "Ciaotou_Sugar_Factory_20150130-1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-KHH:24e1595e": {
+      "label": {
+        "en": "Shoushan (Kaohsiung)",
+        "zh-CN": "寿山 (高雄市)",
+        "zh-TW": "壽山 (高雄市)"
+      },
+      "description": {
+        "en": "Shoushan is a mountain in Gushan District, Kaohsiung, Taiwan, north of the main entrance to Kaohsiung Harbor. It was named Ape Hill by the Dutch in the 17th century to describe many Formosan rock macaques on this mountain.",
+        "zh-CN": "寿山，又称柴山、鼓山、高雄山，古称打狗山、打鼓山，是一座位于台湾高雄市西南滨海的山，也是高雄市临海的天然屏障，绝大部分山体位于鼓山区内，少部分则被划入其北方的左营区。1989年起，中华台北国防部逐渐解禁柴山军事管制的范围。",
+        "zh-TW": "壽山，又稱柴山、鼓山、高雄山，古稱打狗山、打鼓山，是一座位於臺灣高雄市西南濱海的山，也是高雄市臨海的天然屏障，絕大部分山體位於鼓山區內，少部分則被劃入其北方的左營區。1989年起，中華臺北國防部逐漸解禁柴山軍事管制的範圍。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A3%BD%E5%B1%B1_(%E9%AB%98%E9%9B%84%E5%B8%82)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A3%BD%E5%B1%B1_(%E9%AB%98%E9%9B%84%E5%B8%82)",
+        "https://en.wikipedia.org/wiki/Shoushan_(Kaohsiung)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.265,
+        22.63861111
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Shoushan_(Kaohsiung)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-KHH",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f1747d9eaeef71d2.webp",
+        "credit": "黃明寶 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2017_NSYSU_bay1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Sizihwan, Shoushan, and National Sun Yat-sen University",
+        "place": "壽山 (高雄市)",
+        "originalFile": "2017_NSYSU_bay1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-KHH:urban": {
+      "id": "poi:admin:TW-KHH:urban",
+      "label": {
+        "en": "Dragon and Tiger Pagodas",
+        "zh-CN": "龙虎塔",
+        "zh-TW": "龍虎塔"
+      },
+      "description": {
+        "en": "The Dragon and Tiger Pagodas is a temple located at Lotus Lake in Zuoying District, Kaohsiung, Taiwan. The temple was built in 1976.",
+        "zh-CN": "龙虎塔位于台湾高雄市左营区莲池潭畔的宝塔式建筑，是当地知名景点之一。由左营慈济宫于1976年兴建。",
+        "zh-TW": "龍虎塔位於臺灣高雄市左營區蓮池潭畔的寶塔式建築，是當地知名景點之一。由左營慈濟宮於1976年興建。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BE%8D%E8%99%8E%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BE%8D%E8%99%8E%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Dragon_and_Tiger_Pagodas"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e60d3b963c5f6d6a.webp",
+        "credit": "Bernard Gagnon · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Dragon_and_Tiger_Pagodas_02.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Dragon and Tiger Pagodas, Kaohsiung, Taiwan",
+        "place": "Dragon and Tiger Pagodas",
+        "originalFile": "Dragon_and_Tiger_Pagodas_02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.2925,
+        22.68055556
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Dragon_and_Tiger_Pagodas",
+      "kind": "landmark",
+      "parentCity": "TW-KHH"
+    },
+    "poi:admin:TWN:Taiping:urban": {
+      "id": "poi:admin:TWN:Taiping:urban",
+      "label": {
+        "en": "Taiping Island",
+        "zh-CN": "太平岛",
+        "zh-TW": "太平島"
+      },
+      "description": {
+        "en": "Taiping Island, also known as Itu Aba, and various other names, is the largest of the naturally occurring Spratly Islands in the South China Sea. The island is elliptical in shape being 1.4 kilometres in length and 0.4 kilometres in width, with an area of 46 hectares .",
+        "zh-CN": "太平岛，位于南海南沙群岛北部中央郑和群礁西北角，位居南海西侧航道的东边，面积0.51平方公里，是南沙群岛中最大的天然岛屿。东距中滩0.8海浬、中洲礁3.1海浬、敦谦沙洲7.1海浬，西南距南薰礁16海浬。",
+        "zh-TW": "太平島，位於南海南沙羣島北部中央鄭和羣礁西北角，位居南海西側航道的東邊，面積0.51平方公里，是南沙羣島中最大的天然島嶼。東距中灘0.8海浬、中洲礁3.1海浬、敦謙沙洲7.1海浬，西南距南薰礁16海浬。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Taiping_Island"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/adf299bfa2ff2ba1.webp",
+        "credit": "NASA · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Itu_Aba_Island.png",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Itu_Aba_Island.png#Licensing",
+        "alt": "Itu Aba Island",
+        "place": "Taiping Island",
+        "originalFile": "Itu_Aba_Island.png",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        114.3663888889,
+        10.3772222222
+      ],
+      "coordinateSource": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/9158",
+      "kind": "landmark",
+      "parentCity": "TWN:Taiping"
+    },
+    "poi:admin:TWN:Dongsha:urban": {
+      "id": "poi:admin:TWN:Dongsha:urban",
+      "label": {
+        "en": "Pratas Island",
+        "zh-CN": "东沙岛",
+        "zh-TW": "東沙島"
+      },
+      "description": {
+        "en": "Pratas Island, also known as the Tungsha Islands or the Dongsha Islands , is a coral island situated in the northern part of the South China Sea administered as part of Cijin District, Kaohsiung, Taiwan.",
+        "zh-CN": "东沙岛是南海上东沙群岛的主岛，面积1.8平方公里，是南海数百个岛礁中最大的岛屿之一。由中华台北管辖。",
+        "zh-TW": "東沙島是南海上東沙羣島的主島，面積1.8平方公里，是南海數百個島礁中最大的島嶼之一。由中華臺北管轄。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Pratas_Island"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7520c9b738fb8e92.webp",
+        "credit": "ISS Crew Earth Observations experiment and the Image Science & Analysis Laboratory, NASA - Johnson Space Center · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Pratas_Island_ISS004-10210.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Pratas_Island_ISS004-10210.jpg#Licensing",
+        "alt": "Dongsha (Pratas) Island seen from space on April 21, 2002, taken by crew of Expedition 4 on International Space Station from orbit.",
+        "place": "Pratas Island",
+        "originalFile": "Pratas_Island_ISS004-10210.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        116.7275,
+        20.70222222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Pratas_Island",
+      "kind": "landmark",
+      "parentCity": "TWN:Dongsha"
+    }
+  }
+}

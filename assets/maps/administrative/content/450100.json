@@ -1,0 +1,142 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "450100": {
+      "label": {
+        "en": "Nanning",
+        "zh-CN": "南宁市",
+        "zh-TW": "南寧市"
+      },
+      "description": {
+        "en": "Nanning is the capital of the Guangxi Zhuang Autonomous Region in southern China. It is known as the \"Green City \" because of its abundance of lush subtropical foliage.",
+        "zh-CN": "南宁市，简称邕，古称邕州，是中华人民共和国广西壮族自治区首府，广西的政治、经济、文化、教育、科技、金融中心。南宁位于广西中部偏南，西邻崇左市，北界百色市、河池市、来宾市，东接贵港市，南毗钦州市、防城港市。",
+        "zh-TW": "南寧市，簡稱邕，古稱邕州，是中華人民共和國廣西壯族自治區首府，廣西的政治、經濟、文化、教育、科技、金融中心。南寧位於廣西中部偏南，西鄰崇左市，北界百色市、河池市、來賓市，東接貴港市，南毗欽州市、防城港市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%97%E5%AE%81%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%97%E5%AE%81%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Nanning"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        108.3275,
+        22.8167
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/93cc9bd44abcdd59.webp",
+        "credit": "EditQ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%9C%E7%9B%9F%E5%8F%8B%E8%B0%8A%E9%95%BF%E5%BB%8A_1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​东盟友谊长廊",
+        "place": "青秀山",
+        "originalFile": "东盟友谊长廊_1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:450100:2043d7be",
+      "urbanFocus": {
+        "label": {
+          "en": "Nanning",
+          "zh-CN": "南宁市",
+          "zh-TW": "南寧市"
+        },
+        "lngLat": [
+          108.31501,
+          22.81918
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Nanning.",
+          "zh-CN": "以南宁市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以南寧市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q179608#P625",
+        "source": "https://www.wikidata.org/wiki/Q179608",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q179608#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.74
+        }
+      }
+    },
+    "poi:admin:450100:2043d7be": {
+      "label": {
+        "en": "Qingxiu Mountain",
+        "zh-CN": "青秀山",
+        "zh-TW": "青秀山"
+      },
+      "description": {
+        "en": "Qingxiu Mountain is a group of wooded hills beside the Yong River in Nanning. Its scenic area includes a chain of ridges such as Qingshan, Fenghuang and Fengyi.",
+        "zh-CN": "青秀山，是中国广西壮族自治区首府南宁市青秀区境内的一片丘陵，围绕其建有青秀山风景区。青秀山位于邕江江畔，包括青山岭、凤凰岭、凤翼岭、子岭、佛子岭、雷劈岭等18座大小山岭，面积791公顷。",
+        "zh-TW": "青秀山，是中國廣西壯族自治區首府南寧市青秀區境內的一片丘陵，圍繞其建有青秀山風景區。青秀山位於邕江江畔，包括青山嶺、鳳凰嶺、鳳翼嶺、子嶺、佛子嶺、雷劈嶺等18座大小山嶺，面積791公頃。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9D%92%E7%A7%80%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9D%92%E7%A7%80%E5%B1%B1"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        108.38333333,
+        22.78333333
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%9D%92%E7%A7%80%E5%B1%B1",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "450100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/93cc9bd44abcdd59.webp",
+        "credit": "EditQ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%9C%E7%9B%9F%E5%8F%8B%E8%B0%8A%E9%95%BF%E5%BB%8A_1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​东盟友谊长廊",
+        "place": "青秀山",
+        "originalFile": "东盟友谊长廊_1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:450100:649642cc": {
+      "label": {
+        "en": "Yangmei Ancient Town",
+        "zh-CN": "扬美村",
+        "zh-TW": "揚美村"
+      },
+      "description": {
+        "en": "Yangmei Ancient Town is a traditional town located on the Yong River in Nanning, Guangxi, China. The town's population is approximately 5,300.",
+        "zh-CN": "扬美村位于中国广西壮族自治区南宁市江南区江西镇，常被称为“扬美古镇”，以古香古色的传统建筑而闻名。全镇面积6.5平方公里，人口5300多人。",
+        "zh-TW": "揚美村位於中國廣西壯族自治區南寧市江南區江西鎮，常被稱爲“揚美古鎮”，以古香古色的傳統建築而聞名。全鎮面積6.5平方公里，人口5300多人。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%89%AC%E7%BE%8E%E6%9D%91",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%89%AC%E7%BE%8E%E6%9D%91",
+        "https://en.wikipedia.org/wiki/Yangmei_Ancient_Town"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        108.0615,
+        22.844
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Yangmei_Ancient_Town",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "450100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/40a41c8673fb6009.webp",
+        "credit": "kiwi family · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yangmeigate.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "One of the old gates on the river side of the city wall in Yangmei Ancient Town, Guangxi, China. On the inside of this gate are red marks with years painted, indicating high tides (and obvious flooding). On the gate there are three characters \"临江街\" which means \"Riverside Street\" or \"Overlooking-Water Street\". Photo taken with a Canon PowerShot SX100 IS digital camera. 中文：​临江街大门，位于广西南宁扬美古镇临江街",
+        "place": "扬美村",
+        "originalFile": "Yangmeigate.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

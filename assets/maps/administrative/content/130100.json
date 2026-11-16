@@ -1,0 +1,189 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "130100": {
+      "label": {
+        "en": "Shijiazhuang",
+        "zh-CN": "石家庄市",
+        "zh-TW": "石家莊市"
+      },
+      "description": {
+        "en": "Shijiazhuang is the capital and most populous city of China's Hebei Province, located 266 kilometres southwest of Beijing. It administers eight districts, three county-level cities and eleven counties, and is east of the Taihang Mountains, which extend over 400 km from north to south with an average elevation of 1,500 to 2,000 m .",
+        "zh-CN": "石家庄市，简称石，是中华人民共和国河北省的省会，位于河北省中南部。市境北接保定市，东邻衡水市，南毗邢台市，西望山西省阳泉市、忻州市、晋中市。",
+        "zh-TW": "石家莊市，簡稱石，是中華人民共和國河北省的省會，位於河北省中南部。市境北接保定市，東鄰衡水市，南毗邢臺市，西望山西省陽泉市、忻州市、晉中市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%9F%B3%E5%AE%B6%E5%BA%84%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%9F%B3%E5%AE%B6%E5%BA%84%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Shijiazhuang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        114.51,
+        38.0425
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/b392258ab33e5937.webp",
+        "credit": "Photo by and (c)2007 David Chen · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Manichaean_Hall_03_Longxing_temple.JPG",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "The Manichaean Hall of Longxing temple in Zhengding Hebei,China.",
+        "place": "隆興寺",
+        "originalFile": "The_Manichaean_Hall_03_Longxing_temple.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:130100:35b50cd6",
+      "urbanFocus": {
+        "label": {
+          "en": "Shijiazhuang",
+          "zh-CN": "石家庄市",
+          "zh-TW": "石家莊市"
+        },
+        "lngLat": [
+          114.51,
+          38.0425
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Shijiazhuang.",
+          "zh-CN": "以石家庄市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以石家莊市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q58401#P625",
+        "source": "https://www.wikidata.org/wiki/Q58401",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q58401#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.74
+        }
+      }
+    },
+    "poi:admin:130100:c6ec9467": {
+      "label": {
+        "en": "Anji Bridge",
+        "zh-CN": "赵州桥",
+        "zh-TW": "趙州橋"
+      },
+      "description": {
+        "en": "The Anji Bridge , also known as the Great Stone Bridge or Zhaozhou Bridge, is the world's oldest open-spandrel segmental arch bridge of stone construction.",
+        "zh-CN": "赵州桥又名安济桥，位于中国河北省石家庄市赵县，是城南五里洨河上的一座石拱桥，是很久的桥，当地人称之为“大石桥”，以区别于附近的另一座“小石桥”。一般认为，该桥始建于隋代，设计者是隋代杰出的工匠李春。",
+        "zh-TW": "趙州橋又名安濟橋，位於中國河北省石家莊市趙縣，是城南五里洨河上的一座石拱橋，是很久的橋，當地人稱之爲“大石橋”，以區別於附近的另一座“小石橋”。一般認爲，該橋始建於隋代，設計者是隋代傑出的工匠李春。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%B5%B5%E5%B7%9E%E6%A1%A5",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%B5%B5%E5%B7%9E%E6%A1%A5",
+        "https://en.wikipedia.org/wiki/Anji_Bridge"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        114.7633,
+        37.7203
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Anji_Bridge",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "130100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ea6765f06b27ede4.webp",
+        "credit": "Siyuwj · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Anji_Bridge,_Zhao_County,_2020-09-06_05.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "趙県にある安済橋",
+        "place": "赵州桥",
+        "originalFile": "Anji_Bridge,_Zhao_County,_2020-09-06_05.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:130100:35b50cd6": {
+      "label": {
+        "en": "Longxing Temple",
+        "zh-CN": "隆兴寺",
+        "zh-TW": "隆興寺"
+      },
+      "description": {
+        "en": "The Longxing Monastery or Longxing Temple is an ancient Buddhist monastery located in the town of Zhengding in Hebei Province, China, approximately 15 kilometres north of the provincial capital of Shijiazhuang. It has been referred to as the \"Best Temple south of Beijing\".",
+        "zh-CN": "隆兴寺是中国现存的年代较早、规模较大且保存完整的佛教寺院之一，位于河北省正定县正定镇城东门里街，又称“正定大佛寺”。中国“十大名寺”之一。",
+        "zh-TW": "隆興寺是中國現存的年代較早、規模較大且保存完整的佛教寺院之一，位於河北省正定縣正定鎮城東門裏街，又稱“正定大佛寺”。中國“十大名寺”之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9A%86%E8%88%88%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9A%86%E8%88%88%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Longxing_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        114.57607222,
+        38.14414167
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Longxing_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "130100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b392258ab33e5937.webp",
+        "credit": "Photo by and (c)2007 David Chen · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Manichaean_Hall_03_Longxing_temple.JPG",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "The Manichaean Hall of Longxing temple in Zhengding Hebei,China.",
+        "place": "隆興寺",
+        "originalFile": "The_Manichaean_Hall_03_Longxing_temple.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:130100:photo-52780700": {
+      "label": {
+        "en": "Shijiazhuang landscape view",
+        "zh-CN": "石家庄街景 - 江上清风1961 (6)",
+        "zh-TW": "石家莊街景 - 江上清風1961 (6)"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Shijiazhuang, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现石家庄市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現石家莊市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%9F%B3%E5%AE%B6%E5%BA%84%E8%A1%97%E6%99%AF_-_panoramio_-_%E6%B1%9F%E4%B8%8A%E6%B8%85%E9%A3%8E1961_(6).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E7%9F%B3%E5%AE%B6%E5%BA%84%E8%A1%97%E6%99%AF_-_panoramio_-_%E6%B1%9F%E4%B8%8A%E6%B8%85%E9%A3%8E1961_(6).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/12aaab2b6773f493.webp",
+        "credit": "江上清风1961 · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%9F%B3%E5%AE%B6%E5%BA%84%E8%A1%97%E6%99%AF_-_panoramio_-_%E6%B1%9F%E4%B8%8A%E6%B8%85%E9%A3%8E1961_(6).jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "石家庄街景",
+        "place": "石家庄街景 - panoramio - 江上清风1961 (6).jpg",
+        "originalFile": "石家庄街景 - panoramio - 江上清风1961 (6).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            114.514103,
+            38.042075
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E7%9F%B3%E5%AE%B6%E5%BA%84%E8%A1%97%E6%99%AF_-_panoramio_-_%E6%B1%9F%E4%B8%8A%E6%B8%85%E9%A3%8E1961_(6).jpg"
+        }
+      },
+      "lngLat": [
+        114.514103,
+        38.042075
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E7%9F%B3%E5%AE%B6%E5%BA%84%E8%A1%97%E6%99%AF_-_panoramio_-_%E6%B1%9F%E4%B8%8A%E6%B8%85%E9%A3%8E1961_(6).jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "130100"
+    }
+  }
+}

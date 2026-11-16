@@ -1,0 +1,133 @@
+{
+  "entries": {
+    "poi:admin:RUS:Tuva:urban": {
+      "id": "poi:admin:RUS:Tuva:urban",
+      "label": {
+        "en": "Centre of Asia monument",
+        "zh-CN": "亚洲中心纪念碑",
+        "zh-TW": "亞洲中心紀念碑"
+      },
+      "description": {
+        "en": "The Centre of Asia monument stands on the Yenisei embankment in Kyzyl. The present sculptural ensemble was created by Dashi Namdakov in 2014, replacing an earlier obelisk. Its globe and animals make it a distinctive landmark of Tuva. The name expresses a local geographical tradition; the calculated centre of Asia varies with the boundaries and method used.",
+        "zh-CN": "亚洲中心纪念碑坐落于克孜勒的叶尼塞河滨岸。现有雕塑群由达希·纳姆达科夫设计，于2014年建成，取代了早期方尖碑；地球与动物造型使它成为图瓦鲜明的城市标志。“亚洲中心”体现了当地的地理传统，计算所得的大陆中心会随边界定义与测量方法而变化。",
+        "zh-TW": "亞洲中心紀念碑坐落於克孜勒的葉尼塞河濱岸。現有雕塑羣由達希·納姆達科夫設計，於2014年建成，取代了早期方尖碑；地球與動物造型使它成爲圖瓦鮮明的城市標誌。“亞洲中心”體現了當地的地理傳統，計算所得的大陸中心會隨邊界定義與測量方法而變化。"
+      },
+      "source": "https://www.tuva.asia/news/tuva/7365-translyaciya.html",
+      "textSources": [
+        "https://www.tuva.asia/news/tuva/7365-translyaciya.html",
+        "https://en.wikipedia.org/wiki/Geographical_midpoint_of_Asia"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c030a617ab057bac.webp",
+        "credit": "Katharina Sunrise · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9D%D0%BE%D0%B2%D1%8B%D0%B9_%D0%BC%D0%BE%D0%BD%D1%83%D0%BC%D0%B5%D0%BD%D1%82_%22%D0%A6%D0%B5%D0%BD%D1%82%D1%80_%D0%90%D0%B7%D0%B8%D0%B8%22.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "The new Centre of Asia monument on Kyzyl's riverfront, photographed in 2019.",
+          "zh-CN": "2019年拍摄的克孜勒河滨亚洲中心新纪念碑。",
+          "zh-TW": "2019年拍攝的克孜勒河濱亞洲中心新紀念碑。"
+        },
+        "place": {
+          "en": "Centre of Asia monument",
+          "zh-CN": "亚洲中心纪念碑",
+          "zh-TW": "亞洲中心紀念碑"
+        },
+        "originalFile": "Новый монумент \"Центр Азии\".jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        94.4435925167,
+        51.7248811833
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/825505556",
+      "coordinateVerification": "https://api.openstreetmap.org/api/0.6/way/825505556/full.json",
+      "coordinateDerivation": "Arithmetic centroid of the documented OpenStreetMap building/monument footprint nodes (WGS84).",
+      "kind": "landmark",
+      "parentCity": "RUS:Tuva"
+    },
+    "poi:admin:IND:LahaulSpiti:urban": {
+      "id": "poi:admin:IND:LahaulSpiti:urban",
+      "label": {
+        "en": "Shashur Monastery",
+        "zh-CN": "沙舒尔寺",
+        "zh-TW": "沙舒爾寺"
+      },
+      "description": {
+        "en": "Shashur is a Drukpa Buddhist monastery on the hillside above Keylong in the Lahaul valley. Its name refers to the blue pines around the monastery. The halls preserve large thangka paintings and murals, and the summer ceremonial dances are an important local festival. The monastery and its forested slope form a close landscape counterpart to the town and the Bhaga valley below.",
+        "zh-CN": "沙舒尔寺位于拉豪尔河谷凯隆镇上方的山坡，是竹巴噶举派寺院，寺名与周围的蓝松有关。殿堂保存有大型唐卡和壁画，夏季举行的仪式舞蹈是当地重要的节庆活动。寺院、山坡林木与下方的凯隆聚落及巴嘎河谷共同构成近城景观。",
+        "zh-TW": "沙舒爾寺位於拉豪爾河谷凱隆鎮上方的山坡，是竹巴噶舉派寺院，寺名與周圍的藍松有關。殿堂保存有大型唐卡和壁畫，夏季舉行的儀式舞蹈是當地重要的節慶活動。寺院、山坡林木與下方的凱隆聚落及巴嘎河谷共同構成近城景觀。"
+      },
+      "source": "https://hplahaulspiti.nic.in/monasteries-in-lahaul/",
+      "textSources": [
+        "https://hplahaulspiti.nic.in/monasteries-in-lahaul/",
+        "https://hplahaulspiti.nic.in/fairs-festivals/",
+        "https://en.wikipedia.org/wiki/Shashur_Monastery"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0b569a67a587acc9.webp",
+        "credit": "Clintonpeter · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shashur_monastery.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "The Dharma wheel and deer at Shashur Monastery, with the Lahaul mountains behind, photographed in 2017.",
+          "zh-CN": "2017年拍摄的沙舒尔寺法轮、双鹿与远处拉豪尔山景。",
+          "zh-TW": "2017年拍攝的沙舒爾寺法輪、雙鹿與遠處拉豪爾山景。"
+        },
+        "place": {
+          "en": "Shashur Monastery",
+          "zh-CN": "沙舒尔寺",
+          "zh-TW": "沙舒爾寺"
+        },
+        "originalFile": "Shashur monastery.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        77.02557105,
+        32.5792741
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/441781191",
+      "coordinateVerification": "https://api.openstreetmap.org/api/0.6/way/441781191/full.json",
+      "coordinateDerivation": "Arithmetic centroid of the documented OpenStreetMap building/monument footprint nodes (WGS84).",
+      "kind": "landmark",
+      "parentCity": "IND:LahaulSpiti"
+    }
+  },
+  "places": [
+    {
+      "id": "poi:admin:RUS:Tuva:urban",
+      "parentUnit": "RUS:Tuva",
+      "label": {
+        "en": "Centre of Asia monument",
+        "zh-CN": "亚洲中心纪念碑",
+        "zh-TW": "亞洲中心紀念碑"
+      },
+      "lngLat": [
+        94.4435925167,
+        51.7248811833
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/825505556",
+      "role": "landmark"
+    },
+    {
+      "id": "poi:admin:IND:LahaulSpiti:urban",
+      "parentUnit": "IND:LahaulSpiti",
+      "label": {
+        "en": "Shashur Monastery",
+        "zh-CN": "沙舒尔寺",
+        "zh-TW": "沙舒爾寺"
+      },
+      "lngLat": [
+        77.02557105,
+        32.5792741
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/441781191",
+      "role": "landmark"
+    }
+  ]
+}

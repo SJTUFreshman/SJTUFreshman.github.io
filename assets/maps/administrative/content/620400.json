@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "620400": {
+      "label": {
+        "en": "Baiyin",
+        "zh-CN": "白银市",
+        "zh-TW": "白銀市"
+      },
+      "description": {
+        "en": "Baiyin is a prefecture-level city in northeastern Gansu province, People's Republic of China.",
+        "zh-CN": "白银市是中华人民共和国甘肃省下辖的地级市，位于甘肃省中部，黄河上游。市境西邻武威市、兰州市，南接定西市、平凉市，东达宁夏回族自治区固原市、中卫市，北通内蒙古自治区阿拉善盟。",
+        "zh-TW": "白銀市是中華人民共和國甘肅省下轄的地級市，位於甘肅省中部，黃河上游。市境西鄰武威市、蘭州市，南接定西市、平涼市，東達寧夏回族自治區固原市、中衛市，北通內蒙古自治區阿拉善盟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%99%BD%E9%93%B6%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%99%BD%E9%93%B6%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Baiyin"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        104.1389,
+        36.5451
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/bec5cc8313ebebb6.webp",
+        "credit": "Zzyss0721 · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​白银市第一中学",
+        "place": "白银市第一中学操场.jpg",
+        "originalFile": "白银市第一中学操场.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.172656,
+            36.540956
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg"
+        }
+      },
+      "photoReference": "poi:admin:620400:reviewed-photo-179921619",
+      "urbanFocus": {
+        "label": {
+          "en": "Baiyin",
+          "zh-CN": "白银市",
+          "zh-TW": "白銀市"
+        },
+        "lngLat": [
+          104.1766,
+          36.5448
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Baiyin.",
+          "zh-CN": "以白银市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以白銀市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q532981#P625",
+        "source": "https://www.wikidata.org/wiki/Q532981",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q532981#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.29
+        }
+      }
+    },
+    "poi:admin:620400:reviewed-photo-179921619": {
+      "label": {
+        "en": "Baiyin No. 1 Middle School grounds",
+        "zh-CN": "白银市第一中学操场",
+        "zh-TW": "白銀市第一中學操場"
+      },
+      "description": {
+        "en": "The sports grounds and buildings of Baiyin No. 1 Middle School, a view of everyday urban life.",
+        "zh-CN": "白银市第一中学的操场与校园建筑实景，提供了当地城市生活的一个侧面。",
+        "zh-TW": "白銀市第一中學的操場與校園建築實景，提供了當地城市生活的一個側面。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/bec5cc8313ebebb6.webp",
+        "credit": "Zzyss0721 · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​白银市第一中学",
+        "place": "白银市第一中学操场.jpg",
+        "originalFile": "白银市第一中学操场.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.172656,
+            36.540956
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg"
+        }
+      },
+      "lngLat": [
+        104.172656,
+        36.540956
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "620400"
+    }
+  }
+}

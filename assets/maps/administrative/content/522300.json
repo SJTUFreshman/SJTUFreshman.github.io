@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "522300": {
+      "label": {
+        "en": "Qianxinan Buyei and Miao Autonomous Prefecture",
+        "zh-CN": "黔西南布依族苗族自治州",
+        "zh-TW": "黔西南布依族苗族自治州"
+      },
+      "description": {
+        "en": "Qianxinan Buyei and Miao Autonomous Prefecture is an autonomous prefecture of Guizhou province, People's Republic of China, bordering Guangxi to the south and Yunnan to the west. The name, \"黔西南\" derives from the prefecture's southwest location in the province; \"黔\" is the official abbreviation for Guizhou, while \"西南\" means \"southwest\".",
+        "zh-CN": "黔西南布依族苗族自治州，简称黔西南州，是中华人民共和国贵州省下辖的自治州，位于贵州省西南部。州境西北达六盘水市，东北临安顺市，东界黔南布依族苗族自治州，南邻广西壮族自治区百色市，西南接云南省曲靖市。",
+        "zh-TW": "黔西南布依族苗族自治州，簡稱黔西南州，是中華人民共和國貴州省下轄的自治州，位於貴州省西南部。州境西北達六盤水市，東北臨安順市，東界黔南布依族苗族自治州，南鄰廣西壯族自治區百色市，西南接雲南省曲靖市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B8%83%E4%BE%9D%E6%97%8F%E8%8B%97%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B8%83%E4%BE%9D%E6%97%8F%E8%8B%97%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+        "https://en.wikipedia.org/wiki/Qianxinan_Buyei_and_Miao_Autonomous_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        104.91,
+        25.09
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/1736b3f541e4a7f2.webp",
+        "credit": "Kcx36 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​黔西南州民族文化中心",
+        "place": "黔西南州民族文化中心 2026-08-05.jpg",
+        "originalFile": "黔西南州民族文化中心 2026-08-05.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.916075,
+            25.106818
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg"
+        }
+      },
+      "photoReference": "poi:admin:522300:reviewed-photo-198255697",
+      "urbanFocus": {
+        "label": {
+          "en": "Qianxinan Buyei and Miao Autonomous Prefecture",
+          "zh-CN": "黔西南布依族苗族自治州",
+          "zh-TW": "黔西南布依族苗族自治州"
+        },
+        "lngLat": [
+          104.89645,
+          25.09312
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Qianxinan Buyei and Miao Autonomous Prefecture.",
+          "zh-CN": "以黔西南布依族苗族自治州的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以黔西南布依族苗族自治州的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q988844#P625",
+        "source": "https://www.wikidata.org/wiki/Q988844",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q988844#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.58
+        }
+      }
+    },
+    "poi:admin:522300:reviewed-photo-198255697": {
+      "label": {
+        "en": "Qianxinan ethnic cultural centre",
+        "zh-CN": "黔西南州民族文化中心",
+        "zh-TW": "黔西南州民族文化中心"
+      },
+      "description": {
+        "en": "The building and forecourt of the Qianxinan ethnic cultural centre, photographed in August 2026.",
+        "zh-CN": "黔西南州民族文化中心的建筑与广场实景，拍摄于2026年8月。",
+        "zh-TW": "黔西南州民族文化中心的建築與廣場實景，拍攝於2026年8月。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/1736b3f541e4a7f2.webp",
+        "credit": "Kcx36 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​黔西南州民族文化中心",
+        "place": "黔西南州民族文化中心 2026-08-05.jpg",
+        "originalFile": "黔西南州民族文化中心 2026-08-05.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.916075,
+            25.106818
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg"
+        }
+      },
+      "lngLat": [
+        104.916075,
+        25.106818
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "522300"
+    }
+  }
+}

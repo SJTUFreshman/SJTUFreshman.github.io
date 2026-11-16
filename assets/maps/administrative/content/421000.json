@@ -1,0 +1,104 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "421000": {
+      "label": {
+        "en": "Jingzhou",
+        "zh-CN": "荆州市",
+        "zh-TW": "荊州市"
+      },
+      "description": {
+        "en": "Jingzhou is a prefecture-level city in southern Hubei province, China, located on the banks of the Yangtze River. Its total residential population was 5,231,180 according to the 2020 census, 1,068,291 of whom resided in the built-up area comprising two urban districts.",
+        "zh-CN": "荆州市，简称荆，古称郢、江陵、南郡，是中华人民共和国湖北省下辖的地级市，位于湖北省中南部。市境西达宜昌市，北接荆门市、潜江市、仙桃市，东临武汉市、咸宁市，南界湖南省岳阳市、益阳市、常德市。",
+        "zh-TW": "荊州市，簡稱荊，古稱郢、江陵、南郡，是中華人民共和國湖北省下轄的地級市，位於湖北省中南部。市境西達宜昌市，北接荊門市、潛江市、仙桃市，東臨武漢市、咸寧市，南界湖南省岳陽市、益陽市、常德市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8D%86%E5%B7%9E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8D%86%E5%B7%9E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Jingzhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        112.2414,
+        30.3363
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/d48a7ce0a5a755d6.webp",
+        "credit": "Zhangzhugang · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jingzhou_Museum_2014.04.20_10-45-55.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "荆州博物馆",
+        "place": "荆州博物馆",
+        "originalFile": "Jingzhou_Museum_2014.04.20_10-45-55.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:421000:736c2fe2",
+      "urbanFocus": {
+        "label": {
+          "en": "Jingzhou",
+          "zh-CN": "荆州市",
+          "zh-TW": "荊州市"
+        },
+        "lngLat": [
+          112.23611111111,
+          30.324444444444
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Jingzhou.",
+          "zh-CN": "以荆州市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以荊州市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q71247#P625",
+        "source": "https://www.wikidata.org/wiki/Q71247",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q71247#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.33
+        }
+      }
+    },
+    "poi:admin:421000:736c2fe2": {
+      "label": {
+        "en": "Jingzhou Museum",
+        "zh-CN": "荆州博物馆",
+        "zh-TW": "荊州博物館"
+      },
+      "description": {
+        "en": "This regional museum on Jingzhong Road presents the history and cultural heritage of Jingzhou. It was designated a national first-grade museum in 2008.",
+        "zh-CN": "荆州博物馆位于中华人民共和国湖北省荆州市荆州区荆中路166号，是一座综合性地志博物馆，2008年被国家文物局评为“国家一级博物馆”。",
+        "zh-TW": "荊州博物館位於中華人民共和國湖北省荊州市荊州區荊中路166號，是一座綜合性地誌博物館，2008年被國家文物局評爲“國家一級博物館”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8D%86%E5%B7%9E%E5%8D%9A%E7%89%A9%E9%A6%86",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8D%86%E5%B7%9E%E5%8D%9A%E7%89%A9%E9%A6%86"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        112.175,
+        30.35555556
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%8D%86%E5%B7%9E%E5%8D%9A%E7%89%A9%E9%A6%86",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "421000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/d48a7ce0a5a755d6.webp",
+        "credit": "Zhangzhugang · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jingzhou_Museum_2014.04.20_10-45-55.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "荆州博物馆",
+        "place": "荆州博物馆",
+        "originalFile": "Jingzhou_Museum_2014.04.20_10-45-55.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

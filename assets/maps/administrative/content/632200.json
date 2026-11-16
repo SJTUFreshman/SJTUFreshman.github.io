@@ -1,0 +1,223 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "632200": {
+      "label": {
+        "en": "Haibei Tibetan Autonomous Prefecture",
+        "zh-CN": "海北藏族自治州",
+        "zh-TW": "海北藏族自治州"
+      },
+      "description": {
+        "en": "Haibei Tibetan Autonomous Prefecture is an autonomous prefecture of northeastern Qinghai Province, China. The prefecture has an area of 39,354 square kilometres and its seat is Haiyan County.",
+        "zh-CN": "海北藏族自治州，简称海北州，是中华人民共和国青海省下辖的自治州，位于青海省东北部。州境东南接海东市、西宁市，南邻海南州，西达海西州，北靠甘肃省张掖市，东毗甘肃省武威市。",
+        "zh-TW": "海北藏族自治州，簡稱海北州，是中華人民共和國青海省下轄的自治州，位於青海省東北部。州境東南接海東市、西寧市，南鄰海南州，西達海西州，北靠甘肅省張掖市，東毗甘肅省武威市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B5%B7%E5%8C%97%E8%97%8F%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B5%B7%E5%8C%97%E8%97%8F%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+        "https://en.wikipedia.org/wiki/Haibei_Tibetan_Autonomous_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        100.9,
+        36.95
+      ],
+      "photo": {
+        "src": "assets/maps/regions/photos/de943021db53902d.webp",
+        "credit": "NASA · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Qinghai_lake.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Qinghai_lake.jpg#Licensing",
+        "alt": "Qinghai Lake, China - also, originally known as Koko Nor in Mongolian and Tso Ngonpo in Tibetan - November 1994",
+        "place": "青海湖",
+        "originalFile": "Qinghai_lake.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:632200:2",
+      "urbanFocus": {
+        "label": {
+          "en": "Haibei Tibetan Autonomous Prefecture",
+          "zh-CN": "海北藏族自治州",
+          "zh-TW": "海北藏族自治州"
+        },
+        "lngLat": [
+          100.89982,
+          36.95804
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Haibei Tibetan Autonomous Prefecture.",
+          "zh-CN": "以海北藏族自治州的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以海北藏族自治州的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q508594#P625",
+        "source": "https://www.wikidata.org/wiki/Q508594",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q508594#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.19
+        }
+      }
+    },
+    "poi:632200:1": {
+      "label": {
+        "en": "Qilian Mountains",
+        "zh-CN": "祁连山",
+        "zh-TW": "祁連山"
+      },
+      "description": {
+        "en": "The Qilian Mountains, along with the Altyn-Tagh sometimes known as the Nan Shan as it is to the south of the Hexi Corridor, are northern outliers of the Kunlun Mountains, forming the border between the Qinghai and Gansu provinces of China.",
+        "zh-CN": "祁连山脉由七条互相平行的山脊线及其相夹的狭长谷地组成，均沿甘肃、青海省界呈西北-东南走向，狭义的祁连山特指最北山脊线的走廊南山。祁连山脉自山脚以上均无人烟，仅在东端的山间河谷座落数县县城，最北麓山脚距河西走廊大城市数十公里，其余山区方圆百里深处无人区。",
+        "zh-TW": "祁連山脈由七條互相平行的山脊線及其相夾的狹長谷地組成，均沿甘肅、青海省界呈西北-東南走向，狹義的祁連山特指最北山脊線的走廊南山。祁連山脈自山腳以上均無人煙，僅在東端的山間河谷座落數縣縣城，最北麓山腳距河西走廊大城市數十公里，其餘山區方圓百里深處無人區。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%A5%81%E8%BF%9E%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%A5%81%E8%BF%9E%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Qilian_Mountains"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        98.53333333,
+        39.2
+      ],
+      "parentCity": "632200",
+      "photo": {
+        "src": "assets/maps/regions/photos/b5533ea78c15b1d0.webp",
+        "credit": "Gruschke at German Wikipedia · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Qilian1.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Blick auf die Gebirgszüge des Qilian Shan (hier von der Kreisstadt Qilian in Qinghai aus) Foto: Andreas Gruschke (Freiburg)",
+        "place": "祁连山",
+        "originalFile": "Qilian1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:632200:2": {
+      "label": {
+        "en": "Qinghai Lake",
+        "zh-CN": "青海湖",
+        "zh-TW": "青海湖"
+      },
+      "description": {
+        "en": "Qinghai Lake is the largest lake in China. Located in the Qinghai Province, to which it gave its name, Qinghai Lake is classified as an alkaline endorheic salt lake.",
+        "zh-CN": "青海湖，又称库库诺尔，在两语内意思均为“蓝湖”、“青湖”。古称西海、鲜水、鲜海、卑禾羌海等。",
+        "zh-TW": "青海湖，又稱庫庫諾爾，在兩語內意思均爲“藍湖”、“青湖”。古稱西海、鮮水、鮮海、卑禾羌海等。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9D%92%E6%B5%B7%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9D%92%E6%B5%B7%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Qinghai_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        100.13333333,
+        37
+      ],
+      "parentCity": "632200",
+      "photo": {
+        "src": "assets/maps/regions/photos/de943021db53902d.webp",
+        "credit": "NASA · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Qinghai_lake.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Qinghai_lake.jpg#Licensing",
+        "alt": "Qinghai Lake, China - also, originally known as Koko Nor in Mongolian and Tso Ngonpo in Tibetan - November 1994",
+        "place": "青海湖",
+        "originalFile": "Qinghai_lake.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:632200:6ffc7334": {
+      "label": {
+        "en": "Qinghai Lake",
+        "zh-CN": "青海湖",
+        "zh-TW": "青海湖"
+      },
+      "description": {
+        "en": "Qinghai Lake is the largest lake in China. Located in the Qinghai Province, to which it gave its name, Qinghai Lake is classified as an alkaline endorheic salt lake.",
+        "zh-CN": "青海湖，又称库库诺尔，在两语内意思均为“蓝湖”、“青湖”。古称西海、鲜水、鲜海、卑禾羌海等。",
+        "zh-TW": "青海湖，又稱庫庫諾爾，在兩語內意思均爲“藍湖”、“青湖”。古稱西海、鮮水、鮮海、卑禾羌海等。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9D%92%E6%B5%B7%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9D%92%E6%B5%B7%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Qinghai_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        100.13333333,
+        37
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Qinghai_Lake",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "632200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/de943021db53902d.webp",
+        "credit": "NASA · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Qinghai_lake.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Qinghai_lake.jpg#Licensing",
+        "alt": "Qinghai Lake, China - also, originally known as Koko Nor in Mongolian and Tso Ngonpo in Tibetan - November 1994",
+        "place": "青海湖",
+        "originalFile": "Qinghai_lake.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:632200:photo-54719564": {
+      "label": {
+        "en": "Haibei Tibetan Autonomous Prefecture landscape view",
+        "zh-CN": "西海镇街景",
+        "zh-TW": "西海鎮街景"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Haibei Tibetan Autonomous Prefecture, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现海北藏族自治州城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現海北藏族自治州城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E6%B5%B7%E9%8E%AE%E8%A1%97%E6%99%AF_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E6%B5%B7%E9%8E%AE%E8%A1%97%E6%99%AF_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/1c99b6a1027e1986.webp",
+        "credit": "ping lin · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E6%B5%B7%E9%8E%AE%E8%A1%97%E6%99%AF_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "西海鎮街景",
+        "place": "西海鎮街景 - panoramio.jpg",
+        "originalFile": "西海鎮街景 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            100.901833,
+            36.956
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E6%B5%B7%E9%8E%AE%E8%A1%97%E6%99%AF_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        100.901833,
+        36.956
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E6%B5%B7%E9%8E%AE%E8%A1%97%E6%99%AF_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "632200"
+    }
+  }
+}

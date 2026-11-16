@@ -1,0 +1,137 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "IND:Ladakh": {
+      "label": {
+        "en": "Ladakh",
+        "zh-CN": "拉达克",
+        "zh-TW": "拉達克"
+      },
+      "description": {
+        "en": "Ladakh is a region administered by India as a union territory and constitutes an eastern portion of the larger Kashmir region that has been the subject of a dispute between India and Pakistan since 1947 and India and China since 1959.",
+        "zh-CN": "拉达克是印度的一个中央直辖区，为印度控制的克什米尔的东部部分，面积4万5110平方公里，包括锡亚琴冰川和与中国有领土争端的巴里加斯西部，名义上还包括巴基斯坦控制的巴尔蒂斯坦和中国控制的巴里加斯东部和阿克赛钦。海拔在3000-7000米之间。",
+        "zh-TW": "拉達克是印度的一箇中央直轄區，為印度控制的克什米爾的東部部分，面積4萬5110平方公里，包括錫亞琴冰川和與中國有領土爭端的巴里加斯西部，名義上還包括巴基斯坦控制的巴爾蒂斯坦和中國控制的巴里加斯東部和阿克賽欽。海拔在3000-7000米之間。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%8B%89%E9%81%94%E5%85%8B",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%8B%89%E9%81%94%E5%85%8B",
+        "https://en.wikipedia.org/wiki/Ladakh"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        77.58472222,
+        34.16416667
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/e7d41f6bcfcadb0b.webp",
+        "credit": "KennyOMG · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Leh_Palace_2011.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Leh Palace",
+        "place": "Leh Palace",
+        "originalFile": "Leh_Palace_2011.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:IND:Ladakh:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Leh",
+          "zh-CN": "列城",
+          "zh-TW": "列城"
+        },
+        "lngLat": [
+          77.58472222222223,
+          34.16416666666667
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Leh.",
+          "zh-CN": "以列城为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以列城爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q230818",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q230818#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E6%8B%89%E9%81%94%E5%85%8B"
+      }
+    },
+    "poi:IND:Ladakh:1": {
+      "label": {
+        "en": "Thikse Monastery",
+        "zh-CN": "提克西寺",
+        "zh-TW": "提克西寺"
+      },
+      "description": {
+        "en": "Thiksey Monastery or Thiksey Gompa is a Buddhist monastery affiliated with the Gelug school of Tibetan Buddhism. It is located on top of a hill in Thiksey approximately 19 kilometres east of Leh, in the Ladakh region of northern India.",
+        "zh-CN": "提克西寺是一座藏传佛教格鲁派的寺院，位于印度控制的拉达克地区列城以东19公里的提克西村山顶。该寺是拉达克以与西藏拉萨的布达拉宫相似而著称，是拉达克中部最大的寺庙。",
+        "zh-TW": "提克西寺是一座藏傳佛教格魯派的寺院，位於印度控制的拉達克地區列城以東19公里的提克西村山頂。該寺是拉達克以與西藏拉薩的布達拉宮相似而著稱，是拉達克中部最大的寺廟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%8F%90%E5%85%8B%E8%A5%BF%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%8F%90%E5%85%8B%E8%A5%BF%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Thikse_Monastery"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        77.6665,
+        34.05566944
+      ],
+      "parentCity": "IND:Ladakh",
+      "photo": {
+        "src": "assets/maps/regions/photos/17f6a884f069c4b5.webp",
+        "credit": "James Edward Ball · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Thikse_Monastery_Front.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "View of the front of Thikse Monastery",
+        "place": "提克西寺",
+        "originalFile": "Thikse_Monastery_Front.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:IND:Ladakh:urban": {
+      "id": "poi:admin:IND:Ladakh:urban",
+      "label": {
+        "en": "Leh Palace",
+        "zh-CN": "列城王宫",
+        "zh-TW": "列城王宮"
+      },
+      "description": {
+        "en": "Leh Palace, also known as Lachen Palkar Palace, is a former royal palace overlooking the city of Leh in Ladakh, India. It was constructed circa 1600 AD by Sengge Namgyal.",
+        "zh-CN": "列城王宫是拉达克王国的一座王宫，位于克什米尔喜马拉雅山区的列城。它是由南嘉王朝的国王僧格南嘉在17世纪建造的，造型模仿了西藏拉萨的布达拉宫，高九层，上部是皇家住所，而下部是马厩和储藏室。",
+        "zh-TW": "列城王宮是拉達克王國的一座王宮，位於克什米爾喜馬拉雅山區的列城。它是由南嘉王朝的國王僧格南嘉在17世紀建造的，造型模仿了西藏拉薩的布達拉宮，高九層，上部是皇家住所，而下部是馬廄和儲藏室。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%88%97%E5%9F%8E%E7%8E%8B%E5%AE%AB",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%88%97%E5%9F%8E%E7%8E%8B%E5%AE%AB",
+        "https://en.wikipedia.org/wiki/Leh_Palace"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e7d41f6bcfcadb0b.webp",
+        "credit": "KennyOMG · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Leh_Palace_2011.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Leh Palace",
+        "place": "Leh Palace",
+        "originalFile": "Leh_Palace_2011.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        77.58639,
+        34.16628
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Leh_Palace",
+      "kind": "landmark",
+      "parentCity": "IND:Ladakh"
+    }
+  }
+}

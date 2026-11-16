@@ -28,6 +28,9 @@ class PreparePagesTests(unittest.TestCase):
         self.write('assets/mochi/frames/idle/idle-00.png', b'pet frame')
         self.write('assets/music/zhang-qiran/song.m4a', b'audio track')
         self.write('assets/music/shell.html', b'music shell')
+        self.write('assets/life/scripts/24-terrain-model.mjs', b'export const terrain = true;')
+        self.write('assets/maps/administrative/meshes/320500-whole.atm', b'ATM1 terrain geometry')
+        self.write('tools/relief-atlas/administrative/320500-whole.npz', b'offline DEM source')
         self.write('assets/mochi/build.py', b'private build source')
         self.write('assets/.env', b'PRIVATE=value')
         self.write('assets/celestial/hosted/manifest.json', b'old manifest')
@@ -54,11 +57,12 @@ class PreparePagesTests(unittest.TestCase):
         report = self.prepare()
         for relative in [*PAGES.ROOT_FILES, 'images/千島湖.jpg', 'documents/证书.pdf',
                          'assets/mochi/frames/idle/idle-00.png', 'assets/music/zhang-qiran/song.m4a',
-                         'assets/music/shell.html', '404.html', '_headers']:
+                         'assets/music/shell.html', 'assets/life/scripts/24-terrain-model.mjs',
+                         'assets/maps/administrative/meshes/320500-whole.atm', '404.html', '_headers']:
             self.assertTrue((self.output / relative).is_file(), relative)
         for relative in ['assets/.env', 'assets/mochi/build.py', 'assets/untracked.png',
                          'assets/celestial', 'assets/mochi/package.json',
-                         'assets/mochi/render-metadata', '.render-work']:
+                         'assets/mochi/render-metadata', 'tools', '.render-work']:
             self.assertFalse((self.output / relative).exists(), relative)
         self.assertEqual(report['fileCount'], len(report['files']))
         self.assertEqual(report['totalBytes'], sum(record['bytes'] for record in report['files'].values()))

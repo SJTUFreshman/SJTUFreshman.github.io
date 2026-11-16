@@ -1,0 +1,151 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "540400": {
+      "label": {
+        "en": "Nyingchi",
+        "zh-CN": "林芝市",
+        "zh-TW": "林芝市"
+      },
+      "description": {
+        "en": "Nyingchi , also known as Linzhi or Nyingtri, is a prefecture-level city in the southeast of the Tibet Autonomous Region in China. The administrative seat of Nyingchi is Bayi District.",
+        "zh-CN": "林芝市是中华人民共和国西藏自治区下辖的地级市，位于西藏自治区东南部，林芝市地处雅鲁藏布江中下游。常住总人口23.89万人，2024年初户籍人口21.3993万。",
+        "zh-TW": "林芝市是中華人民共和國西藏自治區下轄的地級市，位於西藏自治區東南部，林芝市地處雅魯藏布江中下游。常住總人口23.89萬人，2024年初戶籍人口21.3993萬。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9E%97%E8%8A%9D%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9E%97%E8%8A%9D%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Nyingchi"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        94.3614,
+        29.6488
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/0ec4a2da46b4da07.webp",
+        "credit": "Jiang Jianhua · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%9B%85%E9%B2%81%E8%97%8F%E5%B8%83%E5%A4%A7%E5%B3%A1%E8%B0%B7Q30026988.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Q30026988：The Yarlung Zangbo River bypass Namjagbarwa turning south, forming the world's longest and deepest Grand Canyon, created in the south-eastern Tibetan Plateau exotic forest ecological landscape. The ancient peach forest on the shore is just in full bloom, although the plateau temperature is lower; it has brought people a breath of spring.",
+        "place": "雅鲁藏布大峡谷",
+        "originalFile": "雅鲁藏布大峡谷Q30026988.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:540400:4bc62522",
+      "urbanFocus": {
+        "label": {
+          "en": "Nyingchi",
+          "zh-CN": "林芝市",
+          "zh-TW": "林芝市"
+        },
+        "lngLat": [
+          94.35936,
+          29.65973
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Nyingchi.",
+          "zh-CN": "以林芝市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以林芝市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q1012465#P625",
+        "source": "https://www.wikidata.org/wiki/Q1012465",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q1012465#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.63
+        }
+      }
+    },
+    "poi:admin:540400:4bc62522": {
+      "label": {
+        "en": "Yarlung Tsangpo Grand Canyon",
+        "zh-CN": "雅鲁藏布大峡谷",
+        "zh-TW": "雅魯藏布大峽谷"
+      },
+      "description": {
+        "en": "The Yarlung Tsangpo Grand Canyon, also known as the Yarlung Zangbo Grand Canyon, the Tsangpo Canyon, the Brahmaputra Canyon or the Tsangpo Gorge , is a canyon along the Yarlung Tsangpo River in Tibet Autonomous Region, China. It is the deepest canyon in the world, and at 504.6 kilometres is slightly longer than the Grand Canyon in the United States, making it one of the world's largest.",
+        "zh-CN": "雅鲁藏布大峡谷，是雅鲁藏布江的大峡谷，位于中国西藏东南部的米林县和墨脱县境内，长504.6公里，最深为6009米。因为印度洋季风带来丰沛的降雨，使此地成为了世界上降雨量最大的地方之一，年降雨量达4500-11060毫米。",
+        "zh-TW": "雅魯藏布大峽谷，是雅魯藏布江的大峽谷，位於中國西藏東南部的米林縣和墨脫縣境內，長504.6公里，最深爲6009米。因爲印度洋季風帶來豐沛的降雨，使此地成爲了世界上降雨量最大的地方之一，年降雨量達4500-11060毫米。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9B%85%E9%B2%81%E8%97%8F%E5%B8%83%E5%A4%A7%E5%B3%A1%E8%B0%B7",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9B%85%E9%B2%81%E8%97%8F%E5%B8%83%E5%A4%A7%E5%B3%A1%E8%B0%B7",
+        "https://en.wikipedia.org/wiki/Yarlung_Tsangpo_Grand_Canyon"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        94.936,
+        29.612
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Yarlung_Tsangpo_Grand_Canyon",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "540400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0ec4a2da46b4da07.webp",
+        "credit": "Jiang Jianhua · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%9B%85%E9%B2%81%E8%97%8F%E5%B8%83%E5%A4%A7%E5%B3%A1%E8%B0%B7Q30026988.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Q30026988：The Yarlung Zangbo River bypass Namjagbarwa turning south, forming the world's longest and deepest Grand Canyon, created in the south-eastern Tibetan Plateau exotic forest ecological landscape. The ancient peach forest on the shore is just in full bloom, although the plateau temperature is lower; it has brought people a breath of spring.",
+        "place": "雅鲁藏布大峡谷",
+        "originalFile": "雅鲁藏布大峡谷Q30026988.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:540400:photo-53924023": {
+      "label": {
+        "en": "Nyingchi landscape view",
+        "zh-CN": "林芝街景",
+        "zh-TW": "林芝街景"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Nyingchi, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现林芝市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現林芝市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9E%97%E8%8A%9D%E8%A1%97%E6%99%AF_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E6%9E%97%E8%8A%9D%E8%A1%97%E6%99%AF_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2f19a8e10ca16267.webp",
+        "credit": "mayanming · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%9E%97%E8%8A%9D%E8%A1%97%E6%99%AF_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "林芝街景",
+        "place": "林芝街景 - panoramio.jpg",
+        "originalFile": "林芝街景 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            94.358332,
+            29.650046
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E6%9E%97%E8%8A%9D%E8%A1%97%E6%99%AF_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        94.358332,
+        29.650046
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E6%9E%97%E8%8A%9D%E8%A1%97%E6%99%AF_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "540400"
+    }
+  }
+}

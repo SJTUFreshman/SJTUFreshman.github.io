@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "150200": {
+      "label": {
+        "en": "Baotou",
+        "zh-CN": "包头市",
+        "zh-TW": "包頭市"
+      },
+      "description": {
+        "en": "Baotou is the second-largest city by urban population in Inner Mongolia, China. Governed as a prefecture-level city, its built-up area within its five urban districts is home to 2,261,089 people while the total population is 2,709,378 as of the 2020 census.",
+        "zh-CN": "包头市，简称包，是中华人民共和国内蒙古自治区下辖的地级市，国务院批准之较大的市，位于内蒙古西南部，北临戈壁沙漠与蒙古国接壤，南靠黄河河套平原。 包头市是中国北方工业重镇，是中国境内以冶金、稀土、机械工业为主的综合性工业城市，也是全国物流枢纽城市，属内蒙古自治区区域中心城市，享有首批全国文明城市、全国卫生城市、中国制造业名城、中国投资环境百佳城市、国家科技进步先进城、国家园林城市、国家森林城市、中国优秀旅游城市等荣誉。",
+        "zh-TW": "包頭市，簡稱包，是中華人民共和國內蒙古自治區下轄的地級市，國務院批准之較大的市，位於內蒙古西南部，北臨戈壁沙漠與蒙古國接壤，南靠黃河河套平原。 包頭市是中國北方工業重鎮，是中國境內以冶金、稀土、機械工業爲主的綜合性工業城市，也是全國物流樞紐城市，屬內蒙古自治區區域中心城市，享有首批全國文明城市、全國衛生城市、中國製造業名城、中國投資環境百佳城市、國家科技進步先進城、國家園林城市、國家森林城市、中國優秀旅遊城市等榮譽。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8C%85%E5%A4%B4%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8C%85%E5%A4%B4%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Baotou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        109.9532,
+        40.6213
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/d7f2988572ebfabe.webp",
+        "credit": "wanghongliu · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2004%E5%B9%B4%E9%98%BF%E5%B0%94%E4%B8%81%E5%B9%BF%E5%9C%BA_a_er_ding_guang_chang_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "2004年阿尔丁广场 a er ding guang chang",
+        "place": "2004年阿尔丁广场 a er ding guang chang - panoramio.jpg",
+        "originalFile": "2004年阿尔丁广场 a er ding guang chang - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            109.835692,
+            40.655606
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:2004%E5%B9%B4%E9%98%BF%E5%B0%94%E4%B8%81%E5%B9%BF%E5%9C%BA_a_er_ding_guang_chang_-_panoramio.jpg"
+        }
+      },
+      "photoReference": "poi:admin:150200:photo-56714130",
+      "urbanFocus": {
+        "label": {
+          "en": "Baotou",
+          "zh-CN": "包头市",
+          "zh-TW": "包頭市"
+        },
+        "lngLat": [
+          109.83454,
+          40.65621
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Baotou.",
+          "zh-CN": "以包头市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以包頭市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q569907#P625",
+        "source": "https://www.wikidata.org/wiki/Q569907",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q569907#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.54
+        }
+      }
+    },
+    "poi:admin:150200:photo-56714130": {
+      "label": {
+        "en": "Baotou landscape view",
+        "zh-CN": "2004年阿尔丁广场 a er ding guang chang",
+        "zh-TW": "2004年阿爾丁廣場 a er ding guang chang"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Baotou, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现包头市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現包頭市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:2004%E5%B9%B4%E9%98%BF%E5%B0%94%E4%B8%81%E5%B9%BF%E5%9C%BA_a_er_ding_guang_chang_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:2004%E5%B9%B4%E9%98%BF%E5%B0%94%E4%B8%81%E5%B9%BF%E5%9C%BA_a_er_ding_guang_chang_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/d7f2988572ebfabe.webp",
+        "credit": "wanghongliu · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2004%E5%B9%B4%E9%98%BF%E5%B0%94%E4%B8%81%E5%B9%BF%E5%9C%BA_a_er_ding_guang_chang_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "2004年阿尔丁广场 a er ding guang chang",
+        "place": "2004年阿尔丁广场 a er ding guang chang - panoramio.jpg",
+        "originalFile": "2004年阿尔丁广场 a er ding guang chang - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            109.835692,
+            40.655606
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:2004%E5%B9%B4%E9%98%BF%E5%B0%94%E4%B8%81%E5%B9%BF%E5%9C%BA_a_er_ding_guang_chang_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        109.835692,
+        40.655606
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:2004%E5%B9%B4%E9%98%BF%E5%B0%94%E4%B8%81%E5%B9%BF%E5%9C%BA_a_er_ding_guang_chang_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "150200"
+    }
+  }
+}

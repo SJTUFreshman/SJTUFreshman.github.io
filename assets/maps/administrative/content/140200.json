@@ -1,0 +1,179 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "140200": {
+      "label": {
+        "en": "Datong",
+        "zh-CN": "大同市",
+        "zh-TW": "大同市"
+      },
+      "description": {
+        "en": "Datong is a prefecture-level city in northern Shanxi Province in the People's Republic of China. It is located in the Datong Basin at an elevation of 1,040 metres and borders Inner Mongolia to the north and west and Hebei to the east.",
+        "zh-CN": "大同市，简称同，古称平城、云中，是中华人民共和国山西省下辖的地级市，经国务院批准的较大的市，中国九大古都之一，是山西省第二大城市，位于山西省北部，晋冀蒙三省区交界。市境西接朔州市，南毗忻州市，东南界河北省保定市，东达河北省张家口市，北邻内蒙古自治区乌兰察布市。",
+        "zh-TW": "大同市，簡稱同，古稱平城、雲中，是中華人民共和國山西省下轄的地級市，經國務院批准的較大的市，中國九大古都之一，是山西省第二大城市，位於山西省北部，晉冀蒙三省區交界。市境西接朔州市，南毗忻州市，東南界河北省保定市，東達河北省張家口市，北鄰內蒙古自治區烏蘭察布市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%90%8C%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%90%8C%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Datong"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        113.367,
+        40.097
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/220dc3799ca73459.webp",
+        "credit": "Unknown authorUnknown author · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Datong_Bell_Tower.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Datong_Bell_Tower.jpg#Licensing",
+        "alt": "​大同钟楼，今已不存",
+        "place": "大同钟楼",
+        "originalFile": "Datong_Bell_Tower.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:140200:80de41bd",
+      "urbanFocus": {
+        "label": {
+          "en": "Datong",
+          "zh-CN": "大同市",
+          "zh-TW": "大同市"
+        },
+        "lngLat": [
+          113.29138888889,
+          40.093611111111
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Datong.",
+          "zh-CN": "以大同市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以大同市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q72877#P625",
+        "source": "https://www.wikidata.org/wiki/Q72877",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q72877#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.49
+        }
+      }
+    },
+    "poi:admin:140200:7a9f237e": {
+      "label": {
+        "en": "Four Archways, Datong",
+        "zh-CN": "四牌楼 (大同)",
+        "zh-TW": "四牌樓 (大同)"
+      },
+      "description": {
+        "en": "Datong’s Four Archways form a connected group at the centre of the old city. The monument was built in the Ming Hongwu period when General Xu Da rebuilt the city, commemorating military strength and achievement.",
+        "zh-CN": "四牌楼，位于山西省大同市旧城中心，由四个相连的牌坊组成的建筑。四牌楼建于明代洪武年间，当时大将军徐达受命修筑大同城，为壮军威、颂功德，在城中心修筑了这座建筑。",
+        "zh-TW": "四牌樓，位於山西省大同市舊城中心，由四個相連的牌坊組成的建築。四牌樓建於明代洪武年間，當時大將軍徐達受命修築大同城，爲壯軍威、頌功德，在城中心修築了這座建築。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9B%9B%E7%89%8C%E6%A5%BC_(%E5%A4%A7%E5%90%8C)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9B%9B%E7%89%8C%E6%A5%BC_(%E5%A4%A7%E5%90%8C)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.29525,
+        40.09222222
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%9B%9B%E7%89%8C%E6%A5%BC_(%E5%A4%A7%E5%90%8C)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "140200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f3284e1457fae527.webp",
+        "credit": "Japanese invaders · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Qingyuan_Street_in_Datong_City.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Qingyuan_Street_in_Datong_City.jpg#Licensing",
+        "alt": "Qingyuan Street in Datong City",
+        "place": "四牌楼 (大同)",
+        "originalFile": "Qingyuan_Street_in_Datong_City.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:140200:80de41bd": {
+      "label": {
+        "en": "Datong Bell Tower",
+        "zh-CN": "大同钟楼",
+        "zh-TW": "大同鐘樓"
+      },
+      "description": {
+        "en": "Datong Bell Tower stands in the middle of Qingyuan Street in the western old city. Built in the fifth year of the Ming Hongwu reign, it lies near the Great Mosque, Chunyang Palace and Huayan Temple.",
+        "zh-CN": "大同钟楼位于山西省大同市旧城西部清远街中段街心，东邻清真大寺、南邻纯阳宫，西邻华严寺。建于明代洪武五年。",
+        "zh-TW": "大同鐘樓位於山西省大同市舊城西部清遠街中段街心，東鄰清真大寺、南鄰純陽宮，西鄰華嚴寺。建於明代洪武五年。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%90%8C%E9%92%9F%E6%A5%BC",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%90%8C%E9%92%9F%E6%A5%BC"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.29236111,
+        40.09230556
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%90%8C%E9%92%9F%E6%A5%BC",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "140200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/220dc3799ca73459.webp",
+        "credit": "Unknown authorUnknown author · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Datong_Bell_Tower.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Datong_Bell_Tower.jpg#Licensing",
+        "alt": "​大同钟楼，今已不存",
+        "place": "大同钟楼",
+        "originalFile": "Datong_Bell_Tower.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:140200:ccea50ef": {
+      "label": {
+        "en": "Shanhua Temple",
+        "zh-CN": "善化寺",
+        "zh-TW": "善化寺"
+      },
+      "description": {
+        "en": "Shanhua Temple is a Buddhist temple located in Datong, Shanxi Province, China. The temple was first founded during the early 8th century of the Tang dynasty, but its earliest surviving building dates from the 11th century.",
+        "zh-CN": "善化寺，俗称南寺，是山西省大同市古城内的一所佛寺，位于永泰门内西侧，平城区南寺街6号，东侧靠近永泰街，西近楼房巷，北临教场街，内有一座辽代木构和三座金代木构建筑，具有极高的文物价值，1961年被列为第一批全国重点文物保护单位。现为大同市古建筑文物保管所办公所在地。",
+        "zh-TW": "善化寺，俗稱南寺，是山西省大同市古城內的一所佛寺，位於永泰門內西側，平城區南寺街6號，東側靠近永泰街，西近樓房巷，北臨教場街，內有一座遼代木構和三座金代木構建築，具有極高的文物價值，1961年被列爲第一批全國重點文物保護單位。現爲大同市古建築文物保管所辦公所在地。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%96%84%E5%8C%96%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%96%84%E5%8C%96%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Shanhua_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.29361111,
+        40.08583333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Shanhua_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "140200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5265d4346c8c349b.webp",
+        "credit": "Zhangzhugang · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Datong_Shanhua_Si_2013.08.29_12-28-45.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "大同善化寺—— 三圣殿",
+        "place": "善化寺",
+        "originalFile": "Datong_Shanhua_Si_2013.08.29_12-28-45.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "440600": {
+      "label": {
+        "en": "Foshan",
+        "zh-CN": "佛山市",
+        "zh-TW": "佛山市"
+      },
+      "description": {
+        "en": "Foshan or Futsan is a prefecture-level city in central Guangdong Province, China. The entire prefecture covers 3,848 km2 and had a population of 9,498,863 as of the 2020 census.",
+        "zh-CN": "佛山市，简称禅、佛，是中华人民共和国广东省下辖的地级市，位于广东省南部，是粤港澳大湾区的涵盖城市之一，目前归类为特大城市。市境东邻广州市，北抵清远市，西界肇庆市、云浮市，南临江门市、中山市。",
+        "zh-TW": "佛山市，簡稱禪、佛，是中華人民共和國廣東省下轄的地級市，位於廣東省南部，是粵港澳大灣區的涵蓋城市之一，目前歸類爲特大城市。市境東鄰廣州市，北抵清遠市，西界肇慶市、雲浮市，南臨江門市、中山市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%BD%9B%E5%B1%B1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%BD%9B%E5%B1%B1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Foshan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        113.1216,
+        23.0214
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/b78add546b8789b5.webp",
+        "credit": "Yumeto · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20251122_Foshan_Shi_Zumiao_Bowuguan_(132108).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Foshan Zumiao (Ancestral Temple) Museum",
+        "place": "佛山祖庙",
+        "originalFile": "20251122_Foshan_Shi_Zumiao_Bowuguan_(132108).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:440600:0789c714",
+      "urbanFocus": {
+        "label": {
+          "en": "Foshan",
+          "zh-CN": "佛山市",
+          "zh-TW": "佛山市"
+        },
+        "lngLat": [
+          113.105556,
+          23.029167
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Foshan.",
+          "zh-CN": "以佛山市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以佛山市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q34412#P625",
+        "source": "https://www.wikidata.org/wiki/Q34412",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q34412#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.76
+        }
+      }
+    },
+    "poi:admin:440600:0789c714": {
+      "label": {
+        "en": "Foshan Ancestral Temple",
+        "zh-CN": "佛山祖庙",
+        "zh-TW": "佛山祖廟"
+      },
+      "description": {
+        "en": "Foshan Ancestral Temple aka. Foshan Zumiao is a Daoist temple in Foshan, Guangdong, China.",
+        "zh-CN": "佛山祖庙位于中国广东省佛山市禅城区祖庙街道祖庙路21号，是一座供奉道教玄天大帝的神庙。整个佛山祖庙博物馆由祖庙古建筑群、孔庙、黄飞鸿纪念馆、叶问堂等组成，占地3.2万平方米，现为全国重点文物保护单位、国家一级博物馆、国家AAAA级旅游景区、广东省文明旅游区示范点、广东省中华文化传承基地、广东十个文明旅游景区示范点、广东省爱国主义教育基地、佛山市爱国主义教育基地。",
+        "zh-TW": "佛山祖廟位於中國廣東省佛山市禪城區祖廟街道祖廟路21號，是一座供奉道教玄天大帝的神廟。整個佛山祖廟博物館由祖廟古建築羣、孔廟、黃飛鴻紀念館、葉問堂等組成，佔地3.2萬平方米，現爲全國重點文物保護單位、國家一級博物館、國家AAAA級旅遊景區、廣東省文明旅遊區示範點、廣東省中華文化傳承基地、廣東十個文明旅遊景區示範點、廣東省愛國主義教育基地、佛山市愛國主義教育基地。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%BD%9B%E5%B1%B1%E7%A5%96%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%BD%9B%E5%B1%B1%E7%A5%96%E5%BA%99",
+        "https://en.wikipedia.org/wiki/Foshan_Ancestral_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.116307,
+        23.035151
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Foshan_Ancestral_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "440600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b78add546b8789b5.webp",
+        "credit": "Yumeto · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20251122_Foshan_Shi_Zumiao_Bowuguan_(132108).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Foshan Zumiao (Ancestral Temple) Museum",
+        "place": "佛山祖庙",
+        "originalFile": "20251122_Foshan_Shi_Zumiao_Bowuguan_(132108).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:440600:43cc7a0a": {
+      "label": {
+        "en": "Shunfengshan Park",
+        "zh-CN": "顺峰山公园",
+        "zh-TW": "順峯山公園"
+      },
+      "description": {
+        "en": "Shunfengshan Park , located at the foot of Taiping Mountain in Shunde District, Foshan City, is one of the \"Ten Attractions of Shunde\". It was built between 1999 and 2002, and was opened to public on October 24, 2004.",
+        "zh-CN": "顺峰山公园位于中华人民共和国广东省佛山市顺德区大良街道太平山山脚，是一个免费开放的大型市政公园，也是顺德的风景名胜区、“顺德新十景”之一。公园始建于1999年，2002年10月24日竣工，2004年10月1日开放启用。",
+        "zh-TW": "順峯山公園位於中華人民共和國廣東省佛山市順德區大良街道太平山山腳，是一個免費開放的大型市政公園，也是順德的風景名勝區、“順德新十景”之一。公園始建於1999年，2002年10月24日竣工，2004年10月1日開放啓用。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A1%BA%E5%B3%B0%E5%B1%B1%E5%85%AC%E5%9B%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A1%BA%E5%B3%B0%E5%B1%B1%E5%85%AC%E5%9B%AD",
+        "https://en.wikipedia.org/wiki/Shunfengshan_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.277611,
+        22.827182
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Shunfengshan_Park",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "440600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b209b55d9ba1c640.webp",
+        "credit": "Caiguanhao · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shunfengshan_Park_Paifang.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Paifang in Shunfengshan Park (aka Shunfeng Park), Shunde",
+        "place": "顺峰山公园",
+        "originalFile": "Shunfengshan_Park_Paifang.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:440600:2649eb32": {
+      "label": {
+        "en": "Mount Xiqiao",
+        "zh-CN": "西樵山",
+        "zh-TW": "西樵山"
+      },
+      "description": {
+        "en": "Mount Xiqiao is a 40- to 50-million-year-old extinct volcano situated in the south west of the Nanhai District, Foshan, Guangdong, People's Republic of China 68 km from Guangzhou. The mountain is an important scenic area and designated as a national forest park and national geological park.",
+        "zh-CN": "西樵山，是一座具有四五千万年历史的死火山，位于中华人民共和国广东省佛山市南海区的西南部，距广州市68公里，是国家重点风景名胜区、国家森林公园和国家地质公园。西樵山总面积14平方公里，共有72峰，主峰346米。",
+        "zh-TW": "西樵山，是一座具有四五千萬年歷史的死火山，位於中華人民共和國廣東省佛山市南海區的西南部，距廣州市68公里，是國家重點風景名勝區、國家森林公園和國家地質公園。西樵山總面積14平方公里，共有72峯，主峯346米。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%A5%BF%E6%A8%B5%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%A5%BF%E6%A8%B5%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Mount_Xiqiao"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        112.97277778,
+        22.92722222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Mount_Xiqiao",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "440600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fe9593abbe7f0a31.webp",
+        "credit": "Whw · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Xiqiaoshan2.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Xiqiaoshan2.jpg#Licensing",
+        "alt": "Statue of Kuan Yin on Xiqiao Mountain, Foshan, Guangdong, China",
+        "place": "西樵山",
+        "originalFile": "Xiqiaoshan2.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

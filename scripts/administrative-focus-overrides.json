@@ -1,0 +1,339 @@
+{
+  "232700": {
+    "label": {
+      "en": "Jiagedaqi urban area",
+      "zh-CN": "加格达奇城区",
+      "zh-TW": "加格達奇城區"
+    },
+    "lngLat": [
+      124.12612,
+      50.42082
+    ],
+    "kind": "administrative-seat-outside-display-outline",
+    "extentKm": 20,
+    "definition": {
+      "en": "A close view of Jiagedaqi, the administrative seat of Daxing'anling Prefecture. The land is territorially part of Oroqen Autonomous Banner in Inner Mongolia.",
+      "zh-CN": "展示大兴安岭地区行署驻地加格达奇的城区与周边地形；当地土地属内蒙古鄂伦春自治旗。",
+      "zh-TW": "展示大興安嶺地區行署駐地加格達奇的城區與周邊地形；當地土地屬內蒙古鄂倫春自治旗。"
+    },
+    "coordinateSource": "https://www.wikidata.org/wiki/Q1283517#P625",
+    "source": "https://www.dxal.gov.cn/dxal/c101259/202409/c13_291470.shtml",
+    "selectionSource": "https://zh.wikipedia.org/wiki/加格达奇区"
+  },
+  "469026": {
+    "label": {
+      "en": "Shilu town centre",
+      "zh-CN": "石碌镇城区",
+      "zh-TW": "石碌鎮城區"
+    },
+    "lngLat": [
+      109.05183,
+      19.2792
+    ],
+    "kind": "administrative-seat",
+    "extentKm": 16,
+    "definition": {
+      "en": "A 16 km landscape window around Shilu, the county seat of Changjiang Li Autonomous County.",
+      "zh-CN": "以昌江黎族自治县县城石碌镇为中心，展示周边约16公里宽的城镇与地形。",
+      "zh-TW": "以昌江黎族自治縣縣城石碌鎮為中心，展示周邊約16公里寬的城鎮與地形。"
+    },
+    "coordinateSource": "https://zh.wikipedia.org/wiki/石碌镇",
+    "source": "https://www.hainan.gov.cn/hainan/sxgw/202211/d417713786da4d90bff8eee8d957ac02/files/cc9d2c2849a544059a6dcf522b72aeb7.pdf",
+    "selectionSource": "https://zh.wikipedia.org/wiki/昌江黎族自治县"
+  },
+  "540500": {
+    "label": {
+      "en": "Tsetang urban area",
+      "zh-CN": "泽当城区",
+      "zh-TW": "澤當城區"
+    },
+    "lngLat": [
+      91.78338,
+      29.24662
+    ],
+    "kind": "city-centre",
+    "extentKm": 24,
+    "definition": {
+      "en": "A close view of Shannan's Tsetang urban area and its surrounding river valley.",
+      "zh-CN": "展示山南市泽当城区及周边河谷地形。",
+      "zh-TW": "展示山南市澤當城區及周邊河谷地形。"
+    },
+    "coordinateSource": "https://www.wikidata.org/wiki/Q247599#P625",
+    "source": "https://www.shannan.gov.cn/zwgk/zdlyxxgk/hjbh/202202/t20220226_100186.html",
+    "selectionSource": "https://www.shannan.gov.cn/zwgk/zdlyxxgk/hjbh/202202/t20220226_100186.html"
+  },
+  "621200": {
+    "label": {
+      "en": "Wudu urban area",
+      "zh-CN": "武都城区",
+      "zh-TW": "武都城區"
+    },
+    "lngLat": [
+      104.92733,
+      33.38868
+    ],
+    "kind": "city-centre",
+    "extentKm": 24,
+    "definition": {
+      "en": "A close view of Longnan's urban core in Wudu, extending along the Bailong River valley.",
+      "zh-CN": "展示陇南市武都城区及沿白龙江展开的河谷地形。",
+      "zh-TW": "展示隴南市武都城區及沿白龍江展開的河谷地形。"
+    },
+    "coordinateSource": "https://www.wikidata.org/wiki/Q477646#P625",
+    "source": "https://en.wikipedia.org/wiki/Wudu_District",
+    "selectionSource": "https://en.wikipedia.org/wiki/Longnan"
+  },
+  "659008": {
+    "label": {
+      "en": "Kokdala",
+      "zh-CN": "可克达拉市",
+      "zh-TW": "可克達拉市"
+    },
+    "lngLat": [
+      80.99816,
+      43.93406
+    ],
+    "kind": "city-centre",
+    "definition": {
+      "en": "A 24 km terrain window around Kokdala's urban core on the north bank of the Ili River.",
+      "zh-CN": "以伊犁河北岸的可克达拉城区为中心，展示周边约24公里宽的城区与河谷地形。",
+      "zh-TW": "以伊犁河北岸的可克達拉城區為中心，展示周邊約24公里寬的城區與河谷地形。"
+    },
+    "coordinateSource": "https://www.wikidata.org/wiki/Q18651998#P625",
+    "source": "https://www.wikidata.org/wiki/Q18651998",
+    "extentKm": 24,
+    "coordinateSystem": "WGS84",
+    "verificationSources": [
+      "https://api.openstreetmap.org/api/0.6/node/13602972045.json",
+      "https://www.openstreetmap.org/node/13602972045",
+      "https://www.ccgp.gov.cn/cggg/dfgg/jzxcs/202608/t20260813_27125678.htm"
+    ],
+    "review": {
+      "status": "verified",
+      "referenceDistanceKm": 40.34,
+      "referencePointIsUrbanCore": false,
+      "independentNearbyPoint": {
+        "label": "可克达拉市人民代表大会常务委员会",
+        "lngLat": [
+          80.9831182,
+          43.9312157
+        ],
+        "source": "https://api.openstreetmap.org/api/0.6/node/13602972045.json"
+      },
+      "reason": "Retain the documented city coordinate: the independently mapped municipal government district is about 1.3 km away, while the source polygon's representative centre is about 40 km southwest and is not a city-centre coordinate. The 2026 public procurement record confirms the government offices at Xuefu West Road 1."
+    }
+  },
+  "460300": {
+    "label": {
+      "en": "Yongxing Island settlement",
+      "zh-CN": "永兴岛聚落",
+      "zh-TW": "永興島聚落"
+    },
+    "lngLat": [
+      112.333681944,
+      16.832698889
+    ],
+    "kind": "principal-settlement",
+    "definition": {
+      "en": "A 4 km close-up around the municipal seat and main settlement on Yongxing Island, centred on the government building on Beijing Road.",
+      "zh-CN": "以永兴岛北京路市政府驻地为中心，展示周边约4公里宽的主要聚落与岛屿地形。",
+      "zh-TW": "以永興島北京路市政府駐地為中心，展示周邊約4公里寬的主要聚落與島嶼地形。"
+    },
+    "coordinateSource": "https://www.wikidata.org/wiki/Q107013001#P625",
+    "source": "https://www.wikidata.org/wiki/Q107013001",
+    "extentKm": 4,
+    "coordinateSystem": "WGS84",
+    "verificationSources": [
+      "https://api.openstreetmap.org/api/0.6/way/794157192/full.json",
+      "https://www.openstreetmap.org/way/794157192"
+    ],
+    "review": {
+      "status": "verified",
+      "reason": "The point is inside the independently mapped townhall building at Beijing Road 1. The island settlement is the correct close-up, not a continental urban core or an offshore bounding-box centre. A low-detail source coastline should not shift this documented settlement coordinate.",
+      "independentBuildingBounds": [
+        112.3334112,
+        16.8324771,
+        112.3339244,
+        16.8329263
+      ]
+    }
+  },
+  "441500": {
+    "lngLat": [
+      115.3705112076923,
+      22.790246838461538
+    ],
+    "kind": "city-centre",
+    "label": {
+      "en": "Shanwei urban core",
+      "zh-CN": "汕尾主城区",
+      "zh-TW": "汕尾主城區"
+    },
+    "extentKm": 24,
+    "coordinateSource": "https://www.openstreetmap.org/way/573917854",
+    "source": "https://www.shanwei.gov.cn/attachment/0/57/57140/1008970.pdf",
+    "definition": {
+      "en": "The Shanwei urban core around its municipal government and the Pinqing Lake waterfront, shown in a 24 km landscape window.",
+      "zh-CN": "以汕尾市政府所在的城区为中心，展示品清湖沿岸主城及周边24公里地形。",
+      "zh-TW": "以汕尾市政府所在的城區為中心，展示品清湖沿岸主城及周邊24公里地形。"
+    },
+    "verification": "OSM named government office way 573917854, centre of its building nodes; official planning document confirms Chengqu is the municipal seat. Original way retained in admin-shanwei-osm.json."
+  },
+  "TWN:Wuqiu": {
+    "lngLat": [
+      119.4520405,
+      24.9923118
+    ],
+    "kind": "island-detail",
+    "label": {
+      "en": "Daqiu settlement & lighthouse",
+      "zh-CN": "大坵聚落与灯塔",
+      "zh-TW": "大坵聚落與燈塔"
+    },
+    "extentKm": 3,
+    "coordinateSource": "https://www.wikidata.org/wiki/Q15918057",
+    "source": "https://zh.wikipedia.org/wiki/烏坵燈塔",
+    "definition": {
+      "en": "An island close-up centred on Wuqiu Lighthouse on Daqiu, including the settlement and nearby coast; this is not an urban district.",
+      "zh-CN": "以大坵岛上的乌坵灯塔为焦点，近看聚落与周边海岸；这里采用岛屿近景，并非城市建成区。",
+      "zh-TW": "以大坵島上的烏坵燈塔為焦點，近看聚落與周邊海岸；這裡採用島嶼近景，並非城市建成區。"
+    },
+    "verification": "Point independently falls within the original NLSC land polygon (zero distance to polygon)."
+  },
+  "TWN:Taiping": {
+    "lngLat": [
+      114.3663888889,
+      10.3772222222
+    ],
+    "kind": "island-detail",
+    "label": {
+      "en": "Taiping Island close-up",
+      "zh-CN": "太平岛近景",
+      "zh-TW": "太平島近景"
+    },
+    "extentKm": 0.8,
+    "coordinateSource": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/9158",
+    "source": "https://www.cga.gov.tw/GipOpen/wSite/ct?ctNode=8739&mp=999&xItem=156731",
+    "definition": {
+      "en": "A close-up of Taiping Island and its facilities, centred on the island location reported by the environmental authority; there is no conventional urban core.",
+      "zh-CN": "以环境主管机关公开的岛上位置为焦点，近看太平岛及其设施；这里没有通常意义上的主城区。",
+      "zh-TW": "以環境主管機關公開的島上位置為焦點，近看太平島及其設施；這裡沒有通常意義上的主城區。"
+    },
+    "verification": "Government environmental release publishes 10°22′38″N / 114°21′59″E; converted exactly to decimal degrees. Point lies within NLSC land polygon (zero distance)."
+  },
+  "TWN:Dongsha": {
+    "extentKm": 1.5,
+    "label": {
+      "en": "Dongsha Island close-up",
+      "zh-CN": "东沙岛近景",
+      "zh-TW": "東沙島近景"
+    },
+    "definition": {
+      "en": "A 1.5 km close-up of Dongsha Island and its coastal terrain.",
+      "zh-CN": "近看东沙岛及周边约1.5公里宽的海岸地形。",
+      "zh-TW": "近看東沙島及周邊約1.5公里寬的海岸地形。"
+    }
+  },
+  "469027": {
+    "label": {
+      "en": "Baoyou town centre",
+      "zh-CN": "抱由镇城区",
+      "zh-TW": "抱由鎮城區"
+    },
+    "lngLat": [
+      109.1694923,
+      18.751684
+    ],
+    "kind": "administrative-seat",
+    "definition": {
+      "en": "A 24 km landscape window around Baoyou, the administrative seat of Ledong Li Autonomous County.",
+      "zh-CN": "以乐东黎族自治县县城抱由镇为中心，展示周边约24公里宽的城镇与地形。",
+      "zh-TW": "以樂東黎族自治縣縣城抱由鎮為中心，展示周邊約24公里寬的城鎮與地形。"
+    },
+    "coordinateSource": "https://www.openstreetmap.org/node/1711536920",
+    "coordinateVerification": "https://api.openstreetmap.org/api/0.6/node/1711536920.json",
+    "source": "https://zh.wikipedia.org/wiki/抱由镇",
+    "extentKm": 24,
+    "coordinateSystem": "WGS84",
+    "selectionSource": "https://www.openstreetmap.org/node/1711536920",
+    "review": {
+      "town_node": "1711536920",
+      "nearby_county_government": "https://www.openstreetmap.org/node/4531929311",
+      "county_government_lngLat": [
+        109.1689995,
+        18.7518362
+      ],
+      "reason": "The previous county-level P625 point was about 17 km southwest of the real county seat. The replacement is the documented Baoyou town node adjacent to the county government."
+    }
+  },
+  "152500": {
+    "label": {
+      "en": "Xilinhot",
+      "zh-CN": "锡林浩特",
+      "zh-TW": "錫林浩特"
+    },
+    "lngLat": [
+      116.08588,
+      43.94517
+    ],
+    "kind": "city-centre",
+    "definition": {
+      "en": "A 24 km landscape window centred on the urban area of Xilinhot, the seat of Xilingol League.",
+      "zh-CN": "以锡林郭勒盟驻地锡林浩特主城区为中心，展示周边约24公里宽的城区与地形。",
+      "zh-TW": "以錫林郭勒盟駐地錫林浩特主城區爲中心，展示周邊約24公里寬的城區與地形。"
+    },
+    "coordinateSource": "https://www.wikidata.org/wiki/Q573124#P625",
+    "source": "https://www.wikidata.org/wiki/Q573124",
+    "extentKm": 24,
+    "coordinateSystem": "WGS84",
+    "selectionSource": "https://www.wikidata.org/wiki/Q573124#P625",
+    "review": {
+      "insideAdministrativeOutline": true,
+      "referenceDistanceKm": 0.43
+    }
+  },
+  "340500": {
+    "label": {
+      "en": "Ma'anshan",
+      "zh-CN": "马鞍山市",
+      "zh-TW": "馬鞍山市"
+    },
+    "lngLat": [
+      118.5048377,
+      31.6866105
+    ],
+    "kind": "city-centre",
+    "definition": {
+      "en": "A 24 km landscape window centred on the principal urban area of Maanshan, on the eastern bank of the Yangtze River.",
+      "zh-CN": "以长江东岸的马鞍山主城区为中心，展示约24公里宽的城区与地形。",
+      "zh-TW": "以長江東岸的馬鞍山主城區爲中心，展示約24公里寬的城區與地形。"
+    },
+    "coordinateSource": "https://www.openstreetmap.org/node/244081289",
+    "source": "https://www.openstreetmap.org/node/244081289",
+    "extentKm": 24,
+    "coordinateSystem": "WGS84",
+    "selectionSource": "https://www.openstreetmap.org/relation/3260816"
+  },
+  "340400": {
+    "label": {
+      "en": "Huainan",
+      "zh-CN": "淮南市",
+      "zh-TW": "淮南市"
+    },
+    "lngLat": [
+      117.01301171,
+      32.58943913
+    ],
+    "kind": "city-centre",
+    "definition": {
+      "en": "A 48 km landscape window centred on the Shannan civic centre, covering Tianjiaan, the Shannan urban area and the western urban districts.",
+      "zh-CN": "以山南政务中心为参照，展示田家庵、山南新区及西部老城组团周边约48公里宽的城区与地形。",
+      "zh-TW": "以山南政務中心爲參照，展示田家庵、山南新區及西部老城組團周邊約48公里寬的城區與地形。"
+    },
+    "coordinateSource": "https://www.openstreetmap.org/relation/6643901",
+    "source": "https://www.huainan.gov.cn/zjhn/hngk/index.html",
+    "extentKm": 48,
+    "coordinateSystem": "WGS84",
+    "selectionSource": "https://www.huainan.gov.cn/zjhn/hngk/index.html"
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "540300": {
+      "label": {
+        "en": "Chamdo",
+        "zh-CN": "昌都市",
+        "zh-TW": "昌都市"
+      },
+      "description": {
+        "en": "Chamdo, officially Qamdo and also known in Chinese as Changdu , is a prefecture-level city in the eastern part of the Tibet Autonomous Region, China. Its seat is the town of Chengguan in Karuo District.",
+        "zh-CN": "昌都市是中华人民共和国西藏自治区下辖的地级市，传统上属于康区。位于西藏自治区东部，地处横断山脉和金沙江、澜沧江、怒江三江流域，素有「藏东明珠」的美称。",
+        "zh-TW": "昌都市是中華人民共和國西藏自治區下轄的地級市，傳統上屬於康區。位於西藏自治區東部，地處橫斷山脈和金沙江、瀾滄江、怒江三江流域，素有「藏東明珠」的美稱。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%98%8C%E9%83%BD%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%98%8C%E9%83%BD%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Chamdo"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        97.17,
+        31.143
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/08bd5dceb5dc741b.webp",
+        "credit": "geoff leng · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BC%BA%E5%B7%B4%E6%9E%97%E5%AF%BA.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "Galden Jampaling Monastery (Tibetan: བྱམས་པ་གླིང, Wylie: byams pa gling) is a Buddhist monastery in Chamdo, Tibet, China. Each year on 16 March the temple celebrates The Butter Sculpture Festival with the spectacular \"Guqing\" God Dance",
+        "place": "强巴林寺",
+        "originalFile": "强巴林寺.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:540300:36839fd5",
+      "urbanFocus": {
+        "label": {
+          "en": "Chamdo",
+          "zh-CN": "昌都市",
+          "zh-TW": "昌都市"
+        },
+        "lngLat": [
+          97.17767,
+          31.13749
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Chamdo.",
+          "zh-CN": "以昌都市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以昌都市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q1012419#P625",
+        "source": "https://www.wikidata.org/wiki/Q1012419",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q1012419#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.1
+        }
+      }
+    },
+    "poi:admin:540300:36839fd5": {
+      "label": {
+        "en": "Galden Jampaling Monastery",
+        "zh-CN": "强巴林寺",
+        "zh-TW": "強巴林寺"
+      },
+      "description": {
+        "en": "Galden Jampaling Monastery is a Buddhist monastery in the Chamdo Town, Tibet, China. Each year on 16 March the temple celebrates the Butter Sculpture Festival with the spectacular \"Guqing\" God Dance.",
+        "zh-CN": "强巴林寺，又名昌都寺，汉名俱善弥勒寺、祝厘寺，是位于中国西藏自治区昌都市卡若区城关镇的藏传佛教格鲁派寺院，是康区第一大寺，被誉为“藏东第一禅林”。 昌都强巴林寺在汉语书籍中有时音译为“察木多江巴林寺”、“昌都向巴林寺”、“昌都绛巴林寺”、“昌都强巴岭寺”等等。",
+        "zh-TW": "強巴林寺，又名昌都寺，漢名俱善彌勒寺、祝釐寺，是位於中國西藏自治區昌都市卡若區城關鎮的藏傳佛教格魯派寺院，是康區第一大寺，被譽爲“藏東第一禪林”。 昌都強巴林寺在漢語書籍中有時音譯爲“察木多江巴林寺”、“昌都向巴林寺”、“昌都絳巴林寺”、“昌都強巴嶺寺”等等。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%BC%BA%E5%B7%B4%E6%9E%97%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%BC%BA%E5%B7%B4%E6%9E%97%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Galden_Jampaling_Monastery"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        97.1778,
+        31.1433
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Galden_Jampaling_Monastery",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "540300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/08bd5dceb5dc741b.webp",
+        "credit": "geoff leng · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BC%BA%E5%B7%B4%E6%9E%97%E5%AF%BA.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "Galden Jampaling Monastery (Tibetan: བྱམས་པ་གླིང, Wylie: byams pa gling) is a Buddhist monastery in Chamdo, Tibet, China. Each year on 16 March the temple celebrates The Butter Sculpture Festival with the spectacular \"Guqing\" God Dance",
+        "place": "强巴林寺",
+        "originalFile": "强巴林寺.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:540300:b87ff80c": {
+      "label": {
+        "en": "Rakwa Tso",
+        "zh-CN": "然乌湖",
+        "zh-TW": "然烏湖"
+      },
+      "description": {
+        "en": "Rakwa Tso , also known as Rawu Tso or Ranwu Lake, is a lake in Baxoi County, Chamdo Prefecture, Tibet Autonomous Region, China, to the north of Arza Gongla Glacier, and to the south of Ngagung Tso. The lake covers an area of 27 km2 , and has an elevation of 3,850 metres .",
+        "zh-CN": "然乌湖或然乌错，位于西藏昌都市八宿县境内，属帕隆藏布河源之一。湖泊是由高山滑坡、泥石流堵塞河道而形成堰塞湖。",
+        "zh-TW": "然烏湖或然烏錯，位於西藏昌都市八宿縣境內，屬帕隆藏布河源之一。湖泊是由高山滑坡、泥石流堵塞河道而形成堰塞湖。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%84%B6%E4%B9%8C%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%84%B6%E4%B9%8C%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Rakwa_Tso"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        96.8,
+        29.45
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Rakwa_Tso",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "540300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/eed8d75e969014f9.webp",
+        "credit": "邢 福君 · CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%84%B6%E4%B9%8C%E6%B9%96_2013_(9527239709).jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "alt": "然乌湖 2013",
+        "place": "然乌湖",
+        "originalFile": "然乌湖_2013_(9527239709).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

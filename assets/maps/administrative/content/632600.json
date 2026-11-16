@@ -1,0 +1,189 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "632600": {
+      "label": {
+        "en": "Golog Tibetan Autonomous Prefecture",
+        "zh-CN": "果洛藏族自治州",
+        "zh-TW": "果洛藏族自治州"
+      },
+      "description": {
+        "en": "Golog Tibetan Autonomous Prefecture is an autonomous prefecture occupying the southeastern corner of Qinghai province, China. The prefecture has an area of 76,312 km2 and its seat is located in Maqên County.",
+        "zh-CN": "果洛藏族自治州，简称果洛州，是中华人民共和国青海省下辖的自治州，位于青海省东南部。州境东北达黄南州，北抵海南州、海西州，西界玉树州，南邻四川省甘孜州、阿坝州，东接甘肃省甘南州。",
+        "zh-TW": "果洛藏族自治州，簡稱果洛州，是中華人民共和國青海省下轄的自治州，位於青海省東南部。州境東北達黃南州，北抵海南州、海西州，西界玉樹州，南鄰四川省甘孜州、阿壩州，東接甘肅省甘南州。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9E%9C%E6%B4%9B%E8%97%8F%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9E%9C%E6%B4%9B%E8%97%8F%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+        "https://en.wikipedia.org/wiki/Golog_Tibetan_Autonomous_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        99.31666667,
+        34.11666667
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/840fd56bd94d6448.webp",
+        "credit": "Italian Author-Photographer Mario Biondi · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Amne_Machin.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "The famous and rather mysterious Amne Machin (Maqen Gangri), the second sacred mountain for tibetans after Mount Kailash, 6.282 m. Qinghai, China",
+        "place": "阿尼玛卿山",
+        "originalFile": "Amne_Machin.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:632600:7f86468c",
+      "urbanFocus": {
+        "label": {
+          "en": "Maqên County",
+          "zh-CN": "玛沁县",
+          "zh-TW": "瑪沁縣"
+        },
+        "lngLat": [
+          100.23794,
+          34.47916
+        ],
+        "kind": "administrative-seat",
+        "definition": {
+          "en": "A 24 km landscape window centred on Maqên County.",
+          "zh-CN": "以玛沁县的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以瑪沁縣的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q1026109#P625",
+        "source": "https://www.wikidata.org/wiki/Q1026109",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q115594#P36",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.73
+        }
+      }
+    },
+    "poi:admin:632600:a332b426": {
+      "label": {
+        "en": "Bayan Har Mountains",
+        "zh-CN": "巴颜喀拉山脉",
+        "zh-TW": "巴顏喀拉山脈"
+      },
+      "description": {
+        "en": "The Bayan Har Mountains, formerly known as the Bayen-káras or Bayan-Kara-Ula, are a mountain range in Qinghai Province, northwest China. The name is Mongolian for \"Rich and Black\".",
+        "zh-CN": "巴颜喀拉山脉位于中国青海省中部偏南。从青海的中部偏南向东偏南方向延伸到青海与四川的交界处，全长逾780公里。",
+        "zh-TW": "巴顏喀拉山脈位於中國青海省中部偏南。從青海的中部偏南向東偏南方向延伸到青海與四川的交界處，全長逾780公里。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B7%B4%E9%A2%9C%E5%96%80%E6%8B%89%E5%B1%B1%E8%84%89",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B7%B4%E9%A2%9C%E5%96%80%E6%8B%89%E5%B1%B1%E8%84%89",
+        "https://en.wikipedia.org/wiki/Bayan_Har_Mountains"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        98.21666667,
+        34.7
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Bayan_Har_Mountains",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "632600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/8d6d31fd435b09fb.webp",
+        "credit": "Jay Huang from Pleasanton, USA · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Peaceful_-_Flickr_-_Jaykhuang.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Yaonv Lake, Nianbaoyuze Geopark, Qinghai, China Nianbaoyuze Geopark locates in Bayan Har Mountains, one of many mountains in the famous Tibetan Plateau. It separates the drainage area of the most two famous rivers in China, Yellow River and the Yangtze River. The area is considered as one of the paradise for hikers during the peak season of July and August every year when wild flowers are bloomed everywhere along the lake, gorge, mountains.",
+        "place": "Bayan Har Mountains",
+        "originalFile": "Peaceful_-_Flickr_-_Jaykhuang.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:632600:7f86468c": {
+      "label": {
+        "en": "Amne Machin",
+        "zh-CN": "阿尼玛卿山",
+        "zh-TW": "阿尼瑪卿山"
+      },
+      "description": {
+        "en": "Amne Machin, Anyi Machen, or Anyê Maqên is the highest peak of a mountain range of the same name in the southeast of Qinghai province, China. It is revered in Tibetan Buddhism as the home of the chief indigenous deity of Amdo, Machen Pomra.",
+        "zh-CN": "阿尼玛卿山也译“阿米玛卿”，位于青海省东南部的果洛藏族自治州玛沁县雪山乡，为藏族“四大神山”之一。“阿尼玛卿”地处黄河源，为黄河源头最高山峰，主峰为玛卿岗日，至高点玛卿岗日的I号峰尖，海拔6282米。",
+        "zh-TW": "阿尼瑪卿山也譯“阿米瑪卿”，位於青海省東南部的果洛藏族自治州瑪沁縣雪山鄉，爲藏族“四大神山”之一。“阿尼瑪卿”地處黃河源，爲黃河源頭最高山峯，主峯爲瑪卿崗日，至高點瑪卿崗日的I號峯尖，海拔6282米。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%98%BF%E5%B0%BC%E7%8E%9B%E5%8D%BF%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%98%BF%E5%B0%BC%E7%8E%9B%E5%8D%BF%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Amne_Machin"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        99.4625,
+        34.79833333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Amne_Machin",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "632600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/840fd56bd94d6448.webp",
+        "credit": "Italian Author-Photographer Mario Biondi · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Amne_Machin.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "The famous and rather mysterious Amne Machin (Maqen Gangri), the second sacred mountain for tibetans after Mount Kailash, 6.282 m. Qinghai, China",
+        "place": "阿尼玛卿山",
+        "originalFile": "Amne_Machin.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:632600:photo-53133479": {
+      "label": {
+        "en": "Golog Tibetan Autonomous Prefecture landscape view",
+        "zh-CN": "大武隆什加寺",
+        "zh-TW": "大武隆什加寺"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Golog Tibetan Autonomous Prefecture, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现果洛藏族自治州城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現果洛藏族自治州城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E6%AD%A6%E9%9A%86%E4%BB%80%E5%8A%A0%E5%AF%BA_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E6%AD%A6%E9%9A%86%E4%BB%80%E5%8A%A0%E5%AF%BA_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/43400ac4ff491bfe.webp",
+        "credit": "neverdance · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E6%AD%A6%E9%9A%86%E4%BB%80%E5%8A%A0%E5%AF%BA_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "大武隆什加寺",
+        "place": "大武隆什加寺 - panoramio.jpg",
+        "originalFile": "大武隆什加寺 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            100.243807,
+            34.473024
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E6%AD%A6%E9%9A%86%E4%BB%80%E5%8A%A0%E5%AF%BA_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        100.243807,
+        34.473024
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E6%AD%A6%E9%9A%86%E4%BB%80%E5%8A%A0%E5%AF%BA_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "632600"
+    }
+  }
+}

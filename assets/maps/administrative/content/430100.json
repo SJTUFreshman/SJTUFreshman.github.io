@@ -1,0 +1,181 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "430100": {
+      "label": {
+        "en": "Changsha",
+        "zh-CN": "长沙市",
+        "zh-TW": "長沙市"
+      },
+      "description": {
+        "en": "Changsha is the capital of Hunan, China. Located in the lower reaches of the Xiang River in northeastern Hunan, it is the 15th most populous city in China with a population of 10,513,100.",
+        "zh-CN": "长沙市，简称长，别称星城，古又名潭州，有“屈贾之乡”、“潇湘洙泗”之誉，因其地理形态又名“山水洲城”。位于湘东北的湘江下游，是中华人民共和国湖南省省会，中国中部重要的中心城市以及中国特大城市，全国性综合交通枢纽、首批国家历史文化名城，并与株洲、湘潭共同构成长株潭城市群。",
+        "zh-TW": "長沙市，簡稱長，別稱星城，古又名潭州，有“屈賈之鄉”、“瀟湘洙泗”之譽，因其地理形態又名“山水洲城”。位於湘東北的湘江下游，是中華人民共和國湖南省省會，中國中部重要的中心城市以及中國特大城市，全國性綜合交通樞紐、首批國家歷史文化名城，並與株洲、湘潭共同構成長株潭城市羣。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%95%BF%E6%B2%99%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%95%BF%E6%B2%99%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Changsha"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        112.939,
+        28.228
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/635c556a3a229113.webp",
+        "credit": "Huangdan2060 · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:The_former_residence_of_Jia_Yi_8.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:The_former_residence_of_Jia_Yi_8.jpg#Licensing",
+        "alt": "Former residence is located in China jia yi changsha in hunan liberation west road and peace at the street corner, the former residence of hunan province jia yi is protected units of cultural relics.",
+        "place": "贾谊故居",
+        "originalFile": "The_former_residence_of_Jia_Yi_8.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:430100:8ba8755e",
+      "urbanFocus": {
+        "label": {
+          "en": "Changsha",
+          "zh-CN": "长沙市",
+          "zh-TW": "長沙市"
+        },
+        "lngLat": [
+          112.97087,
+          28.19874
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Changsha.",
+          "zh-CN": "以长沙市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以長沙市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q174091#P625",
+        "source": "https://www.wikidata.org/wiki/Q174091",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q174091#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.23
+        }
+      }
+    },
+    "poi:admin:430100:8ba8755e": {
+      "label": {
+        "en": "Former Residence of Jia Yi",
+        "zh-CN": "贾谊故居",
+        "zh-TW": "賈誼故居"
+      },
+      "description": {
+        "en": "The Former Residence of Jia Yi or Jia Yi's Former Residence was built during the Qing dynasty . It is located in Tianxin District of Changsha, Hunan, China.",
+        "zh-CN": "贾谊故居位于中国湖南省长沙市解放西路与太平街口交汇处，至今已经有2100多年的历史。公元前177年到前174年，贾谊从京城被贬来此居住，任长沙王太傅。",
+        "zh-TW": "賈誼故居位於中國湖南省長沙市解放西路與太平街口交匯處，至今已經有2100多年的歷史。公元前177年到前174年，賈誼從京城被貶來此居住，任長沙王太傅。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%B4%BE%E8%B0%8A%E6%95%85%E5%B1%85",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%B4%BE%E8%B0%8A%E6%95%85%E5%B1%85",
+        "https://en.wikipedia.org/wiki/Former_Residence_of_Jia_Yi"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        112.972302,
+        28.192593
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Former_Residence_of_Jia_Yi",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "430100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/635c556a3a229113.webp",
+        "credit": "Huangdan2060 · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:The_former_residence_of_Jia_Yi_8.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:The_former_residence_of_Jia_Yi_8.jpg#Licensing",
+        "alt": "Former residence is located in China jia yi changsha in hunan liberation west road and peace at the street corner, the former residence of hunan province jia yi is protected units of cultural relics.",
+        "place": "贾谊故居",
+        "originalFile": "The_former_residence_of_Jia_Yi_8.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:430100:04b1e1a0": {
+      "label": {
+        "en": "Yuelu Academy",
+        "zh-CN": "岳麓书院",
+        "zh-TW": "嶽麓書院"
+      },
+      "description": {
+        "en": "The Yuelu Academy is on the east side of Yuelu Mountain in Yuelu District, Changsha, Hunan province, on the west bank of the Xiang River. As one of the four most prestigious academies over the last 1000 years in China, Yuelu Academy has been a famous institution of higher learning as well as a centre of academic activities and cultures since it was formally set up during the Northern Song Dynasty.",
+        "zh-CN": "岳麓书院位于中国湖南省长沙市岳麓区岳麓山东麓，是中国古代四大书院之一，始建于北宋开宝九年，历经宋、元、明、清各代。迨及清光绪三十一年改为湖南高等学堂，至今仍为湖南大学下属的办学机构，历史已逾千年，是世所罕见的“千年学府”。",
+        "zh-TW": "嶽麓書院位於中國湖南省長沙市嶽麓區嶽麓山東麓，是中國古代四大書院之一，始建於北宋開寶九年，歷經宋、元、明、清各代。迨及清光緒三十一年改爲湖南高等學堂，至今仍爲湖南大學下屬的辦學機構，歷史已逾千年，是世所罕見的“千年學府”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B2%B3%E9%BA%93%E4%B9%A6%E9%99%A2",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B2%B3%E9%BA%93%E4%B9%A6%E9%99%A2",
+        "https://en.wikipedia.org/wiki/Yuelu_Academy"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        112.93555556,
+        28.18388889
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Yuelu_Academy",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "430100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fd3373d9502f725b.webp",
+        "credit": "Zhangzhugang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Changsha_Yuelu_Shuyuan_2014.03.04_08-09-37_(adjusted).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Gate of Yuelu Academy",
+        "place": "岳麓书院",
+        "originalFile": "Changsha_Yuelu_Shuyuan_2014.03.04_08-09-37_(adjusted).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:430100:2cef1263": {
+      "label": {
+        "en": "Hunan First Normal University",
+        "zh-CN": "湖南第一师范学院",
+        "zh-TW": "湖南第一師範學院"
+      },
+      "description": {
+        "en": "Hunan First Normal University , founded in 1903, is a university located in Yuelu District, Changsha, Hunan Province, China. Hunan First Normal University covers a total area of 1346 mu, with more than 420,000 square meters of floor space.",
+        "zh-CN": "湖南第一师范学院，简称湖南一师、第一师范、一师，是一所全日制师范类普通高等本科院校，坐落在湖南省长沙市，前身为南宋的城南书院，1903年建立湖南师范馆，2008年升格为本科院校。",
+        "zh-TW": "湖南第一師範學院，簡稱湖南一師、第一師範、一師，是一所全日制師範類普通高等本科院校，坐落在湖南省長沙市，前身爲南宋的城南書院，1903年建立湖南師範館，2008年升格爲本科院校。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B9%96%E5%8D%97%E7%AC%AC%E4%B8%80%E5%B8%88%E8%8C%83%E5%AD%A6%E9%99%A2",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B9%96%E5%8D%97%E7%AC%AC%E4%B8%80%E5%B8%88%E8%8C%83%E5%AD%A6%E9%99%A2",
+        "https://en.wikipedia.org/wiki/Hunan_First_Normal_University"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        112.862,
+        28.2
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Hunan_First_Normal_University",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "430100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e8221da4b9a72980.webp",
+        "credit": "Huangdan2060 · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hunan_First_Normal_University1.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "Hunan First Normal University (simplified Chinese: 湖南第一师范学院; traditional Chinese: 湖南第一師範學院; pinyin: Húnán Dìyī Shīfàn Xué Yuàn), founded in 1903, is a higher education institution located in Yuelu District, Changsha, Hunan Province, People's Republic of China",
+        "place": "湖南第一师范学院",
+        "originalFile": "Hunan_First_Normal_University1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

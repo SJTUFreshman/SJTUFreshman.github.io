@@ -1,0 +1,143 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "320400": {
+      "label": {
+        "en": "Changzhou",
+        "zh-CN": "常州市",
+        "zh-TW": "常州市"
+      },
+      "description": {
+        "en": "Changzhou is a prefecture-level city in southern Jiangsu, China. It was previously known as Yanling, Lanling, and Jinling.",
+        "zh-CN": "常州市，简称常，古称毗陵、武进、延陵，有江南明珠之美誉，位于江苏省南部。市境西南界南京市，西临镇江市，东北连泰州市，东、南接无锡市，太湖水域大小椒山，与湖州市、苏州市隔湖相望，西南邻安徽省宣城市。",
+        "zh-TW": "常州市，簡稱常，古稱毗陵、武進、延陵，有江南明珠之美譽，位於江蘇省南部。市境西南界南京市，西臨鎮江市，東北連泰州市，東、南接無錫市，太湖水域大小椒山，與湖州市、蘇州市隔湖相望，西南鄰安徽省宣城市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B8%B8%E5%B7%9E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B8%B8%E5%B7%9E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Changzhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        119.974,
+        31.811
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/ac2ed6fc913110b8.webp",
+        "credit": "MNXANL · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:201610_Tianning_Temple,_Changzhou.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "201610 Tianning Temple, Changzhou",
+        "place": "天宁寺 (常州)",
+        "originalFile": "201610_Tianning_Temple,_Changzhou.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:320400:58553d19",
+      "urbanFocus": {
+        "label": {
+          "en": "Changzhou",
+          "zh-CN": "常州市",
+          "zh-TW": "常州市"
+        },
+        "lngLat": [
+          119.96916666666667,
+          31.812166666666666
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Changzhou.",
+          "zh-CN": "以常州市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以常州市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q57970#P625",
+        "source": "https://www.wikidata.org/wiki/Q57970",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q57970#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 4.86
+        }
+      }
+    },
+    "poi:admin:320400:58553d19": {
+      "label": {
+        "en": "Tianning Temple (Changzhou)",
+        "zh-CN": "天宁寺 (常州)",
+        "zh-TW": "天寧寺 (常州)"
+      },
+      "description": {
+        "en": "The Tianning Temple is a Buddhist temple located in Changzhou City, Jiangsu Province, China, is noted for its giant pagoda, the Tianning Pagoda . Construction began in April 2002 with the opening ceremony for the completed structure held on April 30, 2007, where a crowd of hundreds of Buddhist monks gathered for the ceremony.",
+        "zh-CN": "天宁禅寺位于中国江苏常州市天宁区，始建于唐代贞观、永徽年间，位于常州市内东门外，是江苏省文物保护单位，常州的主要旅游景点。 天宁寺现任方丈是廓尘法师。",
+        "zh-TW": "天寧禪寺位於中國江蘇常州市天寧區，始建於唐代貞觀、永徽年間，位於常州市內東門外，是江蘇省文物保護單位，常州的主要旅遊景點。 天寧寺現任方丈是廓塵法師。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%AE%81%E5%AF%BA_(%E5%B8%B8%E5%B7%9E)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%AE%81%E5%AF%BA_(%E5%B8%B8%E5%B7%9E)",
+        "https://en.wikipedia.org/wiki/Tianning_Temple_(Changzhou)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.96527778,
+        31.77694444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Tianning_Temple_(Changzhou)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ac2ed6fc913110b8.webp",
+        "credit": "MNXANL · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:201610_Tianning_Temple,_Changzhou.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "201610 Tianning Temple, Changzhou",
+        "place": "天宁寺 (常州)",
+        "originalFile": "201610_Tianning_Temple,_Changzhou.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:320400:85bd9132": {
+      "label": {
+        "en": "Wenbi Tower",
+        "zh-CN": "文笔塔 (常州)",
+        "zh-TW": "文筆塔 (常州)"
+      },
+      "description": {
+        "en": "Wenbi Tower is a tower in Changzhou, China, located near Hongmei Park. It was built during the Southern Dynasties, Qi Gaozu, Xiao Daocheng , Jianyuan , and first named Jianyuan Temple.",
+        "zh-CN": "文笔塔原是江苏省常州市太平寺中的塔。",
+        "zh-TW": "文筆塔原是江蘇省常州市太平寺中的塔。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%87%E7%AC%94%E5%A1%94_(%E5%B8%B8%E5%B7%9E)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%87%E7%AC%94%E5%A1%94_(%E5%B8%B8%E5%B7%9E)",
+        "https://en.wikipedia.org/wiki/Wenbi_Tower"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.96957,
+        31.77374
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Wenbi_Tower",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b8aae37db3944dd6.webp",
+        "credit": "Jakub Hałun · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20090919_Changzhou_Wenbi_Pagoda_5429.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Wenbi Pagoda in Changzhou",
+        "place": "文笔塔 (常州)",
+        "originalFile": "20090919_Changzhou_Wenbi_Pagoda_5429.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

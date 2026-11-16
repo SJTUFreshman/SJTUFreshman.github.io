@@ -1,0 +1,142 @@
+{
+  "entries": {
+    "poi:admin:620300:street-2006": {
+      "label": {
+        "en": "Jinchang streetscape · 2006",
+        "zh-CN": "金昌街景 · 2006",
+        "zh-TW": "金昌街景 · 2006"
+      },
+      "description": {
+        "en": "A streetscape in front of the Jinchuan workers’ building, photographed in Jinchang on 23 April 2006. The road, forecourt and public buildings record the city as it appeared at that time.",
+        "zh-CN": "这张2006年4月23日的照片记录了金昌市区金川职工大厦前的街景。道路、广场与公共建筑呈现了当时的城市面貌。",
+        "zh-TW": "這張2006年4月23日的照片記錄了金昌市區金川職工大廈前的街景。道路、廣場與公共建築呈現了當時的城市面貌。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:20060423105630.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:20060423105630.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption of the linked dated scene photograph.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/1917353f95f23c1e.webp",
+        "credit": "Yaohua2000 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20060423105630.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Jinchang, Gansu, China 38°31.1′ N, 102°10.9′ E This image was taken by User:Yaohua2000 at 2006-04-23 10:56:30 UTC.",
+        "place": "Jinchang streetscape · 2006",
+        "originalFile": "20060423105630.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            102.18166666666667,
+            38.51833333333333
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:20060423105630.jpg"
+        }
+      },
+      "lngLat": [
+        102.18166666666667,
+        38.51833333333333
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:20060423105630.jpg",
+      "coordinateDerivation": "Photographer explicitly published 38°31.1′ N, 102°10.9′ E on the original Commons file page; approximate to 0.1 arcminute.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "620300"
+    },
+    "poi:admin:621200:hanwang-2019": {
+      "label": {
+        "en": "Hanwang valley, Wudu · 2019",
+        "zh-CN": "武都汉王河谷 · 2019",
+        "zh-TW": "武都漢王河谷 · 2019"
+      },
+      "description": {
+        "en": "Hanwang lies in the Bailong River valley southeast of central Wudu. This 2019 photograph shows the closely spaced hillsides, settlements and valley fields.",
+        "zh-CN": "汉王镇位于武都城区东南的白龙江河谷。2019年的实景照片记录了山坡、聚落与河谷田地相邻的景观。",
+        "zh-TW": "漢王鎮位於武都城區東南的白龍江河谷。2019年的實景照片記錄了山坡、聚落與河谷田地相鄰的景觀。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E6%B1%89%E7%8E%8B%E9%95%87_-_Mapillary_(jCkYdXcqFvPFf4e6EoWBI5).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E6%B1%89%E7%8E%8B%E9%95%87_-_Mapillary_(jCkYdXcqFvPFf4e6EoWBI5).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption of the linked dated scene photograph.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/69987775082eb88c.webp",
+        "credit": "ff5722 @ Mapillary.com · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E6%B1%89%E7%8E%8B%E9%95%87_-_Mapillary_(jCkYdXcqFvPFf4e6EoWBI5).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​陇南市汉王镇",
+        "place": "Hanwang valley, Wudu · 2019",
+        "originalFile": "陇南市汉王镇 - Mapillary (jCkYdXcqFvPFf4e6EoWBI5).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            105.0196639,
+            33.3429508
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E6%B1%89%E7%8E%8B%E9%95%87_-_Mapillary_(jCkYdXcqFvPFf4e6EoWBI5).jpg"
+        }
+      },
+      "lngLat": [
+        105.0196639,
+        33.3429508
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E6%B1%89%E7%8E%8B%E9%95%87_-_Mapillary_(jCkYdXcqFvPFf4e6EoWBI5).jpg",
+      "coordinateDerivation": "Public Mapillary camera location, retained in the Commons file GeoData.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "621200"
+    },
+    "poi:admin:621200:liangshui-2019": {
+      "label": {
+        "en": "Liangshui, Wudu · 2019",
+        "zh-CN": "武都两水山城 · 2019",
+        "zh-TW": "武都兩水山城 · 2019"
+      },
+      "description": {
+        "en": "Liangshui occupies a valley northwest of central Wudu. This photograph from May 2019 shows its hillside settlement and transport infrastructure framed by mountains.",
+        "zh-CN": "两水镇位于武都西北的河谷地带。这张2019年5月的照片展示了坡地聚落、交通设施与山地共同构成的地方景观。",
+        "zh-TW": "兩水鎮位於武都西北的河谷地帶。這張2019年5月的照片展示了坡地聚落、交通設施與山地共同構成的地方景觀。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E4%B8%A4%E6%B0%B4%E9%95%87_-_Mapillary_(rhnhbTrMKW852EKUjylBkO).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E4%B8%A4%E6%B0%B4%E9%95%87_-_Mapillary_(rhnhbTrMKW852EKUjylBkO).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption of the linked dated scene photograph.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/15be13bd920542ca.webp",
+        "credit": "ff5722 @ Mapillary.com · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E4%B8%A4%E6%B0%B4%E9%95%87_-_Mapillary_(rhnhbTrMKW852EKUjylBkO).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​陇南市两水镇",
+        "place": "Liangshui, Wudu · 2019",
+        "originalFile": "陇南市两水镇 - Mapillary (rhnhbTrMKW852EKUjylBkO).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.80406,
+            33.42321
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E4%B8%A4%E6%B0%B4%E9%95%87_-_Mapillary_(rhnhbTrMKW852EKUjylBkO).jpg"
+        }
+      },
+      "lngLat": [
+        104.80406,
+        33.42321
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E4%B8%A4%E6%B0%B4%E9%95%87_-_Mapillary_(rhnhbTrMKW852EKUjylBkO).jpg",
+      "coordinateDerivation": "Public Mapillary camera location, retained in the Commons file GeoData.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "621200"
+    }
+  }
+}

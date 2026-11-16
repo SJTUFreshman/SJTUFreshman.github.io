@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "659002": {
+      "label": {
+        "en": "Aral, Xinjiang",
+        "zh-CN": "阿拉尔市",
+        "zh-TW": "阿拉爾市"
+      },
+      "description": {
+        "en": "Aral , also known as Alar , is a sub-prefecture-level city surrounded by Aksu Prefecture in Xinjiang Uyghur Autonomous Region, China. Aral means \"island\" in Uyghur.",
+        "zh-CN": "阿拉尔市是中华人民共和国新疆维吾尔自治区下辖的县级市，与新疆生产建设兵团第一师实行“师市合一”，位于阿克苏地区境内。市人民政府驻金银川路街道。",
+        "zh-TW": "阿拉爾市是中華人民共和國新疆維吾爾自治區下轄的縣級市，與新疆生產建設兵團第一師實行“師市合一”，位於阿克蘇地區境內。市人民政府駐金銀川路街道。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%98%BF%E6%8B%89%E5%B0%94%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%98%BF%E6%8B%89%E5%B0%94%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Aral,_Xinjiang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        81.281,
+        40.548
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/4f0397ebaa4c6fac.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20231216_Tarim_River_Bridge_in_Aral.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Tarim River Bridge in Aral",
+        "place": "20231216 Tarim River Bridge in Aral.jpg",
+        "originalFile": "20231216 Tarim River Bridge in Aral.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            81.223686,
+            40.542722
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:20231216_Tarim_River_Bridge_in_Aral.jpg"
+        }
+      },
+      "photoReference": "poi:admin:659002:photo-142332163",
+      "urbanFocus": {
+        "label": {
+          "en": "Aral",
+          "zh-CN": "阿拉尔市",
+          "zh-TW": "阿拉爾市"
+        },
+        "lngLat": [
+          81.263611111111,
+          40.515555555556
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Aral.",
+          "zh-CN": "以阿拉尔市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以阿拉爾市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q625554#P625",
+        "source": "https://www.wikidata.org/wiki/Q625554",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q625554#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 3.49
+        }
+      }
+    },
+    "poi:admin:659002:photo-142332163": {
+      "label": {
+        "en": "Tarim River Bridge in Aral",
+        "zh-CN": "阿拉尔市城区景观",
+        "zh-TW": "阿拉爾市城區景觀"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Aral, Xinjiang, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现阿拉尔市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現阿拉爾市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:20231216_Tarim_River_Bridge_in_Aral.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:20231216_Tarim_River_Bridge_in_Aral.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4f0397ebaa4c6fac.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20231216_Tarim_River_Bridge_in_Aral.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Tarim River Bridge in Aral",
+        "place": "20231216 Tarim River Bridge in Aral.jpg",
+        "originalFile": "20231216 Tarim River Bridge in Aral.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            81.223686,
+            40.542722
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:20231216_Tarim_River_Bridge_in_Aral.jpg"
+        }
+      },
+      "lngLat": [
+        81.223686,
+        40.542722
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:20231216_Tarim_River_Bridge_in_Aral.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "659002"
+    }
+  }
+}

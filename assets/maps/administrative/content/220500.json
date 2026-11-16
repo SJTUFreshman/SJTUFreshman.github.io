@@ -1,0 +1,179 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "220500": {
+      "label": {
+        "en": "Tonghua",
+        "zh-CN": "通化市",
+        "zh-TW": "通化市"
+      },
+      "description": {
+        "en": "Tonghua is a prefecture-level city in the south of Jilin province, People's Republic of China. It borders North Korea's Chagang Province to the south and southeast, Baishan to the east, Jilin City to the north, Liaoyuan to the northwest, and Liaoning province to the west and southwest.",
+        "zh-CN": "通化市是中华人民共和国吉林省下辖的地级市，位于吉林省东南部。市境东接白山市，北界吉林市，西北达辽源市，西南邻辽宁省抚顺市、本溪市、丹东市，东南抵朝鲜民主主义人民共和国。",
+        "zh-TW": "通化市是中華人民共和國吉林省下轄的地級市，位於吉林省東南部。市境東接白山市，北界吉林市，西北達遼源市，西南鄰遼寧省撫順市、本溪市、丹東市，東南抵朝鮮民主主義人民共和國。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%80%9A%E5%8C%96%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%80%9A%E5%8C%96%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Tonghua"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        125.9397,
+        41.7283
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/673d7f1fe8aef18d.webp",
+        "credit": "EditQ · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yang_Jingyu_Memorial_Park.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "Yang Jingyu Memorial Park",
+        "place": "杨靖宇烈士陵园",
+        "originalFile": "Yang_Jingyu_Memorial_Park.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:220500:50eca269",
+      "urbanFocus": {
+        "label": {
+          "en": "Tonghua",
+          "zh-CN": "通化市",
+          "zh-TW": "通化市"
+        },
+        "lngLat": [
+          125.94705,
+          41.73015
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Tonghua.",
+          "zh-CN": "以通化市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以通化市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q92324#P625",
+        "source": "https://www.wikidata.org/wiki/Q92324",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q92324#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.33
+        }
+      }
+    },
+    "poi:admin:220500:50eca269": {
+      "label": {
+        "en": "Yang Jingyu Memorial Cemetery",
+        "zh-CN": "杨靖宇烈士陵园",
+        "zh-TW": "楊靖宇烈士陵園"
+      },
+      "description": {
+        "en": "This cemetery in Tonghua commemorates Yang Jingyu, a commander of the Northeast Anti-Japanese United Army who died during the resistance against Japan. Built in 1957, the site combines the cemetery with a museum devoted to the army.",
+        "zh-CN": "杨靖宇烈士陵园，位于中国吉林省通化市东昌区，是一座为纪念在东北抗日中牺牲的东北抗日联军将领杨靖宇将军修建的陵园，修建于1957年，由杨靖宇烈士陵园和东北抗日联军纪念馆组成。 1961年4月13日，杨靖宇烈士陵园被公布为省级文物保护单位，类型为近现代史迹及代表性建筑。",
+        "zh-TW": "楊靖宇烈士陵園，位於中國吉林省通化市東昌區，是一座爲紀念在東北抗日中犧牲的東北抗日聯軍將領楊靖宇將軍修建的陵園，修建於1957年，由楊靖宇烈士陵園和東北抗日聯軍紀念館組成。 1961年4月13日，楊靖宇烈士陵園被公佈爲省級文物保護單位，類型爲近現代史蹟及代表性建築。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%A8%E9%9D%96%E5%AE%87%E7%83%88%E5%A3%AB%E9%99%B5%E5%9B%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%A8%E9%9D%96%E5%AE%87%E7%83%88%E5%A3%AB%E9%99%B5%E5%9B%AD"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        125.95851111,
+        41.72639444
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%9D%A8%E9%9D%96%E5%AE%87%E7%83%88%E5%A3%AB%E9%99%B5%E5%9B%AD",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "220500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/673d7f1fe8aef18d.webp",
+        "credit": "EditQ · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yang_Jingyu_Memorial_Park.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "Yang Jingyu Memorial Park",
+        "place": "杨靖宇烈士陵园",
+        "originalFile": "Yang_Jingyu_Memorial_Park.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:220500:90e53678": {
+      "label": {
+        "en": "Donggou ancient tombs",
+        "zh-CN": "洞沟古墓群",
+        "zh-TW": "洞溝古墓羣"
+      },
+      "description": {
+        "en": "The Donggou tombs occupy foothills, valleys and plains near the Tonggou River in Ji’an. This extensive concentration of Goguryeo-period burials is among China’s earliest nationally protected cultural heritage sites.",
+        "zh-CN": "洞沟古墓群是位于中国吉林省集安市通沟河附近的山麓、河谷和平原的一片高句丽时期古墓群，是墓葬数量最多、分布最集中的一处高句丽墓群。现为中国第一批全国重点文物保护单位。",
+        "zh-TW": "洞溝古墓羣是位於中國吉林省集安市通溝河附近的山麓、河谷和平原的一片高句麗時期古墓羣，是墓葬數量最多、分佈最集中的一處高句麗墓羣。現爲中國第一批全國重點文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B4%9E%E6%B2%9F%E5%8F%A4%E5%A2%93%E7%BE%A4",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B4%9E%E6%B2%9F%E5%8F%A4%E5%A2%93%E7%BE%A4"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        126.22628611,
+        41.15769611
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%B4%9E%E6%B2%9F%E5%8F%A4%E5%A2%93%E7%BE%A4",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "220500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7083a6f2fd1f1b18.webp",
+        "credit": "Prcshaw · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:South_of_Tomb_of_the_General.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​将军坟南侧",
+        "place": "洞沟古墓群",
+        "originalFile": "South_of_Tomb_of_the_General.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:220500:9e0ee69d": {
+      "label": {
+        "en": "Hwando",
+        "zh-CN": "丸都城",
+        "zh-TW": "丸都城"
+      },
+      "description": {
+        "en": "Hwando is a mountain fortress of the ancient Korean kingdom of Goguryeo, built to protect Goguryeo's second capital, Gungnae. It is located in present-day Ji'an city of the province of Jilin, China.",
+        "zh-CN": "丸都山城，又称丸都城，其遗址是全国重点文物保护单位，座落在现吉林省集安市西面的丸都山上，距集安市区2.5公里左右，海拔最高处为676米。丸都是高句丽都城「国内城」的军事守备城，又和「国内城」相互依附，成为世界王都建筑史上附合式王都的特殊模式，是高句丽建筑的一大特色。",
+        "zh-TW": "丸都山城，又稱丸都城，其遺址是全國重點文物保護單位，座落在現吉林省集安市西面的丸都山上，距集安市區2.5公里左右，海拔最高處爲676米。丸都是高句麗都城「國內城」的軍事守備城，又和「國內城」相互依附，成爲世界王都建築史上附合式王都的特殊模式，是高句麗建築的一大特色。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%B8%E9%83%BD%E5%9F%8E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%B8%E9%83%BD%E5%9F%8E",
+        "https://en.wikipedia.org/wiki/Hwando"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        126.16319444,
+        41.14652778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Hwando",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "220500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fa29f96ce4fe831d.webp",
+        "credit": "EditQ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Goguryeo_Ancient_Tomb_Museum_1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Goguryeo Ancient Tomb Museum",
+        "place": "丸都城",
+        "originalFile": "Goguryeo_Ancient_Tomb_Museum_1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

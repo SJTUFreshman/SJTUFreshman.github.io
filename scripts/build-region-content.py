@@ -303,11 +303,20 @@ def write_places(entries):
     (OUT/'places.json').write_text(json.dumps([dict(id=k,**{f:v for f,v in e.items() if f in fields})
         for k,e in entries.items() if e.get('lngLat')],ensure_ascii=False,separators=(',',':')),encoding='utf-8')
 
+
+def apply_administrative_photos(entries):
+    """Use the independently verified local subject selected by the admin guide."""
+    path=ROOT/'scripts/administrative-unit-photo-overrides.json'
+    if path.exists():
+        for key,fields in json.loads(path.read_text(encoding='utf-8')).items():
+            if key in entries and entries[key].get('kind')!='culture':entries[key].update(fields)
+
 def refresh_cultural_content():
     document=json.loads((OUT/'content.json').read_text(encoding='utf-8'))
     apply_cultural_content(document['entries'])
     extensions=ROOT/'scripts/region-extension-content.json'
     if extensions.exists(): document['entries'].update(json.loads(extensions.read_text(encoding='utf-8'))['entries'])
+    apply_administrative_photos(document['entries'])
     normalize_display_names(document['entries'])
     document['version']='20261116-cultural-editorial'
     document['provenance']['culturalText']='Original editorial cultural notes; UNESCO, cultural heritage institutions and museums are linked per entry. Culture boundaries are editorial, not administrative definitions.'
@@ -444,6 +453,7 @@ def main():
     apply_cultural_content(entries)
     extensions=ROOT/'scripts/region-extension-content.json'
     if extensions.exists(): entries.update(json.loads(extensions.read_text(encoding='utf-8'))['entries'])
+    apply_administrative_photos(entries)
     normalize_display_names(entries)
     write_places(entries)
     output={'version':'20261116-region-content','entries':entries,'provenance':{
@@ -460,6 +470,7 @@ def main():
 def package_content():
     """Emit one small content bundle per plate after refreshing its place list."""
     source=json.loads((OUT/'content.json').read_text(encoding='utf-8'))
+    apply_administrative_photos(source['entries'])
     manifest=json.loads((OUT/'manifest.json').read_text(encoding='utf-8'))
     destination=OUT/'content';destination.mkdir(exist_ok=True)
     files=sorted({r['file'] if isinstance(r,dict) else r for r in manifest['regions'].values()})
@@ -475,6 +486,11 @@ def package_content():
     # Remove only this builder's obsolete encoded photos, after the new content
     # bundles are written. The API/raw-image cache remains available for rebuilds.
     used={Path(e['photo']['src']).name for e in source['entries'].values() if e.get('photo')}
+    # Administrative cards can intentionally reuse a historical region photo.
+    # Their independent bundles must retain that shared file during packaging.
+    for shard in (ROOT/'assets/maps/administrative/content').glob('*.json'):
+        for entry in json.loads(shard.read_text(encoding='utf-8')).get('entries',{}).values():
+            if entry.get('photo'):used.add(Path(entry['photo']['src']).name)
     photo_root=(OUT/'photos').resolve()
     for candidate in photo_root.glob('*.webp'):
         if candidate.name not in used and re.fullmatch(r'(?:landsat-)?[0-9a-f]{16}\.webp',candidate.name):

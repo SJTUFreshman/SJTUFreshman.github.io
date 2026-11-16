@@ -1,0 +1,117 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "232700": {
+      "label": {
+        "en": "Daxing'anling Prefecture",
+        "zh-CN": "大兴安岭地区",
+        "zh-TW": "大興安嶺地區"
+      },
+      "description": {
+        "en": "Daxing'anling , also known as Da Hinggan Ling, is the northernmost Chinese prefecture-level division, located in northwestern Heilongjiang Province. It covers 46,755 km2 and had a population of 520,000, as of 2004.",
+        "zh-CN": "大兴安岭地区是中华人民共和国黑龙江省下辖的地区，位于黑龙江省西北部，地跨黑龙江、内蒙古两省区。区境东南与黑河市接壤，南、西与内蒙古自治区呼伦贝尔市相连，北、东与俄罗斯隔江相望。",
+        "zh-TW": "大興安嶺地區是中華人民共和國黑龍江省下轄的地區，位於黑龍江省西北部，地跨黑龍江、內蒙古兩省區。區境東南與黑河市接壤，南、西與內蒙古自治區呼倫貝爾市相連，北、東與俄羅斯隔江相望。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%85%B4%E5%AE%89%E5%B2%AD%E5%9C%B0%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%85%B4%E5%AE%89%E5%B2%AD%E5%9C%B0%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Daxing%27anling_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        123.9,
+        52.5
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/51a7202afa0c2ed6.webp",
+        "credit": "Meditation · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%91%E9%BE%99%E6%B1%9F%E5%A4%A7%E5%85%B4%E5%AE%89%E5%B2%AD%E5%9C%B0%E5%8C%BA%E5%8A%A0%E6%A0%BC%E8%BE%BE%E5%A5%87%E5%B8%82_%E7%AB%99%E5%89%8D%E8%A1%97_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "黑龙江大兴安岭地区加格达奇市 站前街",
+        "place": "黑龙江大兴安岭地区加格达奇市 站前街 - panoramio.jpg",
+        "originalFile": "黑龙江大兴安岭地区加格达奇市 站前街 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            124.124021,
+            50.42383
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%91%E9%BE%99%E6%B1%9F%E5%A4%A7%E5%85%B4%E5%AE%89%E5%B2%AD%E5%9C%B0%E5%8C%BA%E5%8A%A0%E6%A0%BC%E8%BE%BE%E5%A5%87%E5%B8%82_%E7%AB%99%E5%89%8D%E8%A1%97_-_panoramio.jpg"
+        }
+      },
+      "photoReference": "poi:admin:232700:photo-53279908",
+      "urbanFocus": {
+        "label": {
+          "en": "Jiagedaqi urban area",
+          "zh-CN": "加格达奇城区",
+          "zh-TW": "加格達奇城區"
+        },
+        "lngLat": [
+          124.12612,
+          50.42082
+        ],
+        "kind": "administrative-seat-outside-display-outline",
+        "definition": {
+          "en": "A close view of Jiagedaqi, the administrative seat of Daxing'anling Prefecture. The land is territorially part of Oroqen Autonomous Banner in Inner Mongolia.",
+          "zh-CN": "展示大兴安岭地区行署驻地加格达奇的城区与周边地形；当地土地属内蒙古鄂伦春自治旗。",
+          "zh-TW": "展示大興安嶺地區行署駐地加格達奇的城區與周邊地形；當地土地屬內蒙古鄂倫春自治旗。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q1283517#P625",
+        "source": "https://www.dxal.gov.cn/dxal/c101259/202409/c13_291470.shtml",
+        "extentKm": 20,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://zh.wikipedia.org/wiki/加格达奇区"
+      }
+    },
+    "poi:admin:232700:photo-53279908": {
+      "label": {
+        "en": "Daxing'anling Prefecture landscape view",
+        "zh-CN": "黑龙江大兴安岭地区加格达奇市 站前街",
+        "zh-TW": "黑龍江大興安嶺地區加格達奇市 站前街"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Daxing'anling Prefecture, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现大兴安岭地区城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現大興安嶺地區城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%91%E9%BE%99%E6%B1%9F%E5%A4%A7%E5%85%B4%E5%AE%89%E5%B2%AD%E5%9C%B0%E5%8C%BA%E5%8A%A0%E6%A0%BC%E8%BE%BE%E5%A5%87%E5%B8%82_%E7%AB%99%E5%89%8D%E8%A1%97_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E9%BB%91%E9%BE%99%E6%B1%9F%E5%A4%A7%E5%85%B4%E5%AE%89%E5%B2%AD%E5%9C%B0%E5%8C%BA%E5%8A%A0%E6%A0%BC%E8%BE%BE%E5%A5%87%E5%B8%82_%E7%AB%99%E5%89%8D%E8%A1%97_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/51a7202afa0c2ed6.webp",
+        "credit": "Meditation · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%91%E9%BE%99%E6%B1%9F%E5%A4%A7%E5%85%B4%E5%AE%89%E5%B2%AD%E5%9C%B0%E5%8C%BA%E5%8A%A0%E6%A0%BC%E8%BE%BE%E5%A5%87%E5%B8%82_%E7%AB%99%E5%89%8D%E8%A1%97_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "黑龙江大兴安岭地区加格达奇市 站前街",
+        "place": "黑龙江大兴安岭地区加格达奇市 站前街 - panoramio.jpg",
+        "originalFile": "黑龙江大兴安岭地区加格达奇市 站前街 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            124.124021,
+            50.42383
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%91%E9%BE%99%E6%B1%9F%E5%A4%A7%E5%85%B4%E5%AE%89%E5%B2%AD%E5%9C%B0%E5%8C%BA%E5%8A%A0%E6%A0%BC%E8%BE%BE%E5%A5%87%E5%B8%82_%E7%AB%99%E5%89%8D%E8%A1%97_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        124.124021,
+        50.42383
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E9%BB%91%E9%BE%99%E6%B1%9F%E5%A4%A7%E5%85%B4%E5%AE%89%E5%B2%AD%E5%9C%B0%E5%8C%BA%E5%8A%A0%E6%A0%BC%E8%BE%BE%E5%A5%87%E5%B8%82_%E7%AB%99%E5%89%8D%E8%A1%97_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "232700"
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "652700": {
+      "label": {
+        "en": "Bortala Mongol Autonomous Prefecture",
+        "zh-CN": "博尔塔拉蒙古自治州",
+        "zh-TW": "博爾塔拉蒙古自治州"
+      },
+      "description": {
+        "en": "Bortala Mongol Autonomous Prefecture is an autonomous prefecture in the northern Xinjiang, China. Its capital is Bole, also known as Bortala.",
+        "zh-CN": "博尔塔拉蒙古自治州，简称博尔塔拉州、博州，是中华人民共和国新疆维吾尔自治区下辖的自治州，位于新疆西北部。面积24,934.33平方公里。",
+        "zh-TW": "博爾塔拉蒙古自治州，簡稱博爾塔拉州、博州，是中華人民共和國新疆維吾爾自治區下轄的自治州，位於新疆西北部。面積24,934.33平方公里。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%9A%E5%B0%94%E5%A1%94%E6%8B%89%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%B7%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%9A%E5%B0%94%E5%A1%94%E6%8B%89%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%B7%9E",
+        "https://en.wikipedia.org/wiki/Bortala_Mongol_Autonomous_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        82.0664,
+        44.906
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/26a573cf8dfefe0f.webp",
+        "credit": "Yangxu76758564 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bortala_Railway_Station_Plaza.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​博尔塔拉站的站前广场，拍摄于2019年9月底",
+        "place": "博尔塔拉蒙古自治州",
+        "originalFile": "Bortala_Railway_Station_Plaza.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:652700:9e0f7022",
+      "urbanFocus": {
+        "label": {
+          "en": "Bortala Mongol Autonomous Prefecture",
+          "zh-CN": "博尔塔拉蒙古自治州",
+          "zh-TW": "博爾塔拉蒙古自治州"
+        },
+        "lngLat": [
+          82.06618,
+          44.89288
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Bortala Mongol Autonomous Prefecture.",
+          "zh-CN": "以博尔塔拉蒙古自治州的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以博爾塔拉蒙古自治州的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q874291#P625",
+        "source": "https://www.wikidata.org/wiki/Q874291",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q874291#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.34
+        }
+      }
+    },
+    "poi:admin:652700:9e0f7022": {
+      "label": {
+        "en": "Bortala Mongol Autonomous Prefecture",
+        "zh-CN": "博尔塔拉蒙古自治州",
+        "zh-TW": "博爾塔拉蒙古自治州"
+      },
+      "description": {
+        "en": "Bortala Mongol Autonomous Prefecture is an autonomous prefecture in the northern Xinjiang, China. Its capital is Bole, also known as Bortala.",
+        "zh-CN": "博尔塔拉蒙古自治州，简称博尔塔拉州、博州，是中华人民共和国新疆维吾尔自治区下辖的自治州，位于新疆西北部。面积24,934.33平方公里。",
+        "zh-TW": "博爾塔拉蒙古自治州，簡稱博爾塔拉州、博州，是中華人民共和國新疆維吾爾自治區下轄的自治州，位於新疆西北部。面積24,934.33平方公里。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%9A%E5%B0%94%E5%A1%94%E6%8B%89%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%B7%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%9A%E5%B0%94%E5%A1%94%E6%8B%89%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%B7%9E",
+        "https://en.wikipedia.org/wiki/Bortala_Mongol_Autonomous_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        82.0664,
+        44.906
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Bortala_Mongol_Autonomous_Prefecture",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "652700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/26a573cf8dfefe0f.webp",
+        "credit": "Yangxu76758564 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bortala_Railway_Station_Plaza.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​博尔塔拉站的站前广场，拍摄于2019年9月底",
+        "place": "博尔塔拉蒙古自治州",
+        "originalFile": "Bortala_Railway_Station_Plaza.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

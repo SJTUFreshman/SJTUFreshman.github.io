@@ -1,0 +1,214 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "310000": {
+      "label": {
+        "en": "Shanghai",
+        "zh-CN": "上海市",
+        "zh-TW": "上海市"
+      },
+      "description": {
+        "en": "Shanghai is a provincial-level direct-administered municipality in China. It has a population of 30,050,000 in the urban area as of 2026, thus making it China's most populous city and the fifth-largest city in the world by population.",
+        "zh-CN": "上海市，简称沪，别称申，是中华人民共和国直辖市，因吴淞江下游原有支流上海浦得名。“沪”，源于晋朝时期当地捕鱼工具“扈”，江流入海处称“渎”，吴淞江下游一带遂称“扈渎”，后改为“沪”。",
+        "zh-TW": "上海市，簡稱滬，別稱申，是中華人民共和國直轄市，因吳淞江下游原有支流上海浦得名。“滬”，源於晉朝時期當地捕魚工具“扈”，江流入海處稱“瀆”，吳淞江下游一帶遂稱“扈瀆”，後改爲“滬”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%8A%E6%B5%B7%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%8A%E6%B5%B7%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Shanghai"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        121.46916667,
+        31.2325
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/3b139ebd03b51e16.webp",
+        "credit": "xiquinhosilva from Cacau · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20694-Shanghai_(32225501024).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "20694-Shanghai",
+        "place": "上海博物馆",
+        "originalFile": "20694-Shanghai_(32225501024).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:310000:d536b322",
+      "urbanFocus": {
+        "label": {
+          "en": "Shanghai",
+          "zh-CN": "上海市",
+          "zh-TW": "上海市"
+        },
+        "lngLat": [
+          121.46916666666667,
+          31.2325
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 48 km landscape window centred on Shanghai.",
+          "zh-CN": "以上海市的地理坐标为中心，展示周边约48公里宽的城区与地形。",
+          "zh-TW": "以上海市的地理座標爲中心，展示周邊約48公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q8686#P625",
+        "source": "https://www.wikidata.org/wiki/Q8686",
+        "extentKm": 48,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q8686#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.34
+        }
+      }
+    },
+    "poi:310000:1": {
+      "label": {
+        "en": "The Bund",
+        "zh-CN": "外滩",
+        "zh-TW": "外灘"
+      },
+      "description": {
+        "en": "The Bund is a waterfront area and a protected historical district in central Shanghai. The area centers on a section of Zhongshan Road within the former Shanghai International Settlement, which runs along the western bank of the Huangpu River in the eastern part of Huangpu.",
+        "zh-CN": "外滩是上海市中心的一个区域，由一段沿黄浦江的马路和沿路的建筑和设施构成，为上海重要的地标之一。全长1.5公里，南起延安东路，北至苏州河上的外白渡桥，东面即黄浦江，西面是旧上海金融、外贸机构的集中地。",
+        "zh-TW": "外灘是上海市中心的一個區域，由一段沿黃浦江的馬路和沿路的建築和設施構成，爲上海重要的地標之一。全長1.5公里，南起延安東路，北至蘇州河上的外白渡橋，東面即黃浦江，西面是舊上海金融、外貿機構的集中地。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%96%E6%BB%A9",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%96%E6%BB%A9",
+        "https://en.wikipedia.org/wiki/The_Bund"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        121.48613889,
+        31.23802778
+      ],
+      "parentCity": "310000",
+      "photo": {
+        "src": "assets/maps/regions/photos/59e4a48aa0c3c5d5.webp",
+        "credit": "Carsten Ullrich from Shanghai, China · CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:A_picture_from_China_every_day_101.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "alt": "A view on the Bund, in red and grey.",
+        "place": "外滩",
+        "originalFile": "A_picture_from_China_every_day_101.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:310000:2": {
+      "label": {
+        "en": "Yu Garden",
+        "zh-CN": "豫园",
+        "zh-TW": "豫園"
+      },
+      "description": {
+        "en": "Yu Garden or Yuyuan Garden is an extensive Chinese garden located beside the City God Temple in the northeast of the Old City of Shanghai at Huangpu District, Shanghai.",
+        "zh-CN": "豫园是建于明朝时期的古典园林，座落于中华人民共和国上海市黄浦区，原上海老城厢东北部，北靠福佑路，东临安仁街，西南有城隍庙、豫园商城。豫园建于1559年，最初是四川布政使潘允端的私人园林，他建造此园林的目的是“愉悦老亲”，而“愉”和“豫”意思相通，故而得名豫园。",
+        "zh-TW": "豫園是建於明朝時期的古典園林，座落於中華人民共和國上海市黃浦區，原上海老城廂東北部，北靠福佑路，東臨安仁街，西南有城隍廟、豫園商城。豫園建於1559年，最初是四川布政使潘允端的私人園林，他建造此園林的目的是“愉悅老親”，而“愉”和“豫”意思相通，故而得名豫園。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%B1%AB%E5%9B%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%B1%AB%E5%9B%AD",
+        "https://en.wikipedia.org/wiki/Yu_Garden"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        121.4875,
+        31.22916667
+      ],
+      "parentCity": "310000",
+      "photo": {
+        "src": "assets/maps/regions/photos/f040c1b43d2ba887.webp",
+        "credit": "Stefan Fussan · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shanghai_-_Yu_Garden_-_0035.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Tingtao Tower Exhibit Hall and a pond in Yu Garden, Shanghai, China",
+        "place": "豫园",
+        "originalFile": "Shanghai_-_Yu_Garden_-_0035.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:310000:d536b322": {
+      "label": {
+        "en": "Shanghai Museum",
+        "zh-CN": "上海博物馆",
+        "zh-TW": "上海博物館"
+      },
+      "description": {
+        "en": "The Shanghai Museum is a public municipal museum of ancient Chinese art, situated on the People's Square in the Huangpu District of Shanghai, China. It is funded by the Shanghai Municipal Culture and Tourism Bureau.",
+        "zh-CN": "上海博物馆位于位于上海市黄浦区人民大道201号，是上海最大的一所综合性古代艺术博物馆，现任馆长为褚晓波。馆内藏品数量达102余万件，涵盖三十多个门类，其中青铜器、陶瓷和书画是最为突出的。",
+        "zh-TW": "上海博物館位於位於上海市黃浦區人民大道201號，是上海最大的一所綜合性古代藝術博物館，現任館長爲褚曉波。館內藏品數量達102餘萬件，涵蓋三十多個門類，其中青銅器、陶瓷和書畫是最爲突出的。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%8A%E6%B5%B7%E5%8D%9A%E7%89%A9%E9%A6%86",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%8A%E6%B5%B7%E5%8D%9A%E7%89%A9%E9%A6%86",
+        "https://en.wikipedia.org/wiki/Shanghai_Museum"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.470556,
+        31.230278
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E4%B8%8A%E6%B5%B7%E5%8D%9A%E7%89%A9%E9%A6%86",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "310000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3b139ebd03b51e16.webp",
+        "credit": "xiquinhosilva from Cacau · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20694-Shanghai_(32225501024).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "20694-Shanghai",
+        "place": "上海博物馆",
+        "originalFile": "20694-Shanghai_(32225501024).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:310000:17b4a090": {
+      "label": {
+        "en": "Shanghai Lu Xun Memorial Hall",
+        "zh-CN": "上海鲁迅纪念馆",
+        "zh-TW": "上海魯迅紀念館"
+      },
+      "description": {
+        "en": "The Shanghai Lu Xun Memorial Hall is a museum devoted to the writer Lu Xun inside Lu Xun Park in Hongkou District. Opened in January 1951, it was the first memorial museum dedicated to an individual established in the People’s Republic of China.",
+        "zh-CN": "上海鲁迅纪念馆位于中华人民共和国上海市虹口区欧阳路街道甜爱路200号上海鲁迅公园内，是为纪念鲁迅而辟的主题性博物馆。纪念馆开放于1951年1月7日，是中华人民共和国的第一座人物性纪念馆。",
+        "zh-TW": "上海魯迅紀念館位於中華人民共和國上海市虹口區歐陽路街道甜愛路200號上海魯迅公園內，是爲紀念魯迅而闢的主題性博物館。紀念館開放於1951年1月7日，是中華人民共和國的第一座人物性紀念館。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%8A%E6%B5%B7%E9%B2%81%E8%BF%85%E7%BA%AA%E5%BF%B5%E9%A6%86",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%8A%E6%B5%B7%E9%B2%81%E8%BF%85%E7%BA%AA%E5%BF%B5%E9%A6%86"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.48366667,
+        31.2695
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E4%B8%8A%E6%B5%B7%E9%B2%81%E8%BF%85%E7%BA%AA%E5%BF%B5%E9%A6%86",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "310000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/9bb53529d2250660.webp",
+        "credit": "Gisling · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7%E9%B2%81%E8%BF%85%E7%BA%AA%E5%BF%B5%E9%A6%86.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Shanghai Luxun Museum",
+        "place": "上海鲁迅纪念馆",
+        "originalFile": "上海鲁迅纪念馆.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

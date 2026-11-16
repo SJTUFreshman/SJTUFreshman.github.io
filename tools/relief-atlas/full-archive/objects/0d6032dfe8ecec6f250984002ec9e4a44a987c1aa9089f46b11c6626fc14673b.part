@@ -1,0 +1,19 @@
+{
+  "relief": {
+    "file": "hawaii-relief.blend",
+    "sha256": "653c75abde9ddc7d413360ef7aac33288af544829102034a77dbd6008d47036e",
+    "bytes": 1248033,
+    "vertices": 41925,
+    "resolution": [
+      1600,
+      800
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false,
+    "white_material_verified": true,
+    "postprocessing": "none",
+    "sea_material": "#e4edf0"
+  }
+}

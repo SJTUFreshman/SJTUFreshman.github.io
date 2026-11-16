@@ -1,0 +1,143 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "520400": {
+      "label": {
+        "en": "Anshun",
+        "zh-CN": "安顺市",
+        "zh-TW": "安順市"
+      },
+      "description": {
+        "en": "Anshun is a prefecture-level city located in southwestern Guizhou province, southwest China, near the Huangguoshu Waterfall, the tallest in China. As of the 2010 census, it had a population of 2,297,339.",
+        "zh-CN": "安顺市是中华人民共和国贵州省下辖的地级市，位于贵州省中西部。贵州省第三大城市。",
+        "zh-TW": "安順市是中華人民共和國貴州省下轄的地級市，位於貴州省中西部。貴州省第三大城市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%89%E9%A1%BA%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%89%E9%A1%BA%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Anshun"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        105.9476,
+        26.2531
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/b1312d2254185109.webp",
+        "credit": "Zhangzhugang · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Anshun_Wenmiao_2014.04.28_15-49-23.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "安顺文庙",
+        "place": "安顺文庙",
+        "originalFile": "Anshun_Wenmiao_2014.04.28_15-49-23.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:520400:9a1cdd65",
+      "urbanFocus": {
+        "label": {
+          "en": "Anshun",
+          "zh-CN": "安顺市",
+          "zh-TW": "安順市"
+        },
+        "lngLat": [
+          105.93401,
+          26.24562
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Anshun.",
+          "zh-CN": "以安顺市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以安順市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q486149#P625",
+        "source": "https://www.wikidata.org/wiki/Q486149",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q486149#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.18
+        }
+      }
+    },
+    "poi:admin:520400:9a1cdd65": {
+      "label": {
+        "en": "Anshun Confucius Temple",
+        "zh-CN": "安顺文庙",
+        "zh-TW": "安順文廟"
+      },
+      "description": {
+        "en": "Anshun Confucius Temple , or Anshun Confucian Temple, also known as Fuxue Palace , is a Confucian temple located in Xixiu District, Anshun City, Guizhou Province. It is one of the four major ancient stone architectural complexes in China.",
+        "zh-CN": "安顺文庙位于中国贵州省安顺市西秀区，2001年被列为第五批全国重点文物保护单位。 安顺文庙始建于明洪武二十七年，后经多次重修，现存石雕为明代遗物，其余则为清代或近现代所建。",
+        "zh-TW": "安順文廟位於中國貴州省安順市西秀區，2001年被列爲第五批全國重點文物保護單位。 安順文廟始建於明洪武二十七年，後經多次重修，現存石雕爲明代遺物，其餘則爲清代或近現代所建。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%89%E9%A1%BA%E6%96%87%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%89%E9%A1%BA%E6%96%87%E5%BA%99",
+        "https://en.wikipedia.org/wiki/Anshun_Confucius_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        105.9322,
+        26.2528
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Anshun_Confucius_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "520400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b1312d2254185109.webp",
+        "credit": "Zhangzhugang · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Anshun_Wenmiao_2014.04.28_15-49-23.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "安顺文庙",
+        "place": "安顺文庙",
+        "originalFile": "Anshun_Wenmiao_2014.04.28_15-49-23.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:520400:18217748": {
+      "label": {
+        "en": "Huangguoshu Waterfall",
+        "zh-CN": "黄果树瀑布",
+        "zh-TW": "黃果樹瀑布"
+      },
+      "description": {
+        "en": "Huangguoshu Waterfall is the largest waterfall in China and one of the largest waterfalls in East Asia.",
+        "zh-CN": "黄菓树瀑布位于中国贵州省安顺市镇宁布依族苗族自治县，是珠江水系打邦河的支流白水河九级瀑布群中规模最大的一级瀑布。瀑布高度为77.8米，其中主瀑高67米；瀑布宽101米，其中主瀑顶宽83.3米。",
+        "zh-TW": "黃菓樹瀑布位於中國貴州省安順市鎮寧布依族苗族自治縣，是珠江水系打邦河的支流白水河九級瀑布羣中規模最大的一級瀑布。瀑布高度爲77.8米，其中主瀑高67米；瀑布寬101米，其中主瀑頂寬83.3米。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BB%84%E6%9E%9C%E6%A0%91%E7%80%91%E5%B8%83",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BB%84%E6%9E%9C%E6%A0%91%E7%80%91%E5%B8%83",
+        "https://en.wikipedia.org/wiki/Huangguoshu_Waterfall"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        105.666,
+        25.992
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Huangguoshu_Waterfall",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "520400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c4e8a5ea64591060.webp",
+        "credit": "Kcx36 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%84%E6%9E%9C%E6%A0%91%E7%80%91%E5%B8%83_2026-07-31_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​黄果树瀑布",
+        "place": "黄果树瀑布",
+        "originalFile": "黄果树瀑布_2026-07-31_01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "330400": {
+      "label": {
+        "en": "Jiaxing",
+        "zh-CN": "嘉兴市",
+        "zh-TW": "嘉興市"
+      },
+      "description": {
+        "en": "Jiaxing , alternately romanized as Kashing, is a prefecture-level city in northern Zhejiang province, China. Lying on the Grand Canal of China, Jiaxing borders Hangzhou to the southwest, Huzhou to the west, Shanghai to the northeast, and the province of Jiangsu to the north.",
+        "zh-CN": "嘉兴市，简称禾、嘉，古称由拳、禾兴、秀州，是中华人民共和国浙江省下辖的地级市，位于浙江省东北部。市境南隔钱塘江与杭州市、绍兴市、宁波市相接，西临湖州市，西北界江苏省苏州市，东北达上海市，东隔杭州湾与舟山市相望。",
+        "zh-TW": "嘉興市，簡稱禾、嘉，古稱由拳、禾興、秀州，是中華人民共和國浙江省下轄的地級市，位於浙江省東北部。市境南隔錢塘江與杭州市、紹興市、寧波市相接，西臨湖州市，西北界江蘇省蘇州市，東北達上海市，東隔杭州灣與舟山市相望。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%98%89%E5%85%B4%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%98%89%E5%85%B4%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Jiaxing"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        120.756,
+        30.747
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/f8dd45b640063d52.webp",
+        "credit": "Siyuwj · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%98%89%E5%85%B4%E5%8D%97%E6%B9%96,_2021-10-30_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​嘉兴 南湖",
+        "place": "南湖 (嘉兴)",
+        "originalFile": "嘉兴南湖,_2021-10-30_03.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:330400:fbcce3a1",
+      "urbanFocus": {
+        "label": {
+          "en": "Jiaxing",
+          "zh-CN": "嘉兴市",
+          "zh-TW": "嘉興市"
+        },
+        "lngLat": [
+          120.75,
+          30.7522
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Jiaxing.",
+          "zh-CN": "以嘉兴市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以嘉興市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q58178#P625",
+        "source": "https://www.wikidata.org/wiki/Q58178",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q58178#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.17
+        }
+      }
+    },
+    "poi:330400:1": {
+      "label": {
+        "en": "Wuzhen",
+        "zh-CN": "乌镇",
+        "zh-TW": "烏鎮"
+      },
+      "description": {
+        "en": "Wuzhen is a historic scenic town, part of Tongxiang, located in the north of Zhejiang Province, China.",
+        "zh-CN": "乌镇镇位于中华人民共和国浙江省桐乡市，是江南著名古镇之一。镇域面积71.19平方公里，建城区面积2.5平方千米，总人口6万，镇区常住人口1.2万。",
+        "zh-TW": "烏鎮鎮位於中華人民共和國浙江省桐鄉市，是江南著名古鎮之一。鎮域面積71.19平方公里，建城區面積2.5平方千米，總人口6萬，鎮區常住人口1.2萬。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B9%8C%E9%95%87%E9%95%87",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B9%8C%E9%95%87%E9%95%87",
+        "https://en.wikipedia.org/wiki/Wuzhen"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        120.487778,
+        30.74275
+      ],
+      "parentCity": "330400",
+      "photo": {
+        "src": "assets/maps/regions/photos/e5d7e0d809488a1c.webp",
+        "credit": "Chensiyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1_wuzhen_aerial_2023.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "wuzhen aerial 2023",
+        "place": "乌镇镇",
+        "originalFile": "1_wuzhen_aerial_2023.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:330400:2": {
+      "label": {
+        "en": "Xitang",
+        "zh-CN": "西塘镇",
+        "zh-TW": "西塘鎮"
+      },
+      "description": {
+        "en": "Xitang , formerly known as Xietang (Chinese: 斜塘; lit.",
+        "zh-CN": "西塘，古称胥塘、斜塘，又名平川，位于浙江省嘉善县，在嘉善县城北10公里处，是一座已有千年历史文化的古镇。面积约1平方公里，春秋战国时期是吴越两国的相交之地，故有“吴根越角”和“越角人家”之称。",
+        "zh-TW": "西塘，古稱胥塘、斜塘，又名平川，位於浙江省嘉善縣，在嘉善縣城北10公里處，是一座已有千年歷史文化的古鎮。面積約1平方公里，春秋戰國時期是吳越兩國的相交之地，故有“吳根越角”和“越角人家”之稱。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%A5%BF%E5%A1%98%E9%95%87_(%E5%98%89%E5%96%84%E5%8E%BF)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%A5%BF%E5%A1%98%E9%95%87_(%E5%98%89%E5%96%84%E5%8E%BF)",
+        "https://en.wikipedia.org/wiki/Xitang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        120.88888889,
+        30.94722222
+      ],
+      "parentCity": "330400",
+      "photo": {
+        "src": "assets/maps/regions/photos/a41d18e6e4fc5587.webp",
+        "credit": "Synyan · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E5%A1%98%E6%B8%B8%E8%88%B9%E7%A0%81%E5%A4%B4%E5%92%8C%E9%80%81%E5%AD%90%E6%9D%A5%E5%87%A4%E6%A1%A5.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "Xitang town bridges and rivers",
+        "place": "西塘镇 (嘉善县)",
+        "originalFile": "西塘游船码头和送子来凤桥.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:330400:b7387c43": {
+      "label": {
+        "en": "Nanhu, Jiaxing",
+        "zh-CN": "南湖区",
+        "zh-TW": "南湖區"
+      },
+      "description": {
+        "en": "Nanhu District is a district in Jiaxing, Zhejiang Province of China. Its former name was Xiucheng District , and it changed to its current name on 17 May 2005.",
+        "zh-CN": "南湖区是中国浙江省嘉兴市所辖的一个市辖区，原名秀城区，2005年5月17日改为现名。位于浙江省北部杭嘉湖平原，东邻上海，西靠杭州，北依苏州，南濒杭州湾，是嘉兴市经济、政治、文化、商贸中心。",
+        "zh-TW": "南湖區是中國浙江省嘉興市所轄的一個市轄區，原名秀城區，2005年5月17日改爲現名。位於浙江省北部杭嘉湖平原，東鄰上海，西靠杭州，北依蘇州，南瀕杭州灣，是嘉興市經濟、政治、文化、商貿中心。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%97%E6%B9%96%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%97%E6%B9%96%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Nanhu,_Jiaxing"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.76666667,
+        30.75
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Nanhu,_Jiaxing",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "330400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c58da6274e97295b.webp",
+        "credit": "Flost · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Jiaxing_Southlake_dark.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Jiaxing_Southlake_dark.jpg#Licensing",
+        "alt": "Jiaxing Southlake in dark",
+        "place": "南湖区",
+        "originalFile": "Jiaxing_Southlake_dark.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:330400:fbcce3a1": {
+      "label": {
+        "en": "South Lake (Jiaxing)",
+        "zh-CN": "南湖 (嘉兴)",
+        "zh-TW": "南湖 (嘉興)"
+      },
+      "description": {
+        "en": "South Lake is a lake in the South of Jiaxing, Zhejiang, China, and covers an area of 0.54 km2. It is also known as \"Mandarin Duck Lake\" due to its shape.",
+        "zh-CN": "南湖旧称鸳鸯湖，简称鸳湖，又称马场湖、滮湖 ，位于浙江省嘉兴市城南，水域面积约41.6万平方米，水深约2到5米，与南京玄武湖、杭州西湖并称江南三大名湖。湖中有一湖心小岛，岛上有一烟雨楼，是赏湖观景的绝佳去处。",
+        "zh-TW": "南湖舊稱鴛鴦湖，簡稱鴛湖，又稱馬場湖、滮湖 ，位於浙江省嘉興市城南，水域面積約41.6萬平方米，水深約2到5米，與南京玄武湖、杭州西湖並稱江南三大名湖。湖中有一湖心小島，島上有一煙雨樓，是賞湖觀景的絕佳去處。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%97%E6%B9%96_(%E5%98%89%E5%85%B4)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%97%E6%B9%96_(%E5%98%89%E5%85%B4)",
+        "https://en.wikipedia.org/wiki/South_Lake_(Jiaxing)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.756,
+        30.757
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/South_Lake_(Jiaxing)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "330400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f8dd45b640063d52.webp",
+        "credit": "Siyuwj · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%98%89%E5%85%B4%E5%8D%97%E6%B9%96,_2021-10-30_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​嘉兴 南湖",
+        "place": "南湖 (嘉兴)",
+        "originalFile": "嘉兴南湖,_2021-10-30_03.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:330400:e06ed964": {
+      "label": {
+        "en": "South Lake (Jiaxing)",
+        "zh-CN": "南湖 (嘉兴)",
+        "zh-TW": "南湖 (嘉興)"
+      },
+      "description": {
+        "en": "South Lake is a lake in the South of Jiaxing, Zhejiang, China, and covers an area of 0.54 km2. It is also known as \"Mandarin Duck Lake\" due to its shape.",
+        "zh-CN": "南湖旧称鸳鸯湖，简称鸳湖，又称马场湖、滮湖 ，位于浙江省嘉兴市城南，水域面积约41.6万平方米，水深约2到5米，与南京玄武湖、杭州西湖并称江南三大名湖。湖中有一湖心小岛，岛上有一烟雨楼，是赏湖观景的绝佳去处。",
+        "zh-TW": "南湖舊稱鴛鴦湖，簡稱鴛湖，又稱馬場湖、滮湖 ，位於浙江省嘉興市城南，水域面積約41.6萬平方米，水深約2到5米，與南京玄武湖、杭州西湖並稱江南三大名湖。湖中有一湖心小島，島上有一煙雨樓，是賞湖觀景的絕佳去處。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%97%E6%B9%96_(%E5%98%89%E5%85%B4)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%97%E6%B9%96_(%E5%98%89%E5%85%B4)",
+        "https://en.wikipedia.org/wiki/South_Lake_(Jiaxing)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.756,
+        30.757
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/South_Lake_(Jiaxing)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "330400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f8dd45b640063d52.webp",
+        "credit": "Siyuwj · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%98%89%E5%85%B4%E5%8D%97%E6%B9%96,_2021-10-30_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​嘉兴 南湖",
+        "place": "南湖 (嘉兴)",
+        "originalFile": "嘉兴南湖,_2021-10-30_03.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

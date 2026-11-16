@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "140500": {
+      "label": {
+        "en": "Jincheng",
+        "zh-CN": "晋城市",
+        "zh-TW": "晉城市"
+      },
+      "description": {
+        "en": "Jincheng is a prefecture-level city situated in the southeast of Shanxi province, China. It shares its border with Henan province to the south and southeast.",
+        "zh-CN": "晋城市是中华人民共和国山西省下辖的地级市，位于山西省东南部。市境西界临汾市、运城市，北邻长治市，东接河南省新乡市，南连河南省焦作市、济源市。",
+        "zh-TW": "晉城市是中華人民共和國山西省下轄的地級市，位於山西省東南部。市境西界臨汾市、運城市，北鄰長治市，東接河南省新鄉市，南連河南省焦作市、濟源市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%99%8B%E5%9F%8E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%99%8B%E5%9F%8E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Jincheng"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        112.852,
+        35.491
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/4b359338f54e972c.webp",
+        "credit": "1969社论 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jincheng_Museum.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​晋城博物馆",
+        "place": "Jincheng Museum.jpg",
+        "originalFile": "Jincheng Museum.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            112.862509,
+            35.490974
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Jincheng_Museum.jpg"
+        }
+      },
+      "photoReference": "poi:admin:140500:photo-158732612",
+      "urbanFocus": {
+        "label": {
+          "en": "Jincheng",
+          "zh-CN": "晋城市",
+          "zh-TW": "晉城市"
+        },
+        "lngLat": [
+          112.8483,
+          35.49056
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Jincheng.",
+          "zh-CN": "以晋城市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以晉城市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q72990#P625",
+        "source": "https://www.wikidata.org/wiki/Q72990",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q72990#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.82
+        }
+      }
+    },
+    "poi:admin:140500:photo-158732612": {
+      "label": {
+        "en": "Jincheng Museum",
+        "zh-CN": "晋城市城区景观",
+        "zh-TW": "晉城市城區景觀"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Jincheng, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现晋城市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現晉城市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Jincheng_Museum.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Jincheng_Museum.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4b359338f54e972c.webp",
+        "credit": "1969社论 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jincheng_Museum.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​晋城博物馆",
+        "place": "Jincheng Museum.jpg",
+        "originalFile": "Jincheng Museum.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            112.862509,
+            35.490974
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Jincheng_Museum.jpg"
+        }
+      },
+      "lngLat": [
+        112.862509,
+        35.490974
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Jincheng_Museum.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "140500"
+    }
+  }
+}

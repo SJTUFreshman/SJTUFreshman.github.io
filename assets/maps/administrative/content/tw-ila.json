@@ -1,0 +1,213 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-ILA": {
+      "label": {
+        "en": "Yilan County, Taiwan",
+        "zh-CN": "宜兰县",
+        "zh-TW": "宜蘭縣"
+      },
+      "description": {
+        "en": "Yilan, alternately spelled I-lan, is a county in northeastern Taiwan. It has a population of 450,031, and its seat is located in Yilan City.",
+        "zh-CN": "宜兰县是中华台北台湾省的县，位于台湾东部与北部，西北部边界邻近新北市，西邻桃园市与新竹县，西南邻台中市，南邻花莲县，东临太平洋。县治设在宜兰市，宜兰县内辖有1市、3镇、8乡，共有12个乡镇市。",
+        "zh-TW": "宜蘭縣是中華臺北臺灣省的縣，位於臺灣東部與北部，西北部邊界鄰近新北市，西鄰桃園市與新竹縣，西南鄰臺中市，南鄰花蓮縣，東臨太平洋。縣治設在宜蘭市，宜蘭縣內轄有1市、3鎮、8鄉，共有12個鄉鎮市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%9C%E8%98%AD%E7%B8%A3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%9C%E8%98%AD%E7%B8%A3",
+        "https://en.wikipedia.org/wiki/Yilan_County,_Taiwan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        121.75916667,
+        24.75055556
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/c95d37641f46713d.webp",
+        "credit": "Mnb · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yilan-Chai_Chi_Lan_Liquor_Museum.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "​臺灣菸酒公司宜蘭酒廠甲子蘭酒文物館。",
+        "place": "Yilan Distillery Chia Chi Lan Liquor Museum",
+        "originalFile": "Yilan-Chai_Chi_Lan_Liquor_Museum.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-ILA:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Yilan City",
+          "zh-CN": "宜兰市",
+          "zh-TW": "宜蘭市"
+        },
+        "lngLat": [
+          121.75,
+          24.75
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Yilan City.",
+          "zh-CN": "以宜兰市为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以宜蘭市爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q680842",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q680842#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E5%AE%9C%E8%98%AD%E7%B8%A3"
+      }
+    },
+    "poi:admin:TW-ILA:17a5e7bd": {
+      "label": {
+        "en": "Sijie Fude Temple",
+        "zh-CN": "四结福德庙",
+        "zh-TW": "四結福德廟"
+      },
+      "description": {
+        "en": "This Earth God temple stands in Wujie Township, Yilan County. It is known for its large statue of Tudigong and its distinctive local religious celebrations.",
+        "zh-CN": "四结福德庙，是位于台湾宜兰县五结乡上四村的土地祠，有一尊巨型的土地公像，并举办过多起与其他庙宇土地公联婚的活动。",
+        "zh-TW": "四結福德廟，是位於臺灣宜蘭縣五結鄉上四村的土地祠，有一尊巨型的土地公像，並舉辦過多起與其他廟宇土地公聯婚的活動。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9B%9B%E7%B5%90%E7%A6%8F%E5%BE%B7%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9B%9B%E7%B5%90%E7%A6%8F%E5%BE%B7%E5%BB%9F"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.765426,
+        24.6974
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%9B%9B%E7%B5%90%E7%A6%8F%E5%BE%B7%E5%BB%9F",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-ILA",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0f51131b2abea2fb.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%9B%9B%E7%B5%90%E7%A6%8F%E5%BE%B7%E5%BB%9F%E6%96%9C%E7%85%A7.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​四結福德廟斜照",
+        "place": "四結福德廟",
+        "originalFile": "四結福德廟斜照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-ILA:3342cd8a": {
+      "label": {
+        "en": "Jiaoxi Xietian Temple",
+        "zh-CN": "礁溪协天庙",
+        "zh-TW": "礁溪協天廟"
+      },
+      "description": {
+        "en": "Jiaoxi Xietian Temple is dedicated to Guan Yu. It serves as a religious centre for several villages around Jiaoxi in Yilan County.",
+        "zh-CN": "礁溪协天庙，是位于台湾宜兰县礁溪乡大忠村的关帝庙，具有恩主公信仰，为礁溪乡大忠村、大义村、二龙村、白鹅村、德阳村、三民村、林美村、六结村的信仰中心。",
+        "zh-TW": "礁溪協天廟，是位於臺灣宜蘭縣礁溪鄉大忠村的關帝廟，具有恩主公信仰，為礁溪鄉大忠村、大義村、二龍村、白鵝村、德陽村、三民村、林美村、六結村的信仰中心。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%A4%81%E6%BA%AA%E5%8D%94%E5%A4%A9%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%A4%81%E6%BA%AA%E5%8D%94%E5%A4%A9%E5%BB%9F"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.768937,
+        24.818701
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E7%A4%81%E6%BA%AA%E5%8D%94%E5%A4%A9%E5%BB%9F",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-ILA",
+      "photo": {
+        "src": "assets/maps/administrative/photos/cc98acbb7dc9f190.webp",
+        "credit": "Yu tptw · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jiaoxi_Xietian_Temple_paifangs.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​礁溪協天廟牌樓",
+        "place": "礁溪協天廟",
+        "originalFile": "Jiaoxi_Xietian_Temple_paifangs.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-ILA:2ccd4b94": {
+      "label": {
+        "en": "Toucheng Kaicheng Temple Chenghuang Temple",
+        "zh-CN": "头城开成寺城隍庙",
+        "zh-TW": "頭城開成寺城隍廟"
+      },
+      "description": {
+        "en": "The Toucheng Kaicheng Temple Chenghuang Temple, it is a Guanyin Temple combined with a City God Temple located in Xinjianli, Toucheng Town, Yilan County, Taiwan. It primarily worships Guanyin Bodhisattva and Anxi City God, with Wusha as a secondary deity..On the 30th day of the seventh lunar month, it holds a traditional 'Toucheng Ghost Grappling Festival' event.",
+        "zh-CN": "头城开成寺城隍庙，是位于台湾宜兰县头城镇新建里的观音寺兼城隍庙，主祀观音菩萨、安溪城隍，配祀吴沙，并在农历七月三十会举行抢孤活动。",
+        "zh-TW": "頭城開成寺城隍廟，是位於臺灣宜蘭縣頭城鎮新建裏的觀音寺兼城隍廟，主祀觀音菩薩、安溪城隍，配祀吳沙，並在農曆七月三十會舉行搶孤活動。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A0%AD%E5%9F%8E%E9%96%8B%E6%88%90%E5%AF%BA%E5%9F%8E%E9%9A%8D%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A0%AD%E5%9F%8E%E9%96%8B%E6%88%90%E5%AF%BA%E5%9F%8E%E9%9A%8D%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Toucheng_Kaicheng_Temple_Chenghuang_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.82181,
+        24.855668
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Toucheng_Kaicheng_Temple_Chenghuang_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-ILA",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5cfb5ef54c9dc597.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%A0%AD%E5%9F%8E%E9%96%8B%E6%88%90%E5%AF%BA%E5%9F%8E%E9%9A%8D%E5%BB%9F%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​頭城開成寺城隍廟正面照",
+        "place": "頭城開成寺城隍廟",
+        "originalFile": "頭城開成寺城隍廟正面照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-ILA:urban": {
+      "id": "poi:admin:TW-ILA:urban",
+      "label": {
+        "en": "Yilan Distillery Chia Chi Lan Liquor Museum",
+        "zh-CN": "甲子兰酒文物馆",
+        "zh-TW": "甲子蘭酒文物館"
+      },
+      "description": {
+        "en": "The Yilan Distillery Chia Chi Lan Liquor Museum or Chia Chi Lan Liquor Museum is a museum about wine in Yilan City, Yilan County, Taiwan.",
+        "zh-CN": "甲子兰酒文物馆，其前身为宜兰酒厂，是一座位于台湾宜兰县宜兰市的一座现代机械化的制酒工厂及设施群，该酒厂的历史可追溯自1909年，亦为台湾仅存仍在市中心经营的酒厂设施群。 归于园区所保存之工业遗产、办公厅舍及相关历史性意义，该园区部分建筑以「宜兰酒厂历史建筑群」之名登录宜兰市历史建筑，当前该单位由台湾烟酒股份有限公司营运。",
+        "zh-TW": "甲子蘭酒文物館，其前身為宜蘭酒廠，是一座位於臺灣宜蘭縣宜蘭市的一座現代機械化的製酒工廠及設施羣，該酒廠的歷史可追溯自1909年，亦為臺灣僅存仍在市中心經營的酒廠設施羣。 歸於園區所保存之工業遺產、辦公廳舍及相關歷史性意義，該園區部分建築以「宜蘭酒廠歷史建築羣」之名登錄宜蘭市歷史建築，當前該單位由臺灣菸酒股份有限公司營運。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%94%B2%E5%AD%90%E8%98%AD%E9%85%92%E6%96%87%E7%89%A9%E9%A4%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%94%B2%E5%AD%90%E8%98%AD%E9%85%92%E6%96%87%E7%89%A9%E9%A4%A8",
+        "https://en.wikipedia.org/wiki/Yilan_Distillery_Chia_Chi_Lan_Liquor_Museum"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c95d37641f46713d.webp",
+        "credit": "Mnb · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yilan-Chai_Chi_Lan_Liquor_Museum.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "​臺灣菸酒公司宜蘭酒廠甲子蘭酒文物館。",
+        "place": "Yilan Distillery Chia Chi Lan Liquor Museum",
+        "originalFile": "Yilan-Chai_Chi_Lan_Liquor_Museum.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.75083333,
+        24.75666667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Yilan_Distillery_Chia_Chi_Lan_Liquor_Museum",
+      "kind": "landmark",
+      "parentCity": "TW-ILA"
+    }
+  }
+}

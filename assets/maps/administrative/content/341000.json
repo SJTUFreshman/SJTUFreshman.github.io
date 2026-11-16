@@ -1,0 +1,189 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "341000": {
+      "label": {
+        "en": "Huangshan City",
+        "zh-CN": "黄山市",
+        "zh-TW": "黃山市"
+      },
+      "description": {
+        "en": "Huangshan is a prefecture-level city in southern Anhui Province, People's Republic of China. Huangshan means Yellow Mountain in Chinese and the city is named after the famously scenic Yellow Mountains which cover much of the city's vast geographic expanse.",
+        "zh-CN": "黄山市，简称黄，是中华人民共和国安徽省下辖的地级市，得名于境内著名景点黄山。旧称徽州，故又简称徽。",
+        "zh-TW": "黃山市，簡稱黃，是中華人民共和國安徽省下轄的地級市，得名於境內著名景點黃山。舊稱徽州，故又簡稱徽。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%B1%B1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%B1%B1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Huangshan_City"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        118.3376,
+        29.7149
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/0bbf0c6018cdba8f.webp",
+        "credit": "Chi King · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Huangshan_pic_4.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Landscape of Mount Huangshan",
+        "place": "黄山",
+        "originalFile": "Huangshan_pic_4.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:341000:d49257e9",
+      "urbanFocus": {
+        "label": {
+          "en": "Huangshan",
+          "zh-CN": "黄山市",
+          "zh-TW": "黃山市"
+        },
+        "lngLat": [
+          118.31506,
+          29.71318
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Huangshan.",
+          "zh-CN": "以黄山市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以黃山市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q180470#P625",
+        "source": "https://www.wikidata.org/wiki/Q180470",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q180470#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.49
+        }
+      }
+    },
+    "poi:admin:341000:d49257e9": {
+      "label": {
+        "en": "Huangshan",
+        "zh-CN": "黄山",
+        "zh-TW": "黃山"
+      },
+      "description": {
+        "en": "Huangshan , literally meaning the Yellow Mountain, is a mountain range in southern Anhui province in eastern China. It was originally called \"Yishan\", and it was renamed because of a legend that the Yellow Emperor once made alchemy here.",
+        "zh-CN": "黄山位于中国安徽省南部黄山市境内，南北长约40公里，东西宽约30公里，山脉面积1200平方公里，核心景区面积约160.6平方公里，主体由花岗岩构成，最高处莲花峰，海拔1864.8米。 黄山原名黟山，因峰岩青黑，遥望苍黛而名。",
+        "zh-TW": "黃山位於中國安徽省南部黃山市境內，南北長約40公里，東西寬約30公里，山脈面積1200平方公里，核心景區面積約160.6平方公里，主體由花崗岩構成，最高處蓮花峯，海拔1864.8米。 黃山原名黟山，因峯巖青黑，遙望蒼黛而名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Huangshan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        118.16666667,
+        30.125
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Huangshan",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "341000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0bbf0c6018cdba8f.webp",
+        "credit": "Chi King · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Huangshan_pic_4.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Landscape of Mount Huangshan",
+        "place": "黄山",
+        "originalFile": "Huangshan_pic_4.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:341000:d18b39f4": {
+      "label": {
+        "en": "Huangshan",
+        "zh-CN": "黄山",
+        "zh-TW": "黃山"
+      },
+      "description": {
+        "en": "Huangshan , literally meaning the Yellow Mountain, is a mountain range in southern Anhui province in eastern China. It was originally called \"Yishan\", and it was renamed because of a legend that the Yellow Emperor once made alchemy here.",
+        "zh-CN": "黄山位于中国安徽省南部黄山市境内，南北长约40公里，东西宽约30公里，山脉面积1200平方公里，核心景区面积约160.6平方公里，主体由花岗岩构成，最高处莲花峰，海拔1864.8米。 黄山原名黟山，因峰岩青黑，遥望苍黛而名。",
+        "zh-TW": "黃山位於中國安徽省南部黃山市境內，南北長約40公里，東西寬約30公里，山脈面積1200平方公里，核心景區面積約160.6平方公里，主體由花崗岩構成，最高處蓮花峯，海拔1864.8米。 黃山原名黟山，因峯巖青黑，遙望蒼黛而名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Huangshan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        118.16666667,
+        30.125
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Huangshan",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "341000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0bbf0c6018cdba8f.webp",
+        "credit": "Chi King · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Huangshan_pic_4.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Landscape of Mount Huangshan",
+        "place": "黄山",
+        "originalFile": "Huangshan_pic_4.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:341000:photo-54670525": {
+      "label": {
+        "en": "Huangshan City landscape view",
+        "zh-CN": "屯溪老街 (3)",
+        "zh-TW": "屯溪老街 (3)"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Huangshan City, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现黄山市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現黃山市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%B1%AF%E6%BA%AA%E8%80%81%E8%A1%97_-_panoramio_(3).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%B1%AF%E6%BA%AA%E8%80%81%E8%A1%97_-_panoramio_(3).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4cd9b83d3a49216a.webp",
+        "credit": "gdczjkk · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%B1%AF%E6%BA%AA%E8%80%81%E8%A1%97_-_panoramio_(3).jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "屯溪老街",
+        "place": "屯溪老街 - panoramio (3).jpg",
+        "originalFile": "屯溪老街 - panoramio (3).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            118.312248,
+            29.708639
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%B1%AF%E6%BA%AA%E8%80%81%E8%A1%97_-_panoramio_(3).jpg"
+        }
+      },
+      "lngLat": [
+        118.312248,
+        29.708639
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%B1%AF%E6%BA%AA%E8%80%81%E8%A1%97_-_panoramio_(3).jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "341000"
+    }
+  }
+}

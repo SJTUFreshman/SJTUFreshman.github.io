@@ -1,0 +1,3514 @@
+{
+  "entries": {
+    "poi:admin:TW-YUN:urban": {
+      "id": "poi:admin:TW-YUN:urban",
+      "label": {
+        "en": "House of Citizen-Memorial Hall of Attendance",
+        "zh-CN": "斗六行启记念馆",
+        "zh-TW": "斗六行啟記念館"
+      },
+      "description": {
+        "en": "The House of Citizen-Memorial Hall of Attendance is a hall in Douliu City, Yunlin County, Taiwan.",
+        "zh-CN": "斗六行启记念馆，是位于云林县斗六市的一座云林县文化资产，约建于1927年，是为纪念1923年裕仁太子访台而建的记念馆。",
+        "zh-TW": "斗六行啟記念館，是位於雲林縣斗六市的一座雲林縣文化資產，約建於1927年，是為紀念1923年裕仁太子訪臺而建的記念館。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%97%E5%85%AD%E8%A1%8C%E5%95%9F%E8%A8%98%E5%BF%B5%E9%A4%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%97%E5%85%AD%E8%A1%8C%E5%95%9F%E8%A8%98%E5%BF%B5%E9%A4%A8",
+        "https://en.wikipedia.org/wiki/House_of_Citizen-Memorial_Hall_of_Attendance"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/797142bc4c5e2fef.webp",
+        "credit": "戴翊峰 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%A1%8C%E5%95%9F%E7%B4%80%E5%BF%B5%E9%A4%A8_11.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "This is a photo of a monument in Taiwan identified by the ID",
+        "place": "House of Citizen-Memorial Hall of Attendance",
+        "originalFile": "行啟紀念館_11.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.54166667,
+        23.70572222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/House_of_Citizen-Memorial_Hall_of_Attendance",
+      "kind": "landmark",
+      "parentCity": "TW-YUN"
+    },
+    "poi:admin:MNG:urban": {
+      "id": "poi:admin:MNG:urban",
+      "label": {
+        "en": "Gandantegchinlen Monastery",
+        "zh-CN": "甘丹寺 (蒙古国)",
+        "zh-TW": "甘丹寺 (蒙古國)"
+      },
+      "description": {
+        "en": "Gandantegchinlen Monastery , also known as Gandan Monastery, is a Buddhist monastery in Bayangol District, Ulaanbaatar, Mongolia. It was founded in 1809, closed amid persecutions in 1939, and from 1944 to 1989 was the country's only active monastery.",
+        "zh-CN": "甘丹寺是位于蒙古国乌兰巴托的藏传佛教寺庙，蒙古国家保护不可移动文物。蒙古人民革命党统治期间，经过大镇压后成为蒙古唯一维持运作之寺庙，至1990年蒙古民主化。",
+        "zh-TW": "甘丹寺是位於蒙古國烏蘭巴託的藏傳佛教寺廟，蒙古國家保護不可移動文物。蒙古人民革命黨統治期間，經過大鎮壓後成為蒙古唯一維持運作之寺廟，至1990年蒙古民主化。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%94%98%E4%B8%B9%E5%AF%BA_(%E8%92%99%E5%8F%A4%E5%9B%BD)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%94%98%E4%B8%B9%E5%AF%BA_(%E8%92%99%E5%8F%A4%E5%9B%BD)",
+        "https://en.wikipedia.org/wiki/Gandantegchinlen_Monastery"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/37ef8695c0c37813.webp",
+        "credit": "Chongkian · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gandantegchinlen_Monastery_(2024).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Gandantegchinlen Monastery, Bayangol, Ulaanbaatar, Mongolia",
+        "place": "Gandantegchinlen Monastery",
+        "originalFile": "Gandantegchinlen_Monastery_(2024).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        106.895,
+        47.92305556
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Gandantegchinlen_Monastery",
+      "kind": "landmark",
+      "parentCity": "MNG"
+    },
+    "poi:admin:TW-KEE:urban": {
+      "id": "poi:admin:TW-KEE:urban",
+      "label": {
+        "en": "Heping Island Park",
+        "zh-CN": "和平岛公园",
+        "zh-TW": "和平島公園"
+      },
+      "description": {
+        "en": "Heping Island Park is a park in Heping Island, Zhongzheng District, Keelung, Taiwan.",
+        "zh-CN": "和平岛公园位于基隆市中正区的和平岛上。海边岩石长期受到风浪侵蚀，形成形态各异的海蚀景观。",
+        "zh-TW": "和平島公園位於基隆市中正區的和平島上。海邊岩石長期受到風浪侵蝕，形成形態各異的海蝕景觀。"
+      },
+      "source": "https://en.wikipedia.org/wiki/Heping_Island_Park",
+      "textSources": [
+        "https://en.wikipedia.org/wiki/Heping_Island_Park",
+        "https://en.wikipedia.org/wiki/Heping_Island_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; translated and shortened excerpt",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e76befedf3ce2d7b.webp",
+        "credit": "This Photo was taken by Supanut Arunoprayote. Feel free to use any of my images, but please mention me as the author and may send me a message. (สามารถใช้ภาพได้อิสระ แต่กรุณาใส่เครดิตผู้ถ่ายและอาจส่งข้อความบอกกล่าวด้วย) Please do not upload an updated image here without consultation with the Author. The author would like to make corrections only at his own source. This ensures that the changes are preserved.Please if you think that any changes should be required, please inform the author.Otherwise you can upload a new image with a new name. Please use one of the templates derivative or extract. · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Heping_Island_Park_07.23.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "Heping Island Park (和平島公園) is a park in Heping Island, Zhongzheng District, Keelung, Taiwan.",
+        "place": "Heping Island Park",
+        "originalFile": "Heping_Island_Park_07.23.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.76394444,
+        25.161
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Heping_Island_Park",
+      "kind": "landmark",
+      "parentCity": "TW-KEE"
+    },
+    "poi:admin:TW-ILA:urban": {
+      "id": "poi:admin:TW-ILA:urban",
+      "label": {
+        "en": "Yilan Distillery Chia Chi Lan Liquor Museum",
+        "zh-CN": "甲子兰酒文物馆",
+        "zh-TW": "甲子蘭酒文物館"
+      },
+      "description": {
+        "en": "The Yilan Distillery Chia Chi Lan Liquor Museum or Chia Chi Lan Liquor Museum is a museum about wine in Yilan City, Yilan County, Taiwan.",
+        "zh-CN": "甲子兰酒文物馆，其前身为宜兰酒厂，是一座位于台湾宜兰县宜兰市的一座现代机械化的制酒工厂及设施群，该酒厂的历史可追溯自1909年，亦为台湾仅存仍在市中心经营的酒厂设施群。 归于园区所保存之工业遗产、办公厅舍及相关历史性意义，该园区部分建筑以「宜兰酒厂历史建筑群」之名登录宜兰市历史建筑，当前该单位由台湾烟酒股份有限公司营运。",
+        "zh-TW": "甲子蘭酒文物館，其前身為宜蘭酒廠，是一座位於臺灣宜蘭縣宜蘭市的一座現代機械化的製酒工廠及設施羣，該酒廠的歷史可追溯自1909年，亦為臺灣僅存仍在市中心經營的酒廠設施羣。 歸於園區所保存之工業遺產、辦公廳舍及相關歷史性意義，該園區部分建築以「宜蘭酒廠歷史建築羣」之名登錄宜蘭市歷史建築，當前該單位由臺灣菸酒股份有限公司營運。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%94%B2%E5%AD%90%E8%98%AD%E9%85%92%E6%96%87%E7%89%A9%E9%A4%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%94%B2%E5%AD%90%E8%98%AD%E9%85%92%E6%96%87%E7%89%A9%E9%A4%A8",
+        "https://en.wikipedia.org/wiki/Yilan_Distillery_Chia_Chi_Lan_Liquor_Museum"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c95d37641f46713d.webp",
+        "credit": "Mnb · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Yilan-Chai_Chi_Lan_Liquor_Museum.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "​臺灣菸酒公司宜蘭酒廠甲子蘭酒文物館。",
+        "place": "Yilan Distillery Chia Chi Lan Liquor Museum",
+        "originalFile": "Yilan-Chai_Chi_Lan_Liquor_Museum.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.75083333,
+        24.75666667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Yilan_Distillery_Chia_Chi_Lan_Liquor_Museum",
+      "kind": "landmark",
+      "parentCity": "TW-ILA"
+    },
+    "poi:admin:IND:Sikkim:urban": {
+      "id": "poi:admin:IND:Sikkim:urban",
+      "label": {
+        "en": "Enchey Monastery",
+        "zh-CN": "恩切寺",
+        "zh-TW": "恩切寺"
+      },
+      "description": {
+        "en": "The Enchey Monastery was established in 1909 above Gangtok, the capital city of Sikkim in the Northeastern Indian state. It belongs to the Nyingma order of Vajrayana Buddhism.",
+        "zh-CN": "恩切寺始建于1909年，坐落在锡金首府甘托克上方的山坡，属于金刚乘佛教宁玛派。",
+        "zh-TW": "恩切寺始建於1909年，坐落在錫金首府甘托克上方的山坡，屬於金剛乘佛教寧瑪派。"
+      },
+      "source": "https://en.wikipedia.org/wiki/Enchey_Monastery",
+      "textSources": [
+        "https://en.wikipedia.org/wiki/Enchey_Monastery",
+        "https://en.wikipedia.org/wiki/Enchey_Monastery"
+      ],
+      "textLicense": "CC BY-SA 4.0; translated and shortened excerpt",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0c9130a4fd17bec1.webp",
+        "credit": "Amitabha Gupta · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Enchey_Monastery_in_Gangtok_district,_East_Sikkim.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "Enchey Monastery was developed into a full-fledged monastery in the year 1840 from an old shrine build by a saint named Drubthob Karpo. During the reign of 10th Chhogyal Sidkyong Tulku (1879-1914), it was rebuilt in the year 1908, in its present shape, which is an artistic adaptation of Chinese Temple of Gyanak Riwo Tsenga. It belongs to the Nyingma order of Vajrayana Buddhism.",
+        "place": "Enchey Monastery",
+        "originalFile": "Enchey_Monastery_in_Gangtok_district,_East_Sikkim.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        88.61916667,
+        27.33583333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Enchey_Monastery",
+      "kind": "landmark",
+      "parentCity": "IND:Sikkim"
+    },
+    "poi:admin:IND:Ladakh:urban": {
+      "id": "poi:admin:IND:Ladakh:urban",
+      "label": {
+        "en": "Leh Palace",
+        "zh-CN": "列城王宫",
+        "zh-TW": "列城王宮"
+      },
+      "description": {
+        "en": "Leh Palace, also known as Lachen Palkar Palace, is a former royal palace overlooking the city of Leh in Ladakh, India. It was constructed circa 1600 AD by Sengge Namgyal.",
+        "zh-CN": "列城王宫是拉达克王国的一座王宫，位于克什米尔喜马拉雅山区的列城。它是由南嘉王朝的国王僧格南嘉在17世纪建造的，造型模仿了西藏拉萨的布达拉宫，高九层，上部是皇家住所，而下部是马厩和储藏室。",
+        "zh-TW": "列城王宮是拉達克王國的一座王宮，位於克什米爾喜馬拉雅山區的列城。它是由南嘉王朝的國王僧格南嘉在17世紀建造的，造型模仿了西藏拉薩的布達拉宮，高九層，上部是皇家住所，而下部是馬廄和儲藏室。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%88%97%E5%9F%8E%E7%8E%8B%E5%AE%AB",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%88%97%E5%9F%8E%E7%8E%8B%E5%AE%AB",
+        "https://en.wikipedia.org/wiki/Leh_Palace"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e7d41f6bcfcadb0b.webp",
+        "credit": "KennyOMG · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Leh_Palace_2011.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Leh Palace",
+        "place": "Leh Palace",
+        "originalFile": "Leh_Palace_2011.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        77.58639,
+        34.16628
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Leh_Palace",
+      "kind": "landmark",
+      "parentCity": "IND:Ladakh"
+    },
+    "poi:admin:BTN:urban": {
+      "id": "poi:admin:BTN:urban",
+      "label": {
+        "en": "Tashichho Dzong",
+        "zh-CN": "札西秋宗",
+        "zh-TW": "札西秋宗"
+      },
+      "description": {
+        "en": "Tashichho Dzong is a Buddhist monastery and fortress on the northern edge of the city of Thimphu in Bhutan, on the western bank of the Wang Chu. It has traditionally been the seat of the Druk Desi , the head of Bhutan's civil government, an office which has been combined with the kingship since the creation of the monarchy in 1907, and summer capital of the country.",
+        "zh-CN": "札西秋宗或译札什曲宗，是集政、教、法于一身的藏传佛教僧院兼城堡建筑，位于不丹廷布的北部边缘，旺河的西岸。为历年宗教领袖竹第悉的驻地，这里和自1907年创立的不丹国王办公室结合，为夏天的首都。",
+        "zh-TW": "札西秋宗或譯札什曲宗，是集政、教、法於一身的藏傳佛教僧院兼城堡建築，位於不丹廷布的北部邊緣，旺河的西岸。為歷年宗教領袖竹第悉的駐地，這裡和自1907年創立的不丹國王辦公室結合，為夏天的首都。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9C%AD%E8%A5%BF%E7%A7%8B%E5%AE%97",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9C%AD%E8%A5%BF%E7%A7%8B%E5%AE%97",
+        "https://en.wikipedia.org/wiki/Tashichho_Dzong"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2d62f1357f1f7424.webp",
+        "credit": "Bernard Gagnon · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tashichho_Dzong,_Bhutan_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Tashichho Dzong, Thimphu, Bhutan",
+        "place": "Tashichho Dzong",
+        "originalFile": "Tashichho_Dzong,_Bhutan_02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        89.635,
+        27.48944444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Tashichho_Dzong",
+      "kind": "landmark",
+      "parentCity": "BTN"
+    },
+    "poi:admin:NPL:urban": {
+      "id": "poi:admin:NPL:urban",
+      "label": {
+        "en": "Swayambhunath",
+        "zh-CN": "斯瓦扬布纳特",
+        "zh-TW": "斯瓦揚布納特"
+      },
+      "description": {
+        "en": "Swayambhunath is an ancient religious complex atop a hill in the Kathmandu Valley, west of Kathmandu city in Nepal. The Tibetan and Sanskrit name for the site means 'self-arising' or 'self-sprung'.",
+        "zh-CN": "斯瓦扬布纳特位于尼泊尔加德满都以西的加德满都谷地，是一座佛教寺庙，也是尼泊尔国家象征。又叫斯瓦扬布寺、四眼天神庙。",
+        "zh-TW": "斯瓦揚布納特位於尼泊爾加德滿都以西的加德滿都谷地，是一座佛教寺廟，也是尼泊爾國家象徵。又叫斯瓦揚布寺、四眼天神廟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%AF%E7%93%A6%E6%89%AC%E5%B8%83%E7%BA%B3%E7%89%B9",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%AF%E7%93%A6%E6%89%AC%E5%B8%83%E7%BA%B3%E7%89%B9",
+        "https://en.wikipedia.org/wiki/Swayambhunath"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7b1660fc6cf2d720.webp",
+        "credit": "Nabin K. Sapkota · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Swayambhunath_2018.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "This is a photo of a monument in Nepal identified by the ID",
+        "place": "Swayambhunath",
+        "originalFile": "Swayambhunath_2018.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        85.29,
+        27.715
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Swayambhunath",
+      "kind": "landmark",
+      "parentCity": "NPL"
+    },
+    "poi:admin:TW-CHA:urban": {
+      "id": "poi:admin:TW-CHA:urban",
+      "label": {
+        "en": "Changhua Confucian Temple",
+        "zh-CN": "彰化孔子庙",
+        "zh-TW": "彰化孔子廟"
+      },
+      "description": {
+        "en": "The Temple of Confucius , is a Confucian temple in Changhua City, Changhua County, Taiwan.",
+        "zh-CN": "彰化孔子庙，又称彰化孔庙，是位于台湾彰化县彰化市永福里的孔庙，雍正四年由彰化县知县张缟倡建，建筑为漳州风格，1983年被列为一级古迹。",
+        "zh-TW": "彰化孔子廟，又稱彰化孔廟，是位於臺灣彰化縣彰化市永福裏的孔廟，雍正四年由彰化縣知縣張縞倡建，建築為漳州風格，1983年被列為一級古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Changhua_Confucian_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a9b1c3848ac46499.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F%E5%A4%A7%E6%88%90%E6%AE%BF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​彰化孔子廟大成殿",
+        "place": "Changhua Confucian Temple",
+        "originalFile": "彰化孔子廟大成殿.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.54330556,
+        24.07902778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Changhua_Confucian_Temple",
+      "kind": "landmark",
+      "parentCity": "TW-CHA"
+    },
+    "poi:admin:TW-NAN:urban": {
+      "id": "poi:admin:TW-NAN:urban",
+      "label": {
+        "en": "Zhongxing New Village",
+        "zh-CN": "中兴新村",
+        "zh-TW": "中興新村"
+      },
+      "description": {
+        "en": "Zhongxing New Village, sometimes rendered as Chunghsing New Village is an urban village located in Nantou City, Nantou County, Taiwan and was the seat of government of Taiwan Province until the abolition of the Taiwan Provincial Government in 2018. The term zhōngxīng is from a Chinese legend Shao Kang Resurgence , referring to the restoration of the Xia dynasty by king Shao Kang, an allusion to the Chinese Taipei government taking back mainland China.",
+        "zh-CN": "中兴新村是位于台湾南投县南投市北部的新市镇，是台湾战后第二个新市镇，为过去中华台北台湾省政府驻地所在，面积约7.07平方公里。为中台湾观光休闲游乐据点，旅游服务业为重要产业。",
+        "zh-TW": "中興新村是位於臺灣南投縣南投市北部的新市鎮，是臺灣戰後第二個新市鎮，為過去中華臺北臺灣省政府駐地所在，面積約7.07平方公里。為中臺灣觀光休閒遊樂據點，旅遊服務業為重要產業。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%88%88%E6%96%B0%E6%9D%91",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%88%88%E6%96%B0%E6%9D%91",
+        "https://en.wikipedia.org/wiki/Zhongxing_New_Village"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/38e890f3ea43d94d.webp",
+        "credit": "Fcuk1203 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%87%BA%E7%81%A3%E7%9C%81%E6%94%BF%E5%BA%9C%E5%A4%A7%E6%A8%93.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​臺灣省政府大樓",
+        "place": "Zhongxing New Village",
+        "originalFile": "臺灣省政府大樓.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.68694444,
+        23.95888889
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Zhongxing_New_Village",
+      "kind": "landmark",
+      "parentCity": "TW-NAN"
+    },
+    "poi:admin:TW-TPE:urban": {
+      "id": "poi:admin:TW-TPE:urban",
+      "label": {
+        "en": "Chiang Kai-shek Memorial Hall",
+        "zh-CN": "中正纪念堂",
+        "zh-TW": "中正紀念堂"
+      },
+      "description": {
+        "en": "The Chiang Kai-shek Memorial Hall is a national monument and tourist attraction erected during Taiwan’s martial law period in memory of Chiang Kai-shek, former President of the Chinese Taipei. In recent years, the site has also incorporated remembrance of Taiwan’s martial law period .",
+        "zh-CN": "中正纪念堂是位于中华台北台北市中正区的国家纪念建筑，是中华台北政府为纪念已故前总统蒋中正而兴建，为众多纪念蒋中正的建筑中规模最大者，管理机关为中华台北文化部辖下的「国立中正纪念堂管理处」。全区250,000平方公尺，纪念堂主堂体高70公尺；园区广场前方两厅院称为「艺文广场」，广场南北侧另建有国家戏剧院以及国家音乐厅，合称「国家两厅院」，由国家表演艺术中心管理。",
+        "zh-TW": "中正紀念堂是位於中華臺北臺北市中正區的國家紀念建築，是中華臺北政府為紀念已故前總統蔣中正而興建，為眾多紀念蔣中正的建築中規模最大者，管理機關為中華臺北文化部轄下的「國立中正紀念堂管理處」。全區250,000平方公尺，紀念堂主堂體高70公尺；園區廣場前方兩廳院稱為「藝文廣場」，廣場南北側另建有國家戲劇院以及國家音樂廳，合稱「國家兩廳院」，由國家表演藝術中心管理。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%AD%A3%E7%B4%80%E5%BF%B5%E5%A0%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%AD%A3%E7%B4%80%E5%BF%B5%E5%A0%82",
+        "https://en.wikipedia.org/wiki/Chiang_Kai-shek_Memorial_Hall"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/24bb64ccd36f4276.webp",
+        "credit": "AngMoKio · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chiang_Kai-shek_memorial_amk.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Chiang Kai-shek Memorial Hall in Taipei, Taiwan",
+        "place": "Chiang Kai-shek Memorial Hall",
+        "originalFile": "Chiang_Kai-shek_memorial_amk.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.52166667,
+        25.03444444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Chiang_Kai-shek_Memorial_Hall",
+      "kind": "landmark",
+      "parentCity": "TW-TPE"
+    },
+    "poi:admin:TW-NWT:urban": {
+      "id": "poi:admin:TW-NWT:urban",
+      "label": {
+        "en": "Lin Family Mansion and Garden",
+        "zh-CN": "林本源园邸",
+        "zh-TW": "林本源園邸"
+      },
+      "description": {
+        "en": "The Lin Ben Yuan Family Mansion and Garden in Banqiao District, New Taipei City, Taiwan was a residence built by the Lin Ben Yuan Family. It is Taiwan's most complete surviving example of traditional Chinese garden architecture.",
+        "zh-CN": "林本源园邸位于新北市板桥区，为板桥林本源家族兴建的宅邸与园林，仿苏州留园设计，是目前台湾仅存最完整的园林建筑。该居可追溯至1847年，当时为林本源家族北上屯租的租馆，后经林国华、林国芳两兄弟扩建，成为林本源家族之居所。",
+        "zh-TW": "林本源園邸位於新北市板橋區，為板橋林本源家族興建的宅邸與園林，仿蘇州留園設計，是目前臺灣僅存最完整的園林建築。該居可追溯至1847年，當時為林本源家族北上屯租的租館，後經林國華、林國芳兩兄弟擴建，成為林本源家族之居所。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9E%97%E6%9C%AC%E6%BA%90%E5%9C%92%E9%82%B8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9E%97%E6%9C%AC%E6%BA%90%E5%9C%92%E9%82%B8",
+        "https://en.wikipedia.org/wiki/Lin_Family_Mansion_and_Garden"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/8467f67865e7209f.webp",
+        "credit": "Original uploader was Alltonight at zh.wikipedia · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lin_Family_Mansion_and_Garden_2006-6-28_11-16-18_0048.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "​臺灣臺北縣板橋市林本源園邸一景。",
+        "place": "Lin Family Mansion and Garden",
+        "originalFile": "Lin_Family_Mansion_and_Garden_2006-6-28_11-16-18_0048.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.45555556,
+        25.01027778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Lin_Family_Mansion_and_Garden",
+      "kind": "landmark",
+      "parentCity": "TW-NWT"
+    },
+    "poi:admin:TW-TXG:urban": {
+      "id": "poi:admin:TW-TXG:urban",
+      "label": {
+        "en": "National Taichung Theater",
+        "zh-CN": "台中国家歌剧院",
+        "zh-TW": "臺中國家歌劇院"
+      },
+      "description": {
+        "en": "The National Taichung Theater is an opera house in the Taichung's 7th Redevelopment Zone in the Xitun District of Taichung, Taiwan. The estimated area of the structure is 57,685 square meters .",
+        "zh-CN": "台中国家歌剧院是位于台湾台中市西屯区七期重划区里的大型公有展演空间，为日本建筑师伊东豊雄设计，占地57,685平方公尺。歌剧院内拥有大剧院、中剧院、小剧场以及一个小型户外剧场，另有餐饮空间与空中花园。",
+        "zh-TW": "臺中國家歌劇院是位於臺灣臺中市西屯區七期重劃區裡的大型公有展演空間，為日本建築師伊東豊雄設計，佔地57,685平方公尺。歌劇院內擁有大劇院、中劇院、小劇場以及一個小型戶外劇場，另有餐飲空間與空中花園。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%87%BA%E4%B8%AD%E5%9C%8B%E5%AE%B6%E6%AD%8C%E5%8A%87%E9%99%A2",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%87%BA%E4%B8%AD%E5%9C%8B%E5%AE%B6%E6%AD%8C%E5%8A%87%E9%99%A2",
+        "https://en.wikipedia.org/wiki/National_Taichung_Theater"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e0c87ef500550626.webp",
+        "credit": "Wpcpey · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:National_Taichung_Theater_aerial_view_2019.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "National Taichung Theater",
+        "place": "National Taichung Theater",
+        "originalFile": "National_Taichung_Theater_aerial_view_2019.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.64055556,
+        24.16277778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/National_Taichung_Theater",
+      "kind": "landmark",
+      "parentCity": "TW-TXG"
+    },
+    "poi:admin:TW-MIA:urban": {
+      "id": "poi:admin:TW-MIA:urban",
+      "label": {
+        "en": "Miaoli Wenchang Temple",
+        "zh-CN": "苗栗文昌祠",
+        "zh-TW": "苗栗文昌祠"
+      },
+      "description": {
+        "en": "Miaoli Wenchang Temple , formerly known as Yingcai Academy , is a temple in Miaoli City, Miaoli County, Taiwan. The temple is dedicated to Wenchang Dijun, the deity of culture and literature.",
+        "zh-CN": "苗栗文昌祠是位于台湾苗栗县苗栗市的文昌庙，兴建于清光绪八年，完工于光绪十一年。在苗栗县刚创设未建县衙时，首任知县林桂芬曾暂借此处办公，并为英才书院、台湾日治时期创立的诗社——栗社的活动场地。",
+        "zh-TW": "苗栗文昌祠是位於臺灣苗栗縣苗栗市的文昌廟，興建於清光緒八年，完工於光緒十一年。在苗栗縣剛創設未建縣衙時，首任知縣林桂芬曾暫藉此處辦公，並為英才書院、臺灣日治時期創立的詩社——慄社的活動場地。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8B%97%E6%A0%97%E6%96%87%E6%98%8C%E7%A5%A0",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8B%97%E6%A0%97%E6%96%87%E6%98%8C%E7%A5%A0",
+        "https://en.wikipedia.org/wiki/Miaoli_Wenchang_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b7e6c63c83931297.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%8B%97%E6%A0%97%E6%96%87%E6%98%8C%E7%A5%A0.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​苗栗文昌祠",
+        "place": "Miaoli Wenchang Temple",
+        "originalFile": "苗栗文昌祠.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.8181,
+        24.5539
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Miaoli_Wenchang_Temple",
+      "kind": "landmark",
+      "parentCity": "TW-MIA"
+    },
+    "poi:admin:TW-TAO:urban": {
+      "id": "poi:admin:TW-TAO:urban",
+      "label": {
+        "en": "Taoyuan Confucian Temple",
+        "zh-CN": "桃园孔子庙",
+        "zh-TW": "桃園孔子廟"
+      },
+      "description": {
+        "en": "The Taoyuan Confucian Temple is a Confucian temple in Taoyuan District, Taoyuan City, Taiwan.",
+        "zh-CN": "桃园孔子庙，是位于台湾桃园市桃园区三元里的孔庙，原借居于桃园文昌庙，至1989年在虎头山公园落成，为台湾十三座官设孔庙中最晚建立的，有著道教祭祀色彩，庙内设孔子像，每年办理释奠典礼活动及祈福活动。",
+        "zh-TW": "桃園孔子廟，是位於臺灣桃園市桃園區三元里的孔廟，原借居於桃園文昌廟，至1989年在虎頭山公園落成，為臺灣十三座官設孔廟中最晚建立的，有著道教祭祀色彩，廟內設孔子像，每年辦理釋奠典禮活動及祈福活動。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%A1%83%E5%9C%92%E5%AD%94%E5%AD%90%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%A1%83%E5%9C%92%E5%AD%94%E5%AD%90%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Taoyuan_Confucian_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c9a99bda1faf04d3.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%A1%83%E5%9C%92%E5%AD%94%E5%AD%90%E5%BB%9F%E5%A4%A7%E6%88%90%E6%AE%BF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​桃園孔子廟大成殿",
+        "place": "Taoyuan Confucian Temple",
+        "originalFile": "桃園孔子廟大成殿.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.32766667,
+        25.00116667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Taoyuan_Confucian_Temple",
+      "kind": "landmark",
+      "parentCity": "TW-TAO"
+    },
+    "poi:admin:TW-CYI:urban": {
+      "id": "poi:admin:TW-CYI:urban",
+      "label": {
+        "en": "Hinoki Village",
+        "zh-CN": "桧意森活村",
+        "zh-TW": "檜意森活村"
+      },
+      "description": {
+        "en": "The Hinoki Village or Cypress Forest Life Village is a culture village in East District, Chiayi City, Taiwan.",
+        "zh-CN": "桧意森活村位于台湾嘉义市东区，是台湾第一座以森林为主题的文创园区，园区内以日治时代的桧町，现共和路与林森东路间的29栋历史建筑「嘉义市共和路与北门街林管处国有宿眷舍」以及市定古迹「嘉义营林俱乐部」构成。占地约3.4公顷，并在忠孝路与林森东路路口设有「农业精品馆」。",
+        "zh-TW": "檜意森活村位於臺灣嘉義市東區，是臺灣第一座以森林為主題的文創園區，園區內以日治時代的檜町，現共和路與林森東路間的29棟歷史建築「嘉義市共和路與北門街林管處國有宿眷舍」以及市定古蹟「嘉義營林俱樂部」構成。佔地約3.4公頃，並在忠孝路與林森東路路口設有「農業精品館」。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%AA%9C%E6%84%8F%E6%A3%AE%E6%B4%BB%E6%9D%91",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%AA%9C%E6%84%8F%E6%A3%AE%E6%B4%BB%E6%9D%91",
+        "https://en.wikipedia.org/wiki/Hinoki_Village"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3e92502b11fa2eb1.webp",
+        "credit": "Cpc3711 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%AA%9C%E6%84%8F%E6%A3%AE%E6%B4%BB%E6%9D%91--%E5%BC%B5%E5%88%A9%E8%81%B0jpg.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​檜意森活村園區總面積約3.4公頃，以1914年（大正3年）搭建的林業日式宿舍為重點，主要有28棟日式檜木歷史建築、1棟市立古蹟、全台唯二的都鐸式建築、及新建的一心二葉館為主體建築",
+        "place": "Hinoki Village",
+        "originalFile": "檜意森活村--張利聰jpg.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.45411111,
+        23.48619444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Hinoki_Village",
+      "kind": "landmark",
+      "parentCity": "TW-CYI"
+    },
+    "poi:admin:TW-TNN:urban": {
+      "id": "poi:admin:TW-TNN:urban",
+      "label": {
+        "en": "Fort Zeelandia (Taiwan)",
+        "zh-CN": "安平古堡",
+        "zh-TW": "安平古堡"
+      },
+      "description": {
+        "en": "Fort Zeelandia was a fortress built over ten years from 1624 to 1634 by the Dutch East India Company , in the town of Anping on Formosa, the former name of central island of Taiwan, during their 38-year rule over the western part of the island. The site had been renamed several times as Fort Orange , Fort Anping and Taiwan City .",
+        "zh-CN": "安平古堡，原称奥兰治城、热兰遮堡或热兰遮城，又名台湾城、安平镇城、安平城、王城、红毛城、赤嵌城，是一座位于台湾台南市安平区的一个城郭遗址。于1623年10月由荷兰东印度公司兴建简易城砦，1624年4月底拆毁，8月底原址重建堡垒，至1634年竣工，是台湾最早的要塞建筑。",
+        "zh-TW": "安平古堡，原稱奧蘭治城、熱蘭遮堡或熱蘭遮城，又名臺灣城、安平鎮城、安平城、王城、紅毛城、赤嵌城，是一座位於臺灣臺南市安平區的一個城郭遺址。於1623年10月由荷蘭東印度公司興建簡易城砦，1624年4月底拆毀，8月底原址重建堡壘，至1634年竣工，是臺灣最早的要塞建築。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%89%E5%B9%B3%E5%8F%A4%E5%A0%A1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%89%E5%B9%B3%E5%8F%A4%E5%A0%A1",
+        "https://en.wikipedia.org/wiki/Fort_Zeelandia_(Taiwan)"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/21a0945392cedfc4.webp",
+        "credit": "Lin Wen Hung · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%87%BA%E5%8D%97%E5%B8%82%E5%AE%89%E5%B9%B3%E5%8D%80%E5%AE%89%E5%B9%B3%E5%8F%A4%E5%A0%A1%E8%88%87%E8%87%BA%E7%81%A3%E5%9F%8E%E6%AE%98%E8%B9%9F.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​臺南市安平區安平古堡與臺灣城殘蹟",
+        "place": "安平古堡",
+        "originalFile": "臺南市安平區安平古堡與臺灣城殘蹟.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.160919,
+        23.001747
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Fort_Zeelandia_(Taiwan)",
+      "kind": "landmark",
+      "parentCity": "TW-TNN"
+    },
+    "poi:admin:TW-CYQ:urban": {
+      "id": "poi:admin:TW-CYQ:urban",
+      "label": {
+        "en": "Southern Branch of the National Palace Museum",
+        "zh-CN": "国立故宫博物院南部院区",
+        "zh-TW": "國立故宮博物院南部院區"
+      },
+      "description": {
+        "en": "The Southern Branch of the National Palace Museum is a museum in Taibao City, Chiayi County, Taiwan.",
+        "zh-CN": "国立故宫博物院南部院区，简称故宫南院，俗称嘉义故宫，为国立故宫博物院辖下两座主院区之一，坐落在台湾嘉义县太保市，邻近高铁嘉义站和蒜头糖厂。场馆由「国立故宫博物院南院处」负责管理与营运，以搜藏、研究、教育、展示亚洲艺术品与相关文物为定位，院区户外另设有人工湖和游憩设施。",
+        "zh-TW": "國立故宮博物院南部院區，簡稱故宮南院，俗稱嘉義故宮，為國立故宮博物院轄下兩座主院區之一，坐落在臺灣嘉義縣太保市，鄰近高鐵嘉義站和蒜頭糖廠。場館由「國立故宮博物院南院處」負責管理與營運，以蒐藏、研究、教育、展示亞洲藝術品與相關文物為定位，院區戶外另設有人工湖和遊憩設施。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9C%8B%E7%AB%8B%E6%95%85%E5%AE%AE%E5%8D%9A%E7%89%A9%E9%99%A2%E5%8D%97%E9%83%A8%E9%99%A2%E5%8D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9C%8B%E7%AB%8B%E6%95%85%E5%AE%AE%E5%8D%9A%E7%89%A9%E9%99%A2%E5%8D%97%E9%83%A8%E9%99%A2%E5%8D%80",
+        "https://en.wikipedia.org/wiki/Southern_Branch_of_the_National_Palace_Museum"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/cfa184a9fa3279c2.webp",
+        "credit": "B2322858 · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Southern_Branch_of_the_National_Palace_Museum_main_building_and_zhimei_bridge.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Southern_Branch_of_the_National_Palace_Museum_main_building_and_zhimei_bridge.jpg#Licensing",
+        "alt": "​國立故宮博物院南部院區主體與至美橋",
+        "place": "Southern Branch of the National Palace Museum",
+        "originalFile": "Southern_Branch_of_the_National_Palace_Museum_main_building_and_zhimei_bridge.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.29227778,
+        23.47355556
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Southern_Branch_of_the_National_Palace_Museum",
+      "kind": "landmark",
+      "parentCity": "TW-CYQ"
+    },
+    "poi:admin:TW-KHH:urban": {
+      "id": "poi:admin:TW-KHH:urban",
+      "label": {
+        "en": "Dragon and Tiger Pagodas",
+        "zh-CN": "龙虎塔",
+        "zh-TW": "龍虎塔"
+      },
+      "description": {
+        "en": "The Dragon and Tiger Pagodas is a temple located at Lotus Lake in Zuoying District, Kaohsiung, Taiwan. The temple was built in 1976.",
+        "zh-CN": "龙虎塔位于台湾高雄市左营区莲池潭畔的宝塔式建筑，是当地知名景点之一。由左营慈济宫于1976年兴建。",
+        "zh-TW": "龍虎塔位於臺灣高雄市左營區蓮池潭畔的寶塔式建築，是當地知名景點之一。由左營慈濟宮於1976年興建。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BE%8D%E8%99%8E%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BE%8D%E8%99%8E%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Dragon_and_Tiger_Pagodas"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e60d3b963c5f6d6a.webp",
+        "credit": "Bernard Gagnon · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Dragon_and_Tiger_Pagodas_02.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Dragon and Tiger Pagodas, Kaohsiung, Taiwan",
+        "place": "Dragon and Tiger Pagodas",
+        "originalFile": "Dragon_and_Tiger_Pagodas_02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.2925,
+        22.68055556
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Dragon_and_Tiger_Pagodas",
+      "kind": "landmark",
+      "parentCity": "TW-KHH"
+    },
+    "poi:admin:TW-TTT:urban": {
+      "id": "poi:admin:TW-TTT:urban",
+      "label": {
+        "en": "Taitung Forest Park",
+        "zh-CN": "台东森林公园",
+        "zh-TW": "臺東森林公園"
+      },
+      "description": {
+        "en": "Taitung Forest Park is a park at Taitung City, Taitung County, Taiwan.",
+        "zh-CN": "台东森林公园，是台湾的一座公园，共占地280公顷，位于台东县台东市北郊，位于卑南溪出海口右岸，与台东海滨公园接壤，昔称「黑森林」，因为整片区域因防风而种植木麻黄，远看林相漆黑一片，感觉幽暗神秘而得名。",
+        "zh-TW": "臺東森林公園，是臺灣的一座公園，共佔地280公頃，位於臺東縣臺東市北郊，位於卑南溪出海口右岸，與臺東海濱公園接壤，昔稱「黑森林」，因為整片區域因防風而種植木麻黃，遠看林相漆黑一片，感覺幽暗神祕而得名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8F%B0%E6%9D%B1%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8F%B0%E6%9D%B1%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92",
+        "https://en.wikipedia.org/wiki/Taitung_Forest_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/63988b9960cb185a.webp",
+        "credit": "Joe Wu · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Taitung_Forest_Park_01.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Taitung Forest Park 台東森林公園",
+        "place": "Taitung Forest Park",
+        "originalFile": "Taitung_Forest_Park_01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.157889,
+        22.767213
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Taitung_Forest_Park",
+      "kind": "landmark",
+      "parentCity": "TW-TTT"
+    },
+    "poi:admin:TW-HUA:urban": {
+      "id": "poi:admin:TW-HUA:urban",
+      "label": {
+        "en": "Pine Garden",
+        "zh-CN": "松园别馆",
+        "zh-TW": "松園別館"
+      },
+      "description": {
+        "en": "The Pine Garden is a former Japanese military office in Hualien City, Hualien County, Taiwan.",
+        "zh-CN": "松园别馆，旧称花莲港厅兵事部，位于台湾花莲县花莲市美仑山麓，兴建于1942年，四周因老松林立、环境清幽，故而得名。",
+        "zh-TW": "松園別館，舊稱花蓮港廳兵事部，位於臺灣花蓮縣花蓮市美崙山麓，興建於1942年，四周因老松林立、環境清幽，故而得名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%BE%E5%9C%92%E5%88%A5%E9%A4%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%BE%E5%9C%92%E5%88%A5%E9%A4%A8",
+        "https://en.wikipedia.org/wiki/Pine_Garden"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/66734a173b143504.webp",
+        "credit": "王嘉新 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%8A%B1%E8%93%AE%E6%9D%BE%E5%9C%92%E5%88%A5%E9%A4%A8.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "This is a photo of a monument in Taiwan identified by the ID",
+        "place": "Pine Garden",
+        "originalFile": "花蓮松園別館.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.61541667,
+        23.98261111
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Pine_Garden",
+      "kind": "landmark",
+      "parentCity": "TW-HUA"
+    },
+    "poi:admin:TW-PEN:urban": {
+      "id": "poi:admin:TW-PEN:urban",
+      "label": {
+        "en": "Penghu Tianhou Temple",
+        "zh-CN": "澎湖天后宫",
+        "zh-TW": "澎湖天后宮"
+      },
+      "description": {
+        "en": "The Penghu Tianhou Temple is a temple dedicated to the sea goddess Mazu located on Zhengyi Street in Magong City, Penghu, Taiwan. It is usually considered the oldest Mazu temple in Taiwan and, despite differences in characters, is the namesake of the surrounding city of Magong.",
+        "zh-CN": "开台澎湖天后宫，位于台湾澎湖县马公市，阖澎公庙之一，主祀天上圣母妈祖。天后宫确切创建年代不详，随著「沈有容谕退红毛番韦麻郎等」石碑出土，确定于大明万历卅二年之前即已立庙，台湾历史最悠久的庙宇。",
+        "zh-TW": "開臺澎湖天后宮，位於臺灣澎湖縣馬公市，闔澎公廟之一，主祀天上聖母媽祖。天后宮確切創建年代不詳，隨著「沈有容諭退紅毛番韋麻郎等」石碑出土，確定於大明萬曆卅二年之前即已立廟，臺灣歷史最悠久的廟宇。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%BE%8E%E6%B9%96%E5%A4%A9%E5%90%8E%E5%AE%AE",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%BE%8E%E6%B9%96%E5%A4%A9%E5%90%8E%E5%AE%AE",
+        "https://en.wikipedia.org/wiki/Penghu_Tianhou_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/1dd290f4850db364.webp",
+        "credit": "TroyJiang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%BE%8E%E6%B9%96%E5%A4%A9%E5%90%8E%E5%AE%AE_%E5%A4%96%E8%A7%80.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Penghu Tianhou Temple",
+        "place": "Penghu Tianhou Temple",
+        "originalFile": "澎湖天后宮_外觀.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        119.5639,
+        23.5648
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Penghu_Tianhou_Temple",
+      "kind": "landmark",
+      "parentCity": "TW-PEN"
+    },
+    "poi:admin:TW-PIF:urban": {
+      "id": "poi:admin:TW-PIF:urban",
+      "label": {
+        "en": "Pingtung Tutorial Academy",
+        "zh-CN": "屏东书院",
+        "zh-TW": "屏東書院"
+      },
+      "description": {
+        "en": "The Pingtung Tutorial Academy is a former tutorial academy in Taiping Village, Pingtung City, Pingtung County, Taiwan.",
+        "zh-CN": "屏东书院是清嘉庆二十年建于福建省台湾府凤山县港西里阿猴街的书院，书院的功能废止后改为屏东孔庙，于民国七十四年11月27日公告为三级古迹，三年后名称改回屏东书院。 该书院原址在屏东市中山公园内，后因市区改正一度有拆除之议，后在东京帝国大学藤岛亥治郎博士的建议下，书院于昭和十三年11月18日到隔年5月迁建。",
+        "zh-TW": "屏東書院是清嘉慶二十年建於福建省臺灣府鳳山縣港西里阿猴街的書院，書院的功能廢止後改為屏東孔廟，於民國七十四年11月27日公告為三級古蹟，三年後名稱改回屏東書院。 該書院原址在屏東市中山公園內，後因市區改正一度有拆除之議，後在東京帝國大學藤島亥治郎博士的建議下，書院於昭和十三年11月18日到隔年5月遷建。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B1%8F%E6%9D%B1%E6%9B%B8%E9%99%A2",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B1%8F%E6%9D%B1%E6%9B%B8%E9%99%A2",
+        "https://en.wikipedia.org/wiki/Pingtung_Tutorial_Academy"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/94aeeffca80aee71.webp",
+        "credit": "Pbdragonwang This file was uploaded with Commonist. · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%B1%8F%E6%9D%B1%E6%9B%B8%E9%99%A2.JPG",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "Pingtung Tutorial Academy",
+        "place": "Pingtung Tutorial Academy",
+        "originalFile": "屏東書院.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.49288889,
+        22.67894444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Pingtung_Tutorial_Academy",
+      "kind": "landmark",
+      "parentCity": "TW-PIF"
+    },
+    "poi:admin:TW-HSZ:urban": {
+      "id": "poi:admin:TW-HSZ:urban",
+      "label": {
+        "en": "Hsinchu Chenghuang Temple",
+        "zh-CN": "新竹都城隍庙",
+        "zh-TW": "新竹都城隍廟"
+      },
+      "description": {
+        "en": "The Chenghuang Temple of Hsinchu is a temple located in Hsinchu, Taiwan. It is dedicated to the City God , who is believed in Chinese religion to record the good and bad deeds of every person residing in the city.",
+        "zh-CN": "新竹都城隍庙与法莲寺，是位于台湾新竹市北区中山里的城隍庙，庙身列为市定古迹，主神为城隍信仰的都城隍爷，一旁为新竹法莲寺。",
+        "zh-TW": "新竹都城隍廟與法蓮寺，是位於臺灣新竹市北區中山裏的城隍廟，廟身列為市定古蹟，主神為城隍信仰的都城隍爺，一旁為新竹法蓮寺。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E9%83%BD%E5%9F%8E%E9%9A%8D%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E9%83%BD%E5%9F%8E%E9%9A%8D%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Hsinchu_Chenghuang_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3aff1a0bed5adaa0.webp",
+        "credit": "Foxy Who \\(^∀^)/ · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%B0%E7%AB%B9_%E5%9F%8E%E9%9A%8D%E5%BB%9F_-_panoramio_(1).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Hsinchu Chenghuang Temple",
+        "place": "Hsinchu Chenghuang Temple",
+        "originalFile": "新竹_城隍廟_-_panoramio_(1).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.96606,
+        24.80437
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Hsinchu_Chenghuang_Temple",
+      "kind": "landmark",
+      "parentCity": "TW-HSZ"
+    },
+    "poi:admin:TW-LIE:urban": {
+      "id": "poi:admin:TW-LIE:urban",
+      "label": {
+        "en": "Matsu Tianhou Temple",
+        "zh-CN": "马祖境天后宫",
+        "zh-TW": "馬祖境天后宮"
+      },
+      "description": {
+        "en": "Matsu Tianhou Temple faces the sea beside Matsu Harbour in Nangan. Its main hall contains the Mazu tomb shrine, an important focus of local religious tradition.",
+        "zh-CN": "马祖境天后宫，又称马港天后宫、南竿妈祖庙，是位于中华台北福建省连江县南竿乡的妈祖庙，在马祖港旁面向大海，是马祖地区重要的信仰中心，信仰者众、香火鼎盛。正殿有「妈祖灵穴」，当地普遍相信为妈祖墓穴所在。",
+        "zh-TW": "馬祖境天后宮，又稱馬港天后宮、南竿媽祖廟，是位於中華臺北福建省連江縣南竿鄉的媽祖廟，在馬祖港旁面向大海，是馬祖地區重要的信仰中心，信仰者眾、香火鼎盛。正殿有「媽祖靈穴」，當地普遍相信爲媽祖墓穴所在。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%A2%83%E5%A4%A9%E5%90%8E%E5%AE%AE",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%A2%83%E5%A4%A9%E5%90%8E%E5%AE%AE",
+        "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%A2%83%E5%A4%A9%E5%90%8E%E5%AE%AE"
+      ],
+      "textLicense": "CC BY-SA 4.0; translated and shortened excerpt",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/df3d49c6f4f247f8.webp",
+        "credit": "Prince Roy · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Mazu_Tomb.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Alleged tomb of Mazu (Lin Moniang) in the Mazu Temple in Matsu Village, Nangan, Matsu",
+        "place": "馬祖境天后宮",
+        "originalFile": "Mazu Tomb.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        119.918268,
+        26.158375
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%A6%AC%E7%A5%96%E5%A2%83%E5%A4%A9%E5%90%8E%E5%AE%AE",
+      "kind": "landmark",
+      "parentCity": "TW-LIE"
+    },
+    "poi:admin:TWN:Taiping:urban": {
+      "id": "poi:admin:TWN:Taiping:urban",
+      "label": {
+        "en": "Taiping Island",
+        "zh-CN": "太平岛",
+        "zh-TW": "太平島"
+      },
+      "description": {
+        "en": "Taiping Island, also known as Itu Aba, and various other names, is the largest of the naturally occurring Spratly Islands in the South China Sea. The island is elliptical in shape being 1.4 kilometres in length and 0.4 kilometres in width, with an area of 46 hectares .",
+        "zh-CN": "太平岛，位于南海南沙群岛北部中央郑和群礁西北角，位居南海西侧航道的东边，面积0.51平方公里，是南沙群岛中最大的天然岛屿。东距中滩0.8海浬、中洲礁3.1海浬、敦谦沙洲7.1海浬，西南距南薰礁16海浬。",
+        "zh-TW": "太平島，位於南海南沙羣島北部中央鄭和羣礁西北角，位居南海西側航道的東邊，面積0.51平方公里，是南沙羣島中最大的天然島嶼。東距中灘0.8海浬、中洲礁3.1海浬、敦謙沙洲7.1海浬，西南距南薰礁16海浬。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Taiping_Island"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/adf299bfa2ff2ba1.webp",
+        "credit": "NASA · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Itu_Aba_Island.png",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Itu_Aba_Island.png#Licensing",
+        "alt": "Itu Aba Island",
+        "place": "Taiping Island",
+        "originalFile": "Itu_Aba_Island.png",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        114.3663888889,
+        10.3772222222
+      ],
+      "coordinateSource": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/9158",
+      "kind": "landmark",
+      "parentCity": "TWN:Taiping"
+    },
+    "poi:admin:TWN:Dongsha:urban": {
+      "id": "poi:admin:TWN:Dongsha:urban",
+      "label": {
+        "en": "Pratas Island",
+        "zh-CN": "东沙岛",
+        "zh-TW": "東沙島"
+      },
+      "description": {
+        "en": "Pratas Island, also known as the Tungsha Islands or the Dongsha Islands , is a coral island situated in the northern part of the South China Sea administered as part of Cijin District, Kaohsiung, Taiwan.",
+        "zh-CN": "东沙岛是南海上东沙群岛的主岛，面积1.8平方公里，是南海数百个岛礁中最大的岛屿之一。由中华台北管辖。",
+        "zh-TW": "東沙島是南海上東沙羣島的主島，面積1.8平方公里，是南海數百個島礁中最大的島嶼之一。由中華臺北管轄。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Pratas_Island"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7520c9b738fb8e92.webp",
+        "credit": "ISS Crew Earth Observations experiment and the Image Science & Analysis Laboratory, NASA - Johnson Space Center · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Pratas_Island_ISS004-10210.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Pratas_Island_ISS004-10210.jpg#Licensing",
+        "alt": "Dongsha (Pratas) Island seen from space on April 21, 2002, taken by crew of Expedition 4 on International Space Station from orbit.",
+        "place": "Pratas Island",
+        "originalFile": "Pratas_Island_ISS004-10210.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        116.7275,
+        20.70222222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Pratas_Island",
+      "kind": "landmark",
+      "parentCity": "TWN:Dongsha"
+    },
+    "poi:admin:TW-KIN:urban": {
+      "id": "poi:admin:TW-KIN:urban",
+      "label": {
+        "en": "Juguang Tower",
+        "zh-CN": "莒光楼",
+        "zh-TW": "莒光樓"
+      },
+      "description": {
+        "en": "The Juguang Tower is a tower in Jincheng Township, Kinmen County, Fukien Province, Chinese Taipei .",
+        "zh-CN": "莒光楼，是一栋位于中华台北金门县金城镇莒光湖旁的建筑，楼高三层，建于1952年。其最初建造目的为表彰在古宁头战役中的中华台北国军官兵，主要纪念胡琏将军，系建筑师沈学海设计。",
+        "zh-TW": "莒光樓，是一棟位於中華臺北金門縣金城鎮莒光湖旁的建築，樓高三層，建於1952年。其最初建造目的為表彰在古寧頭戰役中的中華臺北國軍官兵，主要紀念胡璉將軍，係建築師沈學海設計。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8E%92%E5%85%89%E6%A8%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8E%92%E5%85%89%E6%A8%93",
+        "https://en.wikipedia.org/wiki/Juguang_Tower"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/acba9906e5b2c3a8.webp",
+        "credit": "姜 明雄 · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Juguang_Tower_20180727.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​金門莒光樓",
+        "place": "Juguang Tower",
+        "originalFile": "Juguang_Tower_20180727.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        118.319,
+        24.42497222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Juguang_Tower",
+      "kind": "landmark",
+      "parentCity": "TW-KIN"
+    },
+    "poi:admin:TWN:Wuqiu:urban": {
+      "id": "poi:admin:TWN:Wuqiu:urban",
+      "label": {
+        "en": "Wuqiu Lighthouse",
+        "zh-CN": "乌坵屿灯塔",
+        "zh-TW": "烏坵嶼燈塔"
+      },
+      "description": {
+        "en": "The Wuqiu Lighthouse is a lighthouse in Daqiu Village, Wuqiu Township , Kinmen County , Fujian Province , Chinese Taipei .",
+        "zh-CN": "乌坵屿灯塔位于中华台北福建省金门县乌坵乡的灯塔，始建于五口通商时期。1951年因军事需求关闭，直到2017年重新启用。",
+        "zh-TW": "烏坵嶼燈塔位於中華臺北福建省金門縣烏坵鄉的燈塔，始建於五口通商時期。1951年因軍事需求關閉，直到2017年重新啓用。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%83%8F%E5%9D%B5%E5%B6%BC%E7%87%88%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%83%8F%E5%9D%B5%E5%B6%BC%E7%87%88%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Wuqiu_Lighthouse"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/bf416a3a03c3c040.webp",
+        "credit": "Kechinyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%83%8F%E5%9D%B5%E7%99%BE%E5%B9%B4%E7%87%88%E5%A1%941.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​中華臺北海軍陸戰隊隊徽雕塑與烏坵嶼燈塔。",
+        "place": "Wuqiu Lighthouse",
+        "originalFile": "烏坵百年燈塔1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        119.4520405,
+        24.9923118
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q15918057",
+      "kind": "landmark",
+      "parentCity": "TWN:Wuqiu"
+    },
+    "poi:admin:TW-HSQ:urban": {
+      "id": "poi:admin:TW-HSQ:urban",
+      "label": {
+        "en": "Hsinwawu Hakka Culture Conservation Area",
+        "zh-CN": "新瓦屋客家文化保存区",
+        "zh-TW": "新瓦屋客家文化保存區"
+      },
+      "description": {
+        "en": "Hsinwawu is a historic Hakka settlement of the Lin family in Zhubei. Its traditional houses became a Hakka cultural conservation area in 2005.",
+        "zh-CN": "新瓦屋是位于台湾新竹县竹北市六家中兴里文兴路的林姓饶平客家聚落，建于清朝嘉庆年间。2005年设立新瓦屋客家文化保存区，成为台湾第一个客家文化保存区，现由新竹县政府文化局管理。",
+        "zh-TW": "新瓦屋是位於臺灣新竹縣竹北市六家中興裏文興路的林姓饒平客家聚落，建於清朝嘉慶年間。2005年設立新瓦屋客家文化保存區，成為臺灣第一個客家文化保存區，現由新竹縣政府文化局管理。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%93%A6%E5%B1%8B%E5%AE%A2%E5%AE%B6%E6%96%87%E5%8C%96%E4%BF%9D%E5%AD%98%E5%8D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%93%A6%E5%B1%8B%E5%AE%A2%E5%AE%B6%E6%96%87%E5%8C%96%E4%BF%9D%E5%AD%98%E5%8D%80",
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%93%A6%E5%B1%8B%E5%AE%A2%E5%AE%B6%E6%96%87%E5%8C%96%E4%BF%9D%E5%AD%98%E5%8D%80"
+      ],
+      "textLicense": "CC BY-SA 4.0; translated and shortened excerpt",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0f35b69011fab23c.webp",
+        "credit": "Cookai1205 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%B0%E7%93%A6%E5%B1%8B_%E6%9E%97%E7%A4%BD%E5%9B%BA%E5%AE%B6_2023-07-10.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​新瓦屋客家文化保存區，林礽固家",
+        "place": "新瓦屋客家文化保存區",
+        "originalFile": "新瓦屋 林礽固家 2023-07-10.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.0271,
+        24.8115
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q120499232",
+      "kind": "landmark",
+      "parentCity": "TW-HSQ"
+    },
+    "poi:admin:RUS:Tuva:urban": {
+      "id": "poi:admin:RUS:Tuva:urban",
+      "label": {
+        "en": "Centre of Asia monument",
+        "zh-CN": "亚洲中心纪念碑",
+        "zh-TW": "亞洲中心紀念碑"
+      },
+      "description": {
+        "en": "The Centre of Asia monument stands on the Yenisei embankment in Kyzyl. The present sculptural ensemble was created by Dashi Namdakov in 2014, replacing an earlier obelisk. Its globe and animals make it a distinctive landmark of Tuva. The name expresses a local geographical tradition; the calculated centre of Asia varies with the boundaries and method used.",
+        "zh-CN": "亚洲中心纪念碑坐落于克孜勒的叶尼塞河滨岸。现有雕塑群由达希·纳姆达科夫设计，于2014年建成，取代了早期方尖碑；地球与动物造型使它成为图瓦鲜明的城市标志。“亚洲中心”体现了当地的地理传统，计算所得的大陆中心会随边界定义与测量方法而变化。",
+        "zh-TW": "亞洲中心紀念碑坐落於克孜勒的葉尼塞河濱岸。現有雕塑羣由達希·納姆達科夫設計，於2014年建成，取代了早期方尖碑；地球與動物造型使它成爲圖瓦鮮明的城市標誌。“亞洲中心”體現了當地的地理傳統，計算所得的大陸中心會隨邊界定義與測量方法而變化。"
+      },
+      "source": "https://www.tuva.asia/news/tuva/7365-translyaciya.html",
+      "textSources": [
+        "https://www.tuva.asia/news/tuva/7365-translyaciya.html",
+        "https://en.wikipedia.org/wiki/Geographical_midpoint_of_Asia"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c030a617ab057bac.webp",
+        "credit": "Katharina Sunrise · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9D%D0%BE%D0%B2%D1%8B%D0%B9_%D0%BC%D0%BE%D0%BD%D1%83%D0%BC%D0%B5%D0%BD%D1%82_%22%D0%A6%D0%B5%D0%BD%D1%82%D1%80_%D0%90%D0%B7%D0%B8%D0%B8%22.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "The new Centre of Asia monument on Kyzyl's riverfront, photographed in 2019.",
+          "zh-CN": "2019年拍摄的克孜勒河滨亚洲中心新纪念碑。",
+          "zh-TW": "2019年拍攝的克孜勒河濱亞洲中心新紀念碑。"
+        },
+        "place": {
+          "en": "Centre of Asia monument",
+          "zh-CN": "亚洲中心纪念碑",
+          "zh-TW": "亞洲中心紀念碑"
+        },
+        "originalFile": "Новый монумент \"Центр Азии\".jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        94.4435925167,
+        51.7248811833
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/825505556",
+      "coordinateVerification": "https://api.openstreetmap.org/api/0.6/way/825505556/full.json",
+      "coordinateDerivation": "Arithmetic centroid of the documented OpenStreetMap building/monument footprint nodes (WGS84).",
+      "kind": "landmark",
+      "parentCity": "RUS:Tuva"
+    },
+    "poi:admin:IND:LahaulSpiti:urban": {
+      "id": "poi:admin:IND:LahaulSpiti:urban",
+      "label": {
+        "en": "Shashur Monastery",
+        "zh-CN": "沙舒尔寺",
+        "zh-TW": "沙舒爾寺"
+      },
+      "description": {
+        "en": "Shashur is a Drukpa Buddhist monastery on the hillside above Keylong in the Lahaul valley. Its name refers to the blue pines around the monastery. The halls preserve large thangka paintings and murals, and the summer ceremonial dances are an important local festival. The monastery and its forested slope form a close landscape counterpart to the town and the Bhaga valley below.",
+        "zh-CN": "沙舒尔寺位于拉豪尔河谷凯隆镇上方的山坡，是竹巴噶举派寺院，寺名与周围的蓝松有关。殿堂保存有大型唐卡和壁画，夏季举行的仪式舞蹈是当地重要的节庆活动。寺院、山坡林木与下方的凯隆聚落及巴嘎河谷共同构成近城景观。",
+        "zh-TW": "沙舒爾寺位於拉豪爾河谷凱隆鎮上方的山坡，是竹巴噶舉派寺院，寺名與周圍的藍松有關。殿堂保存有大型唐卡和壁畫，夏季舉行的儀式舞蹈是當地重要的節慶活動。寺院、山坡林木與下方的凱隆聚落及巴嘎河谷共同構成近城景觀。"
+      },
+      "source": "https://hplahaulspiti.nic.in/monasteries-in-lahaul/",
+      "textSources": [
+        "https://hplahaulspiti.nic.in/monasteries-in-lahaul/",
+        "https://hplahaulspiti.nic.in/fairs-festivals/",
+        "https://en.wikipedia.org/wiki/Shashur_Monastery"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0b569a67a587acc9.webp",
+        "credit": "Clintonpeter · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shashur_monastery.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "The Dharma wheel and deer at Shashur Monastery, with the Lahaul mountains behind, photographed in 2017.",
+          "zh-CN": "2017年拍摄的沙舒尔寺法轮、双鹿与远处拉豪尔山景。",
+          "zh-TW": "2017年拍攝的沙舒爾寺法輪、雙鹿與遠處拉豪爾山景。"
+        },
+        "place": {
+          "en": "Shashur Monastery",
+          "zh-CN": "沙舒尔寺",
+          "zh-TW": "沙舒爾寺"
+        },
+        "originalFile": "Shashur monastery.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        77.02557105,
+        32.5792741
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/441781191",
+      "coordinateVerification": "https://api.openstreetmap.org/api/0.6/way/441781191/full.json",
+      "coordinateDerivation": "Arithmetic centroid of the documented OpenStreetMap building/monument footprint nodes (WGS84).",
+      "kind": "landmark",
+      "parentCity": "IND:LahaulSpiti"
+    },
+    "poi:admin:659003:satellite": {
+      "id": "poi:admin:659003:satellite",
+      "label": {
+        "en": "Tumxuk · satellite view",
+        "zh-CN": "图木舒克市 · 遥感全景",
+        "zh-TW": "圖木舒克市 · 遙感全景"
+      },
+      "description": {
+        "en": "A true-color Landsat observation of Tumxuk on 2025-06-06. The 30-metre imagery records the city and its surrounding land, and is labelled as a satellite reference rather than a ground-level travel photograph.",
+        "zh-CN": "这幅2025-06-06的Landsat真彩遥感影像记录了图木舒克市及周边地表。影像分辨率为30米，可观察城区与周边地貌的空间关系；照片标明了实际观测日期。",
+        "zh-TW": "這幅2025-06-06的Landsat真彩遙感影像記錄了圖木舒克市及周邊地表。影像解析度為30公尺，可觀察城區與周邊地貌的空間關係；照片標明了實際觀測日期。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9B%BE%E6%9C%A8%E8%88%92%E5%85%8B%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9B%BE%E6%9C%A8%E8%88%92%E5%85%8B%E5%B8%82",
+        "https://hls.gsfc.nasa.gov/data-access-and-tools/"
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/659003-landsat-2025-06-06.webp",
+        "credit": "NASA / USGS · Landsat HLS L30 · 2025-06-06 · Public domain",
+        "source": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=HLS_L30_Nadir_BRDF_Adjusted_Reflectance&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A4326&BBOX=78.97859070430476%2C39.813601329500536%2C79.16585374013968%2C39.921398670499464&WIDTH=640&HEIGHT=480&TIME=2025-06-06&TRANSPARENT=TRUE",
+        "license": "Public domain (NASA / USGS)",
+        "licenseUrl": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "alt": {
+          "en": "Tumxuk · satellite view",
+          "zh-CN": "图木舒克市 · 遥感全景",
+          "zh-TW": "圖木舒克市 · 遙感全景"
+        },
+        "place": {
+          "en": "Tumxuk · satellite view",
+          "zh-CN": "图木舒克市 · 遥感全景",
+          "zh-TW": "圖木舒克市 · 遙感全景"
+        },
+        "date": "2025-06-06",
+        "type": "satellite",
+        "resolutionM": 30,
+        "bboxWgs84": [
+          78.97859070430476,
+          39.813601329500536,
+          79.16585374013968,
+          39.921398670499464
+        ],
+        "modifications": "Geographic window and WebP encoding; original observed colours retained.",
+        "granule": "HLS.L30.T44TLK.2025157T052119.v2.0"
+      },
+      "lngLat": [
+        79.07222222222222,
+        39.8675
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q989606#P625",
+      "kind": "landmark",
+      "role": "satellite-reference",
+      "parentUnit": "659003"
+    },
+    "poi:admin:659006:satellite": {
+      "id": "poi:admin:659006:satellite",
+      "label": {
+        "en": "Tiemenguan City · satellite view",
+        "zh-CN": "铁门关市 · 遥感全景",
+        "zh-TW": "鐵門關市 · 遙感全景"
+      },
+      "description": {
+        "en": "A true-color Landsat observation of Tiemenguan City on 2025-08-29. The 30-metre imagery records the city and its surrounding land, and is labelled as a satellite reference rather than a ground-level travel photograph.",
+        "zh-CN": "这幅2025-08-29的Landsat真彩遥感影像记录了铁门关市及周边地表。影像分辨率为30米，可观察城区与周边地貌的空间关系；照片标明了实际观测日期。",
+        "zh-TW": "這幅2025-08-29的Landsat真彩遙感影像記錄了鐵門關市及周邊地表。影像解析度為30公尺，可觀察城區與周邊地貌的空間關係；照片標明了實際觀測日期。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%93%81%E9%97%A8%E5%85%B3%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%93%81%E9%97%A8%E5%85%B3%E5%B8%82",
+        "https://hls.gsfc.nasa.gov/data-access-and-tools/"
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/659006-landsat-2025-08-29.webp",
+        "credit": "NASA / USGS · Landsat HLS L30 · 2025-08-29 · Public domain",
+        "source": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=HLS_L30_Nadir_BRDF_Adjusted_Reflectance&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A4326&BBOX=85.55656854612334%2C41.766101329500536%2C85.74943145387667%2C41.873898670499464&WIDTH=640&HEIGHT=480&TIME=2025-08-29&TRANSPARENT=TRUE",
+        "license": "Public domain (NASA / USGS)",
+        "licenseUrl": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "alt": {
+          "en": "Tiemenguan City · satellite view",
+          "zh-CN": "铁门关市 · 遥感全景",
+          "zh-TW": "鐵門關市 · 遙感全景"
+        },
+        "place": {
+          "en": "Tiemenguan City · satellite view",
+          "zh-CN": "铁门关市 · 遥感全景",
+          "zh-TW": "鐵門關市 · 遙感全景"
+        },
+        "date": "2025-08-29",
+        "type": "satellite",
+        "resolutionM": 30,
+        "bboxWgs84": [
+          85.55656854612334,
+          41.766101329500536,
+          85.74943145387667,
+          41.873898670499464
+        ],
+        "modifications": "Geographic window and WebP encoding; original observed colours retained.",
+        "granule": "HLS.L30.T45TUG.2025241T045647.v2.0"
+      },
+      "lngLat": [
+        85.653,
+        41.82
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q5103019#P625",
+      "kind": "landmark",
+      "role": "satellite-reference",
+      "parentUnit": "659006"
+    },
+    "poi:admin:659007:satellite": {
+      "id": "poi:admin:659007:satellite",
+      "label": {
+        "en": "Shuanghe · satellite view",
+        "zh-CN": "双河市 · 遥感全景",
+        "zh-TW": "雙河市 · 遙感全景"
+      },
+      "description": {
+        "en": "A true-color Landsat observation of Shuanghe on 2025-07-25. The 30-metre imagery records the city and its surrounding land, and is labelled as a satellite reference rather than a ground-level travel photograph.",
+        "zh-CN": "这幅2025-07-25的Landsat真彩遥感影像记录了双河市及周边地表。影像分辨率为30米，可观察城区与周边地貌的空间关系；照片标明了实际观测日期。",
+        "zh-TW": "這幅2025-07-25的Landsat真彩遙感影像記錄了雙河市及周邊地表。影像解析度為30公尺，可觀察城區與周邊地貌的空間關係；照片標明了實際觀測日期。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9B%99%E6%B2%B3%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9B%99%E6%B2%B3%E5%B8%82",
+        "https://hls.gsfc.nasa.gov/data-access-and-tools/"
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/659007-landsat-2025-07-25.webp",
+        "credit": "NASA / USGS · Landsat HLS L30 · 2025-07-25 · Public domain",
+        "source": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=HLS_L30_Nadir_BRDF_Adjusted_Reflectance&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A4326&BBOX=82.25035031840962%2C44.78610132950054%2C82.45304968159037%2C44.89389867049947&WIDTH=640&HEIGHT=480&TIME=2025-07-25&TRANSPARENT=TRUE",
+        "license": "Public domain (NASA / USGS)",
+        "licenseUrl": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "alt": {
+          "en": "Shuanghe · satellite view",
+          "zh-CN": "双河市 · 遥感全景",
+          "zh-TW": "雙河市 · 遙感全景"
+        },
+        "place": {
+          "en": "Shuanghe · satellite view",
+          "zh-CN": "双河市 · 遥感全景",
+          "zh-TW": "雙河市 · 遙感全景"
+        },
+        "date": "2025-07-25",
+        "type": "satellite",
+        "resolutionM": 30,
+        "bboxWgs84": [
+          82.25035031840962,
+          44.78610132950054,
+          82.45304968159037,
+          44.89389867049947
+        ],
+        "modifications": "Geographic window and WebP encoding; original observed colours retained.",
+        "granule": "HLS.L30.T44TPQ.2025206T051420.v2.0"
+      },
+      "lngLat": [
+        82.3517,
+        44.84
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q10930847#P625",
+      "kind": "landmark",
+      "role": "satellite-reference",
+      "parentUnit": "659007"
+    },
+    "poi:admin:659008:satellite": {
+      "id": "poi:admin:659008:satellite",
+      "label": {
+        "en": "Kokdala · satellite view",
+        "zh-CN": "可克达拉市 · 遥感全景",
+        "zh-TW": "可克達拉市 · 遙感全景"
+      },
+      "description": {
+        "en": "A true-color Landsat observation of Kokdala on 2025-06-30. The 30-metre imagery records the city and its surrounding land, and is labelled as a satellite reference rather than a ground-level travel photograph.",
+        "zh-CN": "这幅2025-06-30的Landsat真彩遥感影像记录了可克达拉市及周边地表。影像分辨率为30米，可观察城区与周边地貌的空间关系；照片标明了实际观测日期。",
+        "zh-TW": "這幅2025-06-30的Landsat真彩遙感影像記錄了可克達拉市及周邊地表。影像解析度為30公尺，可觀察城區與周邊地貌的空間關係；照片標明了實際觀測日期。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8F%AF%E5%85%8B%E8%BE%BE%E6%8B%89%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8F%AF%E5%85%8B%E8%BE%BE%E6%8B%89%E5%B8%82",
+        "https://hls.gsfc.nasa.gov/data-access-and-tools/"
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/659008-landsat-2025-06-30.webp",
+        "credit": "NASA / USGS · Landsat HLS L30 · 2025-06-30 · Public domain",
+        "source": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=HLS_L30_Nadir_BRDF_Adjusted_Reflectance&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A4326&BBOX=80.89836688308567%2C43.88016132950054%2C81.09795311691433%2C43.98795867049947&WIDTH=640&HEIGHT=480&TIME=2025-06-30&TRANSPARENT=TRUE",
+        "license": "Public domain (NASA / USGS)",
+        "licenseUrl": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "alt": {
+          "en": "Kokdala · satellite view",
+          "zh-CN": "可克达拉市 · 遥感全景",
+          "zh-TW": "可克達拉市 · 遙感全景"
+        },
+        "place": {
+          "en": "Kokdala · satellite view",
+          "zh-CN": "可克达拉市 · 遥感全景",
+          "zh-TW": "可克達拉市 · 遙感全景"
+        },
+        "date": "2025-06-30",
+        "type": "satellite",
+        "resolutionM": 30,
+        "bboxWgs84": [
+          80.89836688308567,
+          43.88016132950054,
+          81.09795311691433,
+          43.98795867049947
+        ],
+        "modifications": "Geographic window and WebP encoding; original observed colours retained.",
+        "granule": "HLS.L30.T44TMP.2025181T052021.v2.0"
+      },
+      "lngLat": [
+        80.99816,
+        43.93406
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q18651998#P625",
+      "kind": "landmark",
+      "role": "satellite-reference",
+      "parentUnit": "659008"
+    },
+    "poi:admin:659009:satellite": {
+      "id": "poi:admin:659009:satellite",
+      "label": {
+        "en": "Kunyu, Xinjiang · satellite view",
+        "zh-CN": "昆玉市 · 遥感全景",
+        "zh-TW": "崑玉市 · 遙感全景"
+      },
+      "description": {
+        "en": "A true-color Landsat observation of Kunyu, Xinjiang on 2025-06-06. The 30-metre imagery records the city and its surrounding land, and is labelled as a satellite reference rather than a ground-level travel photograph.",
+        "zh-CN": "这幅2025-06-06的Landsat真彩遥感影像记录了昆玉市及周边地表。影像分辨率为30米，可观察城区与周边地貌的空间关系；照片标明了实际观测日期。",
+        "zh-TW": "這幅2025-06-06的Landsat真彩遙感影像記錄了崑玉市及周邊地表。影像解析度為30公尺，可觀察城區與周邊地貌的空間關係；照片標明了實際觀測日期。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%98%86%E7%8E%89%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%98%86%E7%8E%89%E5%B8%82",
+        "https://hls.gsfc.nasa.gov/data-access-and-tools/"
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/659009-landsat-2025-06-06.webp",
+        "credit": "NASA / USGS · Landsat HLS L30 · 2025-06-06 · Public domain",
+        "source": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=HLS_L30_Nadir_BRDF_Adjusted_Reflectance&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A4326&BBOX=79.20059924276036%2C37.155545329500534%2C79.38106675723965%2C37.26334267049946&WIDTH=640&HEIGHT=480&TIME=2025-06-06&TRANSPARENT=TRUE",
+        "license": "Public domain (NASA / USGS)",
+        "licenseUrl": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "alt": {
+          "en": "Kunyu, Xinjiang · satellite view",
+          "zh-CN": "昆玉市 · 遥感全景",
+          "zh-TW": "崑玉市 · 遙感全景"
+        },
+        "place": {
+          "en": "Kunyu, Xinjiang · satellite view",
+          "zh-CN": "昆玉市 · 遥感全景",
+          "zh-TW": "崑玉市 · 遙感全景"
+        },
+        "date": "2025-06-06",
+        "type": "satellite",
+        "resolutionM": 30,
+        "bboxWgs84": [
+          79.20059924276036,
+          37.155545329500534,
+          79.38106675723965,
+          37.26334267049946
+        ],
+        "modifications": "Geographic window and WebP encoding; original observed colours retained.",
+        "granule": "HLS.L30.T44SLG.2025157T052207.v2.0"
+      },
+      "lngLat": [
+        79.290833,
+        37.209444
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q22704998#P625",
+      "kind": "landmark",
+      "role": "satellite-reference",
+      "parentUnit": "659009"
+    },
+    "poi:admin:659010:satellite": {
+      "id": "poi:admin:659010:satellite",
+      "label": {
+        "en": "Huyanghe · satellite view",
+        "zh-CN": "胡杨河市 · 遥感全景",
+        "zh-TW": "胡楊河市 · 遙感全景"
+      },
+      "description": {
+        "en": "A true-color Landsat observation of Huyanghe on 2025-06-08. The 30-metre imagery records the city and its surrounding land, and is labelled as a satellite reference rather than a ground-level travel photograph.",
+        "zh-CN": "这幅2025-06-08的Landsat真彩遥感影像记录了胡杨河市及周边地表。影像分辨率为30米，可观察城区与周边地貌的空间关系；照片标明了实际观测日期。",
+        "zh-TW": "這幅2025-06-08的Landsat真彩遙感影像記錄了胡楊河市及周邊地表。影像解析度為30公尺，可觀察城區與周邊地貌的空間關係；照片標明了實際觀測日期。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%83%A1%E6%9D%A8%E6%B2%B3%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%83%A1%E6%9D%A8%E6%B2%B3%E5%B8%82",
+        "https://hls.gsfc.nasa.gov/data-access-and-tools/"
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/659010-landsat-2025-06-08.webp",
+        "credit": "NASA / USGS · Landsat HLS L30 · 2025-06-08 · Public domain",
+        "source": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=HLS_L30_Nadir_BRDF_Adjusted_Reflectance&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A4326&BBOX=84.72390877896264%2C44.63860132950053%2C84.92609122103737%2C44.74639867049946&WIDTH=640&HEIGHT=480&TIME=2025-06-08&TRANSPARENT=TRUE",
+        "license": "Public domain (NASA / USGS)",
+        "licenseUrl": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "alt": {
+          "en": "Huyanghe · satellite view",
+          "zh-CN": "胡杨河市 · 遥感全景",
+          "zh-TW": "胡楊河市 · 遙感全景"
+        },
+        "place": {
+          "en": "Huyanghe · satellite view",
+          "zh-CN": "胡杨河市 · 遥感全景",
+          "zh-TW": "胡楊河市 · 遙感全景"
+        },
+        "date": "2025-06-08",
+        "type": "satellite",
+        "resolutionM": 30,
+        "bboxWgs84": [
+          84.72390877896264,
+          44.63860132950053,
+          84.92609122103737,
+          44.74639867049946
+        ],
+        "modifications": "Geographic window and WebP encoding; original observed colours retained.",
+        "granule": "HLS.L30.T45TUK.2025159T050724.v2.0"
+      },
+      "lngLat": [
+        84.825,
+        44.692499999999995
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q9435117#P625",
+      "kind": "landmark",
+      "role": "satellite-reference",
+      "parentUnit": "659010"
+    },
+    "poi:admin:419001:urban": {
+      "id": "poi:admin:419001:urban",
+      "label": {
+        "en": "Jidu Temple",
+        "zh-CN": "济渎庙",
+        "zh-TW": "濟瀆廟"
+      },
+      "description": {
+        "en": "Jidu Temple stands near the eastern source of the ancient Ji River in Jiyuan. Founded in the Sui period, the temple developed around ceremonies for the river deity; a later shrine also honoured the North Sea deity. Its courtyards, halls and water features preserve the close relationship between the city’s name, its springs and the traditional worship of waterways.",
+        "zh-CN": "济渎庙位于济源古济水东源一带，始建于隋代，是祭祀济水之神的庙宇，后来又增建祭祀北海神的祠宇。层层院落、殿堂与水池共同保存了古代水神祭祀的空间，也使这处近城古建筑与济源的地名、泉水和历史紧密相连。",
+        "zh-TW": "濟瀆廟位於濟源古濟水東源一帶，始建於隋代，是祭祀濟水之神的廟宇，後來又增建祭祀北海神的祠宇。層層院落、殿堂與水池共同保存了古代水神祭祀的空間，也使這處近城古建築與濟源的地名、泉水和歷史緊密相連。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/济渎庙",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/济渎庙",
+        "https://commons.wikimedia.org/wiki/File:20250716_Jidu_Temple_05.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0b13cfa096c96fb4.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20250716_Jidu_Temple_05.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Jidu Temple in an archival photograph.",
+          "zh-CN": "济渎庙的实景记录。",
+          "zh-TW": "濟瀆廟的實景記錄。"
+        },
+        "place": {
+          "en": "Jidu Temple",
+          "zh-CN": "济渎庙",
+          "zh-TW": "濟瀆廟"
+        },
+        "originalFile": "20250716_Jidu_Temple_05.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        112.57638889,
+        35.10916667
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/济渎庙",
+      "coordinateDerivation": "WGS84 geographic coordinates on the linked landmark article.",
+      "kind": "landmark",
+      "parentCity": "419001"
+    },
+    "poi:admin:429004:urban": {
+      "id": "poi:admin:429004:urban",
+      "label": {
+        "en": "Times Square streetscape, Xiantao",
+        "zh-CN": "仙桃时代广场街景",
+        "zh-TW": "仙桃時代廣場街景"
+      },
+      "description": {
+        "en": "This archival street photograph records the Times Square area opposite a station in Xiantao, with residential towers rising above the shops and road. It offers a view of everyday urban life on the Jianghan Plain. The marker follows the photograph’s original geographic tag, so the scene is anchored to its recorded viewpoint rather than to a generic city centre.",
+        "zh-CN": "这张历史街景照片记录了仙桃车站对面的时代广场一带：住宅楼、临街店面与道路共同呈现江汉平原城市的日常面貌。图中保存的是拍摄时的城市景观。地图锚点采用照片原始地理标签对应的观察位置，便于在主城区地形中理解街道与周围街区的关系。",
+        "zh-TW": "這張歷史街景照片記錄了仙桃車站對面的時代廣場一帶：住宅樓、臨街店面與道路共同呈現江漢平原城市的日常面貌。圖中保存的是拍攝時的城市景觀。地圖錨點採用照片原始地理標籤對應的觀察位置，便於在主城區地形中理解街道與周圍街區的關係。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/仙桃市",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/仙桃市",
+        "https://commons.wikimedia.org/wiki/File:%E4%BB%99%E6%A1%83%E8%BD%A6%E7%AB%99%E5%AF%B9%E9%9D%A2%E7%9A%84%E6%97%B6%E4%BB%A3%E5%B9%BF%E5%9C%BA_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0c2fe97e906ed121.webp",
+        "credit": "万精油 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%BB%99%E6%A1%83%E8%BD%A6%E7%AB%99%E5%AF%B9%E9%9D%A2%E7%9A%84%E6%97%B6%E4%BB%A3%E5%B9%BF%E5%9C%BA_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": {
+          "en": "Times Square streetscape, Xiantao in an archival photograph.",
+          "zh-CN": "仙桃时代广场街景的实景记录。",
+          "zh-TW": "仙桃時代廣場街景的實景記錄。"
+        },
+        "place": {
+          "en": "Times Square streetscape, Xiantao",
+          "zh-CN": "仙桃时代广场街景",
+          "zh-TW": "仙桃時代廣場街景"
+        },
+        "originalFile": "仙桃车站对面的时代广场 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        113.438001,
+        30.363859
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E4%BB%99%E6%A1%83%E8%BD%A6%E7%AB%99%E5%AF%B9%E9%9D%A2%E7%9A%84%E6%97%B6%E4%BB%A3%E5%B9%BF%E5%9C%BA_-_panoramio.jpg",
+      "coordinateDerivation": "Original geographically tagged camera/viewpoint location of the depicted streetscape or building.",
+      "kind": "landmark",
+      "parentCity": "429004"
+    },
+    "poi:admin:429005:urban": {
+      "id": "poi:admin:429005:urban",
+      "label": {
+        "en": "Qianjiang railway station",
+        "zh-CN": "潜江站",
+        "zh-TW": "潛江站"
+      },
+      "description": {
+        "en": "Qianjiang railway station is in Yangshi, southeast of the city’s older centre. It opened with the Hanyi railway in 2012 and forms one of the main rail gateways to Qianjiang. The station building and forecourt mark the transition from the compact urban area to the broad, low-lying landscape of the Jianghan Plain.",
+        "zh-CN": "潜江站位于老城区东南侧的杨市街道，随汉宜铁路于2012年开通，是潜江重要的铁路门户。站房与站前空间在城市边缘形成清晰的公共节点；从地形视图中也能看出，周围街区逐渐过渡到江汉平原低平开阔的田地与水网景观。",
+        "zh-TW": "潛江站位於老城區東南側的楊市街道，隨漢宜鐵路於2012年開通，是潛江重要的鐵路門戶。站房與站前空間在城市邊緣形成清晰的公共節點；從地形視圖中也能看出，周圍街區逐漸過渡到江漢平原低平開闊的田地與水網景觀。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/潜江站",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/潜江站",
+        "https://commons.wikimedia.org/wiki/File:%E6%BD%9C%E6%B1%9F%E7%AB%99%E7%AB%99%E6%88%BF%E5%A4%96.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/94eb657ca27abf16.webp",
+        "credit": "Yumeyo · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%BD%9C%E6%B1%9F%E7%AB%99%E7%AB%99%E6%88%BF%E5%A4%96.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": {
+          "en": "Qianjiang railway station in an archival photograph.",
+          "zh-CN": "潜江站的实景记录。",
+          "zh-TW": "潛江站的實景記錄。"
+        },
+        "place": {
+          "en": "Qianjiang railway station",
+          "zh-CN": "潜江站",
+          "zh-TW": "潛江站"
+        },
+        "originalFile": "潜江站站房外.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        112.9339,
+        30.39160278
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/潜江站",
+      "coordinateDerivation": "WGS84 geographic coordinates on the linked landmark article.",
+      "kind": "landmark",
+      "parentCity": "429005"
+    },
+    "poi:admin:429006:urban": {
+      "id": "poi:admin:429006:urban",
+      "label": {
+        "en": "Lu Yu Avenue streetscape",
+        "zh-CN": "陆羽大道街景",
+        "zh-TW": "陸羽大道街景"
+      },
+      "description": {
+        "en": "A planted street corner on Lu Yu Avenue shows a quieter side of central Tianmen, with shade trees, low planting and modern buildings. Tianmen is associated with the Tang tea scholar Lu Yu, whose name appears in the city’s public spaces. The map marks the recorded camera position of this street photograph.",
+        "zh-CN": "陆羽大道的一处街角呈现天门城区较为舒缓的一面：行道树、低矮绿植与现代楼宇共同围合道路空间。天门与唐代茶学家陆羽的历史联系，也延续在城市道路与公共空间的命名中。地图采用这张街景照片记录的拍摄位置，展示当地真实的近城环境。",
+        "zh-TW": "陸羽大道的一處街角呈現天門城區較爲舒緩的一面：行道樹、低矮綠植與現代樓宇共同圍合道路空間。天門與唐代茶學家陸羽的歷史聯繫，也延續在城市道路與公共空間的命名中。地圖採用這張街景照片記錄的拍攝位置，展示當地真實的近城環境。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/天门市",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/天门市",
+        "https://commons.wikimedia.org/wiki/File:%E6%B9%96%E5%8C%97_%E5%A4%A9%E9%97%A8_%E9%99%86%E7%BE%BD%E5%A4%A7%E9%81%93%E7%9A%84%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f5dec267fcbcda5d.webp",
+        "credit": "Walter Grassroot · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%B9%96%E5%8C%97_%E5%A4%A9%E9%97%A8_%E9%99%86%E7%BE%BD%E5%A4%A7%E9%81%93%E7%9A%84%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": {
+          "en": "Lu Yu Avenue streetscape in an archival photograph.",
+          "zh-CN": "陆羽大道街景的实景记录。",
+          "zh-TW": "陸羽大道街景的實景記錄。"
+        },
+        "place": {
+          "en": "Lu Yu Avenue streetscape",
+          "zh-CN": "陆羽大道街景",
+          "zh-TW": "陸羽大道街景"
+        },
+        "originalFile": "湖北 天门 陆羽大道的十字路口.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        113.169968,
+        30.662018
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E6%B9%96%E5%8C%97_%E5%A4%A9%E9%97%A8_%E9%99%86%E7%BE%BD%E5%A4%A7%E9%81%93%E7%9A%84%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3.jpg",
+      "coordinateDerivation": "Original geographically tagged camera/viewpoint location of the depicted streetscape or building.",
+      "kind": "landmark",
+      "parentCity": "429006"
+    },
+    "poi:admin:429021:urban": {
+      "id": "poi:admin:429021:urban",
+      "label": {
+        "en": "Winter landscape west of Songbai",
+        "zh-CN": "松柏西侧冬日街景",
+        "zh-TW": "松柏西側冬日街景"
+      },
+      "description": {
+        "en": "This winter photograph was taken west of Songbai in Shennongjia. Snow along the road, local buildings and wooded mountain slopes show how settlement occupies the narrow spaces between hills. The scene is a record of the inhabited valley landscape, with its marker placed at the original geographically tagged camera position.",
+        "zh-CN": "这张冬日照片拍摄于神农架松柏镇西侧。积雪的道路、沿路建筑与背后的林木山坡，展示了聚落如何沿山间较平缓的空间展开。它记录的是有人居住的河谷与道路景观；地图锚点对应照片原始地理标签，而非远处山峰或泛指整个神农架林区。",
+        "zh-TW": "這張冬日照片拍攝於神農架松柏鎮西側。積雪的道路、沿路建築與背後的林木山坡，展示了聚落如何沿山間較平緩的空間展開。它記錄的是有人居住的河谷與道路景觀；地圖錨點對應照片原始地理標籤，而非遠處山峯或泛指整個神農架林區。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/松柏镇_(神农架林区)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/松柏镇_(神农架林区)",
+        "https://commons.wikimedia.org/wiki/File:Shennongjia,_Hubei,_China_-_panoramio_(14).jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/8007f387fa0eb629.webp",
+        "credit": "Z Zzl · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shennongjia,_Hubei,_China_-_panoramio_(14).jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": {
+          "en": "Winter landscape west of Songbai in an archival photograph.",
+          "zh-CN": "松柏西侧冬日街景的实景记录。",
+          "zh-TW": "松柏西側冬日街景的實景記錄。"
+        },
+        "place": {
+          "en": "Winter landscape west of Songbai",
+          "zh-CN": "松柏西侧冬日街景",
+          "zh-TW": "松柏西側冬日街景"
+        },
+        "originalFile": "Shennongjia, Hubei, China - panoramio (14).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        110.606704,
+        31.758057
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Shennongjia,_Hubei,_China_-_panoramio_(14).jpg",
+      "coordinateDerivation": "Original geographically tagged camera/viewpoint location of the depicted streetscape or building.",
+      "kind": "landmark",
+      "parentCity": "429021"
+    },
+    "poi:admin:469001:urban": {
+      "id": "poi:admin:469001:urban",
+      "label": {
+        "en": "Hainan Provincial Museum of Ethnology",
+        "zh-CN": "海南省民族博物馆",
+        "zh-TW": "海南省民族博物館"
+      },
+      "description": {
+        "en": "The Hainan Provincial Museum of Ethnology is in Wuzhishan’s urban area. Its collections and exhibitions explore Hainan’s history and the traditional cultures of communities including the Li and Miao, using objects, photographs and written interpretation. The museum provides a cultural counterpart to the mountain setting around the city.",
+        "zh-CN": "海南省民族博物馆位于五指山市城区，通过文物、图片与文字介绍海南历史以及黎、苗等民族的传统文化，涵盖生产生活、社会习俗与地方记忆。馆舍与庭院构成一处清晰的城市文化节点，也让周围山地景观之外的海南人文历史得到展示。",
+        "zh-TW": "海南省民族博物館位於五指山市城區，通過文物、圖片與文字介紹海南歷史以及黎、苗等民族的傳統文化，涵蓋生產生活、社會習俗與地方記憶。館舍與庭院構成一處清晰的城市文化節點，也讓周圍山地景觀之外的海南人文歷史得到展示。"
+      },
+      "source": "https://www.neac.gov.cn/seac/c103547/201311/1012240.shtml",
+      "textSources": [
+        "https://www.neac.gov.cn/seac/c103547/201311/1012240.shtml",
+        "https://commons.wikimedia.org/wiki/File:Hainan_Provincial_Museum_of_Ethnology_06.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5b28fb714e04e991.webp",
+        "credit": "STW932 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hainan_Provincial_Museum_of_Ethnology_06.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Hainan Provincial Museum of Ethnology in an archival photograph.",
+          "zh-CN": "海南省民族博物馆的实景记录。",
+          "zh-TW": "海南省民族博物館的實景記錄。"
+        },
+        "place": {
+          "en": "Hainan Provincial Museum of Ethnology",
+          "zh-CN": "海南省民族博物馆",
+          "zh-TW": "海南省民族博物館"
+        },
+        "originalFile": "Hainan Provincial Museum of Ethnology 06.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        109.5191002875,
+        18.7832415875
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/623246496",
+      "coordinateDerivation": "Arithmetic centroid of documented OpenStreetMap museum footprint nodes (WGS84).",
+      "kind": "landmark",
+      "parentCity": "469001"
+    },
+    "poi:admin:469002:urban": {
+      "id": "poi:admin:469002:urban",
+      "label": {
+        "en": "Former Jiaji Police Station",
+        "zh-CN": "嘉积镇派出所旧址",
+        "zh-TW": "嘉積鎮派出所舊址"
+      },
+      "description": {
+        "en": "The former Jiaji Police Station is recorded here as a two-storey brick building with red window frames and a compact street frontage. Jiaji is the principal urban area of Qionghai. The photograph brings the scale and detail of an older public building into the broader view of the town; its original geographic tag locates the viewpoint.",
+        "zh-CN": "嘉积镇派出所旧址的这张照片展示了一座两层砖楼，红色窗框与紧凑的临街立面保留了旧公共建筑的尺度。嘉积是琼海的主要城区，这处建筑让宏观地形之外的街区细节也得以呈现。地图使用照片原始地理标签定位拍摄视点。",
+        "zh-TW": "嘉積鎮派出所舊址的這張照片展示了一座兩層磚樓，紅色窗框與緊湊的臨街立面保留了舊公共建築的尺度。嘉積是瓊海的主要城區，這處建築讓宏觀地形之外的街區細節也得以呈現。地圖使用照片原始地理標籤定位拍攝視點。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Old_Site_of_Jiaji_Town_Police_Station_02.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Old_Site_of_Jiaji_Town_Police_Station_02.jpg",
+        "https://zh.wikipedia.org/wiki/嘉积镇"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/649276f1e43068fb.webp",
+        "credit": "李勝天 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Old_Site_of_Jiaji_Town_Police_Station_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Former Jiaji Police Station in an archival photograph.",
+          "zh-CN": "嘉积镇派出所旧址的实景记录。",
+          "zh-TW": "嘉積鎮派出所舊址的實景記錄。"
+        },
+        "place": {
+          "en": "Former Jiaji Police Station",
+          "zh-CN": "嘉积镇派出所旧址",
+          "zh-TW": "嘉積鎮派出所舊址"
+        },
+        "originalFile": "Old Site of Jiaji Town Police Station 02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        110.458431,
+        19.242969
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Old_Site_of_Jiaji_Town_Police_Station_02.jpg",
+      "coordinateDerivation": "Original geographically tagged camera/viewpoint location of the depicted streetscape or building.",
+      "kind": "landmark",
+      "parentCity": "469002"
+    },
+    "poi:admin:469005:urban": {
+      "id": "poi:admin:469005:urban",
+      "label": {
+        "en": "Wenchang Confucian Temple",
+        "zh-CN": "文昌学宫",
+        "zh-TW": "文昌學宮"
+      },
+      "description": {
+        "en": "Wenchang’s Confucian Temple and former county school stand in Wencheng. The institution began in the Northern Song period and moved to this site in 1375. Gates, a ceremonial pond and successive courtyards lead toward the Dacheng Hall, preserving a setting where Confucian ritual and local education were closely connected.",
+        "zh-CN": "文昌学宫位于文城，前身是北宋时期设立的县学，1375年迁到今址。礼门、泮池与层层院落通向大成殿，形成兼具祭孔与教育传统的建筑群。近城地形中的这一文化节点，也保存着文昌地方教育与儒学礼仪长期交织的历史。",
+        "zh-TW": "文昌學宮位於文城，前身是北宋時期設立的縣學，1375年遷到今址。禮門、泮池與層層院落通向大成殿，形成兼具祭孔與教育傳統的建築羣。近城地形中的這一文化節點，也保存着文昌地方教育與儒學禮儀長期交織的歷史。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/文昌学宫",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/文昌学宫",
+        "https://commons.wikimedia.org/wiki/File:WenchangConfuciusTemple_10.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/78cb8dedf86be7b3.webp",
+        "credit": "STW932 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:WenchangConfuciusTemple_10.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Wenchang Confucian Temple in an archival photograph.",
+          "zh-CN": "文昌学宫的实景记录。",
+          "zh-TW": "文昌學宮的實景記錄。"
+        },
+        "place": {
+          "en": "Wenchang Confucian Temple",
+          "zh-CN": "文昌学宫",
+          "zh-TW": "文昌學宮"
+        },
+        "originalFile": "WenchangConfuciusTemple_10.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        110.74888,
+        19.61911
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/文昌学宫",
+      "coordinateDerivation": "WGS84 geographic coordinates on the linked landmark article.",
+      "kind": "landmark",
+      "parentCity": "469005"
+    },
+    "poi:admin:469006:urban": {
+      "id": "poi:admin:469006:urban",
+      "label": {
+        "en": "Wanning railway station",
+        "zh-CN": "万宁站",
+        "zh-TW": "萬寧站"
+      },
+      "description": {
+        "en": "Wanning railway station is a stop on Hainan’s eastern high-speed railway, which opened in 2010. This platform photograph records the tracks, canopy and planting around a familiar arrival point on the western side of the urban area. The railway connects Wanning with the wider sequence of towns along eastern Hainan.",
+        "zh-CN": "万宁站位于海南东环高速铁路线上，于2010年投入使用。这张站台照片记录了轨道、雨棚与周围绿化，也呈现城区西侧铁路门户的日常一面。铁路将万宁与海南东部的一系列城镇相连，在主城区地形中构成容易理解的交通节点。",
+        "zh-TW": "萬寧站位於海南東環高速鐵路線上，於2010年投入使用。這張站臺照片記錄了軌道、雨棚與周圍綠化，也呈現城區西側鐵路門戶的日常一面。鐵路將萬寧與海南東部的一系列城鎮相連，在主城區地形中構成容易理解的交通節點。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/万宁站",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/万宁站",
+        "https://commons.wikimedia.org/wiki/File:Wanning_Railway_Station_20150501_105206.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/6987ec499595ff91.webp",
+        "credit": "Qa003qa003 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Wanning_Railway_Station_20150501_105206.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Wanning railway station in an archival photograph.",
+          "zh-CN": "万宁站的实景记录。",
+          "zh-TW": "萬寧站的實景記錄。"
+        },
+        "place": {
+          "en": "Wanning railway station",
+          "zh-CN": "万宁站",
+          "zh-TW": "萬寧站"
+        },
+        "originalFile": "Wanning_Railway_Station_20150501_105206.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        110.37612778,
+        18.80913333
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/万宁站",
+      "coordinateDerivation": "WGS84 geographic coordinates on the linked landmark article.",
+      "kind": "landmark",
+      "parentCity": "469006"
+    },
+    "poi:admin:469007:urban": {
+      "id": "poi:admin:469007:urban",
+      "label": {
+        "en": "Former Hainan Railway headquarters",
+        "zh-CN": "海南铁路旧总部",
+        "zh-TW": "海南鐵路舊總部"
+      },
+      "description": {
+        "en": "The former Hainan Railway headquarters in Basuo became the Hainan Railway Museum in 2008. The preserved office building and railway displays connect Dongfang’s urban landscape with the island’s transport history. The photograph records the headquarters building among palms, while the museum also includes an outdoor collection of railway equipment.",
+        "zh-CN": "位于八所的海南铁路旧总部在2008年改建为海南铁路博物馆。保留下来的办公建筑与铁路展陈，把东方城区景观和海南交通史联系起来。照片中的旧楼掩映在棕榈树之间；馆区还通过室外铁路车辆与设备展示，补充这段地方工业记忆。",
+        "zh-TW": "位於八所的海南鐵路舊總部在2008年改建爲海南鐵路博物館。保留下來的辦公建築與鐵路展陳，把東方城區景觀和海南交通史聯繫起來。照片中的舊樓掩映在棕櫚樹之間；館區還通過室外鐵路車輛與設備展示，補充這段地方工業記憶。"
+      },
+      "source": "https://hi.people.com.cn/n2/2021/0519/c231190-34733470.html",
+      "textSources": [
+        "https://hi.people.com.cn/n2/2021/0519/c231190-34733470.html",
+        "https://commons.wikimedia.org/wiki/File:%E6%B5%B7%E5%8D%97%E9%93%81%E8%B7%AF%E6%97%A7%E6%80%BB%E9%83%A8.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/654ef6c8f1193dd2.webp",
+        "credit": "Lhzss8 · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%B5%B7%E5%8D%97%E9%93%81%E8%B7%AF%E6%97%A7%E6%80%BB%E9%83%A8.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": {
+          "en": "Former Hainan Railway headquarters in an archival photograph.",
+          "zh-CN": "海南铁路旧总部的实景记录。",
+          "zh-TW": "海南鐵路舊總部的實景記錄。"
+        },
+        "place": {
+          "en": "Former Hainan Railway headquarters",
+          "zh-CN": "海南铁路旧总部",
+          "zh-TW": "海南鐵路舊總部"
+        },
+        "originalFile": "海南铁路旧总部.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        108.630424,
+        19.10331
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E6%B5%B7%E5%8D%97%E9%93%81%E8%B7%AF%E6%97%A7%E6%80%BB%E9%83%A8.jpg",
+      "coordinateDerivation": "Original geographically tagged camera/viewpoint location of the depicted streetscape or building.",
+      "kind": "landmark",
+      "parentCity": "469007"
+    },
+    "poi:admin:231200:urban": {
+      "id": "poi:admin:231200:urban",
+      "label": {
+        "en": "Suihua railway station",
+        "zh-CN": "绥化站",
+        "zh-TW": "綏化站"
+      },
+      "description": {
+        "en": "Suihua railway station stands in Beilin District and dates from 1928. It serves the Binbei and Suijia railways. The photograph records the station’s pale yellow facade, arched windows and central tower in winter, giving the railway gateway a distinct place in the city landscape.",
+        "zh-CN": "绥化站位于北林区，始建于1928年，是滨北铁路与绥佳铁路上的车站。照片记录了冬日站房的浅黄色立面、拱形窗与中央塔楼，呈现这座铁路门户在城市中的鲜明形象。地图锚点采用公开站点坐标，与照片所示的真实车站对应。",
+        "zh-TW": "綏化站位於北林區，始建於1928年，是濱北鐵路與綏佳鐵路上的車站。照片記錄了冬日站房的淺黃色立面、拱形窗與中央塔樓，呈現這座鐵路門戶在城市中的鮮明形象。地圖錨點採用公開站點座標，與照片所示的真實車站對應。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/绥化站",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/绥化站",
+        "https://commons.wikimedia.org/wiki/File:%E7%BB%A5%E5%8C%96%E7%81%AB%E8%BD%A6%E7%AB%99.png"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f4d678eac9f79a11.webp",
+        "credit": "花生米118.1 · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%BB%A5%E5%8C%96%E7%81%AB%E8%BD%A6%E7%AB%99.png",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": {
+          "en": "Suihua railway station in the cited photograph.",
+          "zh-CN": "绥化站实景照片。",
+          "zh-TW": "綏化站實景照片。"
+        },
+        "place": {
+          "en": "Suihua railway station",
+          "zh-CN": "绥化站",
+          "zh-TW": "綏化站"
+        },
+        "originalFile": "绥化火车站.png",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        127.0094704,
+        46.6432302
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/node/3768463959",
+      "coordinateDerivation": "Documented WGS84 station point; the photograph depicts the station building, rather than an arbitrary city-centre view.",
+      "kind": "landmark",
+      "parentCity": "231200"
+    },
+    "poi:admin:152500:urban": {
+      "id": "poi:admin:152500:urban",
+      "label": {
+        "en": "Xilinhot Airport terminal",
+        "zh-CN": "锡林浩特机场航站楼",
+        "zh-TW": "錫林浩特機場航站樓"
+      },
+      "description": {
+        "en": "Xilinhot Airport is the civil airport serving Xilinhot in Xilingol League. This 2019 photograph shows the terminal from the apron, including its boarding bridges and the broad open space around the building. The map marks the terminal footprint on the southwestern side of the city’s landscape window.",
+        "zh-CN": "锡林浩特机场是位于锡林郭勒盟锡林浩特市的民航机场。这张2019年的实拍从机坪一侧展示航站楼、登机廊桥及周围开阔的场地。地图锚点对应航站楼的真实建筑位置，位于以锡林浩特为中心的近城地形视窗西南部。",
+        "zh-TW": "錫林浩特機場是位於錫林郭勒盟錫林浩特市的民航機場。這張2019年的實拍從機坪一側展示航站樓、登機廊橋及周圍開闊的場地。地圖錨點對應航站樓的真實建築位置，位於以錫林浩特爲中心的近城地形視窗西南部。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/锡林浩特机场",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/锡林浩特机场",
+        "https://commons.wikimedia.org/wiki/File:Xilinhot_Airport.png"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/84f1e3e315aefdba.webp",
+        "credit": "AppleSteveGao · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Xilinhot_Airport.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Xilinhot Airport terminal in the cited photograph.",
+          "zh-CN": "锡林浩特机场航站楼实景照片。",
+          "zh-TW": "錫林浩特機場航站樓實景照片。"
+        },
+        "place": {
+          "en": "Xilinhot Airport terminal",
+          "zh-CN": "锡林浩特机场航站楼",
+          "zh-TW": "錫林浩特機場航站樓"
+        },
+        "originalFile": "Xilinhot Airport.png",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        115.9592166875,
+        43.9161079875
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/228377266",
+      "coordinateDerivation": "Mean of the unique nodes of the documented T2 terminal footprint (WGS84); the pictured terminal is the mapped subject, not the camera location.",
+      "kind": "landmark",
+      "parentCity": "152500"
+    },
+    "poi:admin:469023:urban": {
+      "id": "poi:admin:469023:urban",
+      "label": {
+        "en": "Nandu River and the western bridge, Jinjiang",
+        "zh-CN": "金江南渡江与西侧大桥",
+        "zh-TW": "金江南渡江與西側大橋"
+      },
+      "description": {
+        "en": "The Nandu River divides Jinjiang into northern and southern urban areas, with bridges linking the two banks. This 2014 west-facing photograph records the riverside promenade and the western crossing. Its map marker identifies the bridge visible in the scene; it does not claim an exact camera position.",
+        "zh-CN": "南渡江将金江城区分为南北两部分，跨江桥梁连接两岸的日常生活。这张2014年朝西拍摄的照片记录了滨河步道和西侧跨江大桥。地图锚点标示画面中的桥梁位置，而非未经记录的摄影者站位，使河岸实景与近城地形形成对应。",
+        "zh-TW": "南渡江將金江城區分爲南北兩部分，跨江橋樑連接兩岸的日常生活。這張2014年朝西拍攝的照片記錄了濱河步道和西側跨江大橋。地圖錨點標示畫面中的橋樑位置，而非未經記錄的攝影者站位，使河岸實景與近城地形形成對應。"
+      },
+      "source": "https://www.hndnews.com/p/488623.html",
+      "textSources": [
+        "https://www.hndnews.com/p/488623.html",
+        "https://commons.wikimedia.org/wiki/File:Jinjiang_Town_-_at_Nandu_River_facing_west.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f81f35f0aa2eeb58.webp",
+        "credit": "Anna Frodesiak · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jinjiang_Town_-_at_Nandu_River_facing_west.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": {
+          "en": "Nandu River and the western bridge, Jinjiang in the cited photograph.",
+          "zh-CN": "金江南渡江与西侧大桥实景照片。",
+          "zh-TW": "金江南渡江與西側大橋實景照片。"
+        },
+        "place": {
+          "en": "Nandu River and the western bridge, Jinjiang",
+          "zh-CN": "金江南渡江与西侧大桥",
+          "zh-TW": "金江南渡江與西側大橋"
+        },
+        "originalFile": "Jinjiang Town - at Nandu River facing west.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        110.0001484,
+        19.7292829
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/164352042",
+      "coordinateDerivation": "Midpoint of the mapped western river crossing visible in the west-facing Commons photograph. This locates the depicted bridge, not an unrecorded camera position; the named east-facing companion photograph independently establishes the two bridge directions.",
+      "kind": "landmark",
+      "parentCity": "469023",
+      "coordinateVerification": "https://commons.wikimedia.org/wiki/File:Jinjiang_Town_-_at_Nandu_River_facing_east.jpg"
+    },
+    "poi:admin:210500:reviewed-photo-28345841": {
+      "label": {
+        "en": "Benxi steelworks",
+        "zh-CN": "本溪钢铁工业景观",
+        "zh-TW": "本溪鋼鐵工業景觀"
+      },
+      "description": {
+        "en": "Steelworks photographed in Benxi in February 2013, showing the industrial setting of the city.",
+        "zh-CN": "2013年2月拍摄的本溪钢铁工业景观，厂房与烟囱展现这座城市的工业环境。",
+        "zh-TW": "2013年2月拍攝的本溪鋼鐵工業景觀，廠房與煙囪展現這座城市的工業環境。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Benxi_Steel_Industries.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Benxi_Steel_Industries.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7467e14dd7661e75.webp",
+        "credit": "Andreas Habich · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Benxi_Steel_Industries.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Benxi heavy steel industries in February 2013",
+        "place": "Benxi Steel Industries.jpg",
+        "originalFile": "Benxi Steel Industries.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            123.761,
+            41.277
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Benxi_Steel_Industries.jpg"
+        }
+      },
+      "lngLat": [
+        123.761,
+        41.277
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Benxi_Steel_Industries.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "210500"
+    },
+    "poi:admin:220300:reviewed-photo-56896180": {
+      "label": {
+        "en": "Siping memorial monument",
+        "zh-CN": "四平纪念碑",
+        "zh-TW": "四平紀念碑"
+      },
+      "description": {
+        "en": "A memorial monument in Tiexi, Siping, photographed with its tower and base illuminated at night.",
+        "zh-CN": "四平铁西的纪念碑实景，照片记录了夜间照明下的碑体与基座。",
+        "zh-TW": "四平鐵西的紀念碑實景，照片記錄了夜間照明下的碑體與基座。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Tiexi,_Siping,_Jilin,_China_-_panoramio_(2).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Tiexi,_Siping,_Jilin,_China_-_panoramio_(2).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/534f85d6174ceb72.webp",
+        "credit": "Your friend · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tiexi,_Siping,_Jilin,_China_-_panoramio_(2).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Tiexi, Siping, Jilin, China",
+        "place": "Tiexi, Siping, Jilin, China - panoramio (2).jpg",
+        "originalFile": "Tiexi, Siping, Jilin, China - panoramio (2).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            124.359655,
+            43.168135
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Tiexi,_Siping,_Jilin,_China_-_panoramio_(2).jpg"
+        }
+      },
+      "lngLat": [
+        124.359655,
+        43.168135
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Tiexi,_Siping,_Jilin,_China_-_panoramio_(2).jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "220300"
+    },
+    "poi:admin:371000:reviewed-photo-18694202": {
+      "label": {
+        "en": "Weihai municipal hall",
+        "zh-CN": "威海市政建筑",
+        "zh-TW": "威海市政建築"
+      },
+      "description": {
+        "en": "The municipal hall and forecourt in Weihai, set against the hills surrounding the city.",
+        "zh-CN": "威海市政建筑及门前广场的实景，呈现城市公共空间与周围山体的关系。",
+        "zh-TW": "威海市政建築及門前廣場的實景，呈現城市公共空間與周圍山體的關係。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Weihai_Zhengfu.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Weihai_Zhengfu.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ea00da686ede19d6.webp",
+        "credit": "Popolon · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Weihai_Zhengfu.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Weihai Townhall building, Shandong Province, China.",
+        "place": "Weihai Zhengfu.jpg",
+        "originalFile": "Weihai Zhengfu.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            122.11596,
+            37.506848
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Weihai_Zhengfu.jpg"
+        }
+      },
+      "lngLat": [
+        122.11596,
+        37.506848
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Weihai_Zhengfu.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "371000"
+    },
+    "poi:admin:371100:reviewed-photo-78674705": {
+      "label": {
+        "en": "Rizhao West railway station",
+        "zh-CN": "日照西站",
+        "zh-TW": "日照西站"
+      },
+      "description": {
+        "en": "The passenger-station building at Rizhao West, a railway gateway on the western side of the city.",
+        "zh-CN": "日照西站的站房实景，展示城区西部铁路客运设施的建筑外观。",
+        "zh-TW": "日照西站的站房實景，展示城區西部鐵路客運設施的建築外觀。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Rizhaoxi_Railway_Station.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Rizhaoxi_Railway_Station.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/711977968242b55e.webp",
+        "credit": "Sprt98 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Rizhaoxi_Railway_Station.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "日照西站",
+        "place": "Rizhaoxi Railway Station.jpg",
+        "originalFile": "Rizhaoxi Railway Station.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            119.41522933333,
+            35.389796277778
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Rizhaoxi_Railway_Station.jpg"
+        }
+      },
+      "lngLat": [
+        119.41522933333,
+        35.389796277778
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Rizhaoxi_Railway_Station.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "371100"
+    },
+    "poi:admin:350400:reviewed-photo-53740996": {
+      "label": {
+        "en": "Liexi riverside panorama",
+        "zh-CN": "三明列西滨水景观",
+        "zh-TW": "三明列西濱水景觀"
+      },
+      "description": {
+        "en": "A riverside panorama of Liexi in Sanming, with urban buildings framed by the surrounding hills.",
+        "zh-CN": "这张列西全景照片记录了三明沿河展开的楼群与周围山地。",
+        "zh-TW": "這張列西全景照片記錄了三明沿河展開的樓羣與周圍山地。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%88%97%E8%A5%BF%E5%85%A8%E6%99%AF_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%88%97%E8%A5%BF%E5%85%A8%E6%99%AF_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0d77ba78fa77a87c.webp",
+        "credit": "林頎 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%88%97%E8%A5%BF%E5%85%A8%E6%99%AF_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "列西全景",
+        "place": "列西全景 - panoramio.jpg",
+        "originalFile": "列西全景 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            117.627869,
+            26.265556
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%88%97%E8%A5%BF%E5%85%A8%E6%99%AF_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        117.627869,
+        26.265556
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%88%97%E8%A5%BF%E5%85%A8%E6%99%AF_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "350400"
+    },
+    "poi:admin:451100:reviewed-photo-187634137": {
+      "label": {
+        "en": "Hezhou railway station",
+        "zh-CN": "贺州站站台",
+        "zh-TW": "賀州站站臺"
+      },
+      "description": {
+        "en": "The platforms and tracks of Hezhou railway station, photographed in 2026.",
+        "zh-CN": "2026年拍摄的贺州站站台实景，屋盖与轨道展现了当地铁路交通空间。",
+        "zh-TW": "2026年拍攝的賀州站站臺實景，屋蓋與軌道展現了當地鐵路交通空間。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Hezhou_Railway_Station_20260127.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Hezhou_Railway_Station_20260127.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/cbf3a85c9ac67940.webp",
+        "credit": "沈澄心 · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hezhou_Railway_Station_20260127.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "Hezhou Railway Station",
+        "place": "Hezhou Railway Station 20260127.jpg",
+        "originalFile": "Hezhou Railway Station 20260127.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            111.53405,
+            24.457909
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Hezhou_Railway_Station_20260127.jpg"
+        }
+      },
+      "lngLat": [
+        111.53405,
+        24.457909
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Hezhou_Railway_Station_20260127.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "451100"
+    },
+    "poi:admin:522300:reviewed-photo-198255697": {
+      "label": {
+        "en": "Qianxinan ethnic cultural centre",
+        "zh-CN": "黔西南州民族文化中心",
+        "zh-TW": "黔西南州民族文化中心"
+      },
+      "description": {
+        "en": "The building and forecourt of the Qianxinan ethnic cultural centre, photographed in August 2026.",
+        "zh-CN": "黔西南州民族文化中心的建筑与广场实景，拍摄于2026年8月。",
+        "zh-TW": "黔西南州民族文化中心的建築與廣場實景，拍攝於2026年8月。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/1736b3f541e4a7f2.webp",
+        "credit": "Kcx36 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​黔西南州民族文化中心",
+        "place": "黔西南州民族文化中心 2026-08-05.jpg",
+        "originalFile": "黔西南州民族文化中心 2026-08-05.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.916075,
+            25.106818
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg"
+        }
+      },
+      "lngLat": [
+        104.916075,
+        25.106818
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E9%BB%94%E8%A5%BF%E5%8D%97%E5%B7%9E%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83_2026-08-05.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "522300"
+    },
+    "poi:admin:522600:reviewed-photo-81653532": {
+      "label": {
+        "en": "Kaili West freight yard",
+        "zh-CN": "凯里西站货场",
+        "zh-TW": "凱里西站貨場"
+      },
+      "description": {
+        "en": "The freight yard at Kaili West railway station, photographed in 2019.",
+        "zh-CN": "2019年拍摄的凯里西站货场，轨道和铁路建筑记录了城市的运输空间。",
+        "zh-TW": "2019年拍攝的凱里西站貨場，軌道和鐵路建築記錄了城市的運輸空間。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:201908_Freight_Yard_of_Kailixi_Station.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:201908_Freight_Yard_of_Kailixi_Station.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/89ec54b978dc6985.webp",
+        "credit": "MNXANL · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:201908_Freight_Yard_of_Kailixi_Station.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "201908 Freight Yard of Kailixi Station",
+        "place": "201908 Freight Yard of Kailixi Station.jpg",
+        "originalFile": "201908 Freight Yard of Kailixi Station.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            107.950339,
+            26.589164
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:201908_Freight_Yard_of_Kailixi_Station.jpg"
+        }
+      },
+      "lngLat": [
+        107.950339,
+        26.589164
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:201908_Freight_Yard_of_Kailixi_Station.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "522600"
+    },
+    "poi:admin:420300:reviewed-photo-37198388": {
+      "label": {
+        "en": "Shiyan city panorama",
+        "zh-CN": "十堰城区全景",
+        "zh-TW": "十堰城區全景"
+      },
+      "description": {
+        "en": "A panorama of Shiyan showing urban neighbourhoods extending between wooded hills.",
+        "zh-CN": "十堰城区全景照片，展示楼群在山谷之间延伸的城市景观。",
+        "zh-TW": "十堰城區全景照片，展示樓羣在山谷之間延伸的城市景觀。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%8D%81%E5%A0%B0%E5%85%A8%E6%99%AF%E5%9B%BE_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%8D%81%E5%A0%B0%E5%85%A8%E6%99%AF%E5%9B%BE_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/58be8dbbffcf1075.webp",
+        "credit": "武当山人 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%8D%81%E5%A0%B0%E5%85%A8%E6%99%AF%E5%9B%BE_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​十堰全景图",
+        "place": "十堰全景图 - panoramio.jpg",
+        "originalFile": "十堰全景图 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            110.775361,
+            32.677998
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%8D%81%E5%A0%B0%E5%85%A8%E6%99%AF%E5%9B%BE_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        110.775361,
+        32.677998
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%8D%81%E5%A0%B0%E5%85%A8%E6%99%AF%E5%9B%BE_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "420300"
+    },
+    "poi:admin:653200:reviewed-photo-60328831": {
+      "label": {
+        "en": "Hotan Unity Square",
+        "zh-CN": "和田团结广场",
+        "zh-TW": "和田團結廣場"
+      },
+      "description": {
+        "en": "A north-facing view of Unity Square in Hotan, with the statue of Mao Zedong and Kurban Tulum at its centre.",
+        "zh-CN": "和田团结广场的北向实景，广场中央可见毛泽东与库尔班·吐鲁木的雕像。",
+        "zh-TW": "和田團結廣場的北向實景，廣場中央可見毛澤東與庫爾班·吐魯木的雕像。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/19ff25ffc6792258.webp",
+        "credit": "Voidvector · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Hotan Tuanjie Square Day facing north, center is Statue of Mao Zedong and Kurban Tulum",
+        "place": "Hotan Tuanjie Square Day North.jpg",
+        "originalFile": "Hotan Tuanjie Square Day North.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            79.920936,
+            37.111233
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg"
+        }
+      },
+      "lngLat": [
+        79.920936,
+        37.111233
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "653200"
+    },
+    "poi:admin:654200:reviewed-photo-140838062": {
+      "label": {
+        "en": "Tarbagatai city remains",
+        "zh-CN": "塔尔巴哈台城遗址",
+        "zh-TW": "塔爾巴哈臺城遺址"
+      },
+      "description": {
+        "en": "Surviving earthen structures at the Tarbagatai city remains, showing the materials and form of the former fortifications.",
+        "zh-CN": "塔尔巴哈台城遗址的现场照片，保留的夯土构筑物显示了昔日城防的建筑材料与形态。",
+        "zh-TW": "塔爾巴哈臺城遺址的現場照片，保留的夯土構築物顯示了昔日城防的建築材料與形態。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5782c1768a9ea867.webp",
+        "credit": "HaziiDozen · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​塔尔巴哈台城遗址3",
+        "place": "塔尔巴哈台城遗址3.jpg",
+        "originalFile": "塔尔巴哈台城遗址3.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            82.994392,
+            46.739103
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg"
+        }
+      },
+      "lngLat": [
+        82.994392,
+        46.739103
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "654200"
+    },
+    "poi:admin:620400:reviewed-photo-179921619": {
+      "label": {
+        "en": "Baiyin No. 1 Middle School grounds",
+        "zh-CN": "白银市第一中学操场",
+        "zh-TW": "白銀市第一中學操場"
+      },
+      "description": {
+        "en": "The sports grounds and buildings of Baiyin No. 1 Middle School, a view of everyday urban life.",
+        "zh-CN": "白银市第一中学的操场与校园建筑实景，提供了当地城市生活的一个侧面。",
+        "zh-TW": "白銀市第一中學的操場與校園建築實景，提供了當地城市生活的一個側面。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/bec5cc8313ebebb6.webp",
+        "credit": "Zzyss0721 · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​白银市第一中学",
+        "place": "白银市第一中学操场.jpg",
+        "originalFile": "白银市第一中学操场.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.172656,
+            36.540956
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg"
+        }
+      },
+      "lngLat": [
+        104.172656,
+        36.540956
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E7%99%BD%E9%93%B6%E5%B8%82%E7%AC%AC%E4%B8%80%E4%B8%AD%E5%AD%A6%E6%93%8D%E5%9C%BA.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "620400"
+    },
+    "poi:admin:659004:reviewed-photo-53113662": {
+      "label": {
+        "en": "Wujiaqu public square",
+        "zh-CN": "五家渠城市广场",
+        "zh-TW": "五家渠城市廣場"
+      },
+      "description": {
+        "en": "A winter view of a public square in Wujiaqu, showing its avenues, trees and open space.",
+        "zh-CN": "五家渠广场的冬日实景，树木、道路和广场设施展现了当地公共空间。",
+        "zh-TW": "五家渠廣場的冬日實景，樹木、道路和廣場設施展現了當地公共空間。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%9B%BD%E6%96%B0%E7%96%86%E7%BB%B4%E5%90%BE%E5%B0%94%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8C%BA%E4%BA%94%E5%AE%B6%E6%B8%A0%E5%B8%82_China_Xinjiang_Uygur_Autonomous_Region_-_panoramio_(12).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%9B%BD%E6%96%B0%E7%96%86%E7%BB%B4%E5%90%BE%E5%B0%94%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8C%BA%E4%BA%94%E5%AE%B6%E6%B8%A0%E5%B8%82_China_Xinjiang_Uygur_Autonomous_Region_-_panoramio_(12).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4c44119b08ecade7.webp",
+        "credit": "罗布泊 · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%9B%BD%E6%96%B0%E7%96%86%E7%BB%B4%E5%90%BE%E5%B0%94%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8C%BA%E4%BA%94%E5%AE%B6%E6%B8%A0%E5%B8%82_China_Xinjiang_Uygur_Autonomous_Region_-_panoramio_(12).jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "中国新疆维吾尔族自治区五家渠市 China Xinjiang Uygur Autonomous Region Wujiaqu City China Xinjiang Urumqi Welcome you to tour the, Китай Синьцзяна Урумчи приветствовать Вас на экскурсию, الصين ترحب زيارتك لاورومتشى فى شينجيانغ, 中国新疆のウルムチへの訪問を歓迎する, 中国新疆乌鲁木齐欢迎您来观光旅游",
+        "place": "中国新疆维吾尔族自治区五家渠市 China Xinjiang Uygur Autonomous Region - panoramio (12).jpg",
+        "originalFile": "中国新疆维吾尔族自治区五家渠市 China Xinjiang Uygur Autonomous Region - panoramio (12).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            87.523665,
+            44.16566
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%9B%BD%E6%96%B0%E7%96%86%E7%BB%B4%E5%90%BE%E5%B0%94%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8C%BA%E4%BA%94%E5%AE%B6%E6%B8%A0%E5%B8%82_China_Xinjiang_Uygur_Autonomous_Region_-_panoramio_(12).jpg"
+        }
+      },
+      "lngLat": [
+        87.523665,
+        44.16566
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%9B%BD%E6%96%B0%E7%96%86%E7%BB%B4%E5%90%BE%E5%B0%94%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8C%BA%E4%BA%94%E5%AE%B6%E6%B8%A0%E5%B8%82_China_Xinjiang_Uygur_Autonomous_Region_-_panoramio_(12).jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "659004"
+    },
+    "poi:admin:620300:street-2006": {
+      "label": {
+        "en": "Jinchang streetscape · 2006",
+        "zh-CN": "金昌街景 · 2006",
+        "zh-TW": "金昌街景 · 2006"
+      },
+      "description": {
+        "en": "A streetscape in front of the Jinchuan workers’ building, photographed in Jinchang on 23 April 2006. The road, forecourt and public buildings record the city as it appeared at that time.",
+        "zh-CN": "这张2006年4月23日的照片记录了金昌市区金川职工大厦前的街景。道路、广场与公共建筑呈现了当时的城市面貌。",
+        "zh-TW": "這張2006年4月23日的照片記錄了金昌市區金川職工大廈前的街景。道路、廣場與公共建築呈現了當時的城市面貌。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:20060423105630.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:20060423105630.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption of the linked dated scene photograph.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/1917353f95f23c1e.webp",
+        "credit": "Yaohua2000 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20060423105630.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Jinchang, Gansu, China 38°31.1′ N, 102°10.9′ E This image was taken by User:Yaohua2000 at 2006-04-23 10:56:30 UTC.",
+        "place": "Jinchang streetscape · 2006",
+        "originalFile": "20060423105630.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            102.18166666666667,
+            38.51833333333333
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:20060423105630.jpg"
+        }
+      },
+      "lngLat": [
+        102.18166666666667,
+        38.51833333333333
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:20060423105630.jpg",
+      "coordinateDerivation": "Photographer explicitly published 38°31.1′ N, 102°10.9′ E on the original Commons file page; approximate to 0.1 arcminute.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "620300"
+    },
+    "poi:admin:621200:hanwang-2019": {
+      "label": {
+        "en": "Hanwang valley, Wudu · 2019",
+        "zh-CN": "武都汉王河谷 · 2019",
+        "zh-TW": "武都漢王河谷 · 2019"
+      },
+      "description": {
+        "en": "Hanwang lies in the Bailong River valley southeast of central Wudu. This 2019 photograph shows the closely spaced hillsides, settlements and valley fields.",
+        "zh-CN": "汉王镇位于武都城区东南的白龙江河谷。2019年的实景照片记录了山坡、聚落与河谷田地相邻的景观。",
+        "zh-TW": "漢王鎮位於武都城區東南的白龍江河谷。2019年的實景照片記錄了山坡、聚落與河谷田地相鄰的景觀。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E6%B1%89%E7%8E%8B%E9%95%87_-_Mapillary_(jCkYdXcqFvPFf4e6EoWBI5).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E6%B1%89%E7%8E%8B%E9%95%87_-_Mapillary_(jCkYdXcqFvPFf4e6EoWBI5).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption of the linked dated scene photograph.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/69987775082eb88c.webp",
+        "credit": "ff5722 @ Mapillary.com · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E6%B1%89%E7%8E%8B%E9%95%87_-_Mapillary_(jCkYdXcqFvPFf4e6EoWBI5).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​陇南市汉王镇",
+        "place": "Hanwang valley, Wudu · 2019",
+        "originalFile": "陇南市汉王镇 - Mapillary (jCkYdXcqFvPFf4e6EoWBI5).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            105.0196639,
+            33.3429508
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E6%B1%89%E7%8E%8B%E9%95%87_-_Mapillary_(jCkYdXcqFvPFf4e6EoWBI5).jpg"
+        }
+      },
+      "lngLat": [
+        105.0196639,
+        33.3429508
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E6%B1%89%E7%8E%8B%E9%95%87_-_Mapillary_(jCkYdXcqFvPFf4e6EoWBI5).jpg",
+      "coordinateDerivation": "Public Mapillary camera location, retained in the Commons file GeoData.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "621200"
+    },
+    "poi:admin:621200:liangshui-2019": {
+      "label": {
+        "en": "Liangshui, Wudu · 2019",
+        "zh-CN": "武都两水山城 · 2019",
+        "zh-TW": "武都兩水山城 · 2019"
+      },
+      "description": {
+        "en": "Liangshui occupies a valley northwest of central Wudu. This photograph from May 2019 shows its hillside settlement and transport infrastructure framed by mountains.",
+        "zh-CN": "两水镇位于武都西北的河谷地带。这张2019年5月的照片展示了坡地聚落、交通设施与山地共同构成的地方景观。",
+        "zh-TW": "兩水鎮位於武都西北的河谷地帶。這張2019年5月的照片展示了坡地聚落、交通設施與山地共同構成的地方景觀。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E4%B8%A4%E6%B0%B4%E9%95%87_-_Mapillary_(rhnhbTrMKW852EKUjylBkO).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E4%B8%A4%E6%B0%B4%E9%95%87_-_Mapillary_(rhnhbTrMKW852EKUjylBkO).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption of the linked dated scene photograph.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/15be13bd920542ca.webp",
+        "credit": "ff5722 @ Mapillary.com · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E4%B8%A4%E6%B0%B4%E9%95%87_-_Mapillary_(rhnhbTrMKW852EKUjylBkO).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​陇南市两水镇",
+        "place": "Liangshui, Wudu · 2019",
+        "originalFile": "陇南市两水镇 - Mapillary (rhnhbTrMKW852EKUjylBkO).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.80406,
+            33.42321
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E4%B8%A4%E6%B0%B4%E9%95%87_-_Mapillary_(rhnhbTrMKW852EKUjylBkO).jpg"
+        }
+      },
+      "lngLat": [
+        104.80406,
+        33.42321
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E9%99%87%E5%8D%97%E5%B8%82%E4%B8%A4%E6%B0%B4%E9%95%87_-_Mapillary_(rhnhbTrMKW852EKUjylBkO).jpg",
+      "coordinateDerivation": "Public Mapillary camera location, retained in the Commons file GeoData.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "621200"
+    },
+    "poi:admin:512000:urban": {
+      "id": "poi:admin:512000:urban",
+      "label": {
+        "en": "Ziyang railway station",
+        "zh-CN": "资阳站",
+        "zh-TW": "資陽站"
+      },
+      "description": {
+        "en": "Ziyang railway station opened in 1952 on the Chengdu–Chongqing Railway. This photograph records the station building and forecourt in August 2007, preserving an earlier chapter of the city’s rail history. The station later ceased passenger services while retaining freight operations.",
+        "zh-CN": "资阳站位于成渝铁路线上，于1952年开通。这张2007年8月的照片记录了站房和站前广场，保存着城市铁路历史的一段面貌。车站后来停止办理客运业务，保留货运功能；照片明确作为历史实景展示。",
+        "zh-TW": "資陽站位於成渝鐵路線上，於1952年開通。這張2007年8月的照片記錄了站房和站前廣場，保存着城市鐵路歷史的一段面貌。車站後來停止辦理客運業務，保留貨運功能；照片明確作爲歷史實景展示。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/资阳站",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/资阳站",
+        "https://commons.wikimedia.org/wiki/File:Ziyang_station.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/076fd607fbebd75f.webp",
+        "credit": "Nihongarden · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ziyang_station.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Ziyang railway station in a dated archival photograph.",
+          "zh-CN": "资阳站有明确拍摄年份的实景照片。",
+          "zh-TW": "資陽站有明確拍攝年份的實景照片。"
+        },
+        "place": {
+          "en": "Ziyang railway station",
+          "zh-CN": "资阳站",
+          "zh-TW": "資陽站"
+        },
+        "originalFile": "Ziyang station.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        104.6499139,
+        30.1274167
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q8072896#P625",
+      "coordinateDerivation": "Published WGS84 coordinate of the photographed railway station.",
+      "parentCity": "512000",
+      "kind": "landmark"
+    },
+    "poi:admin:632300:urban": {
+      "id": "poi:admin:632300:urban",
+      "label": {
+        "en": "Rongwo Monastery courtyard",
+        "zh-CN": "隆务寺庭院",
+        "zh-TW": "隆務寺庭院"
+      },
+      "description": {
+        "en": "Rongwo Monastery stands in Tongren and is an important Gelug Buddhist monastery in the Amdo region. Its origins reach back to 1301. This geographically tagged photograph from July 2012 shows a monastery courtyard, golden roof and the surrounding mountain slopes, connecting the architecture with its valley setting.",
+        "zh-CN": "隆务寺位于同仁，是安多地区重要的藏传佛教格鲁派寺院，历史可追溯至1301年。这张带原始地理标签的2012年7月实拍展示庭院、金色屋顶与周围山坡，让寺院建筑和所在河谷的地形关系同时呈现。",
+        "zh-TW": "隆務寺位於同仁，是安多地區重要的藏傳佛教格魯派寺院，歷史可追溯至1301年。這張帶原始地理標籤的2012年7月實拍展示庭院、金色屋頂與周圍山坡，讓寺院建築和所在河谷的地形關係同時呈現。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/隆务寺",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/隆务寺",
+        "https://commons.wikimedia.org/wiki/File:Longwu_Monastery_1.jpeg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fe609fe1d557239f.webp",
+        "credit": "Ken Marshall from Taipei, Taiwan · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Longwu_Monastery_1.jpeg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": {
+          "en": "Rongwo Monastery courtyard in a dated archival photograph.",
+          "zh-CN": "隆务寺庭院有明确拍摄年份的实景照片。",
+          "zh-TW": "隆務寺庭院有明確拍攝年份的實景照片。"
+        },
+        "place": {
+          "en": "Rongwo Monastery courtyard",
+          "zh-CN": "隆务寺庭院",
+          "zh-TW": "隆務寺庭院"
+        },
+        "originalFile": "Longwu Monastery 1.jpeg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        102.007655,
+        35.508375
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Longwu_Monastery_1.jpeg",
+      "coordinateDerivation": "Original Commons geographic photo tag (WGS84).",
+      "parentCity": "632300",
+      "kind": "landmark"
+    },
+    "poi:admin:620800:satellite": {
+      "id": "poi:admin:620800:satellite",
+      "label": {
+        "en": "Pingliang · satellite view",
+        "zh-CN": "平凉市 · 遥感全景",
+        "zh-TW": "平涼市 · 遙感全景"
+      },
+      "description": {
+        "en": "A true-color Landsat observation of Pingliang on 2025-06-16. The 30-metre imagery records the city and its surrounding land, and is labelled as a satellite reference rather than a ground-level travel photograph.",
+        "zh-CN": "这幅2025-06-16的Landsat真彩遥感影像记录了平凉市及周边地表。影像分辨率为30米，可观察城区与周边地貌的空间关系；照片标明了实际观测日期。",
+        "zh-TW": "這幅2025-06-16的Landsat真彩遙感影像記錄了平涼市及周邊地表。影像解析度為30公尺，可觀察城區與周邊地貌的空間關係；照片標明了實際觀測日期。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B9%B3%E5%87%89%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B9%B3%E5%87%89%E5%B8%82",
+        "https://hls.gsfc.nasa.gov/data-access-and-tools/"
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/620800-landsat-2025-06-16.webp",
+        "credit": "NASA / USGS · Landsat HLS L30 · 2025-06-16 · Public domain",
+        "source": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=HLS_L30_Nadir_BRDF_Adjusted_Reflectance&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A4326&BBOX=106.59360106106882%2C35.487331329500535%2C106.77023893893119%2C35.59512867049946&WIDTH=640&HEIGHT=480&TIME=2025-06-16&TRANSPARENT=TRUE",
+        "license": "Public domain (NASA / USGS)",
+        "licenseUrl": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "alt": {
+          "en": "Pingliang · satellite view",
+          "zh-CN": "平凉市 · 遥感全景",
+          "zh-TW": "平涼市 · 遙感全景"
+        },
+        "place": {
+          "en": "Pingliang · satellite view",
+          "zh-CN": "平凉市 · 遥感全景",
+          "zh-TW": "平涼市 · 遙感全景"
+        },
+        "date": "2025-06-16",
+        "type": "satellite",
+        "resolutionM": 30,
+        "bboxWgs84": [
+          106.59360106106882,
+          35.487331329500535,
+          106.77023893893119,
+          35.59512867049946
+        ],
+        "modifications": "Geographic window and WebP encoding; original observed colours retained.",
+        "granule": "HLS.L30.T48SXE.2025167T033123.v2.0"
+      },
+      "lngLat": [
+        106.68192,
+        35.54123
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q533985#P625",
+      "kind": "landmark",
+      "role": "satellite-reference",
+      "parentUnit": "620800"
+    },
+    "poi:admin:469027:satellite": {
+      "id": "poi:admin:469027:satellite",
+      "label": {
+        "en": "Baoyou, Ledong · satellite view",
+        "zh-CN": "乐东抱由 · 遥感全景",
+        "zh-TW": "樂東抱由 · 遙感全景"
+      },
+      "description": {
+        "en": "A true-color Landsat observation of Baoyou, Ledong on 2025-03-25. The 30-metre imagery records the city and its surrounding land, and is labelled as a satellite reference rather than a ground-level travel photograph.",
+        "zh-CN": "这幅2025-03-25的Landsat真彩遥感影像记录了乐东抱由及周边地表。影像分辨率为30米，可观察城区与周边地貌的空间关系；照片标明了实际观测日期。",
+        "zh-TW": "這幅2025-03-25的Landsat真彩遙感影像記錄了樂東抱由及周邊地表。影像解析度為30公尺，可觀察城區與周邊地貌的空間關係；照片標明了實際觀測日期。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B9%90%E4%B8%9C%E9%BB%8E%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8E%BF",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B9%90%E4%B8%9C%E9%BB%8E%E6%97%8F%E8%87%AA%E6%B2%BB%E5%8E%BF",
+        "https://hls.gsfc.nasa.gov/data-access-and-tools/"
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/469027-landsat-2025-03-25.webp",
+        "credit": "NASA / USGS · Landsat HLS L30 · 2025-03-25 · Public domain",
+        "source": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=HLS_L30_Nadir_BRDF_Adjusted_Reflectance&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A4326&BBOX=109.13154567184009%2C18.72473466475027%2C109.20743892815992%2C18.778633335249733&WIDTH=640&HEIGHT=480&TIME=2025-03-25&TRANSPARENT=TRUE",
+        "license": "Public domain (NASA / USGS)",
+        "licenseUrl": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "alt": {
+          "en": "Baoyou, Ledong · satellite view",
+          "zh-CN": "乐东抱由 · 遥感全景",
+          "zh-TW": "樂東抱由 · 遙感全景"
+        },
+        "place": {
+          "en": "Baoyou, Ledong · satellite view",
+          "zh-CN": "乐东抱由 · 遥感全景",
+          "zh-TW": "樂東抱由 · 遙感全景"
+        },
+        "date": "2025-03-25",
+        "type": "satellite",
+        "resolutionM": 30,
+        "bboxWgs84": [
+          109.13154567184009,
+          18.72473466475027,
+          109.20743892815992,
+          18.778633335249733
+        ],
+        "modifications": "Geographic window and WebP encoding; original observed colours retained.",
+        "granule": "HLS.L30.T49QCA.2025084T030533.v2.0"
+      },
+      "lngLat": [
+        109.1694923,
+        18.751684
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/node/1711536920",
+      "kind": "landmark",
+      "role": "satellite-reference",
+      "parentUnit": "469027"
+    },
+    "poi:admin:460300:satellite": {
+      "id": "poi:admin:460300:satellite",
+      "label": {
+        "en": "Yongxing Island · satellite view",
+        "zh-CN": "永兴岛 · 遥感全景",
+        "zh-TW": "永興島 · 遙感全景"
+      },
+      "description": {
+        "en": "A true-color Landsat observation of Yongxing Island on 2025-04-12. The 30-metre imagery records the city and its surrounding land, and is labelled as a satellite reference rather than a ground-level travel photograph.",
+        "zh-CN": "这幅2025-04-12的Landsat真彩遥感影像记录了永兴岛及周边地表。影像分辨率为30米，可观察城区与周边地貌的空间关系；照片标明了实际观测日期。",
+        "zh-TW": "這幅2025-04-12的Landsat真彩遙感影像記錄了永興島及周邊地表。影像解析度為30公尺，可觀察城區與周邊地貌的空間關係；照片標明了實際觀測日期。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%89%E6%B2%99%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%89%E6%B2%99%E5%B8%82",
+        "https://hls.gsfc.nasa.gov/data-access-and-tools/"
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/460300-landsat-2025-04-12.webp",
+        "credit": "NASA / USGS · Landsat HLS L30 · 2025-04-12 · Public domain",
+        "source": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=HLS_L30_Nadir_BRDF_Adjusted_Reflectance&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A4326&BBOX=112.30552626135955%2C16.812486887562702%2C112.36183762664047%2C16.852910890437297&WIDTH=640&HEIGHT=480&TIME=2025-04-12&TRANSPARENT=TRUE",
+        "license": "Public domain (NASA / USGS)",
+        "licenseUrl": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "alt": {
+          "en": "Yongxing Island · satellite view",
+          "zh-CN": "永兴岛 · 遥感全景",
+          "zh-TW": "永興島 · 遙感全景"
+        },
+        "place": {
+          "en": "Yongxing Island · satellite view",
+          "zh-CN": "永兴岛 · 遥感全景",
+          "zh-TW": "永興島 · 遙感全景"
+        },
+        "date": "2025-04-12",
+        "type": "satellite",
+        "resolutionM": 30,
+        "bboxWgs84": [
+          112.30552626135955,
+          16.812486887562702,
+          112.36183762664047,
+          16.852910890437297
+        ],
+        "modifications": "Geographic window and WebP encoding; original observed colours retained.",
+        "granule": "HLS.L30.T49QFU.2025102T025335.v2.0"
+      },
+      "lngLat": [
+        112.333681944,
+        16.832698889
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q107013001#P625",
+      "kind": "landmark",
+      "role": "satellite-reference",
+      "parentUnit": "460300"
+    },
+    "poi:admin:350600:urban": {
+      "id": "poi:admin:350600:urban",
+      "label": {
+        "en": "Zhangzhou Confucian Temple",
+        "zh-CN": "漳州府文庙",
+        "zh-TW": "漳州府文廟"
+      },
+      "description": {
+        "en": "Zhangzhou’s prefectural Confucian temple stands in the historic city centre. It was founded during the Southern Song and rebuilt in the Ming period. This 2010 photograph shows the main hall and its courtyard, including the layered tiled roof, stone balustrade and sculpture of Confucius.",
+        "zh-CN": "漳州府文庙位于历史城区，始建于南宋，明代曾重建。这张2010年的实景照片展示大成殿与庭院：层叠瓦顶、石栏和孔子雕像共同呈现地方儒学建筑的空间，也保存了这处城市文化地标当时的面貌。",
+        "zh-TW": "漳州府文廟位於歷史城區，始建於南宋，明代曾重建。這張2010年的實景照片展示大成殿與庭院：層疊瓦頂、石欄和孔子雕像共同呈現地方儒學建築的空間，也保存了這處城市文化地標當時的面貌。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/漳州府文庙",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/漳州府文庙",
+        "https://commons.wikimedia.org/wiki/File:Zhangzhou_Confucian_temple.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c635acd362de726b.webp",
+        "credit": "Hhaithait (talk) 14:44, 12 December 2010 (UTC) · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Zhangzhou_Confucian_temple.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": {
+          "en": "Zhangzhou Confucian Temple in the cited dated photograph.",
+          "zh-CN": "漳州府文庙有明确拍摄年份的实景照片。",
+          "zh-TW": "漳州府文廟有明確拍攝年份的實景照片。"
+        },
+        "place": {
+          "en": "Zhangzhou Confucian Temple",
+          "zh-CN": "漳州府文庙",
+          "zh-TW": "漳州府文廟"
+        },
+        "originalFile": "Zhangzhou Confucian temple.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        117.64888889,
+        24.50805556
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/漳州府文庙",
+      "coordinateDerivation": "Published WGS84 coordinate of the photographed temple.",
+      "parentCity": "350600",
+      "kind": "landmark"
+    },
+    "poi:admin:360100:urban": {
+      "id": "poi:admin:360100:urban",
+      "label": {
+        "en": "Pavilion of Prince Teng",
+        "zh-CN": "滕王阁",
+        "zh-TW": "滕王閣"
+      },
+      "description": {
+        "en": "The Pavilion of Prince Teng rises beside the Gan River in Nanchang. Its history began in the Tang dynasty, while the present pavilion was reconstructed in 1989. This geographically tagged photograph from August 2024 records the main building, terraces and forecourt.",
+        "zh-CN": "滕王阁坐落于南昌赣江之滨，历史始于唐代，现有楼阁于1989年重建。这张带原始地理标签的2024年8月实拍完整展示主阁、台阶和前方广场，将著名江城地标与近城地形中的真实位置相连接。",
+        "zh-TW": "滕王閣坐落於南昌贛江之濱，歷史始於唐代，現有樓閣於1989年重建。這張帶原始地理標籤的2024年8月實拍完整展示主閣、臺階和前方廣場，將著名江城地標與近城地形中的真實位置相連接。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/滕王阁",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/滕王阁",
+        "https://commons.wikimedia.org/wiki/File:%E6%BB%95%E7%8E%8B%E9%98%81_2024-08-05_04.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b0a74ab2329b7bdc.webp",
+        "credit": "xiquinhosilva · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%BB%95%E7%8E%8B%E9%98%81_2024-08-05_04.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": {
+          "en": "Pavilion of Prince Teng in the cited dated photograph.",
+          "zh-CN": "滕王阁有明确拍摄年份的实景照片。",
+          "zh-TW": "滕王閣有明確拍攝年份的實景照片。"
+        },
+        "place": {
+          "en": "Pavilion of Prince Teng",
+          "zh-CN": "滕王阁",
+          "zh-TW": "滕王閣"
+        },
+        "originalFile": "滕王阁 2024-08-05 04.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        115.876653,
+        28.684025
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:滕王阁_2024-08-05_04.jpg",
+      "coordinateDerivation": "Original Commons geographic photo tag (WGS84).",
+      "parentCity": "360100",
+      "kind": "landmark"
+    },
+    "poi:admin:450200:urban": {
+      "id": "poi:admin:450200:urban",
+      "label": {
+        "en": "Liujiang Bridge",
+        "zh-CN": "柳江大桥",
+        "zh-TW": "柳江大橋"
+      },
+      "description": {
+        "en": "Liujiang Bridge spans the Liu River in central Liuzhou. This geographically tagged photograph from April 2009 shows the bridge from the riverbank, with piers, reflections and urban buildings beyond. It records the close relationship between the city’s crossings and its river landscape.",
+        "zh-CN": "柳江大桥横跨柳州城区的柳江。这张带原始地理标签的2009年4月照片从江岸展示桥身、桥墩、水中倒影和对岸楼宇，记录城市交通与滨江景观的关系。地图锚点采用实拍位置，照片年份也明确保留。",
+        "zh-TW": "柳江大橋橫跨柳州城區的柳江。這張帶原始地理標籤的2009年4月照片從江岸展示橋身、橋墩、水中倒影和對岸樓宇，記錄城市交通與濱江景觀的關係。地圖錨點採用實拍位置，照片年份也明確保留。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/柳江大桥",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/柳江大桥",
+        "https://commons.wikimedia.org/wiki/File:%E6%9F%B3%E6%B1%9F%E5%A4%A7%E6%A1%A5_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/68b17a929669e23f.webp",
+        "credit": "涔水影人 · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%9F%B3%E6%B1%9F%E5%A4%A7%E6%A1%A5_-_panoramio.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": {
+          "en": "Liujiang Bridge in the cited dated photograph.",
+          "zh-CN": "柳江大桥有明确拍摄年份的实景照片。",
+          "zh-TW": "柳江大橋有明確拍攝年份的實景照片。"
+        },
+        "place": {
+          "en": "Liujiang Bridge",
+          "zh-CN": "柳江大桥",
+          "zh-TW": "柳江大橋"
+        },
+        "originalFile": "柳江大桥 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        109.404184,
+        24.30897
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:柳江大桥_-_panoramio.jpg",
+      "coordinateDerivation": "Original Commons geographic photo tag (WGS84).",
+      "parentCity": "450200",
+      "kind": "landmark"
+    },
+    "poi:admin:230500:urban-station": {
+      "label": {
+        "en": "Shuangyashan West railway station",
+        "zh-CN": "双鸭山西站",
+        "zh-TW": "雙鴨山西站"
+      },
+      "description": {
+        "en": "Shuangyashan West opened in December 2021 near Fuli in Jixian County. Its broad station building forms an important passenger gateway to the Shuangyashan urban area.",
+        "zh-CN": "双鸭山西站位于中华人民共和国黑龙江省双鸭山市集贤县福利镇四达金茂小镇南1公里外，紧邻双鸭山市西环路，是中国铁路哈尔滨局集团佳木斯站管辖的二等站，于2017年开工建设，2021年12月6日建成通车。该站是中国高铁系统最东端的车站。",
+        "zh-TW": "雙鴨山西站位於中華人民共和國黑龍江省雙鴨山市集賢縣福利鎮四達金茂小鎮南1公里外，緊鄰雙鴨山市西環路，是中國鐵路哈爾濱局集團佳木斯站管轄的二等站，於2017年開工建設，2021年12月6日建成通車。該站是中國高鐵系統最東端的車站。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8F%8C%E9%B8%AD%E5%B1%B1%E8%A5%BF%E7%AB%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8F%8C%E9%B8%AD%E5%B1%B1%E8%A5%BF%E7%AB%99"
+      ],
+      "textLicense": "CC BY-SA 4.0; shortened and translated encyclopedia excerpt",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/79c4f4c2018fb7ac.webp",
+        "credit": "H2v5o68z · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shuangyashan_West_Railway_Station.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​Shuangyashan Railway Station",
+        "place": "双鸭山西站",
+        "originalFile": "Shuangyashan_West_Railway_Station.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        131.08226,
+        46.70865
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%8F%8C%E9%B8%AD%E5%B1%B1%E8%A5%BF%E7%AB%99",
+      "coordinateDerivation": "WGS84 coordinate explicitly published in the linked station article.",
+      "kind": "landmark",
+      "parentUnit": "230500"
+    },
+    "poi:admin:330800:urban-station": {
+      "label": {
+        "en": "Quzhou railway station",
+        "zh-CN": "衢州站",
+        "zh-TW": "衢州站"
+      },
+      "description": {
+        "en": "Quzhou railway station stands in Kecheng District. It serves the Shanghai–Kunming and connecting railway routes, linking the city with the surrounding region.",
+        "zh-CN": "衢州站位于中华人民共和国浙江省衢州市柯城区花园街道箬篷社区，经过铁路有沪昆铁路、沪昆客运专线、衢九铁路、衢宁铁路。该站为上海局集团金华车务段管辖的二等车站，办理列车通过、停靠，办理客运货运业务。",
+        "zh-TW": "衢州站位於中華人民共和國浙江省衢州市柯城區花園街道箬篷社區，經過鐵路有滬昆鐵路、滬昆客運專線、衢九鐵路、衢寧鐵路。該站爲上海局集團金華車務段管轄的二等車站，辦理列車通過、停靠，辦理客運貨運業務。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%A1%A2%E5%B7%9E%E7%AB%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%A1%A2%E5%B7%9E%E7%AB%99"
+      ],
+      "textLicense": "CC BY-SA 4.0; shortened and translated encyclopedia excerpt",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/eb8a2c305cae288e.webp",
+        "credit": "MNXANL · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:201901_Station_Building_of_Quzhou.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "201901 Station Building of Quzhou",
+        "place": "衢州站",
+        "originalFile": "201901_Station_Building_of_Quzhou.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        118.8772,
+        28.92586667
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%A1%A2%E5%B7%9E%E7%AB%99",
+      "coordinateDerivation": "WGS84 coordinate explicitly published in the linked station article.",
+      "kind": "landmark",
+      "parentUnit": "330800"
+    },
+    "poi:admin:130200:urban-reviewed": {
+      "label": {
+        "en": "Central Tangshan",
+        "zh-CN": "唐山中心城区",
+        "zh-TW": "唐山中心城區"
+      },
+      "description": {
+        "en": "A streetscape in central Tangshan, showing its public square, roads and high-rise buildings.",
+        "zh-CN": "唐山中心城区的实景照片，展现广场、道路与高层建筑共同构成的城市环境。",
+        "zh-TW": "唐山中心城區的實景照片，展現廣場、道路與高層建築共同構成的城市環境。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%94%90%E5%B1%B1center.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%94%90%E5%B1%B1center.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption of the linked photograph.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7364103a949a90a7.webp",
+        "credit": "KangTyngrwey · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%94%90%E5%B1%B1center.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "​唐山市中心天际线",
+        "place": "唐山center.jpg",
+        "originalFile": "唐山center.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            118.177114,
+            39.624294
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%94%90%E5%B1%B1center.jpg"
+        }
+      },
+      "lngLat": [
+        118.177114,
+        39.624294
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%94%90%E5%B1%B1center.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph GeoData; not an arbitrary city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "130200"
+    },
+    "poi:admin:540100:urban": {
+      "id": "poi:admin:540100:urban",
+      "label": {
+        "en": "Potala Palace",
+        "zh-CN": "布达拉宫",
+        "zh-TW": "布達拉宮"
+      },
+      "description": {
+        "en": "Potala Palace is a museum complex in Lhasa, the capital of the Tibet Autonomous Region of China. It was formerly the winter palace of the Dalai Lamas, and from 1649 until 1959 served as the Dalai Lamas' residence.",
+        "zh-CN": "布达拉宫坐落在中华人民共和国西藏自治区首府拉萨市区西北的玛布日山上，是一座规模宏大的宫殿式建筑群，最初是吐蕃王朝第三十三代藏王赞普松赞干布兴建。于17世纪重建后，成为历代达赖喇嘛的冬宫居所，为西藏政教合一的统治中心。",
+        "zh-TW": "布達拉宮坐落在中華人民共和國西藏自治區首府拉薩市區西北的瑪布日山上，是一座規模宏大的宮殿式建築羣，最初是吐蕃王朝第三十三代藏王贊普松贊干布興建。於17世紀重建後，成爲歷代達賴喇嘛的冬宮居所，為西藏政教合一的統治中心。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B8%83%E8%BE%BE%E6%8B%89%E5%AE%AB",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B8%83%E8%BE%BE%E6%8B%89%E5%AE%AB",
+        "https://en.wikipedia.org/wiki/Potala_Palace"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ce4aa37f9f2dbcf4.webp",
+        "credit": "Lhasa Government · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Potala_Palace_HQ.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Potala Palace in Lhasa. In the distant background: Nyangrain Subdistrict.[1]",
+        "place": "Potala Palace",
+        "originalFile": "Potala_Palace_HQ.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        91.11694444,
+        29.65777778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Potala_Palace",
+      "kind": "landmark",
+      "parentCity": "540100"
+    },
+    "poi:admin:441800:urban-reviewed": {
+      "label": {
+        "en": "Qingyuan riverside skyline",
+        "zh-CN": "清远滨水天际线",
+        "zh-TW": "清遠濱水天際線"
+      },
+      "description": {
+        "en": "The riverside skyline of Qingyuan, showing open water, urban buildings and vegetation along the riverbank.",
+        "zh-CN": "清远城区的滨水天际线，水面、楼群与河岸绿地共同构成城市景观。",
+        "zh-TW": "清遠城區的濱水天際線，水面、樓羣與河岸綠地共同構成城市景觀。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%BF%9C%E5%B8%82%E5%8C%BA%E5%A4%A9%E9%99%85%E7%BA%BF.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%BF%9C%E5%B8%82%E5%8C%BA%E5%A4%A9%E9%99%85%E7%BA%BF.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption based on the linked photograph.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/6d0090bcf2de613c.webp",
+        "credit": "Wen Liangjun · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%BF%9C%E5%B8%82%E5%8C%BA%E5%A4%A9%E9%99%85%E7%BA%BF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​摄于凤城大桥",
+        "place": "清远市区天际线.jpg",
+        "originalFile": "清远市区天际线.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            113.055572,
+            23.68625
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%BF%9C%E5%B8%82%E5%8C%BA%E5%A4%A9%E9%99%85%E7%BA%BF.jpg"
+        }
+      },
+      "lngLat": [
+        113.055572,
+        23.68625
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E6%B8%85%E8%BF%9C%E5%B8%82%E5%8C%BA%E5%A4%A9%E9%99%85%E7%BA%BF.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph GeoData; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "441800"
+    }
+  }
+}

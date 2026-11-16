@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "640400": {
+      "label": {
+        "en": "Guyuan",
+        "zh-CN": "固原市",
+        "zh-TW": "固原市"
+      },
+      "description": {
+        "en": "Guyuan , formerly known as Xihaigu or Dayuan , is a prefecture-level city in the Ningxia Hui Autonomous Region of the People's Republic of China. It occupies the southernmost section of the region, bordering Gansu province to the east, south, and due west.",
+        "zh-CN": "固原市，简称固，古称原州，是中华人民共和国宁夏回族自治区下辖的地级市，位于宁夏南部。市境北连中卫市，东、南、西三面分别与甘肃省庆阳市、平凉市、白银市接壤。",
+        "zh-TW": "固原市，簡稱固，古稱原州，是中華人民共和國寧夏回族自治區下轄的地級市，位於寧夏南部。市境北連中衛市，東、南、西三面分別與甘肅省慶陽市、平涼市、白銀市接壤。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9B%BA%E5%8E%9F%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9B%BA%E5%8E%9F%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Guyuan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        106.257,
+        36.01
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/ab81291f0f9a1338.webp",
+        "credit": "董辰兴 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9D%E4%B8%AD%E9%93%81%E8%B7%AF%E8%B7%A8%E5%9B%BA%E5%8E%9F%E6%96%87%E5%8C%96%E8%B7%AF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​宝中铁路跨固原文化路",
+        "place": "宝中铁路跨固原文化路.jpg",
+        "originalFile": "宝中铁路跨固原文化路.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            106.29955,
+            36.00706
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9D%E4%B8%AD%E9%93%81%E8%B7%AF%E8%B7%A8%E5%9B%BA%E5%8E%9F%E6%96%87%E5%8C%96%E8%B7%AF.jpg"
+        }
+      },
+      "photoReference": "poi:admin:640400:photo-79320902",
+      "urbanFocus": {
+        "label": {
+          "en": "Guyuan",
+          "zh-CN": "固原市",
+          "zh-TW": "固原市"
+        },
+        "lngLat": [
+          106.27816,
+          36.00801
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Guyuan.",
+          "zh-CN": "以固原市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以固原市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q604625#P625",
+        "source": "https://www.wikidata.org/wiki/Q604625",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q604625#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.74
+        }
+      }
+    },
+    "poi:admin:640400:photo-79320902": {
+      "label": {
+        "en": "Guyuan landscape view",
+        "zh-CN": "宝中铁路跨固原文化路",
+        "zh-TW": "寶中鐵路跨固原文化路"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Guyuan, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现固原市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現固原市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9D%E4%B8%AD%E9%93%81%E8%B7%AF%E8%B7%A8%E5%9B%BA%E5%8E%9F%E6%96%87%E5%8C%96%E8%B7%AF.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%AE%9D%E4%B8%AD%E9%93%81%E8%B7%AF%E8%B7%A8%E5%9B%BA%E5%8E%9F%E6%96%87%E5%8C%96%E8%B7%AF.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ab81291f0f9a1338.webp",
+        "credit": "董辰兴 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9D%E4%B8%AD%E9%93%81%E8%B7%AF%E8%B7%A8%E5%9B%BA%E5%8E%9F%E6%96%87%E5%8C%96%E8%B7%AF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​宝中铁路跨固原文化路",
+        "place": "宝中铁路跨固原文化路.jpg",
+        "originalFile": "宝中铁路跨固原文化路.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            106.29955,
+            36.00706
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%AE%9D%E4%B8%AD%E9%93%81%E8%B7%AF%E8%B7%A8%E5%9B%BA%E5%8E%9F%E6%96%87%E5%8C%96%E8%B7%AF.jpg"
+        }
+      },
+      "lngLat": [
+        106.29955,
+        36.00706
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%AE%9D%E4%B8%AD%E9%93%81%E8%B7%AF%E8%B7%A8%E5%9B%BA%E5%8E%9F%E6%96%87%E5%8C%96%E8%B7%AF.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "640400"
+    }
+  }
+}

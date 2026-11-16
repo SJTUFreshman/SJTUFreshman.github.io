@@ -1,0 +1,140 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TWN:Wuqiu": {
+      "label": {
+        "en": "Wuqiu, Kinmen",
+        "zh-CN": "乌坵乡",
+        "zh-TW": "烏坵鄉"
+      },
+      "description": {
+        "en": "Wuqiu is a rural township of Kinmen County, Taiwan made up of a group of islands in the Taiwan Strait comprising two major islands, Daqiu and Xiaoqiu. Wuqiu Township is nominally de jure part of Futian County, Fuchien of the Chinese Taipei.",
+        "zh-CN": "乌坵乡是中华台北福建省的行政区划，位于兴化湾及湄洲湾出海口，原属莆田县湄洲乡，1954年起改由金门县代管至今。管辖范围包括大坵屿和小坵屿等两个大陆岛，全境面积约为1.2平方公里，人口仅有600人左右，是目前中华台北政府所管辖面积最小、人口最少的乡，也是面积第二小、人口最少的乡镇市区。",
+        "zh-TW": "烏坵鄉是中華臺北福建省的行政區劃，位於興化灣及湄洲灣出海口，原屬莆田縣湄洲鄉，1954年起改由金門縣代管至今。管轄範圍包括大坵嶼和小坵嶼等兩個大陸島，全境面積約為1.2平方公里，人口僅有600人左右，是目前中華臺北政府所管轄面積最小、人口最少的鄉，也是面積第二小、人口最少的鄉鎮市區。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%83%8F%E5%9D%B5%E9%84%89",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%83%8F%E5%9D%B5%E9%84%89",
+        "https://en.wikipedia.org/wiki/Wuqiu,_Kinmen"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        119.462,
+        24.986
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/bf416a3a03c3c040.webp",
+        "credit": "Kechinyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%83%8F%E5%9D%B5%E7%99%BE%E5%B9%B4%E7%87%88%E5%A1%941.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​中華臺北海軍陸戰隊隊徽雕塑與烏坵嶼燈塔。",
+        "place": "Wuqiu Lighthouse",
+        "originalFile": "烏坵百年燈塔1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TWN:Wuqiu:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Daqiu settlement & lighthouse",
+          "zh-CN": "大坵聚落与灯塔",
+          "zh-TW": "大坵聚落與燈塔"
+        },
+        "lngLat": [
+          119.4520405,
+          24.9923118
+        ],
+        "kind": "island-detail",
+        "definition": {
+          "en": "An island close-up centred on Wuqiu Lighthouse on Daqiu, including the settlement and nearby coast; this is not an urban district.",
+          "zh-CN": "以大坵岛上的乌坵灯塔为焦点，近看聚落与周边海岸；这里采用岛屿近景，并非城市建成区。",
+          "zh-TW": "以大坵島上的烏坵燈塔為焦點，近看聚落與周邊海岸；這裡採用島嶼近景，並非城市建成區。"
+        },
+        "extentKm": 3,
+        "coordinateSystem": "WGS84",
+        "source": "https://zh.wikipedia.org/wiki/烏坵燈塔",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q15918057",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E7%83%8F%E5%9D%B5%E9%84%89",
+        "verification": "Point independently falls within the original NLSC land polygon (zero distance to polygon)."
+      }
+    },
+    "poi:admin:TWN:Wuqiu:c7b3bdaa": {
+      "label": {
+        "en": "Wuqiu Lighthouse",
+        "zh-CN": "乌坵屿灯塔",
+        "zh-TW": "烏坵嶼燈塔"
+      },
+      "description": {
+        "en": "The Wuqiu Lighthouse is a lighthouse in Daqiu Village, Wuqiu Township , Kinmen County , Fujian Province , Chinese Taipei .",
+        "zh-CN": "乌坵屿灯塔位于中华台北福建省金门县乌坵乡的灯塔，始建于五口通商时期。1951年因军事需求关闭，直到2017年重新启用。",
+        "zh-TW": "烏坵嶼燈塔位於中華臺北福建省金門縣烏坵鄉的燈塔，始建於五口通商時期。1951年因軍事需求關閉，直到2017年重新啓用。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%83%8F%E5%9D%B5%E5%B6%BC%E7%87%88%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%83%8F%E5%9D%B5%E5%B6%BC%E7%87%88%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Wuqiu_Lighthouse"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.452948,
+        24.992045
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Wuqiu_Lighthouse",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TWN:Wuqiu",
+      "photo": {
+        "src": "assets/maps/administrative/photos/bf416a3a03c3c040.webp",
+        "credit": "Kechinyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%83%8F%E5%9D%B5%E7%99%BE%E5%B9%B4%E7%87%88%E5%A1%941.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​中華臺北海軍陸戰隊隊徽雕塑與烏坵嶼燈塔。",
+        "place": "烏坵嶼燈塔",
+        "originalFile": "烏坵百年燈塔1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TWN:Wuqiu:urban": {
+      "id": "poi:admin:TWN:Wuqiu:urban",
+      "label": {
+        "en": "Wuqiu Lighthouse",
+        "zh-CN": "乌坵屿灯塔",
+        "zh-TW": "烏坵嶼燈塔"
+      },
+      "description": {
+        "en": "The Wuqiu Lighthouse is a lighthouse in Daqiu Village, Wuqiu Township , Kinmen County , Fujian Province , Chinese Taipei .",
+        "zh-CN": "乌坵屿灯塔位于中华台北福建省金门县乌坵乡的灯塔，始建于五口通商时期。1951年因军事需求关闭，直到2017年重新启用。",
+        "zh-TW": "烏坵嶼燈塔位於中華臺北福建省金門縣烏坵鄉的燈塔，始建於五口通商時期。1951年因軍事需求關閉，直到2017年重新啓用。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%83%8F%E5%9D%B5%E5%B6%BC%E7%87%88%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%83%8F%E5%9D%B5%E5%B6%BC%E7%87%88%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Wuqiu_Lighthouse"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/bf416a3a03c3c040.webp",
+        "credit": "Kechinyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%83%8F%E5%9D%B5%E7%99%BE%E5%B9%B4%E7%87%88%E5%A1%941.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​中華臺北海軍陸戰隊隊徽雕塑與烏坵嶼燈塔。",
+        "place": "Wuqiu Lighthouse",
+        "originalFile": "烏坵百年燈塔1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        119.4520405,
+        24.9923118
+      ],
+      "coordinateSource": "https://www.wikidata.org/wiki/Q15918057",
+      "kind": "landmark",
+      "parentCity": "TWN:Wuqiu"
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "430300": {
+      "label": {
+        "en": "Xiangtan",
+        "zh-CN": "湘潭市",
+        "zh-TW": "湘潭市"
+      },
+      "description": {
+        "en": "Xiangtan is a prefecture-level city in east-central Hunan province, south-central China. The hometowns of several founding leaders of the Chinese Communist Party, including Chairman Mao Zedong, President Liu Shaoqi, and Marshal Peng Dehuai, are in Xiangtan's administration, as well as the hometowns of Qing dynasty and republic era painter Qi Baishi, Confucian scholar-general Zeng Guofan, and tennis player Peng Shuai.",
+        "zh-CN": "湘潭市，简称潭，是中华人民共和国湖南省下辖的地级市，位于湖南省中部偏东，因盛产湘莲而得别名“莲城”。市境北临长沙市，东界株洲市，南接衡阳市，西连娄底市。",
+        "zh-TW": "湘潭市，簡稱潭，是中華人民共和國湖南省下轄的地級市，位於湖南省中部偏東，因盛產湘蓮而得別名“蓮城”。市境北臨長沙市，東界株洲市，南接衡陽市，西連婁底市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B9%98%E6%BD%AD%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B9%98%E6%BD%AD%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Xiangtan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        112.9454,
+        27.8313
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/fb39d237a114ca60.webp",
+        "credit": "Photo taken by Efm · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Baishipark.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "by efm position:baishi park, xiangtan city date:jul 2005",
+        "place": "白石公园",
+        "originalFile": "Baishipark.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:430300:28e921a0",
+      "urbanFocus": {
+        "label": {
+          "en": "Xiangtan",
+          "zh-CN": "湘潭市",
+          "zh-TW": "湘潭市"
+        },
+        "lngLat": [
+          112.92283,
+          27.84306
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Xiangtan.",
+          "zh-CN": "以湘潭市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以湘潭市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q215755#P625",
+        "source": "https://www.wikidata.org/wiki/Q215755",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q215755#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 2.56
+        }
+      }
+    },
+    "poi:admin:430300:28e921a0": {
+      "label": {
+        "en": "Baishi Park",
+        "zh-CN": "白石公园",
+        "zh-TW": "白石公園"
+      },
+      "description": {
+        "en": "Baishi Park is a public urban park in Xiangtan's Yuhu District. Its grounds include Baima Lake.",
+        "zh-CN": "白石公园位于中国湖南省湘潭市雨湖区的开放式的城市公园。公园内有湖泊白马湖。",
+        "zh-TW": "白石公園位於中國湖南省湘潭市雨湖區的開放式的城市公園。公園內有湖泊白馬湖。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%99%BD%E7%9F%B3%E5%85%AC%E5%9B%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%99%BD%E7%9F%B3%E5%85%AC%E5%9B%AD"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        112.89472222,
+        27.85305556
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E7%99%BD%E7%9F%B3%E5%85%AC%E5%9B%AD",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "430300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fb39d237a114ca60.webp",
+        "credit": "Photo taken by Efm · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Baishipark.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "by efm position:baishi park, xiangtan city date:jul 2005",
+        "place": "白石公园",
+        "originalFile": "Baishipark.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:430300:dd088259": {
+      "label": {
+        "en": "Mount Zhao",
+        "zh-CN": "昭山",
+        "zh-TW": "昭山"
+      },
+      "description": {
+        "en": "Mount Zhao is a 185 metres mountain on the border of Xiangtan and Changsha in Hunan, China. Towering by riverside of the Xiang River, it has guarded the estuary of Xiang River and controlled the center of Hunan.",
+        "zh-CN": "昭山坐落在湖南省湘潭市和长沙市交界处的湘江岸边，海拔185米。山下为昭潭。",
+        "zh-TW": "昭山坐落在湖南省湘潭市和長沙市交界處的湘江岸邊，海拔185米。山下爲昭潭。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%98%AD%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%98%AD%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Mount_Zhao"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.017052,
+        27.973871
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Mount_Zhao",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "430300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/245427964493a96e.webp",
+        "credit": "Huangdan2060 · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Zhaoshan_Temple,_15_November_2020C.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "A distant view of Zhaoshan Temple. Zhaoshan Temple is a Buddhist temple located on Mount Zhao (Zhaoshan), in Xiangtan, Hunan, China.",
+        "place": "昭山",
+        "originalFile": "Zhaoshan_Temple,_15_November_2020C.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:430300:cdb9ae88": {
+      "label": {
+        "en": "Dishui Cave",
+        "zh-CN": "滴水洞",
+        "zh-TW": "滴水洞"
+      },
+      "description": {
+        "en": "Dishui Cave , also known as Dishui Hole or Mount Dishui, is a mountain with many caves.",
+        "zh-CN": "滴水洞位于湖南省韶山冲西南约5公里，是一个三面环山的幽深狭谷，它的南面是龙头山，西为书堂山，北为虎歇坪，东面豁口建有韶山水库。滴水洞一号楼为全国文物保护单位。",
+        "zh-TW": "滴水洞位於湖南省韶山沖西南約5公里，是一個三面環山的幽深狹谷，它的南面是龍頭山，西爲書堂山，北爲虎歇坪，東面豁口建有韶山水庫。滴水洞一號樓爲全國文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%BB%B4%E6%B0%B4%E6%B4%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%BB%B4%E6%B0%B4%E6%B4%9E",
+        "https://en.wikipedia.org/wiki/Dishui_Cave"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        112.477067,
+        27.923722
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Dishui_Cave",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "430300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/8c1d11a4a5989f09.webp",
+        "credit": "Tyg728 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Dishui_Cave_20210319.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​韶山滴水洞景区",
+        "place": "滴水洞",
+        "originalFile": "Dishui_Cave_20210319.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TWN:Taiping": {
+      "label": {
+        "en": "Taiping Island",
+        "zh-CN": "太平岛",
+        "zh-TW": "太平島"
+      },
+      "description": {
+        "en": "Taiping Island, also known as Itu Aba, and various other names, is the largest of the naturally occurring Spratly Islands in the South China Sea. The island is elliptical in shape being 1.4 kilometres in length and 0.4 kilometres in width, with an area of 46 hectares .",
+        "zh-CN": "太平岛，位于南海南沙群岛北部中央郑和群礁西北角，位居南海西侧航道的东边，面积0.51平方公里，是南沙群岛中最大的天然岛屿。东距中滩0.8海浬、中洲礁3.1海浬、敦谦沙洲7.1海浬，西南距南薰礁16海浬。",
+        "zh-TW": "太平島，位於南海南沙羣島北部中央鄭和羣礁西北角，位居南海西側航道的東邊，面積0.51平方公里，是南沙羣島中最大的天然島嶼。東距中灘0.8海浬、中洲礁3.1海浬、敦謙沙洲7.1海浬，西南距南薰礁16海浬。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Taiping_Island"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        114.36583333,
+        10.37694444
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/adf299bfa2ff2ba1.webp",
+        "credit": "NASA · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Itu_Aba_Island.png",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Itu_Aba_Island.png#Licensing",
+        "alt": "Itu Aba Island",
+        "place": "Taiping Island",
+        "originalFile": "Itu_Aba_Island.png",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TWN:Taiping:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Taiping Island close-up",
+          "zh-CN": "太平岛近景",
+          "zh-TW": "太平島近景"
+        },
+        "lngLat": [
+          114.3663888889,
+          10.3772222222
+        ],
+        "kind": "island-detail",
+        "definition": {
+          "en": "A close-up of Taiping Island and its facilities, centred on the island location reported by the environmental authority; there is no conventional urban core.",
+          "zh-CN": "以环境主管机关公开的岛上位置为焦点，近看太平岛及其设施；这里没有通常意义上的主城区。",
+          "zh-TW": "以環境主管機關公開的島上位置為焦點，近看太平島及其設施；這裡沒有通常意義上的主城區。"
+        },
+        "extentKm": 0.8,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.cga.gov.tw/GipOpen/wSite/ct?ctNode=8739&mp=999&xItem=156731",
+        "coordinateSource": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/9158",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+        "verification": "Government environmental release publishes 10°22′38″N / 114°21′59″E; converted exactly to decimal degrees. Point lies within NLSC land polygon (zero distance)."
+      }
+    },
+    "poi:admin:TWN:Taiping:urban": {
+      "id": "poi:admin:TWN:Taiping:urban",
+      "label": {
+        "en": "Taiping Island",
+        "zh-CN": "太平岛",
+        "zh-TW": "太平島"
+      },
+      "description": {
+        "en": "Taiping Island, also known as Itu Aba, and various other names, is the largest of the naturally occurring Spratly Islands in the South China Sea. The island is elliptical in shape being 1.4 kilometres in length and 0.4 kilometres in width, with an area of 46 hectares .",
+        "zh-CN": "太平岛，位于南海南沙群岛北部中央郑和群礁西北角，位居南海西侧航道的东边，面积0.51平方公里，是南沙群岛中最大的天然岛屿。东距中滩0.8海浬、中洲礁3.1海浬、敦谦沙洲7.1海浬，西南距南薰礁16海浬。",
+        "zh-TW": "太平島，位於南海南沙羣島北部中央鄭和羣礁西北角，位居南海西側航道的東邊，面積0.51平方公里，是南沙羣島中最大的天然島嶼。東距中灘0.8海浬、中洲礁3.1海浬、敦謙沙洲7.1海浬，西南距南薰礁16海浬。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Taiping_Island"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/adf299bfa2ff2ba1.webp",
+        "credit": "NASA · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Itu_Aba_Island.png",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Itu_Aba_Island.png#Licensing",
+        "alt": "Itu Aba Island",
+        "place": "Taiping Island",
+        "originalFile": "Itu_Aba_Island.png",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        114.3663888889,
+        10.3772222222
+      ],
+      "coordinateSource": "https://enews.moenv.gov.tw/moenv-news/zh-tw/News/9158",
+      "kind": "landmark",
+      "parentCity": "TWN:Taiping"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "relief": {
+    "file": "singapore-relief.blend",
+    "sha256": "5f7234994481cf3993774ca953af3253428bfac9e57f7c4a766d73f342ca4e00",
+    "bytes": 12221937,
+    "vertices": 383990,
+    "resolution": [
+      1600,
+      800
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false,
+    "white_material_verified": true,
+    "postprocessing": "none",
+    "sea_material": "#e4edf0"
+  }
+}

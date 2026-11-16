@@ -1,0 +1,181 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "140800": {
+      "label": {
+        "en": "Yuncheng",
+        "zh-CN": "运城市",
+        "zh-TW": "運城市"
+      },
+      "description": {
+        "en": "Yuncheng is the southernmost prefecture-level city in Shanxi province, People's Republic of China. It borders Linfen and Jincheng municipalities to the north and east, and Henan and Shaanxi provinces to the east, south and west, respectively.",
+        "zh-CN": "运城市，古称河东，是中华人民共和国山西省下辖的地级市，位于山西省西南部，秦晋豫黄河金三角。市境北界临汾市，东临晋城市与河南省济源市、洛阳市，南接河南省三门峡市，西隔黄河与陕西省渭南市毗邻。",
+        "zh-TW": "運城市，古稱河東，是中華人民共和國山西省下轄的地級市，位於山西省西南部，秦晉豫黃河金三角。市境北界臨汾市，東臨晉城市與河南省濟源市、洛陽市，南接河南省三門峽市，西隔黃河與陝西省渭南市毗鄰。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%BF%90%E5%9F%8E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%BF%90%E5%9F%8E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Yuncheng"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        111.007,
+        35.0267
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/83d145473e4e55ee.webp",
+        "credit": "Li Meng · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%BF%90%E5%9F%8E%E7%9B%90%E6%B9%96-2010_-_panoramio_-_Li_Meng.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "运城盐湖-2010",
+        "place": "运城盐湖",
+        "originalFile": "运城盐湖-2010_-_panoramio_-_Li_Meng.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:140800:efa4547b",
+      "urbanFocus": {
+        "label": {
+          "en": "Yuncheng",
+          "zh-CN": "运城市",
+          "zh-TW": "運城市"
+        },
+        "lngLat": [
+          110.99796,
+          35.03042
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Yuncheng.",
+          "zh-CN": "以运城市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以運城市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q73073#P625",
+        "source": "https://www.wikidata.org/wiki/Q73073",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q73073#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.01
+        }
+      }
+    },
+    "poi:admin:140800:efa4547b": {
+      "label": {
+        "en": "Xiechi Lake",
+        "zh-CN": "运城盐湖",
+        "zh-TW": "運城鹽湖"
+      },
+      "description": {
+        "en": "Xiechi Lake , also called Yuncheng yanchi is the largest natural lake in Shanxi in Northern China. It is a saline lake used for production of salt.",
+        "zh-CN": "运城盐湖位于中国山西省西南部运城市境内，地处中条山北麓，是山西省最大的湖泊，世界第三大硫酸钠型内陆湖泊，于新生代第四纪形成。",
+        "zh-TW": "運城鹽湖位於中國山西省西南部運城市境內，地處中條山北麓，是山西省最大的湖泊，世界第三大硫酸鈉型內陸湖泊，於新生代第四紀形成。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%BF%90%E5%9F%8E%E7%9B%90%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%BF%90%E5%9F%8E%E7%9B%90%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Xiechi_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        110.987222,
+        34.977222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Xiechi_Lake",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "140800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/83d145473e4e55ee.webp",
+        "credit": "Li Meng · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%BF%90%E5%9F%8E%E7%9B%90%E6%B9%96-2010_-_panoramio_-_Li_Meng.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "运城盐湖-2010",
+        "place": "运城盐湖",
+        "originalFile": "运城盐湖-2010_-_panoramio_-_Li_Meng.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:140800:128716ee": {
+      "label": {
+        "en": "Haizhou Emperor Guan Temple",
+        "zh-CN": "解州关帝庙",
+        "zh-TW": "解州關帝廟"
+      },
+      "description": {
+        "en": "Haizhou Emperor Guan Temple , or Haizhou Guandi Temple, is a temple located in Haizhou Town, Yanhu District, Yuncheng City, Shanxi Province. It is hailed as \"the grand ancestor of temples dedicated to Guan Yu\" .",
+        "zh-CN": "解州关帝庙位于中国山西运城市盐湖区解州镇解州村西五一路145号，距离市区20公里，为中国最大的关帝庙，全国重点文物保护单位之一。解州关帝庙是中国和海内外三大关帝庙之一。",
+        "zh-TW": "解州關帝廟位於中國山西運城市鹽湖區解州鎮解州村西五一路145號，距離市區20公里，爲中國最大的關帝廟，全國重點文物保護單位之一。解州關帝廟是中國和海內外三大關帝廟之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%A7%A3%E5%B7%9E%E5%85%B3%E5%B8%9D%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%A7%A3%E5%B7%9E%E5%85%B3%E5%B8%9D%E5%BA%99",
+        "https://en.wikipedia.org/wiki/Haizhou_Emperor_Guan_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        110.84333333,
+        34.91055556
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%A7%A3%E5%B7%9E%E5%85%B3%E5%B8%9D%E5%BA%99",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "140800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5feb4c39d829cf23.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20260504_Haizhou_Emperor_Guan_Temple_11.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Haizhou Emperor Guan Temple, Yuncheng, Shanxi",
+        "place": "解州关帝庙",
+        "originalFile": "20260504_Haizhou_Emperor_Guan_Temple_11.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:140800:03fd86c4": {
+      "label": {
+        "en": "Stork Tower",
+        "zh-CN": "鹳雀楼",
+        "zh-TW": "鸛雀樓"
+      },
+      "description": {
+        "en": "The Stork Tower or Guanque Tower is an ancient Chinese tower in Puzhou Town, Yongji, Shanxi, China. It was located in the southwest outside the Puzhou ancient city, and near to the Pujin Ferry .",
+        "zh-CN": "鹳雀楼，又名鹳鹊楼，因时有鹳雀栖其上而得名。楼阁位于中国山西省运城市永济市蒲州镇，是中国著名的古代楼阁之一，与黄鹤楼、岳阳楼、滕王阁被并称为中国古代四大历史文化名楼，也是四大名楼中唯一一座位于黄河以北的楼阁。",
+        "zh-TW": "鸛雀樓，又名鸛鵲樓，因時有鸛雀棲其上而得名。樓閣位於中國山西省運城市永濟市蒲州鎮，是中國著名的古代樓閣之一，與黃鶴樓、岳陽樓、滕王閣被並稱爲中國古代四大歷史文化名樓，也是四大名樓中唯一一座位於黃河以北的樓閣。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%B9%B3%E9%9B%80%E6%A5%BC",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%B9%B3%E9%9B%80%E6%A5%BC",
+        "https://en.wikipedia.org/wiki/Stork_Tower"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        110.276743,
+        34.848518
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Stork_Tower",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "140800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ccc6e7b4535eaf70.webp",
+        "credit": "Yanxutong1215 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%B9%B3%E9%9B%80%E6%A5%BC_(cropped).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​山西省运城市永济市鹳雀楼",
+        "place": "鹳雀楼",
+        "originalFile": "鹳雀楼_(cropped).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

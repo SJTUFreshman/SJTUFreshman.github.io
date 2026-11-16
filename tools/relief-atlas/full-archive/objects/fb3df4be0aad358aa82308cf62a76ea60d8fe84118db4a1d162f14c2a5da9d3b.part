@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.1 (801223 spike-06.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <bounds minlat="24.4250000" minlon="118.5500000" maxlat="24.4410000" maxlon="118.5750000"/>
+</osm>

@@ -1,0 +1,178 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "411600": {
+      "label": {
+        "en": "Zhoukou",
+        "zh-CN": "周口市",
+        "zh-TW": "周口市"
+      },
+      "description": {
+        "en": "Zhoukou is a prefecture-level city in eastern Henan province, China. It borders Zhumadian to the southwest, Xuchang and Luohe to the west, Kaifeng to the northwest, Shangqiu to the northeast, and the province of Anhui on all other sides.",
+        "zh-CN": "周口市，古称陈、淮阳，是中华人民共和国河南省下辖的地级市，位于河南省东南部。市境南邻驻马店市，西毗漯河市、许昌市，北接开封市、商丘市，东接安徽省亳州市、阜阳市。",
+        "zh-TW": "周口市，古稱陳、淮陽，是中華人民共和國河南省下轄的地級市，位於河南省東南部。市境南鄰駐馬店市，西毗漯河市、許昌市，北接開封市、商丘市，東接安徽省亳州市、阜陽市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%8F%A3%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%8F%A3%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Zhoukou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        114.7014,
+        33.6367
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/b5c67ac7ecc327fa.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20260913_Zhoukou_Emperor_Guan_Temple_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Zhoukou Emperor Guan Temple, Henan",
+        "place": "周口关帝庙",
+        "originalFile": "20260913_Zhoukou_Emperor_Guan_Temple_03.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:411600:e8c41591",
+      "urbanFocus": {
+        "label": {
+          "en": "Zhoukou",
+          "zh-CN": "周口市",
+          "zh-TW": "周口市"
+        },
+        "lngLat": [
+          114.6418,
+          33.62502
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Zhoukou.",
+          "zh-CN": "以周口市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以周口市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q198061#P625",
+        "source": "https://www.wikidata.org/wiki/Q198061",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q198061#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.89
+        }
+      }
+    },
+    "poi:admin:411600:e8c41591": {
+      "label": {
+        "en": "Zhoukou Guandi Temple",
+        "zh-CN": "周口关帝庙",
+        "zh-TW": "周口關帝廟"
+      },
+      "description": {
+        "en": "This protected temple stands in Zhoukou, a historic river-transport hub at the meeting of the Sha, Ying and Jialu rivers. It is dedicated to Guan Yu.",
+        "zh-CN": "周口关帝庙位于中国河南省周口市川汇区人和街道富强街，1996年被列为第四批全国重点文物保护单位。 周口地处河南省东南部，历史悠久，风光秀丽，沙河、颖河、贾鲁河在市区交汇，三岸鼎立，古为漕运重地，素有“小武汉”之称。",
+        "zh-TW": "周口關帝廟位於中國河南省周口市川匯區人和街道富強街，1996年被列爲第四批全國重點文物保護單位。 周口地處河南省東南部，歷史悠久，風光秀麗，沙河、穎河、賈魯河在市區交匯，三岸鼎立，古爲漕運重地，素有“小武漢”之稱。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%8F%A3%E5%85%B3%E5%B8%9D%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%8F%A3%E5%85%B3%E5%B8%9D%E5%BA%99"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        114.64011111,
+        33.63326111
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%8F%A3%E5%85%B3%E5%B8%9D%E5%BA%99",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "411600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b5c67ac7ecc327fa.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20260913_Zhoukou_Emperor_Guan_Temple_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Zhoukou Emperor Guan Temple, Henan",
+        "place": "周口关帝庙",
+        "originalFile": "20260913_Zhoukou_Emperor_Guan_Temple_03.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:411600:8a8de056": {
+      "label": {
+        "en": "Pingliangtai Ancient City Site",
+        "zh-CN": "平粮台古城遗址",
+        "zh-TW": "平糧臺古城遺址"
+      },
+      "description": {
+        "en": "This late Neolithic Longshan-culture settlement in Huaiyang is among China's earliest archaeologically confirmed walled towns. Excavations uncovered an extensive prehistoric drainage system made from ceramic pipes.",
+        "zh-CN": "平粮台古城遗址位于中华人民共和国河南省周口市淮阳区，是一处可追溯至新石器时代晚期龙山文化的古代城市遗址，是中国目前经科学考古最早确认的新石器时代城址之一。在平粮台古城遗址进行的两次大规模考古，均发现地下铺设的陶质排水管道，这些排水系统遗存被认为是目前中国发现年代最早、最为完整的史前城市排水设施。",
+        "zh-TW": "平糧臺古城遺址位於中華人民共和國河南省周口市淮陽區，是一處可追溯至新石器時代晚期龍山文化的古代城市遺址，是中國目前經科學考古最早確認的新石器時代城址之一。在平糧臺古城遺址進行的兩次大規模考古，均發現地下鋪設的陶質排水管道，這些排水系統遺存被認爲是目前中國發現年代最早、最爲完整的史前城市排水設施。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B9%B3%E7%B2%AE%E5%8F%B0%E5%8F%A4%E5%9F%8E%E9%81%97%E5%9D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B9%B3%E7%B2%AE%E5%8F%B0%E5%8F%A4%E5%9F%8E%E9%81%97%E5%9D%80"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        114.92364,
+        33.70808
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%B9%B3%E7%B2%AE%E5%8F%B0%E5%8F%A4%E5%9F%8E%E9%81%97%E5%9D%80",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "411600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/254b0ee2703c79ef.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20260913_Pingliangtai_Ancient_City_Site_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Pingliangtai Ancient City Site, Huaiyang District of Zhoukou, Henan",
+        "place": "平粮台古城遗址",
+        "originalFile": "20260913_Pingliangtai_Ancient_City_Site_03.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:411600:4ed92929": {
+      "label": {
+        "en": "Taihao Mausoleum and Temple",
+        "zh-CN": "太昊陵庙",
+        "zh-TW": "太昊陵廟"
+      },
+      "description": {
+        "en": "This Huaiyang complex commemorates Taihao Fuxi. Its documented history reaches back to the Tang and Song periods, while the surviving architectural layout largely reflects Ming and Qing rebuilding.",
+        "zh-CN": "太昊陵庙位于中华人民共和国河南省周口市淮阳区淮宁街道，是太昊伏羲氏的陵庙，第四批全国重点文物保护单位。太昊陵庙有明确记载的历史沿革可追溯至唐宋时期，明、清两代经过多次重建和扩修，逐渐形成现有的建筑格局，现存古建筑即明清时期的遗存。",
+        "zh-TW": "太昊陵廟位於中華人民共和國河南省周口市淮陽區淮寧街道，是太昊伏羲氏的陵廟，第四批全國重點文物保護單位。太昊陵廟有明確記載的歷史沿革可追溯至唐宋時期，明、清兩代經過多次重建和擴修，逐漸形成現有的建築格局，現存古建築即明清時期的遺存。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E6%98%8A%E9%99%B5%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%AA%E6%98%8A%E9%99%B5%E5%BA%99"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        114.88228889,
+        33.75373889
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E6%98%8A%E9%99%B5%E5%BA%99",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "411600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/92825f0263652809.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20260913_Tomb_and_Temple_of_Taihao_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Tomb and Temple of Taihao, Huaiyang District of Zhoukou, Henan",
+        "place": "太昊陵庙",
+        "originalFile": "20260913_Tomb_and_Temple_of_Taihao_01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

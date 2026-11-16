@@ -1,0 +1,54 @@
+{
+  "reviewedAt": "2026-11-16",
+  "units": {
+    "659008": {
+      "label": {"en": "Kokdala", "zh-CN": "可克达拉市", "zh-TW": "可克達拉市"},
+      "lngLat": [80.99816, 43.93406],
+      "kind": "city-centre",
+      "definition": {
+        "en": "A 24 km terrain window around Kokdala's urban core on the north bank of the Ili River.",
+        "zh-CN": "以伊犁河北岸的可克达拉城区为中心，展示周边约24公里宽的城区与河谷地形。",
+        "zh-TW": "以伊犁河北岸的可克達拉城區為中心，展示周邊約24公里寬的城區與河谷地形。"
+      },
+      "coordinateSource": "https://www.wikidata.org/wiki/Q18651998#P625",
+      "source": "https://www.wikidata.org/wiki/Q18651998",
+      "extentKm": 24,
+      "coordinateSystem": "WGS84",
+      "verificationSources": [
+        "https://api.openstreetmap.org/api/0.6/node/13602972045.json",
+        "https://www.openstreetmap.org/node/13602972045",
+        "https://www.ccgp.gov.cn/cggg/dfgg/jzxcs/202608/t20260813_27125678.htm"
+      ],
+      "review": {
+        "status": "verified",
+        "referenceDistanceKm": 40.34,
+        "referencePointIsUrbanCore": false,
+        "independentNearbyPoint": {"label": "可克达拉市人民代表大会常务委员会", "lngLat": [80.9831182, 43.9312157], "source": "https://api.openstreetmap.org/api/0.6/node/13602972045.json"},
+        "reason": "Retain the documented city coordinate: the independently mapped municipal government district is about 1.3 km away, while the source polygon's representative centre is about 40 km southwest and is not a city-centre coordinate. The 2026 public procurement record confirms the government offices at Xuefu West Road 1."
+      }
+    },
+    "460300": {
+      "label": {"en": "Yongxing Island settlement", "zh-CN": "永兴岛聚落", "zh-TW": "永興島聚落"},
+      "lngLat": [112.333681944, 16.832698889],
+      "kind": "principal-settlement",
+      "definition": {
+        "en": "A 4 km close-up around the municipal seat and main settlement on Yongxing Island, centred on the government building on Beijing Road.",
+        "zh-CN": "以永兴岛北京路市政府驻地为中心，展示周边约4公里宽的主要聚落与岛屿地形。",
+        "zh-TW": "以永興島北京路市政府駐地為中心，展示周邊約4公里寬的主要聚落與島嶼地形。"
+      },
+      "coordinateSource": "https://www.wikidata.org/wiki/Q107013001#P625",
+      "source": "https://www.wikidata.org/wiki/Q107013001",
+      "extentKm": 4,
+      "coordinateSystem": "WGS84",
+      "verificationSources": [
+        "https://api.openstreetmap.org/api/0.6/way/794157192/full.json",
+        "https://www.openstreetmap.org/way/794157192"
+      ],
+      "review": {
+        "status": "verified",
+        "reason": "The point is inside the independently mapped townhall building at Beijing Road 1. The island settlement is the correct close-up, not a continental urban core or an offshore bounding-box centre. A low-detail source coastline should not shift this documented settlement coordinate.",
+        "independentBuildingBounds": [112.3334112, 16.8324771, 112.3339244, 16.8329263]
+      }
+    }
+  }
+}

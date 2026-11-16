@@ -1,0 +1,19 @@
+{
+  "relief": {
+    "file": "europe_usa-relief.blend",
+    "sha256": "2b9992d97766a94fde97ac17d21fb026391ca0ede8bbfbae6ab8960f275464ff",
+    "bytes": 50304297,
+    "vertices": 1564607,
+    "resolution": [
+      8000,
+      2827
+    ],
+    "reopened": true,
+    "pigments_verified": true,
+    "lighting_verified": true,
+    "external_images": false,
+    "white_material_verified": true,
+    "postprocessing": "none",
+    "sea_material": "#dce8ea"
+  }
+}

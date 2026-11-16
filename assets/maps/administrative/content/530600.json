@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "530600": {
+      "label": {
+        "en": "Zhaotong",
+        "zh-CN": "昭通市",
+        "zh-TW": "昭通市"
+      },
+      "description": {
+        "en": "Zhaotong is a prefecture-level city located in the northeast corner of Yunnan province, China, bordering the provinces of Guizhou to the south and southeast and Sichuan to the northeast, north, and west. By the end of 2024, the resident population of the city was 4.804 million.",
+        "zh-CN": "昭通市，古称朱提、乌蒙，是中华人民共和国云南省下辖的地级市，位于云南省东北部。市境南界曲靖市和贵州省毕节市，东、北、西分别与四川省泸州市、宜宾市、凉山州接壤。",
+        "zh-TW": "昭通市，古稱朱提、烏蒙，是中華人民共和國雲南省下轄的地級市，位於雲南省東北部。市境南界曲靖市和貴州省畢節市，東、北、西分別與四川省瀘州市、宜賓市、涼山州接壤。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%98%AD%E9%80%9A%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%98%AD%E9%80%9A%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Zhaotong"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        103.717,
+        27.338
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/9a90452e31ad4fce.webp",
+        "credit": "hilloo · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%A1%97%E5%BF%83%E8%8A%B1%E5%9B%AD-%E5%8E%9F%E6%9D%A5%E7%9A%84%E8%80%81%E5%AD%94%E9%9B%80_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "街心花园-原来的老孔雀",
+        "place": "街心花园-原来的老孔雀 - panoramio.jpg",
+        "originalFile": "街心花园-原来的老孔雀 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            103.715497,
+            27.332525
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E8%A1%97%E5%BF%83%E8%8A%B1%E5%9B%AD-%E5%8E%9F%E6%9D%A5%E7%9A%84%E8%80%81%E5%AD%94%E9%9B%80_-_panoramio.jpg"
+        }
+      },
+      "photoReference": "poi:admin:530600:photo-46726814",
+      "urbanFocus": {
+        "label": {
+          "en": "Zhaotong",
+          "zh-CN": "昭通市",
+          "zh-TW": "昭通市"
+        },
+        "lngLat": [
+          103.71445,
+          27.33284
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Zhaotong.",
+          "zh-CN": "以昭通市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以昭通市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q197519#P625",
+        "source": "https://www.wikidata.org/wiki/Q197519",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q197519#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.54
+        }
+      }
+    },
+    "poi:admin:530600:photo-46726814": {
+      "label": {
+        "en": "Zhaotong landscape view",
+        "zh-CN": "街心花园-原来的老孔雀",
+        "zh-TW": "街心花園-原來的老孔雀"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Zhaotong, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现昭通市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現昭通市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E8%A1%97%E5%BF%83%E8%8A%B1%E5%9B%AD-%E5%8E%9F%E6%9D%A5%E7%9A%84%E8%80%81%E5%AD%94%E9%9B%80_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E8%A1%97%E5%BF%83%E8%8A%B1%E5%9B%AD-%E5%8E%9F%E6%9D%A5%E7%9A%84%E8%80%81%E5%AD%94%E9%9B%80_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/9a90452e31ad4fce.webp",
+        "credit": "hilloo · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%A1%97%E5%BF%83%E8%8A%B1%E5%9B%AD-%E5%8E%9F%E6%9D%A5%E7%9A%84%E8%80%81%E5%AD%94%E9%9B%80_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "街心花园-原来的老孔雀",
+        "place": "街心花园-原来的老孔雀 - panoramio.jpg",
+        "originalFile": "街心花园-原来的老孔雀 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            103.715497,
+            27.332525
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E8%A1%97%E5%BF%83%E8%8A%B1%E5%9B%AD-%E5%8E%9F%E6%9D%A5%E7%9A%84%E8%80%81%E5%AD%94%E9%9B%80_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        103.715497,
+        27.332525
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E8%A1%97%E5%BF%83%E8%8A%B1%E5%9B%AD-%E5%8E%9F%E6%9D%A5%E7%9A%84%E8%80%81%E5%AD%94%E9%9B%80_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "530600"
+    }
+  }
+}

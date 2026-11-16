@@ -1,0 +1,137 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "NPL": {
+      "label": {
+        "en": "Nepal",
+        "zh-CN": "尼泊尔",
+        "zh-TW": "尼泊爾"
+      },
+      "description": {
+        "en": "Nepal is a landlocked country in South Asia. It is mainly situated in the Himalayas, but also includes parts of the Indo-Gangetic Plain.",
+        "zh-CN": "尼泊尔联邦民主共和国，通称尼泊尔，是南亚喜马拉雅山脉地区的内陆国家，北与中国相接，其余三面与印度为邻，与孟加拉国仅隔27公里的走廊。尼泊尔的领土面积为14万7516平方公里，约3千万人口。",
+        "zh-TW": "尼泊爾聯邦民主共和國，通稱尼泊爾，是南亞喜馬拉雅山脈地區的內陸國家，北與中國相接，其餘三面與印度爲鄰，與孟加拉國僅隔27公里的走廊。尼泊爾的領土面積為14萬7516平方公里，約3千萬人口。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B0%BC%E6%B3%8A%E5%B0%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B0%BC%E6%B3%8A%E5%B0%94",
+        "https://en.wikipedia.org/wiki/Nepal"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        84.25,
+        28.16666667
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/7b1660fc6cf2d720.webp",
+        "credit": "Nabin K. Sapkota · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Swayambhunath_2018.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "This is a photo of a monument in Nepal identified by the ID",
+        "place": "Swayambhunath",
+        "originalFile": "Swayambhunath_2018.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:NPL:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Kathmandu",
+          "zh-CN": "加德满都",
+          "zh-TW": "加德滿都"
+        },
+        "lngLat": [
+          85.32,
+          27.71
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 24 km landscape window around Kathmandu.",
+          "zh-CN": "以加德满都为中心，展示周边约24公里宽的主要聚落与地形。",
+          "zh-TW": "以加德滿都爲中心，展示周邊約24公里寬的主要聚落與地形。"
+        },
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q3037",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q3037#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E5%B0%BC%E6%B3%8A%E5%B0%94"
+      }
+    },
+    "poi:NPL:1": {
+      "label": {
+        "en": "Kathmandu Durbar Square",
+        "zh-CN": "加德满都杜巴广场",
+        "zh-TW": "加德滿都杜巴廣場"
+      },
+      "description": {
+        "en": "Kathmandu Durbar Square is a historically and culturally significant site in Kathmandu, Nepal. It is one of the three Durbar Squares in the Kathmandu Valley in Nepal that are UNESCO World Heritage Sites.",
+        "zh-CN": "加德满都王宫广场，位于尼泊尔首都加德满都，是加德满都谷地的三处王宫广场之一。",
+        "zh-TW": "加德滿都王宮廣場，位於尼泊爾首都加德滿都，是加德滿都谷地的三處王宮廣場之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8A%A0%E5%BE%B7%E6%BB%A1%E9%83%BD%E7%8E%8B%E5%AE%AB%E5%B9%BF%E5%9C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8A%A0%E5%BE%B7%E6%BB%A1%E9%83%BD%E7%8E%8B%E5%AE%AB%E5%B9%BF%E5%9C%BA",
+        "https://en.wikipedia.org/wiki/Kathmandu_Durbar_Square"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        85.30647,
+        27.70415
+      ],
+      "parentCity": "NPL",
+      "photo": {
+        "src": "assets/maps/regions/photos/5ffffbaae0837cb3.webp",
+        "credit": "Vyacheslav Argenberg · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Kathmandu_Durbar_Square,_Maju_Dega_2,_Nepal.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "Maju Dega is a Hindu temple dedicated to Shiva. Kathmandu Durbar Square, Basantapur Durbar Kshetra, Kathmandu, Nepal.",
+        "place": "加德满都王宫广场",
+        "originalFile": "Kathmandu_Durbar_Square,_Maju_Dega_2,_Nepal.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:NPL:urban": {
+      "id": "poi:admin:NPL:urban",
+      "label": {
+        "en": "Swayambhunath",
+        "zh-CN": "斯瓦扬布纳特",
+        "zh-TW": "斯瓦揚布納特"
+      },
+      "description": {
+        "en": "Swayambhunath is an ancient religious complex atop a hill in the Kathmandu Valley, west of Kathmandu city in Nepal. The Tibetan and Sanskrit name for the site means 'self-arising' or 'self-sprung'.",
+        "zh-CN": "斯瓦扬布纳特位于尼泊尔加德满都以西的加德满都谷地，是一座佛教寺庙，也是尼泊尔国家象征。又叫斯瓦扬布寺、四眼天神庙。",
+        "zh-TW": "斯瓦揚布納特位於尼泊爾加德滿都以西的加德滿都谷地，是一座佛教寺廟，也是尼泊爾國家象徵。又叫斯瓦揚布寺、四眼天神廟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%AF%E7%93%A6%E6%89%AC%E5%B8%83%E7%BA%B3%E7%89%B9",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%AF%E7%93%A6%E6%89%AC%E5%B8%83%E7%BA%B3%E7%89%B9",
+        "https://en.wikipedia.org/wiki/Swayambhunath"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7b1660fc6cf2d720.webp",
+        "credit": "Nabin K. Sapkota · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Swayambhunath_2018.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "This is a photo of a monument in Nepal identified by the ID",
+        "place": "Swayambhunath",
+        "originalFile": "Swayambhunath_2018.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        85.29,
+        27.715
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Swayambhunath",
+      "kind": "landmark",
+      "parentCity": "NPL"
+    }
+  }
+}

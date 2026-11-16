@@ -1,0 +1,150 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "431200": {
+      "label": {
+        "en": "Huaihua",
+        "zh-CN": "怀化市",
+        "zh-TW": "懷化市"
+      },
+      "description": {
+        "en": "Huaihua is a prefecture-level city in western Hunan province, China. It is known as the \"Western Gate\" of Hunan and is the largest prefecture-level city by area in the province.",
+        "zh-CN": "怀化市，别称鹤城、五溪，是中华人民共和国湖南省下辖的地级市，位于湖南省西部。市境西北临湘西州，东北抵张家界市、常德市，东达益阳市、娄底市、邵阳市，南界广西壮族自治区桂林市、柳州市，西毗贵州省黔东南州、铜仁市。",
+        "zh-TW": "懷化市，別稱鶴城、五溪，是中華人民共和國湖南省下轄的地級市，位於湖南省西部。市境西北臨湘西州，東北抵張家界市、常德市，東達益陽市、婁底市、邵陽市，南界廣西壯族自治區桂林市、柳州市，西毗貴州省黔東南州、銅仁市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%80%80%E5%8C%96%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%80%80%E5%8C%96%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Huaihua"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        110.0016,
+        27.5698
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/450ec49130ee9fcc.webp",
+        "credit": "三猎 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%8A%99%E8%93%89%E6%A5%BC1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​黔城芙蓉楼。",
+        "place": "芙蓉樓",
+        "originalFile": "芙蓉楼1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:431200:d2ec005c",
+      "urbanFocus": {
+        "label": {
+          "en": "Huaihua",
+          "zh-CN": "怀化市",
+          "zh-TW": "懷化市"
+        },
+        "lngLat": [
+          109.959167,
+          27.549444
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Huaihua.",
+          "zh-CN": "以怀化市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以懷化市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q416922#P625",
+        "source": "https://www.wikidata.org/wiki/Q416922",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q416922#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.88
+        }
+      }
+    },
+    "poi:admin:431200:d2ec005c": {
+      "label": {
+        "en": "Furong Tower, Qianyang",
+        "zh-CN": "芙蓉楼",
+        "zh-TW": "芙蓉樓"
+      },
+      "description": {
+        "en": "Furong Tower is a classical garden complex in the old town of Qianyang, now Qiancheng in Hongjiang. Built to commemorate the poet Wang Changling, it overlooks the river beside wooded slopes.",
+        "zh-CN": "黔阳芙蓉楼位于湖南省洪江市黔城镇的黔阳古城内，为一处古典园林建筑，为纪念王昌龄而建。背郭临江，依林踞阜，被誉为“楚南上游第一胜迹”。",
+        "zh-TW": "黔陽芙蓉樓位於湖南省洪江市黔城鎮的黔陽古城內，爲一處古典園林建築，爲紀念王昌齡而建。背郭臨江，依林踞阜，被譽爲“楚南上游第一勝蹟”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8A%99%E8%93%89%E6%A8%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8A%99%E8%93%89%E6%A8%93"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        109.81097,
+        27.19550389
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%8A%99%E8%93%89%E6%A8%93",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "431200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/450ec49130ee9fcc.webp",
+        "credit": "三猎 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%8A%99%E8%93%89%E6%A5%BC1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​黔城芙蓉楼。",
+        "place": "芙蓉樓",
+        "originalFile": "芙蓉楼1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:431200:photo-27017934": {
+      "label": {
+        "en": "Temple on Zhong Po Mountain",
+        "zh-CN": "怀化市城区景观",
+        "zh-TW": "懷化市城區景觀"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Huaihua, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现怀化市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現懷化市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Temple_on_Zhong_Po_Mountain.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Temple_on_Zhong_Po_Mountain.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/96f2f2fa7868dbae.webp",
+        "credit": "Teacher McKinley · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Temple_on_Zhong_Po_Mountain.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "Taken on Zhong Po Mountain. Temple can be seen in distance",
+        "place": "Temple on Zhong Po Mountain.jpg",
+        "originalFile": "Temple on Zhong Po Mountain.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            109.966667,
+            27.55
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Temple_on_Zhong_Po_Mountain.jpg"
+        }
+      },
+      "lngLat": [
+        109.966667,
+        27.55
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Temple_on_Zhong_Po_Mountain.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "431200"
+    }
+  }
+}

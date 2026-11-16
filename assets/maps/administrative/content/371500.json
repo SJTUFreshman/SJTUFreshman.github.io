@@ -1,0 +1,104 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "371500": {
+      "label": {
+        "en": "Liaocheng",
+        "zh-CN": "聊城市",
+        "zh-TW": "聊城市"
+      },
+      "description": {
+        "en": "Liaocheng is a prefecture-level city in western Shandong province, China. It borders the provincial capital of Jinan to the southeast, Dezhou to the northeast, Tai'an to the south, and the provinces of Hebei and Henan to the west.",
+        "zh-CN": "聊城市，简称聊，古称东昌府，是中华人民共和国山东省下辖的地级市，位于山东省西部。市境东北与德州市相邻，东南接济南、泰安两市，西南与河南省濮阳市相连，西及西北分别与河北省邯郸市、邢台市毗邻。",
+        "zh-TW": "聊城市，簡稱聊，古稱東昌府，是中華人民共和國山東省下轄的地級市，位於山東省西部。市境東北與德州市相鄰，東南接濟南、泰安兩市，西南與河南省濮陽市相連，西及西北分別與河北省邯鄲市、邢臺市毗鄰。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%81%8A%E5%9F%8E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%81%8A%E5%9F%8E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Liaocheng"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        115.9852,
+        36.4559
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/9e3f338a1918ed04.webp",
+        "credit": "多多看书（其即时通讯软件昵称） · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%85%89%E5%B2%B3%E6%A5%BC_04.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Guangyue Tower",
+        "place": "光岳楼",
+        "originalFile": "光岳楼_04.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:371500:d3a67e0a",
+      "urbanFocus": {
+        "label": {
+          "en": "Liaocheng",
+          "zh-CN": "聊城市",
+          "zh-TW": "聊城市"
+        },
+        "lngLat": [
+          115.98333333333,
+          36.45
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Liaocheng.",
+          "zh-CN": "以聊城市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以聊城市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q373564#P625",
+        "source": "https://www.wikidata.org/wiki/Q373564",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q373564#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.72
+        }
+      }
+    },
+    "poi:admin:371500:d3a67e0a": {
+      "label": {
+        "en": "Guangyue Tower",
+        "zh-CN": "光岳楼",
+        "zh-TW": "光嶽樓"
+      },
+      "description": {
+        "en": "Guangyue Tower stands at the centre of Liaocheng’s historic walled city. Founded during the Ming Hongwu reign as a lookout and defensive structure, it underwent repeated repairs during later centuries.",
+        "zh-CN": "光岳楼又称余木楼、鼓楼、古楼、东昌楼，是位于中国山东省聊城市东昌府区古城正中心的一座古建筑。光岳楼始建于明代洪武年间，最初用以瞭望、御敌，明清、民国时期数次翻修。",
+        "zh-TW": "光嶽樓又稱餘木樓、鼓樓、古樓、東昌樓，是位於中國山東省聊城市東昌府區古城正中心的一座古建築。光嶽樓始建於明代洪武年間，最初用以瞭望、禦敵，明清、民國時期數次翻修。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%85%89%E5%B2%B3%E6%A5%BC",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%85%89%E5%B2%B3%E6%A5%BC"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        115.96416667,
+        36.44416667
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%85%89%E5%B2%B3%E6%A5%BC",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "371500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/9e3f338a1918ed04.webp",
+        "credit": "多多看书（其即时通讯软件昵称） · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%85%89%E5%B2%B3%E6%A5%BC_04.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Guangyue Tower",
+        "place": "光岳楼",
+        "originalFile": "光岳楼_04.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

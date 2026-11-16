@@ -1,0 +1,251 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-PEN": {
+      "label": {
+        "en": "Penghu",
+        "zh-CN": "澎湖群岛",
+        "zh-TW": "澎湖羣島"
+      },
+      "description": {
+        "en": "The Penghu or Pescadores Islands are an archipelago of 90 islands and islets in the Taiwan Strait, about 50 kilometres west of the main island of Taiwan across the Penghu Channel, covering an area of 141 km2 . The archipelago collectively forms Penghu County.",
+        "zh-CN": "澎湖群岛位于台湾海峡，由众多岛屿和小岛组成，隔澎湖水道与台湾本岛相望。各岛之间的海湾、渔港与水道，构成了这里的海洋聚落景观。",
+        "zh-TW": "澎湖羣島位於臺灣海峽，由衆多島嶼和小島組成，隔澎湖水道與臺灣本島相望。各島之間的海灣、漁港與水道，構成了這裏的海洋聚落景觀。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%BE%8E%E6%B9%96%E7%BE%A4%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%BE%8E%E6%B9%96%E7%BE%A4%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Penghu"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        119.5775,
+        23.5675
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/1dd290f4850db364.webp",
+        "credit": "TroyJiang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%BE%8E%E6%B9%96%E5%A4%A9%E5%90%8E%E5%AE%AE_%E5%A4%96%E8%A7%80.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Penghu Tianhou Temple",
+        "place": "Penghu Tianhou Temple",
+        "originalFile": "澎湖天后宮_外觀.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-PEN:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Magong",
+          "zh-CN": "马公市",
+          "zh-TW": "馬公市"
+        },
+        "lngLat": [
+          119.58638888888889,
+          23.565277777777776
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 12 km landscape window around Magong.",
+          "zh-CN": "以马公市为中心，展示周边约12公里宽的主要聚落与地形。",
+          "zh-TW": "以馬公市爲中心，展示周邊約12公里寬的主要聚落與地形。"
+        },
+        "extentKm": 12,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q701428",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q701428#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E6%BE%8E%E6%B9%96%E7%BE%A4%E5%B3%B6"
+      }
+    },
+    "poi:TW-PEN:1": {
+      "label": {
+        "en": "Double-Heart of Stacked Stones",
+        "zh-CN": "双心石沪",
+        "zh-TW": "雙心石滬"
+      },
+      "description": {
+        "en": "The Double-Heart of Stacked Stones or the Twin-Heart Fish Trap is a stone fishing weir located on the north side of Cimei Township, Penghu County, Taiwan. It is a well-preserved ancient fish trap made by stacking stones to form a trap that resembles a flying heart.",
+        "zh-CN": "双心石沪位于澎湖县七美乡，且包覆著咾咕石，因为位于东湖村顶隙北面海崖下，邻近顶隙渔港故又称为顶隙沪，为七美屿唯一的石沪，因其两个沪房设计上形状似两个心形而闻名。2006年，澎湖县政府正式将其登录为文化景观。",
+        "zh-TW": "雙心石滬位於澎湖縣七美鄉，且包覆著咾咕石，因為位於東湖村頂隙北面海崖下，鄰近頂隙漁港故又稱為頂隙滬，為七美嶼唯一的石滬，因其兩個滬房設計上形狀似兩個心形而聞名。2006年，澎湖縣政府正式將其登錄為文化景觀。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%83%E7%BE%8E%E9%9B%99%E5%BF%83%E7%9F%B3%E6%BB%AC",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%83%E7%BE%8E%E9%9B%99%E5%BF%83%E7%9F%B3%E6%BB%AC",
+        "https://en.wikipedia.org/wiki/Double-Heart_of_Stacked_Stones"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        119.44694444,
+        23.22027778
+      ],
+      "parentCity": "TW-PEN",
+      "photo": {
+        "src": "assets/maps/regions/photos/e7e24037596e99f8.webp",
+        "credit": "Zeze0729 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Double-Heart_of_Stacked_Stones_20150721.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "​七美雙心石滬",
+        "place": "七美雙心石滬",
+        "originalFile": "Double-Heart_of_Stacked_Stones_20150721.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-PEN:9797cfca": {
+      "label": {
+        "en": "Penghu Tianhou Temple",
+        "zh-CN": "澎湖天后宫",
+        "zh-TW": "澎湖天后宮"
+      },
+      "description": {
+        "en": "The Penghu Tianhou Temple is a temple dedicated to the sea goddess Mazu located on Zhengyi Street in Magong City, Penghu, Taiwan. It is usually considered the oldest Mazu temple in Taiwan and, despite differences in characters, is the namesake of the surrounding city of Magong.",
+        "zh-CN": "开台澎湖天后宫，位于台湾澎湖县马公市，阖澎公庙之一，主祀天上圣母妈祖。天后宫确切创建年代不详，随著「沈有容谕退红毛番韦麻郎等」石碑出土，确定于大明万历卅二年之前即已立庙，台湾历史最悠久的庙宇。",
+        "zh-TW": "開臺澎湖天后宮，位於臺灣澎湖縣馬公市，闔澎公廟之一，主祀天上聖母媽祖。天后宮確切創建年代不詳，隨著「沈有容諭退紅毛番韋麻郎等」石碑出土，確定於大明萬曆卅二年之前即已立廟，臺灣歷史最悠久的廟宇。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%BE%8E%E6%B9%96%E5%A4%A9%E5%90%8E%E5%AE%AE",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%BE%8E%E6%B9%96%E5%A4%A9%E5%90%8E%E5%AE%AE",
+        "https://en.wikipedia.org/wiki/Penghu_Tianhou_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.5639,
+        23.5648
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Penghu_Tianhou_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-PEN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/efce094699223c70.webp",
+        "credit": "Wei-Te Wong · CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Penghu_Tianhougong_20150618.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "alt": "Penghu Tianhougong.",
+        "place": "澎湖天后宮",
+        "originalFile": "Penghu_Tianhougong_20150618.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-PEN:65e07869": {
+      "label": {
+        "en": "Fenggui Cave",
+        "zh-CN": "风柜洞",
+        "zh-TW": "風櫃洞"
+      },
+      "description": {
+        "en": "Fenggui Cave is a cave in Magong City, Penghu County, Taiwan.",
+        "zh-CN": "风柜洞位于台湾澎湖县风柜半岛的尾端，风柜以前称为「风柜尾」，南岸的玄武岩十分的发达，由于海浪长年的冲击，岩石下方形成了狭长的海蚀洞穴，洞内上方岩石有一处裂缝通达陆面，每当涨潮约七分时，海浪冲入海蚀洞中，压缩空气夹杂海水经岩石裂缝喷出陆面，并发出了巨大的声音，海浪消退时，亦需经岩石裂缝吸入空气，附近会产生巨大吸气声，相似于古时候厨房帮助生火的风柜的声音，因以而得名。 自风柜洞可远眺虎井以及桶盘两座岛屿。",
+        "zh-TW": "風櫃洞位於臺灣澎湖縣風櫃半島的尾端，風櫃以前稱為「風櫃尾」，南岸的玄武岩十分的發達，由於海浪長年的沖擊，岩石下方形成了狹長的海蝕洞穴，洞內上方岩石有一處裂縫通達陸面，每當漲潮約七分時，海浪沖入海蝕洞中，壓縮空氣夾雜海水經岩石裂縫噴出陸面，並發出了巨大的聲音，海浪消退時，亦需經岩石裂縫吸入空氣，附近會產生巨大吸氣聲，相似於古時候廚房幫助生火的風櫃的聲音，因以而得名。 自風櫃洞可遠眺虎井以及桶盤兩座島嶼。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A2%A8%E6%AB%83%E6%B4%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A2%A8%E6%AB%83%E6%B4%9E",
+        "https://en.wikipedia.org/wiki/Fenggui_Cave"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.54377778,
+        23.53783333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Fenggui_Cave",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-PEN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/283b878cff1ec783.webp",
+        "credit": "Chia Chia Kuo · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%A2%A8%E6%AB%83%E6%B4%9E.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​位於澎湖本島的風櫃洞",
+        "place": "風櫃洞",
+        "originalFile": "風櫃洞.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-PEN:4aa502fb": {
+      "label": {
+        "en": "Whale Cave",
+        "zh-CN": "小门鲸鱼洞",
+        "zh-TW": "小門鯨魚洞"
+      },
+      "description": {
+        "en": "The Whale Cave is a wave-cut platform in Xiaomen Village, Xiyu Township, Penghu County, Taiwan.",
+        "zh-CN": "鲸鱼洞位台湾澎湖县西屿乡小门屿西北海岸，属柱状玄武岩。柱状玄武岩在海崖上，因海蚀作用形成一个巨型大洞，当地称为「笼」。",
+        "zh-TW": "鯨魚洞位臺灣澎湖縣西嶼鄉小門嶼西北海岸，屬柱狀玄武岩。柱狀玄武岩在海崖上，因海蝕作用形成一個巨型大洞，當地稱為「籠」。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B0%8F%E9%96%80%E9%AF%A8%E9%AD%9A%E6%B4%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B0%8F%E9%96%80%E9%AF%A8%E9%AD%9A%E6%B4%9E",
+        "https://en.wikipedia.org/wiki/Whale_Cave"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.516152,
+        23.654772
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Whale_Cave",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-PEN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4e3b8f908237ce3a.webp",
+        "credit": "Prattflora · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Taiwan-Penghu-Xiaomen-_Islet.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "The Xiaomen Islet. the famous cave landscape in Penghu. 小門鯨魚洞",
+        "place": "小門鯨魚洞",
+        "originalFile": "Taiwan-Penghu-Xiaomen-_Islet.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-PEN:urban": {
+      "id": "poi:admin:TW-PEN:urban",
+      "label": {
+        "en": "Penghu Tianhou Temple",
+        "zh-CN": "澎湖天后宫",
+        "zh-TW": "澎湖天后宮"
+      },
+      "description": {
+        "en": "The Penghu Tianhou Temple is a temple dedicated to the sea goddess Mazu located on Zhengyi Street in Magong City, Penghu, Taiwan. It is usually considered the oldest Mazu temple in Taiwan and, despite differences in characters, is the namesake of the surrounding city of Magong.",
+        "zh-CN": "开台澎湖天后宫，位于台湾澎湖县马公市，阖澎公庙之一，主祀天上圣母妈祖。天后宫确切创建年代不详，随著「沈有容谕退红毛番韦麻郎等」石碑出土，确定于大明万历卅二年之前即已立庙，台湾历史最悠久的庙宇。",
+        "zh-TW": "開臺澎湖天后宮，位於臺灣澎湖縣馬公市，闔澎公廟之一，主祀天上聖母媽祖。天后宮確切創建年代不詳，隨著「沈有容諭退紅毛番韋麻郎等」石碑出土，確定於大明萬曆卅二年之前即已立廟，臺灣歷史最悠久的廟宇。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%BE%8E%E6%B9%96%E5%A4%A9%E5%90%8E%E5%AE%AE",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%BE%8E%E6%B9%96%E5%A4%A9%E5%90%8E%E5%AE%AE",
+        "https://en.wikipedia.org/wiki/Penghu_Tianhou_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/1dd290f4850db364.webp",
+        "credit": "TroyJiang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%BE%8E%E6%B9%96%E5%A4%A9%E5%90%8E%E5%AE%AE_%E5%A4%96%E8%A7%80.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Penghu Tianhou Temple",
+        "place": "Penghu Tianhou Temple",
+        "originalFile": "澎湖天后宮_外觀.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        119.5639,
+        23.5648
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Penghu_Tianhou_Temple",
+      "kind": "landmark",
+      "parentCity": "TW-PEN"
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "653200": {
+      "label": {
+        "en": "Hotan Prefecture",
+        "zh-CN": "和田地区",
+        "zh-TW": "和田地區"
+      },
+      "description": {
+        "en": "Hotan Prefecture is located in the Tarim Basin region of southwestern Xinjiang, China, bordering the Tibet Autonomous Region to the south and Union Territory of Ladakh and Gilgit-Baltistan to the west. The vast majority of the Aksai Chin region which is disputed between China and India is administered as part of Hotan Prefecture.",
+        "zh-CN": "和田地区，旧称和阗地区，1959年改称和田地区，是中华人民共和国新疆维吾尔自治区下辖的地区，位于新疆西南部。和田地区位于新疆维吾尔自治区最南端。",
+        "zh-TW": "和田地區，舊稱和闐地區，1959年改稱和田地區，是中華人民共和國新疆維吾爾自治區下轄的地區，位於新疆西南部。和田地區位於新疆維吾爾自治區最南端。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%92%8C%E7%94%B0%E5%9C%B0%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%92%8C%E7%94%B0%E5%9C%B0%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Hotan_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        79.91,
+        37.11
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/19ff25ffc6792258.webp",
+        "credit": "Voidvector · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Hotan Tuanjie Square Day facing north, center is Statue of Mao Zedong and Kurban Tulum",
+        "place": "Hotan Tuanjie Square Day North.jpg",
+        "originalFile": "Hotan Tuanjie Square Day North.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            79.920936,
+            37.111233
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg"
+        }
+      },
+      "photoReference": "poi:admin:653200:reviewed-photo-60328831",
+      "urbanFocus": {
+        "label": {
+          "en": "Hotan Prefecture",
+          "zh-CN": "和田地区",
+          "zh-TW": "和田地區"
+        },
+        "lngLat": [
+          79.92484,
+          37.10913
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Hotan Prefecture.",
+          "zh-CN": "以和田地区的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以和田地區的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q989885#P625",
+        "source": "https://www.wikidata.org/wiki/Q989885",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q989885#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.18
+        }
+      }
+    },
+    "poi:admin:653200:reviewed-photo-60328831": {
+      "label": {
+        "en": "Hotan Unity Square",
+        "zh-CN": "和田团结广场",
+        "zh-TW": "和田團結廣場"
+      },
+      "description": {
+        "en": "A north-facing view of Unity Square in Hotan, with the statue of Mao Zedong and Kurban Tulum at its centre.",
+        "zh-CN": "和田团结广场的北向实景，广场中央可见毛泽东与库尔班·吐鲁木的雕像。",
+        "zh-TW": "和田團結廣場的北向實景，廣場中央可見毛澤東與庫爾班·吐魯木的雕像。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/19ff25ffc6792258.webp",
+        "credit": "Voidvector · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Hotan Tuanjie Square Day facing north, center is Statue of Mao Zedong and Kurban Tulum",
+        "place": "Hotan Tuanjie Square Day North.jpg",
+        "originalFile": "Hotan Tuanjie Square Day North.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            79.920936,
+            37.111233
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg"
+        }
+      },
+      "lngLat": [
+        79.920936,
+        37.111233
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Hotan_Tuanjie_Square_Day_North.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "653200"
+    }
+  }
+}

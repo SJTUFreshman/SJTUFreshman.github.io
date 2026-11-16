@@ -292,9 +292,16 @@ async function testRegion(page, device) {
     check(await viewer.locator('.region-note-title').textContent() === titleBefore, `${device} leaving keyboard district focus restores whole region`);
     await units.nth(1).focus();
     if (device === 'mobile') {
+        const unitId = await units.first().getAttribute('data-unit');
         const target = await pointInside(units.first());
         await page.touchscreen.tap(target.x, target.y);
-        check(await viewer.locator('.region-note-title').textContent() === titleAfter, 'mobile tap keeps a district selected for reading');
+        await viewer.locator('.admin-explorer-layout').waitFor();
+        check(await viewer.locator('[data-admin-view="whole"]').count() === 1 &&
+            await viewer.locator('[data-admin-view="urban"]').count() === 1, 'mobile district tap opens its whole and urban terrain views');
+        await viewer.locator('.region-explorer-close').click();
+        await viewer.locator('.region-landscape-svg').waitFor();
+        check(await viewer.evaluate((el, id) => el.contains(document.activeElement) && document.activeElement.dataset.unit === id, unitId),
+            'mobile return restores the originating cultural member');
         const blank = await viewer.locator('.region-landscape-canvas').boundingBox();
         await page.touchscreen.tap(blank.x + 5, blank.y + 5);
         check(await viewer.locator('.region-note-title').textContent() === titleBefore, 'mobile tap on empty landscape restores whole region');

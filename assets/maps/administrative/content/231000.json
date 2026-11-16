@@ -1,0 +1,261 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "231000": {
+      "label": {
+        "en": "Mudanjiang",
+        "zh-CN": "牡丹江市",
+        "zh-TW": "牡丹江市"
+      },
+      "description": {
+        "en": "Mudanjiang , alternately romanized as Mutankiang, is a prefecture-level city in the southeast part of Heilongjiang province, People's Republic of China. It was called Botankou under Japanese occupation.",
+        "zh-CN": "牡丹江市，简称牡，又名雪城｡ 是中华人民共和国黑龙江省下辖的地级市，亦为中华台北松江省之省会，位于黑龙江省东南部，因牡丹江横跨市区因而得名。",
+        "zh-TW": "牡丹江市，簡稱牡，又名雪城｡ 是中華人民共和國黑龍江省下轄的地級市，亦為中華臺北松江省之省會，位於黑龍江省東南部，因牡丹江橫跨市區因而得名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%89%A1%E4%B8%B9%E6%B1%9F%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%89%A1%E4%B8%B9%E6%B1%9F%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Mudanjiang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        129.6329,
+        44.5514
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/2921e2503189cad9.webp",
+        "credit": "호고호 · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%B8%A4%E6%B5%B7%E5%9B%BD%E4%B8%8A%E4%BA%AC%E9%BE%99%E6%B3%89%E5%BA%9C%E5%AE%AB%E5%9F%8E%E9%81%97%E5%9D%80_2.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​渤海国上京龙泉府宫城遗址",
+        "place": "渤海国上京龙泉府遗址",
+        "originalFile": "渤海国上京龙泉府宫城遗址_2.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:231000:5610a065",
+      "urbanFocus": {
+        "label": {
+          "en": "Mudanjiang",
+          "zh-CN": "牡丹江市",
+          "zh-TW": "牡丹江市"
+        },
+        "lngLat": [
+          129.599722,
+          44.586111
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Mudanjiang.",
+          "zh-CN": "以牡丹江市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以牡丹江市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q217646#P625",
+        "source": "https://www.wikidata.org/wiki/Q217646",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q217646#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.54
+        }
+      }
+    },
+    "poi:231000:1": {
+      "label": {
+        "en": "Jingpo Lake",
+        "zh-CN": "镜泊湖",
+        "zh-TW": "鏡泊湖"
+      },
+      "description": {
+        "en": "Jingpo Lake or Lake Jingpo is a lake located in the upper reaches of the Mudan River among the Wanda Mountains in Ningan County, Heilongjiang Province, in the People's Republic of China. Earlier names for the lake include Meituohu Lake , Huhanhai Lake , and Bilten Lake .",
+        "zh-CN": "镜泊湖，清代《盛京通志》称毕尔腾湖，是中国最大的高山堰塞湖，位于中华人民共和国黑龙江省牡丹江市宁安市境内，系历经五次火山喷发，玄武岩浆流阻塞牡丹江河床而形成。",
+        "zh-TW": "鏡泊湖，清代《盛京通志》稱畢爾騰湖，是中國最大的高山堰塞湖，位於中華人民共和國黑龍江省牡丹江市寧安市境內，係歷經五次火山噴發，玄武岩漿流阻塞牡丹江河牀而形成。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%95%9C%E6%B3%8A%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%95%9C%E6%B3%8A%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Jingpo_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        128.94,
+        43.88
+      ],
+      "parentCity": "231000",
+      "photo": {
+        "src": "assets/maps/regions/photos/d949d0757f38b990.webp",
+        "credit": "drnan tu · CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jingpo_Lake,_rowing_boat.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "alt": "镜泊湖",
+        "place": "镜泊湖",
+        "originalFile": "Jingpo_Lake,_rowing_boat.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:231000:2": {
+      "label": {
+        "en": "Xuexiang National Forest Park",
+        "zh-CN": "中国雪乡",
+        "zh-TW": "中國雪鄉"
+      },
+      "description": {
+        "en": "Xuexiang National Forest Park is a national forest park in Changting township, Hailin, Heilongjiang, China. The Xuexiang National Forest Park occupies a large area that includes both the China Snow Town and a vast underdeveloped forest preservation area that surrounds the central touristic town.",
+        "zh-CN": "雪乡国家森林公园位于中华人民共和国黑龙江省牡丹江市海林市长汀镇，又名双峰林场，归大海林重点国有林管理局管理，而大海林林业局又直属于黑龙江森林工业总局。雪乡是国家4A级旅游风景区，景区通常被称为中国雪乡，位于长白山脉张广才岭与老爷岭交汇地带，由于贝加尔湖冷空气与日本海暖湿气流，加之当地较高海拔的抬升作用，降雪频繁，雪期长，积雪深。",
+        "zh-TW": "雪鄉國家森林公園位於中華人民共和國黑龍江省牡丹江市海林市長汀鎮，又名雙峯林場，歸大海林重點國有林管理局管理，而大海林林業局又直屬於黑龍江森林工業總局。雪鄉是國家4A級旅遊風景區，景區通常被稱爲中國雪鄉，位於長白山脈張廣才嶺與老爺嶺交匯地帶，由於貝加爾湖冷空氣與日本海暖溼氣流，加之當地較高海拔的抬升作用，降雪頻繁，雪期長，積雪深。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9B%AA%E4%B9%A1%E5%9B%BD%E5%AE%B6%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9B%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9B%AA%E4%B9%A1%E5%9B%BD%E5%AE%B6%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9B%AD",
+        "https://en.wikipedia.org/wiki/Xuexiang_National_Forest_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        128.2,
+        44.33
+      ],
+      "parentCity": "231000",
+      "photo": {
+        "src": "assets/maps/regions/photos/9338200f019bbdb6.webp",
+        "credit": "Chen Wu · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Morning_in_China_Snow_Town.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Morning in China Snow Town",
+        "place": "雪乡国家森林公园",
+        "originalFile": "Morning_in_China_Snow_Town.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:231000:10a87ff6": {
+      "label": {
+        "en": "Jingpo Lake",
+        "zh-CN": "镜泊湖",
+        "zh-TW": "鏡泊湖"
+      },
+      "description": {
+        "en": "Jingpo Lake or Lake Jingpo is a lake located in the upper reaches of the Mudan River among the Wanda Mountains in Ningan County, Heilongjiang Province, in the People's Republic of China. Earlier names for the lake include Meituohu Lake , Huhanhai Lake , and Bilten Lake .",
+        "zh-CN": "镜泊湖，清代《盛京通志》称毕尔腾湖，是中国最大的高山堰塞湖，位于中华人民共和国黑龙江省牡丹江市宁安市境内，系历经五次火山喷发，玄武岩浆流阻塞牡丹江河床而形成。",
+        "zh-TW": "鏡泊湖，清代《盛京通志》稱畢爾騰湖，是中國最大的高山堰塞湖，位於中華人民共和國黑龍江省牡丹江市寧安市境內，係歷經五次火山噴發，玄武岩漿流阻塞牡丹江河牀而形成。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%95%9C%E6%B3%8A%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%95%9C%E6%B3%8A%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Jingpo_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        128.94,
+        43.88
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Jingpo_Lake",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "231000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/d949d0757f38b990.webp",
+        "credit": "drnan tu · CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jingpo_Lake,_rowing_boat.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "alt": "镜泊湖",
+        "place": "镜泊湖",
+        "originalFile": "Jingpo_Lake,_rowing_boat.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:231000:5610a065": {
+      "label": {
+        "en": "Shangjing Longquanfu",
+        "zh-CN": "渤海国上京龙泉府遗址",
+        "zh-TW": "渤海國上京龍泉府遺址"
+      },
+      "description": {
+        "en": "Shangjing Longquanfu or Sanggyeong Yongcheonbu , also known as Shangjing/Sanggyeong , Huhan/Holhan Fortress , is an archaeological site in Ning'an, Heilongjiang, China. It was the capital of the Balhae Kingdom from 756 to 785, and again from 793 to 926.",
+        "zh-CN": "渤海国上京龙泉府遗址是唐代渤海国首都龙泉府的城池遗址，俗称上京城，位于今黑龙江省宁安市渤海镇。755年，渤海国三世王大钦茂自中京城迁至上京，从此成为国都。",
+        "zh-TW": "渤海國上京龍泉府遺址是唐代渤海國首都龍泉府的城池遺址，俗稱上京城，位於今黑龍江省寧安市渤海鎮。755年，渤海國三世王大欽茂自中京城遷至上京，從此成爲國都。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B8%A4%E6%B5%B7%E5%9B%BD%E4%B8%8A%E4%BA%AC%E9%BE%99%E6%B3%89%E5%BA%9C%E9%81%97%E5%9D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B8%A4%E6%B5%B7%E5%9B%BD%E4%B8%8A%E4%BA%AC%E9%BE%99%E6%B3%89%E5%BA%9C%E9%81%97%E5%9D%80",
+        "https://en.wikipedia.org/wiki/Shangjing_Longquanfu"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        129.1417,
+        44.1306
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Shangjing_Longquanfu",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "231000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2921e2503189cad9.webp",
+        "credit": "호고호 · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%B8%A4%E6%B5%B7%E5%9B%BD%E4%B8%8A%E4%BA%AC%E9%BE%99%E6%B3%89%E5%BA%9C%E5%AE%AB%E5%9F%8E%E9%81%97%E5%9D%80_2.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​渤海国上京龙泉府宫城遗址",
+        "place": "渤海国上京龙泉府遗址",
+        "originalFile": "渤海国上京龙泉府宫城遗址_2.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:231000:photo-46644776": {
+      "label": {
+        "en": "Mudanjiang landscape view",
+        "zh-CN": "牡丹江站北站楼",
+        "zh-TW": "牡丹江站北站樓"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Mudanjiang, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现牡丹江市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現牡丹江市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%89%A1%E4%B8%B9%E6%B1%9F%E7%AB%99%E5%8C%97%E7%AB%99%E6%A5%BC_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E7%89%A1%E4%B8%B9%E6%B1%9F%E7%AB%99%E5%8C%97%E7%AB%99%E6%A5%BC_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a68c7710b3c6909b.webp",
+        "credit": "TowerCard · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%89%A1%E4%B8%B9%E6%B1%9F%E7%AB%99%E5%8C%97%E7%AB%99%E6%A5%BC_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "牡丹江站北站楼",
+        "place": "牡丹江站北站楼 - panoramio.jpg",
+        "originalFile": "牡丹江站北站楼 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            129.605563,
+            44.59036
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E7%89%A1%E4%B8%B9%E6%B1%9F%E7%AB%99%E5%8C%97%E7%AB%99%E6%A5%BC_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        129.605563,
+        44.59036
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E7%89%A1%E4%B8%B9%E6%B1%9F%E7%AB%99%E5%8C%97%E7%AB%99%E6%A5%BC_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "231000"
+    }
+  }
+}

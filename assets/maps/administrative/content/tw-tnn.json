@@ -1,0 +1,214 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-TNN": {
+      "label": {
+        "en": "Tainan",
+        "zh-CN": "台南市",
+        "zh-TW": "臺南市"
+      },
+      "description": {
+        "en": "Tainan , officially Tainan City, is a special municipality in southern Taiwan, facing the Taiwan Strait on its western coast. Tainan is the oldest city on the island and commonly called the \"prefectural capital\" for its 263-year history as the capital of Taiwan under Dutch rule, the Kingdom of Tungning and later Qing dynasty rule until 1887.",
+        "zh-CN": "台南市，通称台南，为中华台北直辖市，台湾六都之一，位于台湾西南部，其西面临台湾海峡、东面临阿里山山脉、北面与嘉义县邻接、南面与高雄市邻接。面积2,191.65平方公里，为台湾各县市中，平原区比例最大、地形最平缓的城市。",
+        "zh-TW": "臺南市，通稱臺南，為中華臺北直轄市，臺灣六都之一，位於臺灣西南部，其西面臨臺灣海峽、東面臨阿里山山脈、北面與嘉義縣鄰接、南面與高雄市鄰接。面積2,191.65平方公里，為臺灣各縣市中，平原區比例最大、地形最平緩的城市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8D%97%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8D%97%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Tainan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        120.185,
+        22.99
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/21a0945392cedfc4.webp",
+        "credit": "Lin Wen Hung · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%87%BA%E5%8D%97%E5%B8%82%E5%AE%89%E5%B9%B3%E5%8D%80%E5%AE%89%E5%B9%B3%E5%8F%A4%E5%A0%A1%E8%88%87%E8%87%BA%E7%81%A3%E5%9F%8E%E6%AE%98%E8%B9%9F.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​臺南市安平區安平古堡與臺灣城殘蹟",
+        "place": "安平古堡",
+        "originalFile": "臺南市安平區安平古堡與臺灣城殘蹟.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-TNN:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Anping District",
+          "zh-CN": "安平区",
+          "zh-TW": "安平區"
+        },
+        "lngLat": [
+          120.16485277778,
+          22.993477777778
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 24 km landscape window around Anping District.",
+          "zh-CN": "以安平区为中心，展示周边约24公里宽的主要聚落与地形。",
+          "zh-TW": "以安平區爲中心，展示周邊約24公里寬的主要聚落與地形。"
+        },
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q703607",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q703607#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8D%97%E5%B8%82"
+      }
+    },
+    "poi:admin:TW-TNN:608357dd": {
+      "label": {
+        "en": "Fort Provintia",
+        "zh-CN": "赤崁楼",
+        "zh-TW": "赤崁樓"
+      },
+      "description": {
+        "en": "Fort Provintia or Providentia, also known as Chihkan Tower , was a Dutch outpost on Formosa at a site now located in West Central District, Tainan, Taiwan. It was built in 1653 during the Dutch colonization of Taiwan.",
+        "zh-CN": "赤崁楼，又作赤崁城、赤磡城、赤坎城、赤嵌城、赤嵌楼，位于台湾台南市中西区。其前身为荷治时期1625年1月辟建的「普罗民遮」市街，1653年于此市街赤崁行省兴建之欧式城塞，1655年完工，称「普罗民遮城」，在地人称为「红毛楼」、「番仔楼」，曾为全台湾岛的商业中心，至清代已倾圮，仅留部分残迹。",
+        "zh-TW": "赤崁樓，又作赤崁城、赤磡城、赤坎城、赤嵌城、赤嵌樓，位於臺灣臺南市中西區。其前身為荷治時期1625年1月闢建的「普羅民遮」市街，1653年於此市街赤崁行省興建之歐式城塞，1655年完工，稱「普羅民遮城」，在地人稱為「紅毛樓」、「番仔樓」，曾為全臺灣島的商業中心，至清代已傾圮，僅留部分殘蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%B5%A4%E5%B4%81%E6%A8%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%B5%A4%E5%B4%81%E6%A8%93",
+        "https://en.wikipedia.org/wiki/Fort_Provintia"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.20281111,
+        22.9975
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Fort_Provintia",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TNN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/77917b1df94293e1.webp",
+        "credit": "Tess1223 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%8F%B0%E5%8D%97_%E8%B5%A4%E5%B4%81%E6%A8%93.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "This is a photo of a monument in Taiwan identified by the ID",
+        "place": "赤崁樓",
+        "originalFile": "台南_赤崁樓.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TNN:ff885893": {
+      "label": {
+        "en": "Taijiang National Park",
+        "zh-CN": "台江国家公园",
+        "zh-TW": "臺江國家公園"
+      },
+      "description": {
+        "en": "Taijiang National Park is a national park in Tainan, Taiwan.",
+        "zh-CN": "台江国家公园，为中华台北第八座国家公园，也是台湾首座都市型国家公园，2009年12月28日成立。范围涵盖陆域与海域，陆域为七股区的青山渔港以南至国圣灯塔、国圣灯塔以南至曾文溪以北，以及安南区的城西滨海区域、鹿耳门溪的溪口至台17线、鹬鸻科保护区与四草湿地周边至盐水溪以北，海域则为上述陆域滨海至澎湖县东吉屿的澎湖水道区域。",
+        "zh-TW": "臺江國家公園，為中華臺北第八座國家公園，也是臺灣首座都市型國家公園，2009年12月28日成立。範圍涵蓋陸域與海域，陸域為七股區的青山漁港以南至國聖燈塔、國聖燈塔以南至曾文溪以北，以及安南區的城西濱海區域、鹿耳門溪的溪口至臺17線、鷸鴴科保護區與四草溼地周邊至鹽水溪以北，海域則為上述陸域濱海至澎湖縣東吉嶼的澎湖水道區域。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8F%B0%E6%B1%9F%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8F%B0%E6%B1%9F%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92",
+        "https://en.wikipedia.org/wiki/Taijiang_National_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.055,
+        23.063
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Taijiang_National_Park",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TNN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/13d2e6a3cb3a2a2a.webp",
+        "credit": "洪邵歆 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%8F%B0%E6%B1%9F%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92%E4%B8%83%E8%82%A1%E5%A4%95%E7%85%A7.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​台江國家公園七股潟湖蚵架，在夕陽餘暉的照映下，別有一番寧靜之美",
+        "place": "台江國家公園",
+        "originalFile": "台江國家公園七股夕照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TNN:b4420d60": {
+      "label": {
+        "en": "Tainan Park",
+        "zh-CN": "台南公园",
+        "zh-TW": "臺南公園"
+      },
+      "description": {
+        "en": "Opened in 1917, Tainan Park is one of the city's oldest and largest public parks. Its early grounds also served as an experimental tropical forest.",
+        "zh-CN": "台南公园，前称中山公园，是一座位于台湾台南市北区的公园，于1917年创立开园，为该市最古老及最大的公园。占地4万余坪，当时身兼热带实验林。",
+        "zh-TW": "臺南公園，前稱中山公園，是一座位於臺灣臺南市北區的公園，於1917年創立開園，為該市最古老及最大的公園。佔地4萬餘坪，當時身兼熱帶實驗林。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8D%97%E5%85%AC%E5%9C%92",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8D%97%E5%85%AC%E5%9C%92"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.2105231,
+        23.0028155
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8D%97%E5%85%AC%E5%9C%92",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-TNN",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2297beabb7e2fd75.webp",
+        "credit": "StevenK234 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Nianci_Pavilion,_Tainan_Park_20251230.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​臺南公園燕潭中的念慈亭",
+        "place": "臺南公園",
+        "originalFile": "Nianci_Pavilion,_Tainan_Park_20251230.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-TNN:urban": {
+      "id": "poi:admin:TW-TNN:urban",
+      "label": {
+        "en": "Fort Zeelandia (Taiwan)",
+        "zh-CN": "安平古堡",
+        "zh-TW": "安平古堡"
+      },
+      "description": {
+        "en": "Fort Zeelandia was a fortress built over ten years from 1624 to 1634 by the Dutch East India Company , in the town of Anping on Formosa, the former name of central island of Taiwan, during their 38-year rule over the western part of the island. The site had been renamed several times as Fort Orange , Fort Anping and Taiwan City .",
+        "zh-CN": "安平古堡，原称奥兰治城、热兰遮堡或热兰遮城，又名台湾城、安平镇城、安平城、王城、红毛城、赤嵌城，是一座位于台湾台南市安平区的一个城郭遗址。于1623年10月由荷兰东印度公司兴建简易城砦，1624年4月底拆毁，8月底原址重建堡垒，至1634年竣工，是台湾最早的要塞建筑。",
+        "zh-TW": "安平古堡，原稱奧蘭治城、熱蘭遮堡或熱蘭遮城，又名臺灣城、安平鎮城、安平城、王城、紅毛城、赤嵌城，是一座位於臺灣臺南市安平區的一個城郭遺址。於1623年10月由荷蘭東印度公司興建簡易城砦，1624年4月底拆毀，8月底原址重建堡壘，至1634年竣工，是臺灣最早的要塞建築。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%89%E5%B9%B3%E5%8F%A4%E5%A0%A1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%89%E5%B9%B3%E5%8F%A4%E5%A0%A1",
+        "https://en.wikipedia.org/wiki/Fort_Zeelandia_(Taiwan)"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/21a0945392cedfc4.webp",
+        "credit": "Lin Wen Hung · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%87%BA%E5%8D%97%E5%B8%82%E5%AE%89%E5%B9%B3%E5%8D%80%E5%AE%89%E5%B9%B3%E5%8F%A4%E5%A0%A1%E8%88%87%E8%87%BA%E7%81%A3%E5%9F%8E%E6%AE%98%E8%B9%9F.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​臺南市安平區安平古堡與臺灣城殘蹟",
+        "place": "安平古堡",
+        "originalFile": "臺南市安平區安平古堡與臺灣城殘蹟.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.160919,
+        23.001747
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Fort_Zeelandia_(Taiwan)",
+      "kind": "landmark",
+      "parentCity": "TW-TNN"
+    }
+  }
+}

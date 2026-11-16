@@ -1,0 +1,250 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "150400": {
+      "label": {
+        "en": "Chifeng",
+        "zh-CN": "赤峰市",
+        "zh-TW": "赤峯市"
+      },
+      "description": {
+        "en": "Chifeng is a prefecture-level city in Southeastern Inner Mongolia, People's Republic of China. It borders Xilin Gol League to the north and west, Tongliao to the northeast, Chaoyang to the southeast and Chengde to the south.",
+        "zh-CN": "赤峰市是中华人民共和国内蒙古自治区下辖的地级市，前身为昭乌达盟。位于内蒙古自治区东南部，华北地区北部。",
+        "zh-TW": "赤峯市是中華人民共和國內蒙古自治區下轄的地級市，前身爲昭烏達盟。位於內蒙古自治區東南部，華北地區北部。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%B5%A4%E5%B3%B0%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%B5%A4%E5%B3%B0%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Chifeng"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        118.8825,
+        42.255
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/eaf46000d68b58da.webp",
+        "credit": "rheins · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%B5%A4%E5%B3%B0%E5%8D%9A%E7%89%A9%E9%A6%86_-_Chifeng_Museum_-_2011.06_-_panoramio.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "赤峰博物馆 - Chifeng Museum - 2011.06",
+        "place": "松山区 (赤峰市)",
+        "originalFile": "赤峰博物馆_-_Chifeng_Museum_-_2011.06_-_panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:150400:33a82ef7",
+      "urbanFocus": {
+        "label": {
+          "en": "Chifeng",
+          "zh-CN": "赤峰市",
+          "zh-TW": "赤峯市"
+        },
+        "lngLat": [
+          118.8825,
+          42.255
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Chifeng.",
+          "zh-CN": "以赤峰市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以赤峯市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q570829#P625",
+        "source": "https://www.wikidata.org/wiki/Q570829",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q570829#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 6.53
+        }
+      }
+    },
+    "poi:150400:1": {
+      "label": {
+        "en": "Heshigten Global Geopark",
+        "zh-CN": "克什克腾世界地质公园",
+        "zh-TW": "克什克騰世界地質公園"
+      },
+      "description": {
+        "en": "Heshigten or Hexigten Global Geopark is a UNESCO Global Geopark in Hexigten Banner, Chifeng city, Inner Mongolia, China. Its 1,750 km2 area is contained in eight separate areas of scenic beauty and geologic significance, including volcanic, glacial, and desert features.",
+        "zh-CN": "克什克腾世界地质公园位于中华人民共和国内蒙古自治区赤峰市克什克腾旗，保护面积为5000平方公里，处于内蒙古高原、大兴安岭、燕山山脉的结合部。地质公园主要有花岗岩石林、岩臼、第四纪冰川遗迹、火山群、大峡谷、浑善达克沙地等地质地貌。",
+        "zh-TW": "克什克騰世界地質公園位於中華人民共和國內蒙古自治區赤峯市克什克騰旗，保護面積爲5000平方公里，處於內蒙古高原、大興安嶺、燕山山脈的結合部。地質公園主要有花崗岩石林、巖臼、第四紀冰川遺蹟、火山羣、大峽谷、渾善達克沙地等地質地貌。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%85%8B%E4%BB%80%E5%85%8B%E8%85%BE%E4%B8%96%E7%95%8C%E5%9C%B0%E8%B4%A8%E5%85%AC%E5%9B%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%85%8B%E4%BB%80%E5%85%8B%E8%85%BE%E4%B8%96%E7%95%8C%E5%9C%B0%E8%B4%A8%E5%85%AC%E5%9B%AD",
+        "https://en.wikipedia.org/wiki/Heshigten_Global_Geopark"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        117.534828,
+        43.247954
+      ],
+      "parentCity": "150400",
+      "photo": {
+        "src": "assets/maps/regions/photos/dbc3bd571451f6df.webp",
+        "credit": "NASA and Earthsat · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Dalai_nur.jpeg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Dalai_nur.jpeg#Licensing",
+        "alt": "Dali Nur (Dalai Nur), Hexigten Banner, Chifeng City, Inner Mongolia, China. Dali Nur is the large lake; Hunshandak Sandland is to the south; and the volcanic landscape area is to the northwest.",
+        "place": "Heshigten Global Geopark",
+        "originalFile": "Dalai nur.jpeg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:150400:2": {
+      "label": {
+        "en": "Dali Lake",
+        "zh-CN": "达里诺尔湖",
+        "zh-TW": "達裏諾爾湖"
+      },
+      "description": {
+        "en": "Dali Lake. Explore the local landscape and follow the linked encyclopedia entry for further reading.",
+        "zh-CN": "达里湖，又称达里诺尔湖，古时又称鱼儿泺、答儿海子，是位于中国内蒙古自治区赤峰市克什克腾旗的咸水内流湖，为一熔岩堰塞湖。东临贡格尔草原，西接锡林郭勒草原，南界浑善达克沙地。",
+        "zh-TW": "達裏湖，又稱達裏諾爾湖，古時又稱魚兒濼、答兒海子，是位於中國內蒙古自治區赤峯市克什克騰旗的鹹水內流湖，為一熔岩堰塞湖。東臨貢格爾草原，西接錫林郭勒草原，南界渾善達克沙地。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%BE%BE%E9%87%8C%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%BE%BE%E9%87%8C%E6%B9%96"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        116.63111111,
+        43.28138889
+      ],
+      "parentCity": "150400",
+      "photo": {
+        "src": "assets/maps/regions/photos/7ec208acb402348d.webp",
+        "credit": "白云悠悠 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%BE%BE%E9%87%8C%E8%AF%BA%E5%B0%94%E6%B9%96_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "达里诺尔湖",
+        "place": "达里湖",
+        "originalFile": "达里诺尔湖_-_panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:150400:33a82ef7": {
+      "label": {
+        "en": "Songshan District, Chifeng",
+        "zh-CN": "松山区 (赤峰市)",
+        "zh-TW": "松山區 (赤峯市)"
+      },
+      "description": {
+        "en": "Songshan District is a district of the city of Chifeng, Inner Mongolia, China. The district spans 5,629 square kilometers, and has a population of 608,883 as of 2019.",
+        "zh-CN": "松山区是中华人民共和国内蒙古自治区赤峰市下辖的一个市辖区。赤峰市政府及新区驻地。",
+        "zh-TW": "松山區是中華人民共和國內蒙古自治區赤峯市下轄的一個市轄區。赤峯市政府及新區駐地。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%BE%E5%B1%B1%E5%8C%BA_(%E8%B5%A4%E5%B3%B0%E5%B8%82)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%BE%E5%B1%B1%E5%8C%BA_(%E8%B5%A4%E5%B3%B0%E5%B8%82)",
+        "https://en.wikipedia.org/wiki/Songshan_District,_Chifeng"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        118.9162,
+        42.2998
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Songshan_District,_Chifeng",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "150400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/eaf46000d68b58da.webp",
+        "credit": "rheins · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%B5%A4%E5%B3%B0%E5%8D%9A%E7%89%A9%E9%A6%86_-_Chifeng_Museum_-_2011.06_-_panoramio.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "赤峰博物馆 - Chifeng Museum - 2011.06",
+        "place": "松山区 (赤峰市)",
+        "originalFile": "赤峰博物馆_-_Chifeng_Museum_-_2011.06_-_panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:150400:f1ad65cc": {
+      "label": {
+        "en": "Dahushi Reservoir",
+        "zh-CN": "打虎石水库",
+        "zh-TW": "打虎石水庫"
+      },
+      "description": {
+        "en": "Dahushi Reservoir lies on the middle reaches of the Heili River in southwestern Ningcheng County, Inner Mongolia. Construction began in 1976 and the reservoir project was completed in 1983.",
+        "zh-CN": "打虎石水库，位于中华人民共和国内蒙古自治区宁城县西南部黑里河镇境内，是黑里河中游的一座大型水库。水库工程于1976年1月开工，1981年10月主体工程完工，1983年1月竣工。",
+        "zh-TW": "打虎石水庫，位於中華人民共和國內蒙古自治區寧城縣西南部黑裏河鎮境內，是黑裏河中游的一座大型水庫。水庫工程於1976年1月開工，1981年10月主體工程完工，1983年1月竣工。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%89%93%E8%99%8E%E7%9F%B3%E6%B0%B4%E5%BA%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%89%93%E8%99%8E%E7%9F%B3%E6%B0%B4%E5%BA%93"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        118.64972222,
+        41.395
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%89%93%E8%99%8E%E7%9F%B3%E6%B0%B4%E5%BA%93",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "150400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b8c283d26ce257c1.webp",
+        "credit": "Earth Science and Remote Sensing Unit, NASA Johnson Space Center · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:ISS017-E-20380_-_View_of_China_(cropped).jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:ISS017-E-20380_-_View_of_China_(cropped).jpg#Licensing",
+        "alt": "View of China taken during ISS Expedition 17.",
+        "place": "打虎石水库",
+        "originalFile": "ISS017-E-20380_-_View_of_China_(cropped).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:150400:9e7f666e": {
+      "label": {
+        "en": "Ar Horqin Banner Museum",
+        "zh-CN": "阿鲁科尔沁旗博物馆",
+        "zh-TW": "阿魯科爾沁旗博物館"
+      },
+      "description": {
+        "en": "Ar Horqin Banner Museum is a history museum on Tianyuan Street in the banner’s new urban district, within Chifeng. Established in 1987, it previously operated as the banner’s cultural relics administration office.",
+        "zh-CN": "阿鲁科尔沁旗博物馆简称阿旗博物馆，是一家位于中华人民共和国内蒙古自治区赤峰市阿鲁科尔沁旗新区天元大街的历史类博物馆。阿鲁科尔沁旗博物馆成立于1987年，曾用名阿鲁科尔沁旗文物事业管理所。",
+        "zh-TW": "阿魯科爾沁旗博物館簡稱阿旗博物館，是一家位於中華人民共和國內蒙古自治區赤峯市阿魯科爾沁旗新區天元大街的歷史類博物館。阿魯科爾沁旗博物館成立於1987年，曾用名阿魯科爾沁旗文物事業管理所。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%98%BF%E9%B2%81%E7%A7%91%E5%B0%94%E6%B2%81%E6%97%97%E5%8D%9A%E7%89%A9%E9%A6%86",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%98%BF%E9%B2%81%E7%A7%91%E5%B0%94%E6%B2%81%E6%97%97%E5%8D%9A%E7%89%A9%E9%A6%86"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.067,
+        43.867
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%98%BF%E9%B2%81%E7%A7%91%E5%B0%94%E6%B2%81%E6%97%97%E5%8D%9A%E7%89%A9%E9%A6%86",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "150400",
+      "photo": {
+        "src": "assets/maps/administrative/photos/bca476f348d8d884.webp",
+        "credit": "Unknown authorUnknown author · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Fresco_Songjingtu,_Liao_Dynasty_Tomb_at_Baoshan.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Fresco_Songjingtu,_Liao_Dynasty_Tomb_at_Baoshan.jpg#Licensing",
+        "alt": "Fresco from Liao Dynasy Tomb at Baoshan, Ar Horqin, Inner Mongolia, China.",
+        "place": "阿鲁科尔沁旗博物馆",
+        "originalFile": "Fresco_Songjingtu,_Liao_Dynasty_Tomb_at_Baoshan.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

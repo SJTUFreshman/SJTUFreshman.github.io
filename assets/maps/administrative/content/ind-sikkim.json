@@ -1,0 +1,132 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "IND:Sikkim": {
+      "label": {
+        "en": "Sikkim",
+        "zh-CN": "锡金邦",
+        "zh-TW": "錫金邦"
+      },
+      "description": {
+        "en": "Sikkim is a state in northeast India. It borders Bhutan in the east, the Tibet Autonomous Region of China in the north and northeast, Koshi Province of Nepal in the west, and West Bengal in the south.",
+        "zh-CN": "锡金邦是印度的一个内陆邦。锡金位于喜马拉雅山脉南麓，北面与中国接壤，东面与不丹接壤，西面是尼泊尔，南面则与西孟加拉邦相邻。",
+        "zh-TW": "錫金邦是印度的一個內陸邦。錫金位於喜馬拉雅山脈南麓，北面與中國接壤，東面與不丹接壤，西面是尼泊爾，南面則與西孟加拉邦相鄰。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%94%A1%E9%87%91%E9%82%A6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%94%A1%E9%87%91%E9%82%A6",
+        "https://en.wikipedia.org/wiki/Sikkim"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0c9130a4fd17bec1.webp",
+        "credit": "Amitabha Gupta · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Enchey_Monastery_in_Gangtok_district,_East_Sikkim.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "Enchey Monastery was developed into a full-fledged monastery in the year 1840 from an old shrine build by a saint named Drubthob Karpo. During the reign of 10th Chhogyal Sidkyong Tulku (1879-1914), it was rebuilt in the year 1908, in its present shape, which is an artistic adaptation of Chinese Temple of Gyanak Riwo Tsenga. It belongs to the Nyingma order of Vajrayana Buddhism.",
+        "place": "Enchey Monastery",
+        "originalFile": "Enchey_Monastery_in_Gangtok_district,_East_Sikkim.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:IND:Sikkim:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Gangtok",
+          "zh-CN": "甘托克",
+          "zh-TW": "甘托克"
+        },
+        "lngLat": [
+          88.62,
+          27.33
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Gangtok.",
+          "zh-CN": "以甘托克为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以甘托克爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q186141",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q186141#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E9%94%A1%E9%87%91%E9%82%A6"
+      }
+    },
+    "poi:IND:Sikkim:1": {
+      "label": {
+        "en": "Lake Tsomgo",
+        "zh-CN": "徐古湖",
+        "zh-TW": "徐古湖"
+      },
+      "description": {
+        "en": "Tsomgo Lake, also known as Tsongmo Lake or Changgu Lake, is a glacial lake in Changu in the Gangtok district of the Indian state of Sikkim, some 40 kilometres from the capital Gangtok. Located at an elevation of 3,753 m , the lake remains frozen during the winter season.",
+        "zh-CN": "徐古湖（Tsomgo Lake）是锡金甘托克地区的一座冰川湖，距甘托克约40公里，湖面海拔约3753米。",
+        "zh-TW": "徐古湖（Tsomgo Lake）是錫金甘托克地區的一座冰川湖，距甘托克約40公里，湖面海拔約3753米。"
+      },
+      "source": "https://en.wikipedia.org/wiki/Lake_Tsomgo",
+      "textSources": [
+        "https://en.wikipedia.org/wiki/Lake_Tsomgo"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        88.76388889,
+        27.37527778
+      ],
+      "parentCity": "IND:Sikkim",
+      "photo": {
+        "src": "assets/maps/regions/photos/04a7ec78341ddee5.webp",
+        "credit": "Indrajit Das · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tsongmo_Lake_or_Changu_Lake_-_East_Sikkim.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "Tsongmo Lake also popular as Changu Lake , it's situated in East Sikkim about 40km away from Gangtok, Sikkim.",
+        "place": "Lake Tsomgo",
+        "originalFile": "Tsongmo_Lake_or_Changu_Lake_-_East_Sikkim.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:IND:Sikkim:urban": {
+      "id": "poi:admin:IND:Sikkim:urban",
+      "label": {
+        "en": "Enchey Monastery",
+        "zh-CN": "恩切寺",
+        "zh-TW": "恩切寺"
+      },
+      "description": {
+        "en": "The Enchey Monastery was established in 1909 above Gangtok, the capital city of Sikkim in the Northeastern Indian state. It belongs to the Nyingma order of Vajrayana Buddhism.",
+        "zh-CN": "恩切寺始建于1909年，坐落在锡金首府甘托克上方的山坡，属于金刚乘佛教宁玛派。",
+        "zh-TW": "恩切寺始建於1909年，坐落在錫金首府甘托克上方的山坡，屬於金剛乘佛教寧瑪派。"
+      },
+      "source": "https://en.wikipedia.org/wiki/Enchey_Monastery",
+      "textSources": [
+        "https://en.wikipedia.org/wiki/Enchey_Monastery",
+        "https://en.wikipedia.org/wiki/Enchey_Monastery"
+      ],
+      "textLicense": "CC BY-SA 4.0; translated and shortened excerpt",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0c9130a4fd17bec1.webp",
+        "credit": "Amitabha Gupta · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Enchey_Monastery_in_Gangtok_district,_East_Sikkim.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "Enchey Monastery was developed into a full-fledged monastery in the year 1840 from an old shrine build by a saint named Drubthob Karpo. During the reign of 10th Chhogyal Sidkyong Tulku (1879-1914), it was rebuilt in the year 1908, in its present shape, which is an artistic adaptation of Chinese Temple of Gyanak Riwo Tsenga. It belongs to the Nyingma order of Vajrayana Buddhism.",
+        "place": "Enchey Monastery",
+        "originalFile": "Enchey_Monastery_in_Gangtok_district,_East_Sikkim.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        88.61916667,
+        27.33583333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Enchey_Monastery",
+      "kind": "landmark",
+      "parentCity": "IND:Sikkim"
+    }
+  }
+}

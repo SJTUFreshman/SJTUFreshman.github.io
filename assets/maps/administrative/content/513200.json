@@ -1,0 +1,189 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "513200": {
+      "label": {
+        "en": "Ngawa Tibetan and Qiang Autonomous Prefecture",
+        "zh-CN": "阿坝藏族羌族自治州",
+        "zh-TW": "阿壩藏族羌族自治州"
+      },
+      "description": {
+        "en": "Ngawa Tibetan and Qiang Autonomous Prefecture, also known as Aba , is an autonomous prefecture of northwestern Sichuan, bordering Gansu to the north and northeast and Qinghai to the northwest. Its seat is in Barkam, and it has an area of 83,201 km2 .",
+        "zh-CN": "阿坝藏族羌族自治州，简称阿坝州，是中华人民共和国四川省下辖的自治州，位于四川省西北部，川甘青三省交界处。州境东接德阳市、绵阳市和甘肃省陇南市，南界成都市、雅安市，西邻甘孜州和青海省果洛州，北达甘肃省甘南州。",
+        "zh-TW": "阿壩藏族羌族自治州，簡稱阿壩州，是中華人民共和國四川省下轄的自治州，位於四川省西北部，川甘青三省交界處。州境東接德陽市、綿陽市和甘肅省隴南市，南界成都市、雅安市，西鄰甘孜州和青海省果洛州，北達甘肅省甘南州。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%98%BF%E5%9D%9D%E8%97%8F%E6%97%8F%E7%BE%8C%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%98%BF%E5%9D%9D%E8%97%8F%E6%97%8F%E7%BE%8C%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E",
+        "https://en.wikipedia.org/wiki/Ngawa_Tibetan_and_Qiang_Autonomous_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        102.22,
+        31.9
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/7e894b43a3b40ca4.webp",
+        "credit": "Chensiyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1_huanglong_aerial_pano_2023.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "default",
+        "place": "黄龙风景名胜区",
+        "originalFile": "1_huanglong_aerial_pano_2023.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:513200:1fd6777a",
+      "urbanFocus": {
+        "label": {
+          "en": "Barkam",
+          "zh-CN": "马尔康市",
+          "zh-TW": "馬爾康市"
+        },
+        "lngLat": [
+          102.21673,
+          31.90456
+        ],
+        "kind": "administrative-seat",
+        "definition": {
+          "en": "A 24 km landscape window centred on Barkam.",
+          "zh-CN": "以马尔康市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以馬爾康市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q808243#P625",
+        "source": "https://www.wikidata.org/wiki/Q808243",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q1012450#P36",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.69
+        }
+      }
+    },
+    "poi:admin:513200:aede3064": {
+      "label": {
+        "en": "Jiuzhaigou",
+        "zh-CN": "九寨沟",
+        "zh-TW": "九寨溝"
+      },
+      "description": {
+        "en": "Jiuzhaigou is a nature reserve and national park located in the north of Sichuan Province in southwestern China. A long valley running north to south, Jiuzhaigou was inscribed by UNESCO as a World Heritage Site in 1992 and a World Biosphere Reserve in 1997.",
+        "zh-CN": "九寨沟风景名胜区，简称九寨沟，位于中国四川省北部阿坝藏族羌族自治州九寨沟县。域跨东经103°46'~104°4'；北纬32°54'~33°19'。",
+        "zh-TW": "九寨溝風景名勝區，簡稱九寨溝，位於中國四川省北部阿壩藏族羌族自治州九寨溝縣。域跨東經103°46'~104°4'；北緯32°54'~33°19'。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B9%9D%E5%AF%A8%E6%B2%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B9%9D%E5%AF%A8%E6%B2%9F",
+        "https://en.wikipedia.org/wiki/Jiuzhaigou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        103.9,
+        33.2
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Jiuzhaigou",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "513200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/6adb3ddf3951c113.webp",
+        "credit": "Chensiyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1_jiuzhaigou_valley_wu_hua_hai_2011b.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Landscape of Five Flower Lake (pinyin: Wǔhuā Hǎi) in Rize Valley (pinyin: Rìzé Gōu), Jiuzhaigou Valley National Park, Sichuan Province, Western China (2011).",
+        "place": "九寨沟",
+        "originalFile": "1_jiuzhaigou_valley_wu_hua_hai_2011b.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:513200:1fd6777a": {
+      "label": {
+        "en": "Huanglong Scenic and Historic Interest Area",
+        "zh-CN": "黄龙风景名胜区",
+        "zh-TW": "黃龍風景名勝區"
+      },
+      "description": {
+        "en": "Huanglong is a scenic and historic interest area in the northwest part of Sichuan, China.",
+        "zh-CN": "黄龙风景名胜区，是位于四川省北部阿坝藏族羌族自治州松潘县境内的一个风景名胜区，在1992年与九寨沟共同登录成为世界自然遗产。",
+        "zh-TW": "黃龍風景名勝區，是位於四川省北部阿壩藏族羌族自治州松潘縣境內的一個風景名勝區，在1992年與九寨溝共同登錄成爲世界自然遺產。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BB%84%E9%BE%99%E9%A3%8E%E6%99%AF%E5%90%8D%E8%83%9C%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BB%84%E9%BE%99%E9%A3%8E%E6%99%AF%E5%90%8D%E8%83%9C%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Huanglong_Scenic_and_Historic_Interest_Area"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        103.833,
+        32.7432
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Huanglong_Scenic_and_Historic_Interest_Area",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "513200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7e894b43a3b40ca4.webp",
+        "credit": "Chensiyuan · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1_huanglong_aerial_pano_2023.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "default",
+        "place": "黄龙风景名胜区",
+        "originalFile": "1_huanglong_aerial_pano_2023.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:513200:photo-61756656": {
+      "label": {
+        "en": "Impressive waterfalls (Unsplash)",
+        "zh-CN": "阿坝藏族羌族自治州城区景观",
+        "zh-TW": "阿壩藏族羌族自治州城區景觀"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Ngawa Tibetan and Qiang Autonomous Prefecture, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现阿坝藏族羌族自治州城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現阿壩藏族羌族自治州城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Impressive_waterfalls_(Unsplash).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Impressive_waterfalls_(Unsplash).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/0fb0f9820eb8ebcd.webp",
+        "credit": "Siqo Wander siqo · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Impressive_waterfalls_(Unsplash).jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "Aba, China",
+        "place": "Impressive waterfalls (Unsplash).jpg",
+        "originalFile": "Impressive waterfalls (Unsplash).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            102.224653,
+            31.899413
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Impressive_waterfalls_(Unsplash).jpg"
+        }
+      },
+      "lngLat": [
+        102.224653,
+        31.899413
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Impressive_waterfalls_(Unsplash).jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "513200"
+    }
+  }
+}

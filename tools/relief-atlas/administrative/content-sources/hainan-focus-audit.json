@@ -1,0 +1,740 @@
+{
+  "469021": {
+    "url": "https://api.openstreetmap.org/api/0.6/map.json?bbox=110.34566,19.66386,110.38166,19.69986",
+    "focus": [
+      110.36366,
+      19.68186
+    ],
+    "places": [
+      {
+        "type": "node",
+        "id": 4531903452,
+        "lat": 19.6820989,
+        "lon": 110.3641006,
+        "tags": {
+          "amenity": "townhall",
+          "name": "定城镇人民政府"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531903453,
+        "lat": 19.6829928,
+        "lon": 110.3544716,
+        "tags": {
+          "capital": "6",
+          "name": "定安县",
+          "name:ceb": "Ding'an",
+          "name:cs": "Ting-an",
+          "name:da": "Ding'an",
+          "name:de": "Ding'an",
+          "name:en": "Ding'an",
+          "name:es": "Ding'an",
+          "name:eu": "Ding'an",
+          "name:fa": "شهرستان دینگان",
+          "name:fr": "Ding'an",
+          "name:it": "Ding'an",
+          "name:ja": "定安県",
+          "name:ko": "딩안현",
+          "name:nan": "Tēng-an-koān",
+          "name:nl": "Ding'an",
+          "name:no": "Ding'an",
+          "name:pl": "Ding'an",
+          "name:sv": "Ding'an",
+          "name:ur": "دینگآن کاؤنٹی",
+          "name:vi": "Định An",
+          "name:yue": "定安縣",
+          "name:zh": "定安县",
+          "name:zh-Hans": "定安县",
+          "name:zh-Hant": "定安縣",
+          "name:zh-Latn-pinyin": "Dìng'ān Xiàn",
+          "place": "city",
+          "place:CN": "county",
+          "population": "50600",
+          "population:date": "2022",
+          "population:note": "人口为城区人口",
+          "wikidata": "Q1022249",
+          "wikipedia": "zh:定安县"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531903454,
+        "lat": 19.6829803,
+        "lon": 110.3528381,
+        "tags": {
+          "amenity": "townhall",
+          "name": "定安县人民政府"
+        }
+      }
+    ]
+  },
+  "469022": {
+    "url": "https://api.openstreetmap.org/api/0.6/map.json?bbox=110.07977777778,19.345333333333,110.11577777778,19.381333333333",
+    "focus": [
+      110.09777777778,
+      19.363333333333
+    ],
+    "places": [
+      {
+        "type": "node",
+        "id": 3919194331,
+        "lat": 19.357786,
+        "lon": 110.0957964,
+        "tags": {
+          "capital": "8",
+          "name": "屯城镇",
+          "name:en": "Tuncheng",
+          "name:zh": "屯城镇",
+          "name:zh-Hans": "屯城镇",
+          "name:zh-Hant": "屯城鎮",
+          "name:zh-Latn-pinyin": "Túnchéng Zhèn",
+          "place": "town",
+          "place:CN": "town",
+          "short_name": "屯城",
+          "source:name": "GNS",
+          "wikidata": "Q7852871",
+          "wikipedia": "zh:屯城镇"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531914464,
+        "lat": 19.3532335,
+        "lon": 110.0971002,
+        "tags": {
+          "amenity": "townhall",
+          "name": "屯昌县人民政府"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531916096,
+        "lat": 19.3532917,
+        "lon": 110.0984332,
+        "tags": {
+          "capital": "6",
+          "name": "屯昌县",
+          "name:ceb": "Tunchang",
+          "name:cs": "Tchun-čchang",
+          "name:da": "Tunchang",
+          "name:de": "Tunchang",
+          "name:en": "Tunchang",
+          "name:es": "Tunchang",
+          "name:eu": "Tunchang",
+          "name:fa": "شهرستان تونچانگ",
+          "name:fr": "Tunchang",
+          "name:it": "Tunchang",
+          "name:ja": "屯昌県",
+          "name:ko": "툰창현",
+          "name:nan": "Tūn-chhiong-koān",
+          "name:nl": "Tunchang",
+          "name:no": "Tunchang",
+          "name:pl": "Tunchang",
+          "name:ru": "Тунчхан",
+          "name:sv": "Tunchang",
+          "name:ur": "تونچانگ کاؤنٹی",
+          "name:vi": "Đồn Xương",
+          "name:yue": "屯昌縣",
+          "name:zh": "屯昌县",
+          "name:zh-Hans": "屯昌县",
+          "name:zh-Hant": "屯昌縣",
+          "name:zh-Latn-pinyin": "Túnchāng Xiàn",
+          "place": "city",
+          "place:CN": "county",
+          "population": "64500",
+          "population:date": "2022",
+          "population:note": "人口为城区人口",
+          "wikidata": "Q1022271",
+          "wikipedia": "zh:屯昌县"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531918905,
+        "lat": 19.3735685,
+        "lon": 110.1005763,
+        "tags": {
+          "amenity": "townhall",
+          "name": "屯城镇人民政府",
+          "name:en": "Tuncheng Town People’s Government",
+          "townhall:type": "town"
+        }
+      }
+    ]
+  },
+  "469023": {
+    "url": "https://api.openstreetmap.org/api/0.6/map.json?bbox=109.98777,19.72062,110.02377,19.75662",
+    "focus": [
+      110.00577,
+      19.73862
+    ],
+    "places": [
+      {
+        "type": "node",
+        "id": 3919137783,
+        "lat": 19.7404504,
+        "lon": 110.0034283,
+        "tags": {
+          "capital": "6",
+          "name": "澄迈县",
+          "name:ceb": "Chengmai",
+          "name:cs": "Čcheng-maj",
+          "name:da": "Chengmai",
+          "name:de": "Chengmai",
+          "name:en": "Chengmai",
+          "name:es": "Chengmai",
+          "name:eu": "Chengmai",
+          "name:fa": "شهرستان چنگمای",
+          "name:fr": "Chengmai",
+          "name:it": "Chengmai",
+          "name:ja": "澄邁県",
+          "name:ko": "청마이현",
+          "name:nan": "Têng-māi-koān",
+          "name:nl": "Chengmai",
+          "name:no": "Chengmai",
+          "name:pl": "Chengmai",
+          "name:ru": "Цзиньцзян",
+          "name:sv": "Chengmai",
+          "name:ur": "چینگمائی کاؤنٹی",
+          "name:vi": "Trừng Mại",
+          "name:yue": "澄邁縣",
+          "name:zh": "澄迈县",
+          "name:zh-Hans": "澄迈县",
+          "name:zh-Hant": "澄邁縣",
+          "name:zh-Latn-pinyin": "Chéngmài Xiàn",
+          "place": "city",
+          "place:CN": "county",
+          "population": "63400",
+          "population:date": "2022",
+          "population:note": "人口为城区人口",
+          "source:name": "GNS",
+          "wikidata": "Q511654",
+          "wikipedia": "zh:澄迈县"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531910027,
+        "lat": 19.7406079,
+        "lon": 110.0027602,
+        "tags": {
+          "amenity": "townhall",
+          "name": "澄迈县人民政府"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531910028,
+        "lat": 19.7407568,
+        "lon": 110.0128587,
+        "tags": {
+          "capital": "8",
+          "name": "金江镇",
+          "name:en": "Jinjiang",
+          "name:zh": "金江镇",
+          "name:zh-Hans": "金江镇",
+          "name:zh-Hant": "金江鎮",
+          "name:zh-Latn-pinyin": "Jīnjiāng Zhèn",
+          "place": "town",
+          "place:CN": "town",
+          "wikidata": "Q14587689",
+          "wikipedia": "zh:金江镇 (澄迈县)"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531910029,
+        "lat": 19.7386967,
+        "lon": 110.006298,
+        "tags": {
+          "amenity": "townhall",
+          "name": "金江镇人民政府"
+        }
+      }
+    ]
+  },
+  "469024": {
+    "url": "https://api.openstreetmap.org/api/0.6/map.json?bbox=109.66783333333,19.889777777778,109.70383333333,19.925777777778002",
+    "focus": [
+      109.68583333333,
+      19.907777777778
+    ],
+    "places": [
+      {
+        "type": "node",
+        "id": 4531946568,
+        "lat": 19.8976991,
+        "lon": 109.6924943,
+        "tags": {
+          "capital": "8",
+          "name": "临城镇",
+          "name:en": "Lincheng",
+          "name:zh": "临城镇",
+          "name:zh-Hans": "临城镇",
+          "name:zh-Hant": "臨城鎮",
+          "name:zh-Latn-pinyin": "Línchéng Zhèn",
+          "place": "town",
+          "place:CN": "town",
+          "wikidata": "Q28794595",
+          "wikipedia": "zh:临城镇 (临高县)"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531946569,
+        "lat": 19.8985769,
+        "lon": 109.692344,
+        "tags": {
+          "amenity": "townhall",
+          "name": "临城镇人民政府"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531946570,
+        "lat": 19.9151158,
+        "lon": 109.6867275,
+        "tags": {
+          "capital": "6",
+          "name": "临高县",
+          "name:ceb": "Lingao",
+          "name:cs": "Lin-kao",
+          "name:de": "Lingao",
+          "name:en": "Lingao",
+          "name:eu": "Lingao",
+          "name:fa": "شهرستان لینگاو",
+          "name:fr": "Lingao",
+          "name:it": "Lingao",
+          "name:ja": "臨高県",
+          "name:ko": "린가오현",
+          "name:nan": "Lîm-ko-koān",
+          "name:nl": "Lingao",
+          "name:no": "Lingao",
+          "name:pl": "Lingao",
+          "name:ru": "Линьгао",
+          "name:sv": "Lingao",
+          "name:uk": "Ліньґао",
+          "name:ur": "لینگاو کاؤنٹی",
+          "name:vi": "Lâm Cao",
+          "name:yue": "臨高縣",
+          "name:zh": "临高县",
+          "name:zh-Hans": "临高县",
+          "name:zh-Hant": "臨高縣",
+          "name:zh-Latn-pinyin": "Língāo Xiàn",
+          "place": "city",
+          "place:CN": "county",
+          "population": "71300",
+          "population:date": "2022",
+          "population:note": "人口为城区人口",
+          "wikidata": "Q1028107",
+          "wikipedia": "zh:临高县"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531946571,
+        "lat": 19.9155785,
+        "lon": 109.6869099,
+        "tags": {
+          "amenity": "townhall",
+          "name": "临高县人民政府"
+        }
+      }
+    ]
+  },
+  "469025": {
+    "url": "https://api.openstreetmap.org/api/0.6/map.json?bbox=109.4332,19.20734,109.4692,19.24334",
+    "focus": [
+      109.4512,
+      19.22534
+    ],
+    "places": [
+      {
+        "type": "node",
+        "id": 3913144279,
+        "lat": 19.2263753,
+        "lon": 109.447576,
+        "tags": {
+          "capital": "6",
+          "name": "白沙县",
+          "name:cs": "Paj-ša",
+          "name:en": "Baisha",
+          "name:fr": "Baisha",
+          "name:ru": "Яча",
+          "name:vi": "Bạch Sa",
+          "name:zh": "白沙县",
+          "name:zh-Hans": "白沙县",
+          "name:zh-Hant": "白沙縣",
+          "name:zh-Latn-pinyin": "Báishā Xiàn",
+          "official_name": "白沙黎族自治县",
+          "official_name:en": "Baisha Li Autonomous County",
+          "official_name:zh": "白沙黎族自治县",
+          "place": "city",
+          "place:CN": "autonomous_county",
+          "population": "26500",
+          "population:date": "2022",
+          "population:note": "人口为城区人口",
+          "source:name": "GNS",
+          "wikidata": "Q203510",
+          "wikipedia": "zh:白沙黎族自治县"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531946536,
+        "lat": 19.2144218,
+        "lon": 109.4408789,
+        "tags": {
+          "capital": "8",
+          "name": "牙叉镇",
+          "name:en": "Yacha",
+          "name:zh": "牙叉镇",
+          "name:zh-Hans": "牙叉镇",
+          "name:zh-Hant": "牙叉鎮",
+          "name:zh-Latn-pinyin": "Yáchā Zhèn",
+          "place": "town",
+          "place:CN": "town",
+          "wikidata": "Q14589783",
+          "wikipedia": "zh:牙叉镇"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531946537,
+        "lat": 19.2141001,
+        "lon": 109.4408011,
+        "tags": {
+          "amenity": "townhall",
+          "name": "牙叉镇人民政府"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531946538,
+        "lat": 19.2268826,
+        "lon": 109.4470963,
+        "tags": {
+          "amenity": "townhall",
+          "name": "白沙黎族自治县人民政府"
+        }
+      }
+    ]
+  },
+  "469026": {
+    "url": "https://api.openstreetmap.org/api/0.6/map.json?bbox=109.03383,19.2612,109.06983,19.2972",
+    "focus": [
+      109.05183,
+      19.2792
+    ],
+    "places": [
+      {
+        "type": "node",
+        "id": 4531938562,
+        "lat": 19.2791219,
+        "lon": 109.0518781,
+        "tags": {
+          "amenity": "townhall",
+          "name": "石碌镇人民政府"
+        }
+      }
+    ]
+  },
+  "469027": {
+    "url": "https://api.openstreetmap.org/api/0.6/map.json?bbox=109.15759,18.72832,109.19359,18.76432",
+    "focus": [
+      109.17559,
+      18.74632
+    ],
+    "places": [
+      {
+        "type": "node",
+        "id": 1711536920,
+        "lat": 18.751684,
+        "lon": 109.1694923,
+        "tags": {
+          "capital": "8",
+          "name": "抱由镇",
+          "name:en": "Baoyou",
+          "name:zh": "抱由镇",
+          "name:zh-Hans": "抱由镇",
+          "name:zh-Hant": "抱由鎮",
+          "name:zh-Latn-pinyin": "Bàoyóu Zhèn",
+          "place": "town",
+          "place:CN": "town",
+          "wikidata": "Q11076761",
+          "wikipedia": "zh:抱由镇"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531929310,
+        "lat": 18.7514629,
+        "lon": 109.1682833,
+        "tags": {
+          "capital": "6",
+          "name": "乐东县",
+          "name:ceb": "Ledong",
+          "name:cs": "Le-tung",
+          "name:de": "Ledong",
+          "name:en": "Ledong",
+          "name:es": "Ledong",
+          "name:eu": "Ledong",
+          "name:fr": "Ledong",
+          "name:it": "Ledong",
+          "name:ja": "楽東県",
+          "name:ko": "러둥현",
+          "name:nan": "Lo̍k-tong Koān",
+          "name:nl": "Ledong",
+          "name:no": "Ledong",
+          "name:pl": "Ledong",
+          "name:ru": "Лэдун",
+          "name:sv": "Ledong",
+          "name:uk": "Ледун",
+          "name:ur": "لیدونگ لی خود مختار کاؤنٹی",
+          "name:vi": "Lạc Đông",
+          "name:zh": "乐东县",
+          "name:zh-Hans": "乐东县",
+          "name:zh-Hant": "樂東縣",
+          "name:zh-Latn-pinyin": "Lèdōng Xiàn",
+          "official_name": "乐东黎族自治县",
+          "official_name:en": "Ledong Li Autonomous County",
+          "official_name:zh": "乐东黎族自治县",
+          "place": "city",
+          "place:CN": "autonomous_county",
+          "population": "32000",
+          "population:date": "2022",
+          "population:note": "人口为城区人口",
+          "short_name": "乐东县",
+          "wikidata": "Q1027316",
+          "wikipedia": "zh:乐东黎族自治县"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531929311,
+        "lat": 18.7518362,
+        "lon": 109.1689995,
+        "tags": {
+          "amenity": "townhall",
+          "name": "乐东黎族自治县人民政府"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531929312,
+        "lat": 18.7463882,
+        "lon": 109.1756058,
+        "tags": {
+          "amenity": "townhall",
+          "name": "抱由镇人民政府"
+        }
+      }
+    ]
+  },
+  "469028": {
+    "url": "https://api.openstreetmap.org/api/0.6/map.json?bbox=110.02,18.487299999999998,110.056,18.5233",
+    "focus": [
+      110.038,
+      18.5053
+    ],
+    "places": [
+      {
+        "type": "node",
+        "id": 1805898410,
+        "lat": 18.5082818,
+        "lon": 110.0334066,
+        "tags": {
+          "alt_name:vi": "Lăng Thuỷ",
+          "capital": "6",
+          "int_name": "Lingshui",
+          "name": "陵水县",
+          "name:ar": "مقاطعة لونغشوي لي",
+          "name:ceb": "Lingshui",
+          "name:cs": "Ling-šuej",
+          "name:de": "Lingshui",
+          "name:en": "Lingshui",
+          "name:es": "Lingshui",
+          "name:eu": "Lingshui",
+          "name:fr": "Lingshui",
+          "name:it": "Lingshui",
+          "name:ja": "陵水県",
+          "name:ko": "링수이현",
+          "name:nan": "Lêng-chúi-koān",
+          "name:nl": "Lingshui",
+          "name:no": "Lingshui",
+          "name:pl": "Lingshui",
+          "name:sv": "Lingshui",
+          "name:uk": "Ліншуй повіт",
+          "name:ur": "لینگشوئی لی خود مختار کاؤنٹی",
+          "name:vi": "Lăng Thủy",
+          "name:yue": "陵水縣",
+          "name:zh": "陵水县",
+          "name:zh-Hans": "陵水县",
+          "name:zh-Hant": "陵水縣",
+          "name:zh-Latn-pinyin": "Língshuǐ Xiàn",
+          "official_name": "陵水黎族自治县",
+          "official_name:en": "Lingshui Li Autonomous County",
+          "official_name:zh": "陵水黎族自治县",
+          "place": "city",
+          "place:CN": "autonomous_county",
+          "population": "82700",
+          "population:date": "2022",
+          "population:note": "人口为城区人口",
+          "short_name": "陵水县",
+          "wikidata": "Q944615",
+          "wikipedia": "zh:陵水黎族自治县"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531881221,
+        "lat": 18.508307,
+        "lon": 110.0333387,
+        "tags": {
+          "amenity": "townhall",
+          "name": "陵水黎族自治县人民政府"
+        }
+      }
+    ]
+  },
+  "469029": {
+    "url": "https://api.openstreetmap.org/api/0.6/map.json?bbox=109.68154,18.62514,109.71754,18.66114",
+    "focus": [
+      109.69954,
+      18.64314
+    ],
+    "places": [
+      {
+        "type": "node",
+        "id": 3924117306,
+        "lat": 18.6422654,
+        "lon": 109.6959518,
+        "tags": {
+          "capital": "6",
+          "name": "保亭县",
+          "name:cs": "Pao-tching",
+          "name:en": "Baoting",
+          "name:fr": "Baoting",
+          "name:vi": "Bảo Đình",
+          "name:zh": "保亭县",
+          "name:zh-Hans": "保亭县",
+          "name:zh-Hant": "保亭縣",
+          "name:zh-Latn-pinyin": "Bǎotíng Xiàn",
+          "official_name": "保亭黎族苗族自治县",
+          "official_name:en": "Baoting Li and Miao Autonomous County",
+          "official_name:zh": "保亭黎族苗族自治县",
+          "place": "city",
+          "place:CN": "autonomous_county",
+          "population": "34000",
+          "population:date": "2022",
+          "population:note": "人口为城区人口",
+          "source:name": "GNS",
+          "wikidata": "Q807080",
+          "wikipedia": "zh:保亭黎族苗族自治县"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531879726,
+        "lat": 18.6411826,
+        "lon": 109.6989074,
+        "tags": {
+          "amenity": "townhall",
+          "name": "保亭黎族苗族自治县人民政府"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531879727,
+        "lat": 18.643663,
+        "lon": 109.699688,
+        "tags": {
+          "capital": "8",
+          "name": "保城镇",
+          "name:en": "Baocheng",
+          "name:zh": "保城镇",
+          "name:zh-Hans": "保城镇",
+          "name:zh-Hant": "保城鎮",
+          "name:zh-Latn-pinyin": "Bǎochéng Zhèn",
+          "place": "town",
+          "place:CN": "town",
+          "wikidata": "Q10887575",
+          "wikipedia": "zh:保城镇"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531879728,
+        "lat": 18.6434013,
+        "lon": 109.6993339,
+        "tags": {
+          "amenity": "townhall",
+          "name": "保城镇人民政府"
+        }
+      }
+    ]
+  },
+  "469030": {
+    "url": "https://api.openstreetmap.org/api/0.6/map.json?bbox=109.83311111111,19.014777777778,109.86911111111,19.050777777778002",
+    "focus": [
+      109.85111111111,
+      19.032777777778
+    ],
+    "places": [
+      {
+        "type": "node",
+        "id": 4531921671,
+        "lat": 19.0351774,
+        "lon": 109.8344207,
+        "tags": {
+          "capital": "6",
+          "name": "琼中县",
+          "name:ceb": "Qiongzhong",
+          "name:cs": "Čchiung-čung",
+          "name:de": "Qiongzhong",
+          "name:en": "Qiongzhong",
+          "name:es": "Qiongzhong",
+          "name:eu": "Qiongzhong",
+          "name:fr": "Qiongzhong",
+          "name:it": "Qiongzhong",
+          "name:ja": "瓊中県",
+          "name:ko": "충중현",
+          "name:nan": "Khêng-tiong-koān",
+          "name:nl": "Qiongzhong",
+          "name:no": "Qiongzhong",
+          "name:pl": "Qiongzhong",
+          "name:ru": "Ингэнь",
+          "name:sv": "Qiongzhong",
+          "name:ur": "چیونگژونگ لی اور میاو خود مختار کاؤنٹی",
+          "name:vi": "Quỳnh Trung",
+          "name:yue": "瓊中縣",
+          "name:zh": "琼中县",
+          "name:zh-Hans": "琼中县",
+          "name:zh-Hant": "瓊中縣",
+          "name:zh-Latn-pinyin": "Qióngzhōng Xiàn",
+          "official_name": "琼中黎族苗族自治县",
+          "official_name:en": "Qiongzhong Li and Miao Autonomous County",
+          "official_name:zh": "琼中黎族苗族自治县",
+          "place": "city",
+          "place:CN": "autonomous_county",
+          "population": "30299",
+          "population:date": "2022",
+          "population:note": "人口为城区人口",
+          "wikidata": "Q1027336",
+          "wikipedia": "zh:琼中黎族苗族自治县"
+        }
+      },
+      {
+        "type": "node",
+        "id": 4531921672,
+        "lat": 19.0350658,
+        "lon": 109.834426,
+        "tags": {
+          "amenity": "townhall",
+          "name": "琼中黎族苗族自治县人民政府"
+        }
+      }
+    ]
+  }
+}

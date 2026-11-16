@@ -1,0 +1,142 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "442000": {
+      "label": {
+        "en": "Zhongshan",
+        "zh-CN": "中山市",
+        "zh-TW": "中山市"
+      },
+      "description": {
+        "en": "Zhongshan , alternately romanized via Cantonese as Chungshan or Jungsaan, is a prefecture-level city in the south of the Pearl River Delta in Guangdong province, China. As of the 2020 census, the whole city with 4,418,060 inhabitants is now part of the Guangzhou–Shenzhen conurbation with 65,565,622 inhabitants.",
+        "zh-CN": "中山市，通称中山，旧称香山，是中华人民共和国广东省下辖的地级市，是中国唯一一座以近现代领导人命名的地级市，位于广东省中南部，是粤港澳大湾区的涵盖城市之一。市境北界广州市、佛山市，西毗江门市，南邻珠海市，东隔珠江口与深圳市相望。",
+        "zh-TW": "中山市，通稱中山，舊稱香山，是中華人民共和國廣東省下轄的地級市，是中國唯一一座以近現代領導人命名的地級市，位於廣東省中南部，是粵港澳大灣區的涵蓋城市之一。市境北界廣州市、佛山市，西毗江門市，南鄰珠海市，東隔珠江口與深圳市相望。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%B1%B1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%B1%B1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Zhongshan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        113.3925,
+        22.517
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/8dd0a03e1e2df99f.webp",
+        "credit": "水餃喵 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%8E%A2%E8%8A%B1%E5%8F%8A%E7%AC%AC%E7%89%8C%E5%9D%8A.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​中山市沙溪镇地标，龙瑞村探花及第牌坊",
+        "place": "沙溪镇 (中山市)",
+        "originalFile": "探花及第牌坊.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:442000:507a30ad",
+      "urbanFocus": {
+        "label": {
+          "en": "Zhongshan",
+          "zh-CN": "中山市",
+          "zh-TW": "中山市"
+        },
+        "lngLat": [
+          113.35,
+          22.533333333333
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Zhongshan.",
+          "zh-CN": "以中山市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以中山市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q59223#P625",
+        "source": "https://www.wikidata.org/wiki/Q59223",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q59223#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 3.6
+        }
+      }
+    },
+    "poi:admin:442000:507a30ad": {
+      "label": {
+        "en": "Shaxi, Zhongshan",
+        "zh-CN": "沙溪镇 (中山市)",
+        "zh-TW": "沙溪鎮 (中山市)"
+      },
+      "description": {
+        "en": "Shaxi is a town under the administration of the prefecture-level city of Zhongshan in Guangdong Province, China, located to the west of downtown Zhongshan. The township covers an area of 55 km2 and had a population of 223,625 in 2020, including 100,000 migrant workers.",
+        "zh-CN": "沙溪镇，旧称隆都，是中国广东省中山市下辖的一个镇，位于中山市中西部。总面积55平方公里，户籍人口6.1万人，非户籍人口8万多人。",
+        "zh-TW": "沙溪鎮，舊稱隆都，是中國廣東省中山市下轄的一個鎮，位於中山市中西部。總面積55平方公里，戶籍人口6.1萬人，非戶籍人口8萬多人。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B2%99%E6%BA%AA%E9%95%87_(%E4%B8%AD%E5%B1%B1%E5%B8%82)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B2%99%E6%BA%AA%E9%95%87_(%E4%B8%AD%E5%B1%B1%E5%B8%82)",
+        "https://en.wikipedia.org/wiki/Shaxi,_Zhongshan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.3213,
+        22.509
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Shaxi,_Zhongshan",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "442000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/8dd0a03e1e2df99f.webp",
+        "credit": "水餃喵 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%8E%A2%E8%8A%B1%E5%8F%8A%E7%AC%AC%E7%89%8C%E5%9D%8A.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​中山市沙溪镇地标，龙瑞村探花及第牌坊",
+        "place": "沙溪镇 (中山市)",
+        "originalFile": "探花及第牌坊.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:442000:e805e62c": {
+      "label": {
+        "en": "Museum of Sun Yat-sen's Former Residence",
+        "zh-CN": "孙中山故居纪念馆",
+        "zh-TW": "孫中山故居紀念館"
+      },
+      "description": {
+        "en": "Established in 1956, this museum preserves Sun Yat-sen's former home in Cuiheng Village, Zhongshan. It forms the centre of the wider historic site associated with his birthplace.",
+        "zh-CN": "孙中山故居纪念馆，位于广东省中山市南朗街道翠亨村内，成立于1956年11月，为国家一级博物馆、国家5A级旅游景区孙中山故里旅游区的核心景区之一。",
+        "zh-TW": "孫中山故居紀念館，位於廣東省中山市南朗街道翠亨村內，成立於1956年11月，爲國家一級博物館、國家5A級旅遊景區孫中山故里旅遊區的核心景區之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AD%99%E4%B8%AD%E5%B1%B1%E6%95%85%E5%B1%85%E7%BA%AA%E5%BF%B5%E9%A6%86",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AD%99%E4%B8%AD%E5%B1%B1%E6%95%85%E5%B1%85%E7%BA%AA%E5%BF%B5%E9%A6%86"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.52293056,
+        22.44521111
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%AD%99%E4%B8%AD%E5%B1%B1%E6%95%85%E5%B1%85%E7%BA%AA%E5%BF%B5%E9%A6%86",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "442000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/db99b39e91ea21d2.webp",
+        "credit": "EditQ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Former_Residence_of_Sun_Yat-sen,_Zhongshan.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Former Residence of Sun Yat-sen, Zhongshan",
+        "place": "孙中山故居纪念馆",
+        "originalFile": "Former_Residence_of_Sun_Yat-sen,_Zhongshan.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

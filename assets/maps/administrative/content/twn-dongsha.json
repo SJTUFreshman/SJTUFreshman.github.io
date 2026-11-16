@@ -1,0 +1,101 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TWN:Dongsha": {
+      "label": {
+        "en": "Pratas Island",
+        "zh-CN": "东沙岛",
+        "zh-TW": "東沙島"
+      },
+      "description": {
+        "en": "Pratas Island, also known as the Tungsha Islands or the Dongsha Islands , is a coral island situated in the northern part of the South China Sea administered as part of Cijin District, Kaohsiung, Taiwan.",
+        "zh-CN": "东沙岛是南海上东沙群岛的主岛，面积1.8平方公里，是南海数百个岛礁中最大的岛屿之一。由中华台北管辖。",
+        "zh-TW": "東沙島是南海上東沙羣島的主島，面積1.8平方公里，是南海數百個島礁中最大的島嶼之一。由中華臺北管轄。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Pratas_Island"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        116.7275,
+        20.70222222
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/7520c9b738fb8e92.webp",
+        "credit": "ISS Crew Earth Observations experiment and the Image Science & Analysis Laboratory, NASA - Johnson Space Center · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Pratas_Island_ISS004-10210.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Pratas_Island_ISS004-10210.jpg#Licensing",
+        "alt": "Dongsha (Pratas) Island seen from space on April 21, 2002, taken by crew of Expedition 4 on International Space Station from orbit.",
+        "place": "Pratas Island",
+        "originalFile": "Pratas_Island_ISS004-10210.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TWN:Dongsha:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Dongsha Island close-up",
+          "zh-CN": "东沙岛近景",
+          "zh-TW": "東沙島近景"
+        },
+        "lngLat": [
+          116.72753888888889,
+          20.70357222222222
+        ],
+        "kind": "island-detail",
+        "definition": {
+          "en": "A 1.5 km close-up of Dongsha Island and its coastal terrain.",
+          "zh-CN": "近看东沙岛及周边约1.5公里宽的海岸地形。",
+          "zh-TW": "近看東沙島及周邊約1.5公里寬的海岸地形。"
+        },
+        "extentKm": 1.5,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q11103595",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q11103595#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6"
+      }
+    },
+    "poi:admin:TWN:Dongsha:urban": {
+      "id": "poi:admin:TWN:Dongsha:urban",
+      "label": {
+        "en": "Pratas Island",
+        "zh-CN": "东沙岛",
+        "zh-TW": "東沙島"
+      },
+      "description": {
+        "en": "Pratas Island, also known as the Tungsha Islands or the Dongsha Islands , is a coral island situated in the northern part of the South China Sea administered as part of Cijin District, Kaohsiung, Taiwan.",
+        "zh-CN": "东沙岛是南海上东沙群岛的主岛，面积1.8平方公里，是南海数百个岛礁中最大的岛屿之一。由中华台北管辖。",
+        "zh-TW": "東沙島是南海上東沙羣島的主島，面積1.8平方公里，是南海數百個島礁中最大的島嶼之一。由中華臺北管轄。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%B2%99%E5%B3%B6",
+        "https://en.wikipedia.org/wiki/Pratas_Island"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7520c9b738fb8e92.webp",
+        "credit": "ISS Crew Earth Observations experiment and the Image Science & Analysis Laboratory, NASA - Johnson Space Center · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Pratas_Island_ISS004-10210.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Pratas_Island_ISS004-10210.jpg#Licensing",
+        "alt": "Dongsha (Pratas) Island seen from space on April 21, 2002, taken by crew of Expedition 4 on International Space Station from orbit.",
+        "place": "Pratas Island",
+        "originalFile": "Pratas_Island_ISS004-10210.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        116.7275,
+        20.70222222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Pratas_Island",
+      "kind": "landmark",
+      "parentCity": "TWN:Dongsha"
+    }
+  }
+}

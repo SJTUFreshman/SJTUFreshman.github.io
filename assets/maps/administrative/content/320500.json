@@ -1,0 +1,253 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "320500": {
+      "label": {
+        "en": "Suzhou",
+        "zh-CN": "苏州市",
+        "zh-TW": "蘇州市"
+      },
+      "description": {
+        "en": "Suzhou is a prefecture-level city in Jiangsu province, Eastern China. Suzhou is a major tourist destination and industrial hub of Eastern China, specializing in high-end manufacturing.",
+        "zh-CN": "苏州市，简称苏，古称吴，是中华人民共和国江苏省东南部的一个地级市，位于长江三角洲和太湖平原的中心地带，号称鱼米之乡、状元之乡、院士之乡、经济重镇、历史文化名城，自古与杭州共享有「上有天堂、下有苏杭」之称。市人民政府驻姑苏区三香路998号。",
+        "zh-TW": "蘇州市，簡稱蘇，古稱吳，是中華人民共和國江蘇省東南部的一個地級市，位於長江三角洲和太湖平原的中心地帶，號稱魚米之鄉、狀元之鄉、院士之鄉、經濟重鎮、歷史文化名城，自古與杭州共享有「上有天堂、下有蘇杭」之稱。市人民政府駐姑蘇區三香路998號。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8B%8F%E5%B7%9E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8B%8F%E5%B7%9E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Suzhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        120.61944444,
+        31.3
+      ],
+      "photo": {
+        "src": "assets/maps/regions/photos/1d146dfdac45d16a.webp",
+        "credit": "King of Hearts · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Humble_Administrator%27s_Garden_Suzhou_November_2017_008.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Mountain View Tower, Humble Administrator's Garden, Suzhou, China.",
+        "place": "拙政园",
+        "originalFile": "Humble_Administrator's_Garden_Suzhou_November_2017_008.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:320500:1",
+      "urbanFocus": {
+        "label": {
+          "en": "Suzhou",
+          "zh-CN": "苏州市",
+          "zh-TW": "蘇州市"
+        },
+        "lngLat": [
+          120.61944444444444,
+          31.3
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Suzhou.",
+          "zh-CN": "以苏州市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以蘇州市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q42622#P625",
+        "source": "https://www.wikidata.org/wiki/Q42622",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q42622#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.07
+        }
+      }
+    },
+    "poi:320500:1": {
+      "label": {
+        "en": "Humble Administrator's Garden",
+        "zh-CN": "拙政园",
+        "zh-TW": "拙政園"
+      },
+      "description": {
+        "en": "The Humble Administrator's Garden is a Chinese garden in Suzhou, a UNESCO World Heritage Site and one of the most famous of the gardens of Suzhou. The garden is located at 178 Northeast Street , Gusu District.",
+        "zh-CN": "拙政园，是中国江南一座园林，位于江苏省苏州市姑苏区平江街道东北街178号，始建于明朝正德年间，初为御史王献臣改佛寺以建。它是中国园林的杰出代表，中国四大名园之一，亦是江南私家花园典范。",
+        "zh-TW": "拙政園，是中國江南一座園林，位於江蘇省蘇州市姑蘇區平江街道東北街178號，始建於明朝正德年間，初為御史王獻臣改佛寺以建。它是中國園林的傑出代表，中國四大名園之一，亦是江南私家花園典範。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%8B%99%E6%94%BF%E5%9B%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%8B%99%E6%94%BF%E5%9B%AD",
+        "https://en.wikipedia.org/wiki/Humble_Administrator%27s_Garden"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        120.62563889,
+        31.32672222
+      ],
+      "parentCity": "320500",
+      "photo": {
+        "src": "assets/maps/regions/photos/1d146dfdac45d16a.webp",
+        "credit": "King of Hearts · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Humble_Administrator%27s_Garden_Suzhou_November_2017_008.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Mountain View Tower, Humble Administrator's Garden, Suzhou, China.",
+        "place": "拙政园",
+        "originalFile": "Humble_Administrator's_Garden_Suzhou_November_2017_008.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:320500:2": {
+      "label": {
+        "en": "Tiger Hill, Suzhou",
+        "zh-CN": "虎丘",
+        "zh-TW": "虎丘"
+      },
+      "description": {
+        "en": "Tiger Hill or Huqiu is a hill in Suzhou, China. It is a tourist destination that is known for its natural environment and historic sites.",
+        "zh-CN": "虎丘是中国江苏苏州的山丘，山丘上及附近有多处古迹。虎丘在古代有“吴中第一名胜”之誉。",
+        "zh-TW": "虎丘是中國江蘇蘇州的山丘，山丘上及附近有多處古跡。虎丘在古代有“吳中第一名勝”之譽。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%99%8E%E4%B8%98",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%99%8E%E4%B8%98",
+        "https://en.wikipedia.org/wiki/Tiger_Hill,_Suzhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        120.576167,
+        31.337531
+      ],
+      "parentCity": "320500",
+      "photo": {
+        "src": "assets/maps/regions/photos/ce9efefd64d6601b.webp",
+        "credit": "Mr. Tickle · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pagoda_Yunyan_Ta.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Yunyan Ta (Cloud Rock Pagoda), also known as leaning pagoda, at the top of Hu Qiu Shan (Tiger Hill) in Suzhou, China",
+        "place": "虎丘",
+        "originalFile": "Pagoda_Yunyan_Ta.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:320500:5dcd16ff": {
+      "label": {
+        "en": "Tiger Hill, Suzhou",
+        "zh-CN": "虎丘",
+        "zh-TW": "虎丘"
+      },
+      "description": {
+        "en": "Tiger Hill or Huqiu is a hill in Suzhou, China. It is a tourist destination that is known for its natural environment and historic sites.",
+        "zh-CN": "虎丘是中国江苏苏州的山丘，山丘上及附近有多处古迹。虎丘在古代有“吴中第一名胜”之誉。",
+        "zh-TW": "虎丘是中國江蘇蘇州的山丘，山丘上及附近有多處古跡。虎丘在古代有“吳中第一名勝”之譽。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%99%8E%E4%B8%98",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%99%8E%E4%B8%98",
+        "https://en.wikipedia.org/wiki/Tiger_Hill,_Suzhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.576167,
+        31.337531
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Tiger_Hill,_Suzhou",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ce9efefd64d6601b.webp",
+        "credit": "Mr. Tickle · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pagoda_Yunyan_Ta.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Yunyan Ta (Cloud Rock Pagoda), also known as leaning pagoda, at the top of Hu Qiu Shan (Tiger Hill) in Suzhou, China",
+        "place": "虎丘",
+        "originalFile": "Pagoda_Yunyan_Ta.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:320500:595a3380": {
+      "label": {
+        "en": "Classical Gardens of Suzhou",
+        "zh-CN": "苏州古典园林",
+        "zh-TW": "蘇州古典園林"
+      },
+      "description": {
+        "en": "The Classical Gardens of Suzhou are a group of gardens in the city of Suzhou, in Jiangsu, China, that are on the UNESCO World Heritage List. Spanning a period of almost one thousand years, from the Northern Song to the late Qing dynasties , these gardens, most of them built by scholars, standardized many of the key features of classical Chinese garden design with constructed landscapes mimicking natural scenery of rocks, hills and rivers with strategically located pavilions and pagodas.",
+        "zh-CN": "苏州古典园林或称苏州园林、苏式园林是中国古典园林的重要流派，亦是江南园林的重要代表。苏州园林的艺术风格由北方传入南方，以私人营造的古典园林为主。",
+        "zh-TW": "蘇州古典園林或稱蘇州園林、蘇式園林是中國古典園林的重要流派，亦是江南園林的重要代表。蘇州園林的藝術風格由北方傳入南方，以私人營造的古典園林爲主。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8B%8F%E5%B7%9E%E5%8F%A4%E5%85%B8%E5%9B%AD%E6%9E%97",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8B%8F%E5%B7%9E%E5%8F%A4%E5%85%B8%E5%9B%AD%E6%9E%97",
+        "https://en.wikipedia.org/wiki/Classical_Gardens_of_Suzhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.45,
+        31.31666667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Classical_Gardens_of_Suzhou",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/9a3bbe43bfdbdd65.webp",
+        "credit": "King of Hearts · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Humble_Administrator%27s_Garden_Suzhou_November_2017_006.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "View of Beisi Pagoda from Humble Administrator's Garden, Suzhou, China.",
+        "place": "苏州古典园林",
+        "originalFile": "Humble_Administrator's_Garden_Suzhou_November_2017_006.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:320500:893eb0c3": {
+      "label": {
+        "en": "Zhouzhuang",
+        "zh-CN": "周庄镇 (昆山市)",
+        "zh-TW": "周莊鎮 (崑山市)"
+      },
+      "description": {
+        "en": "Zhouzhuang is a water town known for its canals in Jiangsu province, China. It is located within the administrative area of Kunshan, 30 km southeast of the city centre of Suzhou.",
+        "zh-CN": "周庄，是中华人民共和国江苏省苏州市昆山市下辖的一个行政建制镇。 周围湖荡环列，镇内河港纵横，是典型的江南水乡，被誉为“中国第一水乡”。",
+        "zh-TW": "周莊，是中華人民共和國江蘇省蘇州市崑山市下轄的一個行政建制鎮。 周圍湖蕩環列，鎮內河港縱橫，是典型的江南水鄉，被譽爲“中國第一水鄉”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%BA%84%E9%95%87_(%E6%98%86%E5%B1%B1%E5%B8%82)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%BA%84%E9%95%87_(%E6%98%86%E5%B1%B1%E5%B8%82)",
+        "https://en.wikipedia.org/wiki/Zhouzhuang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.84555556,
+        31.11472222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Zhouzhuang",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "320500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/611285949873f808.webp",
+        "credit": "Gisling · CC BY 2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Zhouzhuang1.jpg",
+        "license": "CC BY 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+        "alt": "周庄",
+        "place": "周庄镇 (昆山市)",
+        "originalFile": "Zhouzhuang1.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

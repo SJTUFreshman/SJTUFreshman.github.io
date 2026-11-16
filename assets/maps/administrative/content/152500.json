@@ -1,0 +1,118 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "152500": {
+      "label": {
+        "en": "Xilingol League",
+        "zh-CN": "锡林郭勒盟",
+        "zh-TW": "錫林郭勒盟"
+      },
+      "description": {
+        "en": "Xilingol League is one of the three leagues of Inner Mongolia. The seat is Xilinhot, and the area is 202,580 km2 .",
+        "zh-CN": "锡林郭勒盟是中华人民共和国内蒙古自治区下辖的盟，地点位于内蒙古自治区中部偏东。辖境东接兴安盟、通辽市、赤峰市，南邻河北省承德市、张家口市，西界乌兰察布市，北与蒙古国接壤。",
+        "zh-TW": "錫林郭勒盟是中華人民共和國內蒙古自治區下轄的盟，地點位於內蒙古自治區中部偏東。轄境東接興安盟、通遼市、赤峯市，南鄰河北省承德市、張家口市，西界烏蘭察布市，北與蒙古國接壤。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%94%A1%E6%9E%97%E9%83%AD%E5%8B%92%E7%9B%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%94%A1%E6%9E%97%E9%83%AD%E5%8B%92%E7%9B%9F",
+        "https://en.wikipedia.org/wiki/Xilingol_League"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        116.09,
+        43.93
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/84f1e3e315aefdba.webp",
+        "credit": "AppleSteveGao · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Xilinhot_Airport.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Xilinhot Airport terminal in the cited photograph.",
+          "zh-CN": "锡林浩特机场航站楼实景照片。",
+          "zh-TW": "錫林浩特機場航站樓實景照片。"
+        },
+        "place": {
+          "en": "Xilinhot Airport terminal",
+          "zh-CN": "锡林浩特机场航站楼",
+          "zh-TW": "錫林浩特機場航站樓"
+        },
+        "originalFile": "Xilinhot Airport.png",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:152500:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Xilinhot",
+          "zh-CN": "锡林浩特",
+          "zh-TW": "錫林浩特"
+        },
+        "lngLat": [
+          116.08588,
+          43.94517
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on the urban area of Xilinhot, the seat of Xilingol League.",
+          "zh-CN": "以锡林郭勒盟驻地锡林浩特主城区为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以錫林郭勒盟駐地錫林浩特主城區爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q573124#P625",
+        "source": "https://www.wikidata.org/wiki/Q573124",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q573124#P625"
+      }
+    },
+    "poi:admin:152500:urban": {
+      "id": "poi:admin:152500:urban",
+      "label": {
+        "en": "Xilinhot Airport terminal",
+        "zh-CN": "锡林浩特机场航站楼",
+        "zh-TW": "錫林浩特機場航站樓"
+      },
+      "description": {
+        "en": "Xilinhot Airport is the civil airport serving Xilinhot in Xilingol League. This 2019 photograph shows the terminal from the apron, including its boarding bridges and the broad open space around the building. The map marks the terminal footprint on the southwestern side of the city’s landscape window.",
+        "zh-CN": "锡林浩特机场是位于锡林郭勒盟锡林浩特市的民航机场。这张2019年的实拍从机坪一侧展示航站楼、登机廊桥及周围开阔的场地。地图锚点对应航站楼的真实建筑位置，位于以锡林浩特为中心的近城地形视窗西南部。",
+        "zh-TW": "錫林浩特機場是位於錫林郭勒盟錫林浩特市的民航機場。這張2019年的實拍從機坪一側展示航站樓、登機廊橋及周圍開闊的場地。地圖錨點對應航站樓的真實建築位置，位於以錫林浩特爲中心的近城地形視窗西南部。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/锡林浩特机场",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/锡林浩特机场",
+        "https://commons.wikimedia.org/wiki/File:Xilinhot_Airport.png"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/84f1e3e315aefdba.webp",
+        "credit": "AppleSteveGao · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Xilinhot_Airport.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": {
+          "en": "Xilinhot Airport terminal in the cited photograph.",
+          "zh-CN": "锡林浩特机场航站楼实景照片。",
+          "zh-TW": "錫林浩特機場航站樓實景照片。"
+        },
+        "place": {
+          "en": "Xilinhot Airport terminal",
+          "zh-CN": "锡林浩特机场航站楼",
+          "zh-TW": "錫林浩特機場航站樓"
+        },
+        "originalFile": "Xilinhot Airport.png",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        115.9592166875,
+        43.9161079875
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/228377266",
+      "coordinateDerivation": "Mean of the unique nodes of the documented T2 terminal footprint (WGS84); the pictured terminal is the mapped subject, not the camera location.",
+      "kind": "landmark",
+      "parentCity": "152500"
+    }
+  }
+}

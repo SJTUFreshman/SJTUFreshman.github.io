@@ -1,0 +1,178 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "441200": {
+      "label": {
+        "en": "Zhaoqing",
+        "zh-CN": "肇庆市",
+        "zh-TW": "肇慶市"
+      },
+      "description": {
+        "en": "Zhaoqing , alternately romanized as Shiuhing, is a prefecture-level city in Guangdong, China. As of the 2020 census, its population was 4,113,594, with 1,553,109 living in the built-up area made of Duanzhou, Dinghu and Gaoyao.",
+        "zh-CN": "肇庆市，简称肇，古称端州，是中国大陆广东省下辖的地级市，位于广东省西部，是粤港澳大湾区的一部分。市境东北界清远市，东南临佛山市，西南接云浮市，西北达广西壮族自治区梧州市、贺州市。",
+        "zh-TW": "肇慶市，簡稱肇，古稱端州，是中國大陸廣東省下轄的地級市，位於廣東省西部，是粵港澳大灣區的一部分。市境東北界清遠市，東南臨佛山市，西南接雲浮市，西北達廣西壯族自治區梧州市、賀州市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%82%87%E5%BA%86%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%82%87%E5%BA%86%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Zhaoqing"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        112.47,
+        23.05
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/c2ec60c5caaa70ea.webp",
+        "credit": "Zhangzhugang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Zhaoqing_Yuejiang_Lou_2013.11.16_12-21-01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "肇庆阅江楼",
+        "place": "阅江楼 (肇庆)",
+        "originalFile": "Zhaoqing_Yuejiang_Lou_2013.11.16_12-21-01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:441200:1a3d6b1b",
+      "urbanFocus": {
+        "label": {
+          "en": "Zhaoqing",
+          "zh-CN": "肇庆市",
+          "zh-TW": "肇慶市"
+        },
+        "lngLat": [
+          112.46666666666667,
+          23.05
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Zhaoqing.",
+          "zh-CN": "以肇庆市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以肇慶市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q59164#P625",
+        "source": "https://www.wikidata.org/wiki/Q59164",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q59164#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.62
+        }
+      }
+    },
+    "poi:admin:441200:31fc2b55": {
+      "label": {
+        "en": "Zhaoqing Ancient City Walls",
+        "zh-CN": "肇庆古城墙",
+        "zh-TW": "肇慶古城牆"
+      },
+      "description": {
+        "en": "Much of Zhaoqing's historic rectangular city wall survives in Duanzhou District. Its circuit includes four gates, defensive platforms and Piyun Tower at the northwestern corner.",
+        "zh-CN": "肇庆古城墙位于中华人民共和国广东省肇庆市端州区，城墙现大部分保存完整，大致呈长方形，东西宽，南北窄，周长2801米，其中东段403.4米，西段376.9米，南段992.3米，北段1028.6米，共有28个敌台，有东西南北四城门，西北城墙上建有披云楼。1984年11月19日公布为第一批肇庆市文物保护单位。",
+        "zh-TW": "肇慶古城牆位於中華人民共和國廣東省肇慶市端州區，城牆現大部分保存完整，大致呈長方形，東西寬，南北窄，周長2801米，其中東段403.4米，西段376.9米，南段992.3米，北段1028.6米，共有28個敵臺，有東西南北四城門，西北城牆上建有披雲樓。1984年11月19日公佈爲第一批肇慶市文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%82%87%E5%BA%86%E5%8F%A4%E5%9F%8E%E5%A2%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%82%87%E5%BA%86%E5%8F%A4%E5%9F%8E%E5%A2%99"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        112.45388889,
+        23.05166667
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%82%87%E5%BA%86%E5%8F%A4%E5%9F%8E%E5%A2%99",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "441200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5a522f2c16315e58.webp",
+        "credit": "Yumeto · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20250914_Chaotian_Men.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Chaotian Gate",
+        "place": "肇庆古城墙",
+        "originalFile": "20250914_Chaotian_Men.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:441200:8a84d653": {
+      "label": {
+        "en": "Yuecheng Dragon Mother Temple",
+        "zh-CN": "悦城龙母祖庙",
+        "zh-TW": "悅城龍母祖廟"
+      },
+      "description": {
+        "en": "This temple at the meeting of the Yuecheng and Xi rivers in Deqing honours the Dragon Mother. The complex is protected as a national cultural monument.",
+        "zh-CN": "悦城龙母祖庙位于中国广东省肇庆市德庆县悦城镇悦城河与西江交汇处，是祀奉龙母蒲媪的庙宇。1989年公布为广东省文物保护单位；2001年列为第五批全国重点文物保护单位。",
+        "zh-TW": "悅城龍母祖廟位於中國廣東省肇慶市德慶縣悅城鎮悅城河與西江交匯處，是祀奉龍母蒲媼的廟宇。1989年公佈爲廣東省文物保護單位；2001年列爲第五批全國重點文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%82%A6%E5%9F%8E%E9%BE%99%E6%AF%8D%E7%A5%96%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%82%A6%E5%9F%8E%E9%BE%99%E6%AF%8D%E7%A5%96%E5%BA%99"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        112.12821111,
+        23.09188056
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%82%A6%E5%9F%8E%E9%BE%99%E6%AF%8D%E7%A5%96%E5%BA%99",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "441200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5401bceb6238c86b.webp",
+        "credit": "Zhangzhugang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Deqing_Yuecheng_Longmu_Zumiao_2013.11.16_16-15-25.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Yuecheng Dragon Mother Ancestor Temple",
+        "place": "悦城龙母祖庙",
+        "originalFile": "Deqing_Yuecheng_Longmu_Zumiao_2013.11.16_16-15-25.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:441200:1a3d6b1b": {
+      "label": {
+        "en": "Yuejiang Tower, Zhaoqing",
+        "zh-CN": "阅江楼 (肇庆)",
+        "zh-TW": "閱江樓 (肇慶)"
+      },
+      "description": {
+        "en": "Yuejiang Tower stands on the northern bank of the Xi River in Zhaoqing. It now houses a memorial at the former headquarters of Ye Ting's Independent Regiment.",
+        "zh-CN": "阅江楼位于中国广东省肇庆市端州区正东路，地处西江北岸，现为叶挺独立团团部旧址纪念馆，1962年被列为广东省文物保护单位。2019年10月7日，被列为第八批全国重点文物保护单位。",
+        "zh-TW": "閱江樓位於中國廣東省肇慶市端州區正東路，地處西江北岸，現爲葉挺獨立團團部舊址紀念館，1962年被列爲廣東省文物保護單位。2019年10月7日，被列爲第八批全國重點文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%98%85%E6%B1%9F%E6%A5%BC_(%E8%82%87%E5%BA%86)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%98%85%E6%B1%9F%E6%A5%BC_(%E8%82%87%E5%BA%86)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        112.46673524,
+        23.04734766
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%98%85%E6%B1%9F%E6%A5%BC_(%E8%82%87%E5%BA%86)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "441200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c2ec60c5caaa70ea.webp",
+        "credit": "Zhangzhugang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Zhaoqing_Yuejiang_Lou_2013.11.16_12-21-01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "肇庆阅江楼",
+        "place": "阅江楼 (肇庆)",
+        "originalFile": "Zhaoqing_Yuejiang_Lou_2013.11.16_12-21-01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

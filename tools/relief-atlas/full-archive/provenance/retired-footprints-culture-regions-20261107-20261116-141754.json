@@ -1,0 +1,113 @@
+{
+  "source": "/data/run01/scwb515/yangrunde/footprints-culture-regions-20261107",
+  "directories": [
+    "__pycache__",
+    "cultural",
+    "cultural/data",
+    "cultural/renders",
+    "cultural/scenes",
+    "logs"
+  ],
+  "files": [
+    {
+      "path": "__pycache__/render_atlas.cpython-311.pyc",
+      "bytes": 22232,
+      "sha256": "1fa6c0f4f279ea043513792e0a8d43a24267761bf8db39b3ee730238d1a1b3e1",
+      "mtime_ns": 1794018595336877394,
+      "mode": 33204
+    },
+    {
+      "path": "cultural-results.tar.gz",
+      "bytes": 95104992,
+      "sha256": "a11aa432487344e9ac272d1f8629b978f5bc41b3276c47fc2552faa47dbec295",
+      "mtime_ns": 1794018745478356605,
+      "mode": 33204
+    },
+    {
+      "path": "cultural/data/china.json",
+      "bytes": 1204343,
+      "sha256": "ff964fbbe005f46a66413868703cb7f03b289fe1607c3c623925b6a064ad2322",
+      "mtime_ns": 1794018417000000000,
+      "mode": 33204
+    },
+    {
+      "path": "cultural/data/china.npz",
+      "bytes": 7895840,
+      "sha256": "95467cf23c36171b9dabc0cbce4627cfac197f43d7111ca1f6ece97328f50689",
+      "mtime_ns": 1794018417000000000,
+      "mode": 33204
+    },
+    {
+      "path": "cultural/renders/china-colour.png",
+      "bytes": 28285321,
+      "sha256": "b7e212b6ee04169308061d1f1fb9588cb98c4b6704839843e5fdb6c0bf84d16d",
+      "mtime_ns": 1794018713183043132,
+      "mode": 33204
+    },
+    {
+      "path": "cultural/renders/china-render.json",
+      "bytes": 694,
+      "sha256": "8bd973f64e5ce99fe868bb82610da9ab67be1bf2966e5550f461541e0363f8fa",
+      "mtime_ns": 1794018713659052096,
+      "mode": 33204
+    },
+    {
+      "path": "cultural/scenes/china-colour.blend",
+      "bytes": 69691247,
+      "sha256": "585a65a738aabd87baf50f8d5488d19ea986eae84717c62ea179de7e624952c6",
+      "mtime_ns": 1794018598216929227,
+      "mode": 33204
+    },
+    {
+      "path": "cultural/scenes/china-scenes.json",
+      "bytes": 448,
+      "sha256": "a0ca384f70ebaeee89e9ff56a37e147d9c7f51856a89c065d3c4f34e3a2cca7e",
+      "mtime_ns": 1794018713623051419,
+      "mode": 33204
+    },
+    {
+      "path": "logs/render-298556.out",
+      "bytes": 19654,
+      "sha256": "c0bf43e4e2fc094610f99a253f541546adcfbf16dd3cc4f2bde1d5026e41883e",
+      "mtime_ns": 1794018713731053452,
+      "mode": 33204
+    },
+    {
+      "path": "render-footprint-atlas.py",
+      "bytes": 10851,
+      "sha256": "119ec5dbc8f0caeda0ceaaf2ca3c68ba905fbd6d985b33f27694cd019f495381",
+      "mtime_ns": 1793935783000000000,
+      "mode": 33204
+    },
+    {
+      "path": "render-footprint-sectional.slurm",
+      "bytes": 1157,
+      "sha256": "9deed86fbf4a6cffcd510782432a92ae271abbc9ff2a54b57ff466f529e6ca39",
+      "mtime_ns": 1793935783000000000,
+      "mode": 33204
+    },
+    {
+      "path": "render_atlas.py",
+      "bytes": 12456,
+      "sha256": "b2958e4c0207ff99b7b09bf3dc93ca9e5e0785f504670ca2455fe200757989be",
+      "mtime_ns": 1793260788000000000,
+      "mode": 33204
+    },
+    {
+      "path": "style.json",
+      "bytes": 3487,
+      "sha256": "7e4c421989327996993d044755ad00b310506a4f98dc6d4dba4e2f8fae0e581b",
+      "mtime_ns": 1794018467000000000,
+      "mode": 33204
+    },
+    {
+      "path": "upload.tar.gz",
+      "bytes": 8338990,
+      "sha256": "cbe5927db16d7a3ae92c14280bc55817662cbcf899a171a4c6e3617c0a4879d9",
+      "mtime_ns": 1794018471559887703,
+      "mode": 33204
+    }
+  ],
+  "host": "paracloud-Zhongwei1",
+  "excluded_files": []
+}

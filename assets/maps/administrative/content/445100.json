@@ -1,0 +1,142 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "445100": {
+      "label": {
+        "en": "Chaozhou",
+        "zh-CN": "潮州市",
+        "zh-TW": "潮州市"
+      },
+      "description": {
+        "en": "Chaozhou , alternatively Chiuchow, Chaochow or Teochew, is a prefecture-level city in the Teoswa region of east Guangdong, China. It borders Shantou to the south, Jieyang to the southwest, Meizhou to the northwest, the province of Fujian to the east, and the South China Sea to the southeast.",
+        "zh-CN": "潮州市，是中华人民共和国广东省下辖的地级市，位于广东省东部，与福建省比邻，是国家历史文化名城，有“海滨邹鲁”“岭海名邦”“中国瓷都”之美誉，获得联合国教科文组织“世界美食之都”称号。是中国十大宜居中小城市之一，同时还有中国优秀旅游城市、国家园林城市等称号、历史上是粤东的政治、经济、文化中心，市人民政府驻湘桥区枫春路1号。",
+        "zh-TW": "潮州市，是中華人民共和國廣東省下轄的地級市，位於廣東省東部，與福建省比鄰，是國家歷史文化名城，有“海濱鄒魯”“嶺海名邦”“中國瓷都”之美譽，獲得聯合國教科文組織“世界美食之都”稱號。是中國十大宜居中小城市之一，同時還有中國優秀旅遊城市、國家園林城市等稱號、歷史上是粵東的政治、經濟、文化中心，市人民政府駐湘橋區楓春路1號。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%BD%AE%E5%B7%9E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%BD%AE%E5%B7%9E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Chaozhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        116.622,
+        23.658
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/6d861736b5449855.webp",
+        "credit": "Zhangzhugang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chaozhou_Guangji_Men_2013.10.26_15-49-47.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "潮州广济门",
+        "place": "广济门城楼",
+        "originalFile": "Chaozhou_Guangji_Men_2013.10.26_15-49-47.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:445100:5296680f",
+      "urbanFocus": {
+        "label": {
+          "en": "Chaozhou",
+          "zh-CN": "潮州市",
+          "zh-TW": "潮州市"
+        },
+        "lngLat": [
+          116.63,
+          23.67
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Chaozhou.",
+          "zh-CN": "以潮州市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以潮州市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q59227#P625",
+        "source": "https://www.wikidata.org/wiki/Q59227",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q59227#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.95
+        }
+      }
+    },
+    "poi:admin:445100:6c492344": {
+      "label": {
+        "en": "Guangji Bridge (Chaozhou)",
+        "zh-CN": "广济桥 (潮州)",
+        "zh-TW": "廣濟橋 (潮州)"
+      },
+      "description": {
+        "en": "Guangji Bridge , also known as Xiangzi Bridge , is an ancient bridge that crosses the Han River east of Chaozhou, Guangdong province, China.",
+        "zh-CN": "广济桥，俗称湘子桥，是位于广东省潮州市湘桥区东门外韩江上的桥梁。与赵县赵州桥、惠安县洛阳桥及北京市卢沟桥并称“中国四大古桥”，集拱桥、梁桥及浮桥于一体，为中国第一座启闭式浮桥。",
+        "zh-TW": "廣濟橋，俗稱湘子橋，是位於廣東省潮州市湘橋區東門外韓江上的橋樑。與趙縣趙州橋、惠安縣洛陽橋及北京市盧溝橋並稱“中國四大古橋”，集拱橋、樑橋及浮橋於一體，爲中國第一座啓閉式浮橋。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B9%BF%E6%B5%8E%E6%A1%A5_(%E6%BD%AE%E5%B7%9E)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B9%BF%E6%B5%8E%E6%A1%A5_(%E6%BD%AE%E5%B7%9E)",
+        "https://en.wikipedia.org/wiki/Guangji_Bridge_(Chaozhou)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        116.6505,
+        23.6632
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Guangji_Bridge_(Chaozhou)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "445100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fe14089d96d428bf.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20230206_Guangji_Bridge_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Guangji Bridge, Chaozhou",
+        "place": "广济桥 (潮州)",
+        "originalFile": "20230206_Guangji_Bridge_02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:445100:5296680f": {
+      "label": {
+        "en": "Guangji Gate Tower",
+        "zh-CN": "广济门城楼",
+        "zh-TW": "廣濟門城樓"
+      },
+      "description": {
+        "en": "Also known as the East Gate Tower, Guangji Gate faces Guangji Bridge on the eastern side of Chaozhou's old town. Its lower floors house displays about the bridge's history.",
+        "zh-CN": "广济门城楼，俗称东门楼，位于广东省潮州市湘桥区东部，正对广济桥，是潮州古城七城门楼之首。现一、二楼为广济桥史陈列馆 。",
+        "zh-TW": "廣濟門城樓，俗稱東門樓，位於廣東省潮州市湘橋區東部，正對廣濟橋，是潮州古城七城門樓之首。現一、二樓爲廣濟橋史陳列館 。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B9%BF%E6%B5%8E%E9%97%A8%E5%9F%8E%E6%A5%BC",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B9%BF%E6%B5%8E%E9%97%A8%E5%9F%8E%E6%A5%BC"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        116.64781111,
+        23.6657
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%B9%BF%E6%B5%8E%E9%97%A8%E5%9F%8E%E6%A5%BC",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "445100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/6d861736b5449855.webp",
+        "credit": "Zhangzhugang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chaozhou_Guangji_Men_2013.10.26_15-49-47.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "潮州广济门",
+        "place": "广济门城楼",
+        "originalFile": "Chaozhou_Guangji_Men_2013.10.26_15-49-47.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

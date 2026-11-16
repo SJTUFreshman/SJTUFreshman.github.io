@@ -1,0 +1,215 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "610600": {
+      "label": {
+        "en": "Yan'an",
+        "zh-CN": "延安市",
+        "zh-TW": "延安市"
+      },
+      "description": {
+        "en": "Yan'an is a prefecture-level city in the Shaanbei region of Shaanxi province, China, bordering Shanxi to the east and Gansu to the west. It administers several counties, including Zhidan , which served as the headquarters of the Chinese Communist Party before the city of Yan'an proper took that role.",
+        "zh-CN": "延安市，简称延，古称肤施，是中华人民共和国陕西省下辖的地级市，位于陕西省北部。市境南界渭南市、铜川市、咸阳市，西邻甘肃省庆阳市，北达榆林市，东临山西省吕梁市、临汾市。",
+        "zh-TW": "延安市，簡稱延，古稱膚施，是中華人民共和國陝西省下轄的地級市，位於陝西省北部。市境南界渭南市、銅川市、咸陽市，西鄰甘肅省慶陽市，北達榆林市，東臨山西省呂梁市、臨汾市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%BB%B6%E5%AE%89%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%BB%B6%E5%AE%89%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Yan%27an"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        109.494,
+        36.65
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/ac33ba166cb15500.webp",
+        "credit": "H2v5o68z · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Anlan_Gate_2.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​Anlan Gate",
+        "place": "宝塔区",
+        "originalFile": "Anlan_Gate_2.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:610600:af48d67f",
+      "urbanFocus": {
+        "label": {
+          "en": "Yan'an",
+          "zh-CN": "延安市",
+          "zh-TW": "延安市"
+        },
+        "lngLat": [
+          109.48628,
+          36.59523
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Yan'an.",
+          "zh-CN": "以延安市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以延安市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q515388#P625",
+        "source": "https://www.wikidata.org/wiki/Q515388",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q515388#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.43
+        }
+      }
+    },
+    "poi:610600:1": {
+      "label": {
+        "en": "Yan'an",
+        "zh-CN": "延安市",
+        "zh-TW": "延安市"
+      },
+      "description": {
+        "en": "Yan'an is a prefecture-level city in the Shaanbei region of Shaanxi province, China, bordering Shanxi to the east and Gansu to the west. It administers several counties, including Zhidan , which served as the headquarters of the Chinese Communist Party before the city of Yan'an proper took that role.",
+        "zh-CN": "延安市，简称延，古称肤施，是中华人民共和国陕西省下辖的地级市，位于陕西省北部。市境南界渭南市、铜川市、咸阳市，西邻甘肃省庆阳市，北达榆林市，东临山西省吕梁市、临汾市。",
+        "zh-TW": "延安市，簡稱延，古稱膚施，是中華人民共和國陝西省下轄的地級市，位於陝西省北部。市境南界渭南市、銅川市、咸陽市，西鄰甘肅省慶陽市，北達榆林市，東臨山西省呂梁市、臨汾市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%BB%B6%E5%AE%89%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%BB%B6%E5%AE%89%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Yan%27an"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        109.494,
+        36.65
+      ],
+      "parentCity": "610600",
+      "photo": {
+        "src": "assets/maps/regions/photos/0c8cde2ddbbfe183.webp",
+        "credit": "Liuxingy · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BB%B6%E5%AE%89%E6%96%B0%E5%8C%BA%E7%9A%84%E5%BB%BA%E7%AD%91.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​延安新区的建筑",
+        "place": "延安市",
+        "originalFile": "延安新区的建筑.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:610600:2": {
+      "label": {
+        "en": "Mausoleum of the Yellow Emperor",
+        "zh-CN": "黄帝陵 (黄陵县)",
+        "zh-TW": "黃帝陵 (黃陵縣)"
+      },
+      "description": {
+        "en": "The Mausoleum of the Yellow Emperor is the alleged burial site of the legendary Yellow Emperor of China. It is located in Huangling County, Yan'an City, Shaanxi Province, China.",
+        "zh-CN": "黄帝陵或称黄陵，曾称桥陵，位于陕西省黄陵县城北，是全国数座黄帝陵之一。号称“天下第一陵”。",
+        "zh-TW": "黃帝陵或稱黃陵，曾稱橋陵，位於陝西省黃陵縣城北，是全國數座黃帝陵之一。號稱“天下第一陵”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%B8%9D%E9%99%B5_(%E9%BB%84%E9%99%B5%E5%8E%BF)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%B8%9D%E9%99%B5_(%E9%BB%84%E9%99%B5%E5%8E%BF)",
+        "https://en.wikipedia.org/wiki/Mausoleum_of_the_Yellow_Emperor"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        109.26635001,
+        35.57880001
+      ],
+      "parentCity": "610600",
+      "photo": {
+        "src": "assets/maps/regions/photos/7f3cbf9d33f72be4.webp",
+        "credit": "cncs · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:B-Tomb_of_Emperor_Huangdi_in_Shaanxi.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Mausoleum of the Yellow Emperor",
+        "place": "黄帝陵 (黄陵县)",
+        "originalFile": "B-Tomb_of_Emperor_Huangdi_in_Shaanxi.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:610600:af48d67f": {
+      "label": {
+        "en": "Baota District",
+        "zh-CN": "宝塔区",
+        "zh-TW": "寶塔區"
+      },
+      "description": {
+        "en": "Baota District is a district in Yan'an, Shaanxi, China. The district has an area of 3,537.6 square kilometres , and a permanent population of 497,085 as of 2019.",
+        "zh-CN": "宝塔区是陕西省延安市下辖的市辖区，也是市政府所在地，因境内延安宝塔而得名。东边是延长县，西边是安塞县，南部毗邻甘泉、宜川、富县，北部毗邻子长、延川县。",
+        "zh-TW": "寶塔區是陝西省延安市下轄的市轄區，也是市政府所在地，因境內延安寶塔而得名。東邊是延長縣，西邊是安塞縣，南部毗鄰甘泉、宜川、富縣，北部毗鄰子長、延川縣。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%9D%E5%A1%94%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%9D%E5%A1%94%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Baota_District"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        109.4898,
+        36.5854
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Baota_District",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "610600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ac33ba166cb15500.webp",
+        "credit": "H2v5o68z · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Anlan_Gate_2.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": "​Anlan Gate",
+        "place": "宝塔区",
+        "originalFile": "Anlan_Gate_2.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:610600:ed6676ed": {
+      "label": {
+        "en": "Mausoleum of the Yellow Emperor",
+        "zh-CN": "黄帝陵 (黄陵县)",
+        "zh-TW": "黃帝陵 (黃陵縣)"
+      },
+      "description": {
+        "en": "The Mausoleum of the Yellow Emperor is the alleged burial site of the legendary Yellow Emperor of China. It is located in Huangling County, Yan'an City, Shaanxi Province, China.",
+        "zh-CN": "黄帝陵或称黄陵，曾称桥陵，位于陕西省黄陵县城北，是全国数座黄帝陵之一。号称“天下第一陵”。",
+        "zh-TW": "黃帝陵或稱黃陵，曾稱橋陵，位於陝西省黃陵縣城北，是全國數座黃帝陵之一。號稱“天下第一陵”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%B8%9D%E9%99%B5_(%E9%BB%84%E9%99%B5%E5%8E%BF)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%B8%9D%E9%99%B5_(%E9%BB%84%E9%99%B5%E5%8E%BF)",
+        "https://en.wikipedia.org/wiki/Mausoleum_of_the_Yellow_Emperor"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        109.26635001,
+        35.57880001
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Mausoleum_of_the_Yellow_Emperor",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "610600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/7f3cbf9d33f72be4.webp",
+        "credit": "cncs · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:B-Tomb_of_Emperor_Huangdi_in_Shaanxi.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Mausoleum of the Yellow Emperor",
+        "place": "黄帝陵 (黄陵县)",
+        "originalFile": "B-Tomb_of_Emperor_Huangdi_in_Shaanxi.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

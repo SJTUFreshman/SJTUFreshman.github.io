@@ -1,0 +1,123 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "469023": {
+      "label": {
+        "en": "Chengmai County",
+        "zh-CN": "澄迈县",
+        "zh-TW": "澄邁縣"
+      },
+      "description": {
+        "en": "Chengmai County is a county in Hainan, China. It is one of four counties of Hainan.",
+        "zh-CN": "澄迈县是海南省的一个县。位于海南岛北部。",
+        "zh-TW": "澄邁縣是海南省的一個縣。位於海南島北部。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%BE%84%E8%BF%88%E5%8E%BF",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%BE%84%E8%BF%88%E5%8E%BF",
+        "https://en.wikipedia.org/wiki/Chengmai_County"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        110.016,
+        19.752
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/f81f35f0aa2eeb58.webp",
+        "credit": "Anna Frodesiak · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jinjiang_Town_-_at_Nandu_River_facing_west.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": {
+          "en": "Nandu River and the western bridge, Jinjiang in the cited photograph.",
+          "zh-CN": "金江南渡江与西侧大桥实景照片。",
+          "zh-TW": "金江南渡江與西側大橋實景照片。"
+        },
+        "place": {
+          "en": "Nandu River and the western bridge, Jinjiang",
+          "zh-CN": "金江南渡江与西侧大桥",
+          "zh-TW": "金江南渡江與西側大橋"
+        },
+        "originalFile": "Jinjiang Town - at Nandu River facing west.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:469023:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Jinjiang Town",
+          "zh-CN": "金江镇",
+          "zh-TW": "金江鎮"
+        },
+        "lngLat": [
+          110.00577,
+          19.73862
+        ],
+        "kind": "administrative-seat",
+        "definition": {
+          "en": "A 24 km landscape window centred on Jinjiang Town.",
+          "zh-CN": "以金江镇的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以金江鎮的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q14587689#P625",
+        "source": "https://www.wikidata.org/wiki/Q14587689",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q511654#P36",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.22
+        }
+      }
+    },
+    "poi:admin:469023:urban": {
+      "id": "poi:admin:469023:urban",
+      "label": {
+        "en": "Nandu River and the western bridge, Jinjiang",
+        "zh-CN": "金江南渡江与西侧大桥",
+        "zh-TW": "金江南渡江與西側大橋"
+      },
+      "description": {
+        "en": "The Nandu River divides Jinjiang into northern and southern urban areas, with bridges linking the two banks. This 2014 west-facing photograph records the riverside promenade and the western crossing. Its map marker identifies the bridge visible in the scene; it does not claim an exact camera position.",
+        "zh-CN": "南渡江将金江城区分为南北两部分，跨江桥梁连接两岸的日常生活。这张2014年朝西拍摄的照片记录了滨河步道和西侧跨江大桥。地图锚点标示画面中的桥梁位置，而非未经记录的摄影者站位，使河岸实景与近城地形形成对应。",
+        "zh-TW": "南渡江將金江城區分爲南北兩部分，跨江橋樑連接兩岸的日常生活。這張2014年朝西拍攝的照片記錄了濱河步道和西側跨江大橋。地圖錨點標示畫面中的橋樑位置，而非未經記錄的攝影者站位，使河岸實景與近城地形形成對應。"
+      },
+      "source": "https://www.hndnews.com/p/488623.html",
+      "textSources": [
+        "https://www.hndnews.com/p/488623.html",
+        "https://commons.wikimedia.org/wiki/File:Jinjiang_Town_-_at_Nandu_River_facing_west.jpg"
+      ],
+      "textKind": "editorial-place",
+      "textLicense": "Original factual summary and visual description; sources linked for further reading.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f81f35f0aa2eeb58.webp",
+        "credit": "Anna Frodesiak · CC0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jinjiang_Town_-_at_Nandu_River_facing_west.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "alt": {
+          "en": "Nandu River and the western bridge, Jinjiang in the cited photograph.",
+          "zh-CN": "金江南渡江与西侧大桥实景照片。",
+          "zh-TW": "金江南渡江與西側大橋實景照片。"
+        },
+        "place": {
+          "en": "Nandu River and the western bridge, Jinjiang",
+          "zh-CN": "金江南渡江与西侧大桥",
+          "zh-TW": "金江南渡江與西側大橋"
+        },
+        "originalFile": "Jinjiang Town - at Nandu River facing west.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        110.0001484,
+        19.7292829
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/way/164352042",
+      "coordinateDerivation": "Midpoint of the mapped western river crossing visible in the west-facing Commons photograph. This locates the depicted bridge, not an unrecorded camera position; the named east-facing companion photograph independently establishes the two bridge directions.",
+      "kind": "landmark",
+      "parentCity": "469023",
+      "coordinateVerification": "https://commons.wikimedia.org/wiki/File:Jinjiang_Town_-_at_Nandu_River_facing_east.jpg"
+    }
+  }
+}

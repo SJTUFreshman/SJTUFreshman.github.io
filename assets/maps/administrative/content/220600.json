@@ -1,0 +1,151 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "220600": {
+      "label": {
+        "en": "Baishan",
+        "zh-CN": "白山市",
+        "zh-TW": "白山市"
+      },
+      "description": {
+        "en": "Baishan is a prefecture-level city in southeastern Jilin province, in the Dongbei part of China. \"白山\" literally means \"White Mountain\", and is named after Changbai Mountain .",
+        "zh-CN": "白山市原名浑江市，是中华人民共和国吉林省下辖的地级市，位于吉林省东南部，长白山西侧。市境东与延边朝鲜族自治州相邻，北与吉林市毗连，西与通化市接壤，南与朝鲜民主主义人民共和国惠山市隔鸭绿江相望。",
+        "zh-TW": "白山市原名渾江市，是中華人民共和國吉林省下轄的地級市，位於吉林省東南部，長白山西側。市境東與延邊朝鮮族自治州相鄰，北與吉林市毗連，西與通化市接壤，南與朝鮮民主主義人民共和國惠山市隔鴨綠江相望。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%99%BD%E5%B1%B1%E5%B8%82_(%E5%90%89%E6%9E%97%E7%9C%81)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%99%BD%E5%B1%B1%E5%B8%82_(%E5%90%89%E6%9E%97%E7%9C%81)",
+        "https://en.wikipedia.org/wiki/Baishan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        126.4147,
+        41.944
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/ea120503d055c4d2.webp",
+        "credit": "颐园新居 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Changbaishan_Airport_Waiting_hall_20130717.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​长白山机场候机厅",
+        "place": "白山长白山机场",
+        "originalFile": "Changbaishan_Airport_Waiting_hall_20130717.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:220600:e56b27d0",
+      "urbanFocus": {
+        "label": {
+          "en": "Baishan",
+          "zh-CN": "白山市",
+          "zh-TW": "白山市"
+        },
+        "lngLat": [
+          126.41794,
+          41.93771
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Baishan.",
+          "zh-CN": "以白山市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以白山市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q92348#P625",
+        "source": "https://www.wikidata.org/wiki/Q92348",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q92348#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.98
+        }
+      }
+    },
+    "poi:admin:220600:e56b27d0": {
+      "label": {
+        "en": "Baishan Changbaishan Airport",
+        "zh-CN": "白山长白山机场",
+        "zh-TW": "白山長白山機場"
+      },
+      "description": {
+        "en": "Baishan Changbaishan Airport is an airport serving the city of Baishan and the tourist destination of Changbai Mountain in Jilin Province, China. It also called \"Changbaishan Airport\".",
+        "zh-CN": "白山长白山机场，是位于中国吉林省白山市抚松县松江河镇的一座支线旅游机场。",
+        "zh-TW": "白山長白山機場，是位於中國吉林省白山市撫松縣松江河鎮的一座支線旅遊機場。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%99%BD%E5%B1%B1%E9%95%BF%E7%99%BD%E5%B1%B1%E6%9C%BA%E5%9C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%99%BD%E5%B1%B1%E9%95%BF%E7%99%BD%E5%B1%B1%E6%9C%BA%E5%9C%BA",
+        "https://en.wikipedia.org/wiki/Baishan_Changbaishan_Airport"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        127.60666667,
+        42.06638889
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Baishan_Changbaishan_Airport",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "220600",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ea120503d055c4d2.webp",
+        "credit": "颐园新居 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Changbaishan_Airport_Waiting_hall_20130717.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​长白山机场候机厅",
+        "place": "白山长白山机场",
+        "originalFile": "Changbaishan_Airport_Waiting_hall_20130717.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:220600:photo-53122605": {
+      "label": {
+        "en": "Spring Festival on the River 2011",
+        "zh-CN": "白山市城区景观",
+        "zh-TW": "白山市城區景觀"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Baishan, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现白山市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現白山市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:Spring_Festival_on_the_River_2011_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:Spring_Festival_on_the_River_2011_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2e862f624f2c7e2c.webp",
+        "credit": "darrylkeith · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Spring_Festival_on_the_River_2011_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Spring Festival on the River 2011",
+        "place": "Spring Festival on the River 2011 - panoramio.jpg",
+        "originalFile": "Spring Festival on the River 2011 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            126.414356,
+            41.944043
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:Spring_Festival_on_the_River_2011_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        126.414356,
+        41.944043
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:Spring_Festival_on_the_River_2011_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "220600"
+    }
+  }
+}

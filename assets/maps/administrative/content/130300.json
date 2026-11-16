@@ -1,0 +1,223 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "130300": {
+      "label": {
+        "en": "Qinhuangdao",
+        "zh-CN": "秦皇岛市",
+        "zh-TW": "秦皇島市"
+      },
+      "description": {
+        "en": "Qinhuangdao is a port city on the coast of China in northern Hebei. It is administratively a prefecture-level city, about 300 km east of Beijing, on the Bohai Sea, the innermost gulf of the Yellow Sea.",
+        "zh-CN": "秦皇岛市，简称秦，旧称临榆，是中华人民共和国河北省下辖的地级市，位于河北省东北部，市境西南界唐山市，西北接承德市，东北临辽宁省朝阳市、葫芦岛市，东南滨渤海湾。地处燕山山脉丘陵区及山前平原过渡带，地势北高南低。",
+        "zh-TW": "秦皇島市，簡稱秦，舊稱臨榆，是中華人民共和國河北省下轄的地級市，位於河北省東北部，市境西南界唐山市，西北接承德市，東北臨遼寧省朝陽市、葫蘆島市，東南濱渤海灣。地處燕山山脈丘陵區及山前平原過渡帶，地勢北高南低。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%A7%A6%E7%9A%87%E5%B2%9B%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%A7%A6%E7%9A%87%E5%B2%9B%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Qinhuangdao"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        119.5202,
+        39.8882
+      ],
+      "photo": {
+        "src": "assets/maps/regions/photos/6971b4156fa513ef.webp",
+        "credit": "Charlie fong · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Beidaihe_panorama_from_the_south.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​北戴河滨海全景，从戴河上空向北拍摄，中间山峦为联峰山公园",
+        "place": "北戴河区",
+        "originalFile": "Beidaihe_panorama_from_the_south.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:130300:2",
+      "urbanFocus": {
+        "label": {
+          "en": "Qinhuangdao",
+          "zh-CN": "秦皇岛市",
+          "zh-TW": "秦皇島市"
+        },
+        "lngLat": [
+          119.58812,
+          39.93978
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Qinhuangdao.",
+          "zh-CN": "以秦皇岛市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以秦皇島市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q58560#P625",
+        "source": "https://www.wikidata.org/wiki/Q58560",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q58560#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.33
+        }
+      }
+    },
+    "poi:130300:1": {
+      "label": {
+        "en": "Shanhai Pass",
+        "zh-CN": "山海关",
+        "zh-TW": "山海關"
+      },
+      "description": {
+        "en": "The Shanhai Pass is a major fortified gateway at the eastern end of the Great Wall of China and one of its most crucial fortifications, as the pass commands the narrowest choke point in the strategic Liaoxi Corridor, an elongated coastal plain between the Yan Mountains foothills and the Bohai Sea, which is the only easily traversable landway between North and Northeast China.",
+        "zh-CN": "山海关位于中华人民共和国河北省秦皇岛市山海关区与辽宁省葫芦岛市绥中县的边界附近，又名渝关、临闾关、榆关。山海关位于燕山和渤海之间，是明长城最东端的关隘，故而被称为“天下第一关”。",
+        "zh-TW": "山海關位於中華人民共和國河北省秦皇島市山海關區與遼寧省葫蘆島市綏中縣的邊界附近，又名渝關、臨閭關、榆關。山海關位於燕山和渤海之間，是明長城最東端的關隘，故而被稱爲“天下第一關”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B1%B1%E6%B5%B7%E5%85%B3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B1%B1%E6%B5%B7%E5%85%B3",
+        "https://en.wikipedia.org/wiki/Shanhai_Pass"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        119.75416667,
+        40.00944444
+      ],
+      "parentCity": "130300",
+      "photo": {
+        "src": "assets/maps/regions/photos/04c6ed04a1077701.webp",
+        "credit": "BenBenW · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shanhaiguan.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "The great wall at Shanhaiguan, Qinhuangdao, Hebei, China",
+        "place": "山海关",
+        "originalFile": "Shanhaiguan.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:130300:2": {
+      "label": {
+        "en": "Beidaihe, Qinhuangdao",
+        "zh-CN": "北戴河区",
+        "zh-TW": "北戴河區"
+      },
+      "description": {
+        "en": "Beidaihe District is a popular beach resort and a district of the city of Qinhuangdao, Hebei province on China's Bohai Sea coast. It has an area of 70.14 km2 and, as of 2020, a population of 130,104, as well as a coastline of 22.5 km .",
+        "zh-CN": "北戴河区是中国河北省秦皇岛市的一个市辖区，濒临渤海湾。面积为70.3平方公里，海岸线22.5公里。",
+        "zh-TW": "北戴河區是中國河北省秦皇島市的一個市轄區，瀕臨渤海灣。面積爲70.3平方公里，海岸線22.5公里。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8C%97%E6%88%B4%E6%B2%B3%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8C%97%E6%88%B4%E6%B2%B3%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Beidaihe,_Qinhuangdao"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        119.48444444,
+        39.83472222
+      ],
+      "parentCity": "130300",
+      "photo": {
+        "src": "assets/maps/regions/photos/6971b4156fa513ef.webp",
+        "credit": "Charlie fong · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Beidaihe_panorama_from_the_south.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​北戴河滨海全景，从戴河上空向北拍摄，中间山峦为联峰山公园",
+        "place": "北戴河区",
+        "originalFile": "Beidaihe_panorama_from_the_south.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:130300:3bb4213b": {
+      "label": {
+        "en": "Shanhai Pass",
+        "zh-CN": "山海关",
+        "zh-TW": "山海關"
+      },
+      "description": {
+        "en": "The Shanhai Pass is a major fortified gateway at the eastern end of the Great Wall of China and one of its most crucial fortifications, as the pass commands the narrowest choke point in the strategic Liaoxi Corridor, an elongated coastal plain between the Yan Mountains foothills and the Bohai Sea, which is the only easily traversable landway between North and Northeast China.",
+        "zh-CN": "山海关位于中华人民共和国河北省秦皇岛市山海关区与辽宁省葫芦岛市绥中县的边界附近，又名渝关、临闾关、榆关。山海关位于燕山和渤海之间，是明长城最东端的关隘，故而被称为“天下第一关”。",
+        "zh-TW": "山海關位於中華人民共和國河北省秦皇島市山海關區與遼寧省葫蘆島市綏中縣的邊界附近，又名渝關、臨閭關、榆關。山海關位於燕山和渤海之間，是明長城最東端的關隘，故而被稱爲“天下第一關”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B1%B1%E6%B5%B7%E5%85%B3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B1%B1%E6%B5%B7%E5%85%B3",
+        "https://en.wikipedia.org/wiki/Shanhai_Pass"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.75416667,
+        40.00944444
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Shanhai_Pass",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "130300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/04c6ed04a1077701.webp",
+        "credit": "BenBenW · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Shanhaiguan.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "The great wall at Shanhaiguan, Qinhuangdao, Hebei, China",
+        "place": "山海关",
+        "originalFile": "Shanhaiguan.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:130300:photo-54246305": {
+      "label": {
+        "en": "Qinhuangdao landscape view",
+        "zh-CN": "人民广场 (9)",
+        "zh-TW": "人民廣場 (9)"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Qinhuangdao, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现秦皇岛市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現秦皇島市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E4%BA%BA%E6%B0%91%E5%B9%BF%E5%9C%BA_-_panoramio_(9).jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E4%BA%BA%E6%B0%91%E5%B9%BF%E5%9C%BA_-_panoramio_(9).jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/de72dcf685da71cd.webp",
+        "credit": "山海风 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%BA%BA%E6%B0%91%E5%B9%BF%E5%9C%BA_-_panoramio_(9).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "人民广场",
+        "place": "人民广场 - panoramio (9).jpg",
+        "originalFile": "人民广场 - panoramio (9).jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            119.595366,
+            39.940475
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E4%BA%BA%E6%B0%91%E5%B9%BF%E5%9C%BA_-_panoramio_(9).jpg"
+        }
+      },
+      "lngLat": [
+        119.595366,
+        39.940475
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E4%BA%BA%E6%B0%91%E5%B9%BF%E5%9C%BA_-_panoramio_(9).jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "130300"
+    }
+  }
+}

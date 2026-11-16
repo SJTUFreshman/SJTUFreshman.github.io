@@ -1,0 +1,189 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "510700": {
+      "label": {
+        "en": "Mianyang",
+        "zh-CN": "绵阳市",
+        "zh-TW": "綿陽市"
+      },
+      "description": {
+        "en": "Mianyang is the second largest prefecture-level city of Sichuan province in Southwestern China. It borders Nanchong City to the east, Suining City to the south, Deyang City to the southwest, Aba Tibetan and Qiang Autonomous Prefecture to the west, Gansu Province to the north, and Guangyuan City to the northeast.",
+        "zh-CN": "绵阳市，简称涪、绵，古称涪县、绵州，是中华人民共和国四川省下辖的地级市，位于四川省北部，是全省第二大城市。市境东接广元市、南充市，南界遂宁市、德阳市，西邻阿坝州，北临甘肃省陇南市。",
+        "zh-TW": "綿陽市，簡稱涪、綿，古稱涪縣、綿州，是中華人民共和國四川省下轄的地級市，位於四川省北部，是全省第二大城市。市境東接廣元市、南充市，南界遂寧市、德陽市，西鄰阿壩州，北臨甘肅省隴南市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%BB%B5%E9%98%B3%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%BB%B5%E9%98%B3%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Mianyang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        104.679,
+        31.468
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/590dcf5ba1f85877.webp",
+        "credit": "书剑飘零 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%9C%A8%E6%88%90%E9%83%BD%E9%81%A5%E6%9C%9B%E9%9B%AA%E5%B1%B1_%E9%BE%99%E9%97%A8%E5%B1%B1%E8%84%891_Chengdu_skyline_with_a_view_of_Longmen_Mountains.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​在成都遥望雪山 龙门山脉",
+        "place": "龙门山 (四川)",
+        "originalFile": "在成都遥望雪山_龙门山脉1_Chengdu_skyline_with_a_view_of_Longmen_Mountains.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:510700:936ced41",
+      "urbanFocus": {
+        "label": {
+          "en": "Mianyang",
+          "zh-CN": "绵阳市",
+          "zh-TW": "綿陽市"
+        },
+        "lngLat": [
+          104.73847,
+          31.46688
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Mianyang.",
+          "zh-CN": "以绵阳市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以綿陽市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q426130#P625",
+        "source": "https://www.wikidata.org/wiki/Q426130",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q426130#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.44
+        }
+      }
+    },
+    "poi:admin:510700:c9a0c95b": {
+      "label": {
+        "en": "Wanglang National Nature Reserve",
+        "zh-CN": "王朗国家级自然保护区",
+        "zh-TW": "王朗國家級自然保護區"
+      },
+      "description": {
+        "en": "Wanglang National Nature Reserve is located in Pingwu County, Sichuan Province, China, on the northern slopes of the Hengduan Mountains in the Min Mountains, adjacent to Jiuzhaigou National Nature Reserve and Huanglong National Nature Reserve. It is an important component of the Min Mountains section of the Giant Panda National Park.",
+        "zh-CN": "王朗国家级自然保护区位于中国四川省平武县，横断山北麓的岷山山脉, 临近九寨沟国家级自然保护区和黄龙国家级自然保护区，是大熊猫国家公园岷山片区的重要组成部分。创建于1963年，面积32,297公顷，致力于保护大熊猫、川金丝猴、四川羚牛、绿尾虹雉等。",
+        "zh-TW": "王朗國家級自然保護區位於中國四川省平武縣，橫斷山北麓的岷山山脈, 臨近九寨溝國家級自然保護區和黃龍國家級自然保護區，是大熊貓國家公園岷山片區的重要組成部分。創建於1963年，面積32,297公頃，致力於保護大熊貓、川金絲猴、四川羚牛、綠尾虹雉等。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%8E%8B%E6%9C%97%E5%9C%8B%E5%AE%B6%E7%B4%9A%E8%87%AA%E7%84%B6%E4%BF%9D%E8%AD%B7%E5%8D%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%8E%8B%E6%9C%97%E5%9C%8B%E5%AE%B6%E7%B4%9A%E8%87%AA%E7%84%B6%E4%BF%9D%E8%AD%B7%E5%8D%80",
+        "https://en.wikipedia.org/wiki/Wanglang_National_Nature_Reserve"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        104.05,
+        32.93333333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Wanglang_National_Nature_Reserve",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4ae604f008e98ebd.webp",
+        "credit": "Sun Jiao (Interaccoonale) · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Wanglang_NNR_IMG20240531064803_(cropped).jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "Wanglang National Nature Reserve",
+        "place": "王朗國家級自然保護區",
+        "originalFile": "Wanglang_NNR_IMG20240531064803_(cropped).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:510700:936ced41": {
+      "label": {
+        "en": "Longmen Mountains",
+        "zh-CN": "龙门山 (四川)",
+        "zh-TW": "龍門山 (四川)"
+      },
+      "description": {
+        "en": "The Longmen Mountains , also tautologically referred to in English-language publications as the Longmenshan Mountains, are a mountain range in Sichuan province in southwestern China.",
+        "zh-CN": "龙门山，是中国四川北部主要山脉之一和风景区。在地壳活动研究里，以龙门山断层闻名。",
+        "zh-TW": "龍門山，是中國四川北部主要山脈之一和風景區。在地殼活動研究裡，以龍門山斷層聞名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%BE%99%E9%97%A8%E5%B1%B1_(%E5%9B%9B%E5%B7%9D)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%BE%99%E9%97%A8%E5%B1%B1_(%E5%9B%9B%E5%B7%9D)",
+        "https://en.wikipedia.org/wiki/Longmen_Mountains"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        104.9,
+        32.16666667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Longmen_Mountains",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/590dcf5ba1f85877.webp",
+        "credit": "书剑飘零 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%9C%A8%E6%88%90%E9%83%BD%E9%81%A5%E6%9C%9B%E9%9B%AA%E5%B1%B1_%E9%BE%99%E9%97%A8%E5%B1%B1%E8%84%891_Chengdu_skyline_with_a_view_of_Longmen_Mountains.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​在成都遥望雪山 龙门山脉",
+        "place": "龙门山 (四川)",
+        "originalFile": "在成都遥望雪山_龙门山脉1_Chengdu_skyline_with_a_view_of_Longmen_Mountains.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:510700:photo-60104553": {
+      "label": {
+        "en": "Mianyang landscape view",
+        "zh-CN": "越王楼夜景",
+        "zh-TW": "越王樓夜景"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Mianyang, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现绵阳市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現綿陽市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E8%B6%8A%E7%8E%8B%E6%A5%BC%E5%A4%9C%E6%99%AF.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E8%B6%8A%E7%8E%8B%E6%A5%BC%E5%A4%9C%E6%99%AF.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/98b98fe1879c2603.webp",
+        "credit": "沧海夜风 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%B6%8A%E7%8E%8B%E6%A5%BC%E5%A4%9C%E6%99%AF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Yuewang Mansion at night",
+        "place": "越王楼夜景.jpg",
+        "originalFile": "越王楼夜景.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            104.75045833333,
+            31.468230555556
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E8%B6%8A%E7%8E%8B%E6%A5%BC%E5%A4%9C%E6%99%AF.jpg"
+        }
+      },
+      "lngLat": [
+        104.75045833333,
+        31.468230555556
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E8%B6%8A%E7%8E%8B%E6%A5%BC%E5%A4%9C%E6%99%AF.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "510700"
+    }
+  }
+}

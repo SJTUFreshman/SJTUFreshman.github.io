@@ -1,0 +1,178 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "610700": {
+      "label": {
+        "en": "Hanzhong",
+        "zh-CN": "汉中市",
+        "zh-TW": "漢中市"
+      },
+      "description": {
+        "en": "Hanzhong is a prefecture-level city in the southwest of Shaanxi province, China, bordering the provinces of Sichuan to the south and Gansu to the west.",
+        "zh-CN": "汉中市，简称汉，是中华人民共和国陕西省下辖的地级市，位于陕西省西南部，陕甘川三省交汇处。市境北邻同省的西安市、宝鸡市，东接安康市，南界四川省达州市、巴中市、广元市，西毗甘肃省陇南市，总面积为27,097平方公里，常住人口为317万。",
+        "zh-TW": "漢中市，簡稱漢，是中華人民共和國陝西省下轄的地級市，位於陝西省西南部，陝甘川三省交匯處。市境北鄰同省的西安市、寶雞市，東接安康市，南界四川省達州市、巴中市、廣元市，西毗甘肅省隴南市，總面積爲27,097平方公里，常住人口爲317萬。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B1%89%E4%B8%AD%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B1%89%E4%B8%AD%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Hanzhong"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        107.0232,
+        33.0664
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/eb12a26d0fbcead9.webp",
+        "credit": "Tyen-Shyang Chyu · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Dongta,_Hanzhong.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​汉中净明寺东塔",
+        "place": "汉中东塔",
+        "originalFile": "Dongta,_Hanzhong.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:610700:106ab358",
+      "urbanFocus": {
+        "label": {
+          "en": "Hanzhong",
+          "zh-CN": "汉中市",
+          "zh-TW": "漢中市"
+        },
+        "lngLat": [
+          107.02598,
+          33.07938
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Hanzhong.",
+          "zh-CN": "以汉中市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以漢中市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q515573#P625",
+        "source": "https://www.wikidata.org/wiki/Q515573",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q515573#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.31
+        }
+      }
+    },
+    "poi:admin:610700:106ab358": {
+      "label": {
+        "en": "Hanzhong East Pagoda",
+        "zh-CN": "汉中东塔",
+        "zh-TW": "漢中東塔"
+      },
+      "description": {
+        "en": "This historic pagoda stands in Hanzhong's Hantai District. Inscribed iron lions discovered during repairs indicate that the tower existed by 1198, during the Southern Song period.",
+        "zh-CN": "汉中东塔位于陕西省汉中市汉台区东关东塔小学院内，1957年被列为第二批陕西省文物保护单位，2013年被列为第七批全国重点文物保护单位。 汉中东塔形制似唐代古塔，1953年维修时在塔顶发现铁狮子一对，上铸有“庆元四年洋州城西街李子照谨舍”，说明该塔的建造年代不晚于南宋庆元四年。",
+        "zh-TW": "漢中東塔位於陝西省漢中市漢臺區東關東塔小學院內，1957年被列爲第二批陝西省文物保護單位，2013年被列爲第七批全國重點文物保護單位。 漢中東塔形制似唐代古塔，1953年維修時在塔頂發現鐵獅子一對，上鑄有“慶元四年洋州城西街李子照謹舍”，說明該塔的建造年代不晚於南宋慶元四年。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%B1%89%E4%B8%AD%E4%B8%9C%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%B1%89%E4%B8%AD%E4%B8%9C%E5%A1%94"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        107.03405,
+        33.07334
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%B1%89%E4%B8%AD%E4%B8%9C%E5%A1%94",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "610700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/eb12a26d0fbcead9.webp",
+        "credit": "Tyen-Shyang Chyu · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Dongta,_Hanzhong.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​汉中净明寺东塔",
+        "place": "汉中东塔",
+        "originalFile": "Dongta,_Hanzhong.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:610700:4dda63ed": {
+      "label": {
+        "en": "Shimen Reservoir, Hanzhong",
+        "zh-CN": "石门水库 (汉台)",
+        "zh-TW": "石門水庫 (漢臺)"
+      },
+      "description": {
+        "en": "Shimen Reservoir lies on the Bao River in Hanzhong's Hantai District. The reservoir was built in 1978.",
+        "zh-CN": "石门水库是中国陕西省汉中市汉台区境内的一座水库，位于褒河上，建于1978年。水库正常库容为6100万立方米，集雨面积为3861平方千米，海拔为618米。",
+        "zh-TW": "石門水庫是中國陝西省漢中市漢臺區境內的一座水庫，位於褒河上，建於1978年。水庫正常庫容爲6100萬立方米，集雨面積爲3861平方千米，海拔爲618米。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%9F%B3%E9%97%A8%E6%B0%B4%E5%BA%93_(%E6%B1%89%E5%8F%B0)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%9F%B3%E9%97%A8%E6%B0%B4%E5%BA%93_(%E6%B1%89%E5%8F%B0)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        106.956,
+        33.2322
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E7%9F%B3%E9%97%A8%E6%B0%B4%E5%BA%93_(%E6%B1%89%E5%8F%B0)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "610700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/228093ef8a3d6788.webp",
+        "credit": "Charlie fong · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Hanzhong_baoheriver.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Hanzhong_baoheriver.jpg#Licensing",
+        "alt": "baohe river,Hanzhong ,shaanxi,China",
+        "place": "石门水库 (汉台)",
+        "originalFile": "Hanzhong_baoheriver.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:610700:7abad72c": {
+      "label": {
+        "en": "Tomb of Zhuge Liang",
+        "zh-CN": "武侯墓",
+        "zh-TW": "武侯墓"
+      },
+      "description": {
+        "en": "Also called Wuhou Tomb, this nationally protected site lies at the foot of Mount Dingjun in Mian County, Hanzhong. It commemorates the statesman and strategist Zhuge Liang.",
+        "zh-CN": "武侯墓即诸葛亮墓，位于中国陕西省汉中勉县定军山脚，是全国重点文物保护单位。诸葛亮，死后谥为“忠武侯”，后世称为诸葛武侯，故得此名。",
+        "zh-TW": "武侯墓即諸葛亮墓，位於中國陝西省漢中勉縣定軍山腳，是全國重點文物保護單位。諸葛亮，死後諡爲“忠武侯”，後世稱爲諸葛武侯，故得此名。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%AD%A6%E4%BE%AF%E5%A2%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%AD%A6%E4%BE%AF%E5%A2%93"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        106.64791944,
+        33.12550278
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%AD%A6%E4%BE%AF%E5%A2%93",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "610700",
+      "photo": {
+        "src": "assets/maps/administrative/photos/459da372d30b6c56.webp",
+        "credit": "N509FZ · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tomb_of_Marquis_Wu_(20250114131328).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Someone even put a train ticket from Hanzhong to Xi'an North here.",
+        "place": "武侯墓",
+        "originalFile": "Tomb_of_Marquis_Wu_(20250114131328).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

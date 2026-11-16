@@ -1,0 +1,213 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-HSZ": {
+      "label": {
+        "en": "Hsinchu",
+        "zh-CN": "新竹市",
+        "zh-TW": "新竹市"
+      },
+      "description": {
+        "en": "Hsinchu , officially Hsinchu City, is a city located in northwestern Taiwan. It is the most populous city in Taiwan that is not a special municipality, with estimated 476,273 inhabitants.",
+        "zh-CN": "新竹市是中华台北台湾省的市，位于台湾西北部。其北边、东北边与新竹县相连，西临台湾海峡，南邻苗栗县。",
+        "zh-TW": "新竹市是中華臺北臺灣省的市，位於臺灣西北部。其北邊、東北邊與新竹縣相連，西臨臺灣海峽，南鄰苗栗縣。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Hsinchu"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        120.98333333,
+        24.81666667
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/3aff1a0bed5adaa0.webp",
+        "credit": "Foxy Who \\(^∀^)/ · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%B0%E7%AB%B9_%E5%9F%8E%E9%9A%8D%E5%BB%9F_-_panoramio_(1).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Hsinchu Chenghuang Temple",
+        "place": "Hsinchu Chenghuang Temple",
+        "originalFile": "新竹_城隍廟_-_panoramio_(1).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-HSZ:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Hsinchu",
+          "zh-CN": "新竹市",
+          "zh-TW": "新竹市"
+        },
+        "lngLat": [
+          120.97138888889,
+          24.804722222222
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 24 km landscape window around Hsinchu.",
+          "zh-CN": "以新竹市为中心，展示周边约24公里宽的主要聚落与地形。",
+          "zh-TW": "以新竹市爲中心，展示周邊約24公里寬的主要聚落與地形。"
+        },
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q249994",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q249994#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E5%B8%82"
+      }
+    },
+    "poi:admin:TW-HSZ:98d5c642": {
+      "label": {
+        "en": "Tomb of Zheng Yongxi",
+        "zh-CN": "郑用锡墓",
+        "zh-TW": "鄭用錫墓"
+      },
+      "description": {
+        "en": "Zheng Yongxi's tomb stands in eastern Hsinchu beside the military cemetery. Relocated here in 1869, the elaborate official's tomb is a nationally designated monument.",
+        "zh-CN": "郑用锡墓，今位于台湾新竹市东区新竹市军人公墓旁，同治八年从香山区迁葬于此，具有官墓规模，今列国定古迹。",
+        "zh-TW": "鄭用錫墓，今位於臺灣新竹市東區新竹市軍人公墓旁，同治八年從香山區遷葬於此，具有官墓規模，今列國定古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%84%AD%E7%94%A8%E9%8C%AB%E5%A2%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%84%AD%E7%94%A8%E9%8C%AB%E5%A2%93"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.97098,
+        24.787865
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E9%84%AD%E7%94%A8%E9%8C%AB%E5%A2%93",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-HSZ",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4aac8bd8af0afbd8.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%84%AD%E7%94%A8%E9%8C%AB%E5%A2%93%E9%81%A0%E7%85%A7.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​鄭用錫墓遠照",
+        "place": "鄭用錫墓",
+        "originalFile": "鄭用錫墓遠照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-HSZ:30554a18": {
+      "label": {
+        "en": "Hsinchu Chenghuang Temple",
+        "zh-CN": "新竹都城隍庙",
+        "zh-TW": "新竹都城隍廟"
+      },
+      "description": {
+        "en": "The Chenghuang Temple of Hsinchu is a temple located in Hsinchu, Taiwan. It is dedicated to the City God , who is believed in Chinese religion to record the good and bad deeds of every person residing in the city.",
+        "zh-CN": "新竹都城隍庙与法莲寺，是位于台湾新竹市北区中山里的城隍庙，庙身列为市定古迹，主神为城隍信仰的都城隍爷，一旁为新竹法莲寺。",
+        "zh-TW": "新竹都城隍廟與法蓮寺，是位於臺灣新竹市北區中山裏的城隍廟，廟身列為市定古蹟，主神為城隍信仰的都城隍爺，一旁為新竹法蓮寺。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E9%83%BD%E5%9F%8E%E9%9A%8D%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E9%83%BD%E5%9F%8E%E9%9A%8D%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Hsinchu_Chenghuang_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.96606,
+        24.80437
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Hsinchu_Chenghuang_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-HSZ",
+      "photo": {
+        "src": "assets/maps/administrative/photos/60529bfdbd7e0392.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:COVID-19%E6%9C%9F%E9%96%93%E7%9A%84%E6%96%B0%E7%AB%B9%E9%83%BD%E5%9F%8E%E9%9A%8D%E5%BB%9F.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​COVID-19期間的新竹都城隍廟。",
+        "place": "新竹都城隍廟",
+        "originalFile": "COVID-19期間的新竹都城隍廟.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-HSZ:bceea864": {
+      "label": {
+        "en": "Hsinchu Guandi Temple",
+        "zh-CN": "新竹关帝庙",
+        "zh-TW": "新竹關帝廟"
+      },
+      "description": {
+        "en": "This temple in Hsinchu's East District is dedicated to Guan Yu. Its altars also honour Guan Ping, Zhou Cang and a number of scholarly and martial deities.",
+        "zh-CN": "新竹关帝庙，是一座位于台湾新竹市东区的关帝庙。该庙主祀关圣帝君，从祀关平太子、周仓将军，配祀纯阳祖师、岳武穆王、文昌帝君、仓颉先师、魁星星君、关公三代祖先光昭王及裕昌王与成忠王、太岁星君、赤兔马与牵马校尉等神尊。",
+        "zh-TW": "新竹關帝廟，是一座位於臺灣新竹市東區的關帝廟。該廟主祀關聖帝君，從祀關平太子、周倉將軍，配祀純陽祖師、嶽武穆王、文昌帝君、倉頡先師、魁星星君、關公三代祖先光昭王及裕昌王與成忠王、太歲星君、赤兔馬與牽馬校尉等神尊。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E9%97%9C%E5%B8%9D%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E9%97%9C%E5%B8%9D%E5%BB%9F"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.966654,
+        24.802398
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E9%97%9C%E5%B8%9D%E5%BB%9F",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-HSZ",
+      "photo": {
+        "src": "assets/maps/administrative/photos/78bd67a137ff7755.webp",
+        "credit": "顏錫沂2 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%B0%E7%AB%B9%E5%B8%82%E9%97%9C%E5%B8%9D%E5%BB%9F.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "This is a photo of a monument in Taiwan identified by the ID",
+        "place": "新竹關帝廟",
+        "originalFile": "新竹市關帝廟.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-HSZ:urban": {
+      "id": "poi:admin:TW-HSZ:urban",
+      "label": {
+        "en": "Hsinchu Chenghuang Temple",
+        "zh-CN": "新竹都城隍庙",
+        "zh-TW": "新竹都城隍廟"
+      },
+      "description": {
+        "en": "The Chenghuang Temple of Hsinchu is a temple located in Hsinchu, Taiwan. It is dedicated to the City God , who is believed in Chinese religion to record the good and bad deeds of every person residing in the city.",
+        "zh-CN": "新竹都城隍庙与法莲寺，是位于台湾新竹市北区中山里的城隍庙，庙身列为市定古迹，主神为城隍信仰的都城隍爷，一旁为新竹法莲寺。",
+        "zh-TW": "新竹都城隍廟與法蓮寺，是位於臺灣新竹市北區中山裏的城隍廟，廟身列為市定古蹟，主神為城隍信仰的都城隍爺，一旁為新竹法蓮寺。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E9%83%BD%E5%9F%8E%E9%9A%8D%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%96%B0%E7%AB%B9%E9%83%BD%E5%9F%8E%E9%9A%8D%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Hsinchu_Chenghuang_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3aff1a0bed5adaa0.webp",
+        "credit": "Foxy Who \\(^∀^)/ · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%B0%E7%AB%B9_%E5%9F%8E%E9%9A%8D%E5%BB%9F_-_panoramio_(1).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Hsinchu Chenghuang Temple",
+        "place": "Hsinchu Chenghuang Temple",
+        "originalFile": "新竹_城隍廟_-_panoramio_(1).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.96606,
+        24.80437
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Hsinchu_Chenghuang_Temple",
+      "kind": "landmark",
+      "parentCity": "TW-HSZ"
+    }
+  }
+}

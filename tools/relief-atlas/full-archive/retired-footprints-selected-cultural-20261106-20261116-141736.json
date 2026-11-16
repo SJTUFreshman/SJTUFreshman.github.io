@@ -1,0 +1,910 @@
+{
+  "version": 1,
+  "name": "retired-footprints-selected-cultural-20261106-20261116-141736",
+  "created_at": "2026-11-16T14:17:50.566758+00:00",
+  "source": "C:\\Users\\Administrator\\Desktop\\SJTUFreshman.github.io\\.render-work\\retired-relief\\retired-footprints-selected-cultural-20261106-20261116-141736",
+  "excluded_files": [],
+  "chunk_bytes": 50331648,
+  "directories": [
+    "__pycache__",
+    "cultural",
+    "cultural/data",
+    "cultural/renders",
+    "cultural/scenes",
+    "detail",
+    "detail/data",
+    "detail/renders",
+    "detail/scenes",
+    "logs",
+    "overview",
+    "overview/data",
+    "overview/renders",
+    "overview/scenes"
+  ],
+  "files": [
+    {
+      "path": "__pycache__/render_atlas.cpython-311.pyc",
+      "bytes": 22234,
+      "sha256": "ee43b55d115dfcf893b6960b01ddc9ed3315099fbb723491025cace438f4787b",
+      "mtime_ns": 1793935897552399800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/ee43b55d115dfcf893b6960b01ddc9ed3315099fbb723491025cace438f4787b.part",
+          "bytes": 22234,
+          "sha256": "ee43b55d115dfcf893b6960b01ddc9ed3315099fbb723491025cace438f4787b"
+        }
+      ]
+    },
+    {
+      "path": "cultural/data/china.json",
+      "bytes": 1211663,
+      "sha256": "0a0ea88a9911acbc6ffa61b717927c79fa63f70550395c2c9f6c9017788e707c",
+      "mtime_ns": 1793937267672896600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/0a0ea88a9911acbc6ffa61b717927c79fa63f70550395c2c9f6c9017788e707c.part",
+          "bytes": 1211663,
+          "sha256": "0a0ea88a9911acbc6ffa61b717927c79fa63f70550395c2c9f6c9017788e707c"
+        }
+      ]
+    },
+    {
+      "path": "cultural/data/china.npz",
+      "bytes": 7898483,
+      "sha256": "2adbafb0fd087e08506bf1c6c0e8d449fb5c0edc7dfaffdd3254a3cb5bc36cb0",
+      "mtime_ns": 1793937268192893000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/cultural/data/china.npz",
+          "bytes": 7898483,
+          "sha256": "2adbafb0fd087e08506bf1c6c0e8d449fb5c0edc7dfaffdd3254a3cb5bc36cb0"
+        }
+      ]
+    },
+    {
+      "path": "cultural/group-config.json",
+      "bytes": 32962,
+      "sha256": "db29488e47deeb5046e1e2177fadda9d1dfd20873ada43655a8e1c5309574aed",
+      "mtime_ns": 1793937268520890700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/db29488e47deeb5046e1e2177fadda9d1dfd20873ada43655a8e1c5309574aed.part",
+          "bytes": 32962,
+          "sha256": "db29488e47deeb5046e1e2177fadda9d1dfd20873ada43655a8e1c5309574aed"
+        }
+      ]
+    },
+    {
+      "path": "cultural/prepare-manifest.json",
+      "bytes": 477,
+      "sha256": "b46fa13a818cb5261d71e650ed9114fb31b9e1ccda2563a8ae145e4565c7f85f",
+      "mtime_ns": 1793937268928887900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b46fa13a818cb5261d71e650ed9114fb31b9e1ccda2563a8ae145e4565c7f85f.part",
+          "bytes": 477,
+          "sha256": "b46fa13a818cb5261d71e650ed9114fb31b9e1ccda2563a8ae145e4565c7f85f"
+        }
+      ]
+    },
+    {
+      "path": "cultural/renders/china-colour.png",
+      "bytes": 28033090,
+      "sha256": "35a639c5c2b692bb73772d8fbfa9fcef883a05d0bf67a5951ccfd58559fd6102",
+      "mtime_ns": 1793937411029508900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/cultural/renders/china-colour.png",
+          "bytes": 28033090,
+          "sha256": "35a639c5c2b692bb73772d8fbfa9fcef883a05d0bf67a5951ccfd58559fd6102"
+        }
+      ]
+    },
+    {
+      "path": "cultural/renders/china-render.json",
+      "bytes": 694,
+      "sha256": "fecc99725f0f80e9b76359a660e76b52a2fb2d0ab70f40e4f3a66c63a23b6d7e",
+      "mtime_ns": 1793937411485517700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/fecc99725f0f80e9b76359a660e76b52a2fb2d0ab70f40e4f3a66c63a23b6d7e.part",
+          "bytes": 694,
+          "sha256": "fecc99725f0f80e9b76359a660e76b52a2fb2d0ab70f40e4f3a66c63a23b6d7e"
+        }
+      ]
+    },
+    {
+      "path": "cultural/scenes/china-colour.blend",
+      "bytes": 69695134,
+      "sha256": "6bb160b1a3c949aa06f4decbfd22ae36a82e2aa5819b9d4e736aee4bb774936d",
+      "mtime_ns": 1793937289159203200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/cultural/scenes/china-colour.blend",
+          "bytes": 69695134,
+          "sha256": "6bb160b1a3c949aa06f4decbfd22ae36a82e2aa5819b9d4e736aee4bb774936d"
+        }
+      ]
+    },
+    {
+      "path": "cultural/scenes/china-scenes.json",
+      "bytes": 448,
+      "sha256": "c928ade1114d6dc1b02747bef506c01c0dbbed88c57430516f8f61757c0ccf0f",
+      "mtime_ns": 1793937411453517100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/c928ade1114d6dc1b02747bef506c01c0dbbed88c57430516f8f61757c0ccf0f.part",
+          "bytes": 448,
+          "sha256": "c928ade1114d6dc1b02747bef506c01c0dbbed88c57430516f8f61757c0ccf0f"
+        }
+      ]
+    },
+    {
+      "path": "detail/data/china.json",
+      "bytes": 2314113,
+      "sha256": "9b1aa02049006dba5616ac4bc2167c9e0802e55a555f30b349e8464b4dedcc34",
+      "mtime_ns": 1793935818174949900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9b1aa02049006dba5616ac4bc2167c9e0802e55a555f30b349e8464b4dedcc34.part",
+          "bytes": 2314113,
+          "sha256": "9b1aa02049006dba5616ac4bc2167c9e0802e55a555f30b349e8464b4dedcc34"
+        }
+      ]
+    },
+    {
+      "path": "detail/data/china.npz",
+      "bytes": 7895303,
+      "sha256": "b27e9e446b8b80ed2cc12e4ad9391a103ef26362bb809545ec055fbbe7bc0afd",
+      "mtime_ns": 1793935818674946400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/data/china.npz",
+          "bytes": 7895303,
+          "sha256": "b27e9e446b8b80ed2cc12e4ad9391a103ef26362bb809545ec055fbbe7bc0afd"
+        }
+      ]
+    },
+    {
+      "path": "detail/data/east_asia.json",
+      "bytes": 2188312,
+      "sha256": "c483fffe0674b0ed756b4241e03b76ccdbe07fc8b953ace0c3a01f2cec19ecb8",
+      "mtime_ns": 1793935818990944200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/c483fffe0674b0ed756b4241e03b76ccdbe07fc8b953ace0c3a01f2cec19ecb8.part",
+          "bytes": 2188312,
+          "sha256": "c483fffe0674b0ed756b4241e03b76ccdbe07fc8b953ace0c3a01f2cec19ecb8"
+        }
+      ]
+    },
+    {
+      "path": "detail/data/east_asia.npz",
+      "bytes": 16769174,
+      "sha256": "5f4a727e39a02a4e63e0a139ae1c6395addbfc716940a4528148e3393c3a15ce",
+      "mtime_ns": 1793935820498933800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/overview/data/east_asia.npz",
+          "bytes": 16769174,
+          "sha256": "5f4a727e39a02a4e63e0a139ae1c6395addbfc716940a4528148e3393c3a15ce"
+        }
+      ]
+    },
+    {
+      "path": "detail/data/europe_usa.json",
+      "bytes": 1659379,
+      "sha256": "09ae34fcdcfd97eff938b8e4d1d8f740e9a495a9fb6ae4af3979e70c54bbf219",
+      "mtime_ns": 1793935820942930700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/09ae34fcdcfd97eff938b8e4d1d8f740e9a495a9fb6ae4af3979e70c54bbf219.part",
+          "bytes": 1659379,
+          "sha256": "09ae34fcdcfd97eff938b8e4d1d8f740e9a495a9fb6ae4af3979e70c54bbf219"
+        }
+      ]
+    },
+    {
+      "path": "detail/data/europe_usa.npz",
+      "bytes": 11774834,
+      "sha256": "612fb823c5bb506dcc011c053684e3e71ac8e171293ef31642b9209c491e8103",
+      "mtime_ns": 1793935822254921600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/data/europe_usa.npz",
+          "bytes": 11774834,
+          "sha256": "612fb823c5bb506dcc011c053684e3e71ac8e171293ef31642b9209c491e8103"
+        }
+      ]
+    },
+    {
+      "path": "detail/data/hawaii.json",
+      "bytes": 9179,
+      "sha256": "d99a73845997ffe17573b614db5a6f140708f6cdcb8fb4ca9931fbfbef750f9c",
+      "mtime_ns": 1793935822466920100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/d99a73845997ffe17573b614db5a6f140708f6cdcb8fb4ca9931fbfbef750f9c.part",
+          "bytes": 9179,
+          "sha256": "d99a73845997ffe17573b614db5a6f140708f6cdcb8fb4ca9931fbfbef750f9c"
+        }
+      ]
+    },
+    {
+      "path": "detail/data/hawaii.npz",
+      "bytes": 186944,
+      "sha256": "8424151cc5ed493565dd499f60070d038d80ec11e903e78bc9486a83416c765e",
+      "mtime_ns": 1793935822734918200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/data/hawaii.npz",
+          "bytes": 186944,
+          "sha256": "8424151cc5ed493565dd499f60070d038d80ec11e903e78bc9486a83416c765e"
+        }
+      ]
+    },
+    {
+      "path": "detail/data/singapore.json",
+      "bytes": 5559,
+      "sha256": "460524f2aa151697afa7f3df13834d4c08ead61b672f4ad8ca166c76586c9111",
+      "mtime_ns": 1793935823506912900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/460524f2aa151697afa7f3df13834d4c08ead61b672f4ad8ca166c76586c9111.part",
+          "bytes": 5559,
+          "sha256": "460524f2aa151697afa7f3df13834d4c08ead61b672f4ad8ca166c76586c9111"
+        }
+      ]
+    },
+    {
+      "path": "detail/data/singapore.npz",
+      "bytes": 1406637,
+      "sha256": "a7d4473a4279d1576752f5e3fb900282cb423b9abe3017b313e42ecba877b797",
+      "mtime_ns": 1793935823938909900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/data/singapore.npz",
+          "bytes": 1406637,
+          "sha256": "a7d4473a4279d1576752f5e3fb900282cb423b9abe3017b313e42ecba877b797"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/china-colour.png",
+      "bytes": 28198723,
+      "sha256": "54e350153a6643de91a29ffe16eba4c5bae835276b6e79dfd967e52e31d3ec59",
+      "mtime_ns": 1793936150861332400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/renders/china-colour.png",
+          "bytes": 28198723,
+          "sha256": "54e350153a6643de91a29ffe16eba4c5bae835276b6e79dfd967e52e31d3ec59"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/china-relief.png",
+      "bytes": 28957720,
+      "sha256": "415c7d65f36cfa9e6d188ab81a4862eec65eab853166fda15ffdbdc40243c918",
+      "mtime_ns": 1793936032163044300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/renders/china-relief.png",
+          "bytes": 28957720,
+          "sha256": "415c7d65f36cfa9e6d188ab81a4862eec65eab853166fda15ffdbdc40243c918"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/china-render.json",
+      "bytes": 786,
+      "sha256": "ab7dd1131d7e7e804cdee588b5d60372b457630b105df2b215ae2c934b45437b",
+      "mtime_ns": 1793936151745349500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/ab7dd1131d7e7e804cdee588b5d60372b457630b105df2b215ae2c934b45437b.part",
+          "bytes": 786,
+          "sha256": "ab7dd1131d7e7e804cdee588b5d60372b457630b105df2b215ae2c934b45437b"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/east_asia-colour.png",
+      "bytes": 24574582,
+      "sha256": "97dafb093af23d963a6a58ba4e509e88f0cf50735cb3166dbb858fcb29d443ec",
+      "mtime_ns": 1793936376645607500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/renders/east_asia-colour.png",
+          "bytes": 24574582,
+          "sha256": "97dafb093af23d963a6a58ba4e509e88f0cf50735cb3166dbb858fcb29d443ec"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/east_asia-relief.png",
+      "bytes": 24627024,
+      "sha256": "863ba8aee4cb2e4204820021768fb912298bf064ec517dca513b4e97203ce9fd",
+      "mtime_ns": 1793936264623508400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/renders/east_asia-relief.png",
+          "bytes": 24627024,
+          "sha256": "863ba8aee4cb2e4204820021768fb912298bf064ec517dca513b4e97203ce9fd"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/east_asia-render.json",
+      "bytes": 794,
+      "sha256": "6a7e2eb1ea2b59ce4377f390d140ab7a60b6b3166b3cef0fcc5fb38eb06b3e1c",
+      "mtime_ns": 1793936377501623900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/6a7e2eb1ea2b59ce4377f390d140ab7a60b6b3166b3cef0fcc5fb38eb06b3e1c.part",
+          "bytes": 794,
+          "sha256": "6a7e2eb1ea2b59ce4377f390d140ab7a60b6b3166b3cef0fcc5fb38eb06b3e1c"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/europe_usa-relief.png",
+      "bytes": 19979779,
+      "sha256": "06e72eead8719581bd9a66984e05f2da6869bab149343fc59034c1c1adbf2c62",
+      "mtime_ns": 1793936471039391300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/renders/europe_usa-relief.png",
+          "bytes": 19979779,
+          "sha256": "06e72eead8719581bd9a66984e05f2da6869bab149343fc59034c1c1adbf2c62"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/europe_usa-render.json",
+      "bytes": 699,
+      "sha256": "72955f08a9c584b26ccdeddd6fa458a4fce81d0655fcd0db3c72a671faf953cc",
+      "mtime_ns": 1793936471355397400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/72955f08a9c584b26ccdeddd6fa458a4fce81d0655fcd0db3c72a671faf953cc.part",
+          "bytes": 699,
+          "sha256": "72955f08a9c584b26ccdeddd6fa458a4fce81d0655fcd0db3c72a671faf953cc"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/hawaii-relief.png",
+      "bytes": 706368,
+      "sha256": "d1fea39d39a143a171d22ceb9a302bf2d56810fa3b5e492b9180ca77b1793066",
+      "mtime_ns": 1793935921872882300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/renders/hawaii-relief.png",
+          "bytes": 706368,
+          "sha256": "d1fea39d39a143a171d22ceb9a302bf2d56810fa3b5e492b9180ca77b1793066"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/hawaii-render.json",
+      "bytes": 694,
+      "sha256": "3c495558ee6d0639e18d7103fbcb4b51afe05976e4ed1d3bcfa28847bf151228",
+      "mtime_ns": 1793935921892882700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/3c495558ee6d0639e18d7103fbcb4b51afe05976e4ed1d3bcfa28847bf151228.part",
+          "bytes": 694,
+          "sha256": "3c495558ee6d0639e18d7103fbcb4b51afe05976e4ed1d3bcfa28847bf151228"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/singapore-relief.png",
+      "bytes": 1074838,
+      "sha256": "7ac78e24a46cf2da75588359dfd7dfe2f2302014cc0ae90c0327e8bea6e81bef",
+      "mtime_ns": 1793935911856683600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/renders/singapore-relief.png",
+          "bytes": 1074838,
+          "sha256": "7ac78e24a46cf2da75588359dfd7dfe2f2302014cc0ae90c0327e8bea6e81bef"
+        }
+      ]
+    },
+    {
+      "path": "detail/renders/singapore-render.json",
+      "bytes": 697,
+      "sha256": "47b06f3e86c4758d500a304d96978460c6ba18c51dee6482ba07170da3b7a650",
+      "mtime_ns": 1793935911928685000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/47b06f3e86c4758d500a304d96978460c6ba18c51dee6482ba07170da3b7a650.part",
+          "bytes": 697,
+          "sha256": "47b06f3e86c4758d500a304d96978460c6ba18c51dee6482ba07170da3b7a650"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/china-colour.blend",
+      "bytes": 69685847,
+      "sha256": "dc30d15128274ff20ff5c4b84927436ff2d0ae5c770afc579e4661a61133aae5",
+      "mtime_ns": 1793936032635053600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/scenes/china-colour.blend",
+          "bytes": 69685847,
+          "sha256": "dc30d15128274ff20ff5c4b84927436ff2d0ae5c770afc579e4661a61133aae5"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/china-relief.blend",
+      "bytes": 69620159,
+      "sha256": "d35b7cf38a6c8348d2862566d8353dc6551c1eb81b970105fe085c009ad59c56",
+      "mtime_ns": 1793935903212512100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/scenes/china-relief.blend",
+          "bytes": 69620159,
+          "sha256": "d35b7cf38a6c8348d2862566d8353dc6551c1eb81b970105fe085c009ad59c56"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/china-scenes.json",
+      "bytes": 892,
+      "sha256": "797f567b6ed0a08276dd797bf9f85b34531761f99b288f68f9be38a9d2cc4fa9",
+      "mtime_ns": 1793936151677348200,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/797f567b6ed0a08276dd797bf9f85b34531761f99b288f68f9be38a9d2cc4fa9.part",
+          "bytes": 892,
+          "sha256": "797f567b6ed0a08276dd797bf9f85b34531761f99b288f68f9be38a9d2cc4fa9"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/east_asia-colour.blend",
+      "bytes": 68953265,
+      "sha256": "bbb46fa838eea4c63b0e5358886608cf478c7e2e859fe88e7cf3d0e99605f29f",
+      "mtime_ns": 1793936265207519700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/scenes/east_asia-colour.blend",
+          "bytes": 68953265,
+          "sha256": "bbb46fa838eea4c63b0e5358886608cf478c7e2e859fe88e7cf3d0e99605f29f"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/east_asia-relief.blend",
+      "bytes": 68880168,
+      "sha256": "eb4c57a76c24e8870c39aed4bca8fa2881094dff7211abbc3e3737fb145a8b78",
+      "mtime_ns": 1793936156837448000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/scenes/east_asia-relief.blend",
+          "bytes": 68880168,
+          "sha256": "eb4c57a76c24e8870c39aed4bca8fa2881094dff7211abbc3e3737fb145a8b78"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/east_asia-scenes.json",
+      "bytes": 900,
+      "sha256": "f9740340a0fc83717ffe8dba0f79054e8fcc613eebac3bca894bbe391daf6ea3",
+      "mtime_ns": 1793936377441622700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f9740340a0fc83717ffe8dba0f79054e8fcc613eebac3bca894bbe391daf6ea3.part",
+          "bytes": 900,
+          "sha256": "f9740340a0fc83717ffe8dba0f79054e8fcc613eebac3bca894bbe391daf6ea3"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/europe_usa-relief.blend",
+      "bytes": 50304297,
+      "sha256": "2b9992d97766a94fde97ac17d21fb026391ca0ede8bbfbae6ab8960f275464ff",
+      "mtime_ns": 1793936381469699800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/scenes/europe_usa-relief.blend",
+          "bytes": 50304297,
+          "sha256": "2b9992d97766a94fde97ac17d21fb026391ca0ede8bbfbae6ab8960f275464ff"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/europe_usa-scenes.json",
+      "bytes": 452,
+      "sha256": "3f857234689567e75b4344f667f4f32621b2bd75d21ca71de304215b9fc8e87b",
+      "mtime_ns": 1793936471331396900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/3f857234689567e75b4344f667f4f32621b2bd75d21ca71de304215b9fc8e87b.part",
+          "bytes": 452,
+          "sha256": "3f857234689567e75b4344f667f4f32621b2bd75d21ca71de304215b9fc8e87b"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/hawaii-relief.blend",
+      "bytes": 1248107,
+      "sha256": "d143ef10a8ad7d63ec08b558953d3c90e4c867216074bbd5de174d9c43674603",
+      "mtime_ns": 1793935912848703300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/scenes/hawaii-relief.blend",
+          "bytes": 1248107,
+          "sha256": "d143ef10a8ad7d63ec08b558953d3c90e4c867216074bbd5de174d9c43674603"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/hawaii-scenes.json",
+      "bytes": 444,
+      "sha256": "b9444a7c436519baa12e19a1ba7007d76f60fdd02a98fca6f52e4c92e4e75b96",
+      "mtime_ns": 1793935921892882700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b9444a7c436519baa12e19a1ba7007d76f60fdd02a98fca6f52e4c92e4e75b96.part",
+          "bytes": 444,
+          "sha256": "b9444a7c436519baa12e19a1ba7007d76f60fdd02a98fca6f52e4c92e4e75b96"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/singapore-relief.blend",
+      "bytes": 12222199,
+      "sha256": "be41f92c777d2440a048e51df180c1df44fe45be6cec6aa2a3ab28dda1d0ec6b",
+      "mtime_ns": 1793935903084509600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/detail/scenes/singapore-relief.blend",
+          "bytes": 12222199,
+          "sha256": "be41f92c777d2440a048e51df180c1df44fe45be6cec6aa2a3ab28dda1d0ec6b"
+        }
+      ]
+    },
+    {
+      "path": "detail/scenes/singapore-scenes.json",
+      "bytes": 449,
+      "sha256": "e0b0386e4dba5f8dfe685fdc88e1a52493b3c7f140757e149405948712ae17a5",
+      "mtime_ns": 1793935911928685000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e0b0386e4dba5f8dfe685fdc88e1a52493b3c7f140757e149405948712ae17a5.part",
+          "bytes": 449,
+          "sha256": "e0b0386e4dba5f8dfe685fdc88e1a52493b3c7f140757e149405948712ae17a5"
+        }
+      ]
+    },
+    {
+      "path": "logs/render-294277.out",
+      "bytes": 138661,
+      "sha256": "767d72491e46302f2fe85fc228c806837fbb47b3be3be54c0d6473afde95ff1d",
+      "mtime_ns": 1793936680787462100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/767d72491e46302f2fe85fc228c806837fbb47b3be3be54c0d6473afde95ff1d.part",
+          "bytes": 138661,
+          "sha256": "767d72491e46302f2fe85fc228c806837fbb47b3be3be54c0d6473afde95ff1d"
+        }
+      ]
+    },
+    {
+      "path": "logs/render-294278.out",
+      "bytes": 13556,
+      "sha256": "31e71d485d3780951e09886280ecfeea9819a2d72d5ed86de3aa8ad82912f3b1",
+      "mtime_ns": 1793935921944883700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/31e71d485d3780951e09886280ecfeea9819a2d72d5ed86de3aa8ad82912f3b1.part",
+          "bytes": 13556,
+          "sha256": "31e71d485d3780951e09886280ecfeea9819a2d72d5ed86de3aa8ad82912f3b1"
+        }
+      ]
+    },
+    {
+      "path": "logs/render-294352.out",
+      "bytes": 19658,
+      "sha256": "153b289b0d0cff65438882341094183f1de998ca342f2175d700e74c375bb36f",
+      "mtime_ns": 1793937411557519100,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/153b289b0d0cff65438882341094183f1de998ca342f2175d700e74c375bb36f.part",
+          "bytes": 19658,
+          "sha256": "153b289b0d0cff65438882341094183f1de998ca342f2175d700e74c375bb36f"
+        }
+      ]
+    },
+    {
+      "path": "overview/data/china.json",
+      "bytes": 384147,
+      "sha256": "eff3022e9b5f3d3d17129099c300a811c170606cb257f1f05a2eda38725ae911",
+      "mtime_ns": 1793935825879191500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/eff3022e9b5f3d3d17129099c300a811c170606cb257f1f05a2eda38725ae911.part",
+          "bytes": 384147,
+          "sha256": "eff3022e9b5f3d3d17129099c300a811c170606cb257f1f05a2eda38725ae911"
+        }
+      ]
+    },
+    {
+      "path": "overview/data/east_asia.json",
+      "bytes": 511161,
+      "sha256": "3fcaade22cf0fc0fb990bd1bd2cb17668e704389b6bdad6bbf4a75eb618ae337",
+      "mtime_ns": 1793935826247190300,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/3fcaade22cf0fc0fb990bd1bd2cb17668e704389b6bdad6bbf4a75eb618ae337.part",
+          "bytes": 511161,
+          "sha256": "3fcaade22cf0fc0fb990bd1bd2cb17668e704389b6bdad6bbf4a75eb618ae337"
+        }
+      ]
+    },
+    {
+      "path": "overview/data/east_asia.npz",
+      "bytes": 16769174,
+      "sha256": "5f4a727e39a02a4e63e0a139ae1c6395addbfc716940a4528148e3393c3a15ce",
+      "mtime_ns": 1793935830179173500,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/overview/data/east_asia.npz",
+          "bytes": 16769174,
+          "sha256": "5f4a727e39a02a4e63e0a139ae1c6395addbfc716940a4528148e3393c3a15ce"
+        }
+      ]
+    },
+    {
+      "path": "overview/data/europe_usa.json",
+      "bytes": 1335384,
+      "sha256": "82b4046fb603dfc3fd8562d1a0b55751f917edf3d8234cd5c48783c215ee2ed7",
+      "mtime_ns": 1793935830643170600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/82b4046fb603dfc3fd8562d1a0b55751f917edf3d8234cd5c48783c215ee2ed7.part",
+          "bytes": 1335384,
+          "sha256": "82b4046fb603dfc3fd8562d1a0b55751f917edf3d8234cd5c48783c215ee2ed7"
+        }
+      ]
+    },
+    {
+      "path": "overview/data/europe_usa.npz",
+      "bytes": 11833311,
+      "sha256": "1ed80a6867edc27fcf25f6ec7142899e5dae2dd9179bec3320cd457c452fd127",
+      "mtime_ns": 1793935832595158600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/overview/data/europe_usa.npz",
+          "bytes": 11833311,
+          "sha256": "1ed80a6867edc27fcf25f6ec7142899e5dae2dd9179bec3320cd457c452fd127"
+        }
+      ]
+    },
+    {
+      "path": "overview/renders/east_asia-colour.png",
+      "bytes": 24574646,
+      "sha256": "6afd88145e6e2a58bd4723a425247db122ca97ebbe8e87dc615127e0853d9f8b",
+      "mtime_ns": 1793936584933605900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/overview/renders/east_asia-colour.png",
+          "bytes": 24574646,
+          "sha256": "6afd88145e6e2a58bd4723a425247db122ca97ebbe8e87dc615127e0853d9f8b"
+        }
+      ]
+    },
+    {
+      "path": "overview/renders/east_asia-render.json",
+      "bytes": 698,
+      "sha256": "f190054fb97fda080196405fd7bac41b4e75ae016d517a9fa150899c3bdedf57",
+      "mtime_ns": 1793936585433615400,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/f190054fb97fda080196405fd7bac41b4e75ae016d517a9fa150899c3bdedf57.part",
+          "bytes": 698,
+          "sha256": "f190054fb97fda080196405fd7bac41b4e75ae016d517a9fa150899c3bdedf57"
+        }
+      ]
+    },
+    {
+      "path": "overview/renders/europe_usa-colour.png",
+      "bytes": 19718713,
+      "sha256": "e9c7e6cc135e06f8dcaa93ea440359b4cb1ec81d937b723fabc239b088a06c6c",
+      "mtime_ns": 1793936679891444900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/overview/renders/europe_usa-colour.png",
+          "bytes": 19718713,
+          "sha256": "e9c7e6cc135e06f8dcaa93ea440359b4cb1ec81d937b723fabc239b088a06c6c"
+        }
+      ]
+    },
+    {
+      "path": "overview/renders/europe_usa-render.json",
+      "bytes": 699,
+      "sha256": "22b8abbcd35382060ffa99a548e90a17eac50bb3f9655e7e0023794ccc3ab508",
+      "mtime_ns": 1793936680727461000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/22b8abbcd35382060ffa99a548e90a17eac50bb3f9655e7e0023794ccc3ab508.part",
+          "bytes": 699,
+          "sha256": "22b8abbcd35382060ffa99a548e90a17eac50bb3f9655e7e0023794ccc3ab508"
+        }
+      ]
+    },
+    {
+      "path": "overview/scenes/east_asia-colour.blend",
+      "bytes": 68952963,
+      "sha256": "f42c16e752f299fda115411398bb47ad4425aad675ebce87a33f817a11cb30f1",
+      "mtime_ns": 1793936476883504000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/overview/scenes/east_asia-colour.blend",
+          "bytes": 68952963,
+          "sha256": "f42c16e752f299fda115411398bb47ad4425aad675ebce87a33f817a11cb30f1"
+        }
+      ]
+    },
+    {
+      "path": "overview/scenes/east_asia-scenes.json",
+      "bytes": 452,
+      "sha256": "418757e3054624d6b4152ea5eb15119dcb7b89650165a49c9d7f9222c7de1d8b",
+      "mtime_ns": 1793936585405614900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/418757e3054624d6b4152ea5eb15119dcb7b89650165a49c9d7f9222c7de1d8b.part",
+          "bytes": 452,
+          "sha256": "418757e3054624d6b4152ea5eb15119dcb7b89650165a49c9d7f9222c7de1d8b"
+        }
+      ]
+    },
+    {
+      "path": "overview/scenes/europe_usa-colour.blend",
+      "bytes": 50344042,
+      "sha256": "511e728c7138411324166e6a58cfe564897f587bb6dfb8c5ef59fb11622dd2c8",
+      "mtime_ns": 1793936590617714800,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/footprints/selected-cultural-20261106/overview/scenes/europe_usa-colour.blend",
+          "bytes": 50344042,
+          "sha256": "511e728c7138411324166e6a58cfe564897f587bb6dfb8c5ef59fb11622dd2c8"
+        }
+      ]
+    },
+    {
+      "path": "overview/scenes/europe_usa-scenes.json",
+      "bytes": 453,
+      "sha256": "e04d585eafeb0995740ca0843ee9cc7df01abd86b617c3e523c76726be374ec8",
+      "mtime_ns": 1793936680675460000,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/e04d585eafeb0995740ca0843ee9cc7df01abd86b617c3e523c76726be374ec8.part",
+          "bytes": 453,
+          "sha256": "e04d585eafeb0995740ca0843ee9cc7df01abd86b617c3e523c76726be374ec8"
+        }
+      ]
+    },
+    {
+      "path": "render-footprint-atlas.py",
+      "bytes": 10851,
+      "sha256": "119ec5dbc8f0caeda0ceaaf2ca3c68ba905fbd6d985b33f27694cd019f495381",
+      "mtime_ns": 1793935834074839600,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/119ec5dbc8f0caeda0ceaaf2ca3c68ba905fbd6d985b33f27694cd019f495381.part",
+          "bytes": 10851,
+          "sha256": "119ec5dbc8f0caeda0ceaaf2ca3c68ba905fbd6d985b33f27694cd019f495381"
+        }
+      ]
+    },
+    {
+      "path": "render-footprint-sectional.slurm",
+      "bytes": 1157,
+      "sha256": "9deed86fbf4a6cffcd510782432a92ae271abbc9ff2a54b57ff466f529e6ca39",
+      "mtime_ns": 1793935834338837700,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/9deed86fbf4a6cffcd510782432a92ae271abbc9ff2a54b57ff466f529e6ca39.part",
+          "bytes": 1157,
+          "sha256": "9deed86fbf4a6cffcd510782432a92ae271abbc9ff2a54b57ff466f529e6ca39"
+        }
+      ]
+    },
+    {
+      "path": "render_atlas.py",
+      "bytes": 12456,
+      "sha256": "b2958e4c0207ff99b7b09bf3dc93ca9e5e0785f504670ca2455fe200757989be",
+      "mtime_ns": 1793935834602835900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/b2958e4c0207ff99b7b09bf3dc93ca9e5e0785f504670ca2455fe200757989be.part",
+          "bytes": 12456,
+          "sha256": "b2958e4c0207ff99b7b09bf3dc93ca9e5e0785f504670ca2455fe200757989be"
+        }
+      ]
+    },
+    {
+      "path": "style.json",
+      "bytes": 4780,
+      "sha256": "5f34eb5a47afefe4cf2248a99f50fb358be520f0bb40fc1a662c6449f559cb10",
+      "mtime_ns": 1793935835474829900,
+      "mode": 33206,
+      "parts": [
+        {
+          "path": "tools/relief-atlas/full-archive/objects/5f34eb5a47afefe4cf2248a99f50fb358be520f0bb40fc1a662c6449f559cb10.part",
+          "bytes": 4780,
+          "sha256": "5f34eb5a47afefe4cf2248a99f50fb358be520f0bb40fc1a662c6449f559cb10"
+        }
+      ]
+    }
+  ],
+  "file_count": 63,
+  "total_bytes": 814771464
+}

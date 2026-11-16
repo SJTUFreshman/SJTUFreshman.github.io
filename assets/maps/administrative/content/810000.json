@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "810000": {
+      "label": {
+        "en": "Hong Kong",
+        "zh-CN": "香港特别行政区",
+        "zh-TW": "香港特別行政區"
+      },
+      "description": {
+        "en": "Hong Kong is a special administrative region of China. Situated on China's southern coast just south of Shenzhen, it consists of Hong Kong Island, Kowloon, and the New Territories.",
+        "zh-CN": "香港，全称香港特别行政区，简称港，中华人民共和国的特别行政区。香港是享有高度自治权的地方行政区域，保持资本主义社会制度、经济制度和生活方式。",
+        "zh-TW": "香港，全稱香港特別行政區，簡稱港，中華人民共和國的特別行政區。香港是享有高度自治權的地方行政區域，保持資本主義社會制度、經濟制度和生活方式。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF",
+        "https://en.wikipedia.org/wiki/Hong_Kong"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "province",
+      "lngLat": [
+        114.2,
+        22.3
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/361dbb5c6c61b25a.webp",
+        "credit": "Kwuong Tiamz Mina · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:HK_Central_Government_Hill_St._John%27s_Cathedral_January_2021_SS2_08.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "HK Central Government Hill St. John's Cathedral in January 2021",
+        "place": "HK Central Government Hill St. John's Cathedral January 2021 SS2 08.jpg",
+        "originalFile": "HK Central Government Hill St. John's Cathedral January 2021 SS2 08.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            114.159485,
+            22.278762
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:HK_Central_Government_Hill_St._John%27s_Cathedral_January_2021_SS2_08.jpg"
+        }
+      },
+      "photoReference": "poi:admin:810000:photo-100974719",
+      "urbanFocus": {
+        "label": {
+          "en": "Hong Kong",
+          "zh-CN": "香港",
+          "zh-TW": "香港"
+        },
+        "lngLat": [
+          114.15861111111,
+          22.278333333333
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Hong Kong.",
+          "zh-CN": "以香港的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以香港的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q8646#P625",
+        "source": "https://www.wikidata.org/wiki/Q8646",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q8646#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 4.89
+        }
+      }
+    },
+    "poi:admin:810000:photo-100974719": {
+      "label": {
+        "en": "HK Central Government Hill St. John's Cathedral January 2021 SS2 08",
+        "zh-CN": "香港特别行政区城区景观",
+        "zh-TW": "香港特別行政區城區景觀"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Hong Kong, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现香港特别行政区城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現香港特別行政區城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:HK_Central_Government_Hill_St._John%27s_Cathedral_January_2021_SS2_08.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:HK_Central_Government_Hill_St._John%27s_Cathedral_January_2021_SS2_08.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/361dbb5c6c61b25a.webp",
+        "credit": "Kwuong Tiamz Mina · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:HK_Central_Government_Hill_St._John%27s_Cathedral_January_2021_SS2_08.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "HK Central Government Hill St. John's Cathedral in January 2021",
+        "place": "HK Central Government Hill St. John's Cathedral January 2021 SS2 08.jpg",
+        "originalFile": "HK Central Government Hill St. John's Cathedral January 2021 SS2 08.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            114.159485,
+            22.278762
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:HK_Central_Government_Hill_St._John%27s_Cathedral_January_2021_SS2_08.jpg"
+        }
+      },
+      "lngLat": [
+        114.159485,
+        22.278762
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:HK_Central_Government_Hill_St._John%27s_Cathedral_January_2021_SS2_08.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "810000"
+    }
+  }
+}

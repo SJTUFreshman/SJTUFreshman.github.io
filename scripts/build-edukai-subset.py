@@ -66,6 +66,7 @@ LIFE_SOURCE_ROOTS = (
 LIFE_DATA_ROOTS = (
     REPO_ROOT / 'assets' / 'maps' / 'relief',
     REPO_ROOT / 'assets' / 'maps' / 'regions',
+    REPO_ROOT / 'assets' / 'maps' / 'administrative',
 )
 
 # Space is needed even if a future page happens to contain no literal spaces.

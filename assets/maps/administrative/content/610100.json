@@ -1,0 +1,253 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "610100": {
+      "label": {
+        "en": "Xi'an",
+        "zh-CN": "西安市",
+        "zh-TW": "西安市"
+      },
+      "description": {
+        "en": "Xi'an is the capital of the Chinese province of Shaanxi. A sub-provincial city on the Guanzhong plain, the city is the most populous in the province and third-most populous in Western China after Chongqing and Chengdu, as well as the most populous in Northwestern China.",
+        "zh-CN": "西安市，古称镐京、长安、京兆、西京、雍州，是中华人民共和国陕西省省会，副省级市、特大城市。其位于中国正中部，在陕西省内位于中南部及渭河平原正中，关中城市群核心城市，是陕西省乃至西北地区的政治、经济、文化、交通、医疗、教育中心。",
+        "zh-TW": "西安市，古稱鎬京、長安、京兆、西京、雍州，是中華人民共和國陝西省省會，副省級市、特大城市。其位於中國正中部，在陝西省內位於中南部及渭河平原正中，關中城市羣核心城市，是陝西省乃至西北地區的政治、經濟、文化、交通、醫療、教育中心。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%A5%BF%E5%AE%89%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%A5%BF%E5%AE%89%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Xi%27an"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        108.94222222,
+        34.26111111
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/da7a93508097809a.webp",
+        "credit": "Guucancat · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Xi%27anwildgoosepagoda2.JPG",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Xi%27anwildgoosepagoda2.JPG#Licensing",
+        "alt": "Small Wild Goose Pagoda, built by 709, was adjacent to the Dajianfu Temple in Chang'an, where Buddhist monks from India and elsewhere gathered to translate Sanskrit texts into Chinese",
+        "place": "小雁塔",
+        "originalFile": "Xi'anwildgoosepagoda2.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:610100:ab082e2e",
+      "urbanFocus": {
+        "label": {
+          "en": "Xi'an",
+          "zh-CN": "西安市",
+          "zh-TW": "西安市"
+        },
+        "lngLat": [
+          108.94222222222223,
+          34.26111111111111
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Xi'an.",
+          "zh-CN": "以西安市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以西安市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q5826#P625",
+        "source": "https://www.wikidata.org/wiki/Q5826",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q5826#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.58
+        }
+      }
+    },
+    "poi:610100:1": {
+      "label": {
+        "en": "Giant Wild Goose Pagoda",
+        "zh-CN": "大雁塔",
+        "zh-TW": "大雁塔"
+      },
+      "description": {
+        "en": "The Giant Wild Goose Pagoda or Big Wild Goose Pagoda is a seven-storey Buddhist pagoda in the Daci'en Temple complex in southern Xi'an, Shaanxi, China. It was first built in 652, when Xi'an was the Tang capital Chang'an, under the direction of the monk and translator Xuanzang.",
+        "zh-CN": "大雁塔是位于中华人民共和国陕西省西安市雁塔区大慈恩寺内的唐代佛塔。唐永徽三年，玄奘为保存从印度带回的佛经和佛像主持建塔，初建塔为五层；此后经武周重建和历代修缮，形成现存七层方形砖塔。",
+        "zh-TW": "大雁塔是位於中華人民共和國陝西省西安市雁塔區大慈恩寺內的唐代佛塔。唐永徽三年，玄奘爲保存從印度帶回的佛經和佛像主持建塔，初建塔爲五層；此後經武周重建和歷代修繕，形成現存七層方形磚塔。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%9B%81%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%9B%81%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Giant_Wild_Goose_Pagoda"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        108.959354,
+        34.219842
+      ],
+      "parentCity": "610100",
+      "photo": {
+        "src": "assets/maps/regions/photos/58987b1f4bc93ba8.webp",
+        "credit": "Alex Kwok · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Giant_Wild_Goose_Pagoda.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Giant Wild Goose Pagoda at Xi'an",
+        "place": "大雁塔",
+        "originalFile": "Giant_Wild_Goose_Pagoda.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:610100:2": {
+      "label": {
+        "en": "Terracotta Army",
+        "zh-CN": "秦始皇兵马俑",
+        "zh-TW": "秦始皇兵馬俑"
+      },
+      "description": {
+        "en": "The Terracotta Army is a collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first emperor of China. It is a form of funerary art buried with the emperor in 210–209 BCE in his mausoleum with the purpose of protecting him in his afterlife.",
+        "zh-CN": "秦始皇兵马俑，又称秦始皇陵兵马俑、秦陵兵马俑，是秦始皇陵东侧大型陪葬坑中出土的陶质军队群像，位于中华人民共和国陕西省西安市临潼区。兵马俑坑于1974年由当地村民打井时发现，随后展开考古发掘，现已确认一号、二号、三号坑等遗迹。",
+        "zh-TW": "秦始皇兵馬俑，又稱秦始皇陵兵馬俑、秦陵兵馬俑，是秦始皇陵東側大型陪葬坑中出土的陶質軍隊羣像，位於中華人民共和國陝西省西安市臨潼區。兵馬俑坑於1974年由當地村民打井時發現，隨後展開考古發掘，現已確認一號、二號、三號坑等遺蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%A7%A6%E5%A7%8B%E7%9A%87%E5%85%B5%E9%A9%AC%E4%BF%91",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%A7%A6%E5%A7%8B%E7%9A%87%E5%85%B5%E9%A9%AC%E4%BF%91",
+        "https://en.wikipedia.org/wiki/Terracotta_Army"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        109.273056,
+        34.385
+      ],
+      "parentCity": "610100",
+      "photo": {
+        "src": "assets/maps/regions/photos/47e4d93926a2a3d3.webp",
+        "credit": "xiquinhosilva · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:51714-Terracota-Army.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Terracotta Army in Xi'an, China",
+        "place": "秦始皇兵马俑",
+        "originalFile": "51714-Terracota-Army.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:610100:d5c89ae1": {
+      "label": {
+        "en": "Giant Wild Goose Pagoda",
+        "zh-CN": "大雁塔",
+        "zh-TW": "大雁塔"
+      },
+      "description": {
+        "en": "The Giant Wild Goose Pagoda or Big Wild Goose Pagoda is a seven-storey Buddhist pagoda in the Daci'en Temple complex in southern Xi'an, Shaanxi, China. It was first built in 652, when Xi'an was the Tang capital Chang'an, under the direction of the monk and translator Xuanzang.",
+        "zh-CN": "大雁塔是位于中华人民共和国陕西省西安市雁塔区大慈恩寺内的唐代佛塔。唐永徽三年，玄奘为保存从印度带回的佛经和佛像主持建塔，初建塔为五层；此后经武周重建和历代修缮，形成现存七层方形砖塔。",
+        "zh-TW": "大雁塔是位於中華人民共和國陝西省西安市雁塔區大慈恩寺內的唐代佛塔。唐永徽三年，玄奘爲保存從印度帶回的佛經和佛像主持建塔，初建塔爲五層；此後經武周重建和歷代修繕，形成現存七層方形磚塔。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%9B%81%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%9B%81%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Giant_Wild_Goose_Pagoda"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        108.959354,
+        34.219842
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Giant_Wild_Goose_Pagoda",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "610100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/58987b1f4bc93ba8.webp",
+        "credit": "Alex Kwok · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Giant_Wild_Goose_Pagoda.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "Giant Wild Goose Pagoda at Xi'an",
+        "place": "大雁塔",
+        "originalFile": "Giant_Wild_Goose_Pagoda.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:610100:24050fb3": {
+      "label": {
+        "en": "Mausoleum of Qin Shi Huang",
+        "zh-CN": "秦始皇陵",
+        "zh-TW": "秦始皇陵"
+      },
+      "description": {
+        "en": "The Mausoleum of Qin Shi Huang is a tomb complex constructed for Qin Shi Huang, the first emperor of the Chinese Qin dynasty. It is located in modern-day Lintong District in Xi'an, Shaanxi.",
+        "zh-CN": "秦始皇帝陵是秦朝开国皇帝秦始皇的陵墓，位于中华人民共和国陕西省西安市临潼区骊山北麓，秦代称骊山园。陵园以封土和地下墓室为中心，设内外城垣，周围分布礼制建筑、陪葬墓、陪葬坑和修陵人墓地等遗存；核心地宫至今未作主动发掘。",
+        "zh-TW": "秦始皇帝陵是秦朝開國皇帝秦始皇的陵墓，位於中華人民共和國陝西省西安市臨潼區驪山北麓，秦代稱驪山園。陵園以封土和地下墓室為中心，設內外城垣，周圍分佈禮制建築、陪葬墓、陪葬坑和修陵人墓地等遺存；核心地宮至今未作主動發掘。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%A7%A6%E5%A7%8B%E7%9A%87%E9%99%B5",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%A7%A6%E5%A7%8B%E7%9A%87%E9%99%B5",
+        "https://en.wikipedia.org/wiki/Mausoleum_of_Qin_Shi_Huang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        109.25388889,
+        34.38166667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Mausoleum_of_Qin_Shi_Huang",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "610100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c9cd2de39a8d7cf1.webp",
+        "credit": "Legolas1024 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E7%A7%A6%E5%A7%8B%E7%9A%87%E5%B8%9D%E9%99%B5%C2%B7%E7%A7%A6%E5%A7%8B%E7%9A%87%E9%99%B5%C2%B7%E8%A5%BF%E5%AE%89%E8%87%A8%E6%BD%BC%C2%B7%EF%BC%88%E5%B0%81%E5%9C%9F%E6%AD%A3%E5%8C%97%E5%81%B4%EF%BC%89.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​秦始皇帝陵封土北側正面",
+        "place": "秦始皇陵",
+        "originalFile": "秦始皇帝陵·秦始皇陵·西安臨潼·（封土正北側）.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:610100:ab082e2e": {
+      "label": {
+        "en": "Small Wild Goose Pagoda",
+        "zh-CN": "小雁塔",
+        "zh-TW": "小雁塔"
+      },
+      "description": {
+        "en": "The Small Wild Goose Pagoda or Little Wild Goose Pagoda is a Tang-dynasty brick pagoda in the former Jianfu Temple precinct in Xi'an, Shaanxi, China. It was built between 707 and 709, when the city was the imperial capital Chang'an, and was associated with the temple's translation of Buddhist texts brought from India.",
+        "zh-CN": "小雁塔，又称荐福寺塔，是位于中华人民共和国陕西省西安市碑林区西安博物院院内的唐代密檐式砖塔。塔始建于唐景龙年间，与荐福寺的佛经翻译活动有关，最初为十五层；明代地震损坏塔顶两层，现存十三层，高约43.3米。",
+        "zh-TW": "小雁塔，又稱薦福寺塔，是位於中華人民共和國陝西省西安市碑林區西安博物院院內的唐代密檐式磚塔。塔始建於唐景龍年間，與薦福寺的佛經翻譯活動有關，最初爲十五層；明代地震損壞塔頂兩層，現存十三層，高約43.3米。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B0%8F%E9%9B%81%E5%A1%94",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B0%8F%E9%9B%81%E5%A1%94",
+        "https://en.wikipedia.org/wiki/Small_Wild_Goose_Pagoda"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        108.93738889,
+        34.24080556
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Small_Wild_Goose_Pagoda",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "610100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/da7a93508097809a.webp",
+        "credit": "Guucancat · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Xi%27anwildgoosepagoda2.JPG",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Xi%27anwildgoosepagoda2.JPG#Licensing",
+        "alt": "Small Wild Goose Pagoda, built by 709, was adjacent to the Dajianfu Temple in Chang'an, where Buddhist monks from India and elsewhere gathered to translate Sanskrit texts into Chinese",
+        "place": "小雁塔",
+        "originalFile": "Xi'anwildgoosepagoda2.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

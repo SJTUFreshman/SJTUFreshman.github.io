@@ -1,0 +1,180 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "410500": {
+      "label": {
+        "en": "Anyang",
+        "zh-CN": "安阳市",
+        "zh-TW": "安陽市"
+      },
+      "description": {
+        "en": "Anyang is a prefecture-level city in Henan, China. The northernmost city in Henan, it borders Puyang to the east, Hebi and Xinxiang to the south, and the provinces of Shanxi and Hebei to its west and north respectively.",
+        "zh-CN": "安阳市，古称殷、相州、彰德府，是中华人民共和国河南省下辖的地级市，位于河南省北部。市境东连濮阳市，南接新乡市、鹤壁市，西界山西省长治市，北达河北省邯郸市。",
+        "zh-TW": "安陽市，古稱殷、相州、彰德府，是中華人民共和國河南省下轄的地級市，位於河南省北部。市境東連濮陽市，南接新鄉市、鶴壁市，西界山西省長治市，北達河北省邯鄲市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%89%E9%98%B3%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%89%E9%98%B3%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Anyang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        114.392,
+        36.099
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/8109aa01d2aa0e98.webp",
+        "credit": "Unknown authorUnknown author · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%87%E5%B3%B0%E5%A1%94.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​文峰塔（天宁寺塔）",
+        "place": "天宁寺塔 (安阳)",
+        "originalFile": "文峰塔.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:410500:5ae593d4",
+      "urbanFocus": {
+        "label": {
+          "en": "Anyang",
+          "zh-CN": "安阳市",
+          "zh-TW": "安陽市"
+        },
+        "lngLat": [
+          114.34614,
+          36.09561
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Anyang.",
+          "zh-CN": "以安阳市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以安陽市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q324293#P625",
+        "source": "https://www.wikidata.org/wiki/Q324293",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q324293#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.04
+        }
+      }
+    },
+    "poi:admin:410500:8db217c5": {
+      "label": {
+        "en": "National Museum of Chinese Writing",
+        "zh-CN": "中国文字博物馆",
+        "zh-TW": "中國文字博物館"
+      },
+      "description": {
+        "en": "The National Museum of Chinese Writing in Anyang is devoted to writing and its material heritage. Its work combines the preservation of related objects, public exhibitions and scholarly research.",
+        "zh-CN": "中国文字博物馆位于中华人民共和国河南省安阳市北关区人民大道东段656号，是一所以“文字”为主题，兼具与文字相关的文物保护、陈列展示和科学研究三大功能为一体的专业博物馆，同时也是全球第一座以文字为主要“藏品”的国家级博物馆。中国文字博物馆位于中国八大古都之一，同时又有“文字之都”之称的河南省安阳市。",
+        "zh-TW": "中國文字博物館位於中華人民共和國河南省安陽市北關區人民大道東段656號，是一所以“文字”爲主題，兼具與文字相關的文物保護、陳列展示和科學研究三大功能爲一體的專業博物館，同時也是全球第一座以文字爲主要“藏品”的國家級博物館。中國文字博物館位於中國八大古都之一，同時又有“文字之都”之稱的河南省安陽市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9C%8B%E6%96%87%E5%AD%97%E5%8D%9A%E7%89%A9%E9%A4%A8",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9C%8B%E6%96%87%E5%AD%97%E5%8D%9A%E7%89%A9%E9%A4%A8"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        114.39383333,
+        36.11237778
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9C%8B%E6%96%87%E5%AD%97%E5%8D%9A%E7%89%A9%E9%A4%A8",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "410500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/43477c4bca51d107.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20260403_National_Museum_of_Chinese_Writing_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "National Museum of Chinese Writing, Anyang, Henan",
+        "place": "中國文字博物館",
+        "originalFile": "20260403_National_Museum_of_Chinese_Writing_02.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:410500:5ae593d4": {
+      "label": {
+        "en": "Wenfeng Pagoda in Anyang",
+        "zh-CN": "天宁寺塔 (安阳)",
+        "zh-TW": "天寧寺塔 (安陽)"
+      },
+      "description": {
+        "en": "Wenfeng Pagoda, originally known as Tianning Temple Pagoda, is a Buddhist pagoda located in Anyang, Henan Province, China. Built in 952 CE during the Later Zhou dynasty, it is renowned for its rare inverted architectural design, where the upper levels are wider than the base.",
+        "zh-CN": "安阳天宁寺塔又称文峰塔，位于中国河南省安阳市中心，其所在地也因此命名为文峰区。天宁寺原建于隋仁寿年间。",
+        "zh-TW": "安陽天寧寺塔又稱文峯塔，位於中國河南省安陽市中心，其所在地也因此命名爲文峯區。天寧寺原建於隋仁壽年間。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%AE%81%E5%AF%BA%E5%A1%94_(%E5%AE%89%E9%98%B3)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%AE%81%E5%AF%BA%E5%A1%94_(%E5%AE%89%E9%98%B3)",
+        "https://en.wikipedia.org/wiki/Wenfeng_Pagoda_in_Anyang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        114.34347111,
+        36.09804694
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Wenfeng_Pagoda_in_Anyang",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "410500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/8109aa01d2aa0e98.webp",
+        "credit": "Unknown authorUnknown author · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%96%87%E5%B3%B0%E5%A1%94.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​文峰塔（天宁寺塔）",
+        "place": "天宁寺塔 (安阳)",
+        "originalFile": "文峰塔.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:410500:0e581f40": {
+      "label": {
+        "en": "Cao Cao Mausoleum",
+        "zh-CN": "曹操高陵",
+        "zh-TW": "曹操高陵"
+      },
+      "description": {
+        "en": "The Cao Cao Mausoleum, also known as the Gaoling Mausoleum of Wei and the Xigaoxue Tomb No. 2, is a tomb in Xigaoxue Village, Anyang County, Henan Province, China.",
+        "zh-CN": "曹操高陵，又称安阳高陵、魏高陵、西高穴2号墓，是东汉末年魏王曹操之陵墓。曹操陵墓之所在位置近两千年来一直是个谜团，直至2009年12月27日经由河南省文物局宣布，在曹操高陵考古确认，其地址位于安阳市安阳县安丰乡西高穴村一带。",
+        "zh-TW": "曹操高陵，又稱安陽高陵、魏高陵、西高穴2號墓，是東漢末年魏王曹操之陵墓。曹操陵墓之所在位置近兩千年來一直是個謎團，直至2009年12月27日經由河南省文物局宣佈，在曹操高陵考古確認，其地址位於安陽市安陽縣安豐鄉西高穴村一帶。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E6%93%8D%E9%AB%98%E9%99%B5",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9B%B9%E6%93%8D%E9%AB%98%E9%99%B5",
+        "https://en.wikipedia.org/wiki/Cao_Cao_Mausoleum"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        114.25972222,
+        36.24083333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Cao_Cao_Mausoleum",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "410500",
+      "photo": {
+        "src": "assets/maps/administrative/photos/224d2bd2bc6f8b46.webp",
+        "credit": "Windmemories · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20250913_Gao_Mausoleum_of_Cao_Cao_05.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Gao Mausoleum of Cao Cao",
+        "place": "曹操高陵",
+        "originalFile": "20250913_Gao_Mausoleum_of_Cao_Cao_05.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

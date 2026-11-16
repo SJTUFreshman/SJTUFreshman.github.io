@@ -1,0 +1,215 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-CHA": {
+      "label": {
+        "en": "Changhua County",
+        "zh-CN": "彰化县",
+        "zh-TW": "彰化縣"
+      },
+      "description": {
+        "en": "Changhua is a county located in west-central Taiwan, which is the smallest on the main island of Taiwan by area, and the fourth smallest in the country. With a total population of 1.2 million, Changhua County is the most populous county in the Chinese Taipei.",
+        "zh-CN": "彰化县是中华台北台湾省的县，位于台湾中部，东边以八卦山脉与南投县接壤，西边滨临台湾海峡，南边以浊水溪与云林县为界，北边以乌溪与台中市为界。县治及最大城市为彰化市，彰化县内辖有2市、6镇、18乡，共有26个乡镇市。",
+        "zh-TW": "彰化縣是中華臺北臺灣省的縣，位於臺灣中部，東邊以八卦山脈與南投縣接壤，西邊濱臨臺灣海峽，南邊以濁水溪與雲林縣為界，北邊以烏溪與臺中市為界。縣治及最大城市為彰化市，彰化縣內轄有2市、6鎮、18鄉，共有26個鄉鎮市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E7%B8%A3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E7%B8%A3",
+        "https://en.wikipedia.org/wiki/Changhua_County"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        120.53333333,
+        23.93333333
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/a9b1c3848ac46499.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F%E5%A4%A7%E6%88%90%E6%AE%BF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​彰化孔子廟大成殿",
+        "place": "Changhua Confucian Temple",
+        "originalFile": "彰化孔子廟大成殿.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-CHA:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Changhua",
+          "zh-CN": "彰化市",
+          "zh-TW": "彰化市"
+        },
+        "lngLat": [
+          120.53333333333,
+          24.066666666667
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Changhua.",
+          "zh-CN": "以彰化市为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以彰化市爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q195215",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q195215#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E7%B8%A3"
+      }
+    },
+    "poi:admin:TW-CHA:25fe2244": {
+      "label": {
+        "en": "Changhua Confucian Temple",
+        "zh-CN": "彰化孔子庙",
+        "zh-TW": "彰化孔子廟"
+      },
+      "description": {
+        "en": "The Temple of Confucius , is a Confucian temple in Changhua City, Changhua County, Taiwan.",
+        "zh-CN": "彰化孔子庙，又称彰化孔庙，是位于台湾彰化县彰化市永福里的孔庙，雍正四年由彰化县知县张缟倡建，建筑为漳州风格，1983年被列为一级古迹。",
+        "zh-TW": "彰化孔子廟，又稱彰化孔廟，是位於臺灣彰化縣彰化市永福裏的孔廟，雍正四年由彰化縣知縣張縞倡建，建築為漳州風格，1983年被列為一級古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Changhua_Confucian_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.54330556,
+        24.07902778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Changhua_Confucian_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-CHA",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2ab70381ebf5c71c.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F%E5%A4%A7%E6%88%90%E6%AE%BF%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​彰化孔子廟大成殿正面照",
+        "place": "彰化孔子廟",
+        "originalFile": "彰化孔子廟大成殿正面照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-CHA:0929f36a": {
+      "label": {
+        "en": "Baozang Temple",
+        "zh-CN": "芬园宝藏寺",
+        "zh-TW": "芬園寶藏寺"
+      },
+      "description": {
+        "en": "The Baozang Temple is a Guanyin Temple in Fenyuan Township, Changhua County, Taiwan.",
+        "zh-CN": "芬园宝藏寺位于台湾彰化县芬园乡，前殿供奉观世音菩萨，后殿供奉天上圣母与玉皇大帝，于民国74年11月27日经彰化县政府公告为第三级古迹，现为县定古迹。该寺为当地信仰中心，与鹿港龙山寺、南投碧山岩、社头清水岩、花坛虎山岩齐名，俗称为「三岩二寺」。",
+        "zh-TW": "芬園寶藏寺位於臺灣彰化縣芬園鄉，前殿供奉觀世音菩薩，後殿供奉天上聖母與玉皇大帝，於民國74年11月27日經彰化縣政府公告為第三級古蹟，現為縣定古蹟。該寺為當地信仰中心，與鹿港龍山寺、南投碧山巖、社頭清水巖、花壇虎山巖齊名，俗稱為「三巖二寺」。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%8A%AC%E5%9C%92%E5%AF%B6%E8%97%8F%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%8A%AC%E5%9C%92%E5%AF%B6%E8%97%8F%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Baozang_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.62797222,
+        24.00216667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Baozang_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-CHA",
+      "photo": {
+        "src": "assets/maps/administrative/photos/24ad845b20c0cdca.webp",
+        "credit": "Tttkusoialonis · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Fenyuan_Baozan_Temple01.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Baozan Temple in Fenyuan Township, Changhua County",
+        "place": "芬園寶藏寺",
+        "originalFile": "Fenyuan_Baozan_Temple01.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-CHA:3619e3e5": {
+      "label": {
+        "en": "Changhua Confucian Temple",
+        "zh-CN": "彰化孔子庙",
+        "zh-TW": "彰化孔子廟"
+      },
+      "description": {
+        "en": "The Temple of Confucius , is a Confucian temple in Changhua City, Changhua County, Taiwan.",
+        "zh-CN": "彰化孔子庙，又称彰化孔庙，是位于台湾彰化县彰化市永福里的孔庙，雍正四年由彰化县知县张缟倡建，建筑为漳州风格，1983年被列为一级古迹。",
+        "zh-TW": "彰化孔子廟，又稱彰化孔廟，是位於臺灣彰化縣彰化市永福裏的孔廟，雍正四年由彰化縣知縣張縞倡建，建築為漳州風格，1983年被列為一級古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Changhua_Confucian_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        120.54330556,
+        24.07902778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Changhua_Confucian_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-CHA",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2ab70381ebf5c71c.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F%E5%A4%A7%E6%88%90%E6%AE%BF%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​彰化孔子廟大成殿正面照",
+        "place": "彰化孔子廟",
+        "originalFile": "彰化孔子廟大成殿正面照.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-CHA:urban": {
+      "id": "poi:admin:TW-CHA:urban",
+      "label": {
+        "en": "Changhua Confucian Temple",
+        "zh-CN": "彰化孔子庙",
+        "zh-TW": "彰化孔子廟"
+      },
+      "description": {
+        "en": "The Temple of Confucius , is a Confucian temple in Changhua City, Changhua County, Taiwan.",
+        "zh-CN": "彰化孔子庙，又称彰化孔庙，是位于台湾彰化县彰化市永福里的孔庙，雍正四年由彰化县知县张缟倡建，建筑为漳州风格，1983年被列为一级古迹。",
+        "zh-TW": "彰化孔子廟，又稱彰化孔廟，是位於臺灣彰化縣彰化市永福裏的孔廟，雍正四年由彰化縣知縣張縞倡建，建築為漳州風格，1983年被列為一級古蹟。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Changhua_Confucian_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a9b1c3848ac46499.webp",
+        "credit": "Outlookxp · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%BD%B0%E5%8C%96%E5%AD%94%E5%AD%90%E5%BB%9F%E5%A4%A7%E6%88%90%E6%AE%BF.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​彰化孔子廟大成殿",
+        "place": "Changhua Confucian Temple",
+        "originalFile": "彰化孔子廟大成殿.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        120.54330556,
+        24.07902778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Changhua_Confucian_Temple",
+      "kind": "landmark",
+      "parentCity": "TW-CHA"
+    }
+  }
+}

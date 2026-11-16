@@ -1,0 +1,251 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "321000": {
+      "label": {
+        "en": "Yangzhou",
+        "zh-CN": "扬州市",
+        "zh-TW": "揚州市"
+      },
+      "description": {
+        "en": "Yangzhou is a prefecture-level city in central Jiangsu Province, East China. Sitting on the north bank of the Yangtze, it borders the provincial capital Nanjing to the southwest, Huai'an to the north, Yancheng to the northeast, Taizhou to the east, and Zhenjiang across the river to the south.",
+        "zh-CN": "扬州市，简称扬，古称江都、广陵，是中华人民共和国江苏省下辖的地级市，位于江苏省中部，长江北岸。号称美食之都、世界运河之都，古诗中有着“烟花三月下扬州”“淮左名都，竹西佳处”的美誉。",
+        "zh-TW": "揚州市，簡稱揚，古稱江都、廣陵，是中華人民共和國江蘇省下轄的地級市，位於江蘇省中部，長江北岸。號稱美食之都、世界運河之都，古詩中有着“煙花三月下揚州”“淮左名都，竹西佳處”的美譽。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%89%AC%E5%B7%9E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%89%AC%E5%B7%9E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Yangzhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        119.4128,
+        32.3944
+      ],
+      "photo": {
+        "src": "assets/maps/regions/photos/fc0a8fa5449549f9.webp",
+        "credit": "Amarespeco · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Five_Pavilion_Bridge_and_White_Pagoda_2017.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Five Pavilion Bridge and White Pagoda",
+        "place": "瘦西湖",
+        "originalFile": "Five_Pavilion_Bridge_and_White_Pagoda_2017.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:321000:1",
+      "urbanFocus": {
+        "label": {
+          "en": "Yangzhou",
+          "zh-CN": "扬州市",
+          "zh-TW": "揚州市"
+        },
+        "lngLat": [
+          119.43625,
+          32.39117
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Yangzhou.",
+          "zh-CN": "以扬州市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以揚州市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q57906#P625",
+        "source": "https://www.wikidata.org/wiki/Q57906",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q57906#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.45
+        }
+      }
+    },
+    "poi:321000:1": {
+      "label": {
+        "en": "Slender West Lake",
+        "zh-CN": "瘦西湖",
+        "zh-TW": "瘦西湖"
+      },
+      "description": {
+        "en": "Slender West Lake, also known by its Chinese name Shouxihu and by other names, is a scenic lake in Hanjiang District in central Yangzhou, China. The lake developed from the city moats of Tang-era Yangzhou.",
+        "zh-CN": "瘦西湖位于中国江苏省扬州市广陵区，扬州旧城北门外至蜀岗一带，现为“蜀冈-瘦西湖风景名胜区”核心区域。该湖最初由唐代扬州的城市护城河逐渐发展而成。",
+        "zh-TW": "瘦西湖位於中國江蘇省揚州市廣陵區，揚州舊城北門外至蜀崗一帶，現爲“蜀岡-瘦西湖風景名勝區”核心區域。該湖最初由唐代揚州的城市護城河逐漸發展而成。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%98%A6%E8%A5%BF%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%98%A6%E8%A5%BF%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Slender_West_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        119.4175,
+        32.41
+      ],
+      "parentCity": "321000",
+      "photo": {
+        "src": "assets/maps/regions/photos/fc0a8fa5449549f9.webp",
+        "credit": "Amarespeco · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Five_Pavilion_Bridge_and_White_Pagoda_2017.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Five Pavilion Bridge and White Pagoda",
+        "place": "瘦西湖",
+        "originalFile": "Five_Pavilion_Bridge_and_White_Pagoda_2017.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:321000:2": {
+      "label": {
+        "en": "Daming Temple",
+        "zh-CN": "大明寺 (扬州)",
+        "zh-TW": "大明寺 (揚州)"
+      },
+      "description": {
+        "en": "Daming Temple is a temple located at the middle peak of Shugang Mountain , Yangzhou, Jiangsu province, China. This temple is known for a famous monk, Jianzhen, who studied the sutras and initiated people into monkhood here in 742 AD before he left for Japan.",
+        "zh-CN": "大明寺位于江苏扬州蜀冈中峰。鉴真曾在这里研习佛典、受戒，寺院也因此与中日佛教交流的历史相连。",
+        "zh-TW": "大明寺位於江蘇揚州蜀岡中峯。鑑真曾在這裏研習佛典、受戒，寺院也因此與中日佛教交流的歷史相連。"
+      },
+      "source": "https://en.wikipedia.org/wiki/Daming_Temple",
+      "textSources": [
+        "https://en.wikipedia.org/wiki/Daming_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        119.40833333,
+        32.42166667
+      ],
+      "parentCity": "321000",
+      "photo": {
+        "src": "assets/maps/regions/photos/22092adb2550973f.webp",
+        "credit": "Gisling · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Daming_temple.JPG",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Da Ming Temple, Yangzhou 扬州大明寺",
+        "place": "Daming Temple",
+        "originalFile": "Daming_temple.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:321000:f281e159": {
+      "label": {
+        "en": "Choe Chiwon Memorial Hall",
+        "zh-CN": "崔致远纪念馆",
+        "zh-TW": "崔致遠紀念館"
+      },
+      "description": {
+        "en": "This memorial hall in Yangzhou commemorates the Silla scholar Choe Chiwon, who once served as an official in the city. Its first phase opened in October 2007.",
+        "zh-CN": "崔致远纪念馆位于中华人民共和国江苏省扬州市邗江区平山堂东路20号，为纪念曾在扬州为官的新罗文人崔致远而建，是中华人民共和国外交部批准兴建的中国大陆首座外国名人纪念馆。纪念馆总建设费用约人民币2000多万元，一期工程于2007年10月15日竣工开馆。",
+        "zh-TW": "崔致遠紀念館位於中華人民共和國江蘇省揚州市邗江區平山堂東路20號，爲紀念曾在揚州爲官的新羅文人崔致遠而建，是中華人民共和國外交部批准興建的中國大陸首座外國名人紀念館。紀念館總建設費用約人民幣2000多萬元，一期工程於2007年10月15日竣工開館。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B4%94%E8%87%B4%E8%BF%9C%E7%BA%AA%E5%BF%B5%E9%A6%86",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B4%94%E8%87%B4%E8%BF%9C%E7%BA%AA%E5%BF%B5%E9%A6%86"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.4135,
+        32.4231
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E5%B4%94%E8%87%B4%E8%BF%9C%E7%BA%AA%E5%BF%B5%E9%A6%86",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "321000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/429e5045b5d082e6.webp",
+        "credit": "螺钉 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%B4%94%E8%87%B4%E8%BF%9C%E7%BA%AA%E5%BF%B5%E9%A6%86.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​崔致远纪念馆",
+        "place": "崔致远纪念馆",
+        "originalFile": "崔致远纪念馆.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:321000:7e6335dd": {
+      "label": {
+        "en": "Slender West Lake",
+        "zh-CN": "瘦西湖",
+        "zh-TW": "瘦西湖"
+      },
+      "description": {
+        "en": "Slender West Lake, also known by its Chinese name Shouxihu and by other names, is a scenic lake in Hanjiang District in central Yangzhou, China. The lake developed from the city moats of Tang-era Yangzhou.",
+        "zh-CN": "瘦西湖位于中国江苏省扬州市广陵区，扬州旧城北门外至蜀岗一带，现为“蜀冈-瘦西湖风景名胜区”核心区域。该湖最初由唐代扬州的城市护城河逐渐发展而成。",
+        "zh-TW": "瘦西湖位於中國江蘇省揚州市廣陵區，揚州舊城北門外至蜀崗一帶，現爲“蜀岡-瘦西湖風景名勝區”核心區域。該湖最初由唐代揚州的城市護城河逐漸發展而成。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E7%98%A6%E8%A5%BF%E6%B9%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E7%98%A6%E8%A5%BF%E6%B9%96",
+        "https://en.wikipedia.org/wiki/Slender_West_Lake"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.4175,
+        32.41
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Slender_West_Lake",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "321000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fc0a8fa5449549f9.webp",
+        "credit": "Amarespeco · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Five_Pavilion_Bridge_and_White_Pagoda_2017.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Five Pavilion Bridge and White Pagoda",
+        "place": "瘦西湖",
+        "originalFile": "Five_Pavilion_Bridge_and_White_Pagoda_2017.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:321000:ff3bd4ef": {
+      "label": {
+        "en": "Daming Temple",
+        "zh-CN": "扬州大明寺",
+        "zh-TW": "揚州大明寺"
+      },
+      "description": {
+        "en": "Daming Temple is a temple located at the middle peak of Shugang Mountain , Yangzhou, Jiangsu province, China. This temple is known for a famous monk, Jianzhen, who studied the sutras and initiated people into monkhood here in 742 AD before he left for Japan.",
+        "zh-CN": "大明寺位于中国江苏省扬州市蜀冈风景区之中峰，曾是鉴真居住和讲学之所，古有“扬州第一名胜”之说。",
+        "zh-TW": "大明寺位於中國江蘇省揚州市蜀岡風景區之中峯，曾是鑑真居住和講學之所，古有“揚州第一名勝”之說。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%89%AC%E5%B7%9E%E5%A4%A7%E6%98%8E%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%89%AC%E5%B7%9E%E5%A4%A7%E6%98%8E%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Daming_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        119.40833333,
+        32.42166667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Daming_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "321000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/22092adb2550973f.webp",
+        "credit": "Gisling · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Daming_temple.JPG",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Da Ming Temple, Yangzhou 扬州大明寺",
+        "place": "扬州大明寺",
+        "originalFile": "Daming_temple.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

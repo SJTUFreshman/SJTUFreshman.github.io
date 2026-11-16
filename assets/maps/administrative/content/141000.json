@@ -1,0 +1,261 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "141000": {
+      "label": {
+        "en": "Linfen",
+        "zh-CN": "临汾市",
+        "zh-TW": "臨汾市"
+      },
+      "description": {
+        "en": "Linfen is a prefecture-level city in the southwest of Shanxi province, China, bordering Shaanxi province to the west. Linfen City is located in the southern part of Shanxi Province, with the remaining branches of Taiyue to the east and the Luliang Mountains to the west.",
+        "zh-CN": "临汾市，古称平阳、晋州，是中华人民共和国山西省下辖的地级市，位于山西省西南部，黄河东岸，因濒临汾河而得名。市境南接运城市，东南邻晋城市，东北界长治市，北达晋中市、吕梁市，西隔黄河与陕西省延安市、渭南市相望。",
+        "zh-TW": "臨汾市，古稱平陽、晉州，是中華人民共和國山西省下轄的地級市，位於山西省西南部，黃河東岸，因瀕臨汾河而得名。市境南接運城市，東南鄰晉城市，東北界長治市，北達晉中市、呂梁市，西隔黃河與陝西省延安市、渭南市相望。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%B4%E6%B1%BE%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%B4%E6%B1%BE%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Linfen"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        111.519,
+        36.088
+      ],
+      "photo": {
+        "src": "assets/maps/regions/photos/fdc1a7f9ca97daa4.webp",
+        "credit": "Artsxiang · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%B9%BF%E8%83%9C%E5%AF%BA_03.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "广胜寺",
+        "place": "广胜寺",
+        "originalFile": "广胜寺_03.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:141000:2",
+      "urbanFocus": {
+        "label": {
+          "en": "Linfen",
+          "zh-CN": "临汾市",
+          "zh-TW": "臨汾市"
+        },
+        "lngLat": [
+          111.50865,
+          36.08121
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Linfen.",
+          "zh-CN": "以临汾市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以臨汾市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q73156#P625",
+        "source": "https://www.wikidata.org/wiki/Q73156",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q73156#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.9
+        }
+      }
+    },
+    "poi:141000:1": {
+      "label": {
+        "en": "Hukou Waterfalls",
+        "zh-CN": "壶口瀑布",
+        "zh-TW": "壺口瀑布"
+      },
+      "description": {
+        "en": "The Hukou Waterfalls is the largest waterfall on the Yellow River, the second largest waterfall in China , and the world's largest yellow waterfall. It is located at the intersection of the provinces of Shanxi and Shaanxi, 165 km to the west of Fenxi County, and 50 km to the east of Yichuan County where the middle reaches of the Yellow River flow through Jinxia Grand Canyon.",
+        "zh-CN": "壶口瀑布是黄河中游流经晋陕大峡谷时形成的一个天然瀑布。 东为吕梁山脉南端的火焰山，临山西省临汾市吉县；西为黄龙山，临陕西省延安市宜川县壶口乡，距吉县县城西南约25公里。",
+        "zh-TW": "壺口瀑布是黃河中游流經晉陝大峽谷時形成的一個天然瀑布。 東爲呂梁山脈南端的火焰山，臨山西省臨汾市吉縣；西爲黃龍山，臨陝西省延安市宜川縣壺口鄉，距吉縣縣城西南約25公里。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A3%B6%E5%8F%A3%E7%80%91%E5%B8%83",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A3%B6%E5%8F%A3%E7%80%91%E5%B8%83",
+        "https://en.wikipedia.org/wiki/Hukou_Waterfalls"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        110.4508,
+        36.1314
+      ],
+      "parentCity": "141000",
+      "photo": {
+        "src": "assets/maps/regions/photos/4bceec44895d6e90.webp",
+        "credit": "Leruswing · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hukou_Waterfall.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Hukou Waterfall of Yellow River, China",
+        "place": "壶口瀑布",
+        "originalFile": "Hukou_Waterfall.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:141000:2": {
+      "label": {
+        "en": "Guangsheng Temple",
+        "zh-CN": "广胜寺",
+        "zh-TW": "廣勝寺"
+      },
+      "description": {
+        "en": "The Guangsheng Temple is a Buddhist temple, located at the southern foot of Mt. Huoshan, 17 km northeast of Hongtong County, Shanxi, China.",
+        "zh-CN": "广胜寺位于山西省临汾市洪洞县县城东北17公里霍山上下，是一座著名佛教寺院。著名佛教大藏经赵城金藏就是出自广胜寺，1961年广胜寺被列入第一批全国重点文物保护单位。",
+        "zh-TW": "廣勝寺位於山西省臨汾市洪洞縣縣城東北17公里霍山上下，是一座著名佛教寺院。著名佛教大藏經趙城金藏就是出自廣勝寺，1961年廣勝寺被列入第一批全國重點文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B9%BF%E8%83%9C%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B9%BF%E8%83%9C%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Guangsheng_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        111.80638889,
+        36.30166667
+      ],
+      "parentCity": "141000",
+      "photo": {
+        "src": "assets/maps/regions/photos/fdc1a7f9ca97daa4.webp",
+        "credit": "Artsxiang · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%B9%BF%E8%83%9C%E5%AF%BA_03.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "广胜寺",
+        "place": "广胜寺",
+        "originalFile": "广胜寺_03.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:141000:bf919970": {
+      "label": {
+        "en": "Hukou Waterfalls",
+        "zh-CN": "壶口瀑布",
+        "zh-TW": "壺口瀑布"
+      },
+      "description": {
+        "en": "The Hukou Waterfalls is the largest waterfall on the Yellow River, the second largest waterfall in China , and the world's largest yellow waterfall. It is located at the intersection of the provinces of Shanxi and Shaanxi, 165 km to the west of Fenxi County, and 50 km to the east of Yichuan County where the middle reaches of the Yellow River flow through Jinxia Grand Canyon.",
+        "zh-CN": "壶口瀑布是黄河中游流经晋陕大峡谷时形成的一个天然瀑布。 东为吕梁山脉南端的火焰山，临山西省临汾市吉县；西为黄龙山，临陕西省延安市宜川县壶口乡，距吉县县城西南约25公里。",
+        "zh-TW": "壺口瀑布是黃河中游流經晉陝大峽谷時形成的一個天然瀑布。 東爲呂梁山脈南端的火焰山，臨山西省臨汾市吉縣；西爲黃龍山，臨陝西省延安市宜川縣壺口鄉，距吉縣縣城西南約25公里。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A3%B6%E5%8F%A3%E7%80%91%E5%B8%83",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A3%B6%E5%8F%A3%E7%80%91%E5%B8%83",
+        "https://en.wikipedia.org/wiki/Hukou_Waterfalls"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        110.4508,
+        36.1314
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Hukou_Waterfalls",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "141000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4bceec44895d6e90.webp",
+        "credit": "Leruswing · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hukou_Waterfall.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Hukou Waterfall of Yellow River, China",
+        "place": "壶口瀑布",
+        "originalFile": "Hukou_Waterfall.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:141000:02c6cc92": {
+      "label": {
+        "en": "Guangsheng Temple",
+        "zh-CN": "广胜寺",
+        "zh-TW": "廣勝寺"
+      },
+      "description": {
+        "en": "The Guangsheng Temple is a Buddhist temple, located at the southern foot of Mt. Huoshan, 17 km northeast of Hongtong County, Shanxi, China.",
+        "zh-CN": "广胜寺位于山西省临汾市洪洞县县城东北17公里霍山上下，是一座著名佛教寺院。著名佛教大藏经赵城金藏就是出自广胜寺，1961年广胜寺被列入第一批全国重点文物保护单位。",
+        "zh-TW": "廣勝寺位於山西省臨汾市洪洞縣縣城東北17公里霍山上下，是一座著名佛教寺院。著名佛教大藏經趙城金藏就是出自廣勝寺，1961年廣勝寺被列入第一批全國重點文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B9%BF%E8%83%9C%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B9%BF%E8%83%9C%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Guangsheng_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        111.80638889,
+        36.30166667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Guangsheng_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "141000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/fdc1a7f9ca97daa4.webp",
+        "credit": "Artsxiang · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%B9%BF%E8%83%9C%E5%AF%BA_03.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "广胜寺",
+        "place": "广胜寺",
+        "originalFile": "广胜寺_03.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:141000:photo-56277868": {
+      "label": {
+        "en": "Linfen landscape view",
+        "zh-CN": "平阳广场背后的小街",
+        "zh-TW": "平陽廣場背後的小街"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Linfen, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现临汾市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現臨汾市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%B9%B3%E9%98%B3%E5%B9%BF%E5%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E5%B0%8F%E8%A1%97_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%B9%B3%E9%98%B3%E5%B9%BF%E5%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E5%B0%8F%E8%A1%97_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/1da7f5b3ea052409.webp",
+        "credit": "C.M. Osman · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%B9%B3%E9%98%B3%E5%B9%BF%E5%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E5%B0%8F%E8%A1%97_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​平阳广场背后的小街",
+        "place": "平阳广场背后的小街 - panoramio.jpg",
+        "originalFile": "平阳广场背后的小街 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            111.521895,
+            36.079887
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%B9%B3%E9%98%B3%E5%B9%BF%E5%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E5%B0%8F%E8%A1%97_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        111.521895,
+        36.079887
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%B9%B3%E9%98%B3%E5%B9%BF%E5%9C%BA%E8%83%8C%E5%90%8E%E7%9A%84%E5%B0%8F%E8%A1%97_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "141000"
+    }
+  }
+}

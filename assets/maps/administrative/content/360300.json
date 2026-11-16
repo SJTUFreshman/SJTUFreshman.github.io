@@ -1,0 +1,143 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "360300": {
+      "label": {
+        "en": "Pingxiang",
+        "zh-CN": "萍乡市",
+        "zh-TW": "萍鄉市"
+      },
+      "description": {
+        "en": "Pingxiang is a medium-sized prefecture-level city located in western Jiangxi province, People's Republic of China. Pingxiang City is located in the west of Jiangxi Province, bordering Yichun and Ji'an of this province to the east and south, and Zhuzhou and Changsha of Hunan to the northwest.",
+        "zh-CN": "萍乡市是中华人民共和国江西省下辖的地级市，位于江西省西部。市境东北界宜春市，东南邻吉安市，西临湖南省株洲市，北达湖南省长沙市。",
+        "zh-TW": "萍鄉市是中華人民共和國江西省下轄的地級市，位於江西省西部。市境東北界宜春市，東南鄰吉安市，西臨湖南省株洲市，北達湖南省長沙市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%90%8D%E4%B9%A1%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%90%8D%E4%B9%A1%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Pingxiang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        113.887,
+        27.659
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/82344dee680c8ace.webp",
+        "credit": "Zhangzhugang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pingxiang_Anyuan_2018.07.01_08-32-51.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "安源路矿工人运动纪念馆",
+        "place": "安源路矿工人运动纪念馆",
+        "originalFile": "Pingxiang_Anyuan_2018.07.01_08-32-51.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:360300:56165c7b",
+      "urbanFocus": {
+        "label": {
+          "en": "Pingxiang",
+          "zh-CN": "萍乡市",
+          "zh-TW": "萍鄉市"
+        },
+        "lngLat": [
+          113.85,
+          27.633333333333
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Pingxiang.",
+          "zh-CN": "以萍乡市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以萍鄉市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q362865#P625",
+        "source": "https://www.wikidata.org/wiki/Q362865",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q362865#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.18
+        }
+      }
+    },
+    "poi:admin:360300:56165c7b": {
+      "label": {
+        "en": "Anyuan Miners' Strike Memorial Hall",
+        "zh-CN": "安源路矿工人运动纪念馆",
+        "zh-TW": "安源路礦工人運動紀念館"
+      },
+      "description": {
+        "en": "Anyuan Miners' Strike Memorial Hall is a museum in Anyuan District, Pingxiang, China. The museum memorializes part of the early revolutionary activity of Mao Zedong.",
+        "zh-CN": "安源路矿工人运动纪念馆，位于中华人民共和国江西省萍乡市安源区安源镇胜利广场的牛形岭山腰上，是为纪念安源路矿工人大罢工而建立的革命博物馆，为江西省文化厅直属单位。",
+        "zh-TW": "安源路礦工人運動紀念館，位於中華人民共和國江西省萍鄉市安源區安源鎮勝利廣場的牛形嶺山腰上，是爲紀念安源路礦工人大罷工而建立的革命博物館，爲江西省文化廳直屬單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AE%89%E6%BA%90%E8%B7%AF%E7%9F%BF%E5%B7%A5%E4%BA%BA%E8%BF%90%E5%8A%A8%E7%BA%AA%E5%BF%B5%E9%A6%86",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%89%E6%BA%90%E8%B7%AF%E7%9F%BF%E5%B7%A5%E4%BA%BA%E8%BF%90%E5%8A%A8%E7%BA%AA%E5%BF%B5%E9%A6%86",
+        "https://en.wikipedia.org/wiki/Anyuan_Miners%27_Strike_Memorial_Hall"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.8915,
+        27.6084
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Anyuan_Miners%27_Strike_Memorial_Hall",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "360300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/82344dee680c8ace.webp",
+        "credit": "Zhangzhugang · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pingxiang_Anyuan_2018.07.01_08-32-51.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "安源路矿工人运动纪念馆",
+        "place": "安源路矿工人运动纪念馆",
+        "originalFile": "Pingxiang_Anyuan_2018.07.01_08-32-51.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:360300:25da67b2": {
+      "label": {
+        "en": "Wugong Mountains",
+        "zh-CN": "武功山",
+        "zh-TW": "武功山"
+      },
+      "description": {
+        "en": "The Wugongshan or Wu-kung Mountains , now a tourist resort, are a range of mountains located in the west of Jiangxi, China. It is the geography boundary of Anfu County, Luxi County, Jiangxi, Yichun, Jiangxi, and Lianhua County.",
+        "zh-CN": "武功山位于中华人民共和国江西省，属罗霄山脉北支，山体呈东北——西南走向，自江西吉安市安福县，宜春市袁州区，萍乡市芦溪县、莲花县，绵延120余千米，总面积近千平方千米。主峰白鹤峰海拔1918.3米，围绕金顶已设立「武功山国家地质公园」、「武功山国家森林公园」、「明月山国家森林公园」。",
+        "zh-TW": "武功山位於中華人民共和國江西省，屬羅霄山脈北支，山體呈東北——西南走向，自江西吉安市安福縣，宜春市袁州區，萍鄉市蘆溪縣、蓮花縣，綿延120餘千米，總面積近千平方千米。主峯白鶴峯海拔1918.3米，圍繞金頂已設立「武功山國家地質公園」、「武功山國家森林公園」、「明月山國家森林公園」。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%AD%A6%E5%8A%9F%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%AD%A6%E5%8A%9F%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Wugong_Mountains"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        114.18333333,
+        27.48333333
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Wugong_Mountains",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "360300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a2d66c33f3a43451.webp",
+        "credit": "Doctoroftcm · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Wugongshan_8350.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "The ridgeline of Wugong Mountain（Wugongshan）in Jiangxi, China.",
+        "place": "武功山",
+        "originalFile": "Wugongshan_8350.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

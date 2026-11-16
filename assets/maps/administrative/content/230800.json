@@ -1,0 +1,104 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "230800": {
+      "label": {
+        "en": "Jiamusi",
+        "zh-CN": "佳木斯市",
+        "zh-TW": "佳木斯市"
+      },
+      "description": {
+        "en": "Jiamusi is a prefecture-level city in eastern Heilongjiang province, People's Republic of China. Located along the middle and lower reaches of the Songhua River, it faces Russia's Khabarovsk Krai across the Ussuri River and the Heilongjiang.",
+        "zh-CN": "佳木斯市简称佳，是中华人民共和国黑龙江省下辖的地级市，满洲国和民国时期曾先后为三江省、合江省省会，原黑龙江生产建设兵团司令部所在地，位于黑龙江省东北部，是中国最东边的地级行政区。市境南界双鸭山市、七台河市，西接哈尔滨市、伊春市，西北隔松花江与鹤岗市接壤，东北隔黑龙江与俄罗斯犹太自治州比罗比詹毗邻，东隔乌苏里江与俄罗斯哈巴罗夫斯克边疆区伯力相望。",
+        "zh-TW": "佳木斯市簡稱佳，是中華人民共和國黑龍江省下轄的地級市，滿洲國和民國時期曾先後為三江省、合江省省會，原黑龍江生產建設兵團司令部所在地，位於黑龍江省東北部，是中國最東邊的地級行政區。市境南界雙鴨山市、七臺河市，西接哈爾濱市、伊春市，西北隔松花江與鶴崗市接壤，東北隔黑龍江與俄羅斯猶太自治州比羅比詹毗鄰，東隔烏蘇里江與俄羅斯哈巴羅夫斯克邊疆區伯力相望。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%BD%B3%E6%9C%A8%E6%96%AF%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%BD%B3%E6%9C%A8%E6%96%AF%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Jiamusi"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        130.319,
+        46.8
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/c76c9e66cf8e56a0.webp",
+        "credit": "颜邯 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:10th_Anniversary_Memorial_Tower_of_the_founding_of_PRC,_Jiamusi,_Aug_2019.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "10th Anniversary Memorial Tower of the founding of PRC in Jiamusi.",
+        "place": "佳木斯沿江公园",
+        "originalFile": "10th_Anniversary_Memorial_Tower_of_the_founding_of_PRC,_Jiamusi,_Aug_2019.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:230800:a2bf4e1e",
+      "urbanFocus": {
+        "label": {
+          "en": "Jiamusi",
+          "zh-CN": "佳木斯市",
+          "zh-TW": "佳木斯市"
+        },
+        "lngLat": [
+          130.36531,
+          46.80808
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Jiamusi.",
+          "zh-CN": "以佳木斯市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以佳木斯市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q29003#P625",
+        "source": "https://www.wikidata.org/wiki/Q29003",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q29003#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.33
+        }
+      }
+    },
+    "poi:admin:230800:a2bf4e1e": {
+      "label": {
+        "en": "Jiamusi Riverside Park",
+        "zh-CN": "佳木斯沿江公园",
+        "zh-TW": "佳木斯沿江公園"
+      },
+      "description": {
+        "en": "Jiamusi Riverside Park follows the city’s Songhua River embankment. Work on the park began alongside construction of a permanent flood embankment in 1958, and the park was completed the following year.",
+        "zh-CN": "佳木斯沿江公园是中国黑龙江省佳木斯市的公园和国家3A级旅游景区。1958年，佳木斯市修建松花江正面永久性堤坝，公园也于同年沿堤而建，故名“沿江”，1959年建成。",
+        "zh-TW": "佳木斯沿江公園是中國黑龍江省佳木斯市的公園和國家3A級旅遊景區。1958年，佳木斯市修建松花江正面永久性堤壩，公園也於同年沿堤而建，故名“沿江”，1959年建成。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%BD%B3%E6%9C%A8%E6%96%AF%E6%B2%BF%E6%B1%9F%E5%85%AC%E5%9B%AD",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%BD%B3%E6%9C%A8%E6%96%AF%E6%B2%BF%E6%B1%9F%E5%85%AC%E5%9B%AD"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        130.355765,
+        46.818314
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E4%BD%B3%E6%9C%A8%E6%96%AF%E6%B2%BF%E6%B1%9F%E5%85%AC%E5%9B%AD",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "230800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/c76c9e66cf8e56a0.webp",
+        "credit": "颜邯 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:10th_Anniversary_Memorial_Tower_of_the_founding_of_PRC,_Jiamusi,_Aug_2019.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "10th Anniversary Memorial Tower of the founding of PRC in Jiamusi.",
+        "place": "佳木斯沿江公园",
+        "originalFile": "10th_Anniversary_Memorial_Tower_of_the_founding_of_PRC,_Jiamusi,_Aug_2019.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

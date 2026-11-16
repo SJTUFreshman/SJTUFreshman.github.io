@@ -1,0 +1,180 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "820000": {
+      "label": {
+        "en": "Macau",
+        "zh-CN": "澳门特别行政区",
+        "zh-TW": "澳門特別行政區"
+      },
+      "description": {
+        "en": "Macau or Macao is a special administrative region of China. It consists of the Macau Peninsula, the islands of Taipa and Coloane, the Cotai reclamation zone between Taipa and Coloane, and several smaller islets.",
+        "zh-CN": "澳门，全称澳门特别行政区，简称澳，古称龙涯门、濠镜澳、濠江、海镜、镜海、濠镜、嶴门，民间又称马交或梳打埠，是中华人民共和国两个特别行政区之一，亦是中国面积最小的一级行政单位。位于南海北岸、珠江口西侧，北接广东省珠海市，东面与邻近的香港隔珠江相距63公里，其余两面与南海邻接，是粤港澳大湾区的中心城市之一。",
+        "zh-TW": "澳門，全稱澳門特別行政區，簡稱澳，古稱龍涯門、濠鏡澳、濠江、海鏡、鏡海、濠鏡、嶴門，民間又稱馬交或梳打埠，是中華人民共和國兩個特別行政區之一，亦是中國面積最小的一級行政單位。位於南海北岸、珠江口西側，北接廣東省珠海市，東面與鄰近的香港隔珠江相距63公里，其餘兩面與南海鄰接，是粵港澳大灣區的中心城市之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%BE%B3%E9%96%80",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%BE%B3%E9%96%80",
+        "https://en.wikipedia.org/wiki/Macau"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "province",
+      "lngLat": [
+        113.54,
+        22.19
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/5258335c5e5eb941.webp",
+        "credit": "Yumeto · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20260806_Igreja_de_Santo_Agostinho_(131143).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Saint Augustine’s Church",
+        "place": "聖奧斯定堂",
+        "originalFile": "20260806_Igreja_de_Santo_Agostinho_(131143).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:820000:a9c47aa9",
+      "urbanFocus": {
+        "label": {
+          "en": "Macau",
+          "zh-CN": "澳门",
+          "zh-TW": "澳門"
+        },
+        "lngLat": [
+          113.53805555555556,
+          22.19
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Macau.",
+          "zh-CN": "以澳门的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以澳門的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q14773#P625",
+        "source": "https://www.wikidata.org/wiki/Q14773",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q14773#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.51
+        }
+      }
+    },
+    "poi:admin:820000:4abaffc9": {
+      "label": {
+        "en": "Guia Hill",
+        "zh-CN": "东望洋山",
+        "zh-TW": "東望洋山"
+      },
+      "description": {
+        "en": "The Guia Hill is a hill in located in São Lázaro, Macau, with an elevation of 91.6 meters. Situated in the central part of the Macau Peninsula, it features a park, recreational trails, a cable car, and other facilities.",
+        "zh-CN": "东望洋山，俗称松山，是澳门半岛最高的山岳，海拔90米，南连若宪山。山名「东望洋」乃相对于西望洋山而言，葡萄牙语称呼则源自供奉于山上教堂的「导航圣母」态像。",
+        "zh-TW": "東望洋山，俗稱松山，是澳門半島最高的山嶽，海拔90米，南連若憲山。山名「東望洋」乃相對於西望洋山而言，葡萄牙語稱呼則源自供奉於山上教堂的「導航聖母」態像。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%9C%9B%E6%B4%8B%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%B1%E6%9C%9B%E6%B4%8B%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Guia_Hill"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.55222222,
+        22.19916667
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Guia_Hill",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "820000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a48d8850b300d5f6.webp",
+        "credit": "WiNG · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Macau_Colina_da_Guia.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "Macau Colina da Guia 澳門 東望洋山",
+        "place": "東望洋山",
+        "originalFile": "Macau_Colina_da_Guia.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:820000:67faac00": {
+      "label": {
+        "en": "A-Ma Temple",
+        "zh-CN": "妈祖阁",
+        "zh-TW": "媽祖閣"
+      },
+      "description": {
+        "en": "The A-Má Temple is a temple to the Chinese sea-goddess Mazu located in São Lourenço, Macau, China. Built in 1488, the temple is one of the oldest in Macau and thought to be the settlement's namesake.",
+        "zh-CN": "妈祖阁，俗称妈阁庙 ，旧称娘妈庙、海觉寺、天妃庙，是位于澳门半岛西南方妈阁山山腰上的一座主要奉祀海神妈祖的庙宇，约创建于1553年至1557年前，为澳门标志性建筑物之一，与莲峰庙及普济禅院是澳门三大古刹，也是其中最古老的一座庙宇。 妈祖阁在建筑上具闽南特色，是澳门现存庙宇中有实物可考的最古老的庙宇，亦是原建筑物保存得最长久的澳门文化遗产，见证了澳门数百年来的变迁。",
+        "zh-TW": "媽祖閣，俗稱媽閣廟 ，舊稱娘媽廟、海覺寺、天妃廟，是位於澳門半島西南方媽閣山山腰上的一座主要奉祀海神媽祖的廟宇，約創建於1553年至1557年前，為澳門標誌性建築物之一，與蓮峯廟及普濟禪院是澳門三大古剎，也是其中最古老的一座廟宇。 媽祖閣在建築上具閩南特色，是澳門現存廟宇中有實物可考的最古老的廟宇，亦是原建築物保存得最長久的澳門文化遺產，見證了澳門數百年來的變遷。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%AA%BD%E7%A5%96%E9%96%A3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%AA%BD%E7%A5%96%E9%96%A3",
+        "https://en.wikipedia.org/wiki/A-Ma_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.53113889,
+        22.18611111
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/A-Ma_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "820000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ad8ac5400cd5003d.webp",
+        "credit": "WiNG · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:A_Ma_Temple_200907.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "媽閣廟 A-Ma Temple",
+        "place": "媽祖閣",
+        "originalFile": "A_Ma_Temple_200907.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:820000:a9c47aa9": {
+      "label": {
+        "en": "St Augustine's Church, Macau",
+        "zh-CN": "圣奥斯定堂",
+        "zh-TW": "聖奧斯定堂"
+      },
+      "description": {
+        "en": "St Augustine's Church stands on Largo de Santo Agostinho in Macau, with its present form dating to an 1874 rebuilding. It is associated with the annual two-day procession of Our Lord of the Passion.",
+        "zh-CN": "圣奥斯定堂，是一座位于澳门岗顶前地的教堂，于1874年重修后奠定现时的规模。该教堂每年为期两天的苦难耶稣像巡游，是澳门天主教会重要的节日活动之一。",
+        "zh-TW": "聖奧斯定堂，是一座位於澳門崗頂前地的教堂，於1874年重修後奠定現時的規模。該教堂每年為期兩天的苦難耶穌像巡遊，是澳門天主教會重要的節日活動之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%81%96%E5%A5%A7%E6%96%AF%E5%AE%9A%E5%A0%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%81%96%E5%A5%A7%E6%96%AF%E5%AE%9A%E5%A0%82"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.53827389,
+        22.19220389
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E8%81%96%E5%A5%A7%E6%96%AF%E5%AE%9A%E5%A0%82",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "820000",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5258335c5e5eb941.webp",
+        "credit": "Yumeto · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20260806_Igreja_de_Santo_Agostinho_(131143).jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Saint Augustine’s Church",
+        "place": "聖奧斯定堂",
+        "originalFile": "20260806_Igreja_de_Santo_Agostinho_(131143).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

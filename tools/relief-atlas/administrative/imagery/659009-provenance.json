@@ -1,0 +1,343 @@
+{
+  "cmrQuery": "https://cmr.earthdata.nasa.gov/search/granules.json?short_name=HLSL30&version=2.0&point=79.290833%2C37.209444&temporal=2025-06-01T00%3A00%3A00Z%2C2025-09-01T23%3A59%3A59Z&cloud_cover=0%2C10&page_size=20",
+  "granule": {
+    "producer_granule_id": "HLS.L30.T44SLG.2025157T052207",
+    "time_start": "2025-06-06T05:22:07.572Z",
+    "cloud_cover": "0",
+    "updated": "2025-06-08T01:09:44.326Z",
+    "dataset_id": "HLS Landsat Operational Land Imager Surface Reflectance and TOA Brightness Daily Global 30m v2.0",
+    "data_center": "LPCLOUD",
+    "title": "HLS.L30.T44SLG.2025157T052207.v2.0",
+    "coordinate_system": "GEODETIC",
+    "day_night_flag": "DAY",
+    "time_end": "2025-06-06T05:22:07.572Z",
+    "id": "G3583101230-LPCLOUD",
+    "original_format": "ECHO10",
+    "browse_flag": true,
+    "polygons": [
+      [
+        "36.9366419 78.7542279 36.9508105 79.6796286 37.88769 79.9742099 37.9431112 79.9734399 37.9255818 78.7244718 36.9366419 78.7542279"
+      ]
+    ],
+    "collection_concept_id": "C2021957657-LPCLOUD",
+    "online_access_flag": true,
+    "links": [
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.B11.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B11.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.SZA.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.SZA.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.B06.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B06.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.B05.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B05.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.B02.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B02.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.B07.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B07.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.B04.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B04.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.VZA.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.VZA.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.B09.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B09.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.B03.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B03.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.B01.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B01.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.SAA.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.SAA.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.B10.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B10.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.VAA.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.VAA.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.Fmask.tif",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.Fmask.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B11.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.SZA.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B06.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B05.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B02.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B07.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B04.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.VZA.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B09.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B03.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B01.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.SAA.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.B10.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.VAA.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/s3#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.Fmask.tif"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/metadata#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0_stac.json (EXTENDED METADATA)",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-public/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0_stac.json"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/metadata#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.cmr.xml (EXTENDED METADATA)",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.cmr.xml"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/metadata#",
+        "title": "This link provides direct download access via S3 to the granule (EXTENDED METADATA)",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-public/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0_stac.json"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/metadata#",
+        "title": "This link provides direct download access via S3 to the granule (EXTENDED METADATA)",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-protected/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.cmr.xml"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/metadata#",
+        "title": "api endpoint to retrieve temporary credentials valid for same-region direct s3 access (VIEW RELATED INFORMATION)",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/s3credentials"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/browse#",
+        "title": "Download HLS.L30.T44SLG.2025157T052207.v2.0.jpg",
+        "hreflang": "en-US",
+        "href": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-public/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.jpg"
+      },
+      {
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/browse#",
+        "title": "This link provides direct download access via S3 to the granule",
+        "hreflang": "en-US",
+        "href": "s3://lp-prod-public/HLSL30.020/HLS.L30.T44SLG.2025157T052207.v2.0/HLS.L30.T44SLG.2025157T052207.v2.0.jpg"
+      },
+      {
+        "inherited": true,
+        "length": "20MB",
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "hreflang": "en-US",
+        "href": "https://search.earthdata.nasa.gov/search/granules?p=C2021957657-LPCLOUD"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/metadata#",
+        "hreflang": "en-US",
+        "href": "https://doi.org/10.5067/HLS/HLSL30.002"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/metadata#",
+        "hreflang": "en-US",
+        "href": "https://www.earthdata.nasa.gov/centers/lp-daac"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/documentation#",
+        "hreflang": "en-US",
+        "href": "https://lpdaac.usgs.gov/documents/1698/HLS_User_Guide_V2.pdf"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/documentation#",
+        "hreflang": "en-US",
+        "href": "https://lpdaac.usgs.gov/documents/769/HLS_ATBD_V15_provisional.pdf"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/documentation#",
+        "hreflang": "en-US",
+        "href": "https://lpdaac.usgs.gov/documents/1117/HLS_Quick_Guide_v02.pdf"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/documentation#",
+        "hreflang": "en-US",
+        "href": "https://github.com/nasa/HLS-Data-Resources/blob/main/python/tutorials/HLS_Tutorial.ipynb"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/documentation#",
+        "hreflang": "en-US",
+        "href": "https://github.com/nasa/HLS-Data-Resources/tree/main/python/scripts/HLS_SuPER"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/documentation#",
+        "hreflang": "en-US",
+        "href": "https://github.com/nasa/HLS-Data-Resources/tree/main/bash/hls-bulk-download"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/documentation#",
+        "hreflang": "en-US",
+        "href": "https://github.com/nasa/HLS-Data-Resources/blob/main/r/HLS_Tutorial.Rmd"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/data#",
+        "hreflang": "en-US",
+        "href": "https://appeears.earthdatacloud.nasa.gov/"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/documentation#",
+        "hreflang": "en-US",
+        "href": "https://lpdaac.usgs.gov/documents/2434/HLS_v2.0_L30_known_issues_April2026.pdf"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/documentation#",
+        "hreflang": "en-US",
+        "href": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=897"
+      },
+      {
+        "inherited": true,
+        "rel": "http://esipfed.org/ns/fedsearch/1.1/documentation#",
+        "hreflang": "en-US",
+        "href": "https://database.eohandbook.com/database/instrumentsummary.aspx?instrumentID=1769"
+      }
+    ]
+  },
+  "imageQuery": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=HLS_L30_Nadir_BRDF_Adjusted_Reflectance&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A4326&BBOX=79.20059924276036%2C37.155545329500534%2C79.38106675723965%2C37.26334267049946&WIDTH=640&HEIGHT=480&TIME=2025-06-06&TRANSPARENT=TRUE",
+  "bbox": [
+    79.20059924276036,
+    37.155545329500534,
+    79.38106675723965,
+    37.26334267049946
+  ],
+  "coverage": 1.0,
+  "sha256": "e4109f9927ef2914ca98db22d8766b61e3e3142294a75cdcc0487336732d486a"
+}

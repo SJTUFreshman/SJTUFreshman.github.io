@@ -1,0 +1,151 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "460200": {
+      "label": {
+        "en": "Sanya",
+        "zh-CN": "三亚市",
+        "zh-TW": "三亞市"
+      },
+      "description": {
+        "en": "Sanya is a resort city and the southernmost city on Hainan Island, and one of the four prefecture-level cities of Hainan Province in South China. It is a major tourist destination with several large scale resorts and contains the Sanya coral reef, a national protected nature reserve spanning 4000 hectares.",
+        "zh-CN": "三亚市，简称崖，行政中心东迁之前曾称崖州、崖县，是中华人民共和国海南省下辖的一个享黎族自治待遇的非民族区域自治地级市，位于海南岛的最南端。北接保亭黎族苗族自治县，南临三沙市，西北和东北分别和乐东黎族自治县和陵水黎族自治县接壤。",
+        "zh-TW": "三亞市，簡稱崖，行政中心東遷之前曾稱崖州、崖縣，是中華人民共和國海南省下轄的一個享黎族自治待遇的非民族區域自治地級市，位於海南島的最南端。北接保亭黎族苗族自治縣，南臨三沙市，西北和東北分別和樂東黎族自治縣和陵水黎族自治縣接壤。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%B8%89%E4%BA%9A%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%B8%89%E4%BA%9A%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Sanya"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        109.50361111,
+        18.25333333
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/9f17609b1f93570a.webp",
+        "credit": "Hostage820 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Haishangguanyin.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Guan Yin of the South Sea of Sanya — in Sanya, Hainan Province, Southeast China..",
+        "place": "南山寺 (三亚)",
+        "originalFile": "Haishangguanyin.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:460200:94240ccb",
+      "urbanFocus": {
+        "label": {
+          "en": "Sanya",
+          "zh-CN": "三亚市",
+          "zh-TW": "三亞市"
+        },
+        "lngLat": [
+          109.50361111111111,
+          18.253333333333334
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Sanya.",
+          "zh-CN": "以三亚市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以三亞市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q319804#P625",
+        "source": "https://www.wikidata.org/wiki/Q319804",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q319804#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.78
+        }
+      }
+    },
+    "poi:admin:460200:94240ccb": {
+      "label": {
+        "en": "Nanshan Temple (Sanya)",
+        "zh-CN": "南山寺 (三亚)",
+        "zh-TW": "南山寺 (三亞)"
+      },
+      "description": {
+        "en": "Nanshan Temple is a Buddhist temple located in Sanya, Hainan.",
+        "zh-CN": "南山寺是一个佛寺，位于中国海南省三亚市 。其名称源于“福如东海，寿比南山”。",
+        "zh-TW": "南山寺是一個佛寺，位於中國海南省三亞市 。其名稱源於“福如東海，壽比南山”。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%8D%97%E5%B1%B1%E5%AF%BA_(%E4%B8%89%E4%BA%9A)",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%8D%97%E5%B1%B1%E5%AF%BA_(%E4%B8%89%E4%BA%9A)",
+        "https://en.wikipedia.org/wiki/Nanshan_Temple_(Sanya)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        109.206161,
+        18.304336
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Nanshan_Temple_(Sanya)",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "460200",
+      "photo": {
+        "src": "assets/maps/administrative/photos/9f17609b1f93570a.webp",
+        "credit": "Hostage820 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Haishangguanyin.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Guan Yin of the South Sea of Sanya — in Sanya, Hainan Province, Southeast China..",
+        "place": "南山寺 (三亚)",
+        "originalFile": "Haishangguanyin.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:460200:photo-55882330": {
+      "label": {
+        "en": "Sanya landscape view",
+        "zh-CN": "三亚河东路上",
+        "zh-TW": "三亞河東路上"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Sanya, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现三亚市城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現三亞市城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%89%E4%BA%9A%E6%B2%B3%E4%B8%9C%E8%B7%AF%E4%B8%8A_-_panoramio.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E4%B8%89%E4%BA%9A%E6%B2%B3%E4%B8%9C%E8%B7%AF%E4%B8%8A_-_panoramio.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/50dad916246f1c74.webp",
+        "credit": "江上清风1961 · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%89%E4%BA%9A%E6%B2%B3%E4%B8%9C%E8%B7%AF%E4%B8%8A_-_panoramio.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "三亚河东路上",
+        "place": "三亚河东路上 - panoramio.jpg",
+        "originalFile": "三亚河东路上 - panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            109.502213,
+            18.253073
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E4%B8%89%E4%BA%9A%E6%B2%B3%E4%B8%9C%E8%B7%AF%E4%B8%8A_-_panoramio.jpg"
+        }
+      },
+      "lngLat": [
+        109.502213,
+        18.253073
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E4%B8%89%E4%BA%9A%E6%B2%B3%E4%B8%9C%E8%B7%AF%E4%B8%8A_-_panoramio.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "460200"
+    }
+  }
+}

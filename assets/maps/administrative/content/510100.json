@@ -1,0 +1,252 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "510100": {
+      "label": {
+        "en": "Chengdu",
+        "zh-CN": "成都市",
+        "zh-TW": "成都市"
+      },
+      "description": {
+        "en": "Chengdu is the capital city of the Chinese province of Sichuan. With a population of 20,937,757 at the 2020 census, it is the country's fourth most populous city and the only city with a population of over 20 million apart from provincial-level municipalities.",
+        "zh-CN": "成都市，别称“蓉城”、“锦官城”、“锦城”，简称“蓉”、“锦”，是中国四川省的省会、副省级市，地处四川盆地西部的成都平原腹地。为中国西部地区物流、商贸、金融、科技、文化、教育中心及交通、通信枢纽，也是中国人民解放军西部战区联合作战指挥中心所在地，国家统筹城乡综合配套改革试验区。",
+        "zh-TW": "成都市，別稱“蓉城”、“錦官城”、“錦城”，簡稱“蓉”、“錦”，是中國四川省的省會、副省級市，地處四川盆地西部的成都平原腹地。爲中國西部地區物流、商貿、金融、科技、文化、教育中心及交通、通信樞紐，也是中國人民解放軍西部戰區聯合作戰指揮中心所在地，國家統籌城鄉綜合配套改革試驗區。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%88%90%E9%83%BD%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%88%90%E9%83%BD%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Chengdu"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        104.06333333,
+        30.66
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/d8c31616b3552da1.webp",
+        "credit": "Shizhao · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%AD%A6%E4%BE%AF%E7%A5%A0.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​成都武侯祠",
+        "place": "成都武侯祠",
+        "originalFile": "武侯祠.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:510100:300d2ae1",
+      "urbanFocus": {
+        "label": {
+          "en": "Chengdu",
+          "zh-CN": "成都市",
+          "zh-TW": "成都市"
+        },
+        "lngLat": [
+          104.06333333333333,
+          30.66
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Chengdu.",
+          "zh-CN": "以成都市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以成都市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q30002#P625",
+        "source": "https://www.wikidata.org/wiki/Q30002",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q30002#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.24
+        }
+      }
+    },
+    "poi:510100:1": {
+      "label": {
+        "en": "Dujiangyan",
+        "zh-CN": "都江堰",
+        "zh-TW": "都江堰"
+      },
+      "description": {
+        "en": "The Dujiangyan is an ancient hydraulic engineering system in Dujiangyan City, Sichuan, China. Originally constructed around 256 BC by the State of Qin as an irrigation and flood control project, it is still in use today.",
+        "zh-CN": "都江堰是中国古代建设并使用至今的大型水利工程，位于四川省都江堰市城西，岷江上游340公里处。据《史记·河渠书》、《汉书·沟洫志》记载，都江堰是由战国时期秦国蜀郡郡守李冰及其子于约前256年至前251年主持始建，另有一说法是古蜀国开明王朝期间所建。",
+        "zh-TW": "都江堰是中國古代建設並使用至今的大型水利工程，位於四川省都江堰市城西，岷江上游340公里處。據《史記·河渠書》、《漢書·溝洫志》記載，都江堰是由戰國時期秦國蜀郡郡守李冰及其子於約前256年至前251年主持始建，另有一說法是古蜀國開明王朝期間所建。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%83%BD%E6%B1%9F%E5%A0%B0",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%83%BD%E6%B1%9F%E5%A0%B0",
+        "https://en.wikipedia.org/wiki/Dujiangyan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        103.60527778,
+        31.00166667
+      ],
+      "parentCity": "510100",
+      "photo": {
+        "src": "assets/maps/regions/photos/d07b4a866523c1e8.webp",
+        "credit": "xiquinhosilva · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:36661-Dujiangyan_(44634340644).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "36661-Dujiangyan",
+        "place": "都江堰",
+        "originalFile": "36661-Dujiangyan_(44634340644).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:510100:2": {
+      "label": {
+        "en": "Mount Qingcheng",
+        "zh-CN": "青城山",
+        "zh-TW": "青城山"
+      },
+      "description": {
+        "en": "Mount Qingcheng is a sacred Taoist mountain in Dujiangyan, Chengdu, Sichuan, China. It is considered one of the birthplaces of Taoism and one of the most important Taoist religious sites in China.",
+        "zh-CN": "青城山为中国道教发源地之一，属道教名山之一。位于四川省成都市都江堰市西南，古称「丈人山」，东距成都市68公里，处于都江堰水利工程西南10公里处。",
+        "zh-TW": "青城山爲中國道教發源地之一，屬道教名山之一。位於四川省成都市都江堰市西南，古稱「丈人山」，東距成都市68公里，處於都江堰水利工程西南10公里處。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9D%92%E5%9F%8E%E5%B1%B1",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9D%92%E5%9F%8E%E5%B1%B1",
+        "https://en.wikipedia.org/wiki/Mount_Qingcheng"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        103.5577829,
+        30.910499
+      ],
+      "parentCity": "510100",
+      "photo": {
+        "src": "assets/maps/regions/photos/b99c069ad31e017b.webp",
+        "credit": "中国郑开亮 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%9B%9B%E5%B7%9D%E9%9D%92%E5%9F%8E%E5%B1%B1_-_panoramio.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "四川青城山",
+        "place": "青城山",
+        "originalFile": "四川青城山_-_panoramio.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:510100:300d2ae1": {
+      "label": {
+        "en": "Wuhou Shrine, Chengdu",
+        "zh-CN": "成都武侯祠",
+        "zh-TW": "成都武侯祠"
+      },
+      "description": {
+        "en": "The Wuhou Shrine, also known as the Wuhou Temple or Wuhouci , is a shrine in Chengdu. The site contains the Han Zhaolie Temple , which commemorates Liu Bei , the founding emperor of Shu Han, and the Wuhou Shrine proper, which is dedicated to Zhuge Liang , the state's prime minister.",
+        "zh-CN": "成都武侯祠位于中华人民共和国四川省成都市武侯区浆洗街街道武侯祠大街231号，是中国唯一的君臣合祀祠庙，由武侯祠、汉昭烈庙及惠陵组成，人们习惯将三者统称为武侯祠。成都武侯祠始建于公元223年修建惠陵之时，其中武侯祠建于唐以前，初与祭祀刘备的汉昭烈庙相邻，明朝初年重建时将武侯祠并入，形成了君臣合祀，祠堂与陵园合一的格局。",
+        "zh-TW": "成都武侯祠位於中華人民共和國四川省成都市武侯區漿洗街街道武侯祠大街231號，是中國唯一的君臣合祀祠廟，由武侯祠、漢昭烈廟及惠陵組成，人們習慣將三者統稱爲武侯祠。成都武侯祠始建於公元223年修建惠陵之時，其中武侯祠建於唐以前，初與祭祀劉備的漢昭烈廟相鄰，明朝初年重建時將武侯祠併入，形成了君臣合祀，祠堂與陵園合一的格局。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%88%90%E9%83%BD%E6%AD%A6%E4%BE%AF%E7%A5%A0",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%88%90%E9%83%BD%E6%AD%A6%E4%BE%AF%E7%A5%A0",
+        "https://en.wikipedia.org/wiki/Wuhou_Shrine,_Chengdu"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        104.04702778,
+        30.64830556
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%88%90%E9%83%BD%E6%AD%A6%E4%BE%AF%E7%A5%A0",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/d8c31616b3552da1.webp",
+        "credit": "Shizhao · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%AD%A6%E4%BE%AF%E7%A5%A0.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​成都武侯祠",
+        "place": "成都武侯祠",
+        "originalFile": "武侯祠.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:510100:c196f421": {
+      "label": {
+        "en": "Du Fu Thatched Cottage",
+        "zh-CN": "杜甫草堂",
+        "zh-TW": "杜甫草堂"
+      },
+      "description": {
+        "en": "Du Fu Thatched Cottage is a 24-acre park and museum in honour of the Tang dynasty poet Du Fu at the western outskirts of Chengdu, adjacent to the Huanhua Xi . In 1961 the Chinese government made the cottage a National Heritage site.",
+        "zh-CN": "杜甫草堂，又名杜甫草堂博物馆，位于中华人民共和国四川省成都市青羊区草堂街道青华路38号，浣花溪公园旁，占地24公顷居住于。1961年3月4日公布为第一批全国重点文物保护单位，2006年12月被中国国家旅游局评为国家4A级旅游景区。",
+        "zh-TW": "杜甫草堂，又名杜甫草堂博物館，位於中華人民共和國四川省成都市青羊區草堂街道青華路38號，浣花溪公園旁，佔地24公頃居住於。1961年3月4日公佈為第一批全國重點文物保護單位，2006年12月被中國國家旅遊局評爲國家4A級旅遊景區。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9D%9C%E7%94%AB%E8%8D%89%E5%A0%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%9C%E7%94%AB%E8%8D%89%E5%A0%82",
+        "https://en.wikipedia.org/wiki/Du_Fu_Thatched_Cottage"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        104.02611111,
+        30.66277778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Du_Fu_Thatched_Cottage",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/9ae7a43981d84538.webp",
+        "credit": "User:唐戈 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Du_Fu_cao_tang.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "alt": "成都杜甫草堂；The Thatched Cottage of Du Fu in Chengdu",
+        "place": "杜甫草堂",
+        "originalFile": "Du_Fu_cao_tang.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:510100:8a7dd84e": {
+      "label": {
+        "en": "Wangjiang Tower",
+        "zh-CN": "望江楼",
+        "zh-TW": "望江樓"
+      },
+      "description": {
+        "en": "Wangjiang Tower stands in Wangjianglou Park in Chengdu and was built in 1893. The timber tower rises almost 28 metres beneath an octagonal glazed-tile roof.",
+        "zh-CN": "望江楼，原名崇丽阁，位于四川省成都市武侯区望江楼公园内，建于清光绪十九年。木构四重檐八角琉璃瓦攒尖顶，通高27.98米。",
+        "zh-TW": "望江樓，原名崇麗閣，位於四川省成都市武侯區望江樓公園內，建於清光緒十九年。木構四重檐八角琉璃瓦攢尖頂，通高27.98米。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9C%9B%E6%B1%9F%E6%A5%BC",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9C%9B%E6%B1%9F%E6%A5%BC"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        104.09111111,
+        30.63277778
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%9C%9B%E6%B1%9F%E6%A5%BC",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "510100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/4ee9be76ae1e978c.webp",
+        "credit": "AlexHe34 · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Wangjianglou-Tower.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "The Wangjianglou Tower, Chengdu",
+        "place": "望江楼",
+        "originalFile": "Wangjianglou-Tower.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

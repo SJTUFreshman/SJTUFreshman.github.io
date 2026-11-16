@@ -1,0 +1,253 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "130800": {
+      "label": {
+        "en": "Chengde",
+        "zh-CN": "承德市",
+        "zh-TW": "承德市"
+      },
+      "description": {
+        "en": "Chengde, formerly known as Jehol and Rehe, is a prefecture-level city in Hebei province, situated about 225 kilometres northeast of Beijing. It is best known as the site of the Mountain Resort, a vast imperial garden and palace formerly used by the Qing emperors as summer residence.",
+        "zh-CN": "承德市，简称承，旧称热河，是中华人民共和国河北省下辖的地级市，位于河北省东北部。市境南邻天津市、唐山市、秦皇岛市，东接辽宁省朝阳市，东北与内蒙古自治区赤峰市毗邻，西北达内蒙古自治区锡林郭勒盟，西界张家口市，西南与北京市接壤。",
+        "zh-TW": "承德市，簡稱承，舊稱熱河，是中華人民共和國河北省下轄的地級市，位於河北省東北部。市境南鄰天津市、唐山市、秦皇島市，東接遼寧省朝陽市，東北與內蒙古自治區赤峯市毗鄰，西北達內蒙古自治區錫林郭勒盟，西界張家口市，西南與北京市接壤。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%89%BF%E5%BE%B7%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%89%BF%E5%BE%B7%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Chengde"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        117.963,
+        40.953
+      ],
+      "photo": {
+        "src": "assets/maps/regions/photos/e44f186ce4b71202.webp",
+        "credit": "xiquinhosilva · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chengde_Mountain_Resort_22630-Chengde_(42954495010).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Xiahu Lake is at the Mountain Resort in Chengde, a large complex of imperial palaces and gardens situated in the city of Chengde in Hebei, China, culmination of all the variety of gardens, pagodas, temples and palaces from various regions of China.",
+        "place": "承德避暑山庄及其周围寺庙",
+        "originalFile": "Chengde_Mountain_Resort_22630-Chengde_(42954495010).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:130800:1",
+      "urbanFocus": {
+        "label": {
+          "en": "Chengde",
+          "zh-CN": "承德市",
+          "zh-TW": "承德市"
+        },
+        "lngLat": [
+          117.93222222222,
+          40.973888888889
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Chengde.",
+          "zh-CN": "以承德市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以承德市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q58675#P625",
+        "source": "https://www.wikidata.org/wiki/Q58675",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q58675#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.64
+        }
+      }
+    },
+    "poi:130800:1": {
+      "label": {
+        "en": "Chengde Mountain Resort",
+        "zh-CN": "承德避暑山庄",
+        "zh-TW": "承德避暑山莊"
+      },
+      "description": {
+        "en": "Chengde Mountain Resort is a large complex of imperial palaces and gardens situated in the Shuangqiao District of Chengde in northeastern Hebei province, northern China, about 225 kilometres northeast of China's capital Beijing. This resort was frequently used as a summer vacation place before the Kuomintang Chinese Taipei.",
+        "zh-CN": "承德避暑山庄及其周围寺庙是被联合国教科文组织评定为世界遗产时使用的登录名称。其中的避暑山庄又称“热河行宫”，是中国清朝的夏宫及现存最大的皇家园林，位于中国河北省承德市双桥区。",
+        "zh-TW": "承德避暑山莊及其周圍寺廟是被聯合國教科文組織評定爲世界遺產時使用的登錄名稱。其中的避暑山莊又稱“熱河行宮”，是中國清朝的夏宮及現存最大的皇家園林，位於中國河北省承德市雙橋區。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%89%BF%E5%BE%B7%E9%81%BF%E6%9A%91%E5%B1%B1%E5%BA%84%E5%8F%8A%E5%85%B6%E5%91%A8%E5%9B%B4%E5%AF%BA%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%89%BF%E5%BE%B7%E9%81%BF%E6%9A%91%E5%B1%B1%E5%BA%84%E5%8F%8A%E5%85%B6%E5%91%A8%E5%9B%B4%E5%AF%BA%E5%BA%99",
+        "https://en.wikipedia.org/wiki/Chengde_Mountain_Resort"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        117.9375,
+        40.9875
+      ],
+      "parentCity": "130800",
+      "photo": {
+        "src": "assets/maps/regions/photos/e44f186ce4b71202.webp",
+        "credit": "xiquinhosilva · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chengde_Mountain_Resort_22630-Chengde_(42954495010).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Xiahu Lake is at the Mountain Resort in Chengde, a large complex of imperial palaces and gardens situated in the city of Chengde in Hebei, China, culmination of all the variety of gardens, pagodas, temples and palaces from various regions of China.",
+        "place": "承德避暑山庄及其周围寺庙",
+        "originalFile": "Chengde_Mountain_Resort_22630-Chengde_(42954495010).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:130800:2": {
+      "label": {
+        "en": "Putuo Zongcheng Temple",
+        "zh-CN": "普陀宗乘之庙",
+        "zh-TW": "普陀宗乘之廟"
+      },
+      "description": {
+        "en": "The Putuo Zongcheng Temple of Chengde, Hebei, China is a Buddhist temple complex built between 1767 and 1771. It is located near the Chengde Mountain Resort, which is south of the Putuo Zongcheng.",
+        "zh-CN": "普陀宗乘之庙，俗称小布达拉宫，位于河北省承德市双桥区，是一座藏传佛教格鲁派寺院，为“外八庙”之一。",
+        "zh-TW": "普陀宗乘之廟，俗稱小布達拉宮，位於河北省承德市雙橋區，是一座藏傳佛教格魯派寺院，爲“外八廟”之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%99%AE%E9%99%80%E5%AE%97%E4%B9%98%E4%B9%8B%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%99%AE%E9%99%80%E5%AE%97%E4%B9%98%E4%B9%8B%E5%BA%99",
+        "https://en.wikipedia.org/wiki/Putuo_Zongcheng_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "landmark",
+      "lngLat": [
+        117.928,
+        41.0125
+      ],
+      "parentCity": "130800",
+      "photo": {
+        "src": "assets/maps/regions/photos/dbc1e29cbfb4cc23.webp",
+        "credit": "Gisling · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Putuo_Zongcheng_Temple.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Birds eye view of Putuo Zongcheng Temple at Chengde, China, a UNESCO world heritage site. The temple complex was built between 1767 and 1771, during the reign of the Qianlong Emperor.",
+        "place": "普陀宗乘之庙",
+        "originalFile": "Putuo_Zongcheng_Temple.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:130800:5032628b": {
+      "label": {
+        "en": "Chengde Mountain Resort",
+        "zh-CN": "承德避暑山庄及其周围寺庙",
+        "zh-TW": "承德避暑山莊及其周圍寺廟"
+      },
+      "description": {
+        "en": "Chengde Mountain Resort is a large complex of imperial palaces and gardens situated in the Shuangqiao District of Chengde in northeastern Hebei province, northern China, about 225 kilometres northeast of China's capital Beijing. This resort was frequently used as a summer vacation place before the Kuomintang Chinese Taipei.",
+        "zh-CN": "承德避暑山庄及其周围寺庙是被联合国教科文组织评定为世界遗产时使用的登录名称。其中的避暑山庄又称“热河行宫”，是中国清朝的夏宫及现存最大的皇家园林，位于中国河北省承德市双桥区。",
+        "zh-TW": "承德避暑山莊及其周圍寺廟是被聯合國教科文組織評定爲世界遺產時使用的登錄名稱。其中的避暑山莊又稱“熱河行宮”，是中國清朝的夏宮及現存最大的皇家園林，位於中國河北省承德市雙橋區。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%89%BF%E5%BE%B7%E9%81%BF%E6%9A%91%E5%B1%B1%E5%BA%84%E5%8F%8A%E5%85%B6%E5%91%A8%E5%9B%B4%E5%AF%BA%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%89%BF%E5%BE%B7%E9%81%BF%E6%9A%91%E5%B1%B1%E5%BA%84%E5%8F%8A%E5%85%B6%E5%91%A8%E5%9B%B4%E5%AF%BA%E5%BA%99",
+        "https://en.wikipedia.org/wiki/Chengde_Mountain_Resort"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        117.9375,
+        40.9875
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Chengde_Mountain_Resort",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "130800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e44f186ce4b71202.webp",
+        "credit": "xiquinhosilva · CC BY 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chengde_Mountain_Resort_22630-Chengde_(42954495010).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "alt": "Xiahu Lake is at the Mountain Resort in Chengde, a large complex of imperial palaces and gardens situated in the city of Chengde in Hebei, China, culmination of all the variety of gardens, pagodas, temples and palaces from various regions of China.",
+        "place": "承德避暑山庄及其周围寺庙",
+        "originalFile": "Chengde_Mountain_Resort_22630-Chengde_(42954495010).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:130800:7d69bc11": {
+      "label": {
+        "en": "Putuo Zongcheng Temple",
+        "zh-CN": "普陀宗乘之庙",
+        "zh-TW": "普陀宗乘之廟"
+      },
+      "description": {
+        "en": "The Putuo Zongcheng Temple of Chengde, Hebei, China is a Buddhist temple complex built between 1767 and 1771. It is located near the Chengde Mountain Resort, which is south of the Putuo Zongcheng.",
+        "zh-CN": "普陀宗乘之庙，俗称小布达拉宫，位于河北省承德市双桥区，是一座藏传佛教格鲁派寺院，为“外八庙”之一。",
+        "zh-TW": "普陀宗乘之廟，俗稱小布達拉宮，位於河北省承德市雙橋區，是一座藏傳佛教格魯派寺院，爲“外八廟”之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%99%AE%E9%99%80%E5%AE%97%E4%B9%98%E4%B9%8B%E5%BA%99",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%99%AE%E9%99%80%E5%AE%97%E4%B9%98%E4%B9%8B%E5%BA%99",
+        "https://en.wikipedia.org/wiki/Putuo_Zongcheng_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        117.928,
+        41.0125
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Putuo_Zongcheng_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "130800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/dbc1e29cbfb4cc23.webp",
+        "credit": "Gisling · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Putuo_Zongcheng_Temple.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Birds eye view of Putuo Zongcheng Temple at Chengde, China, a UNESCO world heritage site. The temple complex was built between 1767 and 1771, during the reign of the Qianlong Emperor.",
+        "place": "普陀宗乘之庙",
+        "originalFile": "Putuo_Zongcheng_Temple.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:130800:000a11b3": {
+      "label": {
+        "en": "Xumi Fushou Temple",
+        "zh-CN": "须弥福寿之庙",
+        "zh-TW": "須彌福壽之廟"
+      },
+      "description": {
+        "en": "The Xumi Fushou Temple is one of the Eight Outer Temples in Chengde, Hebei, China. This Buddhist temple is in the north of the park complex of the Chengde Mountain Resort, to the east of Putuo Zongcheng Temple on the north side of a slightly upward slope hill.",
+        "zh-CN": "须弥福寿之庙，俗称班禅行宫，位于河北省承德市，是一座藏传佛教格鲁派寺院，为“外八庙”之一。1961年被列为第一批全国重点文物保护单位。",
+        "zh-TW": "須彌福壽之廟，俗稱班禪行宮，位於河北省承德市，是一座藏傳佛教格魯派寺院，爲“外八廟”之一。1961年被列爲第一批全國重點文物保護單位。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%A0%88%E5%BD%8C%E7%A6%8F%E5%A3%BD%E4%B9%8B%E5%BB%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%A0%88%E5%BD%8C%E7%A6%8F%E5%A3%BD%E4%B9%8B%E5%BB%9F",
+        "https://en.wikipedia.org/wiki/Xumi_Fushou_Temple"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        117.942696,
+        41.017858
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Xumi_Fushou_Temple",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "130800",
+      "photo": {
+        "src": "assets/maps/administrative/photos/f20f04fb8a7878af.webp",
+        "credit": "Gisling · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E9%A1%BB%E5%BC%A5%E7%A6%8F%E5%AF%BF%E4%B9%8B%E5%BA%99.JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "​须弥福寿之庙",
+        "place": "須彌福壽之廟",
+        "originalFile": "须弥福寿之庙.JPG",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

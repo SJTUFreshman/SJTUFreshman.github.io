@@ -1,0 +1,10 @@
+{
+  "poi:admin:540100:68eabcd0": {
+    "lngLat": [
+      91.13175646066799,
+      29.65290582309654
+    ],
+    "coordinateSource": "https://www.openstreetmap.org/relation/2358701",
+    "coordinateDerivation": "Centroid of the original WGS84 OSM Jokhang building footprint (relation 2358701), independently checked inside the building polygon. Raw OSM XML is archived under tools/relief-atlas/administrative/jokhang-building-osm.xml. Replaces the erroneous English Wikipedia coordinate."
+  }
+}

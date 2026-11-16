@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "654200": {
+      "label": {
+        "en": "Tacheng Prefecture",
+        "zh-CN": "塔城地区",
+        "zh-TW": "塔城地區"
+      },
+      "description": {
+        "en": "Tacheng Prefecture, also known as Tarbagatay Prefecture, is located in northern Xinjiang, People's Republic of China. It has an area of 98,824 km2 and a population of 992,444 .",
+        "zh-CN": "塔城地区是中华人民共和国新疆维吾尔自治区伊犁哈萨克自治州下辖的地区。总面积104,546.95平方公里，人口92.4万人，其中汉族占66%，哈萨克族占20%，回族占7%，蒙古族占3%。",
+        "zh-TW": "塔城地區是中華人民共和國新疆維吾爾自治區伊犁哈薩克自治州下轄的地區。總面積104,546.95平方公里，人口92.4萬人，其中漢族佔66%，哈薩克族佔20%，回族佔7%，蒙古族佔3%。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A1%94%E5%9F%8E%E5%9C%B0%E5%8C%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A1%94%E5%9F%8E%E5%9C%B0%E5%8C%BA",
+        "https://en.wikipedia.org/wiki/Tacheng_Prefecture"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        82.99,
+        46.75
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/5782c1768a9ea867.webp",
+        "credit": "HaziiDozen · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​塔尔巴哈台城遗址3",
+        "place": "塔尔巴哈台城遗址3.jpg",
+        "originalFile": "塔尔巴哈台城遗址3.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            82.994392,
+            46.739103
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg"
+        }
+      },
+      "photoReference": "poi:admin:654200:reviewed-photo-140838062",
+      "urbanFocus": {
+        "label": {
+          "en": "Tacheng Prefecture",
+          "zh-CN": "塔城地区",
+          "zh-TW": "塔城地區"
+        },
+        "lngLat": [
+          82.98134,
+          46.74591
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Tacheng Prefecture.",
+          "zh-CN": "以塔城地区的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以塔城地區的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q644863#P625",
+        "source": "https://www.wikidata.org/wiki/Q644863",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q644863#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.34
+        }
+      }
+    },
+    "poi:admin:654200:reviewed-photo-140838062": {
+      "label": {
+        "en": "Tarbagatai city remains",
+        "zh-CN": "塔尔巴哈台城遗址",
+        "zh-TW": "塔爾巴哈臺城遺址"
+      },
+      "description": {
+        "en": "Surviving earthen structures at the Tarbagatai city remains, showing the materials and form of the former fortifications.",
+        "zh-CN": "塔尔巴哈台城遗址的现场照片，保留的夯土构筑物显示了昔日城防的建筑材料与形态。",
+        "zh-TW": "塔爾巴哈臺城遺址的現場照片，保留的夯土構築物顯示了昔日城防的建築材料與形態。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial caption based on the linked photograph and its published description.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/5782c1768a9ea867.webp",
+        "credit": "HaziiDozen · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​塔尔巴哈台城遗址3",
+        "place": "塔尔巴哈台城遗址3.jpg",
+        "originalFile": "塔尔巴哈台城遗址3.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            82.994392,
+            46.739103
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg"
+        }
+      },
+      "lngLat": [
+        82.994392,
+        46.739103
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E5%A1%94%E5%B0%94%E5%B7%B4%E5%93%88%E5%8F%B0%E5%9F%8E%E9%81%97%E5%9D%803.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons photograph coordinate; not a substituted city centroid.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "654200"
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "name": "Sectional celadon / mist blue / warm sand",
+  "palette": [
+    "#7eaaa0",
+    "#99bab0",
+    "#6d9a90",
+    "#b1c8b9",
+    "#86aaa2",
+    "#a4bfaf",
+    "#799f96",
+    "#b9cebf"
+  ],
+  "unvisited_material": "#f4f1e9",
+  "backgrounds": {
+    "china": "#e3ebed",
+    "east_asia": "#e4edf0",
+    "europe_usa": "#e5e9e9",
+    "singapore": "#e4edf0",
+    "hawaii": "#e4edf0"
+  },
+  "samples": 192,
+  "province_colors": {
+    "110000": "#7eaaa0",
+    "120000": "#99bab0",
+    "130000": "#6d9a90",
+    "140000": "#b1c8b9",
+    "150000": "#86aaa2",
+    "210000": "#a4bfaf",
+    "220000": "#799f96",
+    "230000": "#b9cebf",
+    "310000": "#7eaaa0",
+    "320000": "#99bab0",
+    "330000": "#6d9a90",
+    "340000": "#b1c8b9",
+    "350000": "#86aaa2",
+    "360000": "#a4bfaf",
+    "370000": "#799f96",
+    "410000": "#b9cebf",
+    "420000": "#7eaaa0",
+    "430000": "#99bab0",
+    "440000": "#6d9a90",
+    "450000": "#b1c8b9",
+    "460000": "#86aaa2",
+    "500000": "#a4bfaf",
+    "510000": "#799f96",
+    "520000": "#b9cebf",
+    "530000": "#7eaaa0",
+    "540000": "#99bab0",
+    "610000": "#6d9a90",
+    "620000": "#b1c8b9",
+    "630000": "#86aaa2",
+    "640000": "#a4bfaf",
+    "650000": "#799f96",
+    "710000": "#b9cebf",
+    "810000": "#7eaaa0",
+    "820000": "#99bab0"
+  },
+  "map_palettes": {
+    "china": [
+      "#7eaaa0",
+      "#99bab0",
+      "#6d9a90",
+      "#b1c8b9",
+      "#86aaa2",
+      "#a4bfaf",
+      "#799f96",
+      "#b9cebf"
+    ],
+    "east_asia": [
+      "#7e9eaf",
+      "#9cb7c4",
+      "#6e8da3",
+      "#b0c4cb",
+      "#8caab9",
+      "#a5bcc7",
+      "#819bac",
+      "#b6c8cf"
+    ],
+    "europe_usa": [
+      "#d1bca0",
+      "#d9c9b3",
+      "#c5ab8e",
+      "#dfd2c0",
+      "#ccb79c",
+      "#e6dac7",
+      "#d4c3ad",
+      "#bfa587"
+    ]
+  },
+  "country_palette_indices": {
+    "USA": 0,
+    "CAN": 3,
+    "MEX": 2,
+    "GRL": 5,
+    "FRA": 0,
+    "ESP": 3,
+    "PRT": 2,
+    "DEU": 4,
+    "GBR": 6,
+    "IRL": 3,
+    "ITA": 7,
+    "CHE": 5,
+    "AUT": 1,
+    "BEL": 2,
+    "NLD": 3,
+    "POL": 0,
+    "CZE": 5,
+    "RUS": 3,
+    "NOR": 6,
+    "SWE": 0,
+    "FIN": 5
+  },
+  "palette_index_algorithm": "sha256-first-four-hex-modulo-eight",
+  "render_widths": {
+    "china": 6000,
+    "east_asia": 6000,
+    "europe_usa": 8000
+  },
+  "corridor_width_km": {
+    "rail": 30,
+    "road": 26
+  }
+}

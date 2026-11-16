@@ -1,0 +1,220 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "540100": {
+      "label": {
+        "en": "Lhasa (prefecture-level city)",
+        "zh-CN": "拉萨市",
+        "zh-TW": "拉薩市"
+      },
+      "description": {
+        "en": "Lhasa is the capital and largest city of the Tibet Autonomous Region of China. It is a prefecture-level city that covers an area of 29,274 square kilometres of rugged and sparsely populated terrain.",
+        "zh-CN": "拉萨，唐代译作逻些、逻逤、逻娑、惹萨，别称日光城，为中华人民共和国西藏自治区首府。全市下辖3个区、5个县，面积2.964万平方千米，拉萨城区海拔3,663.5米，拉萨河流经此，在南郊注入雅鲁藏布江。",
+        "zh-TW": "拉薩，唐代譯作邏些、邏逤、邏娑、惹薩，別稱日光城，爲中華人民共和國西藏自治區首府。全市下轄3個區、5個縣，面積2.964萬平方千米，拉薩城區海拔3,663.5米，拉薩河流經此，在南郊注入雅魯藏布江。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%8B%89%E8%90%A8%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%8B%89%E8%90%A8%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Lhasa_(prefecture-level_city)"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        91.1719,
+        29.6534
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/ce4aa37f9f2dbcf4.webp",
+        "credit": "Lhasa Government · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Potala_Palace_HQ.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Potala Palace in Lhasa. In the distant background: Nyangrain Subdistrict.[1]",
+        "place": "Potala Palace",
+        "originalFile": "Potala_Palace_HQ.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:540100:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Lhasa",
+          "zh-CN": "拉萨市",
+          "zh-TW": "拉薩市"
+        },
+        "lngLat": [
+          91.1408186,
+          29.6457567
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Lhasa.",
+          "zh-CN": "以拉萨市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以拉薩市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q5869#P625",
+        "source": "https://www.wikidata.org/wiki/Q5869",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q5869#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 1.83
+        }
+      }
+    },
+    "poi:admin:540100:68eabcd0": {
+      "label": {
+        "en": "Jokhang",
+        "zh-CN": "大昭寺",
+        "zh-TW": "大昭寺"
+      },
+      "description": {
+        "en": "The Jokhang , historically known as the Rasa Trulnang or Qoikang Monastery or Zuglagkang , is considered the \"heart of Lhasa\". The Jokhang consists of a Tibetan Buddhist temple, its temple complex, and a Gelug school monastery.",
+        "zh-CN": "大昭寺是藏区卫藏地区的一座藏传佛教寺院，位于中华人民共和国西藏自治区拉萨市老城区八廓街，该寺院在藏传佛教中拥有至高无上的地位。大昭寺建成后经历代重新扩建，目前占地25100余平方米。",
+        "zh-TW": "大昭寺是藏區衛藏地區的一座藏傳佛教寺院，位於中華人民共和國西藏自治區拉薩市老城區八廓街，該寺院在藏傳佛教中擁有至高無上的地位。大昭寺建成後經歷代重新擴建，目前佔地25100餘平方米。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%98%AD%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%98%AD%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Jokhang"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        91.13175646066799,
+        29.65290582309654
+      ],
+      "coordinateSource": "https://www.openstreetmap.org/relation/2358701",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "540100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a2c2bbe20bd9b243.webp",
+        "credit": "Hiroki Ogawa · CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jokhang_Temple_Lhasa_Tibet_China_%E8%A5%BF%E8%97%8F_%E6%8B%89%E8%90%A8_%E5%A4%A7%E6%98%AD%E5%AF%BA_-_panoramio_(5).jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "alt": "Jokhang Temple Lhasa Tibet China 西藏 拉萨 大昭寺",
+        "place": "大昭寺",
+        "originalFile": "Jokhang_Temple_Lhasa_Tibet_China_西藏_拉萨_大昭寺_-_panoramio_(5).jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "coordinateDerivation": "Centroid of the original WGS84 OSM Jokhang building footprint (relation 2358701), independently checked inside the building polygon. Raw OSM XML is archived under tools/relief-atlas/administrative/jokhang-building-osm.xml. Replaces the erroneous English Wikipedia coordinate."
+    },
+    "poi:admin:540100:d6e6b4ac": {
+      "label": {
+        "en": "Sera Monastery",
+        "zh-CN": "色拉寺",
+        "zh-TW": "色拉寺"
+      },
+      "description": {
+        "en": "Sera Monastery is one of the \"great three\" Gelug university monasteries of Tibet, located 1.25 miles north of Lhasa and about 5 km north of the Jokhang. The original Sera Monastery is responsible for some 19 hermitages, including four nunneries, which are all located in the foothills north of Lhasa.",
+        "zh-CN": "色拉寺位于西藏自治区拉萨市城关区娘热街道色拉乌孜山南麓，是藏传佛教格鲁派六大寺院之一，由宗喀巴的弟子“大慈法王”绛钦却杰在公元15世纪初创建。1982年，色拉寺被中华人民共和国国务院公布为第二批全国重点文物保护单位之一。",
+        "zh-TW": "色拉寺位於西藏自治區拉薩市城關區娘熱街道色拉烏孜山南麓，是藏傳佛教格魯派六大寺院之一，由宗喀巴的弟子“大慈法王”絳欽卻傑在公元15世紀初創建。1982年，色拉寺被中華人民共和國國務院公佈爲第二批全國重點文物保護單位之一。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E8%89%B2%E6%8B%89%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E8%89%B2%E6%8B%89%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Sera_Monastery"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        91.13333333,
+        29.69805556
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Sera_Monastery",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "540100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b9ee650e87ff228c.webp",
+        "credit": "Antoine Taveneaux · CC BY-SA 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Sera_Monastery4.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "alt": "Sera Monastery",
+        "place": "色拉寺",
+        "originalFile": "Sera_Monastery4.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:540100:7c6b475b": {
+      "label": {
+        "en": "Drepung Monastery",
+        "zh-CN": "哲蚌寺",
+        "zh-TW": "哲蚌寺"
+      },
+      "description": {
+        "en": "Drepung Monastery , located at the foot of Mount Gephel, is one of the \"great three\" Gelug monasteries of Tibet. The other two are Ganden Monastery and Sera Monastery.",
+        "zh-CN": "哲蚌寺，位于中国西藏自治区拉萨市城关区金珠西路街道北京西路276号。为藏传佛教格鲁派寺院，拉萨“三大寺”之一，全名吉祥米聚十方尊胜洲。",
+        "zh-TW": "哲蚌寺，位於中國西藏自治區拉薩市城關區金珠西路街道北京西路276號。爲藏傳佛教格魯派寺院，拉薩“三大寺”之一，全名吉祥米聚十方尊勝洲。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%93%B2%E8%9A%8C%E5%AF%BA",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%93%B2%E8%9A%8C%E5%AF%BA",
+        "https://en.wikipedia.org/wiki/Drepung_Monastery"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        91.0475,
+        29.67638889
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Drepung_Monastery",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "540100",
+      "photo": {
+        "src": "assets/maps/administrative/photos/3a6a63110fb0e2a6.webp",
+        "credit": "Nat Krause · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:%E0%BD%A0%E0%BD%96%E0%BE%B2%E0%BD%A6%E0%BC%8B%E0%BD%A6%E0%BE%A4%E0%BD%B4%E0%BD%84%E0%BD%A6%E0%BC%8B.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:%E0%BD%A0%E0%BD%96%E0%BE%B2%E0%BD%A6%E0%BC%8B%E0%BD%A6%E0%BE%A4%E0%BD%B4%E0%BD%84%E0%BD%A6%E0%BC%8B.jpg#Licensing",
+        "alt": "View of Tibet's Drepung ('Bras-spungs, Zhaibung) Monastery, on the outskirts of Lhasa, and the surrounding mountains. Prior to the modern exile period, the Drepung Monastery was closely associated with the Dalai Lama.",
+        "place": "哲蚌寺",
+        "originalFile": "འབྲས་སྤུངས་.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:540100:urban": {
+      "id": "poi:admin:540100:urban",
+      "label": {
+        "en": "Potala Palace",
+        "zh-CN": "布达拉宫",
+        "zh-TW": "布達拉宮"
+      },
+      "description": {
+        "en": "Potala Palace is a museum complex in Lhasa, the capital of the Tibet Autonomous Region of China. It was formerly the winter palace of the Dalai Lamas, and from 1649 until 1959 served as the Dalai Lamas' residence.",
+        "zh-CN": "布达拉宫坐落在中华人民共和国西藏自治区首府拉萨市区西北的玛布日山上，是一座规模宏大的宫殿式建筑群，最初是吐蕃王朝第三十三代藏王赞普松赞干布兴建。于17世纪重建后，成为历代达赖喇嘛的冬宫居所，为西藏政教合一的统治中心。",
+        "zh-TW": "布達拉宮坐落在中華人民共和國西藏自治區首府拉薩市區西北的瑪布日山上，是一座規模宏大的宮殿式建築羣，最初是吐蕃王朝第三十三代藏王贊普松贊干布興建。於17世紀重建後，成爲歷代達賴喇嘛的冬宮居所，為西藏政教合一的統治中心。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%B8%83%E8%BE%BE%E6%8B%89%E5%AE%AB",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%B8%83%E8%BE%BE%E6%8B%89%E5%AE%AB",
+        "https://en.wikipedia.org/wiki/Potala_Palace"
+      ],
+      "textLicense": "CC BY-SA 4.0; adapted excerpts",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/ce4aa37f9f2dbcf4.webp",
+        "credit": "Lhasa Government · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Potala_Palace_HQ.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Potala Palace in Lhasa. In the distant background: Nyangrain Subdistrict.[1]",
+        "place": "Potala Palace",
+        "originalFile": "Potala_Palace_HQ.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        91.11694444,
+        29.65777778
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Potala_Palace",
+      "kind": "landmark",
+      "parentCity": "540100"
+    }
+  }
+}

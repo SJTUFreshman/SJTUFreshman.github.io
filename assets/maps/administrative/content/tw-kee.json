@@ -1,0 +1,177 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "TW-KEE": {
+      "label": {
+        "en": "Keelung",
+        "zh-CN": "基隆市",
+        "zh-TW": "基隆市"
+      },
+      "description": {
+        "en": "Keelung , Chilung or Jilong , officially known as Keelung City, is a major port city in northeastern Taiwan. The city is part of the Taipei–Keelung metropolitan area with neighboring New Taipei City and Taipei.",
+        "zh-CN": "基隆市是中华台北台湾省的市，位于台湾东北部，古名鸡笼，以谷湾之天然港湾著名，乃台湾最北端的都市，位于市中心的基隆港则是北台湾首要航运枢纽，因而有台湾头、台湾北玄关之称，亦因气候多雨别称雨港、雨都，与高雄并列为台湾两大港市。全市划分为7个区，人口逾36万人；辖内95%土地为丘陵地，东、西、南三面环山与新北市相邻，仅北面之环港区域有少量平地与东海毗邻、南面沿基隆河有狭窄的河谷地可供发展。",
+        "zh-TW": "基隆市是中華臺北臺灣省的市，位於臺灣東北部，古名雞籠，以谷灣之天然港灣著名，乃臺灣最北端的都市，位於市中心的基隆港則是北臺灣首要航運樞紐，因而有臺灣頭、臺灣北玄關之稱，亦因氣候多雨別稱雨港、雨都，與高雄並列為臺灣兩大港市。全市劃分為7個區，人口逾36萬人；轄內95%土地為丘陵地，東、西、南三面環山與新北市相鄰，僅北面之環港區域有少量平地與東海毗鄰、南面沿基隆河有狹窄的河谷地可供發展。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9F%BA%E9%9A%86%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9F%BA%E9%9A%86%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Keelung"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "extension",
+      "lngLat": [
+        121.73333333,
+        25.13333333
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/e76befedf3ce2d7b.webp",
+        "credit": "This Photo was taken by Supanut Arunoprayote. Feel free to use any of my images, but please mention me as the author and may send me a message. (สามารถใช้ภาพได้อิสระ แต่กรุณาใส่เครดิตผู้ถ่ายและอาจส่งข้อความบอกกล่าวด้วย) Please do not upload an updated image here without consultation with the Author. The author would like to make corrections only at his own source. This ensures that the changes are preserved.Please if you think that any changes should be required, please inform the author.Otherwise you can upload a new image with a new name. Please use one of the templates derivative or extract. · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Heping_Island_Park_07.23.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "Heping Island Park (和平島公園) is a park in Heping Island, Zhongzheng District, Keelung, Taiwan.",
+        "place": "Heping Island Park",
+        "originalFile": "Heping_Island_Park_07.23.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:TW-KEE:urban",
+      "urbanFocus": {
+        "label": {
+          "en": "Keelung",
+          "zh-CN": "基隆市",
+          "zh-TW": "基隆市"
+        },
+        "lngLat": [
+          121.7419,
+          25.12825
+        ],
+        "kind": "principal-settlement",
+        "definition": {
+          "en": "A 16 km landscape window around Keelung.",
+          "zh-CN": "以基隆市为中心，展示周边约16公里宽的主要聚落与地形。",
+          "zh-TW": "以基隆市爲中心，展示周邊約16公里寬的主要聚落與地形。"
+        },
+        "extentKm": 16,
+        "coordinateSystem": "WGS84",
+        "source": "https://www.wikidata.org/wiki/Q249996",
+        "coordinateSource": "https://www.wikidata.org/wiki/Q249996#P625",
+        "selectionSource": "https://zh.wikipedia.org/wiki/%E5%9F%BA%E9%9A%86%E5%B8%82"
+      }
+    },
+    "poi:admin:TW-KEE:b663b4cf": {
+      "label": {
+        "en": "Keelung Miaokou Night Market",
+        "zh-CN": "基隆庙口",
+        "zh-TW": "基隆廟口"
+      },
+      "description": {
+        "en": "The Keelung MiaoKou Night Market, is often referred to simply as MiaoKou by locals, is a night market and marketplace in Ren-ai District, Keelung, Taiwan. In 2021, Tatler ranked it among the 20 best-known food markets internationally.",
+        "zh-CN": "基隆庙口是位于台湾基隆市仁爱区的小吃市集，以仁三路上的奠济宫为中心聚集，是全台湾最著名的夜市之一。全天24小时皆有店家在此营业，每到晚间夜市时段时更为热闹，所以也称为庙口夜市。",
+        "zh-TW": "基隆廟口是位於臺灣基隆市仁愛區的小喫市集，以仁三路上的奠濟宮為中心聚集，是全臺灣最著名的夜市之一。全天24小時皆有店家在此營業，每到晚間夜市時段時更為熱鬧，所以也稱為廟口夜市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%9F%BA%E9%9A%86%E5%BB%9F%E5%8F%A3",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%9F%BA%E9%9A%86%E5%BB%9F%E5%8F%A3",
+        "https://en.wikipedia.org/wiki/Keelung_Miaokou_Night_Market"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.74319444,
+        25.12861111
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Keelung_Miaokou_Night_Market",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-KEE",
+      "photo": {
+        "src": "assets/maps/administrative/photos/12513a4d975ee4c5.webp",
+        "credit": "中華臺北總統府 · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2026.03.27_Keelung_Miaokou_Night_Market.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "​2026年3月27日，中華臺北副總統蕭美琴參訪基隆廟口。圖為仁三路夜市。Official Photo by Wang Yu Ching / Office of the President",
+        "place": "基隆廟口",
+        "originalFile": "2026.03.27_Keelung_Miaokou_Night_Market.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-KEE:9451f669": {
+      "label": {
+        "en": "Xian Dong Yan",
+        "zh-CN": "仙洞岩",
+        "zh-TW": "仙洞巖"
+      },
+      "description": {
+        "en": "Xian Dong Yan , literally Immortal cave, is a natural sea cave in Zhongshan District, Keelung, Taiwan. It is a designated Cultural Landscape by the Bureau of Cultural Heritage in Taiwan.",
+        "zh-CN": "仙洞岩，旧名灵仙洞最胜寺、灵仙洞最胜禅寺、基隆仙洞辨天宫，简称仙洞，是位于台湾基隆市中山区的海蚀洞佛寺，历史可追溯至台湾清治时期，被列为基隆市文化景观，也是附近地名仙洞庄、仙洞町、仙洞里的命名依据。",
+        "zh-TW": "仙洞巖，舊名靈仙洞最勝寺、靈仙洞最勝禪寺、基隆仙洞辨天宮，簡稱仙洞，是位於臺灣基隆市中山區的海蝕洞佛寺，歷史可追溯至臺灣清治時期，被列為基隆市文化景觀，也是附近地名仙洞莊、仙洞町、仙洞裏的命名依據。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E4%BB%99%E6%B4%9E%E5%B7%96",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E4%BB%99%E6%B4%9E%E5%B7%96",
+        "https://en.wikipedia.org/wiki/Xian_Dong_Yan"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        121.74838889,
+        25.14522222
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Xian_Dong_Yan",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "TW-KEE",
+      "photo": {
+        "src": "assets/maps/administrative/photos/a44dbc9bff51d0a5.webp",
+        "credit": "生蕃屋發行 · Public domain",
+        "source": "https://commons.wikimedia.org/wiki/File:Photo_of_Kiirun_03.jpg",
+        "license": "Public domain",
+        "licenseUrl": "https://commons.wikimedia.org/wiki/File:Photo_of_Kiirun_03.jpg#Licensing",
+        "alt": "​基隆仙洞辨天宮即現今仙洞巖，當時是一座神社。 基隆要塞司令部許可済 第四二O號(生蕃屋發行) 27",
+        "place": "仙洞巖",
+        "originalFile": "Photo_of_Kiirun_03.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    },
+    "poi:admin:TW-KEE:urban": {
+      "id": "poi:admin:TW-KEE:urban",
+      "label": {
+        "en": "Heping Island Park",
+        "zh-CN": "和平岛公园",
+        "zh-TW": "和平島公園"
+      },
+      "description": {
+        "en": "Heping Island Park is a park in Heping Island, Zhongzheng District, Keelung, Taiwan.",
+        "zh-CN": "和平岛公园位于基隆市中正区的和平岛上。海边岩石长期受到风浪侵蚀，形成形态各异的海蚀景观。",
+        "zh-TW": "和平島公園位於基隆市中正區的和平島上。海邊岩石長期受到風浪侵蝕，形成形態各異的海蝕景觀。"
+      },
+      "source": "https://en.wikipedia.org/wiki/Heping_Island_Park",
+      "textSources": [
+        "https://en.wikipedia.org/wiki/Heping_Island_Park",
+        "https://en.wikipedia.org/wiki/Heping_Island_Park"
+      ],
+      "textLicense": "CC BY-SA 4.0; translated and shortened excerpt",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photo": {
+        "src": "assets/maps/administrative/photos/e76befedf3ce2d7b.webp",
+        "credit": "This Photo was taken by Supanut Arunoprayote. Feel free to use any of my images, but please mention me as the author and may send me a message. (สามารถใช้ภาพได้อิสระ แต่กรุณาใส่เครดิตผู้ถ่ายและอาจส่งข้อความบอกกล่าวด้วย) Please do not upload an updated image here without consultation with the Author. The author would like to make corrections only at his own source. This ensures that the changes are preserved.Please if you think that any changes should be required, please inform the author.Otherwise you can upload a new image with a new name. Please use one of the templates derivative or extract. · CC BY 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Heping_Island_Park_07.23.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "alt": "Heping Island Park (和平島公園) is a park in Heping Island, Zhongzheng District, Keelung, Taiwan.",
+        "place": "Heping Island Park",
+        "originalFile": "Heping_Island_Park_07.23.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "lngLat": [
+        121.76394444,
+        25.161
+      ],
+      "coordinateSource": "https://en.wikipedia.org/wiki/Heping_Island_Park",
+      "kind": "landmark",
+      "parentCity": "TW-KEE"
+    }
+  }
+}

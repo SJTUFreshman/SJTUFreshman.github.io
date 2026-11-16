@@ -1,0 +1,105 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "421300": {
+      "label": {
+        "en": "Suizhou",
+        "zh-CN": "随州市",
+        "zh-TW": "隨州市"
+      },
+      "description": {
+        "en": "Suizhou , formerly Sui County , is a prefecture-level city in northern Hubei province, People's Republic of China, bordering Henan province to the north and east.",
+        "zh-CN": "随州市，简称随，是中华人民共和国湖北省下辖的地级市，位于湖北省北部。市境西界襄阳市，西南邻荆门市，东南接孝感市，东北抵河南省信阳市，北达河南省南阳市。",
+        "zh-TW": "隨州市，簡稱隨，是中華人民共和國湖北省下轄的地級市，位於湖北省北部。市境西界襄陽市，西南鄰荊門市，東南接孝感市，東北抵河南省信陽市，北達河南省南陽市。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E9%9A%8F%E5%B7%9E%E5%B8%82",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E9%9A%8F%E5%B7%9E%E5%B8%82",
+        "https://en.wikipedia.org/wiki/Suizhou"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        113.382,
+        31.69
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/2f50cd719b225835.webp",
+        "credit": "Siyuwj · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%9B%BE%E4%BE%AF%E4%B9%99%E5%A2%93%E5%A4%96%E6%A3%BA%EF%BC%8C2014-04-06_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​曾侯乙墓外棺，湖北省博物馆",
+        "place": "曾侯乙墓",
+        "originalFile": "曾侯乙墓外棺，2014-04-06_01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      },
+      "photoReference": "poi:admin:421300:9ed1bff7",
+      "urbanFocus": {
+        "label": {
+          "en": "Suizhou",
+          "zh-CN": "随州市",
+          "zh-TW": "隨州市"
+        },
+        "lngLat": [
+          113.3658,
+          31.71755
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Suizhou.",
+          "zh-CN": "以随州市的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以隨州市的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q71401#P625",
+        "source": "https://www.wikidata.org/wiki/Q71401",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q71401#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.75
+        }
+      }
+    },
+    "poi:admin:421300:9ed1bff7": {
+      "label": {
+        "en": "Tomb of Marquis Yi of Zeng",
+        "zh-CN": "曾侯乙墓",
+        "zh-TW": "曾侯乙墓"
+      },
+      "description": {
+        "en": "The Tomb of Marquis Yi of Zeng is an archaeological site in Leigudun Community , Nanjiao Subdistrict , Zengdu District, Suizhou , Hubei, China, dated sometime after 433 BC. The tomb contained the remains of Marquis Yi of Zeng , and is one of a handful of ancient Chinese royal tombs to have been discovered intact and then excavated using modern archaeological methods. Zeng was a state during the Spring and Autumn period of China.",
+        "zh-CN": "曾侯乙墓位于中国湖北省随州市城关西郊擂鼓墩附近东团坡上，是一座战国早期诸侯墓，田野考古编号为随县擂鼓墩一号墓，简称「随·擂·M1」。墓葬于1978年发掘，下葬年代为公元前433年或稍晚。",
+        "zh-TW": "曾侯乙墓位於中國湖北省隨州市城關西郊擂鼓墩附近東團坡上，是一座戰國早期諸侯墓，田野考古編號為隨縣擂鼓墩一號墓，簡稱「隨·擂·M1」。墓葬於1978年發掘，下葬年代為公元前433年或稍晚。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E4%BE%AF%E4%B9%99%E5%A2%93",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E6%9B%BE%E4%BE%AF%E4%B9%99%E5%A2%93",
+        "https://en.wikipedia.org/wiki/Tomb_of_Marquis_Yi_of_Zeng"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt shortened and script-converted.",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "lngLat": [
+        113.36666667,
+        31.7
+      ],
+      "coordinateSource": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E4%BE%AF%E4%B9%99%E5%A2%93",
+      "kind": "landmark",
+      "role": "landmark",
+      "parentUnit": "421300",
+      "photo": {
+        "src": "assets/maps/administrative/photos/2f50cd719b225835.webp",
+        "credit": "Siyuwj · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%9B%BE%E4%BE%AF%E4%B9%99%E5%A2%93%E5%A4%96%E6%A3%BA%EF%BC%8C2014-04-06_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "​曾侯乙墓外棺，湖北省博物馆",
+        "place": "曾侯乙墓",
+        "originalFile": "曾侯乙墓外棺，2014-04-06_01.jpg",
+        "modifications": "Resized and converted to WebP; no content edits."
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "version": "20261116-administrative",
+  "entries": {
+    "152200": {
+      "label": {
+        "en": "Hinggan League",
+        "zh-CN": "兴安盟",
+        "zh-TW": "興安盟"
+      },
+      "description": {
+        "en": "The Hinggan League is a prefecture-level subdivision of the Inner Mongolia Autonomous Region of the People's Republic of China. It borders Hulun Buir to the north, the Republic of Mongolia and Xilingol League to the west, Tongliao to the south and the provinces of Jilin and Heilongjiang to the east.",
+        "zh-CN": "兴安盟是中华人民共和国内蒙古自治区下辖的盟，位于内蒙古自治区东北部。辖境北临呼伦贝尔市，东接黑龙江省齐齐哈尔市、吉林省白城市，南邻通辽市，西界锡林郭勒盟、蒙古国。",
+        "zh-TW": "興安盟是中華人民共和國內蒙古自治區下轄的盟，位於內蒙古自治區東北部。轄境北臨呼倫貝爾市，東接黑龍江省齊齊哈爾市、吉林省白城市，南鄰通遼市，西界錫林郭勒盟、蒙古國。"
+      },
+      "source": "https://zh.wikipedia.org/wiki/%E5%85%B4%E5%AE%89%E7%9B%9F",
+      "textSources": [
+        "https://zh.wikipedia.org/wiki/%E5%85%B4%E5%AE%89%E7%9B%9F",
+        "https://en.wikipedia.org/wiki/Hinggan_League"
+      ],
+      "textLicense": "CC BY-SA 4.0; excerpt adapted by shortening and script conversion",
+      "textLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "kind": "city",
+      "lngLat": [
+        122.09,
+        46.07
+      ],
+      "photo": {
+        "src": "assets/maps/administrative/photos/b5ad11c3fd63af66.webp",
+        "credit": "HCCB3947 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%B9%8C%E5%85%B0%E6%B5%A9%E7%89%B9%E5%B8%82%E6%B8%85%E7%9C%9F%E5%AF%BA.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Ulanhot Mosque",
+        "place": "乌兰浩特市清真寺.jpg",
+        "originalFile": "乌兰浩特市清真寺.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            122.07571,
+            46.073014
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E4%B9%8C%E5%85%B0%E6%B5%A9%E7%89%B9%E5%B8%82%E6%B8%85%E7%9C%9F%E5%AF%BA.jpg"
+        }
+      },
+      "photoReference": "poi:admin:152200:photo-197759581",
+      "urbanFocus": {
+        "label": {
+          "en": "Hinggan League",
+          "zh-CN": "兴安盟",
+          "zh-TW": "興安盟"
+        },
+        "lngLat": [
+          122.06584,
+          46.06962
+        ],
+        "kind": "city-centre",
+        "definition": {
+          "en": "A 24 km landscape window centred on Hinggan League.",
+          "zh-CN": "以兴安盟的地理坐标为中心，展示周边约24公里宽的城区与地形。",
+          "zh-TW": "以興安盟的地理座標爲中心，展示周邊約24公里寬的城區與地形。"
+        },
+        "coordinateSource": "https://www.wikidata.org/wiki/Q1619433#P625",
+        "source": "https://www.wikidata.org/wiki/Q1619433",
+        "extentKm": 24,
+        "coordinateSystem": "WGS84",
+        "selectionSource": "https://www.wikidata.org/wiki/Q1619433#P625",
+        "review": {
+          "insideAdministrativeOutline": true,
+          "referenceDistanceKm": 0.82
+        }
+      }
+    },
+    "poi:admin:152200:photo-197759581": {
+      "label": {
+        "en": "Hinggan League landscape view",
+        "zh-CN": "乌兰浩特市清真寺",
+        "zh-TW": "烏蘭浩特市清真寺"
+      },
+      "description": {
+        "en": "A local landscape view from the urban area of Hinggan League, offering a closer look at its surroundings.",
+        "zh-CN": "这张实景照片呈现兴安盟城区周边的地方景观，为观察当地的街巷、建筑与自然环境提供一个现场视角。",
+        "zh-TW": "這張實景照片呈現興安盟城區周邊的地方景觀，爲觀察當地的街巷、建築與自然環境提供一個現場視角。"
+      },
+      "source": "https://commons.wikimedia.org/wiki/File:%E4%B9%8C%E5%85%B0%E6%B5%A9%E7%89%B9%E5%B8%82%E6%B8%85%E7%9C%9F%E5%AF%BA.jpg",
+      "textSources": [
+        "https://commons.wikimedia.org/wiki/File:%E4%B9%8C%E5%85%B0%E6%B5%A9%E7%89%B9%E5%B8%82%E6%B8%85%E7%9C%9F%E5%AF%BA.jpg"
+      ],
+      "textKind": "editorial-locality",
+      "textLicense": "Original editorial scene caption. Photograph location and description documented on the linked Commons file page.",
+      "photo": {
+        "src": "assets/maps/administrative/photos/b5ad11c3fd63af66.webp",
+        "credit": "HCCB3947 · CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E4%B9%8C%E5%85%B0%E6%B5%A9%E7%89%B9%E5%B8%82%E6%B8%85%E7%9C%9F%E5%AF%BA.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "alt": "Ulanhot Mosque",
+        "place": "乌兰浩特市清真寺.jpg",
+        "originalFile": "乌兰浩特市清真寺.jpg",
+        "modifications": "Resized and converted to WebP; no content edits.",
+        "type": "field-photograph",
+        "publishedLocation": {
+          "lngLat": [
+            122.07571,
+            46.073014
+          ],
+          "source": "https://commons.wikimedia.org/wiki/File:%E4%B9%8C%E5%85%B0%E6%B5%A9%E7%89%B9%E5%B8%82%E6%B8%85%E7%9C%9F%E5%AF%BA.jpg"
+        }
+      },
+      "lngLat": [
+        122.07571,
+        46.073014
+      ],
+      "coordinateSource": "https://commons.wikimedia.org/wiki/File:%E4%B9%8C%E5%85%B0%E6%B5%A9%E7%89%B9%E5%B8%82%E6%B8%85%E7%9C%9F%E5%AF%BA.jpg",
+      "coordinateDerivation": "Published Wikimedia Commons GeoData coordinate attached to this photograph; not a substituted city centre.",
+      "kind": "landmark",
+      "role": "photo-location",
+      "parentUnit": "152200"
+    }
+  }
+}
