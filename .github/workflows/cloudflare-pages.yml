@@ -55,6 +55,8 @@ jobs:
             /observatory.html
             /site_content.json
             /site_renderer.py
+            /wechat-archives/*/articles.json
+            /wechat-archives/*/translations.json
             /pet-cache-worker.js
             /me_at_dorm.jpg
             /official_portray.png
