@@ -238,7 +238,9 @@ async function verifyPage(browser, base, route, width) {
             }
         }
         if (isLife) {
-            await verifyGlyphs(page, '.wiki-userbox', `${label}/userbox`, 'Arial');
+            const userboxFonts = await page.locator('.wiki-userbox').first().evaluate(element => getComputedStyle(element).fontFamily);
+            assert(userboxFonts.startsWith('Arial') && !/Lanmi Kai|Site WenKai/.test(userboxFonts),
+                `${label}/userbox: preserve the original Wikipedia-style font stack: ${userboxFonts}`);
         }
         if (route === 'observatory.html') {
             await page.evaluate(() => {
