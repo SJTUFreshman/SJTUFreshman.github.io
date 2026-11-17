@@ -663,10 +663,22 @@ def wishlist_text_values(content: dict[str, Any]) -> dict[str, Any]:
     return values
 
 
+def games_text_values(content: dict[str, Any]) -> dict[str, Any]:
+    games = content["life"].get("games", {})
+    values = {f"games_{key}": value for key, value in games.get("copy", {}).items()}
+    for entry in games.get("entries", []):
+        for field in ("title", "text"):
+            values[f"games_note_{entry['id']}_{field}"] = entry.get(field, {})
+    return values
+
+
 def render_life_i18n(content: dict[str, Any]) -> str:
     life = content["life"]
     home = content["home"]
     i18n = {lang: dict(life["labels"][lang]) for lang in LANGS}
+    for key, value in games_text_values(content).items():
+        for lang in LANGS:
+            i18n[lang][key] = lang_value(value, lang)
     for key, value in reading_text_values(content).items():
         for lang in LANGS:
             i18n[lang][key] = lang_value(value, lang)
@@ -1483,6 +1495,151 @@ def render_life_wine(content: dict[str, Any]) -> str:
             </section>"""
 
 
+def render_life_games(content: dict[str, Any], root: Path = ROOT) -> str:
+    """A complete, progressively enhanced cabinet from a public Steam snapshot."""
+    config = content["life"]["games"]
+    snapshot_path = root / "assets/life/games/steam-profile.json"
+    snapshot = json.loads(snapshot_path.read_text(encoding="utf-8")) if snapshot_path.exists() else {}
+    steam_id = str(config["steam_id"])
+    if not re.fullmatch(r"\d{17}", steam_id):
+        raise ValueError("Games requires a 17-digit SteamID")
+    if snapshot and (snapshot.get("schemaVersion") != 1 or snapshot.get("steamId") != steam_id):
+        raise ValueError("Steam snapshot does not match the configured profile")
+    profile_url = f"https://steamcommunity.com/profiles/{steam_id}/"
+    values = games_text_values(content)
+
+    def text(key: str) -> str:
+        return f'<span data-key="games_{esc(key)}">{esc(lang_value(values.get("games_" + key, {}), "en"))}</span>'
+
+    def asset_url(value: Any) -> str:
+        try:
+            url = urlsplit(str(value or ""))
+            host = url.hostname or ""
+            valid = url.scheme == "https" and not url.username and not url.password and url.port in (None, 443) and (
+                host in ("media.steampowered.com", "steamcdn-a.akamaihd.net") or any(
+                    host == domain or host.endswith("." + domain)
+                    for domain in ("steamstatic.com", "steamusercontent.com")
+                )
+            )
+        except ValueError:
+            return ""
+        return str(value) if valid else ""
+
+    def display_name(game: dict[str, Any]) -> str:
+        names = game.get("names") or {}
+        en = str(names.get("en") or game.get("name") or "Steam")
+        cn = str(names.get("zh-CN") or en)
+        tw = str(names.get("zh-TW") or cn)
+        return f'<span data-game-name data-en="{esc(en)}" data-zh-cn="{esc(cn)}" data-zh-tw="{esc(tw)}">{esc(en)}</span>'
+
+    def duration(minutes: Any) -> str:
+        if isinstance(minutes, (int, float)) and not isinstance(minutes, bool) and 0 <= minutes < 1e9:
+            return f'<strong>{f"{minutes / 60:,.1f}".removesuffix(".0")}</strong> {text("hours")}'
+        return text("playtime_unavailable")
+
+    library = snapshot.get("library")
+    complete = isinstance(library, list) and snapshot.get("libraryStatus") == "complete"
+    collection = library if isinstance(library, list) else snapshot.get("games", [])
+    collection = sorted(collection, key=lambda game: game.get("playtimeMinutes") or 0, reverse=True)
+    cases, templates = [], []
+    seen = set()
+    for game in collection:
+        app = game.get("appId")
+        if not isinstance(app, int) or isinstance(app, bool) or app <= 0 or app in seen:
+            raise ValueError("Game appIds must be unique positive integers")
+        seen.add(app)
+        name = str(game.get("name") or f"Steam App {app}")
+        title = display_name(game)
+        search_name = name + " " + " ".join(str(value) for value in (game.get("names") or {}).values())
+        horizontal = asset_url(game.get("imageUrl"))
+        cover = asset_url(game.get("coverUrl")) or horizontal
+        cover_html = f'<img data-game-cover src="{esc(cover)}" data-fallback="{esc(horizontal)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">' if cover else ''
+        minutes = game.get("playtimeMinutes")
+        achievement = game.get("achievements") or {}
+        available = achievement.get("status") == "available"
+        total = achievement.get("total", 0) if available else 0
+        unlocked = achievement.get("unlocked", 0) if available else 0
+        if not isinstance(total, int) or not isinstance(unlocked, int) or not 0 <= unlocked <= total:
+            raise ValueError("Invalid achievement progress")
+        progress = f'<div class="game-achievement-bar" aria-label="{unlocked} / {total}"><span style="width:{round(unlocked / total * 100, 1)}%"></span></div>' if total else ''
+        recent = 0
+        if game.get("lastPlayedAt"):
+            try:
+                from datetime import datetime
+                recent = int(datetime.fromisoformat(str(game["lastPlayedAt"]).replace("Z", "+00:00")).timestamp())
+            except ValueError:
+                pass
+        cases.append(f'''                        <article class="game-case" data-app-id="{app}" data-portal-entry="games-{app}" data-name="{esc(search_name)}" data-minutes="{minutes if isinstance(minutes, (int, float)) else -1}" data-recent="{recent}" data-completed="{unlocked}" data-total="{total}">
+                            <button class="game-box" type="button" data-game-open="{app}" aria-label="{esc(name)}"><span class="game-box-spine" aria-hidden="true"></span><span class="game-box-cover"><span class="game-cover-title">{title}</span>{cover_html}</span></button>
+                            <h4 class="game-case-title">{title}</h4><p class="game-case-hours">{duration(minutes)}</p>{progress}
+                        </article>''')
+        achievement_rows = []
+        for item in achievement.get("items", []) if available else []:
+            icon = asset_url(item.get("iconUrl"))
+            icon_html = f'<img src="{esc(icon)}" alt="" width="48" height="48" loading="lazy" decoding="async">' if icon else '<span class="game-achievement-icon" aria-hidden="true">✦</span>'
+            state_name = 'unlocked' if item.get('unlocked') else 'locked'
+            achievement_rows.append(f'<li class="game-achievement is-{state_name}">{icon_html}<div><h4>{esc(item.get("name", ""))}</h4><p>{esc(item.get("description", ""))}</p><small>{text(state_name)}</small></div></li>')
+        achievements_html = f'<p class="game-achievement-summary"><strong>{unlocked} / {total}</strong> {text("achievements_unlocked")}</p><ul class="game-achievements">{"".join(achievement_rows)}</ul>' if available else f'<p class="game-detail-unavailable">{text("no_achievements" if achievement.get("status") == "none" else "achievement_pending")}</p>'
+        hero = f'<img src="{esc(horizontal)}" alt="" loading="lazy" decoding="async">' if horizontal else ''
+        templates.append(f'''                    <template id="gameDetail-{app}"><div class="game-detail-hero">{hero}<h3>{title}</h3></div><div class="game-detail-stats"><span>{duration(minutes)} · {text("total_playtime")}</span><a href="https://store.steampowered.com/app/{app}/" target="_blank" rel="noopener noreferrer">{text("store")} ↗</a><a href="{profile_url}achievements/{app}/" target="_blank" rel="noopener noreferrer">{text("steam_achievements")} ↗</a></div><h3 class="game-achievement-heading">{text("achievements")}</h3>{achievements_html}</template>''')
+
+    extras = snapshot.get("profileExtras") or {}
+    avatar = asset_url(extras.get("avatarUrl") or snapshot.get("avatarUrl"))
+    avatar_html = f'<img src="{esc(avatar)}" alt="" width="96" height="96" loading="lazy" decoding="async">' if avatar else ''
+    count = snapshot.get("gameCount")
+    count_html = f'<span class="games-count"><strong>{count:,}</strong> {text("owned_games")}</span>' if isinstance(count, int) and not isinstance(count, bool) and count >= 0 else ''
+    level = extras.get("level")
+    level_html = f'<span class="games-level"><strong>{int(level)}</strong> {text("level")}</span>' if isinstance(level, (int, float)) and level >= 0 else ''
+    badges = []
+    for badge in extras.get("badges", []):
+        icon = asset_url(badge.get("imageUrl"))
+        if not icon:
+            continue
+        badge_name = str(badge.get("name") or "Steam")
+        badges.append(f'<figure class="game-badge"><img src="{esc(icon)}" alt="" width="64" height="64" loading="lazy" decoding="async"><figcaption>{esc(badge_name)}</figcaption></figure>')
+    badge_html = f'<section class="games-badge-showcase"><div class="games-section-heading"><h3>{text("badges")}</h3><a href="{profile_url}badges/" target="_blank" rel="noopener noreferrer">{text("all_badges")} ↗</a></div><div class="games-badges">{"".join(badges)}</div></section>' if badges else ''
+    background = extras.get("background") or {}
+    video = asset_url(background.get("videoUrl"))
+    poster = asset_url(background.get("posterUrl"))
+    backdrop = f'<video data-games-background muted loop playsinline preload="none" aria-hidden="true" poster="{esc(poster)}"><source src="{esc(video)}" type="video/{"webm" if urlsplit(video).path.endswith(".webm") else "mp4"}"></video>' if video else ''
+    notice = '' if complete else f'<p class="games-library-notice">{text("partial_library")}</p>'
+    empty = text("private" if snapshot.get("visibility") == "private" else "recent_empty")
+    shelves = '\n'.join(cases) or f'<p class="games-empty">{empty}</p>'
+    notes, note_ids = [], set()
+    for entry in config.get("entries", []):
+        entry_id = str(entry["id"])
+        if not re.fullmatch(r"[a-zA-Z0-9_-]+", entry_id) or entry_id in note_ids:
+            raise ValueError("Game note IDs must be unique and contain letters, numbers, underscores or hyphens")
+        note_ids.add(entry_id)
+        screenshot = ''
+        if entry.get("image"):
+            image = str(entry["image"])
+            resolved = (root / image).resolve()
+            if not image.startswith("images/games/") or not resolved.is_relative_to((root / "images/games").resolve()) or resolved.suffix.lower() not in (".png", ".jpg", ".jpeg", ".webp") or not resolved.is_file():
+                raise ValueError("Game screenshots must be existing images under images/games/")
+            screenshot = f'<div class="gallery-grid games-note-gallery" data-gallery-group><div class="gallery-item" role="button" tabindex="0" aria-label="{esc(lang_value(entry.get("title", {}), "en"))}" onclick="openLightbox(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){{event.preventDefault();openLightbox(this)}}"><img src="{esc(image)}" alt="" loading="lazy" decoding="async"><div class="gallery-caption">{text("note_" + entry_id + "_title")}</div></div></div>'
+        notes.append(f'<article class="games-note" data-portal-entry="games-note-{esc(entry_id)}"><h4>{text("note_" + entry_id + "_title")}</h4><p>{text("note_" + entry_id + "_text")}</p>{screenshot}</article>')
+    notes_html = f'<section class="games-notes"><div class="games-section-heading"><h3>{text("notes")}</h3></div>{"".join(notes)}</section>' if notes else ''
+    updated = str(snapshot.get("libraryUpdatedAt") or snapshot.get("updatedAt") or '')
+    stamp = f'<span>{text("updated")} <time datetime="{esc(updated)}">{esc(updated[:16].replace("T", " "))} UTC</time></span>' if updated else ''
+    name = snapshot.get("displayName") or "Steam"
+    return f'''            <section id="games" class="portal-content games-content" data-portal-content="games" hidden>
+                <div class="games-showroom"><div class="games-backdrop" aria-hidden="true">{backdrop}</div>
+                    <header class="games-profile-card"><a class="games-avatar" href="{profile_url}" target="_blank" rel="noopener noreferrer" aria-label="Steam · {esc(name)}">{avatar_html}<span aria-hidden="true">✦</span></a><div class="games-identity"><span class="games-kicker">PLAYER COLLECTION</span><h3>{esc(name)}</h3><div class="games-profile-stats">{count_html}{level_html}</div><a class="games-profile-link" href="{profile_url}" target="_blank" rel="noopener noreferrer">{text("visit_profile")} ↗</a></div><button type="button" data-games-motion aria-pressed="false">{text("motion_pause")}</button></header>
+                    {badge_html}
+                    <section id="gamesCabinet" class="games-cabinet" data-library-complete="{str(complete).lower()}" aria-labelledby="gamesCabinetTitle"><div class="games-section-heading"><h3 id="gamesCabinetTitle">{text("cabinet")}</h3><span><span id="gamesResultCount" role="status" aria-live="polite">{len(collection)} / {len(collection)}</span> {text("displayed")}</span></div>{notice}
+                        <div class="games-cabinet-toolbar"><label for="gamesSearch">{text("search")}<input type="search" id="gamesSearch" autocomplete="off" data-placeholder-key="games_search_placeholder" placeholder="{esc(lang_value(values.get('games_search_placeholder', {}), 'en'))}"></label><label for="gamesSort">{text("sort")}<select id="gamesSort"><option value="playtime" data-key="games_sort_playtime">{esc(lang_value(values.get('games_sort_playtime', {}), 'en'))}</option><option value="name" data-key="games_sort_name">{esc(lang_value(values.get('games_sort_name', {}), 'en'))}</option><option value="recent" data-key="games_sort_recent">{esc(lang_value(values.get('games_sort_recent', {}), 'en'))}</option><option value="completion" data-key="games_sort_completion">{esc(lang_value(values.get('games_sort_completion', {}), 'en'))}</option></select></label></div>
+                        <p id="gamesEmpty" class="games-empty" hidden>{text("no_matches")}</p><div id="gamesShelf" class="games-shelf">
+{shelves}
+                        </div>
+                    </section>{notes_html}
+                    <footer class="games-source"><a href="{profile_url}" target="_blank" rel="noopener noreferrer">{text("source")}</a>{stamp}</footer>
+                </div>
+                <dialog id="gameDetailDialog" class="game-detail-dialog" aria-labelledby="gameDetailTitle"><h2 id="gameDetailTitle" class="sr-only">{text("details")}</h2><button id="gameDetailClose" type="button">{text("close")}</button><div id="gameDetailBody"></div></dialog>
+{chr(10).join(templates)}
+            </section>'''
+
+
 def render_life_wishlist(content: dict[str, Any]) -> str:
     wishlist = content["life"]["wishlist"]
     values = wishlist_text_values(content)
@@ -1690,6 +1847,7 @@ def render_life_artifacts(
     html_text = replace_region(html_text, "LIFE_PROFILE", render_life_profile(content), r'<section id="profile".*?</section>')
     html_text = replace_region(html_text, "LIFE_WINE", render_life_wine(content), r'<section id="wine".*?</section>')
     html_text = replace_region(html_text, "LIFE_WISHLIST", render_life_wishlist(content), r'<section id="wishlist".*?</section>')
+    html_text = replace_region(html_text, "LIFE_GAMES", render_life_games(content, root), r'<section id="games".*?</section>')
     content_data_text = replace_code_region(content_data_text, "LIFE_I18N", render_life_i18n(content), r'/\* ===== i18n ===== \*/\s*const i18n = \{.*?\};')
     content_data_text = replace_code_region(content_data_text, "LIFE_VISITED", render_visited(content), r'const visited = \[.*?\];')
     content_data_text = replace_code_region(
@@ -1807,6 +1965,29 @@ def check_site_render(root: Path = ROOT) -> tuple[str, str, str]:
     return home_text, life_text, content_data_text
 
 
+def render_games_updates(root: Path, content: dict[str, Any], write: bool = True) -> dict[Path, str]:
+    """Limit scheduled Steam updates to Games; preserve other authored regions."""
+    page = root / "life.html"
+    life = replace_region(page.read_text(encoding="utf-8"), "LIFE_GAMES", render_life_games(content, root), r'<section id="games".*?</section>')
+    data_path = root / "assets/life/scripts/01-content-data.js"
+    source = data_path.read_text(encoding="utf-8")
+    start = re.search(r"const i18n\s*=\s*", source)
+    if not start:
+        raise ValueError("Life translation dictionary is missing")
+    translations, length = json.JSONDecoder().raw_decode(source[start.end():])
+    values = games_text_values(content)
+    for lang in LANGS:
+        translations[lang] = {key: value for key, value in translations[lang].items() if not key.startswith("games_")}
+        translations[lang]["title_games"] = content["life"]["labels"][lang]["title_games"]
+        translations[lang].update({key: lang_value(value, lang) for key, value in values.items()})
+    source = source[:start.end()] + json_js(translations) + source[start.end() + length:]
+    artifacts = {page: life, root / "observatory.html": render_observatory(life), data_path: source}
+    if write:
+        for path, rendered in artifacts.items():
+            path.write_text(rendered, encoding="utf-8", newline="\n")
+    return artifacts
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Render static homepage HTML from site_content.json.")
     parser.add_argument(
@@ -1815,6 +1996,11 @@ def main() -> int:
         help="Render in memory, verify generated artifacts are current, and do not write files.",
     )
     scope = parser.add_mutually_exclusive_group()
+    scope.add_argument(
+        "--games-only",
+        action="store_true",
+        help="Update Steam snapshots, game notes and their translations on both Life pages only.",
+    )
     scope.add_argument(
         "--reading-only",
         action="store_true",
@@ -1831,7 +2017,14 @@ def main() -> int:
         help="Render only homepage news, journals, publications, and their translations.",
     )
     args = parser.parse_args()
-    if args.reading_only:
+    if args.games_only:
+        content = load_content(ROOT)
+        artifacts = render_games_updates(ROOT, content, write=not args.check)
+        if args.check:
+            for path, rendered in artifacts.items():
+                require_current_artifact(path, rendered, ROOT)
+        print("Games render check passed" if args.check else "Rendered games on both Life pages")
+    elif args.reading_only:
         content = load_content(ROOT)
         validate_content(content)
         artifacts = render_reading_updates(ROOT, content, write=not args.check)

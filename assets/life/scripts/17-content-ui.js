@@ -646,6 +646,7 @@ function setLang(lang) {
     updateSectionDrawerCopy();
     updateActivePortalCopy();
     updateMapLanguage();
+    window.GamesCabinet?.updateLanguage?.();
     window.lifeStarMap?.updateCopy();
 }
 

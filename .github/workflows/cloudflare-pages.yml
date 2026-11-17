@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # UTC; refresh the public Steam snapshot every six hours.
+    - cron: '17 */6 * * *'
 
 permissions:
   contents: read
@@ -50,6 +53,8 @@ jobs:
             /index.html
             /life.html
             /observatory.html
+            /site_content.json
+            /site_renderer.py
             /pet-cache-worker.js
             /me_at_dorm.jpg
             /official_portray.png
@@ -64,6 +69,21 @@ jobs:
         with:
           node-version: '24'
           package-manager-cache: false
+
+      - name: Refresh the public Steam profile
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python scripts/test-sync-steam-profile.py
+          python scripts/test-steam-profile-extras.py
+          python scripts/test-life-games.py
+          if [ "$EVENT_NAME" = 'schedule' ]; then
+            python scripts/sync-steam-profile.py --require-refresh --restore-published
+          else
+            python scripts/sync-steam-profile.py --restore-published
+          fi
+          python site_renderer.py --games-only
 
       - name: Test and prepare the public website
         run: |

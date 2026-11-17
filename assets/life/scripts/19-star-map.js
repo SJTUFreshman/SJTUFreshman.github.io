@@ -59,7 +59,8 @@ class LifeStarMap {
         const placements = {
             gallery: [-122, 48, 5], footprints: [-123, -64, 28], shelf: [102, 63, -8],
             thoughts: [54, -57, 24], friends: [-176, -4, -42], wine: [-20, 73, -20],
-            profile: [-24, -100, 16], wishlist: [-140, 170, -20], reading: [155, -8, -14]
+            profile: [-24, -100, 16], wishlist: [-140, 170, -20], reading: [155, -8, -14],
+            games: [128, -125, 0]
         };
         portalDefinitions.forEach((portal, index) => {
             const directions = portal.equatorialPatternPoints || portal.patternPoints;

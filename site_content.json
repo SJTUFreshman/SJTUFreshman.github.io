@@ -429,7 +429,8 @@
         "title_profile": "Meet Me Again",
         "title_wine": "Wine Diary",
         "wine_empty": "No tasting notes yet.",
-        "title_wishlist": "Wishlist"
+        "title_wishlist": "Wishlist",
+        "title_games": "Games"
       },
       "zh-CN": {
         "nav_gallery": "光影",
@@ -469,7 +470,8 @@
         "title_profile": "重新认识我",
         "title_wine": "品酒日记",
         "wine_empty": "暂时还没有品酒记录。",
-        "title_wishlist": "Wishlist"
+        "title_wishlist": "Wishlist",
+        "title_games": "游戏"
       },
       "zh-TW": {
         "nav_gallery": "光影",
@@ -509,7 +511,8 @@
         "title_profile": "重新認識我",
         "title_wine": "品酒日記",
         "wine_empty": "暫時還没有品酒紀录。",
-        "title_wishlist": "Wishlist"
+        "title_wishlist": "Wishlist",
+        "title_games": "遊戲"
       }
     },
     "gallery": [
@@ -2416,6 +2419,213 @@
           "en": "Hi Runde,\n\nI saw “{activity}” on your Wishlist and would love to join you.\n\nA time that works for me: [time]\nPlace or plans: [a suggestion, or we can decide together]\nA little about me / a message: [anything you’d like to share]\n\nLet me know what you think!\n[Your name]",
           "zh-CN": "润德你好，\n\n我在你的 Wishlist 里看到了“{activity}”，也很想和你一起体验。\n\n方便的时间：[时间]\n地点或安排：[我的想法，也可以一起商量]\n自我介绍／想说的话：[随意写几句]\n\n有兴趣的话，回信一起聊聊吧！\n[你的称呼]",
           "zh-TW": "潤德你好，\n\n我在你的 Wishlist 裡看到了「{activity}」，也很想和你一起體驗。\n\n方便的時間：[時間]\n地點或安排：[我的想法，也可以一起商量]\n自我介紹／想说的話：[隨意寫幾句]\n\n有興趣的話，回信一起聊聊吧！\n[你的稱呼]"
+        }
+      }
+    },
+    "games": {
+      "steam_id": "76561199195301474",
+      "profile_url": "https://steamcommunity.com/profiles/76561199195301474/",
+      "entries": [],
+      "copy": {
+        "intro": {
+          "en": "A few other worlds I spend time in.",
+          "zh-CN": "在现实之外，走过的另一些世界。",
+          "zh-TW": "在現實之外，走過的另一些世界。"
+        },
+        "visit_profile": {
+          "en": "Visit my Steam profile",
+          "zh-CN": "访问我的 Steam 主页",
+          "zh-TW": "造訪我的 Steam 主頁"
+        },
+        "owned_games": {
+          "en": "games on Steam",
+          "zh-CN": "款 Steam 游戏",
+          "zh-TW": "款 Steam 遊戲"
+        },
+        "recent": {
+          "en": "Recently played",
+          "zh-CN": "最近游玩",
+          "zh-TW": "最近遊玩"
+        },
+        "hours": {
+          "en": "hrs",
+          "zh-CN": "小时",
+          "zh-TW": "小時"
+        },
+        "total_playtime": {
+          "en": "on record",
+          "zh-CN": "累计游玩",
+          "zh-TW": "累計遊玩"
+        },
+        "playtime_unavailable": {
+          "en": "Playtime not shared",
+          "zh-CN": "未公开游玩时长",
+          "zh-TW": "未公開遊玩時長"
+        },
+        "private": {
+          "en": "This Steam profile is currently private.",
+          "zh-CN": "Steam 资料目前未公开。",
+          "zh-TW": "Steam 資料目前未公開。"
+        },
+        "recent_empty": {
+          "en": "No recently played games are currently shared.",
+          "zh-CN": "暂时没有公开的最近游玩记录。",
+          "zh-TW": "暫時沒有公開的最近遊玩記錄。"
+        },
+        "library": {
+          "en": "Game library · most played first",
+          "zh-CN": "游戏库 · 按游玩时长",
+          "zh-TW": "遊戲庫 · 按遊玩時長"
+        },
+        "notes": {
+          "en": "Game notes",
+          "zh-CN": "游戏手记",
+          "zh-TW": "遊戲手記"
+        },
+        "notes_empty": {
+          "en": "No game notes yet.",
+          "zh-CN": "还没有留下游戏手记。",
+          "zh-TW": "還沒有留下遊戲手記。"
+        },
+        "source": {
+          "en": "Synced from Steam",
+          "zh-CN": "资料同步自 Steam",
+          "zh-TW": "資料同步自 Steam"
+        },
+        "updated": {
+          "en": "Updated",
+          "zh-CN": "更新于",
+          "zh-TW": "更新於"
+        },
+        "cabinet": {
+          "en": "The game cabinet",
+          "zh-CN": "游戏藏馆",
+          "zh-TW": "遊戲藏館"
+        },
+        "search": {
+          "en": "Find a game",
+          "zh-CN": "找一款游戏",
+          "zh-TW": "找一款遊戲"
+        },
+        "search_placeholder": {
+          "en": "Search the collection…",
+          "zh-CN": "搜索你的收藏…",
+          "zh-TW": "搜尋你的收藏…"
+        },
+        "sort": {
+          "en": "Arrange by",
+          "zh-CN": "排列方式",
+          "zh-TW": "排列方式"
+        },
+        "sort_playtime": {
+          "en": "Most played",
+          "zh-CN": "游玩时长",
+          "zh-TW": "遊玩時長"
+        },
+        "sort_name": {
+          "en": "Title",
+          "zh-CN": "游戏名称",
+          "zh-TW": "遊戲名稱"
+        },
+        "sort_recent": {
+          "en": "Last played",
+          "zh-CN": "最近游玩",
+          "zh-TW": "最近遊玩"
+        },
+        "sort_completion": {
+          "en": "Achievement progress",
+          "zh-CN": "成就进度",
+          "zh-TW": "成就進度"
+        },
+        "displayed": {
+          "en": "on display",
+          "zh-CN": "款展示中",
+          "zh-TW": "款展示中"
+        },
+        "no_matches": {
+          "en": "No games match your search.",
+          "zh-CN": "没有找到匹配的游戏。",
+          "zh-TW": "沒有找到符合的遊戲。"
+        },
+        "partial_library": {
+          "en": "This cabinet currently holds the games visible on my public profile. The full collection is awaiting its next sync.",
+          "zh-CN": "当前展示公开资料中可见的游戏，完整收藏等待下次同步。",
+          "zh-TW": "目前展示公開資料中可見的遊戲，完整收藏等待下次同步。"
+        },
+        "level": {
+          "en": "Steam level",
+          "zh-CN": "Steam 等级",
+          "zh-TW": "Steam 等級"
+        },
+        "badges": {
+          "en": "The badge case",
+          "zh-CN": "徽章陈列",
+          "zh-TW": "徽章陳列"
+        },
+        "all_badges": {
+          "en": "View on Steam",
+          "zh-CN": "在 Steam 查看",
+          "zh-TW": "在 Steam 查看"
+        },
+        "motion_pause": {
+          "en": "Pause background",
+          "zh-CN": "暂停背景",
+          "zh-TW": "暫停背景"
+        },
+        "motion_play": {
+          "en": "Play background",
+          "zh-CN": "播放背景",
+          "zh-TW": "播放背景"
+        },
+        "details": {
+          "en": "Game details",
+          "zh-CN": "游戏详情",
+          "zh-TW": "遊戲詳情"
+        },
+        "close": {
+          "en": "Close",
+          "zh-CN": "关闭",
+          "zh-TW": "關閉"
+        },
+        "store": {
+          "en": "Store page",
+          "zh-CN": "游戏商店页",
+          "zh-TW": "遊戲商店頁"
+        },
+        "steam_achievements": {
+          "en": "View on Steam",
+          "zh-CN": "在 Steam 查看",
+          "zh-TW": "在 Steam 查看"
+        },
+        "achievements": {
+          "en": "Achievements",
+          "zh-CN": "成就收藏",
+          "zh-TW": "成就收藏"
+        },
+        "achievements_unlocked": {
+          "en": "achievements unlocked",
+          "zh-CN": "项成就已解锁",
+          "zh-TW": "項成就已解鎖"
+        },
+        "unlocked": {
+          "en": "Unlocked",
+          "zh-CN": "已解锁",
+          "zh-TW": "已解鎖"
+        },
+        "locked": {
+          "en": "Locked",
+          "zh-CN": "未解锁",
+          "zh-TW": "未解鎖"
+        },
+        "achievement_pending": {
+          "en": "Achievement details are not available yet. You can view this game on Steam.",
+          "zh-CN": "成就资料暂不可用，可前往 Steam 查看。",
+          "zh-TW": "成就資料暫不可用，可前往 Steam 查看。"
+        },
+        "no_achievements": {
+          "en": "This game has no Steam achievements.",
+          "zh-CN": "这款游戏没有 Steam 成就。",
+          "zh-TW": "這款遊戲沒有 Steam 成就。"
         }
       }
     }

@@ -134,9 +134,24 @@ const portalDefinitions = [
         fallbackPitch: 0.38,
         pattern: 'delphinus'
     },
+    {
+        id: 'games',
+        titleKey: 'title_games',
+        fallbackYaw: -2.15,
+        fallbackPitch: 0.32,
+        pattern: 'pegasus'
+    },
 ];
 
 const constellationPatterns = {
+    pegasus: {
+        // The Great Square includes Alpheratz (HIP 677), in Andromeda.
+        hips: [113963, 113881, 677, 1067],
+        contentOrder: [113963, 113881, 677, 1067],
+        focusHip: 113963,
+        fallbackPoints: [[-0.065,-0.055],[-0.07,0.065],[0.06,0.075],[0.075,-0.06]],
+        edges: [[0,1],[1,2],[2,3],[3,0]]
+    },
     coronaBorealis: {
         hips: [76127, 75695, 76267, 76952, 77512, 78159, 78493],
         contentOrder: [76267, 75695, 76952, 77512, 78159, 78493, 76127],
@@ -204,6 +219,15 @@ const constellationPatterns = {
 };
 
 const constellationStories = {
+    games: {
+        name: { en: 'Pegasus', 'zh-CN': '飞马座', 'zh-TW': '飛馬座' },
+        epithet: { en: 'Adventures beyond the everyday', 'zh-CN': '奔向日常之外的冒险', 'zh-TW': '奔向日常之外的冒險' },
+        reason: {
+            en: 'The winged horse lends its imagination to the worlds I explore in games. Its Great Square becomes a doorway to unfamiliar places, shared adventures and stories worth playing through.',
+            'zh-CN': '借飞马的想象力，去游戏里探索另一些世界。它的大四边形像一扇门，通向陌生的地方、结伴的冒险，以及值得亲自走过的故事。',
+            'zh-TW': '借飛馬的想像力，去遊戲裡探索另一些世界。它的大四邊形像一扇門，通向陌生的地方、結伴的冒險，以及值得親自走過的故事。'
+        }
+    },
     reading: {
         name: { en: 'Corona Borealis', 'zh-CN': '北冕座', 'zh-TW': '北冕座' },
         epithet: { en: 'Words worth keeping', 'zh-CN': '拾字句，缀成冠', 'zh-TW': '拾字句，綴成冠' },

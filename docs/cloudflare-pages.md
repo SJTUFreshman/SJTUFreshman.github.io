@@ -40,6 +40,15 @@ Configure these repository settings under **Settings > Secrets and variables > A
 - Secret `CLOUDFLARE_API_TOKEN`: a Cloudflare API token with **Account > Cloudflare Pages > Edit**
   permission restricted to the account that owns `sjtufreshman`.
 - Variable `CLOUDFLARE_ACCOUNT_ID`: `747a3c88e73a9d823b0c362f25d9df93`.
+- Secret `STEAM_API_KEY`: the profile owner's Steam Web API key, used only by
+  the server-side sync step. Never commit its local `.env.steam.local` copy.
+
+The Steam cabinet refreshes on pushes/manual runs and every six hours, at
+00:17, 06:17, 12:17 and 18:17 UTC (08:17, 14:17, 20:17 and 02:17 Beijing time).
+GitHub may delay scheduled runs. It restores the newer published snapshot to
+reuse its caches, refreshes the profile/library, and runs only
+`python site_renderer.py --games-only`. Other authored Life sections are preserved.
+See [the Steam sync documentation](../assets/life/games/README.md).
 
 Create a dedicated API token at https://dash.cloudflare.com/profile/api-tokens.
 Store its value only in the GitHub Actions secret. A local Wrangler OAuth login
@@ -56,8 +65,9 @@ public-file allowlist and Cloudflare limits.
 
 Commit the recovered October 29 pages and their new assets together with the
 workflow before its first run. See `docs/production-snapshot-20261029.md`.
-CI publishes the checked-in HTML and assets without running `site_renderer.py`:
-the older authoring data would otherwise overwrite the newer published content.
+CI publishes the checked-in HTML and assets with only the games region refreshed.
+Do not run the full `site_renderer.py` in CI: the older authoring data would
+otherwise overwrite the newer published content.
 After setup, commit and push website changes to `main`; the Actions run reports
 whether the new version passed verification at https://sjtufreshman.pages.dev/.
 

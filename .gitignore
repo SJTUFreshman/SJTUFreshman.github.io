@@ -5,3 +5,4 @@ __pycache__/
 /tools/relief-atlas/reference/cache/terrarium/
 /tools/relief-atlas/footprints/*/detail/cache/terrarium/
 /tools/relief-atlas/reference/relief-atlas-delivery.zip
+.env.steam.local

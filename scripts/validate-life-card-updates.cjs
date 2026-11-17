@@ -16,7 +16,8 @@ const names = {
     friends: ['Gemini', '双子座', '雙子座'],
     profile: ['Orion', '猎户座', '獵户座'],
     wine: ['Crater', '巨爵座', '巨爵座'],
-    wishlist: ['Delphinus', '海豚座', '海豚座']
+    wishlist: ['Delphinus', '海豚座', '海豚座'],
+    games: ['Pegasus', '飞马座', '飛馬座']
 };
 
 async function ready(page) {
