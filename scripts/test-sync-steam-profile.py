@@ -113,7 +113,7 @@ class SteamTests(unittest.TestCase):
             original = path.read_bytes()
             result, log = self.run_sync(FakeClient(fail=True), path)
             self.assertEqual(result, 0)
-            self.assertIn('WARNING', log)
+            self.assertIn('warning', log.lower())
             self.assertEqual(path.read_bytes(), original)
             result, _ = self.run_sync(FakeClient(fail=True), path, require_refresh=True)
             self.assertEqual(result, 1)
