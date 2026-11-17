@@ -3,6 +3,7 @@ import copy
 import json
 from pathlib import Path
 import re
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -17,7 +18,9 @@ class GamesRenderingTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        self.content = renderer.load_content(ROOT)
+        (self.root / 'site_content.json').write_text(
+            (ROOT / 'site_content.json').read_text(encoding='utf-8'), encoding='utf-8')
+        self.content = renderer.load_content(self.root, resolve_external=False)
         self.snapshot = {
             'schemaVersion': 1, 'steamId': '76561199195301474',
             'profileUrl': 'https://steamcommunity.com/profiles/76561199195301474/',
@@ -60,6 +63,37 @@ class GamesRenderingTests(unittest.TestCase):
         self.assertEqual(original_i18n, artifacts[self.root / 'assets/life/scripts/01-content-data.js'])
         self.assertEqual(artifacts[self.root / 'observatory.html'], renderer.render_observatory(after))
         self.assertEqual(artifacts, renderer.render_games_updates(self.root, self.content, write=False))
+
+    def test_games_only_cli_in_minimal_checkout_without_article_archives(self):
+        # Mirror the workflow's sparse checkout: authored config and rendered pages
+        # exist, but the reading collection's external source archives do not.
+        script = self.root / 'site_renderer.py'
+        script.write_text((ROOT / 'site_renderer.py').read_text(encoding='utf-8'), encoding='utf-8')
+        self.assertFalse((self.root / 'wechat-archives').exists())
+        collections = self.content.get('life', {}).get('reading', {}).get('collections', [])
+        self.assertTrue(any(item.get('articles_file') for item in collections))
+        for flags in (['--games-only'], ['--games-only', '--check']):
+            result = subprocess.run([sys.executable, str(script), *flags], cwd=self.root,
+                                    capture_output=True, text=True, encoding='utf-8')
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('Test Player', (self.root / 'life.html').read_text(encoding='utf-8'))
+        self.assertFalse((self.root / 'wechat-archives').exists())
+
+    def test_full_content_loading_still_resolves_external_articles(self):
+        folder = self.root / 'wechat-archives/example'
+        folder.mkdir(parents=True)
+        content = {'life': {'reading': {'collections': [{
+            'articles_file': 'wechat-archives/example/articles.json',
+            'translations_file': 'wechat-archives/example/translations.json',
+        }]}}}
+        (self.root / 'site_content.json').write_text(json.dumps(content), encoding='utf-8')
+        (folder / 'articles.json').write_text(json.dumps([{'id': 'article-one', 'title': 'An article'}]), encoding='utf-8')
+        (folder / 'translations.json').write_text(json.dumps({'article-one': {'en': {'title': 'Translated title'}}}), encoding='utf-8')
+        full = renderer.load_content(self.root)
+        article = full['life']['reading']['collections'][0]['articles'][0]
+        self.assertEqual(article['translations']['en']['title'], 'Translated title')
+        narrow = renderer.load_content(self.root, resolve_external=False)
+        self.assertNotIn('articles', narrow['life']['reading']['collections'][0])
 
     def test_steam_text_is_escaped_and_image_origins_restricted(self):
         self.snapshot['displayName'] = '<img src=x onerror=alert(1)>'

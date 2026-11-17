@@ -517,8 +517,12 @@ def moment_seed(moment_id: str) -> int:
     return int(hashlib.sha1(moment_id.encode("utf-8")).hexdigest()[:8], 16)
 
 
-def load_content(root: Path = ROOT) -> dict[str, Any]:
+def load_content(root: Path = ROOT, *, resolve_external: bool = True) -> dict[str, Any]:
     content = json.loads((root / "site_content.json").read_text(encoding="utf-8"))
+    # Narrow updates can use the authored JSON without loading unrelated archives.
+    # Full-site and Life generation retain external article resolution by default.
+    if not resolve_external:
+        return content
     for collection in content.get("life", {}).get("reading", {}).get("collections", []):
         if not collection.get("articles_file"):
             continue
@@ -2018,7 +2022,7 @@ def main() -> int:
     )
     args = parser.parse_args()
     if args.games_only:
-        content = load_content(ROOT)
+        content = load_content(ROOT, resolve_external=False)
         artifacts = render_games_updates(ROOT, content, write=not args.check)
         if args.check:
             for path, rendered in artifacts.items():
