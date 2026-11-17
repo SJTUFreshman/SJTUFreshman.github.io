@@ -67,6 +67,7 @@ LIFE_DATA_ROOTS = (
     REPO_ROOT / 'assets' / 'maps' / 'relief',
     REPO_ROOT / 'assets' / 'maps' / 'regions',
     REPO_ROOT / 'assets' / 'maps' / 'administrative',
+    REPO_ROOT / 'assets' / 'maps' / 'settlements',
 )
 
 # Space is needed even if a future page happens to contain no literal spaces.
@@ -427,8 +428,11 @@ def main() -> int:
         if args.pages
         else list(DEFAULT_PAGES)
     )
+    # The lazy atlas corpus is shared by every face. Read it once so all
+    # generated subsets and the final audit use the same text snapshot.
+    requested = collect_codepoints(pages)
     if args.check:
-        validate_coverage(pages)
+        validate_coverage(pages, requested)
         if not args.pages:
             build_home_subsets(args.brotli_quality, check_only=True)
         return 0
@@ -437,6 +441,7 @@ def main() -> int:
         resolve_path(args.output),
         pages,
         args.brotli_quality,
+        codepoints=requested,
     )
     if resolve_path(args.font) == DEFAULT_FONT and resolve_path(args.output) == DEFAULT_OUTPUT:
         WENKAI_SOURCE.parent.mkdir(parents=True, exist_ok=True)
@@ -444,14 +449,14 @@ def main() -> int:
             subprocess.run(["curl.exe" if os.name == "nt" else "curl", "--fail", "--location", "--retry", "2", "--output", str(WENKAI_SOURCE), WENKAI_URL], check=True)
         if sha256(WENKAI_SOURCE) != WENKAI_SHA256:
             raise SystemExit("WenKai source checksum mismatch; remove the cached download and retry.")
-        build_subset(WENKAI_SOURCE, WENKAI_OUTPUT, pages, args.brotli_quality, cjk_only=True, family_name="Site WenKai")
+        build_subset(WENKAI_SOURCE, WENKAI_OUTPUT, pages, args.brotli_quality, cjk_only=True, family_name="Site WenKai", codepoints=requested)
         if not LANMI_SOURCE.is_file():
             subprocess.run(["curl.exe" if os.name == "nt" else "curl", "--fail", "--location", "--retry", "2", "--output", str(LANMI_SOURCE), LANMI_URL], check=True)
         if sha256(LANMI_SOURCE) != LANMI_SHA256:
             raise SystemExit("Lanmi source checksum mismatch; supply the documented LANMI_yujian2_jianfan.ttf version.")
-        build_subset(LANMI_SOURCE, LANMI_OUTPUT, pages, args.brotli_quality, cjk_only=True)
+        build_subset(LANMI_SOURCE, LANMI_OUTPUT, pages, args.brotli_quality, cjk_only=True, codepoints=requested)
         update_site_font_versions()
-        validate_coverage(pages)
+        validate_coverage(pages, requested)
         if not args.pages:
             build_home_subsets(args.brotli_quality)
     return 0
@@ -566,8 +571,8 @@ def build_home_subsets(brotli_quality: int, check_only: bool = False) -> None:
     print(f"Homepage coverage passed: {len(requested)} CJK characters; {format_bytes(total)} across three fonts.")
 
 
-def validate_coverage(pages: list[Path]) -> None:
-    requested = {codepoint for codepoint in collect_codepoints(pages) if is_cjk(codepoint)}
+def validate_coverage(pages: list[Path], codepoints: set[int] | None = None) -> None:
+    requested = {codepoint for codepoint in (collect_codepoints(pages) if codepoints is None else codepoints) if is_cjk(codepoint)}
     with TTFont(WENKAI_OUTPUT) as font:
         blank = blank_cjk_codepoints(font, requested)
         if blank:

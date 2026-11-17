@@ -121,7 +121,8 @@ async function checkInsetHitExclusion(page, container, device, mode) {
                 if (x < frame.x || x > frame.x + frame.width || y < frame.y || y > frame.y + frame.height || !path.isPointInFill(new DOMPoint(x, y))) continue;
                 const screen = new DOMPoint(x, y).matrixTransform(path.getScreenCTM());
                 const hit = document.elementFromPoint(screen.x, screen.y);
-                blocked.push(!hit?.closest('[data-region-id], [data-city-id]'));
+                const regionHit = hit?.closest('[data-region-id], [data-city-id]');
+                blocked.push(!regionHit || Boolean(regionHit.closest('[data-inset-id]')));
                 found = true; break;
             }
             if (found) break;
@@ -155,12 +156,16 @@ async function testMaps(page, device, requests) {
     await hoverPath(page, restricted);
     check(await restricted.evaluate(el => getComputedStyle(el).fill.includes('url(')), `${device} North Korea red hatching`);
     check(/禁止.*入/.test(await east.locator('.footprints-region-tip').textContent()), `${device} North Korea status`);
-    const blockedPoint = await pointInside(restricted);
-    await page.mouse.click(blockedPoint.x, blockedPoint.y);
-    check(await page.locator('.region-explorer[open]').count() === 0, `${device} restricted area cannot open`);
+    const restrictedPoint = await pointInside(restricted);
+    await page.mouse.click(restrictedPoint.x, restrictedPoint.y);
+    await page.locator('.region-explorer[open].is-ready').waitFor();
+    check(await page.locator('.region-explorer[open]').count() === 1, `${device} restricted area geography remains readable`);
+    await page.locator('.region-explorer-close').click();
     await restricted.focus();
     await page.keyboard.press('Enter');
-    check(await page.locator('.region-explorer[open]').count() === 0, `${device} restricted area keyboard blocked`);
+    await page.locator('.region-explorer[open].is-ready').waitFor();
+    check(await page.locator('.region-explorer[open]').count() === 1, `${device} restricted area keyboard opens its guide`);
+    await page.locator('.region-explorer-close').click();
     await switchLanguage(page, 'en');
     for (const map of maps) {
         const card = page.locator(`[data-atlas-card="${map.id}"]`);

@@ -82,8 +82,7 @@ def main():
             original = full if view == "detail" else full[view]
             published = metadata if view == "detail" else metadata[view]
             originals = {region["id"]: region for region in original["regions"]}
-            expected_ids = {region["id"] for region in original["regions"]
-                            if view != "detail" or region.get("visited")}
+            expected_ids = {region["id"] for region in original["regions"]}
             assert {region["id"] for region in published["regions"]} == expected_ids
             for region in published["regions"]:
                 old = originals[region["id"]]
@@ -94,9 +93,6 @@ def main():
                             compare_paths(old[name], region[name], 0.43))
                 if old.get("boundary_path") and old.get("unit") == "cultural-region":
                     assert "path" not in region, "Duplicate cultural geometry"
-            if key == "east_asia" and view == "detail":
-                originals["PRK"] = next(region for region in full["overview"]["regions"] if region["id"] == "PRK")
-                expected_ids.add("PRK")
             assert {region["id"] for region in hits["views"][view]} == expected_ids
             for region in hits["views"][view]:
                 old = originals[region["id"]]
@@ -109,9 +105,19 @@ def main():
             maximum_runtime_error = max(maximum_runtime_error,
                 compare_paths(before["corridor_path"], after["corridor_path"], 0.43))
         hit_bytes = (RELIEF / index["maps"][key]["hit_file"]).read_bytes()
-        assert len(hit_bytes) < 200_000, (key, len(hit_bytes))
+        # Every unvisited administrative unit is now an interactive hit target;
+        # retain separate small-card geometry and a bounded compressed transfer.
+        assert len(hit_bytes) < 450_000, (key, len(hit_bytes))
+        assert len(zlib.compress(hit_bytes)) < 165_000
         runtime_bytes = (RELIEF / index["maps"][key]["data_file"]).read_bytes()
-        assert len(runtime_bytes) < 1_400_000
+        assert len(runtime_bytes) < 3_100_000
+        assert len(zlib.compress(runtime_bytes)) < 1_100_000
+        assert len(hits.get('insets',[]))==len(full.get('insets',[]))
+        for old,detail,small in zip(full.get('insets',[]),metadata.get('insets',[]),hits.get('insets',[])):
+            expected={r['id']:r for r in old['regions']}
+            assert set(expected)=={r['id'] for r in detail['regions']}=={r['id'] for r in small['regions']}
+            for r in small['regions']:
+                compare_paths(expected[r['id']]['path'],r['path'],5.95)
         report[key] = {"runtime_bytes": len(runtime_bytes), "hit_bytes": len(hit_bytes),
                        "hits_deflate_bytes": len(zlib.compress(hit_bytes)),
                        "max_runtime_error_source_pixels": round(maximum_runtime_error, 3),

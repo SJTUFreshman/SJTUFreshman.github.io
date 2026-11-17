@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     const BASE = 'assets/maps/regions/';
-    const VERSION = '20261116-administrative-dual-v1';
+    const VERSION = '20261117-settlement-guide-v1';
     const cache = new Map();
     let active = null;
     let language = 'en';
@@ -46,6 +46,62 @@
         }).catch(error => { cache.delete(src); throw error; }));
         return cache.get(src);
     }
+    const settlementCopy = () => ({
+        en: { urban: 'Built-up areas', visits: 'Visited cities', note: 'Built-up extent is a generalized map reference, not an administrative boundary.', empty: 'No mapped built-up area in this view', unavailable: 'Built-up layer temporarily unavailable', source: 'Settlement data' },
+        'zh-CN': { urban: '城镇建成区', visits: '已造访城市', note: '色块表示概略建成区范围，不代表行政边界。', empty: '本视图暂无已收录的建成区', unavailable: '建成区图层暂不可用', source: '聚落数据' },
+        'zh-TW': { urban: '城鎮建成區', visits: '已造訪城市', note: '色塊表示概略建成區範圍，不代表行政邊界。', empty: '本視圖暫無已收錄的建成區', unavailable: '建成區圖層暫不可用', source: '聚落資料' }
+    })[language] || {};
+    async function settlements(kind, id) {
+        try {
+            const manifest = await fetchJSON('assets/maps/settlements/manifest.json');
+            const entry = manifest[kind]?.[id];
+            if (!entry) return { unavailable: true };
+            const data = await fetchJSON(entry.file || entry);
+            return { ...data, credits: manifest.credits || [], note: manifest.note };
+        } catch (error) {
+            console.warn('Settlement layer:', error);
+            return { unavailable: true };
+        }
+    }
+    function settlementLayer(data, transform) {
+        const group = svg('g', { class: 'settlement-layer', 'aria-hidden': 'true', ...(transform ? { transform } : {}) });
+        (data?.paths || []).forEach(path => group.append(svg('path', { d: typeof path === 'string' ? path : path.path,
+            class: 'settlement-footprint', 'fill-rule': 'evenodd', 'vector-effect': 'non-scaling-stroke' })));
+        (data?.insets || []).forEach(inset => {
+            const frame = inset.frame || inset;
+            group.append(settlementLayer(inset, `translate(${frame.x} ${frame.y}) scale(${frame.width / inset.width} ${frame.height / inset.height})`));
+        });
+        return group;
+    }
+    function settlementKey(container, data, onToggle, visitToggle) {
+        const key = node('div', 'settlement-key');
+        const label = settlementCopy();
+        const button = node('button', 'settlement-switch', label.urban);
+        button.type = 'button'; button.setAttribute('aria-pressed', 'true');
+        button.addEventListener('click', () => {
+            const visible = button.getAttribute('aria-pressed') !== 'true';
+            button.setAttribute('aria-pressed', String(visible)); onToggle(visible);
+        });
+        key.append(button);
+        if (visitToggle) {
+            const visits = node('button', 'settlement-switch settlement-visits-key', label.visits);
+            visits.type = 'button'; visits.setAttribute('aria-pressed', 'true');
+            visits.addEventListener('click', () => {
+                const visible = visits.getAttribute('aria-pressed') !== 'true';
+                visits.setAttribute('aria-pressed', String(visible)); visitToggle(visible);
+            });
+            key.append(visits);
+        }
+        const explanation = node('p', 'settlement-explanation', data?.unavailable ? label.unavailable : local(data?.note) || label.note);
+        if (data?.unavailable) button.disabled = true;
+        else if (!data?.paths?.length && !data?.views) explanation.append(' ', label.empty);
+        const credit = data?.credits?.[0];
+        if (credit?.url) {
+            const link = node('a', '', label.source + ' ↗'); link.href = credit.url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+            explanation.append(' · ', link);
+        }
+        container.append(key, explanation);
+    }
     async function resolveDetail(options) {
         const index = await fetchJSON('manifest.json');
         const map = options.map.replace('east-asia', 'east_asia').replace('euro-usa', 'europe_usa');
@@ -66,6 +122,7 @@
         detail.subregions = (detail.subregions || []).map(enrich);
         detail.places = (detail.places || []).map(enrich);
         detail.credits = detail.credits || index.credits || [];
+        detail.settlements = await settlements('regions', detail.id);
         await new Promise((resolve, reject) => {
             const image = new Image();
             image.decoding = 'async';
@@ -109,7 +166,7 @@
         dialog.classList.add('is-ready');
         session.title.textContent = titleOf(record) || titleOf(options.region);
         session.kicker.textContent = copy().atlas;
-        session.close.textContent = `← ${copy().close}`;
+        session.close.textContent = `← ${session.regionStack?.length ? titleOf(session.regionStack.at(-1).record) : copy().close}`;
         const layout = node('div', 'region-explorer-layout');
         const main = node('section', 'region-landscape');
         const mapHeader = node('div', 'region-landscape-header');
@@ -124,6 +181,8 @@
         const project = point => [left + Number(point?.[0] || 0) * fit, top + Number(point?.[1] || 0) * fit];
         const terrain = svg('g', { transform: `translate(${left} ${top}) scale(${fit})` });
         terrain.append(svg('image', { href: terrainURL(record), width, height, class: 'region-terrain-image' }));
+        const builtUp = settlementLayer(record.settlements);
+        terrain.append(builtUp);
         (record.inset_frames || []).forEach(frame => {
             terrain.append(svg('rect', { x: frame.x, y: frame.y, width: frame.width, height: frame.height,
                 class: 'region-inset-frame', 'vector-effect': 'non-scaling-stroke' }));
@@ -201,7 +260,7 @@
         function itemAt(target) {
             const element = target instanceof Element ? target.closest('[data-unit], [data-place]') : null;
             return element?.dataset.place ? places.find(place => place.id === element.dataset.place)
-                : units.find(unit => unit.id === element?.dataset.unit) || null;
+                : units.find(unit => unit.id === element?.dataset.unit) || record.settlements?.visitedCities?.find(city => (city.unitId || city.id) === element?.dataset.unit) || null;
         }
         function restoreOnLeave(event) {
             // Touch selections stay open for reading; mouse/pen previews follow their location.
@@ -210,7 +269,7 @@
         function tab(item) {
             const button = node('button', '', item ? titleOf(item) : copy().reset);
             button.type = 'button'; button.dataset.unit = item?.id || '';
-            button.addEventListener('click', () => item && record.mode === 'cultural' ? openAdministrative(item, record) : choose(item));
+            button.addEventListener('click', () => exploreUnit(item, record, choose));
             tabs.append(button);
         }
         tab(null);
@@ -221,14 +280,32 @@
             path.addEventListener('pointerleave', restoreOnLeave);
             path.addEventListener('focus', () => choose(unit));
             path.addEventListener('blur', event => choose(itemAt(event.relatedTarget)));
-            const enter = () => record.mode === 'cultural' ? openAdministrative(unit, record) : choose(unit);
+            const enter = () => exploreUnit(unit, record, choose);
             path.addEventListener('click', enter);
             path.addEventListener('keydown', event => { if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); enter(); } });
             terrain.append(path); tab(unit);
         });
         (record.borders || []).forEach(border => terrain.append(svg('path', { d: typeof border === 'string' ? border : border.path,
             class: `region-country-border${border.kind === 'disputed' ? ' is-disputed' : ''}`, 'vector-effect': 'non-scaling-stroke' })));
+        const visits = svg('g', { class: 'region-visited-cities' });
+        (record.settlements?.visitedCities || []).forEach(city => {
+            const [cx, cy] = project(city.point);
+            const marker = svg('g', { class: 'region-visited-city', transform: `translate(${cx} ${cy})`, tabindex: 0,
+                role: 'button', 'data-unit': city.unitId || city.id, 'aria-label': `${titleOf(city)} · ${settlementCopy().visits}` });
+            marker.append(svg('circle', { r: 10, class: 'visited-city-halo' }), svg('circle', { r: 4, class: 'visited-city-dot' }));
+            const label = svg('text', { x: 13, y: 4 }); label.textContent = titleOf(city); marker.append(label);
+            const unit = units.find(item => item.id === (city.unitId || city.id));
+            const select = () => choose(unit || city);
+            marker.addEventListener('pointerenter', select); marker.addEventListener('focus', select);
+            marker.addEventListener('pointerleave', restoreOnLeave);
+            marker.addEventListener('blur', event => choose(itemAt(event.relatedTarget)));
+            const enter = () => unit ? exploreUnit(unit, record, choose) : select();
+            marker.addEventListener('click', enter);
+            marker.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); enter(); } });
+            visits.append(marker);
+        });
         map.append(terrain, lineGroup, markerGroup);
+        map.append(visits);
         canvas.append(map);
         // Photo cards sit in the margins; their leaders are in the same responsive coordinate system.
         // Keep a key place, then spread the remaining windows over the landscape.
@@ -271,13 +348,17 @@
             if (!itemAt(event.target)) choose(null);
         });
         const footer = node('div', 'region-landscape-footer');
-        const hint = record.mode === 'cultural' ? local({ en: 'Hover to discover · Click an area to explore its landscape', 'zh-CN': '悬停看简介 · 点击行政区，深入全域与主城', 'zh-TW': '懸停看簡介 · 點擊行政區，深入全域與主城' }) : copy().hint;
+        const hint = record.mode === 'cultural' ? local({ en: 'Hover to discover · Click an area to explore its landscape', 'zh-CN': '悬停看简介 · 点击行政区，深入全域与主城', 'zh-TW': '懸停看簡介 · 點擊行政區，深入全域與主城' })
+            : units.some(unit => unit.explore || unit.administrative) ? local({ en: 'Hover to discover · Click a district to explore', 'zh-CN': '悬停看简介 · 点击分区，继续探索', 'zh-TW': '懸停看簡介 · 點擊分區，繼續探索' }) : copy().hint;
         footer.append(node('span', 'region-explore-hint', hint));
         if (record.borders?.length) footer.append(node('span', 'region-border-key', copy().borders));
         if (record.borders?.some(border => border.kind === 'disputed')) {
             footer.append(node('span', 'region-border-key is-disputed', language === 'en' ? 'Disputed / control line' : language === 'zh-TW' ? '爭議／控制線' : '争议／控制线'));
         }
-        main.append(mapHeader, canvas, footer);
+        main.append(mapHeader, canvas);
+        settlementKey(main, record.settlements, visible => { builtUp.style.display = visible ? '' : 'none'; },
+            visits.childNodes.length ? visible => { visits.style.display = visible ? '' : 'none'; } : null);
+        main.append(footer);
         aside.append(notes, node('h4', 'region-places-title', copy().places), tabs);
         layout.append(main, aside);
         content.append(layout);
@@ -295,6 +376,47 @@
         // Force first rendering, including the whole-region introduction.
         selection = undefined;
         choose(null);
+    }
+    function exploreUnit(unit, parent, choose) {
+        if (unit?.explore) return openRelated(unit.explore, parent, unit.id);
+        if (unit && (parent.mode === 'cultural' || unit.administrative)) return openAdministrative(unit, parent);
+        choose(unit);
+    }
+    async function openRelated(options, parent, unitId) {
+        const session = active;
+        if (!session) return;
+        const request = session.request = (session.request || 0) + 1;
+        (session.regionStack ||= []).push({ record: parent, options: session.options, unitId });
+        session.options = { ...options, language };
+        session.view = 'region-loading';
+        session.close.textContent = `← ${titleOf(parent)}`;
+        session.content.replaceChildren(node('p', 'region-load-status', copy().loading));
+        session.content.setAttribute('aria-busy', 'true');
+        const load = async () => {
+            try {
+                const detail = await resolveDetail(session.options);
+                if (active === session && session.request === request && session.dialog.open) {
+                    renderDetail(detail); session.content.scrollTop = 0; session.close.focus({ preventScroll: true });
+                }
+            } catch (error) {
+                if (active !== session || session.request !== request) return;
+                const retry = node('button', 'region-load-retry', copy().retry); retry.type = 'button'; retry.addEventListener('click', load);
+                session.content.replaceChildren(node('p', 'region-load-status', copy().failed), retry);
+            } finally { if (active === session && session.request === request) session.content.setAttribute('aria-busy', 'false'); }
+        };
+        await load();
+    }
+    function backFromDetail() {
+        const session = active;
+        if (!session) return;
+        if (session.parent && ['administrative', 'admin-loading'].includes(session.view)) return returnToParent();
+        const previous = session.regionStack?.pop();
+        if (!previous) return session.dialog.close();
+        session.request = (session.request || 0) + 1;
+        session.options = previous.options;
+        renderDetail(previous.record); session.content.setAttribute('aria-busy', 'false'); session.content.scrollTop = 0;
+        const trigger = [...session.content.querySelectorAll('.region-district-tabs button')].find(button => button.dataset.unit === previous.unitId);
+        (trigger || session.close).focus({ preventScroll: true });
     }
     async function openAdministrative(unit, parent) {
         const session = active;
@@ -320,6 +442,7 @@
             const result = { ...detail, ...enrich(entries[unit.id] || article), id: detail.id, views: detail.views,
                 urbanFocus: article.urbanFocus || entries[unit.id]?.urbanFocus || detail.urbanFocus,
                 credits: detail.credits || index.credits || [] };
+            result.settlements = await settlements('administrative', detail.id);
             Object.values(result.views).forEach(view => { view.places = (view.places || []).map(enrich); });
             await Promise.all(Object.values(result.views).map(view => new Promise((resolve, reject) => {
                 const img = new Image(); img.onload = () => img.decode().then(resolve, reject);
@@ -410,6 +533,8 @@
             }
         }
         for (const [key, view] of Object.entries(record.views)) {
+            const settlement = record.settlements?.views?.[key] || { unavailable: true };
+            let controller, showBuiltUp = true;
             const panel = node('section', 'admin-model-panel'); panel.dataset.adminView = key;
             const header = node('header', 'admin-model-header');
             const heading = node('div');
@@ -424,6 +549,8 @@
             const scale = Math.min(900 / w, 650 / h), x = (1000 - w * scale) / 2, y = 24 + (650 - h * scale) / 2;
             const point = p => [x + p[0] * scale, y + p[1] * scale];
             map.append(svg('image', { href: terrainURL(view), x, y, width: w * scale, height: h * scale, class: 'region-terrain-image' }));
+            const builtUp = settlementLayer(settlement, `translate(${x} ${y}) scale(${scale})`);
+            map.append(builtUp);
             (view.inset_frames || []).forEach((frame, index) => {
                 const [fx, fy] = point([frame.x, frame.y]);
                 map.append(svg('rect', { x: fx, y: fy, width: frame.width * scale, height: frame.height * scale, class: 'region-inset-frame' }));
@@ -457,6 +584,9 @@
             showCards(shown);
             stage.prepend(map);
             panel.append(header, stage);
+            settlementKey(panel, { ...settlement, credits: record.settlements?.credits, note: record.settlements?.note }, visible => {
+                showBuiltUp = visible; builtUp.style.display = visible ? '' : 'none'; controller?.setSettlements(visible);
+            });
             if (view.mesh?.file) {
                 const labels = {
                     show: local({ en: 'Rotate terrain', 'zh-CN': '旋转地形', 'zh-TW': '旋轉地形' }),
@@ -484,7 +614,7 @@
                     controls.append(select);
                 }
                 header.append(toggle); panel.insertBefore(controls, stage); panel.append(hint);
-                let controller, canvas, showing = false, generation = 0, retired = false;
+                let canvas, showing = false, generation = 0, retired = false;
                 function restoreLines() {
                     leaders.forEach(({ line, dot, anchor, cx }) => {
                         line.removeAttribute('visibility'); dot.removeAttribute('visibility');
@@ -512,6 +642,9 @@
                         if (retired || token !== generation || !target.isConnected) return;
                         showCards(allPlaces.filter(place => part.points?.[place.id]).slice(0, 2));
                         const model = await module.mountTerrain(target, `${part.file}?v=${VERSION}`, {
+                            settlements: { ...(settlement.meshOverlays?.[part.file] || (part.file === view.mesh.file ? settlement : {})),
+                                width: settlement.meshOverlays?.[part.file]?.width || w, height: settlement.meshOverlays?.[part.file]?.height || h,
+                                bounds: part.pixel_bounds, visible: showBuiltUp },
                             onProject(project) {
                                 leaders.forEach(({ place, line, dot, cx }) => {
                                     const position = part.points?.[place.id];
@@ -590,14 +723,14 @@
         dialog.setAttribute('aria-labelledby', title.id);
         heading.append(kicker, title);
         const close = node('button', 'region-explorer-close', `← ${copy().close}`);
-        close.type = 'button'; close.addEventListener('click', () => active === session && session.view !== 'region' && session.parent ? returnToParent() : dialog.close());
+        close.type = 'button'; close.addEventListener('click', () => active === session && backFromDetail());
         header.append(heading, close);
         const content = node('div', 'region-explorer-content');
         dialog.append(header, content);
         const session = { dialog, content, options, title, kicker, close };
         active = session;
         dialog.addEventListener('cancel', event => {
-            if (session.parent && session.view !== 'region') { event.preventDefault(); returnToParent(); }
+            if (session.regionStack?.length || session.parent && session.view !== 'region') { event.preventDefault(); backFromDetail(); }
         });
         dialog.addEventListener('keydown', event => event.stopPropagation());
         dialog.addEventListener('close', () => {

@@ -109,11 +109,6 @@ def hit_manifest(metadata):
             continue
         items = []
         regions = layer.get("regions", [])
-        if view == "detail":
-            regions = [region for region in regions if region.get("visited")]
-            # The closed-area treatment remains discoverable in either view.
-            regions += [region for region in metadata.get("overview", {}).get("regions", [])
-                        if region.get("country") == "PRK"]
         for region in regions:
             item = {key: deepcopy(region[key]) for key in REGION_KEYS
                     if key in region and key not in ("path", "boundary_path", "color")}
@@ -125,4 +120,9 @@ def hit_manifest(metadata):
                 item["restricted"] = "closed"
             items.append(item)
         result["views"][view] = items
+    result['insets'] = []
+    for inset in metadata.get('insets', []):
+        entry = {key: deepcopy(inset[key]) for key in ('id', 'frame', 'width', 'height')}
+        entry['regions'] = hit_manifest(inset)['views'].get('detail', [])
+        result['insets'].append(entry)
     return result

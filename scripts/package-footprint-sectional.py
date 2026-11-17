@@ -150,7 +150,8 @@ def runtime_atlas(atlas):
     keys = ("id", "width", "height", "image", "color_image", "background", "display_background", "preview", "insets")
     for identifier, metadata in atlas["maps"].items():
         item = {key: deepcopy(metadata[key]) for key in keys if key in metadata}
-        item["regions"] = [deepcopy(region) for region in metadata["regions"] if region.get("visited")]
+        # Visit status controls the route pigment, not which places can open.
+        item["regions"] = [deepcopy(region) for region in metadata["regions"]]
         item["routes"] = [{key: route[key] for key in ("id", "corridor_path", "corridor_width_km")}
                           for route in metadata["routes"]]
         overview = metadata["overview"]

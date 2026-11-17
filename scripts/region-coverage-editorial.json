@@ -1,0 +1,104 @@
+{
+  "GBR:East": {
+    "label": {
+      "en": "Eastern Scotland",
+      "zh-CN": "苏格兰东部",
+      "zh-TW": "蘇格蘭東部"
+    },
+    "description": {
+      "en": "Eastern Scotland links the Firth of Forth and Fife with the Tay basin, Angus and the eastern Lowlands. This atlas retains the older statistical grouping, including Edinburgh, Stirling and the Scottish Borders, rather than presenting it as a single cultural boundary.",
+      "zh-CN": "苏格兰东部连接福斯湾、法夫、泰河流域与东部低地。这幅图沿用较早的统计分区，范围包括爱丁堡、斯特灵及苏格兰边区；它并不代表一条单一文化边界。海湾、河谷与低地城镇构成了这一带的主要地理线索。",
+      "zh-TW": "蘇格蘭東部連接福斯灣、法夫、泰河流域與東部低地。這幅圖沿用較早的統計分區，範圍包括愛丁堡、斯特靈及蘇格蘭邊區；它並不代表一條單一文化邊界。海灣、河谷與低地城鎮構成了這一帶的主要地理線索。"
+    },
+    "source": "https://www.gov.scot/publications/review-nomenclature-units-territorial-statistics-nuts-boundaries-2012/",
+    "textSources": [
+      "https://www.gov.scot/binaries/content/documents/govscot/publications/consultation-paper/2012/11/review-nomenclature-units-territorial-statistics-nuts-boundaries-2012/documents/review-nomenclature-units-territorial-statistics-nuts-boundaries/review-nomenclature-units-territorial-statistics-nuts-boundaries/govscot%3Adocument/00407631.pdf"
+    ],
+    "textLicense": "Original editorial summary of the Scottish Government's 2012 regional geography"
+  },
+  "GBR:South Western": {
+    "label": {
+      "en": "South Western Scotland",
+      "zh-CN": "苏格兰西南部",
+      "zh-TW": "蘇格蘭西南部"
+    },
+    "description": {
+      "en": "This older Scottish statistical grouping joins Glasgow and the Clyde area with Ayrshire, Lanarkshire and Dumfries and Galloway. It spans the urban west-central belt and the more rural south-west; its historical statistical outline should not be read as a cultural frontier.",
+      "zh-CN": "这一较早的苏格兰统计分区，将格拉斯哥与克莱德河一带，同艾尔郡、拉纳克郡及邓弗里斯和加洛韦相连。范围横跨西部中央地带的城镇与西南部乡野；图中的旧统计边界不是文化界线。",
+      "zh-TW": "這一較早的蘇格蘭統計分區，將格拉斯哥與克萊德河一帶，同艾爾郡、拉納克郡及鄧弗里斯和加洛韋相連。範圍橫跨西部中央地帶的城鎮與西南部鄉野；圖中的舊統計邊界不是文化界線。"
+    },
+    "source": "https://www.gov.scot/publications/review-nomenclature-units-territorial-statistics-nuts-boundaries-2012/",
+    "textSources": [
+      "https://www.gov.scot/publications/review-nomenclature-units-territorial-statistics-nuts-boundaries-2012/"
+    ],
+    "textLicense": "Original editorial summary of the Scottish Government's 2012 regional geography"
+  },
+  "GBR:North Eastern": {
+    "label": {
+      "en": "North Eastern Scotland",
+      "zh-CN": "苏格兰东北部",
+      "zh-TW": "蘇格蘭東北部"
+    },
+    "description": {
+      "en": "North Eastern Scotland comprises Aberdeen City and Aberdeenshire in this statistical grouping. The North Sea coast and Aberdeen's urban landscape meet the rural hinterland of Aberdeenshire. This grouping is a geographical guide, not a claim of a sharp cultural border.",
+      "zh-CN": "本图的苏格兰东北部分区由阿伯丁市和阿伯丁郡组成。北海沿岸、阿伯丁的城市景观与阿伯丁郡的乡野腹地在这里相接。这一统计分组用于地理导览，不表示文化在边界处截然分开。",
+      "zh-TW": "本圖的蘇格蘭東北部分區由阿伯丁市和阿伯丁郡組成。北海沿岸、阿伯丁的城市景觀與阿伯丁郡的鄉野腹地在這裡相接。這一統計分組用於地理導覽，不表示文化在邊界處截然分開。"
+    },
+    "source": "https://www.ons.gov.uk/methodology/geography/ukgeographies/eurostat",
+    "textSources": [
+      "https://www.ons.gov.uk/methodology/geography/ukgeographies/eurostat"
+    ],
+    "textLicense": "Original editorial summary of ONS regional geography"
+  },
+  "KOR:gwandong": {
+    "label": {
+      "en": "Gwandong",
+      "zh-CN": "关东",
+      "zh-TW": "關東"
+    },
+    "description": {
+      "en": "Gwandong is the historical region associated with the former Gangwon Province of Korea. Its cultural geography extends across today's South Korean Gangwon and North Korean Kangwon; this atlas panel displays the southern part.",
+      "zh-CN": "关东是与朝鲜半岛历史江原道相对应的地域名称，其文化地理范围跨越今天韩国的江原道与朝鲜的江原道。本图的这一分区展示其中位于韩国境内的部分。",
+      "zh-TW": "關東是與朝鮮半島歷史江原道相對應的地域名稱，其文化地理範圍跨越今天韓國的江原道與朝鮮的江原道。本圖的這一分區展示其中位於韓國境內的部分。"
+    },
+    "source": "https://en.wikipedia.org/wiki/Gwandong",
+    "textSources": [
+      "https://en.wikipedia.org/wiki/Gwandong"
+    ],
+    "textLicense": "CC BY-SA 4.0; encyclopedia summary adapted and translated"
+  },
+  "KOR:hoseo": {
+    "label": {
+      "en": "Hoseo",
+      "zh-CN": "湖西",
+      "zh-TW": "湖西"
+    },
+    "description": {
+      "en": "Hoseo follows the historical Chungcheong region of Korea. Its present-day area includes North and South Chungcheong, Daejeon and Sejong; the cultural name connects these modern administrative divisions.",
+      "zh-CN": "湖西对应朝鲜半岛历史上的忠清道地区。今天这一地域通常包括忠清北道、忠清南道、大田与世宗，传统地域名称将这些现代行政区联系在一起。",
+      "zh-TW": "湖西對應朝鮮半島歷史上的忠清道地區。今天這一地域通常包括忠清北道、忠清南道、大田與世宗，傳統地域名稱將這些現代行政區聯繫在一起。"
+    },
+    "source": "https://en.wikipedia.org/wiki/Hoseo",
+    "textSources": [
+      "https://en.wikipedia.org/wiki/Hoseo"
+    ],
+    "textLicense": "CC BY-SA 4.0; encyclopedia summary adapted and translated"
+  },
+  "GBR:West Wales and the Valleys": {
+    "label": {
+      "en": "West Wales and the Valleys",
+      "zh-CN": "西威尔士与山谷地带",
+      "zh-TW": "西威爾士與山谷地帶"
+    },
+    "description": {
+      "en": "West Wales and the Valleys is a former statistical grouping joining western Wales with the South Wales Valleys. It was used to organise regional development funding; its map outline is a statistical geography rather than a distinct cultural border.",
+      "zh-CN": "西威尔士与山谷地带是一个较早的统计分组，将威尔士西部与南威尔士诸山谷合在一起，曾用于地区发展资金的规划。图中的范围属于统计地理，不应被理解为独立的文化边界。",
+      "zh-TW": "西威爾士與山谷地帶是一個較早的統計分組，將威爾士西部與南威爾士諸山谷合在一起，曾用於地區發展資金的規劃。圖中的範圍屬於統計地理，不應被理解為獨立的文化邊界。"
+    },
+    "source": "https://en.wikipedia.org/wiki/West_Wales_and_the_Valleys",
+    "textSources": [
+      "https://en.wikipedia.org/wiki/West_Wales_and_the_Valleys"
+    ],
+    "textLicense": "CC BY-SA 4.0; encyclopedia summary adapted and translated"
+  }
+}

@@ -1,5 +1,5 @@
 // Demand-loaded real DEM mesh viewer. No framework, texture, or animation loop.
-export async function mountTerrain(canvas, meshURL, { onProject = () => {}, onError = () => {} } = {}) {
+export async function mountTerrain(canvas, meshURL, { onProject = () => {}, onError = () => {}, settlements = null } = {}) {
     const response = await fetch(meshURL);
     if (!response.ok) throw new Error(`Terrain mesh HTTP ${response.status}`);
     const bytes = await response.arrayBuffer();
@@ -28,18 +28,25 @@ export async function mountTerrain(canvas, meshURL, { onProject = () => {}, onEr
     const vertex = compile(gl.VERTEX_SHADER, `
         attribute vec3 position; attribute vec3 normal;
         uniform mat3 rotation; uniform vec2 scale; uniform vec3 center; uniform float depthScale;
-        varying vec3 litNormal;
+        uniform vec4 settlementTransform;
+        varying vec3 litNormal; varying vec2 settlementUV; varying float surfaceNormal;
         void main() {
             vec3 p = rotation * position - center;
             gl_Position = vec4(p.xy * scale, -p.z * depthScale, 1.0);
             litNormal = rotation * normal;
+            settlementUV = position.xy * settlementTransform.xy + settlementTransform.zw;
+            surfaceNormal = normal.z;
         }`);
     const fragment = compile(gl.FRAGMENT_SHADER, `
-        precision mediump float; varying vec3 litNormal;
+        precision mediump float; varying vec3 litNormal; varying vec2 settlementUV; varying float surfaceNormal;
+        uniform sampler2D settlementMask; uniform float showSettlements;
         void main() {
             vec3 n = normalize(litNormal);
             float light = 0.64 + 0.36 * max(dot(n, normalize(vec3(-0.45, 0.65, 1.0))), 0.0);
-            gl_FragColor = vec4(vec3(0.9333, 0.9176, 0.8784) * light, 1.0);
+            float inside = step(0.0, settlementUV.x) * step(settlementUV.x, 1.0) * step(0.0, settlementUV.y) * step(settlementUV.y, 1.0);
+            float built = texture2D(settlementMask, settlementUV).a * showSettlements * inside * step(0.15, surfaceNormal);
+            vec3 paper = mix(vec3(0.9333, 0.9176, 0.8784), vec3(0.72, 0.48, 0.35), built * 0.32);
+            gl_FragColor = vec4(paper * light, 1.0);
         }`);
     gl.attachShader(program, vertex); gl.attachShader(program, fragment); gl.linkProgram(program);
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
@@ -60,6 +67,23 @@ export async function mountTerrain(canvas, meshURL, { onProject = () => {}, onEr
     const scaleLocation = gl.getUniformLocation(program, 'scale');
     const centerLocation = gl.getUniformLocation(program, 'center');
     const depthLocation = gl.getUniformLocation(program, 'depthScale');
+    const settlementLocation = gl.getUniformLocation(program, 'showSettlements');
+    const mask = document.createElement('canvas'); mask.width = mask.height = 1024;
+    const paint = mask.getContext('2d');
+    if (settlements?.paths?.length && settlements.bounds) {
+        paint.scale(mask.width / settlements.width, mask.height / settlements.height);
+        paint.fillStyle = '#fff';
+        settlements.paths.forEach(path => paint.fill(new Path2D(typeof path === 'string' ? path : path.path), 'evenodd'));
+        const [x0, y0, x1, y1] = settlements.bounds, halfSpan = Math.max(x1 - x0, y1 - y0) / 2;
+        gl.uniform4f(gl.getUniformLocation(program, 'settlementTransform'), halfSpan / settlements.width,
+            -halfSpan / settlements.height, (x0 + x1) / 2 / settlements.width, (y0 + y1) / 2 / settlements.height);
+    }
+    const texture = gl.createTexture(); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mask);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.uniform1i(gl.getUniformLocation(program, 'settlementMask'), 0);
+    let showSettlements = settlements?.visible !== false;
     gl.enable(gl.DEPTH_TEST); gl.clearColor(0, 0, 0, 0);
     let yaw = -0.12, pitch = -0.58, zoom = 1, dragging = null;
     let rotation = [], sx = .86, sy = 1;
@@ -87,6 +111,7 @@ export async function mountTerrain(canvas, meshURL, { onProject = () => {}, onEr
         gl.viewport(0, 0, width, height); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         gl.uniformMatrix3fv(rotationLocation, false, rotation); gl.uniform2f(scaleLocation, sx, sy);
         gl.uniform3fv(centerLocation, center); gl.uniform1f(depthLocation, 1 / Math.max(1, max[2] - min[2]));
+        gl.uniform1f(settlementLocation, showSettlements ? 1 : 0);
         gl.drawElements(gl.TRIANGLES, indices, gl.UNSIGNED_SHORT, 0);
         canvas.dataset.rendered = 'true';
         canvas.dataset.rotation = `${yaw.toFixed(4)},${pitch.toFixed(4)},${zoom.toFixed(3)}`;
@@ -129,13 +154,13 @@ export async function mountTerrain(canvas, meshURL, { onProject = () => {}, onEr
     canvas.addEventListener('webglcontextlost', contextLost);
     const observer = new ResizeObserver(draw); observer.observe(canvas);
     draw();
-    return { reset, project, zoomBy(delta) { zoom = Math.max(.6, Math.min(1.7, zoom + delta)); draw(); }, dispose() {
+    return { reset, project, setSettlements(visible) { showSettlements = visible; draw(); }, zoomBy(delta) { zoom = Math.max(.6, Math.min(1.7, zoom + delta)); draw(); }, dispose() {
         if (disposed) return; disposed = true; observer.disconnect();
         canvas.removeEventListener('pointerdown', down); canvas.removeEventListener('pointermove', move);
         canvas.removeEventListener('pointerup', up); canvas.removeEventListener('pointercancel', up);
         canvas.removeEventListener('lostpointercapture', up); canvas.removeEventListener('keydown', key);
         canvas.removeEventListener('webglcontextlost', contextLost);
-        buffers.forEach(buffer => gl.deleteBuffer(buffer)); shaders.forEach(shader => gl.deleteShader(shader)); gl.deleteProgram(program);
+        buffers.forEach(buffer => gl.deleteBuffer(buffer)); shaders.forEach(shader => gl.deleteShader(shader)); gl.deleteProgram(program); gl.deleteTexture(texture);
         gl.getExtension('WEBGL_lose_context')?.loseContext();
     } };
 }

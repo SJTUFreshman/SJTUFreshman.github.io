@@ -4,7 +4,7 @@
     // 维护指南：tools/relief-atlas/ADDING-FOOTPRINTS.md；这里是显示层，不是到访/行程数据的编辑入口。
     // 新城市改 site_content.json 的 visited_china；新路线改 scripts/prepare-footprint-routes.py 再生成、打包。
     // 城市或路线重新打包后，同步修改此版本、life.html 中脚本的 atlas= 及全部 Life 资源的共享 v=。
-    const ATLAS_VERSION = '20261116-east-asia-aligned';
+    const ATLAS_VERSION = '20261117-open-atlas';
     const ATLAS_URL = `assets/maps/relief/atlas-preview.json?v=${ATLAS_VERSION}`;
     const MAP_DEFINITIONS = [
         {
@@ -106,7 +106,9 @@
     const hitLoads = new Map();
 
     function isRestricted(item) { return item.restricted || item.id === 'PRK'; }
-    function canExplore(item) { return !isRestricted(item) && (item.visited === true || /^(?:CHN:|\d{6}$)/.test(String(item.id))); }
+    // A travel status controls the map's ink, never access to its geography.
+    // Restricted destinations retain their warning while remaining readable.
+    function canExplore(item) { return Boolean(item?.id); }
 
     function openRegion(definition, item, view, trigger) {
         if (!canExplore(item)) return;
@@ -175,9 +177,7 @@
             hatchPattern(svg, hatchId);
             const mainlandClip = mainMapClip(svg.querySelector('defs'), instance.map, `preview-${instance.definition.id}`);
             const tip = tooltipFor(instance.box);
-            Object.entries(data.views).forEach(([view, items]) => {
-                const layer = svgElement('g', { 'data-hit-view': view });
-                if (mainlandClip) layer.setAttribute('clip-path', mainlandClip);
+            const appendHits = (layer, items, view) => {
                 items.forEach(item => {
                     const hit = svgElement('path', { d: item.boundary_path || item.path, class: 'footprints-preview-hit', tabindex: 0,
                         role: 'button', 'data-region-id': item.id, 'vector-effect': 'non-scaling-stroke', 'fill-rule': 'evenodd' });
@@ -193,12 +193,32 @@
                     hit.addEventListener('pointerleave', () => { if (document.activeElement !== hit) tip(null); });
                     hit.addEventListener('focus', () => tip(item));
                     hit.addEventListener('blur', () => tip(null));
-                    hit.addEventListener('click', event => { event.stopPropagation(); tip(item); openRegion(instance.definition, item, view, hit); });
+                    hit.addEventListener('click', event => { event.stopPropagation(); tip(item); openRegion(instance.definition, item, view || instance.view, hit); });
                     hit.addEventListener('keydown', event => {
-                        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); event.stopPropagation(); openRegion(instance.definition, item, view, hit); }
+                        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); event.stopPropagation(); openRegion(instance.definition, item, view || instance.view, hit); }
                     });
                     layer.append(hit);
                 });
+            };
+            Object.entries(data.views).forEach(([view, items]) => {
+                const layer = svgElement('g', { 'data-hit-view': view });
+                if (mainlandClip) layer.setAttribute('clip-path', mainlandClip);
+                if (view === 'detail') appendHits(layer, (data.views.overview || []).filter(region => !items.some(item => item.id === region.id)), view);
+                appendHits(layer, items, view);
+                svg.append(layer);
+            });
+            (data.insets || []).forEach(inset => {
+                const frame = inset.frame;
+                if (!frame || !inset.width || !inset.height) return;
+                const width = Math.min(frame.width - 32, (frame.height - 116) * inset.width / inset.height);
+                const height = width * inset.height / inset.width;
+                const layer = svgElement('svg', {
+                    x: frame.x + (frame.width - width) / 2,
+                    y: frame.y + 100 + (frame.height - 116 - height) / 2,
+                    width, height, viewBox: `0 0 ${inset.width} ${inset.height}`,
+                    'data-inset-id': inset.id, overflow: 'hidden'
+                });
+                appendHits(layer, inset.regions || [], null);
                 svg.append(layer);
             });
             instance.hitSvg = svg;
@@ -727,7 +747,7 @@
             ? map.cities
             : Array.isArray(map.visited)
                 ? map.visited
-                : regions.filter(region => region.visited === true || region.level === 'city' || region.kind === 'city');
+                : regions;
         const cities = citySource.map(item => typeof item === 'string' ? { id: item, name: item } : (item || {}));
         const visitedSource = Array.isArray(map.visited) ? map.visited : [];
         const visitedIds = new Set(visitedSource.flatMap(item => [item?.id, item?.name, item?.label, item]).flatMap(value => {
@@ -772,7 +792,7 @@
         const culturalLayer = svgElement('g', { 'data-atlas-view': 'cultural' });
         const mainlandClip = mainMapClip(defs, map, instanceId);
         if (mainlandClip) [detailLayer, overviewLayer, culturalLayer].forEach(layer => layer.setAttribute('clip-path', mainlandClip));
-        const insetLayer = svgElement('g', { class: 'footprints-map-insets', 'aria-hidden': 'true' });
+        const insetLayer = svgElement('g', { class: 'footprints-map-insets' });
         const fillGroup = svgElement('g', { class: 'footprints-map-visited-terrain' });
         const cityGroup = svgElement('g', { class: 'footprints-map-cities' });
         const overviewFillGroup = svgElement('g', { class: 'footprints-map-visited-terrain' });
@@ -941,7 +961,7 @@
                 svg.querySelectorAll('[data-city-id], [data-region-id], [data-cultural-id]').forEach(element => {
                     const city = element._footprintsCity;
                     const label = city ? (element.hasAttribute('data-cultural-id') ? culturalLabel(city.data) : nameOf(city.data)) : '';
-                    element.setAttribute('aria-label', label);
+                    element.setAttribute('aria-label', `${label}${city && isRestricted(city.data) ? ' · ' + restrictionLabel() : ''}`);
                     element.querySelector?.('title')?.replaceChildren(document.createTextNode(label));
                     const text = element.querySelector?.('.footprints-city-label-text');
                     if (text) text.textContent = label;
@@ -1000,6 +1020,12 @@
                 imageUrl(inset.image || overviewInset?.image)
             ].filter(Boolean);
             const regions = Array.isArray(overviewInset?.regions) ? overviewInset.regions : Array.isArray(inset.regions) ? inset.regions : [];
+            const insetHits = svgElement('g', { class: 'footprints-map-inset-hits' });
+            regions.forEach((region, regionIndex) => {
+                const path = geometryPath(region.boundary_path || region.path || region.geometry || region.d);
+                if (path) appendRegionHit(insetHits, region, path, centerOf(region, path), 'data-region-id', regionIndex);
+            });
+            imageViewport.append(insetHits);
             const visitedRegions = regions.filter(region => region?.visited === true && geometryPath(region.path || region.geometry || region.d));
             const colourSources = visitedRegions.length ? [
                 imageUrl(inset.preview?.color_image || overviewInset?.preview_color_image || inset.color_image),
@@ -1093,18 +1119,21 @@
         const visitedClipId = `footprints-${instanceId}-visited`;
         const visitedClip = terrainMask(defs, visitedClipId, width, height);
 
+        // Sparse city layers still leave every country/province discoverable.
+        // Put those broad hit areas underneath the finer administrative shapes.
+        overviewRegions.forEach((region, index) => {
+            if (cities.some(city => city.id === region.id)) return;
+            const path = geometryPath(region.boundary_path || region.path);
+            if (path) appendRegionHit(cityGroup, region, path, centerOf(region, path), 'data-region-id', index);
+        });
         cities.forEach((city, index) => {
             const region = regionFor(city, regions) || regionById.get(normaliseId(city?.id)) || regionById.get(normaliseId(city?.name));
             const path = geometryPath(city.geometry || city.path || city.d) || geometryPath(region?.geometry || region?.path || region?.d);
             const visitedCity = matchVisited(map, city, visitedIds) || Boolean(city.visited);
-            if (!visitedCity || !path) return;
+            if (!path) return;
             const center = centerOf(city, path || geometryPath(region?.geometry));
-            visitedClip.append(svgElement('path', { d: path, 'fill-rule': 'evenodd', 'data-clip-city': city.id }));
+            if (visitedCity) visitedClip.append(svgElement('path', { d: path, 'fill-rule': 'evenodd', 'data-clip-city': city.id }));
             appendRegionHit(cityGroup, city, path, center, 'data-city-id', index);
-        });
-        overviewRegions.filter(isRestricted).forEach((region, index) => {
-            const path = geometryPath(region.boundary_path || region.path);
-            if (path) appendRegionHit(cityGroup, region, path, centerOf(region, path), 'data-region-id', index);
         });
 
         (map.routes || []).forEach(route => {
