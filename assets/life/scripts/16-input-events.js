@@ -151,7 +151,7 @@ refreshAstronomicalSky(new Date());
 buildPortalGeometry();
 resetCameraToInitialView();
 buildSectionDrawer();
-dom.sectionDrawerToggle.addEventListener('click', event => {
+dom.sectionDrawerToggle?.addEventListener('click', event => {
     const interactionSource = event.detail === 0 ? 'keyboard' : 'pointer';
     if (state.sectionDrawerOpen) {
         closeSectionDrawer({ interactionSource });
@@ -159,12 +159,12 @@ dom.sectionDrawerToggle.addEventListener('click', event => {
         openSectionDrawer(interactionSource);
     }
 });
-dom.sectionDrawerClose.addEventListener('click', event => {
+dom.sectionDrawerClose?.addEventListener('click', event => {
     closeSectionDrawer({
         interactionSource: event.detail === 0 ? 'keyboard' : 'pointer'
     });
 });
-dom.sectionDrawerScrim.addEventListener('click', () => {
+dom.sectionDrawerScrim?.addEventListener('click', () => {
     closeSectionDrawer({ interactionSource: 'pointer' });
 });
 dom.sectionDrawerHome?.addEventListener('click', event => {
@@ -303,7 +303,7 @@ dom.panelClose.addEventListener('click', event => {
 });
 dom.homeRouteLaunch?.addEventListener('click', event => {
     launchHomeRoute(
-        state.portalReturnFocusTarget === dom.sectionDrawerToggle
+        dom.sectionDrawerToggle && state.portalReturnFocusTarget === dom.sectionDrawerToggle
             ? 'drawer'
             : (event.detail === 0 ? 'keyboard' : 'pointer')
     );

@@ -841,14 +841,14 @@ class LifeStarMap {
         dom.world.addEventListener('wheel', wheel, { passive: false });
         dom.portalNav.addEventListener('wheel', wheel, { passive: false });
         document.getElementById('mapEntities').addEventListener('wheel', wheel, { passive: false });
-        dom.sectionDrawerToggle.addEventListener('click', event => {
+        dom.sectionDrawerToggle?.addEventListener('click', event => {
             this.clearInput();
             const source = event.detail === 0 ? 'keyboard' : 'pointer';
             if (state.sectionDrawerOpen) closeSectionDrawer({ interactionSource: source });
             else openSectionDrawer(source);
         });
-        dom.sectionDrawerClose.addEventListener('click', () => closeSectionDrawer({ interactionSource: 'keyboard' }));
-        dom.sectionDrawerScrim.addEventListener('click', () => closeSectionDrawer());
+        dom.sectionDrawerClose?.addEventListener('click', () => closeSectionDrawer({ interactionSource: 'keyboard' }));
+        dom.sectionDrawerScrim?.addEventListener('click', () => closeSectionDrawer());
         dom.panelClose.addEventListener('click', event => closePortalPanel(true, event.detail === 0 ? 'keyboard' : 'pointer'));
         document.addEventListener('keydown', event => {
             if (this.solarDestination.open) return;

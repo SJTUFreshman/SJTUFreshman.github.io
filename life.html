@@ -78,7 +78,6 @@
     <script src="assets/hipparcos-stars.js?v=20261117-settlement-guide-v1" defer></script>
     <script src="assets/hipparcos-distances.js?v=20261117-settlement-guide-v1" defer></script>
     <link rel="stylesheet" href="assets/life/styles/01-foundation-sky.css?v=20261117-settlement-guide-v1&ui=20261108-font-roles&reading=20261106-illustrated-reader&fallback=20261112-kaiti-webfont">
-    <link rel="stylesheet" href="assets/life/styles/02-section-drawer.css?v=20261117-settlement-guide-v1">
     <link rel="stylesheet" href="assets/life/styles/03-sky-navigation.css?v=20261117-settlement-guide-v1">
     <link rel="stylesheet" href="assets/life/styles/04-detail-panels.css?v=20261117-settlement-guide-v1">
     <link rel="stylesheet" href="assets/life/styles/05-life-content.css?v=20261117-settlement-guide-v1&ui=20261108-lanmi&friends=20261030-group-links&reading=20261106-illustrated-reader&games=20261116&userboxes=20261117-original-fonts">
@@ -101,7 +100,6 @@
             .galaxy-world, .life-mark, .language-switch, .scene-status,
             .portal-nav, .star-nav,
             .map-entities, .map-footer,
-            .section-drawer-toggle, .section-drawer-scrim, .section-drawer,
             .portal-panel-header, .lightbox, .transition-veil { display: none !important; }
             .portal-panel { position: static; width: auto; opacity: 1; visibility: visible; transform: none; background: var(--life-paper); color: var(--life-ink); box-shadow: none; border: 0; }
             .portal-panel-body { overflow: visible; padding: 32px max(20px, 5vw); }
@@ -154,44 +152,6 @@
     </div>
 
     <div class="sr-only" id="gazeAnnouncement" aria-live="polite"></div>
-
-    <button
-        class="section-drawer-toggle"
-        id="sectionDrawerToggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="sectionDrawer"
-        aria-label="Open life index"
-        inert
-    ></button>
-    <button
-        class="section-drawer-scrim"
-        id="sectionDrawerScrim"
-        type="button"
-        tabindex="-1"
-        aria-hidden="true"
-    ></button>
-    <aside
-        class="section-drawer"
-        id="sectionDrawer"
-        role="dialog"
-        aria-modal="true"
-        aria-hidden="true"
-        aria-labelledby="sectionDrawerTitle"
-        aria-describedby="sectionDrawerObserver sectionDrawerNote"
-        inert
-    >
-        <header class="section-drawer-header">
-            <div class="section-drawer-kicker" id="sectionDrawerKicker">LIVE SKY INDEX</div>
-            <h2 class="section-drawer-title" id="sectionDrawerTitle">Life constellations</h2>
-            <p class="section-drawer-observer" id="sectionDrawerObserver"></p>
-            <button class="section-drawer-close" id="sectionDrawerClose" type="button" aria-label="Close life index"></button>
-        </header>
-        <nav class="section-drawer-list" id="sectionDrawerList" aria-label="Life sections"></nav>
-        <footer class="section-drawer-footer">
-            <p class="section-drawer-note" id="sectionDrawerNote">Sections hidden by the horizon or daylight remain available through this index.</p>
-        </footer>
-    </aside>
 
     <nav class="portal-nav" id="portalNav" aria-label="Life constellations">
         <button class="portal-hit" type="button" data-portal-button="gallery" aria-label="Gallery / 光影 / 光影"></button>
@@ -2282,14 +2242,14 @@ Let me know what you think!
     <script src="assets/life/scripts/07-star-map-renderer.js?v=20261117-settlement-guide-v1&detail=20261102-grazing-density" defer></script>
     <script src="assets/life/scripts/09-label-layout.js?v=20261117-settlement-guide-v1&labels=20261108-font-roles" defer></script>
     <script src="assets/life/scripts/10-sky-overlay.js?v=20261117-settlement-guide-v1" defer></script>
-    <script src="assets/life/scripts/11-section-index.js?v=20261117-settlement-guide-v1" defer></script>
+    <script src="assets/life/scripts/11-section-index.js?v=20261117-settlement-guide-v1&index=20261120-removed" defer></script>
     <script src="assets/life/scripts/12-detail-navigation.js?v=20261117-settlement-guide-v1&copy=20261028-no-star-note" defer></script>
     <script src="assets/life/scripts/13-gaze-constellations.js?v=20261117-settlement-guide-v1" defer></script>
     <script src="assets/life/scripts/14-portal-navigation.js?v=20261117-settlement-guide-v1" defer></script>
     <script src="assets/life/scripts/15-render-lock.js?v=20261117-settlement-guide-v1" defer></script>
-    <script src="assets/life/scripts/19-star-map.js?v=20261117-settlement-guide-v1&games=20261116" defer></script>
+    <script src="assets/life/scripts/19-star-map.js?v=20261117-settlement-guide-v1&index=20261120-removed&games=20261116" defer></script>
     <script src="assets/life/scripts/21-deep-sky-map.js?v=20261117-settlement-guide-v1" defer></script>
-    <script src="assets/life/scripts/16-input-events.js?v=20261117-settlement-guide-v1" defer></script>
+    <script src="assets/life/scripts/16-input-events.js?v=20261117-settlement-guide-v1&index=20261120-removed" defer></script>
     <script src="assets/life/scripts/17-content-ui.js?v=20261117-settlement-guide-v1" defer></script>
     <script src="assets/life/scripts/22-footprints-atlas.js?v=20261117-settlement-guide-v1&atlas=20261117-open-atlas" defer></script>
     <script src="assets/life/scripts/23-region-explorer.js?v=20261117-settlement-guide-v1" defer></script>

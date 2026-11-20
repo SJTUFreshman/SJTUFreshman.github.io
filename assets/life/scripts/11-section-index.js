@@ -118,6 +118,7 @@ function sectionIndexCopy() {
 }
 
 function updateSectionDrawerCopy() {
+    if (!dom.sectionDrawer) return;
     const ui = sectionIndexCopy();
     dom.sectionDrawerKicker.textContent = ui.kicker;
     dom.sectionDrawerTitle.textContent = ui.title;
@@ -163,6 +164,7 @@ function updateSectionDrawerCopy() {
 }
 
 function buildSectionDrawer() {
+    if (!dom.sectionDrawer) return;
     const fragment = document.createDocumentFragment();
     portalDefinitions.forEach(portal => {
         const button = document.createElement('button');
@@ -227,6 +229,7 @@ function sectionDrawerBlocked() {
 }
 
 function syncSectionDrawerAvailability() {
+    if (!dom.sectionDrawer) return;
     const blocked = sectionDrawerBlocked();
     const unavailable = blocked && !state.sectionDrawerOpen;
     if (
@@ -242,6 +245,7 @@ function syncSectionDrawerAvailability() {
 }
 
 function openSectionDrawer(source = 'pointer') {
+    if (!dom.sectionDrawer) return false;
     if (state.sectionDrawerOpen || sectionDrawerBlocked()) return false;
     window.lifeStarMap?.clearInput();
     releaseRightZoom();
