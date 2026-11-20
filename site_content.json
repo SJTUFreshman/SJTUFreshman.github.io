@@ -585,6 +585,54 @@
           "zh-CN": "烘焙社草莓蛋糕",
           "zh-TW": "烘焙社草莓蛋糕"
         }
+      },
+      {
+        "id": "photo-city-after-dark",
+        "image": "images/gallery/city-after-dark.webp",
+        "alt": "City after dark",
+        "caption": {
+          "en": "City after dark",
+          "zh-CN": "夜色里的街道",
+          "zh-TW": "夜色裡的街道"
+        },
+        "image_width": 1706,
+        "image_height": 1279
+      },
+      {
+        "id": "photo-boats-on-the-water",
+        "image": "images/gallery/boats-on-the-water.webp",
+        "alt": "Boats on quiet water",
+        "caption": {
+          "en": "Boats on quiet water",
+          "zh-CN": "静水上的船",
+          "zh-TW": "靜水上的船"
+        },
+        "image_width": 1706,
+        "image_height": 1279
+      },
+      {
+        "id": "photo-flowers-between-the-trees",
+        "image": "images/gallery/flowers-between-the-trees.webp",
+        "alt": "Flowers between the trees",
+        "caption": {
+          "en": "Flowers between the trees",
+          "zh-CN": "林间花开",
+          "zh-TW": "林間花開"
+        },
+        "image_width": 1706,
+        "image_height": 1279
+      },
+      {
+        "id": "photo-afternoon-by-the-river",
+        "image": "images/gallery/afternoon-by-the-river.webp",
+        "alt": "An afternoon by the river",
+        "caption": {
+          "en": "An afternoon by the river",
+          "zh-CN": "河边的午后",
+          "zh-TW": "河邊的午後"
+        },
+        "image_width": 1706,
+        "image_height": 1279
       }
     ],
     "shelf": [
@@ -1067,16 +1115,11 @@
       {
         "id": "gallery-campus-undated",
         "stream": "gallery",
-        "date": "",
-        "date_label": {
-          "en": "Spring · Undated",
-          "zh-CN": "春日 · 未标日期",
-          "zh-TW": "春日 · 未標日期"
-        },
+        "date": "2025-03",
         "location": {
-          "en": "Shanghai",
-          "zh-CN": "上海",
-          "zh-TW": "上海"
+          "en": "SJTU Minhang Campus",
+          "zh-CN": "交大闵行校区",
+          "zh-TW": "交大閔行校區"
         },
         "summary": {
           "en": "Spring on the SJTU campus",
@@ -1312,6 +1355,87 @@
           "book_dl"
         ],
         "prominence": 3
+      },
+      {
+        "id": "gallery-fireworks-2026",
+        "stream": "gallery",
+        "date": "2026",
+        "location": {
+          "en": "Home",
+          "zh-CN": "家",
+          "zh-TW": "家"
+        },
+        "summary": {
+          "en": "Spring Festival fireworks",
+          "zh-CN": "春节烟花",
+          "zh-TW": "春節煙花"
+        },
+        "item_ids": [
+          "photo-city-after-dark"
+        ],
+        "prominence": 2,
+        "date_label": {
+          "en": "Spring Festival 2026",
+          "zh-CN": "2026年春节",
+          "zh-TW": "2026年春節"
+        }
+      },
+      {
+        "id": "gallery-west-lake-2026-03",
+        "stream": "gallery",
+        "date": "2026-03",
+        "location": {
+          "en": "West Lake",
+          "zh-CN": "西湖",
+          "zh-TW": "西湖"
+        },
+        "summary": {
+          "en": "Boats on West Lake",
+          "zh-CN": "西湖上的船",
+          "zh-TW": "西湖上的船"
+        },
+        "item_ids": [
+          "photo-boats-on-the-water"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "gallery-campus-flowers-2026-05",
+        "stream": "gallery",
+        "date": "2026-05",
+        "location": {
+          "en": "SJTU Minhang Campus",
+          "zh-CN": "交大闵行校区",
+          "zh-TW": "交大閔行校區"
+        },
+        "summary": {
+          "en": "Flowers between the trees",
+          "zh-CN": "林间花开",
+          "zh-TW": "林間花開"
+        },
+        "item_ids": [
+          "photo-flowers-between-the-trees"
+        ],
+        "prominence": 2
+      },
+      {
+        "id": "gallery-river-2026-09",
+        "stream": "gallery",
+        "date": "2026-09",
+        "location": {
+          "en": "",
+          "zh-CN": "",
+          "zh-TW": ""
+        },
+        "summary": {
+          "en": "An afternoon by the river",
+          "zh-CN": "河边的午后",
+          "zh-TW": "河邊的午後"
+        },
+        "item_ids": [
+          "photo-afternoon-by-the-river"
+        ],
+        "prominence": 2
       }
     ],
     "star_bindings": {
@@ -1320,7 +1444,11 @@
         "gallery-orion-2025": 3179,
         "gallery-nanjing-2025-03": 3179,
         "gallery-baking-2025-12": 4427,
-        "gallery-campus-undated": 4427
+        "gallery-campus-undated": 4427,
+        "gallery-fireworks-2026": 8886,
+        "gallery-west-lake-2026-03": 8886,
+        "gallery-campus-flowers-2026-05": 8886,
+        "gallery-river-2026-09": 8886
       },
       "footprints": {
         "footprints-map": 54061
