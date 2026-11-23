@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE_PATH || 'playwright');
 const base = process.argv[2] || 'http://127.0.0.1:8797/';
+const mapUrl = new URL('life.html?music=off', base).href;
 const output = path.resolve(__dirname, '../.render-work/continuous-galaxy');
 const errors = [];
 const checks = [];
@@ -19,7 +20,7 @@ async function load(browser, options = {}) {
     page.on('response', response => {
         if (response.url().startsWith(base) && response.status() >= 400 && !response.url().endsWith('/favicon.ico')) errors.push(`HTTP ${response.status()} ${response.url()}`);
     });
-    await page.goto(new URL('life.html', base).href, { waitUntil: 'domcontentloaded' });
+    await page.goto(mapUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => window.lifeStarMap?.renderer.galacticLoadedAt != null && window.lifeStarMap.renderer.skyUploaded);
     await page.waitForFunction(() => lifeStarMap.renderer.galacticOpacity() === 1 && lifeStarMap.renderer.skyOpacity() === 1);
     return { context, page };
@@ -265,7 +266,7 @@ async function limitedTextures(browser) {
         });
         const page = await context.newPage();
         page.on('pageerror', error => errors.push(error.message));
-        await page.goto(new URL('life.html', base).href, { waitUntil: 'domcontentloaded' });
+        await page.goto(mapUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForFunction(() => window.lifeStarMap?.renderer.galacticLoadedAt != null);
         await page.evaluate(() => { lifeStarMap.target.distance = 32000; });
         await settle(page);
@@ -284,7 +285,7 @@ async function unavailableAssets(browser) {
         await context.route('**/assets/life/galaxy/**', route => route.abort());
         const page = await context.newPage();
         page.on('pageerror', error => errors.push(error.message));
-        await page.goto(new URL('life.html', base).href, { waitUntil: 'domcontentloaded' });
+        await page.goto(mapUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForFunction(() => window.lifeStarMap?.initialized);
         const movable = await page.evaluate(() => {
             for (let step = 0; step < 15; step++) lifeStarMap.zoom(120);
