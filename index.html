@@ -705,391 +705,6 @@
             cursor: not-allowed;
         }
 
-        /* ========== Life Preview ========== */
-        .life-card {
-            --portal-size: 166px;
-            position: relative;
-            display: block;
-            margin-top: 0;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            cursor: pointer;
-            height: 232px;
-            text-decoration: none;
-            isolation: isolate;
-            color: #fff;
-            background: #090d18;
-            border: 1px solid rgba(255,255,255,0.12);
-            box-shadow: 0 14px 34px rgba(20, 24, 35, 0.13);
-            transform: translateZ(0);
-            transition:
-                transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.55s ease,
-                border-color 0.55s ease;
-        }
-        .life-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.62;
-            background-image:
-                radial-gradient(circle at 8% 26%, rgba(255,255,255,0.9) 0 0.7px, transparent 1px),
-                radial-gradient(circle at 26% 77%, rgba(255,255,255,0.72) 0 0.6px, transparent 1px),
-                radial-gradient(circle at 48% 18%, rgba(207,221,255,0.88) 0 0.8px, transparent 1.1px),
-                radial-gradient(circle at 63% 72%, rgba(255,255,255,0.82) 0 0.7px, transparent 1px),
-                radial-gradient(circle at 88% 18%, rgba(198,211,255,0.92) 0 0.8px, transparent 1.1px);
-            background-size: 101px 83px, 137px 119px, 173px 151px, 211px 179px, 251px 227px;
-            transition: opacity 0.55s ease, transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .life-card::after {
-            content: "";
-            position: absolute;
-            inset: 7px;
-            z-index: 5;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: calc(var(--radius-lg) - 7px);
-            pointer-events: none;
-            transition: border-color 0.55s ease;
-        }
-        .life-card:hover,
-        .life-card:focus-visible {
-            color: #fff;
-            transform: translateY(-3px);
-            border-color: rgba(192,207,255,0.28);
-            box-shadow: 0 22px 48px rgba(17, 23, 43, 0.22);
-            outline: none;
-        }
-        .life-card:focus-visible {
-            box-shadow:
-                0 0 0 3px var(--bg),
-                0 0 0 5px rgba(73, 92, 138, 0.55),
-                0 22px 48px rgba(17, 23, 43, 0.22);
-        }
-        .life-card:hover::before,
-        .life-card:focus-visible::before {
-            opacity: 0.9;
-            transform: translate3d(-8px, 2px, 0) scale(1.025);
-        }
-        .life-card:hover::after,
-        .life-card:focus-visible::after {
-            border-color: rgba(222,229,255,0.16);
-        }
-        .life-card-bg {
-            position: absolute;
-            inset: 0;
-            display: grid;
-            z-index: -2;
-            grid-template-columns: 1.05fr 0.9fr 1fr 1.25fr;
-            gap: 2px;
-            opacity: 0.42;
-            filter: saturate(0.72) contrast(1.08);
-            transition: opacity 0.65s ease, transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), filter 0.65s ease;
-        }
-        .life-card:hover .life-card-bg,
-        .life-card:focus-visible .life-card-bg {
-            opacity: 0.3;
-            filter: saturate(0.5) contrast(1.16);
-            transform: scale(1.035);
-        }
-        .life-card-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .life-card-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            background:
-                radial-gradient(circle at 82% 50%, rgba(103,119,213,0.16) 0%, rgba(32,39,75,0.2) 24%, transparent 46%),
-                linear-gradient(90deg, rgba(7,10,19,0.94) 0%, rgba(7,10,19,0.86) 44%, rgba(7,10,19,0.56) 70%, rgba(7,10,19,0.78) 100%),
-                linear-gradient(180deg, rgba(8,11,21,0.16), rgba(8,11,21,0.56));
-            transition: opacity 0.6s ease;
-        }
-        .life-card:hover .life-card-overlay,
-        .life-card:focus-visible .life-card-overlay {
-            opacity: 0.94;
-        }
-        .life-card-content {
-            position: relative;
-            z-index: 3;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            text-align: left;
-            width: 66%;
-            padding: 30px 34px;
-        }
-        .life-card-title {
-            font-size: clamp(1.55rem, 4.5vw, 1.82rem);
-            font-weight: 500;
-            color: #fff;
-            line-height: 1.12;
-            letter-spacing: 0.045em;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 16px rgba(0,0,0,0.35);
-        }
-        body.lang-en .life-card-title {
-            text-transform: uppercase;
-            font-family: var(--font-en);
-        }
-        .life-card-desc {
-            font-size: 0.88rem;
-            color: rgba(234,237,247,0.72);
-            line-height: 1.55;
-            max-width: 320px;
-        }
-        .life-card-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            margin-top: 17px;
-            color: rgba(232,237,255,0.88);
-            font-family: var(--font-ui);
-            font-size: 0.7rem;
-            font-weight: 500;
-            line-height: 1;
-            letter-spacing: 0.09em;
-            text-transform: uppercase;
-        }
-        .life-card-cta-line {
-            position: relative;
-            width: 34px;
-            height: 1px;
-            overflow: hidden;
-            background: rgba(221,229,255,0.28);
-            transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .life-card-cta-line::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, #edf1ff, transparent);
-            transform: translateX(-110%);
-            transition: transform 0.7s ease;
-        }
-        .life-card-cta-arrow {
-            font-size: 0.92rem;
-            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .life-card:hover .life-card-cta-line,
-        .life-card:focus-visible .life-card-cta-line {
-            width: 48px;
-        }
-        .life-card:hover .life-card-cta-line::after,
-        .life-card:focus-visible .life-card-cta-line::after {
-            transform: translateX(110%);
-        }
-        .life-card:hover .life-card-cta-arrow,
-        .life-card:focus-visible .life-card-cta-arrow {
-            transform: translateX(4px);
-        }
-        .life-card-portal {
-            position: absolute;
-            top: 50%;
-            right: 29px;
-            z-index: 2;
-            width: var(--portal-size);
-            height: var(--portal-size);
-            border-radius: 50%;
-            transform: translateY(-50%);
-            transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .life-card-portal::before {
-            content: "";
-            position: absolute;
-            inset: 13px;
-            border-radius: 50%;
-            background: rgba(95,119,215,0.18);
-            filter: blur(18px);
-            box-shadow: 0 0 34px rgba(151,168,255,0.32);
-            transition: transform 0.8s ease, opacity 0.8s ease;
-        }
-        .life-card:hover .life-card-portal,
-        .life-card:focus-visible .life-card-portal {
-            transform: translateY(-50%) scale(1.055);
-        }
-        .life-card:hover .life-card-portal::before,
-        .life-card:focus-visible .life-card-portal::before {
-            opacity: 0.92;
-            transform: scale(1.16);
-        }
-        .life-card-orbit,
-        .life-card-bearing,
-        .life-card-core {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            border-radius: 50%;
-        }
-        .life-card-orbit {
-            width: 100%;
-            height: 100%;
-            margin: -50% 0 0 -50%;
-            opacity: 0.64;
-            background:
-                repeating-conic-gradient(
-                    from 8deg,
-                    rgba(224,231,255,0.8) 0deg 0.7deg,
-                    transparent 0.7deg 12deg
-                );
-            -webkit-mask: radial-gradient(circle, transparent 0 78%, #000 79% 81%, transparent 82%);
-            mask: radial-gradient(circle, transparent 0 78%, #000 79% 81%, transparent 82%);
-            animation: life-orbit-turn 28s linear infinite;
-        }
-        .life-card-orbit::before,
-        .life-card-orbit::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            background: #eef2ff;
-            box-shadow: 0 0 10px rgba(193,207,255,0.9);
-        }
-        .life-card-orbit::before {
-            width: 4px;
-            height: 4px;
-            top: 17px;
-            left: 31px;
-        }
-        .life-card-orbit::after {
-            width: 3px;
-            height: 3px;
-            right: 19px;
-            bottom: 39px;
-        }
-        .life-card-bearing {
-            width: 134px;
-            height: 134px;
-            margin: -67px 0 0 -67px;
-            border: 1px solid rgba(207,217,255,0.22);
-            box-shadow:
-                inset 0 0 0 7px rgba(9,13,24,0.26),
-                0 0 0 7px rgba(168,186,255,0.025);
-            transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.6s ease;
-        }
-        .life-card-bearing::before,
-        .life-card-bearing::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            background: rgba(209,219,255,0.18);
-            transform: translate(-50%, -50%);
-        }
-        .life-card-bearing::before {
-            width: 152px;
-            height: 1px;
-        }
-        .life-card-bearing::after {
-            width: 1px;
-            height: 152px;
-        }
-        .life-card:hover .life-card-bearing,
-        .life-card:focus-visible .life-card-bearing {
-            border-color: rgba(218,226,255,0.42);
-            transform: rotate(-10deg);
-        }
-        .life-card-core {
-            width: 108px;
-            height: 108px;
-            margin: -54px 0 0 -54px;
-            overflow: hidden;
-            border: 1px solid rgba(229,234,255,0.62);
-            background: #02040a;
-            box-shadow:
-                0 0 0 5px rgba(8,12,24,0.72),
-                0 0 0 6px rgba(195,208,255,0.18),
-                0 0 30px rgba(118,139,239,0.36);
-        }
-        .life-card-core img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: 50% 49%;
-            opacity: 0.85;
-            filter: saturate(0.76) contrast(1.14) brightness(0.9);
-            transform: scale(1.32);
-            transition: opacity 0.65s ease, filter 0.65s ease, transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .life-card-core::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background:
-                radial-gradient(circle at 48% 48%, transparent 0 35%, rgba(38,49,94,0.08) 55%, rgba(2,4,10,0.7) 100%);
-            box-shadow: inset 0 0 22px rgba(1,3,9,0.84);
-            pointer-events: none;
-        }
-        .life-card:hover .life-card-core img,
-        .life-card:focus-visible .life-card-core img {
-            opacity: 1;
-            filter: saturate(1.02) contrast(1.12) brightness(1.04);
-            transform: scale(1.18);
-        }
-        .life-card-star {
-            position: absolute;
-            z-index: 3;
-            width: 2px;
-            height: 2px;
-            border-radius: 50%;
-            background: #fff;
-            box-shadow: 0 0 8px rgba(210,221,255,0.95);
-            transition: transform 0.75s ease, opacity 0.75s ease;
-        }
-        .life-card-star.one { top: 27px; right: 186px; opacity: 0.78; }
-        .life-card-star.two { right: 19px; bottom: 30px; opacity: 0.56; }
-        .life-card-star.three { right: 208px; bottom: 38px; opacity: 0.48; }
-        .life-card:hover .life-card-star.one,
-        .life-card:focus-visible .life-card-star.one { transform: translate(5px, -5px) scale(1.45); opacity: 1; }
-        .life-card:hover .life-card-star.two,
-        .life-card:focus-visible .life-card-star.two { transform: translate(-4px, 3px) scale(1.35); opacity: 0.9; }
-        .life-card:hover .life-card-star.three,
-        .life-card:focus-visible .life-card-star.three { transform: translate(4px, 2px) scale(1.4); opacity: 0.82; }
-
-        @keyframes life-orbit-turn {
-            to { transform: rotate(360deg); }
-        }
-        @media (max-width: 560px) {
-            .life-card {
-                --portal-size: 142px;
-                height: 252px;
-            }
-            .life-card-content {
-                width: calc(100% - 70px);
-                padding: 27px 24px;
-            }
-            .life-card-title {
-                max-width: 210px;
-                font-size: 1.48rem;
-            }
-            .life-card-desc {
-                max-width: 230px;
-                font-size: 0.82rem;
-            }
-            .life-card-portal {
-                right: -42px;
-            }
-            .life-card-bearing {
-                width: 116px;
-                height: 116px;
-                margin: -58px 0 0 -58px;
-            }
-            .life-card-bearing::before { width: 132px; }
-            .life-card-bearing::after { height: 132px; }
-            .life-card-core {
-                width: 92px;
-                height: 92px;
-                margin: -46px 0 0 -46px;
-            }
-            .life-card-star.one { right: 108px; }
-            .life-card-star.three { right: 122px; }
-        }
-
         /* ========== Visitor Map ========== */
         .visitor-section {
             text-align: center;
@@ -1212,22 +827,7 @@
                 transform: none;
                 transition: none;
             }
-            .life-card,
-            .life-card::before,
-            .life-card-bg,
-            .life-card-portal,
-            .life-card-portal::before,
-            .life-card-bearing,
-            .life-card-core img,
-            .life-card-cta-line,
-            .life-card-cta-line::after,
-            .life-card-cta-arrow,
-            .life-card-star {
-                transition: none;
-            }
-            .life-card-orbit {
-                animation: none;
-            }
+
         }
 
         /* Functional typography: bilingual UI stays crisp while reading copy remains editorial. */
@@ -1258,8 +858,6 @@
         html:lang(zh) [data-key="hero_location"] { font-size: 0.96875rem; }
         html:lang(zh) .weather-desc,
         html:lang(zh) .weather-loc { font-size: 0.875rem; }
-        html:lang(zh) .life-card-desc { font-size: 1rem; }
-        html:lang(zh) .life-card-cta { font-size: 0.8125rem; }
 
         /* Scrollbar */
         html { overflow-x: hidden; }
@@ -1271,7 +869,7 @@
     <link rel="stylesheet" href="assets/lanmi-ui.css?v=20261108-font-roles">
     <link rel="stylesheet" href="assets/site-typography.css?v=20261115-original-companion-type">
     <link rel="stylesheet" href="assets/home-typography.css?v=20261115-restored-name-companion">
-    <link rel="stylesheet" href="assets/home-refinement.css?v=20261115-selected-release">
+    <link rel="stylesheet" href="assets/home-refinement.css?v=20261123-original-type-cta">
 <!-- ===== Navigation ===== -->
 <nav class="nav">
     <div class="nav-inner">
@@ -1557,38 +1155,25 @@ This is a journal preview; the real memories are still to come.</p>
     <!-- ===== Life Portal ===== -->
     <section id="life-portal" class="fade-in">
         <a class="life-card" id="lifePortalLink" href="life.html"
-           aria-labelledby="lifePortalTitle lifePortalDesc">
-            <div class="life-card-bg">
-                <img data-deferred-src="images/card-thumbs/qiandaohu-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async" fetchpriority="low">
-                <noscript><img src="images/card-thumbs/qiandaohu-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async"></noscript>
-                <img data-deferred-src="images/card-thumbs/sjtu-campus-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async" fetchpriority="low">
-                <noscript><img src="images/card-thumbs/sjtu-campus-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async"></noscript>
-                <img data-deferred-src="images/card-thumbs/meteor-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async" fetchpriority="low">
-                <noscript><img src="images/card-thumbs/meteor-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async"></noscript>
-                <img data-deferred-src="images/card-thumbs/zijinshan-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async" fetchpriority="low">
-                <noscript><img src="images/card-thumbs/zijinshan-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async"></noscript>
-            </div>
-            <div class="life-card-overlay"></div>
+           aria-labelledby="lifePortalTitle" aria-describedby="lifePortalDesc">
+            <figure class="life-plate">
+                <img data-deferred-src="images/meteor.jpg" alt="" width="1684" height="1122" loading="lazy" decoding="async" fetchpriority="low">
+                <noscript><img src="images/meteor.jpg" alt="" width="1684" height="1122" loading="lazy" decoding="async"></noscript>
+                <span class="life-plate-dial" aria-hidden="true"></span>
+                <figcaption class="life-plate-caption">
+                    <span class="life-plate-id">M42</span>
+                    <span data-key="cap_meteor">Orion Nebula, 2025</span>
+                </figcaption>
+            </figure>
             <div class="life-card-content">
-                <div class="life-card-title" id="lifePortalTitle" data-key="life_card_title">Beyond Research</div>
-                <div class="life-card-desc" id="lifePortalDesc" data-key="life_card_desc">Footprints map, bookshelf, thoughts, and more.</div>
-                <div class="life-card-cta" aria-hidden="true">
+                <h2 class="life-card-title" id="lifePortalTitle" data-key="life_card_title">Beyond Research</h2>
+                <p class="life-card-desc" id="lifePortalDesc" data-key="life_card_desc">Footprints map, bookshelf, thoughts, and more.</p>
+                <span class="life-card-cta" aria-hidden="true">
                     <span data-key="life_card_cta">Enter the night sky</span>
                     <span class="life-card-cta-line"></span>
                     <span class="life-card-cta-arrow">→</span>
-                </div>
-            </div>
-            <div class="life-card-portal" aria-hidden="true">
-                <span class="life-card-orbit"></span>
-                <span class="life-card-bearing"></span>
-                <span class="life-card-core">
-                    <img data-deferred-src="images/card-thumbs/meteor-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async" fetchpriority="low">
-                    <noscript><img src="images/card-thumbs/meteor-card.jpg" alt="" width="512" height="680" loading="lazy" decoding="async"></noscript>
                 </span>
             </div>
-            <span class="life-card-star one" aria-hidden="true"></span>
-            <span class="life-card-star two" aria-hidden="true"></span>
-            <span class="life-card-star three" aria-hidden="true"></span>
         </a>
     </section>
 
@@ -1622,6 +1207,7 @@ const i18n = {
         "nav_projects": "Projects",
         "nav_gallery": "Gallery",
         "title_news": "News",
+        "life_card_cta": "Enter the night sky",
         "title_pubs": "Publications",
         "title_projects": "Projects",
         "title_gallery": "Gallery",
@@ -1671,6 +1257,7 @@ const i18n = {
         "nav_projects": "项目",
         "nav_gallery": "光影",
         "title_news": "动态",
+        "life_card_cta": "走进星空",
         "title_pubs": "发表论文",
         "title_projects": "项目经历",
         "title_gallery": "光影",
@@ -1720,6 +1307,7 @@ const i18n = {
         "nav_projects": "項目",
         "nav_gallery": "光影",
         "title_news": "動態",
+        "life_card_cta": "走進星空",
         "title_pubs": "發表論文",
         "title_projects": "項目經歷",
         "title_gallery": "光影",

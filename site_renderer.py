@@ -585,7 +585,7 @@ def replace_code_region(text: str, name: str, replacement: str, fallback_pattern
     return text
 
 
-def render_home_i18n(content: dict[str, Any]) -> str:
+def home_translations(content: dict[str, Any]) -> dict[str, dict[str, str]]:
     home = content["home"]
     i18n = {
         lang: dict(home["labels"][lang])
@@ -623,7 +623,11 @@ def render_home_i18n(content: dict[str, Any]) -> str:
         for lang in LANGS:
             i18n[lang][f"cap_{key}"] = lang_value(item.get("caption", {}), lang)
 
-    return "/* ===== i18n Content ===== */\nconst i18n = " + json_js(i18n) + ";"
+    return i18n
+
+
+def render_home_i18n(content: dict[str, Any]) -> str:
+    return "/* ===== i18n Content ===== */\nconst i18n = " + json_js(home_translations(content)) + ";"
 
 
 def wine_text_values(content: dict[str, Any]) -> dict[str, Any]:
@@ -1777,7 +1781,7 @@ def render_home_updates(root: Path, content: dict[str, Any], write: bool) -> str
     text = path.read_text(encoding="utf-8")
     text = replace_region(text, "HOME_NEWS", render_home_news(content), r'<!-- ===== News ===== -->\s*<section id="news".*?</section>')
     text = replace_region(text, "HOME_PUBLICATIONS", render_publications(content), r'<!-- ===== Publications ===== -->\s*<section id="publications".*?</section>')
-    translations = json.loads(render_home_i18n(content).split("const i18n = ", 1)[1].removesuffix(";"))
+    translations = home_translations(content)
     current_translations = json.loads(re.search(r'const i18n = (\{.*?\});', text, re.S).group(1))
     news_keys = {key_for("news", item, index) for index, item in enumerate(content["home"]["news"])}
     label_keys = {"nav_pubs", "title_pubs", "news_read"}
@@ -1822,7 +1826,18 @@ def render_home(root: Path, content: dict[str, Any], write: bool) -> str:
     text = replace_region(text, "HOME_NEWS", render_home_news(content), r'<!-- ===== News ===== -->\s*<section id="news".*?</section>')
     text = replace_region(text, "HOME_PUBLICATIONS", render_publications(content), r'<!-- ===== Publications ===== -->\s*<section id="publications".*?</section>')
     text = replace_region(text, "HOME_PROJECTS", render_projects(content), r'<!-- ===== Projects ===== -->\s*<section id="projects".*?</section>')
-    text = replace_region(text, "HOME_GALLERY", render_home_gallery(content), r'<!-- ===== Gallery ===== -->\s*<section id="gallery".*?</section>')
+    portal = re.search(r'<section\b[^>]*\bid="life-portal"[^>]*>.*?</section>', text, re.S)
+    if portal:
+        english = home_translations(content)["en"]
+        updated = re.sub(
+            r'(?P<opening><(?P<tag>[\w-]+)\b[^>]*\bdata-key="(?P<key>[^"]+)"[^>]*>)[^<]*(?=</(?P=tag)>)',
+            lambda match: match["opening"] + esc(english[match["key"]])
+            if match["key"] in english else match[0],
+            portal[0],
+        )
+        text = text[:portal.start()] + updated + text[portal.end():]
+    else:
+        text = replace_region(text, "HOME_GALLERY", render_home_gallery(content), r'<!-- ===== Gallery ===== -->\s*<section id="gallery".*?</section>')
     text = replace_region(text, "HOME_FOOTER", f'<footer class="footer">\n    {content["site"]["footer"]}\n</footer>', r'<footer class="footer">.*?</footer>')
     text = replace_code_region(text, "HOME_I18N", render_home_i18n(content), r'/\* ===== i18n Content ===== \*/\s*const i18n = \{.*?\};')
     text = replace_code_region(text, "HOME_CITATIONS", render_citations(content), r'/\* ===== Citations ===== \*/\s*const citations = \{.*?\};')

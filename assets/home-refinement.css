@@ -44,11 +44,184 @@ html[lang] .hero-links { gap: 10px 22px; }
 html[lang] .section-title { margin-top: 19px; gap: 14px; }
 .section-title::after { background: linear-gradient(90deg, #d8c1d0, #d8c1d000); }
 #life-portal { padding-top: 36px; }
-.life-card { border-radius: 12px; }
-.life-card::after { border-radius: 6px; }
-html[lang] .life-card-content { padding: 36px 40px; }
-html[lang] .life-card-title { margin-bottom: 14px; }
-html[lang] .life-card-desc { color: #cad1e2; }
+
+/* An astronomical plate from the gallery opens the personal side of the site. */
+.life-card {
+    --plate-ink: #111824;
+    --dial-gold: #dfc9a6;
+    display: grid;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid #24303b;
+    border-radius: 12px;
+    background: linear-gradient(125deg, #1b2836, var(--plate-ink) 45%, #242532);
+    box-shadow: 0 4px 8px -5px #17223145, 0 16px 36px -22px #17223170;
+    text-decoration: none;
+    color: #f1f3f7;
+}
+.life-card::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgb(185 197 214 / 16%);
+    border-radius: 5px;
+    pointer-events: none;
+}
+.life-card:focus-visible { outline: 3px solid #5476a4; outline-offset: 4px; }
+.life-plate {
+    position: absolute;
+    inset: 0 0 0 40%;
+    margin: 0;
+    pointer-events: none;
+}
+.life-plate img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: screen;
+    mask-image: linear-gradient(90deg, transparent, #000 33%);
+    transition: transform 750ms cubic-bezier(.2,.65,.3,1);
+}
+.life-plate::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgb(13 20 32 / 85%), transparent 25%);
+    mask-image: linear-gradient(90deg, transparent, #000 28%);
+}
+.life-plate-dial {
+    position: absolute;
+    top: 51%;
+    left: 52%;
+    width: min(58%, 236px);
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border: 1px solid rgb(225 206 170 / 31%);
+    border-radius: 50%;
+    opacity: .83;
+}
+.life-plate-dial::before {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border-radius: inherit;
+    background: repeating-conic-gradient(from -1deg, var(--dial-gold) 0 .45deg, transparent .6deg 10deg);
+    mask-image: radial-gradient(closest-side, transparent calc(100% - 5px), #000 calc(100% - 5px));
+    transition: rotate 750ms cubic-bezier(.2,.65,.3,1);
+}
+.life-plate-caption {
+    position: absolute;
+    z-index: 1;
+    right: 26px;
+    bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    color: #d6dde8;
+    font: italic .875rem/1.3 var(--font-en);
+}
+.life-plate-id {
+    padding-right: 10px;
+    border-right: 1px solid #b6bfce55;
+    font: normal .6875rem/1 var(--font-mono);
+    letter-spacing: .1em;
+}
+html:lang(zh) .life-plate-caption { font-style: normal; }
+html[lang] .life-card-content {
+    position: relative;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 58%;
+    min-height: 304px;
+    padding: 36px clamp(30px, 4.3vw, 58px);
+}
+html[lang] .life-card-title {
+    margin: 0 0 14px;
+    color: #fff;
+    font-size: clamp(1.625rem, 1.3rem + 1vw, 2rem);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: .01em;
+    text-shadow: 0 2px 16px rgb(0 0 0 / 35%);
+}
+body.lang-en .life-card-title {
+    font-family: var(--font-en);
+    text-transform: uppercase;
+}
+html[lang] .life-card-desc {
+    max-width: 43ch;
+    margin: 0;
+    color: #c9d0d6;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+.life-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 17px;
+    color: rgb(232 237 255 / 88%);
+    font-family: var(--font-ui);
+    font-size: .7rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+}
+.life-card-cta-line {
+    position: relative;
+    width: 34px;
+    height: 1px;
+    overflow: hidden;
+    background: rgb(221 229 255 / 28%);
+    transition: width .55s cubic-bezier(.22, 1, .36, 1);
+}
+.life-card-cta-line::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, #edf1ff, transparent);
+    transform: translateX(-110%);
+    transition: transform .7s ease;
+}
+.life-card-cta-arrow {
+    font-size: .92rem;
+    transition: transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+.life-card:is(:hover, :focus-visible) { color: #f1f3f7; }
+.life-card:is(:hover, :focus-visible) .life-card-cta-line { width: 48px; }
+.life-card:is(:hover, :focus-visible) .life-card-cta-line::after { transform: translateX(110%); }
+.life-card:is(:hover, :focus-visible) .life-card-cta-arrow {
+    transform: translateX(4px);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .life-card:hover .life-plate img { transform: scale(1.035); }
+    .life-card:hover .life-plate-dial::before { rotate: 5deg; }
+}
+@media (max-width: 640px) {
+    .life-plate {
+        position: relative;
+        inset: auto;
+        height: clamp(148px, 40vw, 210px);
+    }
+    .life-plate img { object-position: center 54%; mask-image: linear-gradient(#000 60%, transparent); }
+    .life-plate::after { display: none; }
+    .life-plate-dial { width: auto; height: 70%; left: 51%; top: 47%; }
+    .life-plate-caption { left: 28px; right: auto; bottom: 0; }
+    html[lang] .life-card-content {
+        width: 100%;
+        min-height: 0;
+        padding: 16px 28px 31px;
+    }
+    html[lang] .life-card-title { max-width: 210px; font-size: 1.75rem; }
+    .life-card-cta { margin-top: 18px; }
+}
 html[lang] .footer { color: #68758a; padding-block: 28px 36px; }
 
 /* The menu is refined independently of the original companion launch button. */
@@ -86,7 +259,6 @@ html[lang] .footer { color: #68758a; padding-block: 28px 36px; }
     html[lang] .hero-title { margin-bottom: 18px; }
     html[lang] .hero-bio { margin-bottom: 22px; }
     html[lang] .hero-links { gap: 10px 18px; }
-    html[lang] .life-card-content { padding: 28px 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
