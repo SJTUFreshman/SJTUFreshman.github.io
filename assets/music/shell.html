@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="robots" content="noindex">
     <title>Runde Yang</title>
-    <link rel="stylesheet" href="player.css?v=20261114-editorial">
+    <link rel="stylesheet" href="player.css?v=20261124-cassette">
     <script src="shell.js?v=20261108-music" defer></script>
     <script src="player.js?v=20261112-polish" defer></script>
 </head>
@@ -26,7 +26,6 @@
                 <symbol id="music-icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
                 <symbol id="music-icon-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
                 <symbol id="music-icon-arrow" viewBox="0 0 24 24"><path d="M6 18 18 6M7 6h11v11"/></symbol>
-                <symbol id="music-icon-note" viewBox="0 0 24 24"><path d="M9 18V6l11-3v12M9 10l11-3"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="15" rx="3" ry="2.5"/></symbol>
                 <symbol id="music-icon-grip" viewBox="0 0 24 24"><path d="M8 5h.01M16 5h.01M8 12h.01M16 12h.01M8 19h.01M16 19h.01" stroke-width="3.2"/></symbol>
             </defs>
         </svg>
@@ -66,7 +65,23 @@
             <button type="button" class="music-drag-handle" id="musicDrag" aria-label="移动随身听" aria-describedby="musicDragHint" title="拖动调整位置；双击恢复右上角"><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-grip"/></svg></button>
             <span class="music-sr-only" id="musicDragHint">拖动调整位置，也可用方向键移动，Home 键恢复右上角。</span>
             <button type="button" class="music-toggle" id="musicToggle" aria-controls="musicPanel" aria-expanded="false" aria-label="打开音乐播放器">
-                <span class="music-mark" aria-hidden="true"><svg class="music-glyph"><use href="#music-icon-note"/></svg></span>
+                <svg class="music-mark" viewBox="0 0 48 44" aria-hidden="true" focusable="false">
+                    <!-- Raised transport keys and the enamel case. -->
+                    <rect x="8" y="4" width="10" height="6" rx="1.5" fill="#de8265"/>
+                    <path d="M21 8V5h6v3m2 0V5h6v3" fill="#718397"/>
+                    <rect x="3" y="7" width="42" height="33" rx="5" fill="#3c506c"/>
+                    <rect x="3.75" y="7.75" width="39.5" height="29.75" rx="4" fill="#7193b7"/>
+                    <path d="M8 9h30" stroke="#adc6da" stroke-width="1.4" stroke-linecap="round"/>
+                    <!-- Tape window with two visible spool hubs. -->
+                    <rect x="7" y="12" width="32" height="16" rx="3" fill="#efe6d1"/>
+                    <rect x="9.5" y="14.5" width="27" height="11" rx="5.5" fill="#30455a"/>
+                    <path d="M19 21h8" stroke="#bd9477" stroke-width="2"/>
+                    <g class="music-reel"><circle cx="15.5" cy="20" r="3.8"/><path d="M15.5 17.3V20l2.3 1.35m-2.3-1.35-2.3 1.35"/></g>
+                    <g class="music-reel"><circle cx="30.5" cy="20" r="3.8"/><path d="M30.5 17.3V20l2.3 1.35m-2.3-1.35-2.3 1.35"/></g>
+                    <path d="M8 30h3.5l-2 5H6Z" fill="#f0d49f"/>
+                    <path d="M12.5 30H16l-2 5h-3.5Z" fill="#f0ad95"/>
+                    <path d="M28 31h10m-10 2.7h10" fill="none" stroke="#405d7a" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
                 <span class="music-dock-copy"><span class="music-dock-label">随身听<span class="music-levels" aria-hidden="true"><span></span><span></span><span></span></span></span><span class="music-dock-track"><span id="musicDockTitle">加载歌单…</span><span id="musicDockArtist">张祺然</span></span></span>
             </button>
             <button type="button" class="music-quick-play" id="musicQuickPlay" aria-label="播放" disabled><svg class="music-glyph" aria-hidden="true"><use href="#music-icon-play"/></svg></button>
