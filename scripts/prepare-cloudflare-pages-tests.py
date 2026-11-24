@@ -27,6 +27,7 @@ class PreparePagesTests(unittest.TestCase):
         self.write('documents/证书.pdf', b'certificate')
         self.write('assets/mochi/frames/idle/idle-00.png', b'pet frame')
         self.write('assets/music/zhang-qiran/song.m4a', b'audio track')
+        self.write('assets/music/zhang-qiran/song.vtt', b'WEBVTT\n\n')
         self.write('assets/music/shell.html', b'music shell')
         self.write('assets/life/scripts/24-terrain-model.mjs', b'export const terrain = true;')
         self.write('assets/maps/administrative/meshes/320500-whole.atm', b'ATM1 terrain geometry')
@@ -57,6 +58,7 @@ class PreparePagesTests(unittest.TestCase):
         report = self.prepare()
         for relative in [*PAGES.ROOT_FILES, 'images/千島湖.jpg', 'documents/证书.pdf',
                          'assets/mochi/frames/idle/idle-00.png', 'assets/music/zhang-qiran/song.m4a',
+                         'assets/music/zhang-qiran/song.vtt',
                          'assets/music/shell.html', 'assets/life/scripts/24-terrain-model.mjs',
                          'assets/maps/administrative/meshes/320500-whole.atm', '404.html', '_headers']:
             self.assertTrue((self.output / relative).is_file(), relative)

@@ -14,7 +14,7 @@
 
 @font-face {
     font-family: 'Lanmi Kai';
-    src: url('fonts/lanmi-music.woff2?v=20261112') format('woff2');
+    src: url('fonts/lanmi-music.woff2?v=20261124') format('woff2');
     size-adjust: 120%;
     font-weight: 400;
     font-display: swap;
@@ -23,7 +23,7 @@
 
 @font-face {
     font-family: 'Site WenKai';
-    src: url('fonts/wenkai-music.woff2?v=20261112') format('woff2');
+    src: url('fonts/wenkai-music.woff2?v=20261124') format('woff2');
     font-weight: 400;
     font-display: swap;
     unicode-range: U+2E80-9FFF, U+AC00-D7AF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-323AF;
@@ -211,8 +211,66 @@ body[data-page="life"] { background: #070914; }
 .music-track-title { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 16px/1.45 var(--font-display); }
 .music-track-subtitle { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #7b869b; font: 400 10px/1.6 var(--font-ui); }
 .music-track-duration { color: #7b869b; font: 400 10px/1.5 var(--font-ui); font-variant-numeric: tabular-nums; }
-.music-footer { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-light); color: #8590a5; font: 400 12px/1.6 var(--font-display); text-align: center; }
-.music-footer::before, .music-footer::after { content: ''; width: 3px; height: 3px; border-radius: 50%; background: #d8c4d7; }
+#siteMusic[data-overlay="true"] { pointer-events: none; }
+#siteMusic[data-overlay="true"] .music-dock { visibility: hidden; }
+.music-overlay {
+    --lyric-ink: #39435a;
+    --lyric-halo: #fff;
+    position: fixed;
+    inset: auto max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    align-items: end;
+    pointer-events: none;
+    color: var(--lyric-ink);
+}
+/* The star map keeps its zoom, distance and reset controls along the bottom edge. */
+body[data-page="life"] .music-overlay {
+    --lyric-ink: #faf7f3;
+    --lyric-halo: #202436;
+    bottom: calc(96px + env(safe-area-inset-bottom));
+}
+@media (max-width: 760px) and (orientation: portrait) {
+    body[data-page="life"] .music-overlay { bottom: calc(155px + env(safe-area-inset-bottom)); }
+}
+.music-lyric {
+    grid-column: 2;
+    align-self: center;
+    justify-self: center;
+    max-width: min(100%, 44em);
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    font: 400 16px/1.5 var(--font-display);
+    -webkit-text-stroke: 2.5px var(--lyric-halo);
+    paint-order: stroke fill;
+    text-shadow: 0 1px 3px var(--lyric-halo);
+}
+.music-lyric[data-cue] {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    font-size: clamp(19px, 2vw, 26px);
+}
+#siteMusic #musicRestore {
+    grid-column: 3;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: var(--lyric-ink);
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    pointer-events: auto;
+}
+#musicRestore .music-glyph { filter: drop-shadow(0 0 1px var(--lyric-halo)) drop-shadow(0 0 2px var(--lyric-halo)); }
+#siteMusic #musicRestore:is(:hover, :focus-visible) { background: var(--lyric-halo); }
 .music-status, .music-empty { margin: 12px 0 0; padding: 9px; border: 1px solid rgba(209,111,159,0.18); border-radius: var(--radius); color: #946080; background: var(--accent-pink-soft); font-size: 14px; }
 .music-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 #siteMusic[data-playing="true"] .music-levels { opacity: 1; }
@@ -254,7 +312,6 @@ body[data-page="life"] { background: #070914; }
     .music-library-heading { margin-top: 9px; padding-top: 10px; }
     .music-progress { margin-top: 8px; }
     .music-search { margin-top: 8px; }
-    .music-footer { margin-top: 9px; padding-top: 9px; }
 }
 @media (prefers-reduced-motion: reduce) {
     .music-panel, .music-levels > span, .music-record { animation: none; }

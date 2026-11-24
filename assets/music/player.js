@@ -9,6 +9,9 @@
     const element = name => document.getElementById(`music${name}`);
     const panel = element('Panel');
     const toggle = element('Toggle');
+    const overlay = element('Overlay');
+    const lyric = element('Lyric');
+    const restore = element('Restore');
     const seek = element('Seek');
     const singer = element('Singer');
     const search = element('Search');
@@ -20,6 +23,7 @@
     const positionKey = 'runde:music:position:v1';
     let library = { artists: [], tracks: [] };
     let current = null;
+    let captionTrack = null;
     let mode = 'all';
     let pendingSeek = 0;
     let lastSave = 0;
@@ -228,9 +232,47 @@
         }
     }
 
+    function loadLyrics(track) {
+        captionTrack?.remove();
+        captionTrack = null;
+        const title = [track.title, artistName(track)].filter(Boolean).join(' · ');
+        lyric.textContent = title;
+        lyric.removeAttribute('data-cue');
+        if (!track.lyrics) return;
+
+        const captions = document.createElement('track');
+        captions.kind = 'subtitles';
+        captions.label = '歌词';
+        captions.srclang = 'zh';
+        captions.src = new URL(track.lyrics, root).href;
+        captionTrack = captions;
+        function showCue() {
+            if (captions !== captionTrack) return;
+            const cue = captions.track.activeCues?.[0];
+            const line = cue?.getCueAsHTML().textContent.trim();
+            lyric.textContent = line || title;
+            lyric.toggleAttribute('data-cue', Boolean(line));
+        }
+        captions.track.addEventListener('cuechange', showCue);
+        captions.addEventListener('load', showCue);
+        audio.append(captions);
+        captions.track.mode = 'hidden';
+    }
+
+    function updateOverlay() {
+        const compact = panel.hidden && !audio.paused && !audio.ended && !audio.error;
+        if (compact === !overlay.hidden) return;
+        const focused = document.activeElement;
+        overlay.hidden = !compact;
+        player.dataset.overlay = String(compact);
+        if (compact && dock.contains(focused)) restore.focus({ preventScroll: true });
+        if (!compact && focused === restore && panel.hidden) toggle.focus({ preventScroll: true });
+    }
+
     function updatePlayback() {
         const playing = !audio.paused;
         player.dataset.playing = String(playing);
+        updateOverlay();
         element('PlaybackStatus').textContent = playing ? '正在播放' : audio.currentTime > 0 || pendingSeek > 0 ? '已暂停' : '等待播放';
         playButtons.forEach(button => {
             setIcon(button, playing ? 'pause' : 'play');
@@ -303,9 +345,10 @@
         updatePlayback();
     }
 
-    async function play() {
+    async function play(collapseOnStart = false) {
         if (!current) return;
         const request = ++playbackRequest;
+        const focused = document.activeElement;
         message('');
         try {
             if (audio.error) {
@@ -313,6 +356,9 @@
                 audio.load();
             }
             await audio.play();
+            if (collapseOnStart === true && request === playbackRequest && !panel.hidden && focused === document.activeElement) {
+                setOpen(false, true);
+            }
         } catch (error) {
             if (request !== playbackRequest || error.name === 'AbortError') return;
             message(error.name === 'NotAllowedError' ? '点击播放，继续听上次那首歌。' : '这首歌暂时无法播放，可以重试或切换下一首。');
@@ -326,12 +372,13 @@
         updatePlayback();
     }
 
-    function selectTrack(track, shouldPlay = false, position = 0) {
+    function selectTrack(track, shouldPlay = false, position = 0, collapseOnStart = false) {
         if (!track) return;
         pause();
         current = track;
         pendingSeek = Math.max(0, Math.min(Number(position) || 0, Math.max(0, track.duration - 0.05)));
         audio.src = new URL(track.src, root).href;
+        loadLyrics(track);
         element('Artist').textContent = artistName(track);
         element('Title').textContent = track.title;
         element('Title').classList.toggle('music-title-long', track.title.length > 18);
@@ -349,7 +396,7 @@
         }
         updatePosition();
         updatePlayback();
-        if (shouldPlay) play();
+        if (shouldPlay) play(collapseOnStart);
     }
 
     function skip(direction, shouldPlay = !audio.paused) {
@@ -392,9 +439,10 @@
         player.dataset.open = String(open);
         toggle.setAttribute('aria-expanded', String(open));
         toggle.setAttribute('aria-label', open ? '收起音乐播放器' : '打开音乐播放器');
+        updateOverlay();
         updatePanelPlacement();
         if (open) element('Close').focus({ preventScroll: true });
-        else if (restoreFocus) toggle.focus({ preventScroll: true });
+        else if (restoreFocus) (overlay.hidden ? toggle : restore).focus({ preventScroll: true });
     }
 
     dock.addEventListener('pointerdown', startDrag);
@@ -430,6 +478,7 @@
     layoutPlayer();
 
     toggle.addEventListener('click', () => setOpen(panel.hidden));
+    restore.addEventListener('click', () => setOpen(true));
     element('Close').addEventListener('click', () => setOpen(false, true));
     window.addEventListener('music:outside', () => setOpen(false));
     document.addEventListener('keydown', event => {
@@ -438,7 +487,7 @@
             setOpen(false, true);
         }
     });
-    playButtons.forEach(button => button.addEventListener('click', () => audio.paused ? play() : pause()));
+    playButtons.forEach(button => button.addEventListener('click', () => audio.paused ? play(true) : pause()));
     element('Previous').addEventListener('click', previous);
     element('Next').addEventListener('click', () => skip(1));
     element('Mode').addEventListener('click', () => {
@@ -467,8 +516,8 @@
         const button = event.target.closest('button[data-track-id]');
         if (!button) return;
         const track = library.tracks.find(entry => entry.id === button.dataset.trackId);
-        if (track === current) audio.paused ? play() : pause();
-        else selectTrack(track, true);
+        if (track === current) audio.paused ? play(true) : pause();
+        else selectTrack(track, true, 0, true);
     });
     audio.addEventListener('loadedmetadata', () => {
         if (pendingSeek) {

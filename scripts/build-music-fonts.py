@@ -11,6 +11,7 @@ from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = [ROOT / 'assets/music' / filename for filename in ('shell.html', 'player.js', 'library.json')]
+SOURCES.extend((ROOT / 'assets/music').rglob('*.vtt'))
 FACES = (
     ('LANMI_yujian2_jianfan.ttf', '9d179a554aa3604dd8064c36b4dd40ebecec1109e9cd4eb5862c4932b74410dc', 'lanmi-music.woff2'),
     ('LXGWWenKai-Regular.ttf', '2d73eea94ad808999d90c0000c239a84a33b09d4bc6ab6c5b8bbf1eda8a7fc8b', 'wenkai-music.woff2'),
@@ -46,7 +47,8 @@ def build(source, output, requested):
         options.recalc_timestamp = False
         options.drop_tables.append('FFTM')
         subsetter = subset.Subsetter(options=options)
-        subsetter.populate(unicodes=supported)
+        # Keep a valid Unicode cmap even when the first face covers every lyric.
+        subsetter.populate(unicodes=supported or {0x20})
         subsetter.subset(font)
         font.flavor = 'woff2'
         output.parent.mkdir(parents=True, exist_ok=True)

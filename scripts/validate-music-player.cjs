@@ -11,7 +11,7 @@ const repository = path.resolve(__dirname, '..');
 const root = process.env.SITE_PUBLIC_ROOT ? path.resolve(process.env.SITE_PUBLIC_ROOT) : repository;
 const output = path.join(repository, '.render-work/music');
 const library = JSON.parse(fs.readFileSync(path.join(root, 'assets/music/library.json'), 'utf8'));
-const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.m4a': 'audio/mp4', '.woff2': 'font/woff2', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
+const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.vtt': 'text/vtt', '.m4a': 'audio/mp4', '.woff2': 'font/woff2', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
 const errors = [];
 const server = http.createServer((request, response) => {
     let pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname).replace(/^\/preview\//, '/');
@@ -59,6 +59,40 @@ async function startPlayback(page) {
     });
 }
 
+async function checkPlaybackOverlay(page, label) {
+    await page.locator('#musicOverlay').waitFor();
+    assert(await page.locator('.music-dock').isHidden(), 'The full entry yields its space during playback');
+    const lyric = page.locator('#musicLyric');
+    assert((await lyric.textContent()).trim(), 'The overlay shows the current line or the song details');
+    if (label === 'desktop') {
+        const track = library.tracks[0];
+        const artist = library.artists.find(artist => artist.id === track.artistId);
+        const fallback = `${track.title} · ${artist.name}`;
+        for (const [time, expected] of [[0, fallback], [22, 'First line'], [32, 'Second line'], [26, fallback], [22, 'First line']]) {
+            await page.locator('#siteAudio').evaluate((audio, seconds) => { audio.currentTime = seconds; }, time);
+            await page.waitForFunction(text => document.getElementById('musicLyric').textContent === text, expected);
+        }
+    }
+    for (const selector of ['.music-dock', '#musicLyric']) {
+        assert(await page.locator(selector).evaluate(element => {
+            const box = element.getBoundingClientRect();
+            return document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2) === document.getElementById('sitePage');
+        }), `${label}: page content remains interactive underneath ${selector}`);
+    }
+    const tools = contentFrame(page).locator('.galactic-tools');
+    if (await tools.isVisible()) {
+        const controls = await tools.boundingBox();
+        const restore = await page.locator('#musicRestore').boundingBox();
+        assert(restore.x + restore.width <= controls.x || controls.x + controls.width <= restore.x
+            || restore.y + restore.height <= controls.y || controls.y + controls.height <= restore.y,
+            'The playback control leaves the star-map controls clickable');
+    }
+    await page.screenshot({ path: path.join(output, `${label}-lyrics.png`), animations: 'disabled' });
+    await page.locator('#musicRestore').click();
+    assert(await page.locator('#musicPanel').isVisible());
+    assert(await page.locator('#siteAudio').evaluate(audio => !audio.paused), 'Opening controls keeps the song playing');
+}
+
 async function dragPlayer(page, selector, deltaX, deltaY, touch = false) {
     const bounds = await page.locator(selector).boundingBox();
     const start = { x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 };
@@ -94,7 +128,7 @@ async function checkDragging(page, label) {
     const viewport = page.viewportSize();
     await dragPlayer(page, '#musicToggle', -50, 90, touch);
     assert.equal(await page.locator('#musicToggle').getAttribute('aria-expanded'), 'false', 'Dragging the title does not open the panel');
-    assert(await page.locator('#siteAudio').evaluate(audio => !audio.paused), 'Dragging does not pause playback');
+    assert(await page.locator('#siteAudio').evaluate(audio => audio.paused), 'Moving the idle entry does not start playback');
     let bounds = await page.locator('.music-dock').boundingBox();
     assert(bounds.y > 150, `${label}: pointer movement moves the player`);
     if (!touch) {
@@ -115,11 +149,14 @@ async function checkDragging(page, label) {
     assert.equal(await page.locator('#siteMusic').getAttribute('data-panel-placement'), 'up');
     await assertPlayerFits(page, label, true);
     await page.screenshot({ path: path.join(output, `${label}-dragged.png`), animations: 'disabled' });
+    await page.locator('#musicPlay').click();
+    await page.locator('#musicRestore').click();
     const before = await page.locator('.music-dock').boundingBox();
     await dragPlayer(page, '.music-heading > div', 35, -70, touch);
     const after = await page.locator('.music-dock').boundingBox();
     assert(after.x > before.x + 25 && after.y < before.y - 60, 'The open panel heading also moves the player');
     assert.equal(await page.locator('#musicToggle').getAttribute('aria-expanded'), 'true', 'Dragging an open panel leaves it open');
+    assert(await page.locator('#siteAudio').evaluate(audio => !audio.paused), 'Dragging the open panel keeps playback running');
     await assertPlayerFits(page, label, true);
     await page.locator('#musicSearch').fill('克卜勒');
     assert.equal(await page.locator('#musicTracks button').count(), 1, 'Search remains usable after dragging');
@@ -127,9 +164,10 @@ async function checkDragging(page, label) {
     await page.locator('#musicVolume').fill('0.61');
     assert(Math.abs(await page.locator('#siteAudio').evaluate(audio => audio.volume) - 0.61) < 0.001);
     await page.locator('#musicClose').click();
+    await page.locator('#musicRestore').click();
     await page.locator('#musicQuickPlay').click();
     assert(await page.locator('#siteAudio').evaluate(audio => audio.paused), 'The quick-play button still receives a normal click');
-    await startPlayback(page);
+    await page.locator('#musicClose').click();
     if (label === 'desktop') {
         await page.locator('#musicDrag').focus();
         await page.keyboard.press('ArrowRight');
@@ -192,6 +230,15 @@ async function run() {
         ]) {
             const context = await browser.newContext({ viewport: { width, height }, isMobile: label !== 'desktop', hasTouch: label !== 'desktop', reducedMotion: label === 'desktop' ? 'no-preference' : 'reduce' });
             await context.route('**/*', request => request.request().url().startsWith(base) ? request.continue() : request.fulfill({ status: 200, body: '', contentType: 'text/plain' }));
+            if (label === 'desktop') {
+                const fixture = structuredClone(library);
+                fixture.tracks[0].lyrics = 'assets/music/test-lines.vtt';
+                await context.route('**/assets/music/library.json', route => route.fulfill({ json: fixture }));
+                await context.route('**/assets/music/test-lines.vtt', route => route.fulfill({
+                    contentType: 'text/vtt',
+                    body: 'WEBVTT\n\n00:00:20.000 --> 00:00:25.000\nFirst line\n\n00:00:30.000 --> 00:00:35.000\nSecond line\n'
+                }));
+            }
             const page = await context.newPage();
             page.on('pageerror', error => errors.push(`${label}: ${error.message}`));
             const mediaRequests = [];
@@ -226,7 +273,11 @@ async function run() {
             await page.locator('#musicSearch').fill('');
             await page.locator('#musicClose').click();
             await startPlayback(page);
+            await checkPlaybackOverlay(page, label);
+            await page.locator('#musicPlay').click();
+            await page.locator('#musicClose').click();
             await checkDragging(page, label);
+            await startPlayback(page);
             await page.evaluate(() => { document.getElementById('siteAudio').currentTime = 12; });
             await page.waitForFunction(() => document.getElementById('siteAudio').currentTime >= 12.2);
 
@@ -242,7 +293,9 @@ async function run() {
                 assert(new URL(page.url()).pathname.startsWith('/preview/'), 'Navigation keeps the project subdirectory');
             }
 
+            await page.locator('#musicRestore').click();
             await page.locator('#musicQuickPlay').click();
+            await page.locator('#musicClose').click();
             const pausedTime = await page.locator('#siteAudio').evaluate(audio => audio.currentTime);
             await contentFrame(page).evaluate(() => window.SiteMusicNavigation(new URL('index.html', location.href).href));
             await settled(page, 'index.html');
@@ -267,6 +320,7 @@ async function run() {
             await page.locator('#musicMode').click();
             await page.locator('#musicTracks button').nth(2).click();
             await page.waitForFunction(() => !document.getElementById('siteAudio').paused && document.getElementById('siteAudio').currentTime > 0.1);
+            await page.locator('#musicRestore').click();
             await page.locator('#musicPlay').click();
             await page.locator('#musicSeek').fill('22');
             const title = await page.locator('#musicTitle').textContent();
@@ -279,7 +333,7 @@ async function run() {
             assert(await page.locator('#siteAudio').evaluate(audio => audio.paused), 'Reload preserves paused state');
             await startPlayback(page);
             assert(await page.locator('#siteAudio').evaluate(audio => audio.currentTime >= 22), 'Reload restores playback position');
-            await page.locator('#musicToggle').click();
+            await page.locator('#musicRestore').click();
             await page.screenshot({ path: path.join(output, `${label}-playing.png`), animations: 'disabled' });
             if (label === 'desktop') {
                 await page.locator('#musicMode').click();
@@ -291,13 +345,14 @@ async function run() {
                 await page.waitForFunction(previous => document.getElementById('musicTitle').textContent !== previous && !document.getElementById('siteAudio').paused, title);
                 await page.locator('#musicMode').click();
                 await page.locator('#musicTracks button').last().click();
+                await page.locator('#musicRestore').click();
                 await page.waitForFunction(() => document.getElementById('siteAudio').readyState >= 3);
                 await page.evaluate(() => { const audio = document.getElementById('siteAudio'); audio.currentTime = audio.duration - 0.25; });
                 await page.waitForFunction(expected => document.getElementById('musicTitle').textContent === expected && !document.getElementById('siteAudio').paused, library.tracks[0].title);
             }
             await page.keyboard.press('Escape');
             assert.equal(await page.locator('#musicToggle').getAttribute('aria-expanded'), 'false');
-            assert(await page.locator('#musicToggle').evaluate(button => document.activeElement === button), 'Escape restores focus');
+            assert(await page.locator('#musicRestore').evaluate(button => document.activeElement === button), 'Escape restores focus to the visible playback control');
             if (label === 'desktop') {
                 await continuity(page, () => contentFrame(page).locator('a.nav-link[href="#publications"]').click(), 'index.html');
                 assert.equal(new URL(page.url()).hash, '#publications', 'Page anchors stay visible in the address bar');
@@ -316,6 +371,7 @@ async function run() {
                 if (await page.locator('#siteAudio').evaluate(audio => audio.paused)) await startPlayback(page);
                 assert(await page.locator('#siteAudio').evaluate(audio => audio.currentTime) >= beforeReload - 0.5, 'Reload during playback resumes at the saved position');
             }
+            await page.locator('#musicRestore').click();
             await page.locator('#musicDrag').dblclick();
             const resetDock = await page.locator('.music-dock').boundingBox();
             assert(Math.abs(resetDock.x - dock.x) < 1 && Math.abs(resetDock.y - dock.y) < 1, 'Double-clicking the handle restores the default position');
