@@ -61,6 +61,7 @@ for (const videoId of Object.keys(selection.tracks)) {
     if (!discovered.has(videoId)) throw new Error(`Selected video is missing: ${videoId}`);
 }
 library.artists = [...library.artists.filter(artist => artist.id !== artistId), { id: artistId, name: artistName }];
-library.tracks = [...library.tracks.filter(track => track.artistId !== artistId), ...tracks.sort((left, right) => right.date.localeCompare(left.date))];
+const retained = library.tracks.filter(track => track.artistId !== artistId || track.origin === 'local');
+library.tracks = [...retained, ...tracks.sort((left, right) => right.date.localeCompare(left.date))];
 fs.writeFileSync(libraryFile, JSON.stringify(library, null, 2) + '\n');
 console.log(`Imported ${tracks.length} tracks by ${artistName}. Original videos were not modified.`);

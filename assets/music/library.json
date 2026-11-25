@@ -8,6 +8,15 @@
   ],
   "tracks": [
     {
+      "id": "zhang-qiran-tai-cong-ming",
+      "artistId": "zhang-qiran",
+      "origin": "local",
+      "title": "太聪明",
+      "note": "2026-11-25 收录",
+      "duration": 111.018,
+      "src": "assets/music/zhang-qiran/tai-cong-ming.m4a"
+    },
+    {
       "id": "zhang-qiran-BV1hY456cErB",
       "artistId": "zhang-qiran",
       "title": "天使",
