@@ -13,6 +13,11 @@ Run from anywhere:
     python scripts/build-edukai-subset.py
     python scripts/build-edukai-subset.py --check
 
+Update or verify only the homepage subsets after changing homepage copy:
+
+    python scripts/build-edukai-subset.py --home
+    python scripts/build-edukai-subset.py --home --check
+
 Additional generated pages can be included with one or more ``--page`` options.
 Passing ``--page`` replaces the default index.html/life.html/observatory.html list.
 """
@@ -564,7 +569,10 @@ def build_home_subsets(brotli_quality: int, check_only: bool = False) -> None:
         missing = requested - (coverage[family] | coverage["Site WenKai"])
         if missing:
             preview = " ".join(f"{chr(value)} (U+{value:04X})" for value in sorted(missing))
-            raise SystemExit(f"Homepage {family}: missing characters: {preview}")
+            raise SystemExit(
+                f"Homepage {family}: missing characters: {preview}. "
+                "Run `python scripts/build-edukai-subset.py --home` and commit the regenerated subsets."
+            )
     if not check_only:
         page.write_text(document, encoding="utf-8")
     total = sum(output.stat().st_size for _, _, output in faces)
@@ -588,7 +596,10 @@ def validate_coverage(pages: list[Path], codepoints: set[int] | None = None) -> 
         missing = requested - coverage
         if missing:
             preview = " ".join(f"{chr(value)} (U+{value:04X})" for value in sorted(missing))
-            raise SystemExit(f"{label}: missing {len(missing)} CJK characters: {preview}")
+            raise SystemExit(
+                f"{label}: missing {len(missing)} CJK characters: {preview}. "
+                "Run `python scripts/build-edukai-subset.py` and commit the regenerated subsets."
+            )
         print(f"{label} CJK coverage passed: {len(requested):,} unique characters; no missing glyphs.")
 
 
